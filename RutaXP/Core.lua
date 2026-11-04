@@ -225,7 +225,9 @@ function ns:Command(message)
             self:Print("Objetivo " .. tostring(goal.quest or goal.questID or goal.t or goal.action) .. " · " .. tostring(status or "manual") .. (reason and (" · " .. reason) or ""))
         end
         local point = step and self.GetStepWaypoint and self:GetStepWaypoint(step)
-        self:Print(point and string.format("Mapa %d · %.2f, %.2f · fuente %s", point.mapID, point.x * 100, point.y * 100, point.source or "personal") or "El objetivo actual no tiene coordenadas.")
+        self:Print(point and string.format("Mapa %d · %.2f, %.2f · fuente %s", point.mapID, point.x * 100, point.y * 100, point.source or "personal")
+            or (not goal and "Tus objetivos de este paso ya están resueltos." or "El objetivo actual no tiene coordenadas."))
+        if self.Duo and self.Duo.GetReport then self:Print(self.Duo:GetReport()) end
         local walk = self.Walking and self.Walking:GetStatus()
         if walk then
             self:Print(string.format("Camino: %s · cálculos %d · cancelaciones %d · pendiente %.1f s",

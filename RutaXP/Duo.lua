@@ -221,13 +221,36 @@ function Duo:GetLocalQuestIDs()
 end
 function Duo:GetQuestIDs()
     self:PruneQuestCaches()
-    local ids, set = self:GetLocalQuestIDs()
+    local localIDs, localSet = self:GetLocalQuestIDs()
+    local ids, set = {}, {}
+    local function add(id)
+        if id and not set[id] and #ids < REQUEST_LIMIT then set[id] = true; ids[#ids + 1] = id end
+    end
+    local guide = ns.char and ns.guides[ns.char.activeGuide]
+    local state = guide and ns.char.progress[guide.id]
+    local step = guide and guide.steps[state and state.cursor or 1]
+    local active = step and ns.GetActiveGoal and ns:GetActiveGoal(step, state)
+    local activeID = active and (active.quest or active.questID)
+    if localSet[activeID] then add(activeID) end
+    -- A fresh header identifies the peer's actual current visit. Answer those
+    -- quests before exploratory planner requests: numeric sorting of a full
+    -- request cache otherwise starves later IDs such as Talin's quest 234.
+    local ctx = self:GetContext()
+    local peerGuide = ctx.known and self.peer and fresh(self.peer.headerSeen or self.lastHeader, 15)
+        and ns.guides[ctx.guideID]
+    local peerStep = peerGuide and peerGuide.steps[integer(ctx.cursor, 1, #peerGuide.steps)]
+    if peerStep and appliesToPartner(peerGuide, ctx) and appliesToPartner(peerGuide.only, ctx)
+        and appliesToPartner(peerStep.only, ctx) then
+        add(integer(peerStep.questID, 1, 10000000))
+        for _, goal in ipairs(peerStep.goals or {}) do
+            if appliesToPartner(goal.only, ctx) then add(integer(goal.quest or goal.questID, 1, 10000000)) end
+        end
+    end
+    for _, id in ipairs(localIDs) do add(id) end
     local extra = {}
     for id in pairs(self.requested) do extra[#extra + 1] = id end
     table.sort(extra)
-    for _, id in ipairs(extra) do
-        if not set[id] and #ids < REQUEST_LIMIT then set[id] = true; ids[#ids + 1] = id end
-    end
+    for _, id in ipairs(extra) do add(id) end
     return ids
 end
 function Duo:LocalQuest(id)
@@ -302,13 +325,15 @@ function Duo:GetPartnerQuest(id)
     if active == true then return { state = 1, basic = true } end
     -- The game may hide absent quests. Unknown is never reported as completed.
 end
-function Duo:ShouldWaitForStep(step)
-    if ns.DuoAuto and ns.DuoAuto.IsIndependentPhase and ns.DuoAuto:IsIndependentPhase(step) then return false end
+function Duo:GetStepWaitStatus(step)
+    local noWait = { waiting = false }
+    if not step then return noWait end
+    if ns.DuoAuto and ns.DuoAuto.IsIndependentPhase and ns.DuoAuto:IsIndependentPhase(step) then return noWait end
     local ctx = self:GetContext()
-    if not (ctx.enabled and ctx.wait and ctx.sameParty) then return false end
+    if not (ctx.enabled and ctx.wait and ctx.sameParty) then return noWait end
     local guide = ns.char and ns.guides[ns.char.activeGuide]
-    if (guide and guide.recovery) or not appliesToPartner(guide, ctx) or not appliesToPartner(step.only, ctx) then return false end
-    local requirements = {}
+    if (guide and guide.recovery) or not appliesToPartner(guide, ctx) or not appliesToPartner(step.only, ctx) then return noWait end
+    local requirements, order = {}, {}
     local state = guide and ns.char.progress[guide.id]
     for index, goal in ipairs(step.goals or { step }) do
         local id, action = goal.quest or goal.questID, goal.t or goal.action
@@ -320,25 +345,59 @@ function Duo:ShouldWaitForStep(step)
         if id and applicable and not individual and not skipped and not goal.optional and action ~= "note" then
             local needed = action == "accept" and 1 or 2
             local requirement = requirements[id] or { state = 1, objectives = {} }
+            if not requirements[id] then order[#order + 1] = id end
             local objective = integer(goal.oi or goal.objective, 1, 32)
             if needed == 2 and action ~= "turnin" and objective then requirement.objectives[objective] = true
             else requirement.state = math.max(requirement.state, needed) end
+            if action == "turnin" or requirement.action ~= "turnin" and needed >= (requirement.needed or 0) then
+                requirement.action = action == "accept" and "accept" or action == "turnin" and "turnin" or "complete"
+                requirement.needed = needed
+            end
             requirements[id] = requirement
         end
     end
-    if not next(requirements) then return false end
-    if not ctx.online or not ctx.known then return true, "Sin sincronización: espera o desactiva «Esperar al amigo»." end
-    for id, requirement in pairs(requirements) do
+    if not next(requirements) then return noWait end
+    if not ctx.online or not ctx.known then
+        return { waiting = true, kind = "sync", unknown = true,
+            reason = "Sin sincronización: espera o desactiva «Esperar al amigo»." }
+    end
+    for _, id in ipairs(order) do
+        local requirement = requirements[id]
         local q = self:GetPartnerQuest(id)
-        local pending = not q or q.basic or q.state < requirement.state
+        local unknownState = not q or q.basic or type(q.state) ~= "number"
+        local pending = unknownState or q.state < requirement.state
         if not pending and q.state < 2 then
             for objective in pairs(requirement.objectives) do
                 if math.floor((q.mask or 0) / 2 ^ (objective - 1)) % 2 ~= 1 then pending = true; break end
             end
         end
-        if pending then return true, "Esperando a tu amigo · " .. ns:GetQuestTitle(id) end
+        if pending then
+            self:RequestQuest(id)
+            return { waiting = true, kind = "quest", action = requirement.action, questID = id,
+                state = q and q.state, unknown = unknownState == true,
+                reason = "Esperando a tu amigo · " .. ns:GetQuestTitle(id)
+                    .. (unknownState and " · Sin datos recientes de esta misión" or "") }
+        end
     end
+    return noWait
+end
+function Duo:ShouldWaitForStep(step)
+    local status = self:GetStepWaitStatus(step)
+    if status.waiting then return true, status.reason end
     return false
+end
+function Duo:Resynchronize()
+    local ctx = self:GetContext()
+    if not (ctx.enabled and ctx.sameParty) then return false, "Activa Dúo y forma un grupo de dos para sincronizar." end
+    local allowed, reason = self:CanCommunicate()
+    if not allowed then return false, reason end
+    self.remoteQuests, self.requested, self.outboundRequests = {}, {}, {}
+    self.objectiveRotation, self.rotation = {}, 0
+    self.lastSentHeader, self.lastSentQuest, self.lastSentRequest, self.lastSentCheckpoint = nil, nil, nil, nil
+    -- Reannounce on the normal one-message-per-second tick. Keep the current
+    -- profile/nonce/agreement and all character settings and progress intact.
+    self:NavigationChanged()
+    return true, "Sincronización solicitada; esperando datos nuevos del compañero."
 end
 -- Sources: Gethe/wow-ui-source, branch forever, generated Container/Unit/QuestLog
 -- documentation. General bag space excludes profession/ammunition-only bags.

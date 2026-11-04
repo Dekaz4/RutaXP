@@ -541,6 +541,7 @@ function ns:CreateNavigation()
         if not GameTooltip then return end
         GameTooltip:SetOwner(item, "ANCHOR_BOTTOM")
         GameTooltip:SetText("Flecha de RutaXP", 1, 0.82, 0.45)
+        if item.navigationReason then GameTooltip:AddLine(item.navigationReason, 0.85, 0.88, 0.92, true) end
         GameTooltip:AddLine("Arrastra con clic izquierdo para moverla.", 0.85, 0.88, 0.92, true)
         GameTooltip:Show()
     end)
@@ -643,6 +644,7 @@ function ns:UpdateNavigation()
     if not self.navigationFrame then self:CreateNavigation() end
     local frame = self.navigationFrame
     if not frame then return end
+    frame.navigationState, frame.navigationReason = nil, nil
     if self.char.arrow == false then
         if self.Walking then self.Walking:Clear() end
         frame.dNorth, frame.dWest = nil, nil
@@ -693,6 +695,41 @@ function ns:UpdateNavigation()
         elseif activeGoal and activeGoal.navigationMode == "ability" then message = "Usa la habilidad indicada en la guía"
         elseif activeGoal and activeGoal.navigationMode == "escort" then message = "Sigue y protege al personaje de la escolta" end
         if action == "accept" and activeGoal.item then message = "Abre el objeto en tus bolsas" end
+        if not activeGoal and step and step.goals and self.GetActiveGoal then
+            -- A resolved local visit has no NPC left to navigate to. Waiting
+            -- for the peer does not mean that its coordinates are missing.
+            local waiting, reason, waitKind
+            if self.DuoAuto and self.DuoAuto.ShouldWaitForStep then
+                waiting, reason = safe(self.DuoAuto.ShouldWaitForStep, self.DuoAuto, step)
+            end
+            if not waiting and self.Duo then
+                local status = self.Duo.GetStepWaitStatus and safe(self.Duo.GetStepWaitStatus, self.Duo, step)
+                if type(status) == "table" then
+                    waiting, reason, waitKind = status.waiting == true, status.reason, status.unknown and "sync" or status.kind
+                elseif self.Duo.ShouldWaitForStep then
+                    waiting, reason = safe(self.Duo.ShouldWaitForStep, self.Duo, step)
+                end
+            end
+            if waiting then
+                message = waitKind == "sync" and "Sincronizando misiones" or "Esperando al compañero"
+                frame.navigationReason = type(reason) == "string" and reason ~= "" and reason or message
+                frame.navigationState = "waiting"
+            else
+                local view = self.DuoAuto and safe(self.DuoAuto.GetSharedView, self.DuoAuto)
+                local _, currentStep, state = self:GetCurrent()
+                if view and view.following then
+                    message, frame.navigationState = "Destino del compañero todavía no disponible", "waiting"
+                elseif currentStep == step and state and state.review then
+                    message, frame.navigationState = "Paso completado · revisión manual", "review"
+                elseif self.char.auto == false then
+                    message, frame.navigationState = "Paso completado · pulsa Siguiente para continuar", "manual"
+                else
+                    message, frame.navigationState = "Paso completado", "complete"
+                end
+            end
+        end
+        frame.navigationState = frame.navigationState or (message and "instruction" or "missing")
+        frame.navigationReason = frame.navigationReason or message or "Sin coordenadas para esta acción"
         frame.distance:SetText("|cffffb468" .. (message or "Sin coordenadas para esta acción") .. "|r")
         frame.destination:SetText(subText)
         return

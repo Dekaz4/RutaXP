@@ -104,6 +104,7 @@ function ns:UpdateFeatures()
         add(ctx.ready and "Marcarme no preparado" or "Estoy preparado", function() self.Duo:SetReady(not ctx.ready) end)
         add("Elegir la guía del amigo", function() self:UseManualDuoMode("Guía del compañero elegida manualmente"); result(self.Duo:AdoptPartnerGuide()) end)
         if auto then add(auto.enabled and "Automático al agruparse: sí" or "Automático al agruparse: no", function() result(self.DuoAuto:SetEnabled(not auto.enabled)) end) end
+        if self.Duo.Resynchronize then add("Sincronizar de nuevo", function() result(self.Duo:Resynchronize()) end) end
     elseif tab == "duo-route" and self.DuoPlanner then
         local routes = self.DuoPlanner:GetCommonRoutes() or {}
         local lines = { "Rutas que podéis seguir juntos. Cada uno debe elegirla en su addon; se conserva el progreso individual." }
@@ -249,6 +250,15 @@ function ns:UpdateDuoTracker()
             local stop = self.DuoJourney and self.DuoJourney:GetStopStatus()
             self:ToggleFeatures(stop and stop.active and "duo-stops" or "duo")
         end)
+        self.duoTracker:SetScript("OnEnter", function(b)
+            if not GameTooltip or not b.waitReason then return end
+            GameTooltip:SetOwner(b, "ANCHOR_TOP")
+            GameTooltip:AddLine("Estado del dúo", 1, .8, .45)
+            GameTooltip:AddLine(b.waitReason, 1, 1, 1, true)
+            GameTooltip:AddLine("Pulsa para ver las misiones de ambos y sincronizar de nuevo.", .7, .8, .9, true)
+            GameTooltip:Show()
+        end)
+        self.duoTracker:SetScript("OnLeave", function() if GameTooltip then GameTooltip:Hide() end end)
     end
     self.trackerDuoVisible = ctx.enabled == true
     if not ctx.enabled then
@@ -260,9 +270,21 @@ function ns:UpdateDuoTracker()
         or not ctx.online and "Dúo · amigo desconectado"
         or not ctx.known and "Dúo · esperando sincronización"
         or ("Dúo · " .. (ctx.partnerReady and "amigo preparado" or "amigo en curso"))
-    if step then local waiting = self.Duo:ShouldWaitForStep(step); if waiting then text = "Dúo · esperando al amigo" end end
+    local waiting, waitReason, waitInfo
+    if step and self.Duo.GetStepWaitStatus then
+        waitInfo = self.Duo:GetStepWaitStatus(step)
+        waiting, waitReason = waitInfo.waiting, waitInfo.reason
+    elseif step then waiting, waitReason = self.Duo:ShouldWaitForStep(step) end
+    if not waiting and step and self.DuoAuto then waiting, waitReason = self.DuoAuto:ShouldWaitForStep(step) end
     local autoView = self.DuoAuto and self.DuoAuto:GetSharedView()
     if autoView then text = autoView.following and ("Dúo auto · amigo " .. autoView.sharedCursor .. " · tú " .. autoView.ownCursor) or "Dúo auto · siguiendo la guía común" end
+    if waiting then
+        local verbs = {accept="falta aceptar",complete="misión en curso",turnin="falta entregar"}
+        text = not ctx.known and "Dúo · sin datos del compañero"
+            or waitInfo and (waitInfo.kind=="sync" or waitInfo.unknown) and "Dúo · sincronizando misiones"
+            or ("Dúo · " .. (waitInfo and verbs[waitInfo.action] or "esperando al amigo"))
+    end
+    self.duoTracker.waitReason = waiting and waitReason or nil
     if ctx.differentZone then text = "Dúo · estáis en zonas distintas"
     elseif ctx.separated then text = "Dúo · amigo fuera de alcance" end
     if ctx.dead then text = "Dúo · amigo muerto o fantasma" end

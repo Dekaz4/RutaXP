@@ -123,6 +123,12 @@ end
 function ns:HandleFeatureCommand(command, rest)
     if command == "herramientas" then self:ToggleFeatures()
     elseif command == "sesion" or command == "sesión" then self:ToggleFeatures("session")
+    elseif command == "sincronizar" then
+        if self.Duo and self.Duo.Resynchronize then
+            local ok, reason = self.Duo:Resynchronize()
+            if reason then self:Print(reason) end
+        end
+        self:ToggleFeatures("duo")
     elseif command == "duo" or command == "dúo" then
         self:UseManualDuoMode("Modo dúo cambiado manualmente", true)
         self.Duo:SetEnabled(not self.Duo:GetContext().enabled); self:ToggleFeatures("duo")
