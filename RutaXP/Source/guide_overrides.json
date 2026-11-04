@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+  "overrides": [
+    {
+      "id": "dun-morogh-cooking-instructor",
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 19,
+      "match": { "t": "complete", "quest": 96629 },
+      "copyFrom": { "t": "turnin", "quest": 96629, "npc": 1699 },
+      "copyFields": ["npc", "npcName", "map", "x", "y", "z", "f"],
+      "set": {
+        "note": "Habla con Gremlock Pilsnor en la destilería de Kharanos y aprende Cocina."
+      },
+      "provenance": {
+        "reason": "The complete goal names Gremlock but omits its navigation point; the adjacent turn-in supplies the same instructor's authored location.",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L265-L272",
+        "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
+        "sourceLines": [265, 271, 272],
+        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
+        "compiledSha256": "24e953c65d64f0fa1e634ae83652f9e72b188cc9852da6b082ac3ed37a7dcc97",
+        "coordinateFrame": "Classic Era (f=e); runtime conversion required. These are inherited instructor coordinates, not a new in-game survey."
+      }
+    }
+  ]
+}

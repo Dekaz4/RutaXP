@@ -1,0 +1,259 @@
+#!/usr/bin/env python3
+"""Build the bundled Lua data from editable leveling.json; Python stdlib only.
+
+From the addon workspace:
+    python RutaXP/Source/build_guides.py
+
+Edit leveling.json for route or translation corrections, then rebuild. The
+snapshot preserves upstream goal fields, grouping, conditions and coordinate
+frames. It does not require the upstream compiler or its private reference DB.
+Numeric JSON object keys represent numeric Lua table keys (map/quest IDs).
+Pinned navigation corrections in guide_overrides.json are reapplied by the
+initial import tool, so a deliberate reimport preserves their source evidence.
+"""
+
+from __future__ import annotations
+
+import argparse
+from collections import Counter
+import hashlib
+import json
+import math
+from pathlib import Path
+from typing import Any
+
+
+def lua_string(value: str) -> str:
+    """Quote UTF-8 text for Lua 5.1, including literal control characters."""
+    out = ['"']
+    for char in value:
+        code = ord(char)
+        if char == "\\":
+            out.append("\\\\")
+        elif char == '"':
+            out.append('\\"')
+        elif char == "\n":
+            out.append("\\n")
+        elif char == "\r":
+            out.append("\\r")
+        elif char == "\t":
+            out.append("\\t")
+        elif code < 32 or code == 127:
+            out.append(f"\\{code:03d}")
+        else:
+            out.append(char)
+    out.append('"')
+    return "".join(out)
+
+
+def lua_key(key: Any) -> str:
+    if isinstance(key, int) or (isinstance(key, str) and key.isdecimal()):
+        return f"[{int(key)}]"
+    # Always bracket string keys: 'until' and other Lua keywords stay valid.
+    return f"[{lua_string(str(key))}]"
+
+
+def lua_value(value: Any, indent: int = 0, compact: bool = False) -> str:
+    if value is None:
+        return "nil"
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, str):
+        return lua_string(value)
+    if isinstance(value, (int, float)):
+        if isinstance(value, float) and not math.isfinite(value):
+            raise ValueError("Lua data must not contain non-finite numbers")
+        return repr(value)
+    if not isinstance(value, (list, dict)):
+        raise TypeError(f"Cannot emit {type(value).__name__} to Lua")
+    if not value:
+        return "{}"
+    # Each goal occupies one line, keeping a large guide readable without
+    # producing thousands of lines for its spawn clusters and candidates.
+    if compact:
+        if isinstance(value, list):
+            parts = [lua_value(item, compact=True) for item in value]
+        else:
+            parts = [f"{lua_key(key)} = {lua_value(item, compact=True)}" for key, item in value.items()]
+        return "{ " + ", ".join(parts) + " }"
+    pad, child = "\t" * indent, "\t" * (indent + 1)
+    if isinstance(value, list):
+        lines = [child + lua_value(item, indent + 1, compact=isinstance(item, dict) and "t" in item) + "," for item in value]
+    else:
+        lines = [child + lua_key(key) + " = " + lua_value(item, indent + 1) + "," for key, item in value.items()]
+    return "{\n" + "\n".join(lines) + "\n" + pad + "}"
+
+
+def apply_guide_overrides(document: dict[str, Any], path: Path) -> list[str]:
+    """Reapply audited navigation hints on import without changing quest logic.
+
+    A correction must match exactly one goal and donor in the stated step.
+    NPC/coordinate data is copied from that donor, never supplied speculatively.
+    The normal builder still emits the editable snapshot exactly as saved.
+    """
+    if not path.is_file():
+        return []
+    payload = path.read_bytes()
+    overlay = json.loads(payload)
+    source = document["provenance"]
+    if overlay.get("schemaVersion") != 1 or overlay.get("sourceCommit") != source["commit"]:
+        raise ValueError("Guide corrections do not match the pinned source")
+    applied = []
+    allowed = {"npc", "npcName", "map", "x", "y", "z", "f"}
+    for patch in overlay.get("overrides", []):
+        guides = [g for g in document["guides"] if g["id"] == patch["guideID"]]
+        if len(guides) != 1:
+            raise ValueError(f"Correction guide must match exactly once: {patch['id']}")
+        step_index = patch["step"]
+        if not isinstance(step_index, int) or not 1 <= step_index <= len(guides[0]["steps"]):
+            raise ValueError(f"Invalid correction step: {patch['id']}")
+        goals = guides[0]["steps"][step_index - 1]["goals"]
+
+        def match(selector: dict[str, Any]) -> dict[str, Any]:
+            hits = [g for g in goals if all(g.get(k) == v for k, v in selector.items())]
+            if len(hits) != 1:
+                raise ValueError(f"Correction goal must match exactly once: {patch['id']}")
+            return hits[0]
+
+        goal, donor = match(patch["match"]), match(patch["copyFrom"])
+        evidence = patch["provenance"]
+        if source["inputSha256"].get(evidence["compiledFile"]) != evidence["compiledSha256"]:
+            raise ValueError(f"Correction evidence does not match source: {patch['id']}")
+        fields = patch["copyFields"]
+        if not fields or any(key not in allowed or key not in donor for key in fields):
+            raise ValueError(f"Invalid correction navigation fields: {patch['id']}")
+        if set(patch.get("set", {})) - {"note"}:
+            raise ValueError(f"Corrections cannot change quest semantics: {patch['id']}")
+        goal.update({key: donor[key] for key in fields})
+        goal.update(patch.get("set", {}))
+        applied.append(patch["id"])
+    source["localOverrides"] = {
+        "file": "Source/guide_overrides.json", "sha256": hashlib.sha256(payload).hexdigest(), "applied": applied,
+    }
+    fields = Counter(key for guide in document["guides"] for step in guide["steps"] for goal in step["goals"] for key in goal)
+    document["statistics"]["goalFields"] = dict(sorted(fields.items()))
+    return applied
+
+
+def apply_guide_locations(document: dict[str, Any], path: Path) -> list[str]:
+    """Apply pinned, additive navigation evidence without changing quest logic."""
+    if not path.is_file():
+        return []
+    payload = path.read_bytes()
+    overlay = json.loads(payload)
+    provenance = document["provenance"]
+    if overlay.get("schemaVersion") != 1 or overlay.get("sourceCommit") != provenance["commit"]:
+        raise ValueError("Guide locations do not match the pinned source")
+    compiled = "addon/SendaFH_Guides/Guides.lua"
+    if overlay.get("sourceFiles", {}).get(compiled) != provenance["inputSha256"].get(compiled):
+        raise ValueError("Guide locations do not match the compiled guides")
+    guides = {guide["id"]: guide for guide in document["guides"]}
+    applied, seen = [], set()
+    for patch in overlay.get("patches", []):
+        identity = patch["id"]
+        if identity in seen:
+            raise ValueError("Duplicate location correction: " + identity)
+        seen.add(identity)
+        guide = guides.get(patch["guideID"])
+        si, gi = patch["step"], patch["goal"]
+        if not guide or not isinstance(si, int) or not 1 <= si <= len(guide["steps"]):
+            raise ValueError("Invalid location guide/step: " + identity)
+        goals = guide["steps"][si - 1]["goals"]
+        if not isinstance(gi, int) or not 1 <= gi <= len(goals):
+            raise ValueError("Invalid location goal: " + identity)
+        goal = goals[gi - 1]
+        if not patch.get("match") or any(goal.get(key) != value for key, value in patch["match"].items()):
+            raise ValueError("Location correction target changed: " + identity)
+        fields = patch["set"]
+        if not fields or set(fields) - {"candidates", "navigationHint", "navigationMode"}:
+            raise ValueError("Locations cannot change quest semantics: " + identity)
+        if "navigationMode" in fields and fields["navigationMode"] not in ("inventory", "ability", "escort"):
+            raise ValueError("Invalid action navigation mode: " + identity)
+        for candidate in fields.get("candidates", []):
+            if not isinstance(candidate, dict) or not all(isinstance(candidate.get(key), (int, float))
+                    and not isinstance(candidate[key], bool) and math.isfinite(candidate[key]) for key in ("map", "x", "y")):
+                raise ValueError("Invalid location coordinates: " + identity)
+            if candidate["map"] <= 0 or candidate["map"] != int(candidate["map"]) or not all(0 <= candidate[key] <= 100 for key in ("x", "y")):
+                raise ValueError("Location coordinates out of bounds: " + identity)
+            if candidate.get("f") not in ("e", "l"):
+                raise ValueError("Location requires an explicit coordinate frame: " + identity)
+        if not patch.get("evidence"):
+            raise ValueError("Location correction needs evidence: " + identity)
+        for key, value in fields.items():
+            if key in goal and goal[key] != value:
+                raise ValueError("Location correction would replace authored data: " + identity)
+            goal[key] = value
+        applied.append(identity)
+    provenance["navigationCoverage"] = {
+        "file": "Source/guide_locations.json", "sha256": hashlib.sha256(payload).hexdigest(),
+        "sourceFiles": overlay["sourceFiles"], "applied": applied,
+    }
+    fields = Counter(key for guide in document["guides"] for step in guide["steps"] for goal in step["goals"] for key in goal)
+    document["statistics"]["goalFields"] = dict(sorted(fields.items()))
+    return applied
+
+
+def build(snapshot_path: Path, addon_path: Path) -> dict[str, int]:
+    document = json.loads(snapshot_path.read_text(encoding="utf-8"))
+    if document.get("schemaVersion") != 1:
+        raise ValueError("Unsupported leveling snapshot schema")
+    guides = document["guides"]
+    if not isinstance(guides, list) or not guides:
+        raise ValueError("The snapshot must contain a non-empty guides array")
+    ids = [guide["id"] for guide in guides]
+    if len(ids) != len(set(ids)):
+        raise ValueError("Duplicate guide ID")
+    for guide in guides:
+        if not guide.get("steps") or guide.get("category") != "Leveling":
+            raise ValueError(f"Invalid leveling guide: {guide.get('id')}")
+        for step in guide["steps"]:
+            if not isinstance(step.get("goals"), list) or not step["goals"]:
+                raise ValueError(f"A step has no goals: {guide['id']}")
+
+    addon_path.mkdir(parents=True, exist_ok=True)
+    source = document["provenance"]
+    header = (
+        "-- Generated from Source/leveling.json by Source/build_guides.py.\n"
+        "-- Edit the JSON snapshot and rebuild; preserve all goal semantics.\n"
+        "-- Adapted from Polestar / SendaFH under GPL-3.0-only.\n"
+        f"-- Source commit: {source['commit']}\n"
+        "-- Copyright and data notices: Licenses/.\n"
+        "local _, ns = ...\n\n"
+    )
+    output = [header]
+    ordered_guides = sorted(
+        guides,
+        key=lambda g: (
+            g.get("faction", ""),
+            g.get("minLevel", 0),
+            g.get("maxLevel", 0),
+            0 if g.get("races") else 1,
+            g["id"],
+        ),
+    )
+    for guide in ordered_guides:
+        # Separate functions preserve Lua 5.1's per-function constant budget.
+        output.append(f"-- {guide['id']}\ndo\n\tlocal function register()\n\t\tns:RegisterGuide(")
+        output.append(lua_value(guide, 2))
+        output.append(")\n\tend\n\tregister()\nend\n\n")
+    (addon_path / "Leveling.lua").write_text("".join(output), encoding="utf-8", newline="\n")
+    frames = header + "-- Era coordinate frames. A goal's f='e' must be converted at runtime.\n"
+    frames += "ns.mapFrames = " + lua_value(document["mapFrames"]) + "\n"
+    (addon_path / "MapFrames.lua").write_text(frames, encoding="utf-8", newline="\n")
+    return {
+        "guides": len(guides),
+        "steps": sum(len(guide["steps"]) for guide in guides),
+        "goals": sum(len(step["goals"]) for guide in guides for step in guide["steps"]),
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--input", type=Path, default=Path(__file__).with_name("leveling.json"))
+    parser.add_argument("--output", type=Path, default=Path(__file__).resolve().parents[1])
+    args = parser.parse_args()
+    print(json.dumps(build(args.input, args.output), ensure_ascii=False, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

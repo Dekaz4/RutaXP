@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.backups/
+.sources/
+.pytest_cache/
+dist/
+/Instalador_RutaXP.exe
+/Actualizador_RutaXP.exe
+/tools/payload.zip
+*.user
+*.pdb

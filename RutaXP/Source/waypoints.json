@@ -1,0 +1,593 @@
+{
+  "schema": 1,
+  "source": "Polestar / SendaFH",
+  "license": "GPL-3.0-only (con avisos de terceros existentes)",
+  "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+  "description": "Entradas y extremos de pasos documentados; no es un navegador por carreteras. No se inventan altitudes ni rutas interiores.",
+  "routes": [
+    {
+      "id": "den",
+      "title": "Entrada de El Cubil",
+      "kind": "cave",
+      "match": {
+        "map": 1411,
+        "quests": [
+          788,
+          97279,
+          3090
+        ],
+        "actions": [
+          "accept",
+          "turnin"
+        ]
+      },
+      "activationRadius": 1800,
+      "points": [
+        {
+          "map": 1411,
+          "x": 42.4,
+          "y": 68.6,
+          "f": "e",
+          "label": "Entrada de El Cubil",
+          "radius": 12,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "guides/forever/horde/orc-troll/01-durotar.guide",
+        "line": 115,
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/orc-troll/01-durotar.guide#L115",
+        "verification": "Coordenadas explícitas y explicación de la entrada en la guía fuente; altitud no disponible. Confirmación manual al llegar."
+      }
+    },
+    {
+      "id": "burning-blade",
+      "title": "Entrada del Aquelarre del Filo Ardiente",
+      "kind": "cave",
+      "match": {
+        "map": 1411,
+        "quests": [
+          6394,
+          794
+        ],
+        "actions": [
+          "collect",
+          "complete"
+        ]
+      },
+      "activationRadius": 1800,
+      "points": [
+        {
+          "map": 1411,
+          "x": 45,
+          "y": 56,
+          "f": "e",
+          "label": "Entrada del Aquelarre del Filo Ardiente",
+          "radius": 12,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "guides/forever/horde/orc-troll/01-durotar.guide",
+        "line": 192,
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/orc-troll/01-durotar.guide#L192",
+        "verification": "Coordenadas explícitas y explicación de la entrada en la guía fuente; altitud no disponible. Confirmación manual al llegar."
+      }
+    },
+    {
+      "id": "skull-rock",
+      "title": "Entrada de Roca del Cráneo",
+      "kind": "cave",
+      "match": {
+        "map": 1411,
+        "quests": [
+          827
+        ],
+        "actions": [
+          "collect",
+          "complete"
+        ]
+      },
+      "activationRadius": 1800,
+      "points": [
+        {
+          "map": 1411,
+          "x": 55,
+          "y": 10,
+          "f": "e",
+          "label": "Entrada de Roca del Cráneo",
+          "radius": 12,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "guides/forever/horde/orc-troll/01-durotar.guide",
+        "line": 464,
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/orc-troll/01-durotar.guide#L464",
+        "verification": "Coordenadas explícitas y explicación de la entrada en la guía fuente; altitud no disponible. Confirmación manual al llegar."
+      }
+    },
+    {
+      "id": "fargodeep",
+      "title": "Entrada de la Mina Abisal",
+      "kind": "cave",
+      "match": {
+        "map": 1429,
+        "quests": [
+          62,
+          47,
+          60,
+          87,
+          91775
+        ],
+        "actions": [
+          "complete",
+          "collect"
+        ]
+      },
+      "activationRadius": 1800,
+      "points": [
+        {
+          "map": 1429,
+          "x": 39.5,
+          "y": 82.4,
+          "f": "e",
+          "label": "Entrada de la Mina Abisal",
+          "radius": 12,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "guides/forever/alliance/human/01-elwynn-forest.guide",
+        "line": 325,
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/human/01-elwynn-forest.guide#L325",
+        "verification": "Coordenadas explícitas y explicación de la entrada en la guía fuente; altitud no disponible. Confirmación manual al llegar."
+      }
+    },
+    {
+      "id": "jasperlode",
+      "title": "Entrada de la Cantera de Jaspe",
+      "kind": "cave",
+      "match": {
+        "map": 1429,
+        "quests": [
+          76,
+          91723,
+          91732
+        ],
+        "actions": [
+          "complete",
+          "kill",
+          "collect"
+        ]
+      },
+      "activationRadius": 1800,
+      "points": [
+        {
+          "map": 1429,
+          "x": 61.6,
+          "y": 54.1,
+          "f": "e",
+          "label": "Entrada de la Cantera de Jaspe",
+          "radius": 12,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "guides/forever/alliance/human/01-elwynn-forest.guide",
+        "line": 407,
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/human/01-elwynn-forest.guide#L407",
+        "verification": "Coordenadas explícitas y explicación de la entrada en la guía fuente; altitud no disponible. Confirmación manual al llegar."
+      }
+    },
+    {
+      "id": "coldridge",
+      "title": "Entrada de la cueva de los trols",
+      "kind": "cave",
+      "match": {
+        "map": 1426,
+        "quests": [
+          218
+        ],
+        "npcs": [
+          808
+        ],
+        "actions": [
+          "collect",
+          "complete",
+          "kill",
+          "objective"
+        ]
+      },
+      "activationRadius": 1800,
+      "points": [
+        {
+          "map": 1426,
+          "x": 26.93,
+          "y": 80.03,
+          "label": "Entrada de la cueva de los trols",
+          "radius": 12,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
+        "line": 222,
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L222",
+        "objective": {
+          "questID": 218,
+          "itemID": 2004,
+          "npcID": 808,
+          "questSourceLine": 226,
+          "npcReferenceLine": 215,
+          "npcNameFile": "addon/SendaFH_Names_esES/Names.lua",
+          "npcNameLine": 4712,
+          "npcNameUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_Names_esES/Names.lua#L4712",
+          "actionAliases": "Recoger el diario, completar su objetivo o derrotar a Grik'nir llevan a la misma cueva; aceptar y entregar permanecen fuera."
+        },
+        "verification": "Coordenadas explícitas y explicación de la entrada en la guía fuente; altitud no disponible. Confirmación manual al llegar."
+      }
+    },
+    {
+      "id": "blackfathom",
+      "title": "Entrada de las ruinas de Cavernas de Brazanegra",
+      "kind": "cave",
+      "match": {
+        "map": 1440,
+        "quests": [
+          6563
+        ],
+        "actions": [
+          "collect"
+        ]
+      },
+      "activationRadius": 1800,
+      "points": [
+        {
+          "map": 1440,
+          "x": 14.5,
+          "y": 14.2,
+          "f": "e",
+          "label": "Entrada de las ruinas de Cavernas de Brazanegra",
+          "radius": 12,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "guides/forever/horde/07-ashenvale.guide",
+        "line": 130,
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/07-ashenvale.guide#L130",
+        "verification": "Coordenadas explícitas y explicación de la entrada en la guía fuente; altitud no disponible. Confirmación manual al llegar."
+      }
+    },
+    {
+      "id": "durotar-barrens",
+      "title": "Paso entre Durotar y Los Baldíos",
+      "kind": "crossing",
+      "match": {
+        "fromMap": 1411,
+        "toMap": 1413
+      },
+      "activationRadius": 3000,
+      "points": [
+        {
+          "map": 1411,
+          "x": 37.2,
+          "y": 43,
+          "f": "e",
+          "label": "Acceso al paso del río Furia",
+          "radius": 18,
+          "mode": "confirm"
+        },
+        {
+          "map": 1413,
+          "x": 60.8,
+          "y": 19.8,
+          "f": "e",
+          "label": "Salida del paso del río Furia",
+          "radius": 18,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "tools/lib/travel/crossings.json",
+        "key": "carbonite-durotar--the-barrens",
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/tools/lib/travel/crossings.json",
+        "upstream": "Carbonite-Classic 4d062800ae0c77c3f52ecf436b175bf06dcced4a; Carbonite/Data/classic/ZoneConnections.lua; GPL-3.0",
+        "verification": "Dos extremos exactos del paso del catálogo fuente. No incluye geometría del puente ni altitudes; requiere confirmar cada extremo."
+      }
+    },
+    {
+      "id": "barrens-durotar",
+      "title": "Paso entre Durotar y Los Baldíos",
+      "kind": "crossing",
+      "match": {
+        "fromMap": 1413,
+        "toMap": 1411
+      },
+      "activationRadius": 3000,
+      "points": [
+        {
+          "map": 1413,
+          "x": 60.8,
+          "y": 19.8,
+          "f": "e",
+          "label": "Acceso al paso del río Furia",
+          "radius": 18,
+          "mode": "confirm"
+        },
+        {
+          "map": 1411,
+          "x": 37.2,
+          "y": 43,
+          "f": "e",
+          "label": "Salida del paso del río Furia",
+          "radius": 18,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "tools/lib/travel/crossings.json",
+        "key": "carbonite-durotar--the-barrens",
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/tools/lib/travel/crossings.json",
+        "upstream": "Carbonite-Classic 4d062800ae0c77c3f52ecf436b175bf06dcced4a; Carbonite/Data/classic/ZoneConnections.lua; GPL-3.0",
+        "verification": "Dos extremos exactos del paso del catálogo fuente. No incluye geometría del puente ni altitudes; requiere confirmar cada extremo."
+      }
+    },
+    {
+      "id": "boat-bootybay-ratchet-out",
+      "title": "Barco entre Bahía del Botín y Trinquete",
+      "kind": "transport",
+      "match": {
+        "fromMap": 1434,
+        "toMap": 1413
+      },
+      "activationRadius": 6000,
+      "points": [
+        {
+          "map": 1434,
+          "x": 26.35,
+          "y": 73.56,
+          "f": "e",
+          "label": "Embarque: Bahía del Botín",
+          "radius": 20,
+          "mode": "transport"
+        },
+        {
+          "map": 1413,
+          "x": 63.35,
+          "y": 38.45,
+          "f": "e",
+          "label": "Desembarque: Trinquete",
+          "radius": 20,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "addon/SendaFH/Nav/TravelData.lua",
+        "line": 353,
+        "key": "boat-bootybay-ratchet",
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH/Nav/TravelData.lua#L353",
+        "upstream": "TravelData: puntos del cliente Forever 1.60.1.70425 y SendaFH; avisos de terceros en la fuente y en Licenses/SendaFH-THIRD_PARTY.md.",
+        "verification": "Extremos exactos del transporte publicado en la fuente. No hay altitud comprobada: el embarque y el desembarque requieren confirmación manual; llegar al muelle no prueba un viaje."
+      }
+    },
+    {
+      "id": "boat-bootybay-ratchet-return",
+      "title": "Barco entre Bahía del Botín y Trinquete",
+      "kind": "transport",
+      "match": {
+        "fromMap": 1413,
+        "toMap": 1434
+      },
+      "activationRadius": 6000,
+      "points": [
+        {
+          "map": 1413,
+          "x": 63.35,
+          "y": 38.45,
+          "f": "e",
+          "label": "Embarque: Trinquete",
+          "radius": 20,
+          "mode": "transport"
+        },
+        {
+          "map": 1434,
+          "x": 26.35,
+          "y": 73.56,
+          "f": "e",
+          "label": "Desembarque: Bahía del Botín",
+          "radius": 20,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "addon/SendaFH/Nav/TravelData.lua",
+        "line": 353,
+        "key": "boat-bootybay-ratchet",
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH/Nav/TravelData.lua#L353",
+        "upstream": "TravelData: puntos del cliente Forever 1.60.1.70425 y SendaFH; avisos de terceros en la fuente y en Licenses/SendaFH-THIRD_PARTY.md.",
+        "verification": "Extremos exactos del transporte publicado en la fuente. No hay altitud comprobada: el embarque y el desembarque requieren confirmación manual; llegar al muelle no prueba un viaje."
+      }
+    },
+    {
+      "id": "zeppelin-orgrimmar-undercity-out",
+      "title": "Zepelín entre Orgrimmar y Entrañas",
+      "kind": "transport",
+      "match": {
+        "fromMap": 1411,
+        "toMap": 1420,
+        "factions": [
+          "Horde"
+        ]
+      },
+      "activationRadius": 6000,
+      "points": [
+        {
+          "map": 1411,
+          "x": 50.82,
+          "y": 13.54,
+          "f": "e",
+          "label": "Embarque: Orgrimmar",
+          "radius": 20,
+          "mode": "transport"
+        },
+        {
+          "map": 1420,
+          "x": 60.74,
+          "y": 58.87,
+          "f": "e",
+          "label": "Desembarque: Entrañas",
+          "radius": 20,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "addon/SendaFH/Nav/TravelData.lua",
+        "line": 362,
+        "key": "zeppelin-orgrimmar-undercity",
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH/Nav/TravelData.lua#L362",
+        "upstream": "TravelData: puntos del cliente Forever 1.60.1.70425 y SendaFH; avisos de terceros en la fuente y en Licenses/SendaFH-THIRD_PARTY.md.",
+        "verification": "Extremos exactos del transporte publicado en la fuente. No hay altitud comprobada: el embarque y el desembarque requieren confirmación manual; llegar al muelle no prueba un viaje."
+      }
+    },
+    {
+      "id": "zeppelin-orgrimmar-undercity-return",
+      "title": "Zepelín entre Orgrimmar y Entrañas",
+      "kind": "transport",
+      "match": {
+        "fromMap": 1420,
+        "toMap": 1411,
+        "factions": [
+          "Horde"
+        ]
+      },
+      "activationRadius": 6000,
+      "points": [
+        {
+          "map": 1420,
+          "x": 60.74,
+          "y": 58.87,
+          "f": "e",
+          "label": "Embarque: Entrañas",
+          "radius": 20,
+          "mode": "transport"
+        },
+        {
+          "map": 1411,
+          "x": 50.82,
+          "y": 13.54,
+          "f": "e",
+          "label": "Desembarque: Orgrimmar",
+          "radius": 20,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "addon/SendaFH/Nav/TravelData.lua",
+        "line": 362,
+        "key": "zeppelin-orgrimmar-undercity",
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH/Nav/TravelData.lua#L362",
+        "upstream": "TravelData: puntos del cliente Forever 1.60.1.70425 y SendaFH; avisos de terceros en la fuente y en Licenses/SendaFH-THIRD_PARTY.md.",
+        "verification": "Extremos exactos del transporte publicado en la fuente. No hay altitud comprobada: el embarque y el desembarque requieren confirmación manual; llegar al muelle no prueba un viaje."
+      }
+    },
+    {
+      "id": "portal-ruttheran",
+      "title": "Portal entre Darnassus y Rut'theran",
+      "kind": "portal",
+      "match": {
+        "fromMap": 1457,
+        "toMap": 1438,
+        "factions": [
+          "Alliance"
+        ]
+      },
+      "activationRadius": 1800,
+      "points": [
+        {
+          "map": 1457,
+          "x": 29.13,
+          "y": 41.21,
+          "f": "e",
+          "label": "Entrada del portal en Darnassus",
+          "radius": 12,
+          "mode": "confirm"
+        },
+        {
+          "map": 1438,
+          "x": 55.93,
+          "y": 89.74,
+          "f": "e",
+          "label": "Salida del portal en Aldea Rut'theran",
+          "radius": 12,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "addon/SendaFH/Nav/TravelData.lua",
+        "line": 369,
+        "key": "portal-ruttheran",
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH/Nav/TravelData.lua#L369",
+        "upstream": "TravelData: puntos del cliente Forever 1.60.1.70425 y SendaFH; avisos de terceros en la fuente y en Licenses/SendaFH-THIRD_PARTY.md.",
+        "verification": "Extremos exactos del portal publicados en la fuente. Cada extremo se confirma manualmente; entrar en el radio no prueba haber atravesado el portal."
+      }
+    },
+    {
+      "id": "portal-darnassus",
+      "title": "Portal entre Darnassus y Rut'theran",
+      "kind": "portal",
+      "match": {
+        "fromMap": 1438,
+        "toMap": 1457,
+        "factions": [
+          "Alliance"
+        ]
+      },
+      "activationRadius": 1800,
+      "points": [
+        {
+          "map": 1438,
+          "x": 55.87,
+          "y": 89.34,
+          "f": "e",
+          "label": "Entrada del portal en Aldea Rut'theran",
+          "radius": 12,
+          "mode": "confirm"
+        },
+        {
+          "map": 1457,
+          "x": 30.75,
+          "y": 41.39,
+          "f": "e",
+          "label": "Salida del portal en Darnassus",
+          "radius": 12,
+          "mode": "confirm"
+        }
+      ],
+      "provenance": {
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "file": "addon/SendaFH/Nav/TravelData.lua",
+        "line": 370,
+        "key": "portal-darnassus",
+        "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH/Nav/TravelData.lua#L370",
+        "upstream": "TravelData: puntos del cliente Forever 1.60.1.70425 y SendaFH; avisos de terceros en la fuente y en Licenses/SendaFH-THIRD_PARTY.md.",
+        "verification": "Extremos exactos del portal publicados en la fuente. Cada extremo se confirma manualmente; entrar en el radio no prueba haber atravesado el portal."
+      }
+    }
+  ]
+}

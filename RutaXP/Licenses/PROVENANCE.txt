@@ -1,0 +1,51 @@
+RutaXP leveling guide adaptation
+===============================
+
+Original guide routes: Polestar, by Fitz and contributors.
+Spanish adaptation and translation: SendaFH / Forever Hispano.
+Source: https://github.com/julen92/SendaFH
+Branch: sendafh
+Commit: 5d207e28e82e2c529143b21ace74fe88692f0067
+
+RutaXP captures the 57 Leveling guides, applies SendaFH's Spanish
+presentation catalogue and preserves all grouped goals, prerequisites,
+conditions, quest/object/NPC/item IDs and coordinate frames.
+RutaXP's import and build tools produce the editable Source/leveling.json
+snapshot and the runtime Leveling.lua and MapFrames.lua from that snapshot.
+
+Adapted guide text and original project code are GPL-3.0-only.
+The compiler exception does not remove the GPL from copied guide text.
+Read SendaFH-GPL-3.0.txt, SendaFH-LICENSE-EXCEPTION.md,
+SendaFH-THIRD_PARTY.md and Polestar-Guide-Data.txt for original notices.
+
+The upstream pack resolves factual quest/NPC/object/item records from
+sources including pfQuest, Blizzard tables and QuestieDB. The notices
+identify their provenance and licensing separately. No Questie code or
+quest narrative text is imported by RutaXP's capture tool.
+
+These are beta routes, not fully play-tested Forever guides. The 30-60
+route includes Classic and known Forever quests while new content is
+still being added. The Spanish catalogue also needs in-game review.
+
+RutaXP 0.3.0 intermediate waypoints
+--------------------------------
+Source/waypoints.json records the exact source location and revision for
+each included cave entrance, crossing and transport endpoint. Waypoints.lua
+contains the runtime snapshot. Coordinates are taken from the same pinned
+Polestar / SendaFH revision above; there is no invented terrain geometry.
+The zone-crossing endpoints originate in Carbonite-Classic's
+Data/classic/ZoneConnections.lua, commit
+4d062800ae0c77c3f52ecf436b175bf06dcced4a, under GPL-3.0.
+Transport endpoints come from the upstream generated Nav/TravelData.lua.
+The existing SendaFH-THIRD_PARTY.md retains the original travel-data and
+Carbonite notices. Missing source altitudes remain unknown.
+
+Later RutaXP releases include the walking router and navigation maps in
+Pathing/, adapted from the pinned Polestar/SendaFH revision. That directory
+retains the Shortest Path Forever and Polestar credits, GPL licence, source
+revisions and file hashes in CREDITS.md, UPSTREAM.json, VENDORED.json and
+PACK.json. See those notices for the exact code and data provenance.
+
+The Media/ graphics are also retained from Polestar/SendaFH, under the
+upstream notices in SendaFH-THIRD_PARTY.md. Antigravity's integration and
+interface changes do not change the authorship of those original assets.

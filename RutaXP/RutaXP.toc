@@ -1,0 +1,36 @@
+## Interface: 16001, 11509, 11508, 11507, 11506, 11505, 11504, 11503, 11403
+## Title: RutaXP
+## Notes: Guias completas mision por mision en espanol, flecha de navegacion y rutas propias para WoW Forever.
+## Author: Diego
+## Version: 0.7.0
+## Category: Quests
+## Category-esES: Misiones
+## Category-esMX: Misiones
+## IconTexture: Interface\Icons\INV_Misc_Map_01
+## SavedVariables: RutaXPDB
+## SavedVariablesPerCharacter: RutaXPCharDB
+
+Core.lua
+Updates.lua
+MapFrames.lua
+Leveling.lua
+QuestEngine.lua
+Navigation.lua
+Pathing\Pathing.xml
+Walking.lua
+Waypoints.lua
+Session.lua
+Duo.lua
+DuoPlanner.lua
+DuoAuto.lua
+DuoJourney.lua
+Adaptation.lua
+Recovery.lua
+Talents.lua
+TalentBuilds.lua
+Trainer.lua
+TrackerLayout.lua
+TrackerPreview.lua
+UI.lua
+FeaturesUI.lua
+Extensions.lua

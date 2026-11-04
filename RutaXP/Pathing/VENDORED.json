@@ -1,0 +1,382 @@
+{
+  "schema": 1,
+  "source": {
+    "repository": "https://github.com/julen92/SendaFH",
+    "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+    "directory": "addon/SendaFH_Nav",
+    "license": "GPL-3.0-or-later",
+    "pathingAuthor": "Cillian Berragan (Shortest Path Forever)",
+    "routingRepository": "https://github.com/cjber/shortest-path-forever",
+    "routingCommit": "b1ad5bd4bf579c781937af0e25f5233cc94b3726",
+    "routingVersion": "1.16.0",
+    "gridProduct": "wow_classic_beta",
+    "gridBuild": "1.60.1.70374"
+  },
+  "adaptation": {
+    "script": "tools/vendor_pathing.py",
+    "date": "2026-10-20",
+    "substitutions": {
+      "SendaFHPathData": "RutaXPPathData",
+      "SendaFHNavChokepoints": "RutaXPPathChokepoints",
+      "SendaFH_NavEngine": "RutaXPPathEngine"
+    },
+    "namespace": "The addon-private namespace is root.PathingNamespace",
+    "payloadGuard": "Nav Lua chunks return early when required decoding APIs are unavailable",
+    "algorithmChanges": false
+  },
+  "files": {
+    "API.lua": {
+      "source": "addon/SendaFH_Nav/API.lua",
+      "sourceSHA256": "45f5cca34dd5eaeaf34f546e3037fd7de20e4483ec56d4717520b3eab8489fca",
+      "sha256": "81eb0f781383f3501f4c92ddba01426e3d377922719caf9553f913ce2194f889"
+    },
+    "CREDITS.md": {
+      "source": "addon/SendaFH_Nav/CREDITS.md",
+      "sourceSHA256": "1c963d2079d5d91164d951196300efe09a5df1a491680fffdd8eaae3fa456cb4",
+      "sha256": "1c963d2079d5d91164d951196300efe09a5df1a491680fffdd8eaae3fa456cb4"
+    },
+    "LICENSE": {
+      "source": "addon/SendaFH_Nav/LICENSE",
+      "sourceSHA256": "c3056b39f2dafced20492bb270e339e94d6b2e4030f57f39b04b4193ea57dedf",
+      "sha256": "c3056b39f2dafced20492bb270e339e94d6b2e4030f57f39b04b4193ea57dedf"
+    },
+    "Nav/Chokepoints.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Chokepoints.lua",
+      "sourceSHA256": "b5637bb2e715a88041f4fe6bebbdbefd74cb04ef6cf969c7ea84d7fdda77b064",
+      "sha256": "2f51beae0b5324753980e2cf2ebfe573497f911ab28f74fbe1dfc52b4f25d361"
+    },
+    "Nav/Nav.xml": {
+      "source": "addon/SendaFH_Nav/Nav/Nav.xml",
+      "sourceSHA256": "4739659fc822070064bef1748bcd93cf235065eae6882da640fe7f61870b5afb",
+      "sha256": "4739659fc822070064bef1748bcd93cf235065eae6882da640fe7f61870b5afb"
+    },
+    "Nav/Nav0.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0.lua",
+      "sourceSHA256": "f0384f21ba9a23b526f5d4d7e5f9d4a1fb94e5e39f57b8f72190bb6378a83ee3",
+      "sha256": "56ef992f6aeee7d765b55cd0918652854bc012432f946ba3227dacfa07c36de1"
+    },
+    "Nav/Nav0_1.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_1.lua",
+      "sourceSHA256": "ceef82a031e26beedc5448e10a4d7c14f1f01ee3967303734255e7d494b397c7",
+      "sha256": "79aa775b850fda1c3482588118a74553a92cad17d6d7899bb4dcf30e6878e870"
+    },
+    "Nav/Nav0_10.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_10.lua",
+      "sourceSHA256": "bc12c30bd3ed8a5b44c526d80a04745a3150c76f6ee5f7c4d12f14edd31db28e",
+      "sha256": "69f596ef56fda2a367fe19bcce4dc6df62c30ae34a823b4a770867ed8df3ec05"
+    },
+    "Nav/Nav0_11.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_11.lua",
+      "sourceSHA256": "a03ca33c8f0b1ee3921efee3ce2348f714488c78a1f6da94f9ee4a6412c28ba2",
+      "sha256": "6bd10ba803cdbf46d170738c4f7c084cb2d47fb71acebd67f809b9fd7bf8285a"
+    },
+    "Nav/Nav0_12.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_12.lua",
+      "sourceSHA256": "27be06703c5b9f5d2f226b9ed40ac3dc4f7f8ebfc7470391ded819d61f881985",
+      "sha256": "ca44b2e476621ba851fa1b6c2686e316cffd569e7906f6cb3afc6aa7960e709e"
+    },
+    "Nav/Nav0_13.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_13.lua",
+      "sourceSHA256": "c97d68accca8d889bed760a558d9b279d5f8f3691c553c6d3821f1a0893202e1",
+      "sha256": "72de6bc344a6df2890e92e8dbf747e7b24cc9329ea403b6e3d12ad722492d74f"
+    },
+    "Nav/Nav0_14.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_14.lua",
+      "sourceSHA256": "24d43888bce6863ebb3037c3db259eb8f38b5d49504ab97d6d53eeda54f2b2d5",
+      "sha256": "a13ab9ed83af5594b6e0e73e7c2bb86dab2334a5a544415d50c9bc1be76665b9"
+    },
+    "Nav/Nav0_15.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_15.lua",
+      "sourceSHA256": "dae11cd625be545d2cc61551201c4788250d979f34b67e848f36fbff7ff2205d",
+      "sha256": "4b5a46828dfc9aa46f70bee07e531b2fb1d671604c18ab8fb9bc6642da4057f3"
+    },
+    "Nav/Nav0_16.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_16.lua",
+      "sourceSHA256": "ae496dd218ce257b446f95b55887bab98052b58db6bd5fdeb184a725d07b1894",
+      "sha256": "bf6574c8321a102543fa4ad5d77c38cf93f43053dfaa18c097f141ffd5599756"
+    },
+    "Nav/Nav0_17.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_17.lua",
+      "sourceSHA256": "35972893e0ab42237222e85232158ec9c4489a9f5329f235a10f0e8149f2b5be",
+      "sha256": "ac5cbe441979faa8b716c5b961343caccccd98d57bbca02b39e0ae2b8c2b7267"
+    },
+    "Nav/Nav0_18.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_18.lua",
+      "sourceSHA256": "58ec14c76c320916ae42b0ad366fdcc3f3af3c997cafeca5de8541d80caf6b39",
+      "sha256": "85065f4eac10258d955479f71e10dc1eacba448fabbf6fecc23ce5804a403da6"
+    },
+    "Nav/Nav0_19.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_19.lua",
+      "sourceSHA256": "d2da9185c931f8f93a4f6122d2e39d435bd30950026b202997201d726ea24cb7",
+      "sha256": "f260b727d918bcb16356c0e41d08b8ccc6ea6b50bd950ba5465e2331b45900df"
+    },
+    "Nav/Nav0_2.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_2.lua",
+      "sourceSHA256": "a43dd4fc58f77f4145aff3d730598c2f6dafbee4f3a1a4be2daf79b8fe47d9ce",
+      "sha256": "5d5d732761fb4bcfe93bcfb8d07f500694912c7ddec29aca37a0e8d42ef45456"
+    },
+    "Nav/Nav0_20.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_20.lua",
+      "sourceSHA256": "4ae731e45260e10dc9ddd4dedf06d5aa6ed74cb2ecf8c8bf9a97a659f6bfc12f",
+      "sha256": "84200b7af7448a126fc3e316b12d4344fafe1ea0b4b5fbc061dc1ef1ed708fc2"
+    },
+    "Nav/Nav0_21.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_21.lua",
+      "sourceSHA256": "6cf9fc6321c8a54444766a8d04354f3ce2d164f75fbe0dd07c5e00c8e60ddd7e",
+      "sha256": "2fbe64fb30582d837bf250adfde8d035d50b10178468aa340e32d6a30c58ede8"
+    },
+    "Nav/Nav0_22.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_22.lua",
+      "sourceSHA256": "9f8dfe8b38da81c7a28c5307fe1da53bee97efa7105b5873efecf6ffc61f6fd4",
+      "sha256": "c82aec455bb532a3e6ccaddfa6e70fac4840f83972bb11e122dc8d7d744c1159"
+    },
+    "Nav/Nav0_23.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_23.lua",
+      "sourceSHA256": "4e3f1c558a1a5316151b8843cdb1110630877985a2bf7de661c1b774472615e8",
+      "sha256": "f498e6b30c483db8f6140850b246d29b3a85ad68739dde50dbfec7ca63254217"
+    },
+    "Nav/Nav0_24.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_24.lua",
+      "sourceSHA256": "3fa4e155fcac967f1e6f8d90c9ee5ae8ec9aca96be178e9625ff48c3253e75c4",
+      "sha256": "602eb6adf9d7accd2c1c138f2e5acad41682bc5d265734a558ff71d2a6f5a82e"
+    },
+    "Nav/Nav0_25.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_25.lua",
+      "sourceSHA256": "65a123ff9271bfe3660e8487f69c6c99fd72234beb1284162fa3470177acde20",
+      "sha256": "0cc9a1bd984030c7f3b240d4d65576116be342c298d0d55ccd24e64750fb4bb3"
+    },
+    "Nav/Nav0_3.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_3.lua",
+      "sourceSHA256": "e66da3070fb9afce9d047ef8ebe381dd20c404a432e48f9e643479d15a666557",
+      "sha256": "1387960b1aaa04d031e2c64219ba05d30cc6685776b2e559fd48c5a16dbcc5ab"
+    },
+    "Nav/Nav0_4.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_4.lua",
+      "sourceSHA256": "873640d7107e4ad9b4903493043f8e7ee2f5624edbad66706d0f1ef22263128a",
+      "sha256": "bf2320ed343b73112554172e6e8482609d3828814fbb5cf7d3af139ade62b900"
+    },
+    "Nav/Nav0_5.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_5.lua",
+      "sourceSHA256": "95c452b892cdb14c771cc15e90e0b6cbd8576e9e9e773ca44888bcaee07a92fd",
+      "sha256": "b4f5fdf5fc13443c3079594fe216627de24f5fcdd6e97bafcf311c716a693705"
+    },
+    "Nav/Nav0_6.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_6.lua",
+      "sourceSHA256": "cba530534fd2e2d58e36f797e63a0a8d1032f2a83dd08accb5dbcd8ef7531986",
+      "sha256": "24e1c3ec12ce2ce070d8b73b07532bb311709b0b4c1198fe149f568d2b907761"
+    },
+    "Nav/Nav0_7.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_7.lua",
+      "sourceSHA256": "d1ceff0cee1574606f8853c26bee8cf0bee7cbfee4ddd75d1ca39f8d18adb758",
+      "sha256": "cf0bf11e6976bdb56a62173d394262abb85a0b401bed18c6cf1a6e7510767dfd"
+    },
+    "Nav/Nav0_8.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_8.lua",
+      "sourceSHA256": "0f7cdfd6725a31da82b93a2f0bbfa8e39b757fed9c2aa9c6dc1146034f2970d1",
+      "sha256": "0c9a893a20a04542acc0398c5597d3ee33c708fc8f543b5d6b27ccb8b5c00550"
+    },
+    "Nav/Nav0_9.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav0_9.lua",
+      "sourceSHA256": "9a6672c3605823f46f2c1fe71e00525375d68d27a8ec1bd116a3f7d700b424b6",
+      "sha256": "2a6dd81fcfac20ca0096ab0c29a8f57d7d46e476a62d2df8584db6c6d2ca4bb1"
+    },
+    "Nav/Nav1.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1.lua",
+      "sourceSHA256": "afde7790284da34d1704c45e179d5c635c99b89d1903020bde3ccea017294242",
+      "sha256": "2f72ed802b31bfc807328245732fd56cdd9753fd0ff82bc399d29fe60b6e34c3"
+    },
+    "Nav/Nav1_1.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_1.lua",
+      "sourceSHA256": "e510ba68a89fba2e84e02f738c7e38889fc5f72087828db90c6750021330da7a",
+      "sha256": "1e821668deeaa548fbbe82a105b278a998a81c77853bfe3724fab1335f2f6c71"
+    },
+    "Nav/Nav1_10.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_10.lua",
+      "sourceSHA256": "2480be411d793b3a401d09488c420216d56f726f2632b6c9210eeb39787f2146",
+      "sha256": "8365b29449ab7349c269a7f6406b3c9f8cd641bf1451d38beb5145fb1f7bb89d"
+    },
+    "Nav/Nav1_11.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_11.lua",
+      "sourceSHA256": "15b5de26c86f60a9593dfc5fec122bf17efdb3fa9dc5f452edf3a1ef8502183c",
+      "sha256": "8a7f0aa12678cd08bbbf3d5b0d51c00b0d2dc19e8920a7c33284e2bb4bf6364e"
+    },
+    "Nav/Nav1_12.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_12.lua",
+      "sourceSHA256": "28150ab99386448f1cba7623c49414d1301042e77705b3c39025cd3e0d74e707",
+      "sha256": "83c1dddd02a7b05edc6176371a14e0c7a7e3662350d7dbca470d4ece0a7c0f14"
+    },
+    "Nav/Nav1_13.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_13.lua",
+      "sourceSHA256": "6bf484eb15fe585e93062ca7a42658aacb2cafff50c43c0832268f0e11b88cbe",
+      "sha256": "f866cdef87c30cc36241219153390d57ff71b05713a216a0831d9e44216cff59"
+    },
+    "Nav/Nav1_14.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_14.lua",
+      "sourceSHA256": "203058c52539409a7eeab7b600decb3ae761df3d5a51b4cff30ed17b99ea2e82",
+      "sha256": "de8cf035dcdd9d8e5d01216e7157eafff6e2a1240238f39b6d7f1f78c3b80267"
+    },
+    "Nav/Nav1_15.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_15.lua",
+      "sourceSHA256": "033aa79a925e4be53511eee0480e5790459db8d3dff38ce89f6df40cf9ef98ef",
+      "sha256": "3ab98a9a2c0c47d8162cc23ae26afd996e87a836152cde0c308be1cccd77efa8"
+    },
+    "Nav/Nav1_16.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_16.lua",
+      "sourceSHA256": "bddb208ac98d2ec194450000d3a86a5cf044afed64872fe03fc00863cbeb84fe",
+      "sha256": "b08c2c9ef5d71fda2c7af34158e79e704457d6d84ee6994fb5a4dba9dced400f"
+    },
+    "Nav/Nav1_17.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_17.lua",
+      "sourceSHA256": "a3d25e443c8e69d07232728b9a6653954d396a54f87a3e0eaf13e2042baf746c",
+      "sha256": "3910e691d9555f1a3562830e1c956c60bb80c27c7121abfc182a0f3463f96480"
+    },
+    "Nav/Nav1_18.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_18.lua",
+      "sourceSHA256": "b4a88693b120cb8c2be6d1976b6c1b253658515619686bac5a37a33555ec836e",
+      "sha256": "01d72d80448d4899bc47e70752ef5b5e502ecc08329d0ec74f9513cd1b78d116"
+    },
+    "Nav/Nav1_19.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_19.lua",
+      "sourceSHA256": "ff115d1c20afb218d7f47625c3826c4d55af02b1cbdfb8c8f976032d3151fcd8",
+      "sha256": "c91f2cf13bd8cd90fe59d1e41b19c46f5c9e56d22203d46f452c5606f584e986"
+    },
+    "Nav/Nav1_2.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_2.lua",
+      "sourceSHA256": "9475d5793f6c5a839fbf63045bda17742a8c0cd651ccc8c98f81c19d09a0175a",
+      "sha256": "581a4109b160d10abeebf4e9670b43d503688d229440592c9693ff7f3d9d2838"
+    },
+    "Nav/Nav1_20.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_20.lua",
+      "sourceSHA256": "02ba0e33504a93da083718bba791724354a9f1c12c2322a786fe342911eb5a4e",
+      "sha256": "e482835655c2e104bbca4cf4c2781acdd3fc347eed003fc32e314e510456091c"
+    },
+    "Nav/Nav1_21.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_21.lua",
+      "sourceSHA256": "08e68906c7a3aed377867341cb8d034cc4acf374d8574b0bf8027e50b1734b1a",
+      "sha256": "127b90f23201f458bf855ba1aecc509016e50cd392f9d44020dd6eb679f339c4"
+    },
+    "Nav/Nav1_22.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_22.lua",
+      "sourceSHA256": "dda0fdbdbeaf4cc15b4a787a9815e33d872d2a6de38ecc2aac4259db37e6255c",
+      "sha256": "b106dcbc343f9f71cb204ced621eebe619d0f8c0bd9bc23b6f4d497c52cb4c15"
+    },
+    "Nav/Nav1_23.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_23.lua",
+      "sourceSHA256": "67da1a9a727114139e0706c16df4ec13d44199c8cc1ab53b2b6fd376a425cb33",
+      "sha256": "77549277c54f21e189be5fb5a975afc1aebef3e190340a9ce1eb5876bf86f3e3"
+    },
+    "Nav/Nav1_24.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_24.lua",
+      "sourceSHA256": "11f94b1cb77f5922f65b32f03d0d8863c340e70d744beecf9963fc9e36f20314",
+      "sha256": "fb92166095a3b2ecee7b7045f0676ad29ae07b1d6957415b88093891d4089685"
+    },
+    "Nav/Nav1_25.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_25.lua",
+      "sourceSHA256": "953b088ff9a38cbd43885d34a2df2c00b5d2a3ae4230a17c9465d72b53a236fa",
+      "sha256": "4398c9e3538ccc2f092bf1d9248419c641aa154fdc47ab4a21c67eb8127b93b5"
+    },
+    "Nav/Nav1_26.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_26.lua",
+      "sourceSHA256": "d6fe2fa4a27951f0daa7b4bada16a973cb454ff9b77ed194008aba2c36990ec0",
+      "sha256": "7573c04ded5df617c1752ec2a83c0c57553181ea1d48efa499671ba74d2f35c5"
+    },
+    "Nav/Nav1_27.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_27.lua",
+      "sourceSHA256": "a32d04be50e7677d9c557e0caaa5148f648331e07943d5eb6ae9541b1b66e99f",
+      "sha256": "20f52274ad920fb0bffdc7e3833e34fbdc557802a445cddf134192d18858e268"
+    },
+    "Nav/Nav1_28.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_28.lua",
+      "sourceSHA256": "6573286ff1dc69f005f0211be737bd8665aa21ebf45f3c3f7648d65014184a7b",
+      "sha256": "1c37f3a02d2270db340006b39a1fd238dc2dc50c26f935d71aa4a39a637ba4e1"
+    },
+    "Nav/Nav1_29.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_29.lua",
+      "sourceSHA256": "d99a4b00a0d5d99aded94dc79427a5946ffe1aa496050ba1b239428a3a7ea560",
+      "sha256": "2b3221cf0427423f35479b827bfca8cba82befd1d0cc4654b1d566bc4480b014"
+    },
+    "Nav/Nav1_3.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_3.lua",
+      "sourceSHA256": "343e4774030940dff8ff4d4be7587a3f3e9e994049600bcebf0da87dabfc9b63",
+      "sha256": "a3fcd3d94241c7e82c2a1d04594e155c7aa2c3270e4ac8e54197be56fbbaf1c0"
+    },
+    "Nav/Nav1_30.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_30.lua",
+      "sourceSHA256": "24254d3e12321bbd03b11856bdd4b96bafe73c0bceb0302e4ad441a8243745c0",
+      "sha256": "1a82eadc267d128068b6edff73eb3c4c983aa5c24e6ab9a1710e6bac339f9cc4"
+    },
+    "Nav/Nav1_4.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_4.lua",
+      "sourceSHA256": "22f124346f77243cd79698b1846634ff72e98686f930de7ab80d2c0d6658800e",
+      "sha256": "9b296a1c2600c493ef7d4bcea26a5557788542361f71c1836f99b71528b5f0df"
+    },
+    "Nav/Nav1_5.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_5.lua",
+      "sourceSHA256": "68e894c19435ccee4a375e858e5b372aab2a669d81f45152d2aa3ccba07ab15e",
+      "sha256": "67e55625f1cc89efe5222dc245cb6111ad13c0c7bd72a2e564263619ae4ec781"
+    },
+    "Nav/Nav1_6.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_6.lua",
+      "sourceSHA256": "a76cf992d298f63fa82d75108f6f2def11b1ab324271f6e7bf8ae24743a2f1bb",
+      "sha256": "b9575c04fda1fe0717fa22d70252d0f2398769c7978431b473a1882780b9f569"
+    },
+    "Nav/Nav1_7.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_7.lua",
+      "sourceSHA256": "c4549b72ca75bce987abc32965e37d852347c11444a2fb8730d29b6c7164547e",
+      "sha256": "5d8b923cf7b1ddd15fbd17cdf1de7e64b5174477935d164caced58c1c18c471b"
+    },
+    "Nav/Nav1_8.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_8.lua",
+      "sourceSHA256": "b60251806d4c3d20bcaaadd486747036f0bd3b2d708496fb0ba1ee7aa4bdbb35",
+      "sha256": "b970541894a26e906256989e3984cc4dd580e509b1a04fbe76faa1380cb92d6c"
+    },
+    "Nav/Nav1_9.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav1_9.lua",
+      "sourceSHA256": "392438951502fbd1b7faf18d23183f2a9cec3f181abe6b0da08e05f219d146a9",
+      "sha256": "ba1faea5ffd228f2a502ee9a810ff4d9e2a3c6c2719604745421ca1b7f4cacc1"
+    },
+    "Nav/Nav2991.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav2991.lua",
+      "sourceSHA256": "b28844039c8dc43fd15e88ab50754bc5ffcc57add532dae8ade2981f4813e44f",
+      "sha256": "43350f5cb942770ddf7d4d4351fb39b66733a4c8b8cbfac1c92d2ce37773b7f6"
+    },
+    "Nav/Nav2991_1.lua": {
+      "source": "addon/SendaFH_Nav/Nav/Nav2991_1.lua",
+      "sourceSHA256": "8a2eb10d2b7e0f5dc509669fd0853df8b70b41139d23a21e89281596af5471e6",
+      "sha256": "fa0dbd7bbf0426e065f6547e0a02c475df42f67cd88ca89000d23453b6191bd1"
+    },
+    "PACK.json": {
+      "source": "addon/SendaFH_Nav/PACK.json",
+      "sourceSHA256": "eecfb0b190704c9462e29bec883cfa69afd6837d200ae6e3e1ac93b8d3ac47ed",
+      "sha256": "eecfb0b190704c9462e29bec883cfa69afd6837d200ae6e3e1ac93b8d3ac47ed"
+    },
+    "Routing/Path.lua": {
+      "source": "addon/SendaFH_Nav/Routing/Path.lua",
+      "sourceSHA256": "2a8fc622052f350bff593ae4e03884165a8d23cf640f83aceb057323398b420e",
+      "sha256": "6db13d90e1f5f33d5d4498b6f120b31033cbf534f058a59154a3f52fd482780d"
+    },
+    "Routing/PathGrid.lua": {
+      "source": "addon/SendaFH_Nav/Routing/PathGrid.lua",
+      "sourceSHA256": "d271634feb98598303552a55e1f7c2423d65b089800abee6ef3de64fa8920b7d",
+      "sha256": "a1b2c9c7228224854540e3cef0eb43cf1692cc01de427fdf04e9d89cda1e92de"
+    },
+    "Routing/PathJobs.lua": {
+      "source": "addon/SendaFH_Nav/Routing/PathJobs.lua",
+      "sourceSHA256": "3b22f3b314bc2b8b541904614883935c4acf068e60db911eac02c5f79c9aded9",
+      "sha256": "76e9584c0964a6bf09eacd70a6b0942bf77e75c2b299afba7822c730d1fea411"
+    },
+    "UPSTREAM.json": {
+      "source": "addon/SendaFH_Nav/UPSTREAM.json",
+      "sourceSHA256": "241b8568bb44619199b30c897d3bd18cbfba1c17b105808fe952b1699af87dbe",
+      "sha256": "241b8568bb44619199b30c897d3bd18cbfba1c17b105808fe952b1699af87dbe"
+    }
+  },
+  "generatedFiles": {
+    "Bootstrap.lua": {
+      "sha256": "b26907120b778f9854a2ffe00af793f6cb7c42165ab7b796fe158c39ff23b282"
+    },
+    "Pathing.xml": {
+      "sha256": "c1e2ddf5578225aa110eadf6bbba237c4b1a558295ff04896ba066045a147cdc"
+    }
+  }
+}

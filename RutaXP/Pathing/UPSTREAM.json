@@ -1,0 +1,19 @@
+{
+	"repo": "https://github.com/cjber/shortest-path-forever",
+	"commit": "b1ad5bd4bf579c781937af0e25f5233cc94b3726",
+	"version": "1.16.0",
+	"vendored": "2026-10-16",
+	"files": {
+		"Routing/PathGrid.lua": "d271634feb98598303552a55e1f7c2423d65b089800abee6ef3de64fa8920b7d",
+		"Routing/Path.lua": "2a8fc622052f350bff593ae4e03884165a8d23cf640f83aceb057323398b420e",
+		"Routing/PathJobs.lua": "3b22f3b314bc2b8b541904614883935c4acf068e60db911eac02c5f79c9aded9",
+		"Nav/Nav2991.lua": "b28844039c8dc43fd15e88ab50754bc5ffcc57add532dae8ade2981f4813e44f",
+		"Nav/Nav2991_1.lua": "8a2eb10d2b7e0f5dc509669fd0853df8b70b41139d23a21e89281596af5471e6"
+	},
+	"sendaAdaptation": {
+		"date": "2026-10-16",
+		"base": "Polestar v0.2.5-test.1",
+		"change": "Mechanical namespace and tool-name replacement; routing payload unchanged",
+		"originalManifestSHA256": "604618155ea8d414718694bbc544a5a1c1cf50ce768fd96f8ee3aba052b91f4d"
+	}
+}

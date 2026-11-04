@@ -1,0 +1,1461 @@
+{
+  "schemaVersion": 1,
+  "sourceRepo": "https://github.com/julen92/SendaFH",
+  "sourceCommit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+  "policy": "Presentation only. No quest action, prerequisite, coordinate or completion flag changed. Original note/text remain intact. Inventory classification never invents item pickup positions. Documented exceptions apply only to this source commit; another commit requires a fresh review.",
+  "nameEvidence": {
+    "sourceFile": "addon/SendaFH_Names_esES/Names.lua",
+    "sourceSha256": "f72519937e3310f4ef47e1aee41480c0f6732b1f4bc2cd8c3befa14a34ae7a75",
+    "sourceLines": [
+      17171,
+      17233,
+      21221,
+      21222,
+      21225,
+      21230,
+      22153,
+      22154,
+      22155,
+      22263,
+      22264,
+      22265,
+      22266,
+      24192,
+      24193,
+      24199
+    ]
+  },
+  "quests": [
+    {
+      "questID": 1046,
+      "title": "Raene's Cleansing",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "inventory",
+      "instruction": "Comprueba que tienes en las bolsas «Calavera de Ran Sangradientes» y «Vara de transformación de Dartol». Ambos son requisitos de esta misión; la vara procede de una misión anterior de la cadena.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
+        "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6",
+        "sourceLine": 8,
+        "record": "Codex.Quest(1046).objectives",
+        "objectives": [
+          {
+            "id": 5388,
+            "type": "item",
+            "text": "Ran Bloodtooth's Skull"
+          },
+          {
+            "id": 5462,
+            "type": "item",
+            "text": "Dartol's Rod of Transformation"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
+          "sourceLine": 184,
+          "sourceEndLine": 191,
+          "sourceSha256": "d92fe385490c57c7c3431e67b5680c11ef24f4070f4a92731a595b00797a88ae",
+          "text": "step Krolg\n  turnin 1045\n  accept 1046\n  complete 1046\n\nstep Raene Wolfrunner\n  turnin 1046\n"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "item": 5388,
+          "name": "Ran Bloodtooth's Skull",
+          "sources": [
+            {
+              "chance": 100,
+              "type": "drop",
+              "npc": 3696,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items1.lua",
+          "sourceSha256": "0c40db8e5953f094c4fc0166442aa6b66aadbd8a615cdb7c2a20f53e5ca63797",
+          "sourceLine": 8
+        },
+        {
+          "item": 5462,
+          "name": "Dartol's Rod of Transformation",
+          "sources": [
+            {
+              "type": "quest",
+              "quest": 1028,
+              "from": [
+                "flbis"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items1.lua",
+          "sourceSha256": "0c40db8e5953f094c4fc0166442aa6b66aadbd8a615cdb7c2a20f53e5ca63797",
+          "sourceLine": 8
+        }
+      ],
+      "navigationCaveat": "Mixed objective: skull5388 has a real NPC drop source; rod5462 is an inventory prerequisite. Keep sourced NPC candidate for the pending skull objective; inventory is fallback, not a reason to hide that candidate."
+    },
+    {
+      "questID": 1440,
+      "title": "Return to Vahlarriel",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "authored-mechanic",
+      "instruction": "Rescata a «Dalinda Malem»; comprueba el objetivo de rescate en el registro antes de regresar.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
+        "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6",
+        "sourceLine": 8,
+        "record": "Codex.Quest(1440).objectives",
+        "objectives": [
+          {
+            "type": "event",
+            "text": "Rescue Dalinda Malem"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/alliance/30-40/02-desolace.guide",
+          "sourceLine": 119,
+          "sourceEndLine": 125,
+          "sourceSha256": "c53eb210c2d33d7bb99a729230b122eb343141515cb05064c94d1c23a8638819",
+          "text": "step Escort Dalinda\n  turnin 1439                         -- Dalinda Malem\n  accept 1440\n  goto 58.3,30.9 \"Out of Thunder Axe Fortress\"\n  note Lead Dalinda out of the fortress; she walks off once you are clear of it. Vahlarriel takes the turn-in at Nijel's Point at the end of the guide.\n  complete 1440\n"
+        },
+        {
+          "sourceFile": "guides/forever/alliance/30-40/02-desolace.guide",
+          "sourceLine": 164,
+          "sourceEndLine": 167,
+          "sourceSha256": "c53eb210c2d33d7bb99a729230b122eb343141515cb05064c94d1c23a8638819",
+          "text": "step Nijel's Point\n  hearth \"Nijel's Point\"\n  turnin 1440                         -- Vahlarriel Demonslayer\n  turnin 1387                         -- Corporal Melkins"
+        }
+      ],
+      "itemEvidence": []
+    },
+    {
+      "questID": 3786,
+      "title": "Morrowgrain Research",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "inventory",
+      "instruction": "Reúne 10 «Mañagrana» mediante el cultivo con «Faltriquera de siempre verde» y Tierra de Un'Goro. Comprueba lo que requiere la faltriquera; la mañagrana es un resultado del cultivo, no un objeto fijo del suelo.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
+        "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6",
+        "sourceLine": 8,
+        "record": "Codex.Quest(3786).objectives",
+        "objectives": [
+          {
+            "id": 11040,
+            "type": "item",
+            "count": 10,
+            "text": "Morrowgrain"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/alliance/50-60/04-western-plaguelands.guide",
+          "sourceLine": 349,
+          "sourceEndLine": 356,
+          "sourceSha256": "42f9d77f69e9087be0dd9c0fb77a203cb8388c0de9e49401b5ffd266c4fef781",
+          "text": "step Darnassus\n  zone Darnassus\n  tip Ride back to Chillwind Camp and fly to Menethil Harbor, take the boat to Auberdine and fly to Rut'theran Village; the portal leads up to Darnassus.\n  turnin 3764                         -- Jenal, in the Cenarion Enclave\n  accept 3781                         -- Arch Druid Fandral Staghelm\n  turnin 3781                         -- Mathrengyl Bearwalker\n  accept 3785 optional                -- Ten Morrowgrain from the Evergreen Pouch\n  turnin 3785 optional"
+        },
+        {
+          "sourceFile": "guides/forever/horde/50-60/03-winterspring.guide",
+          "sourceLine": 213,
+          "sourceEndLine": 219,
+          "sourceSha256": "54ded9844e717861f3d06e51ca4191aa628c9e74b146760a45ccc510ef161574",
+          "text": "step Bashana Runetotem\n  tip Bashana buys Morrowgrain grown from your Un'Goro Soil.\n  turnin 3782\n  accept 3786\n  complete 3786\n  turnin 3786\n  accept 3804"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "item": 11018,
+          "name": "Un'Goro Soil",
+          "sources": [
+            {
+              "chance": 58.76,
+              "type": "drop",
+              "npc": 10040,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 55.84,
+              "type": "drop",
+              "npc": 6552,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 55.16,
+              "type": "drop",
+              "npc": 6554,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 55.04,
+              "type": "drop",
+              "npc": 6551,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 55.02,
+              "type": "drop",
+              "npc": 6555,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 51.16,
+              "type": "drop",
+              "npc": 6512,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 50.08,
+              "type": "drop",
+              "npc": 6511,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 49.8,
+              "type": "drop",
+              "npc": 6510,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 49.2,
+              "type": "drop",
+              "npc": 6509,
+              "from": [
+                "questie",
+                "pfquest",
+                "wowhead"
+              ]
+            },
+            {
+              "chance": 40.58,
+              "type": "drop",
+              "npc": 9477,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 100,
+              "type": "object",
+              "object": 157936,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "type": "container",
+              "item": 11568,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "maxLevel": 61,
+              "type": "world",
+              "minLevel": 48,
+              "from": [
+                "questie",
+                "pfquest",
+                "wowhead"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        },
+        {
+          "item": 11020,
+          "name": "Evergreen Pouch",
+          "sources": [
+            {
+              "from": [
+                "questie",
+                "pfquest"
+              ],
+              "type": "vendor",
+              "npc": 4217,
+              "cost": 10000
+            },
+            {
+              "from": [
+                "questie",
+                "pfquest"
+              ],
+              "type": "vendor",
+              "npc": 7879,
+              "cost": 10000
+            },
+            {
+              "from": [
+                "questie",
+                "pfquest"
+              ],
+              "type": "vendor",
+              "npc": 9087,
+              "cost": 10000
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        },
+        {
+          "item": 11024,
+          "name": "Evergreen Herb Casing",
+          "sources": {},
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        },
+        {
+          "item": 11040,
+          "name": "Morrowgrain",
+          "sources": [
+            {
+              "type": "container",
+              "item": 11024,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        }
+      ]
+    },
+    {
+      "questID": 3804,
+      "title": "Morrowgrain to Thunder Bluff",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "inventory",
+      "instruction": "Reúne la cantidad de «Mañagrana» que pida el registro mediante el cultivo con «Faltriquera de siempre verde» y Tierra de Un'Goro. Comprueba el resultado y los requisitos en tus bolsas antes de entregarla.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
+        "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6",
+        "sourceLine": 8,
+        "record": "Codex.Quest(3804).objectives",
+        "objectives": [
+          {
+            "id": 11040,
+            "type": "item",
+            "text": "Morrowgrain"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/alliance/50-60/04-western-plaguelands.guide",
+          "sourceLine": 349,
+          "sourceEndLine": 356,
+          "sourceSha256": "42f9d77f69e9087be0dd9c0fb77a203cb8388c0de9e49401b5ffd266c4fef781",
+          "text": "step Darnassus\n  zone Darnassus\n  tip Ride back to Chillwind Camp and fly to Menethil Harbor, take the boat to Auberdine and fly to Rut'theran Village; the portal leads up to Darnassus.\n  turnin 3764                         -- Jenal, in the Cenarion Enclave\n  accept 3781                         -- Arch Druid Fandral Staghelm\n  turnin 3781                         -- Mathrengyl Bearwalker\n  accept 3785 optional                -- Ten Morrowgrain from the Evergreen Pouch\n  turnin 3785 optional"
+        },
+        {
+          "sourceFile": "guides/forever/horde/50-60/03-winterspring.guide",
+          "sourceLine": 213,
+          "sourceEndLine": 222,
+          "sourceSha256": "54ded9844e717861f3d06e51ca4191aa628c9e74b146760a45ccc510ef161574",
+          "text": "step Bashana Runetotem\n  tip Bashana buys Morrowgrain grown from your Un'Goro Soil.\n  turnin 3782\n  accept 3786\n  complete 3786\n  turnin 3786\n  accept 3804\n  complete 3804\n  turnin 3804\n"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "item": 11018,
+          "name": "Un'Goro Soil",
+          "sources": [
+            {
+              "chance": 58.76,
+              "type": "drop",
+              "npc": 10040,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 55.84,
+              "type": "drop",
+              "npc": 6552,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 55.16,
+              "type": "drop",
+              "npc": 6554,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 55.04,
+              "type": "drop",
+              "npc": 6551,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 55.02,
+              "type": "drop",
+              "npc": 6555,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 51.16,
+              "type": "drop",
+              "npc": 6512,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 50.08,
+              "type": "drop",
+              "npc": 6511,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 49.8,
+              "type": "drop",
+              "npc": 6510,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 49.2,
+              "type": "drop",
+              "npc": 6509,
+              "from": [
+                "questie",
+                "pfquest",
+                "wowhead"
+              ]
+            },
+            {
+              "chance": 40.58,
+              "type": "drop",
+              "npc": 9477,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 100,
+              "type": "object",
+              "object": 157936,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "type": "container",
+              "item": 11568,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "maxLevel": 61,
+              "type": "world",
+              "minLevel": 48,
+              "from": [
+                "questie",
+                "pfquest",
+                "wowhead"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        },
+        {
+          "item": 11020,
+          "name": "Evergreen Pouch",
+          "sources": [
+            {
+              "from": [
+                "questie",
+                "pfquest"
+              ],
+              "type": "vendor",
+              "npc": 4217,
+              "cost": 10000
+            },
+            {
+              "from": [
+                "questie",
+                "pfquest"
+              ],
+              "type": "vendor",
+              "npc": 7879,
+              "cost": 10000
+            },
+            {
+              "from": [
+                "questie",
+                "pfquest"
+              ],
+              "type": "vendor",
+              "npc": 9087,
+              "cost": 10000
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        },
+        {
+          "item": 11024,
+          "name": "Evergreen Herb Casing",
+          "sources": {},
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        },
+        {
+          "item": 11040,
+          "name": "Morrowgrain",
+          "sources": [
+            {
+              "type": "container",
+              "item": 11024,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        }
+      ]
+    },
+    {
+      "questID": 5051,
+      "title": "Two Halves Become One",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "inventory",
+      "instruction": "Consigue «La otra mitad del talismán de buena suerte» de los necrófagos farfullantes de Campo de Piedramácula. Combínala en tus bolsas con «Mitad de talismán de buena suerte» para formar «Talismán de buena suerte».",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
+        "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6",
+        "sourceLine": 8,
+        "record": "Codex.Quest(5051).objectives",
+        "objectives": [
+          {
+            "id": 12723,
+            "type": "item",
+            "count": 1,
+            "text": "Good Luck Charm"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/alliance/50-60/06-silithus.guide",
+          "sourceLine": 370,
+          "sourceEndLine": 377,
+          "sourceSha256": "aaa0b67dd0ba32064f09c0e866fdf55ecf32098fce6abdf80085428ff40c1edc",
+          "text": "step Felstone Field\n  tip Janice's ghost wanders by the farmhouse of Felstone Field, west of Andorhal. The Jabbering Ghouls in the field carry the other half of the charm: combine the two halves.\n  turnin 5050\n  accept 5051\n  kill 10801 optional                 -- Jabbering Ghoul\n  complete 5051\n  turnin 5051\n"
+        },
+        {
+          "sourceFile": "guides/forever/horde/50-60/06-silithus.guide",
+          "sourceLine": 224,
+          "sourceEndLine": 232,
+          "sourceSha256": "39503652c72ba79ae2caada5d6c468e4e5c81bbcd736a65a8670fd6d86f984bf",
+          "text": "step Felstone Field\n  zone Western Plaguelands\n  tip Janice Felstone's farm is the first one east of the Bulwark. Jabbering Ghouls on the farm carry the other half of her charm; Cauldron Lord Bilemaw guards the cauldron in the field.\n  turnin 5050\n  accept 5051\n  collect 12722 x1 \"Good Luck Other-Half-Charm\"\n  complete 5051\n  turnin 5051\n  collect 13194 quest 5229.1"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "item": 12721,
+          "name": "Good Luck Half-Charm",
+          "sources": {},
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        },
+        {
+          "item": 12722,
+          "name": "Good Luck Other-Half-Charm",
+          "sources": [
+            {
+              "chance": 100,
+              "type": "drop",
+              "npc": 10801,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        },
+        {
+          "item": 12723,
+          "name": "Good Luck Charm",
+          "sources": {},
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        }
+      ]
+    },
+    {
+      "questID": 5149,
+      "title": "Pamela's Doll",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "inventory",
+      "instruction": "Reúne la cabeza, la parte izquierda y la parte derecha de la muñeca de Pamela en las casas de Villa Darrow. Combina las tres piezas desde tus bolsas para crear «Muñeca de Pamela». Al recogerlas pueden aparecer fantasmas.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
+        "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6",
+        "sourceLine": 8,
+        "record": "Codex.Quest(5149).objectives",
+        "objectives": [
+          {
+            "id": 12885,
+            "type": "item",
+            "text": "Pamela's Doll"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/alliance/50-60/03-winterspring.guide",
+          "sourceLine": 184,
+          "sourceEndLine": 199,
+          "sourceSha256": "4ebd9bb6508d4f60bd70037a16f008e9c61f1b9a6241d19ac4020303ee22d63f",
+          "text": "step Pamela Redpath\n  zone Eastern Plaguelands\n  tip Follow the southern road east into the Eastern Plaguelands; the ruins of Darrowshire lie south of it. Pamela's ghost plays by the ruined house at the south end.\n  turnin 5601\n  accept 5149\n\nstep Pamela's doll\n  tip The three pieces of the doll lie in the ruined houses of Darrowshire; picking one up can call out ghosts. Combine them into the doll.\n  collect 12886 x1 optional           -- Pamela's Doll's Head\n  collect 12887 x1 optional           -- Pamela's Doll's Left Side\n  collect 12888 x1 optional           -- Pamela's Doll's Right Side\n  complete 5149\n\nstep Pamela Redpath\n  turnin 5149\n  accept 5152                         -- Auntie Marlene, in the Western Plaguelands: keep it"
+        },
+        {
+          "sourceFile": "guides/forever/horde/50-60/01-un-goro-crater.guide",
+          "sourceLine": 407,
+          "sourceEndLine": 420,
+          "sourceSha256": "7921e96378cc766385c0a009bf22855e23b4be6c2d408eb1a35acc3ff93f3ebc",
+          "text": "step Pamela Redpath\n  tip Pamela's ghost stands in the ruins of Darrowshire, in the south-west.\n  accept 5149\n\nstep Pamela's Doll\n  tip The doll's head and its two sides lie in the houses around Pamela; join them from your bags.\n  collect 12886\n  collect 12887\n  collect 12888\n  collect 12885 quest 5149 @38.5,91.4\n\nstep Pamela Redpath\n  turnin 5149\n  accept 5152"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "item": 12885,
+          "name": "Pamela's Doll",
+          "sources": {},
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        },
+        {
+          "item": 12886,
+          "name": "Pamela's Doll's Head",
+          "sources": [
+            {
+              "chance": 100,
+              "type": "object",
+              "object": 176116,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        },
+        {
+          "item": 12887,
+          "name": "Pamela's Doll's Left Side",
+          "sources": [
+            {
+              "chance": 100,
+              "type": "object",
+              "object": 176142,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        },
+        {
+          "item": 12888,
+          "name": "Pamela's Doll's Right Side",
+          "sources": [
+            {
+              "chance": 100,
+              "type": "object",
+              "object": 176143,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items2.lua",
+          "sourceSha256": "a42782d99b6a49cd1792b88d0c19e2ad0e897e568567389c965c3131dfc4e389",
+          "sourceLine": 8
+        }
+      ]
+    },
+    {
+      "questID": 6001,
+      "title": "Body and Heart",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "authored-mechanic",
+      "instruction": "En la Piedra de lechúcico lunar de Costa Oscura, usa «Polvo lunar Cenarion» (objeto 15208), derrota a Garraluna y habla después con el Espíritu de Garraluna. La conversación con el espíritu forma parte del objetivo.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
+        "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6",
+        "sourceLine": 8,
+        "record": "Codex.Quest(6001).objectives",
+        "objectives": [
+          {
+            "id": 12144,
+            "type": "kill",
+            "text": "Lunaclaw Spirit"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/class/druid/bear-form.guide",
+          "sourceLine": 84,
+          "sourceEndLine": 91,
+          "sourceSha256": "615dfa9364e33e1365bcdf8356ea510935eb9c8ea36935d76056b84357c5f752",
+          "text": "\nstep The Moonkin Stone\n  only NightElf\n  zone Darkshore\n  tip Fly from Rut'theran Village to Auberdine. The Moonkin Stone stands in the hills just east of the village: use the Cenarion Moondust there, defeat Lunaclaw and speak to the Lunaclaw Spirit.\n  fly \"Auberdine\"\n  use 15208 @43.5,46.0                  -- Cenarion Moondust\n  complete 6001"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "item": 15208,
+          "name": "Cenarion Moondust",
+          "sources": {},
+          "sourceFile": "addon/SendaFH_Codex/Items3.lua",
+          "sourceSha256": "d0aef781f2a57a3a783548dda6a659ddc281dbbbd5a7562ee9c28b84bc39936d",
+          "sourceLine": 8
+        }
+      ]
+    },
+    {
+      "questID": 6002,
+      "title": "Body and Heart",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "authored-mechanic",
+      "instruction": "En la Piedra de lechúcico lunar del paso de Mulgore a Los Baldíos, usa «Polvo lunar Cenarion» (objeto 15710), derrota a Garraluna y habla después con el Espíritu de Garraluna. La conversación con el espíritu forma parte del objetivo.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
+        "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6",
+        "sourceLine": 8,
+        "record": "Codex.Quest(6002).objectives",
+        "objectives": [
+          {
+            "id": 12144,
+            "type": "kill",
+            "text": "Lunaclaw Spirit"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/class/druid/bear-form.guide",
+          "sourceLine": 133,
+          "sourceEndLine": 138,
+          "sourceSha256": "615dfa9364e33e1365bcdf8356ea510935eb9c8ea36935d76056b84357c5f752",
+          "text": "step The Moonkin Stone\n  only Tauren\n  zone Mulgore\n  tip The Moonkin Stone stands in the pass from Mulgore into the Barrens. Use the Cenarion Lunardust there, defeat Lunaclaw and speak to the Lunaclaw Spirit.\n  use 15710 @71.7,65.0                  -- Cenarion Lunardust\n  complete 6002"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "item": 15710,
+          "name": "Cenarion Lunardust",
+          "sources": {},
+          "sourceFile": "addon/SendaFH_Codex/Items3.lua",
+          "sourceSha256": "d0aef781f2a57a3a783548dda6a659ddc281dbbbd5a7562ee9c28b84bc39936d",
+          "sourceLine": 8
+        }
+      ]
+    },
+    {
+      "questID": 6022,
+      "title": "To Kill With Purpose",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "inventory",
+      "instruction": "Recoge 7 «Caña viva» de la Plaga de Cruce de Corin. Usa «Mano y almirez» para triturarlas y obtener «Putrefacción coagulada» antes de que pasen 10 minutos: las muestras caducan.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
+        "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6",
+        "sourceLine": 8,
+        "record": "Codex.Quest(6022).objectives",
+        "objectives": [
+          {
+            "id": 15448,
+            "type": "item",
+            "text": "Coagulated Rot"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/horde/50-60/05-eastern-plaguelands.guide",
+          "sourceLine": 89,
+          "sourceEndLine": 92,
+          "sourceSha256": "c1a9a9d8588be21d99d6e43994d6df81acd583e61dd8099b79b0b9436fc3dba8",
+          "text": "step Nathanos Blightcaller\n  tip The Banshee Queen's champion holds the Marris Stead farmhouse.\n  accept 6022\n  accept 6042"
+        },
+        {
+          "sourceFile": "guides/forever/horde/50-60/05-eastern-plaguelands.guide",
+          "sourceLine": 127,
+          "sourceEndLine": 135,
+          "sourceSha256": "c1a9a9d8588be21d99d6e43994d6df81acd583e61dd8099b79b0b9436fc3dba8",
+          "text": "step Corin's Crossing\n  tip Living Rot spoils within ten minutes: kill the town's Scourge quickly and grind the seven pieces with the Mortar and Pestle at once.\n  collect 15447 x7\n  complete 6022\n\nstep Nathanos Blightcaller\n  tip Ride west to the Marris Stead.\n  turnin 6022\n  turnin 6042"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "item": 15447,
+          "name": "Living Rot",
+          "sources": [
+            {
+              "chance": 61,
+              "type": "drop",
+              "npc": 8531,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 61,
+              "type": "drop",
+              "npc": 8541,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 60,
+              "type": "drop",
+              "npc": 8538,
+              "from": [
+                "questie",
+                "pfquest",
+                "wowhead"
+              ]
+            },
+            {
+              "chance": 59,
+              "type": "drop",
+              "npc": 8543,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 55,
+              "type": "drop",
+              "npc": 8525,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 46,
+              "type": "drop",
+              "npc": 8526,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            },
+            {
+              "chance": 2,
+              "type": "drop",
+              "npc": 12262,
+              "from": [
+                "questie",
+                "pfquest"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items3.lua",
+          "sourceSha256": "d0aef781f2a57a3a783548dda6a659ddc281dbbbd5a7562ee9c28b84bc39936d",
+          "sourceLine": 8
+        },
+        {
+          "item": 15448,
+          "name": "Coagulated Rot",
+          "sources": {},
+          "sourceFile": "addon/SendaFH_Codex/Items3.lua",
+          "sourceSha256": "d0aef781f2a57a3a783548dda6a659ddc281dbbbd5a7562ee9c28b84bc39936d",
+          "sourceLine": 8
+        },
+        {
+          "item": 15454,
+          "name": "Mortar and Pestle",
+          "sources": {},
+          "sourceFile": "addon/SendaFH_Codex/Items3.lua",
+          "sourceSha256": "d0aef781f2a57a3a783548dda6a659ddc281dbbbd5a7562ee9c28b84bc39936d",
+          "sourceLine": 8
+        }
+      ]
+    },
+    {
+      "questID": 91899,
+      "title": "A Sealed Crate",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "inventory",
+      "instruction": "Necesitas «Sealed Apprentice Crate» (objeto 248765). Verifica los materiales de la caja y el requisito del registro antes de entregarla. Las notas de la fuente discrepan sobre cómo obtenerla; no se ha documentado un punto de recogida.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests2.lua",
+        "sourceSha256": "51e52d1ae7255e02af264a32bb15a9df8ef38c32f0f99f7df7c5a83f2bee7e6d",
+        "sourceLine": 8,
+        "record": "Codex.Quest(91899).objectives",
+        "objectives": [
+          {
+            "id": 248765,
+            "type": "item",
+            "text": "Sealed Apprentice Crate"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/horde/50-60/04-azshara.guide",
+          "sourceLine": 56,
+          "sourceEndLine": 61,
+          "sourceSha256": "038cd8c4542ad4fe322fbd3679f01e1efd80549fe195be302630228e0de0a464",
+          "text": "step Dokimi's crates\n  tip Dokimi stands in the Crossroads. Open each crate she hands you and bring back what is inside.\n  accept 91899\n  complete 91899\n  turnin 91899\n  accept 91904"
+        },
+        {
+          "sourceFile": "guides/forever/reputation/merchants-favor.guide",
+          "sourceLine": 1,
+          "sourceEndLine": 12,
+          "sourceSha256": "f8f6f593f9287f463d9ebdf7d4234b223ddefb34e6be06402dec74b7636ffe4c",
+          "text": "guide forever/reputation/merchants-favor\ntitle Merchant's Favor Reputation\ncategory Reputation\nlevels 10-60\nzone Redridge Mountains\n# Azeroth Commerce Authority (2586, Alliance) and Durotar Supply and Logistics\n# (2587, Horde): Forever's tradeskill factions, paid in Merchant's Favor.\n# Reputation comes from crate hand-ins at each faction's camp: mobs from level\n# 10 drop Waylaid Crates (Apprentice, Journeyman, Expert, Artisan); filled with\n# the goods on the label, a crate becomes a Sealed Crate for the faction's trade\n# representative (\"A Sealed Crate\", quests 91899/91900/91904/91905). Hand-in\n# NPCs: Marcy Baker (256390) at Three Corners, Redridge Mountains (live frame"
+        },
+        {
+          "sourceFile": "guides/forever/reputation/merchants-favor.guide",
+          "sourceLine": 21,
+          "sourceEndLine": 25,
+          "sourceSha256": "f8f6f593f9287f463d9ebdf7d4234b223ddefb34e6be06402dec74b7636ffe4c",
+          "text": "step Azeroth Commerce Authority to Friendly\n  only Alliance\n  zone Redridge Mountains\n  tip The Azeroth Commerce Authority is the Alliance's tradeskill faction in Forever. Its camp is at Three Corners in western Redridge Mountains. From level 10 mobs drop Waylaid Crates: fill each with the goods its label asks for and hand the Sealed Crate to Marcy Baker at the camp for reputation and Merchant's Favor. Forever's Legacy Diplomat perk increases reputation gains.\n  goto 9.8,71.0 \"Marcy Baker\" live"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "item": 248765,
+          "name": "Sealed Apprentice Crate",
+          "sources": {},
+          "sourceFile": "addon/SendaFH_Codex/Items4.lua",
+          "sourceSha256": "9d2629baaeffe5d196373f7ba09cdd5f541ccf429567f6984773005da8750c34",
+          "sourceLine": 8
+        }
+      ],
+      "conflict": "Leveling says open crates handed by Dokimi; reputation says fill dropped Waylaid Crates into a Sealed Crate. Quest/item records do not resolve the source. Do not prescribe opening the required sealed crate or invent a fixed pickup location."
+    },
+    {
+      "questID": 91904,
+      "title": "A Sealed Crate",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "inventory",
+      "instruction": "Necesitas «Sealed Apprentice Crate» (objeto 248770). Verifica los materiales de la caja y el requisito del registro antes de entregarla. Las notas de la fuente discrepan sobre cómo obtenerla; no se ha documentado un punto de recogida.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests2.lua",
+        "sourceSha256": "51e52d1ae7255e02af264a32bb15a9df8ef38c32f0f99f7df7c5a83f2bee7e6d",
+        "sourceLine": 8,
+        "record": "Codex.Quest(91904).objectives",
+        "objectives": [
+          {
+            "id": 248770,
+            "type": "item",
+            "text": "Sealed Apprentice Crate"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/horde/50-60/04-azshara.guide",
+          "sourceLine": 56,
+          "sourceEndLine": 64,
+          "sourceSha256": "038cd8c4542ad4fe322fbd3679f01e1efd80549fe195be302630228e0de0a464",
+          "text": "step Dokimi's crates\n  tip Dokimi stands in the Crossroads. Open each crate she hands you and bring back what is inside.\n  accept 91899\n  complete 91899\n  turnin 91899\n  accept 91904\n  complete 91904\n  turnin 91904\n"
+        },
+        {
+          "sourceFile": "guides/forever/reputation/merchants-favor.guide",
+          "sourceLine": 1,
+          "sourceEndLine": 12,
+          "sourceSha256": "f8f6f593f9287f463d9ebdf7d4234b223ddefb34e6be06402dec74b7636ffe4c",
+          "text": "guide forever/reputation/merchants-favor\ntitle Merchant's Favor Reputation\ncategory Reputation\nlevels 10-60\nzone Redridge Mountains\n# Azeroth Commerce Authority (2586, Alliance) and Durotar Supply and Logistics\n# (2587, Horde): Forever's tradeskill factions, paid in Merchant's Favor.\n# Reputation comes from crate hand-ins at each faction's camp: mobs from level\n# 10 drop Waylaid Crates (Apprentice, Journeyman, Expert, Artisan); filled with\n# the goods on the label, a crate becomes a Sealed Crate for the faction's trade\n# representative (\"A Sealed Crate\", quests 91899/91900/91904/91905). Hand-in\n# NPCs: Marcy Baker (256390) at Three Corners, Redridge Mountains (live frame"
+        },
+        {
+          "sourceFile": "guides/forever/reputation/merchants-favor.guide",
+          "sourceLine": 21,
+          "sourceEndLine": 25,
+          "sourceSha256": "f8f6f593f9287f463d9ebdf7d4234b223ddefb34e6be06402dec74b7636ffe4c",
+          "text": "step Azeroth Commerce Authority to Friendly\n  only Alliance\n  zone Redridge Mountains\n  tip The Azeroth Commerce Authority is the Alliance's tradeskill faction in Forever. Its camp is at Three Corners in western Redridge Mountains. From level 10 mobs drop Waylaid Crates: fill each with the goods its label asks for and hand the Sealed Crate to Marcy Baker at the camp for reputation and Merchant's Favor. Forever's Legacy Diplomat perk increases reputation gains.\n  goto 9.8,71.0 \"Marcy Baker\" live"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "item": 248770,
+          "name": "Sealed Apprentice Crate",
+          "sources": {},
+          "sourceFile": "addon/SendaFH_Codex/Items4.lua",
+          "sourceSha256": "9d2629baaeffe5d196373f7ba09cdd5f541ccf429567f6984773005da8750c34",
+          "sourceLine": 8
+        }
+      ],
+      "conflict": "Leveling says open crates handed by Dokimi; reputation says fill dropped Waylaid Crates into a Sealed Crate. Quest/item records do not resolve the source. Do not prescribe opening the required sealed crate or invent a fixed pickup location."
+    },
+    {
+      "questID": 92474,
+      "title": "Falling With Style",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "ability",
+      "instruction": "Usa la habilidad «Walk on Air» indicada por la misión y comprueba su objetivo en el registro. Es una acción de tu personaje; no tiene un punto fijo de recogida.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests2.lua",
+        "sourceSha256": "51e52d1ae7255e02af264a32bb15a9df8ef38c32f0f99f7df7c5a83f2bee7e6d",
+        "sourceLine": 8,
+        "record": "Codex.Quest(92474).objectives",
+        "objectives": {}
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/alliance/skyborne/01-zephras-isle.guide",
+          "sourceLine": 114,
+          "sourceEndLine": 117,
+          "sourceSha256": "6481190fdfdb54348cfbdb08a6bf5d081ae1f23038cb57c149dc8a02c0191cb9",
+          "text": "  turnin 94414\n  accept 92474                                -- Myriaal Mistwake\n  complete 92474                              -- Use Walk on Air\n  turnin 92474                                -- Rorian the Dayseeker"
+        }
+      ],
+      "itemEvidence": []
+    },
+    {
+      "questID": 92640,
+      "title": "Desperate Times",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "authored-mechanic",
+      "instruction": "Habla con «Valennia Stormfist», «Ayessa Dawnsinger» y «Elaadrin Evengale» para reunirlos. La guía sitúa a Ayessa al oeste del poblado. Comprueba las tres conversaciones en el registro; no debes atacar a estos personajes.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests2.lua",
+        "sourceSha256": "51e52d1ae7255e02af264a32bb15a9df8ef38c32f0f99f7df7c5a83f2bee7e6d",
+        "sourceLine": 8,
+        "record": "Codex.Quest(92640).objectives",
+        "objectives": [
+          {
+            "id": 252383,
+            "type": "kill",
+            "text": "Valennia Stormfist"
+          },
+          {
+            "id": 251968,
+            "type": "kill",
+            "text": "Ayessa Dawnsinger"
+          },
+          {
+            "id": 252475,
+            "type": "kill",
+            "text": "Elaadrin Evengale"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/alliance/skyborne/01-zephras-isle.guide",
+          "sourceLine": 429,
+          "sourceEndLine": 437,
+          "sourceSha256": "6481190fdfdb54348cfbdb08a6bf5d081ae1f23038cb57c149dc8a02c0191cb9",
+          "text": "step Desperate times\n  turnin 92644                                -- Talaanis Shadowsong\n  accept 94568\n  complete 94568 @66.17,76.51\n  turnin 94568\n  accept 92640\n  complete 92640                              -- Rally Valennia, Ayessa Dawnsinger (west of town) and Elaadrin\n  turnin 92640                                -- Valennia Stormfist\n  accept 93065"
+        },
+        {
+          "sourceFile": "guides/forever/horde/skyborne/01-zephras-isle.guide",
+          "sourceLine": 542,
+          "sourceEndLine": 555,
+          "sourceSha256": "0c656ba2ac03ab171b0770618e23ea5ee3dab3f4317c0849fc0dfd81584da0c7",
+          "text": "step Unfortunate News\n  turnin 92644                        -- Talaanis Shadowsong\n  accept 94568\n  complete 94568 @66.17,76.51         -- talk to Talaanis Shadowsong\n  turnin 94568\n  accept 92640\n\nstep Desperate Times\n  talk 252383                         -- Valennia Stormfist\n  talk 251968                         -- Ayessa Dawnsinger\n  talk 252475                         -- Elaadrin Evengale\n  complete 92640 @66.59,79.92\n  turnin 92640                        -- Valennia Stormfist\n  accept 93065"
+        }
+      ],
+      "itemEvidence": []
+    },
+    {
+      "questID": 94568,
+      "title": "The Cult's True Plans",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "authored-mechanic",
+      "instruction": "Habla con «Talaanis Shadowsong» y sigue su conversación. El crédito de esta misión se obtiene al hablar; no debes atacar al personaje.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests2.lua",
+        "sourceSha256": "51e52d1ae7255e02af264a32bb15a9df8ef38c32f0f99f7df7c5a83f2bee7e6d",
+        "sourceLine": 8,
+        "record": "Codex.Quest(94568).objectives",
+        "objectives": [
+          {
+            "id": 252476,
+            "type": "kill",
+            "text": "Talaanis Shadowsong"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/alliance/skyborne/01-zephras-isle.guide",
+          "sourceLine": 429,
+          "sourceEndLine": 434,
+          "sourceSha256": "6481190fdfdb54348cfbdb08a6bf5d081ae1f23038cb57c149dc8a02c0191cb9",
+          "text": "step Desperate times\n  turnin 92644                                -- Talaanis Shadowsong\n  accept 94568\n  complete 94568 @66.17,76.51\n  turnin 94568\n  accept 92640"
+        },
+        {
+          "sourceFile": "guides/forever/horde/skyborne/01-zephras-isle.guide",
+          "sourceLine": 542,
+          "sourceEndLine": 547,
+          "sourceSha256": "0c656ba2ac03ab171b0770618e23ea5ee3dab3f4317c0849fc0dfd81584da0c7",
+          "text": "step Unfortunate News\n  turnin 92644                        -- Talaanis Shadowsong\n  accept 94568\n  complete 94568 @66.17,76.51         -- talk to Talaanis Shadowsong\n  turnin 94568\n  accept 92640"
+        }
+      ],
+      "itemEvidence": []
+    },
+    {
+      "questID": 96873,
+      "title": "A Pain in the Neck",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "inventory",
+      "instruction": "Si tienes Encantamiento, desencanta «Hexed Pendant» (objeto 275724), que sueltan los trols de las Islas del Eco, para reunir 3 «Luminous Residue». No son residuos que se recojan directamente del suelo; esta misión es opcional y requiere desencantar los colgantes.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests2.lua",
+        "sourceSha256": "51e52d1ae7255e02af264a32bb15a9df8ef38c32f0f99f7df7c5a83f2bee7e6d",
+        "sourceLine": 8,
+        "record": "Codex.Quest(96873).objectives",
+        "objectives": [
+          {
+            "id": 247884,
+            "type": "item",
+            "count": 3,
+            "text": "Luminous Residue"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/horde/orc-troll/01-durotar.guide",
+          "sourceLine": 45,
+          "sourceEndLine": 47,
+          "sourceSha256": "d32a2b1dab7def15a2e07a71feae86a39058aaad6843a0760f817da5e74dd83b",
+          "text": "# - A Pain in the Neck (96873) is for enchanters: Pa'zula's Luminous Residue\n#   comes from disenchanting the Hexed Pendants the Echo Isles trolls drop.\n#   Taken at Sen'jin, done on the isles and handed in on the way back."
+        },
+        {
+          "sourceFile": "guides/forever/horde/orc-troll/01-durotar.guide",
+          "sourceLine": 355,
+          "sourceEndLine": 357,
+          "sourceSha256": "d32a2b1dab7def15a2e07a71feae86a39058aaad6843a0760f817da5e74dd83b",
+          "text": "step Sen'jin Village\n  accept 96873 optional               -- Pa'zula: enchanters only, the residue is disenchanted from Hexed Pendants\n  accept 817                          -- Vel'rin Fang"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "item": 275724,
+          "name": "Hexed Pendant",
+          "sources": [
+            {
+              "type": "drop",
+              "npc": 3206,
+              "from": [
+                "questie"
+              ]
+            },
+            {
+              "type": "drop",
+              "npc": 3207,
+              "from": [
+                "questie"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items5.lua",
+          "sourceSha256": "220ca7ef195c9418945e86ef38605964ee274e9391ae8b5a50d483cfba183082",
+          "sourceLine": 8
+        },
+        {
+          "item": 247884,
+          "name": "Luminous Residue",
+          "sources": {},
+          "sourceFile": "addon/SendaFH_Codex/Items4.lua",
+          "sourceSha256": "9d2629baaeffe5d196373f7ba09cdd5f541ccf429567f6984773005da8750c34",
+          "sourceLine": 8
+        }
+      ]
+    },
+    {
+      "questID": 98326,
+      "title": "Frosthowl",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "authored-mechanic",
+      "instruction": "Consigue 1 «Sack of Fish», el objeto que requiere esta misión; comprueba su progreso en el registro.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests2.lua",
+        "sourceSha256": "51e52d1ae7255e02af264a32bb15a9df8ef38c32f0f99f7df7c5a83f2bee7e6d",
+        "sourceLine": 8,
+        "record": "Codex.Quest(98326).objectives",
+        "objectives": [
+          {
+            "id": 280426,
+            "type": "item",
+            "count": 1,
+            "text": "Sack of Fish"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
+          "sourceLine": 334,
+          "sourceEndLine": 341,
+          "sourceSha256": "7b5cb905d7d65fe8c9ef48924dbc5f8af01a3a77c616a45f829e751b315e3d83",
+          "text": "step Brewnall Village\n  tip Brewnall Village sits on the lake north-west of Frostmane Hold.\n  turnin 318                                  -- Rejold Barleybrew\n  accept 315\n  accept 319\n  accept 310                                  -- Marleth Barleybrew\n  accept 98326                                -- Gretta Ganter\n"
+        },
+        {
+          "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
+          "sourceLine": 353,
+          "sourceEndLine": 355,
+          "sourceSha256": "7b5cb905d7d65fe8c9ef48924dbc5f8af01a3a77c616a45f829e751b315e3d83",
+          "text": "step Frosthowl\n  complete 98326\n"
+        },
+        {
+          "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
+          "sourceLine": 475,
+          "sourceEndLine": 477,
+          "sourceSha256": "7b5cb905d7d65fe8c9ef48924dbc5f8af01a3a77c616a45f829e751b315e3d83",
+          "text": "step Brewnall Village\n  turnin 98326                                -- Gretta Ganter\n  turnin 311                                  -- Marleth Barleybrew"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "item": 280426,
+          "name": "Sack of Fish",
+          "sources": [
+            {
+              "type": "drop",
+              "npc": 271587,
+              "from": [
+                "questie"
+              ]
+            }
+          ],
+          "sourceFile": "addon/SendaFH_Codex/Items5.lua",
+          "sourceSha256": "220ca7ef195c9418945e86ef38605964ee274e9391ae8b5a50d483cfba183082",
+          "sourceLine": 8
+        }
+      ]
+    },
+    {
+      "questID": 99134,
+      "title": "Discipline",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "authored-mechanic",
+      "instruction": "Motiva a 5 «Deathguards». Consulta el texto de la misión para ver la acción concreta; no basta con llegar al personaje que la ofrece.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_Codex/Quests2.lua",
+        "sourceSha256": "51e52d1ae7255e02af264a32bb15a9df8ef38c32f0f99f7df7c5a83f2bee7e6d",
+        "sourceLine": 8,
+        "record": "Codex.Quest(99134).objectives",
+        "objectives": [
+          {
+            "type": "event",
+            "text": "Motivate 5 Deathguards"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/horde/undead/01-tirisfal-glades.guide",
+          "sourceLine": 239,
+          "sourceEndLine": 249,
+          "sourceSha256": "54706d6bf6b3792decaff9bf5bcfff6c90c681c56efc3320bc9458902a9b5177",
+          "text": "step Brill\n  tip Follow the road east to Brill. Junior Apothecary Holland stands at the north-west edge of town; the Gallows' End Tavern is the big inn in the middle, with Executor Zygand in front of it.\n  turnin 5481                         -- Junior Apothecary Holland\n  accept 5482\n  sethome \"Gallows' End Tavern\" npc 5688 -- Innkeeper Renee\n  turnin 8                            -- Innkeeper Renee\n  turnin 383                          -- Executor Zygand\n  turnin 91209 only Paladin           -- Shari Stilwell, the Paladin trainer\n  accept 427\n  accept 99134\n  accept 99141"
+        },
+        {
+          "sourceFile": "guides/forever/horde/undead/01-tirisfal-glades.guide",
+          "sourceLine": 255,
+          "sourceEndLine": 258,
+          "sourceSha256": "54706d6bf6b3792decaff9bf5bcfff6c90c681c56efc3320bc9458902a9b5177",
+          "text": "step Discipline\n  goto 60.6,52.0 \"Brill\"              -- Use the Executor's Motivator on five idle Deathguards around town\n  complete 99134\n"
+        },
+        {
+          "sourceFile": "guides/forever/horde/undead/01-tirisfal-glades.guide",
+          "sourceLine": 263,
+          "sourceEndLine": 266,
+          "sourceSha256": "54706d6bf6b3792decaff9bf5bcfff6c90c681c56efc3320bc9458902a9b5177",
+          "text": "step Brill\n  turnin 5482                         -- Junior Apothecary Holland\n  turnin 99134                        -- Executor Zygand\n  accept 367                          -- Apothecary Johaan"
+        }
+      ],
+      "itemEvidence": []
+    },
+    {
+      "questID": 99159,
+      "title": "Finding Warmth",
+      "actions": [
+        "complete",
+        "objective"
+      ],
+      "classification": "authored-mechanic",
+      "instruction": "Recoge 14 leños de los troncos caídos en la nieve alrededor del lago de Refugio Pinobruma. Después entrégalos al Padre Gavin.",
+      "codex": {
+        "sourceFile": "addon/SendaFH_QuestDB/Quests.lua",
+        "sourceLine": 5416,
+        "sourceEndLine": 5416,
+        "sourceSha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8",
+        "text": "[99159]={\"Finding Warmth\",8,5,77,nil,1,1253,1253,nil,nil,nil,{2,286339,14},1426,nil,nil,nil,nil,1},",
+        "record": "QuestDB.Quests[99159]",
+        "objectives": [
+          {
+            "id": 286339,
+            "type": "item",
+            "count": 14,
+            "text": "Mostly Dry Firewood"
+          }
+        ]
+      },
+      "guideEvidence": [
+        {
+          "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
+          "sourceLine": 370,
+          "sourceEndLine": 382,
+          "sourceSha256": "7b5cb905d7d65fe8c9ef48924dbc5f8af01a3a77c616a45f829e751b315e3d83",
+          "text": "step Misty Pine Refuge\n  tip Follow the road east past the depot to Misty Pine Refuge.\n  turnin 99158                                -- Father Gavin\n  accept 99159\n\nstep Firewood\n  tip The firewood lies in the snow around the frozen lake by the refuge.\n  complete 99159\n\nstep Father Gavin\n  turnin 99159\n  accept 99160\n  accept 99162"
+        }
+      ],
+      "itemEvidence": [
+        {
+          "sourceFile": "addon/SendaFH_QuestDB/Items.lua",
+          "sourceLine": 2731,
+          "sourceEndLine": 2731,
+          "sourceSha256": "ad1b2f87dc0f74a7a1bed0b584295c49aa91ce5496553c41b4a3d2abd0c37449",
+          "text": "[286339]={\"Mostly Dry Firewood\",0,1,694934,0},"
+        },
+        {
+          "sourceFile": "addon/SendaFH_QuestDB/Objects.lua",
+          "sourceLine": 985,
+          "sourceEndLine": 985,
+          "sourceSha256": "165a455a968b5e7058322120ca04142364868f10ed5c361ed6bc8f556a936370",
+          "text": "[694934]={\"Fallen Log\",1426,0,15,54.5,46,45,56.3,53,37,58.4,55.9,50,56.8,55.2,23,59.1,58.6,35,49.8,51.6,0,50.8,49.9,0,51.3,52,0,52.4,50.4,0,55.9,48.6,0,56.6,50.9,0,57.4,46.4,0,57.6,48.6,0,58.2,52,0,60.1,53,0},"
+        }
+      ]
+    }
+  ]
+}

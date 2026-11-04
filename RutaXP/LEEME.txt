@@ -1,0 +1,174 @@
+RUTAXP 0.7.0 - WoW Forever
+
+ACTUALIZACIONES
+El mismo Instalador_RutaXP.exe sirve para instalar, actualizar y reparar:
+https://github.com/Dekaz4/RutaXP/releases/latest/download/Instalador_RutaXP.exe
+Con WoW cerrado, ejecutadlo ambos y elegid Instalar o actualizar.
+Guardad el setup fuera de la carpeta del addon. Recuerda vuestro cliente,
+conserva una copia anterior y no modifica el progreso guardado en WTF.
+Luego abrid WoW desde vuestro acceso de siempre. /rutaxp actualizar muestra
+la version local y el enlace. No hay comprobaciones en segundo plano.
+
+INSTALACION
+Coloca RutaXP dentro de Interface\AddOns de tu cliente de Forever.
+Debe quedar Interface\AddOns\RutaXP\RutaXP.toc.
+Reinicia el juego si acabas de añadir la carpeta del addon por primera vez.
+Activa RutaXP en Accesorios y escribe /rutaxp o /rutas.
+
+PLAN DE MISIONES
+Las misiones que ya llevas en el diario muestran el paso previsto para hacerlas
+y entregarlas. Las vistas previas dejan de pedir objetivos ya completados.
+En busca de calor: recoge 14 leños de los troncos caidos junto al lago de
+Refugio Pinobruma; se hace en el paso 38 y se entrega al Padre Gavin en el 39.
+Las ramas alternativas descartadas tampoco bloquean sus entregas posteriores.
+La flecha reconoce el avance al recortar varias curvas consecutivas.
+
+ALTURA DEL CLIENTE FOREVER
+La altura 0 que puede devolver UnitPosition se trata como desconocida.
+Asi no se rechaza continuamente un camino valido al caminar por comparar
+el terreno con esa altura falsa. Las alturas de rutas y destinos se conservan.
+La correccion tambien se aplica al indicador vertical y a puntos que captures.
+
+PANEL COMPACTO
+Objetivo, contador y una pista corta cuando es necesaria. Las explicaciones
+completas aparecen al pasar el raton sobre la fila. Se conservan las nuevas
+coordenadas y la vista previa breve de las proximas misiones.
+
+PANEL AMPLIABLE
+Arrastra cualquier borde o esquina con el boton izquierdo para cambiar
+ancho y alto. El tamaño se guarda por personaje. La cabecera sigue sirviendo
+para moverlo. Amplialo para ver mas objetivos y proximas misiones; usa la
+rueda cuando no quepan. La vista previa no omite pasos ni cambia el progreso.
+Se ha eliminado el limite de seis objetivos visibles del paso actual.
+
+REVISION DE GUIAS 0.6.3
+Revisados los 7.444 objetivos de las 57 guias. Añadidos destinos respaldados
+para 422 objetivos y explicados otros 11 casos de bolsas, habilidad o escolta.
+Cada objetivo tiene instrucciones; el panel muestra tambien las notas del
+paso y las mecanicas de usar objetos, lanzar hechizos, sentarse o domesticar.
+Los vuelos señalan maestros de salida, y los objetivos terminados dejan
+de seleccionar sus posiciones. Las acciones sin lugar fijo explican que hacer.
+Se conservan orden, requisitos, cantidades, condiciones y puntos anteriores.
+La revision es de datos y software; falta recorrer todas las rutas en Forever.
+Source/guide_audit.json contiene el inventario completo. Las dos misiones de
+cajas con fuente contradictoria lo indican: revisa los materiales de la caja
+y el requisito del registro. No se atribuye un punto de recogida inventado.
+
+CONTENIDO
+57 rutas, 2.330 pasos y 7.444 objetivos para Alianza y Horda, con variantes
+de clase y zonas iniciales clásicas y Skyborne. Se conservan la interfaz,
+la flecha facetada, 36 planes de talentos y el asistente de instructor.
+Las rutas Polestar/SendaFH siguen en beta: falta validar esta revisión
+jugando en Forever y revisar el contenido que cambie en el cliente.
+
+PROGRESO Y AUTOMATIZACION
+La guía no cambia automáticamente al cruzar una zona. /rutaxp zona permite
+elegir explícitamente una ruta recomendada. La selección se conserva al
+recargar. Las misiones pendientes y requisitos no se omiten por haber
+entregado otra misión posterior. Saltar una misión no cuenta como entregarla.
+La automatización respeta objetivos actuales, opcionales y requisitos.
+Mantén Shift para pausarla. Elige manualmente las recompensas cuando se pida.
+Confirma las acciones manuales (entrenar, vender...) después de realizarlas.
+Los datos de guías personales anteriores se conservan.
+
+FLECHA
+Las pequeñas variaciones del marcador ya no reinician continuamente el
+calculo mientras caminas. Cambiar de mision o mover de verdad el destino
+sigue calculando una ruta nueva. Si el combate pausa un calculo, lo indica
+y continua al salir. /rutaxp diagnostico muestra calculos y cancelaciones.
+El paso de Cocina en Kharanos señala a Gremlock Pilsnor y explica la accion.
+Corregido el seguimiento al moverte durante el calculo y al pasar junto
+a un giro: retoma el tramo actual sin pedirte volver al punto anterior.
+Si retrocedes detras de una esquina, recalcula desde tu posicion.
+Los giros y el personaje usan las mismas coordenadas; el mapa conserva
+su marcador normal. Al caer, espera a aterrizar para calcular una ruta.
+Señala el objetivo activo y elige candidatos cercanos compatibles con tu
+clase, facción y mapa. Si no hay coordenadas, lo indica y no señala otro
+objetivo. Ahora calcula un camino por el terreno publicado de Forever y
+señala sus giros para rodear laderas y buscar accesos transitables.
+Muestra la distancia del recorrido y recalcula al apartarte del camino.
+Si no hay cobertura, avisa Direccion orientativa. Si falla el calculo,
+explica que no dispone de un camino comprobado. Los calculos nuevos esperan
+a salir de combate. /rutaxp recalcular vuelve a intentarlo; /rutaxp camino
+activa o desactiva este seguimiento. Sigue confirmando los accesos sin
+altura y los transportes; llegar a un giro nunca completa una mision.
+El instructor y los talentos mantienen referencias sin inventar datos si
+la API de un árbol o cliente no puede leerse.
+
+DUO AUTOMATICO 0.5.0
+Instalad 0.5.0 o posterior los dos y formad grupo de dos de la misma faccion.
+Automatico al agruparse viene activado: detecta al amigo, acuerda una guia
+compatible y activa avance con espera sin comandos. El panel Duo informa
+si faltan datos o todavia necesitais completar inicios individuales.
+El adelantado acompaña el paso del rezagado con su flecha sin retroceder
+su cursor guardado ni copiar misiones. Cada uno hace sus propias misiones.
+Al salir del grupo recuperas tus opciones anteriores y mantienes el progreso.
+/rutaxp autoduo o el boton Automatico al agruparse permite desactivarlo.
+Cambiar manualmente guia, duo o espera pasa a control manual.
+
+HERRAMIENTAS DUO CONSERVADAS
+En Herramientas > Duo: Progreso, Ruta comun, Diferencias, Reunion, Partida
+ y Paradas. Tambien estan disponibles con control manual de /rutaxp duo.
+Compara cantidades reales de objetivos; lo desconocido nunca cuenta como 0.
+Propone rutas para ambos perfiles, explica diferencias y permite enfocar
+recogidas locales verificables sin perder el progreso.
+Compartid una posicion para reuniros; cada uno decide si la sigue.
+Guardad la partida conjunta y retomad vuestra guia sin retroceder el progreso
+que hayais ganado al jugar por separado. El historial se conserva por pareja.
+Las paradas se proponen con bolsas, equipo, mana y niveles conocidos; cada uno
+puede marcarse listo. No compran habilidades ni gastan oro automaticamente.
+
+HERRAMIENTAS NUEVAS
+Abre el boton Duo y herramientas de ruta o /rutaxp herramientas.
+Duo: ambos instalais esta version y formais grupo de dos de la misma faccion
+(y cualquier raza/clase). Veis misiones y progreso del amigo sin copiar sus
+omisiones. /rutaxp esperar cambia manualmente la espera;
+puedes quitarla si faltan datos o quieres seguir. No espera misiones de
+clase/raza que no se apliquen al amigo, ni recuperaciones individuales.
+Las mediciones observan XP, tiempo, desplazamientos, muertes y duracion de
+pasos/misiones; conserva 20 sesiones y permite copiar informes. No equivalen
+a validar una ruta jugando ni certifican la mejor ruta.
+Bloqueos propone recuperar requisitos usando las guias existentes, guarda tu
+punto y vuelve tras entregas reales o al cancelar. Ajustar ruta solo propone
+cambios segun personaje, registro y nivel menor del duo confirmado.
+Puntos añade entradas/pasos documentados y permite guardar posiciones propias.
+Las entradas sin altura verificada y transportes se confirman manualmente.
+Saltar puntos nunca completa misiones. La cobertura es parcial.
+Si Forever bloquea mensajes de addons, Duo lo indica: el estado desconocido
+no cuenta como completado. No usa chat visible ni un servidor externo.
+
+COMANDOS
+/rutaxp herramientas  Panel de herramientas
+/rutaxp autoduo       Activar/desactivar configuracion al agruparse
+/rutaxp duo           Control manual: activar/desactivar duo
+/rutaxp esperar       Esperar al amigo o continuar por tu cuenta
+/rutaxp listo         Cambiar tu marca de preparado
+/rutaxp comun         Proponer ruta comun; comun 1 la elige localmente
+/rutaxp diferencias   Comparar pendientes; diferencia 1 enfoca destino
+/rutaxp reunion       Punto compartido: marcar, seguir, cancelar o borrar
+/rutaxp partida       Guardar y retomar: partida guardar / reanudar
+/rutaxp paradas       Propuestas: parada 1 / parada fin
+/rutaxp sesion        Mediciones e informe copiable
+/rutaxp recuperar     Explicar bloqueos; recuperar 1 inicia propuesta 1
+/rutaxp volver        Cancelar recuperacion y volver a ruta guardada
+/rutaxp adaptar       Propuestas de ruta
+/rutaxp puntos        Controles de puntos intermedios
+/rutaxp camino        Activar/desactivar recorrido por terreno
+/rutaxp recalcular    Buscar otra vez desde tu posicion
+/rutaxp punto Entrada Guardar posicion para el objetivo actual
+/rutaxp               Biblioteca
+/rutaxp zona          Seleccionar guía recomendada para la zona
+/rutaxp flecha        Mostrar u ocultar la flecha
+/rutaxp mapa          Marcar el destino actual
+/rutaxp precision     Fuente de las coordenadas
+/rutaxp siguiente     Confirmar acción u omitir objetivo
+/rutaxp anterior      Revisar el paso anterior
+/rutaxp talentos      Panel de talentos
+/rutaxp diagnostico   Estado de guía, objetivo y mapa para reportar un fallo
+/rutaxp version       Datos del cliente
+
+Los datos por personaje se guardan con /reload o al cerrar sesión. No se
+almacenan en la carpeta del addon: conserva los archivos WTF/SavedVariables.
+Consulta el README del paquete y Licenses/ para documentación y créditos.
+El motor terrestre de Shortest Path Forever (Cillian Berragan) y las mallas
+Polestar/SendaFH conservan su licencia GPL y creditos en Pathing/.
