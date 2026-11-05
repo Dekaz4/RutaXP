@@ -339,6 +339,7 @@ function ns:PlaceInGuide(guide, state)
 end
 
 function ns:Sync()
+    if self.UpdateGuideTravel then self:UpdateGuideTravel() end
     local guide, _, state = self:GetCurrent()
     if guide and state and not state.placed and not state.review and self.char and self.char.auto then
         state.placed = true
@@ -829,6 +830,7 @@ function ns:ApplyGuideContinuation(target)
     if not target or self.guides[target.id] ~= target then return false end
     self.char.activeGuide = target.id
     self:GetProgress(target.id)
+    if self.UpdateGuideTravel then self:UpdateGuideTravel() end
     if self.Duo then self.Duo.lastSentHeader = nil end
     return true
 end
@@ -844,7 +846,7 @@ function ns:ContinueGuide()
 end
 
 function ns:OnNavigationTick()
-    if not self.char or not self.char.auto then return end
+    if not self.char or not self.char.auto or (self.GetGuideTravel and self:GetGuideTravel()) then return end
     local _, step, state = self:GetCurrent()
     if not step or state.review then return end
     local goal = self:GetActiveGoal()

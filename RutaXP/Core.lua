@@ -90,6 +90,7 @@ function ns:Sync()
         self:ApplyGuideContinuation(successor)
         guide, step, state = self:GetCurrent()
     end
+    if self.UpdateGuideTravel then self:UpdateGuideTravel() end
     if self.RefreshUI then self:RefreshUI() end
 end
 

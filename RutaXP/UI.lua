@@ -100,9 +100,22 @@ local function flatButton(parent, text, width, height, x, y, action, accent)
 end
 
 local function advanceGuide(button)
-    if button.continuesGuide then
+    if button.startsTravelHere then
+        local ok, reason = ns:StartTravelHere()
+        if not ok and reason then ns:Print(reason) end
+    elseif button.continuesGuide then
         local ok, reason = ns:ContinueGuide()
         if not ok and reason then ns:Print(reason) end
+    else
+        ns:Next()
+    end
+end
+
+local function skipShownStep(button)
+    if button.skipsTravel then
+        ns:SkipGuideTravel()
+    elseif ns.SkipStep then
+        ns:SkipStep()
     else
         ns:Next()
     end
@@ -252,9 +265,7 @@ function ns:CreateUI()
 
     self.previousButton = flatButton(detail, "< Anterior", 96, 26, 18, -392, function() self:Previous() end)
     self.nextButton = flatButton(detail, "Siguiente >", 126, 26, 120, -392, advanceGuide, true)
-    self.skipButton = flatButton(detail, "Saltar paso", 96, 26, 252, -392, function()
-        if self.SkipStep then self:SkipStep() else self:Next() end
-    end)
+    self.skipButton = flatButton(detail, "Saltar paso", 96, 26, 252, -392, skipShownStep)
     self.mapButton = flatButton(detail, "Marcar mapa", 92, 26, 354, -392, function() self:Navigate() end)
     flatButton(detail, "Reiniciar", 64, 26, 452, -392, function()
         local guide = self:GetCurrent()
@@ -453,9 +464,7 @@ function ns:CreateTracker()
     -- Bottom action bar (repositioned dynamically as height changes)
     self.trackerPrevious = flatButton(frame, "<", 32, 22, 8, -178, function() self:Previous() end)
     self.trackerNext = flatButton(frame, "Siguiente >", 126, 22, 44, -178, advanceGuide, true)
-    self.trackerSkip = flatButton(frame, "Saltar", 72, 22, 174, -178, function()
-        if self.SkipStep then self:SkipStep() else self:Next() end
-    end)
+    self.trackerSkip = flatButton(frame, "Saltar", 72, 22, 174, -178, skipShownStep)
     self.trackerMap = flatButton(frame, "Mapa", 66, 22, 250, -178, function() self:Navigate() end)
     if self.CreateTrackerLayout then self:CreateTrackerLayout() end
 end
@@ -524,8 +533,10 @@ function ns:RefreshUI()
     end
 
     local guide, step, state, sharedView
-    if self.GetDisplayedCurrent then guide, step, state, sharedView = self:GetDisplayedCurrent()
+    local travel = self.GetGuideTravel and self:GetGuideTravel()
+    if not travel and self.GetDisplayedCurrent then guide, step, state, sharedView = self:GetDisplayedCurrent()
     else guide, step, state = self:GetCurrent() end
+    if travel then step = travel end
     self.currentDuoView = sharedView
     if not guide then self.detail:Hide(); self.tracker:Hide(); return end
     self.detail:Show()
@@ -543,23 +554,29 @@ function ns:RefreshUI()
 
     local complete = state.cursor > #guide.steps
     local continuation, reason, managed
-    if complete and not sharedView and self.GetGuideContinuation then
+    if complete and not sharedView and (not travel or travel.waiting) and self.GetGuideContinuation then
         continuation, reason, managed = self:GetGuideContinuation()
     end
     local localFinish = managed and "Tu parte está hecha"
+    local travelProgress = travel and "Viaje"
     local ratio = math.max(0, math.min(1, (state.cursor - 1) / #guide.steps))
+    if travel and travel.index and travel.total then
+        travelProgress = "Viaje " .. travel.index .. "/" .. travel.total
+        ratio = (travel.index - 1) / travel.total
+    end
     self.progressBar:SetValue(ratio)
     if self.trackerBar then self.trackerBar:SetValue(ratio) end
 
-    self.stepCount:SetText(managed and "DÚO" or complete and ("¡Recorrido completado! (" .. #guide.steps .. " pasos)") or
+    self.stepCount:SetText(travelProgress or managed and "DÚO" or complete and ("¡Recorrido completado! (" .. #guide.steps .. " pasos)") or
         ("PASO " .. state.cursor .. " DE " .. #guide.steps .. (state.review and " · Revisando paso anterior" or "")))
     self.stepTitle:SetText(step and step.title or localFinish or "¡Has completado esta zona!")
     if sharedView then self.stepCount:SetText("DÚO · PASO " .. state.cursor .. " DE " .. #guide.steps .. " · Tu progreso: " .. sharedView.ownCursor) end
 
     local waypoint
-    if self.GetStepWaypoint then waypoint = self:GetStepWaypoint(step)
+    if travel then waypoint = travel.point
+    elseif self.GetStepWaypoint then waypoint = self:GetStepWaypoint(step)
     else waypoint = step and step.waypoint end
-    local objectives = self:GetObjectives(step)
+    local objectives = travel and "" or self:GetObjectives(step)
     local sharedItems = sharedView and self.GetFollowingGoalItems and self:GetFollowingGoalItems(sharedView)
     if sharedView then objectives = self:GetFollowingObjectives(sharedItems) end
     local text
@@ -582,16 +599,22 @@ function ns:RefreshUI()
     end
     self.stepText:SetText(text)
     self.stepContent:SetHeight(math.max(182, self.stepText:GetStringHeight() + 12))
-    local stepKey = guide.id .. ":" .. state.cursor
+    local stepKey = guide.id .. ":" .. (travel and ("travel:" .. travel.title) or state.cursor)
     if self.lastStepKey ~= stepKey then self.stepScroll:SetVerticalScroll(0); self.lastStepKey = stepKey end
 
-    self.previousButton:SetEnabled(not sharedView and state.cursor > 1)
+    local editSteps = not travel and not sharedView
+    self.previousButton:SetEnabled(editSteps and state.cursor > 1)
     for _, button in ipairs({self.nextButton, self.trackerNext}) do
         button.continuesGuide = continuation ~= nil
-        button:SetText(complete and "Continuar" or "Siguiente >")
-        button:SetEnabled(not sharedView and (not complete or continuation ~= nil))
+        button.startsTravelHere = travel and travel.waiting and travel.localStart == true
+        button:SetText(button.startsTravelHere and "Empezar aquí" or complete and "Continuar" or "Siguiente >")
+        button:SetEnabled(button.startsTravelHere or editSteps and not complete or continuation ~= nil)
     end
-    if self.skipButton then self.skipButton:SetEnabled(not sharedView and not complete) end
+    for _, button in ipairs({self.skipButton, self.trackerSkip}) do
+        button.skipsTravel = travel ~= nil
+        button:SetText(travel and "Omitir viaje" or button == self.skipButton and "Saltar paso" or "Saltar")
+        button:SetEnabled(travel and not travel.waiting or editSteps and not complete)
+    end
     self.mapButton:SetEnabled(waypoint and true or false)
     self.mapButton:SetText(waypoint and "Marcar mapa" or "Sin pin")
 
@@ -600,16 +623,16 @@ function ns:RefreshUI()
     self.trackerTitle:SetText(guide.title .. lvlBadge)
     local partnerVisit = sharedView and step and step.only and not self:MatchesConditions(step.only)
     self.trackerStep:SetText(partnerVisit and ("Tu amigo · " .. step.title) or step and step.title or localFinish or "¡Zona completada!")
-    self.trackerProgress:SetText(managed and "Dúo" or complete and "Completada" or ("Paso " .. state.cursor .. "/" .. #guide.steps))
+    self.trackerProgress:SetText(travelProgress or managed and "Dúo" or complete and "Completada" or ("Paso " .. state.cursor .. "/" .. #guide.steps))
     if sharedView then self.trackerProgress:SetText((partnerVisit and "Amigo " or "Juntos ") .. state.cursor .. " · Tú " .. sharedView.ownCursor) end
 
-    local goalItems = sharedItems or ((step and self.GetStepGoalItems) and self:GetStepGoalItems(step, state) or {})
+    local goalItems = sharedItems or ((not travel and step and self.GetStepGoalItems) and self:GetStepGoalItems(step, state) or {})
     local displayItems = {}
     for _, item in ipairs(goalItems) do displayItems[#displayItems + 1] = item end
     local expanded = self.char.trackerSize or self.tracker.isResizing
     local preview, planned = {}, 0
     local previewGetter = self.GetTrackerPlannedUpcomingItems or self.GetTrackerUpcomingItems
-    if previewGetter then
+    if not travel and previewGetter then
         for _, item in ipairs(previewGetter(self, guide, state.cursor, 12)) do
             if expanded or item.questPlan then
                 preview[#preview + 1] = item
@@ -696,9 +719,7 @@ function ns:RefreshUI()
         self.trackerText:Show()
     end
     if self.LayoutTracker then self:LayoutTracker() end
-    if self.trackerSkip then self.trackerSkip:SetEnabled(not sharedView and not complete) end
-
-    self.trackerPrevious:SetEnabled(not sharedView and state.cursor > 1)
+    self.trackerPrevious:SetEnabled(editSteps and state.cursor > 1)
     self.trackerMap:SetEnabled(waypoint and true or false)
     self.tracker:SetShown(self.char.tracker and not self.window:IsShown())
 end

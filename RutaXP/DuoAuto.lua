@@ -169,6 +169,10 @@ function Auto:_ClearContinuation()
     self.continuation, self.continuationConsent = nil, nil
     if ns.Duo and ns.Duo.ClearAutoMessages then ns.Duo:ClearAutoMessages() end
 end
+function Auto:ClearTravelAgreement()
+    self:_ClearContinuation()
+    self:_ClearAgreement()
+end
 function Auto:_ContinuationPlan(targetID, originID)
     local config, ctx = settings(), context()
     if not continuationMode(config, ctx) then return nil, "La continuación compartida requiere un dúo activo." end

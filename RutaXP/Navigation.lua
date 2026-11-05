@@ -364,7 +364,9 @@ function ns:GetBaseStepWaypoint(step)
     return questPoint(step.questID, step.action)
 end
 
-function ns:GetStepWaypoint(step)
+function ns:GetStepWaypoint(step, travel)
+    if travel == nil and self.GetGuideTravel then travel = self:GetGuideTravel() end
+    if travel then return travel.point end
     local base = self:GetBaseStepWaypoint(step)
     if self.Recovery and self.Recovery.GetNavigationOverride then
         local override = safe(self.Recovery.GetNavigationOverride, self.Recovery)
@@ -411,8 +413,8 @@ end
 
 -- Keep terrain steering separate from the semantic target used by the map
 -- and quest engine. Reaching a bend must never finish the real travel goal.
-function ns:GetArrowWaypoint(step)
-    local point = self:GetStepWaypoint(step)
+function ns:GetArrowWaypoint(step, travel)
+    local point = self:GetStepWaypoint(step, travel)
     if self.Walking then return self.Walking:Resolve(point) end
     return point
 end
@@ -652,7 +654,9 @@ function ns:UpdateNavigation()
         return
     end
     local _, step = self:GetCurrent()
-    local point = self:GetArrowWaypoint(step)
+    local travel = self.GetGuideTravel and self:GetGuideTravel()
+    local point = self:GetArrowWaypoint(step, travel or false)
+    if travel then step = travel end
     if not step and not point then
         if self.Walking then self.Walking:Clear() end
         frame.dNorth, frame.dWest = nil, nil
@@ -661,6 +665,16 @@ function ns:UpdateNavigation()
     end
     frame:Show()
 
+    if travel and not point then
+        -- The tram and partner waits have instructions but no walkable target.
+        frame.dNorth, frame.dWest, frame.targetContinent, frame.arrived = nil, nil, nil, false
+        frame.arrow:Hide()
+        frame.navigationState = travel.waiting and "waiting" or "instruction"
+        frame.navigationReason = travel.text
+        frame.distance:SetText(travel.title)
+        frame.destination:SetText(travel.text)
+        return
+    end
     local activeGoal = point and point.goal or (step and step.goals and self.GetActiveGoal and self:GetActiveGoal(step))
     local goalTitle = activeGoal and self.GetGoalTitle and self:GetGoalTitle(activeGoal)
     local stepTitle = step and step.title

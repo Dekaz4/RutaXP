@@ -338,12 +338,17 @@ function ns:UpdateDuoTracker()
         or not ctx.known and "Dúo · esperando sincronización"
         or ("Dúo · " .. (ctx.partnerReady and "amigo preparado" or "amigo en curso"))
     local waiting, waitReason, waitInfo
+    local travel = self.GetGuideTravel and self:GetGuideTravel()
+    if travel then
+        step = nil
+        if ctx.known then text = travel.waiting and "Dúo · esperando al compañero" or "Dúo · en viaje" end
+    end
     if step and self.Duo.GetStepWaitStatus then
         waitInfo = self.Duo:GetStepWaitStatus(step)
         waiting, waitReason = waitInfo.waiting, waitInfo.reason
     elseif step then waiting, waitReason = self.Duo:ShouldWaitForStep(step) end
     if not waiting and step and self.DuoAuto then waiting, waitReason = self.DuoAuto:ShouldWaitForStep(step) end
-    local autoView = self.DuoAuto and self.DuoAuto:GetSharedView()
+    local autoView = not travel and self.DuoAuto and self.DuoAuto:GetSharedView()
     if autoView then
         text = autoView.personalVisit and "Dúo · tu misión individual"
             or autoView.following and ("Dúo auto · amigo " .. autoView.sharedCursor .. " · tú " .. autoView.ownCursor)

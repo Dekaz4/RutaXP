@@ -19,6 +19,7 @@ function ns:InitializeFeatures()
         elapsed = elapsed + delta
         if elapsed < 1 then return end
         local tick = elapsed; elapsed = 0
+        if self.UpdateGuideTravel and self:UpdateGuideTravel() then self:Sync() end
         if self.Session then self.Session:Tick(tick) end
         if self.DuoAuto then self.DuoAuto:Tick(tick) end
         if self.Duo then self.Duo:Tick(tick) end
@@ -53,6 +54,10 @@ function ns:StartFeatureSession()
 end
 local complete = ns.IsStepComplete
 function ns:IsStepComplete(step, ...)
+    if self.GetGuideTravel and self:GetGuideTravel() then
+        local _, currentStep = self:GetCurrent()
+        if step == currentStep then return false end
+    end
     if not complete(self, step, ...) then return false end
     if step and self.DuoAuto and self.DuoAuto:ShouldWaitForStep(step) then return false end
     if step and self.Duo and self.Duo:ShouldWaitForStep(step) then return false end
@@ -97,6 +102,10 @@ for _, method in ipairs({ "Next", "Previous", "SkipStep", "ToggleGoalConfirm" })
     local original = ns[method]
     local methodName = method
     if original then ns[method] = function(self, ...)
+        if self.GetGuideTravel and self:GetGuideTravel() then
+            if methodName == "SkipStep" then return self:SkipGuideTravel() end
+            return
+        end
         if followingGuard(self) then return end
         if methodName == "Previous" then self:UseManualDuoMode("Revisión manual solicitada") end
         return original(self, ...)
@@ -110,6 +119,7 @@ end
 local questAutomation = ns.HandleQuestAutomation
 if questAutomation then
     function ns:HandleQuestAutomation(...)
+        if self.GetGuideTravel and self:GetGuideTravel() then return end
         if self.DuoAuto and self.DuoAuto:ShouldPauseAutomation() then return end
         return questAutomation(self, ...)
     end

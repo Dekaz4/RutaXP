@@ -212,6 +212,7 @@ function Duo:Settings()
     return ns.char.duo
 end
 function Duo:ClearPeer()
+    self.lastTravelSignal, self.lastTravelSent = nil, nil
     self.transport = nil
     self.peer, self.remoteQuests, self.requested, self.outboundRequests = nil, {}, {}, {}
     self.remoteSupplies, self.remoteCheckpoint, self.partnerMeeting = nil, nil, nil
@@ -290,6 +291,7 @@ function Duo:GetContext()
         partnerAutoPair = headerRecent and self.peer.autoPair == true or false,
         partnerAutoEpoch = headerRecent and self.peer.autoEpoch or nil,
         partnerReview = headerRecent and self.peer.review == true or false,
+        partnerAtWestfall = headerRecent and fresh(self.peer.travelSeen, 18) and self.peer.travelReady == true or false,
         ownName = unitName("player"), partnerNonce = recent and self.peer.nonce or nil,
         wait = settings.wait == true, dead = dead == true,
         separated = self.partnerName and checked == true and inRange == false or nil }
@@ -774,10 +776,14 @@ function Duo:Receive(prefix, message, channel, sender)
         if not self.peer or self.peer.nonce ~= fields[3] then
             self.remoteQuests, self.requested, self.remoteSupplies, self.remoteCheckpoint, self.partnerMeeting = {}, {}, nil, nil, nil
         end
+        local previous = self.peer
         self.peer = { nonce = fields[3], sequence = seq, level = level, class = fields[6], race = fields[7],
             guideID = fields[8], cursor = cursor, ready = fields[10] == "1", seen = now(), headerSeen = now(), mapID = mapID, dead = boolean(fields[13]),
             autoCapability = fields[19] and "1" or nil, autoEpoch = autoEpoch,
             autoPair = boolean(fields[20]), review = boolean(fields[21]) }
+        if previous and previous.nonce == fields[3] and previous.guideID == fields[8] then
+            self.peer.travelReady, self.peer.travelSeen = previous.travelReady, previous.travelSeen
+        end
         self.lastHeader = now()
         if supplies then self.remoteSupplies = supplies end
     elseif kind == "Q" and (#fields == 10 or #fields == 11) and self.peer and self.peer.nonce == fields[3] then
@@ -794,6 +800,9 @@ function Duo:Receive(prefix, message, channel, sender)
             if not token(fields[5]) or #fields[5] > 40 or not token(fields[6]) or not reference or not cursor or not phase then return false end
             if not safe(ns.DuoAuto.OnProtocol, ns.DuoAuto, kind, { transaction=fields[5], guideID=fields[6],
                 reference=reference, cursor=cursor, phase=phase, nonce=fields[3], sender=self.partnerName }) then return false end
+        elseif kind == "T" and #fields == 6 then
+            if fields[5] ~= self.peer.guideID or (fields[6] ~= "0" and fields[6] ~= "1") then return false end
+            self.peer.travelReady, self.peer.travelSeen = fields[6] == "1", now()
         elseif kind == "B" and #fields == 5 then
             local snapshots, ids = {}, {}
             for raw in (fields[5] .. "/"):gmatch("(.-)/") do
@@ -861,7 +870,7 @@ function Duo:Receive(prefix, message, channel, sender)
         local info = transport(self)
         info.receivedHeaders, info.lastHeader = increment(info.receivedHeaders), now()
     end
-    if kind == "H" or kind == "Q" or kind == "U" or kind == "B" then self:Changed() else self:NavigationChanged() end
+    if kind == "H" or kind == "Q" or kind == "U" or kind == "B" or kind == "T" then self:Changed() else self:NavigationChanged() end
     return true
 end
 function Duo:QueueAutoMessage(kind, packet)
@@ -977,8 +986,12 @@ function Duo:Tick(elapsed)
         -- header, counters in Q: neither creates extra per-objective traffic.
         local auxiliary = #ids == 0 or (self.lastSentQuest ~= nil and now() - self.lastSentQuest < 2)
         local meeting = self:Settings().meeting
+        local signal = ns.GetWestfallTravelSignal and ns:GetWestfallTravelSignal()
+        local travel = signal and (guide.id .. "|" .. signal)
         if self.autoQueue and (not self.lastSentAuto or now() - self.lastSentAuto >= 3) then
             if self:Send(self.autoQueue.kind, self.autoQueue.values) then self.lastSentAuto = now(); self.autoQueue = nil end
+        elseif travel and (travel ~= self.lastTravelSignal or not self.lastTravelSent or now() - self.lastTravelSent >= 8) then
+            if self:Send("T", travel) then self.lastTravelSignal, self.lastTravelSent = travel, now() end
         elseif auxiliary and meetingValid(meeting) and (not self.lastSentMeeting or now() - self.lastSentMeeting >= 20) then
             local clear = meeting.clear == true
             if self:Send("M", table.concat({ meeting.revision, clear and 0 or meeting.mapID,
