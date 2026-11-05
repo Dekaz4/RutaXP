@@ -5,6 +5,23 @@ from test_access_navigation import AccessHost, DWARF
 
 
 class DuoWaitUITests(unittest.TestCase):
+    def test_connection_command_and_duo_panel_distinguish_sending_from_receiving(self):
+        from test_auto_party_integration import AutomaticPartyHost
+
+        a = AutomaticPartyHost()
+        a.roster()
+        a.tick()  # WoW accepts a PARTY header, but no peer has replied.
+        before = a.progress()
+        a.ns.Command(a.ns, "conexion")
+        message = a.s.messages[len(a.s.messages)]
+        self.assertIn("WoW acepta tus envíos", message)
+        self.assertIn("Esperando una respuesta", message)
+        self.assertIn("señales recibidas 0", message)
+        a.ns.ToggleFeatures(a.ns, "duo")
+        self.assertIn("WoW acepta tus envíos", a.ns.featuresPanel.body.text)
+        self.assertNotIn("Buscando RutaXP compatible", a.ns.featuresPanel.body.text)
+        self.assertEqual(a.progress(), before)
+
     def visit(self):
         h = AccessHost(DWARF, step=6, x=.26, y=.71)
         h.s.friendRace, h.s.friendClass, h.s.members = "Dwarf", "WARRIOR", 2

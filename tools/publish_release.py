@@ -23,6 +23,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 from zipfile import BadZipFile, ZipFile
 
 
@@ -283,11 +284,18 @@ class Publisher:
         else:
             self.run(["gh", "release", "create", tag, "--repo", HOST_REPOSITORY, "--draft", "--verify-tag",
                       "--target", head, "--title", f"RutaXP {version}", "--notes-file", notes_file])
-            existing = self.find_release(version)
-            if not existing:
-                raise PublishError("No se pudo recuperar el borrador; comprueba GitHub antes de reintentar.")
+            # GitHub may acknowledge creation before the draft appears in its
+            # release list. Only retry a missing result; conflicts and API errors propagate.
+            for delay in (0, 1, 2, 4, 8, 16, 30):
+                if delay:
+                    time.sleep(delay)
+                existing = self.find_release(version)
+                if existing is not None:
+                    break
+            else:
+                raise PublishError("GitHub confirmó la creación del borrador, pero aún no aparece. Compruébalo antes de reintentar.")
         ident = existing.get("id")
-        self.draft(ident, tag)
+        self.metadata(self.draft(ident, tag), assets, exact=False)
         self.run(["gh", "release", "upload", tag, "--repo", HOST_REPOSITORY, "--clobber",
                   *[self.root / "dist" / name for name in assets]], timeout=900)
         uploaded = self.draft(ident, tag)

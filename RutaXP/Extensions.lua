@@ -120,9 +120,38 @@ function ns:RefreshUI(...)
     if self.UpdateDuoTracker then self:UpdateDuoTracker() end
     if self.UpdateFeatures then self:UpdateFeatures() end
 end
+function ns:GetDuoConnectionText(ctx, link)
+    local duo = self.Duo
+    ctx = ctx or duo:GetContext()
+    if not ctx.enabled then return "Dúo desactivado en este personaje." end
+    if not ctx.sameParty then return "Esperando que WoW identifique al compañero en un grupo de dos de la misma facción." end
+    if not ctx.online then return "Tu compañero está desconectado." end
+    local allowed, reason = duo:CanCommunicate()
+    link = link or duo:GetTransportStatus()
+    local failure = link.lastError or (not allowed and reason)
+    if failure then
+        return ctx.known and ("Llegan datos de tu compañero. " .. failure) or failure
+    end
+    if ctx.known then return "Recibida la guía de tu compañero · paso " .. tostring(ctx.cursor) .. "." end
+    if link.lastUnmatchedHeaderAge and link.lastUnmatchedHeaderAge <= 15 then
+        return "Llegan mensajes de RutaXP con un nombre distinto al que WoW muestra para tu compañero."
+    end
+    if link.lastSuccessAge and link.lastSuccessAge <= 15 then
+        return "WoW acepta tus envíos al grupo. Esperando una respuesta válida del RutaXP de tu compañero."
+    end
+    return "Compañero en grupo. Esperando el primer intercambio de RutaXP."
+end
+
 function ns:HandleFeatureCommand(command, rest)
     if command == "herramientas" then self:ToggleFeatures()
     elseif command == "sesion" or command == "sesión" then self:ToggleFeatures("session")
+    elseif command == "conexion" or command == "conexión" then
+        local ctx, link = self.Duo:GetContext(), self.Duo:GetTransportStatus()
+        local text = self:GetDuoConnectionText(ctx, link)
+        if ctx.enabled and ctx.sameParty then
+            text = text .. string.format(" Envíos aceptados %d/%d · señales recibidas %d.", link.accepted, link.attempts, link.receivedHeaders)
+        end
+        self:Print("RutaXP " .. self.Updates:GetLocalVersion() .. " · " .. text)
     elseif command == "sincronizar" then
         if self.Duo and self.Duo.Resynchronize then
             local ok, reason = self.Duo:Resynchronize()

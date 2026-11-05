@@ -144,6 +144,31 @@ class TalentCompatibilityTests(unittest.TestCase):
         self.assertFalse(c.compatible)
         self.assertIsNone(c.staged.unspent)
 
+    def test_level_nine_paladin_previews_first_talent_then_validates_at_unlock(self):
+        h = TalentTrainerHost(full_toc=True)
+        h.state.classToken, h.state.raceToken, h.state.level = "PALADIN", "Dwarf", 9
+        h.live("PALADIN")
+        guide = h.t.Registry.PALADIN.builds[4]
+        h.t.SetChoice(guide.key, "PALADIN")
+        first_node = guide.picks[1].node
+        saved_node = h.state.liveNodes[first_node]
+        h.state.liveNodes[first_node] = None
+        panel = h.panel()
+        self.assertEqual(h.t.current.staged.status, "early")
+        self.assertEqual(h.t.current.staged.unspent, 0)
+        self.assertIn("NIVEL 10", panel.nextCard.header.text)
+        self.assertIn(h.t.Registry.PALADIN.nodes[first_node].nameEs, panel.nextCard.main.text)
+        self.assertNotIn("Solo referencia", panel.detectedText.text)
+
+        h.state.level = 10
+        h.g.EmitAddonEvent("PLAYER_LEVEL_UP", 10)
+        self.assertEqual(h.t.current.staged.status, "unavailable")
+        self.assertIn("NO DISPONIBLE", panel.nextCard.header.text)
+        h.state.liveNodes[first_node] = saved_node
+        h.g.EmitAddonEvent("TRAIT_CONFIG_UPDATED", 1)
+        self.assertTrue(h.t.current.compatible)
+        self.assertIn("SUBE AHORA", panel.nextCard.header.text)
+
     def test_changed_or_empty_tree_is_explicitly_incompatible(self):
         h = self.h
         h.live()

@@ -98,7 +98,7 @@ function ns:UpdateFeatures()
     if tab == "duo" and self.Duo then
         local ctx = self.Duo:GetContext(); text = self.Duo:GetReport()
         local auto = self.DuoAuto and self.DuoAuto:GetStatus()
-        if auto then text = auto.text .. "\n\n" .. text end
+        if auto and (auto.phase ~= "probing" or ctx.known) then text = auto.text .. "\n\n" .. text end
         add(ctx.enabled and "Desactivar dúo" or "Activar dúo", function() self:UseManualDuoMode("Modo dúo cambiado manualmente", true); self.Duo:SetEnabled(not ctx.enabled) end)
         add(ctx.wait and "Continuar sin esperar" or "Esperar al amigo", function() self:UseManualDuoMode("Espera cambiada manualmente", true); self.Duo:SetWait(not ctx.wait) end)
         add(ctx.ready and "Marcarme no preparado" or "Estoy preparado", function() self.Duo:SetReady(not ctx.ready) end)

@@ -74,6 +74,7 @@ local function appliesToPartner(only, context)
         and matches(only.factions, context.partnerFaction))
 end
 local function canonical(name)
+    name = readable(name)
     if type(name) ~= "string" then return nil end
     name = name:gsub("%s", ""):lower()
     if not name:find("-", 1, true) then
@@ -82,10 +83,120 @@ local function canonical(name)
     end
     return name
 end
+local function identityText(value)
+    value = readable(value)
+    return type(value) == "string" and value ~= "" and value ~= UNKNOWNOBJECT and #value <= 240 and value or nil
+end
+local function identityRead(fn, unit)
+    if type(fn) ~= "function" then return nil, nil, false end
+    local ok, name, server = pcall(fn, unit)
+    if not ok then return nil, nil, false end
+    if issecretvalue and (issecretvalue(name) or issecretvalue(server)) then return nil, nil, true end
+    return name, server, false
+end
+local function fullNameParts(unit)
+    local name, realm, hidden = identityRead(UnitFullName, unit)
+    if hidden or (UNKNOWNOBJECT and name == UNKNOWNOBJECT) or name == "" then return nil, nil, hidden end
+    if identityText(name) then return name, identityText(realm), false end
+    name, _, hidden = identityRead(NameUtil and NameUtil.GetUnmodifiedUnitFullName, unit)
+    if hidden then return nil, nil, true end
+    if identityText(name) then return name, nil, false end
+    name, realm, hidden = identityRead(UnitName, unit)
+    return identityText(name), identityText(realm), hidden
+end
 local function unitName(unit)
-    local name, realm = safe(UnitFullName or UnitName, unit)
-    if not name then return nil end
+    local name, realm, hidden = fullNameParts(unit)
+    if not name or hidden then return nil end
     return canonical(realm and realm ~= "" and (name .. "-" .. realm) or name)
+end
+local function aliasKey(value)
+    value = identityText(value)
+    -- Authentication preserves the first/surname boundary. The historical
+    -- canonical key above is for saved records, never a partial-name match.
+    return value and value:lower():gsub("%s+", " "):gsub("^ ", ""):gsub(" $", "")
+end
+local function regionalName(unit)
+    local full, _, hidden = identityRead(NameUtil and NameUtil.GetUnmodifiedUnitFullName, unit)
+    if hidden then return nil, true end
+    local camelot = WOW_PROJECT_ID and WOW_PROJECT_ID == (WOW_PROJECT_CAMELOT or 18)
+    local regional = safe(RegionalUniqueNamesEnabled) == true or camelot
+    local separator = Constants and Constants.CharacterNameSeparatorConsts
+        and Constants.CharacterNameSeparatorConsts.CHARACTERNAME_SURNAME_SEPARATOR or " "
+    if regional and identityText(full) and type(separator) == "string" and separator ~= "" and full:find(separator, 1, true) then return full, false end
+    return nil, false
+end
+local function unitFingerprint(unit)
+    local name, realm, hidden = fullNameParts(unit)
+    if hidden or not name then return nil end
+    local regional, restricted = regionalName(unit)
+    if restricted then return nil end
+    local server = realm or identityText(safe(GetNormalizedRealmName)) or identityText(safe(GetRealmName)) or ""
+    return aliasKey(regional or name) .. "\031" .. server:gsub("[%s%-]", ""):lower()
+end
+local function senderIsUnit(sender, unit)
+    local key = aliasKey(sender)
+    if not key then return false end
+    local name, realm, hidden = fullNameParts(unit)
+    if not name or hidden then return false end
+    local aliases = {}
+    local localRealm = identityText(safe(GetNormalizedRealmName)) or identityText(safe(GetRealmName))
+    local function add(value) local candidate = aliasKey(value); if candidate then aliases[candidate] = true end end
+    local function forms(value, regional)
+        if not identityText(value) then return end
+        local server = realm or localRealm
+        if regional or not realm or not localRealm or realm:gsub("[%s%-]", ""):lower() == localRealm:gsub("[%s%-]", ""):lower() then add(value) end
+        if server then add(value .. "-" .. server); add(value .. "-" .. server:gsub("[%s%-]", "")) end
+    end
+    local regional, restricted = regionalName(unit)
+    if restricted then return false end
+    if regional then
+        -- Camelot's official helper supplies the complete regional identity.
+        -- Accept its chat-link spelling as another complete alias, not the
+        -- ambiguous first name or a whitespace-stripped concatenation.
+        forms(regional, true)
+        forms(safe(C_NameUtil and C_NameUtil.ReplaceSurnameSeparatorWithLinkSeparator, regional), true)
+    else forms(name) end
+    return aliases[key] == true
+end
+local function transport(self)
+    if not self.transport then self.transport = { attempts=0, accepted=0, failed=0, receivedHeaders=0, unmatchedHeaders=0 } end
+    return self.transport
+end
+local function increment(value) return math.min(99999, (value or 0) + 1) end
+local function resultName(result, names, reasons)
+    for field, reason in pairs(reasons) do if names and names[field] == result then return reason end end
+end
+function Duo:RegisterPrefix()
+    if self.registered then return true end
+    if self.lastRegisterAt and now() - self.lastRegisterAt < 1 then return false end
+    if not (C_ChatInfo and type(C_ChatInfo.RegisterAddonMessagePrefix) == "function") then
+        self.registrationError = "El cliente no ofrece registro de mensajes de addons."; return false
+    end
+    self.lastRegisterAt = now()
+    local ok, result = pcall(C_ChatInfo.RegisterAddonMessagePrefix, self.prefix)
+    local names = Enum and Enum.RegisterAddonMessagePrefixResult
+    local success, duplicate = names and names.Success or 0, names and names.DuplicatePrefix or 1
+    local hidden = issecretvalue and issecretvalue(result)
+    local accepted = ok and not hidden
+        and (result == nil or result == true or result == success or result == duplicate)
+    local checked = safe(C_ChatInfo.IsAddonMessagePrefixRegistered, self.prefix)
+    self.registered = ok and (checked == true or checked ~= false and accepted) or false
+    if self.registered then self.registrationError = nil; return true end
+    self.registrationError = not ok and "Error al registrar el canal de RutaXP."
+        or hidden and "El juego no permite confirmar el registro de RutaXP."
+        or resultName(result, names or {InvalidPrefix=2,MaxPrefixes=3}, {
+            InvalidPrefix="El juego rechazó el prefijo de RutaXP.", MaxPrefixes="El juego no admite más prefijos de addons." })
+        or "El canal de RutaXP no se ha registrado todavía."
+    return false
+end
+function Duo:GetTransportStatus()
+    local info, time = transport(self), now()
+    local function age(seen) return type(seen) == "number" and math.max(0, time-seen) or nil end
+    return { registered=self.registered == true, attempts=info.attempts, accepted=info.accepted, failed=info.failed,
+        lastError=info.lastError or self.registrationError, lastResult=info.lastResult,
+        lastAttemptAge=age(info.lastAttempt), lastSuccessAge=age(info.lastSuccess),
+        receivedHeaders=info.receivedHeaders, unmatchedHeaders=info.unmatchedHeaders,
+        lastHeaderAge=age(info.lastHeader), lastUnmatchedHeaderAge=age(info.lastUnmatchedHeader) }
 end
 local function profile(unit)
     local _, class = safe(UnitClass, unit)
@@ -101,6 +212,7 @@ function Duo:Settings()
     return ns.char.duo
 end
 function Duo:ClearPeer()
+    self.transport = nil
     self.peer, self.remoteQuests, self.requested, self.outboundRequests = nil, {}, {}, {}
     self.remoteSupplies, self.remoteCheckpoint, self.partnerMeeting = nil, nil, nil
     self.lastSentMeeting, self.lastSentSupplies, self.lastSentCheckpoint, self.lastSentRequest = nil, nil, nil, nil
@@ -110,15 +222,19 @@ function Duo:ClearPeer()
 end
 function Duo:RefreshRoster()
     local members = safe(GetNumGroupMembers) or 0
-    local name = members == 2 and not safe(IsInRaid) and unitName("party1") or nil
+    local identity = members == 2 and not safe(IsInRaid) and unitFingerprint("party1") or nil
+    local name = identity and unitName("party1") or nil
     local faction = safe(UnitFactionGroup, "party1")
-    if faction and faction ~= "Neutral" and faction ~= safe(UnitFactionGroup, "player") then name = nil end
-    if name ~= self.partnerName then self:ClearPeer(); self.partnerName = name end
+    if faction and faction ~= "Neutral" and faction ~= safe(UnitFactionGroup, "player") then name, identity = nil, nil end
+    if name ~= self.partnerName or identity ~= self.partnerIdentity then
+        self:ClearPeer(); self.partnerName, self.partnerIdentity = name, identity
+    end
     self.groupSize = members
     self.online = name ~= nil and safe(UnitIsConnected, "party1") ~= false
     if not self.online and self.peer then self:ClearPeer() end
 end
 function Duo:CanCommunicate()
+    if not self.registered then self:RegisterPrefix() end
     if not (C_ChatInfo and C_ChatInfo.SendAddonMessage and self.registered) then return false, "Este cliente no ofrece comunicación entre addons." end
     if safe(C_ChatInfo.AreOutgoingAddonChatMessagesRestricted) == true or safe(C_ChatInfo.InChatMessagingLockdown) == true then
         return false, "El cliente restringe los mensajes de addons; solo se muestra la información que permite el juego."
@@ -624,11 +740,19 @@ local function storeQuest(self, snapshot)
 end
 
 function Duo:Receive(prefix, message, channel, sender)
+    if issecretvalue and (issecretvalue(prefix) or issecretvalue(channel) or issecretvalue(message) or issecretvalue(sender)) then return false end
     local settings = self:Settings()
     if prefix ~= self.prefix or channel ~= "PARTY" or not settings or not settings.enabled
         or type(message) ~= "string" or #message > 255 then return false end
     self:RefreshRoster()
-    if not self.partnerName or not self.online or canonical(sender) ~= self.partnerName then return false end
+    if not self.partnerName or not self.online then return false end
+    if not senderIsUnit(sender, "party1") then
+        if message:sub(1, 4) == PROTOCOL .. "|H|" and not senderIsUnit(sender, "player") then
+            local info = transport(self)
+            info.unmatchedHeaders, info.lastUnmatchedHeader = increment(info.unmatchedHeaders), now()
+        end
+        return false
+    end
     local fields = {}; for field in (message .. "|"):gmatch("(.-)|") do fields[#fields + 1] = field end
     if fields[1] ~= PROTOCOL then return false end
     local seq = integer(fields[4], 1, 1000000000)
@@ -733,6 +857,10 @@ function Duo:Receive(prefix, message, channel, sender)
         else return false end
         self.peer.sequence, self.peer.seen = seq, now()
     else return false end
+    if kind == "H" then
+        local info = transport(self)
+        info.receivedHeaders, info.lastHeader = increment(info.receivedHeaders), now()
+    end
     if kind == "H" or kind == "Q" or kind == "U" or kind == "B" then self:Changed() else self:NavigationChanged() end
     return true
 end
@@ -753,9 +881,38 @@ function Duo:Send(kind, values)
     if not settings or not settings.enabled or not self:CanCommunicate() then return false end
     self.sequence = self.sequence + 1
     local message = PROTOCOL .. "|" .. kind .. "|" .. self.nonce .. "|" .. self.sequence .. "|" .. values
-    if #message > 255 then return false end
-    safe(C_ChatInfo.SendAddonMessage, self.prefix, message, "PARTY")
     self.lastSendAt = now()
+    local info = transport(self)
+    info.attempts, info.lastAttempt = increment(info.attempts), now()
+    local ok, result
+    if #message > 255 then ok, result = false, "length"
+    else ok, result = pcall(C_ChatInfo.SendAddonMessage, self.prefix, message, "PARTY") end
+    local hidden = issecretvalue and issecretvalue(result)
+    local names = Enum and Enum.SendAddonMessageResult
+    local success = names and names.Success or 0
+    local accepted = ok and not hidden and (result == nil or result == true or result == success)
+    if not ok then info.lastResult = result == "length" and "length" or "error"
+    elseif hidden then info.lastResult = "protected"
+    elseif type(result) == "number" or type(result) == "boolean" or result == nil then info.lastResult = result
+    else info.lastResult = "unexpected" end
+    if not accepted then
+        info.failed = increment(info.failed)
+        info.lastError = not ok and (result == "length" and "El mensaje supera el tamaño permitido." or "Error del juego al enviar el mensaje de RutaXP.")
+            or hidden and "El juego no permite confirmar el resultado del envío."
+            or resultName(result, names or {InvalidPrefix=1,InvalidMessage=2,AddonMessageThrottle=3,InvalidChatType=4,
+                NotInGroup=5,TargetRequired=6,InvalidChannel=7,ChannelThrottle=8,GeneralError=9,NotInGuild=10,
+                AddOnMessageLockdown=11,TargetOffline=12}, {
+                InvalidPrefix="El juego rechazó el prefijo de RutaXP.", InvalidMessage="El juego rechazó el mensaje de RutaXP.",
+                AddonMessageThrottle="El juego ha limitado temporalmente los mensajes de addons.",
+                InvalidChatType="El juego rechazó el canal de grupo.", NotInGroup="El juego todavía no confirma el grupo.",
+                TargetRequired="El juego requiere un destinatario para este envío.", InvalidChannel="El juego rechazó el canal de grupo.",
+                ChannelThrottle="El juego ha limitado temporalmente el canal de grupo.", GeneralError="El juego no pudo enviar el mensaje.",
+                NotInGuild="El juego rechazó el tipo de canal solicitado.", AddOnMessageLockdown="El juego bloquea temporalmente los mensajes de addons.",
+                TargetOffline="El juego indica que el destinatario no está conectado." })
+            or "El juego no aceptó el mensaje de RutaXP."
+        return false
+    end
+    info.accepted, info.lastSuccess, info.lastError = increment(info.accepted), now(), nil
     return true
 end
 function Duo:QuestPayload(id, q, request, maximum, preferredIndex)
@@ -886,12 +1043,14 @@ function Duo:GetReport()
     if not ctx.sameParty then return "Invita a tu amigo a un grupo de dos, de la misma facción. En grupos mayores se suspende la sincronización para evitar confundir compañeros." end
     local lines = { "Compañero: " .. (self.partnerName or "—"), ctx.online and "Conectado" or "Desconectado" }
     local allowed, reason = self:CanCommunicate()
-    if not allowed then lines[#lines + 1] = reason
-    elseif not ctx.known then lines[#lines + 1] = "Esperando RutaXP del compañero. Ambos debéis instalar esta versión y activar Dúo."
+    if not allowed then lines[#lines + 1] = ns.GetDuoConnectionText and ns:GetDuoConnectionText(ctx) or reason
+    elseif not ctx.known then lines[#lines + 1] = ns.GetDuoConnectionText and ns:GetDuoConnectionText(ctx) or "Esperando RutaXP del compañero. Ambos debéis instalar esta versión y activar Dúo."
     else
         local guide = ns.guides[ctx.guideID]
         lines[#lines + 1] = "Su ruta: " .. (guide and guide.title or "Guía no instalada") .. " · paso " .. ctx.cursor
         lines[#lines + 1] = "Preparados: tú " .. (ctx.ready and "sí" or "no") .. " · amigo " .. (ctx.partnerReady and "sí" or "no")
+        local problem = self:GetTransportStatus().lastError
+        if problem then lines[#lines + 1] = problem end
     end
     if ctx.dead then lines[#lines + 1] = "Tu amigo ha muerto o está como fantasma. Reuniros antes de continuar." end
     local inRange, checked = safe(UnitInRange, "party1")
@@ -943,15 +1102,12 @@ function Duo:Initialize()
     if self.frame then return end
     self:Settings()
     self.nonce = tostring(math.floor((safe(GetTime) or 1) * 1000)) .. "_" .. tostring(math.random(10000, 99999))
-    if C_ChatInfo and C_ChatInfo.RegisterAddonMessagePrefix then
-        local ok = pcall(C_ChatInfo.RegisterAddonMessagePrefix, self.prefix)
-        self.registered = ok and safe(C_ChatInfo.IsAddonMessagePrefixRegistered, self.prefix) ~= false
-    end
+    self:RegisterPrefix()
     self:RefreshRoster()
     self.frame = CreateFrame("Frame")
     for _, event in ipairs({ "CHAT_MSG_ADDON", "GROUP_ROSTER_UPDATE", "UNIT_CONNECTION", "PLAYER_ENTERING_WORLD" }) do self.frame:RegisterEvent(event) end
     self.frame:SetScript("OnEvent", function(_, event, ...)
         if event == "CHAT_MSG_ADDON" then self:Receive(...)
-        else self:RefreshRoster(); self:Changed() end
+        else if not self.registered then self:RegisterPrefix() end; self:RefreshRoster(); self:Changed() end
     end)
 end

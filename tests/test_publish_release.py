@@ -53,6 +53,7 @@ class FakeCommands:
         self.fail_upload = self.fail_tests = False
         self.corrupt_download = False
         self.other_releases = []
+        self.hidden_draft_reads = 0
         self.calls, self.events = [], []
 
     def __call__(self, arguments, root, timeout):
@@ -97,6 +98,9 @@ class FakeCommands:
         if args[:2] == ["gh", "api"]:
             endpoint = args[-1]
             if "?per_page=" in endpoint:
+                if self.release and self.hidden_draft_reads:
+                    self.hidden_draft_reads -= 1
+                    return json.dumps([self.other_releases])
                 return json.dumps([self.other_releases + ([self.release] if self.release else [])])
             return json.dumps(self.release)
         if args[:3] == ["gh", "release", "create"]:
@@ -219,6 +223,24 @@ class PublishReleaseTests(unittest.TestCase):
         self.publish()
         self.assertEqual(self.commands.events.count("create-draft"), 1)
         self.assertEqual(self.commands.events.count("publish"), 1)
+
+    def test_created_draft_appears_on_third_read_without_repeating_creation(self):
+        self.commands.hidden_draft_reads = 2
+        with patch("time.sleep") as wait:
+            self.publish()
+        self.assertEqual(wait.call_count, 2)
+        self.assertEqual(self.commands.events.count("create-draft"), 1)
+        self.assertEqual(self.commands.events.count("publish"), 1)
+
+    def test_created_draft_still_hidden_after_retries_is_left_alone(self):
+        self.commands.hidden_draft_reads = 100
+        with patch("time.sleep") as wait, self.assertRaisesRegex(publication.PublishError, "borrador"):
+            self.publish()
+        self.assertGreater(wait.call_count, 0)
+        self.assertLess(wait.call_count, 10)
+        self.assertEqual(self.commands.events.count("create-draft"), 1)
+        self.assertNotIn("upload", self.commands.events)
+        self.assertTrue(self.commands.release["draft"])
 
     def test_corrupt_download_never_publishes_partial_or_wrong_latest(self):
         self.commands.corrupt_download = True

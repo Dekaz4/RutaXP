@@ -324,19 +324,24 @@ function T.Evaluate(classToken)
     local data = T.Data(cls)
     if not data then return nil end
     local isPlayerClass = (cls == player.classToken)
+    local talentsUnlocked = isPlayerClass and player.level >= T.FIRST_LEVEL
     local live, liveReason
-    if isPlayerClass then live, liveReason = T.ReadLive(data) end
+    if talentsUnlocked then live, liveReason = T.ReadLive(data) end
     local valid = T.Validate(data, live)
     local compatible = isPlayerClass and live ~= nil and valid.ok
     local activeRanks = compatible and ranksOf(valid, live, "active") or {}
     local stagedRanks = compatible and ranksOf(valid, live, "current") or activeRanks
     local build, source = T.BestBuild(data, stagedRanks)
-    local level = compatible and player.level or 1
+    local level = isPlayerClass and player.level or 1
     local granted
     if compatible then granted = live.granted else granted = 0 end
     local state = T.State(build, activeRanks, level, granted)
     local staged = T.State(build, stagedRanks, level, granted)
-    if isPlayerClass and not compatible then
+    local unavailableReason
+    if talentsUnlocked and not compatible then
+        unavailableReason = live and "El árbol del cliente difiere de esta guía; revisa una versión actualizada."
+            or (liveReason == "notree" and "El cliente no ofrece un árbol compatible con esta guía."
+            or "El cliente no permite leer tus talentos ahora. Puedes consultar la guía como referencia.")
         for _, s in ipairs({ state, staged }) do
             s.status, s.points, s.unspent, s.spent = "unavailable", nil, nil, nil
         end
@@ -350,9 +355,7 @@ function T.Evaluate(classToken)
         live = live,
         valid = valid,
         compatible = compatible,
-        unavailableReason = live and "El árbol del cliente difiere de esta guía; revisa una versión actualizada."
-            or (liveReason == "notree" and "El cliente no ofrece un árbol compatible con esta guía."
-            or "El cliente no permite leer tus talentos ahora. Puedes consultar la guía como referencia."),
+        unavailableReason = unavailableReason,
         activeRanks = activeRanks,
         stagedRanks = stagedRanks,
         state = state,
@@ -812,7 +815,12 @@ function T.RenderPanel()
     local s = c.staged or c.state
 
     if c.isPlayerClass then
-        local progress = c.compatible and string.format(" (%d/%d pts)", s.done or 0, s.total or 51) or " · Solo referencia"
+        local progress = ""
+        if c.compatible then
+            progress = string.format(" (%d/%d pts)", s.done or 0, s.total or 51)
+        elseif s.status == "unavailable" then
+            progress = " · Solo referencia"
+        end
         panel.detectedText:SetText(string.format("|cff7edd9cDetectado:|r %s %s · Nivel %d%s", p.raceName, p.className, p.level, progress))
         panel.classBtn.label:SetText("Clase: " .. data.nameEs .. " »")
         panel.classBtn:SetActiveStyle(false, false)
@@ -874,7 +882,7 @@ function T.RenderPanel()
             panel.nextCard.header:SetText(string.format("|cff8ec5ffPRÓXIMAS HABILIDADES EN INSTRUCTOR (NIVEL %d):|r", nextSpellEntry.level))
         end
         panel.nextCard.main:SetText(string.format("|cffffd966» %s|r  ·  |cff7edd9c%s|r", nextSpellEntry.name, nextSpellEntry.tip or ""))
-    elseif c.isPlayerClass and not c.compatible then
+    elseif s.status == "unavailable" then
         panel.nextCard.header:SetText("|cffffb468LECTURA DE TALENTOS NO DISPONIBLE|r")
         panel.nextCard.main:SetText(c.unavailableReason or "Consulta el orden de esta guía como referencia.")
     elseif s.next then
@@ -884,7 +892,7 @@ function T.RenderPanel()
         if not c.isPlayerClass then
             panel.nextCard.header:SetText("|cff8ec5ffPRIMER PUNTO DE ESTA GUÍA (NIVEL 10):|r")
         elseif p.level < T.FIRST_LEVEL and s.points == 0 then
-            panel.nextCard.header:SetText(string.format("|cff8ec5ffAL LLEGAR A NIVEL 10 (TE FALTAN %d NIVELES) SUBE PRIMERO:|r", T.FIRST_LEVEL - p.level))
+            panel.nextCard.header:SetText(string.format("|cff8ec5ffPRIMER PUNTO AL LLEGAR A NIVEL %d|r", T.FIRST_LEVEL))
         elseif s.status == "offplan" then
             panel.nextCard.header:SetText("|cffffb468TU REPARTO DIFIERE DE ESTA GUÍA · REVISA EL ORDEN ANTES DE GASTAR|r")
         elseif (s.unspent or 0) > 0 then
@@ -977,7 +985,7 @@ function T.RenderPanel()
             local specName = (data.specs and node and data.specs[node.spec]) or ""
             local tName = T.NodeName(data, pick.node, c.valid)
             local isDone = c.compatible and ((c.stagedRanks[pick.node] or 0) >= pick.rank)
-            local isNext = (not c.isPlayerClass or c.compatible) and (s.next == pick)
+            local isNext = s.status ~= "unavailable" and (s.next == pick)
 
             row.tipTitle = string.format("Nivel %d · %s (Rango %d/%d)", pick.level, tName, pick.rank, node and node.max or 1)
             row.tipBody = (build.notes and build.notes[pick.level]) or ("Rama: " .. specName)

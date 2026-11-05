@@ -1,4 +1,4 @@
-RUTAXP 0.7.1 - INSTALACION Y ACTUALIZACIONES
+RUTAXP 0.7.2 - INSTALACION Y ACTUALIZACIONES
 
 INSTALAR Y ACTUALIZAR LOS DOS
 Descarga Instalador_RutaXP.exe desde https://github.com/Dekaz4/RutaXP/releases/latest
@@ -43,6 +43,7 @@ EN EL JUEGO
 /rutaxp herramientas  Duo, mediciones, bloqueos, ajustes de ruta y puntos
 /rutaxp autoduo       Activar/desactivar configuracion automatica de grupo
 /rutaxp sincronizar   Renovar los datos del duo conservando progreso y opciones
+/rutaxp conexion      Consultar en el chat el estado de la conexion con el compañero
 En Duo tienes Progreso, Ruta comun, Diferencias, Reunion, Partida y Paradas.
 Instalad 0.5.0 o posterior los dos y formad grupo de dos de la misma faccion: se detecta
 al amigo y se acuerda una guia compatible con espera al rezagado.
