@@ -301,7 +301,9 @@ function ns:IsStepComplete(step, stateOverride)
     for index, goal in ipairs(step.goals) do
         local status = self:GetGoalStatus(goal, step, state, index)
         local q = goal.quest or goal.questID
-        if q and self:MatchesConditions(goal.only) then
+        -- Optional errands can be switched off independently of a required
+        -- journey (for example the tram with the optional parcels in Forjaz).
+        if q and not goal.optional and self:MatchesConditions(goal.only) then
             questGoalsCount = questGoalsCount + 1
             if status == "skip" then skippedQuestGoals = skippedQuestGoals + 1 end
         end
@@ -348,6 +350,7 @@ end
 
 function ns:Next()
     local _, step, state = self:GetCurrent()
+    if state and not step then return self:ContinueGuide() end
     if not step or not step.goals or state.review then return basicNext(self) end
     local goal, index, status = self:GetActiveGoal()
     if goal then
@@ -462,7 +465,7 @@ function ns:GetGoalInstruction(goal, step)
         append(goal.text)
     end
     append(goal.navigationHint)
-    if step and step ~= goal and goal.instructionReplacesContext ~= true then
+    if step and step ~= goal and not goal.instructionReplacesContext and not goal.instructionAsHint then
         append(step.note, true)
         append(step.text, true)
         for _, context in ipairs(step.goals or {}) do
@@ -501,6 +504,7 @@ local shortHints = {
 function ns:GetGoalHint(goal)
     if type(goal) ~= "table" then return nil end
     local action = goal.t or goal.action
+    if goal.instructionAsHint and type(goal.instruction) == "string" then return goal.instruction end
     local hint = (action == "complete" or action == "objective") and shortHints[goal.quest or goal.questID]
     if action == "accept" and goal.item then hint = "Abre " .. (goal.itemName or "el objeto de misión") .. " en tus bolsas para aceptarla." end
     if goal.navigationMode == "escort" then hint = "Sigue y protege al personaje hasta terminar la escolta." end
@@ -558,7 +562,7 @@ function ns:GetStepGoalItems(step, state)
                 local subLines = {}
 
                 if action == "accept" or action == "turnin" or action == "talk" then
-                    if npcName and not (action == "accept" and goal.item) then subLines[#subLines + 1] = "Habla con " .. npcName end
+                    if npcName and not goal.instructionAsHint and not (action == "accept" and goal.item) then subLines[#subLines + 1] = "Habla con " .. npcName end
                 else
                     local hasLiveObj = false
                     local objectives = id and read(C_QuestLog and C_QuestLog.GetQuestObjectives, id)
@@ -702,7 +706,9 @@ function ns:GetRecommendedGuide()
             local inZone = (mapID and guide.zone == mapID)
                 or (zoneText ~= "" and ((guide.zoneName and guide.zoneName:lower() == zoneText) or guide.title:lower() == zoneText))
             local doneQuests, totalQuests, activeQuests = self:GetGuideQuestStats(guide)
-            local allDone = totalQuests > 0 and doneQuests >= totalQuests
+            local saved = self.char and self.char.progress and self.char.progress[guide.id]
+            local allDone = (type(saved) == "table" and (tonumber(saved.cursor) or 0) > #guide.steps)
+                or (totalQuests > 0 and doneQuests >= totalQuests)
 
             rating = level >= low and level <= high and 100 or -math.abs(level - low) * 4
             if inZone and not allDone then
@@ -762,13 +768,79 @@ function ns:SelectGuide(id)
     basicSelect(self, id)
 end
 
-function ns:GetNextGuides()
-    local guide = self:GetCurrent()
+function ns:GetNextGuides(guide)
+    guide = guide or self:GetCurrent()
     local nextIDs = guide and (guide.nextChoices or guide.next)
     if type(nextIDs) == "string" then nextIDs = { nextIDs } end
     local results = {}
-    for _, id in ipairs(nextIDs or {}) do if self.guides[id] then results[#results + 1] = self.guides[id] end end
+    if type(nextIDs) == "table" then
+        for _, id in ipairs(nextIDs) do if self.guides[id] then results[#results + 1] = self.guides[id] end end
+    end
     return results
+end
+
+local function uniqueSuccessor(self, guide)
+    local result
+    for _, candidate in ipairs(self:GetNextGuides(guide)) do
+        if not candidate.temporary and not candidate.recovery
+            and (not candidate.faction or candidate.faction == read(UnitFactionGroup, "player"))
+            and self:MatchesConditions(candidate) and self:MatchesConditions(candidate.only) then
+            if result and result ~= candidate then return nil, "Elige entre las rutas disponibles en Guías." end
+            result = candidate
+        end
+    end
+    if result then return result end
+    if guide.next or guide.nextChoices then return nil, "No hay una guía enlazada disponible para tu personaje." end
+    return nil, "Has llegado al final de esta ruta."
+end
+
+-- The link comes from the route author. Map and level recommendations are
+-- deliberately separate, so a finished starter cannot send us back to itself.
+function ns:GetLinkedGuide(guide)
+    if not guide or guide.recovery or guide.temporary then return nil end
+    local successor, reason = uniqueSuccessor(self, guide)
+    local nextGuide, visited = successor, { [guide.id] = true }
+    while nextGuide do
+        if visited[nextGuide.id] then return nil, "El enlace es circular. Elige otra guía en Guías." end
+        visited[nextGuide.id] = true
+        nextGuide = uniqueSuccessor(self, nextGuide)
+    end
+    return successor, reason
+end
+
+function ns:GetGuideContinuation()
+    local guide, step, state = self:GetCurrent()
+    if not guide or step or not state or state.cursor <= #guide.steps then return nil, "Termina el paso actual para continuar." end
+    if state.review then return nil, "Estás revisando la guía." end
+    if guide.recovery or guide.temporary or (type(self.char.recovery) == "table" and self.char.recovery.active) then
+        return nil, "Termina la recuperación para volver a tu guía."
+    end
+    local successor, reason = self:GetLinkedGuide(guide)
+    if self.DuoAuto and self.DuoAuto.GetContinuationState then
+        local managed, waitReason, canRequest = self.DuoAuto:GetContinuationState(guide)
+        if managed then return canRequest and successor or nil, waitReason, true end
+    end
+    return successor, reason
+end
+
+-- Callers validate the route and any party agreement before committing.
+-- Rendering and quest scans run after the caller has finished its transition.
+function ns:ApplyGuideContinuation(target)
+    if not target or self.guides[target.id] ~= target then return false end
+    self.char.activeGuide = target.id
+    self:GetProgress(target.id)
+    if self.Duo then self.Duo.lastSentHeader = nil end
+    return true
+end
+
+function ns:ContinueGuide()
+    local guide = self:GetCurrent()
+    local successor, reason, coordinated = self:GetGuideContinuation()
+    if not successor then return false, reason end
+    if coordinated then return self.DuoAuto:RequestContinuation(guide) end
+    self:ApplyGuideContinuation(successor)
+    self:Sync()
+    return true
 end
 
 function ns:OnNavigationTick()
@@ -776,7 +848,11 @@ function ns:OnNavigationTick()
     local _, step, state = self:GetCurrent()
     if not step or state.review then return end
     local goal = self:GetActiveGoal()
-    if goal and (goal.t == "goto" or goal.action == "goto" or goal.action == "travel")
+    -- On arrival a grouped goto is already satisfied, so GetActiveGoal
+    -- no longer returns it. A waiting partner may still hold this step.
+    if not goal and step.goals then
+        if self:IsStepComplete(step, state) then self:Sync() end
+    elseif goal and (goal.t == "goto" or goal.action == "goto" or goal.action == "travel")
         and self.IsAtWaypoint and self:IsAtWaypoint(goal) then self:Sync() end
 end
 

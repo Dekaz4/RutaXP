@@ -74,13 +74,13 @@ class PartyFeatureUITests(unittest.TestCase):
         for tab in ["duo", "duo-route", "duo-differences", "duo-meeting", "duo-checkpoint", "duo-stops"]:
             f = a.panel(tab)
             self.assertTrue(f.body.text, tab)
-            self.assertEqual(f.scroll.height, 302)
-            self.assertTrue(all(b.shown for b in f.duoTabs.values()))
+            self.assertEqual(f.scroll.height, 170 if tab == "duo" else 354)
+            self.assertTrue(all(b.shown == (tab != "duo") for b in f.duoTabs.values()))
         for command in ["comun", "diferencias", "reunion", "partida", "paradas"]:
             a.ns.Command(a.ns, command)
         self.assertEqual(a.ns.char.activeGuide, before)
         a.panel("session")
-        self.assertEqual(a.ns.featuresPanel.scroll.height, 334)
+        self.assertEqual(a.ns.featuresPanel.scroll.height, 354)
         self.assertTrue(all(not b.shown for b in a.ns.featuresPanel.duoTabs.values()))
 
     def test_live_partner_counter_is_in_original_goal_row_and_does_not_duplicate(self):

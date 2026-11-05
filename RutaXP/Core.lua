@@ -79,11 +79,16 @@ end
 
 function ns:Sync()
     local guide, step, state = self:GetCurrent()
-    if guide and self.char.auto and not state.review then
+    while guide and self.char.auto and not state.review do
         while step and self:IsStepComplete(step) do
             state.cursor = state.cursor + 1
             step = guide.steps[state.cursor]
         end
+        if step or not self.GetGuideContinuation then break end
+        local successor, _, coordinated = self:GetGuideContinuation()
+        if not successor or coordinated then break end
+        self:ApplyGuideContinuation(successor)
+        guide, step, state = self:GetCurrent()
     end
     if self.RefreshUI then self:RefreshUI() end
 end

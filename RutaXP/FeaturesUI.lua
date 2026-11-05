@@ -12,6 +12,40 @@ local function button(parent, text, width, x, y, action)
     b:SetSize(width, 26); b:SetPoint("TOPLEFT", x, y); b:SetText(text); b:SetScript("OnClick", action)
     return b
 end
+local function duoSummary(self, ctx, auto)
+    local duo, lines = self.Duo, {}
+    if ctx.partnerName then lines[#lines + 1] = "Compañero: " .. ctx.partnerName end
+    local link = duo.GetTransportStatus and duo:GetTransportStatus() or {}
+    local allowed, reason = true, nil
+    if ctx.enabled and ctx.sameParty and ctx.online and duo.CanCommunicate then allowed, reason = duo:CanCommunicate() end
+    local connection = self.GetDuoConnectionText and self:GetDuoConnectionText(ctx, link)
+    if ctx.known and allowed and not link.lastError then connection = "Conectados." end
+    if not connection then
+        connection = not ctx.enabled and "Dúo desactivado."
+            or not ctx.sameParty and "Formad un grupo de dos de la misma facción."
+            or not ctx.online and "Tu compañero está desconectado."
+            or not allowed and reason or "Esperando respuesta del RutaXP de tu compañero."
+    end
+    lines[#lines + 1] = connection
+    if ctx.known and ctx.guideID and ctx.cursor then
+        local guide = self.guides[ctx.guideID]
+        lines[#lines + 1] = "Su guía: " .. (guide and guide.title or "Guía no instalada") .. " · paso " .. tostring(ctx.cursor)
+    end
+    if ctx.dead then lines[#lines + 1] = "Tu compañero ha muerto o está como fantasma. Reuniros antes de seguir."
+    elseif ctx.differentZone then lines[#lines + 1] = "Estáis en zonas distintas. Acordad dónde reuniros."
+    elseif ctx.separated then lines[#lines + 1] = "Estáis fuera de alcance. Acercaos antes de seguir juntos."
+    elseif ctx.known and allowed and not link.lastError then
+        if auto and auto.enabled and auto.text then lines[#lines + 1] = auto.text
+        elseif ctx.wait then
+            local _, step = self:GetCurrent()
+            local wait = step and duo.GetStepWaitStatus and duo:GetStepWaitStatus(step)
+            if wait and wait.waiting then lines[#lines + 1] = wait.reason or "Esperando al compañero en este paso." end
+        end
+    elseif not ctx.enabled and not (auto and auto.enabled) then
+        lines[#lines + 1] = "Activa el modo automático para configurarlo al formar grupo."
+    end
+    return table.concat(lines, "\n\n"), ctx.enabled and ctx.sameParty and ctx.online and allowed and (not ctx.known or link.lastError ~= nil)
+end
 function ns:ShowFeatureText(title, text)
     if not self.featureExport then
         local f = CreateFrame("Frame", nil, UIParent, BackdropTemplateMixin and "BackdropTemplate" or nil)
@@ -49,16 +83,21 @@ function ns:CreateFeaturesUI()
     f:SetScript("OnDragStart", f.StartMoving); f:SetScript("OnDragStop", f.StopMovingOrSizing)
     f:SetBackdrop({ bgFile = "Interface\\Buttons\\WHITE8X8", edgeFile = "Interface\\Buttons\\WHITE8X8", edgeSize = 1 })
     f:SetBackdropColor(.035, .05, .08, .99); f:SetBackdropBorderColor(.65, .5, .26, 1)
-    label(f, "RutaXP · Herramientas de ruta", 20, -16, 620, "GameFontNormalLarge")
-    button(f, "X", 30, 672, -10, function() f:Hide() end)
+    f.heading = label(f, "RutaXP · Dúo", 20, -16, 620, "GameFontNormalLarge")
+    f.closeButton = button(f, "X", 30, 672, -10, function() f:Hide() end)
+    f.detailsButton = button(f, "Ver detalles y herramientas", 280, 20, -290, function()
+        f.expanded = not f.expanded
+        if not f.expanded then self.featureTab = "duo" end
+        self:UpdateFeatures(); f.scroll:SetVerticalScroll(0)
+    end)
     f.tabs, f.actions, f.duoTabs = {}, {}, {}
     for i, tab in ipairs(tabs) do
-        f.tabs[i] = button(f, tab[2], 128, 20 + (i - 1) * 136, -52, function()
+        f.tabs[i] = button(f, tab[2], 150, 20, -94 - (i - 1) * 28, function()
             self.featureTab = tab[1]; self:UpdateFeatures(); f.scroll:SetVerticalScroll(0)
         end)
     end
     for i, tab in ipairs(duoTabs) do
-        f.duoTabs[i] = button(f, tab[2], 107, 20 + (i - 1) * 114, -88, function()
+        f.duoTabs[i] = button(f, tab[2], 150, 20, -250 - (i - 1) * 28, function()
             self.featureTab = tab[1]; self:UpdateFeatures(); f.scroll:SetVerticalScroll(0)
         end)
     end
@@ -74,15 +113,16 @@ function ns:CreateFeaturesUI()
         end)
         f.actions[i] = b
     end
-    label(f, "Los ajustes se aplican a tu personaje. El progreso del amigo se muestra por separado.", 20, -526, 680, "GameFontHighlightSmall")
+    f.footer = label(f, "El progreso de cada uno se conserva.", 20, -334, 680, "GameFontHighlightSmall")
     f:SetScript("OnShow", function() self:UpdateFeatures() end)
     f:Hide(); self.featuresPanel = f
 end
 function ns:ToggleFeatures(tab)
     self:CreateFeaturesUI()
-    if tab then self.featureTab = tab end
-    if not tab and self.featuresPanel:IsShown() then self.featuresPanel:Hide()
-    else self.featuresPanel:Show(); self:UpdateFeatures() end
+    local f = self.featuresPanel
+    if not tab and f:IsShown() then f:Hide(); return end
+    self.featureTab, f.expanded = tab or "duo", tab ~= nil and tab ~= "duo"
+    f:Show(); f.scroll:SetVerticalScroll(0); self:UpdateFeatures()
 end
 function ns:UpdateFeatures()
     local f = self.featuresPanel
@@ -92,19 +132,43 @@ function ns:UpdateFeatures()
     local function result(ok, reason) if not ok and reason then self:Print(reason) end end
     local tab = self.featureTab or "duo"
     local isDuo = tab == "duo" or tab:sub(1, 4) == "duo-"
-    for _, b in ipairs(f.duoTabs) do b:SetShown(isDuo) end
-    f.scroll:ClearAllPoints(); f.scroll:SetPoint("TOPLEFT", 20, isDuo and -128 or -96)
-    f.scroll:SetHeight(isDuo and 302 or 334)
+    local expanded = f.expanded == true or tab ~= "duo"
+    f.expanded = expanded
+    local bodyHeight = expanded and 354 or 170
+    f:SetSize(expanded and 720 or 540, expanded and 550 or 336)
+    f.heading:SetWidth(expanded and 620 or 440)
+    f.heading:SetText(expanded and "RutaXP · Herramientas de ruta" or "RutaXP · Dúo")
+    f.closeButton:ClearAllPoints(); f.closeButton:SetPoint("TOPLEFT", expanded and 672 or 492, -10)
+    f.detailsButton:ClearAllPoints(); f.detailsButton:SetPoint("TOPLEFT", 20, expanded and -52 or -290)
+    f.detailsButton:SetWidth(expanded and 150 or 280)
+    f.detailsButton:SetText(expanded and "Volver al resumen" or "Ver detalles y herramientas")
+    for _, b in ipairs(f.tabs) do b:SetShown(expanded) end
+    for _, b in ipairs(f.duoTabs) do b:SetShown(expanded and isDuo) end
+    f.scroll:ClearAllPoints(); f.scroll:SetPoint("TOPLEFT", expanded and 194 or 20, -60)
+    f.scroll:SetSize(expanded and 468 or 474, bodyHeight)
+    f.content:SetWidth(expanded and 460 or 466); f.body:SetWidth(expanded and 452 or 458)
+    f.footer:ClearAllPoints(); f.footer:SetPoint("TOPLEFT", 20, expanded and -532 or -334)
+    f.footer:SetText(expanded and "Los ajustes se aplican a tu personaje. El progreso del amigo se muestra por separado." or "")
+    f.footer:SetShown(expanded)
     if tab == "duo" and self.Duo then
-        local ctx = self.Duo:GetContext(); text = self.Duo:GetReport()
+        local ctx = self.Duo:GetContext()
         local auto = self.DuoAuto and self.DuoAuto:GetStatus()
-        if auto and (auto.phase ~= "probing" or ctx.known) then text = auto.text .. "\n\n" .. text end
-        add(ctx.enabled and "Desactivar dúo" or "Activar dúo", function() self:UseManualDuoMode("Modo dúo cambiado manualmente", true); self.Duo:SetEnabled(not ctx.enabled) end)
-        add(ctx.wait and "Continuar sin esperar" or "Esperar al amigo", function() self:UseManualDuoMode("Espera cambiada manualmente", true); self.Duo:SetWait(not ctx.wait) end)
-        add(ctx.ready and "Marcarme no preparado" or "Estoy preparado", function() self.Duo:SetReady(not ctx.ready) end)
-        add("Elegir la guía del amigo", function() self:UseManualDuoMode("Guía del compañero elegida manualmente"); result(self.Duo:AdoptPartnerGuide()) end)
-        if auto then add(auto.enabled and "Automático al agruparse: sí" or "Automático al agruparse: no", function() result(self.DuoAuto:SetEnabled(not auto.enabled)) end) end
-        if self.Duo.Resynchronize then add("Sincronizar de nuevo", function() result(self.Duo:Resynchronize()) end) end
+        if expanded then
+            text = self.Duo:GetReport()
+            if auto and (auto.phase ~= "probing" or ctx.known) then text = auto.text .. "\n\n" .. text end
+            add(ctx.enabled and "Desactivar dúo" or "Activar dúo", function() self:UseManualDuoMode("Modo dúo cambiado manualmente", true); self.Duo:SetEnabled(not ctx.enabled) end)
+            add(ctx.wait and "Continuar sin esperar" or "Esperar al amigo", function() self:UseManualDuoMode("Espera cambiada manualmente", true); self.Duo:SetWait(not ctx.wait) end)
+            add(ctx.ready and "Marcarme no preparado" or "Estoy preparado", function() self.Duo:SetReady(not ctx.ready) end)
+            add("Elegir la guía del amigo", function() self:UseManualDuoMode("Guía del compañero elegida manualmente"); result(self.Duo:AdoptPartnerGuide()) end)
+            if auto then add(auto.enabled and "Automático al agruparse: sí" or "Automático al agruparse: no", function() result(self.DuoAuto:SetEnabled(not auto.enabled)) end) end
+            if self.Duo.Resynchronize then add("Sincronizar de nuevo", function() result(self.Duo:Resynchronize()) end) end
+        else
+            local needsSync
+            text, needsSync = duoSummary(self, ctx, auto)
+            if auto then add(auto.enabled and "Automático al agruparse: sí" or "Automático al agruparse: no", function() result(self.DuoAuto:SetEnabled(not auto.enabled)) end)
+            else add(ctx.enabled and "Desactivar dúo" or "Activar dúo", function() self:UseManualDuoMode("Modo dúo cambiado manualmente", true); self.Duo:SetEnabled(not ctx.enabled) end) end
+            if needsSync and self.Duo.Resynchronize then add("Sincronizar de nuevo", function() result(self.Duo:Resynchronize()) end) end
+        end
     elseif tab == "duo-route" and self.DuoPlanner then
         local routes = self.DuoPlanner:GetCommonRoutes() or {}
         local lines = { "Rutas que podéis seguir juntos. Cada uno debe elegirla en su addon; se conserva el progreso individual." }
@@ -235,10 +299,13 @@ function ns:UpdateFeatures()
     end
     for i, b in ipairs(f.actions) do
         local action = actions[i]; b.action = action and action.action
+        b:ClearAllPoints(); b:SetWidth(expanded and 244 or 240)
+        b:SetPoint("TOPLEFT", (expanded and 194 or 20) + ((i - 1) % 2) * 260,
+            (expanded and -426 or -250) - math.floor((i - 1) / 2) * 34)
         b:SetText(action and action.title or ""); b:SetShown(action ~= nil)
     end
     f.body:SetText(text)
-    f.content:SetHeight(math.max(isDuo and 302 or 334, f.body:GetStringHeight() + 16))
+    f.content:SetHeight(math.max(bodyHeight, f.body:GetStringHeight() + 16))
 end
 function ns:UpdateDuoTracker()
     if not self.tracker or not self.Duo or not self.char then return end
@@ -277,7 +344,11 @@ function ns:UpdateDuoTracker()
     elseif step then waiting, waitReason = self.Duo:ShouldWaitForStep(step) end
     if not waiting and step and self.DuoAuto then waiting, waitReason = self.DuoAuto:ShouldWaitForStep(step) end
     local autoView = self.DuoAuto and self.DuoAuto:GetSharedView()
-    if autoView then text = autoView.following and ("Dúo auto · amigo " .. autoView.sharedCursor .. " · tú " .. autoView.ownCursor) or "Dúo auto · siguiendo la guía común" end
+    if autoView then
+        text = autoView.personalVisit and "Dúo · tu misión individual"
+            or autoView.following and ("Dúo auto · amigo " .. autoView.sharedCursor .. " · tú " .. autoView.ownCursor)
+            or "Dúo auto · siguiendo la guía común"
+    end
     if waiting then
         local verbs = {accept="falta aceptar",complete="misión en curso",turnin="falta entregar"}
         text = not ctx.known and "Dúo · sin datos del compañero"
@@ -293,10 +364,12 @@ function ns:UpdateDuoTracker()
     self.duoTracker:SetText(text); self.duoTracker:Show()
     if self.LayoutTracker then self:LayoutTracker() end
 end
-function ns:GetDuoGoalSuffix(goal)
+function ns:GetDuoGoalSuffix(goal, step)
     if not goal or not self.Duo or not self.Duo.GetObjectiveProgress then return "" end
     local ctx = self.Duo:GetContext()
     if not (ctx.enabled and ctx.sameParty) then return "" end
+    if self.Duo.AppliesToPartner and (not self.Duo:AppliesToPartner(goal.only)
+        or (step and not self.Duo:AppliesToPartner(step.only))) then return "" end
     local id, index = goal.quest or goal.questID, goal.oi or goal.objective
     if not id or not index then return "" end
     local progress = self.Duo:GetObjectiveProgress(id, index)

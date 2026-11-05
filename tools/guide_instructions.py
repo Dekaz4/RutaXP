@@ -2,7 +2,7 @@
 """Deterministic Spanish presentation for authored goals; Python stdlib only.
 
 The input is evidence, not a set of mechanics to infer. Only ``instruction``,
-``instructionVerb`` and ``instructionReplacesContext`` are generated. IDs, actions, conditions, coordinates,
+``instructionVerb``, ``instructionAsHint`` and ``instructionReplacesContext`` are generated. IDs, actions, conditions, coordinates,
 notes and text remain unchanged, including explicit caveats and prerequisites.
 Step-wide notes belong to the runtime's current-step presentation, rather than
 being copied into every objective. No game state or completion is generated.
@@ -23,7 +23,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INPUT = ROOT / "RutaXP" / "Source" / "leveling.json"
 PINNED_COMMIT = "5d207e28e82e2c529143b21ace74fe88692f0067"
-GENERATED_FIELDS = frozenset({"instruction", "instructionVerb", "instructionReplacesContext"})
+GENERATED_FIELDS = frozenset({"instruction", "instructionVerb", "instructionAsHint", "instructionReplacesContext"})
 _TAMING = re.compile(r"^(?:tame\s+(?:with|con)|domestica(?:r)?|domar)\b", re.IGNORECASE)
 _ENGLISH = re.compile(
     r"\b(?:the|and|then|with|from|inside|outside|until|before|after|near|click|cast|use|"
@@ -32,6 +32,14 @@ _ENGLISH = re.compile(
 )
 _NAMES = ("npcName", "itemName", "target", "objName", "objectName", "location", "title")
 _PROFESSIONS = {"Cooking": "Cocina", "First Aid": "Primeros auxilios", "Fishing": "Pesca"}
+_DWARF_TAMING_TARGETS = {6064: 1126, 6084: 1201, 6085: 1196}
+_DWARF_TAMING_NOTE = re.compile(r":\s*(?:tame\s+it\s+with|domesticarlo\s+con)\b", re.IGNORECASE)
+# Dun Morogh, source lines 581–583. Forever can offer the turn-in while the
+# player still sees Narm lying down, so retain the item action in both phases.
+_NARM_HINTS = {
+    "complete": "Selecciona a Narm Faulk en la orilla del lago y usa el Símbolo de la Vida de tu mochila.",
+    "turnin": "Si Narm Faulk sigue caído, usa el Símbolo de la Vida sobre él. Cuando se levante, habla con él.",
+}
 
 # Narrow, audited presentation exceptions. Evidence is pinned SendaFH commit
 # 5d207e28e82e2c529143b21ace74fe88692f0067: guides/forever/*.guide tips and
@@ -114,9 +122,21 @@ def _details(goal: Mapping[str, Any]) -> list[str]:
     return out
 
 
-def instruction_verb(goal: Mapping[str, Any]) -> str | None:
+def _documented_dwarf_taming(goal: Mapping[str, Any], source_commit: str | None) -> bool:
+    # The pinned DSL deliberately encodes taming credit as `kill`. Its three
+    # Dun Morogh notes put the explicit rod action AFTER the creature's name.
+    # Do not infer taming from the database's generic kill-credit objective.
+    quest = goal.get("quest") or goal.get("questID")
+    return (source_commit == PINNED_COMMIT and quest in _DWARF_TAMING_TARGETS
+            and (goal.get("t") or goal.get("action")) == "kill" and goal.get("oi") == 1
+            and goal.get("npc") == _DWARF_TAMING_TARGETS[quest]
+            and any(_DWARF_TAMING_NOTE.search(text) for text in _details(goal)))
+
+
+def instruction_verb(goal: Mapping[str, Any], *, source_commit: str | None = PINNED_COMMIT) -> str | None:
     """An explicit source instruction may correct a display verb, never ``t``."""
-    if (goal.get("t") or goal.get("action")) == "kill" and any(_TAMING.search(text) for text in _details(goal)):
+    if _documented_dwarf_taming(goal, source_commit) or (
+            (goal.get("t") or goal.get("action")) == "kill" and any(_TAMING.search(text) for text in _details(goal))):
         return "Domestica"
     return None
 
@@ -150,10 +170,19 @@ def _quest(goal: Mapping[str, Any]) -> str:
     return f"la misión {quest_id}" if isinstance(quest_id, int) and not isinstance(quest_id, bool) else "esta misión"
 
 
+def _narm_hint(goal: Mapping[str, Any], source_commit: str | None) -> str | None:
+    if source_commit == PINNED_COMMIT and goal.get("quest") == 1783:
+        return _NARM_HINTS.get(goal.get("t"))
+    return None
+
+
 def instruction_for(goal: Mapping[str, Any], zone_name: str | None = None, *, source_commit: str | None = PINNED_COMMIT) -> str:
     """Return concrete guidance supported by this goal's authored data only."""
     if not isinstance(goal, Mapping):
         raise TypeError("A goal must be a mapping")
+    hint = _narm_hint(goal, source_commit)
+    if hint:
+        return hint
     action = goal.get("t") or goal.get("action") or "note"
     npc, item = _name(goal, "npcName"), _name(goal, "itemName")
     obj, target = _name(goal, "objName", "objectName"), _name(goal, "target")
@@ -179,9 +208,13 @@ def instruction_for(goal: Mapping[str, Any], zone_name: str | None = None, *, so
         else:
             base = f"Revisa en tu registro dónde entregar {quest}; la guía no identifica al destinatario."
     elif action == "kill":
-        verb = instruction_verb(goal) or "Derrota"
+        verb = instruction_verb(goal, source_commit=source_commit) or "Derrota"
         label = _quote(target or npc) if target or npc else "los enemigos del objetivo indicado en el registro"
-        base = f"{verb} a {label}{count}."
+        if _documented_dwarf_taming(goal, source_commit):
+            base = (f"Domestica a {label}{count} usando la «Fusta de domador» que te entrega «Grif Corazón Salvaje». "
+                    "Después vuelve a Grif para entregar la misión.")
+        else:
+            base = f"{verb} a {label}{count}."
     elif action == "collect":
         label = _quote(item) if item else "los objetos del objetivo indicado en el registro"
         sources = list(dict.fromkeys(filter(None, (visible_text(goal.get("from")), visible_text(goal.get("fromAlso"))))))
@@ -280,7 +313,11 @@ def instruction_for(goal: Mapping[str, Any], zone_name: str | None = None, *, so
 def enrich_goal(goal: Mapping[str, Any], zone_name: str | None = None, *, source_commit: str | None = PINNED_COMMIT) -> dict[str, Any]:
     result = deepcopy(dict(goal))
     result["instruction"] = instruction_for(goal, zone_name, source_commit=source_commit)
-    verb = instruction_verb(goal)
+    if _narm_hint(goal, source_commit):
+        result["instructionAsHint"] = True
+    else:
+        result.pop("instructionAsHint", None)
+    verb = instruction_verb(goal, source_commit=source_commit)
     if verb:
         result["instructionVerb"] = verb
     elif result.get("instructionVerb") == "Domestica":

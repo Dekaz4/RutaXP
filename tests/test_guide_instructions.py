@@ -67,6 +67,76 @@ class GuideInstructionTests(unittest.TestCase):
                 goal = instructions.enrich_goal({"t": "kill", "target": "Criatura", "note": note})
                 self.assertNotIn("instructionVerb", goal)
 
+    def test_dun_morogh_rods_after_creature_names_are_taming_instructions(self):
+        document = json.loads((ROOT / "RutaXP/Source/leveling.json").read_text(encoding="utf-8"))
+        guide = next(g for g in document["guides"] if g["id"] == "forever/alliance/dwarf-gnome/01-dun-morogh")
+        for index, quest, npc, beast in ((0, 6064, 1126, "Grande jabalí del risco"),
+                                         (3, 6084, 1201, "Leopardo de la nieve"),
+                                         (6, 6085, 1196, "Oso zarpahelada")):
+            with self.subTest(quest=quest):
+                raw = guide["steps"][53]["goals"][index]
+                enriched = instructions.enrich_goal(raw)
+                self.assertEqual((enriched["t"], enriched["quest"], enriched["npc"], enriched["oi"]),
+                                 ("kill", quest, npc, 1))
+                self.assertEqual(enriched["instructionVerb"], "Domestica")
+                self.assertIn(f"Domestica a «{beast}»", enriched["instruction"])
+                self.assertIn("«Fusta de domador» que te entrega «Grif Corazón Salvaje»", enriched["instruction"])
+                self.assertIn("vuelve a Grif para entregar", enriched["instruction"])
+                self.assertNotIn("Derrota", enriched["instruction"])
+                for key, value in raw.items():
+                    if key not in instructions.GENERATED_FIELDS:
+                        self.assertEqual(enriched[key], value)
+                for altered in ({**raw, "npc": 999999}, {**raw, "oi": 2},
+                                {**raw, "note": "Recoge el botín del jabalí"}):
+                    self.assertNotIn("instructionVerb", instructions.enrich_goal(altered))
+                future = instructions.enrich_goal(enriched, source_commit="unreviewed")
+                self.assertNotIn("instructionVerb", future)
+
+    def test_compiled_dun_morogh_taming_chain_preserves_actions_order_and_runtime_titles(self):
+        from test_quest_engine import QuestEngineHost
+        host = QuestEngineHost(catalog=True)
+        guide = host.ns.guides["forever/alliance/dwarf-gnome/01-dun-morogh"]
+        step = guide.steps[54]
+        self.assertEqual(len(step.goals), 9)
+        self.assertEqual([(goal.t, goal.quest) for goal in step.goals.values()], [
+            ("kill", 6064), ("turnin", 6064), ("accept", 6084),
+            ("kill", 6084), ("turnin", 6084), ("accept", 6085),
+            ("kill", 6085), ("turnin", 6085), ("accept", 6086)])
+        self.assertEqual(step.only.classes[1], "HUNTER")
+        first = guide.steps[53].goals[3]
+        self.assertEqual((first.t, first.quest, first.minLevel, first.npc), ("accept", 6064, 10, 1231))
+        for index in (1, 4, 7):
+            goal = step.goals[index]
+            self.assertEqual(goal.instructionVerb, "Domestica")
+            self.assertTrue(host.call("GetGoalTitle", goal).startswith("Domestica:"))
+            self.assertNotIn("Derrota", goal.instruction)
+        final = guide.steps[72].goals[1]
+        self.assertEqual((final.t, final.quest, final.npc), ("turnin", 6086, 10090))
+
+    def test_dwarf_taming_evidence_covers_each_creature_rod_and_instructor_name(self):
+        evidence = json.loads((ROOT / "RutaXP/Source/guide_instructions_evidence.json").read_text(encoding="utf-8"))
+        self.assertEqual(evidence["sourceCommit"], instructions.PINNED_COMMIT)
+        records = evidence["tamingObjectives"]
+        self.assertEqual({r["questID"]: r["npcID"] for r in records}, {6064: 1126, 6084: 1201, 6085: 1196})
+        checkout = ROOT / ".sources/SendaFH"
+        if not checkout.is_dir():
+            return  # The shipped evidence is usable without the optional checkout.
+        for record in records:
+            guide = record["guideEvidence"]
+            payload = (checkout / guide["sourceFile"]).read_bytes()
+            self.assertEqual(hashlib.sha256(payload).hexdigest(), guide["sourceSha256"])
+            lines = payload.decode("utf-8-sig").splitlines()
+            self.assertEqual(guide["text"], "\n".join(lines[guide["sourceLine"] - 1:guide["sourceEndLine"]]))
+            self.assertIn(f"quest {record['questID']}.1", lines[record["objectiveSourceLine"] - 1])
+            self.assertIn("tame it with the Taming Rod", lines[record["objectiveSourceLine"] - 1])
+            names = record["nameEvidence"]
+            payload = (checkout / names["sourceFile"]).read_bytes()
+            self.assertEqual(hashlib.sha256(payload).hexdigest(), names["sourceSha256"])
+            lines = payload.decode("utf-8-sig").splitlines()
+            sourced_names = "\n".join(lines[line - 1] for line in names["sourceLines"])
+            for name in ("Grif Corazón Salvaje", "Belia Tronagranito", "Fusta de domador"):
+                self.assertIn(name, sourced_names)
+
     def test_note_and_text_mechanics_survive_together_in_the_presentation(self):
         text = self.text(t="interact", quest=92597, objName="Ley Line", note="Evita al élite que patrulla.",
                          text="Cast Read Ley Line en el Ley Line")
@@ -295,7 +365,7 @@ class GuideInstructionTests(unittest.TestCase):
                     taming += new_goal.get("instructionVerb") == "Domestica"
                     count += 1
         self.assertEqual(count, 7444)
-        self.assertEqual(taming, 8)
+        self.assertEqual(taming, 11)
         self.assertEqual(enriched, instructions.enrich_document(enriched))
 
     def test_cli_writes_only_the_requested_copy_and_check_detects_stale_content(self):

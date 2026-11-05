@@ -1457,5 +1457,85 @@
         }
       ]
     }
+  ],
+  "tamingObjectives": [
+    {
+      "questID": 6064,
+      "objectiveIndex": 1,
+      "npcID": 1126,
+      "action": "kill",
+      "instructionVerb": "Domestica",
+      "classification": "Explicit rod-use instruction after the creature name; presentation only, never a kill-mechanic inference.",
+      "guideEvidence": {
+        "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
+        "sourceLine": 456,
+        "sourceEndLine": 467,
+        "sourceSha256": "7b5cb905d7d65fe8c9ef48924dbc5f8af01a3a77c616a45f829e751b315e3d83",
+        "text": "step Taming the Beast\n  only Hunter\n  tip Each of Grif Wildheart's quests hands you a Taming Rod: use it on the beast he names, then bring the rod back to him at the Kharanos smithy. Large Crag Boars, Snow Leopards and Ice Claw Bears all roam the fields just south and east of Kharanos.\n  kill 1126 quest 6064.1                      -- Large Crag Boar: tame it with the Taming Rod\n  turnin 6064                                 -- Grif Wildheart\n  accept 6084\n  kill 1201 quest 6084.1                      -- Snow Leopard: tame it with the Taming Rod\n  turnin 6084\n  accept 6085\n  kill 1196 quest 6085.1                      -- Ice Claw Bear: tame it with the Taming Rod\n  turnin 6085                                 -- Tame Beast\n  accept 6086                                 -- Belia Thundergranite in Ironforge takes it"
+      },
+      "objectiveSourceLine": 459,
+      "nameEvidence": {
+        "sourceFile": "addon/SendaFH_Names_esES/Names.lua",
+        "sourceSha256": "f72519937e3310f4ef47e1aee41480c0f6732b1f4bc2cd8c3befa14a34ae7a75",
+        "sourceLines": [
+          4965,
+          5054,
+          10050,
+          24615
+        ]
+      }
+    },
+    {
+      "questID": 6084,
+      "objectiveIndex": 1,
+      "npcID": 1201,
+      "action": "kill",
+      "instructionVerb": "Domestica",
+      "classification": "Explicit rod-use instruction after the creature name; presentation only, never a kill-mechanic inference.",
+      "guideEvidence": {
+        "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
+        "sourceLine": 456,
+        "sourceEndLine": 467,
+        "sourceSha256": "7b5cb905d7d65fe8c9ef48924dbc5f8af01a3a77c616a45f829e751b315e3d83",
+        "text": "step Taming the Beast\n  only Hunter\n  tip Each of Grif Wildheart's quests hands you a Taming Rod: use it on the beast he names, then bring the rod back to him at the Kharanos smithy. Large Crag Boars, Snow Leopards and Ice Claw Bears all roam the fields just south and east of Kharanos.\n  kill 1126 quest 6064.1                      -- Large Crag Boar: tame it with the Taming Rod\n  turnin 6064                                 -- Grif Wildheart\n  accept 6084\n  kill 1201 quest 6084.1                      -- Snow Leopard: tame it with the Taming Rod\n  turnin 6084\n  accept 6085\n  kill 1196 quest 6085.1                      -- Ice Claw Bear: tame it with the Taming Rod\n  turnin 6085                                 -- Tame Beast\n  accept 6086                                 -- Belia Thundergranite in Ironforge takes it"
+      },
+      "objectiveSourceLine": 462,
+      "nameEvidence": {
+        "sourceFile": "addon/SendaFH_Names_esES/Names.lua",
+        "sourceSha256": "f72519937e3310f4ef47e1aee41480c0f6732b1f4bc2cd8c3befa14a34ae7a75",
+        "sourceLines": [
+          5034,
+          5054,
+          10050,
+          24615
+        ]
+      }
+    },
+    {
+      "questID": 6085,
+      "objectiveIndex": 1,
+      "npcID": 1196,
+      "action": "kill",
+      "instructionVerb": "Domestica",
+      "classification": "Explicit rod-use instruction after the creature name; presentation only, never a kill-mechanic inference.",
+      "guideEvidence": {
+        "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
+        "sourceLine": 456,
+        "sourceEndLine": 467,
+        "sourceSha256": "7b5cb905d7d65fe8c9ef48924dbc5f8af01a3a77c616a45f829e751b315e3d83",
+        "text": "step Taming the Beast\n  only Hunter\n  tip Each of Grif Wildheart's quests hands you a Taming Rod: use it on the beast he names, then bring the rod back to him at the Kharanos smithy. Large Crag Boars, Snow Leopards and Ice Claw Bears all roam the fields just south and east of Kharanos.\n  kill 1126 quest 6064.1                      -- Large Crag Boar: tame it with the Taming Rod\n  turnin 6064                                 -- Grif Wildheart\n  accept 6084\n  kill 1201 quest 6084.1                      -- Snow Leopard: tame it with the Taming Rod\n  turnin 6084\n  accept 6085\n  kill 1196 quest 6085.1                      -- Ice Claw Bear: tame it with the Taming Rod\n  turnin 6085                                 -- Tame Beast\n  accept 6086                                 -- Belia Thundergranite in Ironforge takes it"
+      },
+      "objectiveSourceLine": 465,
+      "nameEvidence": {
+        "sourceFile": "addon/SendaFH_Names_esES/Names.lua",
+        "sourceSha256": "f72519937e3310f4ef47e1aee41480c0f6732b1f4bc2cd8c3befa14a34ae7a75",
+        "sourceLines": [
+          5029,
+          5054,
+          10050,
+          24615
+        ]
+      }
+    }
   ]
 }

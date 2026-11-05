@@ -558,8 +558,9 @@
       "fromRank": 17,
       "group": 9,
       "instruction": 7444,
+      "instructionAsHint": 2,
       "instructionReplacesContext": 6,
-      "instructionVerb": 8,
+      "instructionVerb": 11,
       "item": 1212,
       "itemName": 1212,
       "level": 25,
@@ -21540,7 +21541,8 @@
                 }
               ],
               "spread": true,
-              "instruction": "Derrota a «Grande jabalí del risco» (1 en total).\nZona: Dun Morogh.\nGrande jabalí del risco: domesticarlo con el Fusta de domador."
+              "instruction": "Domestica a «Grande jabalí del risco» (1 en total) usando la «Fusta de domador» que te entrega «Grif Corazón Salvaje». Después vuelve a Grif para entregar la misión.\nZona: Dun Morogh.\nGrande jabalí del risco: domesticarlo con el Fusta de domador.",
+              "instructionVerb": "Domestica"
             },
             {
               "title": "Domesticar la bestia",
@@ -21771,7 +21773,8 @@
                 }
               ],
               "spread": true,
-              "instruction": "Derrota a «Leopardo de la nieve» (1 en total).\nZona: Dun Morogh.\nLeopardo de la nieve: domesticarlo con el Fusta de domador."
+              "instruction": "Domestica a «Leopardo de la nieve» (1 en total) usando la «Fusta de domador» que te entrega «Grif Corazón Salvaje». Después vuelve a Grif para entregar la misión.\nZona: Dun Morogh.\nLeopardo de la nieve: domesticarlo con el Fusta de domador.",
+              "instructionVerb": "Domestica"
             },
             {
               "title": "Domesticar la bestia",
@@ -21959,7 +21962,8 @@
                 }
               ],
               "spread": true,
-              "instruction": "Derrota a «Oso zarpahelada» (1 en total).\nZona: Dun Morogh.\nOso zarpahelada: domesticarlo con el Fusta de domador."
+              "instruction": "Domestica a «Oso zarpahelada» (1 en total) usando la «Fusta de domador» que te entrega «Grif Corazón Salvaje». Después vuelve a Grif para entregar la misión.\nZona: Dun Morogh.\nOso zarpahelada: domesticarlo con el Fusta de domador.",
+              "instructionVerb": "Domestica"
             },
             {
               "title": "Domesticar la bestia",
@@ -23138,7 +23142,8 @@
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Para «El Libro de la Divinidad», sigue esta indicación de la guía:\nUsal Symbol de Life en Narm Faulk.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+              "instruction": "Selecciona a Narm Faulk en la orilla del lago y usa el Símbolo de la Vida de tu mochila.",
+              "instructionAsHint": true
             },
             {
               "title": "El Libro de la Divinidad",
@@ -23152,7 +23157,8 @@
               "y": 58.09,
               "z": 408.2,
               "f": "e",
-              "instruction": "Habla con «Narm Faulk» y entrega «El Libro de la Divinidad».\nZona: Dun Morogh."
+              "instruction": "Si Narm Faulk sigue caído, usa el Símbolo de la Vida sobre él. Cuando se levante, habla con él.",
+              "instructionAsHint": true
             },
             {
               "title": "El Libro de la Divinidad",

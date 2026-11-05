@@ -788,9 +788,9 @@ function Duo:Receive(prefix, message, channel, sender)
         storeQuest(self, snapshot)
         self.peer.sequence, self.peer.seen = seq, now()
     elseif self.peer and self.peer.nonce == fields[3] and seq > self.peer.sequence then
-        if (kind == "A" or kind == "P") and #fields == 9 and self.peer.autoCapability == "1" and ns.DuoAuto and ns.DuoAuto.OnProtocol then
+        if (kind == "A" or kind == "P" or kind == "N" or kind == "K") and #fields == 9 and self.peer.autoCapability == "1" and ns.DuoAuto and ns.DuoAuto.OnProtocol then
             local reference = integer(fields[7], 0, 1)
-            local cursor, phase = integer(fields[8], 1, 100001), integer(fields[9], 0, kind == "A" and 1 or 2)
+            local cursor, phase = integer(fields[8], 1, 100001), integer(fields[9], 0, (kind == "A" or kind == "N") and 1 or 2)
             if not token(fields[5]) or #fields[5] > 40 or not token(fields[6]) or not reference or not cursor or not phase then return false end
             if not safe(ns.DuoAuto.OnProtocol, ns.DuoAuto, kind, { transaction=fields[5], guideID=fields[6],
                 reference=reference, cursor=cursor, phase=phase, nonce=fields[3], sender=self.partnerName }) then return false end
@@ -865,10 +865,10 @@ function Duo:Receive(prefix, message, channel, sender)
     return true
 end
 function Duo:QueueAutoMessage(kind, packet)
-    if kind ~= "A" and kind ~= "P" then return false end
+    if kind ~= "A" and kind ~= "P" and kind ~= "N" and kind ~= "K" then return false end
     if type(packet) ~= "table" or not token(packet.transaction) or #packet.transaction > 40 or not token(packet.guideID)
         or not integer(packet.reference, 0, 1) or not integer(packet.cursor, 1, 100001)
-        or not integer(packet.phase, 0, kind == "A" and 1 or 2) then return false end
+        or not integer(packet.phase, 0, (kind == "A" or kind == "N") and 1 or 2) then return false end
     local values = table.concat({ packet.transaction, packet.guideID, packet.reference, packet.cursor, packet.phase }, "|")
     if #(PROTOCOL .. "|" .. kind .. "|" .. tostring(self.nonce) .. "|1000000000|" .. values) > 255 then return false end
     self.autoQueue = { kind = kind, values = values }
