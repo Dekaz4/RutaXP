@@ -173,7 +173,29 @@ function Auto:ClearTravelAgreement()
     self:_ClearContinuation()
     self:_ClearAgreement()
 end
-function Auto:_ContinuationPlan(targetID, originID)
+
+-- Orcs and trolls have an extra Barrens chapter before the shared chapter.
+-- Permit one personal link only when the two authored paths meet immediately
+-- afterwards and the partner has actually finished their own approach.
+function Auto:PersonalBranchReady(sourceID, destinationID, ctx)
+    local target = ns.guides and ns.guides[destinationID]
+    if not target or not (target.races or target.classes or target.only) or not ns.GetLinkedGuide then return end
+    if not validPair(ctx) or not ctx.partnerHeaderFresh or ctx.partnerReview
+        or not ctx.partnerRace or not ctx.partnerClass or not ctx.partnerAutoCompatible then return end
+    if ns.Duo:AppliesToPartner(target, ctx) and ns.Duo:AppliesToPartner(target.only, ctx) then return end
+    local source, own = ns.guides[sourceID], ns.char.progress[sourceID]
+    if not source or not own or own.review or own.cursor ~= #source.steps + 1 or ns:GetLinkedGuide(source) ~= target then return end
+    local common = ns:GetLinkedGuide(target)
+    if not common or not ns.Duo:AppliesToPartner(common, ctx) or not ns.Duo:AppliesToPartner(common.only, ctx) then return end
+    if ctx.guideID == common.id then return integer(ctx.cursor, #common.steps + 1) ~= nil end
+    local peerGuide = ns.guides[ctx.guideID]
+    if not peerGuide or ns:GetLinkedGuide(peerGuide) ~= common then return end
+    local travel = ctx.partnerTravel
+    return ctx.cursor == #peerGuide.steps + 1 and travel ~= nil and not travel.legacy
+        and travel.sourceID == peerGuide.id and travel.destinationID == common.id
+end
+
+function Auto:_ContinuationPlan(targetID, flow)
     local config, ctx = settings(), context()
     if not continuationMode(config, ctx) then return nil, "La continuación compartida requiere un dúo activo." end
     if not validPair(ctx) or not ctx.known or not ctx.partnerAutoCompatible then
@@ -182,23 +204,34 @@ function Auto:_ContinuationPlan(targetID, originID)
     local guide, _, state = current()
     if not guide or not state or guide.temporary or guide.recovery
         or (type(ns.char.recovery) == "table" and ns.char.recovery.active) then return nil, "Termina la recuperación antes de continuar." end
-    local source = originID and ns.guides[originID] or guide
-    if originID and source.id ~= originID then return nil, "La guía de origen ya no está disponible." end
-    local target = source and ns.GetLinkedGuide and ns:GetLinkedGuide(source)
-    if not originID and ctx.guideID ~= source.id and (not target or ctx.guideID ~= target.id) then
-        -- A member may already be in the successor (including after reload).
-        -- The other member's completed source is still checked independently.
-        source = ns.guides[ctx.guideID]
-        target = source and ns.GetLinkedGuide and ns:GetLinkedGuide(source)
+    local source, partnerSource = guide, guide
+    if flow then
+        source, partnerSource = ns.guides[flow.originID], ns.guides[flow.partnerOriginID]
+        if not source or not partnerSource then return nil, "La guía de origen ya no está disponible." end
+    end
+    local target = ns:GetLinkedGuide(source)
+    if not flow and target and self:PersonalBranchReady(source.id, target.id, ctx) then
+        -- The ordinary local Continue path handles manual and automatic mode.
+        return nil, "Continúa tu capítulo individual hasta la guía común.", true
+    end
+    if not flow and ctx.guideID ~= source.id and (not target or ctx.guideID ~= target.id) then
+        partnerSource = ns.guides[ctx.guideID]
+        local partnerTarget = ns:GetLinkedGuide(partnerSource)
+        if partnerTarget == guide then
+            -- Already in the successor, e.g. after a reload.
+            source, target = partnerSource, guide
+        elseif not partnerTarget or target ~= partnerTarget then
+            return nil, "El compañero sigue otra guía con un destino distinto."
+        end
     end
     if not source or source.recovery or source.temporary then return nil, "No se ha confirmado la guía de origen del dúo." end
     if guide.id == source.id and (state.review or state.cursor <= #source.steps) then
         return nil, state.review and "Estás revisando la guía; no se cambia automáticamente." or "Termina tu guía antes de continuar juntos."
     end
-    if ctx.guideID == source.id and (ctx.partnerReview or not integer(ctx.cursor) or ctx.cursor <= #source.steps) then
+    if ctx.guideID == partnerSource.id and (ctx.partnerReview or ctx.cursor ~= #partnerSource.steps + 1) then
         if ctx.partnerReview then return nil, "El compañero está revisando la guía." end
-        local step = source.steps[ctx.cursor or 0]
-        return nil, step and ("Esperando al compañero: «" .. step.title .. "» (paso " .. ctx.cursor .. "/" .. #source.steps .. ").")
+        local step = partnerSource.steps[ctx.cursor or 0]
+        return nil, step and ("Esperando al compañero: «" .. step.title .. "» (paso " .. ctx.cursor .. "/" .. #partnerSource.steps .. ").")
             or "Esperando que el compañero termine esta guía."
     end
     if guide.id == source.id and ctx.guideID == source.id and not source.next and not source.nextChoices then
@@ -210,9 +243,15 @@ function Auto:_ContinuationPlan(targetID, originID)
         return nil, "La siguiente guía no corresponde a la raza o clase del compañero."
     end
     if guide.id ~= source.id and guide.id ~= target.id then return nil, "Tu guía ha cambiado; se cancela la continuación anterior." end
-    if ctx.guideID ~= source.id and ctx.guideID ~= target.id then return nil, "El compañero sigue otra guía; comprobad la misma ruta antes de continuar." end
-    if guide.id == target.id and ctx.guideID == target.id and not originID then return nil, "Ambos estáis ya en la siguiente guía." end
-    return { origin = source, target = target, ownAlready = guide.id == target.id, partnerAlready = ctx.guideID == target.id }
+    if ctx.guideID ~= partnerSource.id and ctx.guideID ~= target.id then return nil, "El compañero sigue otra guía; comprobad la misma ruta antes de continuar." end
+    if guide.id == target.id and ctx.guideID == target.id and not flow then return nil, "Ambos estáis ya en la siguiente guía." end
+    -- N/K reference 0 retains the original single-source completion proof.
+    -- Reference 1 names the common destination opener of two distinct sources;
+    -- their cursors have already been checked against their own guide lengths.
+    local mixed = source.id ~= partnerSource.id
+    return { origin = source, partnerOrigin = partnerSource, target = target,
+        reference = mixed and 1 or 0, cursor = mixed and 1 or #source.steps + 1,
+        ownAlready = guide.id == target.id, partnerAlready = ctx.guideID == target.id }
 end
 function Auto:_ContinuationConsent(plan, ctx)
     local consent = self.continuationConsent
@@ -226,7 +265,7 @@ function Auto:GetContinuationState(guide)
     if flow and flow.nonce == peerKey(ctx) and flow.originID ~= guide.id then
         return true, "Confirmando que ambos habéis cambiado a la siguiente guía.", false
     end
-    local plan, reason, terminal = self:_ContinuationPlan(nil, flow and flow.originID)
+    local plan, reason, terminal = self:_ContinuationPlan(nil, flow)
     if not plan then return not terminal, reason, false end
     if plan.origin.id ~= guide.id then return true, "Acompañando al compañero que termina la guía anterior.", false end
     if flow and flow.phase ~= "offered" then return true, "Acordando la siguiente guía con el compañero.", false end
@@ -241,17 +280,17 @@ function Auto:_QueueContinuation(kind, flow, phase)
 end
 function Auto:_StartContinuation(plan, ctx)
     self.serial = self.serial + 1
-    local flow = { originID = plan.origin.id, targetID = plan.target.id, nonce = peerKey(ctx),
+    local flow = { originID = plan.origin.id, partnerOriginID = plan.partnerOrigin.id, targetID = plan.target.id, nonce = peerKey(ctx),
         partnerName = ctx.partnerName, started = timeNow(), phase = "proposed", initiator = true,
         packet = { transaction = "next_" .. tostring(ns.Duo.nonce):sub(1, 20) .. "_" .. self.serial,
-            guideID = plan.target.id, reference = 0, cursor = #plan.origin.steps + 1 } }
+            guideID = plan.target.id, reference = plan.reference, cursor = plan.cursor } }
     self.continuation = flow
     self:_QueueContinuation("N", flow, 0)
 end
 function Auto:RequestContinuation(guide)
     local managed, reason, canRequest = self:GetContinuationState(guide)
     if not managed or not canRequest then return false, reason or "Todavía no se puede continuar juntos." end
-    local plan, why = self:_ContinuationPlan(nil, self.continuation and self.continuation.originID)
+    local plan, why = self:_ContinuationPlan(nil, self.continuation)
     if not plan then return false, why end
     local ctx = context()
     self.continuationConsent = { originID = plan.origin.id, partnerName = ctx.partnerName, nonce = peerKey(ctx) }
@@ -278,8 +317,8 @@ function Auto:_OnContinuationProtocol(kind, packet)
     if not continuationMode(config, ctx) or not validPair(ctx) or not ctx.known or not ctx.partnerAutoCompatible
         or packet.sender ~= ctx.partnerName or packet.nonce ~= ctx.partnerNonce then return false end
     local flow = self.continuation
-    local plan, reason = self:_ContinuationPlan(packet.guideID, flow and flow.originID)
-    if not plan or packet.cursor ~= #plan.origin.steps + 1 or packet.reference ~= 0 then
+    local plan, reason = self:_ContinuationPlan(packet.guideID, flow)
+    if not plan or packet.cursor ~= plan.cursor or packet.reference ~= plan.reference then
         self.reason = reason or "La continuación ya no corresponde a la guía terminada."
         return false
     end
@@ -290,7 +329,7 @@ function Auto:_OnContinuationProtocol(kind, packet)
             return true
         end
         if flow and flow.initiator and coordinator(ctx) == ctx.ownName then return false end
-        flow = { originID = plan.origin.id, targetID = plan.target.id, nonce = peerKey(ctx),
+        flow = { originID = plan.origin.id, partnerOriginID = plan.partnerOrigin.id, targetID = plan.target.id, nonce = peerKey(ctx),
             partnerName = ctx.partnerName, packet = packet, phase = "offered", started = timeNow() }
         self.continuation = flow
         if self:_ContinuationConsent(plan, ctx) then flow.phase = "accepted"; self:_QueueContinuation("K", flow, 1) end
@@ -325,7 +364,7 @@ function Auto:_TickContinuation(ctx, config)
         return false
     end
     if not flow and not consent and step and ctx.guideID == guide.id then return false end
-    local plan, reason = self:_ContinuationPlan(nil, flow and flow.originID)
+    local plan, reason = self:_ContinuationPlan(nil, flow)
     if not plan then
         if flow then self:_ClearContinuation() end
         -- A finished route remains managed while fresh final headers are absent.

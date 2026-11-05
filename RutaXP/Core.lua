@@ -118,6 +118,7 @@ end
 
 function ns:ResetGuide(id)
     if self.guides[id] then
+        if self.ResetGuideTravel then self:ResetGuideTravel(id) end
         self.char.progress[id] = { cursor = 1, confirmed = {}, review = true }
         self:Sync()
     end
@@ -272,6 +273,8 @@ function ns:Initialize()
     end
     self.db.schemaVersion = 3
     self.char.progress = type(self.char.progress) == "table" and self.char.progress or {}
+    self.char.guideTrips = type(self.char.guideTrips) == "table" and self.char.guideTrips or {}
+    self.char.travelOrigins = type(self.char.travelOrigins) == "table" and self.char.travelOrigins or {}
     if self.char.auto == nil then self.char.auto = true end
     if self.char.tracker == nil then self.char.tracker = true end
     if self.char.arrow == nil then self.char.arrow = true end

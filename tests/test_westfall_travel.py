@@ -33,7 +33,8 @@ def old_save(guide=DWARF, west_cursor=1, review=False, auto=True):
 class TravelHost(AutomaticPartyHost):
     """Set the real location and party state before the saved character logs in."""
 
-    def __init__(self, location, saved, name="Uno", friend="Dos", members=0, restricted=False):
+    def __init__(self, location, saved, name="Uno", friend="Dos", members=0, restricted=False,
+                 faction="Alliance", race="Dwarf", classes=("PALADIN", "HUNTER")):
         self.h = TalentTrainerHost(full_toc=True)
         self.h.lua.execute(DUO_STUBS)
         self.h.lua.execute(ENHANCED_STUBS)
@@ -48,9 +49,9 @@ class TravelHost(AutomaticPartyHost):
             function GetRealZoneText() return TEST.instanceName or "" end
         """)
         self.s.playerName, self.s.friendName = name, friend
-        self.s.classToken, self.s.friendClass = ("PALADIN", "HUNTER") if name == "Uno" else ("HUNTER", "PALADIN")
-        self.s.raceToken = self.s.friendRace = "Dwarf"
-        self.s.faction = self.s.friendFaction = "Alliance"
+        self.s.classToken, self.s.friendClass = classes if name == "Uno" else classes[::-1]
+        self.s.raceToken = self.s.friendRace = race
+        self.s.faction = self.s.friendFaction = faction
         self.s.level = self.s.friendLevel = 13
         self.s.members, self.s.restricted = members, restricted
         self.s.friendInRange, self.s.rangeChecked = False, True

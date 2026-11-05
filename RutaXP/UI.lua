@@ -100,7 +100,9 @@ local function flatButton(parent, text, width, height, x, y, action, accent)
 end
 
 local function advanceGuide(button)
-    if button.startsTravelHere then
+    if button.groundDetour then
+        ns:BeginGroundDetour()
+    elseif button.startsTravelHere then
         local ok, reason = ns:StartTravelHere()
         if not ok and reason then ns:Print(reason) end
     elseif button.continuesGuide then
@@ -607,8 +609,10 @@ function ns:RefreshUI()
     for _, button in ipairs({self.nextButton, self.trackerNext}) do
         button.continuesGuide = continuation ~= nil
         button.startsTravelHere = travel and travel.waiting and travel.localStart == true
-        button:SetText(button.startsTravelHere and "Empezar aquí" or complete and "Continuar" or "Siguiente >")
-        button:SetEnabled(button.startsTravelHere or editSteps and not complete or continuation ~= nil)
+        button.groundDetour = travel and travel.groundOption ~= nil
+        button:SetText(button.groundDetour and "Ir sin vuelo" or button.startsTravelHere and "Empezar aquí"
+            or complete and "Continuar" or "Siguiente >")
+        button:SetEnabled(button.groundDetour or button.startsTravelHere or editSteps and not complete or continuation ~= nil)
     end
     for _, button in ipairs({self.skipButton, self.trackerSkip}) do
         button.skipsTravel = travel ~= nil

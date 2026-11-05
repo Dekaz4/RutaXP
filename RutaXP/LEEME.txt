@@ -1,4 +1,4 @@
-RUTAXP 0.7.4 - WoW Forever
+RUTAXP 0.7.5 - WoW Forever
 
 ACTUALIZACIONES
 El mismo Instalador_RutaXP.exe sirve para instalar, actualizar y reparar:
@@ -8,6 +8,11 @@ Guardad el setup fuera de la carpeta del addon. Recuerda vuestro cliente,
 conserva una copia anterior y no modifica el progreso guardado en WTF.
 Luego abrid WoW desde vuestro acceso de siempre. /rutaxp actualizar muestra
 la version local y el enlace. No hay comprobaciones en segundo plano.
+
+CAMBIOS DE ZONA
+Al acabar una guia, sigue las indicaciones hasta donde empieza la siguiente.
+En duo, el primero espera al otro en las paradas compartidas y en el destino.
+Si Forever restringe los mensajes, reunios en el destino y pulsad Empezar aqui.
 
 SINCRONIZACION DEL DUO
 Con los dos en grupo, /rutaxp conexion muestra la version y el estado del

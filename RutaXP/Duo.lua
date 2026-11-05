@@ -8,6 +8,7 @@ local _, ns = ...
 local Duo = { prefix = "RXPDUO3", elapsed = 0, sendElapsed = 0, sequence = 0, remoteQuests = {}, requested = {}, outboundRequests = {} }
 ns.Duo = Duo
 local PROTOCOL, QUEST_TTL, REQUEST_LIMIT, CACHE_LIMIT = "2", 35, 24, 48
+local DUN_MOROGH, WESTFALL = "forever/alliance/dwarf-gnome/01-dun-morogh", "forever/alliance/02-westfall"
 local function readable(value)
     if issecretvalue and issecretvalue(value) then return nil end
     return value
@@ -48,6 +49,27 @@ local function suppliesFields(fields, first)
     return result
 end
 local function token(s) return type(s) == "string" and s:match("^[%w_/%-%.:]+$") and #s <= 100 end
+
+-- A travel packet can be sent before or after the negotiated guide change.
+-- Bind it to a real edge and the sender's most recent guide header in either case.
+local function travelHeader(header, sourceID, destinationID)
+    if not header or header.review or not ns.guides then return false end
+    local source = ns.guides[sourceID]
+    if not source or not ns.guides[destinationID] then return false end
+    local nextIDs = source.nextChoices or source.next
+    local linked = nextIDs == destinationID
+    if type(nextIDs) == "table" then
+        for _, choice in ipairs(nextIDs) do
+            if choice == destinationID then linked = true; break end
+        end
+    end
+    return linked and ((header.guideID == destinationID and header.cursor == 1)
+        or (header.guideID == sourceID and header.cursor == #source.steps + 1))
+end
+
+local function validEndpoint(id)
+    return token(id) and #id <= 64
+end
 local function conditionToken(value)
     local normalized = tostring(value or ""):lower():gsub("[%s_%-]", "")
     if normalized == "undead" then return "scourge" end
@@ -203,8 +225,8 @@ local function profile(unit)
     local _, race = safe(UnitRace, unit)
     return safe(UnitLevel, unit), class, race
 end
-function Duo:AppliesToPartner(conditions)
-    return appliesToPartner(conditions, self:GetContext())
+function Duo:AppliesToPartner(conditions, context)
+    return appliesToPartner(conditions, context or self:GetContext())
 end
 function Duo:Settings()
     if not ns.char then return nil end
@@ -273,6 +295,8 @@ function Duo:GetContext()
     self:RefreshRoster()
     local recent = self.peer and fresh(self.peer.seen, 15)
     local headerRecent = self.peer and fresh(self.peer.headerSeen or self.lastHeader, 15)
+    local travel = headerRecent and self.peer.travel
+    if not (travel and fresh(travel.seen, 18)) then travel = nil end
     local level, class, race = profile("party1")
     local mapID = integer(safe(C_Map and C_Map.GetBestMapForUnit, "player"), 1, 100000)
     local inRange, checked = safe(UnitInRange, "party1")
@@ -291,12 +315,36 @@ function Duo:GetContext()
         partnerAutoPair = headerRecent and self.peer.autoPair == true or false,
         partnerAutoEpoch = headerRecent and self.peer.autoEpoch or nil,
         partnerReview = headerRecent and self.peer.review == true or false,
-        partnerAtWestfall = headerRecent and fresh(self.peer.travelSeen, 18) and self.peer.travelReady == true or false,
+        partnerTravel = travel, partnerHeaderFresh = headerRecent == true,
+        partnerAtWestfall = travel and travel.destinationID == WESTFALL and travel.ready == true or false,
         ownName = unitName("player"), partnerNonce = recent and self.peer.nonce or nil,
         wait = settings.wait == true, dead = dead == true,
         separated = self.partnerName and checked == true and inRange == false or nil }
     context.differentZone = headerRecent and mapID and context.partnerMapID and mapID ~= context.partnerMapID or false
     return context
+end
+
+-- Called when our own character has physically reached a safe checkpoint or
+-- the final hub. Never write the partner's leg number into local progress.
+function Duo:GetTravelWait(destinationID, sourceID, reached, arrived, endpoint)
+    local ctx, settings = self:GetContext(), self:Settings()
+    if not settings or not ctx.sameParty or ctx.groupSize ~= 2
+        or not (settings.autoPair or (settings.enabled and settings.wait)) then return end
+    if ns.DuoAuto and ns.DuoAuto.PersonalBranchReady and ns.DuoAuto:PersonalBranchReady(sourceID, destinationID, ctx) then return end
+    local destination = ns.guides and ns.guides[destinationID]
+    if ctx.partnerHeaderFresh and not ctx.partnerReview and ctx.guideID == destinationID
+        and destination and integer(ctx.cursor, 2, #destination.steps + 1) then return end
+    local peer = ctx.partnerTravel
+    if peer and peer.destinationID == destinationID then
+        local sameRoute, sameEndpoint = peer.sourceID == sourceID, peer.endpoint ~= nil and peer.endpoint == endpoint
+        if peer.ready and (sameRoute or sameEndpoint) then return end
+        if not arrived and not peer.legacy and sameRoute and sameEndpoint and reached and peer.legIndex < reached then
+            return "Espera aquí a que tu compañero llegue a este punto del viaje."
+        end
+    end
+    if arrived then
+        return "Ya has llegado. Esperando que tu compañero confirme su llegada al destino."
+    end
 end
 function Duo:PruneQuestCaches()
     local time = now()
@@ -781,8 +829,9 @@ function Duo:Receive(prefix, message, channel, sender)
             guideID = fields[8], cursor = cursor, ready = fields[10] == "1", seen = now(), headerSeen = now(), mapID = mapID, dead = boolean(fields[13]),
             autoCapability = fields[19] and "1" or nil, autoEpoch = autoEpoch,
             autoPair = boolean(fields[20]), review = boolean(fields[21]) }
-        if previous and previous.nonce == fields[3] and previous.guideID == fields[8] then
-            self.peer.travelReady, self.peer.travelSeen = previous.travelReady, previous.travelSeen
+        if previous and previous.nonce == fields[3] and previous.autoEpoch == autoEpoch and previous.travel
+            and travelHeader(self.peer, previous.travel.sourceID, previous.travel.destinationID) then
+            self.peer.travel = previous.travel
         end
         self.lastHeader = now()
         if supplies then self.remoteSupplies = supplies end
@@ -800,9 +849,19 @@ function Duo:Receive(prefix, message, channel, sender)
             if not token(fields[5]) or #fields[5] > 40 or not token(fields[6]) or not reference or not cursor or not phase then return false end
             if not safe(ns.DuoAuto.OnProtocol, ns.DuoAuto, kind, { transaction=fields[5], guideID=fields[6],
                 reference=reference, cursor=cursor, phase=phase, nonce=fields[3], sender=self.partnerName }) then return false end
+        elseif kind == "T" and #fields == 9 then
+            local source, dest = fields[5], fields[6]
+            local reached, ready = integer(fields[7], 0, 10000), boolean(fields[8])
+            if not fresh(self.peer.headerSeen, 15) or not token(source) or not token(dest) or not reached
+                or ready == nil or not validEndpoint(fields[9]) or not travelHeader(self.peer, source, dest) then return false end
+            self.peer.travel = { sourceID = source, destinationID = dest, legIndex = reached, ready = ready, endpoint = fields[9], seen = now() }
         elseif kind == "T" and #fields == 6 then
-            if fields[5] ~= self.peer.guideID or (fields[6] ~= "0" and fields[6] ~= "1") then return false end
-            self.peer.travelReady, self.peer.travelSeen = fields[6] == "1", now()
+            -- 0.7.4 knows a single destination. Its bit can never acknowledge
+            -- a different hub or an intermediate checkpoint.
+            local ready = boolean(fields[6])
+            if not fresh(self.peer.headerSeen, 15) or fields[5] ~= self.peer.guideID or ready == nil
+                or not travelHeader(self.peer, DUN_MOROGH, WESTFALL) then return false end
+            self.peer.travel = { sourceID = DUN_MOROGH, destinationID = WESTFALL, legIndex = 0, ready = ready, seen = now(), legacy = true }
         elseif kind == "B" and #fields == 5 then
             local snapshots, ids = {}, {}
             for raw in (fields[5] .. "/"):gmatch("(.-)/") do
@@ -986,8 +1045,20 @@ function Duo:Tick(elapsed)
         -- header, counters in Q: neither creates extra per-objective traffic.
         local auxiliary = #ids == 0 or (self.lastSentQuest ~= nil and now() - self.lastSentQuest < 2)
         local meeting = self:Settings().meeting
-        local signal = ns.GetWestfallTravelSignal and ns:GetWestfallTravelSignal()
-        local travel = signal and (guide.id .. "|" .. signal)
+        local travel
+        if ns.GetGuideTravelSignal then
+            local dest, reached, ready, source, endpoint = ns:GetGuideTravelSignal()
+            if token(source) and token(dest) and validEndpoint(endpoint) and integer(reached, 0, 10000) and type(ready) == "boolean" then
+                if ctx.partnerTravel and ctx.partnerTravel.legacy and source == DUN_MOROGH and dest == WESTFALL then
+                    travel = guide.id .. "|" .. encodeBoolean(ready)
+                else
+                    travel = table.concat({ source, dest, reached, encodeBoolean(ready), endpoint }, "|")
+                end
+            end
+        elseif ns.GetWestfallTravelSignal then
+            local signal = ns:GetWestfallTravelSignal()
+            if signal then travel = guide.id .. "|" .. signal end
+        end
         if self.autoQueue and (not self.lastSentAuto or now() - self.lastSentAuto >= 3) then
             if self:Send(self.autoQueue.kind, self.autoQueue.values) then self.lastSentAuto = now(); self.autoQueue = nil end
         elseif travel and (travel ~= self.lastTravelSignal or not self.lastTravelSent or now() - self.lastTravelSent >= 8) then

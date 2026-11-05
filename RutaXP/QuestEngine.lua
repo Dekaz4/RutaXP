@@ -193,6 +193,8 @@ function ns:GetGoalStatus(goal, step, state, index)
     local layout = guide and getGuideLayout(self, guide)
     local stepIndex = (layout and step and layout.stepOf[step]) or (state and state.cursor) or 1
     local action, id = goal.t or goal.action, goal.quest or goal.questID
+    if not id and (action == "fly" or action == "goto" or action == "hearth") and self.IsTravelServiceComplete
+        and self:IsTravelServiceComplete(guide, stepIndex, index) then return "done", "Llegada confirmada" end
     if id and self:IsQuestDelivered(id) then return "done", "Misión entregada" end
     local key = confirmationKey(state, index, stepIndex)
     if state and state.skipped and state.skipped[key] then return "skip", "Omitido manualmente" end
@@ -828,6 +830,7 @@ end
 -- Rendering and quest scans run after the caller has finished its transition.
 function ns:ApplyGuideContinuation(target)
     if not target or self.guides[target.id] ~= target then return false end
+    if self.RememberGuideTravel then self:RememberGuideTravel(self.char.activeGuide, target.id) end
     self.char.activeGuide = target.id
     self:GetProgress(target.id)
     if self.UpdateGuideTravel then self:UpdateGuideTravel() end
@@ -863,6 +866,7 @@ end
 ---------------------------------------------------------------------------
 
 function ns:WantsQuest(action, questID)
+    if self.GetGuideTravel and self:GetGuideTravel() then return false end
     if type(questID) ~= "number" or questID <= 0 then return false end
     local guide, step, state = self:GetCurrent()
     if not guide or not step or not state or state.review or not self:MatchesConditions(step.only) then return false end

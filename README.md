@@ -1,4 +1,4 @@
-# RutaXP 0.7.4 para WoW Forever
+# RutaXP 0.7.5 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,12 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## Viajes entre todas las guías (0.7.5)
+
+Las 57 guías de leveo incluyen 55 enlaces. Al terminar una zona, el recorrido indica dónde embarcar, qué salida tomar y dónde reunirse para empezar el siguiente capítulo. Las dos últimas guías, una por facción, cierran el recorrido. En un transporte sigue la indicación del panel hasta desembarcar. Si te falta un destino de vuelo, usa **Ir sin vuelo** cuando aparezca en el puesto del maestro.
+
+Con el dúo automático, cada uno ve la flecha desde su posición. El que se adelanta espera en las paradas compartidas y en el punto de llegada. Si el juego bloquea la comunicación, reuníos físicamente en el destino y pulsad **Empezar aquí** en ambos ordenadores. Cada personaje mantiene sus misiones y sus pasos guardados.
 
 ## Viaje de Dun Morogh a Páramos de Poniente (0.7.4)
 
@@ -171,7 +177,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.4.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.5.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.

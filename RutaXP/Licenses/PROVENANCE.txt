@@ -40,6 +40,13 @@ Transport endpoints come from the upstream generated Nav/TravelData.lua.
 The existing SendaFH-THIRD_PARTY.md retains the original travel-data and
 Carbonite notices. Missing source altitudes remain unknown.
 
+The 0.7.5 guide links in AllianceTravel.lua and HordeTravel.lua follow the
+same pinned Forever guide itineraries and NPC positions. The road, port,
+zeppelin and train endpoints in TravelConnections.lua are extracted from
+tools/lib/travel/crossings.json and addon/SendaFH/Nav/TravelData.lua by
+tools/build_travel_connections.py. Flight masters are faction-specific;
+each stop retains the coordinate frame of its source.
+
 Later RutaXP releases include the walking router and navigation maps in
 Pathing/, adapted from the pinned Polestar/SendaFH revision. That directory
 retains the Shortest Path Forever and Polestar credits, GPL licence, source
