@@ -606,7 +606,9 @@ function ns:RefreshUI()
     if self.lastStepKey ~= stepKey then self.stepScroll:SetVerticalScroll(0); self.lastStepKey = stepKey end
 
     local editSteps = not travel and not sharedView
-    self.previousButton:SetEnabled(editSteps and state.cursor > 1)
+    local restorePrevious = self.GetPreviousRestorableStep and self:GetPreviousRestorableStep()
+    local canGoBack = not travel and (restorePrevious or editSteps and state.cursor > 1)
+    self.previousButton:SetEnabled(canGoBack)
     for _, button in ipairs({self.nextButton, self.trackerNext}) do
         button.continuesGuide = continuation ~= nil
         button.startsTravelHere = travel and travel.waiting and travel.localStart == true
@@ -729,7 +731,7 @@ function ns:RefreshUI()
         self.trackerText:Show()
     end
     if self.LayoutTracker then self:LayoutTracker() end
-    self.trackerPrevious:SetEnabled(editSteps and state.cursor > 1)
+    self.trackerPrevious:SetEnabled(canGoBack)
     self.trackerMap:SetEnabled(waypoint and true or false)
     self.tracker:SetShown(self.char.tracker and not self.window:IsShown())
 end

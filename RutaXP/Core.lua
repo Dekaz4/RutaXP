@@ -111,8 +111,15 @@ end
 function ns:Previous()
     local guide, _, state = self:GetCurrent()
     if not guide then return end
+    local restore = self.GetPreviousRestorableStep and self:GetPreviousRestorableStep()
     state.cursor = math.max(1, state.cursor - 1)
-    state.review = true -- Permite leer pasos anteriores aunque su misión ya esté hecha.
+    if restore and self:RestoreStepOmissions(guide, state, state.cursor) then
+        state.review = nil
+        if self.DuoAuto and self.DuoAuto.RefreshProgressAgreement then self.DuoAuto:RefreshProgressAgreement() end
+        if self.Duo then self.Duo.lastSentHeader = nil end
+    else
+        state.review = true -- Permite leer pasos anteriores aunque su misión ya esté hecha.
+    end
     self:Sync()
 end
 

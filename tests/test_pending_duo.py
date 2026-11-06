@@ -1,4 +1,4 @@
-"""The public recovery command rejoins a skipped quest in a real two-client duo."""
+"""Recovery actions rejoin skipped quests in a real two-client duo."""
 
 import unittest
 
@@ -81,6 +81,64 @@ class PendingDuoTests(unittest.TestCase):
             self.assertTrue(state.confirmed["2:2"])
             self.assertTrue(state.skipped["2:3"])
             self.assertIsNone(state.skipped["2:1"])
+            self.assertLessEqual(h.s.maxSyncDepth, 2)
+
+    def test_back_button_undoes_own_skip_while_following_buddy_and_keeps_automatic_duo(self):
+        a = AutomaticPartyHost(cursor=2, review=False, auto=True)
+        b = AutomaticPartyHost("Dos", "Uno", cursor=2, review=False, auto=True)
+        for h in (a, b):
+            guide = h.ns.guides[ROUTE_ID]
+            guide.steps[2].goals[2] = h.h.table({"t": "vendor", "text": "Reparar"})
+            guide.steps[4] = h.h.table({"title": "Instructor", "goals": [{"t": "train"}]})
+            state = h.ns.char.progress[ROUTE_ID]
+            state.confirmed["2:2"] = True
+            state.skipped["4:1"] = True
+            h.roster()
+        self.exchange(a, b, 75)
+        options = self.options(a)
+        friend_before = b.progress()
+        other_guides = {key: value for key, value in a.progress().items() if key != ROUTE_ID}
+
+        a.h.g.Click(a.ns.trackerSkip)
+        self.exchange(a, b, 25)
+        own = a.ns.char.progress[ROUTE_ID]
+        self.assertEqual((own.cursor, a.view().sharedCursor), (3, 2))
+        self.assertTrue(a.view().following)
+        self.assertTrue(a.ns.trackerPrevious.isEnabled)
+        self.assertTrue(a.ns.previousButton.isEnabled)
+        self.assertFalse(a.ns.trackerNext.isEnabled)
+        self.assertFalse(a.ns.trackerSkip.isEnabled)
+
+        a.h.g.Click(a.ns.trackerPrevious)
+        self.assertEqual(own.cursor, 2)
+        self.assertFalse(bool(own.review))
+        self.assertIsNone(own.skipped["2:1"])
+        self.assertTrue(own.confirmed["2:2"])
+        self.assertTrue(own.skipped["4:1"])
+        self.assertEqual(self.options(a), options)
+        self.assertEqual(b.progress(), friend_before)
+        self.assertEqual({key: value for key, value in a.progress().items() if key != ROUTE_ID}, other_guides)
+        self.exchange(a, b, 75)
+        self.assertTrue(a.status().active)
+        self.assertTrue(b.status().active)
+        self.assertEqual((a.view().sharedCursor, b.view().sharedCursor), (2, 2))
+        self.assertEqual(self.options(a), options)
+        self.assertEqual(b.progress(), friend_before)
+
+        a.quest(count=8)
+        a.h.g.EmitAddonEvent("QUEST_LOG_UPDATE")
+        self.exchange(a, b, 25)
+        self.assertEqual((own.cursor, b.ns.char.progress[ROUTE_ID].cursor), (2, 2))
+        b.quest(count=8)
+        b.h.g.EmitAddonEvent("QUEST_LOG_UPDATE")
+        self.exchange(a, b, 40)
+        self.assertEqual((own.cursor, b.ns.char.progress[ROUTE_ID].cursor), (3, 3))
+        for h in (a, b):
+            self.assertTrue(h.status().active)
+            self.assertFalse(h.ns.IsQuestDelivered(h.ns, QUEST_ID))
+            state = h.ns.char.progress[ROUTE_ID]
+            self.assertTrue(state.confirmed["2:2"])
+            self.assertTrue(state.skipped["4:1"])
             self.assertLessEqual(h.s.maxSyncDepth, 2)
 
 

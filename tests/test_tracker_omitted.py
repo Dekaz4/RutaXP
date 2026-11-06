@@ -45,23 +45,25 @@ class TrackerOmittedTests(unittest.TestCase):
         return next(row for row in host.ns.trackerRows.values()
                     if row.shown and not row.preview and row.goalIndex == goal)
 
-    def test_skipping_then_reviewing_molsen_retains_real_counts_with_neutral_omitted_label(self):
+    def test_skipping_then_going_back_restores_molsen_as_pending_with_real_counts(self):
         host = self.farm()
         host.h.g.Click(host.ns.trackerSkip)
         host.h.g.Click(host.ns.trackerPrevious)
+        state = host.ns.char.progress[WESTFALL]
+        self.assertEqual(state.cursor, 5)
+        self.assertIsNone(state.review)
         before = host.progress()
         for goal, counter in ((1, "Segunda caja: 0/1"), (2, "Zahorí cosechador: 0/20")):
             with self.subTest(goal=goal):
                 row = self.row(host, goal)
-                self.assertIn("Omitido · ", row.title.text)
-                self.assertEqual(row.sub.text, counter)
+                self.assertNotIn("Omitido", row.title.text)
+                self.assertIn(counter, row.sub.text)
                 self.assertFalse(row.icon.texture.endswith("\\check"))
-                self.assertEqual(tuple(row.icon.color.values()), (.64, .72, .82))
                 self.assertNotIn("|cff6be09e", row.title.text)
+                self.assertIsNone(state.skipped[f"5:{goal}"])
                 row.scripts.OnEnter(row)
                 tooltip = "\n".join(host.h.g.GameTooltip.lines.values())
-                self.assertIn("Omitido", tooltip)
-                self.assertIn("volver a incluir este objetivo", tooltip)
+                self.assertNotIn("Omitido", tooltip)
         self.assertEqual(host.progress(), before)
 
     def test_legacy_confirmation_can_be_undone_by_right_clicking_the_visible_row(self):

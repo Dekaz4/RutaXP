@@ -417,6 +417,40 @@ function ns:SkipStep()
     self:Sync()
 end
 
+function ns:GetPreviousRestorableStep()
+    local guide, _, state = self:GetCurrent()
+    if not guide or state.cursor <= 1 then return end
+    local stepIndex = state.cursor - 1
+    local step = guide.steps[stepIndex]
+    for index, goal in ipairs(step and step.goals or {}) do
+        local key = confirmationKey(state, index, stepIndex)
+        if (state.skipped and state.skipped[key])
+            or ((goal.quest or goal.questID) and state.confirmed and state.confirmed[key]) then
+            local status, reason = self:GetGoalStatus(goal, step, state, index)
+            if status == "skip" and reason and reason:find("Omitido manualmente", 1, true) == 1 then return stepIndex end
+        end
+    end
+end
+
+function ns:RestoreStepOmissions(guide, state, stepIndex)
+    local step = guide.steps[stepIndex]
+    local restored = false
+    for index, goal in ipairs(step and step.goals or {}) do
+        local key = confirmationKey(state, index, stepIndex)
+        if state.skipped and state.skipped[key] then
+            state.skipped[key] = nil
+            restored = true
+        end
+        -- Old quest confirmations represented manual omissions. Genuine
+        -- service confirmations still record an action the player performed.
+        if (goal.quest or goal.questID) and state.confirmed and state.confirmed[key] then
+            state.confirmed[key] = nil
+            restored = true
+        end
+    end
+    return restored
+end
+
 -- Explicitly rejoin the unfinished quests that are actually in this
 -- character's journal. Manual service confirmations and other guides stay
 -- outside this operation, including tasks belonging only to the partner.

@@ -106,8 +106,9 @@ for _, method in ipairs({ "Next", "Previous", "SkipStep", "ToggleGoalConfirm" })
             if methodName == "SkipStep" then return self:SkipGuideTravel() end
             return
         end
-        if followingGuard(self) then return end
-        if methodName == "Previous" then self:UseManualDuoMode("Revisión manual solicitada") end
+        local restorePrevious = methodName == "Previous" and self.GetPreviousRestorableStep and self:GetPreviousRestorableStep()
+        if not restorePrevious and followingGuard(self) then return end
+        if methodName == "Previous" and not restorePrevious then self:UseManualDuoMode("Revisión manual solicitada") end
         return original(self, ...)
     end end
 end

@@ -1,4 +1,4 @@
-RUTAXP 0.7.6 - WoW Forever
+RUTAXP 0.7.7 - WoW Forever
 
 ACTUALIZACIONES
 El mismo Instalador_RutaXP.exe sirve para instalar, actualizar y reparar:
@@ -15,6 +15,8 @@ En duo, el primero espera al otro en las paradas compartidas y en el destino.
 Si Forever restringe los mensajes, reunios en el destino y pulsad Empezar aqui.
 
 MISIONES OMITIDAS
+Al volver con Atras a un paso saltado, las tareas omitidas vuelven a estar
+pendientes. Funciona tambien en duo y permite continuar automaticamente.
 Las tareas saltadas aparecen en gris con Omitido. Clic derecho para recuperarlas.
 Escribe /rutaxp pendientes para retomar el primer objetivo pendiente de tu diario
 en esta guia. Las entregas y los objetivos completados muestran su estado real.

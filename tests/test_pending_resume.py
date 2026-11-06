@@ -99,6 +99,52 @@ class PendingResumeTests(unittest.TestCase):
         h.fire("QUEST_ACCEPTED", 38)
         self.assertFalse(h.call("IsQuestDelivered", 38))
 
+    def test_back_restores_only_that_step_and_keeps_automatic_progress_running(self):
+        h, state = self.host()
+        state.cursor = 3
+        state.skipped["3:1"] = None
+        state.skipped["4:1"] = None
+        h.ns.char.auto = True
+        h.ns.char.progress["other"] = h.table({"cursor": 7, "skipped": {"2:1": True}})
+        quests = primitive_copy(h.state.quests)
+        h.call("Previous")
+        self.assertEqual(state.cursor, 2)
+        self.assertIsNone(state.review)
+        self.assertIsNone(state.skipped["2:1"])
+        self.assertIsNone(state.skipped["2:2"])
+        self.assertIsNone(state.confirmed["2:1"])
+        self.assertTrue(state.confirmed["2:3"])
+        self.assertTrue(state.confirmed["1:1"])
+        self.assertTrue(h.ns.char.progress["other"].skipped["2:1"])
+        self.assertEqual(primitive_copy(h.state.quests), quests)
+        self.assertEqual(h.active()[2], "active")
+        # A server completion then advances normally to the delivery visit.
+        h.quest(38, onQuest=True, complete=True)
+        h.fire("QUEST_LOG_UPDATE")
+        self.assertEqual(state.cursor, 3)
+        self.assertEqual(h.active()[0].t, "turnin")
+        self.assertFalse(h.call("IsQuestDelivered", 38))
+
+    def test_back_recovers_a_skipped_acceptance_even_when_quest_is_not_in_the_log(self):
+        h, state = self.host()
+        state.cursor = 5
+        h.call("Previous")
+        self.assertEqual(state.cursor, 4)
+        self.assertIsNone(state.skipped["4:1"])
+        self.assertEqual(h.active()[0].quest, 71)
+        self.assertEqual(h.active()[2], "active")
+        self.assertTrue(state.skipped["2:1"])
+
+    def test_back_does_not_uncomplete_a_real_delivery(self):
+        h, state = self.host()
+        state.cursor = 2
+        h.ns.char.auto = True
+        h.call("Previous")
+        self.assertEqual(state.cursor, 1)
+        self.assertTrue(state.review)
+        self.assertTrue(h.call("IsQuestDelivered", 9))
+        self.assertEqual(h.status(h.ns.guides["rejoin"].steps[1].goals[1]), "done")
+
 
 if __name__ == "__main__":
     unittest.main()
