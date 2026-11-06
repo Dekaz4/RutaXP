@@ -3,7 +3,7 @@
   "sourceCommit": "5d207e28e82e2c529143b21ace74fe88692f0067",
   "scope": {
     "guides": 57,
-    "steps": 2330,
+    "steps": 2331,
     "goals": 7444,
     "questIDs": 1900,
     "actions": {
@@ -33,7 +33,7 @@
       "item": 1212,
       "count": 1194,
       "pre": 1194,
-      "preAll": 35,
+      "preAll": 36,
       "closedBy": 152,
       "only": 352,
       "optional": 409,
@@ -75,9 +75,1324 @@
     "sourceLevelingGuides": 57,
     "sourceGuideIDsMissingFromSnapshot": [],
     "structuralDifferences": [],
+    "rawStructuralDifferences": [
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "field": "step count"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 1,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 6,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 6,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 6,
+        "goal": 1,
+        "field": "quest",
+        "source": 92745,
+        "snapshot": 92744
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 6,
+        "goal": 1,
+        "field": "oi",
+        "source": 2,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 6,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 254548
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 6,
+        "goal": 1,
+        "field": "count",
+        "source": 6,
+        "snapshot": 7
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 1,
+        "field": "quest",
+        "source": 92745,
+        "snapshot": 92742
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 1,
+        "field": "count",
+        "source": 4,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 2,
+        "field": "quest",
+        "source": 12,
+        "snapshot": 92744
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 2,
+        "field": "count",
+        "source": 15,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 3,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 3,
+        "field": "quest",
+        "source": 12,
+        "snapshot": 92745
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 3,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 3,
+        "field": "count",
+        "source": 15,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 3,
+        "field": "preAll",
+        "source": null,
+        "snapshot": [
+          92742,
+          92744
+        ]
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 7,
+        "goal": 3,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 9
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 8,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 8,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 8,
+        "goal": 1,
+        "field": "quest",
+        "source": 92744,
+        "snapshot": 92745
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 8,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 8,
+        "goal": 1,
+        "field": "item",
+        "source": 254548,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 8,
+        "goal": 1,
+        "field": "count",
+        "source": 7,
+        "snapshot": 6
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 9,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 9,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 9,
+        "goal": 1,
+        "field": "quest",
+        "source": 102,
+        "snapshot": 92745
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 9,
+        "goal": 1,
+        "field": "item",
+        "source": 725,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 9,
+        "goal": 1,
+        "field": "count",
+        "source": 8,
+        "snapshot": 4
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 10,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 10,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 10,
+        "goal": 1,
+        "field": "quest",
+        "source": 64,
+        "snapshot": 102
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 10,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 10,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 725
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 10,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 8
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 11,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 11,
+        "goal": 1,
+        "field": "quest",
+        "source": 9,
+        "snapshot": 64
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 11,
+        "goal": 2,
+        "field": "quest",
+        "source": 22,
+        "snapshot": 151
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 12,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 12,
+        "goal": 1,
+        "field": "quest",
+        "source": 109,
+        "snapshot": 9
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 12,
+        "goal": 2,
+        "field": "quest",
+        "source": 12,
+        "snapshot": 22
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 12,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 12,
+        "goal": 3,
+        "field": "quest",
+        "source": 13,
+        "snapshot": 38
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 12,
+        "goal": 3,
+        "field": "pre",
+        "source": [
+          12
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 12,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 9,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 12,
+        "goal": 4,
+        "field": "quest",
+        "source": 102,
+        "snapshot": 92909
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 12,
+        "goal": 5,
+        "field": "quest",
+        "source": 92742,
+        "snapshot": 92910
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 12,
+        "goal": 6,
+        "field": "quest",
+        "source": 92744,
+        "snapshot": 92911
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 12,
+        "goal": 6,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 1,
+        "field": "quest",
+        "source": 13,
+        "snapshot": 109
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 1,
+        "field": "count",
+        "source": 15,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 2,
+        "field": "quest",
+        "source": 13,
+        "snapshot": 12
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 2,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 2,
+        "field": "count",
+        "source": 15,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 3,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 3,
+        "field": "quest",
+        "source": 153,
+        "snapshot": 13
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 3,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 3,
+        "field": "item",
+        "source": 829,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 3,
+        "field": "count",
+        "source": 15,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 3,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          12
+        ]
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 13,
+        "goal": 3,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 9
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 15
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 2,
+        "field": "quest",
+        "source": 14,
+        "snapshot": 13
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 15
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          13
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 9,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 3,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 3,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 3,
+        "field": "item",
+        "source": null,
+        "snapshot": 829
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 14,
+        "goal": 3,
+        "field": "count",
+        "source": null,
+        "snapshot": 15
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 1,
+        "field": "quest",
+        "source": 14,
+        "snapshot": 13
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 1,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 1,
+        "field": "count",
+        "source": 5,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 2,
+        "field": "oi",
+        "source": 3,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 2,
+        "field": "count",
+        "source": 5,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          13
+        ]
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 9
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 3,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 3,
+        "field": "quest",
+        "source": 14,
+        "snapshot": 153
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 3,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 15,
+        "goal": 3,
+        "field": "count",
+        "source": 15,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 1,
+        "field": "t",
+        "source": "hearth",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 14
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 3
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 3,
+        "field": "quest",
+        "source": 65,
+        "snapshot": 14
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 3,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 3,
+        "field": "count",
+        "source": null,
+        "snapshot": 15
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 14,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 4,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 4,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 4,
+        "field": "item",
+        "source": null,
+        "snapshot": 254676
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 16,
+        "goal": 4,
+        "field": "count",
+        "source": null,
+        "snapshot": 8
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "hearth"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 1,
+        "field": "quest",
+        "source": 1638,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 1,
+        "field": "closedBy",
+        "source": [
+          1679,
+          1684,
+          1678,
+          1683,
+          1639
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 2,
+        "field": "quest",
+        "source": 1638,
+        "snapshot": 14
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 3,
+        "field": "quest",
+        "source": 1639,
+        "snapshot": 65
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 3,
+        "field": "closedBy",
+        "source": [
+          1678,
+          1683
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": 14
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 4,
+        "field": "quest",
+        "source": 1639,
+        "snapshot": 92747
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 5,
+        "field": "quest",
+        "source": 1640,
+        "snapshot": 92748
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 5,
+        "field": "pre",
+        "source": [
+          1639,
+          1678,
+          1683
+        ],
+        "snapshot": [
+          92747
+        ]
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 5,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": 9
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 6,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "vendor"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 6,
+        "field": "quest",
+        "source": 1640,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 17,
+        "goal": 6,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 18,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 18,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 18,
+        "goal": 1,
+        "field": "quest",
+        "source": 5635,
+        "snapshot": 1638
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 18,
+        "goal": 1,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          1679,
+          1684,
+          1678,
+          1683,
+          1639
+        ]
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 18,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 18,
+        "goal": 2,
+        "field": "quest",
+        "source": 94774,
+        "snapshot": 1638
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 19,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 19,
+        "goal": 1,
+        "field": "t",
+        "source": "train",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 19,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 5635
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 19,
+        "goal": 1,
+        "field": "class",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 20,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 20,
+        "goal": 1,
+        "field": "only",
+        "source": {
+          "classes": [
+            "WARRIOR",
+            "PALADIN",
+            "HUNTER",
+            "ROGUE",
+            "PRIEST",
+            "MAGE",
+            "WARLOCK",
+            "DRUID"
+          ]
+        },
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 1,
+        "field": "t",
+        "source": "buy",
+        "snapshot": "train"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 1,
+        "field": "item",
+        "source": 6529,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 1,
+        "field": "count",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 1,
+        "field": "only",
+        "source": null,
+        "snapshot": {
+          "classes": [
+            "WARRIOR",
+            "PALADIN",
+            "HUNTER",
+            "ROGUE",
+            "PRIEST",
+            "MAGE",
+            "WARLOCK",
+            "DRUID"
+          ]
+        }
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 1,
+        "field": "class",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 2,
+        "field": "item",
+        "source": 6530,
+        "snapshot": 2449
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 2,
+        "field": "count",
+        "source": 3,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 2,
+        "field": "only",
+        "source": null,
+        "snapshot": {
+          "races": [
+            "NightElf"
+          ],
+          "classes": [
+            "DRUID"
+          ]
+        }
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 2,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 3,
+        "field": "quest",
+        "source": 95065,
+        "snapshot": 92748
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 7,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 4,
+        "field": "quest",
+        "source": 95065,
+        "snapshot": 1861
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 4,
+        "field": "only",
+        "source": null,
+        "snapshot": {
+          "classes": [
+            "MAGE"
+          ]
+        }
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 5,
+        "field": "t",
+        "source": "goto",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 5,
+        "field": "quest",
+        "source": null,
+        "snapshot": 61
+      },
+      {
+        "guideID": "forever/alliance/02-westfall",
+        "step": 21,
+        "goal": 5,
+        "field": "only",
+        "source": null,
+        "snapshot": {
+          "races": [
+            "Human"
+          ]
+        }
+      }
+    ],
+    "reviewedCorrections": [
+      {
+        "id": "westfall-alba-mines-2",
+        "guideID": "forever/alliance/02-westfall",
+        "revision": 2,
+        "evidence": {
+          "reason": "Both Testing the Wells and Murloc Gills must be delivered before The State of the Mines is available. Their work and deliveries now precede its acceptance and mine objectives. Initial quests are independent.",
+          "sourceUrl": "https://github.com/wheelbarrel00/EverythingQuests/blob/54a16756db16adeb9d5602bace1507077df37185/Data/QuestAvailable_Forever.lua#L15279",
+          "sourceCommit": "54a16756db16adeb9d5602bace1507077df37185",
+          "sourceFile": "Data/QuestAvailable_Forever.lua",
+          "sourceLine": 15279,
+          "questID": 92745,
+          "preAll": [
+            92742,
+            92744
+          ],
+          "navigation": "All goal destinations and coordinate frames are retained from the pinned SendaFH data; no speculative new point is added.",
+          "limitation": "Availability evidence and static replay do not replace verification of the live server."
+        }
+      }
+    ],
     "authoredTextPresenceLosses": [],
     "sourceStepNotes": 1722,
-    "snapshotStepNotes": 1722
+    "snapshotStepNotes": 1723
   },
   "sourceReadProblems": [],
   "order": {
@@ -308,13 +1623,13 @@
       "turnin_without_accept": [
         {
           "guideID": "forever/alliance/02-westfall",
-          "step": 20,
+          "step": 21,
           "goal": 4,
           "action": "turnin",
           "questID": 1861,
           "sourceFile": "guides/forever/alliance/02-westfall.guide",
-          "sourceLine": 244,
-          "sourceText": "turnin 1861 only Mage choose 9513 7508      -- Jennea Cannon, Wizard's Sanctum: Mirror Lake",
+          "sourceLine": 252,
+          "sourceText": "turnin 95065",
           "only": {
             "classes": [
               "MAGE"
@@ -2848,13 +4163,13 @@
         "sourceText": "turnin 65                                   -- Wiley the Black, by the docks",
         "acceptedAt": {
           "guideID": "forever/alliance/02-westfall",
-          "step": 16,
+          "step": 17,
           "goal": 3,
           "action": "accept",
           "questID": 65,
           "sourceFile": "guides/forever/alliance/02-westfall.guide",
-          "sourceLine": 204,
-          "sourceText": "accept 65                                   -- For Wiley the Black in Lakeshire, Redridge"
+          "sourceLine": 217,
+          "sourceText": "accept 1639"
         }
       },
       {
@@ -5537,13 +6852,13 @@
       },
       {
         "guideID": "forever/alliance/02-westfall",
-        "step": 20,
+        "step": 21,
         "goal": 4,
         "action": "turnin",
         "questID": 1861,
         "sourceFile": "guides/forever/alliance/02-westfall.guide",
-        "sourceLine": 244,
-        "sourceText": "turnin 1861 only Mage choose 9513 7508      -- Jennea Cannon, Wizard's Sanctum: Mirror Lake",
+        "sourceLine": 252,
+        "sourceText": "turnin 95065",
         "only": {
           "classes": [
             "MAGE"
@@ -5616,13 +6931,13 @@
       },
       {
         "guideID": "forever/alliance/02-westfall",
-        "step": 20,
+        "step": 21,
         "goal": 5,
         "action": "turnin",
         "questID": 61,
         "sourceFile": "guides/forever/alliance/02-westfall.guide",
-        "sourceLine": 245,
-        "sourceText": "turnin 61 only Human                        -- Morgan Pestle, Trade District",
+        "sourceLine": 253,
+        "sourceText": "goto 21.8,56.9 \"Boat to Auberdine\" live",
         "only": {
           "races": [
             "Human"
@@ -5641,13 +6956,13 @@
       },
       {
         "guideID": "forever/alliance/02-westfall",
-        "step": 18,
+        "step": 19,
         "goal": 1,
         "action": "turnin",
         "questID": 5635,
         "sourceFile": "guides/forever/alliance/02-westfall.guide",
-        "sourceLine": 229,
-        "sourceText": "turnin 5635                                 -- Desperate Prayer",
+        "sourceLine": 236,
+        "sourceText": "train class",
         "stepOnly": {
           "races": [
             "Human"
@@ -5674,13 +6989,10 @@
       },
       {
         "guideID": "forever/alliance/02-westfall",
-        "step": 18,
+        "step": 19,
         "goal": 2,
         "action": "turnin",
         "questID": 94774,
-        "sourceFile": "guides/forever/alliance/02-westfall.guide",
-        "sourceLine": 230,
-        "sourceText": "turnin 94774                                -- Divine Grace",
         "stepOnly": {
           "races": [
             "Human"
@@ -13652,71 +14964,53 @@
         "occurrences": [
           {
             "guideID": "forever/alliance/02-westfall",
-            "step": 21,
+            "step": 22,
             "goal": 3,
             "action": "accept",
-            "questID": 95065,
-            "sourceFile": "guides/forever/alliance/02-westfall.guide",
-            "sourceLine": 251,
-            "sourceText": "accept 95065                                -- Gilbert Gray"
+            "questID": 95065
           }
         ],
         "questGoals": [
           {
             "guideID": "forever/alliance/02-westfall",
-            "step": 21,
+            "step": 22,
             "goal": 3,
             "action": "accept",
-            "questID": 95065,
-            "sourceFile": "guides/forever/alliance/02-westfall.guide",
-            "sourceLine": 251,
-            "sourceText": "accept 95065                                -- Gilbert Gray"
+            "questID": 95065
           },
           {
             "guideID": "forever/alliance/02-westfall",
-            "step": 21,
+            "step": 22,
             "goal": 4,
             "action": "turnin",
-            "questID": 95065,
-            "sourceFile": "guides/forever/alliance/02-westfall.guide",
-            "sourceLine": 252,
-            "sourceText": "turnin 95065"
+            "questID": 95065
           }
         ],
         "unboundMatches": [
           {
             "guideID": "forever/alliance/02-westfall",
-            "step": 21,
+            "step": 22,
             "goal": 2,
             "action": "buy",
-            "questID": null,
-            "sourceFile": "guides/forever/alliance/02-westfall.guide",
-            "sourceLine": 250,
-            "sourceText": "buy 6530 x3 npc 5494                        -- Nightcrawlers"
+            "questID": null
           }
         ],
         "contexts": [
           {
             "guideID": "forever/alliance/02-westfall",
-            "step": 21,
+            "step": 22,
             "goal": 3,
             "action": "accept",
             "questID": 95065,
-            "sourceFile": "guides/forever/alliance/02-westfall.guide",
-            "sourceLine": 251,
-            "sourceText": "accept 95065                                -- Gilbert Gray",
             "note": "Gilbert Gray",
             "stepNote": "Catherine Leland vende suministros de pesca a lo largo del canal justo al oeste de Distrito de Mercaderes; Gilbert Gray peces en el puerto, en el camino al barco."
           },
           {
             "guideID": "forever/alliance/02-westfall",
-            "step": 21,
+            "step": 22,
             "goal": 4,
             "action": "turnin",
             "questID": 95065,
-            "sourceFile": "guides/forever/alliance/02-westfall.guide",
-            "sourceLine": 252,
-            "sourceText": "turnin 95065",
             "stepNote": "Catherine Leland vende suministros de pesca a lo largo del canal justo al oeste de Distrito de Mercaderes; Gilbert Gray peces en el puerto, en el camino al barco."
           }
         ],
@@ -16527,5 +17821,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "b47ad7a48abe93e63360e58fbaea2d90fa60a166dad101297f119c0d44e48bf1"
+  "inputSha256": "71a46f403fe796cf225ab618b313265fbd1ded3bc0b2049f0a241f5f71b0b51d"
 }

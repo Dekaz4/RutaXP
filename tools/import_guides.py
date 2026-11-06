@@ -284,6 +284,7 @@ def import_guides(source_path: Path, addon_path: Path, expected_commit: str) -> 
     builder = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(builder)
     builder.apply_guide_overrides(document, addon_path / "Source" / "guide_overrides.json")
+    builder.apply_guide_revisions(document, addon_path / "Source" / "guide_revisions.json")
     locations = addon_path / "Source" / "guide_locations.json"
     if locations.is_file():
         evidence = json.loads(locations.read_text(encoding="utf-8"))

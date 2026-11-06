@@ -10,6 +10,8 @@ as unbound goals or notes. Live quest completion always remains authoritative.
 from __future__ import annotations
 
 import argparse
+import copy
+import importlib.util
 from collections import Counter, defaultdict
 import hashlib
 import json
@@ -256,7 +258,7 @@ def scan_order(guides, events):
             "noQuestLinkedFutureWork": list(no_work.values())}
 
 
-def compare_compiled(source, guides):
+def compare_compiled(source, guides, document=None):
     if not source:
         return {"available": False}
     from import_guides import to_python
@@ -275,34 +277,53 @@ def compare_compiled(source, guides):
     relative = "addon/SendaFH_Guides/Guides.lua"
     raw = (source / relative).read_bytes()
     lua.execute(raw.decode("utf-8-sig"))
-    differences, missing_text = [], []
-    for guide in guides:
-        original = captured.get(guide["id"])
-        if not original:
-            differences.append({"guideID": guide["id"], "field": "missing source guide"})
-            continue
-        for key in ("faction", "races", "classes", "next", "nextChoices"):
-            if guide.get(key) != original.get(key):
-                differences.append({"guideID": guide["id"], "field": key})
-        if len(guide["steps"]) != len(original["steps"]):
-            differences.append({"guideID": guide["id"], "field": "step count"})
-        for si, (step, old) in enumerate(zip(guide["steps"], original["steps"]), 1):
-            if step.get("only") != old.get("only") or len(step["goals"]) != len(old["goals"]):
-                differences.append({"guideID": guide["id"], "step": si, "field": "group shape/condition"})
-            for field in ("note", "text"):
-                if old.get(field) and not step.get(field):
-                    missing_text.append({"guideID": guide["id"], "step": si, "field": field})
-            for gi, (goal, before) in enumerate(zip(step["goals"], old["goals"]), 1):
-                for field in FIELDS:
-                    if goal.get(field) != before.get(field):
-                        differences.append({"guideID": guide["id"], "step": si, "goal": gi, "field": field,
-                                            "source": before.get(field), "snapshot": goal.get(field)})
+    def compare(originals):
+        differences, missing_text = [], []
+        for guide in guides:
+            original = originals.get(guide["id"])
+            if not original:
+                differences.append({"guideID": guide["id"], "field": "missing source guide"})
+                continue
+            for key in ("faction", "races", "classes", "next", "nextChoices"):
+                if guide.get(key) != original.get(key):
+                    differences.append({"guideID": guide["id"], "field": key})
+            if len(guide["steps"]) != len(original["steps"]):
+                differences.append({"guideID": guide["id"], "field": "step count"})
+            for si, (step, old) in enumerate(zip(guide["steps"], original["steps"]), 1):
+                if step.get("only") != old.get("only") or len(step["goals"]) != len(old["goals"]):
+                    differences.append({"guideID": guide["id"], "step": si, "field": "group shape/condition"})
                 for field in ("note", "text"):
-                    if before.get(field) and not goal.get(field):
-                        missing_text.append({"guideID": guide["id"], "step": si, "goal": gi, "field": field})
+                    if old.get(field) and not step.get(field):
+                        missing_text.append({"guideID": guide["id"], "step": si, "field": field})
+                for gi, (goal, before) in enumerate(zip(step["goals"], old["goals"]), 1):
+                    for field in FIELDS:
+                        if goal.get(field) != before.get(field):
+                            differences.append({"guideID": guide["id"], "step": si, "goal": gi, "field": field,
+                                                "source": before.get(field), "snapshot": goal.get(field)})
+                    for field in ("note", "text"):
+                        if before.get(field) and not goal.get(field):
+                            missing_text.append({"guideID": guide["id"], "step": si, "goal": gi, "field": field})
+        return differences, missing_text
+
+    raw_differences, _ = compare(captured)
+    revised, reviewed = captured, []
+    revisions_path = ROOT / "RutaXP/Source/guide_revisions.json"
+    if document and document.get("provenance", {}).get("routeRevisions") and revisions_path.is_file():
+        spec = importlib.util.spec_from_file_location("audit_revision_builder", revisions_path.with_name("build_guides.py"))
+        builder = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(builder)
+        corrected = {"provenance": {"commit": document["provenance"]["commit"]}, "statistics": {},
+                     "guides": copy.deepcopy(list(captured.values()))}
+        applied = builder.apply_guide_revisions(corrected, revisions_path)
+        revised = {guide["id"]: guide for guide in corrected["guides"]}
+        revisions = json.loads(revisions_path.read_text(encoding="utf-8"))["revisions"]
+        reviewed = [{"id": entry["id"], "guideID": entry["guideID"], "revision": entry["revision"],
+                     "evidence": entry["evidence"]} for entry in revisions if entry["id"] in applied]
+    differences, missing_text = compare(revised)
     return {"available": True, "sourceFile": relative, "sourceSha256": sha(raw),
             "sourceLevelingGuides": len(captured), "sourceGuideIDsMissingFromSnapshot": sorted(set(captured) - {g["id"] for g in guides}),
-            "structuralDifferences": differences, "authoredTextPresenceLosses": missing_text,
+            "structuralDifferences": differences, "rawStructuralDifferences": raw_differences,
+            "reviewedCorrections": reviewed, "authoredTextPresenceLosses": missing_text,
             "sourceStepNotes": sum(bool(s.get("note")) for g in captured.values() for s in g["steps"]),
             "snapshotStepNotes": sum(bool(s.get("note")) for g in guides for s in g["steps"])}
 
@@ -418,7 +439,7 @@ def audit(document, source: Path | None = None, quest_records=None):
                       "goalFields": {k: sum(k in e["data"] for e in events) for k in FIELDS},
                       "stepConditions": sum(bool(s.get("only")) for g in guides for s in g["steps"]),
                       "sourceDslSteps": dsl_steps, "sourceDslActions": verbs},
-            "sourceComparison": compare_compiled(source, guides), "sourceReadProblems": problems,
+            "sourceComparison": compare_compiled(source, guides, document), "sourceReadProblems": problems,
             "order": order, "dependencyCycleCandidates": dependency_cycles(events), "workCoverage": work,
             "runtimeFindings": historical_runtime_findings,
             "limits": [

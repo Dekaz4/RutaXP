@@ -35,13 +35,13 @@ function ns:RegisterGuide(guide)
 end
 
 function ns:GetProgress(id)
+    local guide = self.guides[id]
     local state = self.char.progress[id]
     if type(state) ~= "table" then
-        state = { cursor = 1, confirmed = {} }
+        state = { cursor = 1, confirmed = {}, routeRevision = guide and guide.routeRevision }
         self.char.progress[id] = state
     end
     if type(state.confirmed) ~= "table" then state.confirmed = {} end
-    local guide = self.guides[id]
     state.cursor = math.max(1, math.min(tonumber(state.cursor) or 1, #guide.steps + 1))
     return state
 end
@@ -126,7 +126,7 @@ end
 function ns:ResetGuide(id)
     if self.guides[id] then
         if self.ResetGuideTravel then self:ResetGuideTravel(id) end
-        self.char.progress[id] = { cursor = 1, confirmed = {}, review = true }
+        self.char.progress[id] = { cursor = 1, confirmed = {}, review = true, routeRevision = self.guides[id].routeRevision }
         self:Sync()
     end
 end
@@ -288,6 +288,7 @@ function ns:Initialize()
     if self.char.seen and not self.char.uiV3 then
         self.char.uiV3 = true
     end
+    if self.MigrateGuideProgress then self:MigrateGuideProgress() end
     if self.RestoreFeatures then self:RestoreFeatures() end
     local active = self.guides[self.char.activeGuide]
     if not active then

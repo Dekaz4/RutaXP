@@ -504,6 +504,13 @@
         "forever/horde/50-60/06-silithus:33:5",
         "forever/horde/50-60/07-felwood:2:1"
       ]
+    },
+    "routeRevisions": {
+      "file": "Source/guide_revisions.json",
+      "sha256": "34689fce28e805e6c6e5b92b34be6fc8391275ff8abbfd21aa8709942e9829cf",
+      "applied": [
+        "westfall-alba-mines-2"
+      ]
     }
   },
   "statistics": {
@@ -522,7 +529,7 @@
       "Alliance": 29,
       "Horde": 28
     },
-    "steps": 2330,
+    "steps": 2331,
     "goals": 7444,
     "goalTypes": {
       "accept": 2290,
@@ -579,7 +586,7 @@
       "only": 352,
       "optional": 409,
       "pre": 1194,
-      "preAll": 35,
+      "preAll": 36,
       "preTitles": 1348,
       "profLine": 12,
       "profName": 12,
@@ -51153,7 +51160,7 @@
       "steps": [
         {
           "title": "Colina del Centinela",
-          "note": "Gryan Mantorrecio y Capitán Danuvin se encuentran en la parte superior de la torre de piedra. Intendente Lewis se encuentra en la torre, Explorador Galiaan y Alba Fairmoon en el lado sur de la colina, junto a la posada y Thor el maestro de grifos.",
+          "note": "Gryan Mantorrecio y Capitán Danuvin se encuentran en la parte superior de la torre de piedra. Intendente Lewis se encuentra en la torre, Explorador Galiaan y Alba Lunajusta en el lado sur de la colina, junto a la posada y Thor el maestro de grifos.",
           "goals": [
             {
               "title": "Mensajero a toda prisa",
@@ -51301,17 +51308,17 @@
             {
               "title": "Testing the Wells",
               "minLevel": 9,
-              "note": "Alba Fairmoon",
+              "note": "Alba Lunajusta",
               "t": "accept",
               "quest": 92742,
               "npc": 253092,
-              "npcName": "Alba Fairmoon",
+              "npcName": "Alba Lunajusta",
               "map": 1436,
               "x": 52.48,
               "y": 53.05,
               "f": "e",
               "qlvl": 12,
-              "instruction": "Habla con «Alba Fairmoon» y acepta «Testing the Wells».\nZona: Páramos de Poniente."
+              "instruction": "Habla con «Alba Lunajusta» y acepta «Testing the Wells».\nZona: Páramos de Poniente."
             },
             {
               "title": "Murloc Gills",
@@ -51319,27 +51326,13 @@
               "t": "accept",
               "quest": 92744,
               "npc": 253092,
-              "npcName": "Alba Fairmoon",
+              "npcName": "Alba Lunajusta",
               "map": 1436,
               "x": 52.48,
               "y": 53.05,
               "f": "e",
               "qlvl": 12,
-              "instruction": "Habla con «Alba Fairmoon» y acepta «Murloc Gills».\nZona: Páramos de Poniente."
-            },
-            {
-              "title": "The State of the Mines",
-              "minLevel": 9,
-              "t": "accept",
-              "quest": 92745,
-              "npc": 253092,
-              "npcName": "Alba Fairmoon",
-              "map": 1436,
-              "x": 52.48,
-              "y": 53.05,
-              "f": "e",
-              "qlvl": 14,
-              "instruction": "Habla con «Alba Fairmoon» y acepta «The State of the Mines».\nZona: Páramos de Poniente."
+              "instruction": "Habla con «Alba Lunajusta» y acepta «Murloc Gills».\nZona: Páramos de Poniente."
             }
           ]
         },
@@ -53753,8 +53746,376 @@
           ]
         },
         {
-          "title": "El Mina de la Costa del Oro",
-          "note": "Al oeste de Molsen Granja, hacia la costa. Riverpaw Miners trabajan la cantera.",
+          "title": "La costa norte",
+          "note": "Múrloc Coastrunners y Raiders bordean la playa al norte de la mina. Huyen a baja salud: pull uno a la vez.",
+          "goals": [
+            {
+              "title": "Murloc Gills",
+              "note": "Playa Larga Múrloc Gills",
+              "t": "collect",
+              "quest": 92744,
+              "oi": 1,
+              "item": 254548,
+              "itemName": "Longshore Murloc Gill",
+              "count": 7,
+              "map": 1436,
+              "x": 52.97,
+              "y": 11.3,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 53,
+                  "y": 10,
+                  "r": 41,
+                  "n": 9
+                },
+                {
+                  "x": 47.4,
+                  "y": 9.7,
+                  "r": 40,
+                  "n": 2
+                },
+                {
+                  "x": 42.3,
+                  "y": 11,
+                  "r": 50,
+                  "n": 8
+                },
+                {
+                  "x": 38.2,
+                  "y": 15.5,
+                  "r": 40,
+                  "n": 9
+                },
+                {
+                  "x": 33.9,
+                  "y": 16.9,
+                  "r": 45,
+                  "n": 18
+                },
+                {
+                  "x": 29.4,
+                  "y": 27.5,
+                  "r": 59,
+                  "n": 13
+                },
+                {
+                  "x": 30.8,
+                  "y": 35.1,
+                  "r": 40,
+                  "n": 1
+                },
+                {
+                  "x": 27.1,
+                  "y": 38.8,
+                  "r": 57,
+                  "n": 7
+                },
+                {
+                  "x": 25.5,
+                  "y": 48.6,
+                  "r": 40,
+                  "n": 14
+                },
+                {
+                  "x": 27.1,
+                  "y": 59.1,
+                  "r": 40,
+                  "n": 9
+                },
+                {
+                  "x": 27.6,
+                  "y": 75,
+                  "r": 40,
+                  "n": 4
+                },
+                {
+                  "x": 34.5,
+                  "y": 85,
+                  "r": 50,
+                  "n": 11
+                },
+                {
+                  "x": 55.8,
+                  "y": 8.7,
+                  "r": 40,
+                  "alt": true,
+                  "n": 10
+                },
+                {
+                  "x": 44.4,
+                  "y": 8.3,
+                  "r": 49,
+                  "alt": true,
+                  "n": 11
+                },
+                {
+                  "x": 35.3,
+                  "y": 21.6,
+                  "r": 40,
+                  "alt": true,
+                  "n": 9
+                },
+                {
+                  "x": 32.2,
+                  "y": 26.2,
+                  "r": 40,
+                  "alt": true,
+                  "n": 5
+                },
+                {
+                  "x": 28.5,
+                  "y": 33.6,
+                  "r": 48,
+                  "alt": true,
+                  "n": 9
+                },
+                {
+                  "x": 27.3,
+                  "y": 53.8,
+                  "r": 40,
+                  "alt": true,
+                  "n": 8
+                },
+                {
+                  "x": 24.7,
+                  "y": 56.3,
+                  "r": 43,
+                  "alt": true,
+                  "n": 6
+                },
+                {
+                  "x": 27.8,
+                  "y": 69.6,
+                  "r": 40,
+                  "alt": true,
+                  "n": 6
+                },
+                {
+                  "x": 26.5,
+                  "y": 73.2,
+                  "r": 54,
+                  "alt": true,
+                  "n": 13
+                }
+              ],
+              "spread": true,
+              "instruction": "Reúne «Longshore Murloc Gill» (7 en total).\nZona: Páramos de Poniente.\nPlaya Larga Múrloc Gills."
+            },
+            {
+              "title": "Estofado de los Páramos de Poniente",
+              "note": "Ojo de múrloc",
+              "t": "collect",
+              "quest": 38,
+              "oi": 2,
+              "item": 730,
+              "itemName": "Ojo de múrloc",
+              "count": 3,
+              "map": 1436,
+              "x": 52.97,
+              "y": 11.3,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 53,
+                  "y": 10,
+                  "r": 41,
+                  "n": 9
+                },
+                {
+                  "x": 47.3,
+                  "y": 10.1,
+                  "r": 40,
+                  "n": 3
+                },
+                {
+                  "x": 42.3,
+                  "y": 11,
+                  "r": 50,
+                  "n": 8
+                },
+                {
+                  "x": 38.2,
+                  "y": 15.5,
+                  "r": 40,
+                  "n": 9
+                },
+                {
+                  "x": 33.9,
+                  "y": 16.9,
+                  "r": 45,
+                  "n": 18
+                },
+                {
+                  "x": 29.4,
+                  "y": 27.5,
+                  "r": 59,
+                  "n": 13
+                },
+                {
+                  "x": 30.8,
+                  "y": 35.1,
+                  "r": 40,
+                  "n": 1
+                },
+                {
+                  "x": 27.1,
+                  "y": 38.8,
+                  "r": 57,
+                  "n": 7
+                },
+                {
+                  "x": 25.5,
+                  "y": 48.6,
+                  "r": 40,
+                  "n": 14
+                },
+                {
+                  "x": 27.1,
+                  "y": 59.1,
+                  "r": 40,
+                  "n": 9
+                },
+                {
+                  "x": 26.6,
+                  "y": 73.2,
+                  "r": 51,
+                  "n": 14
+                },
+                {
+                  "x": 34.5,
+                  "y": 85,
+                  "r": 50,
+                  "n": 11
+                },
+                {
+                  "x": 55.8,
+                  "y": 8.7,
+                  "r": 40,
+                  "alt": true,
+                  "n": 10
+                },
+                {
+                  "x": 44.4,
+                  "y": 8.3,
+                  "r": 49,
+                  "alt": true,
+                  "n": 11
+                },
+                {
+                  "x": 35.3,
+                  "y": 21.6,
+                  "r": 40,
+                  "alt": true,
+                  "n": 9
+                },
+                {
+                  "x": 32.2,
+                  "y": 26.2,
+                  "r": 40,
+                  "alt": true,
+                  "n": 5
+                },
+                {
+                  "x": 28.5,
+                  "y": 33.6,
+                  "r": 48,
+                  "alt": true,
+                  "n": 9
+                },
+                {
+                  "x": 27.3,
+                  "y": 44.5,
+                  "r": 40,
+                  "alt": true,
+                  "n": 1
+                },
+                {
+                  "x": 27.3,
+                  "y": 53.8,
+                  "r": 40,
+                  "alt": true,
+                  "n": 8
+                },
+                {
+                  "x": 24.7,
+                  "y": 56.3,
+                  "r": 43,
+                  "alt": true,
+                  "n": 6
+                },
+                {
+                  "x": 27.8,
+                  "y": 69.6,
+                  "r": 40,
+                  "alt": true,
+                  "n": 6
+                },
+                {
+                  "x": 28.1,
+                  "y": 75.4,
+                  "r": 43,
+                  "alt": true,
+                  "n": 4
+                }
+              ],
+              "spread": true,
+              "instruction": "Reúne «Ojo de múrloc» (3 en total).\nZona: Páramos de Poniente."
+            }
+          ]
+        },
+        {
+          "title": "Alba Lunajusta",
+          "note": "Vuelve a Alba en Colina del Centinela. Entrega las muestras de los pozos y las branquias antes de aceptar El estado de las minas.",
+          "goals": [
+            {
+              "title": "Testing the Wells",
+              "note": "Alba Lunajusta",
+              "t": "turnin",
+              "quest": 92742,
+              "npc": 253092,
+              "npcName": "Alba Lunajusta",
+              "map": 1436,
+              "x": 52.48,
+              "y": 53.05,
+              "f": "e",
+              "instruction": "Habla con «Alba Lunajusta» y entrega «Testing the Wells».\nZona: Páramos de Poniente."
+            },
+            {
+              "title": "Murloc Gills",
+              "t": "turnin",
+              "quest": 92744,
+              "npc": 253092,
+              "npcName": "Alba Lunajusta",
+              "map": 1436,
+              "x": 52.48,
+              "y": 53.05,
+              "f": "e",
+              "instruction": "Habla con «Alba Lunajusta» y entrega «Murloc Gills».\nZona: Páramos de Poniente."
+            },
+            {
+              "title": "The State of the Mines",
+              "minLevel": 9,
+              "t": "accept",
+              "quest": 92745,
+              "npc": 253092,
+              "npcName": "Alba Lunajusta",
+              "map": 1436,
+              "x": 52.48,
+              "y": 53.05,
+              "f": "e",
+              "qlvl": 14,
+              "instruction": "Habla con «Alba Lunajusta» y acepta «The State of the Mines».\nZona: Páramos de Poniente.",
+              "preAll": [
+                92742,
+                92744
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Cantera de la Costa del Oro",
+          "note": "Al oeste de la Granja de Molsen, hacia la costa. Derrota a los mineros Zarparrío en la cantera.",
           "goals": [
             {
               "title": "The State of the Mines",
@@ -54165,325 +54526,6 @@
           ]
         },
         {
-          "title": "La costa norte",
-          "note": "Múrloc Coastrunners y Raiders bordean la playa al norte de la mina. Huyen a baja salud: pull uno a la vez.",
-          "goals": [
-            {
-              "title": "Murloc Gills",
-              "note": "Playa Larga Múrloc Gills",
-              "t": "collect",
-              "quest": 92744,
-              "oi": 1,
-              "item": 254548,
-              "itemName": "Longshore Murloc Gill",
-              "count": 7,
-              "map": 1436,
-              "x": 52.97,
-              "y": 11.3,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 53,
-                  "y": 10,
-                  "r": 41,
-                  "n": 9
-                },
-                {
-                  "x": 47.4,
-                  "y": 9.7,
-                  "r": 40,
-                  "n": 2
-                },
-                {
-                  "x": 42.3,
-                  "y": 11,
-                  "r": 50,
-                  "n": 8
-                },
-                {
-                  "x": 38.2,
-                  "y": 15.5,
-                  "r": 40,
-                  "n": 9
-                },
-                {
-                  "x": 33.9,
-                  "y": 16.9,
-                  "r": 45,
-                  "n": 18
-                },
-                {
-                  "x": 29.4,
-                  "y": 27.5,
-                  "r": 59,
-                  "n": 13
-                },
-                {
-                  "x": 30.8,
-                  "y": 35.1,
-                  "r": 40,
-                  "n": 1
-                },
-                {
-                  "x": 27.1,
-                  "y": 38.8,
-                  "r": 57,
-                  "n": 7
-                },
-                {
-                  "x": 25.5,
-                  "y": 48.6,
-                  "r": 40,
-                  "n": 14
-                },
-                {
-                  "x": 27.1,
-                  "y": 59.1,
-                  "r": 40,
-                  "n": 9
-                },
-                {
-                  "x": 27.6,
-                  "y": 75,
-                  "r": 40,
-                  "n": 4
-                },
-                {
-                  "x": 34.5,
-                  "y": 85,
-                  "r": 50,
-                  "n": 11
-                },
-                {
-                  "x": 55.8,
-                  "y": 8.7,
-                  "r": 40,
-                  "alt": true,
-                  "n": 10
-                },
-                {
-                  "x": 44.4,
-                  "y": 8.3,
-                  "r": 49,
-                  "alt": true,
-                  "n": 11
-                },
-                {
-                  "x": 35.3,
-                  "y": 21.6,
-                  "r": 40,
-                  "alt": true,
-                  "n": 9
-                },
-                {
-                  "x": 32.2,
-                  "y": 26.2,
-                  "r": 40,
-                  "alt": true,
-                  "n": 5
-                },
-                {
-                  "x": 28.5,
-                  "y": 33.6,
-                  "r": 48,
-                  "alt": true,
-                  "n": 9
-                },
-                {
-                  "x": 27.3,
-                  "y": 53.8,
-                  "r": 40,
-                  "alt": true,
-                  "n": 8
-                },
-                {
-                  "x": 24.7,
-                  "y": 56.3,
-                  "r": 43,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 27.8,
-                  "y": 69.6,
-                  "r": 40,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 26.5,
-                  "y": 73.2,
-                  "r": 54,
-                  "alt": true,
-                  "n": 13
-                }
-              ],
-              "spread": true,
-              "instruction": "Reúne «Longshore Murloc Gill» (7 en total).\nZona: Páramos de Poniente.\nPlaya Larga Múrloc Gills."
-            },
-            {
-              "title": "Estofado de los Páramos de Poniente",
-              "note": "Ojo de múrloc",
-              "t": "collect",
-              "quest": 38,
-              "oi": 2,
-              "item": 730,
-              "itemName": "Ojo de múrloc",
-              "count": 3,
-              "map": 1436,
-              "x": 52.97,
-              "y": 11.3,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 53,
-                  "y": 10,
-                  "r": 41,
-                  "n": 9
-                },
-                {
-                  "x": 47.3,
-                  "y": 10.1,
-                  "r": 40,
-                  "n": 3
-                },
-                {
-                  "x": 42.3,
-                  "y": 11,
-                  "r": 50,
-                  "n": 8
-                },
-                {
-                  "x": 38.2,
-                  "y": 15.5,
-                  "r": 40,
-                  "n": 9
-                },
-                {
-                  "x": 33.9,
-                  "y": 16.9,
-                  "r": 45,
-                  "n": 18
-                },
-                {
-                  "x": 29.4,
-                  "y": 27.5,
-                  "r": 59,
-                  "n": 13
-                },
-                {
-                  "x": 30.8,
-                  "y": 35.1,
-                  "r": 40,
-                  "n": 1
-                },
-                {
-                  "x": 27.1,
-                  "y": 38.8,
-                  "r": 57,
-                  "n": 7
-                },
-                {
-                  "x": 25.5,
-                  "y": 48.6,
-                  "r": 40,
-                  "n": 14
-                },
-                {
-                  "x": 27.1,
-                  "y": 59.1,
-                  "r": 40,
-                  "n": 9
-                },
-                {
-                  "x": 26.6,
-                  "y": 73.2,
-                  "r": 51,
-                  "n": 14
-                },
-                {
-                  "x": 34.5,
-                  "y": 85,
-                  "r": 50,
-                  "n": 11
-                },
-                {
-                  "x": 55.8,
-                  "y": 8.7,
-                  "r": 40,
-                  "alt": true,
-                  "n": 10
-                },
-                {
-                  "x": 44.4,
-                  "y": 8.3,
-                  "r": 49,
-                  "alt": true,
-                  "n": 11
-                },
-                {
-                  "x": 35.3,
-                  "y": 21.6,
-                  "r": 40,
-                  "alt": true,
-                  "n": 9
-                },
-                {
-                  "x": 32.2,
-                  "y": 26.2,
-                  "r": 40,
-                  "alt": true,
-                  "n": 5
-                },
-                {
-                  "x": 28.5,
-                  "y": 33.6,
-                  "r": 48,
-                  "alt": true,
-                  "n": 9
-                },
-                {
-                  "x": 27.3,
-                  "y": 44.5,
-                  "r": 40,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 27.3,
-                  "y": 53.8,
-                  "r": 40,
-                  "alt": true,
-                  "n": 8
-                },
-                {
-                  "x": 24.7,
-                  "y": 56.3,
-                  "r": 43,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 27.8,
-                  "y": 69.6,
-                  "r": 40,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 28.1,
-                  "y": 75.4,
-                  "r": 43,
-                  "alt": true,
-                  "n": 4
-                }
-              ],
-              "spread": true,
-              "instruction": "Reúne «Ojo de múrloc» (3 en total).\nZona: Páramos de Poniente."
-            }
-          ]
-        },
-        {
           "title": "Las colinas de los gnomos",
           "note": "Gnolles Zarparríos y Scouts recorren las colinas entre la costa y el Jansen Stead.",
           "goals": [
@@ -54843,50 +54885,25 @@
               "instruction": "Habla con «Capitán Danuvin» y entrega «En patrulla por Páramos de Poniente».\nZona: Páramos de Poniente."
             },
             {
-              "title": "Testing the Wells",
-              "note": "Alba Fairmoon",
-              "t": "turnin",
-              "quest": 92742,
-              "npc": 253092,
-              "npcName": "Alba Fairmoon",
-              "map": 1436,
-              "x": 52.48,
-              "y": 53.05,
-              "f": "e",
-              "instruction": "Habla con «Alba Fairmoon» y entrega «Testing the Wells».\nZona: Páramos de Poniente."
-            },
-            {
-              "title": "Murloc Gills",
-              "t": "turnin",
-              "quest": 92744,
-              "npc": 253092,
-              "npcName": "Alba Fairmoon",
-              "map": 1436,
-              "x": 52.48,
-              "y": 53.05,
-              "f": "e",
-              "instruction": "Habla con «Alba Fairmoon» y entrega «Murloc Gills».\nZona: Páramos de Poniente."
-            },
-            {
               "title": "The State of the Mines",
               "t": "turnin",
               "quest": 92745,
               "npc": 253092,
-              "npcName": "Alba Fairmoon",
+              "npcName": "Alba Lunajusta",
               "map": 1436,
               "x": 52.48,
               "y": 53.05,
               "f": "e",
-              "instruction": "Habla con «Alba Fairmoon» y entrega «The State of the Mines».\nZona: Páramos de Poniente."
+              "instruction": "Habla con «Alba Lunajusta» y entrega «The State of the Mines».\nZona: Páramos de Poniente."
             },
             {
               "title": "Moonbrook Espionage",
               "minLevel": 9,
-              "note": "Alba Fairmoon",
+              "note": "Alba Lunajusta",
               "t": "accept",
               "quest": 92747,
               "npc": 253092,
-              "npcName": "Alba Fairmoon",
+              "npcName": "Alba Lunajusta",
               "pre": [
                 92745
               ],
@@ -54898,7 +54915,7 @@
               "y": 53.05,
               "f": "e",
               "qlvl": 15,
-              "instruction": "Habla con «Alba Fairmoon» y acepta «Moonbrook Espionage».\nZona: Páramos de Poniente."
+              "instruction": "Habla con «Alba Lunajusta» y acepta «Moonbrook Espionage».\nZona: Páramos de Poniente."
             },
             {
               "t": "vendor",
@@ -56320,16 +56337,16 @@
             },
             {
               "title": "Moonbrook Espionage",
-              "note": "Alba Fairmoon",
+              "note": "Alba Lunajusta",
               "t": "turnin",
               "quest": 92747,
               "npc": 253092,
-              "npcName": "Alba Fairmoon",
+              "npcName": "Alba Lunajusta",
               "map": 1436,
               "x": 52.48,
               "y": 53.05,
               "f": "e",
-              "instruction": "Habla con «Alba Fairmoon» y entrega «Moonbrook Espionage».\nZona: Páramos de Poniente."
+              "instruction": "Habla con «Alba Lunajusta» y entrega «Moonbrook Espionage».\nZona: Páramos de Poniente."
             },
             {
               "title": "Explosive Consultation",
@@ -56338,7 +56355,7 @@
               "t": "accept",
               "quest": 92748,
               "npc": 253092,
-              "npcName": "Alba Fairmoon",
+              "npcName": "Alba Lunajusta",
               "pre": [
                 92747
               ],
@@ -56350,7 +56367,7 @@
               "y": 53.05,
               "f": "e",
               "qlvl": 16,
-              "instruction": "Habla con «Alba Fairmoon» y acepta «Explosive Consultation».\nZona: Páramos de Poniente.\nPara Duendy Ruedadentada en de Ventormenta Distrito enano."
+              "instruction": "Habla con «Alba Lunajusta» y acepta «Explosive Consultation».\nZona: Páramos de Poniente.\nPara Duendy Ruedadentada en de Ventormenta Distrito enano."
             },
             {
               "t": "vendor",
@@ -58348,7 +58365,8 @@
       ],
       "_sendaLocale": "esES",
       "pack": "guides",
-      "version": 1
+      "version": 1,
+      "routeRevision": 2
     },
     {
       "id": "forever/alliance/03-darkshore",

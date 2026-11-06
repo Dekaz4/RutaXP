@@ -1,4 +1,4 @@
-# RutaXP 0.7.7 para WoW Forever
+# RutaXP 0.7.8 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,14 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## Orden de las misiones de Alba (0.7.8)
+
+En Páramos de Poniente, «El estado de las minas» requiere entregar primero **Probar los pozos y Branquias de múrloc**. La ruta recoge las branquias antes de visitar las minas y vuelve a Alba Lunajusta para entregar ambas misiones y aceptar la siguiente. Sus requisitos se comprueban también al recuperar una cadena.
+
+Las partidas anteriores conservan sus objetivos, omisiones y confirmaciones al cambiar los números de paso. Si esta cadena os había dejado bloqueados, la guía retoma la tarea que falta según el diario de cada personaje. También se corrige la recuperación antigua de esta misión. El modo dúo sigue esperando el progreso real del compañero.
+
+Requisito contrastado con [EverythingQuests](https://github.com/wheelbarrel00/EverythingQuests/blob/54a16756db16adeb9d5602bace1507077df37185/Data/QuestAvailable_Forever.lua#L15279). La revisión de software no sustituye la comprobación dentro de Forever.
 
 ## Volver a un paso saltado (0.7.7)
 
@@ -66,7 +74,7 @@ En Dúo puedes pulsar **Sincronizar de nuevo**, o escribir `/rutaxp sincronizar`
 
 ## Contenido conservado
 
-- 57 rutas de misiones para los niveles 1–60: 29 de Alianza y 28 de Horda, con 2.330 pasos y 7.444 objetivos. Incluyen los inicios clásicos y Skyborne en ambas facciones, con variantes de clase.
+- 57 rutas de misiones para los niveles 1–60: 29 de Alianza y 28 de Horda, con 2.331 pasos y 7.444 objetivos. Incluyen los inicios clásicos y Skyborne en ambas facciones, con variantes de clase.
 - Interfaz de Antigravity, panel compacto, iconos, flecha facetada con giro continuo y posiciones de ventanas por personaje.
 - 36 planes de talentos y sus 1.836 puntos, selector de builds y asistente del instructor. Las recomendaciones orientan al usuario; no compran habilidades ni gastan talentos por sí solas.
 - Búsqueda, filtros, opcionales, confirmación manual, datos y progreso por personaje.
@@ -187,7 +195,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.7.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.8.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.

@@ -504,6 +504,13 @@
         "forever/horde/50-60/06-silithus:33:5",
         "forever/horde/50-60/07-felwood:2:1"
       ]
+    },
+    "routeRevisions": {
+      "file": "Source/guide_revisions.json",
+      "sha256": "34689fce28e805e6c6e5b92b34be6fc8391275ff8abbfd21aa8709942e9829cf",
+      "applied": [
+        "westfall-alba-mines-2"
+      ]
     }
   },
   "totals": {
@@ -521,7 +528,7 @@
     "conditional_navigation": 2,
     "conditional_point_expected": 2,
     "reference_only": 2,
-    "steps": 2330
+    "steps": 2331
   },
   "byAction": {
     "accept": {
@@ -6370,9 +6377,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/02-westfall:16:1",
+      "key": "forever/alliance/02-westfall:17:1",
       "guideID": "forever/alliance/02-westfall",
-      "stepIndex": 16,
+      "stepIndex": 17,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -6382,7 +6389,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/02-westfall",
-        "stepIndex": 16,
+        "stepIndex": 17,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -16802,6 +16809,6 @@
       "location",
       "requiredLevel"
     ],
-    "semanticsSha256": "46bc091cc7034231f3f7138dc301eaff00126460d6abfe7745a3233ada32350d"
+    "semanticsSha256": "73fe78adeda8fb18a7d95bf6a5569f72769b11e85727667167066108f15478fd"
   }
 }

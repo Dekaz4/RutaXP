@@ -106,7 +106,8 @@ class AccessHost:
         marks["user-confirmed"] = True
         self.h.g.RutaXPCharDB = self.h.table({"seen": True, "activeGuide": guide_id, "auto": False,
             "duo": {"enabled": False, "autoPair": False}, "progress": {guide_id: {
-                "cursor": step, "placed": True, "review": True, "confirmed": marks, "skipped": {"user-skipped": True}}}})
+                "cursor": step, "routeRevision": self.guide.routeRevision, "placed": True, "review": True,
+                "confirmed": marks, "skipped": {"user-skipped": True}}}})
         self.engine = load_pathing(self.h) if terrain else None
         self.h.g.EmitAddonEvent("ADDON_LOADED", "RutaXP")
         self.h.g.EmitAddonEvent("PLAYER_LOGIN")

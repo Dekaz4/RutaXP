@@ -143,7 +143,7 @@ function Auto:_Apply(plan)
     if type(own) ~= "table" then
         -- Only our own observed projection may initialize a new route.
         local cursor = plan.ownCursorObserved == true and plan.ownCursor or 1
-        ns.char.progress[guide.id] = { cursor = math.min(cursor, #guide.steps + 1), confirmed = {} }
+        ns.char.progress[guide.id] = { cursor = math.min(cursor, #guide.steps + 1), confirmed = {}, routeRevision = guide.routeRevision }
         own = ns.char.progress[guide.id]
     end
     local lease = settings().autoSession

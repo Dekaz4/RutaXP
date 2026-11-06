@@ -83,7 +83,7 @@ class TrackerOmittedTests(unittest.TestCase):
         self.assertEqual(state.cursor, 5)
 
     def test_delivered_goal_keeps_the_existing_green_check_style(self):
-        host = AccessHost(WESTFALL, 6, 1)
+        host = AccessHost(WESTFALL, 8, 1)
         host.h.lua.execute(TEXTURE_AND_TOOLTIP_STUBS)
         host.s.quests[92745].delivered = True
         host.s.quests[92745].onQuest = False

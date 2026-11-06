@@ -20,6 +20,24 @@ spec.loader.exec_module(audit_module)
 ORIGINAL_SEMANTICS = "46bc091cc7034231f3f7138dc301eaff00126460d6abfe7745a3233ada32350d"
 
 
+def original_order(document):
+    """Undo only the reviewed Westfall move before checking the old full digest."""
+    result = copy.deepcopy(document)
+    west = next(guide for guide in result["guides"] if guide["id"] == "forever/alliance/02-westfall")
+    revised = west["steps"]
+    # Explicit independent inverse of revision 2's authored visit mapping.
+    source_positions = [1, 2, 3, 4, 5, 8, 9, 6, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+    old = [copy.deepcopy(revised[position - 1]) for position in source_positions]
+    acceptance = copy.deepcopy(revised[6]["goals"][2])
+    if acceptance.get("preAll") != [92742, 92744]:
+        raise AssertionError("The reviewed prerequisite correction changed")
+    del acceptance["preAll"]
+    old[0]["goals"].append(acceptance)
+    old[11]["goals"][4:4] = copy.deepcopy(revised[6]["goals"][:2])
+    west["steps"] = old
+    return result
+
+
 class WholeGuideCoverageTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -32,7 +50,7 @@ class WholeGuideCoverageTests(unittest.TestCase):
         report = self.report
         self.assertEqual(report["totals"]["guides"], 57)
         self.assertEqual(report["totals"]["goals"], 7444)
-        self.assertEqual(report["totals"]["steps"], 2330)
+        self.assertEqual(report["totals"]["steps"], 2331)
         self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7444)
         self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7444)
         self.assertEqual(sum(report["totals"].get(k, 0) for k in
@@ -54,8 +72,9 @@ class WholeGuideCoverageTests(unittest.TestCase):
             else:
                 self.assertTrue(item["unresolved"])
 
-    def test_enrichment_preserves_every_original_quest_and_progress_semantic(self):
-        self.assertEqual(self.report["preservation"]["semanticsSha256"], ORIGINAL_SEMANTICS)
+    def test_enrichment_preserves_every_semantic_except_the_reviewed_westfall_correction(self):
+        original = original_order(self.document)
+        self.assertEqual(audit_module.audit(original)["preservation"]["semanticsSha256"], ORIGINAL_SEMANTICS)
 
     def test_authored_direct_points_are_preserved_when_the_optional_original_audit_is_available(self):
         baseline_path = ROOT / ".backups" / "guides-audit-initial.json"
@@ -63,7 +82,7 @@ class WholeGuideCoverageTests(unittest.TestCase):
             self.skipTest("Optional pre-enrichment coordinate baseline is not part of the addon package")
         baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
         before = baseline["preservation"]["authoredDirectDigests"]
-        after = audit_module.audit(self.document, include_baseline=True)["preservation"]["authoredDirectDigests"]
+        after = audit_module.audit(original_order(self.document), include_baseline=True)["preservation"]["authoredDirectDigests"]
         self.assertEqual(len(before), 6560)
         for key, expected in before.items():
             self.assertEqual(after.get(key), expected, key)

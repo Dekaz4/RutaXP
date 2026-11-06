@@ -79,6 +79,7 @@ local function snapshotCopy(raw)
     local guideID, cursor = text(raw.guideID), integer(raw.cursor, 1, 100001)
     if not guideID or not cursor then return nil end
     local result = { guideID = guideID, cursor = cursor, review = raw.review == true or nil,
+        routeRevision = integer(raw.routeRevision, 1, 100001),
         level = integer(raw.level, 1, 100), mapID = integer(raw.mapID, 1, 100000), known = raw.known == true,
         quests = {}, trackedQuestIDs = {} }
     local tracked = {}
@@ -179,7 +180,9 @@ function Journey:SaveCheckpoint(automatic)
         if integer(id, 1, 10000000) and count(ids) < QUEST_LIMIT then ids[id] = true end
     end
     local own = { known = true, guideID = guide.id, cursor = integer(state and state.cursor, 1, #guide.steps + 1) or 1,
-        review = state and state.review == true or nil, level = integer(safe(UnitLevel, "player"), 1, 100),
+        review = state and state.review == true or nil,
+        routeRevision = integer(state and state.routeRevision, 1, 100001) or integer(guide.routeRevision, 1, 100001),
+        level = integer(safe(UnitLevel, "player"), 1, 100),
         mapID = integer(safe(C_Map and C_Map.GetBestMapForUnit, "player"), 1, 100000), quests = {}, trackedQuestIDs = {} }
     local friend = { known = true, guideID = text(ctx.guideID) or text(remote and remote.guideID) or "unknown",
         cursor = integer(ctx.cursor, 1, 100001) or integer(remote and remote.cursor, 1, 100001) or 1,
@@ -212,7 +215,9 @@ function Journey:ResumeCheckpoint(index)
     ns.char.progress = type(ns.char.progress) == "table" and ns.char.progress or {}
     if type(ns.char.progress[guide.id]) ~= "table" then
         -- Only our own saved cursor can initialize missing local progress.
-        ns.char.progress[guide.id] = { cursor = math.min(own.cursor, #guide.steps + 1), confirmed = {}, review = true }
+        local cursor = ns.GetGuideCursorForRevision and ns:GetGuideCursorForRevision(guide.id, own.cursor, own.routeRevision) or own.cursor
+        ns.char.progress[guide.id] = { cursor = math.min(cursor, #guide.steps + 1), confirmed = {}, review = true,
+            routeRevision = guide.routeRevision }
     end
     ns.char.activeGuide = guide.id
     self:Store().lastPartner = record.partnerName

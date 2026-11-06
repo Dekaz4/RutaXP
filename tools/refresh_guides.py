@@ -28,6 +28,7 @@ def refresh(source: Path) -> tuple[dict, dict]:
     spec.loader.exec_module(builder)
     document = json.loads((source / "leveling.json").read_text(encoding="utf-8"))
     builder.apply_guide_overrides(document, source / "guide_overrides.json")
+    builder.apply_guide_revisions(document, source / "guide_revisions.json")
     builder.apply_guide_locations(document, source / "guide_locations.json")
     document = enrich_document(document)
     document["statistics"]["goalFields"] = dict(sorted(Counter(key for guide in document["guides"]

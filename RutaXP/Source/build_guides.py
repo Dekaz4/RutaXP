@@ -15,6 +15,7 @@ initial import tool, so a deliberate reimport preserves their source evidence.
 from __future__ import annotations
 
 import argparse
+import copy
 from collections import Counter
 import hashlib
 import json
@@ -132,6 +133,93 @@ def apply_guide_overrides(document: dict[str, Any], path: Path) -> list[str]:
     }
     fields = Counter(key for guide in document["guides"] for step in guide["steps"] for goal in step["goals"] for key in goal)
     document["statistics"]["goalFields"] = dict(sorted(fields.items()))
+    return applied
+
+
+ROUTE_FIELDS = ("t", "quest", "oi", "item", "count", "pre", "preAll", "closedBy", "only", "optional",
+                "minLevel", "maxLevel", "level", "n", "class", "group", "order")
+
+
+def route_shape(guide: dict[str, Any]) -> str:
+    """Fingerprint quest semantics, independently of translated text/navigation."""
+    shape = [{"only": step.get("only"), "goals": [
+        {key: goal[key] for key in ROUTE_FIELDS if key in goal} for goal in step["goals"]
+    ]} for step in guide["steps"]]
+    return hashlib.sha256(json.dumps(shape, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+def apply_guide_revisions(document: dict[str, Any], path: Path) -> list[str]:
+    """Apply reviewed quest-order corrections, preserving every authored goal.
+
+    Each revision has exact before/after semantic fingerprints and explicit
+    evidence. It is deliberately separate from the navigation-only overlays.
+    """
+    if not path.is_file():
+        return []
+    payload = path.read_bytes()
+    overlay = json.loads(payload)
+    if overlay.get("schemaVersion") != 1 or overlay.get("sourceCommit") != document["provenance"]["commit"]:
+        raise ValueError("Guide revisions do not match the pinned source")
+    applied = []
+    for revision in overlay.get("revisions", []):
+        matches = [guide for guide in document["guides"] if guide["id"] == revision["guideID"]]
+        if len(matches) != 1 or not revision.get("evidence"):
+            raise ValueError("Revision needs one guide and evidence: " + revision["id"])
+        guide = matches[0]
+        if guide.get("routeRevision", 1) == revision["revision"]:
+            if route_shape(guide) != revision["resultShape"]:
+                raise ValueError("Revised guide semantics changed: " + revision["id"])
+            applied.append(revision["id"])
+            continue
+        if guide.get("routeRevision", 1) != revision["previousRevision"] or route_shape(guide) != revision["sourceShape"]:
+            raise ValueError("Revision source semantics changed: " + revision["id"])
+        original = guide["steps"]
+        revised, used = [], []
+        for entry in revision["steps"]:
+            if "sourceStep" in entry:
+                source_index = entry["sourceStep"]
+                step = copy.deepcopy(original[source_index - 1])
+                refs = [[source_index, index] for index in range(1, len(step["goals"]) + 1)
+                        if index not in entry.get("omitGoals", [])]
+                step["goals"] = [copy.deepcopy(original[si - 1]["goals"][gi - 1]) for si, gi in refs]
+                step.update(copy.deepcopy(entry.get("set", {})))
+            else:
+                refs = entry["goals"]
+                step = {key: copy.deepcopy(value) for key, value in entry.items() if key != "goals"}
+                step["goals"] = [copy.deepcopy(original[si - 1]["goals"][gi - 1]) for si, gi in refs]
+            if not step["goals"]:
+                raise ValueError("Revision produces an empty step: " + revision["id"])
+            used.extend(tuple(ref) for ref in refs)
+            revised.append(step)
+        expected = [(si, gi) for si, step in enumerate(original, 1) for gi in range(1, len(step["goals"]) + 1)]
+        if sorted(used) != expected:
+            raise ValueError("Revision must retain every goal exactly once: " + revision["id"])
+        for patch in revision.get("goalChanges", []):
+            goals = [goal for step in revised for goal in step["goals"]
+                     if all(goal.get(key) == value for key, value in patch["match"].items())]
+            if len(goals) != patch["count"]:
+                raise ValueError("Revision goal selector changed: " + revision["id"])
+            for goal in goals:
+                goal.update(copy.deepcopy(patch["set"]))
+        for step in revised:
+            for key in ("title", "note", "text"):
+                if isinstance(step.get(key), str):
+                    for old, new in revision.get("textReplacements", {}).items():
+                        step[key] = step[key].replace(old, new)
+            for goal in step["goals"]:
+                for key in ("npcName", "note", "text"):
+                    if isinstance(goal.get(key), str):
+                        for old, new in revision.get("textReplacements", {}).items():
+                            goal[key] = goal[key].replace(old, new)
+        candidate = dict(guide, steps=revised)
+        if route_shape(candidate) != revision["resultShape"]:
+            raise ValueError("Revision result does not match reviewed semantics: " + revision["id"])
+        guide["steps"], guide["routeRevision"] = revised, revision["revision"]
+        applied.append(revision["id"])
+    document["provenance"]["routeRevisions"] = {
+        "file": "Source/guide_revisions.json", "sha256": hashlib.sha256(payload).hexdigest(), "applied": applied,
+    }
+    document["statistics"]["steps"] = sum(len(guide["steps"]) for guide in document["guides"])
     return applied
 
 

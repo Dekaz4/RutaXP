@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+  "revisions": [
+    {
+      "id": "westfall-alba-mines-2",
+      "guideID": "forever/alliance/02-westfall",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "6c9309fcff45426b91253ceb0236adae2ebecbdc760f82fd6441855ac3016438",
+      "resultShape": "59bf1b9e9d10870e0a84c6700f526ff21058ef6e7d96e5ff1f78c39e96a669c4",
+      "steps": [
+        {
+          "sourceStep": 1,
+          "omitGoals": [
+            11
+          ]
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "title": "Alba Lunajusta",
+          "note": "Vuelve a Alba en Colina del Centinela. Entrega las muestras de los pozos y las branquias antes de aceptar El estado de las minas.",
+          "goals": [
+            [
+              12,
+              5
+            ],
+            [
+              12,
+              6
+            ],
+            [
+              1,
+              11
+            ]
+          ]
+        },
+        {
+          "sourceStep": 6,
+          "set": {
+            "title": "Cantera de la Costa del Oro",
+            "note": "Al oeste de la Granja de Molsen, hacia la costa. Derrota a los mineros Zarparrío en la cantera."
+          }
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12,
+          "omitGoals": [
+            5,
+            6
+          ]
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 92745
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              92742,
+              92744
+            ]
+          }
+        }
+      ],
+      "textReplacements": {
+        "Alba Fairmoon": "Alba Lunajusta"
+      },
+      "evidence": {
+        "reason": "Both Testing the Wells and Murloc Gills must be delivered before The State of the Mines is available. Their work and deliveries now precede its acceptance and mine objectives. Initial quests are independent.",
+        "sourceUrl": "https://github.com/wheelbarrel00/EverythingQuests/blob/54a16756db16adeb9d5602bace1507077df37185/Data/QuestAvailable_Forever.lua#L15279",
+        "sourceCommit": "54a16756db16adeb9d5602bace1507077df37185",
+        "sourceFile": "Data/QuestAvailable_Forever.lua",
+        "sourceLine": 15279,
+        "questID": 92745,
+        "preAll": [
+          92742,
+          92744
+        ],
+        "navigation": "All goal destinations and coordinate frames are retained from the pinned SendaFH data; no speculative new point is added.",
+        "limitation": "Availability evidence and static replay do not replace verification of the live server."
+      }
+    }
+  ]
+}

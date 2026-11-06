@@ -112,8 +112,13 @@ class GuideStructureAuditTests(unittest.TestCase):
 
     def test_shipped_report_covers_all_guides_and_keeps_the_49_work_cases_explicit(self):
         report = json.loads((ROOT / "RutaXP/Source/guide_structure.json").read_text(encoding="utf-8"))
-        self.assertEqual((report["scope"]["guides"], report["scope"]["steps"], report["scope"]["goals"]), (57, 2330, 7444))
+        self.assertEqual((report["scope"]["guides"], report["scope"]["steps"], report["scope"]["goals"]), (57, 2331, 7444))
         self.assertEqual(report["sourceComparison"]["structuralDifferences"], [])
+        comparison = report["sourceComparison"]
+        self.assertEqual([entry["id"] for entry in comparison["reviewedCorrections"]], ["westfall-alba-mines-2"])
+        self.assertTrue(comparison["rawStructuralDifferences"])
+        self.assertEqual({entry["guideID"] for entry in comparison["rawStructuralDifferences"]},
+                         {"forever/alliance/02-westfall"})
         self.assertEqual(report["scope"]["actions"], report["scope"]["sourceDslActions"])
         coverage = report["workCoverage"]
         self.assertEqual(coverage["sourceQuestsWithObjectives"], 49)
