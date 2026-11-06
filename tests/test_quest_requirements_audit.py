@@ -162,6 +162,85 @@ q(6, {groups={q(7, {sourceQuest=4,})},})''')
         self.assertGreater(report["scope"]["withoutReportedEvidence"], 0)
         self.assertTrue(report["limits"])
 
+    def test_new_wetlands_quests_are_captured_without_inventing_missing_gates(self):
+        data = json.loads((SOURCE / "quest_requirements_evidence.json").read_text(encoding="utf-8"))
+        for quest, level, line in ((474, 23, 4830), (98208, 22, 8630), (98291, 22, 8645)):
+            with self.subTest(quest=quest):
+                record = data["quests"][str(quest)]
+                self.assertEqual(record["minLevel"], level)
+                self.assertIn("minLevel", record["reportedFields"])
+                self.assertIn({"source": "everythingquests", "line": line}, record["fieldSources"]["minLevel"])
+        self.assertEqual(data["quests"]["474"]["pre"], [465])
+        self.assertEqual(data["quests"]["474"]["crossSourceReview"]["status"], "corroborated_single_completed_parent")
+        for quest in (98208, 98291):
+            self.assertNotIn("pre", data["quests"][str(quest)])
+            self.assertNotIn("preAll", data["quests"][str(quest)])
+
+    def test_holy_diver_review_keeps_eq_subset_and_reports_the_questie_group_discrepancy(self):
+        data = json.loads((SOURCE / "quest_requirements_evidence.json").read_text(encoding="utf-8"))
+        doc = json.loads((SOURCE / "leveling.json").read_text(encoding="utf-8"))
+        revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
+        record = data["quests"]["87760"]
+        self.assertEqual(record["pre"], [4733])
+        self.assertNotIn("preAll", record)
+        self.assertEqual(record["fieldSources"]["pre"], [{"source": "everythingquests", "line": 15168}])
+        review = record["crossSourceReview"]
+        self.assertEqual(review["status"], "questie_explicit_group_eq_partial")
+        proof = next(r for r in revisions if r["id"] == review["reviewedCorrectionID"])["evidence"]
+        independent = review["additionalReview"]
+        self.assertEqual(independent["preAll"], proof["prerequisites"]["87760"])
+        self.assertEqual(len(independent["preAll"]), 9)
+        for left, right in (("commit", "sourceCommit"), ("url", "sourceUrl"), ("sha256", "sourceSha256")):
+            self.assertEqual(independent[left], proof[right])
+        finding = next(row for row in requirements.audit(doc, data)["findings"]
+                       if row["questID"] == 87760 and row["field"] == "prerequisites")
+        self.assertEqual(finding["kind"], "prerequisite_conflict_review")
+        self.assertEqual(finding["reported"], {"all": [4733], "any": []})
+        self.assertEqual(finding["authored"], {"all": independent["preAll"], "any": []})
+        self.assertEqual(finding["crossSourceReview"], review["status"])
+
+    def test_capture_then_annotation_reproduces_holy_diver_review_without_overwriting_eq(self):
+        revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))
+        published = json.loads((SOURCE / "quest_requirements_evidence.json").read_text(encoding="utf-8"))
+        lines = ["gates = {", " [87760]=1520000770000,", "},"]
+        lines += [""] * (15166 - len(lines))
+        lines += ["pre = {", " [87760]={4733},", "},"]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "eq.lua"
+            path.write_text("\n".join(lines), encoding="utf-8")
+            captured = requirements.capture(path, {"repo": "owner/repo", "commit": "fixture", "path": "data.lua"}, {87760})
+        original = copy.deepcopy(captured["quests"]["87760"])
+        requirements.annotate_reviewed_holy_diver(captured, revisions)
+        record = captured["quests"]["87760"]
+        self.assertEqual(record["crossSourceReview"], published["quests"]["87760"]["crossSourceReview"])
+        self.assertEqual({key: value for key, value in record.items() if key != "crossSourceReview"}, original)
+        snapshot = copy.deepcopy(captured)
+        requirements.annotate_reviewed_holy_diver(captured, revisions)
+        self.assertEqual(captured, snapshot)
+        unrelated = evidence(1, minLevel=10)
+        before = copy.deepcopy(unrelated)
+        requirements.annotate_reviewed_holy_diver(unrelated, {})
+        self.assertEqual(unrelated, before)
+
+    def test_holy_diver_annotation_rejects_changed_review_binding_or_eq_baseline(self):
+        revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))
+        published = json.loads((SOURCE / "quest_requirements_evidence.json").read_text(encoding="utf-8"))
+        for field, value in (("revision", 4), ("guideID", "another-guide"),
+                             ("sourceSha256", "0" * 64), ("sourceUrl", "https://example.com/unreviewed")):
+            with self.subTest(field=field):
+                changed = copy.deepcopy(revisions)
+                revision = next(r for r in changed["revisions"] if r["id"] == "darkshore-holy-diver-3")
+                if field.startswith("source"):
+                    revision["evidence"][field] = value
+                else:
+                    revision[field] = value
+                with self.assertRaisesRegex(ValueError, "review identity"):
+                    requirements.annotate_reviewed_holy_diver(copy.deepcopy(published), changed)
+        changed = copy.deepcopy(published)
+        changed["quests"]["87760"]["pre"] = [4722]
+        with self.assertRaisesRegex(ValueError, "EQ baseline changed"):
+            requirements.annotate_reviewed_holy_diver(changed, revisions)
+
 
 if __name__ == "__main__":
     unittest.main()

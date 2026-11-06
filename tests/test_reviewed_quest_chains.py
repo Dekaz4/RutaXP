@@ -65,7 +65,13 @@ class ReviewedChainTests(unittest.TestCase):
             keys = {f"{si}:{gi}" for si, count in enumerate(revision["previousGoalCounts"], 1) for gi in range(1, count + 1)}
             destinations = [migration["goalMap"].get(key, key) for key in keys]
             self.assertEqual(len(destinations), len(set(destinations)), revision["id"])
-            self.assertEqual(migration["stepMap"][str(migration["previousStepCount"] + 1)], len(guide["steps"]) + 1)
+            completed = migration["stepMap"][str(migration["previousStepCount"] + 1)]
+            revision_number = migration["to"]
+            while revision_number < guide["routeRevision"]:
+                following = next(m for m in guide["progressMigrations"] if m["from"] == revision_number)
+                completed = following["stepMap"].get(str(completed), completed)
+                revision_number = following["to"]
+            self.assertEqual(completed, len(guide["steps"]) + 1)
             self.assertTrue(all(old != new for old, new in migration["goalMap"].items()))
         west = self.guides["forever/alliance/02-westfall"]["progressMigrations"]
         self.assertFalse(any(m["from"] == 1 for m in west))

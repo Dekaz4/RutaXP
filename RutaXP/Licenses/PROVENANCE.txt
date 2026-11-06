@@ -71,3 +71,18 @@ in Source/quest_requirements_evidence.json and quest_requirements_audit.json.
 Reviewed route changes are explicit in Source/guide_revisions.json; all
 authored actions remain accounted for. Complete MIT notices accompany these
 facts in EverythingQuests-MIT.txt and AllTheThings-MIT.txt.
+
+RutaXP 0.7.10 Darkshore and successor review
+-----------------------------------------
+QuestieDB commit 21be34023b72cf2ec3027cb9a61a8b72a1910857,
+src/corrections/Forever/foreverQuestFixes.lua, and the public correction
+https://github.com/Questie/Questie/issues/8040 corroborate the nine numeric
+prerequisite IDs for Holy Diver (87760). No Questie code or narrative quest
+text is imported. QuestieDB-NOTICE.md preserves the original licensing
+notice; this reference must not be represented as MIT-licensed source.
+Source/guide_revisions.json records the exact file hash and line references.
+
+Three missing Wetlands quest chains are reconstructed from numeric NPC,
+object, item, objective and coordinate facts in the same pinned SendaFH,
+EverythingQuests and AllTheThings sources above. Source/successor_review.json
+records the reviewed Alliance chapters and unresolved source discrepancies.

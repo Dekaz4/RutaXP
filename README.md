@@ -1,4 +1,4 @@
-# RutaXP 0.7.9 para WoW Forever
+# RutaXP 0.7.10 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,16 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## Costa Oscura y continuidad de Alianza (0.7.10)
+
+Si una misión previa está omitida, el panel muestra su nombre y conserva los contadores reales. Una entrega pendiente ya no queda oculta mientras la flecha apunta a ella. Pulsa con el botón izquierdo una misión bloqueada para retomar sus requisitos con un recorrido de recuperación; al terminarlos vuelve al punto guardado. El clic derecho sigue permitiendo recuperar una fila omitida. La flecha muestra el requisito pendiente en lugar de llevarte a una entrega que todavía no puedes hacer.
+
+Comprobadas las cuatro cajas mecánicas de Costa Oscura, sus entregas y la espera entre dos jugadores. Holy Diver se acepta después de entregar las nueve misiones de criaturas varadas, se completa durante el regreso al norte y se entrega al volver a Auberdine. El destino del muelle usa ahora el mapa de Costa Oscura. Jai’vhanel requiere nivel 15 y las visitas de druida mantienen sus condiciones.
+
+Revisados los 24 capítulos de Alianza desde Costa Oscura hasta el final de la ruta. Se añaden tres misiones previas omitidas —Nek’rosh, la primera flor de Nord’el y la primera tarea contra los Faucedraco— con aceptación, objetivos y entrega antes de sus continuaciones en Hillsbrad. Se conservan los objetivos originales y se trasladan sus marcas de progreso a las posiciones nuevas.
+
+La revisión es de fuentes y simulaciones, no una certificación de cada misión dentro del juego. Siguen pendientes las discrepancias de **La Forjaluz (526)** y **Una fiesta en tu honor (1271)**; esta última necesitaría además resolver el recorrido de su posible requisito 1258. Se documentan en `RutaXP/Source/successor_review.json` y no se añaden bloqueos sin una solución comprobada.
 
 ## Requisitos y cadenas de misiones (0.7.9)
 
@@ -84,7 +94,7 @@ En Dúo puedes pulsar **Sincronizar de nuevo**, o escribir `/rutaxp sincronizar`
 
 ## Contenido conservado
 
-- 57 rutas de misiones para los niveles 1–60: 29 de Alianza y 28 de Horda, con 2.338 pasos y 7.444 objetivos. Incluyen los inicios clásicos y Skyborne en ambas facciones, con variantes de clase.
+- 57 rutas de misiones para los niveles 1–60: 29 de Alianza y 28 de Horda, con 2.343 pasos y 7.455 objetivos. Incluyen los inicios clásicos y Skyborne en ambas facciones, con variantes de clase.
 - Interfaz de Antigravity, panel compacto, iconos, flecha facetada con giro continuo y posiciones de ventanas por personaje.
 - 36 planes de talentos y sus 1.836 puntos, selector de builds y asistente del instructor. Las recomendaciones orientan al usuario; no compran habilidades ni gastan talentos por sí solas.
 - Búsqueda, filtros, opcionales, confirmación manual, datos y progreso por personaje.
@@ -205,7 +215,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.9.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.10.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.

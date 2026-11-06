@@ -1,4 +1,16 @@
-# Revisión de guías de RutaXP 0.7.9
+# Revisión de guías de RutaXP 0.7.10
+
+## Costa Oscura y capítulos siguientes: revisión 0.7.10
+
+El catálogo pasa a 57 guías, 2.343 pasos y 7.455 objetivos. Se conservan los 7.444 objetivos originales y se añaden 11 acciones para tres misiones previas que faltaban. La única corrección de un mapa original es el muelle de Auberdine: mantiene 32.4, 43.8, pero ahora pertenece a Costa Oscura (1439), no a Claro de la Luna (1450). Las demás posiciones originales se mantienen.
+
+Se reprodujo la captura de la caja mecánica 827 con dos patas de seis y una omisión manual. La entrega seleccionada quedaba oculta mientras aparecía bloqueada la caja 411. El panel mantiene visible el objetivo seleccionado, identifica la previa pendiente y permite iniciar su recuperación con un clic. No interpreta una omisión como entrega. Los datos desconocidos tampoco autorizan avanzar; las pruebas de dos jugadores esperan el crédito real del compañero.
+
+La cadena 827 → 411 → 323 → 525 conserva el orden y los destinos de entrega comprobados. Holy Diver ahora exige las nueve misiones de criaturas varadas, se acepta en el paso 33, se completa en el 34 y se entrega en el 37. La discrepancia con la fuente que solo declaraba una previa permanece explícita. Jai’vhanel requiere nivel 15. Las visitas de druida mantienen sus condiciones y la misión de Pesca sigue permitiendo aprender la profesión.
+
+El barrido posterior recorre 24 capítulos de Alianza. Se incorporan Nek’rosh (474), la primera flor de Nord’el (98208) y la primera tarea contra los Faucedraco (98291), con aceptación, trabajo y entrega antes de sus continuaciones. Los objetivos añadidos y cada traslado tienen evidencia y mapas de migración; las marcas antiguas nunca se asignan a una acción nueva.
+
+Quedan dos incidencias explícitas en `RutaXP/Source/successor_review.json`: las fuentes discrepan en el requisito de La Forjaluz (526); para Una fiesta en tu honor (1271), dos fuentes añaden 1258 y la guía original no lo hace. Incorporar esta última cadena requiere resolver un desplazamiento adicional entre continentes. No se presenta esa parte como reparada ni se impone un requisito sin recorrido. El resto de advertencias de fuentes permanece en el informe de requisitos. Esta auditoría no equivale a completar todas las rutas dentro de Forever.
 
 ## Requisitos y profesiones: revisión 0.7.9
 

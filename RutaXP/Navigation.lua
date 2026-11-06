@@ -353,11 +353,14 @@ function ns:GetBaseStepWaypoint(step)
     if not step then return nil end
     if step.waypoint then return validPoint(step.waypoint) and step.waypoint or nil end
     if step.goals then
-        local goal
-        if self.GetActiveGoal then goal = self:GetActiveGoal(step)
+        local goal, status
+        if self.GetActiveGoal then
+            local index
+            goal, index, status = self:GetActiveGoal(step)
         else goal = step.goals[1] end
         -- Never point at a later NPC while the current objective is a service
         -- without coordinates, or a prerequisite is blocking the route.
+        if status == "blocked" then return nil end
         return self:GetGoalWaypoint(goal)
     end
     if step.t then return self:GetGoalWaypoint(step) end
@@ -402,6 +405,10 @@ function ns:GetStepWaypoint(step, travel)
             end
             return follow
         end
+    end
+    if step and step.goals and self.GetActiveGoal then
+        local _, _, status = self:GetActiveGoal(step)
+        if status == "blocked" then return nil end
     end
     if self.Waypoints and self.Waypoints.Resolve then
         local goal = step
@@ -709,6 +716,14 @@ function ns:UpdateNavigation()
         elseif activeGoal and activeGoal.navigationMode == "ability" then message = "Usa la habilidad indicada en la guía"
         elseif activeGoal and activeGoal.navigationMode == "escort" then message = "Sigue y protege al personaje de la escolta" end
         if action == "accept" and activeGoal.item then message = "Abre el objeto en tus bolsas" end
+        if activeGoal and step and step.goals and self.GetActiveGoal then
+            local _, _, status, reason = self:GetActiveGoal(step)
+            if status == "blocked" then
+                message, frame.navigationState = "Requisito pendiente", "blocked"
+                frame.navigationReason = reason
+                subText = reason or goalTitle or stepTitle
+            end
+        end
         if not activeGoal and step and step.goals and self.GetActiveGoal then
             -- A resolved local visit has no NPC left to navigate to. Waiting
             -- for the peer does not mean that its coordinates are missing.

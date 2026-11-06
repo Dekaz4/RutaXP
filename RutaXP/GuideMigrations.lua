@@ -286,6 +286,39 @@ local function applyMigration(self, id, state, migration)
     end
 end
 
+local function unlockedParents(self, guide, observed)
+    local requiredByChild, protected = {}, {}
+    for _, step in ipairs(guide.steps) do
+        if self:MatchesConditions(step.only) then
+            for _, goal in ipairs(step.goals or {}) do
+                local id = goal.quest or goal.questID
+                local child = observed[id]
+                if (goal.t or goal.action) == "accept" and child and (child.active or child.delivered)
+                    and self:MatchesConditions(goal.only) then
+                    local required = {}
+                    for _, parent in ipairs(goal.preAll or {}) do
+                        if parent > 0 then required[parent] = true end
+                    end
+                    if goal.pre and #goal.pre == 1 and goal.pre[1] > 0 then required[goal.pre[1]] = true end
+                    -- Repeated applicable acceptances can have alternatives.
+                    -- Only a parent required by every such acceptance is proven.
+                    if requiredByChild[id] then
+                        for parent in pairs(requiredByChild[id]) do
+                            if not required[parent] then requiredByChild[id][parent] = nil end
+                        end
+                    else requiredByChild[id] = required end
+                end
+            end
+        end
+    end
+    for _, parents in pairs(requiredByChild) do
+        for parent in pairs(parents) do
+            if observed[parent] and not observed[parent].active then protected[parent] = true end
+        end
+    end
+    return protected
+end
+
 function ns:RepairGuideRequirements()
     local char = self.char
     local id = char and char.activeGuide
@@ -298,12 +331,21 @@ function ns:RepairGuideRequirements()
         state.requirementsRepair = nil
         return false
     end
-    for q in pairs(state.requirementsRepair) do if not questState(q) then return false end end
+    local observed = {}
+    for q in pairs(state.requirementsRepair) do
+        observed[q] = questState(q)
+        if not observed[q] then return false end
+    end
+    -- A real unlocked child proves its mandatory prerequisites were met even
+    -- if older completion flags are missing. This only prevents migration
+    -- rewind: it never invents delivery flags or hides an active parent quest.
+    local protected = unlockedParents(self, guide, observed)
     local first
     local clean = { cursor=state.cursor, confirmed={}, skipped={} }
     for si, step in ipairs(guide.steps) do
         for gi, goal in ipairs(step.goals or {}) do
-            if state.requirementsRepair[goal.quest or goal.questID] then
+            local quest = goal.quest or goal.questID
+            if state.requirementsRepair[quest] and not protected[quest] then
                 local status = self:GetGoalStatus(goal, step, clean, gi)
                 if status ~= "done" and status ~= "skip" then
                     local key = si .. ":" .. gi

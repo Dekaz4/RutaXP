@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "scope": {
     "guides": 57,
-    "questIDs": 1900,
-    "acceptances": 2290,
-    "withReportedEvidence": 1846,
+    "questIDs": 1903,
+    "acceptances": 2293,
+    "withReportedEvidence": 1849,
     "withoutReportedEvidence": 54
   },
   "sourceCommits": {
@@ -38,18 +38,19 @@
   },
   "crossSourceReviewCounts": {
     "active_parent_not_explicit_in_att": 5,
-    "corroborated_single_completed_parent": 37,
+    "corroborated_single_completed_parent": 38,
     "no_att_record_in_reviewed_sources": 1,
     "parent_breadcrumb": 13,
-    "prerequisite_not_corroborated": 2
+    "prerequisite_not_corroborated": 2,
+    "questie_explicit_group_eq_partial": 1
   },
   "counts": {
     "additional_gate_review": 5,
-    "level_conflict_review": 16,
+    "level_conflict_review": 15,
     "missing_active_parent": 10,
-    "missing_prerequisite": 56,
+    "missing_prerequisite": 50,
     "no_source_data": 61,
-    "prerequisite_conflict_review": 43,
+    "prerequisite_conflict_review": 44,
     "selector_conflict_review": 35,
     "source_omission_review": 56
   },
@@ -109,10 +110,8 @@
       "guideID": "forever/alliance/03-darkshore",
       "acceptances": 77,
       "findings": {
-        "level_conflict_review": 1,
-        "missing_prerequisite": 1,
         "no_source_data": 6,
-        "prerequisite_conflict_review": 1,
+        "prerequisite_conflict_review": 2,
         "selector_conflict_review": 1
       }
     },
@@ -141,7 +140,7 @@
     },
     {
       "guideID": "forever/alliance/07-thousand-needles",
-      "acceptances": 38,
+      "acceptances": 39,
       "findings": {
         "level_conflict_review": 1,
         "missing_prerequisite": 2,
@@ -151,10 +150,9 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "acceptances": 44,
+      "acceptances": 46,
       "findings": {
         "level_conflict_review": 1,
-        "missing_prerequisite": 5,
         "no_source_data": 6
       }
     },
@@ -2624,23 +2622,6 @@
     },
     {
       "guideID": "forever/alliance/03-darkshore",
-      "step": 1,
-      "goal": 5,
-      "questID": 98025,
-      "title": "WANTED: Jai'vhanel",
-      "kind": "level_conflict_review",
-      "field": "minLevel",
-      "authored": 10,
-      "reported": 15,
-      "evidence": [
-        {
-          "source": "everythingquests",
-          "line": 8619
-        }
-      ]
-    },
-    {
-      "guideID": "forever/alliance/03-darkshore",
       "step": 12,
       "goal": 2,
       "questID": 26,
@@ -2695,14 +2676,37 @@
     },
     {
       "guideID": "forever/alliance/03-darkshore",
-      "step": 21,
-      "goal": 13,
+      "step": 29,
+      "goal": 4,
+      "questID": 949,
+      "title": "El campamento del Azote del Ocaso",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 33,
+      "goal": 5,
       "questID": 87760,
       "title": "Holy Diver",
-      "kind": "missing_prerequisite",
+      "crossSourceReview": "questie_explicit_group_eq_partial",
+      "kind": "prerequisite_conflict_review",
       "field": "prerequisites",
       "authored": {
-        "all": [],
+        "all": [
+          4722,
+          4723,
+          4725,
+          4727,
+          4728,
+          4730,
+          4731,
+          4732,
+          4733
+        ],
         "any": []
       },
       "reported": {
@@ -2731,18 +2735,6 @@
           }
         ]
       }
-    },
-    {
-      "guideID": "forever/alliance/03-darkshore",
-      "step": 29,
-      "goal": 4,
-      "questID": 949,
-      "title": "El campamento del Azote del Ocaso",
-      "kind": "no_source_data",
-      "field": "availability",
-      "authored": null,
-      "reported": null,
-      "evidence": []
     },
     {
       "guideID": "forever/alliance/03-darkshore",
@@ -3016,7 +3008,7 @@
     },
     {
       "guideID": "forever/alliance/07-thousand-needles",
-      "step": 31,
+      "step": 32,
       "goal": 3,
       "questID": 65602,
       "title": "¿Qué es el amor?",
@@ -3037,7 +3029,7 @@
     },
     {
       "guideID": "forever/alliance/07-thousand-needles",
-      "step": 35,
+      "step": 36,
       "goal": 3,
       "questID": 1106,
       "title": "Martek el Exiliado",
@@ -3060,62 +3052,6 @@
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
       "step": 1,
-      "goal": 2,
-      "questID": 98230,
-      "title": "This Land Was Their Land",
-      "kind": "missing_prerequisite",
-      "field": "prerequisites",
-      "authored": {
-        "all": [],
-        "any": []
-      },
-      "reported": {
-        "all": [
-          474
-        ],
-        "any": []
-      },
-      "evidence": [
-        {
-          "source": "everythingquests",
-          "line": 15479
-        }
-      ],
-      "dependencyLocations": {
-        "474": []
-      }
-    },
-    {
-      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 1,
-      "goal": 3,
-      "questID": 98072,
-      "title": "Crocs of the Sky",
-      "kind": "missing_prerequisite",
-      "field": "prerequisites",
-      "authored": {
-        "all": [],
-        "any": []
-      },
-      "reported": {
-        "all": [
-          471
-        ],
-        "any": []
-      },
-      "evidence": [
-        {
-          "source": "everythingquests",
-          "line": 15472
-        }
-      ],
-      "dependencyLocations": {
-        "471": []
-      }
-    },
-    {
-      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 1,
       "goal": 3,
       "questID": 98072,
       "title": "Crocs of the Sky",
@@ -3132,91 +3068,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 1,
-      "goal": 4,
-      "questID": 98209,
-      "title": "Bloom of the Heavens",
-      "kind": "missing_prerequisite",
-      "field": "prerequisites",
-      "authored": {
-        "all": [],
-        "any": []
-      },
-      "reported": {
-        "all": [
-          98208
-        ],
-        "any": []
-      },
-      "evidence": [
-        {
-          "source": "everythingquests",
-          "line": 15476
-        }
-      ],
-      "dependencyLocations": {
-        "98208": []
-      }
-    },
-    {
-      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 2,
-      "goal": 1,
-      "questID": 98216,
-      "title": "Understanding Our Present",
-      "kind": "missing_prerequisite",
-      "field": "prerequisites",
-      "authored": {
-        "all": [],
-        "any": []
-      },
-      "reported": {
-        "all": [
-          299
-        ],
-        "any": []
-      },
-      "evidence": [
-        {
-          "source": "everythingquests",
-          "line": 15477
-        }
-      ],
-      "dependencyLocations": {
-        "299": []
-      }
-    },
-    {
-      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 5,
-      "goal": 3,
-      "questID": 98297,
-      "title": "Stopping the Cycle",
-      "kind": "missing_prerequisite",
-      "field": "prerequisites",
-      "authored": {
-        "all": [],
-        "any": []
-      },
-      "reported": {
-        "all": [
-          98291
-        ],
-        "any": []
-      },
-      "evidence": [
-        {
-          "source": "everythingquests",
-          "line": 15483
-        }
-      ],
-      "dependencyLocations": {
-        "98291": []
-      }
-    },
-    {
-      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 5,
+      "step": 7,
       "goal": 4,
       "questID": 98283,
       "title": "Carnage",
@@ -3228,7 +3080,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 12,
+      "step": 16,
       "goal": 1,
       "questID": 87318,
       "title": "Hearts of the Lost",
@@ -3240,7 +3092,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 12,
+      "step": 16,
       "goal": 3,
       "questID": 88758,
       "title": "Sentiments of the Lost",
@@ -3252,7 +3104,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 16,
+      "step": 20,
       "goal": 12,
       "questID": 98463,
       "title": "Talk of the Town",
@@ -3264,7 +3116,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 16,
+      "step": 20,
       "goal": 13,
       "questID": 98059,
       "title": "Hillsbrad's Hoard",
@@ -3276,7 +3128,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 34,
+      "step": 38,
       "goal": 2,
       "questID": 79536,
       "title": "Greater Friend of the Library",
@@ -7864,6 +7716,6 @@
     "Local dependency locations are diagnostic; this audit does not assume a previous zone was completed.",
     "No runtime quest completion, profession or player's progress is modified by this audit."
   ],
-  "inputSha256": "9ddc0802b5554b07b5eb2b9bbf4b59f95090821dd4d234c15ac9139387cf88fe",
-  "evidenceSha256": "e65091babd63484d3d5566bd4726a6e2145f8cc628b322dfbc21978498819064"
+  "inputSha256": "e1273cfcfd7cca5a68e28ac03b85452c5931271b57256a0016ac7be66a9f09ff",
+  "evidenceSha256": "12b81e43ce28c6c59f8a8c928d47d497fb34cc92bb21edb3bb276a380a6a0191"
 }

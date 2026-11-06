@@ -5194,6 +5194,1570 @@
         ],
         "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
       }
+    },
+    {
+      "id": "darkshore-holy-diver-3",
+      "guideID": "forever/alliance/03-darkshore",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "7485e5cd2e7d93717e5640ab2e7ca4145e3cf023b1f3de73a3a9018fb3da1623",
+      "resultShape": "0cdfb16425933023b5c95c94b81c7c9e7992657c62ec8ee4d23dbb39d22eb108",
+      "previousGoalCounts": [
+        12,
+        6,
+        3,
+        2,
+        3,
+        2,
+        7,
+        1,
+        10,
+        4,
+        15,
+        3,
+        10,
+        2,
+        1,
+        2,
+        1,
+        2,
+        5,
+        1,
+        20,
+        3,
+        7,
+        5,
+        4,
+        10,
+        2,
+        4,
+        11,
+        4,
+        3,
+        2,
+        11,
+        4,
+        3,
+        4,
+        5,
+        3,
+        7,
+        14,
+        4,
+        3
+      ],
+      "affectedQuestIDs": [
+        4722,
+        4723,
+        4725,
+        4727,
+        4728,
+        4730,
+        4731,
+        4732,
+        4733,
+        87760
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21,
+          "omitGoals": [
+            13
+          ]
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23,
+          "omitGoals": [
+            2
+          ]
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26,
+          "omitGoals": [
+            9
+          ]
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "title": "Auberdine",
+          "note": "Sigue la carretera hacial norte.",
+          "goals": [
+            [
+              33,
+              1
+            ],
+            [
+              33,
+              2
+            ],
+            [
+              33,
+              3
+            ],
+            [
+              33,
+              4
+            ],
+            [
+              21,
+              13
+            ],
+            [
+              33,
+              5
+            ],
+            [
+              33,
+              6
+            ],
+            [
+              33,
+              7
+            ],
+            [
+              33,
+              8
+            ],
+            [
+              33,
+              9
+            ],
+            [
+              33,
+              10
+            ],
+            [
+              33,
+              11
+            ]
+          ]
+        },
+        {
+          "title": "El naga",
+          "note": "Recoge las reliquias y derrota a los nagas en Mathystra. Después sigue la playa hacia el norte: las Stormscale Beastmistresses llevan Rod of Deep Dominion para Holy Diver.",
+          "goals": [
+            [
+              34,
+              1
+            ],
+            [
+              34,
+              2
+            ],
+            [
+              34,
+              3
+            ],
+            [
+              34,
+              4
+            ],
+            [
+              23,
+              2
+            ]
+          ]
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "title": "Auberdine",
+          "goals": [
+            [
+              37,
+              1
+            ],
+            [
+              37,
+              2
+            ],
+            [
+              37,
+              3
+            ],
+            [
+              26,
+              9
+            ],
+            [
+              37,
+              4
+            ],
+            [
+              37,
+              5
+            ]
+          ]
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 87760
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              4722,
+              4723,
+              4725,
+              4727,
+              4728,
+              4730,
+              4731,
+              4732,
+              4733
+            ],
+            "preTitles": {
+              "4722": "Tortuga marina varada",
+              "4728": "Criatura marina varada",
+              "4730": "Criatura marina varada",
+              "4727": "Tortuga marina varada",
+              "4725": "Tortuga marina varada",
+              "4723": "Criatura marina varada",
+              "4731": "Tortuga marina varada",
+              "4732": "Tortuga marina varada",
+              "4733": "Criatura marina varada"
+            },
+            "note": "Gwennyth Bly'Leggonde: después de entregar las nueve criaturas y tortugas varadas."
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98025
+          },
+          "count": 1,
+          "set": {
+            "minLevel": 15
+          }
+        }
+      ],
+      "evidence": {
+        "sourceCommit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+        "sourceFile": "src/corrections/Forever/foreverQuestFixes.lua",
+        "sourceUrl": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L590-L592",
+        "sourceSha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+        "sourceLines": [
+          590,
+          591,
+          592
+        ],
+        "prerequisites": {
+          "87760": [
+            4722,
+            4723,
+            4725,
+            4727,
+            4728,
+            4730,
+            4731,
+            4732,
+            4733
+          ]
+        },
+        "issueUrl": "https://github.com/Questie/Questie/issues/8040",
+        "review": "QuestieDB requires all nine beached creature/turtle quests. All are already in this route. Accept Holy Diver only after the final three are delivered, collect during the later northern coastal visit, and turn in on the final Auberdine return. The EQ subset reports only 4733, not the complete group.",
+        "minimumLevel": {
+          "questID": 98025,
+          "level": 15,
+          "sources": [
+            {
+              "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/darkshore.lua#L1014-L1019",
+              "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+              "sha256": "185b42fc9d3891d0ab718d29618b72b8f745c892a1d4d0cd2baee8c13c6f1656"
+            },
+            {
+              "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L8619",
+              "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4"
+            }
+          ]
+        },
+        "limitation": "Quest requirements corroborated in maintained Forever data and its resolved issue; not a live playthrough."
+      }
+    },
+    {
+      "id": "thousand-needles-nekrosh-chain-2",
+      "guideID": "forever/alliance/07-thousand-needles",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "1792787a9a8a08a72523bb5340fd971e83ea7bf40fea60dfa9c2fa349c0662d5",
+      "resultShape": "9b65670f483e75b3747b883dea7890eccd68cc5911ee543b99d48b5f2bf74f74",
+      "previousGoalCounts": [
+        11,
+        1,
+        2,
+        1,
+        2,
+        2,
+        3,
+        5,
+        1,
+        1,
+        1,
+        3,
+        2,
+        1,
+        4,
+        2,
+        12,
+        8,
+        4,
+        1,
+        5,
+        3,
+        2,
+        2,
+        5,
+        2,
+        1,
+        2,
+        2,
+        2,
+        3,
+        2,
+        7,
+        7,
+        6,
+        1
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "title": "Catapulta Dragonmaw",
+          "note": "Cabalga hacial este de nuevo; la catapulta se encuentra en el campamento Dragonmaw al sur de la carretera.",
+          "goals": [
+            [
+              29,
+              1
+            ],
+            {
+              "added": "nekrosh_accept"
+            },
+            [
+              29,
+              2
+            ]
+          ]
+        },
+        {
+          "title": "Jefe Nek'rosh",
+          "note": "Ve al campamento al sureste de la catapulta. El jefe es élite; despeja los guardias y combátelo en grupo.",
+          "goals": [
+            {
+              "added": "nekrosh_work"
+            }
+          ]
+        },
+        {
+          "title": "Menethil y el barco a Theramore",
+          "goals": [
+            [
+              30,
+              1
+            ],
+            {
+              "added": "nekrosh_turnin"
+            },
+            [
+              30,
+              2
+            ]
+          ]
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        }
+      ],
+      "addedGoals": {
+        "nekrosh_accept": {
+          "goal": {
+            "t": "accept",
+            "quest": 474,
+            "title": "Derrotar a Nek'rosh",
+            "minLevel": 23,
+            "qlvl": 32,
+            "pre": [
+              465
+            ],
+            "preTitles": {
+              "465": "La estrategia de Nek'rosh"
+            },
+            "object": 630696,
+            "objName": "Catapulta Faucedraco",
+            "map": 1437,
+            "x": 47.27,
+            "y": 47.18,
+            "f": "e",
+            "note": "Acepta la misión en la catapulta después de entregar La estrategia de Nek'rosh."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+                "line": 411,
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L411",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 472,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L472",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              },
+              {
+                "repository": "wheelbarrel00/EverythingQuests",
+                "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+                "path": "Data/QuestAvailable_Forever.lua",
+                "line": 13353,
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L13353",
+                "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+              }
+            ],
+            "review": "Numeric quest facts and newly authored concise Spanish instructions; no quest narrative copied.",
+            "navigationDonor": "forever/alliance/07-thousand-needles:29:1"
+          }
+        },
+        "nekrosh_work": {
+          "goal": {
+            "t": "collect",
+            "quest": 474,
+            "title": "Derrotar a Nek'rosh",
+            "oi": 1,
+            "item": 3625,
+            "itemName": "Cabeza de Nek'rosh",
+            "count": 1,
+            "map": 1437,
+            "x": 53.5,
+            "y": 54.7,
+            "f": "e",
+            "from": "Jefe Nek'rosh",
+            "fromKind": "npc",
+            "note": "Derrota al jefe Nek'rosh y recoge su cabeza. Es élite: hazlo en grupo."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+                "line": 418,
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L418",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 472,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L472",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Npcs.lua",
+                "line": 977,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Npcs.lua#L977",
+                "sha256": "1c804c58ba647d16ccf9d2048be106e10e994c55fd38022284b4ede482270d9a"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Items.lua",
+                "line": 292,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Items.lua#L292",
+                "sha256": "ad1b2f87dc0f74a7a1bed0b584295c49aa91ce5496553c41b4a3d2abd0c37449"
+              }
+            ],
+            "review": "Numeric quest facts and newly authored concise Spanish instructions; no quest narrative copied."
+          }
+        },
+        "nekrosh_turnin": {
+          "goal": {
+            "t": "turnin",
+            "quest": 474,
+            "title": "Derrotar a Nek'rosh",
+            "npc": 2104,
+            "npcName": "Capitán Puñorrecio",
+            "map": 1437,
+            "x": 9.86,
+            "y": 57.49,
+            "z": 26.8,
+            "f": "e",
+            "note": "Entrega la cabeza al capitán Puñorrecio antes de salir de Menethil."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 472,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L472",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              }
+            ],
+            "review": "Numeric quest facts and newly authored concise Spanish instructions; no quest narrative copied.",
+            "navigationDonor": "forever/alliance/07-thousand-needles:28:1"
+          }
+        }
+      },
+      "goalChanges": [],
+      "affectedQuestIDs": [
+        465,
+        474
+      ],
+      "firstAffectedStep": 29,
+      "evidence": {
+        "sources": [
+          {
+            "repository": "ATTWoWAddon/AllTheThings",
+            "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+            "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+            "line": 411,
+            "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L411",
+            "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+          },
+          {
+            "repository": "wheelbarrel00/EverythingQuests",
+            "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+            "path": "Data/QuestAvailable_Forever.lua",
+            "line": 13353,
+            "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L13353",
+            "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+          },
+          {
+            "repository": "wheelbarrel00/EverythingQuests",
+            "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+            "path": "Data/QuestAvailable_Forever.lua",
+            "line": 15479,
+            "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15479",
+            "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+          },
+          {
+            "repository": "julen92/SendaFH",
+            "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+            "path": "addon/SendaFH_QuestDB/Quests.lua",
+            "line": 472,
+            "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L472",
+            "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+          }
+        ],
+        "reason": "The old note skipped an elite prerequisite but the following chapter required its follow-up. Add the authored missing quest before the existing return to Menethil."
+      },
+      "textReplacements": {
+        "El siguiente paso, Derrotar a Nek'rosh, te enfrenta a un jefe de élite: saltarlo.": "Esta cadena continúa con Nek'rosh. Es élite: completadla en grupo y entregad su cabeza antes de salir de Menethil.",
+        "The next step, Defeat Nek'rosh, pits you against an elite chieftain: skip it.": "Esta cadena continúa con Nek'rosh. Es élite: completadla en grupo y entregad su cabeza antes de salir de Menethil."
+      }
+    },
+    {
+      "id": "hillsbrad-wetlands-prerequisite-chains-3",
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "38456fb6b0c2812cff91bee4e0e448a1f747671362f22741ea82ceb751181b8e",
+      "resultShape": "2fa446c9bc4a24b52dca52dcde9755ffbff3fbbdfd6eb68e27e3fca17471dcaf",
+      "previousGoalCounts": [
+        4,
+        1,
+        1,
+        2,
+        4,
+        2,
+        1,
+        2,
+        5,
+        4,
+        3,
+        4,
+        2,
+        3,
+        1,
+        13,
+        2,
+        2,
+        1,
+        6,
+        2,
+        2,
+        1,
+        4,
+        2,
+        1,
+        7,
+        1,
+        2,
+        5,
+        1,
+        1,
+        3,
+        4,
+        2,
+        1,
+        6
+      ],
+      "steps": [
+        {
+          "title": "Puerto de Menethil",
+          "note": "Capitán Puñorrecio está parado en Castillo de Menethil; James Halloran y Sylessa Duskwhisper está parado junto a la puerta norte.",
+          "goals": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            {
+              "added": "nordel_accept"
+            }
+          ]
+        },
+        {
+          "title": "Nord'el",
+          "note": "Baja a la costa al sur de Menethil y recoge la flor.",
+          "goals": [
+            {
+              "added": "nordel_work"
+            }
+          ]
+        },
+        {
+          "title": "Sylessa",
+          "goals": [
+            {
+              "added": "nordel_turnin"
+            },
+            [
+              1,
+              4
+            ]
+          ]
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "title": "El Green Belt",
+          "note": "Siga la carretera noreste hacial Green Belt: Howin Plumamable campamentos a su lado, Rethiel el Guardaverde un corto camino al este.",
+          "goals": [
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              2
+            ],
+            {
+              "added": "dragonmaw_accept"
+            },
+            [
+              5,
+              4
+            ]
+          ]
+        },
+        {
+          "title": "Campamentos Faucedraco",
+          "note": "Limpia los campamentos al este de Howin y reúne los tres objetivos antes de volver.",
+          "goals": [
+            {
+              "added": "dragonmaw_reclaimers"
+            },
+            {
+              "added": "dragonmaw_soulbinders"
+            },
+            {
+              "added": "dragonmaw_infiltrators"
+            }
+          ]
+        },
+        {
+          "title": "Howin",
+          "goals": [
+            {
+              "added": "dragonmaw_turnin"
+            },
+            [
+              5,
+              3
+            ]
+          ]
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        }
+      ],
+      "addedGoals": {
+        "nordel_accept": {
+          "goal": {
+            "t": "accept",
+            "quest": 98208,
+            "title": "Flor de los cielos",
+            "minLevel": 22,
+            "qlvl": 29,
+            "npc": 270844,
+            "npcName": "Sylessa Duskwhisper",
+            "map": 1437,
+            "x": 7.96,
+            "y": 55.85,
+            "f": "e",
+            "note": "Habla con Sylessa y acepta recoger Nord'el."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+                "line": 203,
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L203",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 5288,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5288",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              },
+              {
+                "repository": "wheelbarrel00/EverythingQuests",
+                "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+                "path": "Data/QuestAvailable_Forever.lua",
+                "line": 8630,
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L8630",
+                "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+              }
+            ],
+            "review": "Numeric quest facts and newly authored concise Spanish instructions; no quest narrative copied.",
+            "navigationDonor": "forever/alliance/30-40/01-hillsbrad-foothills:1:4"
+          }
+        },
+        "nordel_work": {
+          "goal": {
+            "t": "collect",
+            "quest": 98208,
+            "title": "Flor de los cielos",
+            "oi": 1,
+            "item": 279915,
+            "itemName": "Nord'el",
+            "count": 1,
+            "map": 1437,
+            "x": 12.2,
+            "y": 63.8,
+            "f": "e",
+            "from": "Nord'el",
+            "fromKind": "object",
+            "note": "Recoge Nord'el junto a la costa al sur de Menethil."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+                "line": 209,
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L209",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 5288,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5288",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Items.lua",
+                "line": 2660,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Items.lua#L2660",
+                "sha256": "ad1b2f87dc0f74a7a1bed0b584295c49aa91ce5496553c41b4a3d2abd0c37449"
+              }
+            ],
+            "review": "Numeric quest facts and newly authored concise Spanish instructions; no quest narrative copied."
+          }
+        },
+        "nordel_turnin": {
+          "goal": {
+            "t": "turnin",
+            "quest": 98208,
+            "title": "Flor de los cielos",
+            "npc": 270844,
+            "npcName": "Sylessa Duskwhisper",
+            "map": 1437,
+            "x": 7.96,
+            "y": 55.85,
+            "f": "e",
+            "note": "Entrega Nord'el a Sylessa para recibir el encargo de Auberdine."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+                "line": 203,
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L203",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 5288,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5288",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              }
+            ],
+            "review": "Numeric quest facts and newly authored concise Spanish instructions; no quest narrative copied.",
+            "navigationDonor": "forever/alliance/30-40/01-hillsbrad-foothills:1:4"
+          }
+        },
+        "dragonmaw_accept": {
+          "goal": {
+            "t": "accept",
+            "quest": 98291,
+            "title": "Muerte a los Faucedraco",
+            "minLevel": 22,
+            "qlvl": 30,
+            "npc": 270637,
+            "npcName": "Howin Plumamable",
+            "map": 1437,
+            "x": 49.36,
+            "y": 42.05,
+            "f": "e",
+            "note": "Habla con Howin antes de ir a los campamentos del este."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+                "line": 390,
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L390",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 5308,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5308",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              },
+              {
+                "repository": "wheelbarrel00/EverythingQuests",
+                "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+                "path": "Data/QuestAvailable_Forever.lua",
+                "line": 8645,
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L8645",
+                "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+              }
+            ],
+            "review": "Numeric quest facts and newly authored concise Spanish instructions; no quest narrative copied.",
+            "navigationDonor": "forever/alliance/30-40/01-hillsbrad-foothills:5:1"
+          }
+        },
+        "dragonmaw_reclaimers": {
+          "goal": {
+            "t": "kill",
+            "quest": 98291,
+            "title": "Muerte a los Faucedraco",
+            "oi": 1,
+            "npc": 271351,
+            "target": "Dragonmaw Reclaimer",
+            "count": 8,
+            "map": 1437,
+            "x": 59.7,
+            "y": 44.9,
+            "f": "e",
+            "spread": true,
+            "note": "Derrota 8 Dragonmaw Reclaimer en los campamentos al este de Howin."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+                "line": 397,
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L397",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 5308,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5308",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              }
+            ],
+            "review": "Numeric quest facts and newly authored concise Spanish instructions; no quest narrative copied."
+          }
+        },
+        "dragonmaw_soulbinders": {
+          "goal": {
+            "t": "kill",
+            "quest": 98291,
+            "title": "Muerte a los Faucedraco",
+            "oi": 2,
+            "npc": 271348,
+            "target": "Dragonmaw Soulbinder",
+            "count": 5,
+            "map": 1437,
+            "x": 62.1,
+            "y": 43.8,
+            "f": "e",
+            "spread": true,
+            "note": "Derrota 5 Dragonmaw Soulbinder en los campamentos al este de Howin."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+                "line": 401,
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L401",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 5308,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5308",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              }
+            ],
+            "review": "Numeric quest facts and newly authored concise Spanish instructions; no quest narrative copied."
+          }
+        },
+        "dragonmaw_infiltrators": {
+          "goal": {
+            "t": "kill",
+            "quest": 98291,
+            "title": "Muerte a los Faucedraco",
+            "oi": 3,
+            "npc": 271346,
+            "target": "Dragonmaw Infiltrator",
+            "count": 3,
+            "map": 1437,
+            "x": 58.7,
+            "y": 47.3,
+            "f": "e",
+            "spread": true,
+            "note": "Derrota 3 Dragonmaw Infiltrator en los campamentos al este de Howin."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+                "line": 405,
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L405",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 5308,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5308",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              }
+            ],
+            "review": "Numeric quest facts and newly authored concise Spanish instructions; no quest narrative copied."
+          }
+        },
+        "dragonmaw_turnin": {
+          "goal": {
+            "t": "turnin",
+            "quest": 98291,
+            "title": "Muerte a los Faucedraco",
+            "npc": 270637,
+            "npcName": "Howin Plumamable",
+            "map": 1437,
+            "x": 49.36,
+            "y": 42.05,
+            "f": "e",
+            "note": "Vuelve a Howin y entrega esta misión antes de aceptar Stopping the Cycle."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+                "line": 390,
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L390",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 5308,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5308",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              }
+            ],
+            "review": "Numeric quest facts and newly authored concise Spanish instructions; no quest narrative copied.",
+            "navigationDonor": "forever/alliance/30-40/01-hillsbrad-foothills:5:1"
+          }
+        }
+      },
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98230
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              474
+            ],
+            "preTitles": {
+              "474": "Derrotar a Nek'rosh"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98209
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              98208
+            ],
+            "preTitles": {
+              "98208": "Flor de los cielos"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98297
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              98291
+            ],
+            "preTitles": {
+              "98291": "Muerte a los Faucedraco"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98072
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              471
+            ],
+            "preTitles": {
+              "471": "Deberes de aprendiz"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98216
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              299
+            ],
+            "preTitles": {
+              "299": "Desvelando el pasado"
+            }
+          }
+        }
+      ],
+      "affectedQuestIDs": [
+        98208,
+        98209,
+        98291,
+        98297,
+        98230,
+        98072,
+        98216
+      ],
+      "firstAffectedStep": 1,
+      "evidence": {
+        "sources": [
+          {
+            "repository": "ATTWoWAddon/AllTheThings",
+            "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+            "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+            "line": 219,
+            "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L219",
+            "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+          },
+          {
+            "repository": "ATTWoWAddon/AllTheThings",
+            "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+            "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+            "line": 359,
+            "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L359",
+            "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+          },
+          {
+            "repository": "ATTWoWAddon/AllTheThings",
+            "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+            "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+            "line": 800,
+            "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L800",
+            "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+          },
+          {
+            "repository": "ATTWoWAddon/AllTheThings",
+            "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+            "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+            "line": 1006,
+            "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L1006",
+            "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+          },
+          {
+            "repository": "ATTWoWAddon/AllTheThings",
+            "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+            "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+            "line": 1080,
+            "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L1080",
+            "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+          },
+          {
+            "repository": "wheelbarrel00/EverythingQuests",
+            "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+            "path": "Data/QuestAvailable_Forever.lua",
+            "line": 15472,
+            "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15472",
+            "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+          },
+          {
+            "repository": "wheelbarrel00/EverythingQuests",
+            "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+            "path": "Data/QuestAvailable_Forever.lua",
+            "line": 15476,
+            "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15476",
+            "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+          },
+          {
+            "repository": "wheelbarrel00/EverythingQuests",
+            "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+            "path": "Data/QuestAvailable_Forever.lua",
+            "line": 15477,
+            "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15477",
+            "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+          },
+          {
+            "repository": "wheelbarrel00/EverythingQuests",
+            "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+            "path": "Data/QuestAvailable_Forever.lua",
+            "line": 15479,
+            "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15479",
+            "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+          },
+          {
+            "repository": "wheelbarrel00/EverythingQuests",
+            "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+            "path": "Data/QuestAvailable_Forever.lua",
+            "line": 15483,
+            "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15483",
+            "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+          }
+        ],
+        "reason": "Two required quest lines were absent. Add their full accept/work/turnin visits. Cross-chapter prerequisites474,471,299 are delivered before this route."
+      },
+      "originalGoalValues": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98230
+          },
+          "absent": [
+            "preAll",
+            "preTitles"
+          ],
+          "values": {}
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98209
+          },
+          "absent": [
+            "preAll",
+            "preTitles"
+          ],
+          "values": {}
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98297
+          },
+          "absent": [
+            "preAll",
+            "preTitles"
+          ],
+          "values": {}
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98072
+          },
+          "absent": [
+            "preAll",
+            "preTitles"
+          ],
+          "values": {}
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98216
+          },
+          "absent": [
+            "preAll",
+            "preTitles"
+          ],
+          "values": {}
+        }
+      ]
     }
   ]
 }

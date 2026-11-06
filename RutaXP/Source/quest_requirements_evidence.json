@@ -11244,6 +11244,78 @@
       "classMask": 0,
       "raceMask": 77
     },
+    "474": {
+      "reportedFields": [
+        "minLevel",
+        "classMask",
+        "raceMask",
+        "pre"
+      ],
+      "fieldSources": {
+        "minLevel": [
+          {
+            "source": "everythingquests",
+            "line": 4830
+          }
+        ],
+        "classMask": [
+          {
+            "source": "everythingquests",
+            "line": 4830
+          }
+        ],
+        "raceMask": [
+          {
+            "source": "everythingquests",
+            "line": 4830
+          }
+        ],
+        "pre": [
+          {
+            "source": "everythingquests",
+            "line": 13353
+          },
+          {
+            "source": "att-zones-eastern-kingdoms-wetlands-lua",
+            "line": 411
+          }
+        ]
+      },
+      "minLevel": 23,
+      "classMask": 0,
+      "raceMask": 77,
+      "pre": [
+        465
+      ],
+      "crossSourceReview": {
+        "status": "corroborated_single_completed_parent",
+        "records": [
+          {
+            "sourceQuestIDs": [
+              465
+            ],
+            "declaresBreadcrumb": false,
+            "line": 411,
+            "source": "att-zones-eastern-kingdoms-wetlands-lua"
+          }
+        ],
+        "parents": [
+          {
+            "questID": 465,
+            "records": [
+              {
+                "sourceQuestIDs": [
+                  464
+                ],
+                "declaresBreadcrumb": false,
+                "line": 620,
+                "source": "att-zones-eastern-kingdoms-wetlands-lua"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "475": {
       "reportedFields": [
         "minLevel",
@@ -61388,7 +61460,49 @@
       "raceMask": 77,
       "pre": [
         4733
-      ]
+      ],
+      "crossSourceReview": {
+        "status": "questie_explicit_group_eq_partial",
+        "reviewedCorrectionID": "darkshore-holy-diver-3",
+        "baseline": {
+          "source": "everythingquests",
+          "pre": [
+            4733
+          ],
+          "fieldSources": [
+            {
+              "source": "everythingquests",
+              "line": 15168
+            }
+          ]
+        },
+        "additionalReview": {
+          "repository": "Questie/QuestieDB",
+          "commit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+          "file": "src/corrections/Forever/foreverQuestFixes.lua",
+          "url": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L590-L592",
+          "sha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+          "lines": [
+            590,
+            591,
+            592
+          ],
+          "preAll": [
+            4722,
+            4723,
+            4725,
+            4727,
+            4728,
+            4730,
+            4731,
+            4732,
+            4733
+          ],
+          "issueUrl": "https://github.com/Questie/Questie/issues/8040"
+        },
+        "conclusion": "The reviewed Questie correction requires all nine completed quests. EQ reports only 4733; its reported fields are retained unchanged, so the audit still exposes the discrepancy.",
+        "reproduction": "Reapplied by --capture-eq from the bound guide_revisions.json evidence; it does not replace the captured EQ availability record."
+      }
     },
     "88758": {
       "reportedFields": [],
@@ -71637,6 +71751,36 @@
       "classMask": 0,
       "raceMask": 77
     },
+    "98208": {
+      "reportedFields": [
+        "minLevel",
+        "classMask",
+        "raceMask"
+      ],
+      "fieldSources": {
+        "minLevel": [
+          {
+            "source": "everythingquests",
+            "line": 8630
+          }
+        ],
+        "classMask": [
+          {
+            "source": "everythingquests",
+            "line": 8630
+          }
+        ],
+        "raceMask": [
+          {
+            "source": "everythingquests",
+            "line": 8630
+          }
+        ]
+      },
+      "minLevel": 22,
+      "classMask": 0,
+      "raceMask": 77
+    },
     "98209": {
       "reportedFields": [
         "minLevel",
@@ -71960,6 +72104,36 @@
     "98283": {
       "reportedFields": [],
       "fieldSources": {}
+    },
+    "98291": {
+      "reportedFields": [
+        "minLevel",
+        "classMask",
+        "raceMask"
+      ],
+      "fieldSources": {
+        "minLevel": [
+          {
+            "source": "everythingquests",
+            "line": 8645
+          }
+        ],
+        "classMask": [
+          {
+            "source": "everythingquests",
+            "line": 8645
+          }
+        ],
+        "raceMask": [
+          {
+            "source": "everythingquests",
+            "line": 8645
+          }
+        ]
+      },
+      "minLevel": 22,
+      "classMask": 0,
+      "raceMask": 77
     },
     "98297": {
       "reportedFields": [

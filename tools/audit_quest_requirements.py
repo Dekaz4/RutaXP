@@ -230,6 +230,53 @@ def capture(eq_path, metadata, quest_ids, att_path=None, att_metadata=None, att_
                        "Only known Classic class/race bits are compared; Skyborne eligibility needs separate review."]}
 
 
+def annotate_reviewed_holy_diver(evidence, revisions):
+    """Keep one reviewed Questie group distinct from EQ's partial requirement.
+
+    This is a bound manual review, not a general Questie parser or an extra
+    availability source. The original EQ fields must survive recapture.
+    """
+    record = evidence.get("quests", {}).get("87760")
+    if record is None:
+        return
+    review_id = "darkshore-holy-diver-3"
+    matches = [revision for revision in revisions.get("revisions", []) if revision.get("id") == review_id]
+    if revisions.get("schemaVersion") != 1 or len(matches) != 1:
+        raise ValueError("Holy Diver annotation needs its unique reviewed route revision")
+    revision = matches[0]
+    proof = revision.get("evidence", {})
+    commit = "21be34023b72cf2ec3027cb9a61a8b72a1910857"
+    source_file = "src/corrections/Forever/foreverQuestFixes.lua"
+    source_hash = "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b"
+    parents = [4722, 4723, 4725, 4727, 4728, 4730, 4731, 4732, 4733]
+    source_url = f"https://github.com/Questie/QuestieDB/blob/{commit}/{source_file}#L590-L592"
+    issue_url = "https://github.com/Questie/Questie/issues/8040"
+    if (revision.get("guideID") != "forever/alliance/03-darkshore"
+            or revision.get("previousRevision") != 2 or revision.get("revision") != 3
+            or proof.get("sourceCommit") != commit or proof.get("sourceFile") != source_file
+            or proof.get("sourceSha256") != source_hash or proof.get("sourceUrl") != source_url
+            or proof.get("sourceLines") != [590, 591, 592] or proof.get("issueUrl") != issue_url
+            or proof.get("prerequisites", {}).get("87760") != parents):
+        raise ValueError("Holy Diver review identity, version or pinned evidence changed")
+    changes = [change for change in revision.get("goalChanges", [])
+               if change.get("match") == {"t": "accept", "quest": 87760}]
+    if len(changes) != 1 or changes[0].get("count") != 1 or changes[0].get("set", {}).get("preAll") != parents:
+        raise ValueError("Holy Diver reviewed route no longer applies the explicit group")
+    if (record.get("pre") != [4733] or "preAll" in record
+            or record.get("fieldSources", {}).get("pre") != [{"source": "everythingquests", "line": 15168}]):
+        raise ValueError("Holy Diver EQ baseline changed; review the discrepancy again")
+    record["crossSourceReview"] = {
+        "status": "questie_explicit_group_eq_partial", "reviewedCorrectionID": review_id,
+        "baseline": {"source": "everythingquests", "pre": [4733],
+                     "fieldSources": [{"source": "everythingquests", "line": 15168}]},
+        "additionalReview": {"repository": "Questie/QuestieDB", "commit": commit,
+                             "file": source_file, "url": source_url, "sha256": source_hash,
+                             "lines": [590, 591, 592], "preAll": parents, "issueUrl": issue_url},
+        "conclusion": "The reviewed Questie correction requires all nine completed quests. EQ reports only 4733; its reported fields are retained unchanged, so the audit still exposes the discrepancy.",
+        "reproduction": "Reapplied by --capture-eq from the bound guide_revisions.json evidence; it does not replace the captured EQ availability record.",
+    }
+
+
 def prerequisites(goal):
     """Normalize equivalent single-item OR/AND without erasing active parents."""
     all_ids, any_ids = set(goal.get("preAll") or []), set(goal.get("pre") or [])
@@ -358,6 +405,8 @@ def main():
     parser.add_argument("--att-meta", type=Path)
     parser.add_argument("--att-dir", type=Path, help="ATT forever source root matching quest_requirements_att_review.json (25 pinned files)")
     parser.add_argument("--att-review", type=Path, default=SOURCE / "quest_requirements_att_review.json")
+    parser.add_argument("--revisions", type=Path, default=SOURCE / "guide_revisions.json",
+                        help="Reviewed route evidence used to retain explicit cross-source discrepancies during capture")
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     document = json.loads(args.input.read_text(encoding="utf-8-sig"))
@@ -368,6 +417,8 @@ def main():
         evidence = capture(args.capture_eq, json.loads(args.eq_meta.read_text()), ids, args.att_westfall,
                            json.loads(args.att_meta.read_text()) if args.att_meta else None, args.att_dir,
                            json.loads(args.att_review.read_text(encoding="utf-8")) if args.att_dir else None)
+        if "87760" in evidence["quests"]:
+            annotate_reviewed_holy_diver(evidence, json.loads(args.revisions.read_text(encoding="utf-8")))
         args.evidence.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     evidence = json.loads(args.evidence.read_text(encoding="utf-8"))
     result = audit(document, evidence)

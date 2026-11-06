@@ -205,6 +205,53 @@ class RequirementMigrationTests(unittest.TestCase):
 
 
 class PublishedMigrationContractTests(unittest.TestCase):
+    def test_unlocked_holy_diver_does_not_reopen_inactive_historical_parents(self):
+        dark = "forever/alliance/03-darkshore"
+        for child in ({"onQuest": True, "complete": False}, {"delivered": True}):
+            with self.subTest(child=child):
+                saved = {"seen": True, "auto": False, "activeGuide": dark, "progress": {dark: {
+                    "cursor": 26, "routeRevision": 2, "review": True, "placed": True,
+                    "skipped": {"7:7": True, "11:12": True}, "confirmed": {"1:1": True}}}}
+                h = MigrationHost(saved, {87760: child})
+                expected = h.call("GetGuideCursorForRevision", dark, 26, 2)
+                h.initialize()
+                state = h.ns.char.progress[dark]
+                self.assertEqual(state.cursor, expected)
+                self.assertTrue(state.skipped["7:7"])
+                self.assertTrue(state.skipped["11:12"])
+                self.assertTrue(state.confirmed["1:1"])
+                self.assertIsNone(state.requirementsRepair)
+                for parent in (4722, 4723, 4725, 4727, 4728, 4730, 4731, 4732, 4733):
+                    self.assertFalse(h.call("IsQuestDelivered", parent))
+                    self.assertIsNone(h.ns.turnedIn[parent])
+
+    def test_active_holy_diver_parent_is_still_repaired_from_its_real_journal_state(self):
+        dark = "forever/alliance/03-darkshore"
+        saved = {"seen": True, "auto": False, "activeGuide": dark, "progress": {dark: {
+            "cursor": 26, "routeRevision": 2, "review": True, "placed": True,
+            "skipped": {"7:7": True, "11:12": True}, "confirmed": {"1:1": True}}}}
+        h = MigrationHost(saved, {87760: {"onQuest": True, "complete": False},
+                                 4722: {"onQuest": True, "complete": False}})
+        h.initialize()
+        state = h.ns.char.progress[dark]
+        self.assertEqual(state.cursor, 11)
+        self.assertIsNone(state.skipped["11:12"])
+        self.assertTrue(h.call("IsQuestActive", 4722))
+        self.assertFalse(h.call("IsQuestDelivered", 4722))
+        self.assertTrue(h.call("IsQuestActive", 87760))
+        self.assertTrue(state.confirmed["1:1"])
+
+    def test_unlocked_child_does_not_choose_an_unproven_or_parent(self):
+        h = RequirementHost(cursor=3)
+        guide = h.ns.guides[ROUTE]
+        guide.progressMigrations[1].affectedQuestIDs = h.table([100, 200])
+        guide.steps[2].goals[1].pre = h.table([200, 300])
+        h.quest(100, onQuest=True, complete=False)
+        h.migrate()
+        self.assertEqual(h.progress.cursor, 1)
+        self.assertFalse(h.call("IsQuestDelivered", 200))
+        self.assertIsNone(h.progress.confirmed["1:1"])
+
     def test_paused_legacy_mine_recovery_preserves_the_selected_other_guide(self):
         other = "forever/alliance/human/01-elwynn-forest"
         saved = {"seen": True, "auto": False, "activeGuide": other, "progress": {
@@ -248,10 +295,20 @@ class PublishedMigrationContractTests(unittest.TestCase):
                 migration = next(m for m in guide.progressMigrations.values() if m["from"] == revision["previousRevision"])
                 old = {f"{si}:{gi}": f"{si}:{gi}" for si, count in enumerate(revision["previousGoalCounts"], 1)
                        for gi in range(1, count + 1)}
-                expected = {migration.goalMap[key] or key: value for key, value in old.items()}
+                chain, current = [], revision["previousRevision"]
+                while current < guide.routeRevision:
+                    update = next(m for m in guide.progressMigrations.values() if m["from"] == current)
+                    chain.append(update)
+                    current = update.to
+                expected, added = dict(old), set()
+                for update in chain:
+                    expected = {update.goalMap[key] or key: value for key, value in expected.items()}
+                    added = {update.goalMap[key] or key for key in added}
+                    added.update((update.addedGoalKeys or h.table([])).values())
                 actual_keys = {f"{si}:{gi}" for si, step in guide.steps.items() for gi in step.goals.keys()}
                 self.assertEqual(len(expected), len(old), "Distinct old actions must never collide")
-                self.assertEqual(set(expected), actual_keys)
+                self.assertFalse(set(expected) & added, "New actions cannot inherit an old confirmation")
+                self.assertEqual(set(expected) | added, actual_keys)
                 h.ns.char = h.table({"activeGuide": "unselected", "progress": {guide.id: {
                     "routeRevision": revision["previousRevision"], "cursor": len(revision["previousGoalCounts"]) + 1,
                     "confirmed": old, "skipped": dict(old)}}})
@@ -261,7 +318,10 @@ class PublishedMigrationContractTests(unittest.TestCase):
                 self.assertEqual(primitive_copy(state.confirmed), expected)
                 self.assertEqual(primitive_copy(state.skipped), expected)
                 self.assertEqual(state.cursor, len(guide.steps) + 1)
-                for old_step, new_step in migration.stepMap.items():
+                for old_step in migration.stepMap.keys():
+                    new_step = old_step
+                    for update in chain:
+                        new_step = update.stepMap[new_step] or new_step
                     self.assertEqual(h.call("GetGuideCursorForRevision", guide.id, old_step, migration["from"]), new_step)
 
     def test_westfall_two_migrations_keep_earlier_live_repair_and_both_backups(self):

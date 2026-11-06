@@ -20,9 +20,10 @@
     },
     "localOverrides": {
       "file": "Source/guide_overrides.json",
-      "sha256": "b9ed47b109415f15a78ecff0a6ec12914d7a39dcd8876cdcfb7135f8b4fd516a",
+      "sha256": "220323b9856a82507c0c77c7e69c807b5a4ecc5def63480e9f9010f88ada26c4",
       "applied": [
-        "dun-morogh-cooking-instructor"
+        "dun-morogh-cooking-instructor",
+        "darkshore-auberdine-pier-map"
       ]
     },
     "navigationCoverage": {
@@ -507,7 +508,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "ebcca7a8dfc3d7e2cfcbba7a0caf1164afeca08513c40b5a0a65a12873a26f1e",
+      "sha256": "8e1d8545253cafa6b527f4646f80c505faec15844073dae3fef1aa5f4c236566",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -531,15 +532,18 @@
         "horde-02-the-barrens-prerequisites-metadata",
         "horde-03-silverpine-forest-prerequisites-metadata",
         "horde-04-the-barrens-prerequisites-metadata",
-        "horde-30-40-03-arathi-highlands-prerequisites-metadata"
+        "horde-30-40-03-arathi-highlands-prerequisites-metadata",
+        "darkshore-holy-diver-3",
+        "thousand-needles-nekrosh-chain-2",
+        "hillsbrad-wetlands-prerequisite-chains-3"
       ]
     }
   },
   "totals": {
     "guides": 57,
-    "goals": 7444,
-    "direct": 6559,
-    "generated_instruction": 7444,
+    "goals": 7455,
+    "direct": 6570,
+    "generated_instruction": 7455,
     "missing_goal_note_text": 3672,
     "missing": 289,
     "no_fixed_point_expected": 301,
@@ -550,13 +554,13 @@
     "reference_only": 3,
     "conditional_navigation": 2,
     "conditional_point_expected": 2,
-    "steps": 2338
+    "steps": 2343
   },
   "byAction": {
     "accept": {
-      "goals": 2290,
-      "direct": 2226,
-      "generated_instruction": 2290,
+      "goals": 2293,
+      "direct": 2229,
+      "generated_instruction": 2293,
       "missing_goal_note_text": 1285,
       "missing": 64,
       "no_fixed_point_expected": 64,
@@ -569,9 +573,9 @@
       "candidates": 1
     },
     "collect": {
-      "goals": 1102,
-      "direct": 1102,
-      "generated_instruction": 1102,
+      "goals": 1104,
+      "direct": 1104,
+      "generated_instruction": 1104,
       "missing_goal_note_text": 591
     },
     "complete": {
@@ -624,9 +628,9 @@
       "missing_goal_note_text": 25
     },
     "kill": {
-      "goals": 608,
-      "direct": 608,
-      "generated_instruction": 608,
+      "goals": 611,
+      "direct": 611,
+      "generated_instruction": 611,
       "missing_goal_note_text": 357
     },
     "level": {
@@ -664,9 +668,9 @@
       "direct": 9
     },
     "turnin": {
-      "goals": 2288,
-      "direct": 2288,
-      "generated_instruction": 2288,
+      "goals": 2291,
+      "direct": 2291,
+      "generated_instruction": 2291,
       "missing_goal_note_text": 784,
       "empty_authored_subtitle": 81
     },
@@ -1524,10 +1528,10 @@
       "guideID": "forever/alliance/07-thousand-needles",
       "title": "Las Mil Agujas, Bosque del Ocaso y Los Humedales",
       "counts": {
-        "goals": 119,
+        "goals": 122,
         "candidates": 4,
-        "generated_instruction": 119,
-        "direct": 108,
+        "generated_instruction": 122,
+        "direct": 111,
         "missing_goal_note_text": 28,
         "missing": 7,
         "no_fixed_point_expected": 7,
@@ -1535,9 +1539,9 @@
       },
       "byAction": {
         "accept": {
-          "goals": 38,
-          "direct": 36,
-          "generated_instruction": 38,
+          "goals": 39,
+          "direct": 37,
+          "generated_instruction": 39,
           "missing_goal_note_text": 16,
           "missing": 2,
           "no_fixed_point_expected": 2,
@@ -1549,9 +1553,9 @@
           "generated_instruction": 2
         },
         "collect": {
-          "goals": 18,
-          "direct": 18,
-          "generated_instruction": 18
+          "goals": 19,
+          "direct": 19,
+          "generated_instruction": 19
         },
         "fly": {
           "goals": 2,
@@ -1584,9 +1588,9 @@
           "generated_instruction": 2
         },
         "turnin": {
-          "goals": 35,
-          "direct": 35,
-          "generated_instruction": 35,
+          "goals": 36,
+          "direct": 36,
+          "generated_instruction": 36,
           "missing_goal_note_text": 7,
           "empty_authored_subtitle": 1
         },
@@ -1602,9 +1606,9 @@
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
       "title": "Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta",
       "counts": {
-        "goals": 108,
-        "direct": 102,
-        "generated_instruction": 108,
+        "goals": 116,
+        "direct": 110,
+        "generated_instruction": 116,
         "missing_goal_note_text": 31,
         "missing": 2,
         "no_fixed_point_expected": 2,
@@ -1613,9 +1617,9 @@
       },
       "byAction": {
         "accept": {
-          "goals": 44,
-          "direct": 44,
-          "generated_instruction": 44,
+          "goals": 46,
+          "direct": 46,
+          "generated_instruction": 46,
           "missing_goal_note_text": 17,
           "empty_authored_subtitle": 1
         },
@@ -1625,9 +1629,9 @@
           "generated_instruction": 1
         },
         "collect": {
-          "goals": 12,
-          "direct": 12,
-          "generated_instruction": 12
+          "goals": 13,
+          "direct": 13,
+          "generated_instruction": 13
         },
         "complete": {
           "goals": 1,
@@ -1652,9 +1656,9 @@
           "empty_authored_subtitle": 2
         },
         "kill": {
-          "goals": 7,
-          "direct": 7,
-          "generated_instruction": 7
+          "goals": 10,
+          "direct": 10,
+          "generated_instruction": 10
         },
         "note": {
           "goals": 2,
@@ -1675,9 +1679,9 @@
           "missing_goal_note_text": 1
         },
         "turnin": {
-          "goals": 34,
-          "direct": 34,
-          "generated_instruction": 34,
+          "goals": 36,
+          "direct": 36,
+          "generated_instruction": 36,
           "missing_goal_note_text": 12
         }
       }
@@ -6888,10 +6892,10 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/07-thousand-needles:29:2",
+      "key": "forever/alliance/07-thousand-needles:29:3",
       "guideID": "forever/alliance/07-thousand-needles",
       "stepIndex": 29,
-      "goalIndex": 2,
+      "goalIndex": 3,
       "action": "note",
       "questID": null,
       "title": null,
@@ -6901,20 +6905,20 @@
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/07-thousand-needles",
         "stepIndex": 29,
-        "goalIndex": 2
+        "goalIndex": 3
       },
       "classification": "semantic_no_location",
       "reason": "Nota informativa; no establece un destino físico.",
       "unresolved": false,
-      "goalNote": "El siguiente paso, Derrotar a Nek'rosh, te enfrenta a un jefe de élite: saltarlo.",
+      "goalNote": "Esta cadena continúa con Nek'rosh. Es élite: completadla en grupo y entregad su cabeza antes de salir de Menethil.",
       "stepNote": "Cabalga hacial este de nuevo; la catapulta se encuentra en el campamento Dragonmaw al sur de la carretera.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/07-thousand-needles:30:1",
+      "key": "forever/alliance/07-thousand-needles:31:1",
       "guideID": "forever/alliance/07-thousand-needles",
-      "stepIndex": 30,
+      "stepIndex": 31,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -6924,7 +6928,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/07-thousand-needles",
-        "stepIndex": 30,
+        "stepIndex": 31,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -6936,10 +6940,10 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/07-thousand-needles:30:2",
+      "key": "forever/alliance/07-thousand-needles:31:3",
       "guideID": "forever/alliance/07-thousand-needles",
-      "stepIndex": 30,
-      "goalIndex": 2,
+      "stepIndex": 31,
+      "goalIndex": 3,
       "action": "note",
       "questID": null,
       "title": null,
@@ -6948,8 +6952,8 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/07-thousand-needles",
-        "stepIndex": 30,
-        "goalIndex": 2
+        "stepIndex": 31,
+        "goalIndex": 3
       },
       "classification": "semantic_no_location",
       "reason": "Nota informativa; no establece un destino físico.",
@@ -6960,9 +6964,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/07-thousand-needles:32:2",
+      "key": "forever/alliance/07-thousand-needles:33:2",
       "guideID": "forever/alliance/07-thousand-needles",
-      "stepIndex": 32,
+      "stepIndex": 33,
       "goalIndex": 2,
       "action": "accept",
       "questID": 1100,
@@ -6972,7 +6976,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/07-thousand-needles",
-        "stepIndex": 32,
+        "stepIndex": 33,
         "goalIndex": 2
       },
       "classification": "item_start",
@@ -6984,9 +6988,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/07-thousand-needles:36:1",
+      "key": "forever/alliance/07-thousand-needles:37:1",
       "guideID": "forever/alliance/07-thousand-needles",
-      "stepIndex": 36,
+      "stepIndex": 37,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -6996,7 +7000,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/07-thousand-needles",
-        "stepIndex": 36,
+        "stepIndex": 37,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -7008,9 +7012,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/01-hillsbrad-foothills:6:1",
+      "key": "forever/alliance/30-40/01-hillsbrad-foothills:10:1",
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "stepIndex": 6,
+      "stepIndex": 10,
       "goalIndex": 1,
       "action": "note",
       "questID": null,
@@ -7020,7 +7024,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "stepIndex": 6,
+        "stepIndex": 10,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -7032,9 +7036,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/01-hillsbrad-foothills:25:2",
+      "key": "forever/alliance/30-40/01-hillsbrad-foothills:29:2",
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "stepIndex": 25,
+      "stepIndex": 29,
       "goalIndex": 2,
       "action": "note",
       "questID": null,
@@ -7044,7 +7048,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "stepIndex": 25,
+        "stepIndex": 29,
         "goalIndex": 2
       },
       "classification": "semantic_no_location",
@@ -13970,9 +13974,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/30-40/01-hillsbrad-foothills:30:3",
+      "key": "forever/alliance/30-40/01-hillsbrad-foothills:34:3",
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "stepIndex": 30,
+      "stepIndex": 34,
       "goalIndex": 3,
       "action": "complete",
       "questID": 1447,
@@ -13982,7 +13986,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "stepIndex": 30,
+        "stepIndex": 34,
         "goalIndex": 3
       },
       "kind": "step_instructions_not_goal",
@@ -16864,6 +16868,6 @@
       "location",
       "requiredLevel"
     ],
-    "semanticsSha256": "a2d48837dafa3b041e69b26c293957ea6417e36773d59f1db4235da632577079"
+    "semanticsSha256": "8cec214a6354fe831ec4433bc3c7af2d6b1e4f810e4d242f25e6f89c7dfcc8b0"
   }
 }

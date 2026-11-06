@@ -313,6 +313,9 @@ local function makeEntry(goal, step, state, index, guide, ctx, reason)
             for _, pre in ipairs(goal.pre or {}) do entry.missingQuestIDs[#entry.missingQuestIDs + 1] = math.abs(pre) end
         end
         plan, errorText = prerequisites(goal, ctx, {}, 0)
+    elseif id and kind == "turnin" and active(id) then
+        entry.kind, entry.missingQuestIDs = "unfinished_quest", { id }
+        plan, errorText = resolve(id, ctx, {}, 0)
     elseif id and not active(id) then
         entry.kind, entry.missingQuestIDs = "missing_quest", { id }
         plan, errorText = resolve(id, ctx, {}, 0)
@@ -426,6 +429,15 @@ function R:Start(indexOrQuest)
     ns.char.activeGuide = TEMP_ID
     ns:Sync()
     return true, self:GetStatus()
+end
+
+-- Tracker rows identify the local goal, not a quest number that could also
+-- be interpreted as an index into a changed blocker list.
+function R:StartForGoal(goalIndex)
+    for index, entry in ipairs(self:GetBlockers()) do
+        if entry.goalIndex == goalIndex then return self:Start(index) end
+    end
+    return false, "Este objetivo ya no tiene un requisito pendiente."
 end
 
 local function remaining(saved)

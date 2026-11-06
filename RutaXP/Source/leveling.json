@@ -20,9 +20,10 @@
     },
     "localOverrides": {
       "file": "Source/guide_overrides.json",
-      "sha256": "b9ed47b109415f15a78ecff0a6ec12914d7a39dcd8876cdcfb7135f8b4fd516a",
+      "sha256": "220323b9856a82507c0c77c7e69c807b5a4ecc5def63480e9f9010f88ada26c4",
       "applied": [
-        "dun-morogh-cooking-instructor"
+        "dun-morogh-cooking-instructor",
+        "darkshore-auberdine-pier-map"
       ]
     },
     "navigationCoverage": {
@@ -507,7 +508,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "ebcca7a8dfc3d7e2cfcbba7a0caf1164afeca08513c40b5a0a65a12873a26f1e",
+      "sha256": "8e1d8545253cafa6b527f4646f80c505faec15844073dae3fef1aa5f4c236566",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -531,7 +532,10 @@
         "horde-02-the-barrens-prerequisites-metadata",
         "horde-03-silverpine-forest-prerequisites-metadata",
         "horde-04-the-barrens-prerequisites-metadata",
-        "horde-30-40-03-arathi-highlands-prerequisites-metadata"
+        "horde-30-40-03-arathi-highlands-prerequisites-metadata",
+        "darkshore-holy-diver-3",
+        "thousand-needles-nekrosh-chain-2",
+        "hillsbrad-wetlands-prerequisite-chains-3"
       ]
     }
   },
@@ -551,8 +555,8 @@
       "Alliance": 29,
       "Horde": 28
     },
-    "steps": 2338,
-    "goals": 7444,
+    "steps": 2343,
+    "goals": 7455,
     "goalTypes": {
       "accept": 2290,
       "buy": 27,
@@ -578,43 +582,43 @@
       "candidates": 586,
       "class": 116,
       "closedBy": 152,
-      "count": 1194,
-      "f": 5490,
-      "from": 734,
+      "count": 1199,
+      "f": 5501,
+      "from": 736,
       "fromAlso": 97,
       "fromFaction": 11,
-      "fromKind": 734,
+      "fromKind": 736,
       "fromRank": 17,
       "group": 9,
-      "instruction": 7444,
+      "instruction": 7455,
       "instructionAsHint": 2,
       "instructionReplacesContext": 6,
       "instructionVerb": 11,
-      "item": 1212,
-      "itemName": 1212,
+      "item": 1214,
+      "itemName": 1214,
       "level": 25,
       "location": 399,
-      "map": 6560,
-      "minLevel": 2288,
+      "map": 6571,
+      "minLevel": 2291,
       "navigationHint": 434,
       "navigationMode": 14,
       "node": 76,
-      "note": 3555,
-      "npc": 4985,
-      "npcName": 4377,
-      "objName": 301,
-      "object": 301,
-      "oi": 1673,
+      "note": 3566,
+      "npc": 4993,
+      "npcName": 4382,
+      "objName": 302,
+      "object": 302,
+      "oi": 1678,
       "only": 352,
       "optional": 414,
-      "pre": 1212,
-      "preAll": 56,
-      "preTitles": 1382,
+      "pre": 1213,
+      "preAll": 62,
+      "preTitles": 1389,
       "profLine": 18,
       "profName": 18,
       "profRank": 18,
-      "qlvl": 2287,
-      "quest": 6489,
+      "qlvl": 2290,
+      "quest": 6500,
       "r": 2,
       "rank": 1,
       "rankMax": 1,
@@ -622,14 +626,14 @@
       "skill": 1,
       "skillLine": 1,
       "spots": 1313,
-      "spread": 667,
-      "t": 7444,
-      "target": 608,
+      "spread": 670,
+      "t": 7455,
+      "target": 611,
       "text": 226,
-      "title": 6489,
-      "x": 6560,
-      "y": 6560,
-      "z": 4463
+      "title": 6500,
+      "x": 6571,
+      "y": 6571,
+      "z": 4464
     }
   },
   "mapFrames": {
@@ -59023,7 +59027,7 @@
             },
             {
               "title": "WANTED: Jai'vhanel",
-              "minLevel": 10,
+              "minLevel": 15,
               "note": "El cartel de SE BUSCA fuera de la posada",
               "t": "accept",
               "quest": 98025,
@@ -63440,22 +63444,6 @@
               "instruction": "Habla con «Gubber Blump» y acepta «Rico marisco».\nZona: Costa Oscura."
             },
             {
-              "title": "Holy Diver",
-              "minLevel": 15,
-              "note": "Gwennyth Bly'Leggonde",
-              "t": "accept",
-              "quest": 87760,
-              "npc": 10219,
-              "npcName": "Gwennyth Bly'Leggonde",
-              "map": 1439,
-              "x": 36.62,
-              "y": 45.59,
-              "z": 16.1,
-              "f": "e",
-              "qlvl": 20,
-              "instruction": "Habla con «Gwennyth Bly'Leggonde» y acepta «Holy Diver».\nZona: Costa Oscura."
-            },
-            {
               "title": "SE BUSCA: ¡Viscoso!",
               "minLevel": 15,
               "note": "El cartel SE BUSCA",
@@ -64479,48 +64467,6 @@
               "instruction": "Habla con «Gelkak Gyromast» y acepta «La búsqueda de Gyromast».\nZona: Costa Oscura."
             },
             {
-              "title": "Holy Diver",
-              "note": "Rod de Deep Dominion: Stormscale Beastmistra",
-              "t": "collect",
-              "quest": 87760,
-              "oi": 1,
-              "item": 280686,
-              "itemName": "Rod of Deep Dominion",
-              "map": 1439,
-              "x": 50.41,
-              "y": 14.27,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 49.7,
-                  "y": 14.6,
-                  "r": 49,
-                  "n": 6
-                },
-                {
-                  "x": 48.5,
-                  "y": 13.2,
-                  "r": 68,
-                  "n": 7
-                },
-                {
-                  "x": 49.7,
-                  "y": 11.3,
-                  "r": 50,
-                  "n": 7
-                },
-                {
-                  "x": 48.2,
-                  "y": 11.6,
-                  "r": 16,
-                  "n": 2
-                }
-              ],
-              "from": "Stormscale Beastmistress",
-              "fromKind": "npc",
-              "instruction": "Recoge «Rod of Deep Dominion» del botín de «Stormscale Beastmistress».\nZona: Costa Oscura.\nRod de Deep Dominion: Stormscale Beastmistra."
-            },
-            {
               "title": "La búsqueda de Gyromast",
               "t": "collect",
               "quest": 2098,
@@ -65133,20 +65079,6 @@
               "z": 0.2,
               "f": "e",
               "instruction": "Habla con «Gubber Blump» y entrega «Rico marisco».\nZona: Costa Oscura."
-            },
-            {
-              "title": "Holy Diver",
-              "note": "Gwennyth Bly'Leggonde",
-              "t": "turnin",
-              "quest": 87760,
-              "npc": 10219,
-              "npcName": "Gwennyth Bly'Leggonde",
-              "map": 1439,
-              "x": 36.62,
-              "y": 45.59,
-              "z": 16.1,
-              "f": "e",
-              "instruction": "Habla con «Gwennyth Bly'Leggonde» y entrega «Holy Diver».\nZona: Costa Oscura."
             },
             {
               "t": "vendor",
@@ -66701,6 +66633,44 @@
               "instruction": "Habla con «Gwennyth Bly'Leggonde» y entrega «Criatura marina varada».\nZona: Costa Oscura."
             },
             {
+              "title": "Holy Diver",
+              "minLevel": 15,
+              "note": "Gwennyth Bly'Leggonde: después de entregar las nueve criaturas y tortugas varadas.",
+              "t": "accept",
+              "quest": 87760,
+              "npc": 10219,
+              "npcName": "Gwennyth Bly'Leggonde",
+              "map": 1439,
+              "x": 36.62,
+              "y": 45.59,
+              "z": 16.1,
+              "f": "e",
+              "qlvl": 20,
+              "instruction": "Habla con «Gwennyth Bly'Leggonde» y acepta «Holy Diver».\nZona: Costa Oscura.\nGwennyth Bly'Leggonde: después de entregar las nueve criaturas y tortugas varadas.",
+              "preAll": [
+                4722,
+                4723,
+                4725,
+                4727,
+                4728,
+                4730,
+                4731,
+                4732,
+                4733
+              ],
+              "preTitles": {
+                "4722": "Tortuga marina varada",
+                "4728": "Criatura marina varada",
+                "4730": "Criatura marina varada",
+                "4727": "Tortuga marina varada",
+                "4725": "Tortuga marina varada",
+                "4723": "Criatura marina varada",
+                "4731": "Tortuga marina varada",
+                "4732": "Tortuga marina varada",
+                "4733": "Criatura marina varada"
+              }
+            },
+            {
               "title": "SE BUSCA: ¡Viscoso!",
               "note": "Centinela Glynda Nal'Shea",
               "t": "turnin",
@@ -67588,7 +67558,7 @@
         },
         {
           "title": "El naga",
-          "note": "Sigue la costa noreste a la Ruins de Mathystra. Las reliquias de Mathystra se encuentran entre las ruinas; Stormscale Myrmidons, Sorceresses y guerreros mantenerlas.",
+          "note": "Recoge las reliquias y derrota a los nagas en Mathystra. Después sigue la playa hacia el norte: las Stormscale Beastmistresses llevan Rod of Deep Dominion para Holy Diver.",
           "goals": [
             {
               "title": "Las reliquias de Mathystra",
@@ -67862,6 +67832,48 @@
                 }
               ],
               "instruction": "Derrota a «Guerrero Escama Tormentosa» (6 en total).\nZona: Costa Oscura."
+            },
+            {
+              "title": "Holy Diver",
+              "note": "Rod de Deep Dominion: Stormscale Beastmistra",
+              "t": "collect",
+              "quest": 87760,
+              "oi": 1,
+              "item": 280686,
+              "itemName": "Rod of Deep Dominion",
+              "map": 1439,
+              "x": 50.41,
+              "y": 14.27,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 49.7,
+                  "y": 14.6,
+                  "r": 49,
+                  "n": 6
+                },
+                {
+                  "x": 48.5,
+                  "y": 13.2,
+                  "r": 68,
+                  "n": 7
+                },
+                {
+                  "x": 49.7,
+                  "y": 11.3,
+                  "r": 50,
+                  "n": 7
+                },
+                {
+                  "x": 48.2,
+                  "y": 11.6,
+                  "r": 16,
+                  "n": 2
+                }
+              ],
+              "from": "Stormscale Beastmistress",
+              "fromKind": "npc",
+              "instruction": "Recoge «Rod of Deep Dominion» del botín de «Stormscale Beastmistress».\nZona: Costa Oscura.\nRod de Deep Dominion: Stormscale Beastmistra."
             }
           ]
         },
@@ -68148,6 +68160,20 @@
               "f": "e",
               "qlvl": 17,
               "instruction": "Habla con «Thundris Tejevientos» y acepta «Expanding Horizons».\nZona: Costa Oscura.\nThundris Tejevientos: para Baros Alexston en Ventormenta."
+            },
+            {
+              "title": "Holy Diver",
+              "note": "Gwennyth Bly'Leggonde",
+              "t": "turnin",
+              "quest": 87760,
+              "npc": 10219,
+              "npcName": "Gwennyth Bly'Leggonde",
+              "map": 1439,
+              "x": 36.62,
+              "y": 45.59,
+              "z": 16.1,
+              "f": "e",
+              "instruction": "Habla con «Gwennyth Bly'Leggonde» y entrega «Holy Diver».\nZona: Costa Oscura."
             },
             {
               "t": "vendor",
@@ -68920,12 +68946,12 @@
             },
             {
               "t": "goto",
-              "map": 1450,
+              "map": 1439,
               "x": 32.4,
               "y": 43.8,
               "f": "e",
               "text": "Boat a Ventormenta",
-              "instruction": "Toma el barco a Ventormenta."
+              "instruction": "Toma el barco a Ventormenta.\nZona: Costa Oscura."
             }
           ]
         },
@@ -70174,7 +70200,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 2,
+      "routeRevision": 3,
       "progressMigrations": [
         {
           "from": 1,
@@ -70228,6 +70254,96 @@
           "affectedQuestIDs": [],
           "previousStepCount": 42,
           "firstAffectedStep": 43
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "goalMap": {
+            "21:14": "21:13",
+            "21:15": "21:14",
+            "21:16": "21:15",
+            "21:17": "21:16",
+            "21:18": "21:17",
+            "21:19": "21:18",
+            "21:20": "21:19",
+            "23:3": "23:2",
+            "23:4": "23:3",
+            "23:5": "23:4",
+            "23:6": "23:5",
+            "23:7": "23:6",
+            "26:10": "26:9",
+            "21:13": "33:5",
+            "33:5": "33:6",
+            "33:6": "33:7",
+            "33:7": "33:8",
+            "33:8": "33:9",
+            "33:9": "33:10",
+            "33:10": "33:11",
+            "33:11": "33:12",
+            "23:2": "34:5",
+            "26:9": "37:4",
+            "37:4": "37:5",
+            "37:5": "37:6"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 30,
+            "31": 31,
+            "32": 32,
+            "33": 33,
+            "34": 34,
+            "35": 35,
+            "36": 36,
+            "37": 37,
+            "38": 38,
+            "39": 39,
+            "40": 40,
+            "41": 41,
+            "42": 42,
+            "43": 43
+          },
+          "affectedQuestIDs": [
+            4722,
+            4723,
+            4725,
+            4727,
+            4728,
+            4730,
+            4731,
+            4732,
+            4733,
+            87760
+          ],
+          "previousStepCount": 42,
+          "firstAffectedStep": 21
         }
       ]
     },
@@ -95602,20 +95718,78 @@
               "instruction": "Interactúa con «Catapulta Faucedraco» para entregar «La estrategia de Nek'rosh».\nZona: Los Humedales."
             },
             {
+              "t": "accept",
+              "quest": 474,
+              "title": "Derrotar a Nek'rosh",
+              "minLevel": 23,
+              "qlvl": 32,
+              "pre": [
+                465
+              ],
+              "preTitles": {
+                "465": "La estrategia de Nek'rosh"
+              },
+              "object": 630696,
+              "objName": "Catapulta Faucedraco",
+              "map": 1437,
+              "x": 47.27,
+              "y": 47.18,
+              "f": "e",
+              "note": "Acepta la misión en la catapulta después de entregar La estrategia de Nek'rosh.",
+              "instruction": "Interactúa con «Catapulta Faucedraco» y acepta «Derrotar a Nek'rosh».\nZona: Los Humedales.\nAcepta la misión en la catapulta después de entregar La estrategia de Nek'rosh."
+            },
+            {
               "t": "note",
-              "text": "El siguiente paso, Derrotar a Nek'rosh, te enfrenta a un jefe de élite: saltarlo.",
-              "instruction": "El siguiente paso, Derrotar a Nek'rosh, te enfrenta a un jefe de élite: saltarlo."
+              "text": "Esta cadena continúa con Nek'rosh. Es élite: completadla en grupo y entregad su cabeza antes de salir de Menethil.",
+              "instruction": "Esta cadena continúa con Nek'rosh. Es élite: completadla en grupo y entregad su cabeza antes de salir de Menethil."
             }
           ]
         },
         {
-          "title": "A Theramore",
+          "title": "Jefe Nek'rosh",
+          "note": "Ve al campamento al sureste de la catapulta. El jefe es élite; despeja los guardias y combátelo en grupo.",
+          "goals": [
+            {
+              "t": "collect",
+              "quest": 474,
+              "title": "Derrotar a Nek'rosh",
+              "oi": 1,
+              "item": 3625,
+              "itemName": "Cabeza de Nek'rosh",
+              "count": 1,
+              "map": 1437,
+              "x": 53.5,
+              "y": 54.7,
+              "f": "e",
+              "from": "Jefe Nek'rosh",
+              "fromKind": "npc",
+              "note": "Derrota al jefe Nek'rosh y recoge su cabeza. Es élite: hazlo en grupo.",
+              "instruction": "Recoge «Cabeza de Nek'rosh» (1 en total) del botín de «Jefe Nek'rosh».\nZona: Los Humedales.\nDerrota al jefe Nek'rosh y recoge su cabeza. Es élite: hazlo en grupo."
+            }
+          ]
+        },
+        {
+          "title": "Menethil y el barco a Theramore",
           "goals": [
             {
               "t": "hearth",
               "area": 2104,
               "location": "Mesón Aguahonda",
               "instruction": "Comprueba que tu piedra de hogar está vinculada a «Mesón Aguahonda» y úsala para regresar allí."
+            },
+            {
+              "t": "turnin",
+              "quest": 474,
+              "title": "Derrotar a Nek'rosh",
+              "npc": 2104,
+              "npcName": "Capitán Puñorrecio",
+              "map": 1437,
+              "x": 9.86,
+              "y": 57.49,
+              "z": 26.8,
+              "f": "e",
+              "note": "Entrega la cabeza al capitán Puñorrecio antes de salir de Menethil.",
+              "instruction": "Habla con «Capitán Puñorrecio» y entrega «Derrotar a Nek'rosh».\nZona: Los Humedales.\nEntrega la cabeza al capitán Puñorrecio antes de salir de Menethil."
             },
             {
               "t": "note",
@@ -96819,7 +96993,95 @@
       ],
       "_sendaLocale": "esES",
       "pack": "guides",
-      "version": 1
+      "version": 1,
+      "routeRevision": 2,
+      "progressMigrations": [
+        {
+          "from": 1,
+          "to": 2,
+          "goalMap": {
+            "29:2": "29:3",
+            "30:1": "31:1",
+            "30:2": "31:3",
+            "31:1": "32:1",
+            "31:2": "32:2",
+            "31:3": "32:3",
+            "32:1": "33:1",
+            "32:2": "33:2",
+            "33:1": "34:1",
+            "33:2": "34:2",
+            "33:3": "34:3",
+            "33:4": "34:4",
+            "33:5": "34:5",
+            "33:6": "34:6",
+            "33:7": "34:7",
+            "34:1": "35:1",
+            "34:2": "35:2",
+            "34:3": "35:3",
+            "34:4": "35:4",
+            "34:5": "35:5",
+            "34:6": "35:6",
+            "34:7": "35:7",
+            "35:1": "36:1",
+            "35:2": "36:2",
+            "35:3": "36:3",
+            "35:4": "36:4",
+            "35:5": "36:5",
+            "35:6": "36:6",
+            "36:1": "37:1"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 31,
+            "31": 32,
+            "32": 33,
+            "33": 34,
+            "34": 35,
+            "35": 36,
+            "36": 37,
+            "37": 38
+          },
+          "affectedQuestIDs": [
+            465,
+            474
+          ],
+          "previousStepCount": 36,
+          "firstAffectedStep": 29,
+          "addedGoalKeys": [
+            "29:2",
+            "30:1",
+            "31:2"
+          ]
+        }
+      ]
     },
     {
       "id": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -96874,7 +97136,13 @@
               "z": 26.8,
               "f": "e",
               "qlvl": 29,
-              "instruction": "Habla con «Capitán Puñorrecio» y acepta «This Land Was Their Land».\nZona: Los Humedales.\nCapitán Puñorrecio: para Howin Plumamable."
+              "instruction": "Habla con «Capitán Puñorrecio» y acepta «This Land Was Their Land».\nZona: Los Humedales.\nCapitán Puñorrecio: para Howin Plumamable.",
+              "preAll": [
+                474
+              ],
+              "preTitles": {
+                "474": "Derrotar a Nek'rosh"
+              }
             },
             {
               "title": "Crocs of the Sky",
@@ -96889,7 +97157,69 @@
               "z": 10.1,
               "f": "e",
               "qlvl": 27,
-              "instruction": "Habla con «James Halloran» y acepta «Crocs of the Sky».\nZona: Los Humedales."
+              "instruction": "Habla con «James Halloran» y acepta «Crocs of the Sky».\nZona: Los Humedales.",
+              "preAll": [
+                471
+              ],
+              "preTitles": {
+                "471": "Deberes de aprendiz"
+              }
+            },
+            {
+              "t": "accept",
+              "quest": 98208,
+              "title": "Flor de los cielos",
+              "minLevel": 22,
+              "qlvl": 29,
+              "npc": 270844,
+              "npcName": "Sylessa Duskwhisper",
+              "map": 1437,
+              "x": 7.96,
+              "y": 55.85,
+              "f": "e",
+              "note": "Habla con Sylessa y acepta recoger Nord'el.",
+              "instruction": "Habla con «Sylessa Duskwhisper» y acepta «Flor de los cielos».\nZona: Los Humedales.\nHabla con Sylessa y acepta recoger Nord'el."
+            }
+          ]
+        },
+        {
+          "title": "Nord'el",
+          "note": "Baja a la costa al sur de Menethil y recoge la flor.",
+          "goals": [
+            {
+              "t": "collect",
+              "quest": 98208,
+              "title": "Flor de los cielos",
+              "oi": 1,
+              "item": 279915,
+              "itemName": "Nord'el",
+              "count": 1,
+              "map": 1437,
+              "x": 12.2,
+              "y": 63.8,
+              "f": "e",
+              "from": "Nord'el",
+              "fromKind": "object",
+              "note": "Recoge Nord'el junto a la costa al sur de Menethil.",
+              "instruction": "Interactúa con «Nord'el» para reunir «Nord'el» (1 en total).\nZona: Los Humedales.\nRecoge Nord'el junto a la costa al sur de Menethil."
+            }
+          ]
+        },
+        {
+          "title": "Sylessa",
+          "goals": [
+            {
+              "t": "turnin",
+              "quest": 98208,
+              "title": "Flor de los cielos",
+              "npc": 270844,
+              "npcName": "Sylessa Duskwhisper",
+              "map": 1437,
+              "x": 7.96,
+              "y": 55.85,
+              "f": "e",
+              "note": "Entrega Nord'el a Sylessa para recibir el encargo de Auberdine.",
+              "instruction": "Habla con «Sylessa Duskwhisper» y entrega «Flor de los cielos».\nZona: Los Humedales.\nEntrega Nord'el a Sylessa para recibir el encargo de Auberdine."
             },
             {
               "title": "Bloom of the Heavens",
@@ -96904,7 +97234,13 @@
               "y": 55.85,
               "f": "e",
               "qlvl": 29,
-              "instruction": "Habla con «Sylessa Duskwhisper» y acepta «Bloom of the Heavens».\nZona: Los Humedales.\nSylessa Duskwhisper: para Thundris Tejevientos en Auberdine (02-desolace)."
+              "instruction": "Habla con «Sylessa Duskwhisper» y acepta «Bloom of the Heavens».\nZona: Los Humedales.\nSylessa Duskwhisper: para Thundris Tejevientos en Auberdine (02-desolace).",
+              "preAll": [
+                98208
+              ],
+              "preTitles": {
+                "98208": "Flor de los cielos"
+              }
             }
           ]
         },
@@ -96925,7 +97261,13 @@
               "z": 117,
               "f": "e",
               "qlvl": 31,
-              "instruction": "Habla con «Prospector Whelgar» y acepta «Understanding Our Present».\nZona: Los Humedales."
+              "instruction": "Habla con «Prospector Whelgar» y acepta «Understanding Our Present».\nZona: Los Humedales.",
+              "preAll": [
+                299
+              ],
+              "preTitles": {
+                "299": "Desvelando el pasado"
+              }
             }
           ]
         },
@@ -97049,18 +97391,19 @@
               "instruction": "Habla con «Howin Plumamable» y acepta «Razormaw Needling».\nZona: Los Humedales."
             },
             {
-              "title": "Stopping the Cycle",
-              "minLevel": 24,
               "t": "accept",
-              "quest": 98297,
+              "quest": 98291,
+              "title": "Muerte a los Faucedraco",
+              "minLevel": 22,
+              "qlvl": 30,
               "npc": 270637,
               "npcName": "Howin Plumamable",
               "map": 1437,
               "x": 49.36,
               "y": 42.05,
               "f": "e",
-              "qlvl": 34,
-              "instruction": "Habla con «Howin Plumamable» y acepta «Stopping the Cycle».\nZona: Los Humedales."
+              "note": "Habla con Howin antes de ir a los campamentos del este.",
+              "instruction": "Habla con «Howin Plumamable» y acepta «Muerte a los Faucedraco».\nZona: Los Humedales.\nHabla con Howin antes de ir a los campamentos del este."
             },
             {
               "title": "Carnage",
@@ -97078,6 +97421,98 @@
               "optional": true,
               "qlvl": 30,
               "instruction": "Opcional.\nHabla con «Rethiel el Guardaverde» y acepta «Carnage».\nZona: Los Humedales.\nRethiel el Guardaverde: Carnicería, un raptor de élite."
+            }
+          ]
+        },
+        {
+          "title": "Campamentos Faucedraco",
+          "note": "Limpia los campamentos al este de Howin y reúne los tres objetivos antes de volver.",
+          "goals": [
+            {
+              "t": "kill",
+              "quest": 98291,
+              "title": "Muerte a los Faucedraco",
+              "oi": 1,
+              "npc": 271351,
+              "target": "Dragonmaw Reclaimer",
+              "count": 8,
+              "map": 1437,
+              "x": 59.7,
+              "y": 44.9,
+              "f": "e",
+              "spread": true,
+              "note": "Derrota 8 Dragonmaw Reclaimer en los campamentos al este de Howin.",
+              "instruction": "Derrota a «Dragonmaw Reclaimer» (8 en total).\nZona: Los Humedales.\nDerrota 8 Dragonmaw Reclaimer en los campamentos al este de Howin."
+            },
+            {
+              "t": "kill",
+              "quest": 98291,
+              "title": "Muerte a los Faucedraco",
+              "oi": 2,
+              "npc": 271348,
+              "target": "Dragonmaw Soulbinder",
+              "count": 5,
+              "map": 1437,
+              "x": 62.1,
+              "y": 43.8,
+              "f": "e",
+              "spread": true,
+              "note": "Derrota 5 Dragonmaw Soulbinder en los campamentos al este de Howin.",
+              "instruction": "Derrota a «Dragonmaw Soulbinder» (5 en total).\nZona: Los Humedales.\nDerrota 5 Dragonmaw Soulbinder en los campamentos al este de Howin."
+            },
+            {
+              "t": "kill",
+              "quest": 98291,
+              "title": "Muerte a los Faucedraco",
+              "oi": 3,
+              "npc": 271346,
+              "target": "Dragonmaw Infiltrator",
+              "count": 3,
+              "map": 1437,
+              "x": 58.7,
+              "y": 47.3,
+              "f": "e",
+              "spread": true,
+              "note": "Derrota 3 Dragonmaw Infiltrator en los campamentos al este de Howin.",
+              "instruction": "Derrota a «Dragonmaw Infiltrator» (3 en total).\nZona: Los Humedales.\nDerrota 3 Dragonmaw Infiltrator en los campamentos al este de Howin."
+            }
+          ]
+        },
+        {
+          "title": "Howin",
+          "goals": [
+            {
+              "t": "turnin",
+              "quest": 98291,
+              "title": "Muerte a los Faucedraco",
+              "npc": 270637,
+              "npcName": "Howin Plumamable",
+              "map": 1437,
+              "x": 49.36,
+              "y": 42.05,
+              "f": "e",
+              "note": "Vuelve a Howin y entrega esta misión antes de aceptar Stopping the Cycle.",
+              "instruction": "Habla con «Howin Plumamable» y entrega «Muerte a los Faucedraco».\nZona: Los Humedales.\nVuelve a Howin y entrega esta misión antes de aceptar Stopping the Cycle."
+            },
+            {
+              "title": "Stopping the Cycle",
+              "minLevel": 24,
+              "t": "accept",
+              "quest": 98297,
+              "npc": 270637,
+              "npcName": "Howin Plumamable",
+              "map": 1437,
+              "x": 49.36,
+              "y": 42.05,
+              "f": "e",
+              "qlvl": 34,
+              "instruction": "Habla con «Howin Plumamable» y acepta «Stopping the Cycle».\nZona: Los Humedales.",
+              "preAll": [
+                98291
+              ],
+              "preTitles": {
+                "98291": "Muerte a los Faucedraco"
+              }
             }
           ]
         },
@@ -100614,7 +101049,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 2,
+      "routeRevision": 3,
       "progressMigrations": [
         {
           "from": 1,
@@ -100663,6 +101098,178 @@
           "affectedQuestIDs": [],
           "previousStepCount": 37,
           "firstAffectedStep": 38
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "goalMap": {
+            "1:4": "3:2",
+            "2:1": "4:1",
+            "3:1": "5:1",
+            "4:1": "6:1",
+            "4:2": "6:2",
+            "5:1": "7:1",
+            "5:2": "7:2",
+            "5:4": "7:4",
+            "5:3": "9:2",
+            "6:1": "10:1",
+            "6:2": "10:2",
+            "7:1": "11:1",
+            "8:1": "12:1",
+            "8:2": "12:2",
+            "9:1": "13:1",
+            "9:2": "13:2",
+            "9:3": "13:3",
+            "9:4": "13:4",
+            "9:5": "13:5",
+            "10:1": "14:1",
+            "10:2": "14:2",
+            "10:3": "14:3",
+            "10:4": "14:4",
+            "11:1": "15:1",
+            "11:2": "15:2",
+            "11:3": "15:3",
+            "12:1": "16:1",
+            "12:2": "16:2",
+            "12:3": "16:3",
+            "12:4": "16:4",
+            "13:1": "17:1",
+            "13:2": "17:2",
+            "14:1": "18:1",
+            "14:2": "18:2",
+            "14:3": "18:3",
+            "15:1": "19:1",
+            "16:1": "20:1",
+            "16:2": "20:2",
+            "16:3": "20:3",
+            "16:4": "20:4",
+            "16:5": "20:5",
+            "16:6": "20:6",
+            "16:7": "20:7",
+            "16:8": "20:8",
+            "16:9": "20:9",
+            "16:10": "20:10",
+            "16:11": "20:11",
+            "16:12": "20:12",
+            "16:13": "20:13",
+            "17:1": "21:1",
+            "17:2": "21:2",
+            "18:1": "22:1",
+            "18:2": "22:2",
+            "19:1": "23:1",
+            "20:1": "24:1",
+            "20:2": "24:2",
+            "20:3": "24:3",
+            "20:4": "24:4",
+            "20:5": "24:5",
+            "20:6": "24:6",
+            "21:1": "25:1",
+            "21:2": "25:2",
+            "22:1": "26:1",
+            "22:2": "26:2",
+            "23:1": "27:1",
+            "24:1": "28:1",
+            "24:2": "28:2",
+            "24:3": "28:3",
+            "24:4": "28:4",
+            "25:1": "29:1",
+            "25:2": "29:2",
+            "26:1": "30:1",
+            "27:1": "31:1",
+            "27:2": "31:2",
+            "27:3": "31:3",
+            "27:4": "31:4",
+            "27:5": "31:5",
+            "27:6": "31:6",
+            "27:7": "31:7",
+            "28:1": "32:1",
+            "29:1": "33:1",
+            "29:2": "33:2",
+            "30:1": "34:1",
+            "30:2": "34:2",
+            "30:3": "34:3",
+            "30:4": "34:4",
+            "30:5": "34:5",
+            "31:1": "35:1",
+            "32:1": "36:1",
+            "33:1": "37:1",
+            "33:2": "37:2",
+            "33:3": "37:3",
+            "34:1": "38:1",
+            "34:2": "38:2",
+            "34:3": "38:3",
+            "34:4": "38:4",
+            "35:1": "39:1",
+            "35:2": "39:2",
+            "36:1": "40:1",
+            "37:1": "41:1",
+            "37:2": "41:2",
+            "37:3": "41:3",
+            "37:4": "41:4",
+            "37:5": "41:5",
+            "37:6": "41:6"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 4,
+            "3": 5,
+            "4": 6,
+            "5": 7,
+            "6": 10,
+            "7": 11,
+            "8": 12,
+            "9": 13,
+            "10": 14,
+            "11": 15,
+            "12": 16,
+            "13": 17,
+            "14": 18,
+            "15": 19,
+            "16": 20,
+            "17": 21,
+            "18": 22,
+            "19": 23,
+            "20": 24,
+            "21": 25,
+            "22": 26,
+            "23": 27,
+            "24": 28,
+            "25": 29,
+            "26": 30,
+            "27": 31,
+            "28": 32,
+            "29": 33,
+            "30": 34,
+            "31": 35,
+            "32": 36,
+            "33": 37,
+            "34": 38,
+            "35": 39,
+            "36": 40,
+            "37": 41,
+            "38": 42
+          },
+          "affectedQuestIDs": [
+            98072,
+            98208,
+            98209,
+            98216,
+            98230,
+            98291,
+            98297
+          ],
+          "previousStepCount": 37,
+          "firstAffectedStep": 1,
+          "addedGoalKeys": [
+            "1:4",
+            "2:1",
+            "3:1",
+            "7:3",
+            "8:1",
+            "8:2",
+            "8:3",
+            "9:1"
+          ]
         }
       ]
     },

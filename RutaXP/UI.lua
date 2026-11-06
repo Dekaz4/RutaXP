@@ -443,6 +443,7 @@ function ns:CreateTracker()
                 GameTooltip:AddLine(item.questPlan and "Plan del diario: informa de próximos pasos sin cambiar la misión de la flecha."
                     or item.preview and "Vista previa: primero termina el paso actual. No modifica tu progreso."
                     or item.omitted and "Clic der.: volver a incluir este objetivo"
+                    or item.blocked and "Clic izq.: retomar el requisito pendiente · Clic der.: omitir"
                     or "Clic izq.: marcar destino · Clic der.: omitir o quitar la marca manual", 0.58, 0.80, 1.0, true)
                 GameTooltip:Show()
             end
@@ -455,6 +456,9 @@ function ns:CreateTracker()
             if item.preview then return end
             if mouseBtn == "RightButton" and self.ToggleGoalConfirm and item.goalIndex then
                 self:ToggleGoalConfirm(item.goalIndex)
+            elseif item.blocked and self.Recovery and self.Recovery.StartForGoal then
+                local ok, reason = self.Recovery:StartForGoal(item.goalIndex)
+                if not ok and reason then self:Print(reason) end
             else
                 self:Navigate()
             end
@@ -670,6 +674,7 @@ function ns:RefreshUI()
             row.goalTitle = omitted and ("Omitido · " .. item.title) or item.title
             row.omitted = omitted
             row.preview = item.preview == true
+            row.blocked = not sharedView and not row.preview and item.status == "blocked"
             row.questPlan = item.questPlan == true
             local subtitle = item.subtitle
             if item.status ~= "done" and not row.preview and not sharedView and self.GetDuoGoalSuffix and step.goals and item.index then

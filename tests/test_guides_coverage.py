@@ -25,6 +25,54 @@ def original_order(document):
     result = copy.deepcopy(document)
     revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
     for revision in reversed(revisions):
+        if not revision.get("addedGoals"):
+            continue
+        guide = next(g for g in result["guides"] if g["id"] == revision["guideID"])
+        migration = next(m for m in guide["progressMigrations"] if m["from"] == revision["previousRevision"])
+        old = []
+        for si, count in enumerate(revision["previousGoalCounts"], 1):
+            step = copy.deepcopy(guide["steps"][migration["stepMap"][str(si)] - 1])
+            step["goals"] = []
+            for gi in range(1, count + 1):
+                ni, nj = (int(value) for value in migration["goalMap"].get(f"{si}:{gi}", f"{si}:{gi}").split(":"))
+                goal = copy.deepcopy(guide["steps"][ni - 1]["goals"][nj - 1])
+                for patch in revision.get("goalChanges", []):
+                    if all(goal.get(key) == value for key, value in patch["match"].items()) and goal.get("t") == "accept":
+                        for key, value in patch["set"].items():
+                            if key not in ("preAll", "preTitles") or goal.get(key) != value:
+                                raise AssertionError("A reviewed successor prerequisite changed")
+                            del goal[key]
+                step["goals"].append(goal)
+            old.append(step)
+        guide["steps"] = old
+    darkshore = next(g for g in result["guides"] if g["id"] == "forever/alliance/03-darkshore")
+    revision = next(r for r in revisions if r["id"] == "darkshore-holy-diver-3")
+    migration = next(m for m in darkshore["progressMigrations"] if m["from"] == 2 and m["to"] == 3)
+    original = []
+    for si, count in enumerate(revision["previousGoalCounts"], 1):
+        step = copy.deepcopy(darkshore["steps"][si - 1])
+        step["goals"] = []
+        for gi in range(1, count + 1):
+            target = migration["goalMap"].get(f"{si}:{gi}", f"{si}:{gi}")
+            ni, nj = (int(value) for value in target.split(":"))
+            goal = copy.deepcopy(darkshore["steps"][ni - 1]["goals"][nj - 1])
+            if goal.get("t") == "accept" and goal.get("quest") == 87760:
+                if goal.get("preAll") != [4722, 4723, 4725, 4727, 4728, 4730, 4731, 4732, 4733]:
+                    raise AssertionError("The reviewed Holy Diver prerequisite group changed")
+                del goal["preAll"]
+                goal.pop("preTitles", None)
+            if goal.get("t") == "accept" and goal.get("quest") == 98025:
+                if goal.get("minLevel") != 15:
+                    raise AssertionError("The reviewed Jai'vhanel minimum level changed")
+                goal["minLevel"] = 10
+            step["goals"].append(goal)
+        original.append(step)
+    darkshore["steps"] = original
+    pier = darkshore["steps"][36]["goals"][4]
+    if (pier.get("t"), pier.get("map"), pier.get("x"), pier.get("y"), pier.get("f")) != ("goto", 1439, 32.4, 43.8, "e"):
+        raise AssertionError("The reviewed Auberdine map correction changed")
+    pier["map"] = 1450
+    for revision in reversed(revisions):
         if not revision["id"].endswith("-prerequisites-metadata"):
             continue
         guide = next(g for g in result["guides"] if g["id"] == revision["guideID"])
@@ -108,12 +156,12 @@ class WholeGuideCoverageTests(unittest.TestCase):
     def test_inventory_accounts_for_every_goal_and_keeps_legitimate_exceptions_explicit(self):
         report = self.report
         self.assertEqual(report["totals"]["guides"], 57)
-        self.assertEqual(report["totals"]["goals"], 7444)
-        self.assertEqual(report["totals"]["steps"], 2338)
-        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7444)
-        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7444)
+        self.assertEqual(report["totals"]["goals"], 7455)
+        self.assertEqual(report["totals"]["steps"], 2343)
+        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7455)
+        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7455)
         self.assertEqual(sum(report["totals"].get(k, 0) for k in
-                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7444)
+                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7455)
         self.assertEqual(report["invalidNavigation"], [])
         for item in report["missingNavigation"]:
             self.assertTrue(item["classification"])
@@ -318,7 +366,7 @@ class ShippedGuideRenderingTests(unittest.TestCase):
             end
             return count,errorCount,table.concat(errors,"; ")
         ''')
-        self.assertEqual(result, (7444, 0, ""))
+        self.assertEqual(result, (7455, 0, ""))
 
     def test_all_bundled_points_and_candidate_frames_resolve_with_the_real_navigation_converter(self):
         host = AccessHost()

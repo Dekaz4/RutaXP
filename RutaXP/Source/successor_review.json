@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "scope": {
+    "guideIDs": [
+      "forever/alliance/03-darkshore",
+      "forever/alliance/04-redridge-mountains",
+      "forever/alliance/05-duskwood",
+      "forever/alliance/06-ashenvale",
+      "forever/alliance/07-thousand-needles",
+      "forever/alliance/30-40/01-hillsbrad-foothills",
+      "forever/alliance/30-40/02-desolace",
+      "forever/alliance/30-40/03-ashenvale",
+      "forever/alliance/30-40/04-stranglethorn-vale",
+      "forever/alliance/30-40/05-arathi-highlands",
+      "forever/alliance/30-40/06-badlands",
+      "forever/alliance/40-50/01-stranglethorn-vale",
+      "forever/alliance/40-50/02-badlands",
+      "forever/alliance/40-50/03-feralas",
+      "forever/alliance/40-50/04-tanaris",
+      "forever/alliance/40-50/05-the-hinterlands",
+      "forever/alliance/40-50/06-searing-gorge",
+      "forever/alliance/40-50/07-un-goro-crater",
+      "forever/alliance/50-60/01-burning-steppes",
+      "forever/alliance/50-60/02-felwood",
+      "forever/alliance/50-60/03-winterspring",
+      "forever/alliance/50-60/04-western-plaguelands",
+      "forever/alliance/50-60/05-silithus",
+      "forever/alliance/50-60/06-silithus"
+    ],
+    "guides": 24,
+    "beforeSteps": 837,
+    "beforeGoals": 2547
+  },
+  "appliedRevisionIDs": [
+    "thousand-needles-nekrosh-chain-2",
+    "hillsbrad-wetlands-prerequisite-chains-3"
+  ],
+  "addedQuestIDs": [
+    474,
+    98208,
+    98291
+  ],
+  "addedActions": 11,
+  "notApplied": [
+    {
+      "questID": 1271,
+      "status": "source_discrepancy_and_route_not_resolved",
+      "authored": {
+        "pre": [
+          1222
+        ]
+      },
+      "reportedByEverythingQuestsAndATT": {
+        "preAll": [
+          1222,
+          1258
+        ]
+      },
+      "sources": [
+        {
+          "repository": "julen92/SendaFH",
+          "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+          "path": "addon/SendaFH_QuestDB/Quests.lua",
+          "line": 1231,
+          "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L1231",
+          "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+        },
+        {
+          "repository": "ATTWoWAddon/AllTheThings",
+          "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+          "path": ".contrib/.db/forever/zones/kalimdor/dustwallow marsh.lua",
+          "line": 179,
+          "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/dustwallow%20marsh.lua#L179",
+          "sha256": "468f22df175f48de75aa127256473706cfab58580aca93b45294a9cd08aad1f6"
+        },
+        {
+          "repository": "wheelbarrel00/EverythingQuests",
+          "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+          "path": "Data/QuestAvailable_Forever.lua",
+          "line": 15183,
+          "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15183",
+          "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+        }
+      ],
+      "reason": "Senda requires1222 only. The alternative AND rule also needs1258, absent from this route. Adding the gate alone would block the character.",
+      "candidateQuest": {
+        "questID": 1258,
+        "pre": [
+          1204
+        ],
+        "minLevel": 33,
+        "acceptAfter": "forever/alliance/40-50/01-stranglethorn-vale:16:5",
+        "workAlong": "forever/alliance/40-50/01-stranglethorn-vale:47:1",
+        "work": {
+          "item": 5938,
+          "count": 12,
+          "npcIDs": [
+            922,
+            1088
+          ],
+          "map": 1435
+        },
+        "naturalTurninAt": "forever/alliance/40-50/02-badlands:16",
+        "npc": 4794,
+        "sources": [
+          {
+            "repository": "julen92/SendaFH",
+            "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+            "path": "addon/SendaFH_QuestDB/Quests.lua",
+            "line": 1218,
+            "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L1218",
+            "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+          },
+          {
+            "repository": "ATTWoWAddon/AllTheThings",
+            "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+            "path": ".contrib/.db/forever/zones/kalimdor/dustwallow marsh.lua",
+            "line": 88,
+            "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/dustwallow%20marsh.lua#L88",
+            "sha256": "468f22df175f48de75aa127256473706cfab58580aca93b45294a9cd08aad1f6"
+          },
+          {
+            "repository": "julen92/SendaFH",
+            "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+            "path": "addon/SendaFH_QuestDB/Items.lua",
+            "line": 746,
+            "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Items.lua#L746",
+            "sha256": "ad1b2f87dc0f74a7a1bed0b584295c49aa91ce5496553c41b4a3d2abd0c37449"
+          },
+          {
+            "repository": "julen92/SendaFH",
+            "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+            "path": "addon/SendaFH_QuestDB/Npcs.lua",
+            "line": 391,
+            "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Npcs.lua#L391",
+            "sha256": "1c804c58ba647d16ccf9d2048be106e10e994c55fd38022284b4ede482270d9a"
+          },
+          {
+            "repository": "julen92/SendaFH",
+            "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+            "path": "addon/SendaFH_QuestDB/Npcs.lua",
+            "line": 483,
+            "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Npcs.lua#L483",
+            "sha256": "1c804c58ba647d16ccf9d2048be106e10e994c55fd38022284b4ede482270d9a"
+          }
+        ]
+      },
+      "existing1271At": "forever/alliance/40-50/01-stranglethorn-vale:38:4-5",
+      "nextExistingStormwindAfterNaturalTurnin": "forever/alliance/50-60/05-silithus:17",
+      "possibleDetourNotApplied": "After STV48, travel via Duskwood flight to Menethil, boat to Theramore, hand1258toMorgan, then use existing hearthSW49 and move1271afterit. Requires a separate travel review."
+    },
+    {
+      "questID": 526,
+      "status": "contradictory_sources_not_applied",
+      "authored": {
+        "closedBy": [
+          322,
+          324
+        ]
+      },
+      "sources": [
+        {
+          "repository": "julen92/SendaFH",
+          "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+          "path": "addon/SendaFH_QuestDB/Quests.lua",
+          "line": 524,
+          "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L524",
+          "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+        },
+        {
+          "repository": "ATTWoWAddon/AllTheThings",
+          "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+          "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+          "line": 596,
+          "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L596",
+          "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+        },
+        {
+          "repository": "wheelbarrel00/EverythingQuests",
+          "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+          "path": "Data/QuestAvailable_Forever.lua",
+          "line": 13384,
+          "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L13384",
+          "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+        }
+      ],
+      "reason": "Senda has no prerequisite and excludes324. ATT requires321 and treats324 as alternative; EQrequires324. Preserve authored behavior until client evidence resolves this."
+    }
+  ],
+  "limits": [
+    "This is a static source and ordering review, not an in-game playthrough or a complete proof of every NPC/phase.",
+    "Breadcrumbs and faction conflicts are not converted into hard prerequisites.",
+    "Existing source warnings remain in quest_requirements_audit.json.",
+    "ATT and EQ facts retain MIT attribution; Senda data notices remain in Licenses."
+  ]
+}

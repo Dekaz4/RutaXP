@@ -364,7 +364,7 @@ class GuideInstructionTests(unittest.TestCase):
                             self.assertEqual(value, new_goal[key])
                     taming += new_goal.get("instructionVerb") == "Domestica"
                     count += 1
-        self.assertEqual(count, 7444)
+        self.assertEqual(count, 7455)
         self.assertEqual(taming, 11)
         self.assertEqual(enriched, instructions.enrich_document(enriched))
 

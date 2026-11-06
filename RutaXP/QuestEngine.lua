@@ -96,11 +96,18 @@ local function getGuideLayout(self, guide)
     if not guide or not guide.steps then return nil end
     local cached = guideCache[guide]
     if cached then return cached end
-    cached = { stepOf = {}, accepts = {}, preOf = {} }
+    cached = { stepOf = {}, accepts = {}, preOf = {}, work = {}, titles = {} }
     for s, step in ipairs(guide.steps) do
         cached.stepOf[step] = s
         for g, goal in ipairs(step.goals or {}) do
             local q = goal.quest or goal.questID
+            if q and goal.title then cached.titles[q] = goal.title end
+            local kind = goal.t or goal.action
+            if q and (kind == "collect" or kind == "kill" or kind == "complete" or kind == "objective"
+                or kind == "interact" or kind == "use") then
+                cached.work[q] = cached.work[q] or {}
+                table.insert(cached.work[q], { s=s, g=g, step=step, goal=goal })
+            end
             if q and (goal.t or goal.action) == "accept" then
                 cached.accepts[q] = cached.accepts[q] or {}
                 table.insert(cached.accepts[q], { s = s, g = g, step = step, goal = goal })
@@ -318,6 +325,45 @@ local function questWorkReason(goal, id)
     end
 end
 
+local function questLabel(layout, id, fallback)
+    local live = read(C_QuestLog and C_QuestLog.GetTitleForQuestID, id)
+    return type(live) == "string" and live ~= "" and live
+        or (layout and layout.titles[id]) or fallback or ("Misión " .. tostring(id))
+end
+
+local function prerequisiteReason(self, layout, goal, ids, alternatives)
+    local labels = {}
+    for _, value in ipairs(ids) do
+        local id = math.abs(value)
+        if not self:IsQuestDelivered(id) then
+            labels[#labels + 1] = "«" .. questLabel(layout, id, (goal.preTitles or {})[id]) .. "»"
+        end
+    end
+    if #labels == 1 then
+        local id = math.abs(ids[1])
+        for _, value in ipairs(ids) do if not self:IsQuestDelivered(math.abs(value)) then id = math.abs(value); break end end
+        local ready = self:IsQuestActive(id) and read(C_QuestLog and C_QuestLog.IsComplete, id) == true
+        return (ready and "Entrega primero " or "Completa y entrega primero ") .. labels[1]
+    end
+    if alternatives then
+        return "Entrega una previa: " .. labels[1] .. (#labels == 2 and (" o " .. labels[2]) or (" u otras " .. (#labels - 1)))
+    end
+    return "Entrega primero " .. labels[1] .. " y " .. (#labels - 1) .. " previa(s) más"
+end
+
+local function omittedWork(self, layout, id, state, stepIndex, goalIndex)
+    if not layout or not state then return false end
+    for _, entry in ipairs(layout.work[id] or {}) do
+        if (entry.s < stepIndex or entry.s == stepIndex and entry.g < goalIndex)
+            and self:MatchesConditions(entry.step.only) and self:MatchesConditions(entry.goal.only) then
+            local key = confirmationKey(state, entry.g, entry.s)
+            if ((state.skipped and state.skipped[key]) or (state.confirmed and state.confirmed[key]))
+                and not questWorkReason(entry.goal, id) then return true end
+        end
+    end
+    return false
+end
+
 function ns:GetGoalStatus(goal, step, state, index)
     if not self:MatchesConditions(step and step.only) or not self:MatchesConditions(goal.only) then return "skip", "Otro personaje" end
     local guide = self.char and self.guides[self.char.activeGuide]
@@ -378,12 +424,14 @@ function ns:GetGoalStatus(goal, step, state, index)
             return "blocked", "Acepta primero " .. parentTitle .. " y mantenla en tu diario"
         end
         for _, pre in ipairs(goal.preAll or {}) do
-            if not self:IsQuestDelivered(math.abs(pre)) then return "blocked", "Primero entrega la misión previa" end
+            if not self:IsQuestDelivered(math.abs(pre)) then
+                return "blocked", prerequisiteReason(self, layout, goal, goal.preAll, false)
+            end
         end
         if goal.pre and #goal.pre > 0 then
             local ready = false
             for _, pre in ipairs(goal.pre) do if self:IsQuestDelivered(math.abs(pre)) then ready = true; break end end
-            if not ready then return "blocked", "Falta una misión previa de esta cadena" end
+            if not ready then return "blocked", prerequisiteReason(self, layout, goal, goal.pre, true) end
         end
         return "active", "Acepta la misión"
     end
@@ -396,7 +444,13 @@ function ns:GetGoalStatus(goal, step, state, index)
             end
             return "skip", "La misión no está en tu diario"
         end
-        if action == "turnin" then return "active", "Entrega la misión al NPC" end
+        if action == "turnin" then
+            if onQuest and read(C_QuestLog and C_QuestLog.IsComplete, id) == false
+                and omittedWork(self, layout, id, state, stepIndex, index or 1) then
+                return "blocked", "Retoma los objetivos pendientes de «" .. questLabel(layout, id, goal.title) .. "»"
+            end
+            return "active", "Entrega la misión al NPC"
+        end
         if workDone then return "done", workDone end
         return "active", "Completa el objetivo de la misión"
     end
@@ -764,7 +818,7 @@ function ns:GetStepGoalItems(step, state)
             local id = goal.quest or goal.questID
             -- If an earlier objective in the same step for the same quest is still incomplete,
             -- hide the turnin row until that objective is done so the tracker stays clean.
-            if action == "turnin" and id and pendingWorkByQuest[id] and status ~= "done" then
+            if action == "turnin" and id and pendingWorkByQuest[id] and status ~= "done" and index ~= currentIdx then
                 -- Skip premature turnin row in the same step
             else
                 if status ~= "done" and id and (action == "kill" or action == "collect" or action == "complete" or action == "objective" or action == "interact" or action == "use") then

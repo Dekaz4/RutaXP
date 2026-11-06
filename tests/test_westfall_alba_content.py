@@ -68,7 +68,7 @@ class WestfallAlbaContentTests(unittest.TestCase):
         self.assertEqual(revision["evidence"]["sourceCommit"], "54a16756db16adeb9d5602bace1507077df37185")
         self.assertEqual(revision["evidence"]["preAll"], [92742, 92744])
         self.assertEqual(self.builder.route_shape(self.guide), next(r for r in overlay["revisions"] if r["id"] == "westfall-engineering-3")["resultShape"])
-        self.assertEqual(self.doc["statistics"]["steps"], 2338)
+        self.assertEqual(self.doc["statistics"]["steps"], 2343)
 
     def test_clean_reimport_reapplies_only_reviewed_route_semantics(self):
         upstream = ROOT / ".sources/SendaFH"

@@ -3,41 +3,41 @@
   "sourceCommit": "5d207e28e82e2c529143b21ace74fe88692f0067",
   "scope": {
     "guides": 57,
-    "steps": 2338,
-    "goals": 7444,
-    "questIDs": 1900,
+    "steps": 2343,
+    "goals": 7455,
+    "questIDs": 1903,
     "actions": {
-      "accept": 2290,
+      "accept": 2293,
       "buy": 27,
-      "collect": 1102,
+      "collect": 1104,
       "complete": 238,
       "fly": 165,
       "getfp": 76,
       "goto": 99,
       "hearth": 84,
       "interact": 50,
-      "kill": 608,
+      "kill": 611,
       "level": 25,
       "note": 116,
       "sethome": 74,
       "talk": 10,
       "train": 126,
-      "turnin": 2288,
+      "turnin": 2291,
       "use": 18,
       "vendor": 48
     },
     "goalFields": {
-      "t": 7444,
-      "quest": 6489,
-      "oi": 1673,
-      "item": 1212,
-      "count": 1194,
-      "pre": 1212,
-      "preAll": 56,
+      "t": 7455,
+      "quest": 6500,
+      "oi": 1678,
+      "item": 1214,
+      "count": 1199,
+      "pre": 1213,
+      "preAll": 62,
       "closedBy": 152,
       "only": 352,
       "optional": 414,
-      "minLevel": 2288,
+      "minLevel": 2291,
       "maxLevel": 0,
       "level": 25,
       "n": 0,
@@ -3675,6 +3675,583 @@
       },
       {
         "guideID": "forever/alliance/03-darkshore",
+        "step": 1,
+        "goal": 5,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": 15
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 13,
+        "field": "quest",
+        "source": 87760,
+        "snapshot": 4740
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 14,
+        "field": "quest",
+        "source": 4740,
+        "snapshot": 965
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 14,
+        "field": "minLevel",
+        "source": 15,
+        "snapshot": 13
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 15,
+        "field": "quest",
+        "source": 965,
+        "snapshot": 986
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 15,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          985
+        ]
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 15,
+        "field": "minLevel",
+        "source": 13,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 16,
+        "field": "quest",
+        "source": 986,
+        "snapshot": 2139
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 16,
+        "field": "pre",
+        "source": [
+          985
+        ],
+        "snapshot": [
+          2138
+        ]
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 17,
+        "field": "quest",
+        "source": 2139,
+        "snapshot": 982
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 17,
+        "field": "pre",
+        "source": [
+          2138
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 17,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": 13
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 18,
+        "field": "quest",
+        "source": 982,
+        "snapshot": 4763
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 18,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          4762
+        ]
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 18,
+        "field": "minLevel",
+        "source": 13,
+        "snapshot": 15
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 19,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "vendor"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 19,
+        "field": "quest",
+        "source": 4763,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 19,
+        "field": "pre",
+        "source": [
+          4762
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 21,
+        "goal": 19,
+        "field": "minLevel",
+        "source": 15,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 2,
+        "field": "quest",
+        "source": 87760,
+        "snapshot": 2098
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 2,
+        "field": "item",
+        "source": 280686,
+        "snapshot": 7498
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 3,
+        "field": "oi",
+        "source": 1,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 3,
+        "field": "item",
+        "source": 7498,
+        "snapshot": 7499
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 4,
+        "field": "oi",
+        "source": 2,
+        "snapshot": 3
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 4,
+        "field": "item",
+        "source": 7499,
+        "snapshot": 7500
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 5,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 5,
+        "field": "oi",
+        "source": 3,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 5,
+        "field": "item",
+        "source": 7500,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 6,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 6,
+        "field": "quest",
+        "source": 2098,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 6,
+        "field": "item",
+        "source": null,
+        "snapshot": 15883
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 6,
+        "field": "count",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 23,
+        "goal": 6,
+        "field": "only",
+        "source": null,
+        "snapshot": {
+          "races": [
+            "NightElf"
+          ],
+          "classes": [
+            "DRUID"
+          ]
+        }
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 26,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 26,
+        "goal": 9,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "vendor"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 26,
+        "goal": 9,
+        "field": "quest",
+        "source": 87760,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 5,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 5,
+        "field": "quest",
+        "source": 4740,
+        "snapshot": 87760
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 5,
+        "field": "preAll",
+        "source": null,
+        "snapshot": [
+          4722,
+          4723,
+          4725,
+          4727,
+          4728,
+          4730,
+          4731,
+          4732,
+          4733
+        ]
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 5,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 15
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 6,
+        "field": "quest",
+        "source": 6123,
+        "snapshot": 4740
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 6,
+        "field": "only",
+        "source": {
+          "classes": [
+            "DRUID"
+          ],
+          "races": [
+            "NightElf"
+          ]
+        },
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 7,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 7,
+        "field": "quest",
+        "source": 6124,
+        "snapshot": 6123
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 7,
+        "field": "pre",
+        "source": [
+          6123
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 7,
+        "field": "minLevel",
+        "source": 14,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 8,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 8,
+        "field": "quest",
+        "source": 98042,
+        "snapshot": 6124
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 8,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          6123
+        ]
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 8,
+        "field": "only",
+        "source": null,
+        "snapshot": {
+          "races": [
+            "NightElf"
+          ],
+          "classes": [
+            "DRUID"
+          ]
+        }
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 8,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 14
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 9,
+        "field": "quest",
+        "source": 986,
+        "snapshot": 98042
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 10,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 10,
+        "field": "quest",
+        "source": 993,
+        "snapshot": 986
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 10,
+        "field": "pre",
+        "source": [
+          986
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 10,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 11,
+        "field": "t",
+        "source": "vendor",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 11,
+        "field": "quest",
+        "source": null,
+        "snapshot": 993
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 11,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          986
+        ]
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 33,
+        "goal": 11,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 34,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 37,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 37,
+        "goal": 4,
+        "field": "t",
+        "source": "vendor",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 37,
+        "goal": 4,
+        "field": "quest",
+        "source": null,
+        "snapshot": 87760
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 37,
+        "goal": 5,
+        "field": "t",
+        "source": "goto",
+        "snapshot": "vendor"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
         "step": 40,
         "goal": 2,
         "field": "preAll",
@@ -3922,8 +4499,1083 @@
         ]
       },
       {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "field": "step count"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 29,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 29,
+        "goal": 2,
+        "field": "t",
+        "source": "note",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 29,
+        "goal": 2,
+        "field": "quest",
+        "source": null,
+        "snapshot": 474
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 29,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          465
+        ]
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 29,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 23
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 30,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 30,
+        "goal": 1,
+        "field": "t",
+        "source": "hearth",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 30,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 474
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 30,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 30,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 3625
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 30,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "hearth"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 1,
+        "field": "quest",
+        "source": 1716,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 2,
+        "field": "quest",
+        "source": 1738,
+        "snapshot": 474
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1716
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 20,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "note"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 3,
+        "field": "quest",
+        "source": 65602,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 3,
+        "field": "pre",
+        "source": [
+          1716
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 3,
+        "field": "optional",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 20,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 32,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 32,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 32,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 1716
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 32,
+        "goal": 1,
+        "field": "item",
+        "source": 5791,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 32,
+        "goal": 2,
+        "field": "quest",
+        "source": 1100,
+        "snapshot": 1738
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 32,
+        "goal": 2,
+        "field": "item",
+        "source": 5791,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 32,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1716
+        ]
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 32,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 29,
+        "snapshot": 20
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 33,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 33,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 33,
+        "goal": 1,
+        "field": "quest",
+        "source": 1104,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 33,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 5791
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 33,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 28,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 33,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 33,
+        "goal": 2,
+        "field": "quest",
+        "source": 1179,
+        "snapshot": 1100
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 33,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 5791
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 33,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 29
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 1,
+        "field": "quest",
+        "source": 1110,
+        "snapshot": 1104
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 1,
+        "field": "item",
+        "source": 5798,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 1,
+        "field": "count",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 2,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 2,
+        "field": "quest",
+        "source": 1104,
+        "snapshot": 1179
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 2,
+        "field": "item",
+        "source": 5794,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 2,
+        "field": "count",
+        "source": 6,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 3,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 3,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 3,
+        "field": "item",
+        "source": 5795,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 3,
+        "field": "count",
+        "source": 9,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 3,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 4,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 4,
+        "field": "quest",
+        "source": 1176,
+        "snapshot": 1110
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 4,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 4,
+        "field": "item",
+        "source": 5848,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 4,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 4,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 5,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 5,
+        "field": "quest",
+        "source": 1175,
+        "snapshot": 5762
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 5,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 5,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 5,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 6,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 6,
+        "field": "quest",
+        "source": 1175,
+        "snapshot": 1176
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 6,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 6,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 6,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 29
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 7,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 7,
+        "field": "oi",
+        "source": 3,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 7,
+        "field": "count",
+        "source": 6,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 34,
+        "goal": 7,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 1,
+        "field": "quest",
+        "source": 1104,
+        "snapshot": 1110
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 5798
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 2,
+        "field": "quest",
+        "source": 1105,
+        "snapshot": 1104
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 5794
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 6
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 3,
+        "field": "quest",
+        "source": 1106,
+        "snapshot": 1105
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 3,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 3,
+        "field": "item",
+        "source": null,
+        "snapshot": 5795
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 3,
+        "field": "count",
+        "source": null,
+        "snapshot": 9
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 3,
+        "field": "preAll",
+        "source": [
+          1104,
+          1105
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 26,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 4,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 4,
+        "field": "quest",
+        "source": 1110,
+        "snapshot": 1176
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 4,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 4,
+        "field": "item",
+        "source": null,
+        "snapshot": 5848
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 4,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 5,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 5,
+        "field": "quest",
+        "source": 1176,
+        "snapshot": 1175
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 5,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 5,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 6,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 6,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 35,
+        "goal": 6,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 36,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 36,
+        "goal": 1,
+        "field": "t",
+        "source": "hearth",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 36,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 1104
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "field": "step count"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 1,
+        "goal": 2,
+        "field": "preAll",
+        "source": null,
+        "snapshot": [
+          474
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 1,
+        "goal": 3,
+        "field": "preAll",
+        "source": null,
+        "snapshot": [
+          471
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 1,
+        "goal": 4,
+        "field": "quest",
+        "source": 98209,
+        "snapshot": 98208
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 2,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 2,
+        "goal": 1,
+        "field": "quest",
+        "source": 98216,
+        "snapshot": 98208
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 2,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 2,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 279915
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 2,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 2,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 23,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 3,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 3,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 3,
+        "goal": 1,
+        "field": "quest",
+        "source": 98216,
+        "snapshot": 98208
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 3,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 3,
+        "goal": 1,
+        "field": "item",
+        "source": 279993,
+        "snapshot": null
+      },
+      {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
         "step": 4,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 4,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 4,
+        "goal": 1,
+        "field": "preAll",
+        "source": null,
+        "snapshot": [
+          299
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 4,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 23
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 5,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 5,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 5,
+        "goal": 1,
+        "field": "quest",
+        "source": 98230,
+        "snapshot": 98216
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 5,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 5,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 279993
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 6,
+        "goal": 1,
+        "field": "t",
+        "source": "note",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 6,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 98216
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 6,
+        "goal": 2,
+        "field": "quest",
+        "source": 98223,
+        "snapshot": 98310
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 6,
         "goal": 2,
         "field": "preAll",
         "source": null,
@@ -3933,7 +5585,481 @@
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 6,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 23,
+        "snapshot": 24
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 7,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 7,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 7,
+        "goal": 1,
+        "field": "quest",
+        "source": 98310,
+        "snapshot": 98230
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 7,
+        "goal": 1,
+        "field": "oi",
+        "source": 3,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 7,
+        "goal": 1,
+        "field": "item",
+        "source": 280397,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 8,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 8,
+        "goal": 1,
+        "field": "quest",
+        "source": 98297,
+        "snapshot": 98291
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 8,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 8
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 8,
+        "goal": 2,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 8,
+        "goal": 2,
+        "field": "quest",
+        "source": 98310,
+        "snapshot": 98291
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 8,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 8,
+        "goal": 2,
+        "field": "item",
+        "source": 280395,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 8,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "goal": 1,
+        "field": "quest",
+        "source": 98072,
+        "snapshot": 98291
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "goal": 1,
+        "field": "item",
+        "source": 279385,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "goal": 1,
+        "field": "count",
+        "source": 8,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "goal": 2,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "goal": 2,
+        "field": "quest",
+        "source": 98245,
+        "snapshot": 98297
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "goal": 2,
+        "field": "item",
+        "source": 280103,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "goal": 2,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "goal": 2,
+        "field": "preAll",
+        "source": null,
+        "snapshot": [
+          98291
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 9,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 24
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
         "step": 10,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 10,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "note"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 10,
+        "goal": 1,
+        "field": "quest",
+        "source": 98297,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 10,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 10,
+        "goal": 2,
+        "field": "quest",
+        "source": 98245,
+        "snapshot": 98223
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 10,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 23
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 11,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 11,
+        "goal": 1,
+        "field": "oi",
+        "source": 2,
+        "snapshot": 3
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 11,
+        "goal": 1,
+        "field": "item",
+        "source": 280396,
+        "snapshot": 280397
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 12,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 12,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 12,
+        "goal": 1,
+        "field": "quest",
+        "source": 87318,
+        "snapshot": 98297
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 12,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 12,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 28,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 12,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 12,
+        "goal": 2,
+        "field": "quest",
+        "source": 87318,
+        "snapshot": 98310
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 12,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 12,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 280395
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 13,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 13,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 13,
+        "goal": 1,
+        "field": "quest",
+        "source": 98310,
+        "snapshot": 98072
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 13,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 13,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 279385
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 13,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 8
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 13,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 13,
+        "goal": 2,
+        "field": "quest",
+        "source": 98313,
+        "snapshot": 98245
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 13,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 13,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 280103
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 13,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 13,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 24,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 14,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 14,
+        "goal": 1,
+        "field": "quest",
+        "source": 98221,
+        "snapshot": 98297
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 14,
+        "goal": 2,
+        "field": "quest",
+        "source": 98223,
+        "snapshot": 98245
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 14,
+        "goal": 3,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 14,
+        "goal": 3,
+        "field": "quest",
+        "source": 98072,
+        "snapshot": 98300
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 14,
         "goal": 3,
         "field": "preAll",
         "source": null,
@@ -3943,13 +6069,1244 @@
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 13,
+        "step": 14,
+        "goal": 3,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 24
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 15,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 15,
+        "goal": 1,
+        "field": "t",
+        "source": "goto",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 15,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 98310
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 15,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 15,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 280396
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 16,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 16,
+        "goal": 1,
+        "field": "t",
+        "source": "getfp",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 16,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 87318
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 16,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 16,
+        "goal": 2,
+        "field": "t",
+        "source": "sethome",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 16,
+        "goal": 2,
+        "field": "quest",
+        "source": null,
+        "snapshot": 87318
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 16,
+        "goal": 3,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 16,
+        "goal": 3,
+        "field": "quest",
+        "source": 98219,
+        "snapshot": 88758
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 16,
+        "goal": 3,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 16,
+        "goal": 4,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 16,
+        "goal": 4,
+        "field": "quest",
+        "source": 536,
+        "snapshot": 88758
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 16,
+        "goal": 4,
+        "field": "minLevel",
+        "source": 25,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 17,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 17,
+        "goal": 1,
+        "field": "quest",
+        "source": 536,
+        "snapshot": 98310
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 17,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 17,
+        "goal": 1,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 17,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 17,
+        "goal": 2,
+        "field": "quest",
+        "source": 536,
+        "snapshot": 98313
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 17,
+        "goal": 2,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 17,
+        "goal": 2,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 17,
         "goal": 2,
         "field": "preAll",
         "source": null,
         "snapshot": [
           98310
         ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 17,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 24
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 18,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 18,
+        "goal": 1,
+        "field": "quest",
+        "source": 536,
+        "snapshot": 98221
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 18,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 18,
+        "goal": 2,
+        "field": "quest",
+        "source": 559,
+        "snapshot": 98223
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 18,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          536
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 18,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 25,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 19,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "goto"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 19,
+        "goal": 1,
+        "field": "quest",
+        "source": 559,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 19,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 19,
+        "goal": 1,
+        "field": "item",
+        "source": 3716,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 19,
+        "goal": 1,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "getfp"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 1,
+        "field": "quest",
+        "source": 559,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "sethome"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 2,
+        "field": "quest",
+        "source": 560,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          559
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 25,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 3,
+        "field": "quest",
+        "source": 560,
+        "snapshot": 98219
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 4,
+        "field": "quest",
+        "source": 561,
+        "snapshot": 536
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 4,
+        "field": "pre",
+        "source": [
+          560
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 5,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 5,
+        "field": "quest",
+        "source": 561,
+        "snapshot": 555
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 5,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 6,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "buy"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 6,
+        "field": "quest",
+        "source": 562,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 6,
+        "field": "item",
+        "source": null,
+        "snapshot": 3713
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 6,
+        "field": "count",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 6,
+        "field": "pre",
+        "source": [
+          561
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 20,
+        "goal": 6,
+        "field": "minLevel",
+        "source": 25,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 21,
+        "goal": 1,
+        "field": "quest",
+        "source": 562,
+        "snapshot": 536
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 21,
+        "goal": 2,
+        "field": "quest",
+        "source": 562,
+        "snapshot": 536
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 22,
+        "goal": 1,
+        "field": "quest",
+        "source": 562,
+        "snapshot": 536
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 22,
+        "goal": 2,
+        "field": "quest",
+        "source": 563,
+        "snapshot": 559
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 22,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          562
+        ],
+        "snapshot": [
+          536
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 23,
+        "goal": 1,
+        "field": "quest",
+        "source": 555,
+        "snapshot": 559
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 23,
+        "goal": 1,
+        "field": "item",
+        "source": 3712,
+        "snapshot": 3716
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 1,
+        "field": "quest",
+        "source": 505,
+        "snapshot": 559
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 1,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 1,
+        "field": "count",
+        "source": 8,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 2,
+        "field": "quest",
+        "source": 505,
+        "snapshot": 560
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 2,
+        "field": "count",
+        "source": 12,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          559
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 25
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 3,
+        "field": "quest",
+        "source": 510,
+        "snapshot": 560
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 26,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 4,
+        "field": "quest",
+        "source": 511,
+        "snapshot": 561
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 4,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          560
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 24,
+        "goal": 4,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": 25
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 25,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 25,
+        "goal": 1,
+        "field": "quest",
+        "source": 565,
+        "snapshot": 562
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 25,
+        "goal": 1,
+        "field": "oi",
+        "source": 4,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 25,
+        "goal": 1,
+        "field": "item",
+        "source": 3720,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 25,
+        "goal": 2,
+        "field": "t",
+        "source": "note",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 25,
+        "goal": 2,
+        "field": "quest",
+        "source": null,
+        "snapshot": 562
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 25,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 25,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 26,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 26,
+        "goal": 1,
+        "field": "t",
+        "source": "goto",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 26,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 562
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 27,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 27,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 27,
+        "goal": 1,
+        "field": "quest",
+        "source": 98059,
+        "snapshot": 555
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 27,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 27,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 3712
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 27,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 28,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 28,
+        "goal": 1,
+        "field": "t",
+        "source": "fly",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 28,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 505
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 28,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 28,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 8
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 1,
+        "field": "quest",
+        "source": 1245,
+        "snapshot": 565
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 4
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 3720
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "note"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 2,
+        "field": "quest",
+        "source": 1246,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1245
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 28,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 30,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 30,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "goto"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 30,
+        "goal": 1,
+        "field": "quest",
+        "source": 1246,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 31,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 31,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 31,
+        "goal": 1,
+        "field": "quest",
+        "source": 1718,
+        "snapshot": 98059
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 31,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 32,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "fly"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 32,
+        "goal": 1,
+        "field": "quest",
+        "source": 563,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 33,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 33,
+        "goal": 1,
+        "field": "quest",
+        "source": 293,
+        "snapshot": 1245
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 33,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 33,
+        "goal": 2,
+        "field": "quest",
+        "source": 269,
+        "snapshot": 1246
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 33,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1245
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 33,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 1,
+        "field": "quest",
+        "source": 690,
+        "snapshot": 1246
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 1,
+        "field": "closedBy",
+        "source": [
+          691
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 2,
+        "field": "quest",
+        "source": 79536,
+        "snapshot": 1447
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1246
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 20,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 3,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "complete"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 3,
+        "field": "quest",
+        "source": 79536,
+        "snapshot": 1447
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 4,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 4,
+        "field": "quest",
+        "source": 1301,
+        "snapshot": 1447
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 4,
+        "field": "closedBy",
+        "source": [
+          1302
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 4,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 35,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 35,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 35,
+        "goal": 1,
+        "field": "quest",
+        "source": 1247,
+        "snapshot": 1718
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 35,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 36,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 36,
+        "goal": 1,
+        "field": "t",
+        "source": "train",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 36,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 563
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 36,
+        "goal": 1,
+        "field": "class",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 37,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 37,
+        "goal": 1,
+        "field": "quest",
+        "source": 514,
+        "snapshot": 293
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 37,
+        "goal": 2,
+        "field": "quest",
+        "source": 98313,
+        "snapshot": 269
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 37,
+        "goal": 3,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 37,
+        "goal": 3,
+        "field": "quest",
+        "source": 98300,
+        "snapshot": 270
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 37,
+        "goal": 3,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          269
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 37,
+        "goal": 3,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 20
       },
       {
         "guideID": "forever/alliance/50-60/03-winterspring",
@@ -9345,11 +12702,190 @@
           ],
           "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
         }
+      },
+      {
+        "id": "darkshore-holy-diver-3",
+        "guideID": "forever/alliance/03-darkshore",
+        "revision": 3,
+        "evidence": {
+          "sourceCommit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+          "sourceFile": "src/corrections/Forever/foreverQuestFixes.lua",
+          "sourceUrl": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L590-L592",
+          "sourceSha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+          "sourceLines": [
+            590,
+            591,
+            592
+          ],
+          "prerequisites": {
+            "87760": [
+              4722,
+              4723,
+              4725,
+              4727,
+              4728,
+              4730,
+              4731,
+              4732,
+              4733
+            ]
+          },
+          "issueUrl": "https://github.com/Questie/Questie/issues/8040",
+          "review": "QuestieDB requires all nine beached creature/turtle quests. All are already in this route. Accept Holy Diver only after the final three are delivered, collect during the later northern coastal visit, and turn in on the final Auberdine return. The EQ subset reports only 4733, not the complete group.",
+          "minimumLevel": {
+            "questID": 98025,
+            "level": 15,
+            "sources": [
+              {
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/darkshore.lua#L1014-L1019",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "sha256": "185b42fc9d3891d0ab718d29618b72b8f745c892a1d4d0cd2baee8c13c6f1656"
+              },
+              {
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L8619",
+                "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4"
+              }
+            ]
+          },
+          "limitation": "Quest requirements corroborated in maintained Forever data and its resolved issue; not a live playthrough."
+        }
+      },
+      {
+        "id": "thousand-needles-nekrosh-chain-2",
+        "guideID": "forever/alliance/07-thousand-needles",
+        "revision": 2,
+        "evidence": {
+          "sources": [
+            {
+              "repository": "ATTWoWAddon/AllTheThings",
+              "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+              "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+              "line": 411,
+              "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L411",
+              "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+            },
+            {
+              "repository": "wheelbarrel00/EverythingQuests",
+              "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+              "path": "Data/QuestAvailable_Forever.lua",
+              "line": 13353,
+              "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L13353",
+              "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+            },
+            {
+              "repository": "wheelbarrel00/EverythingQuests",
+              "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+              "path": "Data/QuestAvailable_Forever.lua",
+              "line": 15479,
+              "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15479",
+              "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+            },
+            {
+              "repository": "julen92/SendaFH",
+              "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+              "path": "addon/SendaFH_QuestDB/Quests.lua",
+              "line": 472,
+              "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L472",
+              "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+            }
+          ],
+          "reason": "The old note skipped an elite prerequisite but the following chapter required its follow-up. Add the authored missing quest before the existing return to Menethil."
+        }
+      },
+      {
+        "id": "hillsbrad-wetlands-prerequisite-chains-3",
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "revision": 3,
+        "evidence": {
+          "sources": [
+            {
+              "repository": "ATTWoWAddon/AllTheThings",
+              "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+              "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+              "line": 219,
+              "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L219",
+              "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+            },
+            {
+              "repository": "ATTWoWAddon/AllTheThings",
+              "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+              "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+              "line": 359,
+              "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L359",
+              "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+            },
+            {
+              "repository": "ATTWoWAddon/AllTheThings",
+              "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+              "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+              "line": 800,
+              "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L800",
+              "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+            },
+            {
+              "repository": "ATTWoWAddon/AllTheThings",
+              "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+              "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+              "line": 1006,
+              "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L1006",
+              "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+            },
+            {
+              "repository": "ATTWoWAddon/AllTheThings",
+              "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+              "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+              "line": 1080,
+              "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L1080",
+              "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d"
+            },
+            {
+              "repository": "wheelbarrel00/EverythingQuests",
+              "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+              "path": "Data/QuestAvailable_Forever.lua",
+              "line": 15472,
+              "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15472",
+              "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+            },
+            {
+              "repository": "wheelbarrel00/EverythingQuests",
+              "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+              "path": "Data/QuestAvailable_Forever.lua",
+              "line": 15476,
+              "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15476",
+              "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+            },
+            {
+              "repository": "wheelbarrel00/EverythingQuests",
+              "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+              "path": "Data/QuestAvailable_Forever.lua",
+              "line": 15477,
+              "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15477",
+              "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+            },
+            {
+              "repository": "wheelbarrel00/EverythingQuests",
+              "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+              "path": "Data/QuestAvailable_Forever.lua",
+              "line": 15479,
+              "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15479",
+              "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+            },
+            {
+              "repository": "wheelbarrel00/EverythingQuests",
+              "commit": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+              "path": "Data/QuestAvailable_Forever.lua",
+              "line": 15483,
+              "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15483",
+              "sha256": "f48176a8fe186f965beefadb6f6140f9fe0a207f9c65cc10de0d6b576a49a286"
+            }
+          ],
+          "reason": "Two required quest lines were absent. Add their full accept/work/turnin visits. Cross-chapter prerequisites474,471,299 are delivered before this route."
+        }
       }
     ],
     "authoredTextPresenceLosses": [],
     "sourceStepNotes": 1722,
-    "snapshotStepNotes": 1733
+    "snapshotStepNotes": 1736
   },
   "sourceReadProblems": [],
   "order": {
@@ -12335,13 +15871,13 @@
       },
       {
         "guideID": "forever/alliance/07-thousand-needles",
-        "step": 33,
+        "step": 34,
         "goal": 2,
         "action": "turnin",
         "questID": 1179,
         "sourceFile": "guides/forever/alliance/07-thousand-needles.guide",
-        "sourceLine": 271,
-        "sourceText": "turnin 1179                             -- Wizzle Brassbolts",
+        "sourceLine": 281,
+        "sourceText": "collect 5794 quest 1104                 -- Salty Scorpid Venom",
         "acceptedAt": {
           "guideID": "forever/alliance/06-ashenvale",
           "step": 58,
@@ -12355,13 +15891,13 @@
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 16,
+        "step": 20,
         "goal": 3,
         "action": "turnin",
         "questID": 98219,
         "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-        "sourceLine": 179,
-        "sourceText": "turnin 98219 npc 2228               -- Lieutenant Farren Orinelle",
+        "sourceLine": 210,
+        "sourceText": "turnin 560                          -- Marshal Redpath",
         "acceptedAt": {
           "guideID": "forever/alliance/06-ashenvale",
           "step": 62,
@@ -12375,13 +15911,13 @@
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 29,
+        "step": 33,
         "goal": 1,
         "action": "turnin",
         "questID": 1245,
         "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-        "sourceLine": 263,
-        "sourceText": "turnin 1245",
+        "sourceLine": 283,
+        "sourceText": "turnin 293                          -- Archbishop Benedictus",
         "acceptedAt": {
           "guideID": "forever/alliance/07-thousand-needles",
           "step": 17,
@@ -12395,13 +15931,13 @@
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 33,
+        "step": 37,
         "goal": 1,
         "action": "turnin",
         "questID": 293,
         "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-        "sourceLine": 283,
-        "sourceText": "turnin 293                          -- Archbishop Benedictus",
+        "sourceLine": 308,
+        "sourceText": "turnin 514                          -- Prospector Stormpike, Hall of Explorers",
         "acceptedAt": {
           "guideID": "forever/alliance/07-thousand-needles",
           "step": 23,
@@ -12415,13 +15951,13 @@
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 33,
+        "step": 37,
         "goal": 2,
         "action": "turnin",
         "questID": 269,
         "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-        "sourceLine": 284,
-        "sourceText": "turnin 269                          -- Bishop Farthing",
+        "sourceLine": 309,
+        "sourceText": "turnin 98313                        -- Historian Karnik, Hall of Explorers",
         "acceptedAt": {
           "guideID": "forever/alliance/07-thousand-needles",
           "step": 13,
@@ -12444,13 +15980,10 @@
         "sourceText": "turnin 98209                        -- Thundris Windweaver: Nord'el, from Sylessa in Menethil",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 1,
-          "goal": 4,
+          "step": 3,
+          "goal": 2,
           "action": "accept",
-          "questID": 98209,
-          "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 89,
-          "sourceText": "accept 98209                        -- Sylessa Duskwhisper: for Thundris Windweaver in Auberdine (02-desolace)"
+          "questID": 98209
         }
       },
       {
@@ -12464,13 +15997,10 @@
         "sourceText": "turnin 1453                         -- Kreldig Ungor",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 37,
+          "step": 41,
           "goal": 5,
           "action": "accept",
-          "questID": 1453,
-          "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 312,
-          "sourceText": "accept 1453                         -- Roetten Stonehammer"
+          "questID": 1453
         }
       },
       {
@@ -12484,13 +16014,13 @@
         "sourceText": "turnin 270",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 33,
+          "step": 37,
           "goal": 3,
           "action": "accept",
           "questID": 270,
           "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 285,
-          "sourceText": "accept 270"
+          "sourceLine": 310,
+          "sourceText": "turnin 98300                        -- King Magni Bronzebeard, the High Seat"
         }
       },
       {
@@ -12504,13 +16034,10 @@
         "sourceText": "turnin 1301                         -- Vincent Hyal",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 34,
+          "step": 38,
           "goal": 4,
           "action": "accept",
-          "questID": 1301,
-          "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 292,
-          "sourceText": "accept 1301                         -- Connor Rivers"
+          "questID": 1301
         }
       },
       {
@@ -12524,13 +16051,10 @@
         "sourceText": "turnin 1248                         -- Mikhail",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 35,
+          "step": 39,
           "goal": 2,
           "action": "accept",
-          "questID": 1248,
-          "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 296,
-          "sourceText": "accept 1248"
+          "questID": 1248
         }
       },
       {
@@ -12544,13 +16068,13 @@
         "sourceText": "turnin 5762                         -- Hemet Nesingwary, from Thousand Needles",
         "acceptedAt": {
           "guideID": "forever/alliance/07-thousand-needles",
-          "step": 33,
+          "step": 34,
           "goal": 5,
           "action": "accept",
           "questID": 5762,
           "sourceFile": "guides/forever/alliance/07-thousand-needles.guide",
-          "sourceLine": 274,
-          "sourceText": "accept 5762                             -- For Hemet Nesingwary in Stranglethorn, later"
+          "sourceLine": 284,
+          "sourceText": "kill 4147 quest 1175                    -- Saltstone Basilisk"
         }
       },
       {
@@ -12564,13 +16088,10 @@
         "sourceText": "turnin 98463                        -- Nixxrax Fillamug, in the Salty Sailor Tavern",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 16,
+          "step": 20,
           "goal": 12,
           "action": "accept",
-          "questID": 98463,
-          "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 189,
-          "sourceText": "accept 98463                        -- Barkeep Kelly, in the inn: for Booty Bay (04-stranglethorn-vale)"
+          "questID": 98463
         }
       },
       {
@@ -12584,13 +16105,10 @@
         "sourceText": "turnin 525                          -- Magistrate Henry Maleb",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 37,
+          "step": 41,
           "goal": 4,
           "action": "accept",
-          "questID": 525,
-          "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 311,
-          "sourceText": "accept 525"
+          "questID": 525
         }
       },
       {
@@ -12604,13 +16122,10 @@
         "sourceText": "turnin 690                          -- Skuerto",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 34,
+          "step": 38,
           "goal": 1,
           "action": "accept",
-          "questID": 690,
-          "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 289,
-          "sourceText": "accept 690                          -- Archmage Malin"
+          "questID": 690
         }
       },
       {
@@ -12624,13 +16139,10 @@
         "sourceText": "turnin 659",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 16,
+          "step": 20,
           "goal": 7,
           "action": "accept",
-          "questID": 659,
-          "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 183,
-          "sourceText": "accept 659                          -- Phin Odelic: his trail leads to Arathi"
+          "questID": 659
         }
       },
       {
@@ -12666,13 +16178,10 @@
         "sourceText": "turnin 92432 \"An Alarming Request\"  -- Image of Archmage Modera",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 16,
+          "step": 20,
           "goal": 8,
           "action": "accept",
-          "questID": 92432,
-          "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 185,
-          "sourceText": "accept 92432 \"An Alarming Request\" npc 247264 lvl 30 -- Emissary Jacques"
+          "questID": 92432
         }
       },
       {
@@ -12706,13 +16215,10 @@
         "sourceText": "turnin 512",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 27,
+          "step": 31,
           "goal": 7,
           "action": "accept",
-          "questID": 512,
-          "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 253,
-          "sourceText": "accept 512"
+          "questID": 512
         }
       },
       {
@@ -12726,13 +16232,10 @@
         "sourceText": "turnin 564                          -- Darren Malvew",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 16,
+          "step": 20,
           "goal": 11,
           "action": "accept",
-          "questID": 564,
-          "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 188,
-          "sourceText": "accept 564                          -- Darren Malvew: the lions come later"
+          "questID": 564
         }
       },
       {
@@ -12746,13 +16249,10 @@
         "sourceText": "turnin 565                          -- Bartolo Ginsetti",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 16,
+          "step": 20,
           "goal": 10,
           "action": "accept",
-          "questID": 565,
-          "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 187,
-          "sourceText": "accept 565                          -- Bartolo Ginsetti"
+          "questID": 565
         }
       },
       {
@@ -12766,13 +16266,10 @@
         "sourceText": "turnin 1106                         -- Martek the Exiled",
         "acceptedAt": {
           "guideID": "forever/alliance/07-thousand-needles",
-          "step": 35,
+          "step": 36,
           "goal": 3,
           "action": "accept",
-          "questID": 1106,
-          "sourceFile": "guides/forever/alliance/07-thousand-needles.guide",
-          "sourceLine": 291,
-          "sourceText": "accept 1106                             -- Fizzle Brassbolts: for Martek in the Badlands, later"
+          "questID": 1106
         }
       },
       {
@@ -12931,13 +16428,13 @@
         },
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 31,
+          "step": 35,
           "goal": 1,
           "action": "accept",
           "questID": 1718,
           "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 277,
-          "sourceText": "accept 1718 npc 5479                -- Wu Shen",
+          "sourceLine": 295,
+          "sourceText": "turnin 1247",
           "stepOnly": {
             "classes": [
               "WARRIOR"
@@ -13196,13 +16693,13 @@
         "sourceText": "turnin 1100                         -- if you carry Lonebrow's Journal from Thousand Needles",
         "acceptedAt": {
           "guideID": "forever/alliance/07-thousand-needles",
-          "step": 32,
+          "step": 33,
           "goal": 2,
           "action": "accept",
           "questID": 1100,
           "sourceFile": "guides/forever/alliance/07-thousand-needles.guide",
-          "sourceLine": 266,
-          "sourceText": "accept 1100                             -- For Falfindel Waywarder in Feralas, much later"
+          "sourceLine": 271,
+          "sourceText": "turnin 1179                             -- Wizzle Brassbolts"
         }
       },
       {
@@ -14595,13 +18092,13 @@
       },
       {
         "guideID": "forever/alliance/07-thousand-needles",
-        "step": 31,
+        "step": 32,
         "goal": 1,
         "action": "turnin",
         "questID": 1716,
         "sourceFile": "guides/forever/alliance/07-thousand-needles.guide",
-        "sourceLine": 258,
-        "sourceText": "turnin 1716                             -- Takar the Seer",
+        "sourceLine": 265,
+        "sourceText": "collect 5791 @30.7,24.3                 -- Henrig Lonebrow's Journal",
         "stepOnly": {
           "classes": [
             "WARLOCK"
@@ -14646,13 +18143,13 @@
         },
         "acceptedAt": {
           "guideID": "forever/alliance/07-thousand-needles",
-          "step": 31,
+          "step": 32,
           "goal": 2,
           "action": "accept",
           "questID": 1738,
           "sourceFile": "guides/forever/alliance/07-thousand-needles.guide",
-          "sourceLine": 259,
-          "sourceText": "accept 1738                             -- Heartswood: in Ashenvale, on the way to Desolace",
+          "sourceLine": 266,
+          "sourceText": "accept 1100                             -- For Falfindel Waywarder in Feralas, much later",
           "stepOnly": {
             "classes": [
               "WARLOCK"
@@ -14677,13 +18174,10 @@
         },
         "acceptedAt": {
           "guideID": "forever/alliance/07-thousand-needles",
-          "step": 31,
+          "step": 32,
           "goal": 3,
           "action": "accept",
           "questID": 65602,
-          "sourceFile": "guides/forever/alliance/07-thousand-needles.guide",
-          "sourceLine": 260,
-          "sourceText": "accept 65602 optional                   -- What Is Love?: the incubus, beside the succubus; the Wooden Figurine is near the Heartswood",
           "optional": true,
           "stepOnly": {
             "classes": [
@@ -19486,13 +22980,13 @@
         "unboundMatches": [
           {
             "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-            "step": 16,
+            "step": 20,
             "goal": 6,
             "action": "buy",
             "questID": null,
             "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-            "sourceLine": 182,
-            "sourceText": "buy 3713 x1 npc 2381                -- Soothing Spices, from Micha Yance"
+            "sourceLine": 213,
+            "sourceText": "accept 562"
           },
           {
             "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
@@ -25760,5 +29254,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "9ddc0802b5554b07b5eb2b9bbf4b59f95090821dd4d234c15ac9139387cf88fe"
+  "inputSha256": "e1273cfcfd7cca5a68e28ac03b85452c5931271b57256a0016ac7be66a9f09ff"
 }

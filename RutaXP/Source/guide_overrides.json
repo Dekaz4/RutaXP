@@ -6,9 +6,24 @@
       "id": "dun-morogh-cooking-instructor",
       "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
       "step": 19,
-      "match": { "t": "complete", "quest": 96629 },
-      "copyFrom": { "t": "turnin", "quest": 96629, "npc": 1699 },
-      "copyFields": ["npc", "npcName", "map", "x", "y", "z", "f"],
+      "match": {
+        "t": "complete",
+        "quest": 96629
+      },
+      "copyFrom": {
+        "t": "turnin",
+        "quest": 96629,
+        "npc": 1699
+      },
+      "copyFields": [
+        "npc",
+        "npcName",
+        "map",
+        "x",
+        "y",
+        "z",
+        "f"
+      ],
       "set": {
         "note": "Habla con Gremlock Pilsnor en la destilería de Kharanos y aprende Cocina."
       },
@@ -16,10 +31,56 @@
         "reason": "The complete goal names Gremlock but omits its navigation point; the adjacent turn-in supplies the same instructor's authored location.",
         "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L265-L272",
         "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
-        "sourceLines": [265, 271, 272],
+        "sourceLines": [
+          265,
+          271,
+          272
+        ],
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "compiledSha256": "24e953c65d64f0fa1e634ae83652f9e72b188cc9852da6b082ac3ed37a7dcc97",
         "coordinateFrame": "Classic Era (f=e); runtime conversion required. These are inherited instructor coordinates, not a new in-game survey."
+      }
+    },
+    {
+      "id": "darkshore-auberdine-pier-map",
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 37,
+      "match": {
+        "t": "goto",
+        "x": 32.4,
+        "y": 43.8
+      },
+      "copyFrom": {
+        "t": "accept",
+        "quest": 97914
+      },
+      "copyFields": [
+        "map"
+      ],
+      "provenance": {
+        "reason": "The unqualified boat waypoint inherited Moonglade from the later druid section. Its Auberdine visit and the identical authored Ashenvale pier point both identify Darkshore map 1439. Only the map ID is corrected; x/y and frame stay authored.",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/03-darkshore.guide#L378",
+        "sourceFile": "guides/forever/alliance/03-darkshore.guide",
+        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
+        "compiledSha256": "24e953c65d64f0fa1e634ae83652f9e72b188cc9852da6b082ac3ed37a7dcc97",
+        "sourceLines": [
+          378
+        ],
+        "corroboratingGoal": {
+          "guideID": "forever/alliance/06-ashenvale",
+          "step": 31,
+          "goal": 3,
+          "map": 1439,
+          "x": 32.4,
+          "y": 43.8,
+          "f": "e"
+        },
+        "coordinateFrame": "Classic Era (f=e); corrected map only, not a new terrain survey.",
+        "compiledLines": [
+          674,
+          1520
+        ],
+        "corroboratingSourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_Guides/Guides.lua#L1520"
       }
     }
   ]
