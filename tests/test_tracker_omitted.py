@@ -45,6 +45,10 @@ class TrackerOmittedTests(unittest.TestCase):
         return next(row for row in host.ns.trackerRows.values()
                     if row.shown and not row.preview and row.goalIndex == goal)
 
+    def goal_index(self, host, **identity):
+        return next(index for index, goal in host.step.goals.items()
+                    if all(goal[key] == value for key, value in identity.items()))
+
     def test_skipping_then_going_back_restores_molsen_as_pending_with_real_counts(self):
         host = self.farm()
         host.h.g.Click(host.ns.trackerSkip)
@@ -124,13 +128,22 @@ class TrackerOmittedTests(unittest.TestCase):
         before = host.progress()
         host.ns.RefreshUI(host.ns)
         rows = [row for row in host.ns.trackerRows.values() if row.shown and not row.preview]
-        self.assertEqual({row.goalIndex for row in rows}, {5, 7, 8, 9, 10, 11})
+        expected = {
+            self.goal_index(host, t="collect", quest=None, item=255155),
+            self.goal_index(host, t="accept", quest=92910),
+            self.goal_index(host, t="collect", quest=22, oi=1),
+            self.goal_index(host, t="collect", quest=38, oi=3),
+            self.goal_index(host, t="collect", quest=38, oi=1),
+        }
+        self.assertEqual({row.goalIndex for row in rows}, expected)
         for row in rows:
             self.assertIn("Omitido · ", row.title.text)
             self.assertFalse(row.icon.texture.endswith("\\check"))
             self.assertEqual(tuple(row.icon.color.values()), (.64, .72, .82))
         all_text = "\n".join(row.sub.text for row in rows)
-        self.assertIn("Suministros pendientes: 0/1", all_text)
+        # Revision 3 puts 92911 after its engineering prerequisite is handed
+        # in. Its live counter must not leak into the earlier Molsen visit.
+        self.assertNotIn("Suministros pendientes: 0/1", all_text)
         self.assertIn("Hígado de Dentosangre: 0/3", all_text)
         for historical in ("Zahorí cosechador: 0/20", "Caja antigua: 0/1", "Segunda caja: 0/1"):
             self.assertNotIn(historical, all_text)
@@ -145,8 +158,9 @@ class TrackerOmittedTests(unittest.TestCase):
                 entry.onQuest, entry.delivered = False, True
                 host.s.quests[goal.quest] = entry
         host.s.quests[38].complete = True
-        state.skipped["5:7"] = None
-        state.confirmed["5:7"] = True  # The unbound inventory errand is a manual service.
+        inventory = self.goal_index(host, t="collect", quest=None, item=255155)
+        state.skipped[f"5:{inventory}"] = None
+        state.confirmed[f"5:{inventory}"] = True  # The unbound inventory errand is a manual service.
         before = host.progress()
         host.ns.RefreshUI(host.ns)
         rows = [row for row in host.ns.trackerRows.values() if row.shown and not row.preview]
@@ -157,7 +171,8 @@ class TrackerOmittedTests(unittest.TestCase):
             self.assertNotIn("Omitido", row.title.text)
             self.assertNotIn("0/", row.sub.text)
         self.assertEqual(self.row(host, 2).sub.text, "Misión entregada")
-        self.assertEqual(self.row(host, 6).sub.text, "Objetivos completados")
+        okra = self.goal_index(host, t="collect", quest=38, oi=4)
+        self.assertEqual(self.row(host, okra).sub.text, "Objetivos completados")
         self.assertEqual(host.progress(), before)
 
 

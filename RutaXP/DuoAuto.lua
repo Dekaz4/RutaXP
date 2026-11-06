@@ -517,7 +517,8 @@ local function personalQuestVisit(step)
     local personal = false
     for _, goal in ipairs(step.goals or {step}) do
         if (goal.quest or goal.questID) and ns:MatchesConditions(goal.only) then
-            if sharedStep and (not goal.only or duo:AppliesToPartner(goal.only)) then return false end
+            local profession = ns.GetGoalProfessionRequirement and ns:GetGoalProfessionRequirement(goal, step)
+            if not profession and sharedStep and (not goal.only or duo:AppliesToPartner(goal.only)) then return false end
             personal = true
         end
     end
@@ -552,7 +553,8 @@ function Auto:_IndividualStep(step)
         local individual, shared = false, false
         for _, goal in ipairs(step and step.goals or { step or {} }) do
             if not goal.only or not ns.MatchesConditions or ns:MatchesConditions(goal.only) then
-                if duo:AppliesToPartner(goal.only) then shared = true else individual = true end
+                local profession = ns.GetGoalProfessionRequirement and ns:GetGoalProfessionRequirement(goal, step)
+                if not profession and duo:AppliesToPartner(goal.only) then shared = true else individual = true end
             end
         end
         if individual and not shared then return true end

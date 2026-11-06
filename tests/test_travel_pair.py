@@ -1,5 +1,7 @@
 """Two full addon clients exchange physically observed trip checkpoints on PARTY."""
 
+import json
+from pathlib import Path
 import unittest
 
 from test_auto_party_integration import AutomaticPartyHost, ROUTE_ID
@@ -10,6 +12,8 @@ SOURCE = "travel-test/source"
 SECOND_SOURCE = "travel-test/other-source"
 SECOND_DEST = "travel-test/other-destination"
 HUB = "1436:55.9:49.8"
+SHIPPED_GUIDES = {guide["id"]: guide for guide in json.loads(
+    (Path(__file__).resolve().parents[1] / "RutaXP/Source/leveling.json").read_text(encoding="utf-8"))["guides"]}
 
 
 class TravelPairTests(unittest.TestCase):
@@ -170,20 +174,25 @@ class TravelPairTests(unittest.TestCase):
     def test_real_alliance_and_horde_handoffs_regroup_at_border_then_at_quest_hub(self):
         cases = (
             ("Alliance", "Human", ("PALADIN", "WARRIOR"),
-             "forever/alliance/human/01-elwynn-forest", 73, WEST,
+             "forever/alliance/human/01-elwynn-forest", WEST,
              (1429, .42, .66), (1429, .2230, .7820), (1436, .609, .19), (1436, .559, .498)),
             ("Horde", "Tauren", ("SHAMAN", "HUNTER"),
-             "forever/horde/tauren/01-mulgore", 59, "forever/horde/02-the-barrens",
+             "forever/horde/tauren/01-mulgore", "forever/horde/02-the-barrens",
              (1412, .4593, .6416), (1412, .6859, .6059), (1413, .457, .61), (1413, .515, .3034)),
         )
-        for faction, race, classes, source, finished, destination, start, border, road, hub in cases:
+        for faction, race, classes, source, destination, start, border, road, hub in cases:
             with self.subTest(source=source):
+                # This tests travel from the currently shipped route. Old
+                # save migration is covered independently, before any travel.
+                finished = len(SHIPPED_GUIDES[source]["steps"]) + 1
                 def member(name, friend):
                     saved = {"seen": True, "activeGuide": source, "auto": True,
                              "duo": {"enabled": True, "autoPair": True, "wait": True},
                              "progress": {
-                                 source: {"cursor": finished, "placed": True, "confirmed": {name: True}},
-                                 destination: {"cursor": 1, "placed": True, "skipped": {name: True}},
+                                 source: {"cursor": finished, "placed": True, "confirmed": {name: True},
+                                          "routeRevision": SHIPPED_GUIDES[source].get("routeRevision", 1)},
+                                 destination: {"cursor": 1, "placed": True, "skipped": {name: True},
+                                               "routeRevision": SHIPPED_GUIDES[destination].get("routeRevision", 1)},
                              }}
                     return TravelHost(start, saved, name, friend, members=2,
                                       race=race, faction=faction, classes=classes)

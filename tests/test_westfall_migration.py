@@ -9,6 +9,7 @@ from test_quest_engine import QuestEngineHost
 WEST = "forever/alliance/02-westfall"
 ELWYNN = "forever/alliance/human/01-elwynn-forest"
 BACKUP = WEST + ":2"
+CURRENT_REVISION = 3
 
 
 class MigrationHost(QuestEngineHost):
@@ -73,7 +74,7 @@ class WestfallMigrationTests(unittest.TestCase):
         state = host.progress
         self.assertEqual(state.cursor, 6)  # Coast, not the old mine step.
         self.assertIsNone(state.review)
-        self.assertEqual(state.routeRevision, 2)
+        self.assertEqual(state.routeRevision, CURRENT_REVISION)
         self.assertFalse(host.ns.char.auto)
         self.assertEqual(primitive_copy(host.ns.char.duo), saved["duo"])
         self.assertTrue(state.confirmed["1:3"])
@@ -102,7 +103,7 @@ class WestfallMigrationTests(unittest.TestCase):
                 self.assertTrue(state.skipped["6:1"])
                 self.assertTrue(state.skipped["7:2"])
                 self.assertTrue(state.confirmed["13:7"])
-                self.assertEqual(state.routeRevision, 2)
+                self.assertEqual(state.routeRevision, CURRENT_REVISION)
 
     def test_live_objectives_select_wells_coast_or_return_not_completed_work(self):
         cases = [
@@ -165,7 +166,7 @@ class WestfallMigrationTests(unittest.TestCase):
     def test_fresh_progress_records_current_revision(self):
         host = MigrationHost({"seen": True, "activeGuide": WEST, "auto": False, "progress": {}})
         host.initialize()
-        self.assertEqual(host.progress.routeRevision, 2)
+        self.assertEqual(host.progress.routeRevision, CURRENT_REVISION)
         self.assertIsNone(host.ns.char.guideMigrationBackups)
         host.progress.cursor, host.progress.review = 6, True
         saved = host.saved()
@@ -246,7 +247,7 @@ class WestfallMigrationTests(unittest.TestCase):
         host = MigrationHost(self.saved_state(), self.pending_gills())
         host.initialize()
         host.call("ResetGuide", WEST)
-        self.assertEqual(host.progress.routeRevision, 2)
+        self.assertEqual(host.progress.routeRevision, CURRENT_REVISION)
         self.assertEqual(host.progress.cursor, 1)
         host.progress.cursor = 6
         host.progress.skipped = host.table({"6:1": True})
@@ -256,7 +257,7 @@ class WestfallMigrationTests(unittest.TestCase):
         self.assertEqual(restored.saved(), saved)
 
     def test_old_and_new_checkpoints_restore_only_own_cursor_and_save_revision(self):
-        for revision, expected in ((None, 8), (1, 8), (2, 6)):
+        for revision, expected in ((None, 8), (1, 8), (2, 6), (3, 6)):
             with self.subTest(revision=revision):
                 host = MigrationHost({"seen": True, "auto": False, "activeGuide": WEST, "progress": {}})
                 host.initialize()
@@ -272,7 +273,7 @@ class WestfallMigrationTests(unittest.TestCase):
                 ok, message = journey.ResumeCheckpoint(journey, 1)
                 self.assertTrue(ok, message)
                 self.assertEqual(host.progress.cursor, expected)
-                self.assertEqual(host.progress.routeRevision, 2)
+                self.assertEqual(host.progress.routeRevision, CURRENT_REVISION)
                 self.assertEqual(primitive_copy(host.progress.confirmed), {})
                 self.assertEqual(host.ns.char.duoJourney.history[1].localSnapshot.routeRevision, revision)
                 self.assertEqual(host.ns.char.duoJourney.history[1].localSnapshot.cursor, 6)
@@ -290,7 +291,7 @@ class WestfallMigrationTests(unittest.TestCase):
                 }""")
                 ok, checkpoint = journey.SaveCheckpoint(journey, False)
                 self.assertTrue(ok, checkpoint)
-                self.assertEqual(checkpoint.localSnapshot.routeRevision, 2)
+                self.assertEqual(checkpoint.localSnapshot.routeRevision, CURRENT_REVISION)
                 self.assertEqual(checkpoint.localSnapshot.cursor, expected)
                 self.assertEqual(checkpoint.partnerSnapshot.cursor, 21)
 

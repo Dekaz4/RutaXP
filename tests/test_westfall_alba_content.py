@@ -28,7 +28,7 @@ class WestfallAlbaContentTests(unittest.TestCase):
 
     def test_both_independent_quests_are_delivered_before_mines_acceptance_and_work(self):
         guide = self.guide
-        self.assertEqual((guide["routeRevision"], len(guide["steps"])), (2, 22))
+        self.assertEqual((guide["routeRevision"], len(guide["steps"])), (3, 22))
         initial = {goal.get("quest"): goal for goal in guide["steps"][0]["goals"] if goal["t"] == "accept"}
         self.assertIn(92742, initial)
         self.assertIn(92744, initial)
@@ -67,8 +67,8 @@ class WestfallAlbaContentTests(unittest.TestCase):
         self.assertEqual(revision["guideID"], WEST)
         self.assertEqual(revision["evidence"]["sourceCommit"], "54a16756db16adeb9d5602bace1507077df37185")
         self.assertEqual(revision["evidence"]["preAll"], [92742, 92744])
-        self.assertEqual(self.builder.route_shape(self.guide), revision["resultShape"])
-        self.assertEqual(self.doc["statistics"]["steps"], 2331)
+        self.assertEqual(self.builder.route_shape(self.guide), next(r for r in overlay["revisions"] if r["id"] == "westfall-engineering-3")["resultShape"])
+        self.assertEqual(self.doc["statistics"]["steps"], 2338)
 
     def test_clean_reimport_reapplies_only_reviewed_route_semantics(self):
         upstream = ROOT / ".sources/SendaFH"

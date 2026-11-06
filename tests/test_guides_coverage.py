@@ -21,9 +21,67 @@ ORIGINAL_SEMANTICS = "46bc091cc7034231f3f7138dc301eaff00126460d6abfe7745a3233ada
 
 
 def original_order(document):
-    """Undo only the reviewed Westfall move before checking the old full digest."""
+    """Undo reviewed moves and exact prerequisite edits before the old digest."""
     result = copy.deepcopy(document)
+    revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
+    for revision in reversed(revisions):
+        if not revision["id"].endswith("-prerequisites-metadata"):
+            continue
+        guide = next(g for g in result["guides"] if g["id"] == revision["guideID"])
+        for patch in revision["goalChanges"]:
+            goals = [goal for step in guide["steps"] for goal in step["goals"]
+                     if all(goal.get(key) == value for key, value in patch["match"].items())]
+            if len(goals) != patch["count"]:
+                raise AssertionError("A corroborated requirement target changed")
+            for goal in goals:
+                for key, value in patch["set"].items():
+                    if key not in ("pre", "preAll", "preTitles") or goal.get(key) != value:
+                        raise AssertionError("A corroborated requirement changed")
+                    del goal[key]
+    corrected = {"zephras-alliance-service-2", "redridge-alther-bridge-2", "mulgore-malah-centaurs-2",
+                 "tirisfal-rear-guard-2", "silverpine-quinn-potions-2"}
+    for revision in revisions:
+        if revision["id"] not in corrected:
+            continue
+        guide = next(g for g in result["guides"] if g["id"] == revision["guideID"])
+        migration = next(m for m in guide["progressMigrations"] if m["from"] == 1 and m["to"] == 2)
+        old = []
+        for si, count in enumerate(revision["previousGoalCounts"], 1):
+            step = copy.deepcopy(guide["steps"][migration["stepMap"][str(si)] - 1])
+            step["goals"] = []
+            for gi in range(1, count + 1):
+                new_si, new_gi = (int(v) for v in migration["goalMap"].get(f"{si}:{gi}", f"{si}:{gi}").split(":"))
+                goal = copy.deepcopy(guide["steps"][new_si - 1]["goals"][new_gi - 1])
+                if goal.get("t") == "accept" and str(goal.get("quest")) in revision["evidence"]["prerequisites"]:
+                    if goal["quest"] == 92860:
+                        goal["pre"] = [92840]
+                    else:
+                        goal.pop("pre", None)
+                step["goals"].append(goal)
+            old.append(step)
+        guide["steps"] = old
     west = next(guide for guide in result["guides"] if guide["id"] == "forever/alliance/02-westfall")
+    # Revision 3 fixes only the optional engineering branch. Restore its
+    # original positions and semantics independently of the overlay builder.
+    current = west["steps"]
+    engineering_accept = copy.deepcopy(current[11]["goals"][5])
+    engineering_work = copy.deepcopy(current[11]["goals"][6])
+    if engineering_accept.get("preAll") != [92910] or engineering_work.get("t") != "complete" or "oi" in engineering_work:
+        raise AssertionError("The reviewed engineering correction changed")
+    del engineering_accept["preAll"]
+    engineering_work.update(t="collect", oi=1)
+    engineering_work.pop("navigationMode", None)
+    engineering_work.pop("navigationHint", None)
+    current[1]["goals"].insert(4, engineering_accept)
+    current[4]["goals"].insert(4, engineering_work)
+    del current[11]["goals"][5:7]
+    for visit in current:
+        for goal in visit["goals"]:
+            if goal.get("quest") in (92910, 92911) or goal.get("item") == 255155:
+                for key in ("profLine", "profRank", "profName"):
+                    goal.pop(key, None)
+                if not (goal.get("quest") == 92911 and goal["t"] == "turnin"):
+                    goal.pop("optional", None)
     revised = west["steps"]
     # Explicit independent inverse of revision 2's authored visit mapping.
     source_positions = [1, 2, 3, 4, 5, 8, 9, 6, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
@@ -44,13 +102,14 @@ class WholeGuideCoverageTests(unittest.TestCase):
         cls.document = json.loads((SOURCE / "leveling.json").read_text(encoding="utf-8"))
         locations_path = SOURCE / "guide_locations.json"
         cls.locations = json.loads(locations_path.read_text(encoding="utf-8")) if locations_path.exists() else None
-        cls.report = audit_module.audit(cls.document, locations=cls.locations)
+        cls.revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))
+        cls.report = audit_module.audit(cls.document, locations=cls.locations, revisions=cls.revisions)
 
     def test_inventory_accounts_for_every_goal_and_keeps_legitimate_exceptions_explicit(self):
         report = self.report
         self.assertEqual(report["totals"]["guides"], 57)
         self.assertEqual(report["totals"]["goals"], 7444)
-        self.assertEqual(report["totals"]["steps"], 2331)
+        self.assertEqual(report["totals"]["steps"], 2338)
         self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7444)
         self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7444)
         self.assertEqual(sum(report["totals"].get(k, 0) for k in
@@ -72,7 +131,7 @@ class WholeGuideCoverageTests(unittest.TestCase):
             else:
                 self.assertTrue(item["unresolved"])
 
-    def test_enrichment_preserves_every_semantic_except_the_reviewed_westfall_correction(self):
+    def test_enrichment_preserves_every_semantic_except_the_reviewed_chain_corrections(self):
         original = original_order(self.document)
         self.assertEqual(audit_module.audit(original)["preservation"]["semanticsSha256"], ORIGINAL_SEMANTICS)
 
@@ -149,7 +208,12 @@ class WholeGuideCoverageTests(unittest.TestCase):
         for patch in overlay["patches"]:
             self.assertNotIn(patch["id"], ids)
             ids.add(patch["id"])
-            goal = guides[patch["guideID"]]["steps"][patch["step"] - 1]["goals"][patch["goal"] - 1]
+            guide = guides[patch["guideID"]]
+            key = f'{patch["step"]}:{patch["goal"]}'
+            for migration in guide.get("progressMigrations", []):
+                key = migration.get("goalMap", {}).get(key, key)
+            si, gi = (int(value) for value in key.split(":"))
+            goal = guide["steps"][si - 1]["goals"][gi - 1]
             for field, value in patch["match"].items():
                 self.assertEqual(goal.get(field), value, patch["id"])
             self.assertLessEqual(set(patch["set"]), {"candidates", "navigationHint", "navigationMode"})

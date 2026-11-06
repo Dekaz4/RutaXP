@@ -513,6 +513,7 @@ function Duo:GetStepWaitStatus(step)
         -- Class/race errands are individual branches; never wait on another
         -- class to finish our class quest.
         local individual = not appliesToPartner(goal.only, ctx)
+            or (ns.GetGoalProfessionRequirement and ns:GetGoalProfessionRequirement(goal, step) ~= nil)
         local skipped = ns.GetGoalStatus and ns:GetGoalStatus(goal, step, state, index) == "skip"
         if id and applicable and not individual and not skipped and not goal.optional and action ~= "note" then
             local needed = action == "accept" and 1 or 2

@@ -1,0 +1,7869 @@
+{
+  "schemaVersion": 1,
+  "scope": {
+    "guides": 57,
+    "questIDs": 1900,
+    "acceptances": 2290,
+    "withReportedEvidence": 1846,
+    "withoutReportedEvidence": 54
+  },
+  "sourceCommits": {
+    "everythingquests": "8e7aa971319226f984639d4dae06e864b50c4fb4",
+    "att-westfall": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-eastern-kingdoms-redridge-mountains-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-eastern-kingdoms-duskwood-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-eastern-kingdoms-wetlands-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-eastern-kingdoms-stranglethorn-vale-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-eastern-kingdoms-tirisfal-glades-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-eastern-kingdoms-dun-morogh-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-eastern-kingdoms-silverpine-forest-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-eastern-kingdoms-arathi-highlands-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-kalimdor-mulgore-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-kalimdor-teldrassil-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-kalimdor-dustwallow-marsh-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-kalimdor-the-barrens-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-kalimdor-1-orgrimmar-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-kalimdor-durotar-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-eastern-kingdoms-1-stormwind-city-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-eastern-kingdoms-elwynn-forest-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-eastern-kingdoms-1-undercity-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-kalimdor-tanaris-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-kalimdor-thousand-needles-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-kalimdor-winterspring-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-eastern-kingdoms-eastern-plaguelands-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-kalimdor-1-darnassus-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-zephras-isle-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-kalimdor-darkshore-lua": "b50b6d8335d56a215bb3053811745f617532cc14",
+    "att-zones-kalimdor-moonglade-lua": "b50b6d8335d56a215bb3053811745f617532cc14"
+  },
+  "crossSourceReviewCounts": {
+    "active_parent_not_explicit_in_att": 5,
+    "corroborated_single_completed_parent": 37,
+    "no_att_record_in_reviewed_sources": 1,
+    "parent_breadcrumb": 13,
+    "prerequisite_not_corroborated": 2
+  },
+  "counts": {
+    "additional_gate_review": 5,
+    "level_conflict_review": 16,
+    "missing_active_parent": 10,
+    "missing_prerequisite": 56,
+    "no_source_data": 61,
+    "prerequisite_conflict_review": 43,
+    "selector_conflict_review": 35,
+    "source_omission_review": 56
+  },
+  "byGuide": [
+    {
+      "guideID": "forever/alliance/nightelf/01-teldrassil",
+      "acceptances": 78,
+      "findings": {
+        "missing_prerequisite": 2,
+        "no_source_data": 1,
+        "prerequisite_conflict_review": 2,
+        "source_omission_review": 2
+      }
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "acceptances": 99,
+      "findings": {
+        "level_conflict_review": 1,
+        "missing_prerequisite": 2,
+        "no_source_data": 3,
+        "prerequisite_conflict_review": 3,
+        "selector_conflict_review": 27,
+        "source_omission_review": 1
+      }
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "acceptances": 97,
+      "findings": {
+        "missing_prerequisite": 2,
+        "no_source_data": 3,
+        "prerequisite_conflict_review": 4,
+        "selector_conflict_review": 2,
+        "source_omission_review": 2
+      }
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "acceptances": 108,
+      "findings": {
+        "missing_prerequisite": 1,
+        "no_source_data": 1,
+        "prerequisite_conflict_review": 5,
+        "source_omission_review": 8
+      }
+    },
+    {
+      "guideID": "forever/alliance/02-westfall",
+      "acceptances": 28,
+      "findings": {
+        "missing_prerequisite": 1,
+        "prerequisite_conflict_review": 1
+      }
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "acceptances": 77,
+      "findings": {
+        "level_conflict_review": 1,
+        "missing_prerequisite": 1,
+        "no_source_data": 6,
+        "prerequisite_conflict_review": 1,
+        "selector_conflict_review": 1
+      }
+    },
+    {
+      "guideID": "forever/alliance/04-redridge-mountains",
+      "acceptances": 22,
+      "findings": {
+        "level_conflict_review": 1,
+        "no_source_data": 1
+      }
+    },
+    {
+      "guideID": "forever/alliance/05-duskwood",
+      "acceptances": 29,
+      "findings": {
+        "missing_prerequisite": 1
+      }
+    },
+    {
+      "guideID": "forever/alliance/06-ashenvale",
+      "acceptances": 56,
+      "findings": {
+        "additional_gate_review": 1,
+        "no_source_data": 3
+      }
+    },
+    {
+      "guideID": "forever/alliance/07-thousand-needles",
+      "acceptances": 38,
+      "findings": {
+        "level_conflict_review": 1,
+        "missing_prerequisite": 2,
+        "no_source_data": 1,
+        "source_omission_review": 2
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "acceptances": 44,
+      "findings": {
+        "level_conflict_review": 1,
+        "missing_prerequisite": 5,
+        "no_source_data": 6
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/02-desolace",
+      "acceptances": 11,
+      "findings": {}
+    },
+    {
+      "guideID": "forever/alliance/30-40/03-ashenvale",
+      "acceptances": 25,
+      "findings": {
+        "missing_prerequisite": 1,
+        "no_source_data": 3
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+      "acceptances": 40,
+      "findings": {
+        "missing_active_parent": 4,
+        "missing_prerequisite": 4
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/05-arathi-highlands",
+      "acceptances": 41,
+      "findings": {
+        "level_conflict_review": 1,
+        "missing_prerequisite": 3,
+        "no_source_data": 2,
+        "source_omission_review": 2
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/06-badlands",
+      "acceptances": 27,
+      "findings": {
+        "no_source_data": 1
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "acceptances": 53,
+      "findings": {
+        "missing_active_parent": 1,
+        "missing_prerequisite": 2,
+        "no_source_data": 1,
+        "prerequisite_conflict_review": 3,
+        "selector_conflict_review": 1,
+        "source_omission_review": 3
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/02-badlands",
+      "acceptances": 9,
+      "findings": {
+        "source_omission_review": 1
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/03-feralas",
+      "acceptances": 28,
+      "findings": {
+        "no_source_data": 1,
+        "source_omission_review": 1
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/04-tanaris",
+      "acceptances": 25,
+      "findings": {
+        "missing_prerequisite": 1
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/05-the-hinterlands",
+      "acceptances": 15,
+      "findings": {
+        "level_conflict_review": 1,
+        "missing_prerequisite": 1
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/06-searing-gorge",
+      "acceptances": 14,
+      "findings": {}
+    },
+    {
+      "guideID": "forever/alliance/40-50/07-un-goro-crater",
+      "acceptances": 33,
+      "findings": {}
+    },
+    {
+      "guideID": "forever/alliance/50-60/01-burning-steppes",
+      "acceptances": 16,
+      "findings": {
+        "no_source_data": 3
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/02-felwood",
+      "acceptances": 21,
+      "findings": {
+        "additional_gate_review": 1
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/03-winterspring",
+      "acceptances": 31,
+      "findings": {
+        "missing_prerequisite": 2,
+        "source_omission_review": 2
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/04-western-plaguelands",
+      "acceptances": 64,
+      "findings": {
+        "missing_prerequisite": 1,
+        "prerequisite_conflict_review": 5,
+        "selector_conflict_review": 1,
+        "source_omission_review": 3
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/05-silithus",
+      "acceptances": 34,
+      "findings": {
+        "source_omission_review": 1
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/06-silithus",
+      "acceptances": 34,
+      "findings": {
+        "level_conflict_review": 3,
+        "no_source_data": 1
+      }
+    },
+    {
+      "guideID": "forever/horde/orc-troll/01-durotar",
+      "acceptances": 80,
+      "findings": {
+        "no_source_data": 1,
+        "prerequisite_conflict_review": 4,
+        "source_omission_review": 2
+      }
+    },
+    {
+      "guideID": "forever/horde/tauren/01-mulgore",
+      "acceptances": 70,
+      "findings": {
+        "level_conflict_review": 2,
+        "no_source_data": 1,
+        "prerequisite_conflict_review": 2
+      }
+    },
+    {
+      "guideID": "forever/horde/undead/01-tirisfal-glades",
+      "acceptances": 71,
+      "findings": {
+        "level_conflict_review": 2,
+        "missing_prerequisite": 5,
+        "prerequisite_conflict_review": 1
+      }
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "acceptances": 111,
+      "findings": {
+        "no_source_data": 1,
+        "prerequisite_conflict_review": 6,
+        "source_omission_review": 8
+      }
+    },
+    {
+      "guideID": "forever/horde/orc-troll/02-the-barrens",
+      "acceptances": 34,
+      "findings": {
+        "missing_prerequisite": 2
+      }
+    },
+    {
+      "guideID": "forever/horde/02-the-barrens",
+      "acceptances": 38,
+      "findings": {
+        "missing_prerequisite": 2,
+        "prerequisite_conflict_review": 1
+      }
+    },
+    {
+      "guideID": "forever/horde/03-silverpine-forest",
+      "acceptances": 37,
+      "findings": {
+        "missing_prerequisite": 1,
+        "prerequisite_conflict_review": 2,
+        "selector_conflict_review": 1
+      }
+    },
+    {
+      "guideID": "forever/horde/04-the-barrens",
+      "acceptances": 75,
+      "findings": {
+        "missing_prerequisite": 1,
+        "no_source_data": 4,
+        "source_omission_review": 1
+      }
+    },
+    {
+      "guideID": "forever/horde/05-stonetalon-mountains",
+      "acceptances": 22,
+      "findings": {
+        "missing_prerequisite": 1,
+        "no_source_data": 6
+      }
+    },
+    {
+      "guideID": "forever/horde/06-hillsbrad-foothills",
+      "acceptances": 22,
+      "findings": {}
+    },
+    {
+      "guideID": "forever/horde/07-ashenvale",
+      "acceptances": 47,
+      "findings": {
+        "missing_prerequisite": 2,
+        "no_source_data": 4,
+        "source_omission_review": 1
+      }
+    },
+    {
+      "guideID": "forever/horde/30-40/01-desolace",
+      "acceptances": 31,
+      "findings": {
+        "no_source_data": 1,
+        "source_omission_review": 1
+      }
+    },
+    {
+      "guideID": "forever/horde/30-40/02-stranglethorn-vale",
+      "acceptances": 32,
+      "findings": {
+        "missing_active_parent": 4,
+        "missing_prerequisite": 4
+      }
+    },
+    {
+      "guideID": "forever/horde/30-40/03-arathi-highlands",
+      "acceptances": 33,
+      "findings": {
+        "additional_gate_review": 2,
+        "source_omission_review": 2
+      }
+    },
+    {
+      "guideID": "forever/horde/30-40/04-dustwallow-marsh",
+      "acceptances": 25,
+      "findings": {
+        "no_source_data": 1
+      }
+    },
+    {
+      "guideID": "forever/horde/40-50/01-stranglethorn-vale",
+      "acceptances": 31,
+      "findings": {
+        "missing_active_parent": 1,
+        "missing_prerequisite": 1,
+        "prerequisite_conflict_review": 3
+      }
+    },
+    {
+      "guideID": "forever/horde/40-50/02-feralas",
+      "acceptances": 32,
+      "findings": {
+        "missing_prerequisite": 1,
+        "source_omission_review": 1
+      }
+    },
+    {
+      "guideID": "forever/horde/40-50/03-feralas",
+      "acceptances": 26,
+      "findings": {
+        "source_omission_review": 2
+      }
+    },
+    {
+      "guideID": "forever/horde/40-50/04-tanaris",
+      "acceptances": 27,
+      "findings": {}
+    },
+    {
+      "guideID": "forever/horde/40-50/05-the-hinterlands",
+      "acceptances": 26,
+      "findings": {}
+    },
+    {
+      "guideID": "forever/horde/40-50/06-azshara",
+      "acceptances": 35,
+      "findings": {
+        "no_source_data": 1,
+        "source_omission_review": 2
+      }
+    },
+    {
+      "guideID": "forever/horde/50-60/01-un-goro-crater",
+      "acceptances": 47,
+      "findings": {
+        "missing_prerequisite": 3,
+        "no_source_data": 1,
+        "source_omission_review": 4
+      }
+    },
+    {
+      "guideID": "forever/horde/50-60/02-felwood",
+      "acceptances": 45,
+      "findings": {
+        "additional_gate_review": 1,
+        "selector_conflict_review": 2,
+        "source_omission_review": 2
+      }
+    },
+    {
+      "guideID": "forever/horde/50-60/03-winterspring",
+      "acceptances": 31,
+      "findings": {
+        "missing_prerequisite": 1,
+        "source_omission_review": 1
+      }
+    },
+    {
+      "guideID": "forever/horde/50-60/04-azshara",
+      "acceptances": 15,
+      "findings": {
+        "no_source_data": 3
+      }
+    },
+    {
+      "guideID": "forever/horde/50-60/05-eastern-plaguelands",
+      "acceptances": 16,
+      "findings": {}
+    },
+    {
+      "guideID": "forever/horde/50-60/06-silithus",
+      "acceptances": 29,
+      "findings": {
+        "level_conflict_review": 2,
+        "source_omission_review": 1
+      }
+    },
+    {
+      "guideID": "forever/horde/50-60/07-felwood",
+      "acceptances": 5,
+      "findings": {}
+    }
+  ],
+  "findings": [
+    {
+      "guideID": "forever/alliance/nightelf/01-teldrassil",
+      "step": 4,
+      "goal": 5,
+      "questID": 97236,
+      "title": "Fang of Githyiss",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/nightelf/01-teldrassil",
+      "step": 16,
+      "goal": 3,
+      "questID": 96634,
+      "title": "Camping 101: Cooking",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          95998,
+          96101,
+          96604,
+          96605,
+          96606,
+          96607,
+          96608
+        ]
+      },
+      "reported": {
+        "all": [
+          96606
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15379
+        }
+      ],
+      "dependencyLocations": {
+        "96606": [
+          {
+            "step": 15,
+            "goal": 10,
+            "action": "accept"
+          },
+          {
+            "step": 16,
+            "goal": 1,
+            "action": "complete"
+          },
+          {
+            "step": 16,
+            "goal": 2,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/nightelf/01-teldrassil",
+      "step": 27,
+      "goal": 1,
+      "questID": 930,
+      "title": "El fruto resplandeciente",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          918
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/nightelf/01-teldrassil",
+      "step": 31,
+      "goal": 2,
+      "questID": 931,
+      "title": "Flora luminosa",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          918
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/nightelf/01-teldrassil",
+      "step": 43,
+      "goal": 2,
+      "questID": 6341,
+      "title": "La prodigalidad de Teldrassil",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          6344
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14636
+        }
+      ],
+      "dependencyLocations": {
+        "6344": [
+          {
+            "step": 42,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 43,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/nightelf/01-teldrassil",
+      "step": 50,
+      "goal": 3,
+      "questID": 1639,
+      "title": "Bartleby, el borracho",
+      "crossSourceReview": "prerequisite_not_corroborated",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1638
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13881
+        }
+      ],
+      "dependencyLocations": {
+        "1638": [
+          {
+            "step": 50,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 50,
+            "goal": 2,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/nightelf/01-teldrassil",
+      "step": 50,
+      "goal": 5,
+      "questID": 1640,
+      "title": "Vence a Bartleby",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1639,
+          1678,
+          1683
+        ]
+      },
+      "reported": {
+        "all": [
+          1639
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13882
+        }
+      ],
+      "dependencyLocations": {
+        "1639": [
+          {
+            "step": 50,
+            "goal": 3,
+            "action": "accept"
+          },
+          {
+            "step": 50,
+            "goal": 4,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 3,
+      "goal": 6,
+      "questID": 3107,
+      "title": "Runa consagrada",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 6131
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 3,
+      "goal": 8,
+      "questID": 3108,
+      "title": "Runa con grabados",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 6132
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 3,
+      "goal": 18,
+      "questID": 98581,
+      "title": "Archaic Rune",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8685
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 3,
+      "goal": 20,
+      "questID": 3114,
+      "title": "Memorándum con inscripciones",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Gnome"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 6137
+        }
+      ],
+      "excluded": [
+        "Dwarf"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 3,
+      "goal": 22,
+      "questID": 3115,
+      "title": "Memorándum corrupto",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Gnome"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 6138
+        }
+      ],
+      "excluded": [
+        "Dwarf"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 12,
+      "goal": 6,
+      "questID": 94373,
+      "title": "Clamor de Tierra",
+      "crossSourceReview": "corroborated_single_completed_parent",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8370
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 16,
+      "goal": 2,
+      "questID": 94374,
+      "title": "Clamor de Tierra",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8371
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 16,
+      "goal": 5,
+      "questID": 94375,
+      "title": "Clamor de Tierra",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8372
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 17,
+      "goal": 3,
+      "questID": 96628,
+      "title": "The Adventurer",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          282
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          218
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15376
+        }
+      ],
+      "dependencyLocations": {
+        "218": [
+          {
+            "step": 11,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 14,
+            "goal": 1,
+            "action": "collect"
+          },
+          {
+            "step": 15,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 19,
+      "goal": 5,
+      "questID": 96629,
+      "title": "Camping 101: Cooking",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          95998,
+          96101,
+          96604,
+          96605,
+          96606,
+          96607,
+          96608
+        ]
+      },
+      "reported": {
+        "all": [
+          96608
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15377
+        }
+      ],
+      "dependencyLocations": {
+        "96608": [
+          {
+            "step": 19,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 19,
+            "goal": 3,
+            "action": "complete"
+          },
+          {
+            "step": 19,
+            "goal": 4,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 45,
+      "goal": 1,
+      "questID": 95217,
+      "title": "The Quarry's Smith",
+      "kind": "selector_conflict_review",
+      "field": "classMask",
+      "authored": [
+        "DRUID",
+        "HUNTER",
+        "MAGE",
+        "PALADIN",
+        "PRIEST",
+        "ROGUE",
+        "SHAMAN",
+        "WARLOCK",
+        "WARRIOR"
+      ],
+      "reported": [
+        "PALADIN",
+        "SHAMAN",
+        "WARRIOR"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8432
+        }
+      ],
+      "excluded": [
+        "DRUID",
+        "HUNTER",
+        "MAGE",
+        "PRIEST",
+        "ROGUE",
+        "WARLOCK"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 46,
+      "goal": 3,
+      "questID": 95213,
+      "title": "Stolen Blasting Powder",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 47,
+      "goal": 3,
+      "questID": 95214,
+      "title": "Stolen Blasting Powder",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          95213
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 53,
+      "goal": 3,
+      "questID": 6064,
+      "title": "Domesticar la bestia",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 6921
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 53,
+      "goal": 4,
+      "questID": 94449,
+      "title": "La llamada del fuego",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8383
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 54,
+      "goal": 3,
+      "questID": 6084,
+      "title": "Domesticar la bestia",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 6937
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 54,
+      "goal": 6,
+      "questID": 6085,
+      "title": "Domesticar la bestia",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 6938
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 54,
+      "goal": 9,
+      "questID": 6086,
+      "title": "Entrenar a la bestia",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 6939
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 57,
+      "goal": 1,
+      "questID": 96408,
+      "title": "A Visitor to Dun Morogh",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 9,
+      "reported": 10,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8481
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 59,
+      "goal": 2,
+      "questID": 94465,
+      "title": "La llamada del fuego",
+      "crossSourceReview": "corroborated_single_completed_parent",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8384
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 60,
+      "goal": 2,
+      "questID": 94466,
+      "title": "La llamada del fuego",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8385
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 62,
+      "goal": 2,
+      "questID": 94467,
+      "title": "La llamada del fuego",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8386
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 62,
+      "goal": 6,
+      "questID": 94468,
+      "title": "La llamada del fuego",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8387
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 65,
+      "goal": 4,
+      "questID": 96391,
+      "title": "Underground Map",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 69,
+      "goal": 1,
+      "questID": 2999,
+      "title": "El Libro de la Divinidad",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 6097
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 69,
+      "goal": 3,
+      "questID": 1646,
+      "title": "El Libro de la Divinidad",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 69,
+      "goal": 5,
+      "questID": 1647,
+      "title": "El Libro de la Divinidad",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 5706
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 69,
+      "goal": 7,
+      "questID": 1648,
+      "title": "El Libro de la Divinidad",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 5707
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 69,
+      "goal": 10,
+      "questID": 1778,
+      "title": "El Libro de la Divinidad",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 5762
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 69,
+      "goal": 12,
+      "questID": 1779,
+      "title": "El Libro de la Divinidad",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 5763
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 69,
+      "goal": 14,
+      "questID": 1783,
+      "title": "El Libro de la Divinidad",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 5767
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 70,
+      "goal": 3,
+      "questID": 1784,
+      "title": "El Libro de la Divinidad",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 5768
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 71,
+      "goal": 2,
+      "questID": 1785,
+      "title": "El Libro de la Divinidad",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Dwarf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 5769
+        }
+      ],
+      "excluded": [
+        "Gnome"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 74,
+      "goal": 3,
+      "questID": 1639,
+      "title": "Bartleby, el borracho",
+      "crossSourceReview": "prerequisite_not_corroborated",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1638
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13881
+        }
+      ],
+      "dependencyLocations": {
+        "1638": [
+          {
+            "step": 74,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 74,
+            "goal": 2,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 74,
+      "goal": 5,
+      "questID": 1640,
+      "title": "Vence a Bartleby",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1639,
+          1678,
+          1683
+        ]
+      },
+      "reported": {
+        "all": [
+          1639
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13882
+        }
+      ],
+      "dependencyLocations": {
+        "1639": [
+          {
+            "step": 74,
+            "goal": 3,
+            "action": "accept"
+          },
+          {
+            "step": 74,
+            "goal": 4,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 79,
+      "goal": 1,
+      "questID": 1861,
+      "title": "Lago Espejo",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1860
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13960
+        }
+      ],
+      "dependencyLocations": {
+        "1860": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "step": 79,
+      "goal": 1,
+      "questID": 1861,
+      "title": "Lago Espejo",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome"
+      ],
+      "reported": [
+        "Gnome",
+        "Human"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 5811
+        }
+      ],
+      "excluded": [
+        "Dwarf"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 1,
+      "goal": 1,
+      "questID": 33,
+      "title": "Los lobos cruzan la frontera",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          5261
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13100
+        }
+      ],
+      "dependencyLocations": {
+        "5261": [
+          {
+            "step": 1,
+            "goal": 5,
+            "action": "accept"
+          },
+          {
+            "step": 3,
+            "goal": 2,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 4,
+      "goal": 3,
+      "questID": 91741,
+      "title": "Nibbled-On Book",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 5,
+      "goal": 10,
+      "questID": 92479,
+      "title": "A Scribbled Letter",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          7
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 5,
+      "goal": 10,
+      "questID": 92479,
+      "title": "A Scribbled Letter",
+      "kind": "selector_conflict_review",
+      "field": "classMask",
+      "authored": [
+        "HUNTER"
+      ],
+      "reported": [
+        "WARRIOR"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8264
+        }
+      ],
+      "excluded": [
+        "HUNTER"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 5,
+      "goal": 10,
+      "questID": 92479,
+      "title": "A Scribbled Letter",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Human"
+      ],
+      "reported": [
+        "NightElf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8264
+        }
+      ],
+      "excluded": [
+        "Human"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 9,
+      "goal": 3,
+      "questID": 3903,
+      "title": "Milly Osworth",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          18
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          33
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14273
+        }
+      ],
+      "dependencyLocations": {
+        "33": [
+          {
+            "step": 1,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 2,
+            "goal": 1,
+            "action": "collect"
+          },
+          {
+            "step": 3,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 10,
+      "goal": 2,
+      "questID": 3904,
+      "title": "La cosecha de Milly",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          18
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          3903
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14274
+        }
+      ],
+      "dependencyLocations": {
+        "3903": [
+          {
+            "step": 9,
+            "goal": 3,
+            "action": "accept"
+          },
+          {
+            "step": 10,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 17,
+      "goal": 5,
+      "questID": 96626,
+      "title": "Camping 101: Cooking",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          95998,
+          96101,
+          96604,
+          96605,
+          96606,
+          96607,
+          96608
+        ]
+      },
+      "reported": {
+        "all": [
+          95998
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15374
+        }
+      ],
+      "dependencyLocations": {
+        "95998": [
+          {
+            "step": 17,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 17,
+            "goal": 3,
+            "action": "complete"
+          },
+          {
+            "step": 17,
+            "goal": 4,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 51,
+      "goal": 1,
+      "questID": 91736,
+      "title": "Applejack Still",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 52,
+      "goal": 2,
+      "questID": 11,
+      "title": "Recompensas por los gnolls Zarparrío",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          76
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          239
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13085
+        }
+      ],
+      "dependencyLocations": {
+        "239": [
+          {
+            "step": 48,
+            "goal": 8,
+            "action": "accept"
+          },
+          {
+            "step": 52,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 56,
+      "goal": 1,
+      "questID": 46,
+      "title": "Recompensas por los murlocs",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          39
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 64,
+      "goal": 2,
+      "questID": 1861,
+      "title": "Lago Espejo",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1860
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13960
+        }
+      ],
+      "dependencyLocations": {
+        "1860": [
+          {
+            "step": 62,
+            "goal": 6,
+            "action": "accept"
+          },
+          {
+            "step": 64,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "step": 69,
+      "goal": 2,
+      "questID": 1642,
+      "title": "El Libro de la Divinidad",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 11,
+      "goal": 4,
+      "questID": 96646,
+      "title": "Camping 101: Cooking",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          95998,
+          96101,
+          96604,
+          96605,
+          96606,
+          96607,
+          96608
+        ]
+      },
+      "reported": {
+        "all": [
+          96101
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15381
+        }
+      ],
+      "dependencyLocations": {
+        "96101": [
+          {
+            "step": 11,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 11,
+            "goal": 2,
+            "action": "complete"
+          },
+          {
+            "step": 11,
+            "goal": 3,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 12,
+      "goal": 3,
+      "questID": 93951,
+      "title": "A Little Beauty",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92514,
+          93461
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 12,
+      "goal": 4,
+      "questID": 92515,
+      "title": "The Problem With Prideclaws",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92514,
+          93461
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 12,
+      "goal": 5,
+      "questID": 92516,
+      "title": "Hippogryph Harrassment",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92514,
+          93461
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 12,
+      "goal": 6,
+      "questID": 93319,
+      "title": "Pilfered Windstones",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92514,
+          93461
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 12,
+      "goal": 7,
+      "questID": 92553,
+      "title": "Restocking the Larders",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92514,
+          93461
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 12,
+      "goal": 8,
+      "questID": 93318,
+      "title": "WANTED: Vulgara the Insatiable",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92514,
+          93461
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 39,
+      "goal": 4,
+      "questID": 93320,
+      "title": "Tower Defense",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92860,
+          92871
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 42,
+      "goal": 2,
+      "questID": 94638,
+      "title": "Strength and Mercy",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          94006
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 47,
+      "goal": 2,
+      "questID": 94485,
+      "title": "Tears of the Lady",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          94484,
+          94493
+        ]
+      },
+      "reported": {
+        "all": [
+          94484
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15338
+        }
+      ],
+      "dependencyLocations": {
+        "94484": [
+          {
+            "step": 41,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 47,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 47,
+      "goal": 3,
+      "questID": 94486,
+      "title": "Feathers for Binding",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          94484,
+          94493
+        ]
+      },
+      "reported": {
+        "all": [
+          94484
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15339
+        }
+      ],
+      "dependencyLocations": {
+        "94484": [
+          {
+            "step": 41,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 47,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 47,
+      "goal": 4,
+      "questID": 94487,
+      "title": "Unwanted and Unworthy",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          94484,
+          94493
+        ]
+      },
+      "reported": {
+        "all": [
+          94484
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15340
+        }
+      ],
+      "dependencyLocations": {
+        "94484": [
+          {
+            "step": 41,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 47,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 50,
+      "goal": 2,
+      "questID": 93165,
+      "title": "Mercy Falls on Deaf Ears",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          94484,
+          94493
+        ]
+      },
+      "reported": {
+        "all": [
+          94484
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15303
+        }
+      ],
+      "dependencyLocations": {
+        "94484": [
+          {
+            "step": 41,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 47,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 50,
+      "goal": 7,
+      "questID": 94490,
+      "title": "Ripped Missive",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "step": 61,
+      "goal": 1,
+      "questID": 1861,
+      "title": "Lago Espejo",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1860
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13960
+        }
+      ],
+      "dependencyLocations": {
+        "1860": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/02-westfall",
+      "step": 18,
+      "goal": 3,
+      "questID": 1639,
+      "title": "Bartleby, el borracho",
+      "crossSourceReview": "prerequisite_not_corroborated",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1638
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13881
+        }
+      ],
+      "dependencyLocations": {
+        "1638": [
+          {
+            "step": 18,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 18,
+            "goal": 2,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/02-westfall",
+      "step": 18,
+      "goal": 5,
+      "questID": 1640,
+      "title": "Vence a Bartleby",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1639,
+          1678,
+          1683
+        ]
+      },
+      "reported": {
+        "all": [
+          1639
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13882
+        }
+      ],
+      "dependencyLocations": {
+        "1639": [
+          {
+            "step": 18,
+            "goal": 3,
+            "action": "accept"
+          },
+          {
+            "step": 18,
+            "goal": 4,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 1,
+      "goal": 5,
+      "questID": 98025,
+      "title": "WANTED: Jai'vhanel",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 10,
+      "reported": 15,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8619
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 12,
+      "goal": 2,
+      "questID": 26,
+      "title": "Una lección que aprender",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "NightElf"
+      ],
+      "reported": [
+        "Tauren"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 4406
+        }
+      ],
+      "excluded": [
+        "NightElf"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 13,
+      "goal": 4,
+      "questID": 29,
+      "title": "La prueba del lago",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          26
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          27
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13096
+        }
+      ],
+      "dependencyLocations": {
+        "27": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 21,
+      "goal": 13,
+      "questID": 87760,
+      "title": "Holy Diver",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          4733
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15168
+        }
+      ],
+      "dependencyLocations": {
+        "4733": [
+          {
+            "step": 30,
+            "goal": 4,
+            "action": "accept"
+          },
+          {
+            "step": 33,
+            "goal": 4,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 29,
+      "goal": 4,
+      "questID": 949,
+      "title": "El campamento del Azote del Ocaso",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 37,
+      "goal": 2,
+      "questID": 990,
+      "title": "El camino de Vallefresno",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 38,
+      "goal": 3,
+      "questID": 98393,
+      "title": "The Great Cat Spirit",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 39,
+      "goal": 5,
+      "questID": 98341,
+      "title": "The Great Windborne Cat Spirit",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 40,
+      "goal": 12,
+      "questID": 98731,
+      "title": "Blessings of the Great Cat Spirit",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 40,
+      "goal": 14,
+      "questID": 98738,
+      "title": "Blessings of the Great Windborne Cat Spirit",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/04-redridge-mountains",
+      "step": 3,
+      "goal": 6,
+      "questID": 94819,
+      "title": "Contingency Plan",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/04-redridge-mountains",
+      "step": 12,
+      "goal": 4,
+      "questID": 180,
+      "title": "Se busca: teniente Fangore",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 21,
+      "reported": 15,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 4551
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/05-duskwood",
+      "step": 9,
+      "goal": 2,
+      "questID": 148,
+      "title": "Suministros de Villa Oscura",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          165
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13170
+        }
+      ],
+      "dependencyLocations": {
+        "165": [
+          {
+            "step": 1,
+            "goal": 7,
+            "action": "accept"
+          },
+          {
+            "step": 9,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/06-ashenvale",
+      "step": 24,
+      "goal": 4,
+      "questID": 78132,
+      "title": "Dragonslayer's Helm",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/06-ashenvale",
+      "step": 24,
+      "goal": 6,
+      "questID": 78133,
+      "title": "Dragonslayer's Shield",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/06-ashenvale",
+      "step": 24,
+      "goal": 8,
+      "questID": 78134,
+      "title": "Dragonslayer's Lance",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/06-ashenvale",
+      "step": 32,
+      "goal": 8,
+      "questID": 484,
+      "title": "Piel de crocolisco joven",
+      "kind": "additional_gate_review",
+      "field": "minRep",
+      "authored": null,
+      "reported": {
+        "factionID": 47,
+        "standing": 9000
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17519
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/07-thousand-needles",
+      "step": 15,
+      "goal": 2,
+      "questID": 96138,
+      "title": "Merrick's Bow",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/07-thousand-needles",
+      "step": 18,
+      "goal": 7,
+      "questID": 526,
+      "title": "Lingotes Forjaluz",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          324
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13384
+        }
+      ],
+      "dependencyLocations": {
+        "324": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/07-thousand-needles",
+      "step": 18,
+      "goal": 8,
+      "questID": 464,
+      "title": "Estandartes de batalla",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          473
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13349
+        }
+      ],
+      "dependencyLocations": {
+        "473": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/07-thousand-needles",
+      "step": 24,
+      "goal": 1,
+      "questID": 299,
+      "title": "Desvelando el pasado",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 22,
+      "reported": 25,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 4665
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/07-thousand-needles",
+      "step": 31,
+      "goal": 3,
+      "questID": 65602,
+      "title": "¿Qué es el amor?",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          1716
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/07-thousand-needles",
+      "step": 35,
+      "goal": 3,
+      "questID": 1106,
+      "title": "Martek el Exiliado",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          1104,
+          1105
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 1,
+      "goal": 2,
+      "questID": 98230,
+      "title": "This Land Was Their Land",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          474
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15479
+        }
+      ],
+      "dependencyLocations": {
+        "474": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 1,
+      "goal": 3,
+      "questID": 98072,
+      "title": "Crocs of the Sky",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          471
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15472
+        }
+      ],
+      "dependencyLocations": {
+        "471": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 1,
+      "goal": 3,
+      "questID": 98072,
+      "title": "Crocs of the Sky",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": null,
+      "reported": 19,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8624
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 1,
+      "goal": 4,
+      "questID": 98209,
+      "title": "Bloom of the Heavens",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          98208
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15476
+        }
+      ],
+      "dependencyLocations": {
+        "98208": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 2,
+      "goal": 1,
+      "questID": 98216,
+      "title": "Understanding Our Present",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          299
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15477
+        }
+      ],
+      "dependencyLocations": {
+        "299": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 5,
+      "goal": 3,
+      "questID": 98297,
+      "title": "Stopping the Cycle",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          98291
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15483
+        }
+      ],
+      "dependencyLocations": {
+        "98291": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 5,
+      "goal": 4,
+      "questID": 98283,
+      "title": "Carnage",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 12,
+      "goal": 1,
+      "questID": 87318,
+      "title": "Hearts of the Lost",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 12,
+      "goal": 3,
+      "questID": 88758,
+      "title": "Sentiments of the Lost",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 16,
+      "goal": 12,
+      "questID": 98463,
+      "title": "Talk of the Town",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 16,
+      "goal": 13,
+      "questID": 98059,
+      "title": "Hillsbrad's Hoard",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 34,
+      "goal": 2,
+      "questID": 79536,
+      "title": "Greater Friend of the Library",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/30-40/03-ashenvale",
+      "step": 1,
+      "goal": 5,
+      "questID": 95737,
+      "title": "Seeking Caitlin",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/30-40/03-ashenvale",
+      "step": 11,
+      "goal": 3,
+      "questID": 98418,
+      "title": "Shared Fury",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/30-40/03-ashenvale",
+      "step": 14,
+      "goal": 2,
+      "questID": 98027,
+      "title": "Gleaming Crescent Necklace",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/30-40/03-ashenvale",
+      "step": 35,
+      "goal": 3,
+      "questID": 1302,
+      "title": "James Hyal",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1301
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13785
+        }
+      ],
+      "dependencyLocations": {
+        "1301": [
+          {
+            "step": 35,
+            "goal": 2,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+      "step": 26,
+      "goal": 3,
+      "questID": 339,
+      "title": "Capítulo I",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          -338
+        ],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {
+        "-338": [
+          {
+            "step": 26,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 31,
+            "goal": 5,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+      "step": 26,
+      "goal": 3,
+      "questID": 339,
+      "title": "Capítulo I",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_active_parent",
+      "field": "parent",
+      "authored": null,
+      "reported": 338,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17253
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+      "step": 26,
+      "goal": 4,
+      "questID": 340,
+      "title": "Capítulo II",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          -338
+        ],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {
+        "-338": [
+          {
+            "step": 26,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 31,
+            "goal": 5,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+      "step": 26,
+      "goal": 4,
+      "questID": 340,
+      "title": "Capítulo II",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_active_parent",
+      "field": "parent",
+      "authored": null,
+      "reported": 338,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17254
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+      "step": 26,
+      "goal": 5,
+      "questID": 341,
+      "title": "Capítulo III",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          -338
+        ],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {
+        "-338": [
+          {
+            "step": 26,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 31,
+            "goal": 5,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+      "step": 26,
+      "goal": 5,
+      "questID": 341,
+      "title": "Capítulo III",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_active_parent",
+      "field": "parent",
+      "authored": null,
+      "reported": 338,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17255
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+      "step": 26,
+      "goal": 6,
+      "questID": 342,
+      "title": "Capítulo IV",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          -338
+        ],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {
+        "-338": [
+          {
+            "step": 26,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 31,
+            "goal": 5,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+      "step": 26,
+      "goal": 6,
+      "questID": 342,
+      "title": "Capítulo IV",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_active_parent",
+      "field": "parent",
+      "authored": null,
+      "reported": 338,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17256
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/30-40/05-arathi-highlands",
+      "step": 2,
+      "goal": 2,
+      "questID": 93176,
+      "title": "My Little Friends",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/30-40/05-arathi-highlands",
+      "step": 17,
+      "goal": 3,
+      "questID": 522,
+      "title": "Contrato de asesino",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/30-40/05-arathi-highlands",
+      "step": 18,
+      "goal": 4,
+      "questID": 691,
+      "title": "Valer su peso en oro",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          690
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13485
+        }
+      ],
+      "dependencyLocations": {
+        "690": [
+          {
+            "step": 18,
+            "goal": 3,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/05-arathi-highlands",
+      "step": 21,
+      "goal": 1,
+      "questID": 631,
+      "title": "El puente Thandol",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 26,
+      "reported": 28,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 4977
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/30-40/05-arathi-highlands",
+      "step": 23,
+      "goal": 4,
+      "questID": 664,
+      "title": "Ahogar las penas",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          663
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/30-40/05-arathi-highlands",
+      "step": 23,
+      "goal": 5,
+      "questID": 665,
+      "title": "El tesoro sumergido",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          663
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/30-40/05-arathi-highlands",
+      "step": 44,
+      "goal": 2,
+      "questID": 92459,
+      "title": "Friend of the Kirin Tor",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          92458
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15236
+        }
+      ],
+      "dependencyLocations": {
+        "92458": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/05-arathi-highlands",
+      "step": 48,
+      "goal": 1,
+      "questID": 738,
+      "title": "Encontrar a Agmond",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          707
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13517
+        }
+      ],
+      "dependencyLocations": {
+        "707": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/06-badlands",
+      "step": 22,
+      "goal": 7,
+      "questID": 93224,
+      "title": "Carved Centaur Totems",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "step": 1,
+      "goal": 3,
+      "questID": 1204,
+      "title": "Sopa de fangorroca con tropezones",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1260
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13756
+        }
+      ],
+      "dependencyLocations": {
+        "1260": [
+          {
+            "step": 1,
+            "goal": 2,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "step": 10,
+      "goal": 1,
+      "questID": 1252,
+      "title": "Teniente Paval Reethe",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1282,
+          1302
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "step": 10,
+      "goal": 2,
+      "questID": 1284,
+      "title": "Huellas pezuñales sospechosas",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1282,
+          1302
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "step": 16,
+      "goal": 3,
+      "questID": 1288,
+      "title": "El informe de Vimes",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "step": 21,
+      "goal": 5,
+      "questID": 576,
+      "title": "¡Ojo!",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          597
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          595
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13412
+        }
+      ],
+      "dependencyLocations": {
+        "595": [
+          {
+            "step": 19,
+            "goal": 3,
+            "action": "accept"
+          },
+          {
+            "step": 20,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "step": 21,
+      "goal": 6,
+      "questID": 587,
+      "title": "Tabaco rapé",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          597
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          595
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13419
+        }
+      ],
+      "dependencyLocations": {
+        "595": [
+          {
+            "step": 19,
+            "goal": 3,
+            "action": "accept"
+          },
+          {
+            "step": 20,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "step": 27,
+      "goal": 2,
+      "questID": 349,
+      "title": "La fiebre de Tuercespina",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          -348
+        ],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {
+        "-348": [
+          {
+            "step": 19,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 28,
+            "goal": 2,
+            "action": "collect"
+          },
+          {
+            "step": 29,
+            "goal": 5,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "step": 27,
+      "goal": 2,
+      "questID": 349,
+      "title": "La fiebre de Tuercespina",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_active_parent",
+      "field": "parent",
+      "authored": null,
+      "reported": 348,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17257
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "step": 38,
+      "goal": 4,
+      "questID": 1271,
+      "title": "¡Una fiesta en tu honor!",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          1222
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1222,
+          1258
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15183
+        }
+      ],
+      "dependencyLocations": {
+        "1222": [
+          {
+            "step": 6,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 6,
+            "goal": 2,
+            "action": "complete"
+          },
+          {
+            "step": 11,
+            "goal": 14,
+            "action": "turnin"
+          }
+        ],
+        "1258": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "step": 38,
+      "goal": 8,
+      "questID": 1364,
+      "title": "La orden de Mazen",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          1363
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "step": 42,
+      "goal": 1,
+      "questID": 1661,
+      "title": "Libro de la nobleza",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome",
+        "Human",
+        "NightElf"
+      ],
+      "reported": [
+        "Dwarf",
+        "Human"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 5717
+        }
+      ],
+      "excluded": [
+        "Gnome",
+        "NightElf"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/40-50/02-badlands",
+      "step": 17,
+      "goal": 3,
+      "questID": 4490,
+      "title": "Invoca un malignoecus",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          3631,
+          4487,
+          4488,
+          4489
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/40-50/03-feralas",
+      "step": 15,
+      "goal": 4,
+      "questID": 4281,
+      "title": "Una entrega en Thalanaar",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/40-50/03-feralas",
+      "step": 17,
+      "goal": 3,
+      "questID": 7735,
+      "title": "Pellejo de yeti prístino",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          2821
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/40-50/04-tanaris",
+      "step": 5,
+      "goal": 2,
+      "questID": 2873,
+      "title": "el Cargamento de Stoley",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          2872
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14094
+        }
+      ],
+      "dependencyLocations": {
+        "2872": [
+          {
+            "step": 5,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/05-the-hinterlands",
+      "step": 5,
+      "goal": 3,
+      "questID": 1395,
+      "title": "Suministros para Nethergarde",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1477
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13809
+        }
+      ],
+      "dependencyLocations": {
+        "1477": [
+          {
+            "step": 5,
+            "goal": 2,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/40-50/05-the-hinterlands",
+      "step": 11,
+      "goal": 3,
+      "questID": 17,
+      "title": "Componentes de Uldaman",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 38,
+      "reported": 36,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 4397
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/50-60/01-burning-steppes",
+      "step": 7,
+      "goal": 1,
+      "questID": 3381,
+      "title": "Un encuentro con el maestro",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/50-60/01-burning-steppes",
+      "step": 11,
+      "goal": 2,
+      "questID": 3461,
+      "title": "Vuelve con Tymor",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/50-60/01-burning-steppes",
+      "step": 23,
+      "goal": 1,
+      "questID": 3801,
+      "title": "El legado de los Hierro Negro",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/50-60/02-felwood",
+      "step": 18,
+      "goal": 2,
+      "questID": 6031,
+      "title": "Paño rúnico",
+      "kind": "additional_gate_review",
+      "field": "minRep",
+      "authored": null,
+      "reported": {
+        "factionID": 576,
+        "standing": 3000
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17528
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/50-60/03-winterspring",
+      "step": 4,
+      "goal": 6,
+      "questID": 5082,
+      "title": "La amenaza de los Nevada",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          6603
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14456
+        }
+      ],
+      "dependencyLocations": {
+        "6603": [
+          {
+            "step": 1,
+            "goal": 7,
+            "action": "accept"
+          },
+          {
+            "step": 4,
+            "goal": 4,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/03-winterspring",
+      "step": 24,
+      "goal": 2,
+      "questID": 5149,
+      "title": "La muñeca de Pamela",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": [
+          5142,
+          5601
+        ]
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14472
+        }
+      ],
+      "dependencyLocations": {
+        "5142": [],
+        "5601": [
+          {
+            "step": 1,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 24,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/03-winterspring",
+      "step": 27,
+      "goal": 8,
+      "questID": 5509,
+      "title": "Piedras de la Plaga de un invasor",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5401,
+          5405,
+          5503
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/50-60/03-winterspring",
+      "step": 27,
+      "goal": 9,
+      "questID": 5510,
+      "title": "Piedras de la Plaga de un esbirro",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5401,
+          5405,
+          5503
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/50-60/04-western-plaguelands",
+      "step": 1,
+      "goal": 2,
+      "questID": 5092,
+      "title": "Despejando el camino",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": [
+          5066,
+          5090,
+          5091
+        ]
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14462
+        }
+      ],
+      "dependencyLocations": {
+        "5066": [],
+        "5090": [],
+        "5091": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/04-western-plaguelands",
+      "step": 1,
+      "goal": 3,
+      "questID": 5402,
+      "title": "Piedras de la Plaga del esbirro",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5401,
+          5405,
+          5503
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/50-60/04-western-plaguelands",
+      "step": 1,
+      "goal": 4,
+      "questID": 5403,
+      "title": "Piedras de la Plaga del invasor",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5401,
+          5405,
+          5503
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/50-60/04-western-plaguelands",
+      "step": 15,
+      "goal": 1,
+      "questID": 5218,
+      "title": "El caldero del Campo de Piedra Mácula",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5217,
+          5230
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": [
+          5216,
+          5229,
+          5237
+        ]
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14496
+        }
+      ],
+      "dependencyLocations": {
+        "5216": [
+          {
+            "step": 11,
+            "goal": 7,
+            "action": "accept"
+          },
+          {
+            "step": 13,
+            "goal": 1,
+            "action": "collect"
+          },
+          {
+            "step": 13,
+            "goal": 2,
+            "action": "turnin"
+          }
+        ],
+        "5229": [],
+        "5237": [
+          {
+            "step": 39,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 39,
+            "goal": 3,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/04-western-plaguelands",
+      "step": 20,
+      "goal": 1,
+      "questID": 5224,
+      "title": "El caldero de El Tormento",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5223,
+          5234
+        ]
+      },
+      "reported": {
+        "all": [
+          5237
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14502
+        }
+      ],
+      "dependencyLocations": {
+        "5237": [
+          {
+            "step": 39,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 39,
+            "goal": 3,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/04-western-plaguelands",
+      "step": 21,
+      "goal": 1,
+      "questID": 5221,
+      "title": "El caldero del Llanto de Dalson",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5220,
+          5232
+        ]
+      },
+      "reported": {
+        "all": [
+          5237
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14499
+        }
+      ],
+      "dependencyLocations": {
+        "5237": [
+          {
+            "step": 39,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 39,
+            "goal": 3,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/04-western-plaguelands",
+      "step": 39,
+      "goal": 2,
+      "questID": 5237,
+      "title": "¡Misión cumplida!",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          5226
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          5236
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14515
+        }
+      ],
+      "dependencyLocations": {
+        "5236": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/04-western-plaguelands",
+      "step": 39,
+      "goal": 2,
+      "questID": 5237,
+      "title": "¡Misión cumplida!",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Dwarf",
+        "Gnome",
+        "Human",
+        "NightElf"
+      ],
+      "reported": [
+        "Orc",
+        "Scourge",
+        "Tauren",
+        "Troll"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 6700
+        }
+      ],
+      "excluded": [
+        "Dwarf",
+        "Gnome",
+        "Human",
+        "NightElf"
+      ]
+    },
+    {
+      "guideID": "forever/alliance/50-60/04-western-plaguelands",
+      "step": 51,
+      "goal": 2,
+      "questID": 4493,
+      "title": "La marcha de los silítidos",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          162
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/50-60/04-western-plaguelands",
+      "step": 52,
+      "goal": 2,
+      "questID": 6761,
+      "title": "La nueva frontera",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1015,
+          1019,
+          1047
+        ]
+      },
+      "reported": {
+        "all": [
+          1015
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14678
+        }
+      ],
+      "dependencyLocations": {
+        "1015": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/50-60/05-silithus",
+      "step": 1,
+      "goal": 4,
+      "questID": 4496,
+      "title": "Que jungla tan chunga",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          4493,
+          4494
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/50-60/06-silithus",
+      "step": 7,
+      "goal": 1,
+      "questID": 4261,
+      "title": "El espíritu de un Ancestro",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/50-60/06-silithus",
+      "step": 17,
+      "goal": 6,
+      "questID": 9415,
+      "title": "Preséntate ante el alguacil Murazul",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 1,
+      "reported": 53,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8174
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/50-60/06-silithus",
+      "step": 19,
+      "goal": 2,
+      "questID": 9419,
+      "title": "Peinando el desierto",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 1,
+      "reported": 55,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8176
+        }
+      ]
+    },
+    {
+      "guideID": "forever/alliance/50-60/06-silithus",
+      "step": 21,
+      "goal": 4,
+      "questID": 8304,
+      "title": "Queridísima Natalia",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 58,
+      "reported": 60,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 7505
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/orc-troll/01-durotar",
+      "step": 4,
+      "goal": 11,
+      "questID": 98576,
+      "title": "Glyphic Parchment",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          788
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/orc-troll/01-durotar",
+      "step": 4,
+      "goal": 14,
+      "questID": 98575,
+      "title": "Tainted Tablet",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          788
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/orc-troll/01-durotar",
+      "step": 14,
+      "goal": 4,
+      "questID": 1499,
+      "title": "Familiares viles",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1470,
+          1485
+        ]
+      },
+      "reported": {
+        "all": [
+          1485
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13856
+        }
+      ],
+      "dependencyLocations": {
+        "1485": [
+          {
+            "step": 4,
+            "goal": 32,
+            "action": "accept"
+          },
+          {
+            "step": 12,
+            "goal": 2,
+            "action": "collect"
+          },
+          {
+            "step": 14,
+            "goal": 3,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/orc-troll/01-durotar",
+      "step": 20,
+      "goal": 2,
+      "questID": 1517,
+      "title": "Clamor de Tierra",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1516,
+          1519
+        ]
+      },
+      "reported": {
+        "all": [
+          1516
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13868
+        }
+      ],
+      "dependencyLocations": {
+        "1516": [
+          {
+            "step": 15,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 18,
+            "goal": 1,
+            "action": "collect"
+          },
+          {
+            "step": 20,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/orc-troll/01-durotar",
+      "step": 24,
+      "goal": 5,
+      "questID": 96655,
+      "title": "Camping 101: Cooking",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          95998,
+          96101,
+          96604,
+          96605,
+          96606,
+          96607,
+          96608
+        ]
+      },
+      "reported": {
+        "all": [
+          96604
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15383
+        }
+      ],
+      "dependencyLocations": {
+        "96604": [
+          {
+            "step": 24,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 24,
+            "goal": 3,
+            "action": "complete"
+          },
+          {
+            "step": 24,
+            "goal": 4,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/orc-troll/01-durotar",
+      "step": 33,
+      "goal": 4,
+      "questID": 97281,
+      "title": "A Simmering Storm",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/orc-troll/01-durotar",
+      "step": 66,
+      "goal": 2,
+      "questID": 1502,
+      "title": "Thun'grim Vistafuego",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1498,
+          1819
+        ]
+      },
+      "reported": {
+        "all": [
+          1498
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13858
+        }
+      ],
+      "dependencyLocations": {
+        "1498": [
+          {
+            "step": 64,
+            "goal": 4,
+            "action": "accept"
+          },
+          {
+            "step": 65,
+            "goal": 1,
+            "action": "collect"
+          },
+          {
+            "step": 66,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/tauren/01-mulgore",
+      "step": 14,
+      "goal": 2,
+      "questID": 1520,
+      "title": "La llamada de la tierra",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1516,
+          1519
+        ]
+      },
+      "reported": {
+        "all": [
+          1519
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13870
+        }
+      ],
+      "dependencyLocations": {
+        "1519": [
+          {
+            "step": 12,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 13,
+            "goal": 1,
+            "action": "collect"
+          },
+          {
+            "step": 14,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/tauren/01-mulgore",
+      "step": 15,
+      "goal": 5,
+      "questID": 96661,
+      "title": "Camping 101: Cooking",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          95998,
+          96101,
+          96604,
+          96605,
+          96606,
+          96607,
+          96608
+        ]
+      },
+      "reported": {
+        "all": [
+          96605
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15385
+        }
+      ],
+      "dependencyLocations": {
+        "96605": [
+          {
+            "step": 15,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 15,
+            "goal": 3,
+            "action": "complete"
+          },
+          {
+            "step": 15,
+            "goal": 4,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/tauren/01-mulgore",
+      "step": 16,
+      "goal": 7,
+      "questID": 96130,
+      "title": "Chakuyak",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 4,
+      "reported": 5,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8466
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/tauren/01-mulgore",
+      "step": 25,
+      "goal": 1,
+      "questID": 99411,
+      "title": "Kyle's Gone Missing!",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 7,
+      "reported": 5,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8729
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/tauren/01-mulgore",
+      "step": 39,
+      "goal": 5,
+      "questID": 98424,
+      "title": "Fizsprocket's Notes",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/undead/01-tirisfal-glades",
+      "step": 2,
+      "goal": 2,
+      "questID": 364,
+      "title": "Los autómatas",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          363
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13289
+        }
+      ],
+      "dependencyLocations": {
+        "363": [
+          {
+            "step": 1,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 2,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/undead/01-tirisfal-glades",
+      "step": 5,
+      "goal": 1,
+      "questID": 98601,
+      "title": "A Difficult Path",
+      "crossSourceReview": "prerequisite_not_corroborated",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          364
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15170
+        }
+      ],
+      "dependencyLocations": {
+        "364": [
+          {
+            "step": 2,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 3,
+            "goal": 1,
+            "action": "kill"
+          },
+          {
+            "step": 3,
+            "goal": 2,
+            "action": "kill"
+          },
+          {
+            "step": 4,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/undead/01-tirisfal-glades",
+      "step": 26,
+      "goal": 5,
+      "questID": 96658,
+      "title": "Camping 101: Cooking",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          95998,
+          96101,
+          96604,
+          96605,
+          96606,
+          96607,
+          96608
+        ]
+      },
+      "reported": {
+        "all": [
+          96607
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15384
+        }
+      ],
+      "dependencyLocations": {
+        "96607": [
+          {
+            "step": 26,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 26,
+            "goal": 3,
+            "action": "complete"
+          },
+          {
+            "step": 26,
+            "goal": 4,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/undead/01-tirisfal-glades",
+      "step": 44,
+      "goal": 1,
+      "questID": 99152,
+      "title": "As Above, So Below",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 7,
+      "reported": 10,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8718
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/undead/01-tirisfal-glades",
+      "step": 44,
+      "goal": 2,
+      "questID": 99153,
+      "title": "The One That Got Away",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 7,
+      "reported": 10,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8719
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/undead/01-tirisfal-glades",
+      "step": 49,
+      "goal": 1,
+      "questID": 1819,
+      "title": "Ulag, el cuchillero",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1818
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13942
+        }
+      ],
+      "dependencyLocations": {
+        "1818": []
+      }
+    },
+    {
+      "guideID": "forever/horde/undead/01-tirisfal-glades",
+      "step": 50,
+      "goal": 1,
+      "questID": 1473,
+      "title": "Criatura abisal",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1478
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13844
+        }
+      ],
+      "dependencyLocations": {
+        "1478": []
+      }
+    },
+    {
+      "guideID": "forever/horde/undead/01-tirisfal-glades",
+      "step": 51,
+      "goal": 2,
+      "questID": 1882,
+      "title": "La Hacienda Balnir",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          1881
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13963
+        }
+      ],
+      "dependencyLocations": {
+        "1881": [
+          {
+            "step": 48,
+            "goal": 14,
+            "action": "accept"
+          },
+          {
+            "step": 51,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 17,
+      "goal": 2,
+      "questID": 92467,
+      "title": "Clamor de Tierra",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1516,
+          1519,
+          92466
+        ]
+      },
+      "reported": {
+        "all": [
+          92466
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15240
+        }
+      ],
+      "dependencyLocations": {
+        "92466": [
+          {
+            "step": 11,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 14,
+            "goal": 1,
+            "action": "collect"
+          },
+          {
+            "step": 17,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 19,
+      "goal": 3,
+      "questID": 96646,
+      "title": "Camping 101: Cooking",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          95998,
+          96101,
+          96604,
+          96605,
+          96606,
+          96607,
+          96608
+        ]
+      },
+      "reported": {
+        "all": [
+          96101
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15381
+        }
+      ],
+      "dependencyLocations": {
+        "96101": [
+          {
+            "step": 18,
+            "goal": 8,
+            "action": "accept"
+          },
+          {
+            "step": 19,
+            "goal": 1,
+            "action": "complete"
+          },
+          {
+            "step": 19,
+            "goal": 2,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 20,
+      "goal": 5,
+      "questID": 92553,
+      "title": "Restocking the Larders",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92514,
+          93461
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 20,
+      "goal": 6,
+      "questID": 93951,
+      "title": "A Little Beauty",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92514,
+          93461
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 20,
+      "goal": 7,
+      "questID": 92515,
+      "title": "The Problem With Prideclaws",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92514,
+          93461
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 20,
+      "goal": 8,
+      "questID": 92516,
+      "title": "Hippogryph Harrassment",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92514,
+          93461
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 20,
+      "goal": 9,
+      "questID": 93319,
+      "title": "Pilfered Windstones",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92514,
+          93461
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 20,
+      "goal": 10,
+      "questID": 93318,
+      "title": "WANTED: Vulgara the Insatiable",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92514,
+          93461
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 49,
+      "goal": 2,
+      "questID": 93320,
+      "title": "Tower Defense",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          92860,
+          92871
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 52,
+      "goal": 2,
+      "questID": 94638,
+      "title": "Strength and Mercy",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          94006
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 67,
+      "goal": 2,
+      "questID": 94485,
+      "title": "Tears of the Lady",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          94484,
+          94493
+        ]
+      },
+      "reported": {
+        "all": [
+          94484
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15338
+        }
+      ],
+      "dependencyLocations": {
+        "94484": [
+          {
+            "step": 53,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 67,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 67,
+      "goal": 3,
+      "questID": 94486,
+      "title": "Feathers for Binding",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          94484,
+          94493
+        ]
+      },
+      "reported": {
+        "all": [
+          94484
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15339
+        }
+      ],
+      "dependencyLocations": {
+        "94484": [
+          {
+            "step": 53,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 67,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 67,
+      "goal": 4,
+      "questID": 94487,
+      "title": "Unwanted and Unworthy",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          94484,
+          94493
+        ]
+      },
+      "reported": {
+        "all": [
+          94484
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15340
+        }
+      ],
+      "dependencyLocations": {
+        "94484": [
+          {
+            "step": 53,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 67,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 70,
+      "goal": 1,
+      "questID": 93165,
+      "title": "Mercy Falls on Deaf Ears",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          94484,
+          94493
+        ]
+      },
+      "reported": {
+        "all": [
+          94484
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15303
+        }
+      ],
+      "dependencyLocations": {
+        "94484": [
+          {
+            "step": 53,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 67,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "step": 70,
+      "goal": 7,
+      "questID": 94490,
+      "title": "Ripped Missive",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/orc-troll/02-the-barrens",
+      "step": 1,
+      "goal": 4,
+      "questID": 5041,
+      "title": "Suministros para El Cruce",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          871
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14434
+        }
+      ],
+      "dependencyLocations": {
+        "871": [
+          {
+            "step": 1,
+            "goal": 3,
+            "action": "accept"
+          },
+          {
+            "step": 10,
+            "goal": 1,
+            "action": "kill"
+          },
+          {
+            "step": 10,
+            "goal": 2,
+            "action": "kill"
+          },
+          {
+            "step": 10,
+            "goal": 3,
+            "action": "kill"
+          },
+          {
+            "step": 19,
+            "goal": 4,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/orc-troll/02-the-barrens",
+      "step": 7,
+      "goal": 2,
+      "questID": 1524,
+      "title": "La llamada del Fuego",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": [
+          1522,
+          1523,
+          2983,
+          2984
+        ]
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13872
+        }
+      ],
+      "dependencyLocations": {
+        "1522": [],
+        "1523": [],
+        "2983": [
+          {
+            "step": 7,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ],
+        "2984": []
+      }
+    },
+    {
+      "guideID": "forever/horde/02-the-barrens",
+      "step": 1,
+      "goal": 7,
+      "questID": 5041,
+      "title": "Suministros para El Cruce",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          871
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14434
+        }
+      ],
+      "dependencyLocations": {
+        "871": [
+          {
+            "step": 1,
+            "goal": 6,
+            "action": "accept"
+          },
+          {
+            "step": 6,
+            "goal": 3,
+            "action": "kill"
+          },
+          {
+            "step": 6,
+            "goal": 4,
+            "action": "kill"
+          },
+          {
+            "step": 6,
+            "goal": 5,
+            "action": "kill"
+          },
+          {
+            "step": 19,
+            "goal": 4,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/02-the-barrens",
+      "step": 7,
+      "goal": 2,
+      "questID": 1524,
+      "title": "La llamada del Fuego",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": [
+          1522,
+          1523,
+          2983,
+          2984
+        ]
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13872
+        }
+      ],
+      "dependencyLocations": {
+        "1522": [],
+        "1523": [
+          {
+            "step": 7,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ],
+        "2983": [],
+        "2984": []
+      }
+    },
+    {
+      "guideID": "forever/horde/02-the-barrens",
+      "step": 10,
+      "goal": 2,
+      "questID": 1502,
+      "title": "Thun'grim Vistafuego",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1498,
+          1819
+        ]
+      },
+      "reported": {
+        "all": [
+          1498
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13858
+        }
+      ],
+      "dependencyLocations": {
+        "1498": [
+          {
+            "step": 8,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 9,
+            "goal": 1,
+            "action": "collect"
+          },
+          {
+            "step": 10,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/03-silverpine-forest",
+      "step": 3,
+      "goal": 3,
+      "questID": 27,
+      "title": "Una lección que aprender",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Tauren"
+      ],
+      "reported": [
+        "NightElf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 4407
+        }
+      ],
+      "excluded": [
+        "Tauren"
+      ]
+    },
+    {
+      "guideID": "forever/horde/03-silverpine-forest",
+      "step": 4,
+      "goal": 4,
+      "questID": 28,
+      "title": "La prueba del lago",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          27
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          26
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13095
+        }
+      ],
+      "dependencyLocations": {
+        "26": []
+      }
+    },
+    {
+      "guideID": "forever/horde/03-silverpine-forest",
+      "step": 19,
+      "goal": 2,
+      "questID": 443,
+      "title": "Icor de Putrepellejo",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          439
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          438
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13336
+        }
+      ],
+      "dependencyLocations": {
+        "438": [
+          {
+            "step": 17,
+            "goal": 3,
+            "action": "accept"
+          },
+          {
+            "step": 18,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/03-silverpine-forest",
+      "step": 23,
+      "goal": 6,
+      "questID": 98298,
+      "title": "La locura de Arugal",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          99
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15484
+        }
+      ],
+      "dependencyLocations": {
+        "99": []
+      }
+    },
+    {
+      "guideID": "forever/horde/04-the-barrens",
+      "step": 41,
+      "goal": 2,
+      "questID": 1530,
+      "title": "La llamada del agua",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": [
+          1528,
+          1529,
+          2985,
+          2986
+        ]
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13876
+        }
+      ],
+      "dependencyLocations": {
+        "1528": [
+          {
+            "step": 12,
+            "goal": 4,
+            "action": "accept"
+          },
+          {
+            "step": 41,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ],
+        "1529": [],
+        "2985": [],
+        "2986": []
+      }
+    },
+    {
+      "guideID": "forever/horde/04-the-barrens",
+      "step": 48,
+      "goal": 4,
+      "questID": 6382,
+      "title": "La Caza de Vallefresno",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          882
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/04-the-barrens",
+      "step": 54,
+      "goal": 2,
+      "questID": 98093,
+      "title": "Field to Clear",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/04-the-barrens",
+      "step": 71,
+      "goal": 3,
+      "questID": 98340,
+      "title": "The Great Cat Spirit",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/04-the-barrens",
+      "step": 72,
+      "goal": 9,
+      "questID": 98341,
+      "title": "The Great Windborne Cat Spirit",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/04-the-barrens",
+      "step": 73,
+      "goal": 14,
+      "questID": 98738,
+      "title": "Blessings of the Great Windborne Cat Spirit",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/05-stonetalon-mountains",
+      "step": 4,
+      "goal": 2,
+      "questID": 6383,
+      "title": "La Caza de Vallefresno",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": [
+          235,
+          742,
+          6382
+        ]
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14643
+        }
+      ],
+      "dependencyLocations": {
+        "235": [],
+        "742": [],
+        "6382": [
+          {
+            "step": 4,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/05-stonetalon-mountains",
+      "step": 6,
+      "goal": 1,
+      "questID": 98251,
+      "title": "Never Coming Back",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/05-stonetalon-mountains",
+      "step": 6,
+      "goal": 5,
+      "questID": 98252,
+      "title": "A Void Path",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/05-stonetalon-mountains",
+      "step": 16,
+      "goal": 5,
+      "questID": 86576,
+      "title": "Bloodfury Trinkets",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/05-stonetalon-mountains",
+      "step": 25,
+      "goal": 1,
+      "questID": 95884,
+      "title": "The Offering Stone",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/05-stonetalon-mountains",
+      "step": 25,
+      "goal": 3,
+      "questID": 95883,
+      "title": "The Tortured Soul",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/05-stonetalon-mountains",
+      "step": 26,
+      "goal": 2,
+      "questID": 95885,
+      "title": "The Offering of Blood",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/07-ashenvale",
+      "step": 1,
+      "goal": 3,
+      "questID": 6563,
+      "title": "La esencia de Aku'Mai",
+      "crossSourceReview": "no_att_record_in_reviewed_sources",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          6562
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14660
+        }
+      ],
+      "dependencyLocations": {
+        "6562": [
+          {
+            "step": 1,
+            "goal": 2,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/07-ashenvale",
+      "step": 11,
+      "goal": 1,
+      "questID": 78132,
+      "title": "Dragonslayer's Helm",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/07-ashenvale",
+      "step": 11,
+      "goal": 3,
+      "questID": 78133,
+      "title": "Dragonslayer's Shield",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/07-ashenvale",
+      "step": 11,
+      "goal": 5,
+      "questID": 78134,
+      "title": "Dragonslayer's Lance",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/07-ashenvale",
+      "step": 29,
+      "goal": 4,
+      "questID": 4841,
+      "title": "Apaciguar al centauro",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          4542
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14410
+        }
+      ],
+      "dependencyLocations": {
+        "4542": [
+          {
+            "step": 28,
+            "goal": 3,
+            "action": "accept"
+          },
+          {
+            "step": 29,
+            "goal": 3,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/07-ashenvale",
+      "step": 29,
+      "goal": 7,
+      "questID": 98070,
+      "title": "Stop the Screeching",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/07-ashenvale",
+      "step": 46,
+      "goal": 4,
+      "questID": 1106,
+      "title": "Martek el Exiliado",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          1104,
+          1105
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/30-40/01-desolace",
+      "step": 12,
+      "goal": 4,
+      "questID": 1434,
+      "title": "La contaminación del sátiro",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          1432
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/30-40/01-desolace",
+      "step": 34,
+      "goal": 6,
+      "questID": 96,
+      "title": "La llamada del agua",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/30-40/02-stranglethorn-vale",
+      "step": 33,
+      "goal": 3,
+      "questID": 339,
+      "title": "Capítulo I",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          -338
+        ],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {
+        "-338": [
+          {
+            "step": 33,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 37,
+            "goal": 6,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/30-40/02-stranglethorn-vale",
+      "step": 33,
+      "goal": 3,
+      "questID": 339,
+      "title": "Capítulo I",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_active_parent",
+      "field": "parent",
+      "authored": null,
+      "reported": 338,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17253
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/30-40/02-stranglethorn-vale",
+      "step": 33,
+      "goal": 4,
+      "questID": 340,
+      "title": "Capítulo II",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          -338
+        ],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {
+        "-338": [
+          {
+            "step": 33,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 37,
+            "goal": 6,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/30-40/02-stranglethorn-vale",
+      "step": 33,
+      "goal": 4,
+      "questID": 340,
+      "title": "Capítulo II",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_active_parent",
+      "field": "parent",
+      "authored": null,
+      "reported": 338,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17254
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/30-40/02-stranglethorn-vale",
+      "step": 33,
+      "goal": 5,
+      "questID": 341,
+      "title": "Capítulo III",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          -338
+        ],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {
+        "-338": [
+          {
+            "step": 33,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 37,
+            "goal": 6,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/30-40/02-stranglethorn-vale",
+      "step": 33,
+      "goal": 5,
+      "questID": 341,
+      "title": "Capítulo III",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_active_parent",
+      "field": "parent",
+      "authored": null,
+      "reported": 338,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17255
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/30-40/02-stranglethorn-vale",
+      "step": 33,
+      "goal": 6,
+      "questID": 342,
+      "title": "Capítulo IV",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          -338
+        ],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {
+        "-338": [
+          {
+            "step": 33,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 37,
+            "goal": 6,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/30-40/02-stranglethorn-vale",
+      "step": 33,
+      "goal": 6,
+      "questID": 342,
+      "title": "Capítulo IV",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_active_parent",
+      "field": "parent",
+      "authored": null,
+      "reported": 338,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17256
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/30-40/03-arathi-highlands",
+      "step": 8,
+      "goal": 10,
+      "questID": 8263,
+      "title": "Paquete de curación elemental de los Rapiñadores",
+      "kind": "additional_gate_review",
+      "field": "maxLevel",
+      "authored": null,
+      "reported": 34,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17810
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/30-40/03-arathi-highlands",
+      "step": 8,
+      "goal": 10,
+      "questID": 8263,
+      "title": "Paquete de curación elemental de los Rapiñadores",
+      "kind": "additional_gate_review",
+      "field": "minRep",
+      "authored": null,
+      "reported": {
+        "factionID": 510,
+        "standing": 3000
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17604
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/30-40/03-arathi-highlands",
+      "step": 16,
+      "goal": 4,
+      "questID": 664,
+      "title": "Ahogar las penas",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          663
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/30-40/03-arathi-highlands",
+      "step": 16,
+      "goal": 5,
+      "questID": 665,
+      "title": "El tesoro sumergido",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          663
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/30-40/04-dustwallow-marsh",
+      "step": 19,
+      "goal": 2,
+      "questID": 93225,
+      "title": "Carved Centaur Totems",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/40-50/01-stranglethorn-vale",
+      "step": 5,
+      "goal": 6,
+      "questID": 587,
+      "title": "Tabaco rapé",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          597
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          595
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13419
+        }
+      ],
+      "dependencyLocations": {
+        "595": [
+          {
+            "step": 3,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 4,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/40-50/01-stranglethorn-vale",
+      "step": 5,
+      "goal": 7,
+      "questID": 576,
+      "title": "¡Ojo!",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          597
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          595
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13412
+        }
+      ],
+      "dependencyLocations": {
+        "595": [
+          {
+            "step": 3,
+            "goal": 2,
+            "action": "accept"
+          },
+          {
+            "step": 4,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/40-50/01-stranglethorn-vale",
+      "step": 10,
+      "goal": 1,
+      "questID": 349,
+      "title": "La fiebre de Tuercespina",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          -348
+        ],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {
+        "-348": [
+          {
+            "step": 3,
+            "goal": 1,
+            "action": "accept"
+          },
+          {
+            "step": 12,
+            "goal": 2,
+            "action": "collect"
+          },
+          {
+            "step": 21,
+            "goal": 9,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/40-50/01-stranglethorn-vale",
+      "step": 10,
+      "goal": 1,
+      "questID": 349,
+      "title": "La fiebre de Tuercespina",
+      "crossSourceReview": "active_parent_not_explicit_in_att",
+      "kind": "missing_active_parent",
+      "field": "parent",
+      "authored": null,
+      "reported": 348,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17257
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/40-50/01-stranglethorn-vale",
+      "step": 15,
+      "goal": 5,
+      "questID": 598,
+      "title": "Collares de huesos partidos",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          596,
+          629
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          596
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 13425
+        }
+      ],
+      "dependencyLocations": {
+        "596": []
+      }
+    },
+    {
+      "guideID": "forever/horde/40-50/02-feralas",
+      "step": 9,
+      "goal": 3,
+      "questID": 4490,
+      "title": "Invoca un malignoecus",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          3631,
+          4487,
+          4488,
+          4489
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/40-50/02-feralas",
+      "step": 15,
+      "goal": 4,
+      "questID": 2873,
+      "title": "el Cargamento de Stoley",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          2872
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14094
+        }
+      ],
+      "dependencyLocations": {
+        "2872": [
+          {
+            "step": 15,
+            "goal": 3,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/40-50/03-feralas",
+      "step": 21,
+      "goal": 6,
+      "questID": 3128,
+      "title": "Materiales naturales",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          3122
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/40-50/03-feralas",
+      "step": 30,
+      "goal": 3,
+      "questID": 7738,
+      "title": "Pellejo de yeti perfecto",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          2822
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/40-50/06-azshara",
+      "step": 7,
+      "goal": 3,
+      "questID": 3381,
+      "title": "Un encuentro con el maestro",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/40-50/06-azshara",
+      "step": 23,
+      "goal": 4,
+      "questID": 4494,
+      "title": "La marcha de los silítidos",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          32,
+          7732
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/40-50/06-azshara",
+      "step": 37,
+      "goal": 10,
+      "questID": 4496,
+      "title": "Que jungla tan chunga",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          4493,
+          4494
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/50-60/01-un-goro-crater",
+      "step": 39,
+      "goal": 2,
+      "questID": 3822,
+      "title": "Krom'Grul",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/50-60/01-un-goro-crater",
+      "step": 45,
+      "goal": 2,
+      "questID": 5096,
+      "title": "Distracción Escarlata",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": [
+          5093,
+          5094,
+          5095
+        ]
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14463
+        }
+      ],
+      "dependencyLocations": {
+        "5093": [],
+        "5094": [
+          {
+            "step": 44,
+            "goal": 4,
+            "action": "accept"
+          },
+          {
+            "step": 45,
+            "goal": 1,
+            "action": "turnin"
+          }
+        ],
+        "5095": []
+      }
+    },
+    {
+      "guideID": "forever/horde/50-60/01-un-goro-crater",
+      "step": 45,
+      "goal": 5,
+      "questID": 5407,
+      "title": "Piedras de la Plaga del invasor",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5401,
+          5405,
+          5503
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/50-60/01-un-goro-crater",
+      "step": 45,
+      "goal": 6,
+      "questID": 5408,
+      "title": "Piedras de la Plaga del esbirro",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5401,
+          5405,
+          5503
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/50-60/01-un-goro-crater",
+      "step": 50,
+      "goal": 3,
+      "questID": 5211,
+      "title": "Los defensores de Villa Darrow",
+      "crossSourceReview": "corroborated_single_completed_parent",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          5241
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14491
+        },
+        {
+          "source": "att-zones-eastern-kingdoms-eastern-plaguelands-lua",
+          "line": 293
+        }
+      ],
+      "dependencyLocations": {
+        "5241": [
+          {
+            "step": 54,
+            "goal": 3,
+            "action": "accept"
+          },
+          {
+            "step": 56,
+            "goal": 3,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/50-60/01-un-goro-crater",
+      "step": 50,
+      "goal": 5,
+      "questID": 5509,
+      "title": "Piedras de la Plaga de un invasor",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5401,
+          5405,
+          5503
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/50-60/01-un-goro-crater",
+      "step": 50,
+      "goal": 6,
+      "questID": 5510,
+      "title": "Piedras de la Plaga de un esbirro",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5401,
+          5405,
+          5503
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/50-60/01-un-goro-crater",
+      "step": 52,
+      "goal": 1,
+      "questID": 5149,
+      "title": "La muñeca de Pamela",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": [
+          5142,
+          5601
+        ]
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14472
+        }
+      ],
+      "dependencyLocations": {
+        "5142": [],
+        "5601": []
+      }
+    },
+    {
+      "guideID": "forever/horde/50-60/02-felwood",
+      "step": 6,
+      "goal": 6,
+      "questID": 5402,
+      "title": "Piedras de la Plaga del esbirro",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5401,
+          5405,
+          5503
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/50-60/02-felwood",
+      "step": 6,
+      "goal": 6,
+      "questID": 5402,
+      "title": "Piedras de la Plaga del esbirro",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Orc",
+        "Scourge",
+        "Tauren",
+        "Troll"
+      ],
+      "reported": [
+        "Dwarf",
+        "Gnome",
+        "Human",
+        "NightElf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 6740
+        }
+      ],
+      "excluded": [
+        "Orc",
+        "Scourge",
+        "Tauren",
+        "Troll"
+      ]
+    },
+    {
+      "guideID": "forever/horde/50-60/02-felwood",
+      "step": 6,
+      "goal": 7,
+      "questID": 5403,
+      "title": "Piedras de la Plaga del invasor",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          5401,
+          5405,
+          5503
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/50-60/02-felwood",
+      "step": 6,
+      "goal": 7,
+      "questID": 5403,
+      "title": "Piedras de la Plaga del invasor",
+      "kind": "selector_conflict_review",
+      "field": "raceMask",
+      "authored": [
+        "Orc",
+        "Scourge",
+        "Tauren",
+        "Troll"
+      ],
+      "reported": [
+        "Dwarf",
+        "Gnome",
+        "Human",
+        "NightElf"
+      ],
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 6741
+        }
+      ],
+      "excluded": [
+        "Orc",
+        "Scourge",
+        "Tauren",
+        "Troll"
+      ]
+    },
+    {
+      "guideID": "forever/horde/50-60/02-felwood",
+      "step": 42,
+      "goal": 4,
+      "questID": 6031,
+      "title": "Paño rúnico",
+      "kind": "additional_gate_review",
+      "field": "minRep",
+      "authored": null,
+      "reported": {
+        "factionID": 576,
+        "standing": 3000
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 17528
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/50-60/03-winterspring",
+      "step": 9,
+      "goal": 6,
+      "questID": 5082,
+      "title": "La amenaza de los Nevada",
+      "crossSourceReview": "parent_breadcrumb",
+      "kind": "missing_prerequisite",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          6603
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 14456
+        }
+      ],
+      "dependencyLocations": {
+        "6603": [
+          {
+            "step": 1,
+            "goal": 7,
+            "action": "accept"
+          },
+          {
+            "step": 9,
+            "goal": 3,
+            "action": "turnin"
+          }
+        ]
+      }
+    },
+    {
+      "guideID": "forever/horde/50-60/03-winterspring",
+      "step": 28,
+      "goal": 4,
+      "questID": 1123,
+      "title": "Rabine Saturna",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [],
+        "any": [
+          1000,
+          1004,
+          1018
+        ]
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/50-60/04-azshara",
+      "step": 3,
+      "goal": 1,
+      "questID": 91899,
+      "title": "A Sealed Crate",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/50-60/04-azshara",
+      "step": 3,
+      "goal": 4,
+      "questID": 91904,
+      "title": "A Sealed Crate",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/50-60/04-azshara",
+      "step": 20,
+      "goal": 1,
+      "questID": 79095,
+      "title": "The Apothecary's Metaphysical Primer",
+      "kind": "no_source_data",
+      "field": "availability",
+      "authored": null,
+      "reported": null,
+      "evidence": []
+    },
+    {
+      "guideID": "forever/horde/50-60/06-silithus",
+      "step": 5,
+      "goal": 7,
+      "questID": 9416,
+      "title": "Preséntate ante el general Kirika",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 1,
+      "reported": 53,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8175
+        }
+      ]
+    },
+    {
+      "guideID": "forever/horde/50-60/06-silithus",
+      "step": 10,
+      "goal": 2,
+      "questID": 9422,
+      "title": "Peinando el desierto",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          9416
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/horde/50-60/06-silithus",
+      "step": 10,
+      "goal": 2,
+      "questID": 9422,
+      "title": "Peinando el desierto",
+      "kind": "level_conflict_review",
+      "field": "minLevel",
+      "authored": 1,
+      "reported": 55,
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 8177
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Source omissions do not prove that a quest has no gate.",
+    "ATT coverage is a reviewed subset; no captured evidence does not mean that no record exists elsewhere in ATT.",
+    "Availability comes from community-maintained addon data, not a query of the live server.",
+    "A published prerequisite must be reviewed with route ordering and variant/class context before editing a guide.",
+    "Only known Classic class/race bits are compared; Skyborne eligibility needs separate review.",
+    "Findings are review candidates, not proof that every difference is a route defect.",
+    "Local dependency locations are diagnostic; this audit does not assume a previous zone was completed.",
+    "No runtime quest completion, profession or player's progress is modified by this audit."
+  ],
+  "inputSha256": "9ddc0802b5554b07b5eb2b9bbf4b59f95090821dd4d234c15ac9139387cf88fe",
+  "evidenceSha256": "e65091babd63484d3d5566bd4726a6e2145f8cc628b322dfbc21978498819064"
+}

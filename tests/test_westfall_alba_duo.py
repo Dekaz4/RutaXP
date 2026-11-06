@@ -98,7 +98,7 @@ class WestfallAlbaPartyTests(unittest.TestCase):
     def test_two_old_saves_rejoin_gills_before_mines_without_sharing_progress(self):
         a, b = self.pair()
         for host, current in ((a, 3), (b, 5)):
-            self.assertEqual(host.ns.guides[WESTFALL].routeRevision, 2)
+            self.assertEqual(host.ns.guides[WESTFALL].routeRevision, 3)
             self.assertEqual(host.cursor, 6)
             self.assertTrue(host.status().active)
             goal = host.active_goal()
@@ -106,6 +106,7 @@ class WestfallAlbaPartyTests(unittest.TestCase):
             self.assertEqual(host.s.quests[92744].objectives[1].numFulfilled, current)
             self.assertFalse(host.ns.IsQuestActive(host.ns, 92745))
             state = host.ns.char.progress[WESTFALL]
+            self.assertEqual(state.routeRevision, 3)
             self.assertTrue(state.confirmed["1:3"])
             self.assertTrue(state.confirmed["13:7"])
             self.assertTrue(state.skipped["21:2"])

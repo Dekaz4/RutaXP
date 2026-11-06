@@ -507,28 +507,50 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "34689fce28e805e6c6e5b92b34be6fc8391275ff8abbfd21aa8709942e9829cf",
+      "sha256": "ebcca7a8dfc3d7e2cfcbba7a0caf1164afeca08513c40b5a0a65a12873a26f1e",
       "applied": [
-        "westfall-alba-mines-2"
+        "westfall-alba-mines-2",
+        "westfall-engineering-3",
+        "zephras-alliance-service-2",
+        "redridge-alther-bridge-2",
+        "mulgore-malah-centaurs-2",
+        "tirisfal-rear-guard-2",
+        "silverpine-quinn-potions-2",
+        "alliance-nightelf-01-teldrassil-prerequisites-metadata",
+        "alliance-dwarf-gnome-01-dun-morogh-prerequisites-metadata",
+        "alliance-skyborne-01-zephras-isle-prerequisites-metadata",
+        "alliance-03-darkshore-prerequisites-metadata",
+        "alliance-04-redridge-mountains-prerequisites-metadata",
+        "alliance-06-ashenvale-prerequisites-metadata",
+        "alliance-30-40-01-hillsbrad-foothills-prerequisites-metadata",
+        "alliance-50-60-03-winterspring-prerequisites-metadata",
+        "horde-orc-troll-01-durotar-prerequisites-metadata",
+        "horde-tauren-01-mulgore-prerequisites-metadata",
+        "horde-undead-01-tirisfal-glades-prerequisites-metadata",
+        "horde-skyborne-01-zephras-isle-prerequisites-metadata",
+        "horde-02-the-barrens-prerequisites-metadata",
+        "horde-03-silverpine-forest-prerequisites-metadata",
+        "horde-04-the-barrens-prerequisites-metadata",
+        "horde-30-40-03-arathi-highlands-prerequisites-metadata"
       ]
     }
   },
   "totals": {
     "guides": 57,
     "goals": 7444,
-    "direct": 6560,
+    "direct": 6559,
     "generated_instruction": 7444,
-    "missing_goal_note_text": 3673,
+    "missing_goal_note_text": 3672,
     "missing": 289,
-    "no_fixed_point_expected": 300,
+    "no_fixed_point_expected": 301,
     "empty_authored_subtitle": 821,
     "candidates": 582,
     "unclear_instruction": 6,
-    "no_fixed_navigation": 11,
+    "no_fixed_navigation": 12,
+    "reference_only": 3,
     "conditional_navigation": 2,
     "conditional_point_expected": 2,
-    "reference_only": 2,
-    "steps": 2331
+    "steps": 2338
   },
   "byAction": {
     "accept": {
@@ -547,24 +569,24 @@
       "candidates": 1
     },
     "collect": {
-      "goals": 1103,
-      "direct": 1103,
-      "generated_instruction": 1103,
-      "missing_goal_note_text": 592
+      "goals": 1102,
+      "direct": 1102,
+      "generated_instruction": 1102,
+      "missing_goal_note_text": 591
     },
     "complete": {
-      "goals": 237,
+      "goals": 238,
       "direct": 55,
-      "generated_instruction": 237,
+      "generated_instruction": 238,
       "candidates": 169,
       "missing_goal_note_text": 177,
       "empty_authored_subtitle": 116,
       "unclear_instruction": 6,
-      "no_fixed_navigation": 11,
-      "no_fixed_point_expected": 11,
+      "no_fixed_navigation": 12,
+      "no_fixed_point_expected": 12,
+      "reference_only": 3,
       "conditional_navigation": 2,
-      "conditional_point_expected": 2,
-      "reference_only": 2
+      "conditional_point_expected": 2
     },
     "fly": {
       "goals": 165,
@@ -1026,13 +1048,15 @@
       "title": "Páramos de Poniente",
       "counts": {
         "goals": 100,
-        "direct": 91,
+        "direct": 90,
         "generated_instruction": 100,
         "candidates": 6,
-        "missing_goal_note_text": 36,
+        "missing_goal_note_text": 35,
         "empty_authored_subtitle": 3,
         "missing": 3,
-        "no_fixed_point_expected": 3
+        "no_fixed_point_expected": 4,
+        "no_fixed_navigation": 1,
+        "reference_only": 1
       },
       "byAction": {
         "accept": {
@@ -1050,10 +1074,17 @@
           "generated_instruction": 3
         },
         "collect": {
-          "goals": 18,
-          "direct": 18,
-          "generated_instruction": 18,
-          "missing_goal_note_text": 4
+          "goals": 17,
+          "direct": 17,
+          "generated_instruction": 17,
+          "missing_goal_note_text": 3
+        },
+        "complete": {
+          "goals": 1,
+          "no_fixed_navigation": 1,
+          "reference_only": 1,
+          "no_fixed_point_expected": 1,
+          "generated_instruction": 1
         },
         "getfp": {
           "goals": 1,
@@ -6305,9 +6336,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/skyborne/01-zephras-isle:48:7",
+      "key": "forever/alliance/skyborne/01-zephras-isle:50:7",
       "guideID": "forever/alliance/skyborne/01-zephras-isle",
-      "stepIndex": 48,
+      "stepIndex": 50,
       "goalIndex": 7,
       "action": "accept",
       "questID": 94490,
@@ -6317,7 +6348,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/skyborne/01-zephras-isle",
-        "stepIndex": 48,
+        "stepIndex": 50,
         "goalIndex": 7
       },
       "classification": "item_start",
@@ -6353,10 +6384,10 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/02-westfall:5:8",
+      "key": "forever/alliance/02-westfall:5:7",
       "guideID": "forever/alliance/02-westfall",
       "stepIndex": 5,
-      "goalIndex": 8,
+      "goalIndex": 7,
       "action": "accept",
       "questID": 92910,
       "title": "Harvesting the Harvesters",
@@ -6366,7 +6397,7 @@
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/02-westfall",
         "stepIndex": 5,
-        "goalIndex": 8
+        "goalIndex": 7
       },
       "classification": "item_start",
       "reason": "La misión comienza usando un objeto; no implica un NPC de aceptación fijo.",
@@ -6375,6 +6406,30 @@
       "stepNote": "Al oeste de de Saldean. Harvest Watchers y Golems trabajan los campos; dejan caer las isosprings, giroestabilizadores, Okra y a veces un Precessive Autocognition Assembly. Revientaenemigos 4000, un nivel raro 20, camina aquí: déjalo en paz. Sigue matando Goretusks y Fleshrippers en cada etapa de este bucle.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
+    },
+    {
+      "key": "forever/alliance/02-westfall:12:7",
+      "guideID": "forever/alliance/02-westfall",
+      "stepIndex": 12,
+      "goalIndex": 7,
+      "action": "complete",
+      "questID": 92911,
+      "title": "Harvesting the Harvesters",
+      "source": {
+        "repository": "https://github.com/julen92/SendaFH",
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
+        "guideID": "forever/alliance/02-westfall",
+        "stepIndex": 12,
+        "goalIndex": 7
+      },
+      "classification": "documented_navigation_mode",
+      "reason": "Acción en el inventario; no se presenta un NPC o una posición inventada.",
+      "unresolved": false,
+      "goalNote": "Reúne 8 isomuelles de gólem, 4 moduladores de cobre y 1 mira rudimentaria.",
+      "stepNote": "Entrega las misiones de la granja. La cadena opcional de Ingeniería continúa después de entregar el mecanismo encontrado.",
+      "navigationMode": "inventory",
+      "referenceNavigationKind": "direct"
     },
     {
       "key": "forever/alliance/02-westfall:17:1",
@@ -9281,9 +9336,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/tauren/01-mulgore:37:5",
+      "key": "forever/horde/tauren/01-mulgore:39:5",
       "guideID": "forever/horde/tauren/01-mulgore",
-      "stepIndex": 37,
+      "stepIndex": 39,
       "goalIndex": 5,
       "action": "accept",
       "questID": 98424,
@@ -9293,7 +9348,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/tauren/01-mulgore",
-        "stepIndex": 37,
+        "stepIndex": 39,
         "goalIndex": 5
       },
       "classification": "item_start",
@@ -9305,9 +9360,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/tauren/01-mulgore:54:1",
+      "key": "forever/horde/tauren/01-mulgore:56:1",
       "guideID": "forever/horde/tauren/01-mulgore",
-      "stepIndex": 54,
+      "stepIndex": 56,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -9317,7 +9372,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/tauren/01-mulgore",
-        "stepIndex": 54,
+        "stepIndex": 56,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -9425,9 +9480,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/undead/01-tirisfal-glades:67:1",
+      "key": "forever/horde/undead/01-tirisfal-glades:68:1",
       "guideID": "forever/horde/undead/01-tirisfal-glades",
-      "stepIndex": 67,
+      "stepIndex": 68,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -9437,7 +9492,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "stepIndex": 67,
+        "stepIndex": 68,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -9593,9 +9648,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/03-silverpine-forest:21:3",
+      "key": "forever/horde/03-silverpine-forest:22:3",
       "guideID": "forever/horde/03-silverpine-forest",
-      "stepIndex": 21,
+      "stepIndex": 22,
       "goalIndex": 3,
       "action": "accept",
       "questID": 460,
@@ -9605,7 +9660,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/03-silverpine-forest",
-        "stepIndex": 21,
+        "stepIndex": 22,
         "goalIndex": 3
       },
       "classification": "item_start",
@@ -9617,9 +9672,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/03-silverpine-forest:27:1",
+      "key": "forever/horde/03-silverpine-forest:29:1",
       "guideID": "forever/horde/03-silverpine-forest",
-      "stepIndex": 27,
+      "stepIndex": 29,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -9629,7 +9684,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/03-silverpine-forest",
-        "stepIndex": 27,
+        "stepIndex": 29,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -9641,9 +9696,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/03-silverpine-forest:28:2",
+      "key": "forever/horde/03-silverpine-forest:30:2",
       "guideID": "forever/horde/03-silverpine-forest",
-      "stepIndex": 28,
+      "stepIndex": 30,
       "goalIndex": 2,
       "action": "level",
       "questID": null,
@@ -9653,7 +9708,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/03-silverpine-forest",
-        "stepIndex": 28,
+        "stepIndex": 30,
         "goalIndex": 2
       },
       "classification": "semantic_no_location",
@@ -13655,9 +13710,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/skyborne/01-zephras-isle:42:3",
+      "key": "forever/alliance/skyborne/01-zephras-isle:44:3",
       "guideID": "forever/alliance/skyborne/01-zephras-isle",
-      "stepIndex": 42,
+      "stepIndex": 44,
       "goalIndex": 3,
       "action": "complete",
       "questID": 94568,
@@ -13667,7 +13722,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/skyborne/01-zephras-isle",
-        "stepIndex": 42,
+        "stepIndex": 44,
         "goalIndex": 3
       },
       "kind": "unclear_instruction",
@@ -13675,9 +13730,9 @@
       "reason": "La fuente no explica la acción; necesita objetivos legibles del diario o revisión manual."
     },
     {
-      "key": "forever/alliance/skyborne/01-zephras-isle:50:2",
+      "key": "forever/alliance/skyborne/01-zephras-isle:52:2",
       "guideID": "forever/alliance/skyborne/01-zephras-isle",
-      "stepIndex": 50,
+      "stepIndex": 52,
       "goalIndex": 2,
       "action": "complete",
       "questID": 93159,
@@ -13687,7 +13742,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/skyborne/01-zephras-isle",
-        "stepIndex": 50,
+        "stepIndex": 52,
         "goalIndex": 2
       },
       "kind": "step_instructions_not_goal",
@@ -13695,9 +13750,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/skyborne/01-zephras-isle:53:1",
+      "key": "forever/alliance/skyborne/01-zephras-isle:55:1",
       "guideID": "forever/alliance/skyborne/01-zephras-isle",
-      "stepIndex": 53,
+      "stepIndex": 55,
       "goalIndex": 1,
       "action": "complete",
       "questID": 93835,
@@ -13707,7 +13762,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/skyborne/01-zephras-isle",
-        "stepIndex": 53,
+        "stepIndex": 55,
         "goalIndex": 1
       },
       "kind": "step_instructions_not_goal",
@@ -15060,8 +15115,8 @@
       "stepIndex": 31,
       "goalIndex": 1,
       "action": "complete",
-      "questID": 99080,
-      "title": "Drive Them Out",
+      "questID": 759,
+      "title": "El tótem Ferocrín",
       "source": {
         "repository": "https://github.com/julen92/SendaFH",
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
@@ -15075,33 +15130,13 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/tauren/01-mulgore:31:2",
-      "guideID": "forever/horde/tauren/01-mulgore",
-      "stepIndex": 31,
-      "goalIndex": 2,
-      "action": "complete",
-      "questID": 759,
-      "title": "El tótem Ferocrín",
-      "source": {
-        "repository": "https://github.com/julen92/SendaFH",
-        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
-        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
-        "guideID": "forever/horde/tauren/01-mulgore",
-        "stepIndex": 31,
-        "goalIndex": 2
-      },
-      "kind": "step_instructions_not_goal",
-      "severity": "review",
-      "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
-    },
-    {
       "key": "forever/horde/tauren/01-mulgore:34:1",
       "guideID": "forever/horde/tauren/01-mulgore",
       "stepIndex": 34,
       "goalIndex": 1,
       "action": "complete",
-      "questID": 766,
-      "title": "Mazzranache",
+      "questID": 99080,
+      "title": "Drive Them Out",
       "source": {
         "repository": "https://github.com/julen92/SendaFH",
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
@@ -15115,9 +15150,29 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/tauren/01-mulgore:37:2",
+      "key": "forever/horde/tauren/01-mulgore:36:1",
       "guideID": "forever/horde/tauren/01-mulgore",
-      "stepIndex": 37,
+      "stepIndex": 36,
+      "goalIndex": 1,
+      "action": "complete",
+      "questID": 766,
+      "title": "Mazzranache",
+      "source": {
+        "repository": "https://github.com/julen92/SendaFH",
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
+        "guideID": "forever/horde/tauren/01-mulgore",
+        "stepIndex": 36,
+        "goalIndex": 1
+      },
+      "kind": "step_instructions_not_goal",
+      "severity": "review",
+      "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
+    },
+    {
+      "key": "forever/horde/tauren/01-mulgore:39:2",
+      "guideID": "forever/horde/tauren/01-mulgore",
+      "stepIndex": 39,
       "goalIndex": 2,
       "action": "complete",
       "questID": 764,
@@ -15127,7 +15182,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/tauren/01-mulgore",
-        "stepIndex": 37,
+        "stepIndex": 39,
         "goalIndex": 2
       },
       "kind": "step_instructions_not_goal",
@@ -15135,9 +15190,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/tauren/01-mulgore:37:3",
+      "key": "forever/horde/tauren/01-mulgore:39:3",
       "guideID": "forever/horde/tauren/01-mulgore",
-      "stepIndex": 37,
+      "stepIndex": 39,
       "goalIndex": 3,
       "action": "complete",
       "questID": 765,
@@ -15147,7 +15202,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/tauren/01-mulgore",
-        "stepIndex": 37,
+        "stepIndex": 39,
         "goalIndex": 3
       },
       "kind": "step_instructions_not_goal",
@@ -15155,9 +15210,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/tauren/01-mulgore:37:6",
+      "key": "forever/horde/tauren/01-mulgore:39:6",
       "guideID": "forever/horde/tauren/01-mulgore",
-      "stepIndex": 37,
+      "stepIndex": 39,
       "goalIndex": 6,
       "action": "complete",
       "questID": 98424,
@@ -15167,28 +15222,8 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/tauren/01-mulgore",
-        "stepIndex": 37,
-        "goalIndex": 6
-      },
-      "kind": "step_instructions_not_goal",
-      "severity": "review",
-      "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
-    },
-    {
-      "key": "forever/horde/tauren/01-mulgore:39:1",
-      "guideID": "forever/horde/tauren/01-mulgore",
-      "stepIndex": 39,
-      "goalIndex": 1,
-      "action": "complete",
-      "questID": 743,
-      "title": "Las Viento Furioso son un peligro",
-      "source": {
-        "repository": "https://github.com/julen92/SendaFH",
-        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
-        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
-        "guideID": "forever/horde/tauren/01-mulgore",
         "stepIndex": 39,
-        "goalIndex": 1
+        "goalIndex": 6
       },
       "kind": "step_instructions_not_goal",
       "severity": "review",
@@ -15200,8 +15235,8 @@
       "stepIndex": 41,
       "goalIndex": 1,
       "action": "complete",
-      "questID": 746,
-      "title": "Una excavación de los enanos",
+      "questID": 743,
+      "title": "Las Viento Furioso son un peligro",
       "source": {
         "repository": "https://github.com/julen92/SendaFH",
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
@@ -15215,9 +15250,29 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/tauren/01-mulgore:42:1",
+      "key": "forever/horde/tauren/01-mulgore:43:1",
       "guideID": "forever/horde/tauren/01-mulgore",
-      "stepIndex": 42,
+      "stepIndex": 43,
+      "goalIndex": 1,
+      "action": "complete",
+      "questID": 746,
+      "title": "Una excavación de los enanos",
+      "source": {
+        "repository": "https://github.com/julen92/SendaFH",
+        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
+        "guideID": "forever/horde/tauren/01-mulgore",
+        "stepIndex": 43,
+        "goalIndex": 1
+      },
+      "kind": "step_instructions_not_goal",
+      "severity": "review",
+      "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
+    },
+    {
+      "key": "forever/horde/tauren/01-mulgore:44:1",
+      "guideID": "forever/horde/tauren/01-mulgore",
+      "stepIndex": 44,
       "goalIndex": 1,
       "action": "complete",
       "questID": 745,
@@ -15227,7 +15282,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/tauren/01-mulgore",
-        "stepIndex": 42,
+        "stepIndex": 44,
         "goalIndex": 1
       },
       "kind": "step_instructions_not_goal",
@@ -15235,9 +15290,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/tauren/01-mulgore:42:3",
+      "key": "forever/horde/tauren/01-mulgore:44:3",
       "guideID": "forever/horde/tauren/01-mulgore",
-      "stepIndex": 42,
+      "stepIndex": 44,
       "goalIndex": 3,
       "action": "complete",
       "questID": 98430,
@@ -15247,7 +15302,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/tauren/01-mulgore",
-        "stepIndex": 42,
+        "stepIndex": 44,
         "goalIndex": 3
       },
       "kind": "step_instructions_not_goal",
@@ -15255,9 +15310,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/tauren/01-mulgore:45:2",
+      "key": "forever/horde/tauren/01-mulgore:47:2",
       "guideID": "forever/horde/tauren/01-mulgore",
-      "stepIndex": 45,
+      "stepIndex": 47,
       "goalIndex": 2,
       "action": "complete",
       "questID": 833,
@@ -15267,7 +15322,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/tauren/01-mulgore",
-        "stepIndex": 45,
+        "stepIndex": 47,
         "goalIndex": 2
       },
       "kind": "step_instructions_not_goal",
@@ -15275,9 +15330,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/tauren/01-mulgore:53:3",
+      "key": "forever/horde/tauren/01-mulgore:55:3",
       "guideID": "forever/horde/tauren/01-mulgore",
-      "stepIndex": 53,
+      "stepIndex": 55,
       "goalIndex": 3,
       "action": "complete",
       "questID": 5930,
@@ -15287,7 +15342,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/tauren/01-mulgore",
-        "stepIndex": 53,
+        "stepIndex": 55,
         "goalIndex": 3
       },
       "kind": "step_instructions_not_goal",
@@ -15295,9 +15350,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/tauren/01-mulgore:56:2",
+      "key": "forever/horde/tauren/01-mulgore:58:2",
       "guideID": "forever/horde/tauren/01-mulgore",
-      "stepIndex": 56,
+      "stepIndex": 58,
       "goalIndex": 2,
       "action": "complete",
       "questID": 6002,
@@ -15307,7 +15362,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/tauren/01-mulgore",
-        "stepIndex": 56,
+        "stepIndex": 58,
         "goalIndex": 2
       },
       "kind": "step_instructions_not_goal",
@@ -16809,6 +16864,6 @@
       "location",
       "requiredLevel"
     ],
-    "semanticsSha256": "73fe78adeda8fb18a7d95bf6a5569f72769b11e85727667167066108f15478fd"
+    "semanticsSha256": "a2d48837dafa3b041e69b26c293957ea6417e36773d59f1db4235da632577079"
   }
 }

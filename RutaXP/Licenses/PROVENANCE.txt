@@ -56,3 +56,18 @@ PACK.json. See those notices for the exact code and data provenance.
 The Media/ graphics are also retained from Polestar/SendaFH, under the
 upstream notices in SendaFH-THIRD_PARTY.md. Antigravity's integration and
 interface changes do not change the authorship of those original assets.
+
+RutaXP 0.7.9 availability audit and reviewed chains
+------------------------------------------------
+EverythingQuests (Wheelbarrel00), MIT, commit
+8e7aa971319226f984639d4dae06e864b50c4fb4:
+https://github.com/wheelbarrel00/EverythingQuests
+AllTheThings WoW Addon, MIT, commit
+b50b6d8335d56a215bb3053811745f617532cc14:
+https://github.com/ATTWoWAddon/AllTheThings
+Only numeric facts and provenance are captured for this audit. Source file
+hashes, line references, limits and cross-source disagreements are recorded
+in Source/quest_requirements_evidence.json and quest_requirements_audit.json.
+Reviewed route changes are explicit in Source/guide_revisions.json; all
+authored actions remain accounted for. Complete MIT notices accompany these
+facts in EverythingQuests-MIT.txt and AllTheThings-MIT.txt.

@@ -118,6 +118,20 @@ end
 local resolve
 local function prerequisites(goal, ctx, path, depth)
     for id, name in pairs(goal.preTitles or {}) do if type(name) == "string" then ctx.names[id] = name end end
+    if goal.parent and not active(goal.parent) then
+        local npc
+        for _, records in ipairs(ctx.catalog[goal.parent] or {}) do
+            for _, record in ipairs(records) do
+                if action(record.goal) == "accept" then
+                    npc = record.goal.npcName or record.goal.objName
+                    if npc then break end
+                end
+            end
+            if npc then break end
+        end
+        return nil, "Acepta primero " .. title(goal.parent, ctx.names[goal.parent])
+            .. (npc and (" con " .. npc) or "") .. " y mantenla en tu diario."
+    end
     local plan = emptyPlan()
     for _, value in ipairs(goal.preAll or {}) do
         local id = math.abs(value)
@@ -167,12 +181,18 @@ resolve = function(id, ctx, path, depth)
         for _, first in ipairs(starts) do
             local accept = action(records[first].goal) == "accept" and records[first].goal or nil
             local enoughLevel = not accept or not accept.minLevel or (UnitLevel("player") or 1) >= accept.minLevel
+            local profession, professionReason = true, nil
+            if accept and ns.CheckGoalProfession then
+                profession, professionReason = ns:CheckGoalProfession(accept, records[first].step)
+            end
             local finish
             for index = first, #records do
                 if action(records[index].goal) == "turnin" then finish = index; break end
                 if index > first and action(records[index].goal) == "accept" then break end
             end
-            if not enoughLevel then
+            if profession ~= true then
+                lastReason = professionReason or "La profesión requerida no está confirmada."
+            elseif not enoughLevel then
                 lastReason = "Requiere nivel " .. accept.minLevel .. " para " .. title(id, accept.title) .. "."
             elseif accept and not active(id) and closed(accept) then
                 lastReason = "La rama de " .. title(id, accept.title) .. " está cerrada por otra misión activa o entregada."
@@ -271,9 +291,19 @@ local function makeEntry(goal, step, state, index, guide, ctx, reason)
         entry.reason = "Necesitas nivel " .. goal.minLevel .. ". Continúa actividades o recorridos anteriores antes de aceptar esta misión."
         return entry
     end
+    if ns.CheckGoalProfession then
+        local eligible, professionReason = ns:CheckGoalProfession(goal, step)
+        if eligible ~= true then
+            entry.kind, entry.reason = "unresolved", professionReason
+            return entry
+        end
+    end
     local plan, errorText
     if kind == "accept" then
         entry.kind = "prerequisite"
+        if goal.parent and not active(goal.parent) then
+            entry.missingQuestIDs[#entry.missingQuestIDs + 1] = goal.parent
+        end
         for _, pre in ipairs(goal.preAll or {}) do
             if not delivered(math.abs(pre)) then entry.missingQuestIDs[#entry.missingQuestIDs + 1] = math.abs(pre) end
         end
@@ -303,7 +333,7 @@ local function makeEntry(goal, step, state, index, guide, ctx, reason)
     end
     if not entry.plan then
         entry.kind = entry.kind == "level" and entry.kind or "unresolved"
-        entry.reason = errorText or "No se puede reconstruir este requisito con las guías disponibles. Consulta el diario."
+        entry.reason = errorText or reason or "No se puede reconstruir este requisito con las guías disponibles. Consulta el diario."
     end
     entry.missingQuestTitles = {}
     for _, missing in ipairs(entry.missingQuestIDs) do

@@ -1,4 +1,4 @@
-# RutaXP 0.7.8 para WoW Forever
+# RutaXP 0.7.9 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,16 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## Requisitos y cadenas de misiones (0.7.9)
+
+Se corrigen el orden y los requisitos de cadenas en Páramos de Poniente, Zephras de Alianza, Crestagrana, Mulgore, Claros de Tirisfal y Bosque de Argénteos. Además, 28 aceptaciones en 16 guías comprueban ahora una misión previa que ya se entregaba en el recorrido. Las correcciones están contrastadas con EverythingQuests y AllTheThings para Forever; las alternativas o requisitos contradictorios quedan documentados sin aplicarlos automáticamente.
+
+Las misiones de profesión comprueban la profesión y el rango del personaje. Si no la tiene, se aparta esa tarea; si ya lleva la misión en el diario, se sigue mostrando. En dúo son tareas personales y después se vuelve a esperar en los pasos compartidos. La rama opcional de Ingeniería de Páramos pide primero completar su primera misión y después reunir todos los materiales de la segunda.
+
+Los cambios de orden conservan las marcas de cada objetivo, los puntos personales y los marcadores de recuperación. Una cadena afectada puede retomar una tarea anterior pendiente; las guías ya terminadas conservan su final. La interfaz de Antigravity se mantiene.
+
+La auditoría cubre las **57 guías y 1.900 IDs de misión**. Hay 54 IDs cuyos datos de disponibilidad todavía no están incorporados al informe y otras discrepancias pendientes de comprobar en el juego. El informe reproducible está en `RutaXP/Source/quest_requirements_audit.json`: revisar todas las guías no significa haber validado todas las misiones jugando.
 
 ## Orden de las misiones de Alba (0.7.8)
 
@@ -74,7 +84,7 @@ En Dúo puedes pulsar **Sincronizar de nuevo**, o escribir `/rutaxp sincronizar`
 
 ## Contenido conservado
 
-- 57 rutas de misiones para los niveles 1–60: 29 de Alianza y 28 de Horda, con 2.331 pasos y 7.444 objetivos. Incluyen los inicios clásicos y Skyborne en ambas facciones, con variantes de clase.
+- 57 rutas de misiones para los niveles 1–60: 29 de Alianza y 28 de Horda, con 2.338 pasos y 7.444 objetivos. Incluyen los inicios clásicos y Skyborne en ambas facciones, con variantes de clase.
 - Interfaz de Antigravity, panel compacto, iconos, flecha facetada con giro continuo y posiciones de ventanas por personaje.
 - 36 planes de talentos y sus 1.836 puntos, selector de builds y asistente del instructor. Las recomendaciones orientan al usuario; no compran habilidades ni gastan talentos por sí solas.
 - Búsqueda, filtros, opcionales, confirmación manual, datos y progreso por personaje.
@@ -195,7 +205,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.8.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.9.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.

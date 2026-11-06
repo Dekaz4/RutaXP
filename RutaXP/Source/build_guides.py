@@ -137,7 +137,8 @@ def apply_guide_overrides(document: dict[str, Any], path: Path) -> list[str]:
 
 
 ROUTE_FIELDS = ("t", "quest", "oi", "item", "count", "pre", "preAll", "closedBy", "only", "optional",
-                "minLevel", "maxLevel", "level", "n", "class", "group", "order")
+                "minLevel", "maxLevel", "level", "n", "class", "group", "order",
+                "profLine", "profRank", "profName", "requiresSkill")
 
 
 def route_shape(guide: dict[str, Any]) -> str:
@@ -146,6 +147,54 @@ def route_shape(guide: dict[str, Any]) -> str:
         {key: goal[key] for key in ROUTE_FIELDS if key in goal} for goal in step["goals"]
     ]} for step in guide["steps"]]
     return hashlib.sha256(json.dumps(shape, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+def revision_progress(revision: dict[str, Any]) -> dict[str, Any] | None:
+    """Derive character progress maps from the exact reviewed source references."""
+    counts = revision.get("previousGoalCounts")
+    if counts is None:  # Westfall revision 1 -> 2 retains its existing runtime migration.
+        return None
+    if not counts or any(not isinstance(count, int) or count < 1 for count in counts):
+        raise ValueError("Invalid previous goal counts: " + revision["id"])
+    entries = revision.get("steps")
+    if revision.get("preserveSteps"):
+        if entries is not None:
+            raise ValueError("Revision cannot preserve and reorder steps together: " + revision["id"])
+        entries = [{"sourceStep": index} for index in range(1, len(counts) + 1)]
+    mapping, steps = {}, {}
+    for si, entry in enumerate(entries or [], 1):
+        old_step = entry.get("sourceStep")
+        if old_step is not None:
+            if not 1 <= old_step <= len(counts):
+                raise ValueError("Invalid migration source step: " + revision["id"])
+            refs = [[old_step, gi] for gi in range(1, counts[old_step - 1] + 1)
+                    if gi not in entry.get("omitGoals", [])]
+        else:
+            refs = entry["goals"]
+        for gi, (old_si, old_gi) in enumerate(refs, 1):
+            key = f"{old_si}:{old_gi}"
+            if key in mapping or not 1 <= old_si <= len(counts) or not 1 <= old_gi <= counts[old_si - 1]:
+                raise ValueError("Invalid migration goal reference: " + revision["id"])
+            mapping[key] = f"{si}:{gi}"
+            steps[str(old_si)] = min(si, steps.get(str(old_si), si))
+    expected = {f"{si}:{gi}" for si, count in enumerate(counts, 1) for gi in range(1, count + 1)}
+    if set(mapping) != expected:
+        raise ValueError("Migration must retain every source goal: " + revision["id"])
+    changed = {old: new for old, new in mapping.items() if old != new}
+    steps[str(len(counts) + 1)] = len(entries) + 1
+    return {"from": revision["previousRevision"], "to": revision["revision"],
+            "goalMap": changed, "stepMap": steps,
+            "affectedQuestIDs": sorted(set(revision.get("affectedQuestIDs", []))),
+            "previousStepCount": len(counts),
+            "firstAffectedStep": min((int(key.split(":")[0]) for key in changed), default=len(counts) + 1)}
+
+
+def current_goal_key(guide: dict[str, Any], step: int, goal: int) -> tuple[int, int]:
+    """Translate original navigation-evidence keys through reviewed route moves."""
+    key = f"{step}:{goal}"
+    for migration in guide.get("progressMigrations", []):
+        key = migration.get("goalMap", {}).get(key, key)
+    return tuple(int(value) for value in key.split(":"))
 
 
 def apply_guide_revisions(document: dict[str, Any], path: Path) -> list[str]:
@@ -161,11 +210,33 @@ def apply_guide_revisions(document: dict[str, Any], path: Path) -> list[str]:
     if overlay.get("schemaVersion") != 1 or overlay.get("sourceCommit") != document["provenance"]["commit"]:
         raise ValueError("Guide revisions do not match the pinned source")
     applied = []
+    by_guide_revision = {}
+    for entry in overlay.get("revisions", []):
+        key = (entry["guideID"], entry["revision"])
+        if key in by_guide_revision:
+            raise ValueError("Duplicate guide revision: " + entry["id"])
+        by_guide_revision[key] = entry
     for revision in overlay.get("revisions", []):
         matches = [guide for guide in document["guides"] if guide["id"] == revision["guideID"]]
         if len(matches) != 1 or not revision.get("evidence"):
             raise ValueError("Revision needs one guide and evidence: " + revision["id"])
         guide = matches[0]
+        current_revision = guide.get("routeRevision", 1)
+        if current_revision > revision["revision"]:
+            # A rebuilt snapshot may already include several reviewed changes.
+            # Only a known, fingerprint-checked successor can supersede one.
+            current = by_guide_revision.get((guide["id"], current_revision))
+            if not current or route_shape(guide) != current["resultShape"]:
+                raise ValueError("Revised guide semantics changed: " + revision["id"])
+            ancestor = current
+            while ancestor["revision"] > revision["revision"]:
+                ancestor = by_guide_revision.get((guide["id"], ancestor["previousRevision"]))
+                if not ancestor:
+                    raise ValueError("Missing guide revision ancestor: " + revision["id"])
+            if ancestor["id"] != revision["id"]:
+                raise ValueError("Guide revision is not an ancestor: " + revision["id"])
+            applied.append(revision["id"])
+            continue
         if guide.get("routeRevision", 1) == revision["revision"]:
             if route_shape(guide) != revision["resultShape"]:
                 raise ValueError("Revised guide semantics changed: " + revision["id"])
@@ -174,8 +245,15 @@ def apply_guide_revisions(document: dict[str, Any], path: Path) -> list[str]:
         if guide.get("routeRevision", 1) != revision["previousRevision"] or route_shape(guide) != revision["sourceShape"]:
             raise ValueError("Revision source semantics changed: " + revision["id"])
         original = guide["steps"]
+        if revision.get("previousGoalCounts") is not None and revision["previousGoalCounts"] != [len(s["goals"]) for s in original]:
+            raise ValueError("Migration source goal counts changed: " + revision["id"])
         revised, used = [], []
-        for entry in revision["steps"]:
+        entries = revision.get("steps")
+        if revision.get("preserveSteps"):
+            if entries is not None:
+                raise ValueError("Revision cannot preserve and reorder steps together: " + revision["id"])
+            entries = [{"sourceStep": index} for index in range(1, len(original) + 1)]
+        for entry in entries or []:
             if "sourceStep" in entry:
                 source_index = entry["sourceStep"]
                 step = copy.deepcopy(original[source_index - 1])
@@ -200,6 +278,10 @@ def apply_guide_revisions(document: dict[str, Any], path: Path) -> list[str]:
             if len(goals) != patch["count"]:
                 raise ValueError("Revision goal selector changed: " + revision["id"])
             for goal in goals:
+                for key in patch.get("unset", []):
+                    if key not in ROUTE_FIELDS or key not in goal:
+                        raise ValueError("Revision cannot remove an unexpected field: " + revision["id"])
+                    del goal[key]
                 goal.update(copy.deepcopy(patch["set"]))
         for step in revised:
             for key in ("title", "note", "text"):
@@ -216,6 +298,12 @@ def apply_guide_revisions(document: dict[str, Any], path: Path) -> list[str]:
             raise ValueError("Revision result does not match reviewed semantics: " + revision["id"])
         guide["steps"], guide["routeRevision"] = revised, revision["revision"]
         applied.append(revision["id"])
+    for guide in document["guides"]:
+        migrations = [revision_progress(revision) for revision in overlay.get("revisions", [])
+                      if revision["guideID"] == guide["id"] and revision["revision"] <= guide.get("routeRevision", 1)]
+        migrations = [entry for entry in migrations if entry is not None]
+        if migrations:
+            guide["progressMigrations"] = migrations
     document["provenance"]["routeRevisions"] = {
         "file": "Source/guide_revisions.json", "sha256": hashlib.sha256(payload).hexdigest(), "applied": applied,
     }
@@ -244,6 +332,8 @@ def apply_guide_locations(document: dict[str, Any], path: Path) -> list[str]:
         seen.add(identity)
         guide = guides.get(patch["guideID"])
         si, gi = patch["step"], patch["goal"]
+        if guide:
+            si, gi = current_goal_key(guide, si, gi)
         if not guide or not isinstance(si, int) or not 1 <= si <= len(guide["steps"]):
             raise ValueError("Invalid location guide/step: " + identity)
         goals = guide["steps"][si - 1]["goals"]

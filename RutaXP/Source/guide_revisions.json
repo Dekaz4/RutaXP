@@ -135,6 +135,5065 @@
         "navigation": "All goal destinations and coordinate frames are retained from the pinned SendaFH data; no speculative new point is added.",
         "limitation": "Availability evidence and static replay do not replace verification of the live server."
       }
+    },
+    {
+      "id": "westfall-engineering-3",
+      "guideID": "forever/alliance/02-westfall",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "59bf1b9e9d10870e0a84c6700f526ff21058ef6e7d96e5ff1f78c39e96a669c4",
+      "resultShape": "249fd0f4cfa054d640bc7e187380f24b3129c1046c8fcb6e179ab994e44ce0db",
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2,
+          "omitGoals": [
+            5
+          ]
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5,
+          "omitGoals": [
+            5
+          ]
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "title": "Finca de Saldean",
+          "note": "Entrega las misiones de la granja. La cadena opcional de Ingeniería continúa después de entregar el mecanismo encontrado.",
+          "goals": [
+            [
+              12,
+              1
+            ],
+            [
+              12,
+              2
+            ],
+            [
+              12,
+              3
+            ],
+            [
+              12,
+              4
+            ],
+            [
+              12,
+              5
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              12,
+              6
+            ]
+          ]
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "quest": 92910
+          },
+          "count": 2,
+          "set": {
+            "optional": true,
+            "profLine": 202,
+            "profRank": 1,
+            "profName": "Ingeniería"
+          }
+        },
+        {
+          "match": {
+            "quest": 92911
+          },
+          "count": 3,
+          "set": {
+            "optional": true,
+            "profLine": 202,
+            "profRank": 1,
+            "profName": "Ingeniería"
+          }
+        },
+        {
+          "match": {
+            "t": "collect",
+            "item": 255155
+          },
+          "count": 1,
+          "set": {
+            "optional": true,
+            "profLine": 202,
+            "profRank": 1,
+            "profName": "Ingeniería",
+            "note": "Opcional para Ingeniería: consigue el mecanismo de los cosechadores para iniciar la misión."
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 92911
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              92910
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "collect",
+            "quest": 92911
+          },
+          "count": 1,
+          "unset": [
+            "oi"
+          ],
+          "set": {
+            "t": "complete",
+            "navigationMode": "inventory",
+            "note": "Reúne 8 isomuelles de gólem, 4 moduladores de cobre y 1 mira rudimentaria.",
+            "navigationHint": "Consigue los muelles en la Granja de Molsen; fabrica o compra los moduladores y la mira."
+          }
+        },
+        {
+          "match": {
+            "t": "turnin",
+            "quest": 92911
+          },
+          "count": 1,
+          "set": {
+            "note": "Entrega los 8 isomuelles, 4 moduladores de cobre y 1 mira rudimentaria a Ozwin."
+          }
+        }
+      ],
+      "progressRemap": {
+        "5:6": "5:5",
+        "5:7": "5:6",
+        "5:8": "5:7",
+        "5:9": "5:8",
+        "5:10": "5:9",
+        "5:11": "5:10",
+        "2:5": "12:6",
+        "5:5": "12:7",
+        "12:6": "12:8"
+      },
+      "evidence": {
+        "reason": "The item-start engineering quest 92910 precedes 92911; both require Engineering. The follow-up requires all three material types, not only the first objective. The universal quest 92909 is independent.",
+        "sourceUrl": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/westfall.lua#L246",
+        "sourceCommit": "b50b6d8335d56a215bb3053811745f617532cc14",
+        "sourceFile": ".contrib/.db/forever/zones/eastern kingdoms/westfall.lua",
+        "sourceSha256": "c7106c195714f070f49bd4a18568afb7a6dc5e20e4e4e1fd3f60a7be2d88ebd2",
+        "sourceLines": [
+          246,
+          269
+        ],
+        "quests": [
+          92910,
+          92911
+        ],
+        "profLine": 202,
+        "profRank": 1,
+        "preAll": {
+          "92911": [
+            92910
+          ]
+        },
+        "materials": {
+          "255007": 8,
+          "4363": 4,
+          "4405": 1
+        },
+        "navigation": "Original farm coordinates remain reference evidence. The full material objective uses inventory navigation because crafted or traded materials have no single required location.",
+        "limitation": "The source declares Engineering but no minimum rank beyond learning the profession. Live quest credit remains authoritative."
+      },
+      "previousGoalCounts": [
+        10,
+        5,
+        7,
+        2,
+        11,
+        2,
+        3,
+        1,
+        5,
+        1,
+        2,
+        6,
+        7,
+        3,
+        3,
+        4,
+        6,
+        9,
+        2,
+        1,
+        5,
+        5
+      ],
+      "affectedQuestIDs": [
+        92910,
+        92911
+      ]
+    },
+    {
+      "id": "zephras-alliance-service-2",
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "7b80ff7843c4f591610a2e7329ad54814c8da78fcd885c7cf8d0df4c4460270a",
+      "resultShape": "309c6e1971ebeee47246987c73496b1f6c5189478cc43d6ed495b5623b344a33",
+      "previousGoalCounts": [
+        4,
+        2,
+        23,
+        2,
+        7,
+        9,
+        3,
+        5,
+        5,
+        8,
+        6,
+        8,
+        3,
+        2,
+        3,
+        5,
+        3,
+        4,
+        4,
+        7,
+        4,
+        1,
+        1,
+        10,
+        4,
+        9,
+        2,
+        6,
+        5,
+        5,
+        5,
+        1,
+        5,
+        11,
+        10,
+        2,
+        6,
+        10,
+        10,
+        2,
+        7,
+        11,
+        1,
+        9,
+        4,
+        4,
+        5,
+        7,
+        4,
+        6,
+        3,
+        2,
+        1,
+        13,
+        1,
+        4,
+        2,
+        2,
+        1,
+        1
+      ],
+      "affectedQuestIDs": [
+        92834,
+        92860
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37,
+          "omitGoals": [
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "title": "Amuletos de los Al'Aketh",
+          "note": "Reúne los diez amuletos al norte de Valanaar antes de volver con Elaadrin.",
+          "goals": [
+            [
+              38,
+              6
+            ]
+          ]
+        },
+        {
+          "title": "De Elaadrin a Valennia",
+          "note": "Entrega los amuletos a Elaadrin. Lleva su encargo a Valennia y acepta la misión de la torre.",
+          "goals": [
+            [
+              39,
+              1
+            ],
+            [
+              37,
+              4
+            ],
+            [
+              37,
+              5
+            ],
+            [
+              37,
+              6
+            ]
+          ]
+        },
+        {
+          "sourceStep": 38,
+          "omitGoals": [
+            6
+          ]
+        },
+        {
+          "sourceStep": 39,
+          "omitGoals": [
+            1
+          ]
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        },
+        {
+          "sourceStep": 49
+        },
+        {
+          "sourceStep": 50
+        },
+        {
+          "sourceStep": 51
+        },
+        {
+          "sourceStep": 52
+        },
+        {
+          "sourceStep": 53
+        },
+        {
+          "sourceStep": 54
+        },
+        {
+          "sourceStep": 55
+        },
+        {
+          "sourceStep": 56
+        },
+        {
+          "sourceStep": 57
+        },
+        {
+          "sourceStep": 58
+        },
+        {
+          "sourceStep": 59
+        },
+        {
+          "sourceStep": 60
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 92860
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              92834
+            ],
+            "preTitles": {
+              "92834": "Avenged Tenfold"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "sourceCommit": "b50b6d8335d56a215bb3053811745f617532cc14",
+        "sourceFile": ".contrib/.db/forever/zones/zephras isle.lua",
+        "sourceUrl": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/zephras%20isle.lua#L956",
+        "sourceSha256": "a2c5501511ce8156b4498bb155b930a9d27fb420a821d4f67a89a812512de386",
+        "sourceLines": [
+          956,
+          962
+        ],
+        "prerequisites": {
+          "92860": [
+            92834
+          ]
+        },
+        "review": "Avenged Tenfold se entrega antes de In Service of Zephras; la visita a la torre queda después del enlace de Valennia.",
+        "limitation": "Orden comprobado contra datos de misión del servidor; recorrido no cronometrado dentro del juego."
+      }
+    },
+    {
+      "id": "redridge-alther-bridge-2",
+      "guideID": "forever/alliance/04-redridge-mountains",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "5f710496b14ecfaf71a6e2b122365ac88a8fa8e10b20afb16a6b79d0c46a2036",
+      "resultShape": "d28237d9d667b5cf32e38fdea240074e5b9100d8db18f672db760ead803cfd1d",
+      "previousGoalCounts": [
+        4,
+        1,
+        7,
+        2,
+        1,
+        5,
+        10,
+        3,
+        7,
+        1,
+        2,
+        3,
+        2,
+        3,
+        2,
+        9,
+        1,
+        2,
+        3
+      ],
+      "affectedQuestIDs": [
+        89,
+        98386
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7,
+          "omitGoals": [
+            3
+          ]
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "title": "Villa del Lago",
+          "note": "Entrega los materiales del puente al supervisor Olento y acepta después la misión del Molino de Alther.",
+          "goals": [
+            [
+              12,
+              1
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              12,
+              2
+            ],
+            [
+              12,
+              3
+            ]
+          ]
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98386
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              89
+            ],
+            "preTitles": {
+              "89": "La reconstrucción del puente"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "sourceCommit": "b50b6d8335d56a215bb3053811745f617532cc14",
+        "sourceFile": ".contrib/.db/forever/zones/eastern kingdoms/redridge mountains.lua",
+        "sourceUrl": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/redridge%20mountains.lua#L114",
+        "sourceSha256": "29bc674dc3e45517842ecb3dd3d26204ead7a61948b87656d6e0b8bf71a54112",
+        "sourceLines": [
+          114,
+          128
+        ],
+        "prerequisites": {
+          "98386": [
+            89
+          ]
+        },
+        "review": "Alther's Mill se acepta al entregar The Everstill Bridge en la visita existente al supervisor; arañas y entrega siguen después.",
+        "limitation": "Orden comprobado contra datos de misión del servidor; recorrido no cronometrado dentro del juego."
+      }
+    },
+    {
+      "id": "mulgore-malah-centaurs-2",
+      "guideID": "forever/horde/tauren/01-mulgore",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "d161ac41f7ee4791a116ecefba5c9161639b3ac5d2bf2075d08b44c570c33bc1",
+      "resultShape": "1726188cf59dca19626920ff407d1ce8acd7cc3dbd619fbbf6270d0faca99af9",
+      "previousGoalCounts": [
+        2,
+        1,
+        11,
+        3,
+        2,
+        2,
+        4,
+        3,
+        1,
+        5,
+        6,
+        1,
+        1,
+        5,
+        5,
+        7,
+        1,
+        3,
+        1,
+        2,
+        2,
+        14,
+        2,
+        3,
+        1,
+        7,
+        5,
+        1,
+        1,
+        2,
+        2,
+        2,
+        5,
+        1,
+        1,
+        3,
+        6,
+        1,
+        1,
+        2,
+        1,
+        3,
+        6,
+        3,
+        6,
+        5,
+        5,
+        5,
+        1,
+        2,
+        1,
+        3,
+        5,
+        3,
+        11,
+        2,
+        4,
+        4
+      ],
+      "affectedQuestIDs": [
+        99079,
+        99080,
+        99081,
+        99082,
+        99101
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22,
+          "omitGoals": [
+            4,
+            5,
+            11,
+            12
+          ]
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31,
+          "omitGoals": [
+            1
+          ],
+          "set": {
+            "title": "Lobos de pradera alfa",
+            "note": "Reúne los materiales del tótem antes de volver al poblado."
+          }
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "title": "Poblado Pezuña de Sangre",
+          "note": "Entrega el informe a Corresalvaje, llévalo a Baine y acepta su encargo contra los centauros.",
+          "goals": [
+            [
+              33,
+              1
+            ],
+            [
+              33,
+              2
+            ],
+            [
+              33,
+              3
+            ],
+            [
+              33,
+              5
+            ],
+            [
+              22,
+              4
+            ],
+            [
+              22,
+              5
+            ],
+            [
+              22,
+              11
+            ]
+          ]
+        },
+        {
+          "title": "Expulsar a los centauros",
+          "note": "Completa el encargo de Baine en el campamento de los centauros Galak.",
+          "goals": [
+            [
+              31,
+              1
+            ]
+          ]
+        },
+        {
+          "title": "Regreso a Baine",
+          "note": "Vuelve a Baine, entrega la misión de los centauros y acepta su mensaje para Cima del Trueno.",
+          "goals": [
+            [
+              33,
+              4
+            ],
+            [
+              22,
+              12
+            ]
+          ]
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        },
+        {
+          "sourceStep": 49
+        },
+        {
+          "sourceStep": 50
+        },
+        {
+          "sourceStep": 51
+        },
+        {
+          "sourceStep": 52
+        },
+        {
+          "sourceStep": 53
+        },
+        {
+          "sourceStep": 54
+        },
+        {
+          "sourceStep": 55
+        },
+        {
+          "sourceStep": 56
+        },
+        {
+          "sourceStep": 57
+        },
+        {
+          "sourceStep": 58
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 99081
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              99079
+            ],
+            "preTitles": {
+              "99079": "Longwalker Malah"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 99101
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              99081
+            ],
+            "preTitles": {
+              "99081": "Grim Tidings"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 99080
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              99101
+            ],
+            "preTitles": {
+              "99101": "Our Ancient Enemy"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 99082
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              99080
+            ],
+            "preTitles": {
+              "99080": "Drive Them Out"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "sourceCommit": "b50b6d8335d56a215bb3053811745f617532cc14",
+        "sourceFile": ".contrib/.db/forever/zones/kalimdor/mulgore.lua",
+        "sourceUrl": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/mulgore.lua#L702",
+        "sourceSha256": "40861f5e7e122f0fd1d8842e2f44ba10512a590bf340dbc1cbb67db0a520557b",
+        "sourceLines": [
+          702,
+          777,
+          887,
+          1254
+        ],
+        "prerequisites": {
+          "99081": [
+            99079
+          ],
+          "99101": [
+            99081
+          ],
+          "99080": [
+            99101
+          ],
+          "99082": [
+            99080
+          ]
+        },
+        "review": "Se conserva el viaje a Malah. El informe vuelve primero a Corresalvaje y Baine; la caza de centauros y el mensaje para Cairne se aceptan en su orden real.",
+        "limitation": "Orden comprobado contra datos de misión del servidor; recorrido no cronometrado dentro del juego."
+      }
+    },
+    {
+      "id": "tirisfal-rear-guard-2",
+      "guideID": "forever/horde/undead/01-tirisfal-glades",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "bf0ce9684ecbe9790bf0e77b3a47f000e40d391f272bf3f61b2a52094d683ea1",
+      "resultShape": "7ac1d6f5d030446d394c56390541f6273d4a6610abaad825df4f1d58a5817155",
+      "previousGoalCounts": [
+        1,
+        2,
+        2,
+        15,
+        4,
+        3,
+        1,
+        5,
+        2,
+        1,
+        5,
+        6,
+        1,
+        2,
+        1,
+        5,
+        1,
+        3,
+        1,
+        2,
+        13,
+        2,
+        1,
+        3,
+        1,
+        6,
+        2,
+        1,
+        3,
+        1,
+        13,
+        1,
+        2,
+        2,
+        1,
+        7,
+        6,
+        2,
+        8,
+        1,
+        1,
+        4,
+        1,
+        2,
+        3,
+        2,
+        1,
+        15,
+        3,
+        1,
+        2,
+        4,
+        1,
+        3,
+        1,
+        4,
+        3,
+        4,
+        2,
+        2,
+        2,
+        5,
+        7,
+        2,
+        1,
+        3,
+        1,
+        8,
+        1,
+        2
+      ],
+      "affectedQuestIDs": [
+        356,
+        99156
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37,
+          "omitGoals": [
+            5
+          ]
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        },
+        {
+          "sourceStep": 49
+        },
+        {
+          "sourceStep": 50
+        },
+        {
+          "sourceStep": 51
+        },
+        {
+          "sourceStep": 52
+        },
+        {
+          "sourceStep": 53
+        },
+        {
+          "sourceStep": 54
+        },
+        {
+          "sourceStep": 55
+        },
+        {
+          "sourceStep": 56
+        },
+        {
+          "sourceStep": 57
+        },
+        {
+          "sourceStep": 58
+        },
+        {
+          "title": "Informe a Linnea",
+          "note": "Vuelve a Linnea tras la patrulla. Su siguiente encargo, Riptear, es opcional y se recomienda en grupo.",
+          "goals": [
+            [
+              62,
+              1
+            ],
+            [
+              37,
+              5
+            ]
+          ]
+        },
+        {
+          "sourceStep": 59
+        },
+        {
+          "sourceStep": 60
+        },
+        {
+          "sourceStep": 61
+        },
+        {
+          "sourceStep": 62,
+          "omitGoals": [
+            1
+          ]
+        },
+        {
+          "sourceStep": 63
+        },
+        {
+          "sourceStep": 64
+        },
+        {
+          "sourceStep": 65
+        },
+        {
+          "sourceStep": 66
+        },
+        {
+          "sourceStep": 67
+        },
+        {
+          "sourceStep": 68
+        },
+        {
+          "sourceStep": 69
+        },
+        {
+          "sourceStep": 70
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 99156
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              356
+            ],
+            "preTitles": {
+              "356": "Patrulla de la retaguardia"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "sourceCommit": "b50b6d8335d56a215bb3053811745f617532cc14",
+        "sourceFile": ".contrib/.db/forever/zones/eastern kingdoms/tirisfal glades.lua",
+        "sourceUrl": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/tirisfal%20glades.lua#L1429",
+        "sourceSha256": "05f6923eeafcb3ba6a8bec2ef9ed387e46e9e6e7b7148a3f347f4a0f515a14f2",
+        "sourceLines": [
+          1429,
+          1442
+        ],
+        "prerequisites": {
+          "99156": [
+            356
+          ]
+        },
+        "review": "La patrulla inicial se entrega a Linnea antes de aceptar Riptear. La visita al este y la entrega posterior conservan sus destinos.",
+        "limitation": "Orden comprobado contra datos de misión del servidor; recorrido no cronometrado dentro del juego."
+      }
+    },
+    {
+      "id": "silverpine-quinn-potions-2",
+      "guideID": "forever/horde/03-silverpine-forest",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "b8cabe8a9311dc7a1db5a2568a2fa17fadd8904f20f1e2c912cb31b3f5f39984",
+      "resultShape": "0e9d27a8736c5633d745020b35b3661744557182d1f948215854b64d7923cbce",
+      "previousGoalCounts": [
+        2,
+        1,
+        4,
+        8,
+        1,
+        1,
+        1,
+        7,
+        2,
+        6,
+        2,
+        1,
+        4,
+        2,
+        2,
+        2,
+        9,
+        2,
+        2,
+        4,
+        6,
+        5,
+        3,
+        1,
+        2,
+        2,
+        6,
+        2,
+        1,
+        1,
+        1,
+        3,
+        1,
+        3,
+        2,
+        1,
+        10
+      ],
+      "affectedQuestIDs": [
+        428,
+        429,
+        430,
+        91920,
+        91921
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8,
+          "omitGoals": [
+            7
+          ]
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13,
+          "omitGoals": [
+            3,
+            4
+          ]
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16,
+          "omitGoals": [
+            2
+          ],
+          "set": {
+            "title": "Corazones de lupo",
+            "note": "Recoge los corazones de los lupos moteados y llévalos a Renferrel."
+          }
+        },
+        {
+          "sourceStep": 17,
+          "omitGoals": [
+            9
+          ]
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "title": "El Ivar Patch",
+          "note": "Entrega la primera poción a Quinn y acepta su encargo de ojos de múrloc. Después resuelve el encargo de Ivar con Rane.",
+          "goals": [
+            [
+              20,
+              1
+            ],
+            [
+              13,
+              4
+            ],
+            [
+              20,
+              2
+            ],
+            [
+              20,
+              3
+            ],
+            [
+              20,
+              4
+            ]
+          ]
+        },
+        {
+          "title": "Ojos de múrloc",
+          "note": "Recoge tres ojos de los múrlocs junto al lago, camino de la isla de Fenris.",
+          "goals": [
+            [
+              16,
+              2
+            ]
+          ]
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "title": "El Sepulcro",
+          "note": "Entrega los ojos a Renferrel y recoge la nueva poción para Quinn.",
+          "goals": [
+            [
+              22,
+              1
+            ],
+            [
+              17,
+              9
+            ],
+            [
+              8,
+              7
+            ],
+            [
+              22,
+              2
+            ],
+            [
+              22,
+              3
+            ],
+            [
+              22,
+              4
+            ],
+            [
+              22,
+              5
+            ]
+          ]
+        },
+        {
+          "title": "Segunda poción para Quinn",
+          "note": "Lleva la nueva poción a Quinn, en la casa del Huerto de Malden.",
+          "goals": [
+            [
+              13,
+              3
+            ]
+          ]
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 91921
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              91920
+            ],
+            "preTitles": {
+              "91920": "Wild Eyes"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 91920
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              430
+            ],
+            "preTitles": {
+              "430": "Vuelve con Quinn"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 429
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              428
+            ],
+            "preTitles": {
+              "428": "Los Mortacechadores desaparecidos"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "sourceCommit": "b50b6d8335d56a215bb3053811745f617532cc14",
+        "sourceFile": ".contrib/.db/forever/zones/eastern kingdoms/silverpine forest.lua",
+        "sourceUrl": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/silverpine%20forest.lua#L556",
+        "sourceSha256": "0b7830160cbda04185d33e56d62f6961ffd70ad59eb32c9b6073ab7b37b26f04",
+        "sourceLines": [
+          556,
+          564,
+          878,
+          891
+        ],
+        "prerequisites": {
+          "91921": [
+            91920
+          ],
+          "91920": [
+            430
+          ],
+          "429": [
+            428
+          ]
+        },
+        "review": "Se conserva la secuencia de corazones, primera poción, ojos y segunda poción; la recogida de ojos se mueve después de aceptarla y se aprovecha el regreso desde Fenris.",
+        "limitation": "Orden comprobado contra datos de misión del servidor; recorrido no cronometrado dentro del juego."
+      }
+    },
+    {
+      "id": "alliance-nightelf-01-teldrassil-prerequisites-metadata",
+      "guideID": "forever/alliance/nightelf/01-teldrassil",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "b480d156fbdcf307373d2ef209e79fc781e064c0073e4422c500b3086515fed0",
+      "resultShape": "54a8fe92d48d71e5b689cfce0dcb04df64b398dd4d8d99b32ad19e3572653b92",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        5,
+        4,
+        13,
+        7,
+        12,
+        1,
+        4,
+        6,
+        2,
+        3,
+        1,
+        7,
+        1,
+        5,
+        10,
+        7,
+        6,
+        1,
+        7,
+        8,
+        1,
+        1,
+        1,
+        11,
+        2,
+        1,
+        1,
+        8,
+        3,
+        2,
+        3,
+        1,
+        2,
+        3,
+        3,
+        1,
+        10,
+        6,
+        2,
+        9,
+        1,
+        12,
+        5,
+        1,
+        8,
+        2,
+        3,
+        3,
+        3,
+        9
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 918
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              997
+            ],
+            "preTitles": {
+              "997": "Las tierras de Denalan"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/alliance/nightelf/01-teldrassil",
+            "questID": 918,
+            "t": "accept",
+            "set": {
+              "pre": [
+                997
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/teldrassil.lua#L1438",
+                "sha256": "8dbda9e51b966df7765a7e1142b4117353af6f41627e2f56e97b275d545e74eb",
+                "line": 1438,
+                "sourceQuestIDs": [
+                  997
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/teldrassil.lua#L798",
+                "sha256": "8dbda9e51b966df7765a7e1142b4117353af6f41627e2f56e97b275d545e74eb",
+                "line": 798,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 13598
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L13598"
+              }
+            ],
+            "dependencyLocations": {
+              "997": [
+                {
+                  "step": 12,
+                  "goal": 4,
+                  "action": "accept"
+                },
+                {
+                  "step": 19,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "alliance-dwarf-gnome-01-dun-morogh-prerequisites-metadata",
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "3e8052f08f7e58ff44592801ea27e0c01b81bf1fa34bd057068b6e90637602b9",
+      "resultShape": "287103378716814534f9849171a6b260953686ce519ad2b1e22babb5ac2573f4",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        1,
+        1,
+        26,
+        2,
+        4,
+        3,
+        2,
+        1,
+        3,
+        4,
+        3,
+        6,
+        5,
+        1,
+        4,
+        6,
+        4,
+        8,
+        7,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        5,
+        2,
+        3,
+        5,
+        4,
+        2,
+        1,
+        5,
+        1,
+        2,
+        1,
+        3,
+        2,
+        3,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3,
+        1,
+        2,
+        2,
+        1,
+        5,
+        6,
+        9,
+        1,
+        6,
+        1,
+        1,
+        2,
+        2,
+        2,
+        6,
+        1,
+        5,
+        4,
+        1,
+        2,
+        3,
+        14,
+        4,
+        3,
+        3,
+        4,
+        9,
+        1,
+        2,
+        1,
+        4,
+        1,
+        1
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 94373
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              98581
+            ],
+            "preTitles": {
+              "98581": "Archaic Rune"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98322
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              420
+            ],
+            "preTitles": {
+              "420": "Las observaciones de Senir"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 94465
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              94449
+            ],
+            "preTitles": {
+              "94449": "La llamada del fuego"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+            "questID": 94373,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                98581
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/dun%20morogh.lua#L104",
+                "sha256": "d2df6984a7e743feb444d8f3086b5294264951af85dc55e670d1b15164440d3e",
+                "line": 104,
+                "sourceQuestIDs": [
+                  98581
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/dun%20morogh.lua#L73",
+                "sha256": "d2df6984a7e743feb444d8f3086b5294264951af85dc55e670d1b15164440d3e",
+                "line": 73,
+                "sourceQuestIDs": [
+                  179
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15325
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15325"
+              }
+            ],
+            "dependencyLocations": {
+              "98581": [
+                {
+                  "step": 3,
+                  "goal": 18,
+                  "action": "accept"
+                },
+                {
+                  "step": 3,
+                  "goal": 19,
+                  "action": "turnin"
+                }
+              ]
+            }
+          },
+          {
+            "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+            "questID": 98322,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                420
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/dun%20morogh.lua#L1217",
+                "sha256": "d2df6984a7e743feb444d8f3086b5294264951af85dc55e670d1b15164440d3e",
+                "line": 1217,
+                "sourceQuestIDs": [
+                  420
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/dun%20morogh.lua#L295",
+                "sha256": "d2df6984a7e743feb444d8f3086b5294264951af85dc55e670d1b15164440d3e",
+                "line": 295,
+                "sourceQuestIDs": [
+                  282
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15489
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15489"
+              }
+            ],
+            "dependencyLocations": {
+              "420": [
+                {
+                  "step": 17,
+                  "goal": 2,
+                  "action": "accept"
+                },
+                {
+                  "step": 18,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          },
+          {
+            "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+            "questID": 94465,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                94449
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/dun%20morogh.lua#L628",
+                "sha256": "d2df6984a7e743feb444d8f3086b5294264951af85dc55e670d1b15164440d3e",
+                "line": 628,
+                "sourceQuestIDs": [
+                  94449
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/dun%20morogh.lua#L614",
+                "sha256": "d2df6984a7e743feb444d8f3086b5294264951af85dc55e670d1b15164440d3e",
+                "line": 614,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15334
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15334"
+              }
+            ],
+            "dependencyLocations": {
+              "94449": [
+                {
+                  "step": 53,
+                  "goal": 4,
+                  "action": "accept"
+                },
+                {
+                  "step": 59,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "alliance-skyborne-01-zephras-isle-prerequisites-metadata",
+      "guideID": "forever/alliance/skyborne/01-zephras-isle",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "309c6e1971ebeee47246987c73496b1f6c5189478cc43d6ed495b5623b344a33",
+      "resultShape": "4345169bda3359c8b547732d9fc59453a06400ae69caea49cb24c6f05552cbc0",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        4,
+        2,
+        23,
+        2,
+        7,
+        9,
+        3,
+        5,
+        5,
+        8,
+        6,
+        8,
+        3,
+        2,
+        3,
+        5,
+        3,
+        4,
+        4,
+        7,
+        4,
+        1,
+        1,
+        10,
+        4,
+        9,
+        2,
+        6,
+        5,
+        5,
+        5,
+        1,
+        5,
+        11,
+        10,
+        2,
+        3,
+        1,
+        4,
+        9,
+        9,
+        2,
+        7,
+        11,
+        1,
+        9,
+        4,
+        4,
+        5,
+        7,
+        4,
+        6,
+        3,
+        2,
+        1,
+        13,
+        1,
+        4,
+        2,
+        2,
+        1,
+        1
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 92596
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              92472
+            ],
+            "preTitles": {
+              "92472": "The Next Step"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/alliance/skyborne/01-zephras-isle",
+            "questID": 92596,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                92472
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/zephras%20isle.lua#L1404",
+                "sha256": "a2c5501511ce8156b4498bb155b930a9d27fb420a821d4f67a89a812512de386",
+                "line": 1404,
+                "sourceQuestIDs": [
+                  92472
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/zephras%20isle.lua#L1485",
+                "sha256": "a2c5501511ce8156b4498bb155b930a9d27fb420a821d4f67a89a812512de386",
+                "line": 1485,
+                "sourceQuestIDs": [
+                  92470
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15257
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15257"
+              }
+            ],
+            "dependencyLocations": {
+              "92472": [
+                {
+                  "step": 9,
+                  "goal": 3,
+                  "action": "accept"
+                },
+                {
+                  "step": 10,
+                  "goal": 2,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "alliance-03-darkshore-prerequisites-metadata",
+      "guideID": "forever/alliance/03-darkshore",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "c968075b94ac72b224bd48f7f5cbb3a9eb62b5a5c0a559b3c088c3bfd3cd8b2a",
+      "resultShape": "7485e5cd2e7d93717e5640ab2e7ca4145e3cf023b1f3de73a3a9018fb3da1623",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        12,
+        6,
+        3,
+        2,
+        3,
+        2,
+        7,
+        1,
+        10,
+        4,
+        15,
+        3,
+        10,
+        2,
+        1,
+        2,
+        1,
+        2,
+        5,
+        1,
+        20,
+        3,
+        7,
+        5,
+        4,
+        10,
+        2,
+        4,
+        11,
+        4,
+        3,
+        2,
+        11,
+        4,
+        3,
+        4,
+        5,
+        3,
+        7,
+        14,
+        4,
+        3
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98396
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              98394
+            ],
+            "preTitles": {
+              "98394": "The Great Cat Spirit"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/alliance/03-darkshore",
+            "questID": 98396,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                98394
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/moonglade.lua#L392",
+                "sha256": "f2bed5f3f3f3770a2d21b30fc059a556dca9399a51e35ca025c2418d32a4e283",
+                "line": 392,
+                "sourceQuestIDs": [
+                  98394
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/moonglade.lua#L384",
+                "sha256": "f2bed5f3f3f3770a2d21b30fc059a556dca9399a51e35ca025c2418d32a4e283",
+                "line": 384,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15493
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15493"
+              }
+            ],
+            "dependencyLocations": {
+              "98394": [
+                {
+                  "step": 39,
+                  "goal": 2,
+                  "action": "accept"
+                },
+                {
+                  "step": 40,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "alliance-04-redridge-mountains-prerequisites-metadata",
+      "guideID": "forever/alliance/04-redridge-mountains",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "d28237d9d667b5cf32e38fdea240074e5b9100d8db18f672db760ead803cfd1d",
+      "resultShape": "8e9c24233a77361b850661b26c9eac3b274e3f2ecd4514d465d423b5b69185e7",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        4,
+        1,
+        7,
+        2,
+        1,
+        5,
+        9,
+        3,
+        7,
+        1,
+        2,
+        4,
+        2,
+        3,
+        2,
+        9,
+        1,
+        2,
+        3
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 97926
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              97914
+            ],
+            "preTitles": {
+              "97914": "Expanding Horizons"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/alliance/04-redridge-mountains",
+            "questID": 97926,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                97914
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/darkshore.lua#L609",
+                "sha256": "185b42fc9d3891d0ab718d29618b72b8f745c892a1d4d0cd2baee8c13c6f1656",
+                "line": 609,
+                "sourceQuestIDs": [
+                  97914
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/darkshore.lua#L444",
+                "sha256": "185b42fc9d3891d0ab718d29618b72b8f745c892a1d4d0cd2baee8c13c6f1656",
+                "line": 444,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15422
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15422"
+              }
+            ],
+            "dependencyLocations": {
+              "97914": [
+                {
+                  "step": 1,
+                  "goal": 2,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "alliance-06-ashenvale-prerequisites-metadata",
+      "guideID": "forever/alliance/06-ashenvale",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "5397459430d294a1f4d8e71cf394b7ef2743a985f97742c0c8f71f93f5f67d5a",
+      "resultShape": "8e5aedeb286a432b0283221b6a91a6d70bce9c6efa4d5120d85b45223658cbb4",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        4,
+        2,
+        3,
+        2,
+        2,
+        4,
+        2,
+        4,
+        8,
+        3,
+        1,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        5,
+        1,
+        1,
+        3,
+        1,
+        4,
+        9,
+        1,
+        4,
+        5,
+        3,
+        4,
+        5,
+        3,
+        10,
+        2,
+        1,
+        2,
+        2,
+        6,
+        3,
+        2,
+        1,
+        3,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        3,
+        2,
+        2,
+        1,
+        2,
+        1,
+        1,
+        1,
+        2,
+        8,
+        6,
+        2,
+        2,
+        6,
+        2,
+        1,
+        4,
+        3
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98189
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              286
+            ],
+            "preTitles": {
+              "286": "Devuelve la Estatuilla"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98190
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              98189
+            ],
+            "preTitles": {
+              "98189": "Devuelve la Estatuilla"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98191
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              98190
+            ],
+            "preTitles": {
+              "98190": "A Friend of the Family"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98219
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              98191
+            ],
+            "preTitles": {
+              "98191": "A Friend of the Family"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/alliance/06-ashenvale",
+            "questID": 98189,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                286
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L742",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 742,
+                "sourceQuestIDs": [
+                  286
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L730",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 730,
+                "sourceQuestIDs": [
+                  285
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15473
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15473"
+              }
+            ],
+            "dependencyLocations": {
+              "286": [
+                {
+                  "step": 37,
+                  "goal": 6,
+                  "action": "accept"
+                },
+                {
+                  "step": 38,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          },
+          {
+            "guideID": "forever/alliance/06-ashenvale",
+            "questID": 98190,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                98189
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L70",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 70,
+                "sourceQuestIDs": [
+                  98189
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L742",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 742,
+                "sourceQuestIDs": [
+                  286
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15474
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15474"
+              }
+            ],
+            "dependencyLocations": {
+              "98189": [
+                {
+                  "step": 38,
+                  "goal": 2,
+                  "action": "accept"
+                },
+                {
+                  "step": 39,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          },
+          {
+            "guideID": "forever/alliance/06-ashenvale",
+            "questID": 98191,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                98190
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L80",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 80,
+                "sourceQuestIDs": [
+                  98190
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L70",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 70,
+                "sourceQuestIDs": [
+                  98189
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15475
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15475"
+              }
+            ],
+            "dependencyLocations": {
+              "98190": [
+                {
+                  "step": 39,
+                  "goal": 2,
+                  "action": "accept"
+                },
+                {
+                  "step": 61,
+                  "goal": 4,
+                  "action": "turnin"
+                }
+              ]
+            }
+          },
+          {
+            "guideID": "forever/alliance/06-ashenvale",
+            "questID": 98219,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                98191
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L952",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 952,
+                "sourceQuestIDs": [
+                  98191
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L80",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 80,
+                "sourceQuestIDs": [
+                  98190
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15478
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15478"
+              }
+            ],
+            "dependencyLocations": {
+              "98191": [
+                {
+                  "step": 61,
+                  "goal": 5,
+                  "action": "accept"
+                },
+                {
+                  "step": 62,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "alliance-30-40-01-hillsbrad-foothills-prerequisites-metadata",
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "dada2ea60b774c8a384645de710c2aa1f6745d2656663426fe387f2058f6860a",
+      "resultShape": "38456fb6b0c2812cff91bee4e0e448a1f747671362f22741ea82ceb751181b8e",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        4,
+        1,
+        1,
+        2,
+        4,
+        2,
+        1,
+        2,
+        5,
+        4,
+        3,
+        4,
+        2,
+        3,
+        1,
+        13,
+        2,
+        2,
+        1,
+        6,
+        2,
+        2,
+        1,
+        4,
+        2,
+        1,
+        7,
+        1,
+        2,
+        5,
+        1,
+        1,
+        3,
+        4,
+        2,
+        1,
+        6
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98310
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              98216
+            ],
+            "preTitles": {
+              "98216": "Understanding Our Present"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98300
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              98297
+            ],
+            "preTitles": {
+              "98297": "Stopping the Cycle"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98313
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              98310
+            ],
+            "preTitles": {
+              "98310": "Gleaning Our Future"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+            "questID": 98310,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                98216
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L527",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 527,
+                "sourceQuestIDs": [
+                  98216
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L1080",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 1080,
+                "sourceQuestIDs": [
+                  299
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15486
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15486"
+              }
+            ],
+            "dependencyLocations": {
+              "98216": [
+                {
+                  "step": 2,
+                  "goal": 1,
+                  "action": "accept"
+                },
+                {
+                  "step": 3,
+                  "goal": 1,
+                  "action": "collect"
+                },
+                {
+                  "step": 4,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          },
+          {
+            "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+            "questID": 98300,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                98297
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L1127",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 1127,
+                "sourceQuestIDs": [
+                  98297
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L800",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 800,
+                "sourceQuestIDs": [
+                  98291
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15485
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15485"
+              }
+            ],
+            "dependencyLocations": {
+              "98297": [
+                {
+                  "step": 5,
+                  "goal": 3,
+                  "action": "accept"
+                },
+                {
+                  "step": 8,
+                  "goal": 1,
+                  "action": "kill"
+                },
+                {
+                  "step": 10,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          },
+          {
+            "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+            "questID": 98313,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                98310
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L474",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 474,
+                "sourceQuestIDs": [
+                  98310
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua#L527",
+                "sha256": "155ddd61d668a1487757fe1b85b35c850f9ab0a061b76427af45ffebf4fc805d",
+                "line": 527,
+                "sourceQuestIDs": [
+                  98216
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15487
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15487"
+              }
+            ],
+            "dependencyLocations": {
+              "98310": [
+                {
+                  "step": 4,
+                  "goal": 2,
+                  "action": "accept"
+                },
+                {
+                  "step": 7,
+                  "goal": 1,
+                  "action": "collect"
+                },
+                {
+                  "step": 8,
+                  "goal": 2,
+                  "action": "collect"
+                },
+                {
+                  "step": 9,
+                  "goal": 3,
+                  "action": "collect"
+                },
+                {
+                  "step": 11,
+                  "goal": 1,
+                  "action": "collect"
+                },
+                {
+                  "step": 13,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "alliance-50-60-03-winterspring-prerequisites-metadata",
+      "guideID": "forever/alliance/50-60/03-winterspring",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "1ff1a8be4b1a32687da830bc74a8125af235934dc2b1aece83e4cb79732876c2",
+      "resultShape": "7b38e0623eb17fc62c9909bdf6a800d5e8da824357fcd7ec565b3b0afc160f1b",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        7,
+        3,
+        5,
+        6,
+        2,
+        8,
+        3,
+        4,
+        2,
+        3,
+        1,
+        2,
+        5,
+        2,
+        4,
+        2,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        2,
+        2,
+        4,
+        3,
+        10,
+        3,
+        3,
+        1,
+        3,
+        3
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 5211
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              5241
+            ],
+            "preTitles": {
+              "5241": "Tío Carlin"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/alliance/50-60/03-winterspring",
+            "questID": 5211,
+            "t": "accept",
+            "set": {
+              "pre": [
+                5241
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/eastern%20plaguelands.lua#L293",
+                "sha256": "706ab628a4b6391442df943158f83264c43eb5e263e1572940b9fc9b4d68de54",
+                "line": 293,
+                "sourceQuestIDs": [
+                  5241
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/eastern%20plaguelands.lua#L967",
+                "sha256": "706ab628a4b6391442df943158f83264c43eb5e263e1572940b9fc9b4d68de54",
+                "line": 967,
+                "sourceQuestIDs": [
+                  5149
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 14491
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L14491"
+              }
+            ],
+            "dependencyLocations": {
+              "5241": [
+                {
+                  "step": 26,
+                  "goal": 3,
+                  "action": "accept"
+                },
+                {
+                  "step": 27,
+                  "goal": 3,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "horde-orc-troll-01-durotar-prerequisites-metadata",
+      "guideID": "forever/horde/orc-troll/01-durotar",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "9e1ddc259235996d4ef5fbcae68f22236c66577455845592be579162ace60de0",
+      "resultShape": "06d7779f66eda1e9ef6bb81c1f8747af46005899e8afb2672a632a2ba254b3b3",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        1,
+        3,
+        3,
+        33,
+        1,
+        3,
+        3,
+        3,
+        1,
+        1,
+        2,
+        3,
+        1,
+        6,
+        1,
+        1,
+        1,
+        1,
+        4,
+        5,
+        1,
+        2,
+        2,
+        5,
+        9,
+        1,
+        3,
+        4,
+        1,
+        10,
+        6,
+        4,
+        4,
+        3,
+        1,
+        1,
+        4,
+        1,
+        9,
+        2,
+        1,
+        6,
+        2,
+        7,
+        6,
+        2,
+        12,
+        2,
+        4,
+        5,
+        2,
+        2,
+        1,
+        3,
+        1,
+        5,
+        1,
+        3,
+        2,
+        4,
+        2,
+        3,
+        1,
+        4,
+        1,
+        2,
+        2
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 97282
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              97281
+            ],
+            "preTitles": {
+              "97281": "A Simmering Storm"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 1501
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              1506
+            ],
+            "preTitles": {
+              "1506": "Las invocaciones de Gan'rul"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 1498
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              1505
+            ],
+            "preTitles": {
+              "1505": "Uzzek, el veterano"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/horde/orc-troll/01-durotar",
+            "questID": 97282,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                97281
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/durotar.lua#L1210",
+                "sha256": "f849eef36355ea11e7c53ab3240a378cabd0f04340d7dc9c3a5e5e624c04c6fd",
+                "line": 1210,
+                "sourceQuestIDs": [
+                  97281
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/durotar.lua#L440",
+                "sha256": "f849eef36355ea11e7c53ab3240a378cabd0f04340d7dc9c3a5e5e624c04c6fd",
+                "line": 440,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15395
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15395"
+              }
+            ],
+            "dependencyLocations": {
+              "97281": [
+                {
+                  "step": 33,
+                  "goal": 4,
+                  "action": "accept"
+                },
+                {
+                  "step": 34,
+                  "goal": 2,
+                  "action": "turnin"
+                }
+              ]
+            }
+          },
+          {
+            "guideID": "forever/horde/orc-troll/01-durotar",
+            "questID": 1501,
+            "t": "accept",
+            "set": {
+              "pre": [
+                1506
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/1%20-%20orgrimmar.lua#L358",
+                "sha256": "b8b0d67833a9840554a2ea5da372345822381368bb63964baf658d2086aaa698",
+                "line": 358,
+                "sourceQuestIDs": [
+                  1506
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/durotar.lua#L937",
+                "sha256": "f849eef36355ea11e7c53ab3240a378cabd0f04340d7dc9c3a5e5e624c04c6fd",
+                "line": 937,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 13857
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L13857"
+              }
+            ],
+            "dependencyLocations": {
+              "1506": [
+                {
+                  "step": 47,
+                  "goal": 11,
+                  "action": "accept"
+                },
+                {
+                  "step": 52,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          },
+          {
+            "guideID": "forever/horde/orc-troll/01-durotar",
+            "questID": 1498,
+            "t": "accept",
+            "set": {
+              "pre": [
+                1505
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/the%20barrens.lua#L1681",
+                "sha256": "7b85cabc454f625ef0a2f2eff6ecd2fb6b981684fb965f667f109abc9dfe1e15",
+                "line": 1681,
+                "sourceQuestIDs": [
+                  1505
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/the%20barrens.lua#L2739",
+                "sha256": "7b85cabc454f625ef0a2f2eff6ecd2fb6b981684fb965f667f109abc9dfe1e15",
+                "line": 2739,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 13855
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L13855"
+              }
+            ],
+            "dependencyLocations": {
+              "1505": [
+                {
+                  "step": 47,
+                  "goal": 8,
+                  "action": "accept"
+                },
+                {
+                  "step": 64,
+                  "goal": 3,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "horde-tauren-01-mulgore-prerequisites-metadata",
+      "guideID": "forever/horde/tauren/01-mulgore",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "1726188cf59dca19626920ff407d1ce8acd7cc3dbd619fbbf6270d0faca99af9",
+      "resultShape": "873c5b55018a023f39b42ab190e3b8f23403320b7944e556364a378a2aadb785",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        2,
+        1,
+        11,
+        3,
+        2,
+        2,
+        4,
+        3,
+        1,
+        5,
+        6,
+        1,
+        1,
+        5,
+        5,
+        7,
+        1,
+        3,
+        1,
+        2,
+        2,
+        10,
+        2,
+        3,
+        1,
+        7,
+        5,
+        1,
+        1,
+        2,
+        1,
+        2,
+        7,
+        1,
+        2,
+        1,
+        1,
+        3,
+        6,
+        1,
+        1,
+        2,
+        1,
+        3,
+        6,
+        3,
+        6,
+        5,
+        5,
+        5,
+        1,
+        2,
+        1,
+        3,
+        5,
+        3,
+        11,
+        2,
+        4,
+        4
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 753
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              752
+            ],
+            "preTitles": {
+              "752": "Una humilde contribución"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 767
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              763
+            ],
+            "preTitles": {
+              "763": "Ritos de la Madre Tierra"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/horde/tauren/01-mulgore",
+            "questID": 753,
+            "t": "accept",
+            "set": {
+              "pre": [
+                752
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/mulgore.lua#L33",
+                "sha256": "40861f5e7e122f0fd1d8842e2f44ba10512a590bf340dbc1cbb67db0a520557b",
+                "line": 33,
+                "sourceQuestIDs": [
+                  752
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/mulgore.lua#L17",
+                "sha256": "40861f5e7e122f0fd1d8842e2f44ba10512a590bf340dbc1cbb67db0a520557b",
+                "line": 17,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 13522
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L13522"
+              }
+            ],
+            "dependencyLocations": {
+              "752": [
+                {
+                  "step": 1,
+                  "goal": 2,
+                  "action": "accept"
+                },
+                {
+                  "step": 4,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          },
+          {
+            "guideID": "forever/horde/tauren/01-mulgore",
+            "questID": 767,
+            "t": "accept",
+            "set": {
+              "pre": [
+                763
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/mulgore.lua#L946",
+                "sha256": "40861f5e7e122f0fd1d8842e2f44ba10512a590bf340dbc1cbb67db0a520557b",
+                "line": 946,
+                "sourceQuestIDs": [
+                  763
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/mulgore.lua#L181",
+                "sha256": "40861f5e7e122f0fd1d8842e2f44ba10512a590bf340dbc1cbb67db0a520557b",
+                "line": 181,
+                "sourceQuestIDs": [
+                  757
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 13534
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L13534"
+              }
+            ],
+            "dependencyLocations": {
+              "763": [
+                {
+                  "step": 11,
+                  "goal": 5,
+                  "action": "accept"
+                },
+                {
+                  "step": 16,
+                  "goal": 3,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "horde-undead-01-tirisfal-glades-prerequisites-metadata",
+      "guideID": "forever/horde/undead/01-tirisfal-glades",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "7ac1d6f5d030446d394c56390541f6273d4a6610abaad825df4f1d58a5817155",
+      "resultShape": "e3894e87054fc9cda4e91cbc056aff91b158b26422fdfb696079339d2e3df650",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        1,
+        2,
+        2,
+        15,
+        4,
+        3,
+        1,
+        5,
+        2,
+        1,
+        5,
+        6,
+        1,
+        2,
+        1,
+        5,
+        1,
+        3,
+        1,
+        2,
+        13,
+        2,
+        1,
+        3,
+        1,
+        6,
+        2,
+        1,
+        3,
+        1,
+        13,
+        1,
+        2,
+        2,
+        1,
+        7,
+        5,
+        2,
+        8,
+        1,
+        1,
+        4,
+        1,
+        2,
+        3,
+        2,
+        1,
+        15,
+        3,
+        1,
+        2,
+        4,
+        1,
+        3,
+        1,
+        4,
+        3,
+        4,
+        2,
+        2,
+        2,
+        2,
+        4,
+        7,
+        2,
+        1,
+        3,
+        1,
+        8,
+        1,
+        2
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 96896
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              96899
+            ],
+            "preTitles": {
+              "96899": "Bandarion Keep"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/horde/undead/01-tirisfal-glades",
+            "questID": 96896,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                96899
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/tirisfal%20glades.lua#L621",
+                "sha256": "05f6923eeafcb3ba6a8bec2ef9ed387e46e9e6e7b7148a3f347f4a0f515a14f2",
+                "line": 621,
+                "sourceQuestIDs": [
+                  96899
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/tirisfal%20glades.lua#L766",
+                "sha256": "05f6923eeafcb3ba6a8bec2ef9ed387e46e9e6e7b7148a3f347f4a0f515a14f2",
+                "line": 766,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15386
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15386"
+              }
+            ],
+            "dependencyLocations": {
+              "96899": [
+                {
+                  "step": 56,
+                  "goal": 4,
+                  "action": "accept"
+                },
+                {
+                  "step": 66,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "horde-skyborne-01-zephras-isle-prerequisites-metadata",
+      "guideID": "forever/horde/skyborne/01-zephras-isle",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "6776959fdbee51cbc9a1354f67f797986938e97b59f4cc9130bd50c92688ce5d",
+      "resultShape": "10c97eba53d76ad1e39278b65fc8aa34c4b3eabe5f0e16b6641467e8d10f275e",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        4,
+        2,
+        16,
+        1,
+        3,
+        1,
+        1,
+        7,
+        1,
+        11,
+        1,
+        1,
+        5,
+        1,
+        2,
+        5,
+        5,
+        8,
+        5,
+        10,
+        2,
+        1,
+        3,
+        7,
+        1,
+        3,
+        6,
+        4,
+        4,
+        3,
+        5,
+        8,
+        3,
+        1,
+        5,
+        1,
+        7,
+        3,
+        2,
+        1,
+        6,
+        5,
+        5,
+        2,
+        6,
+        3,
+        11,
+        6,
+        2,
+        1,
+        10,
+        2,
+        9,
+        1,
+        1,
+        6,
+        1,
+        2,
+        1,
+        3,
+        4,
+        5,
+        9,
+        1,
+        9,
+        1,
+        4,
+        3,
+        5,
+        8,
+        4,
+        2,
+        9,
+        1,
+        11,
+        1,
+        1,
+        3,
+        1,
+        5,
+        1,
+        1,
+        3,
+        2
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 95350
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              95349
+            ],
+            "preTitles": {
+              "95349": "The Earthen Ring"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/horde/skyborne/01-zephras-isle",
+            "questID": 95350,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                95349
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/zephras%20isle.lua#L1713",
+                "sha256": "a2c5501511ce8156b4498bb155b930a9d27fb420a821d4f67a89a812512de386",
+                "line": 1713,
+                "sourceQuestIDs": [
+                  95349
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/zephras%20isle.lua#L1313",
+                "sha256": "a2c5501511ce8156b4498bb155b930a9d27fb420a821d4f67a89a812512de386",
+                "line": 1313,
+                "sourceQuestIDs": [
+                  93090
+                ],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15357
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15357"
+              }
+            ],
+            "dependencyLocations": {
+              "95349": [
+                {
+                  "step": 75,
+                  "goal": 10,
+                  "action": "accept"
+                },
+                {
+                  "step": 78,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "horde-02-the-barrens-prerequisites-metadata",
+      "guideID": "forever/horde/02-the-barrens",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "259c0ab70b13c9ef25739ea9ca9f1784b007456e725c7ac73df6d2da9084dd2c",
+      "resultShape": "1d05ee82e0ecc97814ee6f02e7f069f9201d2cd101878c8484c0f73ce74cc691",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        10,
+        2,
+        3,
+        2,
+        2,
+        6,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        4,
+        5,
+        3,
+        7,
+        2,
+        1,
+        6,
+        4,
+        5,
+        1,
+        1,
+        10,
+        3,
+        1,
+        3,
+        2,
+        1,
+        8,
+        1,
+        3,
+        4,
+        3,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 1498
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              1505
+            ],
+            "preTitles": {
+              "1505": "Uzzek, el veterano"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/horde/02-the-barrens",
+            "questID": 1498,
+            "t": "accept",
+            "set": {
+              "pre": [
+                1505
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/the%20barrens.lua#L1681",
+                "sha256": "7b85cabc454f625ef0a2f2eff6ecd2fb6b981684fb965f667f109abc9dfe1e15",
+                "line": 1681,
+                "sourceQuestIDs": [
+                  1505
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/the%20barrens.lua#L2739",
+                "sha256": "7b85cabc454f625ef0a2f2eff6ecd2fb6b981684fb965f667f109abc9dfe1e15",
+                "line": 2739,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 13855
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L13855"
+              }
+            ],
+            "dependencyLocations": {
+              "1505": [
+                {
+                  "step": 8,
+                  "goal": 1,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "horde-03-silverpine-forest-prerequisites-metadata",
+      "guideID": "forever/horde/03-silverpine-forest",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "0e9d27a8736c5633d745020b35b3661744557182d1f948215854b64d7923cbce",
+      "resultShape": "671956efb9d667d64ed7d72e3806e0df81b483d606516be56c9bf151fadc8a9e",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        2,
+        1,
+        4,
+        8,
+        1,
+        1,
+        1,
+        6,
+        2,
+        6,
+        2,
+        1,
+        2,
+        2,
+        2,
+        1,
+        8,
+        2,
+        2,
+        5,
+        1,
+        6,
+        7,
+        1,
+        3,
+        1,
+        2,
+        2,
+        6,
+        2,
+        1,
+        1,
+        1,
+        3,
+        1,
+        3,
+        2,
+        1,
+        10
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 97249
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              97246
+            ],
+            "preTitles": {
+              "97246": "Meal Appeal"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 97242
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              97246
+            ],
+            "preTitles": {
+              "97246": "Meal Appeal"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/horde/03-silverpine-forest",
+            "questID": 97249,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                97246
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/1%20-%20orgrimmar.lua#L386",
+                "sha256": "b8b0d67833a9840554a2ea5da372345822381368bb63964baf658d2086aaa698",
+                "line": 386,
+                "sourceQuestIDs": [
+                  97246
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/1%20-%20orgrimmar.lua#L540",
+                "sha256": "b8b0d67833a9840554a2ea5da372345822381368bb63964baf658d2086aaa698",
+                "line": 540,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15393
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15393"
+              }
+            ],
+            "dependencyLocations": {
+              "97246": [
+                {
+                  "step": 32,
+                  "goal": 1,
+                  "action": "accept"
+                },
+                {
+                  "step": 32,
+                  "goal": 2,
+                  "action": "turnin"
+                }
+              ]
+            }
+          },
+          {
+            "guideID": "forever/horde/03-silverpine-forest",
+            "questID": 97242,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                97246
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/1%20-%20orgrimmar.lua#L854",
+                "sha256": "b8b0d67833a9840554a2ea5da372345822381368bb63964baf658d2086aaa698",
+                "line": 854,
+                "sourceQuestIDs": [
+                  97246
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/1%20-%20orgrimmar.lua#L540",
+                "sha256": "b8b0d67833a9840554a2ea5da372345822381368bb63964baf658d2086aaa698",
+                "line": 540,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15390
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15390"
+              }
+            ],
+            "dependencyLocations": {
+              "97246": [
+                {
+                  "step": 32,
+                  "goal": 1,
+                  "action": "accept"
+                },
+                {
+                  "step": 32,
+                  "goal": 2,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "horde-04-the-barrens-prerequisites-metadata",
+      "guideID": "forever/horde/04-the-barrens",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "178be4677269e5ffe01b540defadb11c2d8d9a854c43485cb4dfba622b317b81",
+      "resultShape": "d850540da2638fc7e59b29c96d6021da58ece0f44e065ab398ff716c913aec96",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        1,
+        6,
+        1,
+        1,
+        4,
+        2,
+        4,
+        1,
+        9,
+        4,
+        1,
+        4,
+        5,
+        4,
+        3,
+        2,
+        3,
+        1,
+        3,
+        2,
+        2,
+        2,
+        3,
+        3,
+        2,
+        1,
+        4,
+        1,
+        4,
+        1,
+        2,
+        7,
+        1,
+        4,
+        2,
+        9,
+        8,
+        2,
+        5,
+        1,
+        2,
+        4,
+        1,
+        4,
+        2,
+        1,
+        1,
+        4,
+        3,
+        3,
+        1,
+        1,
+        3,
+        7,
+        11,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        9,
+        4,
+        1,
+        2,
+        2,
+        3,
+        5,
+        2,
+        3,
+        9,
+        14,
+        3,
+        4,
+        1
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 1824
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              1823
+            ],
+            "preTitles": {
+              "1823": "Habla con Ruga"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 95774
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              4921
+            ],
+            "preTitles": {
+              "4921": "Perdida en la batalla"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/horde/04-the-barrens",
+            "questID": 1824,
+            "t": "accept",
+            "set": {
+              "pre": [
+                1823
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/the%20barrens.lua#L2640",
+                "sha256": "7b85cabc454f625ef0a2f2eff6ecd2fb6b981684fb965f667f109abc9dfe1e15",
+                "line": 2640,
+                "sourceQuestIDs": [
+                  1823
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/the%20barrens.lua#L2108",
+                "sha256": "7b85cabc454f625ef0a2f2eff6ecd2fb6b981684fb965f667f109abc9dfe1e15",
+                "line": 2108,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 13946
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L13946"
+              }
+            ],
+            "dependencyLocations": {
+              "1823": [
+                {
+                  "step": 12,
+                  "goal": 3,
+                  "action": "accept"
+                },
+                {
+                  "step": 36,
+                  "goal": 8,
+                  "action": "turnin"
+                }
+              ]
+            }
+          },
+          {
+            "guideID": "forever/horde/04-the-barrens",
+            "questID": 95774,
+            "t": "accept",
+            "set": {
+              "preAll": [
+                4921
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/the%20barrens.lua#L1226",
+                "sha256": "7b85cabc454f625ef0a2f2eff6ecd2fb6b981684fb965f667f109abc9dfe1e15",
+                "line": 1226,
+                "sourceQuestIDs": [
+                  4921
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/the%20barrens.lua#L1485",
+                "sha256": "7b85cabc454f625ef0a2f2eff6ecd2fb6b981684fb965f667f109abc9dfe1e15",
+                "line": 1485,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 15359
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L15359"
+              }
+            ],
+            "dependencyLocations": {
+              "4921": [
+                {
+                  "step": 9,
+                  "goal": 3,
+                  "action": "accept"
+                },
+                {
+                  "step": 37,
+                  "goal": 2,
+                  "action": "complete"
+                },
+                {
+                  "step": 44,
+                  "goal": 2,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
+    },
+    {
+      "id": "horde-30-40-03-arathi-highlands-prerequisites-metadata",
+      "guideID": "forever/horde/30-40/03-arathi-highlands",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "7e1f9ac8b8d884477a569257538f7f7f85ee1a3858778888b76ce2fe47fb9515",
+      "resultShape": "f87875cacea000b10767f8a1d5680fd81b7caeb01a356666bb23412470f18957",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        11,
+        1,
+        6,
+        1,
+        2,
+        1,
+        3,
+        1,
+        5,
+        1,
+        2,
+        7,
+        6,
+        1,
+        1,
+        1,
+        2,
+        10,
+        2,
+        2,
+        1,
+        3,
+        1,
+        6,
+        1,
+        2,
+        1,
+        2,
+        4,
+        2,
+        3,
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        2,
+        2,
+        1,
+        2,
+        4,
+        4
+      ],
+      "affectedQuestIDs": [],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 677
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              676
+            ],
+            "preTitles": {
+              "676": "La Sentencia"
+            }
+          }
+        }
+      ],
+      "evidence": {
+        "corroboratedAcceptances": [
+          {
+            "guideID": "forever/horde/30-40/03-arathi-highlands",
+            "questID": 677,
+            "t": "accept",
+            "set": {
+              "pre": [
+                676
+              ]
+            },
+            "reason": "EverythingQuests and ATT agree on the single completed prerequisite; neither child nor parent is flagged as a breadcrumb. The guide already turns in this parent before acceptance.",
+            "proofs": [
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/arathi%20highlands.lua#L151",
+                "sha256": "0126e4e43f4140171e6879f819bb82dd64fa90d10d31ffdbd2e871e6384f7466",
+                "line": 151,
+                "sourceQuestIDs": [
+                  676
+                ],
+                "declaresBreadcrumb": false
+              },
+              {
+                "repository": "ATTWoWAddon/AllTheThings",
+                "commit": "b50b6d8335d56a215bb3053811745f617532cc14",
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/arathi%20highlands.lua#L841",
+                "sha256": "0126e4e43f4140171e6879f819bb82dd64fa90d10d31ffdbd2e871e6384f7466",
+                "line": 841,
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": false
+              }
+            ],
+            "eqProofs": [
+              {
+                "source": {
+                  "source": "everythingquests",
+                  "line": 13475
+                },
+                "url": "https://github.com/wheelbarrel00/EverythingQuests/blob/8e7aa971319226f984639d4dae06e864b50c4fb4/Data/QuestAvailable_Forever.lua#L13475"
+              }
+            ],
+            "dependencyLocations": {
+              "676": [
+                {
+                  "step": 6,
+                  "goal": 1,
+                  "action": "kill"
+                },
+                {
+                  "step": 6,
+                  "goal": 2,
+                  "action": "kill"
+                },
+                {
+                  "step": 8,
+                  "goal": 7,
+                  "action": "turnin"
+                }
+              ]
+            }
+          }
+        ],
+        "review": "Only missing delivered prerequisites agreed by both pinned sources; parent turn-ins already precede acceptance. Breadcrumbs and conflicting alternatives are excluded."
+      }
     }
   ]
 }

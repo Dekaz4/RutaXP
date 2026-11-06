@@ -1,4 +1,18 @@
-# Revisión de guías de RutaXP 0.6.6
+# Revisión de guías de RutaXP 0.7.9
+
+## Requisitos y profesiones: revisión 0.7.9
+
+El catálogo actual tiene 57 guías, 2.338 pasos, 7.444 objetivos y 1.900 IDs distintos de misión. Se compararon las 2.290 aceptaciones con datos de disponibilidad fijados de EverythingQuests, complementados con comprobaciones de AllTheThings para Forever. 1.846 IDs tienen algún dato incorporado al informe; 54 todavía no. De estos últimos, 45 aparecen en otros bloques de AllTheThings pendientes de revisar e incorporar. Tener algún dato no garantiza que todos los requisitos de esa misión estén documentados.
+
+Se revisó el orden de cadenas en seis guías: Ingeniería de Páramos, Zephras de Alianza, Crestagrana, Mulgore, Claros de Tirisfal y Bosque de Argénteos. Se añadieron siete visitas para entregar los requisitos antes de aceptar y realizar las misiones siguientes, conservando todos los objetivos y sus destinos. Otras 28 aceptaciones en 16 guías recibieron requisitos corroborados que faltaban, sin cambiar su orden. Las revisiones guardan las pruebas y los mapas exactos para conservar el progreso entre versiones.
+
+El motor comprueba las profesiones por ID y rango. Una profesión ausente aparta las tareas que todavía no están aceptadas; una respuesta desconocida no se interpreta como ausencia. Las misiones ya activas o entregadas conservan su estado real. Las profesiones son ramas personales en dúo; no se supone que el compañero tenga la misma profesión. Ingeniería 1/2 y 2/2 de Páramos requieren Ingeniería, y la segunda se acepta después de entregar la primera. Su objetivo comprueba la misión completa y explica todos los materiales.
+
+Los posibles requisitos contradictorios, encargos opcionales que llevan al mismo NPC, alternativas y condiciones activas sin corroboración suficiente permanecen en el informe. No se han aplicado como bloqueos automáticos. Las pruebas son de datos y simulaciones de funcionamiento; falta recorrer las rutas corregidas dentro de Forever.
+
+Para reproducir la auditoría usa `python tools/audit_quest_requirements.py --check`. La evidencia con versiones, líneas, huellas y limitaciones está en `RutaXP/Source/quest_requirements_evidence.json`; el informe, en `quest_requirements_audit.json`; las revisiones aplicadas, en `guide_revisions.json`. Las licencias y créditos figuran en `NOTICE.md` y `RutaXP/Licenses/`.
+
+## Revisión anterior 0.6.6
 
 Se revisaron las 57 guías, sus 2.330 pasos y los 7.444 objetivos. La auditoría comprueba datos, fuentes, instrucciones y navegación del addon; no certifica haber recorrido cada misión dentro de WoW Forever.
 

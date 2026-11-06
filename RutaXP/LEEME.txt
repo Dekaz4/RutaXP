@@ -1,4 +1,4 @@
-RUTAXP 0.7.8 - WoW Forever
+RUTAXP 0.7.9 - WoW Forever
 
 ACTUALIZACIONES
 El mismo Instalador_RutaXP.exe sirve para instalar, actualizar y reparar:
@@ -8,6 +8,20 @@ Guardad el setup fuera de la carpeta del addon. Recuerda vuestro cliente,
 conserva una copia anterior y no modifica el progreso guardado en WTF.
 Luego abrid WoW desde vuestro acceso de siempre. /rutaxp actualizar muestra
 la version local y el enlace. No hay comprobaciones en segundo plano.
+
+REQUISITOS Y CADENAS 0.7.9
+Corregidas cadenas en Paramos, Zephras de Alianza, Crestagrana, Mulgore,
+Claros de Tirisfal y Bosque de Argenteos. Añadidas 28 comprobaciones de
+misiones previas en 16 guias, contrastadas en dos fuentes de Forever.
+Las tareas de profesion comprueban tu habilidad y rango; si no la tienes,
+se apartan sin bloquear al amigo. Las que ya llevas en el diario se conservan.
+La rama opcional de Ingenieria en Paramos sigue el orden de sus dos misiones
+y comprueba todos los materiales. El duo se reune en los pasos compartidos.
+Al cambiar los pasos se conserva el progreso. Una cadena corregida puede
+retomar una tarea anterior pendiente. Las guias terminadas siguen terminadas.
+Auditoria de 57 guias y 1.900 IDs; quedan 54 IDs cuyos datos aun no estan
+incorporados y discrepancias pendientes de verificar jugando. No son rutas certificadas
+en el juego. Ver Source/quest_requirements_audit.json.
 
 MISIONES DE ALBA EN PARAMOS DE PONIENTE
 Antes de El estado de las minas, entrega Probar los pozos y Branquias de murloc.
@@ -85,7 +99,7 @@ cajas con fuente contradictoria lo indican: revisa los materiales de la caja
 y el requisito del registro. No se atribuye un punto de recogida inventado.
 
 CONTENIDO
-57 rutas, 2.331 pasos y 7.444 objetivos para Alianza y Horda, con variantes
+57 rutas, 2.338 pasos y 7.444 objetivos para Alianza y Horda, con variantes
 de clase y zonas iniciales clásicas y Skyborne. Se conservan la interfaz,
 la flecha facetada, 36 planes de talentos y el asistente de instructor.
 Las rutas Polestar/SendaFH siguen en beta: falta validar esta revisión

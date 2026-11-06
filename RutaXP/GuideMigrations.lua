@@ -24,12 +24,28 @@ local function stepIndex(value)
     return steps[index] or index
 end
 
+local function migrationAt(guide, revision)
+    for _, migration in ipairs(guide and guide.progressMigrations or {}) do
+        if migration.from == revision and migration.to > revision then return migration end
+    end
+end
+
+local function mapStep(migration, cursor)
+    return (migration.stepMap or {})[tonumber(cursor)] or cursor
+end
+
 -- Historical checkpoints retain their original revision. Only their own
 -- cursor is translated when missing local progress is explicitly restored.
 function ns:GetGuideCursorForRevision(id, cursor, revision)
     local guide = self.guides[id]
-    if id == WEST and guide and guide.routeRevision == REVISION and (tonumber(revision) or 1) < REVISION then
-        return stepIndex(cursor)
+    revision = tonumber(revision) or 1
+    if id == WEST and guide and (guide.routeRevision or 1) >= REVISION and revision < REVISION then
+        cursor, revision = stepIndex(cursor), REVISION
+    end
+    for _ = 1, 20 do
+        local migration = migrationAt(guide, revision)
+        if not migration then break end
+        cursor, revision = mapStep(migration, cursor), migration.to
     end
     return cursor
 end
@@ -101,6 +117,10 @@ function ns:RepairWestfallMigration()
     if not guide or not state or not state.routeRepairPending then return false end
     -- A deferred read must never pull a player out of another selected route.
     if char.activeGuide ~= WEST or (char.recovery and char.recovery.active) then return false end
+    if (tonumber(state.cursor) or 1) > #guide.steps then
+        state.routeRepairPending = nil
+        return false
+    end
     local observed = {}
     for id in pairs(CHAIN) do
         observed[id] = questState(id)
@@ -142,15 +162,16 @@ local function oldMineRecovery(saved)
     return false
 end
 
-function ns:MigrateGuideProgress()
+local function migrateWestfallLegacy(self)
     local char, guide = self.char, self.guides[WEST]
-    if not char or not guide or guide.routeRevision ~= REVISION then return end
+    if not char or not guide or (guide.routeRevision or 1) < REVISION then return end
     local state = char.progress[WEST]
     if type(state) ~= "table" or (tonumber(state.routeRevision) or 1) >= REVISION then return end
     local saved = type(char.recovery) == "table" and char.recovery or nil
     local bookmark = saved and type(saved.bookmark) == "table" and saved.bookmark.guideID == WEST and saved.bookmark or nil
     local recovery = oldMineRecovery(saved) and saved or nil
-    local oldCursor = tonumber(bookmark and bookmark.cursor or state.cursor) or 1
+    local runningRecovery = bookmark and saved.active and char.activeGuide == "_recovery"
+    local oldCursor = tonumber(runningRecovery and bookmark.cursor or state.cursor) or 1
     char.guideMigrationBackups = char.guideMigrationBackups or {}
     local backupKey = WEST .. ":" .. REVISION
     if not char.guideMigrationBackups[backupKey] then
@@ -169,19 +190,163 @@ function ns:MigrateGuideProgress()
         lease.reviews[WEST].cursor = stepIndex(lease.reviews[WEST].cursor)
     end
     if recovery then
-        state.cursor, state.review = recovery.bookmark.cursor, recovery.bookmark.review
-        char.activeGuide, char.recovery = WEST, nil
+        if runningRecovery then
+            state.cursor, state.review = recovery.bookmark.cursor, recovery.bookmark.review
+            char.activeGuide = WEST
+        end
+        char.recovery = nil
     end
     -- Completed chapters and their outgoing journeys keep the completed
     -- cursor. Merely having an inactive bookmark never changes selection.
     if oldCursor >= 6 and oldCursor <= 21 then
         state.routeRepairPending = true
-        self:RepairWestfallMigration()
     end
+end
+
+local function revisedKey(migration, key)
+    return (migration.goalMap or {})[key] or key
+end
+
+local function revisedMarks(migration, marks)
+    if type(marks) ~= "table" then return marks end
+    local result = {}
+    for key, value in pairs(marks) do result[revisedKey(migration, key)] = value end
+    return result
+end
+
+local function reviseWaypoints(saved, id, migration)
+    if type(saved) ~= "table" then return end
+    local pattern = id:gsub("(%W)", "%%%1") .. ":(%d+):(%d+)"
+    local function key(value)
+        if type(value) ~= "string" then return value end
+        return (value:gsub(pattern, function(step, goal)
+            return id .. ":" .. revisedKey(migration, step .. ":" .. goal)
+        end))
+    end
+    for _, field in ipairs({ "ownRoutes", "entries" }) do
+        if type(saved[field]) == "table" then
+            local mapped = {}
+            for oldKey, value in pairs(saved[field]) do
+                if type(value) == "table" then
+                    if field == "ownRoutes" then value.id = key(value.id)
+                    else value.targetKey = key(value.targetKey) end
+                end
+                mapped[key(oldKey)] = value
+            end
+            saved[field] = mapped
+        end
+    end
+    if type(saved.active) == "table" then
+        for _, field in ipairs({ "key", "route", "entryKey" }) do saved.active[field] = key(saved.active[field]) end
+    end
+end
+
+local function applyMigration(self, id, state, migration)
+    local char = self.char
+    local saved = type(char.recovery) == "table" and char.recovery or nil
+    local bookmark = saved and type(saved.bookmark) == "table" and saved.bookmark.guideID == id and saved.bookmark
+    local runningRecovery = bookmark and saved.active and char.activeGuide == "_recovery"
+    local oldCursor = tonumber(runningRecovery and bookmark.cursor or state.cursor) or 1
+    local affected = {}
+    for _, q in ipairs(migration.affectedQuestIDs or {}) do affected[q] = true end
+    char.guideMigrationBackups = char.guideMigrationBackups or {}
+    local backupKey = id .. ":" .. migration.to
+    if not char.guideMigrationBackups[backupKey] then
+        char.guideMigrationBackups[backupKey] = { progress=copy(state), activeGuide=char.activeGuide,
+            recovery=bookmark and copy(saved), recoveryProgress=bookmark and copy(char.progress._recovery),
+            waypoints=copy(char.waypoints), duoReview=copy(char.duo and char.duo.autoSession
+                and char.duo.autoSession.reviews and char.duo.autoSession.reviews[id]) }
+    end
+    state.cursor = mapStep(migration, state.cursor)
+    state.confirmed, state.skipped = revisedMarks(migration, state.confirmed), revisedMarks(migration, state.skipped)
+    state.routeRevision = migration.to
+    if bookmark then bookmark.cursor = mapStep(migration, bookmark.cursor) end
+    reviseWaypoints(char.waypoints, id, migration)
+    local lease = char.duo and char.duo.autoSession
+    if lease and lease.reviews and type(lease.reviews[id]) == "table" then
+        lease.reviews[id].cursor = mapStep(migration, lease.reviews[id].cursor)
+    end
+    if bookmark and saved.active then
+        local stale = affected[saved.requestedQuestID]
+        for _, q in ipairs(saved.requiredQuestIDs or {}) do stale = stale or affected[q] end
+        if stale then
+            if runningRecovery then
+                char.activeGuide = id
+                state.cursor, state.review = bookmark.cursor, bookmark.review
+            end
+            char.recovery = nil
+        end
+    end
+    -- Only affected chapters already reached by this character need repair.
+    -- A completed chapter and its outgoing journey remain completed.
+    if migration.firstAffectedStep and oldCursor >= migration.firstAffectedStep
+        and oldCursor <= (migration.previousStepCount or 0) and next(affected) then
+        state.requirementsRepair = state.requirementsRepair or {}
+        for q in pairs(affected) do state.requirementsRepair[q] = true end
+    end
+end
+
+function ns:RepairGuideRequirements()
+    local char = self.char
+    local id = char and char.activeGuide
+    local guide, state = id and self.guides[id], id and char.progress[id]
+    if not guide or type(state) ~= "table" or type(state.requirementsRepair) ~= "table"
+        or (char.recovery and char.recovery.active) then return false end
+    -- Completion can happen while the client is still withholding quest data.
+    -- A later response must not reopen the chapter or its outgoing journey.
+    if (tonumber(state.cursor) or 1) > #guide.steps then
+        state.requirementsRepair = nil
+        return false
+    end
+    for q in pairs(state.requirementsRepair) do if not questState(q) then return false end end
+    local first
+    local clean = { cursor=state.cursor, confirmed={}, skipped={} }
+    for si, step in ipairs(guide.steps) do
+        for gi, goal in ipairs(step.goals or {}) do
+            if state.requirementsRepair[goal.quest or goal.questID] then
+                local status = self:GetGoalStatus(goal, step, clean, gi)
+                if status ~= "done" and status ~= "skip" then
+                    local key = si .. ":" .. gi
+                    if state.confirmed then state.confirmed[key] = nil end
+                    if state.skipped then state.skipped[key] = nil end
+                    first = first or si
+                end
+            end
+        end
+    end
+    state.requirementsRepair = nil
+    if not first then return false end
+    -- Another chain repair may already have restored an earlier pending visit.
+    -- A moved delivery ahead of that visit must never advance past it.
+    state.cursor, state.review, state.placed = math.min(tonumber(state.cursor) or first, first), nil, true
+    if self.DuoAuto and self.DuoAuto.RefreshProgressAgreement then self.DuoAuto:RefreshProgressAgreement() end
+    if self.Duo then self.Duo.lastSentHeader = nil end
+    self:Print("La guía conserva el recorrido y recupera las tareas pendientes de la cadena corregida.")
+    return true
+end
+
+function ns:MigrateGuideProgress()
+    if not self.char then return end
+    migrateWestfallLegacy(self)
+    for id, guide in pairs(self.guides) do
+        local state = self.char.progress[id]
+        if type(state) == "table" then
+            for _ = 1, 20 do
+                local migration = migrationAt(guide, tonumber(state.routeRevision) or 1)
+                if not migration then break end
+                applyMigration(self, id, state, migration)
+            end
+        end
+    end
+    self:RepairWestfallMigration()
+    self:RepairGuideRequirements()
 end
 
 local events = CreateFrame("Frame")
 for _, event in ipairs({ "PLAYER_ENTERING_WORLD", "QUEST_LOG_UPDATE", "QUEST_DATA_LOAD_RESULT" }) do events:RegisterEvent(event) end
 events:SetScript("OnEvent", function()
-    if ns.initialized and ns:RepairWestfallMigration() then ns:Sync() end
+    if not ns.initialized then return end
+    local changed = ns:RepairWestfallMigration()
+    changed = ns:RepairGuideRequirements() or changed
+    if changed then ns:Sync() end
 end)

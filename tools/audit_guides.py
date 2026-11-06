@@ -127,7 +127,8 @@ def authored_subtitle(goal):
 
 
 def audit(document: dict[str, Any], include_baseline: bool = False,
-          locations: dict[str, Any] | None = None) -> dict[str, Any]:
+          locations: dict[str, Any] | None = None,
+          revisions: dict[str, Any] | None = None) -> dict[str, Any]:
     by_action = defaultdict(Counter)
     by_guide = {g["id"]: {"guideID": g["id"], "title": g["title"], "counts": Counter(),
                                   "byAction": defaultdict(Counter)} for g in document["guides"]}
@@ -145,7 +146,31 @@ def audit(document: dict[str, Any], include_baseline: bool = False,
                 and locations.get("sourceFiles", {}).get(entry["sourceFile"]) == entry["sourceSha256"]
                 for entry in evidence)
             if mode in NAVIGATION_MODES and proved:
-                mode_evidence[goal_key(patch["guideID"], patch["step"], patch["goal"])] = mode
+                guide = next((guide for guide in document["guides"] if guide["id"] == patch["guideID"]), {})
+                key = f'{patch["step"]}:{patch["goal"]}'
+                for migration in guide.get("progressMigrations", []):
+                    key = migration.get("goalMap", {}).get(key, key)
+                si, gi = (int(part) for part in key.split(":"))
+                mode_evidence[goal_key(patch["guideID"], si, gi)] = mode
+    if revisions and revisions.get("sourceCommit") == document.get("provenance", {}).get("commit"):
+        applied = document.get("provenance", {}).get("routeRevisions", {}).get("applied", [])
+        for revision in revisions.get("revisions", []):
+            proof = revision.get("evidence", {})
+            sha = proof.get("sourceSha256", "")
+            if revision.get("id") not in applied or not text(proof.get("sourceFile")) or not text(proof.get("sourceUrl")) \
+                    or len(sha) != 64 or any(char not in "0123456789abcdef" for char in sha):
+                continue
+            for patch in revision.get("goalChanges", []):
+                mode = patch.get("set", {}).get("navigationMode")
+                if mode not in NAVIGATION_MODES:
+                    continue
+                expected = {**patch["match"], **patch["set"]}
+                matches = [(guide, si, gi) for guide, si, _, gi, goal in iter_goals(document)
+                           if guide["id"] == revision["guideID"]
+                           and all(goal.get(key) == value for key, value in expected.items())]
+                if len(matches) == patch["count"]:
+                    for guide, si, gi in matches:
+                        mode_evidence[goal_key(guide["id"], si, gi)] = mode
     era = document.get("mapFrames", {}).get("era", {})
     for guide, si, step, gi, goal in iter_goals(document):
         key = goal_key(guide["id"], si, gi)
@@ -259,7 +284,9 @@ def main():
     document = json.loads(args.input.read_text(encoding="utf-8"))
     locations_path = args.locations or args.input.with_name("guide_locations.json")
     locations = json.loads(locations_path.read_text(encoding="utf-8")) if locations_path.exists() else None
-    report = audit(document, args.baseline, locations)
+    revisions_path = args.input.with_name("guide_revisions.json")
+    revisions = json.loads(revisions_path.read_text(encoding="utf-8")) if revisions_path.exists() else None
+    report = audit(document, args.baseline, locations, revisions)
     rendered = json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -71,6 +71,10 @@ local function questID(goal)
     return finite(q) and q > 0 and q == math.floor(q) and q or nil
 end
 local function action(goal) return goal and (goal.t or goal.action) end
+local function profession(goal, step)
+    if ns.GetGoalProfessionRequirement then return ns:GetGoalProfessionRequirement(goal, step) end
+    return goal and (goal.requiresSkill or goal.profLine) or step and (step.requiresSkill or step.profLine)
+end
 local function copy(value)
     if type(value) ~= "table" then return value end
     local out = {}; for k, v in pairs(value) do if k ~= "_rxpSpot" then out[k] = copy(v) end end
@@ -144,6 +148,13 @@ local function delivered(observation, q, owner)
     if not item or item.basic then return nil end
     return item.state == 3
 end
+local function activeParent(goal, owner, observation)
+    if not goal.parent then return true end
+    if not finite(goal.parent) or goal.parent <= 0 or goal.parent ~= math.floor(goal.parent) then return nil end
+    local item = observation(goal.parent, owner)
+    if not item or item.basic then return nil end
+    return item.state == 1 or item.state == 2
+end
 -- nil is unknown, false is a known unmet requirement. OR and AND retain their
 -- authored meaning; a partner's absent snapshot never becomes a missing quest.
 local function prerequisites(goal, who, owner, observation)
@@ -151,8 +162,24 @@ local function prerequisites(goal, who, owner, observation)
     if goal.minLevel and (not finite(who.level) or who.level < goal.minLevel) then
         return false, "Requiere nivel " .. tostring(goal.minLevel) .. ".", missing, unknown
     end
-    if goal.profLine or goal.profRank or goal.profession or goal.skill or goal.reputation then
+    if profession(goal) then
+        if owner ~= "mine" or not ns.CheckGoalProfession then
+            return nil, "La profesión del compañero debe comprobarse en su personaje.", missing, unknown
+        end
+        local eligible, reason = ns:CheckGoalProfession(goal)
+        if eligible ~= true then return eligible, reason, missing, unknown end
+    end
+    if goal.profession or goal.skill or goal.reputation then
         return nil, "El requisito de profesión, habilidad o reputación debe comprobarse en su personaje.", missing, unknown
+    end
+    local parent = activeParent(goal, owner, observation)
+    if parent == false then
+        missing[#missing + 1] = goal.parent
+        return false, "Acepta primero " .. title(goal.parent, (goal.preTitles or {})[goal.parent])
+            .. " y mantenla en tu diario.", missing, unknown
+    elseif parent == nil then
+        if finite(goal.parent) then unknown[#unknown + 1] = goal.parent end
+        return nil, "Sin confirmar la misión que debe mantener en el diario.", missing, unknown
     end
     for _, q in ipairs(goal.closedBy or {}) do
         local item = observation(math.abs(q), owner)
@@ -217,6 +244,9 @@ local function completeSource(record, who)
     return work and handin
 end
 local function recoveryAvailable(target, who, owner, observation)
+    -- Recovery plans complete and deliver prerequisites. An active parent
+    -- must stay in the journal and cannot be recovered by such a plan.
+    if activeParent(target, owner, observation) ~= true then return false end
     local work, path = 0, {}
     local resolve
     resolve = function(q, depth)
@@ -228,8 +258,11 @@ local function recoveryAvailable(target, who, owner, observation)
         for _, r in ipairs(acceptRecords(q, who)) do
             local goal, valid = r.goal, completeSource(r, who)
             if goal.minLevel and who.level < goal.minLevel then valid=false end
-            if goal.profLine or goal.profRank or goal.profession or goal.skill or goal.reputation then valid=false end
+            if goal.profession or goal.skill or goal.reputation then valid=false end
+            if observed.state == 0 and profession(goal) and (owner ~= "mine" or not ns.CheckGoalProfession
+                or ns:CheckGoalProfession(goal) ~= true) then valid=false end
             if valid and observed.state == 0 then
+                if activeParent(goal, owner, observation) ~= true then valid=false end
                 for _, closed in ipairs(goal.closedBy or {}) do
                     local value = observation(math.abs(closed), owner)
                     if not value or value.basic or value.state > 0 then valid=false end
@@ -255,7 +288,7 @@ local function recoveryAvailable(target, who, owner, observation)
 end
 local function commonAccept(records, mine, partner)
     for _, r in ipairs(records) do
-        if action(r.goal) == "accept" and applies(r, mine) and applies(r, partner) then return r end
+        if action(r.goal) == "accept" and applies(r, mine) and applies(r, partner) and not profession(r.goal, r.step) then return r end
     end
 end
 local function key(mine, partner, ctx)
@@ -314,7 +347,7 @@ function P:GetCommonRoutes()
                     if a and a.state>0 and a.state<3 then
                         local shared=false
                         for _, r in ipairs(route.quests[q]) do
-                            if not r.goal.optional and applies(r,mine) and applies(r,partner) then shared=true;break end
+                            if not r.goal.optional and applies(r,mine) and applies(r,partner) and not profession(r.goal,r.step) then shared=true;break end
                         end
                         if shared then
                             local b=observation(q,"partner")
@@ -329,7 +362,7 @@ function P:GetCommonRoutes()
             for _, q in ipairs(chosen and {} or route.entries) do
                 local shared, required = false, false
                 for _, r in ipairs(route.quests[q]) do
-                    if applies(r, mine) and applies(r, partner) then shared=true; if not r.goal.optional then required=true end end
+                    if applies(r, mine) and applies(r, partner) and not profession(r.goal,r.step) then shared=true; if not r.goal.optional then required=true end end
                 end
                 if shared and required then
                     local a, b = observation(q, "mine"), observation(q, "partner")
@@ -432,12 +465,12 @@ function P:GetDifferences()
         for _, record in ipairs(records) do
             local q = record.q
             local a, b = observation(q,"mine"), observation(q,"partner")
-            local common = applies(record,mine) and applies(record,partner)
+            local common = applies(record,mine) and applies(record,partner) and not profession(record.goal,record.step)
                 and identityAllowed(record.guide, mine) and identityAllowed(record.guide, partner)
             local entry
             if not common then
                 entry={questID=q,title=title(q,record.goal.title),owner=applies(record,mine) and "mine" or "partner",kind="individual",
-                    text="Esta rama es individual por requisitos de guía, raza, clase o nivel. Cada uno conserva su cadena; no se compara como una misión compartida."}
+                    text="Esta rama es individual por requisitos de guía, raza, clase, profesión o nivel. Cada uno conserva su cadena; no se compara como una misión compartida."}
             elseif not a then
                 entry={questID=q,title=title(q,record.goal.title),owner="mine",kind="unknown",
                     text="El cliente no permite confirmar tu registro actual para esta misión. No se deduce una diferencia con tu amigo ni se propone una recogida."}
@@ -583,8 +616,16 @@ local function goalObservation(goal,who,owner,observation)
             return {known=true,done=who.level>=target,status=who.level>=target and "done" or "active",reason="Nivel "..who.level.."/"..target}
         end
     end
+    local item=q and observation(q,owner)
+    if profession(goal) and (not item or item.state==0) then
+        if owner~="mine" or not ns.CheckGoalProfession then
+            return {known=false,done=false,status="blocked",reason="Profesión del compañero sin confirmar.",quest=item}
+        end
+        local ready,why=ns:CheckGoalProfession(goal)
+        if ready==false then return {known=true,done=true,status="skip",reason=why,quest=item} end
+        if ready==nil then return {known=false,done=false,status="blocked",reason=why,quest=item} end
+    end
     if not q then return {known=false,done=false,status="manual",reason="Acción de viaje o servicio sin confirmación individual compartida."} end
-    local item=observation(q,owner)
     if not item or item.basic then return {known=false,done=false,status="blocked",reason="Registro individual sin confirmar.",quest=item} end
     if item.state==3 then return {known=true,done=true,status="done",reason="Entregada en su registro.",quest=item} end
     if kind=="accept" then
@@ -618,13 +659,13 @@ local function stepItems(g,stepIndex,mine,partner,observation)
         local record={goal=goal,step=step,guide=g}
         local a,b=applies(record,mine),applies(record,partner)
         local item={goal=goal,index=i,action=action(goal) or "manual",questID=questID(goal),title=goal.title or step.title,
-            appliesMine=a,appliesPartner=b,individual=not(a and b),optional=goal.optional==true}
+            appliesMine=a,appliesPartner=b,individual=not(a and b) or profession(goal,step)~=nil,optional=goal.optional==true}
         item.mine=a and goalObservation(goal,mine,"mine",observation) or {known=true,done=false,status="skip",reason="Rama de otra raza o clase."}
         item.partner=b and goalObservation(goal,partner,"partner",observation) or {known=true,done=false,status="skip",reason="Rama de otra raza o clase."}
         item.known=(not a or item.mine.known) and (not b or item.partner.known)
         if item.individual or item.optional then
             item.status="skip"
-            item.reason=item.individual and "Rama individual: cada raza o clase conserva sus requisitos; no se marca completada para el otro." or "Objetivo opcional; no se exige como avance común."
+            item.reason=item.individual and "Rama individual: cada personaje conserva sus requisitos de raza, clase o profesión; no se marca completada para el otro." or "Objetivo opcional; no se exige como avance común."
         elseif item.action=="note" and hasTask then
             item.status,item.known,item.reason="skip",true,"Información del autor; no representa una misión completada."
         elseif not item.known then

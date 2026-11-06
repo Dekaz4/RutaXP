@@ -35,7 +35,9 @@ def refresh(source: Path) -> tuple[dict, dict]:
         for step in guide["steps"] for goal in step["goals"] for key in goal).items()))
     locations_path = source / "guide_locations.json"
     locations = json.loads(locations_path.read_text(encoding="utf-8")) if locations_path.is_file() else None
-    return document, audit(document, locations=locations)
+    revisions_path = source / "guide_revisions.json"
+    revisions = json.loads(revisions_path.read_text(encoding="utf-8")) if revisions_path.is_file() else None
+    return document, audit(document, locations=locations, revisions=revisions)
 
 
 def main():

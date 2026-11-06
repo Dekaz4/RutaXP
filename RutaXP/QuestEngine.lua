@@ -104,6 +104,10 @@ local function getGuideLayout(self, guide)
             if q and (goal.t or goal.action) == "accept" then
                 cached.accepts[q] = cached.accepts[q] or {}
                 table.insert(cached.accepts[q], { s = s, g = g, step = step, goal = goal })
+                if type(goal.parent) == "number" and goal.parent > 0 then
+                    cached.preOf[goal.parent] = cached.preOf[goal.parent] or {}
+                    table.insert(cached.preOf[goal.parent], q)
+                end
                 for _, pre in ipairs(goal.pre or {}) do
                     cached.preOf[math.abs(pre)] = cached.preOf[math.abs(pre)] or {}
                     table.insert(cached.preOf[math.abs(pre)], q)
@@ -161,6 +165,117 @@ local function earlierAccept(self, layout, id, stepIndex, goalIndex)
         end
     end
     return found
+end
+
+local professionNames = { [129]="Primeros auxilios", [164]="Herrería", [165]="Peletería", [171]="Alquimia",
+    [182]="Herboristería", [185]="Cocina", [186]="Minería", [197]="Sastrería", [202]="Ingeniería",
+    [333]="Encantamiento", [356]="Pesca", [393]="Desuello" }
+local function finiteNumber(value)
+    return not (issecretvalue and issecretvalue(value)) and type(value) == "number"
+        and value == value and math.abs(value) < math.huge
+end
+local function ownProfessionRequirement(goal)
+    if not goal then return nil end
+    local requirement = type(goal.requiresSkill) == "table" and goal.requiresSkill
+    if not requirement and not goal.profLine then return nil end
+    local id = requirement and requirement.id or goal.profLine
+    local rank = requirement and requirement.rank or goal.profRank or 1
+    return { id=id, rank=rank, name=professionNames[id] or (requirement and requirement.name) or goal.profName or "la profesión indicada" }
+end
+function ns:GetGoalProfessionRequirement(goal, step)
+    local requirement = ownProfessionRequirement(goal) or ownProfessionRequirement(step)
+    if requirement then return requirement end
+    local id = goal and (goal.quest or goal.questID)
+    local guide = self.char and self.guides[self.char.activeGuide]
+    local layout = id and getGuideLayout(self, guide)
+    for _, entry in ipairs(layout and layout.accepts[id] or {}) do
+        if self:MatchesConditions(entry.step.only) and self:MatchesConditions(entry.goal.only) then
+            requirement = ownProfessionRequirement(entry.goal) or ownProfessionRequirement(entry.step)
+            if requirement then return requirement end
+        end
+    end
+end
+
+-- Never infer a partner's professions. A nil rank is unreadable, while zero
+-- requires a readable, complete local enumeration or an explicit skill record.
+function ns:InvalidateProfessionRequirements()
+    self.professionRanks = nil
+    if self.DuoPlanner and self.DuoPlanner.Invalidate then self.DuoPlanner:Invalidate() end
+end
+function ns:GetProfessionRank(id)
+    if not finiteNumber(id) or id <= 0 or id ~= math.floor(id) then return nil end
+    local now = read(GetTime) or 0
+    local cache = self.professionRanks
+    if not cache or now < cache.at or now - cache.at >= 5 then
+        cache = { at=now, values={} }; self.professionRanks = cache
+    end
+    local cached = cache.values[id]
+    if cached ~= nil then return cached ~= false and cached or nil end
+    local function remember(rank)
+        if rank == nil then cache.values[id] = false else cache.values[id] = rank end
+        return rank
+    end
+    local function rankOf(info)
+        if type(info) ~= "table" or (issecretvalue and issecretvalue(info)) then return nil end
+        local rank, maximum = info.rank, info.maxRank
+        if finiteNumber(rank) and rank >= 0 and finiteNumber(maximum) and maximum >= rank then return rank end
+    end
+    local rank = rankOf(read(C_SkillInfo and C_SkillInfo.GetSkillLineInfoByID, id))
+    if rank ~= nil then return remember(rank) end
+    if type(GetProfessions) == "function" and type(GetProfessionInfo) == "function" then
+        local results = { pcall(GetProfessions) }
+        if results[1] then
+            local complete = true
+            for index = 2, 7 do
+                local slot = results[index]
+                if issecretvalue and issecretvalue(slot) then complete = false
+                elseif slot ~= nil then
+                    if not finiteNumber(slot) then complete = false
+                    else
+                        local _, _, skillRank, _, _, _, skillID = read(GetProfessionInfo, slot)
+                        if not finiteNumber(skillID) or not finiteNumber(skillRank) or skillRank < 0 then complete = false
+                        elseif skillID == id then return remember(skillRank) end
+                    end
+                end
+            end
+            if complete then return remember(0) end
+        end
+    end
+    local count = read(C_SkillInfo and C_SkillInfo.GetNumSkillLines)
+    if finiteNumber(count) and count >= 0 and count <= 1000 and count == math.floor(count) then
+        local complete = true
+        for index = 1, count do
+            local info = read(C_SkillInfo and C_SkillInfo.GetSkillLineInfo, index)
+            if type(info) ~= "table" then complete = false
+            elseif issecretvalue and (issecretvalue(info.skillID) or issecretvalue(info.isHeader) or issecretvalue(info.isExpanded)) then complete = false
+            elseif info.isHeader then
+                -- A collapsed category can hide a learned skill; do not
+                -- expand the user's skill window just to manufacture certainty.
+                if info.isExpanded ~= true then complete = false end
+            elseif info.skillID == id then
+                rank = rankOf(info)
+                if rank ~= nil then return remember(rank) end
+                complete = false
+            elseif not finiteNumber(info.skillID) then complete = false end
+        end
+        if complete then return remember(0) end
+    end
+    return remember(nil)
+end
+function ns:CheckGoalProfession(goal, step)
+    local requirement = self:GetGoalProfessionRequirement(goal, step)
+    if not requirement then return true end
+    local id = goal and (goal.quest or goal.questID)
+    if id and (self:IsQuestActive(id) or self:IsQuestDelivered(id)) then return true end
+    local rank = self:GetProfessionRank(requirement.id)
+    local needed = requirement.rank
+    if not finiteNumber(needed) or needed < 1 or rank == nil then
+        return nil, "No se puede comprobar " .. requirement.name
+    end
+    if rank < needed then
+        return false, "Requiere " .. requirement.name .. (needed > 1 and (" (" .. needed .. ")") or "")
+    end
+    return true
 end
 
 local function isAbsentCarriedQuest(self, goal, step, id)
@@ -236,6 +351,9 @@ function ns:GetGoalStatus(goal, step, state, index)
         return "skip", "Rama alternativa ya elegida"
     end
     if goal.optional and not (self.char and self.char.optional) and not onQuest then return "skip", "Opcional desactivado" end
+    local profession, professionReason = self:CheckGoalProfession(goal, step)
+    if profession == false then return "skip", professionReason end
+    if profession == nil then return "blocked", professionReason end
     local playerLevel = UnitLevel("player") or 1
     if action == "accept" then
         -- Grey is an XP classification, not proof that a quest/reward is
@@ -251,6 +369,13 @@ function ns:GetGoalStatus(goal, step, state, index)
         end
         if goal.minLevel and playerLevel < goal.minLevel then
             return "blocked", "Requiere nivel " .. goal.minLevel
+        end
+        -- A parent is an umbrella quest kept in the journal while its
+        -- subquests are done. Its delivery is not an acceptance prerequisite.
+        if goal.parent and not self:IsQuestActive(goal.parent) then
+            local parentTitle = read(C_QuestLog and C_QuestLog.GetTitleForQuestID, goal.parent)
+                or (goal.preTitles or {})[goal.parent] or ("Misión " .. tostring(goal.parent))
+            return "blocked", "Acepta primero " .. parentTitle .. " y mantenla en tu diario"
         end
         for _, pre in ipairs(goal.preAll or {}) do
             if not self:IsQuestDelivered(math.abs(pre)) then return "blocked", "Primero entrega la misión previa" end
@@ -1088,12 +1213,15 @@ for _, event in ipairs({
     "BAG_UPDATE_DELAYED", "HEARTHSTONE_BOUND", "NEW_TAXI_PATH", "TAXIMAP_OPENED",
     "MERCHANT_SHOW", "TRAINER_SHOW", "GOSSIP_SHOW", "QUEST_GREETING", "QUEST_DETAIL",
     "QUEST_PROGRESS", "QUEST_COMPLETE", "UNIT_SPELLCAST_SUCCEEDED",
-    "ZONE_CHANGED_NEW_AREA"
+    "ZONE_CHANGED_NEW_AREA", "SKILL_LINES_CHANGED", "TRADE_SKILL_LIST_UPDATE", "PLAYER_ENTERING_WORLD"
 }) do
     pcall(events.RegisterEvent, events, event)
 end
 events:SetScript("OnEvent", function(_, event, ...)
     if not ns.initialized then return end
+    if event == "SKILL_LINES_CHANGED" or event == "TRADE_SKILL_LIST_UPDATE" or event == "PLAYER_ENTERING_WORLD" then
+        ns:InvalidateProfessionRequirements()
+    end
     if event == "ZONE_CHANGED_NEW_AREA" then
         local guide, _, state = ns:GetCurrent()
         if state then state.placed = false end
