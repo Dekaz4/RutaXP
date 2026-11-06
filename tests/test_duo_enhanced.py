@@ -91,6 +91,29 @@ class EnhancedDuoTests(unittest.TestCase):
         missing = a.dcall("GetObjectiveProgress", 100, 32)
         self.assertFalse(missing.partner.known)
 
+    def test_delivered_history_has_no_live_zero_counter_for_either_character(self):
+        a, b = self.pair()
+        for h in (a, b):
+            h.ns.char.auto = False
+            h.quest(100, onQuest=False, delivered=True, objectives=[{
+                "finished": False, "numFulfilled": 0, "numRequired": 20,
+            }])
+        self.exchange(a, b, ticks=8)
+        for h in (a, b):
+            progress = h.dcall("GetObjectiveProgress", 100, 1)
+            for owner in (progress.mine, progress.partner):
+                self.assertTrue(owner.delivered)
+                self.assertTrue(owner.finished)
+                self.assertFalse(owner.known)
+                self.assertIsNone(owner.current)
+                self.assertIsNone(owner.total)
+            self.assertIn("Entregada", progress.text)
+            self.assertNotIn("0/20", progress.text)
+            report = h.dcall("GetReport")
+            self.assertIn("Entregada", report)
+            self.assertNotIn("0/20", report)
+            self.assertNotIn("0/1 objetivos", report)
+
     def test_large_objective_set_rotates_without_breaking_mask_or_packet_limit(self):
         a, b = self.pair()
         objectives = [{"finished": index == 32, "numFulfilled": 10000000 if index == 32 else 9999999,

@@ -98,6 +98,22 @@ class DuoPlannerTests(unittest.TestCase):
         assert(routes[1].text:find("mapas distintos",1,true))
         ''')
 
+    def test_journal_fallback_preserves_active_quest_over_stale_history(self):
+        self.check('''
+        NS.Duo.LocalQuest=nil
+        function NS:IsQuestDelivered() return false end
+        function C_QuestLog.IsOnQuest() return true end
+        function C_QuestLog.IsQuestFlaggedCompleted() return true end
+        function C_QuestLog.IsComplete() return false end
+        Known(101,3)
+        local items=NS.DuoPlanner:GetSharedGoalItems("current",1)
+        assert(items[2].mine.done==false and items[2].status~="done")
+        assert(items[3].mine.done==false and items[3].status~="done")
+        NS.IsQuestDelivered=nil
+        items=NS.DuoPlanner:GetSharedGoalItems("current",1)
+        assert(items[2].mine.done==false and items[3].mine.done==false)
+        ''')
+
     def test_prerequisites_keep_or_and_and_unknown_semantics_for_each_player(self):
         self.check('''
         local a=NS.guides.current.steps[1].goals[1]

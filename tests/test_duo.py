@@ -103,6 +103,47 @@ class DuoTests(unittest.TestCase):
         a.call("Sync")
         self.assertEqual(a.position(), 2)
 
+    def test_active_quest_with_stale_history_and_zero_flags_is_sent_as_pending(self):
+        a, b = self.pair()
+        a.quest(100, onQuest=True, complete=0, delivered=True, objectives=[{
+            "text": "Objetos: 0/20", "finished": 0, "numFulfilled": 0, "numRequired": 20,
+        }])
+        a.lua.execute("""
+            function C_QuestLog.IsComplete() return 0 end
+            function C_QuestLog.ReadyForTurnIn() return 0 end
+        """)
+        # The historical API can still say delivered for a quest currently in
+        # the journal. Numeric zero from a boolean API must not become true.
+        a.call("Sync")
+        local = a.dcall("LocalQuest", 100)
+        self.assertEqual((local.state, local.done, local.mask), (1, 0, 0))
+        self.assertIsNone(local.objectives[1].finished)
+        for _ in range(12):
+            a.tick(); b.tick(); a.deliver_to(b); b.deliver_to(a)
+        remote = b.dcall("GetPartnerQuest", 100)
+        self.assertEqual((remote.state, remote.done, remote.mask), (1, 0, 0))
+        self.assertEqual(b.dcall("GetObjectiveProgress", 100, 1).partner.current, 0)
+        # A real turn-in event remains valid during the brief stale journal.
+        a.fire("QUEST_TURNED_IN", 100)
+        self.assertEqual(a.dcall("LocalQuest", 100).state, 3)
+
+    def test_skipping_a_step_never_sends_completed_quest_or_objective_bits(self):
+        a, b = self.pair()
+        for h in (a, b):
+            h.quest(100, onQuest=True, complete=False, objectives=[{
+                "text": "Objetos: 0/20", "finished": False, "numFulfilled": 0, "numRequired": 20,
+            }])
+            h.ns.char.auto = False
+        a.call("SkipStep")
+        self.assertEqual((a.position(), b.position()), (2, 1))
+        for _ in range(15):
+            a.tick(); b.tick(); a.deliver_to(b); b.deliver_to(a)
+        self.assertEqual((a.position(), b.position()), (2, 1))
+        remote = b.dcall("GetPartnerQuest", 100)
+        self.assertEqual((remote.state, remote.done, remote.mask), (1, 0, 0))
+        self.assertFalse(a.call("IsQuestDelivered", 100))
+        self.assertIsNone(b.call("GetProgress", "forever/alliance/test").skipped)
+
     def test_wait_holds_completed_local_step_until_peer_ready_for_turnin(self):
         a, b = self.pair()
         a.dcall("SetWait", True)

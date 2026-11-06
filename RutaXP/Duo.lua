@@ -420,12 +420,12 @@ function Duo:GetQuestIDs()
     return ids
 end
 function Duo:LocalQuest(id)
+    local activeValue = safe(C_QuestLog and C_QuestLog.IsOnQuest, id)
+    local active = activeValue == true
     local delivered = ns.IsQuestDelivered and ns:IsQuestDelivered(id) == true
     local flag = safe(C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted, id)
     if flag == nil then flag = safe(IsQuestFlaggedCompleted, id) end
-    if flag == true then delivered = true end
-    local activeValue = safe(C_QuestLog and C_QuestLog.IsOnQuest, id)
-    local active = activeValue == true
+    if not ns.IsQuestDelivered and not active and flag == true then delivered = true end
     local known = delivered == true or active or (activeValue == false and flag == false)
     local complete = safe(C_QuestLog and C_QuestLog.IsComplete, id) == true
         or safe(C_QuestLog and C_QuestLog.ReadyForTurnIn, id) == true
@@ -466,6 +466,9 @@ end
 function Duo:GetObjectiveProgress(id, objectiveIndex)
     objectiveIndex = integer(objectiveIndex, 1, 32)
     local function progress(q, remote)
+        if q and q.known ~= false and not q.basic and q.state == 3 then
+            return { known = false, delivered = true, finished = true, index = objectiveIndex }
+        end
         local item = objectiveIndex and q and q.objectives and q.objectives[objectiveIndex]
         local finished = item and item.finished
         if remote and q and not q.basic and q.known ~= false and objectiveIndex and objectiveIndex <= (q.total or 0) then
@@ -477,7 +480,10 @@ function Duo:GetObjectiveProgress(id, objectiveIndex)
     end
     local mine = progress(self:LocalQuest(id), false)
     local partner = progress(self:GetPartnerQuest(id), true)
-    local function text(item) return item.known and (item.current .. "/" .. item.total) or "Sin datos" end
+    local function text(item)
+        if item.delivered then return "Entregada" end
+        return item.known and (item.current .. "/" .. item.total) or "Sin datos"
+    end
     return { mine = mine, partner = partner, index = objectiveIndex,
         text = "Tú: " .. text(mine) .. " · amigo: " .. text(partner) }
 end
@@ -1144,16 +1150,18 @@ function Duo:GetReport()
     for _, id in ipairs(self:GetQuestIDs()) do
         local mine, friend = self:LocalQuest(id), self:GetPartnerQuest(id)
         local theirs = friend and (friend.basic and "La lleva; objetivos sin confirmar" or names[friend.state]) or "Sin datos recientes"
-        if friend and not friend.basic and friend.total > 0 then theirs = theirs .. " (" .. friend.done .. "/" .. friend.total .. " objetivos)" end
+        if friend and not friend.basic and friend.state ~= 3 and friend.total > 0 then theirs = theirs .. " (" .. friend.done .. "/" .. friend.total .. " objetivos)" end
         lines[#lines + 1] = ns:GetQuestTitle(id) .. " · tú: " .. (names[mine.state] or "Sin datos") .. " · amigo: " .. theirs
-        local function countText(objective)
+        local function countText(quest, objective)
+            if quest and quest.state == 3 then return "Entregada" end
             if objective and objective.known and fresh(objective.seen) then return objective.current .. "/" .. objective.total end
             return "Sin datos"
         end
         for index = 1, math.min(32, math.max(mine.total or 0, friend and friend.total or 0)) do
-            local localObjective, remoteObjective = mine.objectives[index], friend and friend.objectives and friend.objectives[index]
+            local localObjective = mine.state ~= 3 and mine.objectives[index]
+            local remoteObjective = friend and friend.state ~= 3 and friend.objectives and friend.objectives[index]
             if (localObjective and localObjective.known) or (remoteObjective and remoteObjective.known) then
-                lines[#lines + 1] = "  Objetivo " .. index .. " · tú: " .. countText(localObjective) .. " · amigo: " .. countText(remoteObjective)
+                lines[#lines + 1] = "  Objetivo " .. index .. " · tú: " .. countText(mine, localObjective) .. " · amigo: " .. countText(friend, remoteObjective)
             end
         end
     end

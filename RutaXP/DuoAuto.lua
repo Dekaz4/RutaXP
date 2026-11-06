@@ -174,6 +174,18 @@ function Auto:ClearTravelAgreement()
     self:_ClearAgreement()
 end
 
+function Auto:RefreshProgressAgreement()
+    self:ClearTravelAgreement()
+    local config = settings()
+    if config and config.autoPair then
+        -- Both clients must discard the previous agreement, including when
+        -- the recovering character is waiting for the other to coordinate.
+        config.autoEpoch = (tonumber(config.autoEpoch) or 0) % 1000000000 + 1
+    end
+    self.retryAt = nil
+    if ns.Duo then ns.Duo.lastSentHeader = nil end
+end
+
 -- Orcs and trolls have an extra Barrens chapter before the shared chapter.
 -- Permit one personal link only when the two authored paths meet immediately
 -- afterwards and the partner has actually finished their own approach.

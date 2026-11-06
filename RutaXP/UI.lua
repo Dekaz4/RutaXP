@@ -442,6 +442,7 @@ function ns:CreateTracker()
                 end
                 GameTooltip:AddLine(item.questPlan and "Plan del diario: informa de próximos pasos sin cambiar la misión de la flecha."
                     or item.preview and "Vista previa: primero termina el paso actual. No modifica tu progreso."
+                    or item.omitted and "Clic der.: volver a incluir este objetivo"
                     or "Clic izq.: marcar destino · Clic der.: omitir o quitar la marca manual", 0.58, 0.80, 1.0, true)
                 GameTooltip:Show()
             end
@@ -661,12 +662,15 @@ function ns:RefreshUI()
             if not self.trackerRows[i] then self:CreateTrackerRow(i) end
             local row = self.trackerRows[i]
             local meta = ACTION_ICONS[item.action] or ACTION_ICONS.goto
+            local omitted = item.status == "skip" and item.reason
+                and item.reason:find("^Omitido manualmente") ~= nil
             row.goalIndex = item.index
-            row.goalTitle = item.title
+            row.goalTitle = omitted and ("Omitido · " .. item.title) or item.title
+            row.omitted = omitted
             row.preview = item.preview == true
             row.questPlan = item.questPlan == true
             local subtitle = item.subtitle
-            if not row.preview and not sharedView and self.GetDuoGoalSuffix and step.goals and item.index then
+            if item.status ~= "done" and not row.preview and not sharedView and self.GetDuoGoalSuffix and step.goals and item.index then
                 local suffix = self:GetDuoGoalSuffix(step.goals[item.index], step)
                 if suffix and suffix ~= "" then subtitle = (subtitle and subtitle ~= "" and subtitle .. " · " or "") .. suffix end
             end
@@ -678,13 +682,15 @@ function ns:RefreshUI()
             if row.icon.SetVertexColor then
                 if item.status == "done" then
                     row.icon:SetVertexColor(unpack(GREEN))
+                elseif omitted then
+                    row.icon:SetVertexColor(unpack(MUTED))
                 else
                     row.icon:SetVertexColor(unpack(meta.color))
                 end
             end
-            local titleColor = row.preview and "|cff9facbd" or item.status == "done" and "|cff6be09e"
+            local titleColor = (row.preview or omitted) and "|cff9facbd" or item.status == "done" and "|cff6be09e"
                 or (item.isCurrent and "|cffffe08c" or "|cffe8eef7")
-            row.title:SetText(titleColor .. item.title .. "|r")
+            row.title:SetText(titleColor .. row.goalTitle .. "|r")
             local titleH = math.max(14, row.title:GetStringHeight() or 14)
             if subtitle and subtitle ~= "" then
                 row.sub:SetText(subtitle)
@@ -700,7 +706,7 @@ function ns:RefreshUI()
                 row.mark:SetColorTexture(unpack(GREEN))
                 row:SetBackdropColor(0.05, 0.11, 0.09, 0.85)
                 row.borderColor = { 0.18, 0.36, 0.26, 0.85 }
-            elseif item.isCurrent then
+            elseif item.isCurrent and not omitted then
                 row.mark:SetColorTexture(unpack(GOLD))
                 row:SetBackdropColor(0.11, 0.14, 0.21, 0.95)
                 row.borderColor = { 0.45, 0.38, 0.22, 0.95 }

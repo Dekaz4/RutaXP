@@ -118,9 +118,10 @@ local function observe()
         if owner == "mine" then
             if ns.Duo and ns.Duo.LocalQuest then value = read(ns.Duo.LocalQuest, ns.Duo, q) end
             if type(value) ~= "table" then
-                local delivered = ns.IsQuestDelivered and read(ns.IsQuestDelivered, ns, q)
-                    or read(C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted, q)
                 local active = read(C_QuestLog and C_QuestLog.IsOnQuest, q)
+                local delivered
+                if ns.IsQuestDelivered then delivered = read(ns.IsQuestDelivered, ns, q)
+                elseif active ~= true then delivered = read(C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted, q) end
                 local complete = read(C_QuestLog and C_QuestLog.IsComplete, q)
                 if delivered == true then value = { state=3 }
                 elseif active == true then value = { state=complete == true and 2 or 1 }

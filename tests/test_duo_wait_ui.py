@@ -64,6 +64,16 @@ class DuoWaitUITests(unittest.TestCase):
         self.assertIn("falta aceptar", h.ns.duoTracker.text)
         self.assertIn(h.ns.GetQuestTitle(h.ns, 234), h.ns.duoTracker.waitReason)
 
+    def test_goal_suffix_names_confirmed_delivery_instead_of_zeroed_old_counts(self):
+        h = self.visit()
+        receive = h.ns.Duo.Receive
+        self.assertTrue(receive(h.ns.Duo, h.ns.Duo.prefix,
+            "2|H|friend|1|10|WARRIOR|Dwarf|" + DWARF + "|6|0|Alliance", "PARTY", "Dos-Forever"))
+        self.assertTrue(receive(h.ns.Duo, h.ns.Duo.prefix,
+            "2|Q|friend|2|183|3|0|1|0|0|1:0:20:0", "PARTY", "Dos-Forever"))
+        goal = h.h.table({"quest": 183, "oi": 1})
+        self.assertEqual(h.ns.GetDuoGoalSuffix(h.ns, goal), "Amigo: entregada")
+
     def test_resync_command_and_panel_button_preserve_cursor_marks_and_mode(self):
         h = self.visit()
         before, active = h.progress(), h.ns.char.activeGuide

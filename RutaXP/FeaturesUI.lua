@@ -263,6 +263,10 @@ function ns:UpdateFeatures()
             add("Recuperar requisito " .. i, function() result(self.Recovery:Start(index)) end)
         end
         add("Comprobar requisitos", function() result(self.Recovery:Resume()) end)
+        add("Retomar misiones pendientes", function()
+            local _, reason = self:ResumePendingQuests()
+            if reason then self:Print(reason) end
+        end)
         add("Volver a mi ruta", function() result(self.Recovery:Cancel()) end)
     elseif tab == "adaptation" and self.Adaptation then
         local suggestions = self.Adaptation:GetSuggestions() or {}
@@ -379,6 +383,7 @@ function ns:GetDuoGoalSuffix(goal, step)
     if not id or not index then return "" end
     local progress = self.Duo:GetObjectiveProgress(id, index)
     local other = progress and progress.partner
+    if other and other.delivered then return "Amigo: entregada" end
     if other and other.known and type(other.current) == "number" and type(other.total) == "number" then
         return string.format("Amigo: %d/%d", other.current, other.total)
     end

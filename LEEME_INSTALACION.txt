@@ -1,4 +1,4 @@
-RUTAXP 0.7.5 - INSTALACION Y ACTUALIZACIONES
+RUTAXP 0.7.6 - INSTALACION Y ACTUALIZACIONES
 
 INSTALAR Y ACTUALIZAR LOS DOS
 Descarga Instalador_RutaXP.exe desde https://github.com/Dekaz4/RutaXP/releases/latest

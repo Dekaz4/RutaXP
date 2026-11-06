@@ -253,7 +253,7 @@ function ns:Command(message)
         local version, build, _, interface = GetBuildInfo()
         self:Print(tostring(version) .. " · build " .. tostring(build) .. " · interfaz " .. tostring(interface) .. " · proyecto " .. tostring(WOW_PROJECT_ID))
     else
-        self:Print("/rutaxp · autoduo · duo · herramientas · sesion · recuperar · adaptar · puntos · camino · recalcular · talentos · zona · flecha · mapa · siguiente · anterior · diagnostico · version · actualizar")
+        self:Print("/rutaxp · autoduo · duo · herramientas · sesion · recuperar · pendientes · adaptar · puntos · camino · recalcular · talentos · zona · flecha · mapa · siguiente · anterior · diagnostico · version · actualizar")
     end
 end
 

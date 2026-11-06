@@ -1,4 +1,4 @@
-# RutaXP 0.7.5 para WoW Forever
+# RutaXP 0.7.6 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,12 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## Misiones omitidas y progreso real (0.7.6)
+
+Las tareas saltadas se muestran en gris con «Omitido». Puedes recuperarlas con clic derecho sobre su fila. Las misiones entregadas muestran «Misión entregada» y los objetivos terminados muestran su resultado, evitando los contadores antiguos a cero.
+
+Escribe `/rutaxp pendientes` para retomar el primer objetivo pendiente de tu diario en la guía seleccionada. Se recuperan las omisiones de esas tareas y se actualiza el estado que recibe tu compañero. También está en Herramientas → Bloqueos → Retomar misiones pendientes.
 
 ## Viajes entre todas las guías (0.7.5)
 
@@ -177,7 +183,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.5.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.6.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.
@@ -202,6 +208,7 @@ Las copias locales de desarrollo no se distribuyen. Las copias creadas por el in
 | `/rutaxp partida` | Partida conjunta; `partida guardar` y `partida reanudar` |
 | `/rutaxp paradas` | Propuestas; `parada 1` inicia la primera y `parada fin` termina la tuya |
 | `/rutaxp sesion` | Muestra mediciones y permite copiar el informe |
+| `/rutaxp pendientes` | Retoma los objetivos pendientes de tu diario en la guía actual |
 | `/rutaxp recuperar` | Explica bloqueos; `recuperar 1` inicia la primera recuperación propuesta |
 | `/rutaxp volver` | Cancela la recuperación y vuelve a la ruta guardada |
 | `/rutaxp adaptar` | Muestra propuestas de ruta |

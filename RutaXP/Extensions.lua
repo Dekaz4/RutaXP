@@ -201,6 +201,9 @@ function ns:HandleFeatureCommand(command, rest)
         elseif tonumber(rest) then ok, reason = self.DuoJourney:BeginStop(tonumber(rest)) end
         if ok == false and reason then self:Print(reason) end
         self:ToggleFeatures("duo-stops")
+    elseif command == "pendientes" then
+        local _, reason = self:ResumePendingQuests()
+        if reason then self:Print(reason) end
     elseif command == "recuperar" then
         if rest ~= "" then local ok, reason = self.Recovery:Start(tonumber(rest)); if not ok and reason then self:Print(reason) end end
         self:ToggleFeatures("recovery")

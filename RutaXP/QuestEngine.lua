@@ -47,8 +47,12 @@ function ns:MatchesConditions(only)
 end
 
 function ns:IsQuestDelivered(id)
-    return self.turnedIn[id] or read(C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted, id)
-        or read(IsQuestFlaggedCompleted, id) or false
+    if self.turnedIn[id] == true then return true end
+    -- A repeat in the live log still needs its current objectives, even
+    -- when the client retains a historical completion flag.
+    if self:IsQuestActive(id) then return false end
+    return read(C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted, id) == true
+        or read(IsQuestFlaggedCompleted, id) == true
 end
 
 function ns:IsQuestActive(id)
@@ -187,6 +191,18 @@ local function matchedCandidate(self, goal)
     end
 end
 
+local function questWorkReason(goal, id)
+    if read(C_QuestLog and C_QuestLog.IsComplete, id) == true then return "Objetivos completados" end
+    local oi = goal.oi or goal.objective
+    if oi then
+        local objectives = read(C_QuestLog and C_QuestLog.GetQuestObjectives, id)
+        local finished = objectives and objectives[oi] and objectives[oi].finished
+        if not (issecretvalue and issecretvalue(finished)) and finished == true then return "Objetivo completado" end
+    elseif (goal.t or goal.action) == "collect" and goal.item and goal.count and itemCount(goal.item) >= goal.count then
+        return "Objetos reunidos"
+    end
+end
+
 function ns:GetGoalStatus(goal, step, state, index)
     if not self:MatchesConditions(step and step.only) or not self:MatchesConditions(goal.only) then return "skip", "Otro personaje" end
     local guide = self.char and self.guides[self.char.activeGuide]
@@ -196,6 +212,11 @@ function ns:GetGoalStatus(goal, step, state, index)
     if not id and (action == "fly" or action == "goto" or action == "hearth") and self.IsTravelServiceComplete
         and self:IsTravelServiceComplete(guide, stepIndex, index) then return "done", "Llegada confirmada" end
     if id and self:IsQuestDelivered(id) then return "done", "Misión entregada" end
+    local onQuest = id and self:IsQuestActive(id)
+    local workDone = id and action ~= "accept" and action ~= "turnin" and questWorkReason(goal, id)
+    -- Actual acceptance/objective credit supersedes an earlier manual skip.
+    if onQuest and action == "accept" then return "done", "Aceptada" end
+    if onQuest and workDone then return "done", workDone end
     local key = confirmationKey(state, index, stepIndex)
     if state and state.skipped and state.skipped[key] then return "skip", "Omitido manualmente" end
     if state and state.confirmed and state.confirmed[key] then
@@ -208,7 +229,6 @@ function ns:GetGoalStatus(goal, step, state, index)
         if hasOnlyNotes(self, step) then return "manual", "Confirma tras leer la nota" end
         return "skip", "Información"
     end
-    local onQuest = id and self:IsQuestActive(id)
     -- A branch excluded at acceptance also excludes its later work/delivery.
     -- An actual quest in the log remains actionable, even if another branch exists.
     if not onQuest and (isClosedBranch(self, goal) or (id and action ~= "accept"
@@ -218,7 +238,6 @@ function ns:GetGoalStatus(goal, step, state, index)
     if goal.optional and not (self.char and self.char.optional) and not onQuest then return "skip", "Opcional desactivado" end
     local playerLevel = UnitLevel("player") or 1
     if action == "accept" then
-        if onQuest then return "done", "Aceptada" end
         -- Grey is an XP classification, not proof that a quest/reward is
         -- expendable. This policy is off by default and protects known
         -- cross-guide chains and class-specific objectives when enabled.
@@ -253,14 +272,7 @@ function ns:GetGoalStatus(goal, step, state, index)
             return "skip", "La misión no está en tu diario"
         end
         if action == "turnin" then return "active", "Entrega la misión al NPC" end
-        if read(C_QuestLog and C_QuestLog.IsComplete, id) == true then return "done", "Objetivos completados" end
-        local oi = goal.oi or goal.objective
-        if oi then
-            local objectives = read(C_QuestLog and C_QuestLog.GetQuestObjectives, id)
-            if objectives and objectives[oi] and objectives[oi].finished then return "done", "Objetivo completado" end
-        elseif action == "collect" and goal.item and goal.count and itemCount(goal.item) >= goal.count then
-            return "done", "Objetos reunidos"
-        end
+        if workDone then return "done", workDone end
         return "active", "Completa el objetivo de la misión"
     end
     if action == "level" then
@@ -403,6 +415,45 @@ function ns:SkipStep()
     state.cursor = math.min(state.cursor + 1, #guide.steps + 1)
     state.review = nil
     self:Sync()
+end
+
+-- Explicitly rejoin the unfinished quests that are actually in this
+-- character's journal. Manual service confirmations and other guides stay
+-- outside this operation, including tasks belonging only to the partner.
+function ns:ResumePendingQuests()
+    local guide, _, state = self:GetCurrent()
+    if not guide then return false, "Selecciona una guía para buscar tus misiones pendientes." end
+    if guide.recovery or guide.temporary then return false, "Vuelve a tu ruta para recuperar los objetivos omitidos." end
+    if self.GetGuideTravel and self:GetGuideTravel() then return false, "Termina el viaje para retomar las misiones de esta guía." end
+    local first, keys = nil, {}
+    local observed = { cursor = state.cursor, confirmed = {}, skipped = {} }
+    for stepIndex, step in ipairs(guide.steps) do
+        if self:MatchesConditions(step.only) then
+            for index, goal in ipairs(step.goals or {}) do
+                local id = goal.quest or goal.questID
+                if id and self:IsQuestActive(id) and self:MatchesConditions(goal.only) then
+                    local status = self:GetGoalStatus(goal, step, observed, index)
+                    if status ~= "done" and status ~= "skip" then
+                        first = first or stepIndex
+                        keys[#keys + 1] = confirmationKey(state, index, stepIndex)
+                    end
+                end
+            end
+        end
+    end
+    if not first then return false, "Tu diario no tiene objetivos pendientes que correspondan a esta guía." end
+    for _, key in ipairs(keys) do
+        if state.skipped then state.skipped[key] = nil end
+        if state.confirmed then state.confirmed[key] = nil end
+    end
+    state.cursor, state.review, state.placed = first, nil, true
+    if self.DuoAuto and self.DuoAuto.RefreshProgressAgreement then self.DuoAuto:RefreshProgressAgreement() end
+    if self.Duo then
+        self.Duo.lastSentHeader = nil
+        if self.Duo.Resynchronize then self.Duo:Resynchronize() end
+    end
+    self:Sync()
+    return true, "Retomadas tus misiones pendientes del diario en el paso " .. state.cursor .. "."
 end
 
 function ns:GetGoalTitle(goal)
@@ -548,7 +599,8 @@ function ns:GetStepGoalItems(step, state)
 
     for index, goal in ipairs(step.goals) do
         local status, reason = self:GetGoalStatus(goal, step, state, index)
-        if status ~= "skip" or goal.t == "note" then
+        local manualSkip = status == "skip" and reason and reason:find("Omitido manualmente", 1, true) == 1
+        if status ~= "skip" or manualSkip or goal.t == "note" then
             local action = goal.t or goal.action or "goto"
             local id = goal.quest or goal.questID
             -- If an earlier objective in the same step for the same quest is still incomplete,
@@ -564,13 +616,17 @@ function ns:GetStepGoalItems(step, state)
                 local objName = goal.objName or goal.objectName
                 local subLines = {}
 
-                if action == "accept" or action == "turnin" or action == "talk" then
+                if status == "done" then
+                    -- Quest history can expose zeroed objective counters.
+                    -- Show the proven result instead of those old counters.
+                    subLines[#subLines + 1] = reason
+                elseif action == "accept" or action == "turnin" or action == "talk" then
                     if npcName and not goal.instructionAsHint and not (action == "accept" and goal.item) then subLines[#subLines + 1] = "Habla con " .. npcName end
                 else
                     local hasLiveObj = false
                     local objectives = id and read(C_QuestLog and C_QuestLog.GetQuestObjectives, id)
                     for oi, objective in ipairs(objectives or {}) do
-                        if objective.text and not objective.finished and (not goal.oi or goal.oi == oi) then
+                        if objective.text and objective.finished ~= true and (not goal.oi or goal.oi == oi) then
                             subLines[#subLines + 1] = objective.text
                             hasLiveObj = true
                         end
@@ -590,7 +646,7 @@ function ns:GetStepGoalItems(step, state)
 
                 local note = self:GetGoalHint(goal)
                 if note and npcName and note:gsub("[%.%s]+$", "") == "Habla con " .. npcName then note = nil end
-                if note and (index == currentIdx or #subLines == 0) then
+                if status ~= "done" and note and (index == currentIdx or #subLines == 0) then
                     subLines[#subLines + 1] = note
                 end
                 if (status == "blocked" or status == "manual") and reason and reason ~= note then
@@ -630,12 +686,13 @@ function ns:GetObjectives(step)
     local skippedDone = 0
     for index, goal in ipairs(step.goals) do
         local status, reason = self:GetGoalStatus(goal, step, state, index)
-        if status ~= "skip" or goal.t == "note" then
+        local manualSkip = status == "skip" and reason and reason:find("Omitido manualmente", 1, true) == 1
+        if status ~= "skip" or manualSkip or goal.t == "note" then
             if status == "done" and not state.review then
                 skippedDone = skippedDone + 1
             else
-                local color = status == "done" and "|cff7edd9c" or (index == current and "|cffffce72" or "|cffd5deeb")
-                local marker = status == "done" and "[Hecho] " or (index == current and "» " or "• ")
+                local color = status == "done" and "|cff7edd9c" or manualSkip and "|cff9ba8b8" or (index == current and "|cffffce72" or "|cffd5deeb")
+                local marker = status == "done" and "[Hecho] " or manualSkip and "[Omitido] " or (index == current and "» " or "• ")
                 lines[#lines + 1] = color .. marker .. self:GetGoalTitle(goal) .. "|r"
                 if index == current then
                     local candidate = matchedCandidate(self, goal)
