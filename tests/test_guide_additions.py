@@ -63,6 +63,23 @@ class ReviewedAdditionsTests(unittest.TestCase):
                 with self.assertRaises(ValueError): builder.revision_progress(revision)
                 with self.assertRaises(ValueError): self.apply(guide, revision)
 
+    def test_replacement_on_reused_indices_requires_matching_source_actions(self):
+        guide, _, revision = self.fixture()
+        revision["retiredGoals"] = {
+            "1:1": {"match": {"t": "accept", "quest": 1}, "evidence": "Old acceptance"},
+            "1:2": {"match": {"t": "turnin", "quest": 1}, "evidence": "Old delivery"},
+        }
+        revision["steps"][0].update(cursorFromStep=1, goals=[{"added": "followup"}])
+        result_steps = [{"title": "Camp", "goals": [revision["addedGoals"]["followup"]["goal"]]}]
+        revision["resultShape"] = builder.route_shape(dict(guide, steps=result_steps))
+        final = self.apply(copy.deepcopy(guide), revision)["guides"][0]
+        self.assertEqual(final["steps"], result_steps)
+        self.assertIsNone(builder.current_goal_key(final, 1, 1))
+        self.assertEqual(final["progressMigrations"][0]["stepMap"], {"1": 1, "2": 2})
+        revision["retiredGoals"]["1:1"]["match"]["quest"] = 222
+        with self.assertRaisesRegex(ValueError, "Retired source action changed"):
+            self.apply(guide, revision)
+
 
 if __name__ == "__main__":
     unittest.main()

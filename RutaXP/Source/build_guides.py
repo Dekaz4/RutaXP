@@ -162,6 +162,19 @@ def reviewed_additions(revision: dict[str, Any]) -> dict[str, Any]:
     return additions
 
 
+def reviewed_retirements(revision: dict[str, Any]) -> dict[str, Any]:
+    retired = revision.get("retiredGoals", {})
+    if not isinstance(retired, dict):
+        raise ValueError("Invalid retired goals: " + revision["id"])
+    for record in retired.values():
+        if not isinstance(record, dict) or not record.get("evidence") or not isinstance(record.get("match"), dict) \
+                or not record["match"].get("t"):
+            raise ValueError("Retiring an action needs a source match and evidence: " + revision["id"])
+    if retired and not revision.get("previousGoalCounts"):
+        raise ValueError("Retiring an action needs a progress migration: " + revision["id"])
+    return retired
+
+
 def revision_progress(revision: dict[str, Any]) -> dict[str, Any] | None:
     """Derive character progress maps from the exact reviewed source references."""
     counts = revision.get("previousGoalCounts")
@@ -175,8 +188,15 @@ def revision_progress(revision: dict[str, Any]) -> dict[str, Any] | None:
             raise ValueError("Revision cannot preserve and reorder steps together: " + revision["id"])
         entries = [{"sourceStep": index} for index in range(1, len(counts) + 1)]
     additions = reviewed_additions(revision)
+    retired = reviewed_retirements(revision)
     mapping, steps, added_keys, used_additions = {}, {}, [], set()
+    replacement_steps = {}
     for si, entry in enumerate(entries or [], 1):
+        if "cursorFromStep" in entry:
+            previous = entry["cursorFromStep"]
+            if not isinstance(previous, int) or not 1 <= previous <= len(counts) or str(previous) in replacement_steps:
+                raise ValueError("Invalid replacement step: " + revision["id"])
+            replacement_steps[str(previous)] = si
         old_step = entry.get("sourceStep")
         if old_step is not None:
             if not 1 <= old_step <= len(counts):
@@ -200,8 +220,11 @@ def revision_progress(revision: dict[str, Any]) -> dict[str, Any] | None:
             mapping[key] = f"{si}:{gi}"
             steps[str(old_si)] = min(si, steps.get(str(old_si), si))
     expected = {f"{si}:{gi}" for si, count in enumerate(counts, 1) for gi in range(1, count + 1)}
-    if set(mapping) != expected or used_additions != set(additions):
+    if set(mapping) & set(retired) or set(mapping) | set(retired) != expected or used_additions != set(additions):
         raise ValueError("Migration must retain every source goal: " + revision["id"])
+    if steps.keys() & replacement_steps.keys() or len(steps) + len(replacement_steps) != len(counts):
+        raise ValueError("Every replaced step needs exactly one cursor destination: " + revision["id"])
+    steps.update(replacement_steps)
     changed = {old: new for old, new in mapping.items() if old != new}
     steps[str(len(counts) + 1)] = len(entries) + 1
     first = revision.get("firstAffectedStep", min((int(key.split(":")[0]) for key in changed), default=len(counts) + 1))
@@ -214,19 +237,23 @@ def revision_progress(revision: dict[str, Any]) -> dict[str, Any] | None:
             "firstAffectedStep": first}
     if added_keys:
         result["addedGoalKeys"] = added_keys
+    if retired:
+        result["retiredGoalKeys"] = dict.fromkeys(retired, True)
     return result
 
 
-def current_goal_key(guide: dict[str, Any], step: int, goal: int) -> tuple[int, int]:
+def current_goal_key(guide: dict[str, Any], step: int, goal: int) -> tuple[int, int] | None:
     """Translate original navigation-evidence keys through reviewed route moves."""
     key = f"{step}:{goal}"
     for migration in guide.get("progressMigrations", []):
+        if key in migration.get("retiredGoalKeys", {}):
+            return None
         key = migration.get("goalMap", {}).get(key, key)
     return tuple(int(value) for value in key.split(":"))
 
 
 def apply_guide_revisions(document: dict[str, Any], path: Path) -> list[str]:
-    """Apply reviewed quest-order corrections, preserving every authored goal.
+    """Apply reviewed corrections and account for each original action.
 
     Each revision has exact before/after semantic fingerprints and explicit
     evidence. It is deliberately separate from the navigation-only overlays.
@@ -276,6 +303,7 @@ def apply_guide_revisions(document: dict[str, Any], path: Path) -> list[str]:
         if revision.get("previousGoalCounts") is not None and revision["previousGoalCounts"] != [len(s["goals"]) for s in original]:
             raise ValueError("Migration source goal counts changed: " + revision["id"])
         additions = reviewed_additions(revision)
+        retired = reviewed_retirements(revision)
         revised, used, used_additions = [], [], set()
         entries = revision.get("steps")
         if revision.get("preserveSteps"):
@@ -291,7 +319,7 @@ def apply_guide_revisions(document: dict[str, Any], path: Path) -> list[str]:
                 step.update(copy.deepcopy(entry.get("set", {})))
             else:
                 refs = entry["goals"]
-                step = {key: copy.deepcopy(value) for key, value in entry.items() if key != "goals"}
+                step = {key: copy.deepcopy(value) for key, value in entry.items() if key not in ("goals", "cursorFromStep")}
             step["goals"] = []
             for ref in refs:
                 if isinstance(ref, dict):
@@ -308,6 +336,13 @@ def apply_guide_revisions(document: dict[str, Any], path: Path) -> list[str]:
                 raise ValueError("Revision produces an empty step: " + revision["id"])
             revised.append(step)
         expected = [(si, gi) for si, step in enumerate(original, 1) for gi in range(1, len(step["goals"]) + 1)]
+        for si, gi in expected:
+            record = retired.get(f"{si}:{gi}")
+            if record:
+                goal = original[si - 1]["goals"][gi - 1]
+                if any(goal.get(k) != v for k, v in record["match"].items()):
+                    raise ValueError("Retired source action changed: " + revision["id"])
+                used.append((si, gi))
         if sorted(used) != expected or used_additions != set(additions):
             raise ValueError("Revision must retain every goal exactly once: " + revision["id"])
         for patch in revision.get("goalChanges", []):
@@ -372,7 +407,10 @@ def apply_guide_locations(document: dict[str, Any], path: Path) -> list[str]:
         guide = guides.get(patch["guideID"])
         si, gi = patch["step"], patch["goal"]
         if guide:
-            si, gi = current_goal_key(guide, si, gi)
+            destination = current_goal_key(guide, si, gi)
+            if destination is None:
+                continue
+            si, gi = destination
         if not guide or not isinstance(si, int) or not 1 <= si <= len(guide["steps"]):
             raise ValueError("Invalid location guide/step: " + identity)
         goals = guide["steps"][si - 1]["goals"]

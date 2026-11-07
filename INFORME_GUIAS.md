@@ -1,4 +1,8 @@
-# Revisión de guías de RutaXP 0.7.10
+# Revisión de guías de RutaXP 0.7.11
+
+## El Páramo de los Ancianos (0.7.11)
+
+La segunda visita a Onus sitúa la aceptación de «Fuerzas henchidas» después de su requisito 950. En el viaje a Vallefresno la guía enlaza la aceptación de «El despertar» con la escolta hasta la bolsa en Costa Oscura y la entrega a Liladris en Atalaya de Maestra. El objetivo consulta el diario del personaje. Las marcas manuales antiguas de desplazamiento y de lectura quedan en la copia de progreso de la revisión anterior.
 
 ## Costa Oscura y capítulos siguientes: revisión 0.7.10
 

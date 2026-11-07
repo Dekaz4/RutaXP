@@ -24,8 +24,18 @@ def original_order(document):
     """Undo reviewed moves and exact prerequisite edits before the old digest."""
     result = copy.deepcopy(document)
     revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
+    darkshore = next(g for g in result["guides"] if g["id"] == "forever/alliance/03-darkshore")
+    ashenvale = next(g for g in result["guides"] if g["id"] == "forever/alliance/06-ashenvale")
+    arbal = darkshore["steps"][31]["goals"].pop(2)
+    if arbal["quest"] != 98013 or arbal.pop("preAll") != [950]:
+        raise AssertionError("The reviewed Arbal visit changed")
+    escort = ashenvale["steps"][4]
+    if [(q["t"], q["quest"]) for q in escort["goals"]] != [("accept", 5321), ("complete", 5321)]:
+        raise AssertionError("The reviewed Kerlonian escort changed")
+    darkshore["steps"][27]["goals"].extend([arbal, escort["goals"][0]])
+    escort["goals"] = [{"t": "goto", "map": 1439, "x": 44.4, "y": 76.4, "f": "e"}, {"t": "note"}]
     for revision in reversed(revisions):
-        if not revision.get("addedGoals"):
+        if not revision.get("addedGoals") or revision.get("retiredGoals"):
             continue
         guide = next(g for g in result["guides"] if g["id"] == revision["guideID"])
         migration = next(m for m in guide["progressMigrations"] if m["from"] == revision["previousRevision"])
@@ -45,7 +55,6 @@ def original_order(document):
                 step["goals"].append(goal)
             old.append(step)
         guide["steps"] = old
-    darkshore = next(g for g in result["guides"] if g["id"] == "forever/alliance/03-darkshore")
     revision = next(r for r in revisions if r["id"] == "darkshore-holy-diver-3")
     migration = next(m for m in darkshore["progressMigrations"] if m["from"] == 2 and m["to"] == 3)
     original = []
@@ -156,12 +165,12 @@ class WholeGuideCoverageTests(unittest.TestCase):
     def test_inventory_accounts_for_every_goal_and_keeps_legitimate_exceptions_explicit(self):
         report = self.report
         self.assertEqual(report["totals"]["guides"], 57)
-        self.assertEqual(report["totals"]["goals"], 7455)
+        self.assertEqual(report["totals"]["goals"], 7454)
         self.assertEqual(report["totals"]["steps"], 2343)
-        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7455)
-        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7455)
+        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7454)
+        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7454)
         self.assertEqual(sum(report["totals"].get(k, 0) for k in
-                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7455)
+                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7454)
         self.assertEqual(report["invalidNavigation"], [])
         for item in report["missingNavigation"]:
             self.assertTrue(item["classification"])
@@ -366,7 +375,7 @@ class ShippedGuideRenderingTests(unittest.TestCase):
             end
             return count,errorCount,table.concat(errors,"; ")
         ''')
-        self.assertEqual(result, (7455, 0, ""))
+        self.assertEqual(result, (7454, 0, ""))
 
     def test_all_bundled_points_and_candidate_frames_resolve_with_the_real_navigation_converter(self):
         host = AccessHost()

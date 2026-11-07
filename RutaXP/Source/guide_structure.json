@@ -4,21 +4,21 @@
   "scope": {
     "guides": 57,
     "steps": 2343,
-    "goals": 7455,
+    "goals": 7454,
     "questIDs": 1903,
     "actions": {
       "accept": 2293,
       "buy": 27,
       "collect": 1104,
-      "complete": 238,
+      "complete": 239,
       "fly": 165,
       "getfp": 76,
-      "goto": 99,
+      "goto": 98,
       "hearth": 84,
       "interact": 50,
       "kill": 611,
       "level": 25,
-      "note": 116,
+      "note": 115,
       "sethome": 74,
       "talk": 10,
       "train": 126,
@@ -27,13 +27,13 @@
       "vendor": 48
     },
     "goalFields": {
-      "t": 7455,
-      "quest": 6500,
+      "t": 7454,
+      "quest": 6501,
       "oi": 1678,
       "item": 1214,
       "count": 1199,
       "pre": 1213,
-      "preAll": 62,
+      "preAll": 63,
       "closedBy": 152,
       "only": 352,
       "optional": 414,
@@ -3989,6 +3989,16 @@
       },
       {
         "guideID": "forever/alliance/03-darkshore",
+        "step": 28,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
+        "step": 32,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/03-darkshore",
         "step": 33,
         "field": "group shape/condition"
       },
@@ -4457,6 +4467,46 @@
         "field": "minLevel",
         "source": 21,
         "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/06-ashenvale",
+        "step": 5,
+        "goal": 1,
+        "field": "t",
+        "source": "goto",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/06-ashenvale",
+        "step": 5,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 5321
+      },
+      {
+        "guideID": "forever/alliance/06-ashenvale",
+        "step": 5,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 17
+      },
+      {
+        "guideID": "forever/alliance/06-ashenvale",
+        "step": 5,
+        "goal": 2,
+        "field": "t",
+        "source": "note",
+        "snapshot": "complete"
+      },
+      {
+        "guideID": "forever/alliance/06-ashenvale",
+        "step": 5,
+        "goal": 2,
+        "field": "quest",
+        "source": null,
+        "snapshot": 5321
       },
       {
         "guideID": "forever/alliance/06-ashenvale",
@@ -12881,11 +12931,56 @@
           ],
           "reason": "Two required quest lines were absent. Add their full accept/work/turnin visits. Cross-chapter prerequisites474,471,299 are delivered before this route."
         }
+      },
+      {
+        "id": "darkshore-onus-arbal-kerlonian-4",
+        "guideID": "forever/alliance/03-darkshore",
+        "revision": 4,
+        "evidence": {
+          "reason": "Arbal empieza a ofrecer su misión tras la entrega a Onus. En esta guía la primera visita de Onus precede esa entrega. La escolta de Kerlonian debe iniciarse cuando el grupo vaya a Vallefresno.",
+          "sources": [
+            {
+              "url": "https://github.com/Questie/QuestieDB/issues/139",
+              "detail": "Informe en Forever de que entregar la misión 950 desbloquea la 98013."
+            },
+            {
+              "url": "https://www.wowhead.com/forever/es/quest=98013/fuerzas-henchidas",
+              "detail": "Nombre español de la misión y del lugar. Un segundo jugador identifica 950 como previa."
+            },
+            {
+              "url": "https://www.foreverwisp.com/guides/wow-forever-dwarf-gnome-leveling-guide",
+              "detail": "Visita de regreso a Onus y aceptación posterior de la misión de Arbal."
+            },
+            {
+              "url": "https://www.wowhead.com/forever/quest=5321/the-sleeper-has-awakened",
+              "detail": "Inicio en Kerlonian, temporizador y entrega en Vallefresno."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ashenvale-kerlonian-escort-3",
+        "guideID": "forever/alliance/06-ashenvale",
+        "revision": 3,
+        "evidence": {
+          "reason": "La aceptación, la escolta cronometrada hasta la bolsa y la entrega inmediata en la Atalaya de Maestra se hacen en una sola visita continua. Las marcas manuales del antiguo viaje no prueban que se haya iniciado o terminado la escolta.",
+          "sources": [
+            {
+              "url": "https://www.wowhead.com/forever/quest=5321/the-sleeper-has-awakened"
+            },
+            {
+              "url": "https://worldofwarcraft.blizzard.com/en-us/news/24315281/wow-forever-hotfixes-november-6-2026"
+            },
+            {
+              "url": "https://www.foreverwisp.com/guides/wow-forever-dwarf-gnome-leveling-guide"
+            }
+          ]
+        }
       }
     ],
     "authoredTextPresenceLosses": [],
     "sourceStepNotes": 1722,
-    "snapshotStepNotes": 1736
+    "snapshotStepNotes": 1737
   },
   "sourceReadProblems": [],
   "order": {
@@ -15683,26 +15778,6 @@
           "sourceFile": "guides/forever/alliance/04-redridge-mountains.guide",
           "sourceLine": 66,
           "sourceText": "accept 97926                                -- For Thundris Windweaver, on the return to Auberdine (06-ashenvale)"
-        }
-      },
-      {
-        "guideID": "forever/alliance/06-ashenvale",
-        "step": 6,
-        "goal": 1,
-        "action": "turnin",
-        "questID": 5321,
-        "sourceFile": "guides/forever/alliance/06-ashenvale.guide",
-        "sourceLine": 134,
-        "sourceText": "turnin 5321                             -- Liladris Moonriver",
-        "acceptedAt": {
-          "guideID": "forever/alliance/03-darkshore",
-          "step": 28,
-          "goal": 4,
-          "action": "accept",
-          "questID": 5321,
-          "sourceFile": "guides/forever/alliance/03-darkshore.guide",
-          "sourceLine": 307,
-          "sourceText": "accept 5321                                 -- Kerlonian Evershade: his escort to Maestra's Post is done on the Ashenvale leg"
         }
       },
       {
@@ -21360,8 +21435,8 @@
   },
   "dependencyCycleCandidates": [],
   "workCoverage": {
-    "acceptOccurrencesWithoutQuestLinkedWork": 965,
-    "uniqueQuestIDs": 848,
+    "acceptOccurrencesWithoutQuestLinkedWork": 964,
+    "uniqueQuestIDs": 847,
     "sourceQuestsWithoutObjectives": 799,
     "sourceQuestIDsWithoutObjectives": [
       2,
@@ -22164,13 +22239,12 @@
       99158,
       99260
     ],
-    "sourceQuestsWithObjectives": 49,
+    "sourceQuestsWithObjectives": 48,
     "unknownQuestIDs": [],
     "classifications": {
       "chapter_rewards": 1,
       "codex_route_disagreement": 1,
       "destination_credit": 1,
-      "escort_in_unbound_context": 1,
       "inventory_donation_in_context": 12,
       "item_start_already_carried": 1,
       "npc_conversation_in_context": 4,
@@ -23782,84 +23856,6 @@
           }
         ],
         "contexts": [],
-        "runtimeRisk": "Un turnin no demuestra que sus objetivos estén terminados; comprobar IsComplete/objetivos reales antes de dirigir exclusivamente al NPC."
-      },
-      {
-        "questID": 5321,
-        "title": "The Sleeper Has Awakened",
-        "objectives": [
-          {
-            "id": 13536,
-            "type": "item",
-            "text": "Horn of Awakening"
-          },
-          {
-            "type": "event",
-            "text": "Escort Kerlonian Evershade to Maestra's Post"
-          }
-        ],
-        "classification": "escort_in_unbound_context",
-        "explanation": "La aceptación difiere la escolta; Ashenvale paso5 tiene goto+note con cuerno y sueño, sin questID. La continuidad real del NPC entre guías queda por verificar.",
-        "occurrences": [
-          {
-            "guideID": "forever/alliance/03-darkshore",
-            "step": 28,
-            "goal": 4,
-            "action": "accept",
-            "questID": 5321,
-            "sourceFile": "guides/forever/alliance/03-darkshore.guide",
-            "sourceLine": 307,
-            "sourceText": "accept 5321                                 -- Kerlonian Evershade: his escort to Maestra's Post is done on the Ashenvale leg"
-          }
-        ],
-        "questGoals": [
-          {
-            "guideID": "forever/alliance/03-darkshore",
-            "step": 28,
-            "goal": 4,
-            "action": "accept",
-            "questID": 5321,
-            "sourceFile": "guides/forever/alliance/03-darkshore.guide",
-            "sourceLine": 307,
-            "sourceText": "accept 5321                                 -- Kerlonian Evershade: his escort to Maestra's Post is done on the Ashenvale leg"
-          },
-          {
-            "guideID": "forever/alliance/06-ashenvale",
-            "step": 6,
-            "goal": 1,
-            "action": "turnin",
-            "questID": 5321,
-            "sourceFile": "guides/forever/alliance/06-ashenvale.guide",
-            "sourceLine": 134,
-            "sourceText": "turnin 5321                             -- Liladris Moonriver"
-          }
-        ],
-        "unboundMatches": [],
-        "contexts": [
-          {
-            "guideID": "forever/alliance/03-darkshore",
-            "step": 28,
-            "goal": 4,
-            "action": "accept",
-            "questID": 5321,
-            "sourceFile": "guides/forever/alliance/03-darkshore.guide",
-            "sourceLine": 307,
-            "sourceText": "accept 5321                                 -- Kerlonian Evershade: his escort to Maestra's Post is done on the Ashenvale leg",
-            "note": "Kerlonian Semprumbrío: la escolta hasta Atalaya de Maestra se hace durante el tramo de Vallefresno",
-            "stepNote": "Sigue la carretera al sur. Onus es el antiguo en el Grove; Arbal y Kerlonian Semprumbrío dormir a su lado."
-          },
-          {
-            "guideID": "forever/alliance/06-ashenvale",
-            "step": 6,
-            "goal": 1,
-            "action": "turnin",
-            "questID": 5321,
-            "sourceFile": "guides/forever/alliance/06-ashenvale.guide",
-            "sourceLine": 134,
-            "sourceText": "turnin 5321                             -- Liladris Moonriver",
-            "note": "Liladris Rioluna"
-          }
-        ],
         "runtimeRisk": "Un turnin no demuestra que sus objetivos estén terminados; comprobar IsComplete/objetivos reales antes de dirigir exclusivamente al NPC."
       },
       {
@@ -29254,5 +29250,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "e1273cfcfd7cca5a68e28ac03b85452c5931271b57256a0016ac7be66a9f09ff"
+  "inputSha256": "b49e6a40415c016ffbd728e923b5e78456168c91af3c8accad434d5ee01c7be8"
 }

@@ -9,6 +9,7 @@ local SAMPLE_INTERVAL = 0.1 -- Target sampling; the faceted arrow still rotates 
 local TWO_PI = 2 * math.pi
 local DIAL = 56
 local CLOSE_RANGE = 220
+local CONTACT_RANGE = 40 -- yards
 local NAV_MEDIA = "Interface\\AddOns\\RutaXP\\Media\\Nav\\"
 
 local function number(value)
@@ -699,12 +700,25 @@ function ns:UpdateNavigation()
     if point and (point.source == "duo-follow" or point.targetSource == "duo-follow") and not point.intermediate then
         subText = "|cffffce72" .. (point.label or point.title or "Acompaña al compañero") .. "|r\nTu progreso propio se conserva"
     end
-    if point and point.walking then
+    local distance, right, forward, dNorth, dWest
+    if point and not point.navigationBlocked then
+        distance, right, forward, dNorth, dWest = self:GetWaypointVector(point)
+    end
+    local goal = point and point.goal
+    local contact = goal and (point.candidateName or goal.npcName)
+    local questTarget = point and (point.source == "guide" or point.source == "game" or point.source == "learned")
+    if distance and distance <= CONTACT_RANGE and questTarget and not point.intermediate
+        and (not point.walking or point.walkingFinal) and contact and (goal.t == "accept" or goal.t == "turnin") then
+        subText = "|cffffce72Habla con " .. contact .. "|r\n" .. (goalTitle or stepTitle or "")
+    elseif point and point.walking then
         local target = point.walkingGoal
         local label = target and (target.routeLabel or target.label or target.goalTitle) or goalTitle or stepTitle
         subText = string.format("|cffffce72Camino por terreno · tramo %d/%d|r\n%s", math.max(1,point.walkingIndex-1),
             math.max(1,point.walkingCount-1),label or "Sigue el siguiente giro")
-    elseif point and point.navigationNotice then subText = subText .. "\n|cff9fb0c7" .. point.navigationNotice .. "|r" end
+    end
+    if point and not point.walking and point.navigationNotice then
+        subText = subText .. "\n|cff9fb0c7" .. point.navigationNotice .. "|r"
+    end
 
     if not point then
         frame.dNorth, frame.dWest, frame.targetContinent = nil, nil, nil
@@ -771,7 +785,6 @@ function ns:UpdateNavigation()
         return
     end
 
-    local distance, right, forward, dNorth, dWest = self:GetWaypointVector(point)
     frame.dNorth, frame.dWest = dNorth, dWest
     frame.targetContinent, frame.targetNorth, frame.targetWest = pointWorld(point)
     frame.useNativePosition = point.walking == true

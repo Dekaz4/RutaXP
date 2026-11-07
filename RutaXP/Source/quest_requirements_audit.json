@@ -52,7 +52,7 @@
     "no_source_data": 61,
     "prerequisite_conflict_review": 44,
     "selector_conflict_review": 35,
-    "source_omission_review": 56
+    "source_omission_review": 57
   },
   "byGuide": [
     {
@@ -108,11 +108,12 @@
     },
     {
       "guideID": "forever/alliance/03-darkshore",
-      "acceptances": 77,
+      "acceptances": 76,
       "findings": {
         "no_source_data": 6,
         "prerequisite_conflict_review": 2,
-        "selector_conflict_review": 1
+        "selector_conflict_review": 1,
+        "source_omission_review": 1
       }
     },
     {
@@ -132,7 +133,7 @@
     },
     {
       "guideID": "forever/alliance/06-ashenvale",
-      "acceptances": 56,
+      "acceptances": 57,
       "findings": {
         "additional_gate_review": 1,
         "no_source_data": 3
@@ -2685,6 +2686,27 @@
       "authored": null,
       "reported": null,
       "evidence": []
+    },
+    {
+      "guideID": "forever/alliance/03-darkshore",
+      "step": 32,
+      "goal": 3,
+      "questID": 98013,
+      "title": "Fuerzas henchidas",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          950
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
     },
     {
       "guideID": "forever/alliance/03-darkshore",
@@ -7716,6 +7738,6 @@
     "Local dependency locations are diagnostic; this audit does not assume a previous zone was completed.",
     "No runtime quest completion, profession or player's progress is modified by this audit."
   ],
-  "inputSha256": "e1273cfcfd7cca5a68e28ac03b85452c5931271b57256a0016ac7be66a9f09ff",
+  "inputSha256": "b49e6a40415c016ffbd728e923b5e78456168c91af3c8accad434d5ee01c7be8",
   "evidenceSha256": "12b81e43ce28c6c59f8a8c928d47d497fb34cc92bb21edb3bb276a380a6a0191"
 }

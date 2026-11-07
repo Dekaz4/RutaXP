@@ -110,13 +110,13 @@ class GuideStructureAuditTests(unittest.TestCase):
         self.assertEqual(dependency_cycles(events_for(guides, {})), [[1, 2]])
         self.assertTrue(scan(guides)["guideLinkCycles"])
 
-    def test_shipped_report_covers_all_guides_and_keeps_the_49_work_cases_explicit(self):
+    def test_shipped_report_covers_all_guides_and_keeps_the_48_work_cases_explicit(self):
         report = json.loads((ROOT / "RutaXP/Source/guide_structure.json").read_text(encoding="utf-8"))
-        self.assertEqual((report["scope"]["guides"], report["scope"]["steps"], report["scope"]["goals"]), (57, 2343, 7455))
+        self.assertEqual((report["scope"]["guides"], report["scope"]["steps"], report["scope"]["goals"]), (57, 2343, 7454))
         self.assertEqual(report["sourceComparison"]["structuralDifferences"], [])
         comparison = report["sourceComparison"]
         revisions = json.loads((ROOT / "RutaXP/Source/guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
-        self.assertEqual(len(revisions), 26)
+        self.assertEqual(len(revisions), 28)
         self.assertEqual([r["id"] for r in revisions[:7]],
                          ["westfall-alba-mines-2", "westfall-engineering-3", "zephras-alliance-service-2",
                           "redridge-alther-bridge-2", "mulgore-malah-centaurs-2", "tirisfal-rear-guard-2",
@@ -128,17 +128,19 @@ class GuideStructureAuditTests(unittest.TestCase):
                          {r["guideID"] for r in revisions})
         expected_actions = dict(report["scope"]["sourceDslActions"])
         expected_actions["collect"] -= 1
-        expected_actions["complete"] += 1
+        expected_actions["complete"] += 2
+        expected_actions["goto"] -= 1
+        expected_actions["note"] -= 1
         for action, count in {"accept": 3, "collect": 2, "kill": 3, "turnin": 3}.items():
             expected_actions[action] += count
         self.assertEqual(report["scope"]["actions"], expected_actions)
         coverage = report["workCoverage"]
-        self.assertEqual(coverage["sourceQuestsWithObjectives"], 49)
+        self.assertEqual(coverage["sourceQuestsWithObjectives"], 48)
         self.assertEqual(coverage["unknownQuestIDs"], [])
         self.assertNotIn("needs_manual_review", coverage["classifications"])
         cases = {case["questID"]: case for case in coverage["cases"]}
         self.assertEqual(cases[4492]["classification"], "codex_route_disagreement")
-        self.assertEqual(cases[5321]["classification"], "escort_in_unbound_context")
+        self.assertNotIn(5321, cases)
         self.assertTrue(all(case["occurrences"] and case["explanation"] for case in cases.values()))
         self.assertTrue(report["limits"])
 

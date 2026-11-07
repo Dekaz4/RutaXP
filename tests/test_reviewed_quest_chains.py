@@ -63,7 +63,11 @@ class ReviewedChainTests(unittest.TestCase):
             guide = self.guides[revision["guideID"]]
             self.assertIn(migration, guide["progressMigrations"])
             keys = {f"{si}:{gi}" for si, count in enumerate(revision["previousGoalCounts"], 1) for gi in range(1, count + 1)}
-            destinations = [migration["goalMap"].get(key, key) for key in keys]
+            retired = set(migration.get("retiredGoalKeys", {}))
+            self.assertEqual(retired, set(revision.get("retiredGoals", {})))
+            self.assertTrue(retired <= keys)
+            self.assertTrue(retired.isdisjoint(migration["goalMap"]))
+            destinations = [migration["goalMap"].get(key, key) for key in keys - retired]
             self.assertEqual(len(destinations), len(set(destinations)), revision["id"])
             completed = migration["stepMap"][str(migration["previousStepCount"] + 1)]
             revision_number = migration["to"]

@@ -204,13 +204,17 @@ local function migrateWestfallLegacy(self)
 end
 
 local function revisedKey(migration, key)
+    if migration.retiredGoalKeys and migration.retiredGoalKeys[key] then return nil end
     return (migration.goalMap or {})[key] or key
 end
 
 local function revisedMarks(migration, marks)
     if type(marks) ~= "table" then return marks end
     local result = {}
-    for key, value in pairs(marks) do result[revisedKey(migration, key)] = value end
+    for key, value in pairs(marks) do
+        local destination = revisedKey(migration, key)
+        if destination then result[destination] = value end
+    end
     return result
 end
 
@@ -219,25 +223,36 @@ local function reviseWaypoints(saved, id, migration)
     local pattern = id:gsub("(%W)", "%%%1") .. ":(%d+):(%d+)"
     local function key(value)
         if type(value) ~= "string" then return value end
-        return (value:gsub(pattern, function(step, goal)
-            return id .. ":" .. revisedKey(migration, step .. ":" .. goal)
-        end))
+        local retired = false
+        local mapped = value:gsub(pattern, function(step, goal)
+            local destination = revisedKey(migration, step .. ":" .. goal)
+            if destination then return id .. ":" .. destination end
+            retired = true
+        end)
+        if not retired then return mapped end
     end
     for _, field in ipairs({ "ownRoutes", "entries" }) do
         if type(saved[field]) == "table" then
             local mapped = {}
             for oldKey, value in pairs(saved[field]) do
-                if type(value) == "table" then
-                    if field == "ownRoutes" then value.id = key(value.id)
-                    else value.targetKey = key(value.targetKey) end
+                local newKey = key(oldKey)
+                if newKey then
+                    if type(value) == "table" then
+                        if field == "ownRoutes" then value.id = key(value.id)
+                        else value.targetKey = key(value.targetKey) end
+                    end
+                    mapped[newKey] = value
                 end
-                mapped[key(oldKey)] = value
             end
             saved[field] = mapped
         end
     end
     if type(saved.active) == "table" then
-        for _, field in ipairs({ "key", "route", "entryKey" }) do saved.active[field] = key(saved.active[field]) end
+        for _, field in ipairs({ "key", "route", "entryKey" }) do
+            local old = saved.active[field]
+            saved.active[field] = key(old)
+            if old and not saved.active[field] then saved.active = nil; break end
+        end
     end
 end
 

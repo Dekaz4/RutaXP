@@ -1,6 +1,6 @@
 local addonName, ns = ...
 -- Updating happens through the same external setup used to install RutaXP.
-local Updates = { fallbackVersion="0.7.10", url="https://github.com/Dekaz4/RutaXP/releases/latest",
+local Updates = { fallbackVersion="0.7.11", url="https://github.com/Dekaz4/RutaXP/releases/latest",
     updaterURL="https://github.com/Dekaz4/RutaXP/releases/latest/download/Instalador_RutaXP.exe" }
 ns.Updates = Updates
 local function read(fn,...)

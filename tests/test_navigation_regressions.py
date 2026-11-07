@@ -32,6 +32,43 @@ class NavigationRegressions(unittest.TestCase):
         point = h.call("GetStepWaypoint", step)
         self.assertEqual(point.goal.quest, 999)
 
+    def test_nearby_quest_contact_is_named_only_on_the_final_personal_approach(self):
+        h = self.host
+        h.state.mapID, h.state.x, h.state.y = 1439, .4371, .7649
+        self.select_goal({"t": "accept", "quest": 5321, "title": "El despertar", "npcName": "Kerlonian Semprumbrío",
+                          "map": 1439, "x": 44.4, "y": 76.43})
+        _, step, _ = h.call("GetCurrent")
+        point = h.call("GetStepWaypoint", step)
+        h.state.arrowPoint = point
+        h.ns.GetArrowWaypoint = h.lua.eval("function() return TEST.arrowPoint end")
+        h.state.x = point.x - .001
+        point.walking, point.walkingFinal = True, True
+        point.walkingCount, point.walkingIndex = 2, 2
+        h.call("UpdateNavigation")
+        label = h.ns.navigationFrame.destination
+        self.assertIn("Habla con Kerlonian Semprumbrío", label.text)
+        self.assertIn("Acepta: El despertar", label.text)
+        self.assertNotIn("tramo", label.text)
+
+        h.state.x = point.x - .1
+        h.call("UpdateNavigation")
+        self.assertIn("Camino por terreno", label.text)
+        h.state.x = point.x - .001
+        point.walkingFinal = False
+        h.call("UpdateNavigation")
+        self.assertIn("Camino por terreno", label.text)
+
+        point.walking, point.source = False, "duo-follow"
+        h.call("UpdateNavigation")
+        self.assertIn("Acompaña al compañero", label.text)
+        self.assertNotIn("Kerlonian", label.text)
+        point.source, point.goal.t = "game", "turnin"
+        point.navigationNotice = "Dirección orientativa"
+        h.call("UpdateNavigation")
+        self.assertIn("Habla con Kerlonian Semprumbrío", label.text)
+        self.assertIn("Entrega: El despertar", label.text)
+        self.assertIn("Dirección orientativa", label.text)
+
     def test_nearest_compatible_candidate_wins_over_the_first_in_catalog(self):
         h = self.host
         h.state.mapID, h.state.x, h.state.y = 1436, .5, .5

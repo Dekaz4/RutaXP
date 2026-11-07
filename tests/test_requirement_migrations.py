@@ -45,6 +45,22 @@ class RequirementHost(QuestEngineHost):
 
 
 class RequirementMigrationTests(unittest.TestCase):
+    def test_retired_waypoint_is_saved_in_backup_and_releases_the_arrow(self):
+        key = ROUTE + ":3:2:note:"
+        kept = ROUTE + ":1:1:accept:100"
+        h = RequirementHost(affected=False, waypoints={
+            "active": {"key": key, "route": "own:" + key},
+            "ownRoutes": {key: {"id": "own:" + key}, kept: {"id": "own:" + kept}},
+            "entries": {key + ":own:" + key: {"targetKey": key}},
+        })
+        h.ns.guides[ROUTE].progressMigrations[1].retiredGoalKeys = h.table({"3:2": True})
+        h.migrate()
+        current = h.ns.char.waypoints
+        self.assertIsNone(current.active)
+        self.assertEqual(list(current.entries.keys()), [])
+        self.assertEqual(list(current.ownRoutes.keys()), [ROUTE + ":2:1:accept:100"])
+        self.assertEqual(h.ns.char.guideMigrationBackups[ROUTE + ":2"].waypoints.active.key, key)
+
     def test_swapped_keys_remain_distinct_and_backups_do_not_alias_live_data(self):
         h = RequirementHost(cursor=1, affected=False, duo={"autoSession": {"reviews": {
             ROUTE: {"cursor": 1, "review": True}, OTHER: {"cursor": 1}}}})
@@ -300,13 +316,15 @@ class PublishedMigrationContractTests(unittest.TestCase):
                     update = next(m for m in guide.progressMigrations.values() if m["from"] == current)
                     chain.append(update)
                     current = update.to
-                expected, added = dict(old), set()
+                expected, added, retained = dict(old), set(), len(old)
                 for update in chain:
-                    expected = {update.goalMap[key] or key: value for key, value in expected.items()}
-                    added = {update.goalMap[key] or key for key in added}
+                    retired = set((update.retiredGoalKeys or h.table({})).keys())
+                    retained -= len(expected.keys() & retired)
+                    expected = {update.goalMap[key] or key: value for key, value in expected.items() if key not in retired}
+                    added = {update.goalMap[key] or key for key in added - retired}
                     added.update((update.addedGoalKeys or h.table([])).values())
                 actual_keys = {f"{si}:{gi}" for si, step in guide.steps.items() for gi in step.goals.keys()}
-                self.assertEqual(len(expected), len(old), "Distinct old actions must never collide")
+                self.assertEqual(len(expected), retained, "Distinct surviving actions must never collide")
                 self.assertFalse(set(expected) & added, "New actions cannot inherit an old confirmation")
                 self.assertEqual(set(expected) | added, actual_keys)
                 h.ns.char = h.table({"activeGuide": "unselected", "progress": {guide.id: {

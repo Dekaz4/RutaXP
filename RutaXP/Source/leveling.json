@@ -508,7 +508,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "8e1d8545253cafa6b527f4646f80c505faec15844073dae3fef1aa5f4c236566",
+      "sha256": "eb8c250f1a66bc75d935b18465b46b9951e813f8d9883806b5ce8ba65adbf722",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -535,7 +535,9 @@
         "horde-30-40-03-arathi-highlands-prerequisites-metadata",
         "darkshore-holy-diver-3",
         "thousand-needles-nekrosh-chain-2",
-        "hillsbrad-wetlands-prerequisite-chains-3"
+        "hillsbrad-wetlands-prerequisite-chains-3",
+        "darkshore-onus-arbal-kerlonian-4",
+        "ashenvale-kerlonian-escort-3"
       ]
     }
   },
@@ -556,7 +558,7 @@
       "Horde": 28
     },
     "steps": 2343,
-    "goals": 7455,
+    "goals": 7454,
     "goalTypes": {
       "accept": 2290,
       "buy": 27,
@@ -590,7 +592,7 @@
       "fromKind": 736,
       "fromRank": 17,
       "group": 9,
-      "instruction": 7455,
+      "instruction": 7454,
       "instructionAsHint": 2,
       "instructionReplacesContext": 6,
       "instructionVerb": 11,
@@ -603,7 +605,7 @@
       "navigationHint": 434,
       "navigationMode": 14,
       "node": 76,
-      "note": 3566,
+      "note": 3567,
       "npc": 4993,
       "npcName": 4382,
       "objName": 302,
@@ -612,13 +614,13 @@
       "only": 352,
       "optional": 414,
       "pre": 1213,
-      "preAll": 62,
-      "preTitles": 1389,
+      "preAll": 63,
+      "preTitles": 1390,
       "profLine": 18,
       "profName": 18,
       "profRank": 18,
       "qlvl": 2290,
-      "quest": 6500,
+      "quest": 6501,
       "r": 2,
       "rank": 1,
       "rankMax": 1,
@@ -627,10 +629,10 @@
       "skillLine": 1,
       "spots": 1313,
       "spread": 670,
-      "t": 7455,
+      "t": 7454,
       "target": 611,
-      "text": 226,
-      "title": 6500,
+      "text": 224,
+      "title": 6501,
       "x": 6571,
       "y": 6571,
       "z": 4464
@@ -66022,8 +66024,8 @@
           ]
         },
         {
-          "title": "El Grove del Ancients",
-          "note": "Sigue la carretera al sur. Onus es el antiguo en el Grove; Arbal y Kerlonian Semprumbrío dormir a su lado.",
+          "title": "Onus en el Páramo de los Ancianos",
+          "note": "Habla con Onus. Volverás a ver a Arbal al entregar «Vuelve con Onus».",
           "goals": [
             {
               "title": "Onus",
@@ -66059,37 +66061,6 @@
               "f": "e",
               "qlvl": 17,
               "instruction": "Habla con «Onus» y acepta «El Glaive del Maestro».\nZona: Costa Oscura."
-            },
-            {
-              "title": "Swelling Forces",
-              "minLevel": 12,
-              "note": "Arbal",
-              "t": "accept",
-              "quest": 98013,
-              "npc": 270269,
-              "npcName": "Arbal",
-              "map": 1439,
-              "x": 43.71,
-              "y": 76.49,
-              "f": "e",
-              "qlvl": 20,
-              "instruction": "Habla con «Arbal» y acepta «Swelling Forces».\nZona: Costa Oscura."
-            },
-            {
-              "title": "El despertar",
-              "minLevel": 17,
-              "note": "Kerlonian Semprumbrío: la escolta hasta Atalaya de Maestra se hace durante el tramo de Vallefresno",
-              "t": "accept",
-              "quest": 5321,
-              "npc": 11218,
-              "npcName": "Kerlonian Semprumbrío",
-              "map": 1439,
-              "x": 44.4,
-              "y": 76.43,
-              "z": 51.6,
-              "f": "e",
-              "qlvl": 20,
-              "instruction": "Habla con «Kerlonian Semprumbrío» y acepta «El despertar».\nZona: Costa Oscura.\nKerlonian Semprumbrío: la escolta hasta Atalaya de Maestra se hace durante el tramo de Vallefresno."
             }
           ]
         },
@@ -66535,7 +66506,8 @@
           ]
         },
         {
-          "title": "El Grove del Ancients",
+          "title": "Onus y Arbal",
+          "note": "Entrega «Vuelve con Onus» y habla con Arbal, el anciano de la guerra que está a su lado.",
           "goals": [
             {
               "title": "Vuelve con Onus",
@@ -66571,6 +66543,27 @@
               "f": "e",
               "qlvl": 20,
               "instruction": "Habla con «Onus» y acepta «Las reliquias de Mathystra».\nZona: Costa Oscura."
+            },
+            {
+              "title": "Fuerzas henchidas",
+              "minLevel": 12,
+              "note": "Arbal",
+              "t": "accept",
+              "quest": 98013,
+              "npc": 270269,
+              "npcName": "Arbal",
+              "map": 1439,
+              "x": 43.71,
+              "y": 76.49,
+              "f": "e",
+              "qlvl": 20,
+              "instruction": "Habla con «Arbal» y acepta «Fuerzas henchidas».\nZona: Costa Oscura.",
+              "preAll": [
+                950
+              ],
+              "preTitles": {
+                "950": "Vuelve con Onus"
+              }
             }
           ]
         },
@@ -67631,7 +67624,7 @@
               "instruction": "Interactúa con «Reliquia de Mathystra» para reunir «Reliquia de Mathystra» (6 en total).\nZona: Costa Oscura."
             },
             {
-              "title": "Swelling Forces",
+              "title": "Fuerzas henchidas",
               "t": "kill",
               "quest": 98013,
               "oi": 1,
@@ -67705,7 +67698,7 @@
               "instruction": "Derrota a «Myrmidón Escama Tormentosa» (12 en total).\nZona: Costa Oscura."
             },
             {
-              "title": "Swelling Forces",
+              "title": "Fuerzas henchidas",
               "t": "kill",
               "quest": 98013,
               "oi": 2,
@@ -67793,7 +67786,7 @@
               "instruction": "Derrota a «Hechicera Escama Tormentosa» (8 en total).\nZona: Costa Oscura."
             },
             {
-              "title": "Swelling Forces",
+              "title": "Fuerzas henchidas",
               "t": "kill",
               "quest": 98013,
               "oi": 3,
@@ -67902,7 +67895,7 @@
               "instruction": "Habla con «Onus» y entrega «Las reliquias de Mathystra».\nZona: Costa Oscura.\nOnus, en el Grove."
             },
             {
-              "title": "Swelling Forces",
+              "title": "Fuerzas henchidas",
               "note": "Arbal",
               "t": "turnin",
               "quest": 98013,
@@ -67912,7 +67905,7 @@
               "x": 43.71,
               "y": 76.49,
               "f": "e",
-              "instruction": "Habla con «Arbal» y entrega «Swelling Forces».\nZona: Costa Oscura."
+              "instruction": "Habla con «Arbal» y entrega «Fuerzas henchidas».\nZona: Costa Oscura."
             }
           ]
         },
@@ -70200,7 +70193,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 3,
+      "routeRevision": 4,
       "progressMigrations": [
         {
           "from": 1,
@@ -70344,6 +70337,64 @@
           ],
           "previousStepCount": 42,
           "firstAffectedStep": 21
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "goalMap": {
+            "28:3": "32:3"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 30,
+            "31": 31,
+            "32": 32,
+            "33": 33,
+            "34": 34,
+            "35": 35,
+            "36": 36,
+            "37": 37,
+            "38": 38,
+            "39": 39,
+            "40": 40,
+            "41": 41,
+            "42": 42,
+            "43": 43
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 42,
+          "firstAffectedStep": 28,
+          "retiredGoalKeys": {
+            "28:4": true
+          }
         }
       ]
     },
@@ -82066,22 +82117,35 @@
           ]
         },
         {
-          "title": "Kerlonian Semprumbrío",
-          "note": "Kerlonian duerme en el Grove del Ancients en el sur de Costa Oscura. Usal Horn de Awakening para despertarlo y llevarlo al sur a lo largo de la carretera en Vallefresno a Liladris Rioluna en Atalaya de Maestra; soplal cuerno de nuevo cuando se duerma.",
+          "title": "El despertar de Kerlonian",
+          "note": "Si el diario la da por fallida, abandónala y vuelve a hablar con Kerlonian.",
           "goals": [
             {
-              "t": "goto",
+              "title": "El despertar",
+              "minLevel": 17,
+              "t": "accept",
+              "quest": 5321,
+              "npc": 11218,
+              "npcName": "Kerlonian Semprumbrío",
               "map": 1439,
               "x": 44.4,
-              "y": 76.4,
+              "y": 76.43,
+              "z": 51.6,
               "f": "e",
-              "text": "Kerlonian Semprumbrío",
-              "instruction": "Dirígete al punto de la ruta: «Kerlonian Semprumbrío».\nZona: Costa Oscura."
+              "qlvl": 20,
+              "note": "Busca al elfo dormido junto a los ancianos. Aceptad los dos cuando estéis listos para salir.",
+              "instruction": "Habla con «Kerlonian Semprumbrío» y acepta «El despertar».\nZona: Costa Oscura.\nBusca al elfo dormido junto a los ancianos. Aceptad los dos cuando estéis listos para salir."
             },
             {
-              "t": "note",
-              "text": "Escolta a Kerlonian hasta Atalaya de Maestra, en Vallefresno.",
-              "instruction": "Escolta a Kerlonian hasta Atalaya de Maestra, en Vallefresno."
+              "title": "El despertar",
+              "t": "complete",
+              "quest": 5321,
+              "map": 1439,
+              "x": 41.8,
+              "y": 90.2,
+              "f": "e",
+              "note": "Ve al sur con Kerlonian y usa el Cuerno de Despertar si se duerme. Pasa con él por el cruce de tres caminos junto a la bolsa. Cuando el diario lo confirme, sigue hasta Liladris.",
+              "instruction": "Para «El despertar», sigue esta indicación de la guía:\nZona: Costa Oscura.\nVe al sur con Kerlonian y usa el Cuerno de Despertar si se duerme. Pasa con él por el cruce de tres caminos junto a la bolsa. Cuando el diario lo confirme, sigue hasta Liladris."
             }
           ]
         },
@@ -82090,7 +82154,7 @@
           "goals": [
             {
               "title": "El despertar",
-              "note": "Liladris Rioluna",
+              "note": "Entrega a Liladris Rioluna antes de que se acabe el tiempo.",
               "t": "turnin",
               "quest": 5321,
               "npc": 11219,
@@ -82100,7 +82164,7 @@
               "y": 35.58,
               "z": 16.2,
               "f": "e",
-              "instruction": "Habla con «Liladris Rioluna» y entrega «El despertar».\nZona: Vallefresno."
+              "instruction": "Habla con «Liladris Rioluna» y entrega «El despertar».\nZona: Vallefresno.\nEntrega a Liladris Rioluna antes de que se acabe el tiempo."
             },
             {
               "title": "La torre de Althalaxx",
@@ -91427,7 +91491,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 2,
+      "routeRevision": 3,
       "progressMigrations": [
         {
           "from": 1,
@@ -91504,6 +91568,90 @@
           "affectedQuestIDs": [],
           "previousStepCount": 65,
           "firstAffectedStep": 66
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "goalMap": {},
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 30,
+            "31": 31,
+            "32": 32,
+            "33": 33,
+            "34": 34,
+            "35": 35,
+            "36": 36,
+            "37": 37,
+            "38": 38,
+            "39": 39,
+            "40": 40,
+            "41": 41,
+            "42": 42,
+            "43": 43,
+            "44": 44,
+            "45": 45,
+            "46": 46,
+            "47": 47,
+            "48": 48,
+            "49": 49,
+            "50": 50,
+            "51": 51,
+            "52": 52,
+            "53": 53,
+            "54": 54,
+            "55": 55,
+            "56": 56,
+            "57": 57,
+            "58": 58,
+            "59": 59,
+            "60": 60,
+            "61": 61,
+            "62": 62,
+            "63": 63,
+            "64": 64,
+            "65": 65,
+            "5": 5,
+            "66": 66
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 65,
+          "firstAffectedStep": 5,
+          "addedGoalKeys": [
+            "5:1",
+            "5:2"
+          ],
+          "retiredGoalKeys": {
+            "5:1": true,
+            "5:2": true
+          }
         }
       ]
     },

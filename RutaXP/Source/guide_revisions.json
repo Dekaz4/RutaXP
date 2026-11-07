@@ -6758,6 +6758,684 @@
           "values": {}
         }
       ]
+    },
+    {
+      "id": "darkshore-onus-arbal-kerlonian-4",
+      "guideID": "forever/alliance/03-darkshore",
+      "previousRevision": 3,
+      "revision": 4,
+      "sourceShape": "0cdfb16425933023b5c95c94b81c7c9e7992657c62ec8ee4d23dbb39d22eb108",
+      "resultShape": "b9c488b7066fa00c96c1f25c6267a818f5ce01eaa1f8e7e276eef242cc0dc9b5",
+      "previousGoalCounts": [
+        12,
+        6,
+        3,
+        2,
+        3,
+        2,
+        7,
+        1,
+        10,
+        4,
+        15,
+        3,
+        10,
+        2,
+        1,
+        2,
+        1,
+        2,
+        5,
+        1,
+        19,
+        3,
+        6,
+        5,
+        4,
+        9,
+        2,
+        4,
+        11,
+        4,
+        3,
+        2,
+        12,
+        5,
+        3,
+        4,
+        6,
+        3,
+        7,
+        14,
+        4,
+        3
+      ],
+      "firstAffectedStep": 28,
+      "affectedQuestIDs": [],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28,
+          "omitGoals": [
+            3,
+            4
+          ],
+          "set": {
+            "title": "Onus en el Páramo de los Ancianos",
+            "note": "Habla con Onus. Volverás a ver a Arbal al entregar «Vuelve con Onus»."
+          }
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "title": "Onus y Arbal",
+          "note": "Entrega «Vuelve con Onus» y habla con Arbal, el anciano de la guerra que está a su lado.",
+          "goals": [
+            [
+              32,
+              1
+            ],
+            [
+              32,
+              2
+            ],
+            [
+              28,
+              3
+            ]
+          ]
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        }
+      ],
+      "retiredGoals": {
+        "28:4": {
+          "match": {
+            "t": "accept",
+            "quest": 5321,
+            "npc": 11218
+          },
+          "evidence": "La escolta tiene un límite de tiempo. La aceptación se traslada al comienzo de la escolta en Vallefresno."
+        }
+      },
+      "goalChanges": [
+        {
+          "match": {
+            "quest": 98013
+          },
+          "count": 5,
+          "set": {
+            "title": "Fuerzas henchidas"
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98013
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              950
+            ],
+            "preTitles": {
+              "950": "Vuelve con Onus"
+            }
+          }
+        }
+      ],
+      "originalGoalValues": [
+        {
+          "match": {
+            "quest": 98013
+          },
+          "values": {
+            "title": "Swelling Forces"
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98013
+          },
+          "absent": [
+            "preAll",
+            "preTitles"
+          ],
+          "values": {}
+        }
+      ],
+      "evidence": {
+        "reason": "Arbal empieza a ofrecer su misión tras la entrega a Onus. En esta guía la primera visita de Onus precede esa entrega. La escolta de Kerlonian debe iniciarse cuando el grupo vaya a Vallefresno.",
+        "sources": [
+          {
+            "url": "https://github.com/Questie/QuestieDB/issues/139",
+            "detail": "Informe en Forever de que entregar la misión 950 desbloquea la 98013."
+          },
+          {
+            "url": "https://www.wowhead.com/forever/es/quest=98013/fuerzas-henchidas",
+            "detail": "Nombre español de la misión y del lugar. Un segundo jugador identifica 950 como previa."
+          },
+          {
+            "url": "https://www.foreverwisp.com/guides/wow-forever-dwarf-gnome-leveling-guide",
+            "detail": "Visita de regreso a Onus y aceptación posterior de la misión de Arbal."
+          },
+          {
+            "url": "https://www.wowhead.com/forever/quest=5321/the-sleeper-has-awakened",
+            "detail": "Inicio en Kerlonian, temporizador y entrega en Vallefresno."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ashenvale-kerlonian-escort-3",
+      "guideID": "forever/alliance/06-ashenvale",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "8e5aedeb286a432b0283221b6a91a6d70bce9c6efa4d5120d85b45223658cbb4",
+      "resultShape": "0934c3e9d49157498394c975e6129871f7c592d467d4bd46112725836a40fb41",
+      "previousGoalCounts": [
+        4,
+        2,
+        3,
+        2,
+        2,
+        4,
+        2,
+        4,
+        8,
+        3,
+        1,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        5,
+        1,
+        1,
+        3,
+        1,
+        4,
+        9,
+        1,
+        4,
+        5,
+        3,
+        4,
+        5,
+        3,
+        10,
+        2,
+        1,
+        2,
+        2,
+        6,
+        3,
+        2,
+        1,
+        3,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        3,
+        2,
+        2,
+        1,
+        2,
+        1,
+        1,
+        1,
+        2,
+        8,
+        6,
+        2,
+        2,
+        6,
+        2,
+        1,
+        4,
+        3
+      ],
+      "firstAffectedStep": 5,
+      "affectedQuestIDs": [],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "cursorFromStep": 5,
+          "title": "El despertar de Kerlonian",
+          "goals": [
+            {
+              "added": "accept_kerlonian"
+            },
+            {
+              "added": "escort_kerlonian"
+            }
+          ],
+          "note": "Si el diario la da por fallida, abandónala y vuelve a hablar con Kerlonian."
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        },
+        {
+          "sourceStep": 49
+        },
+        {
+          "sourceStep": 50
+        },
+        {
+          "sourceStep": 51
+        },
+        {
+          "sourceStep": 52
+        },
+        {
+          "sourceStep": 53
+        },
+        {
+          "sourceStep": 54
+        },
+        {
+          "sourceStep": 55
+        },
+        {
+          "sourceStep": 56
+        },
+        {
+          "sourceStep": 57
+        },
+        {
+          "sourceStep": 58
+        },
+        {
+          "sourceStep": 59
+        },
+        {
+          "sourceStep": 60
+        },
+        {
+          "sourceStep": 61
+        },
+        {
+          "sourceStep": 62
+        },
+        {
+          "sourceStep": 63
+        },
+        {
+          "sourceStep": 64
+        },
+        {
+          "sourceStep": 65
+        }
+      ],
+      "retiredGoals": {
+        "5:1": {
+          "match": {
+            "t": "goto",
+            "x": 44.4,
+            "y": 76.4
+          },
+          "evidence": "Llegar al lugar no acredita haber aceptado la misión."
+        },
+        "5:2": {
+          "match": {
+            "t": "note"
+          },
+          "evidence": "La nota manual se sustituye por el crédito real de la escolta."
+        }
+      },
+      "addedGoals": {
+        "accept_kerlonian": {
+          "goal": {
+            "title": "El despertar",
+            "minLevel": 17,
+            "t": "accept",
+            "quest": 5321,
+            "npc": 11218,
+            "npcName": "Kerlonian Semprumbrío",
+            "map": 1439,
+            "x": 44.4,
+            "y": 76.43,
+            "z": 51.6,
+            "f": "e",
+            "qlvl": 20,
+            "note": "Busca al elfo dormido junto a los ancianos. Aceptad los dos cuando estéis listos para salir."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/kalimdor/darkshore.lua#L890-L896"
+              },
+              {
+                "url": "https://www.wowhead.com/forever/quest=5321/the-sleeper-has-awakened"
+              }
+            ],
+            "navigationDonor": "forever/alliance/03-darkshore@3:28:4"
+          }
+        },
+        "escort_kerlonian": {
+          "goal": {
+            "title": "El despertar",
+            "t": "complete",
+            "quest": 5321,
+            "map": 1439,
+            "x": 41.8,
+            "y": 90.2,
+            "f": "e",
+            "note": "Ve al sur con Kerlonian y usa el Cuerno de Despertar si se duerme. Pasa con él por el cruce de tres caminos junto a la bolsa. Cuando el diario lo confirme, sigue hasta Liladris."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "url": "https://www.wowhead.com/forever/quest=5321/the-sleeper-has-awakened",
+                "detail": "El objetivo termina en la bolsa de Kerlonian en Costa Oscura. La entrega sigue estando en Vallefresno."
+              },
+              {
+                "url": "https://www.foreverwisp.com/guides/wow-forever-dwarf-gnome-leveling-guide",
+                "detail": "Posición aproximada de la bolsa junto al cruce del camino sur."
+              },
+              {
+                "url": "https://worldofwarcraft.blizzard.com/en-us/news/24315281/wow-forever-hotfixes-november-6-2026",
+                "detail": "En Forever el cuerno se recibe al aceptar la misión."
+              }
+            ]
+          }
+        }
+      },
+      "evidence": {
+        "reason": "La aceptación, la escolta cronometrada hasta la bolsa y la entrega inmediata en la Atalaya de Maestra se hacen en una sola visita continua. Las marcas manuales del antiguo viaje no prueban que se haya iniciado o terminado la escolta.",
+        "sources": [
+          {
+            "url": "https://www.wowhead.com/forever/quest=5321/the-sleeper-has-awakened"
+          },
+          {
+            "url": "https://worldofwarcraft.blizzard.com/en-us/news/24315281/wow-forever-hotfixes-november-6-2026"
+          },
+          {
+            "url": "https://www.foreverwisp.com/guides/wow-forever-dwarf-gnome-leveling-guide"
+          }
+        ]
+      },
+      "goalChanges": [
+        {
+          "match": {
+            "t": "turnin",
+            "quest": 5321
+          },
+          "count": 1,
+          "set": {
+            "note": "Entrega a Liladris Rioluna antes de que se acabe el tiempo."
+          }
+        }
+      ],
+      "originalGoalValues": [
+        {
+          "match": {
+            "t": "turnin",
+            "quest": 5321
+          },
+          "values": {
+            "note": "Liladris Rioluna"
+          }
+        }
+      ]
     }
   ]
 }

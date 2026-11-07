@@ -508,7 +508,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "8e1d8545253cafa6b527f4646f80c505faec15844073dae3fef1aa5f4c236566",
+      "sha256": "eb8c250f1a66bc75d935b18465b46b9951e813f8d9883806b5ce8ba65adbf722",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -535,19 +535,21 @@
         "horde-30-40-03-arathi-highlands-prerequisites-metadata",
         "darkshore-holy-diver-3",
         "thousand-needles-nekrosh-chain-2",
-        "hillsbrad-wetlands-prerequisite-chains-3"
+        "hillsbrad-wetlands-prerequisite-chains-3",
+        "darkshore-onus-arbal-kerlonian-4",
+        "ashenvale-kerlonian-escort-3"
       ]
     }
   },
   "totals": {
     "guides": 57,
-    "goals": 7455,
+    "goals": 7454,
     "direct": 6570,
-    "generated_instruction": 7455,
+    "generated_instruction": 7454,
     "missing_goal_note_text": 3672,
-    "missing": 289,
-    "no_fixed_point_expected": 301,
-    "empty_authored_subtitle": 821,
+    "missing": 288,
+    "no_fixed_point_expected": 300,
+    "empty_authored_subtitle": 819,
     "candidates": 582,
     "unclear_instruction": 6,
     "no_fixed_navigation": 12,
@@ -579,9 +581,9 @@
       "missing_goal_note_text": 591
     },
     "complete": {
-      "goals": 238,
-      "direct": 55,
-      "generated_instruction": 238,
+      "goals": 239,
+      "direct": 56,
+      "generated_instruction": 239,
       "candidates": 169,
       "missing_goal_note_text": 177,
       "empty_authored_subtitle": 116,
@@ -608,10 +610,10 @@
       "empty_authored_subtitle": 36
     },
     "goto": {
-      "goals": 99,
-      "direct": 99,
-      "generated_instruction": 99,
-      "empty_authored_subtitle": 93
+      "goals": 98,
+      "direct": 98,
+      "generated_instruction": 98,
+      "empty_authored_subtitle": 92
     },
     "hearth": {
       "goals": 84,
@@ -642,11 +644,11 @@
       "empty_authored_subtitle": 1
     },
     "note": {
-      "goals": 116,
-      "missing": 116,
-      "no_fixed_point_expected": 116,
-      "generated_instruction": 116,
-      "empty_authored_subtitle": 116
+      "goals": 115,
+      "missing": 115,
+      "no_fixed_point_expected": 115,
+      "generated_instruction": 115,
+      "empty_authored_subtitle": 115
     },
     "sethome": {
       "goals": 74,
@@ -1145,20 +1147,20 @@
       "guideID": "forever/alliance/03-darkshore",
       "title": "Costa Oscura",
       "counts": {
-        "goals": 225,
+        "goals": 224,
         "candidates": 24,
-        "generated_instruction": 225,
+        "generated_instruction": 224,
         "missing_goal_note_text": 83,
         "empty_authored_subtitle": 39,
-        "direct": 197,
+        "direct": 196,
         "missing": 4,
         "no_fixed_point_expected": 4
       },
       "byAction": {
         "accept": {
-          "goals": 77,
-          "direct": 76,
-          "generated_instruction": 77,
+          "goals": 76,
+          "direct": 75,
+          "generated_instruction": 76,
           "missing_goal_note_text": 35,
           "empty_authored_subtitle": 16,
           "missing": 1,
@@ -1423,19 +1425,19 @@
       "title": "Vallefresno, Los Humedales y Sierra Espolón",
       "counts": {
         "goals": 182,
-        "direct": 161,
+        "direct": 162,
         "generated_instruction": 182,
         "missing_goal_note_text": 71,
         "candidates": 14,
-        "empty_authored_subtitle": 18,
-        "missing": 7,
-        "no_fixed_point_expected": 7
+        "empty_authored_subtitle": 16,
+        "missing": 6,
+        "no_fixed_point_expected": 6
       },
       "byAction": {
         "accept": {
-          "goals": 56,
-          "direct": 56,
-          "generated_instruction": 56,
+          "goals": 57,
+          "direct": 57,
+          "generated_instruction": 57,
           "missing_goal_note_text": 33,
           "empty_authored_subtitle": 3
         },
@@ -1446,9 +1448,10 @@
           "missing_goal_note_text": 2
         },
         "complete": {
-          "goals": 1,
+          "goals": 2,
+          "direct": 1,
+          "generated_instruction": 2,
           "candidates": 1,
-          "generated_instruction": 1,
           "missing_goal_note_text": 1
         },
         "fly": {
@@ -1464,10 +1467,10 @@
           "generated_instruction": 4
         },
         "goto": {
-          "goals": 4,
-          "direct": 4,
-          "generated_instruction": 4,
-          "empty_authored_subtitle": 4
+          "goals": 3,
+          "direct": 3,
+          "generated_instruction": 3,
+          "empty_authored_subtitle": 3
         },
         "hearth": {
           "goals": 4,
@@ -1490,11 +1493,11 @@
           "generated_instruction": 1
         },
         "note": {
-          "goals": 2,
-          "missing": 2,
-          "no_fixed_point_expected": 2,
-          "generated_instruction": 2,
-          "empty_authored_subtitle": 2
+          "goals": 1,
+          "missing": 1,
+          "no_fixed_point_expected": 1,
+          "generated_instruction": 1,
+          "empty_authored_subtitle": 1
         },
         "sethome": {
           "goals": 2,
@@ -6672,30 +6675,6 @@
       "unresolved": false,
       "goalNote": "Next: Ventormenta paral entrenamiento, luego el barco de Ventormenta Harbor a Auberdine para Vallefresno.",
       "stepNote": null,
-      "navigationMode": null,
-      "referenceNavigationKind": "missing"
-    },
-    {
-      "key": "forever/alliance/06-ashenvale:5:2",
-      "guideID": "forever/alliance/06-ashenvale",
-      "stepIndex": 5,
-      "goalIndex": 2,
-      "action": "note",
-      "questID": null,
-      "title": null,
-      "source": {
-        "repository": "https://github.com/julen92/SendaFH",
-        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
-        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
-        "guideID": "forever/alliance/06-ashenvale",
-        "stepIndex": 5,
-        "goalIndex": 2
-      },
-      "classification": "semantic_no_location",
-      "reason": "Nota informativa; no establece un destino físico.",
-      "unresolved": false,
-      "goalNote": "Escolta a Kerlonian hasta Atalaya de Maestra, en Vallefresno.",
-      "stepNote": "Kerlonian duerme en el Grove del Ancients en el sur de Costa Oscura. Usal Horn de Awakening para despertarlo y llevarlo al sur a lo largo de la carretera en Vallefresno a Liladris Rioluna en Atalaya de Maestra; soplal cuerno de nuevo cuando se duerma.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
@@ -16868,6 +16847,6 @@
       "location",
       "requiredLevel"
     ],
-    "semanticsSha256": "8cec214a6354fe831ec4433bc3c7af2d6b1e4f810e4d242f25e6f89c7dfcc8b0"
+    "semanticsSha256": "652e08d18b7195d1162bbf42c7c3ad590292f8c7c96cc2c9d2dc6c7abdfe4cdb"
   }
 }

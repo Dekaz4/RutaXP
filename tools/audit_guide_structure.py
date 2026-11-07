@@ -351,7 +351,6 @@ CONTEXT = {
     5742: ("npc_conversation_in_context", "La nota original pide escuchar a Tirion; el crédito NPC de Codex no debe convertirse en matar."),
     96392: ("npc_conversation_in_context", "La nota original pide hablar con Farsen para ver su visión."),
     4492: ("codex_route_disagreement", "La fuente usa4492 para encontrar a Ringo y4491 para escoltarlo; Codex atribuye la escolta a4492. Requiere verificación del cliente antes de corregir la ruta."),
-    5321: ("escort_in_unbound_context", "La aceptación difiere la escolta; Ashenvale paso5 tiene goto+note con cuerno y sueño, sin questID. La continuidad real del NPC entre guías queda por verificar."),
     91772: ("optional_travel_clicks_in_context", "La nota de aceptación pide pulsar los rastros durante el viaje a Villadorada; no hay goal separado de trabajo ni se perdió al importar."),
 }
 DONATIONS = {7791, 7820, 7821, 7822, 7824, 7826, 7827, 7831, 7833, 7834, 7835, 7836}

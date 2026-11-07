@@ -1,4 +1,4 @@
-RUTAXP 0.7.10 - WoW Forever
+RUTAXP 0.7.11 - WoW Forever
 
 ACTUALIZACIONES
 El mismo Instalador_RutaXP.exe sirve para instalar, actualizar y reparar:

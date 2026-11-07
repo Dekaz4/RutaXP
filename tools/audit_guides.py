@@ -149,9 +149,12 @@ def audit(document: dict[str, Any], include_baseline: bool = False,
                 guide = next((guide for guide in document["guides"] if guide["id"] == patch["guideID"]), {})
                 key = f'{patch["step"]}:{patch["goal"]}'
                 for migration in guide.get("progressMigrations", []):
+                    if key in migration.get("retiredGoalKeys", {}):
+                        break
                     key = migration.get("goalMap", {}).get(key, key)
-                si, gi = (int(part) for part in key.split(":"))
-                mode_evidence[goal_key(patch["guideID"], si, gi)] = mode
+                else:
+                    si, gi = (int(part) for part in key.split(":"))
+                    mode_evidence[goal_key(patch["guideID"], si, gi)] = mode
     if revisions and revisions.get("sourceCommit") == document.get("provenance", {}).get("commit"):
         applied = document.get("provenance", {}).get("routeRevisions", {}).get("applied", [])
         for revision in revisions.get("revisions", []):
