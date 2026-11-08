@@ -49,7 +49,7 @@ class QuestOfferAdviceTests(unittest.TestCase):
         self.assertEqual(self.early(7)[1], "ahora")
         self.h.ns.char.auto = False
         self.assertIsNone(self.early(6))
-        self.assertEqual(self.advice(6)[1], "después")
+        self.assertEqual(self.advice(6)[1], "ahora")  # The manual pickup saves the same trip.
         self.h.ns.char.auto = True
         for room in (False, None):
             self.h.state.hasSpace = room

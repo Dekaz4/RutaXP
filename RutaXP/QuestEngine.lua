@@ -1207,11 +1207,16 @@ function ns:ShouldWaitForEarlyQuest(step)
     return duo and duo.enabled and duo.wait and self.Duo and self.Duo:ShouldWaitForStep(step) or false
 end
 
+function ns:GetQuestContactNPC()
+    local guid = read(UnitGUID, "npc")
+    return type(guid) == "string" and tonumber(guid:match("^Creature%-%d+%-%d+%-%d+%-%d+%-(%d+)%-"))
+end
+
 local function turninAtContact(self, id, ready)
+    if self.GetGuideTravel and self:GetGuideTravel() then return false end
     if self:WantsQuest("turnin", id) then return true end
     if not self.CanHandInDuringVisit then return false end
-    local guid = read(UnitGUID, "npc")
-    local npc = type(guid) == "string" and tonumber(guid:match("^Creature%-%d+%-%d+%-%d+%-%d+%-(%d+)%-"))
+    local npc = self:GetQuestContactNPC()
     return npc and self:CanHandInDuringVisit(id, npc, ready) or false
 end
 

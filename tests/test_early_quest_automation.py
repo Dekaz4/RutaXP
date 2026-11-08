@@ -85,6 +85,37 @@ class EarlyQuestAutomationTests(unittest.TestCase):
         self.assertIsNone(h.state.selected)
         self.assertEqual(h.ns.char.progress[ELWYNN].cursor, 37)
 
+    def test_pick_up_furlbrow_quests_while_the_arrow_points_to_sentinel_hill(self):
+        for guide, cursor in ((ELWYNN, 72), (WESTFALL, 1)):
+            h = self.h
+            h.call("SelectGuide", guide)
+            h.ns.char.progress[guide].cursor = cursor
+            h.state.level = 12
+            for quest in (64, 36, 151):
+                h.quest(quest, onQuest=False)
+            for npc, offers in ((237, [64]), (238, [36, 151])):
+                h.state.npc = npc
+                h.state.offers = h.table(offers)
+                for i, quest in enumerate(offers):
+                    with self.subTest(guide=guide, quest=quest):
+                        h.state.selected, h.state.accepted = None, None
+                        self.automate("GOSSIP_SHOW" if i == 0 else "QUEST_GREETING")
+                        self.assertEqual(h.state.selected, quest)
+                        self.automate("QUEST_DETAIL")
+                        self.assertEqual(h.state.accepted, quest)
+                        h.quest(quest, onQuest=True)
+            self.assertEqual(h.ns.char.progress[guide].cursor, cursor)
+        h.ns.char.progress[WESTFALL].cursor = 3
+        step = h.ns.guides[WESTFALL].steps[3]
+        state = h.ns.char.progress[WESTFALL]
+        for index in (1, 2, 3):
+            self.assertEqual(h.call("GetGoalStatus", step.goals[index], step, state, index)[0], "done")
+        self.assertNotEqual(h.call("GetGoalStatus", step.goals[7], step, state, 7)[0], "done")
+        h.quest(184, delivered=True)  # The screenshot shows the deed already turned in.
+        h.quest(92742, onQuest=True)
+        next_goal = h.call("GetActiveGoal", step, state)[0]
+        self.assertEqual((next_goal.t, next_goal.quest), ("collect", 92742))
+
     def test_space_uses_quest_count_and_keeps_the_last_slot_for_the_current_step(self):
         h = self.h
         for used, allowed in [(38, True), (39, False), (40, False), (None, False)]:

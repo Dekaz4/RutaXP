@@ -11,7 +11,7 @@ class QuestVisitTurninTests(unittest.TestCase):
     def setUp(self):
         h = self.h = QuestEngineHost(catalog=True)
         h.load((ADDON / "QuestVisitTurnin.lua").read_text(encoding="utf-8"), "RutaXP", h.ns)
-        h.ns.earlyQuestOffers = h.table({109: True, 65: True})
+        h.ns.earlyQuestOffers = h.table({36: True, 109: True, 65: True})
         h.state.level = 12
         h.state.classToken = "ROGUE"
         h.initialize()
@@ -45,6 +45,16 @@ class QuestVisitTurninTests(unittest.TestCase):
         self.assertFalse(self.permits())
         h.quest(109, onQuest=False, delivered=True)
         self.assertFalse(self.permits(ready=True))
+
+    def test_deliver_vernas_recipe_on_first_scheduled_visit_to_salma(self):
+        h = self.h
+        h.quest(36, onQuest=True, complete=True)
+        self.assertFalse(self.permits(36, 235, True))  # Still at Sentinel Hill.
+        h.ns.char.progress[WESTFALL].cursor = 2
+        self.assertFalse(self.permits(36, 238, True))  # Verna gives the recipe.
+        self.assertFalse(self.permits(36, 235, False))
+        self.assertTrue(self.permits(36, 235, True))
+        self.assertEqual(h.cursor(WESTFALL), 2)
 
     def test_requires_reviewed_recipient_and_an_applicable_current_visit(self):
         h = self.h

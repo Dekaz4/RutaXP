@@ -602,6 +602,10 @@ function ns:CreateNavigation()
 
     frame.distance = outlinedText(frame, "GameFontNormalLarge", -60, 200, 15)
     frame.destination = outlinedText(frame, "GameFontHighlightSmall", -78, 206, 11)
+    frame.roadside = outlinedText(frame, "GameFontHighlightSmall", 0, 220, 11)
+    frame.roadside:ClearAllPoints()
+    frame.roadside:SetPoint("TOP", frame.destination, "BOTTOM", 0, -2)
+    frame.roadside:SetTextColor(0.55, 1, 0.68)
     frame:Hide()
 
     local updater = CreateFrame("Frame")
@@ -661,9 +665,16 @@ function ns:UpdateNavigation()
         frame:Hide()
         return
     end
-    local _, step = self:GetCurrent()
+    local guide, step, state = self:GetCurrent()
     local travel = self.GetGuideTravel and self:GetGuideTravel()
     local point = self:GetArrowWaypoint(step, travel or false)
+    if frame.roadside and self.GetWestfallCartHint then
+        local hint = self:GetWestfallCartHint(guide, step, state, travel)
+        if hint ~= frame.roadsideText then
+            frame.roadside:SetText(hint or "")
+            frame.roadsideText = hint
+        end
+    end
     if travel then step = travel end
     if not step and not point then
         if self.Walking then self.Walking:Clear() end

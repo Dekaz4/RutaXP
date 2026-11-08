@@ -120,7 +120,6 @@ end
 local questAutomation = ns.HandleQuestAutomation
 if questAutomation then
     function ns:HandleQuestAutomation(...)
-        if self.GetGuideTravel and self:GetGuideTravel() then return end
         if self.DuoAuto and self.DuoAuto:ShouldPauseAutomation() then return end
         return questAutomation(self, ...)
     end

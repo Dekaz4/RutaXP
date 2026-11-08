@@ -2,7 +2,10 @@ local _, ns = ...
 
 -- Reviewed courier hand-ins. Approving a quest for early pickup alone does
 -- not authorize finishing a timed, escort or PvP quest during another visit.
-local courierRecipient = { [109] = 234 } -- Report to Gryan Stoutmantle
+local courierRecipient = {
+    [36] = 235,  -- Verna's recipe to Salma Saldean
+    [109] = 234, -- Report to Gryan Stoutmantle
+}
 
 local function readyForNPC(questID, npcReady)
     if issecretvalue and issecretvalue(npcReady) then return false end

@@ -204,6 +204,10 @@ function ns:UpdateGuideTravel()
     if source then
         local journey = itinerary(self, source)
         view = travelView(self, source, dest, journey, savedTrip(self, source, journey))
+        if view then
+            view.source, view.destination = source, dest
+            view.arrivalMap = journey.legs[#journey.legs].map
+        end
     end
     self.guideTravelView = view
     if not old or not view then return old ~= view end

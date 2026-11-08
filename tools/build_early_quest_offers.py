@@ -25,11 +25,21 @@ BUILDS = {
     "1.60.1.70840": "1a8e5263510de3d9ec98f99dfda56653b1bbe30a77f97268740b28ac466016fd",
 }
 DB_SHA = "4f92db520868ab4e566726f68b5b2e380ae781209beaf22237b4f7f04600d0c0"
+# A later snapshot captured the wardrobe quest too. Its review is scoped to
+# the two Westfall errands missing from the general multiple-target filter.
+FARM_BUILD = "1.60.1.70862"
+FARM_URL = ("https://raw.githubusercontent.com/JIVESCORP/eg-link-output-wowf/"
+            "156f29c9af78b1586883e8eb94a13467eb89638c/data/wowf/" + FARM_BUILD + "/quests.enUS.json")
+FARM_SHA = "0f8b890bbedc79f6c80b99511a88ff5f699048f4a34303bd6d0a0281cfde4b7a"
+# giver, recipient, only required item, item supplied on acceptance (zero for none).
+FARM_ERRANDS = {36: (238, 235, 2832, 2832), 64: (237, 237, 841, 0)}
 
 # Source-qualified signatures, grouped by the supporting live build(s) in verify_sources().
 # Positive integers are monster IDs, negatives are item IDs. Empty means the individually
 # reviewed Report to Gryan Stoutmantle, a direct report with no item, timer or start script.
 WITNESSES = {
+    "70840+70862": "36:-2832",
+    "70862": "64:-841",
     "70790": """
         21:80 33:-750 47:-773 60:-772 170:707,724 182:706 183:708 376:-3265,-3264 381:-3266 404:-2855
         427:1535 432:1115 443:-3236 457:1985,2032 459:-3297 845:-5086 869:-5062 880:-5098 887:3381,3382
@@ -109,7 +119,11 @@ def classic_signatures(data):
                 row = dict(zip(columns, fields.split(","), strict=True))
                 if row["Method"] != "2" or row["QuestFlags"] not in ("0", "8"):
                     continue
-                gates = ("Type", "SpecialFlags", "StartScript", "LimitTime", "SrcItemId", "SrcSpell",
+                qid = int(row["entry"])
+                starter = FARM_ERRANDS[qid][3] if qid in FARM_ERRANDS else 0
+                if int(row["SrcItemId"]) != starter or (starter and row["SrcItemCount"] != "1"):
+                    continue
+                gates = ("Type", "SpecialFlags", "StartScript", "LimitTime", "SrcSpell",
                          "SuggestedPlayers", "ExclusiveGroup", "RequiredSkill", "RequiredCondition")
                 if any(row[key] != "0" for key in gates) or any(row[f"ReqSpellCast{i}"] != "0" for i in range(1, 5)):
                     continue
@@ -123,15 +137,18 @@ def classic_signatures(data):
                     if item:
                         signature[-item] = int(row[f"ReqItemCount{i}"])
                 else:
-                    results[int(row["entry"])] = signature
+                    results[qid] = signature
     return results
 
 
-def live_signature(row):
+def live_signature(row, qid=None):
     # Normal (2), no flags or SHAREABLE (8) only. Reject unknown bits and categories.
     if row.get("questType") != 2 or row.get("flags") not in (0, 8):
         return None
-    if any(row.get(k) for k in ("timeLimitSeconds", "flagsEx", "flagsEx2", "startItemId",
+    errand = FARM_ERRANDS.get(qid)
+    if (row.get("startItemId") or 0) != (errand[3] if errand else 0):
+        return None
+    if any(row.get(k) for k in ("timeLimitSeconds", "flagsEx", "flagsEx2",
                                 "questInfoId", "conditionalDescriptions", "areaDescription", "treasurePickerIds")):
         return None
     signature = {}
@@ -140,9 +157,13 @@ def live_signature(row):
         if kind not in ("item", "monster") or not isinstance(obj, int) or obj <= 0:
             return None
         count = objective.get("amount")
-        if not isinstance(count, int) or count < 2:
+        if not isinstance(count, int) or count < 1:
+            return None
+        if count == 1 and not (errand and kind == "item" and obj == errand[2]):
             return None
         signature[obj if kind == "monster" else -obj] = count
+    if errand and signature != {-errand[2]: 1}:
+        return None
     return signature
 
 
@@ -160,6 +181,22 @@ def authored_signatures(guides):
         if not {"accept", "turnin"} <= actions <= {"accept", "turnin", "collect", "kill"}:
             continue
         if any(g.get(key) for g in goals for key in ("group", "profLine", "closedBy", "fromFaction", "fromRank", "rank", "optional")):
+            continue
+        if qid in FARM_ERRANDS:
+            giver, recipient, item, starter = FARM_ERRANDS[qid]
+            contacts = {"accept": giver, "turnin": recipient}
+            if any(g.get("npc") != contacts[g["t"]] or g.get("map") != 1436
+                   for g in goals if g["t"] in contacts):
+                continue
+            work = [g for g in goals if g["t"] not in contacts]
+            if starter and not work:  # Verna hands over the recipe at acceptance.
+                results[qid] = (-item,)
+            elif not starter and work and all(
+                g["t"] == "collect" and g.get("fromKind") == "object" and g.get("item") == item
+                and g.get("count", 1) == 1 and g.get("map") == 1436 and g.get("x") and g.get("y")
+                for g in work
+            ):
+                results[qid] = (-item,)
             continue
         signature = set()
         for g in goals:
@@ -183,6 +220,9 @@ def verify_sources(authored, cache):
     for build, sha in BUILDS.items():
         data = raw_source(cache, f"early-offers-{build}.json", EG_ROOT + build + "/quests.enUS.json", sha)
         live[build] = json.loads(data)["quests"]
+    farm_data = raw_source(cache, f"early-offers-{FARM_BUILD}.json", FARM_URL, FARM_SHA)
+    farm_quests = json.loads(farm_data)["quests"]
+    live[FARM_BUILD] = {str(qid): farm_quests[str(qid)] for qid in FARM_ERRANDS if str(qid) in farm_quests}
     eligible = {}
     for qid, targets in authored.items():
         builds = [b for b, quests in live.items() if str(qid) in quests]
@@ -191,7 +231,7 @@ def verify_sources(authored, cache):
         if qid == 109 and any(not live[b][str(qid)].get("objectivesText", "").startswith("Talk to Gryan Stoutmantle.")
                               for b in builds):
             continue
-        if all(live_signature(live[b][str(qid)]) == classic[qid] for b in builds):
+        if all(live_signature(live[b][str(qid)], qid) == classic[qid] for b in builds):
             eligible[qid] = (tuple(b.rsplit(".", 1)[1] for b in builds), targets)
     return eligible
 

@@ -98,11 +98,24 @@ local function plannedOffer(self, guide, state, id, requireActive)
 end
 
 local function earlyEnabled(self, guide, state)
-    local char = self.char
-    if char.auto ~= true or guide.temporary or guide.recovery or not guide.steps[state.cursor]
-        or visitPaused(self, state) then return false end
+    if not guide.steps[state.cursor] or visitPaused(self, state) then return false end
     if self:ShouldWaitForEarlyQuest(guide.steps[state.cursor]) then return false end
     return self.GetEarlyQuestSpace and self:GetEarlyQuestSpace() == true
+end
+
+local function arrivalOffer(self, id, trip, guide, cursor)
+    if guide.id ~= trip.destination and (guide.id ~= trip.source or cursor <= #guide.steps) then return end
+    local target = self.guides[trip.destination]
+    if trip.waiting or not target or not applies(self, target) or not trip.arrivalMap
+        or self.TravelRouting.OnTaxi() or self.TravelRouting.Zone() ~= trip.arrivalMap then return end
+    local saved = self.char.progress[target.id]
+    if saved and (saved.review or saved.cursor ~= 1) then return end
+    local row = plannedAcceptance(self, target, id, 1, saved, true)
+    if not row or row.goal.map ~= trip.arrivalMap or not row.goal.npc or row.goal.npc ~= self:GetQuestContactNPC() then return end
+    -- While travelling, the shared travel checkpoint owns the wait. The
+    -- destination's first quest step has not started for either player yet.
+    if self.DuoAuto and self.DuoAuto:ShouldPauseAutomation() then return end
+    if self:GetEarlyQuestSpace() then return "Cógela de camino. La harás en " .. target.title .. ".", "ahora" end
 end
 
 local function booksAdvice(self)
@@ -114,24 +127,30 @@ end
 
 -- Advice only for a profitable, usable offer whose place in the route is
 -- established. The caller still owns all NPC and journal actions.
-function ns:GetEarlyQuestOffer(id)
+local function earlyOffer(self, id)
     if not validQuest(id) then return nil end
     if id ~= 91777 and not (self.earlyQuestOffers and self.earlyQuestOffers[id] == true) then return nil end
     local char = self.char
     local guide = char and self.guides[char.activeGuide]
     local state = guide and char.progress and char.progress[guide.id]
-    if not state or type(state.cursor) ~= "number" or not applies(self, guide)
+    if not state or type(state.cursor) ~= "number" or state.review or guide.temporary or guide.recovery or not applies(self, guide)
         or self:IsQuestActive(id) or self:IsQuestDelivered(id) then return nil end
+    local trip = self.GetGuideTravel and self:GetGuideTravel()
     if id == 91777 then
         if guide.id == ELWYNN and char.optional and IsInGroup and IsInGroup() == true and self:IsQuestDelivered(91775)
             and earlyEnabled(self, guide, state) then return booksAdvice(self) end
         return nil
     end
+    if trip then return arrivalOffer(self, id, trip, guide, state.cursor) end
     local row, target = plannedOffer(self, guide, state, id, true)
     if not row or not earlyEnabled(self, guide, state) then return nil end
     if target == guide then return "Puedes cogerla ahora para el paso " .. row.s .. ".", "ahora" end
     if id == 109 and target.id == WESTFALL then return "Cógela para entregarla al llegar a Gryan en Páramos de Poniente.", "ahora" end
     return "Puedes cogerla ahora para " .. target.title .. ".", "ahora"
+end
+
+function ns:GetEarlyQuestOffer(id)
+    if self.char and self.char.auto == true then return earlyOffer(self, id) end
 end
 
 function ns:GetQuestOfferAdvice(questID)
@@ -149,6 +168,8 @@ function ns:GetQuestOfferAdvice(questID)
     local state = char.progress and char.progress[guide.id]
     local cursor = state and state.cursor
     if type(cursor) ~= "number" or cursor < 1 then return "La guía está cargando tu progreso.", "estado" end
+    local early, kind = earlyOffer(self, questID)
+    if early and self.GetGuideTravel and self:GetGuideTravel() then return early, kind end
     local step = guide.steps[cursor]
     if step and applies(self, step) then
         for gi, goal in ipairs(step.goals or {step}) do
@@ -186,7 +207,6 @@ function ns:GetQuestOfferAdvice(questID)
             end
         end
     end
-    local early, kind = self:GetEarlyQuestOffer(questID)
     if early then return early, kind end
     if later then
         if later.goal.optional then return "Opcional en el paso " .. later.s .. ".", "opcional" end
