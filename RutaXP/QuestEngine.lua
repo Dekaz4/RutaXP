@@ -1177,11 +1177,10 @@ end
 
 function ns:WantsQuest(action, questID)
     if self.GetGuideTravel and self:GetGuideTravel() then return false end
-    if type(questID) ~= "number" or questID <= 0 then return false end
+    if not finiteNumber(questID) or questID <= 0 then return false end
     local guide, step, state = self:GetCurrent()
     if not guide or not step or not state or state.review or not self:MatchesConditions(step.only) then return false end
-    -- NPC dialogs authorize only active objectives of this visit. Merely
-    -- appearing somewhere in a future route does not authorize accepting it.
+    -- Current, unblocked objectives always take priority in an NPC menu.
     for index, goal in ipairs(step.goals or { step }) do
         if (goal.t or goal.action) == action and (goal.quest or goal.questID) == questID
             and self:GetGoalStatus(goal, step, state, index) == "active" then
@@ -1189,6 +1188,49 @@ function ns:WantsQuest(action, questID)
         end
     end
     return false
+end
+
+function ns:GetEarlyQuestSpace()
+    local limit = read(C_QuestLog and C_QuestLog.GetMaxNumQuestsCanAccept) or MAX_QUESTLOG_QUESTS
+    local _, used = read(C_QuestLog and C_QuestLog.GetNumQuestLogEntries)
+    if not finiteNumber(used) then _, used = read(GetNumQuestLogEntries) end
+    -- The first return counts displayed rows, including zone headers. The
+    -- second counts quests even if a zone is collapsed. Keep the last slot
+    -- for a required pickup at the character's current step.
+    return finiteNumber(limit) and limit > 0 and limit == math.floor(limit)
+        and finiteNumber(used) and used >= 0 and used == math.floor(used) and limit - used >= 2
+end
+
+function ns:ShouldWaitForEarlyQuest(step)
+    local duo = self.char and self.char.duo
+    if duo and duo.autoSession and self.DuoAuto and self.DuoAuto:ShouldPauseAutomation() then return true end
+    return duo and duo.enabled and duo.wait and self.Duo and self.Duo:ShouldWaitForStep(step) or false
+end
+
+local function turninAtContact(self, id, ready)
+    if self:WantsQuest("turnin", id) then return true end
+    if not self.CanHandInDuringVisit then return false end
+    local guid = read(UnitGUID, "npc")
+    local npc = type(guid) == "string" and tonumber(guid:match("^Creature%-%d+%-%d+%-%d+%-%d+%-(%d+)%-"))
+    return npc and self:CanHandInDuringVisit(id, npc, ready) or false
+end
+
+local function selectAvailable(self, count, getOffer, selectOffer)
+    local early
+    for i = 1, count do
+        local id, selection = getOffer(i)
+        if self:WantsQuest("accept", id) then
+            read(selectOffer, selection)
+            return
+        end
+        if not early and self.GetEarlyQuestOffer and self:GetEarlyQuestOffer(id) then early = selection end
+    end
+    if early then read(selectOffer, early) end
+end
+
+local function greetingOffer(index)
+    local _, _, _, _, id = read(GetAvailableQuestInfo, index)
+    return id, index
 end
 
 function ns:HandleQuestAutomation(event)
@@ -1199,7 +1241,7 @@ function ns:HandleQuestAutomation(event)
 
     if event == "QUEST_DETAIL" then
         local qid = read(GetQuestID)
-        if not self:WantsQuest("accept", qid) then return end
+        if not self:WantsQuest("accept", qid) and not (self.GetEarlyQuestOffer and self:GetEarlyQuestOffer(qid)) then return end
         if read(QuestFlagsPVP) then return end
         if read(QuestGetAutoAccept) then
             read(AcknowledgeAutoAcceptQuest)
@@ -1208,13 +1250,11 @@ function ns:HandleQuestAutomation(event)
         end
     elseif event == "QUEST_PROGRESS" then
         local qid = read(GetQuestID)
-        if not self:WantsQuest("turnin", qid) then return end
-        if read(IsQuestCompletable) then
-            read(CompleteQuest)
-        end
+        local ready = read(IsQuestCompletable)
+        if (ready == true or ready == 1) and turninAtContact(self, qid, true) then read(CompleteQuest) end
     elseif event == "QUEST_COMPLETE" then
         local qid = read(GetQuestID)
-        if not self:WantsQuest("turnin", qid) then return end
+        if not turninAtContact(self, qid, true) then return end
         local choices = read(GetNumQuestChoices)
         if type(choices) ~= "number" or choices < 0 then return end
         if choices > 1 then
@@ -1229,34 +1269,26 @@ function ns:HandleQuestAutomation(event)
         for i = 1, numActive do
             local _, isComplete = read(GetActiveTitle, i)
             local qid = read(GetActiveQuestID, i)
-            if isComplete and self:WantsQuest("turnin", qid) then
+            if (isComplete == true or isComplete == 1) and turninAtContact(self, qid, true) then
                 read(SelectActiveQuest, i)
                 return
             end
         end
-        local numAvailable = read(GetNumAvailableQuests) or 0
-        for i = 1, numAvailable do
-            local _, _, _, _, qid = read(GetAvailableQuestInfo, i)
-            if self:WantsQuest("accept", qid) then
-                read(SelectAvailableQuest, i)
-                return
-            end
-        end
+        selectAvailable(self, read(GetNumAvailableQuests) or 0, greetingOffer, SelectAvailableQuest)
     elseif event == "GOSSIP_SHOW" and C_GossipInfo then
         local active = read(C_GossipInfo.GetActiveQuests) or {}
         for _, info in ipairs(active) do
-            if info.isComplete and self:WantsQuest("turnin", info.questID) then
+            if not (issecretvalue and issecretvalue(info.isComplete))
+                and (info.isComplete == true or info.isComplete == 1) and turninAtContact(self, info.questID, true) then
                 read(C_GossipInfo.SelectActiveQuest, info.questID)
                 return
             end
         end
         local available = read(C_GossipInfo.GetAvailableQuests) or {}
-        for _, info in ipairs(available) do
-            if self:WantsQuest("accept", info.questID) then
-                read(C_GossipInfo.SelectAvailableQuest, info.questID)
-                return
-            end
-        end
+        selectAvailable(self, #available, function(i)
+            local id = available[i].questID
+            return id, id
+        end, C_GossipInfo.SelectAvailableQuest)
     end
 end
 

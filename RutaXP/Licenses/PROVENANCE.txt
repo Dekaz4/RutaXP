@@ -1,6 +1,16 @@
 RutaXP leveling guide adaptation
 ===============================
 
+EarlyQuestData.lua contains IDs selected by RutaXP for early pickup.
+Forever quest facts: Efficient Games (https://efficient.games), CC BY 4.0
+(https://creativecommons.org/licenses/by/4.0/), builds 1.60.1.70790 and 1.60.1.70840.
+Original data: https://github.com/JIVESCORP/eg-link-output-wowf/tree/45f58b070b84501f8001bdcad43864aa929a6a4b/data/wowf
+Quest types, objectives, timers and start scripts were cross-checked with
+CMaNGOS Classic-DB, GPL-3.0:
+https://github.com/cmangos/classic-db/tree/c33f90b8eeb3f8bacb53d5cbfee45075c80b416c
+RutaXP filters the records and joins them to its guide routes.
+Source hashes and selection rules are in tools/build_early_quest_offers.py.
+
 Original guide routes: Polestar, by Fitz and contributors.
 Spanish adaptation and translation: SendaFH / Forever Hispano.
 Source: https://github.com/julen92/SendaFH

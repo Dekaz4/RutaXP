@@ -1,5 +1,7 @@
 # Procedencia y licencias de RutaXP
 
+El catálogo de recogidas anticipadas filtra datos de las misiones de Forever publicados por [Efficient Games](https://efficient.games) bajo [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). RutaXP selecciona identificadores y contrasta los objetivos, los temporizadores y las acciones al aceptar con [CMaNGOS Classic-DB](https://github.com/cmangos/classic-db), GPL-3.0. Las revisiones de origen están en `RutaXP/Licenses/PROVENANCE.txt`.
+
 RutaXP y sus modificaciones se distribuyen bajo GPL-3.0-only; el texto está en `LICENSE`. Los componentes de terceros conservan sus propios avisos y, cuando corresponda, licencias adicionales.
 
 - **Polestar**, por Fitz y colaboradores, y **SendaFH / Forever Hispano**: recorridos, traducciones, recursos gráficos de `RutaXP/Media` y datos adaptados desde [SendaFH](https://github.com/julen92/SendaFH), revisión `5d207e28e82e2c529143b21ace74fe88692f0067`. Se conservan sus avisos en `RutaXP/Licenses/`. El trabajo de integración e interfaz realizado con Antigravity se conserva; ese crédito no sustituye la autoría de los recursos originales.
