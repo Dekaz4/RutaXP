@@ -32,6 +32,28 @@ WARNINGS = dict(no_source_data="sin datos externos de requisitos", missing_prere
                 additional_gate_review="condición adicional por verificar")
 
 
+ORDER_REVIEW = """## Posibles ahorros en los otros 13 capítulos
+
+Estas propuestas parten de los pasos de la versión 0.7.12. Para medir su efecto en partida hay que contar también caminos, esperas y tiempo de combate.
+
+| Capítulo y pasos | Valoración | Recorrido que se podría probar |
+|---|---|---|
+| Desolace · 5–9 | Una vuelta menos al puesto | Tras los sátiros, visitar el cofre de Malem. Al regresar a Punta de Nijel se podrían entregar juntos los componentes a Kreldig y el encargo a Vahlarriel, y aceptar ambas continuaciones. |
+| Vallefresno y Los Humedales · 8–16 | Una visita a Xavian | Una vez aceptada «Shared Fury» en el paso 11, conseguir la rama de Geltharis (#1031) y matar los sátiros (#98418) en la misma incursión. Los círculos de la Torre de Althalaxx conservan su secuencia. |
+| Vega de Tuercespina · 22–25 | Depende del espacio en el diario | Antes de salir de Bahía del Botín, recoger «OPA hostil» y «La isla fantasma», y pasar por el barón para aceptar «La piedra de las mareas». Hacer la costa y el crocolisco en el mismo viaje, guardando su piel para entregarla a Drizzlik al volver. |
+| Tierras Inhóspitas y Tierras del Interior · 13–15 | Desplazamiento corto | Al volver a Pico Nidal, entregar primero los collares a Fraggar y después las jaulas a Garracha. El siguiente vuelo sale hacia Puerto de Menethil. |
+| Tanaris · 5, 10 y 19–21 | Depende de la aparición del objetivo | Recoger el encargo de Caliph Escorpijón (#2781) al visitar el cartel por primera vez. Si está en la zona y el grupo puede derrotarlo al pasar en el paso 10, aprovechar la ocasión. |
+| Tierras del Interior, Tierras Devastadas y Loch Modan · 7 | Margen pequeño | Entregar los dos envíos a Lungertz en la misma conversación si ya están listos. Los destinatarios intermedios están muy cerca. Mantener el orden del encargo cronometrado de este capítulo. |
+| La Garganta de Fuego · 1 y 10 | Margen pequeño | En el Puesto del Torio se pueden ordenar las paradas según la entrada y la salida. Los encargos de Hansel ya se recogen y entregan juntos. |
+| Cráter de Un’Goro y Forjaz · 1, 12, 17 y 23 | Dos objetivos en la misma cueva | Si Torwa ofrece «Los simios de Un’Goro» (#4289) en la primera visita, aceptarla para recoger las tres pelambres durante el paso 12. Volver por las que falten si los gorilas no las sueltan todas. |
+| Estepas Ardientes, Azshara y Tierras Devastadas · 8–11 | Depende del botín | Si ya han salido las runas de «El equipamiento perdido de Kim'jael» (#5534), volver a Kim'jael antes de completar las piedras. Desde las piedras se puede continuar hacia el piloto. |
+| Frondavil · 7–11 | Depende de los enemigos que aparezcan | Si llevas los frascos de Laris, aprovechar los mocos que encuentres junto al camino de Jaedenar. La segunda entrada para recoger el agua necesita la entrega previa a Greta. |
+| Cuna del Invierno y Tierras de la Peste del Este · 9–12 | Conservar la vuelta a Vista Eterna | Umi recibe el pelaje (#3783) antes de ofrecer el encargo de los cuernos (#977). En las ruinas de Kel’Theril (paso 3) queda por comprobar el camino entre los cuatro fragmentos. |
+| Tierras de la Peste del Oeste, Tierras de la Peste del Este y Feralas · 8–17 | Reunir las tareas de dos granjas | Visitar a Janice (10) cuando se va al caldero de Piedra Mácula (13), antes de comprar el acelerador temporal. Hacer el diario y las llaves de Dalson (9) con el caldero de esa granja (16). Cada cadena mantiene sus entregas intermedias. |
+| Silithus, Frondavil, Cuna del Invierno y Tierras de la Peste · 27–30 | Una visita al Fuerte Cenarion | Tras completar el Lexicón con Havunth, ir directamente al ermitaño Ortell. Con la piedra del paso 30 disponible y sitio en las bolsas, entregar al regresar al fuerte «Queridísima Natalia», la cartera de Noggle y «Un propósito terrible». |
+"""
+
+
 def route(document):
     by_id = {g["id"]: g for g in document["guides"]}
     visited = []
@@ -228,7 +250,7 @@ def review(guides, items, requirements, revisions):
         f"Hay {totals['flagged']} filas con algún requisito pendiente de contrastar. Entre ellas siguen Lingotes Forjaluz (526) "
         "y Una fiesta en tu honor (1271). Los tiempos de viaje quedan pendientes de medir en el juego.",
         "", "| Capítulo | Pasos | Acciones compatibles / examinadas | Revisión |", "|---|---:|---:|---|",
-        *summary, "", body, ""])
+        *summary, "", ORDER_REVIEW.rstrip(), "", body, ""])
 
 
 def main():
