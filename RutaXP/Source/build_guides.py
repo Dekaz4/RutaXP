@@ -225,6 +225,13 @@ def revision_progress(revision: dict[str, Any]) -> dict[str, Any] | None:
     if steps.keys() & replacement_steps.keys() or len(steps) + len(replacement_steps) != len(counts):
         raise ValueError("Every replaced step needs exactly one cursor destination: " + revision["id"])
     steps.update(replacement_steps)
+    if revision.get("preservePendingVisits"):
+        # A saved cursor says nothing about completion of later visits. If a
+        # future action moved earlier, resume early enough to consult the log.
+        earliest = len(entries)
+        for old in range(len(counts), 0, -1):
+            earliest = min(earliest, steps[str(old)])
+            steps[str(old)] = earliest
     changed = {old: new for old, new in mapping.items() if old != new}
     steps[str(len(counts) + 1)] = len(entries) + 1
     first = revision.get("firstAffectedStep", min((int(key.split(":")[0]) for key in changed), default=len(counts) + 1))

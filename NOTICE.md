@@ -8,6 +8,8 @@ RutaXP y sus modificaciones se distribuyen bajo GPL-3.0-only; el texto está en 
 - **EverythingQuests**, por Wheelbarrel00, y **AllTheThings WoW Addon**, ambos MIT: datos numéricos de disponibilidad y comprobación de cadenas de Forever. Las revisiones exactas, archivos, líneas y huellas se conservan en `RutaXP/Source/quest_requirements_evidence.json` y `guide_revisions.json`. Sus licencias completas se incluyen en `RutaXP/Licenses/EverythingQuests-MIT.txt` y `AllTheThings-MIT.txt`. No se importa su código de ejecución ni el texto narrativo de las misiones.
 - **QuestieDB / Questie**: contraste de los nueve IDs de requisito de Holy Diver, con revisión fijada `21be34023b72cf2ec3027cb9a61a8b72a1910857` e incidencia pública Questie/Questie#8040. Se referencian hechos numéricos y su procedencia; no se importa código ni texto narrativo de esa base. Se conserva su aviso original en `RutaXP/Licenses/QuestieDB-NOTICE.md`, sin atribuirle una licencia MIT.
 
+- **ForeverLevelingBiS**, por Thunder, MIT. Los datos de equipo y recompensas de Forever proceden de la versión 0.12.0-beta incluida en SendaFH. El aviso íntegro figura en `RutaXP/Licenses/ForeverLevelingBiS-MIT.txt`.
+
 Los datos editables y las herramientas de reconstrucción acompañan al código. Los ejecutables de las publicaciones se compilan desde `tools/Installer.cs` y `tools/Updater.cs`. Las fuentes originales fijadas se identifican en los archivos de procedencia; no se publican las copias personales ni los archivos `WTF` de ningún jugador.
 
 RutaXP es un proyecto independiente y no está afiliado a Blizzard Entertainment.

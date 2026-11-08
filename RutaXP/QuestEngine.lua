@@ -467,6 +467,31 @@ function ns:GetGoalStatus(goal, step, state, index)
     return "manual", "Confirma al terminar esta acción"
 end
 
+-- During a town visit a rogue travelling alone can hand in a ready quest
+-- to the NPC in front of them. Never pull an acceptance or an escort forward.
+local function readyAtContact(self, step, state, first)
+    local char = self.char
+    if not state or state.review or not char or char.auto ~= true or not char.activeGuide
+        or not char.activeGuide:match("^forever/alliance/") or (char.duo and char.duo.enabled)
+        or read(IsInGroup) then return end
+    local _, class = UnitClass("player")
+    local _, race = UnitRace("player")
+    if class ~= "ROGUE" or race ~= "Human" then return end
+    local guid = read(UnitGUID, "npc")
+    if not guid and read(CheckInteractDistance, "target", 3) == true then guid = read(UnitGUID, "target") end
+    local contact = type(guid) == "string" and tonumber(guid:match("^Creature%-%d+%-%d+%-%d+%-%d+%-(%d+)%-"))
+    if not contact or step.goals[first].npc == contact then return end
+    for index = first + 1, #step.goals do
+        local goal = step.goals[index]
+        if goal.t ~= "accept" and goal.t ~= "turnin" then break end
+        if goal.t == "turnin" and goal.npc == contact and goal.quest
+            and self:IsQuestActive(goal.quest) and read(C_QuestLog and C_QuestLog.IsComplete, goal.quest) == true then
+            local status, reason = self:GetGoalStatus(goal, step, state, index)
+            if status == "active" then return goal, index, status, reason end
+        end
+    end
+end
+
 function ns:GetActiveGoal(step, state)
     if not step then
         _, step, state = self:GetCurrent()
@@ -478,7 +503,13 @@ function ns:GetActiveGoal(step, state)
     if not step.goals then return step, 1, "active" end
     for index, goal in ipairs(step.goals) do
         local status, reason = self:GetGoalStatus(goal, step, state, index)
-        if status ~= "done" and status ~= "skip" then return goal, index, status, reason end
+        if status ~= "done" and status ~= "skip" then
+            if status == "active" and (goal.t == "accept" or goal.t == "turnin") and index < #step.goals then
+                local nearby, row, ready, why = readyAtContact(self, step, state, index)
+                if nearby then return nearby, row, ready, why end
+            end
+            return goal, index, status, reason
+        end
     end
 end
 
@@ -866,6 +897,15 @@ function ns:GetStepGoalItems(step, state)
                     subLines[#subLines + 1] = reason
                 end
 
+                local details = self:GetGoalInstruction(goal, index == currentIdx and step or nil)
+                if index == currentIdx and status == "active" and (action == "accept" or action == "turnin")
+                    and self.GetRogueQuestRewardInfo then
+                    local hint, rewards = self:GetRogueQuestRewardInfo(id, action)
+                    if hint then
+                        subLines[#subLines + 1] = hint
+                        details = details and (details .. "\n" .. rewards) or rewards
+                    end
+                end
                 local entry = {
                     index = index,
                     goal = goal,
@@ -875,7 +915,7 @@ function ns:GetStepGoalItems(step, state)
                     isCurrent = (index == currentIdx),
                     title = self:GetGoalTitle(goal),
                     subtitle = #subLines > 0 and table.concat(subLines, "\n") or nil,
-                    details = self:GetGoalInstruction(goal, index == currentIdx and step or nil),
+                    details = details,
                 }
                 if status == "done" then
                     doneItems[#doneItems + 1] = entry

@@ -28,14 +28,14 @@ class WestfallAlbaContentTests(unittest.TestCase):
 
     def test_both_independent_quests_are_delivered_before_mines_acceptance_and_work(self):
         guide = self.guide
-        self.assertEqual((guide["routeRevision"], len(guide["steps"])), (3, 22))
+        self.assertGreaterEqual(guide["routeRevision"], 4)
         initial = {goal.get("quest"): goal for goal in guide["steps"][0]["goals"] if goal["t"] == "accept"}
         self.assertIn(92742, initial)
         self.assertIn(92744, initial)
         self.assertNotIn(92745, initial)
         for quest in (92742, 92744):
             self.assertFalse(initial[quest].get("pre") or initial[quest].get("preAll"))
-        coast = guide["steps"][5]["goals"]
+        coast = guide["steps"][4]["goals"]
         self.assertEqual([(goal["t"], goal.get("quest")) for goal in coast], [("collect", 92744), ("collect", 38)])
         alba = guide["steps"][6]["goals"]
         self.assertEqual([(goal["t"], goal["quest"]) for goal in alba], [("turnin", 92742), ("turnin", 92744), ("accept", 92745)])
@@ -67,8 +67,10 @@ class WestfallAlbaContentTests(unittest.TestCase):
         self.assertEqual(revision["guideID"], WEST)
         self.assertEqual(revision["evidence"]["sourceCommit"], "54a16756db16adeb9d5602bace1507077df37185")
         self.assertEqual(revision["evidence"]["preAll"], [92742, 92744])
-        self.assertEqual(self.builder.route_shape(self.guide), next(r for r in overlay["revisions"] if r["id"] == "westfall-engineering-3")["resultShape"])
-        self.assertEqual(self.doc["statistics"]["steps"], 2343)
+        chain = [r for r in overlay["revisions"] if r["guideID"] == WEST]
+        by_version = {r["revision"]: r for r in chain}
+        self.assertEqual(by_version[4]["sourceShape"], by_version[3]["resultShape"])
+        self.assertEqual(self.builder.route_shape(self.guide), by_version[self.guide["routeRevision"]]["resultShape"])
 
     def test_clean_reimport_reapplies_only_reviewed_route_semantics(self):
         upstream = ROOT / ".sources/SendaFH"

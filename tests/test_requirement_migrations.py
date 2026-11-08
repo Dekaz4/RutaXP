@@ -342,7 +342,7 @@ class PublishedMigrationContractTests(unittest.TestCase):
                         new_step = update.stepMap[new_step] or new_step
                     self.assertEqual(h.call("GetGuideCursorForRevision", guide.id, old_step, migration["from"]), new_step)
 
-    def test_westfall_two_migrations_keep_earlier_live_repair_and_both_backups(self):
+    def test_westfall_migrations_keep_earlier_live_repair_and_each_backup(self):
         saved = {"seen": True, "auto": False, "activeGuide": WEST, "progress": {WEST: {
             "cursor": 6, "routeRevision": 1, "review": True,
             "confirmed": {"2:5": True, "5:5": True}, "skipped": {"11:6": True}}}}
@@ -350,14 +350,27 @@ class PublishedMigrationContractTests(unittest.TestCase):
                                  92744: {"onQuest": True, "complete": False},
                                  92910: {"onQuest": True, "complete": True}})
         h.initialize()
-        self.assertEqual(h.progress.routeRevision, 3)
-        self.assertEqual(h.progress.cursor, 6)  # Coast first; engineering return is later.
+        self.assertEqual(h.progress.routeRevision, 4)
+        self.assertEqual(h.progress.cursor, 5)  # Coast first; engineering return is later.
         self.assertTrue(h.progress.confirmed["12:6"])
         self.assertTrue(h.progress.confirmed["12:7"])
         self.assertIsNotNone(h.ns.char.guideMigrationBackups[WEST + ":2"])
         self.assertIsNotNone(h.ns.char.guideMigrationBackups[WEST + ":3"])
+        self.assertIsNotNone(h.ns.char.guideMigrationBackups[WEST + ":4"])
         self.assertEqual(h.call("GetGuideCursorForRevision", WEST, 22, 1), 23)
         self.assertEqual(h.call("GetGuideCursorForRevision", WEST, 23, 2), 23)
+
+    def test_old_molsen_cursor_preserves_the_still_pending_coast_visit(self):
+        saved = {"seen": True, "auto": False, "activeGuide": WEST, "progress": {WEST: {
+            "cursor": 5, "routeRevision": 3, "review": True, "confirmed": {"5:1": True}}}}
+        h = MigrationHost(saved, {92744: {"onQuest": True, "complete": False}})
+        h.initialize()
+        # Old step 5 moved into new step 6, but the beach that used to follow
+        # it is now visited first. Directly resuming in Molsen would hide it.
+        self.assertEqual(h.progress.cursor, 5)
+        self.assertEqual((h.active()[0].t, h.active()[0].quest), ("collect", 92744))
+        self.assertTrue(h.progress.confirmed["6:2"])  # Keep the actual Molsen mark.
+        self.assertIsNone(h.progress.confirmed["5:1"])
 
 
 if __name__ == "__main__":

@@ -1,4 +1,8 @@
-# Revisión de guías de RutaXP 0.7.11
+# Revisión de guías de RutaXP 0.7.12
+
+## Recorrido del pícaro humano
+
+[Ver el informe por paso, incluidas las recompensas y las discrepancias por verificar](PICARO_HUMANO.md).
 
 ## El Páramo de los Ancianos (0.7.11)
 

@@ -86,3 +86,18 @@ Three missing Wetlands quest chains are reconstructed from numeric NPC,
 object, item, objective and coordinate facts in the same pinned SendaFH,
 EverythingQuests and AllTheThings sources above. Source/successor_review.json
 records the reviewed Alliance chapters and unresolved source discrepancies.
+
+RutaXP 0.7.12 Human Rogue equipment
+-----------------------------------
+tools/review_human_rogue.py uses the SendaFH commit identified above.
+addon/SendaFH_ItemDB/Forever.lua contains quest rewards and item data from
+ForeverLevelingBiS v0.12.0-beta by Thunder (2026-10-13). The full upstream
+notice is reproduced in ForeverLevelingBiS-MIT.txt. Items.lua provides
+Blizzard Classic Era item facts when no Forever-specific record exists.
+Missing reward lists use SendaFH_Codex, and item names use SendaFH_Names_esES.
+In-game comparisons use the values available on that player's client.
+Rogue one-handed axes and the two-dagger requirement for Mutilate:
+https://worldofwarcraft.blizzard.com/es-es/news/24310968
+The Westfall chest (2041) comes from quest 166 at the end of the Defias
+chain. Quest links are in SendaFH_QuestDB/Quests.lua, item attributes in
+SendaFH_ItemDB/Items.lua and reward options in SendaFH_ItemDB/Forever.lua.

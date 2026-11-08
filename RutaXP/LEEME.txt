@@ -1,4 +1,4 @@
-RUTAXP 0.7.11 - WoW Forever
+RUTAXP 0.7.12 - WoW Forever
 
 ACTUALIZACIONES
 El mismo Instalador_RutaXP.exe sirve para instalar, actualizar y reparar:
@@ -115,7 +115,7 @@ cajas con fuente contradictoria lo indican: revisa los materiales de la caja
 y el requisito del registro. No se atribuye un punto de recogida inventado.
 
 CONTENIDO
-57 rutas, 2.343 pasos y 7.455 objetivos para Alianza y Horda, con variantes
+57 rutas, 2.343 pasos y 7.458 objetivos para Alianza y Horda, con variantes
 de clase y zonas iniciales clásicas y Skyborne. Se conservan la interfaz,
 la flecha facetada, 36 planes de talentos y el asistente de instructor.
 Las rutas Polestar/SendaFH siguen en beta: falta validar esta revisión

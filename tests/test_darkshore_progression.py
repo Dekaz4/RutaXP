@@ -90,10 +90,17 @@ class DarkshoreProgressionTests(unittest.TestCase):
         self.assertEqual(h.point().goal.object, 17182)
         h.set_quest(1001, counts=[(0, 3)])
         h.event("QUEST_ACCEPTED", 1001)
+        self.assertEqual(h.cursor, 3)
+        self.assert_goal(h, "accept", 4681)
+        h.set_quest(4681, counts=[(0, 1)])
+        h.event("QUEST_ACCEPTED", 4681)
+        self.assert_goal(h, "collect", 4681)
+        h.set_quest(4681, counts=[(1, 1)])
+        h.event()
         self.assert_goal(h, "collect", 1001)
         h.set_quest(1001, counts=[(3, 3)])
         h.event()
-        self.assertEqual(h.cursor, 3)
+        self.assert_goal(h, "turnin", 4681)
 
         # The next delivery is explicitly in the later northern excursion.
         for q in (954, 955, 956, 957):

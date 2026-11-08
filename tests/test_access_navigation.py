@@ -85,7 +85,7 @@ def load_pathing(host, missing_part=None):
 
 
 class AccessHost:
-    def __init__(self, guide_id=HUMAN, step=24, goal_index=1, x=.1, y=.1, terrain=False):
+    def __init__(self, guide_id=HUMAN, step=24, goal_index=1, x=.1, y=.1, terrain=False, *, find_goal=None):
         self.h = full.TalentTrainerHost(full_toc=True)
         self.h.lua.execute(DUO_STUBS)
         self.ns, self.s = self.h.ns, self.h.state
@@ -95,7 +95,14 @@ class AccessHost:
         self.s.x, self.s.y = x, y
         self.s.faction, self.s.raceToken = ("Horde", "Orc") if guide_id == ORC else ("Alliance", "Dwarf" if guide_id == DWARF else "Human")
         self.s.classToken = "WARRIOR"
-        self.guide, self.step_index = self.ns.guides[guide_id], step
+        self.guide = self.ns.guides[guide_id]
+        if find_goal:
+            matches = [(si, gi) for si, visit in self.guide.steps.items() for gi, goal in visit.goals.items()
+                       if all(goal[k] == v for k, v in find_goal.items())]
+            if len(matches) != 1:
+                raise AssertionError(f"Expected one {find_goal} in {guide_id}, got {matches}")
+            step, goal_index = matches[0]
+        self.step_index = step
         self.step = self.guide.steps[step]
         self.goal = self.step.goals[goal_index]
         self.s.mapID = self.goal.map
@@ -177,7 +184,9 @@ class AuthoredAccessIntegrationTests(unittest.TestCase):
         self.assertFalse(h.ns.IsQuestDelivered(h.ns, 62))
 
     def test_real_jasperlode_source_gate_is_not_imposed_again_on_the_next_step(self):
-        h = AccessHost(HUMAN, 45, x=.616, y=.541)
+        h = AccessHost(HUMAN, x=.616, y=.541, find_goal={"t": "complete", "quest": 76})
+        entrance = h.guide.steps[h.step_index - 1].goals[1]
+        self.assertEqual((entrance.t, entrance.map, entrance.x, entrance.y), ("goto", 1429, 61.6, 54.1))
         before = h.progress()
         self.assertFalse(bool(h.point().intermediate))
         status = h.waypoint_control("GetStatus")

@@ -39,7 +39,12 @@ class AlbaPartyHost(AutomaticPartyHost):
         self.set_quest(92742, delivered=True)
         self.set_quest(92744, counts=[(self.starting_gills, 7)])
         self.set_quest(92745, active=False, counts=[(0, 4), (0, 6)])
-        self.set_quest(38, counts=[(0, 3), (3, 3), (0, 3), (0, 3)])
+        # These characters finished Molsen in the old order. Over the
+        # coast-first visit the new guide must consult those journal counters.
+        self.set_quest(9, counts=[(20, 20)])
+        self.set_quest(22, counts=[(8, 8)])
+        self.set_quest(92909, counts=[(14, 14), (5, 5)])
+        self.set_quest(38, counts=[(3, 3), (3, 3), (3, 3), (3, 3)])
 
     def set_quest(self, qid, *, active=True, delivered=False, counts=()):
         objectives = [
@@ -98,16 +103,16 @@ class WestfallAlbaPartyTests(unittest.TestCase):
     def test_two_old_saves_rejoin_gills_before_mines_without_sharing_progress(self):
         a, b = self.pair()
         for host, current in ((a, 3), (b, 5)):
-            self.assertEqual(host.ns.guides[WESTFALL].routeRevision, 3)
-            self.assertEqual(host.cursor, 6)
+            self.assertEqual(host.ns.guides[WESTFALL].routeRevision, 4)
+            self.assertEqual(host.cursor, 5)
             self.assertTrue(host.status().active)
             goal = host.active_goal()
             self.assertEqual((goal.t, goal.quest), ("collect", 92744))
             self.assertEqual(host.s.quests[92744].objectives[1].numFulfilled, current)
             self.assertFalse(host.ns.IsQuestActive(host.ns, 92745))
             state = host.ns.char.progress[WESTFALL]
-            self.assertEqual(state.routeRevision, 3)
-            self.assertTrue(state.confirmed["1:3"])
+            self.assertEqual(state.routeRevision, 4)
+            self.assertTrue(state.confirmed["1:7"])
             self.assertTrue(state.confirmed["13:7"])
             self.assertTrue(state.skipped["21:2"])
             self.assertIsNone(state.skipped["7:3"])
@@ -125,7 +130,7 @@ class WestfallAlbaPartyTests(unittest.TestCase):
         a.set_quest(92744, counts=[(7, 7)])
         a.event()
         self.exchange(a, b)
-        self.assertEqual((a.cursor, b.cursor), (6, 6))
+        self.assertEqual((a.cursor, b.cursor), (5, 5))
         self.assertEqual(b.s.quests[92744].objectives[1].numFulfilled, 5)
         for host in (a, b):
             self.assert_not_sent_to_mine(host)

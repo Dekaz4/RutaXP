@@ -112,11 +112,11 @@ class GuideStructureAuditTests(unittest.TestCase):
 
     def test_shipped_report_covers_all_guides_and_keeps_the_48_work_cases_explicit(self):
         report = json.loads((ROOT / "RutaXP/Source/guide_structure.json").read_text(encoding="utf-8"))
-        self.assertEqual((report["scope"]["guides"], report["scope"]["steps"], report["scope"]["goals"]), (57, 2343, 7454))
+        self.assertEqual((report["scope"]["guides"], report["scope"]["steps"], report["scope"]["goals"]), (57, 2343, 7458))
         self.assertEqual(report["sourceComparison"]["structuralDifferences"], [])
         comparison = report["sourceComparison"]
         revisions = json.loads((ROOT / "RutaXP/Source/guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
-        self.assertEqual(len(revisions), 28)
+        self.assertEqual(len(revisions), 41)
         self.assertEqual([r["id"] for r in revisions[:7]],
                          ["westfall-alba-mines-2", "westfall-engineering-3", "zephras-alliance-service-2",
                           "redridge-alther-bridge-2", "mulgore-malah-centaurs-2", "tirisfal-rear-guard-2",
@@ -133,6 +133,10 @@ class GuideStructureAuditTests(unittest.TestCase):
         expected_actions["note"] -= 1
         for action, count in {"accept": 3, "collect": 2, "kill": 3, "turnin": 3}.items():
             expected_actions[action] += count
+        # The human rogue chain adds two starts, two rewards and one collection.
+        # The second mandatory copy of the Duskwood collection was retired.
+        expected_actions["accept"] += 2
+        expected_actions["turnin"] += 2
         self.assertEqual(report["scope"]["actions"], expected_actions)
         coverage = report["workCoverage"]
         self.assertEqual(coverage["sourceQuestsWithObjectives"], 48)

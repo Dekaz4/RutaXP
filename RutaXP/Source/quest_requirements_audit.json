@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "scope": {
     "guides": 57,
-    "questIDs": 1903,
-    "acceptances": 2293,
-    "withReportedEvidence": 1849,
+    "questIDs": 1905,
+    "acceptances": 2295,
+    "withReportedEvidence": 1851,
     "withoutReportedEvidence": 54
   },
   "sourceCommits": {
@@ -40,7 +40,7 @@
     "active_parent_not_explicit_in_att": 5,
     "corroborated_single_completed_parent": 38,
     "no_att_record_in_reviewed_sources": 1,
-    "parent_breadcrumb": 13,
+    "parent_breadcrumb": 14,
     "prerequisite_not_corroborated": 2,
     "questie_explicit_group_eq_partial": 1
   },
@@ -79,7 +79,7 @@
     },
     {
       "guideID": "forever/alliance/human/01-elwynn-forest",
-      "acceptances": 97,
+      "acceptances": 99,
       "findings": {
         "missing_prerequisite": 2,
         "no_source_data": 3,
@@ -1771,7 +1771,7 @@
     {
       "guideID": "forever/alliance/human/01-elwynn-forest",
       "step": 5,
-      "goal": 10,
+      "goal": 11,
       "questID": 92479,
       "title": "A Scribbled Letter",
       "kind": "source_omission_review",
@@ -1792,7 +1792,7 @@
     {
       "guideID": "forever/alliance/human/01-elwynn-forest",
       "step": 5,
-      "goal": 10,
+      "goal": 11,
       "questID": 92479,
       "title": "A Scribbled Letter",
       "kind": "selector_conflict_review",
@@ -1816,7 +1816,7 @@
     {
       "guideID": "forever/alliance/human/01-elwynn-forest",
       "step": 5,
-      "goal": 10,
+      "goal": 11,
       "questID": 92479,
       "title": "A Scribbled Letter",
       "kind": "selector_conflict_review",
@@ -2032,7 +2032,7 @@
     {
       "guideID": "forever/alliance/human/01-elwynn-forest",
       "step": 56,
-      "goal": 1,
+      "goal": 2,
       "questID": 46,
       "title": "Recompensas por los murlocs",
       "kind": "source_omission_review",
@@ -2833,7 +2833,7 @@
     {
       "guideID": "forever/alliance/04-redridge-mountains",
       "step": 12,
-      "goal": 4,
+      "goal": 2,
       "questID": 180,
       "title": "Se busca: teniente Fangore",
       "kind": "level_conflict_review",
@@ -2926,7 +2926,7 @@
     {
       "guideID": "forever/alliance/06-ashenvale",
       "step": 32,
-      "goal": 8,
+      "goal": 5,
       "questID": 484,
       "title": "Piel de crocolisco joven",
       "kind": "additional_gate_review",
@@ -3723,7 +3723,7 @@
     {
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
       "step": 21,
-      "goal": 5,
+      "goal": 3,
       "questID": 576,
       "title": "¡Ojo!",
       "kind": "prerequisite_conflict_review",
@@ -7738,6 +7738,6 @@
     "Local dependency locations are diagnostic; this audit does not assume a previous zone was completed.",
     "No runtime quest completion, profession or player's progress is modified by this audit."
   ],
-  "inputSha256": "b49e6a40415c016ffbd728e923b5e78456168c91af3c8accad434d5ee01c7be8",
-  "evidenceSha256": "12b81e43ce28c6c59f8a8c928d47d497fb34cc92bb21edb3bb276a380a6a0191"
+  "inputSha256": "063c0e5c87afeeec98643ae34f84de9ff17161a375010330fde0f3ed12df4cd6",
+  "evidenceSha256": "c06b0934ce25451ead85925ad75dff623224ce1dd542b58c322d2aab23edef4f"
 }

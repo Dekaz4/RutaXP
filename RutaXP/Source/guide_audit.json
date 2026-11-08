@@ -508,7 +508,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "eb8c250f1a66bc75d935b18465b46b9951e813f8d9883806b5ce8ba65adbf722",
+      "sha256": "65d3ea5973b66cb183d7879df56707af8e61728289f7af74020034c5a17dff1d",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -537,16 +537,29 @@
         "thousand-needles-nekrosh-chain-2",
         "hillsbrad-wetlands-prerequisite-chains-3",
         "darkshore-onus-arbal-kerlonian-4",
-        "ashenvale-kerlonian-escort-3"
+        "ashenvale-kerlonian-escort-3",
+        "elwynn-human-rogue-circuit-2",
+        "westfall-north-coast-circuit-4",
+        "darkshore-beach-and-auberdine-efficiency-5",
+        "redridge-stormwind-and-lakeshire-efficiency-4",
+        "duskwood-ravenhill-rogue-efficiency-2",
+        "ashenvale-menethil-library-efficiency-4",
+        "thousand-needles-sirra-fizzle-efficiency-3",
+        "hillsbrad-ironforge-prospector-efficiency-4",
+        "arathi-southshore-handins-efficiency-2",
+        "badlands-kreldig-efficiency-2",
+        "stranglethorn-booty-bay-efficiency-2",
+        "feralas-feathermoon-efficiency-2",
+        "silithus-ironforge-districts-efficiency-2"
       ]
     }
   },
   "totals": {
     "guides": 57,
-    "goals": 7454,
-    "direct": 6570,
-    "generated_instruction": 7454,
-    "missing_goal_note_text": 3672,
+    "goals": 7458,
+    "direct": 6574,
+    "generated_instruction": 7458,
+    "missing_goal_note_text": 3673,
     "missing": 288,
     "no_fixed_point_expected": 300,
     "empty_authored_subtitle": 819,
@@ -560,10 +573,10 @@
   },
   "byAction": {
     "accept": {
-      "goals": 2293,
-      "direct": 2229,
-      "generated_instruction": 2293,
-      "missing_goal_note_text": 1285,
+      "goals": 2295,
+      "direct": 2231,
+      "generated_instruction": 2295,
+      "missing_goal_note_text": 1286,
       "missing": 64,
       "no_fixed_point_expected": 64,
       "empty_authored_subtitle": 151
@@ -670,9 +683,9 @@
       "direct": 9
     },
     "turnin": {
-      "goals": 2291,
-      "direct": 2291,
-      "generated_instruction": 2291,
+      "goals": 2293,
+      "direct": 2293,
+      "generated_instruction": 2293,
       "missing_goal_note_text": 784,
       "empty_authored_subtitle": 81
     },
@@ -893,10 +906,10 @@
       "guideID": "forever/alliance/human/01-elwynn-forest",
       "title": "Bosque de Elwynn",
       "counts": {
-        "goals": 262,
-        "direct": 247,
-        "generated_instruction": 262,
-        "missing_goal_note_text": 102,
+        "goals": 267,
+        "direct": 252,
+        "generated_instruction": 267,
+        "missing_goal_note_text": 103,
         "candidates": 10,
         "missing": 5,
         "no_fixed_point_expected": 5,
@@ -904,10 +917,10 @@
       },
       "byAction": {
         "accept": {
-          "goals": 97,
-          "direct": 93,
-          "generated_instruction": 97,
-          "missing_goal_note_text": 58,
+          "goals": 99,
+          "direct": 95,
+          "generated_instruction": 99,
+          "missing_goal_note_text": 59,
           "missing": 4,
           "no_fixed_point_expected": 4,
           "empty_authored_subtitle": 6
@@ -918,9 +931,9 @@
           "generated_instruction": 1
         },
         "collect": {
-          "goals": 38,
-          "direct": 38,
-          "generated_instruction": 38
+          "goals": 39,
+          "direct": 39,
+          "generated_instruction": 39
         },
         "complete": {
           "goals": 6,
@@ -967,9 +980,9 @@
           "missing_goal_note_text": 7
         },
         "turnin": {
-          "goals": 92,
-          "direct": 92,
-          "generated_instruction": 92,
+          "goals": 94,
+          "direct": 94,
+          "generated_instruction": 94,
           "missing_goal_note_text": 34,
           "empty_authored_subtitle": 3
         }
@@ -1244,9 +1257,9 @@
       "title": "Montañas Crestagrana",
       "counts": {
         "goals": 68,
-        "candidates": 8,
-        "generated_instruction": 68,
         "direct": 58,
+        "generated_instruction": 68,
+        "candidates": 8,
         "missing_goal_note_text": 16,
         "empty_authored_subtitle": 5,
         "missing": 2,
@@ -1335,9 +1348,9 @@
       "guideID": "forever/alliance/05-duskwood",
       "title": "Bosque del Ocaso",
       "counts": {
-        "goals": 89,
-        "direct": 80,
-        "generated_instruction": 89,
+        "goals": 88,
+        "direct": 79,
+        "generated_instruction": 88,
         "missing_goal_note_text": 41,
         "missing": 3,
         "no_fixed_point_expected": 3,
@@ -1360,9 +1373,9 @@
           "generated_instruction": 4
         },
         "collect": {
-          "goals": 11,
-          "direct": 11,
-          "generated_instruction": 11,
+          "goals": 10,
+          "direct": 10,
+          "generated_instruction": 10,
           "missing_goal_note_text": 2
         },
         "complete": {
@@ -6391,10 +6404,10 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/02-westfall:5:7",
+      "key": "forever/alliance/02-westfall:6:8",
       "guideID": "forever/alliance/02-westfall",
-      "stepIndex": 5,
-      "goalIndex": 7,
+      "stepIndex": 6,
+      "goalIndex": 8,
       "action": "accept",
       "questID": 92910,
       "title": "Harvesting the Harvesters",
@@ -6403,14 +6416,14 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/02-westfall",
-        "stepIndex": 5,
-        "goalIndex": 7
+        "stepIndex": 6,
+        "goalIndex": 8
       },
       "classification": "item_start",
       "reason": "La misión comienza usando un objeto; no implica un NPC de aceptación fijo.",
       "unresolved": false,
       "goalNote": null,
-      "stepNote": "Al oeste de de Saldean. Harvest Watchers y Golems trabajan los campos; dejan caer las isosprings, giroestabilizadores, Okra y a veces un Precessive Autocognition Assembly. Revientaenemigos 4000, un nivel raro 20, camina aquí: déjalo en paz. Sigue matando Goretusks y Fleshrippers en cada etapa de este bucle.",
+      "stepNote": "De vuelta al sur, recoge el encargo de Ozwin en el granero al oeste de Saldean. En Molsen toma la muestra del pozo y recoge las piezas de los cosechadores. Evita al gólem raro de nivel 20.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
@@ -6578,7 +6591,7 @@
       "reason": "Usa el hogar realmente vinculado; no debe inventarse su posición.",
       "unresolved": false,
       "goalNote": null,
-      "stepNote": null,
+      "stepNote": "Desde la posada, visita a Breanna y a Baren. Pasa por el ayuntamiento y termina las entregas junto al puente.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
@@ -6607,10 +6620,10 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/05-duskwood:3:5",
+      "key": "forever/alliance/05-duskwood:3:4",
       "guideID": "forever/alliance/05-duskwood",
       "stepIndex": 3,
-      "goalIndex": 5,
+      "goalIndex": 4,
       "action": "accept",
       "questID": 337,
       "title": "Un libro de Historia viejo",
@@ -6620,13 +6633,13 @@
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/05-duskwood",
         "stepIndex": 3,
-        "goalIndex": 5
+        "goalIndex": 4
       },
       "classification": "item_start",
       "reason": "La misión comienza usando un objeto; no implica un NPC de aceptación fijo.",
       "unresolved": false,
       "goalNote": null,
-      "stepNote": "Skeletal Warriors y Skeletal Mages caminan entre las tumbas al sureste de Villa Oscura, por debajo de la casa Mary la de Ciega en la colina. Cada esqueleto en Bosque del Ocaso puede soltar un Dedo esquelético.",
+      "stepNote": "Derrota a los guerreros y magos del Jardín Sereno. Recoge los dedos que suelten. Podrás terminar los diez en el Cerro del Cuervo.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
@@ -16847,6 +16860,6 @@
       "location",
       "requiredLevel"
     ],
-    "semanticsSha256": "652e08d18b7195d1162bbf42c7c3ad590292f8c7c96cc2c9d2dc6c7abdfe4cdb"
+    "semanticsSha256": "63b3a875b9b436bc8be6d05b31870f9da698d7c7836d721ffb3b12eea6e501cd"
   }
 }

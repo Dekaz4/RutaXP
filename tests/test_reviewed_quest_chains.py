@@ -69,6 +69,20 @@ class ReviewedChainTests(unittest.TestCase):
             self.assertTrue(retired.isdisjoint(migration["goalMap"]))
             destinations = [migration["goalMap"].get(key, key) for key in keys - retired]
             self.assertEqual(len(destinations), len(set(destinations)), revision["id"])
+            added = migration.get("addedGoalKeys", [])
+            self.assertEqual(len(added), len(revision.get("addedGoals", {})), revision["id"])
+            self.assertTrue(set(added).isdisjoint(destinations), revision["id"])
+            if revision.get("preservePendingVisits"):
+                # The cursor may return to an earlier visit when a later errand
+                # moved there, even if the old current visit itself did not move.
+                earliest = len(revision["steps"]) + 1
+                for si in range(len(revision["previousGoalCounts"]), 0, -1):
+                    for gi in range(1, revision["previousGoalCounts"][si - 1] + 1):
+                        key = f"{si}:{gi}"
+                        if key not in retired:
+                            target = migration["goalMap"].get(key, key)
+                            earliest = min(earliest, int(target.split(":")[0]))
+                    self.assertLessEqual(migration["stepMap"][str(si)], earliest, (revision["id"], si))
             completed = migration["stepMap"][str(migration["previousStepCount"] + 1)]
             revision_number = migration["to"]
             while revision_number < guide["routeRevision"]:

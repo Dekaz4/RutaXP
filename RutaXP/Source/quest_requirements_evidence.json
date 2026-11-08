@@ -36094,6 +36094,113 @@
       "classMask": 0,
       "raceMask": 178
     },
+    "2205": {
+      "reportedFields": [
+        "minLevel",
+        "classMask",
+        "raceMask",
+        "excl"
+      ],
+      "fieldSources": {
+        "minLevel": [
+          {
+            "source": "everythingquests",
+            "line": 5875
+          }
+        ],
+        "classMask": [
+          {
+            "source": "everythingquests",
+            "line": 5875
+          }
+        ],
+        "raceMask": [
+          {
+            "source": "everythingquests",
+            "line": 5875
+          }
+        ],
+        "excl": [
+          {
+            "source": "everythingquests",
+            "line": 15562
+          }
+        ]
+      },
+      "minLevel": 10,
+      "classMask": 8,
+      "raceMask": 77,
+      "excl": [
+        2218,
+        2241
+      ]
+    },
+    "2206": {
+      "reportedFields": [
+        "minLevel",
+        "classMask",
+        "raceMask",
+        "pre"
+      ],
+      "fieldSources": {
+        "minLevel": [
+          {
+            "source": "everythingquests",
+            "line": 5876
+          }
+        ],
+        "classMask": [
+          {
+            "source": "everythingquests",
+            "line": 5876
+          }
+        ],
+        "raceMask": [
+          {
+            "source": "everythingquests",
+            "line": 5876
+          }
+        ],
+        "pre": [
+          {
+            "source": "everythingquests",
+            "line": 13999
+          }
+        ]
+      },
+      "minLevel": 10,
+      "classMask": 8,
+      "raceMask": 77,
+      "pre": [
+        2205
+      ],
+      "crossSourceReview": {
+        "status": "parent_breadcrumb",
+        "records": [
+          {
+            "sourceQuestIDs": [
+              2205
+            ],
+            "declaresBreadcrumb": false,
+            "line": 1401,
+            "source": "att-zones-eastern-kingdoms-1-stormwind-city-lua"
+          }
+        ],
+        "parents": [
+          {
+            "questID": 2205,
+            "records": [
+              {
+                "sourceQuestIDs": [],
+                "declaresBreadcrumb": true,
+                "line": 1424,
+                "source": "att-zones-eastern-kingdoms-elwynn-forest-lua"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "2258": {
       "reportedFields": [
         "minLevel",

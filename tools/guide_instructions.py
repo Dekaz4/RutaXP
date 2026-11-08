@@ -219,7 +219,9 @@ def instruction_for(goal: Mapping[str, Any], zone_name: str | None = None, *, so
         label = _quote(item) if item else "los objetos del objetivo indicado en el registro"
         sources = list(dict.fromkeys(filter(None, (visible_text(goal.get("from")), visible_text(goal.get("fromAlso"))))))
         source = " o ".join(_quote(name) for name in sources)
-        if source and goal.get("fromKind") == "npc":
+        if source and goal.get("fromKind") == "pickpocket":
+            base = f"Usa Robar sobre {source} en sigilo para conseguir {label}."
+        elif source and goal.get("fromKind") == "npc":
             base = f"Recoge {label}{count} del botín de {source}."
         elif (source and goal.get("fromKind") == "object") or obj:
             base = f"Interactúa con {source or _quote(obj)} para reunir {label}{count}."

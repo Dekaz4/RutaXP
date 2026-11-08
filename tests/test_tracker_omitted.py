@@ -29,7 +29,8 @@ TEXTURE_AND_TOOLTIP_STUBS = """
 
 class TrackerOmittedTests(unittest.TestCase):
     def farm(self):
-        host = AccessHost(WESTFALL, 5, 1, x=.50, y=.27)
+        host = AccessHost(WESTFALL, x=.50, y=.27, find_goal={"t": "collect", "quest": 92742, "oi": 2})
+        host.s.quests[92909] = host.h.table({"onQuest": True, "complete": False})
         host.s.quests[92742] = host.h.table({"onQuest": True, "complete": False, "objectives": [
             {"text": "Primera caja: 1/1", "numFulfilled": 1, "numRequired": 1, "finished": True},
             {"text": "Segunda caja: 0/1", "numFulfilled": 0, "numRequired": 1, "finished": False},
@@ -54,17 +55,19 @@ class TrackerOmittedTests(unittest.TestCase):
         host.h.g.Click(host.ns.trackerSkip)
         host.h.g.Click(host.ns.trackerPrevious)
         state = host.ns.char.progress[WESTFALL]
-        self.assertEqual(state.cursor, 5)
+        self.assertEqual(state.cursor, host.step_index)
         self.assertIsNone(state.review)
         before = host.progress()
-        for goal, counter in ((1, "Segunda caja: 0/1"), (2, "Zahorí cosechador: 0/20")):
+        well = self.goal_index(host, t="collect", quest=92742, oi=2)
+        harvest = self.goal_index(host, t="kill", quest=9, oi=1)
+        for goal, counter in ((well, "Segunda caja: 0/1"), (harvest, "Zahorí cosechador: 0/20")):
             with self.subTest(goal=goal):
                 row = self.row(host, goal)
                 self.assertNotIn("Omitido", row.title.text)
                 self.assertIn(counter, row.sub.text)
                 self.assertFalse(row.icon.texture.endswith("\\check"))
                 self.assertNotIn("|cff6be09e", row.title.text)
-                self.assertIsNone(state.skipped[f"5:{goal}"])
+                self.assertIsNone(state.skipped[f"{host.step_index}:{goal}"])
                 row.scripts.OnEnter(row)
                 tooltip = "\n".join(host.h.g.GameTooltip.lines.values())
                 self.assertNotIn("Omitido", tooltip)
@@ -73,18 +76,20 @@ class TrackerOmittedTests(unittest.TestCase):
     def test_legacy_confirmation_can_be_undone_by_right_clicking_the_visible_row(self):
         host = self.farm()
         state = host.ns.char.progress[WESTFALL]
-        state.confirmed["5:1"] = True
+        well = self.goal_index(host, t="collect", quest=92742, oi=2)
+        key = f"{host.step_index}:{well}"
+        state.confirmed[key] = True
         state.confirmed["unrelated-mark"] = True
         host.ns.RefreshUI(host.ns)
-        row = self.row(host, 1)
+        row = self.row(host, well)
         self.assertIn("Omitido", row.title.text)
         row.scripts.OnClick(row, "RightButton")
-        row = self.row(host, 1)
+        row = self.row(host, well)
         self.assertNotIn("Omitido", row.title.text)
         self.assertEqual(row.sub.text.splitlines()[0], "Segunda caja: 0/1")
-        self.assertIsNone(state.confirmed["5:1"])
+        self.assertIsNone(state.confirmed[key])
         self.assertTrue(state.confirmed["unrelated-mark"])
-        self.assertEqual(state.cursor, 5)
+        self.assertEqual(state.cursor, host.step_index)
 
     def test_delivered_goal_keeps_the_existing_green_check_style(self):
         host = AccessHost(WESTFALL, 8, 1)
@@ -120,7 +125,7 @@ class TrackerOmittedTests(unittest.TestCase):
         state = host.ns.char.progress[WESTFALL]
         state.review = True
         for index in range(1, len(host.step.goals) + 1):
-            state.skipped[f"5:{index}"] = True
+            state.skipped[f"{host.step_index}:{index}"] = True
         return host
 
     def test_live_molsen_evidence_shows_only_pending_omissions_and_excludes_delivered_zeroes(self):
@@ -159,8 +164,9 @@ class TrackerOmittedTests(unittest.TestCase):
                 host.s.quests[goal.quest] = entry
         host.s.quests[38].complete = True
         inventory = self.goal_index(host, t="collect", quest=None, item=255155)
-        state.skipped[f"5:{inventory}"] = None
-        state.confirmed[f"5:{inventory}"] = True  # The unbound inventory errand is a manual service.
+        key = f"{host.step_index}:{inventory}"
+        state.skipped[key] = None
+        state.confirmed[key] = True  # The unbound inventory errand is a manual service.
         before = host.progress()
         host.ns.RefreshUI(host.ns)
         rows = [row for row in host.ns.trackerRows.values() if row.shown and not row.preview]
@@ -170,7 +176,8 @@ class TrackerOmittedTests(unittest.TestCase):
             self.assertIn("|cff6be09e", row.title.text)
             self.assertNotIn("Omitido", row.title.text)
             self.assertNotIn("0/", row.sub.text)
-        self.assertEqual(self.row(host, 2).sub.text, "Misión entregada")
+        harvest = self.goal_index(host, t="kill", quest=9, oi=1)
+        self.assertEqual(self.row(host, harvest).sub.text, "Misión entregada")
         okra = self.goal_index(host, t="collect", quest=38, oi=4)
         self.assertEqual(self.row(host, okra).sub.text, "Objetivos completados")
         self.assertEqual(host.progress(), before)

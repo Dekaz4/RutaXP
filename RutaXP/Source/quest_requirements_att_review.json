@@ -28,6 +28,7 @@
     1824,
     1861,
     1882,
+    2206,
     2873,
     4841,
     5082,
@@ -219,13 +220,15 @@
       "questIDs": [
         1638,
         1639,
-        1861
+        1861,
+        2206
       ]
     },
     "zones/eastern kingdoms/elwynn forest.lua": {
       "sha256": "f8d3bfcaf04b45e019b55f99ec92f2c3715d8e6fb199b07664dcb0492b052d12",
       "questIDs": [
-        1860
+        1860,
+        2205
       ]
     },
     "zones/eastern kingdoms/1 - undercity.lua": {

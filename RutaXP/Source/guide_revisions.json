@@ -7436,6 +7436,3867 @@
           }
         }
       ]
+    },
+    {
+      "id": "elwynn-human-rogue-circuit-2",
+      "guideID": "forever/alliance/human/01-elwynn-forest",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "37848e6dd2995b54a04c085a0d6906ce602d29a2726e49ea6bce24d3d3ea4264",
+      "resultShape": "49c84debe6386b4b60c91726800751fa3241b2224211623ca73104f64130ec24",
+      "previousGoalCounts": [
+        6,
+        1,
+        4,
+        3,
+        20,
+        2,
+        5,
+        2,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        11,
+        8,
+        8,
+        1,
+        2,
+        3,
+        3,
+        5,
+        1,
+        5,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        3,
+        3,
+        14,
+        2,
+        2,
+        4,
+        6,
+        1,
+        5,
+        2,
+        5,
+        1,
+        1,
+        3,
+        3,
+        2,
+        9,
+        1,
+        3,
+        3,
+        4,
+        3,
+        2,
+        2,
+        1,
+        4,
+        2,
+        3,
+        1,
+        1,
+        7,
+        11,
+        2,
+        1,
+        2,
+        1,
+        4,
+        13,
+        4,
+        3,
+        1
+      ],
+      "firstAffectedStep": 5,
+      "affectedQuestIDs": [
+        2205,
+        2206
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "title": "Abadía de Villanorte",
+          "goals": [
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              5,
+              4
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              5,
+              20
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              5,
+              11
+            ],
+            [
+              5,
+              12
+            ],
+            [
+              5,
+              13
+            ],
+            [
+              5,
+              14
+            ],
+            [
+              5,
+              15
+            ],
+            [
+              5,
+              16
+            ],
+            [
+              5,
+              17
+            ],
+            [
+              5,
+              18
+            ],
+            [
+              5,
+              19
+            ]
+          ]
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "title": "Abadía de Villanorte",
+          "goals": [
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              4
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              7,
+              5
+            ]
+          ]
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "title": "Abadía de Villanorte",
+          "note": "Recoge los encargos de McBride en la misma visita. Tordrin está detrás de la abadía, junto a los establos.",
+          "goals": [
+            [
+              15,
+              1
+            ],
+            [
+              15,
+              2
+            ],
+            [
+              15,
+              3
+            ],
+            [
+              15,
+              4
+            ],
+            [
+              15,
+              5
+            ],
+            [
+              15,
+              8
+            ],
+            [
+              15,
+              9
+            ],
+            [
+              15,
+              6
+            ],
+            [
+              15,
+              7
+            ],
+            [
+              15,
+              10
+            ],
+            [
+              15,
+              11
+            ]
+          ]
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "title": "El collar de Bernice",
+          "note": "Al oeste de la Mina Abisal, busca a Bernice junto a la casa de la granja Pedregosa.",
+          "goals": [
+            [
+              26,
+              2
+            ]
+          ]
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "title": "Jabalíes de los viñedos",
+          "note": "Caza los jabalíes entre los viñedos y la granja para reunir la carne del pastel y la sangre del cebo en la misma salida.",
+          "goals": [
+            [
+              30,
+              1
+            ],
+            [
+              25,
+              2
+            ]
+          ]
+        },
+        {
+          "title": "Pétalos para el cebo",
+          "note": "Recoge los pétalos que te falten de vuelta a la granja Pedregosa.",
+          "goals": [
+            [
+              25,
+              1
+            ]
+          ]
+        },
+        {
+          "title": "Granja Pedregosa",
+          "note": "Entrega a Bernice la carne del pastel. La vieja Pedregosa espera al lado de la casa.",
+          "goals": [
+            [
+              31,
+              1
+            ],
+            [
+              31,
+              2
+            ],
+            [
+              26,
+              1
+            ]
+          ]
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "title": "Torre de Azora",
+          "goals": [
+            [
+              36,
+              2
+            ],
+            [
+              36,
+              1
+            ]
+          ]
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 47,
+          "set": {
+            "title": "Guardia Thomas",
+            "note": "Lleva el informe de Rolf al puente antes de regresar al oeste."
+          }
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "title": "Villadorada",
+          "note": "Camino de Villadorada, Jason y Helene están en la orilla occidental del lago.",
+          "goals": [
+            [
+              48,
+              2
+            ],
+            [
+              48,
+              1
+            ],
+            [
+              48,
+              3
+            ],
+            [
+              48,
+              4
+            ],
+            [
+              48,
+              5
+            ],
+            [
+              48,
+              6
+            ],
+            [
+              48,
+              7
+            ],
+            [
+              48,
+              8
+            ],
+            [
+              48,
+              9
+            ]
+          ]
+        },
+        {
+          "sourceStep": 49
+        },
+        {
+          "sourceStep": 50
+        },
+        {
+          "sourceStep": 51
+        },
+        {
+          "sourceStep": 52
+        },
+        {
+          "sourceStep": 53
+        },
+        {
+          "sourceStep": 54
+        },
+        {
+          "title": "Villadorada",
+          "note": "Entrega el informe al alguacil Dughan.",
+          "goals": [
+            [
+              55,
+              1
+            ],
+            [
+              55,
+              2
+            ],
+            {
+              "added": "keryn"
+            },
+            {
+              "added": "package"
+            },
+            {
+              "added": "heist"
+            }
+          ]
+        },
+        {
+          "title": "Camino al puente",
+          "note": "El guardia Thomas vigila el puente al este, cerca de la torre de Azora.",
+          "goals": [
+            {
+              "added": "pickpocket"
+            },
+            [
+              56,
+              1
+            ]
+          ]
+        },
+        {
+          "sourceStep": 57
+        },
+        {
+          "sourceStep": 58
+        },
+        {
+          "title": "Aserradero de la Vega del Este",
+          "goals": [
+            [
+              59,
+              2
+            ],
+            [
+              59,
+              3
+            ],
+            [
+              59,
+              1
+            ]
+          ]
+        },
+        {
+          "sourceStep": 60
+        },
+        {
+          "sourceStep": 61
+        },
+        {
+          "title": "Villadorada",
+          "note": "Sigue la carretera al oeste para regresar a Villadorada.",
+          "goals": [
+            [
+              62,
+              1
+            ],
+            [
+              62,
+              2
+            ],
+            [
+              62,
+              3
+            ],
+            [
+              62,
+              4
+            ],
+            [
+              62,
+              5
+            ],
+            [
+              62,
+              6
+            ],
+            [
+              62,
+              7
+            ],
+            {
+              "added": "dagger"
+            }
+          ]
+        },
+        {
+          "sourceStep": 63
+        },
+        {
+          "sourceStep": 64
+        },
+        {
+          "sourceStep": 65
+        },
+        {
+          "sourceStep": 66
+        },
+        {
+          "sourceStep": 67
+        },
+        {
+          "sourceStep": 68
+        },
+        {
+          "sourceStep": 69
+        },
+        {
+          "sourceStep": 70
+        },
+        {
+          "sourceStep": 71
+        },
+        {
+          "sourceStep": 72
+        }
+      ],
+      "evidence": {
+        "sourceFile": "guides/forever/alliance/human/01-elwynn-forest.guide",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/human/01-elwynn-forest.guide",
+        "sourceSha256": "94b6610a1b723bce58adcc618826687ee4bff7cdf6e2d77026d43221e1c13720",
+        "reason": "Las continuaciones de McBride se aceptan antes de ir a Jorik, Paxton o Tordrin. Los dos objetivos de jabalí se hacen juntos tras hablar con Billy. El informe de Rolf se entrega al regresar del lago, antes de visitar los gnolls, la cantera y la torre. No se adelantan los requisitos de nivel. La visita del pícaro al SI:7 enlaza con su último circuito oriental.",
+        "rewardSources": [
+          "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/elwynn%20forest.lua#L1424-L1430",
+          "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/1%20-%20stormwind%20city.lua#L1401-L1417",
+          "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L1611-L1612",
+          "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/class/rogue/blade-of-cunning-alliance.guide",
+          "https://www.wowhead.com/forever/quest=2206/snatch-and-grab"
+        ]
+      },
+      "addedGoals": {
+        "keryn": {
+          "goal": {
+            "t": "accept",
+            "quest": 2205,
+            "title": "Busca el SI: 7",
+            "only": {
+              "classes": [
+                "ROGUE"
+              ],
+              "races": [
+                "Human"
+              ]
+            },
+            "qlvl": 10,
+            "minLevel": 10,
+            "npc": 917,
+            "npcName": "Keryn Sylvius",
+            "map": 1429,
+            "x": 43.87,
+            "y": 65.94,
+            "z": 63.9,
+            "f": "e",
+            "note": "Sube al primer piso de la posada de Villadorada. Aprende Sigilo y Robar para el encargo de Shaw."
+          },
+          "evidence": {
+            "source": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/elwynn%20forest.lua#L1424-L1430",
+            "codex": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L1611-L1612"
+          }
+        },
+        "package": {
+          "goal": {
+            "t": "turnin",
+            "quest": 2205,
+            "title": "Busca el SI: 7",
+            "only": {
+              "classes": [
+                "ROGUE"
+              ],
+              "races": [
+                "Human"
+              ]
+            },
+            "qlvl": 10,
+            "npc": 332,
+            "npcName": "Maestro Mathias Shaw",
+            "map": 1453,
+            "x": 78.31,
+            "y": 70.74,
+            "z": 109.6,
+            "note": "Ve a Ventormenta. Shaw está arriba en la sede del SI:7, en el Casco Antiguo."
+          },
+          "evidence": {
+            "source": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/1%20-%20stormwind%20city.lua#L1401-L1417",
+            "codex": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L1611-L1612"
+          }
+        },
+        "heist": {
+          "goal": {
+            "t": "accept",
+            "quest": 2206,
+            "title": "El robo",
+            "only": {
+              "classes": [
+                "ROGUE"
+              ],
+              "races": [
+                "Human"
+              ]
+            },
+            "qlvl": 10,
+            "minLevel": 10,
+            "pre": [
+              2205
+            ],
+            "preTitles": {
+              "2205": "Busca el SI: 7"
+            },
+            "npc": 332,
+            "npcName": "Maestro Mathias Shaw",
+            "map": 1453,
+            "x": 78.31,
+            "y": 70.74,
+            "z": 109.6
+          },
+          "evidence": {
+            "source": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/1%20-%20stormwind%20city.lua#L1401-L1417",
+            "codex": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L1611-L1612"
+          }
+        },
+        "pickpocket": {
+          "goal": {
+            "t": "collect",
+            "quest": 2206,
+            "title": "El robo",
+            "only": {
+              "classes": [
+                "ROGUE"
+              ],
+              "races": [
+                "Human"
+              ]
+            },
+            "qlvl": 10,
+            "oi": 1,
+            "count": 1,
+            "item": 7675,
+            "itemName": "Calendario de envíos Defias",
+            "map": 1429,
+            "x": 48.06,
+            "y": 86.96,
+            "f": "e",
+            "fromKind": "pickpocket",
+            "from": "Maestro de embarcadero Defias",
+            "note": "Busca al maestro de embarcadero Defias dentro de la casa del Embarcadero de Jerod. Entra en sigilo y usa Robar."
+          },
+          "evidence": {
+            "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/class/rogue/blade-of-cunning-alliance.guide",
+            "codex": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L1611-L1612"
+          }
+        },
+        "dagger": {
+          "goal": {
+            "t": "turnin",
+            "quest": 2206,
+            "title": "El robo",
+            "only": {
+              "classes": [
+                "ROGUE"
+              ],
+              "races": [
+                "Human"
+              ]
+            },
+            "qlvl": 10,
+            "npc": 332,
+            "npcName": "Maestro Mathias Shaw",
+            "map": 1453,
+            "x": 78.31,
+            "y": 70.74,
+            "z": 109.6,
+            "rewards": {
+              "items": [
+                {
+                  "item": 7298,
+                  "itemName": "Hoja de Astucia"
+                }
+              ]
+            },
+            "note": "Entrega el calendario en el SI:7 de Ventormenta para recibir la Hoja de Astucia, una daga de una mano."
+          },
+          "evidence": {
+            "source": "https://github.com/ATTWoWAddon/AllTheThings/blob/b50b6d8335d56a215bb3053811745f617532cc14/.contrib/.db/forever/zones/eastern%20kingdoms/1%20-%20stormwind%20city.lua#L1401-L1417",
+            "codex": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L1611-L1612"
+          }
+        }
+      },
+      "preservePendingVisits": true
+    },
+    {
+      "id": "westfall-north-coast-circuit-4",
+      "guideID": "forever/alliance/02-westfall",
+      "previousRevision": 3,
+      "revision": 4,
+      "sourceShape": "249fd0f4cfa054d640bc7e187380f24b3129c1046c8fcb6e179ab994e44ce0db",
+      "resultShape": "12dc80f0379dbc6fe2c56402fc5acc6ab94d56fd33150b7fc780719fbe382ac7",
+      "previousGoalCounts": [
+        10,
+        4,
+        7,
+        2,
+        10,
+        2,
+        3,
+        1,
+        5,
+        1,
+        2,
+        8,
+        7,
+        3,
+        3,
+        4,
+        6,
+        9,
+        2,
+        1,
+        5,
+        5
+      ],
+      "firstAffectedStep": 1,
+      "affectedQuestIDs": [],
+      "steps": [
+        {
+          "title": "Colina del Centinela",
+          "note": "Habla con Lewis, Gryan y Danuvin en la torre. Después baja hasta Thor, la posada, Galiaan y Alba.",
+          "goals": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              1,
+              9
+            ],
+            [
+              1,
+              10
+            ]
+          ]
+        },
+        {
+          "title": "Finca de Saldean",
+          "note": "Sigue la carretera hacia el norte. El granjero Saldean está fuera y Salma está en la casa.",
+          "goals": [
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 6,
+          "set": {
+            "note": "Desde la granja, ve a la playa al norte de la mina. Consigue allí las branquias y los ojos de múrloc antes de regresar por Molsen."
+          }
+        },
+        {
+          "title": "Granja de Molsen",
+          "note": "De vuelta al sur, recoge el encargo de Ozwin en el granero al oeste de Saldean. En Molsen toma la muestra del pozo y recoge las piezas de los cosechadores. Evita al gólem raro de nivel 20.",
+          "goals": [
+            [
+              2,
+              4
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              5,
+              4
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              5,
+              10
+            ]
+          ]
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        }
+      ],
+      "evidence": {
+        "sourceFile": "guides/forever/alliance/02-westfall.guide",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/02-westfall.guide",
+        "sourceSha256": "5808da7448c8a0e53d9107bd916b52b759d341d4c2b8312076e779df0a27fff4",
+        "reason": "En Colina del Centinela se visita la torre antes de bajar a Thor y la posada. Tras aceptar el estofado, la playa del norte precede el regreso por Ozwin y la granja de Molsen. Alba sigue esperando las branquias y los pozos antes de enviar a ambas minas."
+      },
+      "preservePendingVisits": true
+    },
+    {
+      "id": "darkshore-beach-and-auberdine-efficiency-5",
+      "guideID": "forever/alliance/03-darkshore",
+      "previousRevision": 4,
+      "revision": 5,
+      "sourceShape": "b9c488b7066fa00c96c1f25c6267a818f5ce01eaa1f8e7e276eef242cc0dc9b5",
+      "resultShape": "9c9ef6578df8bc27dace05fa2eee7d0f26ca8b0be98e7c78ef74a6a938124b3b",
+      "previousGoalCounts": [
+        12,
+        6,
+        3,
+        2,
+        3,
+        2,
+        7,
+        1,
+        10,
+        4,
+        15,
+        3,
+        10,
+        2,
+        1,
+        2,
+        1,
+        2,
+        5,
+        1,
+        19,
+        3,
+        6,
+        5,
+        4,
+        9,
+        2,
+        2,
+        11,
+        4,
+        3,
+        3,
+        12,
+        5,
+        3,
+        4,
+        6,
+        3,
+        7,
+        14,
+        4,
+        3
+      ],
+      "firstAffectedStep": 2,
+      "preservePendingVisits": true,
+      "affectedQuestIDs": [],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "title": "La playa",
+          "note": "Busca los reptadores y abre la caja 827. Sigue la orilla hacia el sur hasta los huesos de la criatura varada. Si ves trilladores por el camino, aprovecha para conseguir sus ojos.",
+          "goals": [
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              6
+            ]
+          ]
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "title": "La tortuga y los trilladores",
+          "note": "Nada hasta la tortuga al oeste del muelle. Busca en esas aguas los ojos de trillador que te falten antes de volver con Gwennyth.",
+          "goals": [
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              4,
+              2
+            ]
+          ]
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "title": "Auberdine",
+          "note": "Entrega a Terenthis y coge su siguiente encargo. Pasa por el muelle de Gwennyth y termina en el norte del pueblo con Thundris antes de ir a los pecios.",
+          "goals": [
+            [
+              21,
+              4
+            ],
+            [
+              21,
+              15
+            ],
+            [
+              21,
+              6
+            ],
+            [
+              21,
+              7
+            ],
+            [
+              21,
+              8
+            ],
+            [
+              21,
+              9
+            ],
+            [
+              21,
+              10
+            ],
+            [
+              21,
+              12
+            ],
+            [
+              21,
+              13
+            ],
+            [
+              21,
+              11
+            ],
+            [
+              21,
+              5
+            ],
+            [
+              21,
+              16
+            ],
+            [
+              21,
+              14
+            ],
+            [
+              21,
+              17
+            ],
+            [
+              21,
+              2
+            ],
+            [
+              21,
+              3
+            ],
+            [
+              21,
+              1
+            ],
+            [
+              21,
+              18
+            ],
+            [
+              21,
+              19
+            ]
+          ]
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "collect",
+            "quest": 1001,
+            "item": 5412
+          },
+          "count": 1,
+          "set": {
+            "note": "Busca trilladores en el agua al oeste del muelle."
+          }
+        }
+      ],
+      "evidence": {
+        "reason": "La caja 411 se acepta durante la primera visita a la playa y se entrega en el paso 9. Uno de sus puntos de trilladores (29.5, 46.3) está junto a la tortuga (31.82, 46.31); otro (34.7, 53.2) está cerca de los primeros huesos. En el paso 21, 985 desbloquea 986 en Terenthis y 4762 desbloquea 4763 en Thundris. La visita al muelle deja espacio en el diario antes de las siguientes aceptaciones. Las acciones de druida se mantienen juntas y conservan su condición original.",
+        "sources": [
+          {
+            "url": "https://github.com/Dekaz4/RutaXP/blob/v0.7.11/RutaXP/Source/leveling.json",
+            "guideID": "forever/alliance/03-darkshore",
+            "steps": [
+              2,
+              4,
+              9,
+              20,
+              21,
+              22
+            ]
+          },
+          {
+            "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/03-darkshore.guide"
+          }
+        ]
+      }
+    },
+    {
+      "id": "redridge-stormwind-and-lakeshire-efficiency-4",
+      "guideID": "forever/alliance/04-redridge-mountains",
+      "previousRevision": 3,
+      "revision": 4,
+      "sourceShape": "8e9c24233a77361b850661b26c9eac3b274e3f2ecd4514d465d423b5b69185e7",
+      "resultShape": "e378e91bc6db6a266bec18438a360ff97b0fae9ba7d98bf750353488e19b4a7b",
+      "previousGoalCounts": [
+        4,
+        1,
+        7,
+        2,
+        1,
+        5,
+        9,
+        3,
+        7,
+        1,
+        2,
+        4,
+        2,
+        3,
+        2,
+        9,
+        1,
+        2,
+        3
+      ],
+      "firstAffectedStep": 1,
+      "preservePendingVisits": true,
+      "affectedQuestIDs": [],
+      "steps": [
+        {
+          "title": "Ventormenta",
+          "note": "Entrega la carta a Baros Alexston y recoge su respuesta. Aprovecha el paso por la ciudad para vender y entrenar.",
+          "goals": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3,
+          "set": {
+            "note": "Si eres pícaro, habla con Mathias Shaw en el Casco Antiguo después de entrenar con Osborne. Gakin está en el sótano de la taberna del Barrio de los Magos y Laurena en la Catedral de la Luz."
+          }
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "title": "Villa del Lago",
+          "note": "Cruza el puente y habla con Olento y Marris. Pasa por el ayuntamiento y la posada, visita a Martie en el oeste y termina con Baren antes de ir al lago.",
+          "goals": [
+            [
+              7,
+              2
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              7,
+              7
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              9
+            ],
+            [
+              7,
+              6
+            ],
+            [
+              7,
+              8
+            ],
+            [
+              7,
+              4
+            ],
+            [
+              7,
+              5
+            ]
+          ]
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "title": "Feldon y el supervisor Olento",
+          "note": "Entrega los encargos a Feldon al sur del puente. Crúzalo para entregar los materiales a Olento y aceptar «Molino de Alther».",
+          "goals": [
+            [
+              11,
+              1
+            ],
+            [
+              11,
+              2
+            ],
+            [
+              12,
+              1
+            ],
+            [
+              12,
+              2
+            ]
+          ]
+        },
+        {
+          "sourceStep": 10,
+          "set": {
+            "note": "Panzallena está en el corral al oeste de Villa del Lago. Sepáralo de los otros jabalíes y llévale su colmillo a Martie."
+          }
+        },
+        {
+          "title": "El jardín y el cartel de Villa del Lago",
+          "note": "Entrega «Una visita poco grata» a Martie en su jardín. De vuelta hacia el lago, recoge el encargo del cartel de Fangore.",
+          "goals": [
+            [
+              12,
+              3
+            ],
+            [
+              12,
+              4
+            ]
+          ]
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "title": "Volver a Villa del Lago",
+          "note": "Desde la posada, visita a Breanna y a Baren. Pasa por el ayuntamiento y termina las entregas junto al puente.",
+          "goals": [
+            [
+              16,
+              1
+            ],
+            [
+              16,
+              4
+            ],
+            [
+              16,
+              2
+            ],
+            [
+              16,
+              3
+            ],
+            [
+              16,
+              7
+            ],
+            [
+              16,
+              8
+            ],
+            [
+              16,
+              5
+            ],
+            [
+              16,
+              6
+            ],
+            [
+              16,
+              9
+            ]
+          ]
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        }
+      ],
+      "goalChanges": [],
+      "evidence": {
+        "reason": "El tramo desde Auberdine desemboca en una parada con Baros Alexston. Atenderlo antes del instructor permite encadenar Osborne con Mathias Shaw para el pícaro. La vuelta de los gnolls sale de la orilla sur junto a Feldon con 246, 98407 y 89 ya trabajadas. Enlaza a Feldon con Olento al cruzar el puente. 125 precede a 89 y 89 a 98386. El rodeo de Panzallena queda seguido por su entrega en el jardín de Martie antes del cartel de nivel 21. Se agrupan las visitas independientes de Villa del Lago y se conserva el punto de hogar antes de utilizarlo.",
+        "sources": [
+          {
+            "url": "https://github.com/Dekaz4/RutaXP/blob/v0.7.11/RutaXP/AllianceTravel.lua",
+            "link": "03-darkshore -> 04-redridge-mountains"
+          },
+          {
+            "url": "https://github.com/Dekaz4/RutaXP/blob/v0.7.11/RutaXP/Source/leveling.json",
+            "guideID": "forever/alliance/04-redridge-mountains",
+            "steps": [
+              1,
+              3,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              16
+            ]
+          },
+          {
+            "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/04-redridge-mountains.guide"
+          }
+        ]
+      }
+    },
+    {
+      "id": "duskwood-ravenhill-rogue-efficiency-2",
+      "guideID": "forever/alliance/05-duskwood",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "a06840a69de5986f7d81fba9b7659fd0af9459c1bfcf5b8dbefbde6e0c1aeb04",
+      "resultShape": "c8c3481a50f51214b0dd8b0c98be017bf19398ca7f4a2b49577a90b81289726c",
+      "previousGoalCounts": [
+        7,
+        2,
+        5,
+        3,
+        1,
+        1,
+        3,
+        3,
+        2,
+        5,
+        1,
+        2,
+        7,
+        2,
+        2,
+        2,
+        3,
+        8,
+        1,
+        3,
+        2,
+        1,
+        1,
+        2,
+        2,
+        4,
+        12,
+        1,
+        1
+      ],
+      "firstAffectedStep": 3,
+      "affectedQuestIDs": [],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "title": "Cementerio del Jardín Sereno",
+          "note": "Derrota a los guerreros y magos del Jardín Sereno. Recoge los dedos que suelten. Podrás terminar los diez en el Cerro del Cuervo.",
+          "goals": [
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              5
+            ]
+          ]
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7,
+          "set": {
+            "note": "En la mitad sur del cementerio, derrota a los esqueletos de la Vigilancia Nocturna y recoge los dedos que falten. Evita a Mor'Ladim."
+          }
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26,
+          "set": {
+            "note": "Desde el campamento de Sven, cruza a Páramos de Poniente y busca a la agente Kearnen en la colina que domina la torre de Klaven."
+          }
+        },
+        {
+          "title": "Maestro Mathias Shaw",
+          "note": "Entrega el diario a Mathias Shaw en el SI:7 del Casco Antiguo. Si haces la cura de Zanzil, el doctor está en el sótano de los cuarteles.",
+          "only": {
+            "classes": [
+              "ROGUE"
+            ]
+          },
+          "goals": [
+            [
+              27,
+              1
+            ],
+            [
+              27,
+              2
+            ],
+            [
+              27,
+              3
+            ],
+            [
+              27,
+              4
+            ],
+            [
+              27,
+              5
+            ],
+            [
+              27,
+              6
+            ],
+            [
+              27,
+              7
+            ],
+            [
+              27,
+              8
+            ],
+            [
+              27,
+              9
+            ],
+            [
+              27,
+              11
+            ],
+            [
+              27,
+              10
+            ],
+            [
+              27,
+              12
+            ]
+          ]
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        }
+      ],
+      "evidence": {
+        "reason": "Los dos cementerios comparten el contador de diez dedos. Se recogen al pasar por el primero y se terminan entre los esqueletos de la Vigilancia Nocturna en el segundo. La ruta personal del pícaro reúne los ingredientes de la cura después de recibir el encargo y toma la bobina antes de subir al Distrito Enano.",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/05-duskwood.guide",
+        "previousNavigation": {
+          "7:3": {
+            "x": 76.92,
+            "y": 68.16,
+            "f": "e",
+            "spots": [
+              {
+                "x": 78,
+                "y": 70.7,
+                "r": 55,
+                "n": 8
+              },
+              {
+                "x": 79.4,
+                "y": 67.7,
+                "r": 40,
+                "n": 6
+              },
+              {
+                "x": 79.4,
+                "y": 73.6,
+                "r": 54,
+                "n": 8
+              },
+              {
+                "x": 81.6,
+                "y": 70.1,
+                "r": 36,
+                "n": 5
+              }
+            ]
+          }
+        },
+        "navigationDonor": "7:2 — NPC 531, Duskwood; la visita usa las ubicaciones del mefisto esquelético que suelta 2378 en el Cerro del Cuervo.",
+        "sources": [
+          "https://www.wowhead.com/classic/item=2378/skeleton-finger",
+          "https://www.wowhead.com/forever/quest=57/the-night-watch",
+          "https://www.wowhead.com/forever/quest=2359/klavens-tower",
+          "https://www.wowhead.com/forever/quest=2609/the-touch-of-zanzil"
+        ]
+      },
+      "retiredGoals": {
+        "3:3": {
+          "match": {
+            "t": "collect",
+            "quest": 101,
+            "oi": 3,
+            "item": 2378,
+            "count": 10
+          },
+          "evidence": {
+            "reason": "El contador lo conserva la segunda visita al cementerio en este capítulo.",
+            "originalGoal": {
+              "title": "El Tótem de castigo",
+              "note": "Dedo esquelético",
+              "t": "collect",
+              "quest": 101,
+              "oi": 3,
+              "item": 2378,
+              "itemName": "Dedo esquelético",
+              "count": 10,
+              "map": 1431,
+              "x": 78.25,
+              "y": 68.18,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 79.4,
+                  "y": 67.7,
+                  "r": 40,
+                  "n": 6
+                },
+                {
+                  "x": 78,
+                  "y": 70.7,
+                  "r": 55,
+                  "n": 8
+                },
+                {
+                  "x": 81.6,
+                  "y": 70.1,
+                  "r": 36,
+                  "n": 5
+                },
+                {
+                  "x": 79.4,
+                  "y": 73.6,
+                  "r": 54,
+                  "n": 8
+                }
+              ],
+              "instruction": "Reúne «Dedo esquelético» (10 en total).\nZona: Bosque del Ocaso."
+            }
+          }
+        }
+      },
+      "goalChanges": [
+        {
+          "match": {
+            "t": "collect",
+            "quest": 101,
+            "oi": 3,
+            "x": 76.92,
+            "y": 68.16
+          },
+          "count": 1,
+          "set": {
+            "x": 21.81,
+            "y": 47.42,
+            "f": "e",
+            "spots": [
+              {
+                "x": 21.2,
+                "y": 46.9,
+                "r": 19,
+                "n": 2
+              },
+              {
+                "x": 22.9,
+                "y": 42.7,
+                "r": 41,
+                "n": 6
+              },
+              {
+                "x": 16,
+                "y": 46.9,
+                "r": 23,
+                "n": 3
+              },
+              {
+                "x": 15.6,
+                "y": 42.4,
+                "r": 19,
+                "n": 2
+              }
+            ],
+            "note": "Recoge los dedos que falten de los horrores y mefistos esqueléticos del Cerro del Cuervo."
+          }
+        },
+        {
+          "match": {
+            "t": "collect",
+            "quest": 2359,
+            "item": 7923
+          },
+          "count": 1,
+          "set": {
+            "fromKind": "pickpocket",
+            "note": "En sigilo, usa Robar sobre el zángano que patrulla fuera de la torre."
+          }
+        },
+        {
+          "match": {
+            "t": "collect",
+            "quest": 2359,
+            "item": 7908
+          },
+          "count": 1,
+          "set": {
+            "note": "Sube en sigilo. Si Klaven vigila el cofre de la última planta, usa Porrazo antes de abrirlo."
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 2607
+          },
+          "count": 1,
+          "set": {
+            "note": "Busca a Doc Mixilpixil en el sótano de los cuarteles del SI:7."
+          }
+        },
+        {
+          "match": {
+            "t": "collect",
+            "quest": 2609,
+            "item": 8431
+          },
+          "count": 1,
+          "set": {
+            "note": "Recoge la bobina del suelo en la sastrería junto al canal de la Plaza de la Catedral."
+          }
+        }
+      ]
+    },
+    {
+      "id": "ashenvale-menethil-library-efficiency-4",
+      "guideID": "forever/alliance/06-ashenvale",
+      "previousRevision": 3,
+      "revision": 4,
+      "sourceShape": "0934c3e9d49157498394c975e6129871f7c592d467d4bd46112725836a40fb41",
+      "resultShape": "c6fb44af552c9e11f788c355063e8f7c9ead5ca39cd17289f0c0c4d7a41de45c",
+      "previousGoalCounts": [
+        4,
+        2,
+        3,
+        2,
+        2,
+        4,
+        2,
+        4,
+        8,
+        3,
+        1,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        5,
+        1,
+        1,
+        3,
+        1,
+        4,
+        9,
+        1,
+        4,
+        5,
+        3,
+        4,
+        5,
+        3,
+        10,
+        2,
+        1,
+        2,
+        2,
+        6,
+        3,
+        2,
+        1,
+        3,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        3,
+        2,
+        2,
+        1,
+        2,
+        1,
+        1,
+        1,
+        2,
+        8,
+        6,
+        2,
+        2,
+        6,
+        2,
+        1,
+        4,
+        3
+      ],
+      "firstAffectedStep": 32,
+      "affectedQuestIDs": [],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "title": "Puerto de Menethil",
+          "goals": [
+            [
+              32,
+              1
+            ],
+            [
+              32,
+              2
+            ],
+            [
+              32,
+              3
+            ],
+            [
+              32,
+              5
+            ],
+            [
+              32,
+              8
+            ],
+            [
+              32,
+              6
+            ],
+            [
+              32,
+              7
+            ],
+            [
+              32,
+              9
+            ],
+            [
+              32,
+              4
+            ],
+            [
+              32,
+              10
+            ]
+          ]
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        },
+        {
+          "sourceStep": 49
+        },
+        {
+          "sourceStep": 50
+        },
+        {
+          "sourceStep": 51
+        },
+        {
+          "sourceStep": 52
+        },
+        {
+          "sourceStep": 53
+        },
+        {
+          "sourceStep": 54
+        },
+        {
+          "sourceStep": 55
+        },
+        {
+          "sourceStep": 56
+        },
+        {
+          "sourceStep": 57
+        },
+        {
+          "sourceStep": 58
+        },
+        {
+          "sourceStep": 59
+        },
+        {
+          "sourceStep": 60
+        },
+        {
+          "title": "Castillo de Ventormenta",
+          "goals": [
+            [
+              61,
+              1
+            ],
+            [
+              61,
+              2
+            ],
+            [
+              61,
+              3
+            ],
+            [
+              61,
+              6
+            ],
+            [
+              61,
+              4
+            ],
+            [
+              61,
+              5
+            ]
+          ]
+        },
+        {
+          "sourceStep": 62
+        },
+        {
+          "sourceStep": 63
+        },
+        {
+          "sourceStep": 64
+        },
+        {
+          "sourceStep": 65
+        }
+      ],
+      "evidence": {
+        "reason": "Las ocho aceptaciones de Puerto de Menethil son viajes posteriores, con la posada y el muelle juntos y la última visita situada antes del trabajo en el puerto. En la biblioteca de Ventormenta se entrega el libro opcional en la misma visita que la misión de Milton.",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/06-ashenvale.guide"
+      }
+    },
+    {
+      "id": "thousand-needles-sirra-fizzle-efficiency-3",
+      "guideID": "forever/alliance/07-thousand-needles",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "9b65670f483e75b3747b883dea7890eccd68cc5911ee543b99d48b5f2bf74f74",
+      "resultShape": "f114024a0591ab359a0e3de1fcbaf8d130b354d246c2b726baf0ee2447c3b05b",
+      "previousGoalCounts": [
+        11,
+        1,
+        2,
+        1,
+        2,
+        2,
+        3,
+        5,
+        1,
+        1,
+        1,
+        3,
+        2,
+        1,
+        4,
+        2,
+        12,
+        8,
+        4,
+        1,
+        5,
+        3,
+        2,
+        2,
+        5,
+        2,
+        1,
+        2,
+        3,
+        1,
+        3,
+        3,
+        2,
+        7,
+        7,
+        6,
+        1
+      ],
+      "firstAffectedStep": 17,
+      "affectedQuestIDs": [],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "title": "Volver a Villa Oscura",
+          "goals": [
+            [
+              17,
+              1
+            ],
+            [
+              17,
+              2
+            ],
+            [
+              17,
+              3
+            ],
+            [
+              17,
+              4
+            ],
+            [
+              17,
+              5
+            ],
+            [
+              17,
+              6
+            ],
+            [
+              17,
+              7
+            ],
+            [
+              17,
+              8
+            ],
+            [
+              17,
+              9
+            ],
+            [
+              17,
+              10
+            ],
+            [
+              17,
+              12
+            ],
+            [
+              17,
+              11
+            ]
+          ]
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "title": "Circuito del Espejismo",
+          "goals": [
+            [
+              36,
+              2
+            ],
+            [
+              36,
+              1
+            ],
+            [
+              36,
+              3
+            ],
+            [
+              36,
+              4
+            ],
+            [
+              36,
+              5
+            ],
+            [
+              36,
+              6
+            ]
+          ]
+        },
+        {
+          "sourceStep": 37
+        }
+      ],
+      "evidence": {
+        "reason": "Si se lleva el arco de Merrick, entrégalo durante la visita a Sirra. En el Circuito del Espejismo se entregan los caparazones a Wizzle y luego el veneno a Fizzle, quien puede ofrecer la continuación cuando ambas entregas constan en el diario.",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/07-thousand-needles.guide"
+      }
+    },
+    {
+      "id": "hillsbrad-ironforge-prospector-efficiency-4",
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "previousRevision": 3,
+      "revision": 4,
+      "sourceShape": "2fa446c9bc4a24b52dca52dcde9755ffbff3fbbdfd6eb68e27e3fca17471dcaf",
+      "resultShape": "28315e744683dc227ce1a311d353e812d3669cf5b22d051db76c2bb0820d9712",
+      "previousGoalCounts": [
+        4,
+        1,
+        2,
+        1,
+        1,
+        2,
+        4,
+        3,
+        2,
+        2,
+        1,
+        2,
+        5,
+        4,
+        3,
+        4,
+        2,
+        3,
+        1,
+        13,
+        2,
+        2,
+        1,
+        6,
+        2,
+        2,
+        1,
+        4,
+        2,
+        1,
+        7,
+        1,
+        2,
+        5,
+        1,
+        1,
+        3,
+        4,
+        2,
+        1,
+        6
+      ],
+      "firstAffectedStep": 41,
+      "affectedQuestIDs": [],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "title": "Tren subterráneo",
+          "note": "Tomal Tren subterráneo desdel Distrito enano a Forjaz.",
+          "goals": [
+            [
+              41,
+              1
+            ],
+            [
+              41,
+              4
+            ],
+            [
+              41,
+              2
+            ],
+            [
+              41,
+              5
+            ],
+            [
+              41,
+              3
+            ],
+            [
+              41,
+              6
+            ]
+          ]
+        }
+      ],
+      "evidence": {
+        "reason": "El prospector ofrece Más misterios al entregar la carta 514. Karnik y Roetten están en el sector del prospector, a una visita de la sala del rey. La carta de nivel mínimo 30 ya se aceptó antes de este paso.",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/01-hillsbrad-foothills.guide"
+      }
+    },
+    {
+      "id": "arathi-southshore-handins-efficiency-2",
+      "guideID": "forever/alliance/30-40/05-arathi-highlands",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "7724e8b44e80fac1e44dba909710ce84e7c95c5ebd33d5001b143499c75c35fb",
+      "resultShape": "d99253447d2ec244bbc9e559eb536e56ccf0fecead9c0b9b4b15267ba787aafc",
+      "previousGoalCounts": [
+        1,
+        2,
+        3,
+        2,
+        1,
+        1,
+        1,
+        3,
+        3,
+        2,
+        1,
+        5,
+        8,
+        1,
+        1,
+        4,
+        7,
+        4,
+        3,
+        1,
+        1,
+        1,
+        5,
+        1,
+        2,
+        4,
+        6,
+        2,
+        1,
+        4,
+        1,
+        2,
+        2,
+        2,
+        2,
+        3,
+        2,
+        3,
+        1,
+        2,
+        4,
+        4,
+        2,
+        5,
+        12,
+        3,
+        3,
+        1
+      ],
+      "firstAffectedStep": 45,
+      "affectedQuestIDs": [],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "title": "Costasur",
+          "goals": [
+            [
+              45,
+              1
+            ],
+            [
+              45,
+              2
+            ],
+            [
+              45,
+              3
+            ],
+            [
+              45,
+              4
+            ],
+            [
+              45,
+              7
+            ],
+            [
+              45,
+              6
+            ],
+            [
+              45,
+              5
+            ],
+            [
+              45,
+              8
+            ],
+            [
+              45,
+              9
+            ],
+            [
+              45,
+              10
+            ],
+            [
+              45,
+              11
+            ],
+            [
+              45,
+              12
+            ]
+          ]
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        }
+      ],
+      "evidence": {
+        "reason": "En Costasur se hace una vuelta por los cuatro destinatarios independientes de misiones completadas. La entrega a Dibbs y sus continuaciones conservan su posición al final de la visita.",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/05-arathi-highlands.guide"
+      }
+    },
+    {
+      "id": "badlands-kreldig-efficiency-2",
+      "guideID": "forever/alliance/30-40/06-badlands",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "3a5f7e8a49088ab92d4396dbacb308d853dff6323911170787acc33c3e72d47b",
+      "resultShape": "02aa752a4088747e591b354ea98d4b089e07290e6a380075c518dbed7668ae8a",
+      "previousGoalCounts": [
+        2,
+        3,
+        1,
+        5,
+        4,
+        3,
+        4,
+        3,
+        1,
+        2,
+        2,
+        4,
+        2,
+        2,
+        4,
+        1,
+        1,
+        2,
+        2,
+        2,
+        4,
+        7,
+        2,
+        1,
+        1,
+        1,
+        3,
+        1,
+        3,
+        1,
+        2,
+        1,
+        3,
+        3,
+        2,
+        1,
+        1,
+        5,
+        1
+      ],
+      "firstAffectedStep": 38,
+      "affectedQuestIDs": [],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "title": "Punta de Nijel",
+          "note": "Sigue la carretera hacial norte hasta Punta de Nijel.",
+          "goals": [
+            [
+              38,
+              1
+            ],
+            [
+              38,
+              3
+            ],
+            [
+              38,
+              2
+            ],
+            [
+              38,
+              4
+            ],
+            [
+              38,
+              5
+            ]
+          ]
+        },
+        {
+          "sourceStep": 39
+        }
+      ],
+      "evidence": {
+        "reason": "En Punta de Nijel, Kreldig ofrece la continuación 1467 tras recibir 1466. El encargo de los tótems del capitán se entrega después en la misma visita.",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/06-badlands.guide"
+      }
+    },
+    {
+      "id": "stranglethorn-booty-bay-efficiency-2",
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "5334c3d5d149d68627fbea15e6b02e90be4e9c9056a6ef692cef5593c31b730b",
+      "resultShape": "6dde9c75d01276207cea491b97a0ad86773200de9de036d5c733bdea657823f1",
+      "previousGoalCounts": [
+        4,
+        2,
+        2,
+        4,
+        1,
+        2,
+        3,
+        1,
+        1,
+        2,
+        14,
+        2,
+        3,
+        1,
+        2,
+        5,
+        5,
+        2,
+        16,
+        3,
+        8,
+        5,
+        4,
+        5,
+        1,
+        1,
+        3,
+        2,
+        7,
+        2,
+        2,
+        1,
+        1,
+        1,
+        2,
+        2,
+        8,
+        12,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        3,
+        2,
+        1,
+        3,
+        3,
+        4,
+        2,
+        2
+      ],
+      "firstAffectedStep": 21,
+      "affectedQuestIDs": [],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "title": "Bahía del Botín",
+          "goals": [
+            [
+              21,
+              1
+            ],
+            [
+              21,
+              2
+            ],
+            [
+              21,
+              5
+            ],
+            [
+              21,
+              3
+            ],
+            [
+              21,
+              4
+            ],
+            [
+              21,
+              6
+            ],
+            [
+              21,
+              7
+            ],
+            [
+              21,
+              8
+            ]
+          ]
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        },
+        {
+          "sourceStep": 49
+        },
+        {
+          "sourceStep": 50
+        },
+        {
+          "sourceStep": 51
+        },
+        {
+          "sourceStep": 52
+        }
+      ],
+      "evidence": {
+        "reason": "Dizzy ofrece su encargo tras la entrega a Crazz de 597, ya hecha al principio del paso. Se recoge antes de seguir hacia Cuernomarino y Deeg junto a la posada, manteniendo la entrega de 599 antes de 604.",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/01-stranglethorn-vale.guide"
+      }
+    },
+    {
+      "id": "feralas-feathermoon-efficiency-2",
+      "guideID": "forever/alliance/40-50/03-feralas",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "3c7ebdef885af8c44e78db87f5549e79abde68c470fd78b99cf68bf008cc6d8e",
+      "resultShape": "e0b8c4643143263c8f92b924b51cf787a7e675fda3cc28b3da30d596c560f58c",
+      "previousGoalCounts": [
+        9,
+        2,
+        4,
+        1,
+        3,
+        2,
+        3,
+        1,
+        9,
+        1,
+        4,
+        4,
+        3,
+        2,
+        7,
+        3,
+        3,
+        1,
+        3,
+        2,
+        7,
+        1,
+        1,
+        2,
+        2,
+        4
+      ],
+      "firstAffectedStep": 1,
+      "affectedQuestIDs": [],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "title": "Bastión Plumaluna",
+          "note": "Desde Theramore, volar a Punta de Nijel y viajar al sur de Desolace en Feralas; la carretera conduce al oeste hastal muelle Forgotten Coast, dondel barco cruza a Feathermoon en Isla de Sardor.",
+          "goals": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              1,
+              9
+            ]
+          ]
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        }
+      ],
+      "evidence": {
+        "reason": "Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ángelas y Troyas están juntos en 31.8,45.5. La cadena del mensajero comienza con Latronicus y continúa con Ginro.",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/03-feralas.guide"
+      }
+    },
+    {
+      "id": "silithus-ironforge-districts-efficiency-2",
+      "guideID": "forever/alliance/50-60/05-silithus",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "aacd1fc780f6bd0419dc79c9d41a53363a697e59c5091642552ba9513b75f064",
+      "resultShape": "fa2b2bfdc5f86d8c0b393cd0ae873e26de195063204d819a1677482848f6fc89",
+      "previousGoalCounts": [
+        8,
+        4,
+        2,
+        5,
+        4,
+        4,
+        3,
+        4,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        4,
+        9,
+        5,
+        12,
+        2,
+        3,
+        2,
+        2,
+        1,
+        2,
+        1,
+        1
+      ],
+      "firstAffectedStep": 19,
+      "affectedQuestIDs": [],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "title": "Forjaz",
+          "note": "Lleval Tren subterráneo a Forjaz.",
+          "goals": [
+            [
+              19,
+              1
+            ],
+            [
+              19,
+              2
+            ],
+            [
+              19,
+              6
+            ],
+            [
+              19,
+              7
+            ],
+            [
+              19,
+              8
+            ],
+            [
+              19,
+              4
+            ],
+            [
+              19,
+              5
+            ],
+            [
+              19,
+              9
+            ],
+            [
+              19,
+              10
+            ],
+            [
+              19,
+              11
+            ],
+            [
+              19,
+              3
+            ],
+            [
+              19,
+              12
+            ]
+          ]
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        }
+      ],
+      "evidence": {
+        "reason": "En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del historiador y al teniente. Se mantiene junta la entrega 4512 y su continuación y se conserva la salida hacia el vuelo con el encargo del teniente.",
+        "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/05-silithus.guide"
+      }
     }
   ]
 }

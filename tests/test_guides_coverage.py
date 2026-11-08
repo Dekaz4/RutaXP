@@ -20,10 +20,50 @@ spec.loader.exec_module(audit_module)
 ORIGINAL_SEMANTICS = "46bc091cc7034231f3f7138dc301eaff00126460d6abfe7745a3233ada32350d"
 
 
+def undo_visit_optimization(guide, revision):
+    """Restore source slots from authored references independently of the runtime cursor map."""
+    restored = {}
+    for step, spec in zip(guide["steps"], revision["steps"], strict=True):
+        if "sourceStep" in spec:
+            si = spec["sourceStep"]
+            count = revision["previousGoalCounts"][si - 1]
+            refs = [(si, gi) for gi in range(1, count + 1) if gi not in spec.get("omitGoals", ())]
+        else:
+            refs = spec["goals"]
+        for ref, goal in zip(refs, step["goals"], strict=True):
+            if isinstance(ref, dict):
+                added = revision["addedGoals"][ref["added"]]["goal"]
+                for field in audit_module.SEMANTIC_FIELDS:
+                    if goal.get(field) != added.get(field):
+                        raise AssertionError(f"Changed addition {revision['id']}: {ref}")
+                continue
+            key = f"{ref[0]}:{ref[1]}"
+            if key in restored:
+                raise AssertionError(f"Repeated source slot {revision['id']}: {key}")
+            restored[key] = goal
+    for key, retirement in revision.get("retiredGoals", {}).items():
+        goal = retirement["evidence"]["originalGoal"]
+        if key in restored or any(goal.get(k) != v for k, v in retirement["match"].items()):
+            raise AssertionError(f"Inconsistent retirement {revision['id']}: {key}")
+        restored[key] = copy.deepcopy(goal)
+    for key, previous in revision["evidence"].get("previousNavigation", {}).items():
+        if not previous.keys() <= {"map", "x", "y", "z", "f", "r", "spots"}:
+            raise AssertionError(f"Unexpected navigation evidence {revision['id']}: {key}")
+        restored[key].update(copy.deepcopy(previous))
+    for si, (count, step) in enumerate(zip(revision["previousGoalCounts"], guide["steps"], strict=True), 1):
+        step["goals"] = [restored.pop(f"{si}:{gi}") for gi in range(1, count + 1)]
+    if restored:
+        raise AssertionError(f"Unexpected source slots {revision['id']}: {sorted(restored)}")
+
+
 def original_order(document):
     """Undo reviewed moves and exact prerequisite edits before the old digest."""
     result = copy.deepcopy(document)
     revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
+    guides = {guide["id"]: guide for guide in result["guides"]}
+    for revision in reversed(revisions):
+        if revision.get("preservePendingVisits"):
+            undo_visit_optimization(guides[revision["guideID"]], revision)
     darkshore = next(g for g in result["guides"] if g["id"] == "forever/alliance/03-darkshore")
     ashenvale = next(g for g in result["guides"] if g["id"] == "forever/alliance/06-ashenvale")
     arbal = darkshore["steps"][31]["goals"].pop(2)
@@ -35,7 +75,7 @@ def original_order(document):
     darkshore["steps"][27]["goals"].extend([arbal, escort["goals"][0]])
     escort["goals"] = [{"t": "goto", "map": 1439, "x": 44.4, "y": 76.4, "f": "e"}, {"t": "note"}]
     for revision in reversed(revisions):
-        if not revision.get("addedGoals") or revision.get("retiredGoals"):
+        if revision.get("preservePendingVisits") or not revision.get("addedGoals") or revision.get("retiredGoals"):
             continue
         guide = next(g for g in result["guides"] if g["id"] == revision["guideID"])
         migration = next(m for m in guide["progressMigrations"] if m["from"] == revision["previousRevision"])
@@ -165,12 +205,12 @@ class WholeGuideCoverageTests(unittest.TestCase):
     def test_inventory_accounts_for_every_goal_and_keeps_legitimate_exceptions_explicit(self):
         report = self.report
         self.assertEqual(report["totals"]["guides"], 57)
-        self.assertEqual(report["totals"]["goals"], 7454)
+        self.assertEqual(report["totals"]["goals"], 7458)
         self.assertEqual(report["totals"]["steps"], 2343)
-        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7454)
-        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7454)
+        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7458)
+        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7458)
         self.assertEqual(sum(report["totals"].get(k, 0) for k in
-                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7454)
+                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7458)
         self.assertEqual(report["invalidNavigation"], [])
         for item in report["missingNavigation"]:
             self.assertTrue(item["classification"])
@@ -375,7 +415,7 @@ class ShippedGuideRenderingTests(unittest.TestCase):
             end
             return count,errorCount,table.concat(errors,"; ")
         ''')
-        self.assertEqual(result, (7454, 0, ""))
+        self.assertEqual(result, (7458, 0, ""))
 
     def test_all_bundled_points_and_candidate_frames_resolve_with_the_real_navigation_converter(self):
         host = AccessHost()
