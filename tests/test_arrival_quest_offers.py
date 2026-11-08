@@ -60,14 +60,20 @@ class ArrivalQuestTests(unittest.TestCase):
                           for i in range(1, 4)], ["done"] * 3)
         self.assertEqual(self.ns.GetGoalStatus(self.ns, step.goals[7], step, state, 7)[0], "active")
 
-    def test_requires_destination_map_actual_contact_space_and_unpaused_visit(self):
+    def test_live_offers_can_come_from_an_intermediate_map_or_an_alternate_giver(self):
         self.client.move(GOLDSHIRE)
-        self.assertIsNone(self.offer())
+        self.assertIsNone(self.ns.GetPlannedPickupAtNPC(self.ns, 151, 238, 1429))
+        self.assertEqual(self.offer(), 151)  # The actual NPC dialog is stronger evidence than the map.
+        self.state.quests[151] = None
         self.client.move(WESTFALL_ENTRY)
-        for contact in (None, 237):
-            self.state.contact = contact
-            self.assertIsNone(self.offer())
-        self.state.contact, self.state.used = 238, 39
+        self.state.contact = 237
+        self.assertIsNone(self.ns.GetPlannedPickupAtNPC(self.ns, 151, 237, 1436))
+        self.assertEqual(self.offer(), 151)
+
+    def test_requires_actual_contact_space_and_unpaused_visit(self):
+        self.state.contact = None
+        self.assertIsNone(self.offer())
+        self.state.contact, self.state.used = 238, 40
         self.assertIsNone(self.offer())
         self.state.used, self.state.shift = 18, True
         self.assertIsNone(self.offer())

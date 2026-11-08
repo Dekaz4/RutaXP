@@ -1,17 +1,19 @@
 RutaXP leveling guide adaptation
 ===============================
 
-EarlyQuestData.lua contains IDs selected by RutaXP for early pickup.
+EarlyQuestData.lua classifies NPC pickups throughout the Polestar/SendaFH routes.
 Forever quest facts: Efficient Games (https://efficient.games), CC BY 4.0
 (https://creativecommons.org/licenses/by/4.0/), builds 1.60.1.70790 and 1.60.1.70840.
 Original data: https://github.com/JIVESCORP/eg-link-output-wowf/tree/45f58b070b84501f8001bdcad43864aa929a6a4b/data/wowf
-The Furlbrow errands were also checked against build 1.60.1.70862:
+Additional Forever timing and quest category data comes from build 1.60.1.70862:
 https://github.com/JIVESCORP/eg-link-output-wowf/tree/156f29c9af78b1586883e8eb94a13467eb89638c/data/wowf/1.60.1.70862
 Quest types, objectives, timers and start scripts were cross-checked with
 CMaNGOS Classic-DB, GPL-3.0:
 https://github.com/cmangos/classic-db/tree/c33f90b8eeb3f8bacb53d5cbfee45075c80b416c
-RutaXP filters the records and joins them to its guide routes.
+RutaXP matches these facts and the guide instructions to questgivers, marks
+timed or immediate events and checks branch restrictions against the route.
 Source hashes and selection rules are in tools/build_early_quest_offers.py.
+The offline evidence is in Source/early_quest_timing.json.
 
 Original guide routes: Polestar, by Fitz and contributors.
 Spanish adaptation and translation: SendaFH / Forever Hispano.

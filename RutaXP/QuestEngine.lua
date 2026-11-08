@@ -189,11 +189,11 @@ local function ownProfessionRequirement(goal)
     local rank = requirement and requirement.rank or goal.profRank or 1
     return { id=id, rank=rank, name=professionNames[id] or (requirement and requirement.name) or goal.profName or "la profesión indicada" }
 end
-function ns:GetGoalProfessionRequirement(goal, step)
+function ns:GetGoalProfessionRequirement(goal, step, guide)
     local requirement = ownProfessionRequirement(goal) or ownProfessionRequirement(step)
     if requirement then return requirement end
     local id = goal and (goal.quest or goal.questID)
-    local guide = self.char and self.guides[self.char.activeGuide]
+    guide = guide or (self.char and self.guides[self.char.activeGuide])
     local layout = id and getGuideLayout(self, guide)
     for _, entry in ipairs(layout and layout.accepts[id] or {}) do
         if self:MatchesConditions(entry.step.only) and self:MatchesConditions(entry.goal.only) then
@@ -269,8 +269,8 @@ function ns:GetProfessionRank(id)
     end
     return remember(nil)
 end
-function ns:CheckGoalProfession(goal, step)
-    local requirement = self:GetGoalProfessionRequirement(goal, step)
+function ns:CheckGoalProfession(goal, step, guide)
+    local requirement = self:GetGoalProfessionRequirement(goal, step, guide)
     if not requirement then return true end
     local id = goal and (goal.quest or goal.questID)
     if id and (self:IsQuestActive(id) or self:IsQuestDelivered(id)) then return true end
@@ -364,9 +364,9 @@ local function omittedWork(self, layout, id, state, stepIndex, goalIndex)
     return false
 end
 
-function ns:GetGoalStatus(goal, step, state, index)
+function ns:GetGoalStatus(goal, step, state, index, guide)
     if not self:MatchesConditions(step and step.only) or not self:MatchesConditions(goal.only) then return "skip", "Otro personaje" end
-    local guide = self.char and self.guides[self.char.activeGuide]
+    guide = guide or (self.char and self.guides[self.char.activeGuide])
     local layout = guide and getGuideLayout(self, guide)
     local stepIndex = (layout and step and layout.stepOf[step]) or (state and state.cursor) or 1
     local action, id = goal.t or goal.action, goal.quest or goal.questID
@@ -397,7 +397,7 @@ function ns:GetGoalStatus(goal, step, state, index)
         return "skip", "Rama alternativa ya elegida"
     end
     if goal.optional and not (self.char and self.char.optional) and not onQuest then return "skip", "Opcional desactivado" end
-    local profession, professionReason = self:CheckGoalProfession(goal, step)
+    local profession, professionReason = self:CheckGoalProfession(goal, step, guide)
     if profession == false then return "skip", professionReason end
     if profession == nil then return "blocked", professionReason end
     local playerLevel = UnitLevel("player") or 1
@@ -515,8 +515,7 @@ end
 
 function ns:IsStepComplete(step, stateOverride)
     if not step or not step.goals then return basicComplete(self, step) end
-    local _, _, state = self:GetCurrent()
-    state = stateOverride or state
+    local state = stateOverride or select(3, self:GetCurrent())
     if not self:MatchesConditions(step.only) then return true end
     local hasOpenNonService = false
     local hasOpenService = false
@@ -551,6 +550,7 @@ function ns:IsStepComplete(step, stateOverride)
     end
     return true
 end
+local isLocalStepComplete = ns.IsStepComplete
 
 -- Only a resolved prefix proves that a route can advance. An unrelated quest
 -- delivered later in the route says nothing about unfinished earlier chains.
@@ -1109,16 +1109,23 @@ end
 
 -- The link comes from the route author. Map and level recommendations are
 -- deliberately separate, so a finished starter cannot send us back to itself.
-function ns:GetLinkedGuide(guide)
-    if not guide or guide.recovery or guide.temporary then return nil end
+function ns:GetLinkedGuideChain(guide)
+    if not guide or guide.recovery or guide.temporary then return {} end
+    local chain = {}
     local successor, reason = uniqueSuccessor(self, guide)
     local nextGuide, visited = successor, { [guide.id] = true }
     while nextGuide do
-        if visited[nextGuide.id] then return nil, "El enlace es circular. Elige otra guía en Guías." end
+        if visited[nextGuide.id] then return {}, "El enlace es circular. Elige otra guía en Guías." end
         visited[nextGuide.id] = true
+        chain[#chain + 1] = nextGuide
         nextGuide = uniqueSuccessor(self, nextGuide)
     end
-    return successor, reason
+    return chain, reason
+end
+
+function ns:GetLinkedGuide(guide)
+    local chain, reason = self:GetLinkedGuideChain(guide)
+    return chain[1], reason
 end
 
 function ns:GetGuideContinuation()
@@ -1175,19 +1182,22 @@ end
 -- Auto-accept & Auto-turnin (RestedXP style)
 ---------------------------------------------------------------------------
 
-function ns:WantsQuest(action, questID)
-    if self.GetGuideTravel and self:GetGuideTravel() then return false end
-    if not finiteNumber(questID) or questID <= 0 then return false end
+local function currentQuestIndex(self, action, questID)
+    if self.GetGuideTravel and self:GetGuideTravel() then return end
+    if not finiteNumber(questID) or questID <= 0 then return end
     local guide, step, state = self:GetCurrent()
-    if not guide or not step or not state or state.review or not self:MatchesConditions(step.only) then return false end
+    if not guide or not step or not state or state.review or not self:MatchesConditions(step.only) then return end
     -- Current, unblocked objectives always take priority in an NPC menu.
     for index, goal in ipairs(step.goals or { step }) do
         if (goal.t or goal.action) == action and (goal.quest or goal.questID) == questID
             and self:GetGoalStatus(goal, step, state, index) == "active" then
-            return true
+            return index
         end
     end
-    return false
+end
+
+function ns:WantsQuest(action, questID)
+    return currentQuestIndex(self, action, questID) ~= nil
 end
 
 function ns:GetEarlyQuestSpace()
@@ -1195,16 +1205,19 @@ function ns:GetEarlyQuestSpace()
     local _, used = read(C_QuestLog and C_QuestLog.GetNumQuestLogEntries)
     if not finiteNumber(used) then _, used = read(GetNumQuestLogEntries) end
     -- The first return counts displayed rows, including zone headers. The
-    -- second counts quests even if a zone is collapsed. Keep the last slot
-    -- for a required pickup at the character's current step.
+    -- second counts quests even if a zone is collapsed.
     return finiteNumber(limit) and limit > 0 and limit == math.floor(limit)
-        and finiteNumber(used) and used >= 0 and used == math.floor(used) and limit - used >= 2
+        and finiteNumber(used) and used >= 0 and used == math.floor(used) and used < limit
 end
 
-function ns:ShouldWaitForEarlyQuest(step)
+function ns:ShouldWaitForEarlyQuest(step, pickupState)
     local duo = self.char and self.char.duo
     if duo and duo.autoSession and self.DuoAuto and self.DuoAuto:ShouldPauseAutomation() then return true end
-    return duo and duo.enabled and duo.wait and self.Duo and self.Duo:ShouldWaitForStep(step) or false
+    -- A partner can still be doing the same step as us. Wait for their
+    -- objectives at the point where our own step would actually advance.
+    return duo and duo.enabled and duo.wait and self.Duo
+        and (not pickupState or isLocalStepComplete(self, step, pickupState))
+        and self.Duo:ShouldWaitForStep(step) or false
 end
 
 function ns:GetQuestContactNPC()
@@ -1221,16 +1234,19 @@ local function turninAtContact(self, id, ready)
 end
 
 local function selectAvailable(self, count, getOffer, selectOffer)
-    local early
+    local best, firstStep, firstGoal
     for i = 1, count do
         local id, selection = getOffer(i)
-        if self:WantsQuest("accept", id) then
-            read(selectOffer, selection)
-            return
+        local goal = currentQuestIndex(self, "accept", id)
+        local step = -1 -- A current-step pickup precedes every future offer.
+        if not goal and self.GetEarlyQuestOrder then
+            step, goal = self:GetEarlyQuestOrder(id)
         end
-        if not early and self.GetEarlyQuestOffer and self:GetEarlyQuestOffer(id) then early = selection end
+        if goal and (not best or step < firstStep or (step == firstStep and goal < firstGoal)) then
+            best, firstStep, firstGoal = selection, step, goal
+        end
     end
-    if early then read(selectOffer, early) end
+    if best then read(selectOffer, best) end
 end
 
 local function greetingOffer(index)
@@ -1246,7 +1262,8 @@ function ns:HandleQuestAutomation(event)
 
     if event == "QUEST_DETAIL" then
         local qid = read(GetQuestID)
-        if not self:WantsQuest("accept", qid) and not (self.GetEarlyQuestOffer and self:GetEarlyQuestOffer(qid)) then return end
+        if not self:WantsQuest("accept", qid) and not (self:GetQuestContactNPC()
+            and self.GetEarlyQuestOffer and self:GetEarlyQuestOffer(qid)) then return end
         if read(QuestFlagsPVP) then return end
         if read(QuestGetAutoAccept) then
             read(AcknowledgeAutoAcceptQuest)

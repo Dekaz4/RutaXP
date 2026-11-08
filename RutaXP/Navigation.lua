@@ -191,6 +191,8 @@ local function playerWorld()
     return continent, north, west, map
 end
 
+ns.GetPlayerWorldPosition = playerWorld
+
 -- Among several authored spots, point to the closest one. A small hysteresis
 -- (25 yards) prevents the arrow from flickering between two similar spots.
 local function nearestPoint(goal, list)
@@ -668,8 +670,8 @@ function ns:UpdateNavigation()
     local guide, step, state = self:GetCurrent()
     local travel = self.GetGuideTravel and self:GetGuideTravel()
     local point = self:GetArrowWaypoint(step, travel or false)
-    if frame.roadside and self.GetWestfallCartHint then
-        local hint = self:GetWestfallCartHint(guide, step, state, travel)
+    if frame.roadside and self.GetNearbyQuestOfferHint then
+        local hint = self:GetNearbyQuestOfferHint(guide, step, state, travel)
         if hint ~= frame.roadsideText then
             frame.roadside:SetText(hint or "")
             frame.roadsideText = hint

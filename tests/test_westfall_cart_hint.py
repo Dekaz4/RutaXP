@@ -1,4 +1,4 @@
-"""The north-road cart is a nearby pickup hint, never a navigation target."""
+"""Nearby pickups for either faction leave the arrow on its current route."""
 import unittest
 
 import test_quest_engine as engine
@@ -13,7 +13,8 @@ class WestfallCartHintTests(unittest.TestCase):
         engine.NavigationAndFullTocTests.setUp(self)
         h = self.host
         for name in ["Leveling.lua", "WestfallTravelData.lua", "AllianceTravel.lua", "HordeTravel.lua",
-                     "TravelConnections.lua", "TravelRouting.lua", "QuestOfferAdvice.lua"]:
+                     "TravelConnections.lua", "TravelRouting.lua", "EarlyQuestData.lua", "QuestOfferAdvice.lua",
+                     "NearbyQuestOffers.lua"]:
             h.load((engine.ADDON / name).read_text(encoding="utf-8"), "RutaXP", h.ns)
         h.lua.execute("""
             TEST.now, TEST.filled = 10, 12
@@ -49,7 +50,7 @@ class WestfallCartHintTests(unittest.TestCase):
         after = h.call("GetArrowWaypoint", step)
         self.assertEqual((target.x, target.y, 72), (after.x, after.y, self.state.cursor))
 
-    def test_leaving_cart_and_earlier_chapters_do_not_prompt_to_return(self):
+    def test_leaving_cart_does_not_prompt_to_return_even_when_quests_are_ahead(self):
         h = self.host
         self.assertIn("reloj", self.refresh())
         h.state.x, h.state.y = .5625, .3473  # Farther down the road at Saldean's Farm.
@@ -57,7 +58,7 @@ class WestfallCartHintTests(unittest.TestCase):
         h.state.x, h.state.y, h.state.mapID = .5995, .1936, 1429
         self.assertEqual(self.refresh(), "")
         h.state.mapID, self.state.cursor = 1436, 10
-        self.assertEqual(self.refresh(), "")
+        self.assertIn("reloj", self.refresh())
 
     def test_local_checks_are_throttled_and_unreadable_positions_suppress_hint(self):
         h = self.host
@@ -68,17 +69,17 @@ class WestfallCartHintTests(unittest.TestCase):
                 return zone(unit)
             end
         """)
-        h.ns.TravelRouting.Zone = h.lua.eval("""
-            function(zone) return function()
-                TEST.zoneChecks = (TEST.zoneChecks or 0) + 1
-                return zone()
+        h.ns.GetPlayerWorldPosition = h.lua.eval("""
+            function(position) return function()
+                TEST.samples = (TEST.samples or 0) + 1
+                return position()
             end end
-        """)(h.ns.TravelRouting.Zone)
+        """)(h.ns.GetPlayerWorldPosition)
         self.assertIn("reloj", self.refresh())
-        count = h.state.zoneChecks
+        count = h.state.samples
         for _ in range(10):
             h.call("UpdateNavigation")
-        self.assertEqual(h.state.zoneChecks, count)
+        self.assertEqual(h.state.samples, count)
         h.state.positionUnavailable = True
         self.assertEqual(self.refresh(), "")
         h.state.positionUnavailable, h.state.noZone = False, True
@@ -108,5 +109,44 @@ class WestfallCartHintTests(unittest.TestCase):
         h.ns.DuoAuto, h.state.travel = None, None
         h.ns.char.duo = h.table({"enabled": True, "wait": True})
         h.ns.Duo = h.lua.eval("{ShouldWaitForStep=function() return true end}")
-        self.assertEqual(self.refresh(), "")
+        # Both players can take future quests while still doing this step.
+        self.assertIn("avena", self.refresh())
         self.assertEqual(dest.cursor, 1)
+
+    def test_horde_route_and_known_giver_are_independent_of_the_cart(self):
+        h = self.host
+        h.state.faction, h.state.raceToken = "Horde", "Orc"
+        h.state.mapID, h.state.x, h.state.y = 1411, .4285, .6915
+        h.call("SelectGuide", "forever/horde/orc-troll/01-durotar")
+        self.assertTrue(h.call("IsKnownQuestGiverLocation", 792, 3145, 1411))
+        self.assertFalse(h.call("IsKnownQuestGiverLocation", 792, 237, 1411))
+        self.assertIn("Habla con Zureetha Vistalonga", self.refresh())
+        h.quest(792, onQuest=True)
+        self.assertNotIn("Familiares viles", self.refresh())
+
+    def test_bad_target_conversion_recovers_and_another_floor_is_suppressed(self):
+        h = self.host
+        conversion = h.ns.GetWaypointWorldPosition
+        h.call("IsKnownQuestGiverLocation", 792, 3145, 1411)  # Rebuild on returning to Westfall.
+        h.ns.GetWaypointWorldPosition = h.lua.eval("function() return nil end")
+        self.assertEqual(self.refresh(), "")
+        h.ns.GetWaypointWorldPosition = conversion
+        self.assertIn("reloj", self.refresh())
+        h.ns.GetWaypointHeightDifference = h.lua.eval("function() return 35 end")
+        self.assertEqual(self.refresh(), "")
+
+    def test_same_giver_with_two_future_offers_displays_the_earlier_route_stop(self):
+        h = self.host
+        h.ns.earlyQuestOffers[910001], h.ns.earlyQuestOffers[910002] = True, True
+        location = {"t": "accept", "map": 1436, "x": 82, "y": 45,
+                    "npc": 910100, "npcName": "Guía de prueba"}
+        h.guide("visit", steps=[
+            {"title": "Primer paso", "goals": [{"t": "note", "text": "Empieza el recorrido"}]},
+            {"title": "Primera parada", "goals": [dict(location, quest=910002, title="Primera misión")]},
+            {"title": "Segunda parada", "goals": [dict(location, quest=910001, title="Segunda misión")]},
+        ])
+        h.call("SelectGuide", "visit")
+        h.state.x, h.state.y = .82, .45
+        self.assertEqual(self.refresh(), "Habla con Guía de prueba · Primera misión (+1)")
+        h.quest(910002, onQuest=True)
+        self.assertEqual(self.refresh(), "Habla con Guía de prueba · Segunda misión")

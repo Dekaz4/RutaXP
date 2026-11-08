@@ -116,9 +116,9 @@ class EarlyQuestAutomationTests(unittest.TestCase):
         next_goal = h.call("GetActiveGoal", step, state)[0]
         self.assertEqual((next_goal.t, next_goal.quest), ("collect", 92742))
 
-    def test_space_uses_quest_count_and_keeps_the_last_slot_for_the_current_step(self):
+    def test_one_free_slot_is_enough_and_full_or_unknown_journal_defers_pickup(self):
         h = self.h
-        for used, allowed in [(38, True), (39, False), (40, False), (None, False)]:
+        for used, allowed in [(38, True), (39, True), (40, False), (None, False)]:
             h.state.used, h.state.selected, h.state.accepted = used, 109, None
             self.assertEqual(h.call("GetEarlyQuestSpace"), allowed)
             self.automate("QUEST_DETAIL")
@@ -133,6 +133,41 @@ class EarlyQuestAutomationTests(unittest.TestCase):
             function GetNumQuestLogEntries() return 0, 20 end
         """)
         self.assertTrue(h.call("GetEarlyQuestSpace"))
+
+    def test_last_slot_goes_to_nearest_planned_offer_in_both_menus(self):
+        h = self.h
+        h.call("SelectGuide", WESTFALL)
+        h.ns.char.progress[WESTFALL].cursor = 1
+        h.state.used, h.state.offers = 39, h.table([151, 36])
+        for event in ("GOSSIP_SHOW", "QUEST_GREETING"):
+            self.automate(event)
+            self.assertEqual(h.state.selected, 36)
+            self.automate("QUEST_DETAIL")
+            self.assertEqual(h.state.accepted, 36)
+
+    def test_a_shared_or_item_offer_cannot_trigger_an_early_npc_pickup(self):
+        h = self.h
+        h.state.selected = 109
+        h.lua.execute("function UnitGUID() return nil end")
+        self.automate("QUEST_DETAIL")
+        self.assertIsNone(h.state.accepted)
+
+    def test_durotar_and_tirisfal_take_the_followup_after_the_real_breadcrumb(self):
+        h = self.h
+        h.state.faction = "Horde"
+        for guide, race, npc, breadcrumb, followup in (
+            ("forever/horde/orc-troll/01-durotar", "Orc", 3143, 4641, 788),
+            ("forever/horde/undead/01-tirisfal-glades", "Scourge", 1569, 363, 364),
+        ):
+            h.state.raceToken = race
+            h.call("SelectGuide", guide)
+            h.ns.char.progress[guide].cursor = 1
+            h.state.npc, h.state.selected, h.state.accepted = npc, followup, None
+            self.automate("QUEST_DETAIL")
+            self.assertIsNone(h.state.accepted)
+            h.quest(breadcrumb, delivered=True)
+            self.automate("QUEST_DETAIL")
+            self.assertEqual(h.state.accepted, followup)
 
     def test_give_gryan_the_courier_on_first_visit_and_leave_multiple_rewards_to_player(self):
         h = self.h

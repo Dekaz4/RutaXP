@@ -115,11 +115,14 @@ class QuestOfferAdviceTests(unittest.TestCase):
         self.assertIsNone(self.early(6))
         self.h.state.pause = False
         self.h.state.wait = True
+        self.assertIsNotNone(self.early(6))  # Both players can still be doing this step.
+        for quest_id in (1, 2, 5):
+            self.h.quest(quest_id, onQuest=True)
         self.assertIsNone(self.early(6))
         self.h.state.wait = False
         self.assertIsNotNone(self.early(6))
 
-    def test_only_the_unique_compatible_immediate_successor_can_supply_early_offers(self):
+    def test_any_guaranteed_successor_can_supply_an_offer_but_not_an_unresolved_branch(self):
         start = self.h.ns.guides["offers"]
         start.nextChoices = self.h.table(["b", "c"])
         self.h.guide("b", steps=[{"title": "B", "goals": [{"t": "accept", "quest": 20}]}], next="d")
@@ -131,7 +134,36 @@ class QuestOfferAdviceTests(unittest.TestCase):
         self.h.ns.guides["c"].classes = self.h.table(["MAGE"])
         self.assertIsNotNone(self.early(20))
         self.assertIsNone(self.early(21))
+        self.assertIsNotNone(self.early(22))
+        self.assertIsNone(self.h.ns.char.progress["b"])
+        self.assertIsNone(self.h.ns.char.progress["d"])
+        self.h.ns.guides["d"].next = "offers"  # Circular routes are never predicted.
         self.assertIsNone(self.early(22))
+
+    def test_early_accept_preserves_earlier_mutually_exclusive_choices(self):
+        h = self.h
+        self.enable_early(6, 9)
+        h.ns.earlyQuestAlternatives = h.table({9: [6]})
+        self.assertIsNone(self.early(9))
+        earlier = h.ns.guides["offers"].steps[2].goals[1]
+        earlier.minLevel = 20  # A future level gate isn't permission to close this branch.
+        self.assertIsNone(self.early(9))
+        earlier.only = h.table({"classes": ["MAGE"]})
+        self.assertIsNotNone(self.early(9))
+        earlier.only = None
+        h.quest(6, delivered=True)
+        self.assertIsNotNone(self.early(9))  # Its earlier breadcrumb has served its purpose.
+
+    def test_deferred_quest_explains_timing_now_or_in_a_later_chapter(self):
+        h = self.h
+        h.ns.deferredQuestOffers = h.table({6: "Empieza una escolta.", 22: "Tiene límite de tiempo."})
+        h.guide("later", steps=[{"title": "D", "goals": [{"t": "accept", "quest": 22}]}])
+        h.ns.guides["offers"].next = "later"
+        for quest, phrase, step in ((6, "escolta", "paso 2"), (22, "tiempo", "paso 1")):
+            text, kind = self.advice(quest)
+            self.assertIn(phrase, text)
+            self.assertIn(step, text)
+            self.assertEqual(kind, "después")
 
     def test_thomas_can_offer_109_for_the_first_gryan_visit_without_selecting_westfall(self):
         self.h.load((ADDON / "Leveling.lua").read_text(encoding="utf-8"), "RutaXP", self.h.ns)
