@@ -513,11 +513,30 @@ local function applyArrowRotation(frame, angle)
     if frame.glow and frame.glow.SetRotation then frame.glow:SetRotation(angle) end
 end
 
+local function showArrowDetails(frame)
+    GameTooltip:SetText("Flecha de RutaXP", 1, 0.82, 0.45)
+    if frame.statusText then GameTooltip:AddLine(frame.statusText, 1, 0.82, 0.45, true) end
+    if frame.destinationText then GameTooltip:AddLine(frame.destinationText, 0.85, 0.88, 0.92, true) end
+    local reason = frame.navigationReason
+    if reason and reason ~= frame.statusText and reason ~= frame.destinationText then
+        GameTooltip:AddLine(reason, 0.85, 0.88, 0.92, true)
+    end
+    if ns.GetNearbyQuestOfferHint then
+        local guide, step, state = ns:GetCurrent()
+        local travel = ns.GetGuideTravel and ns:GetGuideTravel()
+        local hint = ns:GetNearbyQuestOfferHint(guide, step, state, travel)
+        if hint then GameTooltip:AddLine(hint, 0.55, 1, 0.68, true) end
+    end
+    GameTooltip:AddLine("Arrastra con clic izquierdo para moverla.", 0.85, 0.88, 0.92, true)
+    GameTooltip:Show()
+end
+
 function ns:CreateNavigation()
     if self.navigationFrame or not self.char then return end
     local frame = CreateFrame("Frame", nil, UIParent)
     self.navigationFrame = frame
     frame:SetSize(210, 114)
+    if frame.SetHitRectInsets then frame:SetHitRectInsets(60, 60, 0, 34) end
     frame:SetFrameStrata("MEDIUM")
     frame:SetClampedToScreen(true)
     frame:SetMovable(true)
@@ -548,18 +567,17 @@ function ns:CreateNavigation()
     hoverBg:Hide()
     frame.hoverBg = hoverBg
 
+    local tooltipElapsed = 0
     frame:SetScript("OnEnter", function(item)
         hoverBg:Show()
         if not GameTooltip then return end
-        GameTooltip:SetOwner(item, "ANCHOR_BOTTOM")
-        GameTooltip:SetText("Flecha de RutaXP", 1, 0.82, 0.45)
-        if item.navigationReason then GameTooltip:AddLine(item.navigationReason, 0.85, 0.88, 0.92, true) end
-        GameTooltip:AddLine("Arrastra con clic izquierdo para moverla.", 0.85, 0.88, 0.92, true)
-        GameTooltip:Show()
+        tooltipElapsed = 0
+        GameTooltip:SetOwner(item, "ANCHOR_RIGHT")
+        showArrowDetails(item)
     end)
     frame:SetScript("OnLeave", function()
         hoverBg:Hide()
-        if GameTooltip then GameTooltip:Hide() end
+        if GameTooltip and GameTooltip:IsOwned(frame) then GameTooltip:Hide() end
     end)
 
     local arrow = CreateFrame("Frame", nil, frame)
@@ -603,11 +621,6 @@ function ns:CreateNavigation()
     frame.ring = ring
 
     frame.distance = outlinedText(frame, "GameFontNormalLarge", -60, 200, 15)
-    frame.destination = outlinedText(frame, "GameFontHighlightSmall", -78, 206, 11)
-    frame.roadside = outlinedText(frame, "GameFontHighlightSmall", 0, 220, 11)
-    frame.roadside:ClearAllPoints()
-    frame.roadside:SetPoint("TOP", frame.destination, "BOTTOM", 0, -2)
-    frame.roadside:SetTextColor(0.55, 1, 0.68)
     frame:Hide()
 
     local updater = CreateFrame("Frame")
@@ -617,9 +630,16 @@ function ns:CreateNavigation()
     updater:SetScript("OnUpdate", function(_, elapsed)
         elapsedTime = elapsedTime + elapsed
         if elapsedTime >= SAMPLE_INTERVAL then
-            elapsedTime = 0
             self:UpdateNavigation()
             if self.OnNavigationTick then self:OnNavigationTick() end
+            if frame:IsShown() and hoverBg:IsShown() and GameTooltip and GameTooltip:IsOwned(frame) then
+                tooltipElapsed = tooltipElapsed + elapsedTime
+                if tooltipElapsed >= 1 then
+                    showArrowDetails(frame)
+                    tooltipElapsed = 0
+                end
+            end
+            elapsedTime = 0
         end
         -- Per-frame rotation using the LIVE player position and facing, so the
         -- arrow never lags behind while running or strafing.
@@ -661,22 +681,16 @@ function ns:UpdateNavigation()
     local frame = self.navigationFrame
     if not frame then return end
     frame.navigationState, frame.navigationReason = nil, nil
+    frame.statusText, frame.destinationText = nil, nil
     if self.char.arrow == false then
         if self.Walking then self.Walking:Clear() end
         frame.dNorth, frame.dWest = nil, nil
         frame:Hide()
         return
     end
-    local guide, step, state = self:GetCurrent()
+    local _, step = self:GetCurrent()
     local travel = self.GetGuideTravel and self:GetGuideTravel()
     local point = self:GetArrowWaypoint(step, travel or false)
-    if frame.roadside and self.GetNearbyQuestOfferHint then
-        local hint = self:GetNearbyQuestOfferHint(guide, step, state, travel)
-        if hint ~= frame.roadsideText then
-            frame.roadside:SetText(hint or "")
-            frame.roadsideText = hint
-        end
-    end
     if travel then step = travel end
     if not step and not point then
         if self.Walking then self.Walking:Clear() end
@@ -692,8 +706,8 @@ function ns:UpdateNavigation()
         frame.arrow:Hide()
         frame.navigationState = travel.waiting and "waiting" or "instruction"
         frame.navigationReason = travel.text
-        frame.distance:SetText(travel.title)
-        frame.destination:SetText(travel.text)
+        frame.distance:SetText("")
+        frame.statusText, frame.destinationText = travel.title, travel.text
         return
     end
     local activeGoal = point and point.goal or (step and step.goals and self.GetActiveGoal and self:GetActiveGoal(step))
@@ -786,15 +800,16 @@ function ns:UpdateNavigation()
         end
         frame.navigationState = frame.navigationState or (message and "instruction" or "missing")
         frame.navigationReason = frame.navigationReason or message or "Sin coordenadas para esta acción"
-        frame.distance:SetText("|cffffb468" .. (message or "Sin coordenadas para esta acción") .. "|r")
-        frame.destination:SetText(subText)
+        frame.distance:SetText("")
+        frame.statusText, frame.destinationText = message or frame.navigationReason, subText
         return
     end
     if point.navigationBlocked then
         frame.dNorth, frame.dWest, frame.targetContinent = nil, nil, nil
         frame.arrow:Hide()
-        frame.distance:SetText("|cffffb468" .. (point.navigationNotice or "Calculando camino…") .. "|r")
-        frame.destination:SetText(goalTitle or stepTitle or "Destino de la guía")
+        frame.distance:SetText("")
+        frame.statusText = point.navigationNotice or "Calculando camino…"
+        frame.destinationText = goalTitle or stepTitle or "Destino de la guía"
         return
     end
 
@@ -805,8 +820,8 @@ function ns:UpdateNavigation()
     if not distance then
         frame.targetContinent = nil
         frame.arrow:Hide()
-        frame.distance:SetText("|cffffb468" .. (right or "En otra zona") .. "|r")
-        frame.destination:SetText(subText)
+        frame.distance:SetText("")
+        frame.statusText, frame.destinationText = right or "En otra zona", subText
         return
     end
 
@@ -829,19 +844,18 @@ function ns:UpdateNavigation()
     local b = 0.36 + (0.62 - 0.36) * t
 
     if point.intermediate and point.waiting and distance <= radius then
-        frame.distance:SetText("|cffffb468" .. point.waiting .. "|r")
+        frame.statusText = point.waiting
     elseif heightDelta and distance <= radius and math.abs(heightDelta) > 8 then
-        frame.distance:SetText(heightDelta > 0 and "|cffffb468El objetivo está más arriba|r" or "|cffffb468El objetivo está más abajo|r")
+        frame.statusText = heightDelta > 0 and "El objetivo está más arriba" or "El objetivo está más abajo"
     elseif arrived then
-        frame.distance:SetText("|cff6be09e¡Has llegado!|r")
-    else
-        local distStr = metres >= 1000 and string.format("%.1f km", metres / 1000)
-            or metres < 20 and string.format("%.1f m", metres)
-            or string.format("%d m", math.floor(metres + 0.5))
-        frame.distance:SetText(distStr)
-        if frame.distance.SetTextColor then frame.distance:SetTextColor(r, g, b) end
+        frame.statusText = "¡Has llegado!"
     end
-    frame.destination:SetText(subText)
+    local distStr = metres >= 1000 and string.format("%.1f km", metres / 1000)
+        or metres < 20 and string.format("%.1f m", metres)
+        or string.format("%d m", math.floor(metres + 0.5))
+    frame.distance:SetText(distStr)
+    if frame.distance.SetTextColor then frame.distance:SetTextColor(r, g, b) end
+    frame.destinationText = subText
 
     if right == nil or forward == nil then
         frame.arrow:Hide()

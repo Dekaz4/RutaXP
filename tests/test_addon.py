@@ -140,6 +140,17 @@ end
 """
 
 
+TOOLTIP_STUBS = """
+GameTooltip = {lines = {}}
+function GameTooltip:SetOwner(owner) self.owner, self.lines = owner, {} end
+function GameTooltip:IsOwned(owner) return self.owner == owner end
+function GameTooltip:SetText(text) self.lines = {text} end
+function GameTooltip:AddLine(text) table.insert(self.lines, text) end
+function GameTooltip:Show() self.shown = true end
+function GameTooltip:Hide() self.shown, self.owner = false, nil end
+"""
+
+
 class AddonHost:
     def __init__(self, catalog=False, real_ui=False):
         self.lua = LuaRuntime(unpack_returned_tuples=True)

@@ -3,6 +3,7 @@
 import unittest
 
 from test_access_navigation import AccessHost, DWARF
+from test_addon import TOOLTIP_STUBS
 
 
 class TurninNavigationTests(unittest.TestCase):
@@ -31,24 +32,18 @@ class TurninNavigationTests(unittest.TestCase):
         h.ns.UpdateNavigation(h.ns)
         frame = h.ns.navigationFrame
         self.assertEqual(frame.navigationState, "waiting")
-        self.assertIn("Sincronizando misiones", frame.distance.text)
-        self.assertNotIn(reason, frame.distance.text)
+        self.assertIn("Sincronizando misiones", frame.statusText)
+        self.assertNotIn(reason, frame.statusText)
+        self.assertEqual(frame.distance.text, "")
         self.assertEqual(frame.navigationReason, reason)
-        self.assertNotIn("Sin coordenadas", frame.distance.text)
+        self.assertNotIn("Sin coordenadas", frame.statusText)
         self.assertFalse(frame.arrow.shown)
         self.assertEqual(h.ns.char.progress[DWARF].cursor, 6)
         self.assertEqual(h.progress(), before)
 
     def test_wait_explanation_is_in_the_arrow_tooltip_and_sync_state_has_a_short_label(self):
         h = self.done_visit()
-        h.h.lua.execute('''
-            GameTooltip={lines={}}
-            function GameTooltip:SetOwner() self.lines={} end
-            function GameTooltip:SetText(text) self.lines[#self.lines+1]=text end
-            function GameTooltip:AddLine(text) self.lines[#self.lines+1]=text end
-            function GameTooltip:Show() self.shown=true end
-            function GameTooltip:Hide() self.shown=false end
-        ''')
+        h.h.lua.execute(TOOLTIP_STUBS)
         before = h.progress()
         h.ns.UpdateNavigation(h.ns)
         frame = h.ns.navigationFrame
@@ -62,9 +57,9 @@ class TurninNavigationTests(unittest.TestCase):
         self.assertFalse(h.h.g.GameTooltip.shown)
         h.ns.Duo.ClearPeer(h.ns.Duo)
         h.ns.UpdateNavigation(h.ns)
-        self.assertIn("Sincronizando misiones", frame.distance.text)
+        self.assertIn("Sincronizando misiones", frame.statusText)
         self.assertIn("Sin sincronización", frame.navigationReason)
-        self.assertNotIn("desactiva", frame.distance.text)
+        self.assertNotIn("desactiva", frame.statusText)
         self.assertEqual(h.progress(), before)
 
     def test_resolved_visit_distinguishes_manual_review_manual_advance_and_completion(self):
@@ -75,16 +70,16 @@ class TurninNavigationTests(unittest.TestCase):
         h.ns.char.auto = True
         h.ns.UpdateNavigation(h.ns)
         self.assertEqual(h.ns.navigationFrame.navigationState, "review")
-        self.assertIn("revisión", h.ns.navigationFrame.distance.text)
+        self.assertIn("revisión", h.ns.navigationFrame.statusText)
         state.review, h.ns.char.auto = False, False
         h.ns.UpdateNavigation(h.ns)
         self.assertEqual(h.ns.navigationFrame.navigationState, "manual")
-        self.assertIn("Siguiente", h.ns.navigationFrame.distance.text)
+        self.assertIn("Siguiente", h.ns.navigationFrame.statusText)
         h.ns.char.auto = True
         before = h.progress()
         h.ns.UpdateNavigation(h.ns)
         self.assertEqual(h.ns.navigationFrame.navigationState, "complete")
-        self.assertIn("Paso completado", h.ns.navigationFrame.distance.text)
+        self.assertIn("Paso completado", h.ns.navigationFrame.statusText)
         self.assertEqual(h.progress(), before)  # Rendering must never call Sync.
 
     def test_recovery_meeting_and_follow_destinations_survive_an_all_done_local_visit(self):

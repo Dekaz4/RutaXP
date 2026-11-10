@@ -109,7 +109,8 @@ class GuideLocationRuntimeTests(unittest.TestCase):
                 h.initialize()
                 h.call("SelectGuide", "no-fixed-" + goal["t"])
                 h.call("UpdateNavigation")
-                self.assertIn(message, h.ns.navigationFrame.distance.text)
+                self.assertIn(message, h.ns.navigationFrame.statusText)
+                self.assertEqual(h.ns.navigationFrame.distance.text, "")
                 self.assertFalse(h.ns.navigationFrame.arrow.shown)
 
 

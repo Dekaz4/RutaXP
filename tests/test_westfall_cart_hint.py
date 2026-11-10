@@ -2,6 +2,7 @@
 import unittest
 
 import test_quest_engine as engine
+from test_addon import TOOLTIP_STUBS
 
 
 ELWYNN = "forever/alliance/human/01-elwynn-forest"
@@ -16,7 +17,7 @@ class WestfallCartHintTests(unittest.TestCase):
                      "TravelConnections.lua", "TravelRouting.lua", "EarlyQuestData.lua", "QuestOfferAdvice.lua",
                      "NearbyQuestOffers.lua"]:
             h.load((engine.ADDON / name).read_text(encoding="utf-8"), "RutaXP", h.ns)
-        h.lua.execute("""
+        h.lua.execute(TOOLTIP_STUBS + """
             TEST.now, TEST.filled = 10, 12
             function GetTime() return TEST.now end
             function C_QuestLog.GetNumQuestLogEntries() return 12, TEST.filled end
@@ -33,7 +34,11 @@ class WestfallCartHintTests(unittest.TestCase):
         h = self.host
         h.state.now += 1
         h.call("UpdateNavigation")
-        return h.ns.navigationFrame.roadside.text or ""
+        frame = h.ns.navigationFrame
+        frame.scripts.OnEnter(frame)
+        lines = list(h.globals.GameTooltip.lines.values())
+        frame.scripts.OnLeave(frame)
+        return next((line for line in lines if line.startswith("Habla con ") and " · " in line), "")
 
     def test_actual_flight_target_remains_while_hint_lists_only_pending_quests(self):
         h = self.host
@@ -41,7 +46,7 @@ class WestfallCartHintTests(unittest.TestCase):
         target = h.call("GetArrowWaypoint", step)
         self.assertEqual(target.goal.node, 4)
         self.assertEqual(self.refresh(), "Habla con los Cejade · estofado, avena, reloj")
-        self.assertIn("Colina del Centinela", h.ns.navigationFrame.destination.text)
+        self.assertIn("Colina del Centinela", h.ns.navigationFrame.destinationText)
         h.quest(64, onQuest=True)
         h.quest(36, delivered=True)
         self.assertEqual(self.refresh(), "Habla con los Cejade · avena")
@@ -75,6 +80,8 @@ class WestfallCartHintTests(unittest.TestCase):
                 return position()
             end end
         """)(h.ns.GetPlayerWorldPosition)
+        h.call("UpdateNavigation")
+        self.assertIsNone(h.state.samples)
         self.assertIn("reloj", self.refresh())
         count = h.state.samples
         for _ in range(10):

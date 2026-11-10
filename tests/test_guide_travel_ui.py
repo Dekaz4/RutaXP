@@ -41,7 +41,7 @@ class GuideTravelUITests(unittest.TestCase):
         for getter in (h.ns.GetStepWaypoint, h.ns.GetArrowWaypoint):
             point = getter(h.ns, h.step)
             self.assertEqual((point.mapID, point.x, point.y), (1426, .5, .6))
-        self.assertIn("Puente a Poniente", h.ns.navigationFrame.destination.text)
+        self.assertIn("Puente a Poniente", h.ns.navigationFrame.destinationText)
         for name in ("nextButton", "trackerNext", "previousButton", "trackerPrevious"):
             button = h.ns[name]
             self.assertFalse(button.enabled)
@@ -60,8 +60,9 @@ class GuideTravelUITests(unittest.TestCase):
                 frame = h.ns.navigationFrame
                 self.assertTrue(frame.shown)
                 self.assertFalse(frame.arrow.shown)
-                self.assertEqual(frame.distance.text, h.s.travel.title)
-                self.assertEqual(frame.destination.text, "Espera aquí.")
+                self.assertEqual(frame.distance.text, "")
+                self.assertEqual(frame.statusText, h.s.travel.title)
+                self.assertEqual(frame.destinationText, "Espera aquí.")
                 self.assertEqual(frame.navigationState, "waiting" if waiting else "instruction")
                 self.assertEqual(h.ns.trackerProgress.text, "Viaje")
                 self.assertEqual(h.ns.trackerText.text, "Espera aquí.")

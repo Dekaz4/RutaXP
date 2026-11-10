@@ -283,7 +283,8 @@ class WalkingIntegrationTests(unittest.TestCase):
         self.assertEqual(w.GetStatus(w).phase, "pending")
         h.ns.UpdateNavigation(h.ns)
         self.assertFalse(h.ns.navigationFrame.arrow.shown)
-        self.assertIn("Calculando", h.ns.navigationFrame.distance.text)
+        self.assertIn("Calculando", h.ns.navigationFrame.statusText)
+        self.assertEqual(h.ns.navigationFrame.distance.text, "")
         h.pump()
         arrow = h.ns.GetArrowWaypoint(h.ns, h.step)
         self.assertTrue(arrow.walking)
@@ -296,7 +297,7 @@ class WalkingIntegrationTests(unittest.TestCase):
         self.assertAlmostEqual(h.s.lastWaypoint.y, semantic.y)
         h.ns.UpdateNavigation(h.ns)
         self.assertTrue(h.ns.navigationFrame.arrow.shown)
-        self.assertIn("Camino por terreno", h.ns.navigationFrame.destination.text)
+        self.assertIn("Camino por terreno", h.ns.navigationFrame.destinationText)
         self.assertFalse(h.ns.navigationFrame.arrived)
         h.s.x, h.s.y, h.s.height = arrow.x, arrow.y, arrow.z
         self.assertFalse(h.ns.IsAtWaypoint(h.ns, h.goal))
@@ -381,7 +382,8 @@ class WalkingIntegrationTests(unittest.TestCase):
         self.assertFalse(bool(point.walking))
         self.assertEqual(h.ns.Walking.GetStatus(h.ns.Walking).phase, "failed")
         self.assertFalse(h.ns.navigationFrame.arrow.shown)
-        self.assertIn("No hay un camino comprobado", h.ns.navigationFrame.distance.text)
+        self.assertIn("No hay un camino comprobado", h.ns.navigationFrame.statusText)
+        self.assertEqual(h.ns.navigationFrame.distance.text, "")
         self.assertEqual(h.progress(), before)
 
 

@@ -3,6 +3,7 @@ import math
 import unittest
 
 import test_quest_engine as engine_fixtures
+from test_addon import TOOLTIP_STUBS
 
 
 class NavigationRegressions(unittest.TestCase):
@@ -27,7 +28,8 @@ class NavigationRegressions(unittest.TestCase):
         self.assertIsNone(h.call("GetStepWaypoint", step))
         frame = h.ns.navigationFrame
         self.assertFalse(frame.arrow.shown)
-        self.assertIn("Sin coordenadas", frame.distance.text)
+        self.assertIn("Sin coordenadas", frame.statusText)
+        self.assertEqual(frame.distance.text, "")
         h.call("Next")
         point = h.call("GetStepWaypoint", step)
         self.assertEqual(point.goal.quest, 999)
@@ -45,29 +47,74 @@ class NavigationRegressions(unittest.TestCase):
         point.walking, point.walkingFinal = True, True
         point.walkingCount, point.walkingIndex = 2, 2
         h.call("UpdateNavigation")
-        label = h.ns.navigationFrame.destination
-        self.assertIn("Habla con Kerlonian Semprumbrío", label.text)
-        self.assertIn("Acepta: El despertar", label.text)
-        self.assertNotIn("tramo", label.text)
+        frame = h.ns.navigationFrame
+        self.assertIn("Habla con Kerlonian Semprumbrío", frame.destinationText)
+        self.assertIn("Acepta: El despertar", frame.destinationText)
+        self.assertNotIn("tramo", frame.destinationText)
 
         h.state.x = point.x - .1
         h.call("UpdateNavigation")
-        self.assertIn("Camino por terreno", label.text)
+        self.assertIn("Camino por terreno", frame.destinationText)
         h.state.x = point.x - .001
         point.walkingFinal = False
         h.call("UpdateNavigation")
-        self.assertIn("Camino por terreno", label.text)
+        self.assertIn("Camino por terreno", frame.destinationText)
 
         point.walking, point.source = False, "duo-follow"
         h.call("UpdateNavigation")
-        self.assertIn("Acompaña al compañero", label.text)
-        self.assertNotIn("Kerlonian", label.text)
+        self.assertIn("Acompaña al compañero", frame.destinationText)
+        self.assertNotIn("Kerlonian", frame.destinationText)
         point.source, point.goal.t = "game", "turnin"
         point.navigationNotice = "Dirección orientativa"
         h.call("UpdateNavigation")
-        self.assertIn("Habla con Kerlonian Semprumbrío", label.text)
-        self.assertIn("Entrega: El despertar", label.text)
-        self.assertIn("Dirección orientativa", label.text)
+        self.assertIn("Habla con Kerlonian Semprumbrío", frame.destinationText)
+        self.assertIn("Entrega: El despertar", frame.destinationText)
+        self.assertIn("Dirección orientativa", frame.destinationText)
+
+    def test_walk_to_bashal_aran_only_displays_distance_and_explains_the_route_on_hover(self):
+        h = self.host
+        h.lua.execute(TOOLTIP_STUBS + """
+            local methods = getmetatable(UIParent).__index
+            local createFontString = methods.CreateFontString
+            function methods:CreateFontString(...)
+                local label = createFontString(self, ...)
+                self.fontStrings = self.fontStrings or {}
+                table.insert(self.fontStrings, label)
+                return label
+            end
+        """)
+        h.state.mapID, h.state.x, h.state.y = 1439, .40, .40
+        self.select_goal({"t": "accept", "quest": 954, "title": "Bashal'Aran",
+                          "map": 1439, "x": 45, "y": 45})
+        _, step, _ = h.call("GetCurrent")
+        point = h.call("GetStepWaypoint", step)
+        point.walking, point.walkingDistance = True, 119.2
+        point.walkingIndex, point.walkingCount = 3, 5
+        h.state.arrowPoint = point
+        h.ns.GetArrowWaypoint = h.lua.eval("function() return TEST.arrowPoint end")
+        h.call("UpdateNavigation")
+
+        frame, tooltip = h.ns.navigationFrame, h.globals.GameTooltip
+        self.assertTrue(frame.arrow.shown)
+        self.assertEqual([label.text for label in frame.fontStrings.values() if label.shown and label.text],
+                         ["109 m"])
+        self.assertFalse(tooltip.shown)
+        frame.scripts.OnEnter(frame)
+        self.assertTrue(tooltip.shown)
+        details = "\n".join(tooltip.lines.values())
+        self.assertIn("Camino por terreno · tramo 2/4", details)
+        self.assertIn("Acepta: Bashal'Aran", details)
+        point.walking, point.walkingDistance = False, None
+        h.state.x, h.state.y = point.x, point.y
+        updater = h.ns.navigationUpdater
+        updater.scripts.OnUpdate(updater, 1)
+        self.assertTrue(frame.arrived)
+        self.assertEqual(frame.distance.text, "0.0 m")
+        details = "\n".join(tooltip.lines.values())
+        self.assertIn("¡Has llegado!", details)
+        self.assertNotIn("tramo", details)
+        frame.scripts.OnLeave(frame)
+        self.assertFalse(tooltip.shown)
 
     def test_nearest_compatible_candidate_wins_over_the_first_in_catalog(self):
         h = self.host

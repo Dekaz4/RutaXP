@@ -1,4 +1,4 @@
-# RutaXP 0.7.16 para WoW Forever
+# RutaXP 0.7.17 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -20,9 +20,13 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
 
+## Flecha de navegación (0.7.17)
+
+Debajo de la flecha solo aparece la distancia. Pasa el ratón por encima para consultar el destino, el tramo y las misiones que puedes recoger cerca.
+
 ## Recoger misiones al pasar por un personaje (0.7.16)
 
-Las 57 guías tienen en cuenta las visitas anticipadas. Si pasas cerca de un personaje conocido que puede darte una misión pendiente de tu recorrido, verás un aviso bajo la flecha. Habla con él para abrir su lista. Con **Automático** activado, RutaXP acepta las misiones que WoW te ofrece para el paso actual y después las que te servirán más adelante en la ruta que sigue tu personaje.
+Las 57 guías tienen en cuenta las visitas anticipadas. Si pasas cerca de un personaje conocido que puede darte una misión pendiente de tu recorrido, puedes ver su nombre al pasar el ratón sobre la flecha. Habla con él para abrir su lista. Con **Automático** activado, RutaXP acepta las misiones que WoW te ofrece para el paso actual y después las que te servirán más adelante en la ruta que sigue tu personaje.
 
 La revisión abarca 1.730 misiones que se aceptan hablando con un NPC. Se pueden adelantar 1.626 y las otras 104 conservan su paso. Al abrir el pergamino puedes ver el motivo, por ejemplo si empieza una escolta o caduca el objeto que te entregan. Si una misión cierra otra que tienes prevista antes, RutaXP respeta el orden de esa cadena. Con un hueco en el diario, tienen prioridad las misiones que vas a hacer primero.
 
@@ -30,7 +34,7 @@ Las recogidas ya hechas cuentan al llegar a su paso. Puedes volver a una granja 
 
 ## Al entrar en Páramos de Poniente (0.7.15)
 
-Al pasar junto al carro de los Cejade, un aviso bajo la flecha indica qué misiones puedes aceptar allí. Habla con el granjero para coger «La reliquia olvidada» y con Verna para «Estofado de los Páramos de Poniente» y «La pobre y vieja Blanchy». La flecha sigue hacia Colina del Centinela. Con el automático activo, RutaXP recoge las misiones que ofrecen mientras haya espacio para adelantarlas.
+Al pasar junto al carro de los Cejade, puedes consultar sus misiones pasando el ratón sobre la flecha. Habla con el granjero para coger «La reliquia olvidada» y con Verna para «Estofado de los Páramos de Poniente» y «La pobre y vieja Blanchy». La flecha sigue hacia Colina del Centinela. Con el automático activo, RutaXP recoge las misiones que ofrecen mientras haya espacio para adelantarlas.
 
 Puedes llevarle la receta a Salma en la primera visita prevista a su granja. El recorrido reserva la recogida del reloj para cuando pases por la casa de los Defias y reúne su entrega con la de la avena.
 
@@ -249,7 +253,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.16.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.17.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.

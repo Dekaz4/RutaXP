@@ -72,8 +72,8 @@ class CapturedNativeHeightTests(unittest.TestCase):
         h.state.height = 0
         self.assertIsNone(h.call("GetWaypointHeightDifference", point))
         h.call("UpdateNavigation")
-        self.assertNotIn("más arriba", h.ns.navigationFrame.distance.text)
-        self.assertNotIn("más abajo", h.ns.navigationFrame.distance.text)
+        self.assertNotIn("más arriba", h.ns.navigationFrame.statusText or "")
+        self.assertNotIn("más abajo", h.ns.navigationFrame.statusText or "")
         _, step, _ = h.call("GetCurrent")
         self.assertFalse(h.call("IsAtWaypoint", step.goals[1]))
         self.assertEqual(h.cursor("waypoint-test"), saved_cursor)
@@ -81,7 +81,8 @@ class CapturedNativeHeightTests(unittest.TestCase):
         h.state.height = -12.5
         self.assertEqual(h.call("GetWaypointHeightDifference", point), 12.5)
         h.call("UpdateNavigation")
-        self.assertIn("más arriba", h.ns.navigationFrame.distance.text)
+        self.assertIn("más arriba", h.ns.navigationFrame.statusText)
+        self.assertRegex(h.ns.navigationFrame.distance.text, r"^\d+(\.\d+)? m$")
         h.state.height = 7
         self.assertEqual(h.call("GetWaypointHeightDifference", point), -7)
         self.assertTrue(h.call("IsAtWaypoint", step.goals[1]))
