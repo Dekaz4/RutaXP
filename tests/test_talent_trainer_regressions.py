@@ -42,11 +42,11 @@ ClassTrainerFrame = CreateFrame()
 ClassTrainerFrame.ScrollBox = {
     ForEachFrame = function(_, callback) for _, row in ipairs(TEST.rows) do callback(row) end end
 }
-function InstallLiveTalents(ns, classToken)
-    local data = ns.Talents.Registry[classToken]
+function InstallLiveTalents(ns, classToken, fixture)
+    local nodes = fixture or ns.Talents.Registry[classToken].nodes
     TEST.liveNodes, TEST.entries = {}, {}
     TEST.unspent, TEST.spent = 1, 0
-    for id, n in pairs(data.nodes) do
+    for id, n in pairs(nodes) do
         TEST.liveNodes[id] = { ID = id, activeRank = 0, currentRank = 0, maxRanks = n.max,
             entryIDs = { n.entry }, activeEntry = { entryID = n.entry } }
         TEST.entries[n.entry] = { spellID = n.spell, overrideName = n.nameEs }
@@ -390,6 +390,75 @@ class ForeverConvictionTests(unittest.TestCase):
         h.live("PALADIN")
         h.state.liveNodes[901234] = h.table({"ID": 0, "activeRank": 0, "currentRank": 0})
         self.assertTrue(h.t.Evaluate().compatible)
+
+
+class ForeverRogueTests(unittest.TestCase):
+    # Visible nodes from the Forever 1.60.1.70888 DB2s, tree 1111.
+    # Node ID, entry ID, spell ID and max rank are independent of TalentBuilds.lua.
+    nodes = (
+        (105708, 130437, 14162, 3), (105709, 130438, 399956, 1), (105710, 130439, 14186, 3),
+        (105711, 130440, 14174, 2), (105712, 130441, 1329328, 1), (105713, 130442, 14113, 5),
+        (105714, 130443, 16513, 5), (105715, 130444, 14177, 1), (105716, 130445, 14128, 2),
+        (105717, 130446, 14168, 2), (105718, 130447, 1329256, 1), (105719, 130448, 1224716, 3),
+        (105720, 130449, 14983, 2), (105721, 130450, 14156, 3), (105722, 130451, 14138, 5),
+        (105723, 130452, 14144, 2), (105724, 130453, 13750, 1), (105726, 130455, 30919, 2),
+        (105727, 130456, 13960, 5), (105728, 130457, 13877, 1), (105730, 130459, 18427, 3),
+        (105732, 130461, 13743, 2), (105733, 130462, 13754, 2), (105735, 130464, 14251, 1),
+        (105736, 130465, 13742, 2), (105737, 130466, 13705, 3), (105738, 130467, 13713, 3),
+        (105739, 130468, 14165, 3), (105740, 130469, 1329284, 5), (105741, 130470, 13732, 2),
+        (105742, 130471, 13741, 3), (105743, 130472, 14183, 1), (105745, 130474, 14082, 2),
+        (105746, 130475, 14185, 1), (105747, 130476, 30894, 2), (105748, 130477, 16511, 1),
+        (105749, 130478, 14079, 3), (105750, 130479, 1329286, 5), (105751, 130480, 13983, 3),
+        (105752, 130481, 14171, 3), (105753, 130482, 13981, 2), (105754, 130483, 14278, 1),
+        (105755, 130484, 13976, 3), (105756, 130485, 13975, 3), (105757, 130486, 1224782, 2),
+        (105759, 130488, 1329265, 2), (105760, 130489, 14057, 5), (105761, 130490, 13958, 3),
+        (108100, 133482, 1310711, 1), (110866, 137864, 1316709, 1), (110867, 137865, 1310728, 2),
+        (113398, 140697, 13712, 5), (113633, 141295, 14179, 5), (113635, 141297, 13715, 2),
+    )
+    names = {105708: "Golpe de gracia", 105737: "Precisión", 105738: "Desvío", 105741: "Golpes eficientes"}
+    invested = {105708: 3, 105738: 3, 105741: 2}
+
+    def setUp(self):
+        h = self.h = TalentTrainerHost()
+        h.state.classToken, h.state.raceToken, h.state.level = "ROGUE", "Human", 17
+        fixture = {node: {"entry": entry, "spell": spell, "max": maximum, "nameEs": self.names.get(node)}
+                   for node, entry, spell, maximum in self.nodes}
+        h.g.InstallLiveTalents(h.ns, "ROGUE", h.table(fixture))
+        for node, rank in self.invested.items():
+            live = h.state.liveNodes[node]
+            live.activeRank = live.currentRank = rank
+        h.state.spent, h.state.unspent = 8, 0
+
+    def test_level_seventeen_combat_rogue_previews_the_ninth_point_until_earned(self):
+        h = self.h
+        panel = h.panel()
+        c = h.t.current
+        self.assertTrue(c.compatible)
+        self.assertEqual(c.build.key, "combat_swords")
+        self.assertEqual(dict(c.activeRanks.items()), self.invested)
+        self.assertEqual((c.staged.done, c.staged.spent, c.staged.unspent), (8, 8, 0))
+        self.assertEqual((c.staged.next.node, c.staged.next.rank, c.staged.next.level), (105737, 1, 18))
+        self.assertIn("CUANDO TENGAS OTRO PUNTO", panel.nextCard.header.text)
+        self.assertIn("Precisión", panel.nextCard.main.text)
+        self.assertIn("1/3", panel.nextCard.main.text)
+        h.state.level, h.state.unspent = 18, 1
+        h.t.Refresh()
+        self.assertIn("SUBE AHORA", panel.nextCard.header.text)
+        self.assertIn("Precisión", panel.nextCard.main.text)
+
+    def test_all_four_selectable_rogue_plans_display_their_level_by_level_guide(self):
+        h = self.h
+        panel = h.panel()
+        self.assertEqual(len(panel.buildBtns), 4)
+        for button in panel.buildBtns.values():
+            with self.subTest(build=button.buildKey):
+                button.scripts.OnMouseUp(button)
+                c = h.t.current
+                self.assertEqual(c.build.key, button.buildKey)
+                self.assertTrue(c.compatible)
+                self.assertIsNotNone(c.staged.next)
+                self.assertEqual(sum(row.shown for row in panel.rows.values()), 51)
+                self.assertIn("10–60", panel.tabTalentsBtn.label.text)
 
 
 class TrainerRegressionTests(unittest.TestCase):

@@ -8,6 +8,7 @@ const { TABLES, treeFacts } = require('../.sources/SendaFH/tools/lib/talents/bui
 
 const BUILD = '1.60.1.70374';
 const PALADIN_BUILD = '1.60.1.70862';
+const ROGUE_BUILD = '1.60.1.70888';
 const OUT_FILE = path.resolve(__dirname, '../RutaXP/TalentBuilds.lua');
 
 const CLASS_META = {
@@ -37,7 +38,7 @@ const CLASS_META = {
     nameEs: 'Pícaro',
     specs: ['Assassination', 'Combat', 'Subtlety'],
     specsEs: ['Asesinato', 'Combate', 'Sutileza'],
-    summary: 'Combate con espadas o mazas es la vía más constante y potente para subir de nivel, con Aluvión de acero contra varios enemigos. Asesinato destaca con dagas y venenos (Mutilar), mientras que Sutileza domina el sigilo y el mundo abierto.',
+    summary: 'Combate combina espadas o mazas con Estocada y Ráfaga con espada. Asesinato usa dos dagas, venenos y Mutilar. Sutileza combina sigilo, Hemorragia y Marca de muerte.',
   },
   PRIEST: {
     skillLine: 613,
@@ -106,6 +107,15 @@ function expandSeq(seq, defaultTree, label) {
   }
   return out;
 }
+
+// Both Combat builds unlock Riposte at level 20, Blade Flurry at 30 and Adrenaline Rush at 40.
+const ROGUE_COMBAT_LEVELING = [
+  ['Efficient Strikes', 2], ['Coup de Grace', 3], ['Deflection', 3],
+  ['Precision', 2], ['Riposte', 1], ['Precision', 1], ['Lightning Reflexes', 3],
+  ['Weapon Expertise', 2], ['Aggression', 2], ['Flawless Execution', 1],
+  ['Blade Flurry', 1], ['Dual Wield Specialization', 2], ['Hack and Slash', 5],
+  ['Flash of Steel', 2], ['Adrenaline Rush', 1],
+];
 
 const PLANS = {
   WARRIOR: [
@@ -588,35 +598,26 @@ const PLANS = {
       split: '20/31/0',
       stats: 'Índice de golpe > Agilidad > Fuerza / Poder de ataque > Crítico > Aguante',
       weapons: 'Arma lenta y pesada en mano derecha (espada o maza 2.60+) y arma muy rápida en mano izquierda (1.40–1.80)',
-      skills: 'Golpe siniestro, Hacer picadillo, Eviscerar, Riposte, Aluvión de acero, Subidón de adrenalina y Patada',
-      rotation: 'Golpe siniestro hasta 2 puntos -> Hacer picadillo (manténlo activo) -> Riposte siempre que pares un golpe -> Eviscerar con 4-5 puntos.',
+      skills: 'Golpe siniestro, Hacer picadillo, Eviscerar, Estocada, Ráfaga con espada y Subidón de adrenalina',
+      rotation: 'Usa Golpe siniestro para generar puntos, mantén Hacer picadillo y remata con Eviscerar. Usa Estocada cuando pares un ataque.',
       notes: {
-        10: 'Golpe siniestro mejorado y Reflejos del relámpago hacen tu rotación más fluida y esquivas más ataques.',
-        20: 'Riposte (nivel 20) es un golpe baratísimo de energía que además desarma al enemigo tras parar un ataque.',
-        30: 'Aluvión de acero (Blade Flurry) golpea a un segundo enemigo cercano y aumenta un 20% tu velocidad de ataque.',
-        40: 'Subidón de adrenalina duplica tu regeneración de energía para derretir jefes o grupos difíciles.',
-        50: 'Los 20 puntos en Asesinato suman Malicia, Crueldad y Letalidad para que tus Golpes siniestros sean devastadores.',
+        10: 'Golpes eficientes reduce el coste de Golpe siniestro.',
+        18: 'Con Desvío completo, invierte dos puntos en Precisión para abrir la tercera fila.',
+        20: 'Estocada se activa después de parar un ataque.',
+        30: 'Usa Ráfaga con espada al luchar contra dos enemigos cercanos.',
+        40: 'Activa Subidón de adrenalina cuando puedas mantenerte atacando.',
+        50: 'Crueldad ayuda a recuperar puntos de combo después de un remate.',
       },
       seq: [
-        ['Improved Sinister Strike', 2, 'Combat'],
-        ['Improved Eviscerate', 3, 'Combat'],
-        ['Deflection', 3, 'Combat'],
-        ['Precision', 3, 'Combat'],
-        ['Riposte', 1, 'Combat'],
-        ['Lightning Reflexes', 3, 'Combat'],
-        ['Dual Wield Specialization', 5, 'Combat'],
-        ['Blade Flurry', 1, 'Combat'],
-        ['Hack and Slash', 5, 'Combat'],
-        ['Weapon Expertise', 2, 'Combat'],
-        ['Aggression', 2, 'Combat'],
-        ['Adrenaline Rush', 1, 'Combat'],
+        ...ROGUE_COMBAT_LEVELING,
         ['Malice', 5, 'Assassination'],
         ['Remorseless Attacks', 2, 'Assassination'],
         ['Ruthlessness', 3, 'Assassination'],
-        ['Murder', 2, 'Assassination'],
-        ['Improved Slice and Dice', 2, 'Assassination'],
-        ['Relentless Strikes', 1, 'Assassination'],
-        ['Lethality', 5, 'Assassination'],
+        ['Lethality', 2, 'Assassination'],
+        ['Improved Slice and Dice', 3, 'Assassination'],
+        ['Cold Blood', 1, 'Assassination'],
+        ['Vigor', 2, 'Assassination'],
+        ['Vile Poisons', 2, 'Assassination'],
       ],
     },
     {
@@ -627,33 +628,37 @@ const PLANS = {
       split: '31/20/0',
       stats: 'Agilidad > Crítico > Poder de ataque > Índice de golpe > Aguante',
       weapons: 'Dos dagas con buen daño por segundo y Veneno instantáneo / mortal siempre aplicado',
-      skills: 'Mutilar, Venom, Hacer picadillo, Envenenar / Eviscerar, Sangre fría y Golpe en los riñones',
-      rotation: 'Aplica venenos en ambas dagas -> Abre en sigilo -> Mutilar (genera 2 puntos de combo) -> Hacer picadillo -> Sangre fría + Eviscerar.',
+      skills: 'Puñalada, Hacer picadillo, Eviscerar, Sangre fría, Veneno y Mutilar',
+      rotation: 'Abre desde sigilo. Usa Puñalada cuando puedas colocarte detrás y Golpe siniestro de frente. Al aprender Mutilar, úsalo con dos dagas para generar puntos de combo.',
       notes: {
-        10: 'Ataques despiadados te da +40% de crítico tras matar a un enemigo: perfecto para encadenar misiones.',
-        20: 'Golpes incansables recupera energía al usar remates y Venenos viles potencia tus dagas.',
-        30: 'Mutilar ataca con ambas dagas a la vez y gana daño extra contra objetivos envenenados.',
-        40: 'Venom y Sellar destino te permiten llenar los 5 puntos de combo casi al instante.',
+        10: 'Ataques implacables favorece encadenar enemigos mientras subes de nivel.',
+        20: 'Con los cinco rangos de Maldad puedes aprender Letalidad.',
+        30: 'Veneno abre el acceso a Mutilar al llegar al final de Asesinato.',
+        40: 'Mutilar ataca con las dos dagas.',
       },
       seq: [
         ['Remorseless Attacks', 2, 'Assassination'],
         ['Malice', 5, 'Assassination'],
         ['Ruthlessness', 3, 'Assassination'],
-        ['Murder', 2, 'Assassination'],
-        ['Improved Slice and Dice', 3, 'Assassination'],
-        ['Relentless Strikes', 1, 'Assassination'],
-        ['Lethality', 5, 'Assassination'],
+        ['Lethality', 2, 'Assassination'],
+        ['Vigor', 2, 'Assassination'],
+        ['Blood Splatter', 1, 'Assassination'],
         ['Cold Blood', 1, 'Assassination'],
-        ['Vile Poisons', 2, 'Assassination'],
-        ['Mutilate', 1, 'Assassination'],
-        ['Seal Fate', 5, 'Assassination'],
+        ['Improved Poisons', 4, 'Assassination'],
         ['Venom', 1, 'Assassination'],
-        ['Lightning Reflexes', 5, 'Combat'],
+        ['Relentless Strikes', 4, 'Assassination'],
+        ['Seal Fate', 3, 'Assassination'],
+        ['Relentless Strikes', 1, 'Assassination'],
+        ['Improved Poisons', 1, 'Assassination'],
+        ['Mutilate', 1, 'Assassination'],
+        ['Efficient Strikes', 2, 'Combat'],
+        ['Coup de Grace', 3, 'Combat'],
         ['Puncturing Wounds', 3, 'Combat'],
         ['Precision', 3, 'Combat'],
-        ['Endurance', 2, 'Combat'],
-        ['Improved Sprint', 2, 'Combat'],
-        ['Dual Wield Specialization', 5, 'Combat'],
+        ['Lightning Reflexes', 4, 'Combat'],
+        ['Weapon Expertise', 2, 'Combat'],
+        ['Flawless Execution', 1, 'Combat'],
+        ['Aggression', 2, 'Combat'],
       ],
     },
     {
@@ -661,41 +666,43 @@ const PLANS = {
       spec: 'Subtlety',
       title: 'Sutileza — Sigilo, Hemorragia y PvP',
       role: 'Sigilo · Mundo Abierto y PvP',
-      split: '21/0/30',
+      split: '20/0/31',
       stats: 'Agilidad > Aguante > Crítico > Poder de ataque',
       weapons: 'Arma principal muy lenta (espada/maza/puño) para Hemorragia o daga para Emboscada',
-      skills: 'Hemorragia, Golpe fantasmal, Golpe bajo, Preparación, Ceguera, Esfumarse y Sangre fría',
-      rotation: 'Sigilo -> Golpe bajo / Emboscada -> Hemorragia -> Golpe fantasmal para esquivar -> Eviscerar.',
+      skills: 'Hemorragia, Golpe fantasmal, Golpe bajo, Preparación, Esfumarse, Marca de muerte y Sangre fría',
+      rotation: 'Abre con Golpe bajo o Emboscada. Usa Golpe fantasmal para ganar esquiva, Hemorragia para generar puntos y Eviscerar como remate.',
       notes: {
-        10: 'Camuflaje y Maestro del engaño te permiten moverte en sigilo a toda velocidad sin ser detectado.',
-        20: 'Golpe fantasmal te da +15% de esquiva durante 7 segundos: excelente para batirse en duelo con élites.',
-        30: 'Hemorragia y Preparación reinician todos tus tiempos de reutilización de supervivencia.',
-        50: 'Sangre fría y Letalidad en Asesinato aseguran remates críticos devastadores.',
+        10: 'Maestro de la decepción dificulta que te detecten en sigilo.',
+        20: 'Completa Espadas dentadas para desbloquear Hemorragia más adelante.',
+        30: 'Hemorragia genera puntos de combo. Al siguiente nivel puedes aprender Preparación.',
+        40: 'Preparación es el requisito para Marca de muerte.',
       },
       seq: [
-        ['Camouflage', 5, 'Subtlety'],
         ['Master of Deception', 3, 'Subtlety'],
         ['Opportunity', 2, 'Subtlety'],
-        ['Elusiveness', 2, 'Subtlety'],
+        ['Camouflage', 3, 'Subtlety'],
         ['Dirty Tricks', 2, 'Subtlety'],
-        ['Initiative', 3, 'Subtlety'],
-        ['Ghostly Strike', 1, 'Subtlety'],
-        ['Setup', 2, 'Subtlety'],
         ['Serrated Blades', 3, 'Subtlety'],
-        ['Heightened Senses', 2, 'Subtlety'],
+        ['Initiative', 2, 'Subtlety'],
+        ['Ghostly Strike', 1, 'Subtlety'],
+        ['Elusiveness', 2, 'Subtlety'],
+        ['Dirty Deeds', 2, 'Subtlety'],
         ['Hemorrhage', 1, 'Subtlety'],
         ['Preparation', 1, 'Subtlety'],
-        ['Dirty Deeds', 2, 'Subtlety'],
-        ['Cutthroat', 1, 'Subtlety'],
+        ['Quick Getaway', 2, 'Subtlety'],
+        ['Initiative', 1, 'Subtlety'],
+        ['Boot Knife', 5, 'Subtlety'],
+        ['Death Mark', 1, 'Subtlety'],
         ['Malice', 5, 'Assassination'],
         ['Remorseless Attacks', 2, 'Assassination'],
         ['Ruthlessness', 3, 'Assassination'],
-        ['Murder', 2, 'Assassination'],
-        ['Relentless Strikes', 1, 'Assassination'],
-        ['Lethality', 5, 'Assassination'],
-        ['Improved Eviscerate', 2, 'Combat'],
+        ['Lethality', 2, 'Assassination'],
+        ['Vigor', 2, 'Assassination'],
+        ['Blood Splatter', 1, 'Assassination'],
         ['Cold Blood', 1, 'Assassination'],
-      ].slice(0, 0), // replaced below with pure 21/0/30
+        ['Improved Slice and Dice', 3, 'Assassination'],
+        ['Vile Poisons', 1, 'Assassination'],
+      ],
     },
     {
       key: 'combat_ghostly',
@@ -705,32 +712,22 @@ const PLANS = {
       split: '0/31/20',
       stats: 'Agilidad > Índice de golpe > Fuerza > Aguante',
       weapons: 'Espadas o mazas de 1 mano',
-      skills: 'Riposte, Golpe fantasmal, Aluvión de acero, Subidón de adrenalina y Esfumarse',
-      rotation: 'Alterna Golpe fantasmal y Riposte para tener una esquiva y parada altísimas mientras limpias campamentos.',
+      skills: 'Estocada, Golpe fantasmal, Ráfaga con espada, Subidón de adrenalina y Esfumarse',
+      rotation: 'Usa Estocada tras una parada. Cuando aprendas Golpe fantasmal, úsalo para ganar esquiva mientras luchas cuerpo a cuerpo.',
       notes: {
-        10: 'Combina toda la potencia de Combate (Riposte, Aluvión de acero y Subidón de adrenalina) con Camuflaje y Golpe fantasmal.',
+        10: 'Sube primero por Combate hasta Subidón de adrenalina. Después invierte los veinte puntos restantes en Sutileza.',
       },
       seq: [
-        ['Improved Sinister Strike', 2, 'Combat'],
-        ['Improved Eviscerate', 3, 'Combat'],
-        ['Deflection', 3, 'Combat'],
-        ['Precision', 3, 'Combat'],
-        ['Riposte', 1, 'Combat'],
-        ['Lightning Reflexes', 3, 'Combat'],
-        ['Dual Wield Specialization', 5, 'Combat'],
-        ['Blade Flurry', 1, 'Combat'],
-        ['Hack and Slash', 5, 'Combat'],
-        ['Weapon Expertise', 2, 'Combat'],
-        ['Aggression', 2, 'Combat'],
-        ['Adrenaline Rush', 1, 'Combat'],
-        ['Camouflage', 5, 'Subtlety'],
+        ...ROGUE_COMBAT_LEVELING,
         ['Master of Deception', 3, 'Subtlety'],
         ['Opportunity', 2, 'Subtlety'],
-        ['Elusiveness', 2, 'Subtlety'],
-        ['Setup', 3, 'Subtlety'],
+        ['Camouflage', 3, 'Subtlety'],
+        ['Dirty Tricks', 2, 'Subtlety'],
+        ['Serrated Blades', 3, 'Subtlety'],
+        ['Initiative', 2, 'Subtlety'],
         ['Ghostly Strike', 1, 'Subtlety'],
-        ['Initiative', 3, 'Subtlety'],
-        ['Serrated Blades', 1, 'Subtlety'],
+        ['Elusiveness', 2, 'Subtlety'],
+        ['Quick Getaway', 2, 'Subtlety'],
       ],
     },
   ],
@@ -1471,33 +1468,6 @@ const PLANS = {
   ],
 };
 
-// Fix the 3 sequences that had placeholder/slice(0,0):
-PLANS.ROGUE[2].seq = [
-  ['Camouflage', 5, 'Subtlety'],
-  ['Master of Deception', 3, 'Subtlety'],
-  ['Opportunity', 2, 'Subtlety'],
-  ['Elusiveness', 2, 'Subtlety'],
-  ['Dirty Tricks', 2, 'Subtlety'],
-  ['Setup', 1, 'Subtlety'],
-  ['Initiative', 3, 'Subtlety'],
-  ['Ghostly Strike', 1, 'Subtlety'],
-  ['Improved Distract', 1, 'Subtlety'],
-  ['Serrated Blades', 3, 'Subtlety'],
-  ['Heightened Senses', 2, 'Subtlety'],
-  ['Hemorrhage', 1, 'Subtlety'],
-  ['Preparation', 1, 'Subtlety'],
-  ['Dirty Deeds', 2, 'Subtlety'],
-  ['Premeditation', 1, 'Subtlety'],
-  ['Malice', 5, 'Assassination'],
-  ['Remorseless Attacks', 2, 'Assassination'],
-  ['Ruthlessness', 3, 'Assassination'],
-  ['Murder', 2, 'Assassination'],
-  ['Improved Slice and Dice', 3, 'Assassination'],
-  ['Relentless Strikes', 1, 'Assassination'],
-  ['Lethality', 4, 'Assassination'],
-  ['Cold Blood', 1, 'Assassination'],
-];
-
 PLANS.MAGE[2].seq = [
   ['Improved Fireball', 5, 'Fire'],
   ['Ignite', 5, 'Fire'],
@@ -1861,9 +1831,12 @@ async function main() {
   const buildMod = require('../.sources/SendaFH/tools/lib/talents/build');
   Object.assign(buildMod.CLASSES, CLASS_META);
   const baseData = await readTalentData(BUILD);
-  const paladinData = await readTalentData(PALADIN_BUILD);
+  const reviewedData = {
+    PALADIN: await readTalentData(PALADIN_BUILD),
+    ROGUE: await readTalentData(ROGUE_BUILD),
+  };
   const lines = [
-    `-- Auto-generated by tools/build_talents.js from Forever DB2: Paladin ${PALADIN_BUILD}, other classes ${BUILD}.`,
+    `-- Auto-generated by tools/build_talents.js from Forever DB2: Rogue ${ROGUE_BUILD}, Paladin ${PALADIN_BUILD}, other classes ${BUILD}.`,
     'local _, ns = ...',
     'ns.Talents = ns.Talents or {}',
     'local T = ns.Talents',
@@ -1880,7 +1853,7 @@ async function main() {
   let totalPicks = 0;
 
   for (const [cls, meta] of Object.entries(CLASS_META)) {
-    const { tables, tdEs, snEs, entries } = cls === 'PALADIN' ? paladinData : baseData;
+    const { tables, tdEs, snEs, entries } = reviewedData[cls] || baseData;
     const facts = treeFacts(tables, cls);
     // Filter out off-screen deprecated nodes (y >= 10000) and reverse edges (from.y > to.y)
     for (const id of Object.keys(facts.nodes).map(Number)) {
