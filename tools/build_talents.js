@@ -7,7 +7,7 @@ const { loadTables } = require('../.sources/SendaFH/tools/lib/professions/tables
 const { TABLES, treeFacts } = require('../.sources/SendaFH/tools/lib/talents/build');
 
 const BUILD = '1.60.1.70374';
-const CACHE_DIR = path.resolve(__dirname, '../.sources/SendaFH/data/sources/wago', BUILD);
+const PALADIN_BUILD = '1.60.1.70862';
 const OUT_FILE = path.resolve(__dirname, '../RutaXP/TalentBuilds.lua');
 
 const CLASS_META = {
@@ -279,11 +279,11 @@ const PLANS = {
       skills: 'Sello de orden, Sentencia, Golpe sagrado, Bendición de poderío, Bendición de sabiduría y Destello de Luz',
       rotation: 'Activa Sello de orden -> Sentencia al objetivo -> Reaplica Sello de orden -> Usa Golpe sagrado cuando tengas maná de sobra.',
       notes: {
-        10: 'Bendición reduce el coste de maná de tus sellos y sentencias para que no tengas que beber entre combates.',
+        10: 'Oración reduce el coste de maná de tus sellos y sentencias.',
         20: 'Sello de orden (nivel 20) es el talento estrella para armas de 2 manos: tómalo en cuanto se desbloquee.',
         30: 'Venganza acumula daño físico y sagrado tras cada golpe crítico.',
-        40: 'Twist of Light y Arrepentimiento te dan control y ráfagas de daño al nivel 40.',
-        50: 'Los puntos en Sagrado (Fuerza divina y Sellos mejorados) aumentan aún más tu daño base.',
+        40: 'Cólera desellada requiere Arrepentimiento. Acumula cargas con un sello y cambia de sello para aprovecharlas.',
+        50: 'Completa Sellos mejorados tras invertir cinco puntos en Fuerza divina.',
       },
       seq: [
         ['Benediction', 5, 'Retribution'],
@@ -291,21 +291,21 @@ const PLANS = {
         ['Conviction', 3, 'Retribution'],
         ['Seal of Command', 1, 'Retribution'],
         ['Sanctified Judgement', 3, 'Retribution'],
-        ['Conviction', 2, 'Retribution'],
-        ['Vindication', 3, 'Retribution'],
-        ['Sacred Arbiter', 1, 'Retribution'],
-        ['Vengeance', 3, 'Retribution'],
+        ['Vindication', 1, 'Retribution'],
         ['Two-Handed Weapon Specialization', 3, 'Retribution'],
-        ['Pursuit of Justice', 2, 'Retribution'],
-        ['Holy Conduit', 2, 'Retribution'],
-        ['Twist of Light', 1, 'Retribution'],
-        ['Instrument of Law', 2, 'Retribution'],
-        ['Divine Strength', 5, 'Holy'],
-        ['Improved Seals', 3, 'Holy'],
-        ['Healing Light', 2, 'Holy'],
-        ['Deflection', 5, 'Retribution'],
+        ['Sacred Arbiter', 1, 'Retribution'],
+        ['Pursuit of Justice', 1, 'Retribution'],
+        ['Vengeance', 3, 'Retribution'],
         ['Repentance', 1, 'Retribution'],
-        ['Eye for an Eye', 2, 'Retribution'],
+        ['Pursuit of Justice', 1, 'Retribution'],
+        ['Champion of the Light', 5, 'Retribution'],
+        ['Unsealed Wrath', 1, 'Retribution'],
+        ['Divine Strength', 5, 'Holy'],
+        ['Improved Seals', 5, 'Holy'],
+        ['Vindication', 2, 'Retribution'],
+        ['Deflection', 5, 'Retribution'],
+        ['Unyielding Faith', 2, 'Retribution'],
+        ['Eye for an Eye', 1, 'Retribution'],
       ],
     },
     {
@@ -319,31 +319,34 @@ const PLANS = {
       skills: 'Furia justa, Escudo sagrado, Consagración / Sello de furia, Bendición de santuario y Martillo de justicia',
       rotation: 'Mantén Furia justa activa -> Escudo sagrado antes de recibir golpes -> Sello de furia / Sentencia -> Golpe sagrado para amenaza.',
       notes: {
-        10: 'Empieza con Reducto: bloquear se activa constantemente y desbloquea Especialización en escudo.',
-        20: 'Sello de furia mejorado y Furia justa mejorada inician el ciclo de maná y amenaza de Forever.',
-        30: 'Baluarte del templario te da un escudo de absorción que escala con tu salud máxima.',
-        40: 'Escudo sagrado devuelve daño sagrado cada vez que bloqueas: ideal para juntar varios enemigos a la vez.',
-        50: 'Los últimos puntos en Sagrado suman Fuerza divina y Sellos mejorados.',
+        10: 'Baluarte desbloquea Especialización en escudo.',
+        20: 'Elige Baluarte de templario para desbloquear Juicio presto más adelante.',
+        30: 'Activa Escudo sagrado al tanquear y tendrás acceso a Juramento de escudo más adelante.',
+        40: 'Con Juramento de escudo, usa Golpe sagrado para activar tus efectos de bloqueo.',
+        50: 'Los últimos diez puntos se reparten entre Fuerza divina y Sellos mejorados.',
       },
       seq: [
         ['Redoubt', 5, 'Protection'],
         ['Precision', 3, 'Protection'],
-        ['Anticipation', 2, 'Protection'],
-        ['Improved Seal of Fury', 1, 'Protection'],
-        ['Improved Righteous Fury', 3, 'Protection'],
-        ['Shield Specialization', 3, 'Protection'],
         ['Sacred Duty', 2, 'Protection'],
-        ['Swift Judgement', 1, 'Protection'],
-        ['Anticipation', 3, 'Protection'],
         ["Templar's Bulwark", 1, 'Protection'],
-        ['One-Handed Weapon Specialization', 3, 'Protection'],
-        ['Iron Creed', 5, 'Protection'],
+        ['Shield Specialization', 2, 'Protection'],
+        ['Improved Hammer of Justice', 2, 'Protection'],
+        ['Improved Righteous Fury', 3, 'Protection'],
+        ['Swift Judgement', 1, 'Protection'],
+        ['Toughness', 1, 'Protection'],
         ['Holy Shield', 1, 'Protection'],
-        ['Toughness', 5, 'Protection'],
-        ['Improved Hammer of Justice', 3, 'Protection'],
+        ['Reckoning', 4, 'Protection'],
+        ['Iron Creed', 3, 'Protection'],
+        ['Reckoning', 1, 'Protection'],
+        ['Toughness', 1, 'Protection'],
+        ['Shieldsworn', 1, 'Protection'],
+        ['Anticipation', 5, 'Protection'],
+        ['Toughness', 3, 'Protection'],
+        ['Improved Hammer of Justice', 1, 'Protection'],
+        ["Guardian's Favor", 1, 'Protection'],
         ['Divine Strength', 5, 'Holy'],
-        ['Improved Seals', 3, 'Holy'],
-        ['Healing Light', 2, 'Holy'],
+        ['Improved Seals', 5, 'Holy'],
       ],
     },
     {
@@ -357,32 +360,35 @@ const PLANS = {
       skills: 'Destello de Luz, Luz Sagrada, Choque Sagrado, Favor divino, Bendición de sabiduría y Purificar',
       rotation: 'En grupo: Destello de Luz como cura eficiente y Choque Sagrado para emergencias. Solo: Sello + Sentencia + Choque Sagrado ofensivo.',
       notes: {
-        10: 'Intelecto divino y Sellos mejorados te dan maná amplio sin perder daño al misionar.',
-        20: 'Reverencia mantiene regeneración de maná mientras lanzas conjuros y abre paso a Iluminación.',
-        30: 'Iluminación devuelve el maná de tus curas críticas: es el motor infinito del Paladín Sagrado.',
-        40: 'Choque Sagrado y Vigilia de la Luz convierten tus curas instantáneas en sanación en área para el grupo.',
-        50: 'Los 20 puntos finales en Reprensión desbloquean Sello de orden para misionar cómodamente.',
+        10: 'Empieza con Enfoque espiritual para poder curar incluso mientras recibes golpes.',
+        20: 'Tras completar Reverencia, combina Favor divino con los puntos de Iluminación.',
+        30: 'Choque Sagrado te da una cura instantánea y abre Luz sin límites.',
+        40: 'Con Choque Sagrado aprendido ya puedes elegir Vigilia de la Luz.',
+        50: 'En Reprensión, completa Convicción y aprende Sello de orden para misionar.',
       },
       seq: [
-        ['Divine Intellect', 5, 'Holy'],
-        ['Improved Seals', 3, 'Holy'],
-        ['Healing Light', 2, 'Holy'],
-        ['Reverence', 3, 'Holy'],
-        ['Healing Light', 1, 'Holy'],
-        ['Spiritual Focus', 2, 'Holy'],
-        ['Illumination', 5, 'Holy'],
+        ['Spiritual Focus', 5, 'Holy'],
+        ['Healing Light', 3, 'Holy'],
+        ['Reverence', 2, 'Holy'],
         ['Divine Favor', 1, 'Holy'],
-        ['Holy Shock', 1, 'Holy'],
+        ['Illumination', 4, 'Holy'],
         ['Infusion of Light', 2, 'Holy'],
+        ['Illumination', 1, 'Holy'],
+        ['Oath of Light', 1, 'Holy'],
+        ['Holy Conduit', 1, 'Holy'],
+        ['Holy Shock', 1, 'Holy'],
+        ['Boundless Light', 2, 'Holy'],
+        ['Divine Precision', 2, 'Holy'],
         ['Holy Power', 5, 'Holy'],
         ["Light's Vigil", 1, 'Holy'],
         ['Benediction', 5, 'Retribution'],
         ['Improved Judgement', 2, 'Retribution'],
-        ['Conviction', 5, 'Retribution'],
+        ['Conviction', 3, 'Retribution'],
         ['Seal of Command', 1, 'Retribution'],
         ['Sanctified Judgement', 3, 'Retribution'],
-        ['Holy Conduit', 2, 'Retribution'],
         ['Pursuit of Justice', 2, 'Retribution'],
+        ['Two-Handed Weapon Specialization', 3, 'Retribution'],
+        ['Sacred Arbiter', 1, 'Retribution'],
       ],
     },
     {
@@ -397,28 +403,31 @@ const PLANS = {
       rotation: 'Controla con Arrepentimiento y Martillo de justicia mejorado -> Descarga Sello de orden con Venganza activa.',
       notes: {
         10: 'Sube primero hasta Sello de orden y Persecución de la justicia (+velocidad de movimiento) en Reprensión.',
-        30: 'Completa Arrepentimiento y Twist of Light para máximo potencial ofensivo.',
-        45: 'Invierte 20 puntos en Protección para obtener Precisión, Martillo de justicia cada menos tiempo y Reducto.',
+        30: 'Elige Arrepentimiento para controlar al objetivo y desbloquear Cólera desellada al nivel 40.',
+        45: 'Los 20 puntos en Protección dan acceso a Precisión, Baluarte y Martillo de justicia mejorado.',
       },
       seq: [
         ['Benediction', 5, 'Retribution'],
         ['Improved Judgement', 2, 'Retribution'],
-        ['Conviction', 5, 'Retribution'],
+        ['Conviction', 3, 'Retribution'],
         ['Seal of Command', 1, 'Retribution'],
         ['Pursuit of Justice', 2, 'Retribution'],
-        ['Sanctified Judgement', 3, 'Retribution'],
-        ['Eye for an Eye', 2, 'Retribution'],
-        ['Vengeance', 3, 'Retribution'],
+        ['Sanctified Judgement', 2, 'Retribution'],
         ['Two-Handed Weapon Specialization', 3, 'Retribution'],
+        ['Sanctified Judgement', 1, 'Retribution'],
+        ['Eye for an Eye', 1, 'Retribution'],
         ['Repentance', 1, 'Retribution'],
-        ['Champion of the Light', 3, 'Retribution'],
-        ['Twist of Light', 1, 'Retribution'],
+        ['Vengeance', 3, 'Retribution'],
+        ['Eye for an Eye', 1, 'Retribution'],
+        ['Champion of the Light', 5, 'Retribution'],
+        ['Unsealed Wrath', 1, 'Retribution'],
         ['Redoubt', 5, 'Protection'],
-        ['Toughness', 5, 'Protection'],
         ['Precision', 3, 'Protection'],
-        ["Guardian's Favor", 2, 'Protection'],
-        ['Improved Righteous Fury', 2, 'Protection'],
+        ['Sacred Duty', 2, 'Protection'],
         ['Improved Hammer of Justice', 3, 'Protection'],
+        ['Shield Specialization', 2, 'Protection'],
+        ["Guardian's Favor", 2, 'Protection'],
+        ['Toughness', 3, 'Protection'],
       ],
     },
   ],
@@ -1678,7 +1687,7 @@ const TRAINER_SPELLS = {
     [20, 'Exorcismo (Rango 1) y Destello de Luz (Rango 1)', 'must', 'Destello de Luz es tu cura rápida y barata'],
     [22, 'Sello de justicia', 'save', 'Opcional; puedes ahorrar oro para la montura'],
     [24, 'Bendición de poderío (Rango 3) y Sentencia de sabiduría', 'must', 'Mejora directa de daño y maná'],
-    [26, 'Bendición de salvación', 'good', 'Útil en grupo para reducir amenaza'],
+    [26, 'Sello de furia (Rango 3)', 'good', 'Mejora tu sello al tanquear en grupo'],
     [28, 'Aura de concentración', 'good', 'Evita retrocesos al curar'],
     [30, 'Intervención divina y Sello de Luz', 'must', 'Sello de Luz te cura en cada golpe cuerpo a cuerpo'],
     [34, 'Escudo divino (Pompa)', 'must', 'Inmunidad total durante 10–12 segundos'],
@@ -1830,22 +1839,31 @@ function luaStr(s) {
   return `"${String(s || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n')}"`;
 }
 
-async function main() {
-  const buildMod = require('../.sources/SendaFH/tools/lib/talents/build');
-  Object.assign(buildMod.CLASSES, CLASS_META);
+// DB2 CSV snapshots from https://wago.tools/db2/<table>/csv?build=<build>.
+// The two localized files use &locale=esES. Keep each class on its reviewed
+// build until its plans have also been checked against a newer tree.
+async function readTalentData(build) {
+  const sourcesDir = path.resolve(__dirname, '../.sources/SendaFH/data/sources');
   const { tables } = await loadTables({
-    sourcesDir: path.resolve(__dirname, '../.sources/SendaFH/data/sources'),
-    build: BUILD,
+    sourcesDir,
+    build,
     offline: true,
     tables: TABLES,
   });
-
-  const tdEs = new Map(parseCsv(fs.readFileSync(path.join(CACHE_DIR, 'TraitDefinition.esES.csv'), 'utf8')).map(r => [Number(r.ID), r]));
-  const snEs = new Map(parseCsv(fs.readFileSync(path.join(CACHE_DIR, 'SpellName.esES.csv'), 'utf8')).map(r => [Number(r.ID), r.Name_lang]));
+  const cacheDir = path.join(sourcesDir, 'wago', build);
+  const tdEs = new Map(parseCsv(fs.readFileSync(path.join(cacheDir, 'TraitDefinition.esES.csv'), 'utf8')).map(r => [Number(r.ID), r]));
+  const snEs = new Map(parseCsv(fs.readFileSync(path.join(cacheDir, 'SpellName.esES.csv'), 'utf8')).map(r => [Number(r.ID), r.Name_lang]));
   const entries = new Map(tables.TraitNodeEntry.map(r => [Number(r.ID), r]));
+  return { tables, tdEs, snEs, entries };
+}
 
+async function main() {
+  const buildMod = require('../.sources/SendaFH/tools/lib/talents/build');
+  Object.assign(buildMod.CLASSES, CLASS_META);
+  const baseData = await readTalentData(BUILD);
+  const paladinData = await readTalentData(PALADIN_BUILD);
   const lines = [
-    '-- Auto-generated by tools/build_talents.js from Forever 1.60.1.70374 trait tables.',
+    `-- Auto-generated by tools/build_talents.js from Forever DB2: Paladin ${PALADIN_BUILD}, other classes ${BUILD}.`,
     'local _, ns = ...',
     'ns.Talents = ns.Talents or {}',
     'local T = ns.Talents',
@@ -1862,6 +1880,7 @@ async function main() {
   let totalPicks = 0;
 
   for (const [cls, meta] of Object.entries(CLASS_META)) {
+    const { tables, tdEs, snEs, entries } = cls === 'PALADIN' ? paladinData : baseData;
     const facts = treeFacts(tables, cls);
     // Filter out off-screen deprecated nodes (y >= 10000) and reverse edges (from.y > to.y)
     for (const id of Object.keys(facts.nodes).map(Number)) {
@@ -1884,13 +1903,7 @@ async function main() {
     const classPlans = PLANS[cls];
     const resolvedBuilds = [];
     for (const plan of classPlans) {
-      let expanded;
-      try {
-        expanded = expandSeq(plan.seq, plan.spec, `${cls}/${plan.key}`);
-      } catch (e) {
-        console.error(e.message);
-        continue;
-      }
+      const expanded = expandSeq(plan.seq, plan.spec, `${cls}/${plan.key}`);
       const ranks = {};
       const picks = [];
       const spent = (g) => (facts.groups[g] || []).reduce((s, id) => s + (ranks[id] || 0), 0);

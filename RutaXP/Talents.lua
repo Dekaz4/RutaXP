@@ -109,9 +109,8 @@ local function clientGrantedPoints(config, treeID)
     if type(list) ~= "table" or not list[1] then return nil end
     local total
     for _, c in ipairs(list) do
-        if type(c) == "table" and type(c.quantity) == "number" then
-            total = (total or 0) + c.quantity + (type(c.spent) == "number" and c.spent or 0)
-        end
+        if type(c) ~= "table" or type(c.quantity) ~= "number" or type(c.spent) ~= "number" then return nil end
+        total = (total or 0) + c.quantity + c.spent
     end
     return total
 end
@@ -120,59 +119,93 @@ function T.ReadLive(data)
     if not data then return nil, "noclass" end
     local config = C_ClassTalents and safe(C_ClassTalents.GetActiveConfigID)
     if type(config) ~= "number" or config <= 0 then return nil, "noconfig" end
-    local ids = C_Traits and safe(C_Traits.GetTreeNodes, data.tree)
+    local tree = data.tree
+    if C_Traits and C_Traits.GetConfigInfo then
+        local info = safe(C_Traits.GetConfigInfo, config)
+        local trees = info and info.treeIDs
+        if type(trees) ~= "table" or #trees == 0 then return nil, "notree" end
+        if #trees == 1 then
+            tree = trees[1]
+        else
+            tree = nil
+            for _, id in ipairs(trees) do
+                if id == data.tree then tree = id; break end
+            end
+            if not tree then return nil, "notree" end
+        end
+    end
+    local ids = C_Traits and safe(C_Traits.GetTreeNodes, tree)
     if type(ids) ~= "table" or #ids == 0 then return nil, "notree" end
-    local nodes = {}
+    local nodes, incomplete = {}, false
     for _, id in ipairs(ids) do
         local info = safe(C_Traits.GetNodeInfo, config, id)
-        if info and info.ID and info.ID ~= 0 then
+        if info and info.ID == id and type(info.activeRank) == "number" and type(info.maxRanks) == "number" then
             local entry = (info.activeEntry and info.activeEntry.entryID) or (info.entryIDs and info.entryIDs[1])
             local spell, name = clientEntryName(config, entry, nil)
             nodes[id] = {
-                active = info.activeRank or 0,
-                current = info.currentRank or info.activeRank or 0,
-                max = info.maxRanks or 0,
+                active = info.activeRank,
+                current = info.currentRank or info.activeRank,
+                max = info.maxRanks,
+                entry = entry,
                 spell = spell,
                 name = name,
             }
+        elseif not (info and info.ID == 0 and info.activeRank == 0 and info.currentRank == 0) then
+            incomplete = true
         end
     end
     return {
         config = config,
         nodes = nodes,
-        granted = clientGrantedPoints(config, data.tree),
+        incomplete = incomplete,
+        granted = clientGrantedPoints(config, tree),
     }
 end
 
+local function sameTalent(node, live)
+    if node.spell and live.spell then return node.spell == live.spell end
+    if live.name then return live.name == node.nameEs or live.name == node.name end
+    if live.entry then return live.entry == node.entry end
+    return live.max == node.max
+end
+
 function T.Validate(data, live)
-    local v = { map = {}, back = {}, names = {}, missing = {}, ok = true }
-    if not live or not live.nodes or not next(live.nodes) then v.ok = false; return v end
+    local v = { map = {}, back = {}, names = {}, max = {}, missing = {}, ok = false }
+    if not live or not live.nodes or not next(live.nodes) then return v end
+    v.ok = not live.incomplete
     local bySpell, byName = {}, {}
     local function index(t, k, id)
         t[k] = t[k] == nil and id or false
     end
     for id, n in pairs(live.nodes) do
-        if n.spell then index(bySpell, n.spell .. "#" .. n.max, id) end
-        if n.name then index(byName, n.name .. "#" .. n.max, id) end
+        if n.spell then index(bySpell, n.spell, id) end
+        if n.name then index(byName, n.name, id) end
     end
+    local candidates, owners = {}, {}
     for id, n in pairs(data.nodes) do
         local l = live.nodes[id]
         local hit
-        if l and l.max == n.max and ((l.spell and n.spell and l.spell == n.spell) or not l.spell) then
+        if l and sameTalent(n, l) then
             hit = id
         else
-            hit = (n.spell and bySpell[n.spell .. "#" .. n.max])
-                or (n.nameEs and byName[n.nameEs .. "#" .. n.max])
-                or (n.name and byName[n.name .. "#" .. n.max])
-                or nil
+            hit = n.spell and bySpell[n.spell]
+            if not hit then
+                local named = byName[n.nameEs] or byName[n.name]
+                if named and not (live.nodes[named].spell and n.spell) then hit = named end
+            end
         end
         if hit then
-            v.map[id] = hit
-            v.back[hit] = id
-            v.names[id] = live.nodes[hit].name
+            candidates[id] = hit
+            index(owners, hit, id)
+        end
+    end
+    for id, n in pairs(data.nodes) do
+        local hit = candidates[id]
+        if hit and owners[hit] == id and live.nodes[hit].max > 0 then
+            v.map[id], v.back[hit] = hit, id
+            v.names[id], v.max[id] = live.nodes[hit].name, live.nodes[hit].max
         else
             v.missing[#v.missing + 1] = n.nameEs or n.name or tostring(id)
-            v.ok = false
         end
     end
     for id, n in pairs(live.nodes) do
@@ -222,13 +255,11 @@ function T.State(build, ranks, level, granted)
             s.nodeNext[p.node] = s.nodeNext[p.node] or p
         end
     end
-    local fallbackPoints = math.max(0, math.min((level or 1) - T.FIRST_LEVEL + 1, s.total))
-    if type(granted) == "number" then
-        s.points = math.max(granted, s.spent)
-    else
-        s.points = math.max(fallbackPoints, s.spent)
+    if type(granted) ~= "number" or granted < s.spent then
+        s.status = "pointsunknown"
+        return s
     end
-    s.unspent = math.max(0, s.points - s.spent)
+    s.points, s.unspent = granted, granted - s.spent
     if s.points == 0 then
         s.status = "early"
     elseif off then
@@ -328,22 +359,43 @@ function T.Evaluate(classToken)
     local live, liveReason
     if talentsUnlocked then live, liveReason = T.ReadLive(data) end
     local valid = T.Validate(data, live)
-    local compatible = isPlayerClass and live ~= nil and valid.ok
-    local activeRanks = compatible and ranksOf(valid, live, "active") or {}
-    local stagedRanks = compatible and ranksOf(valid, live, "current") or activeRanks
+    local activeRanks = ranksOf(valid, live, "active")
+    local stagedRanks = ranksOf(valid, live, "current")
     local build, source = T.BestBuild(data, stagedRanks)
+    local unsupported
+    if valid.ok and build then
+        for _, pick in ipairs(build.picks) do
+            -- An increased cap can also invalidate a later full-rank prerequisite.
+            if valid.max[pick.node] ~= data.nodes[pick.node].max then
+                valid.ok = false
+                unsupported = T.NodeName(data, pick.node, valid)
+                break
+            end
+        end
+    end
+    local compatible = isPlayerClass and valid.ok
     local level = isPlayerClass and player.level or 1
-    local granted
-    if compatible then granted = live.granted else granted = 0 end
+    local granted = 0
+    if live then granted = live.granted end
     local state = T.State(build, activeRanks, level, granted)
     local staged = T.State(build, stagedRanks, level, granted)
     local unavailableReason
     if talentsUnlocked and not compatible then
-        unavailableReason = live and "El árbol del cliente difiere de esta guía; revisa una versión actualizada."
+        unavailableReason = unsupported and ("El plan incluye un rango que no se ha podido verificar para " .. unsupported .. ".")
+            or live and "El cliente solo permite verificar parte del plan."
             or (liveReason == "notree" and "El cliente no ofrece un árbol compatible con esta guía."
             or "El cliente no permite leer tus talentos ahora. Puedes consultar la guía como referencia.")
         for _, s in ipairs({ state, staged }) do
-            s.status, s.points, s.unspent, s.spent = "unavailable", nil, nil, nil
+            s.status, s.points, s.unspent, s.next = "unavailable", nil, nil, nil
+            s.nodeNext = {}
+            s.spent = nil
+        end
+        if live and not live.incomplete and next(live.nodes) then
+            state.spent, staged.spent = 0, 0
+            for _, node in pairs(live.nodes) do
+                state.spent = state.spent + node.active
+                staged.spent = staged.spent + node.current
+            end
         end
     end
     return {
@@ -434,6 +486,10 @@ local function hideAllMarks()
     for _, m in pairs(marks) do m:Hide() end
 end
 
+local function rankLimit(c, nodeID)
+    return c.valid.max[nodeID] or c.data.nodes[nodeID].max
+end
+
 local function onTalentButtonEnter(button)
     if not GameTooltip or not GameTooltip:IsShown() then return end
     local c = T.current
@@ -443,12 +499,12 @@ local function onTalentButtonEnter(button)
     if not id then return end
     local pick = c.staged.nodeNext[id]
     local off = c.staged.offPlan[id]
-    local isNext = c.staged.status ~= "offplan" and c.staged.next and c.staged.next.node == id
+    local isNext = c.staged.status ~= "offplan" and c.staged.status ~= "pointsunknown" and c.staged.next and c.staged.next.node == id
     local node = c.data.nodes[id]
     if off then
         GameTooltip:AddLine("RutaXP (" .. c.build.title .. "): punto fuera de esta guía", 1, 0.45, 0.35, true)
     elseif pick and node then
-        local line = string.format("RutaXP: Paso #%d (Niv. %d) · Rango %d/%d", pick.order, pick.level, pick.rank, node.max)
+        local line = string.format("RutaXP: Paso #%d (Niv. %d) · Rango %d/%d", pick.order, pick.level, pick.rank, rankLimit(c, id))
         if isNext then
             GameTooltip:AddLine(line .. " [SIGUIENTE A SUBIR]", 1, 0.85, 0.35, true)
         else
@@ -485,7 +541,7 @@ function T.DrawOverlay()
         end
         if id then
             local pick = c.staged.nodeNext[id]
-            local isNext = c.staged.status ~= "offplan" and c.staged.next and c.staged.next.node == id
+            local isNext = c.staged.status ~= "offplan" and c.staged.status ~= "pointsunknown" and c.staged.next and c.staged.next.node == id
             if pick then
                 local m = getOrCreateMark(button)
                 seen[m] = true
@@ -803,6 +859,42 @@ local function ensureRow(panel, index)
     return row
 end
 
+local function renderSpentTalents(panel, c)
+    local talents = {}
+    for id, node in pairs(c.live.nodes) do
+        local rank = node.current or node.active or 0
+        if rank > 0 then
+            local match = c.valid.back[id]
+            local known = match and c.data.nodes[match]
+            local name = node.name or (known and (known.nameEs or known.name)) or ("Talento " .. id)
+            local spec = known and c.data.specs and c.data.specs[known.spec]
+            talents[#talents + 1] = {id = id, name = name, rank = rank, max = node.max, spec = spec}
+        end
+    end
+    table.sort(talents, function(a, b)
+        if a.name == b.name then return a.id < b.id end
+        return a.name < b.name
+    end)
+    for i, talent in ipairs(talents) do
+        local row = ensureRow(panel, i)
+        row:ClearAllPoints()
+        row:SetPoint("TOPLEFT", panel.content, "TOPLEFT", 0, -(i - 1) * 23)
+        local ranks = talent.max and talent.max >= talent.rank
+            and string.format("%d/%d", talent.rank, talent.max) or tostring(talent.rank)
+        row.tipTitle = string.format("%s (%s)", talent.name, ranks)
+        row.tipBody = talent.spec
+        row.lvl:SetText("|cff7edd9cActual|r")
+        row.name:SetText(row.tipTitle)
+        row.spec:SetText(talent.spec or "")
+        if row.SetBackdropColor then
+            row:SetBackdropColor(0.05, 0.11, 0.08, 0.75)
+            row:SetBackdropBorderColor(0.14, 0.28, 0.20, 0.50)
+        end
+        row:Show()
+    end
+    return #talents
+end
+
 function T.RenderPanel()
     local panel = T.panel
     if not panel or not panel:IsShown() then return end
@@ -813,11 +905,14 @@ function T.RenderPanel()
     local data = c.data
     local build = c.build
     local s = c.staged or c.state
+    local showLiveRanks = not c.compatible and c.live and next(c.live.nodes) ~= nil
 
     if c.isPlayerClass then
         local progress = ""
-        if c.compatible then
-            progress = string.format(" (%d/%d pts)", s.done or 0, s.total or 51)
+        if (c.compatible or showLiveRanks) and c.state.spent ~= nil then
+            progress = string.format(" · %d pts. gastados", c.state.spent)
+        elseif showLiveRanks then
+            progress = " · Árbol del personaje"
         elseif s.status == "unavailable" then
             progress = " · Solo referencia"
         end
@@ -858,7 +953,10 @@ function T.RenderPanel()
     end
 
     local activeTab = panel.activeTab or "talents"
-    if panel.tabTalentsBtn then panel.tabTalentsBtn:SetActiveStyle(activeTab == "talents", true) end
+    if panel.tabTalentsBtn then
+        panel.tabTalentsBtn.label:SetText(showLiveRanks and "Tus talentos" or "Talentos (Niv. 10–60)")
+        panel.tabTalentsBtn:SetActiveStyle(activeTab == "talents", true)
+    end
     if panel.tabSpellsBtn then panel.tabSpellsBtn:SetActiveStyle(activeTab == "spells", true) end
 
     -- Find next/current trainer spell for the player's level
@@ -882,6 +980,9 @@ function T.RenderPanel()
             panel.nextCard.header:SetText(string.format("|cff8ec5ffPRÓXIMAS HABILIDADES EN INSTRUCTOR (NIVEL %d):|r", nextSpellEntry.level))
         end
         panel.nextCard.main:SetText(string.format("|cffffd966» %s|r  ·  |cff7edd9c%s|r", nextSpellEntry.name, nextSpellEntry.tip or ""))
+    elseif showLiveRanks then
+        panel.nextCard.header:SetText("|cffffb468GUÍA POR NIVEL NO DISPONIBLE|r")
+        panel.nextCard.main:SetText("La lista muestra tus rangos actuales del juego.")
     elseif s.status == "unavailable" then
         panel.nextCard.header:SetText("|cffffb468LECTURA DE TALENTOS NO DISPONIBLE|r")
         panel.nextCard.main:SetText(c.unavailableReason or "Consulta el orden de esta guía como referencia.")
@@ -895,12 +996,14 @@ function T.RenderPanel()
             panel.nextCard.header:SetText(string.format("|cff8ec5ffPRIMER PUNTO AL LLEGAR A NIVEL %d|r", T.FIRST_LEVEL))
         elseif s.status == "offplan" then
             panel.nextCard.header:SetText("|cffffb468TU REPARTO DIFIERE DE ESTA GUÍA · REVISA EL ORDEN ANTES DE GASTAR|r")
+        elseif s.status == "pointsunknown" then
+            panel.nextCard.header:SetText("|cff8ec5ffPRÓXIMO TALENTO · PUNTOS POR CONFIRMAR|r")
         elseif (s.unspent or 0) > 0 then
             panel.nextCard.header:SetText(string.format("|cffffd966TIENES %d PUNTO(S) DISPONIBLE(S) · SUBE AHORA MISMO:|r", s.unspent))
         else
-            panel.nextCard.header:SetText(string.format("|cff7edd9cAL DÍA CON LA GUÍA · PRÓXIMO PUNTO (PASO #%d / NIV. %d):|r", s.next.order, s.next.level))
+            panel.nextCard.header:SetText("|cff7edd9cCUANDO TENGAS OTRO PUNTO|r")
         end
-        panel.nextCard.main:SetText(string.format("|cffffd966» %s|r |cffffffff(Rango %d/%d)|r  ·  |cff8ec5ffRama %s|r", nextName, s.next.rank, nextNode and nextNode.max or 1, nextSpec))
+        panel.nextCard.main:SetText(string.format("|cffffd966» %s|r |cffffffff(Rango %d/%d)|r  ·  |cff8ec5ffRama %s|r", nextName, s.next.rank, rankLimit(c, s.next.node), nextSpec))
     else
         panel.nextCard.header:SetText("|cff7edd9c¡GUÍA DE TALENTOS COMPLETADA!|r")
         panel.nextCard.main:SetText("Has aprendido los 51 puntos de talento de esta guía.")
@@ -974,6 +1077,9 @@ function T.RenderPanel()
             row:Show()
             y = y + 23
         end
+    elseif showLiveRanks then
+        shownRows = renderSpentTalents(panel, c)
+        y, scrollTargetY = shownRows * 23, 0
     else
         for i, pick in ipairs(build.picks) do
             shownRows = i
@@ -982,12 +1088,13 @@ function T.RenderPanel()
             row:SetPoint("TOPLEFT", panel.content, "TOPLEFT", 0, -y)
 
             local node = data.nodes[pick.node]
+            local maxRank = rankLimit(c, pick.node)
             local specName = (data.specs and node and data.specs[node.spec]) or ""
             local tName = T.NodeName(data, pick.node, c.valid)
             local isDone = c.compatible and ((c.stagedRanks[pick.node] or 0) >= pick.rank)
             local isNext = s.status ~= "unavailable" and (s.next == pick)
 
-            row.tipTitle = string.format("Nivel %d · %s (Rango %d/%d)", pick.level, tName, pick.rank, node and node.max or 1)
+            row.tipTitle = string.format("Nivel %d · %s (Rango %d/%d)", pick.level, tName, pick.rank, maxRank)
             row.tipBody = (build.notes and build.notes[pick.level]) or ("Rama: " .. specName)
 
             if isNext then
@@ -997,7 +1104,7 @@ function T.RenderPanel()
                     row:SetBackdropBorderColor(0.95, 0.78, 0.25, 0.90)
                 end
                 row.lvl:SetText(string.format("|cffffd966» Niv. %d|r", pick.level))
-                row.name:SetText(string.format("|cffffd966%s|r |cffffffff(%d/%d)|r", tName, pick.rank, node and node.max or 1))
+                row.name:SetText(string.format("|cffffd966%s|r |cffffffff(%d/%d)|r", tName, pick.rank, maxRank))
                 row.spec:SetText("|cffffd966" .. specName .. "|r")
             elseif isDone then
                 if row.SetBackdropColor then
@@ -1005,7 +1112,7 @@ function T.RenderPanel()
                     row:SetBackdropBorderColor(0.14, 0.28, 0.20, 0.50)
                 end
                 row.lvl:SetText(string.format("|cff7edd9c[Hecho] %d|r", pick.level))
-                row.name:SetText(string.format("|cff7edd9c%s (%d/%d)|r", tName, pick.rank, node and node.max or 1))
+                row.name:SetText(string.format("|cff7edd9c%s (%d/%d)|r", tName, pick.rank, maxRank))
                 row.spec:SetText("|cff6c8c7a" .. specName .. "|r")
             else
                 if row.SetBackdropColor then
@@ -1014,7 +1121,7 @@ function T.RenderPanel()
                     row:SetBackdropBorderColor(0.12, 0.18, 0.26, 0.45)
                 end
                 row.lvl:SetText(string.format("|cff9fb0c7Niv. %d|r", pick.level))
-                row.name:SetText(string.format("|cffd5deeb%s|r |cff8ec5ff(%d/%d)|r", tName, pick.rank, node and node.max or 1))
+                row.name:SetText(string.format("|cffd5deeb%s|r |cff8ec5ff(%d/%d)|r", tName, pick.rank, maxRank))
                 row.spec:SetText("|cff8ec5ff" .. specName .. "|r")
             end
 
@@ -1028,7 +1135,7 @@ function T.RenderPanel()
     end
     panel.content:SetHeight(math.max(1, y + 6))
 
-    local scrollKey = build.key .. ":" .. activeTab
+    local scrollKey = build.key .. ":" .. activeTab .. (showLiveRanks and ":live" or "")
     if scrollTargetY and panel.scroll.SetVerticalScroll and panel.lastScrolledBuild ~= scrollKey then
         panel.lastScrolledBuild = scrollKey
         safe(panel.scroll.SetVerticalScroll, panel.scroll, scrollTargetY)

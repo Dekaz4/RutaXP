@@ -172,8 +172,10 @@ class TalentCompatibilityTests(unittest.TestCase):
     def test_changed_or_empty_tree_is_explicitly_incompatible(self):
         h = self.h
         h.live()
-        self.assertTrue(h.t.Evaluate().compatible)
-        first = next(iter(h.state.liveNodes.items()))[0]
+        selected = h.t.Evaluate()
+        self.assertTrue(selected.compatible)
+        h.t.SetChoice(selected.build.key)
+        first = selected.build.picks[1].node
         h.state.liveNodes[first] = None
         c = h.t.Evaluate()
         self.assertFalse(c.compatible)
@@ -188,6 +190,34 @@ class TalentCompatibilityTests(unittest.TestCase):
         h.live()
         h.state.liveNodes[999999] = h.table({"ID": 999999, "activeRank": 2, "currentRank": 2, "maxRanks": 5})
         self.assertFalse(h.t.Evaluate().compatible)
+
+    def test_unspent_node_outside_the_selected_plan_does_not_hide_live_ranks(self):
+        h = self.h
+        h.live()
+        build = h.t.Registry.MAGE.builds[1]
+        h.t.SetChoice(build.key)
+        chosen = {p.node for p in build.picks.values()}
+        irrelevant = next(node for node in h.state.liveNodes.keys() if node not in chosen)
+        h.state.liveNodes[irrelevant] = None
+        first = build.picks[1].node
+        h.state.liveNodes[first].activeRank = h.state.liveNodes[first].currentRank = 1
+        h.state.spent, h.state.unspent = 1, 0
+        result = h.t.Evaluate()
+        self.assertTrue(result.compatible)
+        self.assertEqual(result.state.spent, 1)
+        self.assertEqual(result.activeRanks[first], 1)
+
+    def test_no_currency_does_not_infer_free_talent_points_from_character_level(self):
+        h = self.h
+        h.live()
+        h.g.C_Traits.GetTreeCurrencyInfo = None
+        result = h.t.Evaluate()
+        self.assertTrue(result.compatible)
+        self.assertEqual(result.state.spent, 0)
+        self.assertIsNone(result.state.unspent)
+        self.assertIsNone(result.state.points)
+        panel = h.panel()
+        self.assertNotIn("SUBE AHORA", panel.nextCard.header.text)
 
     def test_live_node_remapping_by_spell_preserves_spent_ranks(self):
         h = self.h
@@ -263,6 +293,103 @@ class TalentCompatibilityTests(unittest.TestCase):
         h.t.current = h.t.Evaluate()
         h.t.DrawOverlay()
         self.assertFalse(h.state.overlayMark.shown)
+
+
+class ForeverConvictionTests(unittest.TestCase):
+    def setUp(self):
+        h = self.h = TalentTrainerHost()
+        h.state.classToken, h.state.level = "PALADIN", 27
+        self.data = h.t.Registry.PALADIN
+        self.conviction = next(id for id, node in self.data.nodes.items() if node.name == "Conviction")
+        self.retribution = next(b for b in self.data.builds.values() if b.key == "retribution")
+        h.t.SetChoice(self.retribution.key)
+
+    def test_static_paladin_guides_and_reference_rows_respect_convictions_three_ranks(self):
+        self.assertEqual(self.data.nodes[self.conviction].max, 3)
+        for build in self.data.builds.values():
+            with self.subTest(build=build.key):
+                ranks = [p.rank for p in build.picks.values() if p.node == self.conviction]
+                self.assertTrue(all(1 <= rank <= 3 for rank in ranks))
+                if build.key == self.retribution.key:
+                    self.assertEqual(sorted(ranks), [1, 2, 3])
+        panel = self.h.panel()
+        rows = [row for row in panel.rows.values() if row.shown and "Convicción" in row.name.text]
+        self.assertEqual(len(rows), 3)
+        for rank in (1, 2, 3):
+            self.assertTrue(any(f"{rank}/3" in row.name.text for row in rows))
+
+    def test_three_full_ranks_in_the_active_tree_do_not_suggest_a_fourth(self):
+        h = self.h
+        h.live("PALADIN")
+        h.lua.execute("""
+            local getNodes = C_Traits.GetTreeNodes
+            C_Traits.GetConfigInfo = function() return {treeIDs = {987654}} end
+            C_Traits.GetTreeNodes = function(treeID)
+                return treeID == 987654 and getNodes() or {}
+            end
+        """)
+        # The seven lit-up talents in the Forever character's 18-point tree.
+        retri = {(n.row, n.col): id for id, n in self.data.nodes.items() if n.spec == 3}
+        self.assertEqual(retri[2, 2], self.conviction)
+        spent = {(1, 3): 5, (2, 1): 2, (2, 2): 3, (2, 3): 3, (3, 1): 3, (3, 3): 1, (4, 2): 1}
+        for pos, rank in spent.items():
+            node = h.state.liveNodes[retri[pos]]
+            self.assertLessEqual(rank, node.maxRanks)
+            node.activeRank = node.currentRank = rank
+        h.state.spent, h.state.unspent = 18, 0
+        panel = h.panel()
+        c = h.t.current
+        self.assertTrue(c.compatible)
+        self.assertEqual((c.state.spent, c.state.unspent), (18, 0))
+        self.assertEqual(c.activeRanks[self.conviction], 3)
+        next_node = self.data.nodes[c.staged.next.node]
+        self.assertEqual((next_node.name, c.staged.next.rank, next_node.max),
+                         ("Two-Handed Weapon Specialization", 1, 3))
+        self.assertIn(next_node.nameEs, panel.nextCard.main.text)
+        self.assertTrue(any("Convicción" in row.name.text and "3/3" in row.name.text
+                            for row in panel.rows.values() if row.shown))
+
+    def test_a_lower_cap_from_a_new_client_displays_invested_ranks_without_a_false_next_pick(self):
+        h = self.h
+        h.live("PALADIN")
+        node = h.state.liveNodes[self.conviction]
+        node.maxRanks = node.activeRank = node.currentRank = 2
+        h.state.spent, h.state.unspent = 2, 0
+        panel = h.panel()
+        c = h.t.current
+        self.assertFalse(c.compatible)
+        self.assertIsNone(c.staged.next)
+        self.assertEqual(c.activeRanks[self.conviction], 2)
+        self.assertEqual(c.state.spent, 2)
+        rows = [row for row in panel.rows.values() if row.shown]
+        self.assertEqual(len(rows), 1)
+        self.assertIn("Convicción", rows[0].name.text)
+        self.assertIn("2/2", rows[0].name.text)
+        self.assertNotIn("SUBE AHORA", panel.nextCard.header.text)
+
+    def test_reused_node_and_name_cannot_hide_a_different_spell(self):
+        h = self.h
+        h.live("PALADIN")
+        entry = self.data.nodes[self.conviction].entry
+        h.state.entries[entry].spellID = 901234
+        c = h.t.Evaluate()
+        self.assertFalse(c.compatible)
+        self.assertIsNone(c.staged.next)
+
+    def test_build_cannot_pass_a_prerequisite_with_a_newly_increased_rank_limit(self):
+        h = self.h
+        h.live("PALADIN")
+        planned = {p.node for p in self.retribution.picks.values()}
+        parent = next(edge[1] for edge in self.data.edges.values()
+                      if edge[1] in planned and edge[2] in planned)
+        h.state.liveNodes[parent].maxRanks += 1
+        self.assertFalse(h.t.Evaluate().compatible)
+
+    def test_inactive_placeholder_in_live_tree_does_not_invalidate_known_talents(self):
+        h = self.h
+        h.live("PALADIN")
+        h.state.liveNodes[901234] = h.table({"ID": 0, "activeRank": 0, "currentRank": 0})
+        self.assertTrue(h.t.Evaluate().compatible)
 
 
 class TrainerRegressionTests(unittest.TestCase):

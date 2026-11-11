@@ -20,7 +20,9 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
 
-## Vallefresno (0.7.18)
+## Talentos de paladín y Vallefresno (0.7.18)
+
+Convicción tiene tres rangos en Forever. Las cuatro guías de paladín siguen el árbol actualizado. Si el árbol que devuelve el juego difiere del de la guía, el panel muestra los talentos que ya has elegido con sus rangos reales.
 
 Retiramos los tres encargos de Alonso de las rutas de Alianza y Horda. En la Alianza, después de «Brazales elementales», la guía continúa hacia las Ruinas del Polvo Estelar. El addon adapta el progreso guardado de cada personaje al actualizar.
 
