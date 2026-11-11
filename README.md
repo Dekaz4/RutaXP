@@ -1,4 +1,4 @@
-# RutaXP 0.7.20 para WoW Forever
+# RutaXP 0.7.21 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,12 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## Puntos de interés en el mapa (0.7.21)
+
+Pulsa **M** y abre el desplegable que está junto al nombre de la zona. En **Puntos de interés de RutaXP** puedes elegir qué servicios y misiones de tu guía aparecen con los iconos de WoW. Las preferencias se guardan por personaje. Los vendedores generales empiezan desactivados para que se distingan los demás servicios en las capitales.
+
+Pasa el ratón por un icono para ver su nombre. Si varios servicios o misiones comparten un punto, se muestran juntos. Las casillas de la guía controlan los marcadores adicionales. El menú de WoW conserva sus opciones para las misiones que muestra el propio juego.
 
 ## Flecha de navegación (0.7.20)
 
@@ -263,7 +269,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.20.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.21.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.

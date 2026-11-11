@@ -571,6 +571,7 @@ function ns:Sync()
     end
     basicSync(self)
     if self.UpdateNavigation then self:UpdateNavigation() end
+    if self.RefreshMapPoints then self:RefreshMapPoints() end
 end
 
 function ns:Next()
