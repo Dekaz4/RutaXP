@@ -1,6 +1,6 @@
 # Ruta del pícaro humano
 
-26 capítulos, 936 pasos y 2923 acciones examinadas. 2729 acciones son compatibles por raza y clase, incluidas las opcionales.
+26 capítulos, 936 pasos y 2917 acciones examinadas. 2723 acciones son compatibles por raza y clase, incluidas las opcionales.
 
 En 75 misiones del recorrido hay armas para el pícaro o cuero, capas y accesorios con atributos físicos. Desde nivel 10, la cadena de Keryn y Mathias Shaw da la Hoja de Astucia. Al aceptar o entregar una misión con equipo, pasa el ratón sobre la fila para ver qué recibes y qué puedes elegir.
 
@@ -8,7 +8,7 @@ Si usas Mutilar, conserva una daga para cada mano. Las hachas de una mano tambi�
 
 En Páramos de Poniente, la Hermandad de los Defias abre una cadena opcional para grupo. Con la misión final, entrega la cabeza de VanCleef tras hacer las Minas de la Muerte para elegir la Túnica de Páramos de Poniente (+11 agilidad y +5 aguante).
 
-Los números de paso y fila son los del addon. Las coordenadas usan el mapa del catálogo de origen. Hay 83 filas con algún requisito pendiente de contrastar. Entre ellas siguen Lingotes Forjaluz (526) y Una fiesta en tu honor (1271). Los tiempos de viaje quedan pendientes de medir en el juego.
+Los números de paso y fila son los del addon. Las coordenadas usan el mapa del catálogo de origen. Hay 80 filas con algún requisito pendiente de contrastar. Entre ellas siguen Lingotes Forjaluz (526) y Una fiesta en tu honor (1271). Los tiempos de viaje quedan pendientes de medir en el juego.
 
 | Capítulo | Pasos | Acciones compatibles / examinadas | Revisión |
 |---|---:|---:|---|
@@ -17,7 +17,7 @@ Los números de paso y fila son los del addon. Las coordenadas usan el mapa del 
 | Costa Oscura | 42 | 171 / 224 | Recorrido ajustado |
 | Montañas Crestagrana | 19 | 59 / 68 | Recorrido ajustado |
 | Bosque del Ocaso | 29 | 87 / 88 | Recorrido ajustado |
-| Vallefresno, Los Humedales y Sierra Espolón | 65 | 170 / 182 | Recorrido ajustado |
+| Vallefresno, Los Humedales y Sierra Espolón | 65 | 164 / 176 | Recorrido ajustado |
 | Las Mil Agujas, Bosque del Ocaso y Los Humedales | 37 | 119 / 122 | Recorrido ajustado |
 | Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta | 41 | 114 / 116 | Recorrido ajustado |
 | Desolace | 22 | 42 / 44 | Revisado |
@@ -787,12 +787,6 @@ Las ocho aceptaciones de Puerto de Menethil son viajes posteriores, con la posad
 | 24.1 | Aceptar · Brazales elementales (#1016) | Centinela Velene Estrella · desde nivel 20 · mapa 1440 · 49.8, 67.21 |
 | 24.2 | Recoger · Brazales elementales (#1016) | Pergamino divino · mapa 1440 · 46.6, 69.6 |
 | 24.3 | Entregar · Brazales elementales (#1016) | Centinela Velene Estrella · mapa 1440 · 49.8, 67.21 |
-| 24.4 | Aceptar · Dragonslayer's Helm (#78132) | Alonso · desde nivel 15 · mapa 1440 · 43.4, 70.4 · sin datos externos de requisitos |
-| 24.5 | Entregar · Dragonslayer's Helm (#78132) | Alonso · mapa 1440 · 43.4, 70.4 |
-| 24.6 | Aceptar · Dragonslayer's Shield (#78133) | Alonso · desde nivel 15 · mapa 1440 · 43.4, 70.4 · sin datos externos de requisitos |
-| 24.7 | Entregar · Dragonslayer's Shield (#78133) | Alonso · mapa 1440 · 43.4, 70.4 |
-| 24.8 | Aceptar · Dragonslayer's Lance (#78134) | Alonso · desde nivel 15 · mapa 1440 · 43.4, 70.4 · sin datos externos de requisitos |
-| 24.9 | Entregar · Dragonslayer's Lance (#78134) | Alonso · mapa 1440 · 43.4, 70.4 |
 | 25.1 | Recoger · Las ruinas del Polvo Estelar (#1034) | Un puñado de polvo estelar ×5 · Arbusto cubierto de polvo estelar · mapa 1440 · 33.3, 67.7 |
 | 26.1 | Piedra de hogar · Astranaar |  |
 | 26.2 | Entregar · Las ruinas del Polvo Estelar (#1034) | Pelturas Lunablanca · mapa 1440 · 37.37, 51.79 |

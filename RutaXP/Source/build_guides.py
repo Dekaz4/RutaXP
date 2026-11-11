@@ -388,7 +388,9 @@ def apply_guide_revisions(document: dict[str, Any], path: Path) -> list[str]:
         "file": "Source/guide_revisions.json", "sha256": hashlib.sha256(payload).hexdigest(), "applied": applied,
     }
     document["statistics"]["steps"] = sum(len(guide["steps"]) for guide in document["guides"])
-    document["statistics"]["goals"] = sum(len(step["goals"]) for guide in document["guides"] for step in guide["steps"])
+    goal_types = Counter(goal["t"] for guide in document["guides"] for step in guide["steps"] for goal in step["goals"])
+    document["statistics"]["goals"] = sum(goal_types.values())
+    document["statistics"]["goalTypes"] = dict(sorted(goal_types.items()))
     return applied
 
 

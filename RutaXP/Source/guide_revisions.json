@@ -11297,6 +11297,968 @@
         "reason": "En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del historiador y al teniente. Se mantiene junta la entrega 4512 y su continuación y se conserva la salida hacia el vuelo con el encargo del teniente.",
         "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/05-silithus.guide"
       }
+    },
+    {
+      "id": "ashenvale-alliance-retire-alonso-5",
+      "guideID": "forever/alliance/06-ashenvale",
+      "previousRevision": 4,
+      "revision": 5,
+      "sourceShape": "c6fb44af552c9e11f788c355063e8f7c9ead5ca39cd17289f0c0c4d7a41de45c",
+      "resultShape": "9daa658ac8d65385db5c87c818128b35dd81fb4b586001e0b6c54832c008bca6",
+      "previousGoalCounts": [
+        4,
+        2,
+        3,
+        2,
+        2,
+        4,
+        2,
+        4,
+        8,
+        3,
+        1,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        5,
+        1,
+        1,
+        3,
+        1,
+        4,
+        9,
+        1,
+        4,
+        5,
+        3,
+        4,
+        5,
+        3,
+        10,
+        2,
+        1,
+        2,
+        2,
+        6,
+        3,
+        2,
+        1,
+        3,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        3,
+        2,
+        2,
+        1,
+        2,
+        1,
+        1,
+        1,
+        2,
+        8,
+        6,
+        2,
+        2,
+        6,
+        2,
+        1,
+        4,
+        3
+      ],
+      "firstAffectedStep": 66,
+      "affectedQuestIDs": [
+        78132,
+        78133,
+        78134
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24,
+          "omitGoals": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "set": {
+            "note": "La centinela Velene Estrella está en el Refugio Brisa de Plata, en la orilla este del lago Mystral. Busca los elementales de agua en el lago para reunir los brazales."
+          }
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        },
+        {
+          "sourceStep": 49
+        },
+        {
+          "sourceStep": 50
+        },
+        {
+          "sourceStep": 51
+        },
+        {
+          "sourceStep": 52
+        },
+        {
+          "sourceStep": 53
+        },
+        {
+          "sourceStep": 54
+        },
+        {
+          "sourceStep": 55
+        },
+        {
+          "sourceStep": 56
+        },
+        {
+          "sourceStep": 57
+        },
+        {
+          "sourceStep": 58
+        },
+        {
+          "sourceStep": 59
+        },
+        {
+          "sourceStep": 60
+        },
+        {
+          "sourceStep": 61
+        },
+        {
+          "sourceStep": 62
+        },
+        {
+          "sourceStep": 63
+        },
+        {
+          "sourceStep": 64
+        },
+        {
+          "sourceStep": 65
+        }
+      ],
+      "retiredGoals": {
+        "24:4": {
+          "match": {
+            "t": "accept",
+            "quest": 78132,
+            "npc": 210995
+          },
+          "evidence": {
+            "reason": "Encargo de Alonso sin aparición confirmada en Forever. Véanse las fuentes de esta revisión.",
+            "originalGoal": {
+              "title": "Dragonslayer's Helm",
+              "minLevel": 15,
+              "note": "Alonso",
+              "t": "accept",
+              "quest": 78132,
+              "npc": 210995,
+              "npcName": "Alonso",
+              "map": 1440,
+              "x": 43.4,
+              "y": 70.4,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 43.4,
+                  "y": 70.4,
+                  "r": 15,
+                  "n": 1
+                },
+                {
+                  "x": 42.2,
+                  "y": 69.6,
+                  "r": 20,
+                  "n": 2
+                }
+              ],
+              "qlvl": 25
+            }
+          }
+        },
+        "24:5": {
+          "match": {
+            "t": "turnin",
+            "quest": 78132,
+            "npc": 210995
+          },
+          "evidence": {
+            "reason": "Encargo de Alonso sin aparición confirmada en Forever. Véanse las fuentes de esta revisión.",
+            "originalGoal": {
+              "title": "Dragonslayer's Helm",
+              "t": "turnin",
+              "quest": 78132,
+              "npc": 210995,
+              "npcName": "Alonso",
+              "map": 1440,
+              "x": 43.4,
+              "y": 70.4,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 43.4,
+                  "y": 70.4,
+                  "r": 15,
+                  "n": 1
+                },
+                {
+                  "x": 42.2,
+                  "y": 69.6,
+                  "r": 20,
+                  "n": 2
+                }
+              ]
+            }
+          }
+        },
+        "24:6": {
+          "match": {
+            "t": "accept",
+            "quest": 78133,
+            "npc": 210995
+          },
+          "evidence": {
+            "reason": "Encargo de Alonso sin aparición confirmada en Forever. Véanse las fuentes de esta revisión.",
+            "originalGoal": {
+              "title": "Dragonslayer's Shield",
+              "minLevel": 15,
+              "t": "accept",
+              "quest": 78133,
+              "npc": 210995,
+              "npcName": "Alonso",
+              "map": 1440,
+              "x": 43.4,
+              "y": 70.4,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 43.4,
+                  "y": 70.4,
+                  "r": 15,
+                  "n": 1
+                },
+                {
+                  "x": 42.2,
+                  "y": 69.6,
+                  "r": 20,
+                  "n": 2
+                }
+              ],
+              "qlvl": 25
+            }
+          }
+        },
+        "24:7": {
+          "match": {
+            "t": "turnin",
+            "quest": 78133,
+            "npc": 210995
+          },
+          "evidence": {
+            "reason": "Encargo de Alonso sin aparición confirmada en Forever. Véanse las fuentes de esta revisión.",
+            "originalGoal": {
+              "title": "Dragonslayer's Shield",
+              "t": "turnin",
+              "quest": 78133,
+              "npc": 210995,
+              "npcName": "Alonso",
+              "map": 1440,
+              "x": 43.4,
+              "y": 70.4,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 43.4,
+                  "y": 70.4,
+                  "r": 15,
+                  "n": 1
+                },
+                {
+                  "x": 42.2,
+                  "y": 69.6,
+                  "r": 20,
+                  "n": 2
+                }
+              ]
+            }
+          }
+        },
+        "24:8": {
+          "match": {
+            "t": "accept",
+            "quest": 78134,
+            "npc": 210995
+          },
+          "evidence": {
+            "reason": "Encargo de Alonso sin aparición confirmada en Forever. Véanse las fuentes de esta revisión.",
+            "originalGoal": {
+              "title": "Dragonslayer's Lance",
+              "minLevel": 15,
+              "t": "accept",
+              "quest": 78134,
+              "npc": 210995,
+              "npcName": "Alonso",
+              "map": 1440,
+              "x": 43.4,
+              "y": 70.4,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 43.4,
+                  "y": 70.4,
+                  "r": 15,
+                  "n": 1
+                },
+                {
+                  "x": 42.2,
+                  "y": 69.6,
+                  "r": 20,
+                  "n": 2
+                }
+              ],
+              "qlvl": 25
+            }
+          }
+        },
+        "24:9": {
+          "match": {
+            "t": "turnin",
+            "quest": 78134,
+            "npc": 210995
+          },
+          "evidence": {
+            "reason": "Encargo de Alonso sin aparición confirmada en Forever. Véanse las fuentes de esta revisión.",
+            "originalGoal": {
+              "title": "Dragonslayer's Lance",
+              "t": "turnin",
+              "quest": 78134,
+              "npc": 210995,
+              "npcName": "Alonso",
+              "map": 1440,
+              "x": 43.4,
+              "y": 70.4,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 43.4,
+                  "y": 70.4,
+                  "r": 15,
+                  "n": 1
+                },
+                {
+                  "x": 42.2,
+                  "y": 69.6,
+                  "r": 20,
+                  "n": 2
+                }
+              ]
+            }
+          }
+        }
+      },
+      "evidence": {
+        "reason": "Se retiran las visitas a Alonso. La guía de Forever Questward retiró este encuentro de Season of Discovery y varios jugadores de Forever informan de que no encuentran al personaje en el punto marcado.",
+        "sources": [
+          {
+            "url": "https://www.curseforge.com/wow/addons/questward-forever/files/9529029",
+            "detail": "La versión 1.0.7 de Questward para Forever retira los pasos exclusivos de Season of Discovery y menciona a Alonso en Vallefresno."
+          },
+          {
+            "url": "https://www.wowhead.com/forever/npc=210995/alonso#comments",
+            "detail": "Tres jugadores de Forever describen visitas al punto de la base de datos sin encontrar a Alonso. Las coordenadas importadas no acreditan una aparición en el reino."
+          }
+        ],
+        "previousNote": "Centinela Velene Estrella está en Refugio Brisa de Plata, en la orilla este de Lago Mystral. Alonso acampa en la orilla oeste. Los Befouled Elementales de agua se mueven por el lago entre ambos."
+      }
+    },
+    {
+      "id": "ashenvale-horde-retire-alonso-2",
+      "guideID": "forever/horde/07-ashenvale",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "42f09db7e554a76a6d7a96aedfbb20453c7e666ed4f2c51ccefe909e9c5e2e01",
+      "resultShape": "db46d1ed1f78a5cac0ea2891453a2ebc27da8dfb1758526aa70f3e916a415098",
+      "previousGoalCounts": [
+        6,
+        2,
+        1,
+        1,
+        3,
+        2,
+        3,
+        3,
+        2,
+        1,
+        6,
+        2,
+        1,
+        2,
+        3,
+        11,
+        2,
+        1,
+        2,
+        3,
+        7,
+        3,
+        2,
+        3,
+        6,
+        4,
+        3,
+        3,
+        8,
+        1,
+        2,
+        5,
+        4,
+        2,
+        3,
+        3,
+        6,
+        3,
+        1,
+        4,
+        6,
+        2,
+        2,
+        6,
+        7,
+        6,
+        2
+      ],
+      "firstAffectedStep": 48,
+      "affectedQuestIDs": [
+        78132,
+        78133,
+        78134
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 12,
+          "cursorFromStep": 11
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        }
+      ],
+      "retiredGoals": {
+        "11:1": {
+          "match": {
+            "t": "accept",
+            "quest": 78132,
+            "npc": 210995
+          },
+          "evidence": {
+            "reason": "Encargo de Alonso sin aparición confirmada en Forever. Véanse las fuentes de esta revisión.",
+            "originalGoal": {
+              "title": "Dragonslayer's Helm",
+              "minLevel": 15,
+              "t": "accept",
+              "quest": 78132,
+              "npc": 210995,
+              "npcName": "Alonso",
+              "map": 1440,
+              "x": 42,
+              "y": 69.2,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 42.2,
+                  "y": 69.6,
+                  "r": 20,
+                  "n": 2
+                },
+                {
+                  "x": 43.4,
+                  "y": 70.4,
+                  "r": 15,
+                  "n": 1
+                }
+              ],
+              "qlvl": 25
+            }
+          }
+        },
+        "11:2": {
+          "match": {
+            "t": "turnin",
+            "quest": 78132,
+            "npc": 210995
+          },
+          "evidence": {
+            "reason": "Encargo de Alonso sin aparición confirmada en Forever. Véanse las fuentes de esta revisión.",
+            "originalGoal": {
+              "title": "Dragonslayer's Helm",
+              "t": "turnin",
+              "quest": 78132,
+              "npc": 210995,
+              "npcName": "Alonso",
+              "map": 1440,
+              "x": 42,
+              "y": 69.2,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 42.2,
+                  "y": 69.6,
+                  "r": 20,
+                  "n": 2
+                },
+                {
+                  "x": 43.4,
+                  "y": 70.4,
+                  "r": 15,
+                  "n": 1
+                }
+              ]
+            }
+          }
+        },
+        "11:3": {
+          "match": {
+            "t": "accept",
+            "quest": 78133,
+            "npc": 210995
+          },
+          "evidence": {
+            "reason": "Encargo de Alonso sin aparición confirmada en Forever. Véanse las fuentes de esta revisión.",
+            "originalGoal": {
+              "title": "Dragonslayer's Shield",
+              "minLevel": 15,
+              "t": "accept",
+              "quest": 78133,
+              "npc": 210995,
+              "npcName": "Alonso",
+              "map": 1440,
+              "x": 42,
+              "y": 69.2,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 42.2,
+                  "y": 69.6,
+                  "r": 20,
+                  "n": 2
+                },
+                {
+                  "x": 43.4,
+                  "y": 70.4,
+                  "r": 15,
+                  "n": 1
+                }
+              ],
+              "qlvl": 25
+            }
+          }
+        },
+        "11:4": {
+          "match": {
+            "t": "turnin",
+            "quest": 78133,
+            "npc": 210995
+          },
+          "evidence": {
+            "reason": "Encargo de Alonso sin aparición confirmada en Forever. Véanse las fuentes de esta revisión.",
+            "originalGoal": {
+              "title": "Dragonslayer's Shield",
+              "t": "turnin",
+              "quest": 78133,
+              "npc": 210995,
+              "npcName": "Alonso",
+              "map": 1440,
+              "x": 42,
+              "y": 69.2,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 42.2,
+                  "y": 69.6,
+                  "r": 20,
+                  "n": 2
+                },
+                {
+                  "x": 43.4,
+                  "y": 70.4,
+                  "r": 15,
+                  "n": 1
+                }
+              ]
+            }
+          }
+        },
+        "11:5": {
+          "match": {
+            "t": "accept",
+            "quest": 78134,
+            "npc": 210995
+          },
+          "evidence": {
+            "reason": "Encargo de Alonso sin aparición confirmada en Forever. Véanse las fuentes de esta revisión.",
+            "originalGoal": {
+              "title": "Dragonslayer's Lance",
+              "minLevel": 15,
+              "t": "accept",
+              "quest": 78134,
+              "npc": 210995,
+              "npcName": "Alonso",
+              "map": 1440,
+              "x": 42,
+              "y": 69.2,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 42.2,
+                  "y": 69.6,
+                  "r": 20,
+                  "n": 2
+                },
+                {
+                  "x": 43.4,
+                  "y": 70.4,
+                  "r": 15,
+                  "n": 1
+                }
+              ],
+              "qlvl": 25
+            }
+          }
+        },
+        "11:6": {
+          "match": {
+            "t": "turnin",
+            "quest": 78134,
+            "npc": 210995
+          },
+          "evidence": {
+            "reason": "Encargo de Alonso sin aparición confirmada en Forever. Véanse las fuentes de esta revisión.",
+            "originalGoal": {
+              "title": "Dragonslayer's Lance",
+              "t": "turnin",
+              "quest": 78134,
+              "npc": 210995,
+              "npcName": "Alonso",
+              "map": 1440,
+              "x": 42,
+              "y": 69.2,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 42.2,
+                  "y": 69.6,
+                  "r": 20,
+                  "n": 2
+                },
+                {
+                  "x": 43.4,
+                  "y": 70.4,
+                  "r": 15,
+                  "n": 1
+                }
+              ]
+            }
+          }
+        }
+      },
+      "evidence": {
+        "reason": "Se retiran las visitas a Alonso. La guía de Forever Questward retiró este encuentro de Season of Discovery y varios jugadores de Forever informan de que no encuentran al personaje en el punto marcado.",
+        "sources": [
+          {
+            "url": "https://www.curseforge.com/wow/addons/questward-forever/files/9529029",
+            "detail": "La versión 1.0.7 de Questward para Forever retira los pasos exclusivos de Season of Discovery y menciona a Alonso en Vallefresno."
+          },
+          {
+            "url": "https://www.wowhead.com/forever/npc=210995/alonso#comments",
+            "detail": "Tres jugadores de Forever describen visitas al punto de la base de datos sin encontrar a Alonso. Las coordenadas importadas no acreditan una aparición en el reino."
+          }
+        ],
+        "retiredStep": {
+          "step": 11,
+          "title": "Alonso",
+          "note": "Alonso, una adición Forever, se encuentra en la orilla oeste de Lago Mystral con tres rápidos Dragonslayer misiones."
+        }
+      }
     }
   ]
 }

@@ -508,7 +508,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "65d3ea5973b66cb183d7879df56707af8e61728289f7af74020034c5a17dff1d",
+      "sha256": "3e41c0e3f562454db7eae5a3e6fd2947e9a9c0e489c140a1587ef22019930ab7",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -550,7 +550,9 @@
         "badlands-kreldig-efficiency-2",
         "stranglethorn-booty-bay-efficiency-2",
         "feralas-feathermoon-efficiency-2",
-        "silithus-ironforge-districts-efficiency-2"
+        "silithus-ironforge-districts-efficiency-2",
+        "ashenvale-alliance-retire-alonso-5",
+        "ashenvale-horde-retire-alonso-2"
       ]
     }
   },
@@ -570,25 +572,25 @@
       "Alliance": 29,
       "Horde": 28
     },
-    "steps": 2343,
-    "goals": 7458,
+    "steps": 2342,
+    "goals": 7446,
     "goalTypes": {
-      "accept": 2290,
+      "accept": 2289,
       "buy": 27,
-      "collect": 1103,
-      "complete": 237,
+      "collect": 1104,
+      "complete": 239,
       "fly": 165,
       "getfp": 76,
-      "goto": 99,
+      "goto": 98,
       "hearth": 84,
       "interact": 50,
-      "kill": 608,
+      "kill": 611,
       "level": 25,
-      "note": 116,
+      "note": 115,
       "sethome": 74,
       "talk": 10,
       "train": 126,
-      "turnin": 2288,
+      "turnin": 2287,
       "use": 18,
       "vendor": 48
     },
@@ -598,14 +600,14 @@
       "class": 116,
       "closedBy": 152,
       "count": 1199,
-      "f": 5502,
+      "f": 5490,
       "from": 737,
       "fromAlso": 97,
       "fromFaction": 11,
       "fromKind": 737,
       "fromRank": 17,
       "group": 9,
-      "instruction": 7458,
+      "instruction": 7446,
       "instructionAsHint": 2,
       "instructionReplacesContext": 6,
       "instructionVerb": 11,
@@ -613,14 +615,14 @@
       "itemName": 1214,
       "level": 25,
       "location": 399,
-      "map": 6575,
-      "minLevel": 2293,
+      "map": 6563,
+      "minLevel": 2287,
       "navigationHint": 434,
       "navigationMode": 14,
       "node": 76,
-      "note": 3570,
-      "npc": 4997,
-      "npcName": 4386,
+      "note": 3569,
+      "npc": 4985,
+      "npcName": 4374,
       "objName": 302,
       "object": 302,
       "oi": 1678,
@@ -632,22 +634,22 @@
       "profLine": 18,
       "profName": 18,
       "profRank": 18,
-      "qlvl": 2295,
-      "quest": 6505,
+      "qlvl": 2289,
+      "quest": 6493,
       "r": 2,
       "rank": 1,
       "rankMax": 1,
       "rewards": 8,
       "skill": 1,
       "skillLine": 1,
-      "spots": 1312,
+      "spots": 1300,
       "spread": 670,
-      "t": 7458,
+      "t": 7446,
       "target": 611,
       "text": 224,
-      "title": 6505,
-      "x": 6575,
-      "y": 6575,
+      "title": 6493,
+      "x": 6563,
+      "y": 6563,
       "z": 4468
     }
   },
@@ -84434,7 +84436,7 @@
         },
         {
           "title": "Lago Mystral",
-          "note": "Centinela Velene Estrella está en Refugio Brisa de Plata, en la orilla este de Lago Mystral. Alonso acampa en la orilla oeste. Los Befouled Elementales de agua se mueven por el lago entre ambos.",
+          "note": "La centinela Velene Estrella está en el Refugio Brisa de Plata, en la orilla este del lago Mystral. Busca los elementales de agua en el lago para reunir los brazales.",
           "goals": [
             {
               "title": "Brazales elementales",
@@ -84479,169 +84481,6 @@
               "z": 101.9,
               "f": "e",
               "instruction": "Habla con «Centinela Velene Estrella» y entrega «Brazales elementales».\nZona: Vallefresno."
-            },
-            {
-              "title": "Dragonslayer's Helm",
-              "minLevel": 15,
-              "note": "Alonso",
-              "t": "accept",
-              "quest": 78132,
-              "npc": 210995,
-              "npcName": "Alonso",
-              "map": 1440,
-              "x": 43.4,
-              "y": 70.4,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 43.4,
-                  "y": 70.4,
-                  "r": 15,
-                  "n": 1
-                },
-                {
-                  "x": 42.2,
-                  "y": 69.6,
-                  "r": 20,
-                  "n": 2
-                }
-              ],
-              "qlvl": 25,
-              "instruction": "Habla con «Alonso» y acepta «Dragonslayer's Helm».\nZona: Vallefresno."
-            },
-            {
-              "title": "Dragonslayer's Helm",
-              "t": "turnin",
-              "quest": 78132,
-              "npc": 210995,
-              "npcName": "Alonso",
-              "map": 1440,
-              "x": 43.4,
-              "y": 70.4,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 43.4,
-                  "y": 70.4,
-                  "r": 15,
-                  "n": 1
-                },
-                {
-                  "x": 42.2,
-                  "y": 69.6,
-                  "r": 20,
-                  "n": 2
-                }
-              ],
-              "instruction": "Habla con «Alonso» y entrega «Dragonslayer's Helm».\nZona: Vallefresno."
-            },
-            {
-              "title": "Dragonslayer's Shield",
-              "minLevel": 15,
-              "t": "accept",
-              "quest": 78133,
-              "npc": 210995,
-              "npcName": "Alonso",
-              "map": 1440,
-              "x": 43.4,
-              "y": 70.4,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 43.4,
-                  "y": 70.4,
-                  "r": 15,
-                  "n": 1
-                },
-                {
-                  "x": 42.2,
-                  "y": 69.6,
-                  "r": 20,
-                  "n": 2
-                }
-              ],
-              "qlvl": 25,
-              "instruction": "Habla con «Alonso» y acepta «Dragonslayer's Shield».\nZona: Vallefresno."
-            },
-            {
-              "title": "Dragonslayer's Shield",
-              "t": "turnin",
-              "quest": 78133,
-              "npc": 210995,
-              "npcName": "Alonso",
-              "map": 1440,
-              "x": 43.4,
-              "y": 70.4,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 43.4,
-                  "y": 70.4,
-                  "r": 15,
-                  "n": 1
-                },
-                {
-                  "x": 42.2,
-                  "y": 69.6,
-                  "r": 20,
-                  "n": 2
-                }
-              ],
-              "instruction": "Habla con «Alonso» y entrega «Dragonslayer's Shield».\nZona: Vallefresno."
-            },
-            {
-              "title": "Dragonslayer's Lance",
-              "minLevel": 15,
-              "t": "accept",
-              "quest": 78134,
-              "npc": 210995,
-              "npcName": "Alonso",
-              "map": 1440,
-              "x": 43.4,
-              "y": 70.4,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 43.4,
-                  "y": 70.4,
-                  "r": 15,
-                  "n": 1
-                },
-                {
-                  "x": 42.2,
-                  "y": 69.6,
-                  "r": 20,
-                  "n": 2
-                }
-              ],
-              "qlvl": 25,
-              "instruction": "Habla con «Alonso» y acepta «Dragonslayer's Lance».\nZona: Vallefresno."
-            },
-            {
-              "title": "Dragonslayer's Lance",
-              "t": "turnin",
-              "quest": 78134,
-              "npc": 210995,
-              "npcName": "Alonso",
-              "map": 1440,
-              "x": 43.4,
-              "y": 70.4,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 43.4,
-                  "y": 70.4,
-                  "r": 15,
-                  "n": 1
-                },
-                {
-                  "x": 42.2,
-                  "y": 69.6,
-                  "r": 20,
-                  "n": 2
-                }
-              ],
-              "instruction": "Habla con «Alonso» y entrega «Dragonslayer's Lance».\nZona: Vallefresno."
             }
           ]
         },
@@ -91983,7 +91822,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 4,
+      "routeRevision": 5,
       "progressMigrations": [
         {
           "from": 1,
@@ -92228,6 +92067,94 @@
           "affectedQuestIDs": [],
           "previousStepCount": 65,
           "firstAffectedStep": 32
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "goalMap": {},
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 30,
+            "31": 31,
+            "32": 32,
+            "33": 33,
+            "34": 34,
+            "35": 35,
+            "36": 36,
+            "37": 37,
+            "38": 38,
+            "39": 39,
+            "40": 40,
+            "41": 41,
+            "42": 42,
+            "43": 43,
+            "44": 44,
+            "45": 45,
+            "46": 46,
+            "47": 47,
+            "48": 48,
+            "49": 49,
+            "50": 50,
+            "51": 51,
+            "52": 52,
+            "53": 53,
+            "54": 54,
+            "55": 55,
+            "56": 56,
+            "57": 57,
+            "58": 58,
+            "59": 59,
+            "60": 60,
+            "61": 61,
+            "62": 62,
+            "63": 63,
+            "64": 64,
+            "65": 65,
+            "66": 66
+          },
+          "affectedQuestIDs": [
+            78132,
+            78133,
+            78134
+          ],
+          "previousStepCount": 65,
+          "firstAffectedStep": 66,
+          "retiredGoalKeys": {
+            "24:4": true,
+            "24:5": true,
+            "24:6": true,
+            "24:7": true,
+            "24:8": true,
+            "24:9": true
+          }
         }
       ]
     },
@@ -277694,174 +277621,6 @@
           ]
         },
         {
-          "title": "Alonso",
-          "note": "Alonso, una adición Forever, se encuentra en la orilla oeste de Lago Mystral con tres rápidos Dragonslayer misiones.",
-          "goals": [
-            {
-              "title": "Dragonslayer's Helm",
-              "minLevel": 15,
-              "t": "accept",
-              "quest": 78132,
-              "npc": 210995,
-              "npcName": "Alonso",
-              "map": 1440,
-              "x": 42,
-              "y": 69.2,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 42.2,
-                  "y": 69.6,
-                  "r": 20,
-                  "n": 2
-                },
-                {
-                  "x": 43.4,
-                  "y": 70.4,
-                  "r": 15,
-                  "n": 1
-                }
-              ],
-              "qlvl": 25,
-              "instruction": "Habla con «Alonso» y acepta «Dragonslayer's Helm».\nZona: Vallefresno."
-            },
-            {
-              "title": "Dragonslayer's Helm",
-              "t": "turnin",
-              "quest": 78132,
-              "npc": 210995,
-              "npcName": "Alonso",
-              "map": 1440,
-              "x": 42,
-              "y": 69.2,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 42.2,
-                  "y": 69.6,
-                  "r": 20,
-                  "n": 2
-                },
-                {
-                  "x": 43.4,
-                  "y": 70.4,
-                  "r": 15,
-                  "n": 1
-                }
-              ],
-              "instruction": "Habla con «Alonso» y entrega «Dragonslayer's Helm».\nZona: Vallefresno."
-            },
-            {
-              "title": "Dragonslayer's Shield",
-              "minLevel": 15,
-              "t": "accept",
-              "quest": 78133,
-              "npc": 210995,
-              "npcName": "Alonso",
-              "map": 1440,
-              "x": 42,
-              "y": 69.2,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 42.2,
-                  "y": 69.6,
-                  "r": 20,
-                  "n": 2
-                },
-                {
-                  "x": 43.4,
-                  "y": 70.4,
-                  "r": 15,
-                  "n": 1
-                }
-              ],
-              "qlvl": 25,
-              "instruction": "Habla con «Alonso» y acepta «Dragonslayer's Shield».\nZona: Vallefresno."
-            },
-            {
-              "title": "Dragonslayer's Shield",
-              "t": "turnin",
-              "quest": 78133,
-              "npc": 210995,
-              "npcName": "Alonso",
-              "map": 1440,
-              "x": 42,
-              "y": 69.2,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 42.2,
-                  "y": 69.6,
-                  "r": 20,
-                  "n": 2
-                },
-                {
-                  "x": 43.4,
-                  "y": 70.4,
-                  "r": 15,
-                  "n": 1
-                }
-              ],
-              "instruction": "Habla con «Alonso» y entrega «Dragonslayer's Shield».\nZona: Vallefresno."
-            },
-            {
-              "title": "Dragonslayer's Lance",
-              "minLevel": 15,
-              "t": "accept",
-              "quest": 78134,
-              "npc": 210995,
-              "npcName": "Alonso",
-              "map": 1440,
-              "x": 42,
-              "y": 69.2,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 42.2,
-                  "y": 69.6,
-                  "r": 20,
-                  "n": 2
-                },
-                {
-                  "x": 43.4,
-                  "y": 70.4,
-                  "r": 15,
-                  "n": 1
-                }
-              ],
-              "qlvl": 25,
-              "instruction": "Habla con «Alonso» y acepta «Dragonslayer's Lance».\nZona: Vallefresno."
-            },
-            {
-              "title": "Dragonslayer's Lance",
-              "t": "turnin",
-              "quest": 78134,
-              "npc": 210995,
-              "npcName": "Alonso",
-              "map": 1440,
-              "x": 42,
-              "y": 69.2,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 42.2,
-                  "y": 69.6,
-                  "r": 20,
-                  "n": 2
-                },
-                {
-                  "x": 43.4,
-                  "y": 70.4,
-                  "r": 15,
-                  "n": 1
-                }
-              ],
-              "instruction": "Habla con «Alonso» y entrega «Dragonslayer's Lance».\nZona: Vallefresno."
-            }
-          ]
-        },
-        {
           "title": "Tideress",
           "note": "Tideress, un agua dañada elemental, deriva en Lago Mystral. Her Globo de agua contaminada inicia un misión para Splintertree.",
           "goals": [
@@ -283260,7 +283019,212 @@
       ],
       "_sendaLocale": "esES",
       "pack": "guides",
-      "version": 1
+      "version": 1,
+      "routeRevision": 2,
+      "progressMigrations": [
+        {
+          "from": 1,
+          "to": 2,
+          "goalMap": {
+            "12:1": "11:1",
+            "12:2": "11:2",
+            "13:1": "12:1",
+            "14:1": "13:1",
+            "14:2": "13:2",
+            "15:1": "14:1",
+            "15:2": "14:2",
+            "15:3": "14:3",
+            "16:1": "15:1",
+            "16:2": "15:2",
+            "16:3": "15:3",
+            "16:4": "15:4",
+            "16:5": "15:5",
+            "16:6": "15:6",
+            "16:7": "15:7",
+            "16:8": "15:8",
+            "16:9": "15:9",
+            "16:10": "15:10",
+            "16:11": "15:11",
+            "17:1": "16:1",
+            "17:2": "16:2",
+            "18:1": "17:1",
+            "19:1": "18:1",
+            "19:2": "18:2",
+            "20:1": "19:1",
+            "20:2": "19:2",
+            "20:3": "19:3",
+            "21:1": "20:1",
+            "21:2": "20:2",
+            "21:3": "20:3",
+            "21:4": "20:4",
+            "21:5": "20:5",
+            "21:6": "20:6",
+            "21:7": "20:7",
+            "22:1": "21:1",
+            "22:2": "21:2",
+            "22:3": "21:3",
+            "23:1": "22:1",
+            "23:2": "22:2",
+            "24:1": "23:1",
+            "24:2": "23:2",
+            "24:3": "23:3",
+            "25:1": "24:1",
+            "25:2": "24:2",
+            "25:3": "24:3",
+            "25:4": "24:4",
+            "25:5": "24:5",
+            "25:6": "24:6",
+            "26:1": "25:1",
+            "26:2": "25:2",
+            "26:3": "25:3",
+            "26:4": "25:4",
+            "27:1": "26:1",
+            "27:2": "26:2",
+            "27:3": "26:3",
+            "28:1": "27:1",
+            "28:2": "27:2",
+            "28:3": "27:3",
+            "29:1": "28:1",
+            "29:2": "28:2",
+            "29:3": "28:3",
+            "29:4": "28:4",
+            "29:5": "28:5",
+            "29:6": "28:6",
+            "29:7": "28:7",
+            "29:8": "28:8",
+            "30:1": "29:1",
+            "31:1": "30:1",
+            "31:2": "30:2",
+            "32:1": "31:1",
+            "32:2": "31:2",
+            "32:3": "31:3",
+            "32:4": "31:4",
+            "32:5": "31:5",
+            "33:1": "32:1",
+            "33:2": "32:2",
+            "33:3": "32:3",
+            "33:4": "32:4",
+            "34:1": "33:1",
+            "34:2": "33:2",
+            "35:1": "34:1",
+            "35:2": "34:2",
+            "35:3": "34:3",
+            "36:1": "35:1",
+            "36:2": "35:2",
+            "36:3": "35:3",
+            "37:1": "36:1",
+            "37:2": "36:2",
+            "37:3": "36:3",
+            "37:4": "36:4",
+            "37:5": "36:5",
+            "37:6": "36:6",
+            "38:1": "37:1",
+            "38:2": "37:2",
+            "38:3": "37:3",
+            "39:1": "38:1",
+            "40:1": "39:1",
+            "40:2": "39:2",
+            "40:3": "39:3",
+            "40:4": "39:4",
+            "41:1": "40:1",
+            "41:2": "40:2",
+            "41:3": "40:3",
+            "41:4": "40:4",
+            "41:5": "40:5",
+            "41:6": "40:6",
+            "42:1": "41:1",
+            "42:2": "41:2",
+            "43:1": "42:1",
+            "43:2": "42:2",
+            "44:1": "43:1",
+            "44:2": "43:2",
+            "44:3": "43:3",
+            "44:4": "43:4",
+            "44:5": "43:5",
+            "44:6": "43:6",
+            "45:1": "44:1",
+            "45:2": "44:2",
+            "45:3": "44:3",
+            "45:4": "44:4",
+            "45:5": "44:5",
+            "45:6": "44:6",
+            "45:7": "44:7",
+            "46:1": "45:1",
+            "46:2": "45:2",
+            "46:3": "45:3",
+            "46:4": "45:4",
+            "46:5": "45:5",
+            "46:6": "45:6",
+            "47:1": "46:1",
+            "47:2": "46:2"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "12": 11,
+            "13": 12,
+            "14": 13,
+            "15": 14,
+            "16": 15,
+            "17": 16,
+            "18": 17,
+            "19": 18,
+            "20": 19,
+            "21": 20,
+            "22": 21,
+            "23": 22,
+            "24": 23,
+            "25": 24,
+            "26": 25,
+            "27": 26,
+            "28": 27,
+            "29": 28,
+            "30": 29,
+            "31": 30,
+            "32": 31,
+            "33": 32,
+            "34": 33,
+            "35": 34,
+            "36": 35,
+            "37": 36,
+            "38": 37,
+            "39": 38,
+            "40": 39,
+            "41": 40,
+            "42": 41,
+            "43": 42,
+            "44": 43,
+            "45": 44,
+            "46": 45,
+            "47": 46,
+            "11": 11,
+            "48": 47
+          },
+          "affectedQuestIDs": [
+            78132,
+            78133,
+            78134
+          ],
+          "previousStepCount": 47,
+          "firstAffectedStep": 48,
+          "retiredGoalKeys": {
+            "11:1": true,
+            "11:2": true,
+            "11:3": true,
+            "11:4": true,
+            "11:5": true,
+            "11:6": true
+          }
+        }
+      ]
     },
     {
       "id": "forever/horde/30-40/01-desolace",

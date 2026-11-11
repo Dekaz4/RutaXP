@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "scope": {
     "guides": 57,
-    "questIDs": 1905,
-    "acceptances": 2295,
+    "questIDs": 1902,
+    "acceptances": 2289,
     "withReportedEvidence": 1851,
-    "withoutReportedEvidence": 54
+    "withoutReportedEvidence": 51
   },
   "sourceCommits": {
     "everythingquests": "8e7aa971319226f984639d4dae06e864b50c4fb4",
@@ -49,7 +49,7 @@
     "level_conflict_review": 15,
     "missing_active_parent": 10,
     "missing_prerequisite": 50,
-    "no_source_data": 61,
+    "no_source_data": 55,
     "prerequisite_conflict_review": 44,
     "selector_conflict_review": 35,
     "source_omission_review": 57
@@ -133,10 +133,9 @@
     },
     {
       "guideID": "forever/alliance/06-ashenvale",
-      "acceptances": 57,
+      "acceptances": 54,
       "findings": {
-        "additional_gate_review": 1,
-        "no_source_data": 3
+        "additional_gate_review": 1
       }
     },
     {
@@ -378,10 +377,10 @@
     },
     {
       "guideID": "forever/horde/07-ashenvale",
-      "acceptances": 47,
+      "acceptances": 44,
       "findings": {
         "missing_prerequisite": 2,
-        "no_source_data": 4,
+        "no_source_data": 1,
         "source_omission_review": 1
       }
     },
@@ -2886,42 +2885,6 @@
           }
         ]
       }
-    },
-    {
-      "guideID": "forever/alliance/06-ashenvale",
-      "step": 24,
-      "goal": 4,
-      "questID": 78132,
-      "title": "Dragonslayer's Helm",
-      "kind": "no_source_data",
-      "field": "availability",
-      "authored": null,
-      "reported": null,
-      "evidence": []
-    },
-    {
-      "guideID": "forever/alliance/06-ashenvale",
-      "step": 24,
-      "goal": 6,
-      "questID": 78133,
-      "title": "Dragonslayer's Shield",
-      "kind": "no_source_data",
-      "field": "availability",
-      "authored": null,
-      "reported": null,
-      "evidence": []
-    },
-    {
-      "guideID": "forever/alliance/06-ashenvale",
-      "step": 24,
-      "goal": 8,
-      "questID": 78134,
-      "title": "Dragonslayer's Lance",
-      "kind": "no_source_data",
-      "field": "availability",
-      "authored": null,
-      "reported": null,
-      "evidence": []
     },
     {
       "guideID": "forever/alliance/06-ashenvale",
@@ -6448,43 +6411,7 @@
     },
     {
       "guideID": "forever/horde/07-ashenvale",
-      "step": 11,
-      "goal": 1,
-      "questID": 78132,
-      "title": "Dragonslayer's Helm",
-      "kind": "no_source_data",
-      "field": "availability",
-      "authored": null,
-      "reported": null,
-      "evidence": []
-    },
-    {
-      "guideID": "forever/horde/07-ashenvale",
-      "step": 11,
-      "goal": 3,
-      "questID": 78133,
-      "title": "Dragonslayer's Shield",
-      "kind": "no_source_data",
-      "field": "availability",
-      "authored": null,
-      "reported": null,
-      "evidence": []
-    },
-    {
-      "guideID": "forever/horde/07-ashenvale",
-      "step": 11,
-      "goal": 5,
-      "questID": 78134,
-      "title": "Dragonslayer's Lance",
-      "kind": "no_source_data",
-      "field": "availability",
-      "authored": null,
-      "reported": null,
-      "evidence": []
-    },
-    {
-      "guideID": "forever/horde/07-ashenvale",
-      "step": 29,
+      "step": 28,
       "goal": 4,
       "questID": 4841,
       "title": "Apaciguar al centauro",
@@ -6510,12 +6437,12 @@
       "dependencyLocations": {
         "4542": [
           {
-            "step": 28,
+            "step": 27,
             "goal": 3,
             "action": "accept"
           },
           {
-            "step": 29,
+            "step": 28,
             "goal": 3,
             "action": "turnin"
           }
@@ -6524,7 +6451,7 @@
     },
     {
       "guideID": "forever/horde/07-ashenvale",
-      "step": 29,
+      "step": 28,
       "goal": 7,
       "questID": 98070,
       "title": "Stop the Screeching",
@@ -6536,7 +6463,7 @@
     },
     {
       "guideID": "forever/horde/07-ashenvale",
-      "step": 46,
+      "step": 45,
       "goal": 4,
       "questID": 1106,
       "title": "Martek el Exiliado",
@@ -7738,6 +7665,6 @@
     "Local dependency locations are diagnostic; this audit does not assume a previous zone was completed.",
     "No runtime quest completion, profession or player's progress is modified by this audit."
   ],
-  "inputSha256": "063c0e5c87afeeec98643ae34f84de9ff17161a375010330fde0f3ed12df4cd6",
+  "inputSha256": "067ba268530de6fba6875beceadfa99e2b0cc2be70066f49edf0942b73db1304",
   "evidenceSha256": "c06b0934ce25451ead85925ad75dff623224ce1dd542b58c322d2aab23edef4f"
 }

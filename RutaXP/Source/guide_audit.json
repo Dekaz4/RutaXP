@@ -508,7 +508,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "65d3ea5973b66cb183d7879df56707af8e61728289f7af74020034c5a17dff1d",
+      "sha256": "3e41c0e3f562454db7eae5a3e6fd2947e9a9c0e489c140a1587ef22019930ab7",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -550,16 +550,18 @@
         "badlands-kreldig-efficiency-2",
         "stranglethorn-booty-bay-efficiency-2",
         "feralas-feathermoon-efficiency-2",
-        "silithus-ironforge-districts-efficiency-2"
+        "silithus-ironforge-districts-efficiency-2",
+        "ashenvale-alliance-retire-alonso-5",
+        "ashenvale-horde-retire-alonso-2"
       ]
     }
   },
   "totals": {
     "guides": 57,
-    "goals": 7458,
-    "direct": 6574,
-    "generated_instruction": 7458,
-    "missing_goal_note_text": 3673,
+    "goals": 7446,
+    "direct": 6562,
+    "generated_instruction": 7446,
+    "missing_goal_note_text": 3662,
     "missing": 288,
     "no_fixed_point_expected": 300,
     "empty_authored_subtitle": 819,
@@ -569,14 +571,14 @@
     "reference_only": 3,
     "conditional_navigation": 2,
     "conditional_point_expected": 2,
-    "steps": 2343
+    "steps": 2342
   },
   "byAction": {
     "accept": {
-      "goals": 2295,
-      "direct": 2231,
-      "generated_instruction": 2295,
-      "missing_goal_note_text": 1286,
+      "goals": 2289,
+      "direct": 2225,
+      "generated_instruction": 2289,
+      "missing_goal_note_text": 1281,
       "missing": 64,
       "no_fixed_point_expected": 64,
       "empty_authored_subtitle": 151
@@ -683,10 +685,10 @@
       "direct": 9
     },
     "turnin": {
-      "goals": 2293,
-      "direct": 2293,
-      "generated_instruction": 2293,
-      "missing_goal_note_text": 784,
+      "goals": 2287,
+      "direct": 2287,
+      "generated_instruction": 2287,
+      "missing_goal_note_text": 778,
       "empty_authored_subtitle": 81
     },
     "use": {
@@ -1437,10 +1439,10 @@
       "guideID": "forever/alliance/06-ashenvale",
       "title": "Vallefresno, Los Humedales y Sierra Espolón",
       "counts": {
-        "goals": 182,
-        "direct": 162,
-        "generated_instruction": 182,
-        "missing_goal_note_text": 71,
+        "goals": 176,
+        "direct": 156,
+        "generated_instruction": 176,
+        "missing_goal_note_text": 66,
         "candidates": 14,
         "empty_authored_subtitle": 16,
         "missing": 6,
@@ -1448,10 +1450,10 @@
       },
       "byAction": {
         "accept": {
-          "goals": 57,
-          "direct": 57,
-          "generated_instruction": 57,
-          "missing_goal_note_text": 33,
+          "goals": 54,
+          "direct": 54,
+          "generated_instruction": 54,
+          "missing_goal_note_text": 31,
           "empty_authored_subtitle": 3
         },
         "collect": {
@@ -1526,10 +1528,10 @@
           "missing_goal_note_text": 2
         },
         "turnin": {
-          "goals": 63,
-          "direct": 63,
-          "generated_instruction": 63,
-          "missing_goal_note_text": 18,
+          "goals": 60,
+          "direct": 60,
+          "generated_instruction": 60,
+          "missing_goal_note_text": 15,
           "empty_authored_subtitle": 1
         },
         "vendor": {
@@ -4273,21 +4275,21 @@
       "guideID": "forever/horde/07-ashenvale",
       "title": "Vallefresno & Las Mil Agujas",
       "counts": {
-        "goals": 161,
+        "goals": 155,
         "candidates": 17,
-        "generated_instruction": 161,
-        "missing_goal_note_text": 84,
+        "generated_instruction": 155,
+        "missing_goal_note_text": 78,
         "empty_authored_subtitle": 26,
-        "direct": 133,
+        "direct": 127,
         "missing": 11,
         "no_fixed_point_expected": 11
       },
       "byAction": {
         "accept": {
-          "goals": 47,
-          "direct": 41,
-          "generated_instruction": 47,
-          "missing_goal_note_text": 22,
+          "goals": 44,
+          "direct": 38,
+          "generated_instruction": 44,
+          "missing_goal_note_text": 19,
           "missing": 6,
           "no_fixed_point_expected": 6,
           "empty_authored_subtitle": 6
@@ -4359,10 +4361,10 @@
           "missing_goal_note_text": 2
         },
         "turnin": {
-          "goals": 46,
-          "direct": 46,
-          "generated_instruction": 46,
-          "missing_goal_note_text": 11
+          "goals": 43,
+          "direct": 43,
+          "generated_instruction": 43,
+          "missing_goal_note_text": 8
         },
         "vendor": {
           "goals": 2,
@@ -10148,9 +10150,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/07-ashenvale:12:2",
+      "key": "forever/horde/07-ashenvale:11:2",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 12,
+      "stepIndex": 11,
       "goalIndex": 2,
       "action": "accept",
       "questID": 1918,
@@ -10160,7 +10162,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 12,
+        "stepIndex": 11,
         "goalIndex": 2
       },
       "classification": "item_start",
@@ -10172,9 +10174,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/07-ashenvale:17:2",
+      "key": "forever/horde/07-ashenvale:16:2",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 17,
+      "stepIndex": 16,
       "goalIndex": 2,
       "action": "accept",
       "questID": 2,
@@ -10184,7 +10186,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 17,
+        "stepIndex": 16,
         "goalIndex": 2
       },
       "classification": "item_start",
@@ -10196,9 +10198,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/07-ashenvale:19:2",
+      "key": "forever/horde/07-ashenvale:18:2",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 19,
+      "stepIndex": 18,
       "goalIndex": 2,
       "action": "accept",
       "questID": 24,
@@ -10208,7 +10210,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 19,
+        "stepIndex": 18,
         "goalIndex": 2
       },
       "classification": "item_start",
@@ -10220,9 +10222,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/07-ashenvale:21:1",
+      "key": "forever/horde/07-ashenvale:20:1",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 21,
+      "stepIndex": 20,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -10232,7 +10234,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 21,
+        "stepIndex": 20,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -10244,9 +10246,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/07-ashenvale:25:6",
+      "key": "forever/horde/07-ashenvale:24:6",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 25,
+      "stepIndex": 24,
       "goalIndex": 6,
       "action": "accept",
       "questID": 96294,
@@ -10256,7 +10258,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 25,
+        "stepIndex": 24,
         "goalIndex": 6
       },
       "classification": "item_start",
@@ -10268,9 +10270,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/07-ashenvale:32:5",
+      "key": "forever/horde/07-ashenvale:31:5",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 32,
+      "stepIndex": 31,
       "goalIndex": 5,
       "action": "accept",
       "questID": 4881,
@@ -10280,7 +10282,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 32,
+        "stepIndex": 31,
         "goalIndex": 5
       },
       "classification": "item_start",
@@ -10292,9 +10294,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/07-ashenvale:37:2",
+      "key": "forever/horde/07-ashenvale:36:2",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 37,
+      "stepIndex": 36,
       "goalIndex": 2,
       "action": "note",
       "questID": null,
@@ -10304,7 +10306,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 37,
+        "stepIndex": 36,
         "goalIndex": 2
       },
       "classification": "semantic_no_location",
@@ -10316,9 +10318,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/07-ashenvale:47:1",
+      "key": "forever/horde/07-ashenvale:46:1",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 47,
+      "stepIndex": 46,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -10328,7 +10330,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 47,
+        "stepIndex": 46,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -10340,9 +10342,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/horde/07-ashenvale:47:2",
+      "key": "forever/horde/07-ashenvale:46:2",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 47,
+      "stepIndex": 46,
       "goalIndex": 2,
       "action": "note",
       "questID": null,
@@ -10352,7 +10354,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 47,
+        "stepIndex": 46,
         "goalIndex": 2
       },
       "classification": "semantic_no_location",
@@ -15806,9 +15808,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/07-ashenvale:14:2",
+      "key": "forever/horde/07-ashenvale:13:2",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 14,
+      "stepIndex": 13,
       "goalIndex": 2,
       "action": "complete",
       "questID": 6544,
@@ -15818,7 +15820,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 14,
+        "stepIndex": 13,
         "goalIndex": 2
       },
       "kind": "step_instructions_not_goal",
@@ -15826,9 +15828,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/07-ashenvale:20:3",
+      "key": "forever/horde/07-ashenvale:19:3",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 20,
+      "stepIndex": 19,
       "goalIndex": 3,
       "action": "complete",
       "questID": 25,
@@ -15838,7 +15840,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 20,
+        "stepIndex": 19,
         "goalIndex": 3
       },
       "kind": "step_instructions_not_goal",
@@ -15846,9 +15848,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/07-ashenvale:33:2",
+      "key": "forever/horde/07-ashenvale:32:2",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 33,
+      "stepIndex": 32,
       "goalIndex": 2,
       "action": "complete",
       "questID": 1149,
@@ -15858,7 +15860,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 33,
+        "stepIndex": 32,
         "goalIndex": 2
       },
       "kind": "step_instructions_not_goal",
@@ -15866,9 +15868,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/07-ashenvale:36:3",
+      "key": "forever/horde/07-ashenvale:35:3",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 36,
+      "stepIndex": 35,
       "goalIndex": 3,
       "action": "complete",
       "questID": 4904,
@@ -15878,7 +15880,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 36,
+        "stepIndex": 35,
         "goalIndex": 3
       },
       "kind": "step_instructions_not_goal",
@@ -15886,9 +15888,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/horde/07-ashenvale:38:3",
+      "key": "forever/horde/07-ashenvale:37:3",
       "guideID": "forever/horde/07-ashenvale",
-      "stepIndex": 38,
+      "stepIndex": 37,
       "goalIndex": 3,
       "action": "complete",
       "questID": 4770,
@@ -15898,7 +15900,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/horde/07-ashenvale",
-        "stepIndex": 38,
+        "stepIndex": 37,
         "goalIndex": 3
       },
       "kind": "step_instructions_not_goal",
@@ -16860,6 +16862,6 @@
       "location",
       "requiredLevel"
     ],
-    "semanticsSha256": "63b3a875b9b436bc8be6d05b31870f9da698d7c7836d721ffb3b12eea6e501cd"
+    "semanticsSha256": "9b1ec28b3333471ba0233d7c03b0ad1509ba5fcacd263a446b4b8deacf8dcdf2"
   }
 }

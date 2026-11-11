@@ -3,11 +3,11 @@
   "sourceCommit": "5d207e28e82e2c529143b21ace74fe88692f0067",
   "scope": {
     "guides": 57,
-    "steps": 2343,
-    "goals": 7458,
-    "questIDs": 1905,
+    "steps": 2342,
+    "goals": 7446,
+    "questIDs": 1902,
     "actions": {
-      "accept": 2295,
+      "accept": 2289,
       "buy": 27,
       "collect": 1104,
       "complete": 239,
@@ -22,13 +22,13 @@
       "sethome": 74,
       "talk": 10,
       "train": 126,
-      "turnin": 2293,
+      "turnin": 2287,
       "use": 18,
       "vendor": 48
     },
     "goalFields": {
-      "t": 7458,
-      "quest": 6505,
+      "t": 7446,
+      "quest": 6493,
       "oi": 1678,
       "item": 1214,
       "count": 1199,
@@ -37,7 +37,7 @@
       "closedBy": 152,
       "only": 357,
       "optional": 414,
-      "minLevel": 2293,
+      "minLevel": 2287,
       "maxLevel": 0,
       "level": 25,
       "n": 0,
@@ -6843,6 +6843,11 @@
         "field": "quest",
         "source": null,
         "snapshot": 5321
+      },
+      {
+        "guideID": "forever/alliance/06-ashenvale",
+        "step": 24,
+        "field": "group shape/condition"
       },
       {
         "guideID": "forever/alliance/06-ashenvale",
@@ -13680,6 +13685,2797 @@
         ]
       },
       {
+        "guideID": "forever/horde/07-ashenvale",
+        "field": "step count"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 11,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 11,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 11,
+        "goal": 1,
+        "field": "quest",
+        "source": 78132,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 11,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 16408
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 11,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 15,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 11,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 11,
+        "goal": 2,
+        "field": "quest",
+        "source": 78132,
+        "snapshot": 1918
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 11,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 16408
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 11,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 23
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 12,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 12,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 6621
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 12,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 12,
+        "goal": 1,
+        "field": "item",
+        "source": 16408,
+        "snapshot": 16976
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 13,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 13,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 13,
+        "goal": 1,
+        "field": "quest",
+        "source": 6621,
+        "snapshot": 6544
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 13,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 13,
+        "goal": 1,
+        "field": "item",
+        "source": 16976,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 13,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 20
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 14,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 14,
+        "goal": 1,
+        "field": "quest",
+        "source": 6544,
+        "snapshot": 6503
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 14,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 20,
+        "snapshot": 19
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 14,
+        "goal": 2,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 14,
+        "goal": 2,
+        "field": "quest",
+        "source": 6544,
+        "snapshot": 6503
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 14,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 14,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 9
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 15,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 15,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "sethome"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 15,
+        "goal": 1,
+        "field": "quest",
+        "source": 6503,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 15,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 19,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 15,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 15,
+        "goal": 2,
+        "field": "quest",
+        "source": 6503,
+        "snapshot": 6544
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 15,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 15,
+        "goal": 2,
+        "field": "count",
+        "source": 9,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 15,
+        "goal": 3,
+        "field": "quest",
+        "source": 6503,
+        "snapshot": 6482
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 16,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 16,
+        "goal": 1,
+        "field": "t",
+        "source": "sethome",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 16,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 16305
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 16,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 16,
+        "goal": 2,
+        "field": "quest",
+        "source": 6544,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 16,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 16305
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 16,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          6383
+        ]
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 16,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 20
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 17,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 17,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 6441
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 17,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 17,
+        "goal": 1,
+        "field": "item",
+        "source": 16305,
+        "snapshot": 5481
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 17,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 16
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 18,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 18,
+        "goal": 1,
+        "field": "quest",
+        "source": 6441,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 18,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 18,
+        "goal": 1,
+        "field": "item",
+        "source": 5481,
+        "snapshot": 16304
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 18,
+        "goal": 1,
+        "field": "count",
+        "source": 16,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 19,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 19,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 19,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 25
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 19,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 19,
+        "goal": 1,
+        "field": "item",
+        "source": 16304,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 19,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 12
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 19,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "goto"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 19,
+        "goal": 2,
+        "field": "quest",
+        "source": 24,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 19,
+        "goal": 2,
+        "field": "item",
+        "source": 16304,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 19,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          6383
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 19,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 20,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 20,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 20,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "hearth"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 20,
+        "goal": 1,
+        "field": "quest",
+        "source": 25,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 20,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 20,
+        "goal": 1,
+        "field": "count",
+        "source": 12,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 20,
+        "goal": 2,
+        "field": "t",
+        "source": "goto",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 20,
+        "goal": 2,
+        "field": "quest",
+        "source": null,
+        "snapshot": 25
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 20,
+        "goal": 3,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 20,
+        "goal": 3,
+        "field": "quest",
+        "source": 25,
+        "snapshot": 6441
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 21,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 21,
+        "goal": 1,
+        "field": "t",
+        "source": "hearth",
+        "snapshot": "fly"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 21,
+        "goal": 2,
+        "field": "quest",
+        "source": 25,
+        "snapshot": 6621
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 21,
+        "goal": 3,
+        "field": "quest",
+        "source": 6441,
+        "snapshot": 824
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 22,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 22,
+        "goal": 1,
+        "field": "t",
+        "source": "fly",
+        "snapshot": "getfp"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 22,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 22,
+        "goal": 2,
+        "field": "quest",
+        "source": 6621,
+        "snapshot": 93739
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 22,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 3
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 22,
+        "goal": 2,
+        "field": "only",
+        "source": null,
+        "snapshot": {
+          "races": [
+            "Skyborne"
+          ]
+        }
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 22,
+        "goal": 2,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 23,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 23,
+        "goal": 1,
+        "field": "t",
+        "source": "getfp",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 23,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 96241
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 23,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 23
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 23,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 23,
+        "goal": 2,
+        "field": "quest",
+        "source": 93739,
+        "snapshot": 96260
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 23,
+        "goal": 2,
+        "field": "oi",
+        "source": 3,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 23,
+        "goal": 2,
+        "field": "only",
+        "source": {
+          "races": [
+            "Skyborne"
+          ]
+        },
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 23,
+        "goal": 2,
+        "field": "optional",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 23,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 23
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 273001
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 23,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 273181
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 3
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 23,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 3,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 3,
+        "field": "count",
+        "source": null,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 24,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 23,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 1,
+        "field": "item",
+        "source": 273001,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 1,
+        "field": "count",
+        "source": 5,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 2,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 2,
+        "field": "item",
+        "source": 273181,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 2,
+        "field": "count",
+        "source": 3,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 3,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 3,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 3,
+        "field": "count",
+        "source": 5,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 4,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 4,
+        "field": "quest",
+        "source": 96259,
+        "snapshot": 96294
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 4,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 25,
+        "goal": 4,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 26,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 26,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "fly"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 26,
+        "goal": 1,
+        "field": "quest",
+        "source": 96241,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 26,
+        "goal": 2,
+        "field": "quest",
+        "source": 96260,
+        "snapshot": 1534
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 26,
+        "goal": 3,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 26,
+        "goal": 3,
+        "field": "quest",
+        "source": 96259,
+        "snapshot": 220
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 26,
+        "goal": 3,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1534
+        ]
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 26,
+        "goal": 3,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 20
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 27,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 27,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "goto"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 27,
+        "goal": 2,
+        "field": "quest",
+        "source": 1534,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 27,
+        "goal": 3,
+        "field": "quest",
+        "source": 220,
+        "snapshot": 4542
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 27,
+        "goal": 3,
+        "field": "pre",
+        "source": [
+          1534
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 27,
+        "goal": 3,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          4841
+        ]
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 27,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 20,
+        "snapshot": 23
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 28,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 28,
+        "goal": 1,
+        "field": "t",
+        "source": "fly",
+        "snapshot": "getfp"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 28,
+        "goal": 2,
+        "field": "t",
+        "source": "goto",
+        "snapshot": "sethome"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 28,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 28,
+        "goal": 3,
+        "field": "closedBy",
+        "source": [
+          4841
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 28,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 23,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 29,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 29,
+        "goal": 1,
+        "field": "t",
+        "source": "getfp",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 29,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 4821
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 29,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 29,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 12467
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 29,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 30,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 30,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 30,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 30,
+        "goal": 1,
+        "field": "item",
+        "source": 12467,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 30,
+        "goal": 1,
+        "field": "count",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 31,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 31,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 31,
+        "goal": 1,
+        "field": "quest",
+        "source": 4821,
+        "snapshot": 4841
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 31,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 31,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 12
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 31,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 31,
+        "goal": 2,
+        "field": "quest",
+        "source": 4865,
+        "snapshot": 4841
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 31,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 31,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 31,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          4821
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 31,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 24,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 1,
+        "field": "quest",
+        "source": 4841,
+        "snapshot": 1149
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 1,
+        "field": "count",
+        "source": 12,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 25
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "complete"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 2,
+        "field": "quest",
+        "source": 4841,
+        "snapshot": 1149
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 2,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 2,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 3,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 3,
+        "field": "quest",
+        "source": 4841,
+        "snapshot": 1149
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 3,
+        "field": "oi",
+        "source": 3,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 3,
+        "field": "count",
+        "source": 6,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 4,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 4,
+        "field": "quest",
+        "source": null,
+        "snapshot": 1150
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 4,
+        "field": "item",
+        "source": 12564,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 4,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1149
+        ]
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 32,
+        "goal": 4,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 25
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 33,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 33,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 33,
+        "goal": 1,
+        "field": "quest",
+        "source": 1149,
+        "snapshot": 4841
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 33,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 25,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 33,
+        "goal": 2,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 33,
+        "goal": 2,
+        "field": "quest",
+        "source": 1149,
+        "snapshot": 5064
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 33,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          4841
+        ]
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 33,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 24
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 34,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 34,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "interact"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 34,
+        "goal": 1,
+        "field": "quest",
+        "source": 4841,
+        "snapshot": 5064
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 34,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 3
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 34,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "interact"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 34,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 34,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          4841
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 34,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 24,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 35,
+        "goal": 1,
+        "field": "t",
+        "source": "interact",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 35,
+        "goal": 1,
+        "field": "quest",
+        "source": 5064,
+        "snapshot": 5147
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 35,
+        "goal": 1,
+        "field": "oi",
+        "source": 3,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 35,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 12884
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 35,
+        "goal": 2,
+        "field": "t",
+        "source": "interact",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 35,
+        "goal": 2,
+        "field": "quest",
+        "source": 5064,
+        "snapshot": 4904
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 35,
+        "goal": 2,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 35,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 25
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 35,
+        "goal": 3,
+        "field": "t",
+        "source": "interact",
+        "snapshot": "complete"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 35,
+        "goal": 3,
+        "field": "quest",
+        "source": 5064,
+        "snapshot": 4904
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 35,
+        "goal": 3,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 36,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 36,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 36,
+        "goal": 1,
+        "field": "quest",
+        "source": 5147,
+        "snapshot": 4865
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 36,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 36,
+        "goal": 1,
+        "field": "item",
+        "source": 12884,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 36,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "note"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 36,
+        "goal": 2,
+        "field": "quest",
+        "source": 4904,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 36,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 25,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 36,
+        "goal": 3,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 36,
+        "goal": 3,
+        "field": "quest",
+        "source": 4904,
+        "snapshot": 4881
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 37,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 37,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 37,
+        "goal": 1,
+        "field": "quest",
+        "source": 4865,
+        "snapshot": 4767
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 37,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 37,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 12356
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 37,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 37,
+        "goal": 2,
+        "field": "t",
+        "source": "note",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 37,
+        "goal": 2,
+        "field": "quest",
+        "source": null,
+        "snapshot": 4770
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 37,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 25
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 37,
+        "goal": 3,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "complete"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 37,
+        "goal": 3,
+        "field": "quest",
+        "source": 4881,
+        "snapshot": 4770
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 38,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 38,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 38,
+        "goal": 1,
+        "field": "quest",
+        "source": 4767,
+        "snapshot": 4770
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 38,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 38,
+        "goal": 1,
+        "field": "item",
+        "source": 12356,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 38,
+        "goal": 1,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 39,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 39,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 39,
+        "goal": 1,
+        "field": "quest",
+        "source": 4770,
+        "snapshot": 1150
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 39,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 39,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 5843
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 1,
+        "field": "quest",
+        "source": 1150,
+        "snapshot": 5064
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 1,
+        "field": "item",
+        "source": 5843,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 2,
+        "field": "quest",
+        "source": 98070,
+        "snapshot": 5147
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 2,
+        "field": "count",
+        "source": 5,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 3,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 3,
+        "field": "quest",
+        "source": 98070,
+        "snapshot": 4904
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 3,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 3,
+        "field": "count",
+        "source": 5,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 4,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 4,
+        "field": "quest",
+        "source": 98070,
+        "snapshot": 4767
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 4,
+        "field": "oi",
+        "source": 3,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 40,
+        "goal": 4,
+        "field": "count",
+        "source": 5,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 41,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 41,
+        "goal": 1,
+        "field": "quest",
+        "source": 5064,
+        "snapshot": 1150
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 41,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 41,
+        "goal": 2,
+        "field": "quest",
+        "source": 5147,
+        "snapshot": 1151
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 41,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1150
+        ]
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 41,
+        "goal": 2,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 41,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 25
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 42,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 42,
+        "goal": 1,
+        "field": "quest",
+        "source": 1150,
+        "snapshot": 1151
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 42,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 42,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 5844
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 42,
+        "goal": 1,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 42,
+        "goal": 1,
+        "field": "group",
+        "source": null,
+        "snapshot": {
+          "kind": "elite",
+          "rank": 1
+        }
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 42,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 42,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1150
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 42,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 25,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 43,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 43,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 43,
+        "goal": 1,
+        "field": "quest",
+        "source": 1151,
+        "snapshot": 1110
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 43,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 43,
+        "goal": 1,
+        "field": "item",
+        "source": 5844,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 43,
+        "goal": 1,
+        "field": "optional",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 43,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 43,
+        "goal": 1,
+        "field": "group",
+        "source": {
+          "rank": 1,
+          "kind": "elite"
+        },
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 43,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 43,
+        "goal": 2,
+        "field": "quest",
+        "source": 1151,
+        "snapshot": 5762
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 43,
+        "goal": 2,
+        "field": "optional",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 43,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 5798
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 28,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 2,
+        "field": "quest",
+        "source": 5762,
+        "snapshot": 1104
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 5794
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 6
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 28,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 3,
+        "field": "quest",
+        "source": 1104,
+        "snapshot": 1105
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 3,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 3,
+        "field": "item",
+        "source": null,
+        "snapshot": 5795
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 3,
+        "field": "count",
+        "source": null,
+        "snapshot": 9
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 28,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 4,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 4,
+        "field": "quest",
+        "source": 1105,
+        "snapshot": 1176
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 4,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 4,
+        "field": "item",
+        "source": null,
+        "snapshot": 5848
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 4,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 4,
+        "field": "minLevel",
+        "source": 28,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 5,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 5,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 5,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 5,
+        "field": "minLevel",
+        "source": 28,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 6,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 6,
+        "field": "quest",
+        "source": 1176,
+        "snapshot": 1175
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 6,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 6,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 44,
+        "goal": 6,
+        "field": "minLevel",
+        "source": 29,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 1,
+        "field": "item",
+        "source": 5798,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 1,
+        "field": "count",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 2,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 2,
+        "field": "item",
+        "source": 5794,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 2,
+        "field": "count",
+        "source": 6,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 3,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 3,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 3,
+        "field": "item",
+        "source": 5795,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 3,
+        "field": "count",
+        "source": 9,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 4,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 4,
+        "field": "quest",
+        "source": 1176,
+        "snapshot": 1106
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 4,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 4,
+        "field": "item",
+        "source": 5848,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 4,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 4,
+        "field": "preAll",
+        "source": null,
+        "snapshot": [
+          1104,
+          1105
+        ]
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 4,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 26
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 5,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 5,
+        "field": "quest",
+        "source": 1175,
+        "snapshot": 1176
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 5,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 5,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 6,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 6,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 45,
+        "goal": 6,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 46,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 46,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "hearth"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 46,
+        "goal": 1,
+        "field": "quest",
+        "source": 1110,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 46,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "note"
+      },
+      {
+        "guideID": "forever/horde/07-ashenvale",
+        "step": 46,
+        "goal": 2,
+        "field": "quest",
+        "source": 1104,
+        "snapshot": null
+      },
+      {
         "guideID": "forever/horde/30-40/03-arathi-highlands",
         "step": 8,
         "goal": 8,
@@ -16089,11 +18885,53 @@
           "reason": "En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del historiador y al teniente. Se mantiene junta la entrega 4512 y su continuación y se conserva la salida hacia el vuelo con el encargo del teniente.",
           "sourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/05-silithus.guide"
         }
+      },
+      {
+        "id": "ashenvale-alliance-retire-alonso-5",
+        "guideID": "forever/alliance/06-ashenvale",
+        "revision": 5,
+        "evidence": {
+          "reason": "Se retiran las visitas a Alonso. La guía de Forever Questward retiró este encuentro de Season of Discovery y varios jugadores de Forever informan de que no encuentran al personaje en el punto marcado.",
+          "sources": [
+            {
+              "url": "https://www.curseforge.com/wow/addons/questward-forever/files/9529029",
+              "detail": "La versión 1.0.7 de Questward para Forever retira los pasos exclusivos de Season of Discovery y menciona a Alonso en Vallefresno."
+            },
+            {
+              "url": "https://www.wowhead.com/forever/npc=210995/alonso#comments",
+              "detail": "Tres jugadores de Forever describen visitas al punto de la base de datos sin encontrar a Alonso. Las coordenadas importadas no acreditan una aparición en el reino."
+            }
+          ],
+          "previousNote": "Centinela Velene Estrella está en Refugio Brisa de Plata, en la orilla este de Lago Mystral. Alonso acampa en la orilla oeste. Los Befouled Elementales de agua se mueven por el lago entre ambos."
+        }
+      },
+      {
+        "id": "ashenvale-horde-retire-alonso-2",
+        "guideID": "forever/horde/07-ashenvale",
+        "revision": 2,
+        "evidence": {
+          "reason": "Se retiran las visitas a Alonso. La guía de Forever Questward retiró este encuentro de Season of Discovery y varios jugadores de Forever informan de que no encuentran al personaje en el punto marcado.",
+          "sources": [
+            {
+              "url": "https://www.curseforge.com/wow/addons/questward-forever/files/9529029",
+              "detail": "La versión 1.0.7 de Questward para Forever retira los pasos exclusivos de Season of Discovery y menciona a Alonso en Vallefresno."
+            },
+            {
+              "url": "https://www.wowhead.com/forever/npc=210995/alonso#comments",
+              "detail": "Tres jugadores de Forever describen visitas al punto de la base de datos sin encontrar a Alonso. Las coordenadas importadas no acreditan una aparición en el reino."
+            }
+          ],
+          "retiredStep": {
+            "step": 11,
+            "title": "Alonso",
+            "note": "Alonso, una adición Forever, se encuentra en la orilla oeste de Lago Mystral con tres rápidos Dragonslayer misiones."
+          }
+        }
       }
     ],
     "authoredTextPresenceLosses": [],
     "sourceStepNotes": 1722,
-    "snapshotStepNotes": 1743
+    "snapshotStepNotes": 1742
   },
   "sourceReadProblems": [],
   "order": {
@@ -22025,13 +24863,13 @@
         "sourceText": "turnin 5762",
         "acceptedAt": {
           "guideID": "forever/horde/07-ashenvale",
-          "step": 44,
+          "step": 43,
           "goal": 2,
           "action": "accept",
           "questID": 5762,
           "sourceFile": "guides/forever/horde/07-ashenvale.guide",
-          "sourceLine": 396,
-          "sourceText": "accept 5762                         -- His crate is for Stranglethorn, later on the route"
+          "sourceLine": 389,
+          "sourceText": "turnin 1151 optional                -- Dorn Plainstalker"
         }
       },
       {
@@ -22126,13 +24964,13 @@
         "sourceText": "turnin 1106                         -- Martek the Exiled: Fizzle's letter from the Shimmering Flats",
         "acceptedAt": {
           "guideID": "forever/horde/07-ashenvale",
-          "step": 46,
+          "step": 45,
           "goal": 4,
           "action": "accept",
           "questID": 1106,
           "sourceFile": "guides/forever/horde/07-ashenvale.guide",
-          "sourceLine": 416,
-          "sourceText": "accept 1106                         -- Fizzle Brassbolts: his letter goes to Martek in the Badlands, around level 38"
+          "sourceLine": 407,
+          "sourceText": "collect 5848 quest 1176"
         }
       },
       {
@@ -24127,13 +26965,13 @@
       },
       {
         "guideID": "forever/horde/07-ashenvale",
-        "step": 27,
+        "step": 26,
         "goal": 2,
         "action": "turnin",
         "questID": 1534,
         "sourceFile": "guides/forever/horde/07-ashenvale.guide",
-        "sourceLine": 286,
-        "sourceText": "turnin 1534                         -- Brine",
+        "sourceLine": 275,
+        "sourceText": "turnin 96260                        -- Yorn Grimtotem",
         "stepOnly": {
           "classes": [
             "SHAMAN"
@@ -24171,13 +27009,13 @@
         },
         "acceptedAt": {
           "guideID": "forever/horde/07-ashenvale",
-          "step": 27,
+          "step": 26,
           "goal": 3,
           "action": "accept",
           "questID": 220,
           "sourceFile": "guides/forever/horde/07-ashenvale.guide",
-          "sourceLine": 287,
-          "sourceText": "accept 220                          -- for Islen Waterseer, south of Ratchet: next guide",
+          "sourceLine": 276,
+          "sourceText": "turnin 96259                        -- Muln Earthfury",
           "stepOnly": {
             "classes": [
               "SHAMAN"
@@ -24548,9 +27386,9 @@
   },
   "dependencyCycleCandidates": [],
   "workCoverage": {
-    "acceptOccurrencesWithoutQuestLinkedWork": 965,
-    "uniqueQuestIDs": 848,
-    "sourceQuestsWithoutObjectives": 800,
+    "acceptOccurrencesWithoutQuestLinkedWork": 959,
+    "uniqueQuestIDs": 845,
+    "sourceQuestsWithoutObjectives": 797,
     "sourceQuestIDsWithoutObjectives": [
       2,
       8,
@@ -25195,9 +28033,6 @@
       8471,
       9415,
       9416,
-      78132,
-      78133,
-      78134,
       79095,
       79536,
       87318,
@@ -27718,37 +30553,28 @@
         "occurrences": [
           {
             "guideID": "forever/horde/07-ashenvale",
-            "step": 16,
+            "step": 15,
             "goal": 9,
             "action": "accept",
             "questID": 6504,
-            "sourceFile": "guides/forever/horde/07-ashenvale.guide",
-            "sourceLine": 211,
-            "sourceText": "accept 6504 optional                -- Gurda Ragescar: only if you carry the manual pages",
             "optional": true
           }
         ],
         "questGoals": [
           {
             "guideID": "forever/horde/07-ashenvale",
-            "step": 16,
+            "step": 15,
             "goal": 9,
             "action": "accept",
             "questID": 6504,
-            "sourceFile": "guides/forever/horde/07-ashenvale.guide",
-            "sourceLine": 211,
-            "sourceText": "accept 6504 optional                -- Gurda Ragescar: only if you carry the manual pages",
             "optional": true
           },
           {
             "guideID": "forever/horde/07-ashenvale",
-            "step": 16,
+            "step": 15,
             "goal": 10,
             "action": "turnin",
             "questID": 6504,
-            "sourceFile": "guides/forever/horde/07-ashenvale.guide",
-            "sourceLine": 212,
-            "sourceText": "turnin 6504 optional",
             "optional": true
           }
         ],
@@ -27756,26 +30582,20 @@
         "contexts": [
           {
             "guideID": "forever/horde/07-ashenvale",
-            "step": 16,
+            "step": 15,
             "goal": 9,
             "action": "accept",
             "questID": 6504,
-            "sourceFile": "guides/forever/horde/07-ashenvale.guide",
-            "sourceLine": 211,
-            "sourceText": "accept 6504 optional                -- Gurda Ragescar: only if you carry the manual pages",
             "optional": true,
             "note": "Gurda Cicafuria: sólo si usted lleva las páginas del manual",
             "stepNote": "Al norte de la carretera a Puesto del Hachazo y SendaFH de la Noche junto a ella."
           },
           {
             "guideID": "forever/horde/07-ashenvale",
-            "step": 16,
+            "step": 15,
             "goal": 10,
             "action": "turnin",
             "questID": 6504,
-            "sourceFile": "guides/forever/horde/07-ashenvale.guide",
-            "sourceLine": 212,
-            "sourceText": "turnin 6504 optional",
             "optional": true,
             "stepNote": "Al norte de la carretera a Puesto del Hachazo y SendaFH de la Noche junto a ella."
           }
@@ -32364,5 +35184,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "063c0e5c87afeeec98643ae34f84de9ff17161a375010330fde0f3ed12df4cd6"
+  "inputSha256": "067ba268530de6fba6875beceadfa99e2b0cc2be70066f49edf0942b73db1304"
 }
