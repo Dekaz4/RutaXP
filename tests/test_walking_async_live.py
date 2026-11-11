@@ -221,6 +221,12 @@ class LiveWalkingAsyncTests(unittest.TestCase):
         self.assertEqual(h.stats, {"find": 1, "cancel": 0, "answers": 0, "successes": 0})
         self.assertEqual(h.reported_counts, {"find": 1, "cancel": 0})
         self.assertIn("combate", h.w.GetStatus(h.w).text)
+        frame = h.ns.navigationFrame
+        self.assertTrue(frame.shown)
+        self.assertFalse(frame.arrow.shown)
+        self.assertEqual(frame.distance.text, "")
+        self.assertTrue(frame.hint.shown)
+        self.assertEqual(frame.hint.text, "Sal de combate")
         self.assertTrue(any(frame.events.PLAYER_REGEN_ENABLED for frame in h.s.eventFrames.values()))
 
         h.s.combat = False
@@ -230,7 +236,36 @@ class LiveWalkingAsyncTests(unittest.TestCase):
         self.assertEqual(h.stats, {"find": 1, "cancel": 0, "answers": 1, "successes": 1})
         self.assertEqual(h.reported_counts, {"find": 1, "cancel": 0})
         self.assertEqual(h.w.GetStatus(h.w).phase, "walking")
+        self.assertRegex(frame.hint.text, r"^Tramo \d+/\d+$")
+        h.s.combat = True
+        h.frame()
+        h.ns.UpdateNavigation(h.ns)
+        self.assertTrue(frame.arrow.shown)
+        self.assertRegex(frame.hint.text, r"^Tramo \d+/\d+$")
         self.assertEqual(h.host.progress(), h.before)
+
+    def test_first_route_request_shows_the_required_action_then_clears_it_during_calculation(self):
+        h = LiveAsyncHost()
+        h.h.lua.execute("""
+            function InCombatLockdown() return TEST.combat == true end
+            function IsFalling() return TEST.falling == true end
+        """)
+        frame = h.ns.navigationFrame
+        h.s.combat = True
+        h.ns.UpdateNavigation(h.ns)
+        self.assertEqual(h.stats["find"], 0)
+        self.assertTrue(frame.shown)
+        self.assertTrue(frame.hint.shown)
+        self.assertEqual(frame.hint.text, "Sal de combate")
+        h.s.combat, h.s.falling = False, True
+        h.ns.UpdateNavigation(h.ns)
+        self.assertTrue(frame.hint.shown)
+        self.assertEqual(frame.hint.text, "Espera a tocar el suelo")
+        h.s.falling = False
+        h.ns.UpdateNavigation(h.ns)
+        self.assertEqual(h.stats["find"], 1)
+        self.assertTrue(h.w.pending)
+        self.assertFalse(frame.hint.shown and frame.hint.text)
 
 
 if __name__ == "__main__":

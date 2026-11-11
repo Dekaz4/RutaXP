@@ -284,6 +284,20 @@ function W:_Adopt(points,requestTravel,requestZ)
     self.phase,self.text="walking","Siguiendo el camino por el terreno"
     return true
 end
+local function blockedWaypoint(self, point)
+    point.navigationBlocked, point.navigationNotice = true, self.text
+    if self.phase == "pending" then
+        if combat() then
+            point.navigationHint = "Sal de combate"
+        elseif not self.pending and read(IsFalling) == true then
+            point.navigationHint = "Espera a tocar el suelo"
+        end
+    elseif self.phase == "failed" then
+        point.navigationHint = self.failure == "error" and "Recalcula el camino" or "Revisa el acceso"
+    end
+    return point
+end
+
 function W:Resolve(point)
     if type(point)~="table" then self:Clear();return nil end
     local config=settings()
@@ -389,17 +403,17 @@ function W:Resolve(point)
             diagnostic(self,not floorOK and "floor" or behind and "behind" or "drift")
             if not self.pending and now()-(self.lastAsk or -100)>=2 then self:_Ask(engine,continent,px,py,pz,latest,not floorOK and "floor" or behind and "behind" or "drift") end
             self.phase,self.text="pending","Recalculando el camino desde tu posición…"
-            out.navigationBlocked,out.navigationNotice=true,self.text;return out
+            return blockedWaypoint(self, out)
         end
         local node=points[index]
         if index==#points and (self.pending or self.refreshWanted) and distance(px,py,node.x,node.y)<=12 then
             self.phase,self.text="pending","Actualizando el camino hasta el nuevo destino…"
-            out.navigationBlocked,out.navigationNotice=true,self.text;return out
+            return blockedWaypoint(self, out)
         end
         local aim=ns.WorldToWaypoint and ns:WorldToWaypoint(continent,node.x,node.y,here.mapID)
         if not aim then
             self.phase,self.text="unavailable","No se puede situar el siguiente giro en este mapa"
-            out.navigationBlocked,out.navigationNotice=true,self.text;return out
+            return blockedWaypoint(self, out)
         end
         out.mapID,out.x,out.y,out.z=aim.mapID,aim.x,aim.y,node.z
         out.walking,out.walkingIndex,out.walkingCount=true,index,#points
@@ -411,6 +425,5 @@ function W:Resolve(point)
             ..((self.pending or self.refreshWanted) and " · actualizando" or "")
         return out
     end
-    out.navigationBlocked,out.navigationNotice=true,self.text
-    return out
+    return blockedWaypoint(self, out)
 end

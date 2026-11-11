@@ -251,14 +251,15 @@ function W:_Arrived(raw, point)
     local distance, reason = ns:GetWaypointVector(point)
     if not finite(distance) then return false, reason or "Posición no disponible" end
     if distance > point.radius then return false end
-    if raw.mode == "transport" then return false, "Confirma cuando hayas subido al transporte; estar en el muelle no prueba un viaje" end
-    if raw.mode == "interact" then return false, "Interactúa con el NPC indicado o confirma este punto" end
-    if raw.mode == "confirm" then return false, "Estás cerca; confirma el punto (sin altitud verificada)" end
-    if point.z == nil then return false, "Altitud no disponible; confirma el punto" end
+    if raw.mode == "transport" then return false, "Confirma cuando hayas subido al transporte; estar en el muelle no prueba un viaje", "Confirma al embarcar" end
+    if raw.mode == "interact" then return false, "Interactúa con el NPC indicado o confirma este punto", "Habla con el personaje" end
+    if raw.mode == "confirm" then return false, "Estás cerca; confirma el punto (sin altitud verificada)", "Confirma el punto" end
+    if point.z == nil then return false, "Altitud no disponible; confirma el punto", "Confirma el punto" end
     local delta = ns:GetWaypointHeightDifference(point)
-    if not finite(delta) then return false, "No se puede comprobar la altura; confirma el punto" end
+    if not finite(delta) then return false, "No se puede comprobar la altura; confirma el punto", "Confirma el punto" end
     if math.abs(delta) > (raw.heightTolerance or 8) then
-        return false, delta > 0 and "El punto está más arriba" or "El punto está más abajo"
+        local message = delta > 0 and "El punto está más arriba" or "El punto está más abajo"
+        return false, message, message
     end
     return true
 end
@@ -304,7 +305,7 @@ function W:_Resolve(context, base)
     local raw = route.points[entry.index]
     local point = raw and sourcePoint(raw)
     if not point then entry.waiting = "Punto sin coordenadas disponibles"; return nil end
-    local arrived, reason = self:_Arrived(raw, point)
+    local arrived, reason, hint = self:_Arrived(raw, point)
     entry.waiting = reason
     if arrived then
         self:_Advance(entry, route, "arrival")
@@ -320,7 +321,7 @@ function W:_Resolve(context, base)
     point.goal, point.source = context.goal, "itinerary"
     point.targetSource = context.source or (base and base.source)
     point.guideID, point.stepIndex, point.goalIndex = context.guide.id, context.progress.cursor, context.index
-    point.waiting = entry.waiting
+    point.waiting, point.waitingHint = entry.waiting, hint
     return point
 end
 

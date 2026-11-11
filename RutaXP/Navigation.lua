@@ -536,7 +536,7 @@ function ns:CreateNavigation()
     local frame = CreateFrame("Frame", nil, UIParent)
     self.navigationFrame = frame
     frame:SetSize(210, 114)
-    if frame.SetHitRectInsets then frame:SetHitRectInsets(60, 60, 0, 34) end
+    if frame.SetHitRectInsets then frame:SetHitRectInsets(26, 26, 0, 18) end
     frame:SetFrameStrata("MEDIUM")
     frame:SetClampedToScreen(true)
     frame:SetMovable(true)
@@ -621,6 +621,8 @@ function ns:CreateNavigation()
     frame.ring = ring
 
     frame.distance = outlinedText(frame, "GameFontNormalLarge", -60, 200, 15)
+    frame.hint = outlinedText(frame, "GameFontHighlightSmall", -78, 206, 12)
+    frame.hint:SetTextColor(1, 0.70, 0.33)
     frame:Hide()
 
     local updater = CreateFrame("Frame")
@@ -675,11 +677,9 @@ function ns:CreateNavigation()
     end)
 end
 
-function ns:UpdateNavigation()
-    if not self.char then return end
-    if not self.navigationFrame then self:CreateNavigation() end
-    local frame = self.navigationFrame
-    if not frame then return end
+-- Return only the short line for the HUD. Full instructions stay in the tooltip.
+local function updateArrow(self, frame)
+    local hint
     frame.navigationState, frame.navigationReason = nil, nil
     frame.statusText, frame.destinationText = nil, nil
     if self.char.arrow == false then
@@ -708,6 +708,8 @@ function ns:UpdateNavigation()
         frame.navigationReason = travel.text
         frame.distance:SetText("")
         frame.statusText, frame.destinationText = travel.title, travel.text
+        if travel.localStart then return "Reuníos y pulsad «Empezar aquí»" end
+        if travel.waiting then return "Espera a tu compañero" end
         return
     end
     local activeGoal = point and point.goal or (step and step.goals and self.GetActiveGoal and self:GetActiveGoal(step))
@@ -734,14 +736,19 @@ function ns:UpdateNavigation()
     local goal = point and point.goal
     local contact = goal and (point.candidateName or goal.npcName)
     local questTarget = point and (point.source == "guide" or point.source == "game" or point.source == "learned")
+    local segment
+    if point and point.walking then
+        segment = string.format("%d/%d", math.max(1, point.walkingIndex - 1), math.max(1, point.walkingCount - 1))
+    elseif point and point.intermediate then
+        segment = string.format("%d/%d", point.pointIndex, point.pointCount)
+    end
     if distance and distance <= CONTACT_RANGE and questTarget and not point.intermediate
         and (not point.walking or point.walkingFinal) and contact and (goal.t == "accept" or goal.t == "turnin") then
         subText = "|cffffce72Habla con " .. contact .. "|r\n" .. (goalTitle or stepTitle or "")
     elseif point and point.walking then
         local target = point.walkingGoal
         local label = target and (target.routeLabel or target.label or target.goalTitle) or goalTitle or stepTitle
-        subText = string.format("|cffffce72Camino por terreno · tramo %d/%d|r\n%s", math.max(1,point.walkingIndex-1),
-            math.max(1,point.walkingCount-1),label or "Sigue el siguiente giro")
+        subText = "|cffffce72Camino por terreno · tramo " .. segment .. "|r\n" .. (label or "Sigue el siguiente giro")
     end
     if point and not point.walking and point.navigationNotice then
         subText = subText .. "\n|cff9fb0c7" .. point.navigationNotice .. "|r"
@@ -782,6 +789,7 @@ function ns:UpdateNavigation()
             end
             if waiting then
                 message = waitKind == "sync" and "Sincronizando misiones" or "Esperando al compañero"
+                if waitKind ~= "sync" then hint = "Espera a tu compañero" end
                 frame.navigationReason = type(reason) == "string" and reason ~= "" and reason or message
                 frame.navigationState = "waiting"
             else
@@ -802,7 +810,7 @@ function ns:UpdateNavigation()
         frame.navigationReason = frame.navigationReason or message or "Sin coordenadas para esta acción"
         frame.distance:SetText("")
         frame.statusText, frame.destinationText = message or frame.navigationReason, subText
-        return
+        return hint
     end
     if point.navigationBlocked then
         frame.dNorth, frame.dWest, frame.targetContinent = nil, nil, nil
@@ -810,7 +818,7 @@ function ns:UpdateNavigation()
         frame.distance:SetText("")
         frame.statusText = point.navigationNotice or "Calculando camino…"
         frame.destinationText = goalTitle or stepTitle or "Destino de la guía"
-        return
+        return point.navigationHint
     end
 
     frame.dNorth, frame.dWest = dNorth, dWest
@@ -843,13 +851,16 @@ function ns:UpdateNavigation()
     local g = 0.68 + (0.88 - 0.68) * t
     local b = 0.36 + (0.62 - 0.36) * t
 
-    if point.intermediate and point.waiting and distance <= radius then
+    if point.intermediate and point.waiting and inRange and (not point.walking or point.walkingFinal) then
         frame.statusText = point.waiting
-    elseif heightDelta and distance <= radius and math.abs(heightDelta) > 8 then
+        hint = point.waitingHint
+    elseif heightDelta and inRange and math.abs(heightDelta) > 8 then
         frame.statusText = heightDelta > 0 and "El objetivo está más arriba" or "El objetivo está más abajo"
+        hint = frame.statusText
     elseif arrived then
         frame.statusText = "¡Has llegado!"
     end
+    if not hint and segment and not arrived then hint = "Tramo " .. segment end
     local distStr = metres >= 1000 and string.format("%.1f km", metres / 1000)
         or metres < 20 and string.format("%.1f m", metres)
         or string.format("%d m", math.floor(metres + 0.5))
@@ -859,7 +870,7 @@ function ns:UpdateNavigation()
 
     if right == nil or forward == nil then
         frame.arrow:Hide()
-        return
+        return hint
     end
 
     frame.arrow:Show()
@@ -881,4 +892,12 @@ function ns:UpdateNavigation()
         if frame.glow.SetVertexColor then frame.glow:SetVertexColor(r, g, b, 0.45) end
         if frame.halo.SetVertexColor then frame.halo:SetVertexColor(r, g, b, 0.32) end
     end
+    return hint
+end
+
+function ns:UpdateNavigation()
+    if not self.char then return end
+    if not self.navigationFrame then self:CreateNavigation() end
+    local frame = self.navigationFrame
+    if frame then frame.hint:SetText(updateArrow(self, frame) or "") end
 end

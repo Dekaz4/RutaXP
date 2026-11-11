@@ -71,7 +71,7 @@ class NavigationRegressions(unittest.TestCase):
         self.assertIn("Entrega: El despertar", frame.destinationText)
         self.assertIn("Dirección orientativa", frame.destinationText)
 
-    def test_walk_to_bashal_aran_only_displays_distance_and_explains_the_route_on_hover(self):
+    def test_walk_to_bashal_aran_displays_distance_and_leg_with_quest_details_on_hover(self):
         h = self.host
         h.lua.execute(TOOLTIP_STUBS + """
             local methods = getmetatable(UIParent).__index
@@ -95,9 +95,11 @@ class NavigationRegressions(unittest.TestCase):
         h.call("UpdateNavigation")
 
         frame, tooltip = h.ns.navigationFrame, h.globals.GameTooltip
+        def visible_text():
+            return [label.text for label in frame.fontStrings.values() if label.shown and label.text]
+
         self.assertTrue(frame.arrow.shown)
-        self.assertEqual([label.text for label in frame.fontStrings.values() if label.shown and label.text],
-                         ["109 m"])
+        self.assertEqual(visible_text(), ["109 m", "Tramo 2/4"])
         self.assertFalse(tooltip.shown)
         frame.scripts.OnEnter(frame)
         self.assertTrue(tooltip.shown)
@@ -105,6 +107,9 @@ class NavigationRegressions(unittest.TestCase):
         self.assertIn("Camino por terreno · tramo 2/4", details)
         self.assertIn("Acepta: Bashal'Aran", details)
         point.walking, point.walkingDistance = False, None
+        h.call("UpdateNavigation")
+        self.assertEqual(visible_text(), [frame.distance.text])
+        self.assertRegex(frame.distance.text, r"^\d+(?:\.\d+)? (?:m|km)$")
         h.state.x, h.state.y = point.x, point.y
         updater = h.ns.navigationUpdater
         updater.scripts.OnUpdate(updater, 1)

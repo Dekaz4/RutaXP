@@ -177,6 +177,12 @@ class WaypointTests(unittest.TestCase):
         step = self.select({"t": "complete", "quest": 501, "map": 1411, "x": 90, "y": 90})
         self.assertEqual(self.point(step).pointIndex, 1)
         self.assertIn("transporte", self.control("GetStatus").waiting)
+        h.call("UpdateNavigation")
+        frame = h.ns.navigationFrame
+        self.assertEqual(frame.distance.text, "0.0 m")
+        self.assertTrue(frame.hint.shown)
+        self.assertEqual(frame.hint.text, "Confirma al embarcar")
+        self.assertIn("transporte", frame.statusText)
         self.control("Skip")
         self.assertEqual(self.point(step).pointIndex, 2)
         self.assertEqual(self.point(step).pointIndex, 2)
