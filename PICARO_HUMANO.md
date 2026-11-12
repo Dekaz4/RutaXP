@@ -661,8 +661,8 @@ Los dos cementerios comparten el contador de diez dedos. Se recogen al pasar por
 | 8.1 | Entregar · Entrega a Sven (#164) | Sven Yorgen · mapa 1431 · 7.78, 34.07 |
 | 8.2 | Aceptar · La venganza de Sven (#95) | Sven Yorgen · desde nivel 20 · mapa 1431 · 7.78, 34.07 |
 | 8.3 | Aceptar · Con los lobos en los talones (#226) | Lars · desde nivel 19 · mapa 1431 · 7.71, 33.2 |
-| 9.1 | Entregar · El ermitaño (#165) | Abercrombie · mapa 1431 · 28.11, 31.46 |
-| 9.2 | Aceptar · Suministros de Villa Oscura (#148) | Abercrombie · desde nivel 20 · mapa 1431 · 28.11, 31.46 · posible previa adicional |
+| 9.1 | Entregar · El ermitaño (#165) | Abercrombie · mapa 1431 · 27.97, 31.53 |
+| 9.2 | Aceptar · Suministros de Villa Oscura (#148) | Abercrombie · desde nivel 20 · mapa 1431 · 27.97, 31.53 · posible previa adicional |
 | 10.1 | Derrotar · Con los lobos en los talones (#226) | Lobo temible rabioso ×8 · mapa 1431 · 33.14, 29.35 |
 | 10.2 | Derrotar · Con los lobos en los talones (#226) | Lobo feroz hambriento ×12 · mapa 1431 · 33.56, 26.75 |
 | 10.3 | Derrotar · Las amenazas de ocho patas (#245) | Telarácnida venenosa pigmea ×15 · mapa 1431 · 33.96, 24.6 |
@@ -682,8 +682,8 @@ Los dos cementerios comparten el contador de diez dedos. Se recogen al pasar por
 | 14.2 | Aceptar · Devuelve el peine (#154) | Mary la Ciega · desde nivel 20 · previa 149 · mapa 1431 · 81.99, 59.09 |
 | 15.1 | Entregar · Devuelve el peine (#154) | Lady Eva · mapa 1431 · 75.79, 45.32 |
 | 15.2 | Aceptar · Devolver el pelo (#157) | Lady Eva · desde nivel 20 · previa 154 · mapa 1431 · 75.79, 45.32 |
-| 16.1 | Entregar · Devolver el pelo (#157) | Abercrombie · mapa 1431 · 28.11, 31.46 |
-| 16.2 | Aceptar · Zumo de zombi (#158) | Abercrombie · desde nivel 20 · previa 157 · mapa 1431 · 28.11, 31.46 |
+| 16.1 | Entregar · Devolver el pelo (#157) | Abercrombie · mapa 1431 · 27.97, 31.53 |
+| 16.2 | Aceptar · Zumo de zombi (#158) | Abercrombie · desde nivel 20 · previa 157 · mapa 1431 · 27.97, 31.53 |
 | 17.1 | Entregar · El campamento de Sven (#230) | Sven Yorgen · mapa 1431 · 7.78, 34.07 |
 | 17.2 | Aceptar · La figura en las sombras (#262) | Sven Yorgen · desde nivel 20 · previa 230 · mapa 1431 · 7.78, 34.07 |
 | 17.3 | Entregar · Con los lobos en los talones (#226) | Lars · mapa 1431 · 7.71, 33.2 |
@@ -699,10 +699,10 @@ Los dos cementerios comparten el contador de diez dedos. Se recogen al pasar por
 | 20.1 | Entregar · Busca flores podridas (#156) | Tabernero Smitts · mapa 1431 · 73.78, 44.49 |
 | 20.2 | Aceptar · Entrega de zumo (#159) | Tabernero Smitts · desde nivel 20 · previa 156 · mapa 1431 · 73.78, 44.49 |
 | 20.3 | Vender · Tabernero Smitts | varios destinos o ubicaciones según objetivo |
-| 21.1 | Entregar · Entrega de zumo (#159) | Abercrombie · mapa 1431 · 28.11, 31.46 |
-| 21.2 | Aceptar · Un espantapájaros para necrófagos (#133) | Abercrombie · desde nivel 20 · previa 159 · mapa 1431 · 28.11, 31.46 |
+| 21.1 | Entregar · Entrega de zumo (#159) | Abercrombie · mapa 1431 · 27.97, 31.53 |
+| 21.2 | Aceptar · Un espantapájaros para necrófagos (#133) | Abercrombie · desde nivel 20 · previa 159 · mapa 1431 · 27.97, 31.53 |
 | 22.1 | Recoger · Un espantapájaros para necrófagos (#133) | Costilla de necrófago ×7 · mapa 1431 · 26.87, 34.28 |
-| 23.1 | Entregar · Un espantapájaros para necrófagos (#133) | Abercrombie · mapa 1431 · 28.11, 31.46 |
+| 23.1 | Entregar · Un espantapájaros para necrófagos (#133) | Abercrombie · mapa 1431 · 27.97, 31.53 |
 | 24.1 | Entregar · Encuentra a la figura (#453) | Altero · mapa 1431 · 18.38, 56.37 |
 | 24.2 | Aceptar · Entrega para Sven (#268) | Altero · desde nivel 20 · previa 453 · mapa 1431 · 18.38, 56.37 |
 | 25.1 | Entregar · Entrega para Sven (#268) | Sven Yorgen · mapa 1431 · 7.78, 34.07 |
@@ -934,7 +934,7 @@ Si se lleva el arco de Merrick, entrégalo durante la visita a Sirra. En el Circ
 | 8.3 | Aceptar · Ferocanis en el bosque (#223) | Calor · desde nivel 23 · previa 222 · mapa 1431 · 75.75, 47.57 |
 | 8.4 | Entregar · Ferocanis en el bosque (#223) | Jonathan Carevin · mapa 1431 · 75.32, 49.02 |
 | 8.5 | Vender · Villa Oscura | varios destinos o ubicaciones según objetivo |
-| 9.1 | Aceptar · Ladrones ogros (#134) | Abercrombie · desde nivel 20 · previa 133 · mapa 1431 · 28.11, 31.46 |
+| 9.1 | Aceptar · Ladrones ogros (#134) | Abercrombie · desde nivel 20 · previa 133 · mapa 1431 · 27.97, 31.53 |
 | 10.1 | Derrotar · Vigilancia nocturna (#58) | Propagador de la Peste ×20 · mapa 1431 · 26.31, 34.2 |
 | 11.1 | Aceptar · Prueba de valor (#323) | Sven Yorgen · desde nivel 20 · previa 268 · mapa 1431 · 7.78, 34.07 |
 | 12.1 | Derrotar · Prueba de valor (#323) | Asaltante esquelético ×15 · mapa 1431 · 13.67, 33.39 |
@@ -947,8 +947,8 @@ Si se lleva el arco de Merrick, entrégalo durante la visita a Sirra. En el Circ
 | 15.2 | Aceptar · Merrick's Bow (#96138) | desde nivel 18 · opcional · sin datos externos de requisitos |
 | 15.3 | Derrotar · Merrick's Bow (#96138) | Guerrero Puñastilla ×8 · opcional · mapa 1431 · 33.67, 76.02 |
 | 15.4 | Derrotar · Merrick's Bow (#96138) | Capataz Puñastilla ×4 · opcional · mapa 1431 · 33.84, 70.49 |
-| 16.1 | Entregar · Ladrones ogros (#134) | Abercrombie · mapa 1431 · 28.11, 31.46 |
-| 16.2 | Aceptar · Nota para el alcalde (#160) | Abercrombie · desde nivel 20 · previa 134 · mapa 1431 · 28.11, 31.46 |
+| 16.1 | Entregar · Ladrones ogros (#134) | Abercrombie · mapa 1431 · 27.97, 31.53 |
+| 16.2 | Aceptar · Nota para el alcalde (#160) | Abercrombie · desde nivel 20 · previa 134 · mapa 1431 · 27.97, 31.53 |
 | 17.1 | Piedra de hogar · Villa Oscura |  |
 | 17.2 | Entregar · El diplomático desaparecido (#1244) | Vigía Backus · mapa 1431 · 74.83, 44.22 |
 | 17.3 | Aceptar · El diplomático desaparecido (#1245) | Vigía Backus · desde nivel 28 · previa 1244 · mapa 1431 · 74.83, 44.22 |
