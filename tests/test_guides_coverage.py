@@ -62,6 +62,15 @@ def undo_visit_optimization(guide, revision):
 def original_order(document):
     """Undo reviewed moves and exact prerequisite edits before the old digest."""
     result = copy.deepcopy(document)
+    # Compare the historical Era baseline in its own coordinate system.
+    hermit_visits = [goal for guide in result["guides"] for step in guide["steps"] for goal in step["goals"]
+                     if goal.get("npc") == 289 and goal.get("map") == 1431 and goal["t"] in ("accept", "turnin")]
+    if len(hermit_visits) != 10:
+        raise AssertionError("The reviewed Abercrombie visits changed")
+    for goal in hermit_visits:
+        if (goal["x"], goal["y"], goal["f"]) != (27.97, 31.53, "l"):
+            raise AssertionError("The verified Forever contact position changed")
+        goal.update(x=28.11, y=31.46, f="e")
     revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
     guides = {guide["id"]: guide for guide in result["guides"]}
     for revision in reversed(revisions):
