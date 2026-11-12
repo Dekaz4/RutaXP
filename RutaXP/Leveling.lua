@@ -5168,8 +5168,8 @@ do
 					["title"] = "Abercrombie",
 					["note"] = "La cabaña del ermitaño se encuentra en el bosque al noreste del Cementerio del Cerro del Cuervo.",
 					["goals"] = {
-						{ ["title"] = "El ermitaño", ["t"] = "turnin", ["quest"] = 165, ["npc"] = 289, ["npcName"] = "Abercrombie", ["map"] = 1431, ["x"] = 28.11, ["y"] = 31.46, ["z"] = 38.9, ["f"] = "e", ["instruction"] = "Habla con «Abercrombie» y entrega «El ermitaño».\nZona: Bosque del Ocaso." },
-						{ ["title"] = "Suministros de Villa Oscura", ["minLevel"] = 20, ["t"] = "accept", ["quest"] = 148, ["npc"] = 289, ["npcName"] = "Abercrombie", ["map"] = 1431, ["x"] = 28.11, ["y"] = 31.46, ["z"] = 38.9, ["f"] = "e", ["qlvl"] = 24, ["instruction"] = "Habla con «Abercrombie» y acepta «Suministros de Villa Oscura».\nZona: Bosque del Ocaso." },
+						{ ["title"] = "El ermitaño", ["t"] = "turnin", ["quest"] = 165, ["npc"] = 289, ["npcName"] = "Abercrombie", ["map"] = 1431, ["x"] = 27.97, ["y"] = 31.53, ["z"] = 38.9, ["f"] = "l", ["instruction"] = "Habla con «Abercrombie» y entrega «El ermitaño».\nZona: Bosque del Ocaso." },
+						{ ["title"] = "Suministros de Villa Oscura", ["minLevel"] = 20, ["t"] = "accept", ["quest"] = 148, ["npc"] = 289, ["npcName"] = "Abercrombie", ["map"] = 1431, ["x"] = 27.97, ["y"] = 31.53, ["z"] = 38.9, ["f"] = "l", ["qlvl"] = 24, ["instruction"] = "Habla con «Abercrombie» y acepta «Suministros de Villa Oscura».\nZona: Bosque del Ocaso." },
 					},
 				},
 				{
@@ -5229,8 +5229,8 @@ do
 					["title"] = "Abercrombie",
 					["note"] = "Cabalga hacial oeste por la carretera una vez más.",
 					["goals"] = {
-						{ ["title"] = "Devolver el pelo", ["t"] = "turnin", ["quest"] = 157, ["npc"] = 289, ["npcName"] = "Abercrombie", ["map"] = 1431, ["x"] = 28.11, ["y"] = 31.46, ["z"] = 38.9, ["f"] = "e", ["instruction"] = "Habla con «Abercrombie» y entrega «Devolver el pelo».\nZona: Bosque del Ocaso." },
-						{ ["title"] = "Zumo de zombi", ["minLevel"] = 20, ["t"] = "accept", ["quest"] = 158, ["npc"] = 289, ["npcName"] = "Abercrombie", ["pre"] = { 157 }, ["preTitles"] = { [157] = "Deliver the Thread" }, ["map"] = 1431, ["x"] = 28.11, ["y"] = 31.46, ["z"] = 38.9, ["f"] = "e", ["qlvl"] = 24, ["instruction"] = "Habla con «Abercrombie» y acepta «Zumo de zombi».\nZona: Bosque del Ocaso." },
+						{ ["title"] = "Devolver el pelo", ["t"] = "turnin", ["quest"] = 157, ["npc"] = 289, ["npcName"] = "Abercrombie", ["map"] = 1431, ["x"] = 27.97, ["y"] = 31.53, ["z"] = 38.9, ["f"] = "l", ["instruction"] = "Habla con «Abercrombie» y entrega «Devolver el pelo».\nZona: Bosque del Ocaso." },
+						{ ["title"] = "Zumo de zombi", ["minLevel"] = 20, ["t"] = "accept", ["quest"] = 158, ["npc"] = 289, ["npcName"] = "Abercrombie", ["pre"] = { 157 }, ["preTitles"] = { [157] = "Deliver the Thread" }, ["map"] = 1431, ["x"] = 27.97, ["y"] = 31.53, ["z"] = 38.9, ["f"] = "l", ["qlvl"] = 24, ["instruction"] = "Habla con «Abercrombie» y acepta «Zumo de zombi».\nZona: Bosque del Ocaso." },
 					},
 				},
 				{
@@ -5274,8 +5274,8 @@ do
 					["title"] = "Abercrombie",
 					["note"] = "Ve al oeste al ermitaño una vez más.",
 					["goals"] = {
-						{ ["title"] = "Entrega de zumo", ["t"] = "turnin", ["quest"] = 159, ["npc"] = 289, ["npcName"] = "Abercrombie", ["map"] = 1431, ["x"] = 28.11, ["y"] = 31.46, ["z"] = 38.9, ["f"] = "e", ["instruction"] = "Habla con «Abercrombie» y entrega «Entrega de zumo».\nZona: Bosque del Ocaso." },
-						{ ["title"] = "Un espantapájaros para necrófagos", ["minLevel"] = 20, ["t"] = "accept", ["quest"] = 133, ["npc"] = 289, ["npcName"] = "Abercrombie", ["pre"] = { 159 }, ["preTitles"] = { [159] = "Juice Delivery" }, ["map"] = 1431, ["x"] = 28.11, ["y"] = 31.46, ["z"] = 38.9, ["f"] = "e", ["qlvl"] = 27, ["instruction"] = "Habla con «Abercrombie» y acepta «Un espantapájaros para necrófagos».\nZona: Bosque del Ocaso." },
+						{ ["title"] = "Entrega de zumo", ["t"] = "turnin", ["quest"] = 159, ["npc"] = 289, ["npcName"] = "Abercrombie", ["map"] = 1431, ["x"] = 27.97, ["y"] = 31.53, ["z"] = 38.9, ["f"] = "l", ["instruction"] = "Habla con «Abercrombie» y entrega «Entrega de zumo».\nZona: Bosque del Ocaso." },
+						{ ["title"] = "Un espantapájaros para necrófagos", ["minLevel"] = 20, ["t"] = "accept", ["quest"] = 133, ["npc"] = 289, ["npcName"] = "Abercrombie", ["pre"] = { 159 }, ["preTitles"] = { [159] = "Juice Delivery" }, ["map"] = 1431, ["x"] = 27.97, ["y"] = 31.53, ["z"] = 38.9, ["f"] = "l", ["qlvl"] = 27, ["instruction"] = "Habla con «Abercrombie» y acepta «Un espantapájaros para necrófagos».\nZona: Bosque del Ocaso." },
 					},
 				},
 				{
@@ -5288,7 +5288,7 @@ do
 				{
 					["title"] = "Abercrombie",
 					["goals"] = {
-						{ ["title"] = "Un espantapájaros para necrófagos", ["t"] = "turnin", ["quest"] = 133, ["npc"] = 289, ["npcName"] = "Abercrombie", ["map"] = 1431, ["x"] = 28.11, ["y"] = 31.46, ["z"] = 38.9, ["f"] = "e", ["instruction"] = "Habla con «Abercrombie» y entrega «Un espantapájaros para necrófagos».\nZona: Bosque del Ocaso." },
+						{ ["title"] = "Un espantapájaros para necrófagos", ["t"] = "turnin", ["quest"] = 133, ["npc"] = 289, ["npcName"] = "Abercrombie", ["map"] = 1431, ["x"] = 27.97, ["y"] = 31.53, ["z"] = 38.9, ["f"] = "l", ["instruction"] = "Habla con «Abercrombie» y entrega «Un espantapájaros para necrófagos».\nZona: Bosque del Ocaso." },
 					},
 				},
 				{
@@ -6463,7 +6463,7 @@ do
 					["title"] = "Abercrombie",
 					["note"] = "Camine al oeste por la carretera; la cabaña del ermitaño se encuentra al noreste de la Cementerio del Cerro del Cuervo.",
 					["goals"] = {
-						{ ["title"] = "Ladrones ogros", ["minLevel"] = 20, ["t"] = "accept", ["quest"] = 134, ["npc"] = 289, ["npcName"] = "Abercrombie", ["pre"] = { 133 }, ["preTitles"] = { [133] = "Ghoulish Effigy" }, ["map"] = 1431, ["x"] = 28.11, ["y"] = 31.46, ["z"] = 38.9, ["f"] = "e", ["qlvl"] = 30, ["instruction"] = "Habla con «Abercrombie» y acepta «Ladrones ogros».\nZona: Bosque del Ocaso." },
+						{ ["title"] = "Ladrones ogros", ["minLevel"] = 20, ["t"] = "accept", ["quest"] = 134, ["npc"] = 289, ["npcName"] = "Abercrombie", ["pre"] = { 133 }, ["preTitles"] = { [133] = "Ghoulish Effigy" }, ["map"] = 1431, ["x"] = 27.97, ["y"] = 31.53, ["z"] = 38.9, ["f"] = "l", ["qlvl"] = 30, ["instruction"] = "Habla con «Abercrombie» y acepta «Ladrones ogros».\nZona: Bosque del Ocaso." },
 					},
 				},
 				{
@@ -6515,8 +6515,8 @@ do
 				{
 					["title"] = "Abercrombie",
 					["goals"] = {
-						{ ["title"] = "Ladrones ogros", ["t"] = "turnin", ["quest"] = 134, ["npc"] = 289, ["npcName"] = "Abercrombie", ["map"] = 1431, ["x"] = 28.11, ["y"] = 31.46, ["z"] = 38.9, ["f"] = "e", ["instruction"] = "Habla con «Abercrombie» y entrega «Ladrones ogros».\nZona: Bosque del Ocaso." },
-						{ ["title"] = "Nota para el alcalde", ["minLevel"] = 20, ["t"] = "accept", ["quest"] = 160, ["npc"] = 289, ["npcName"] = "Abercrombie", ["pre"] = { 134 }, ["preTitles"] = { [134] = "Ogre Thieves" }, ["map"] = 1431, ["x"] = 28.11, ["y"] = 31.46, ["z"] = 38.9, ["f"] = "e", ["qlvl"] = 30, ["instruction"] = "Habla con «Abercrombie» y acepta «Nota para el alcalde».\nZona: Bosque del Ocaso." },
+						{ ["title"] = "Ladrones ogros", ["t"] = "turnin", ["quest"] = 134, ["npc"] = 289, ["npcName"] = "Abercrombie", ["map"] = 1431, ["x"] = 27.97, ["y"] = 31.53, ["z"] = 38.9, ["f"] = "l", ["instruction"] = "Habla con «Abercrombie» y entrega «Ladrones ogros».\nZona: Bosque del Ocaso." },
+						{ ["title"] = "Nota para el alcalde", ["minLevel"] = 20, ["t"] = "accept", ["quest"] = 160, ["npc"] = 289, ["npcName"] = "Abercrombie", ["pre"] = { 134 }, ["preTitles"] = { [134] = "Ogre Thieves" }, ["map"] = 1431, ["x"] = 27.97, ["y"] = 31.53, ["z"] = 38.9, ["f"] = "l", ["qlvl"] = 30, ["instruction"] = "Habla con «Abercrombie» y acepta «Nota para el alcalde».\nZona: Bosque del Ocaso." },
 					},
 				},
 				{

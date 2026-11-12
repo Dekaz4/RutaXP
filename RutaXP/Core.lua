@@ -167,29 +167,49 @@ function ns:PlayerPoint()
     end
 end
 
-function ns:Navigate()
+function ns:Navigate(goalIndex)
     local _, step = self:GetCurrent()
+    local request = {index=goalIndex}
     local point
-    if self.GetStepWaypoint then point = self:GetStepWaypoint(step)
+    if self.GetStepWaypoint then point = self:GetStepWaypoint(step, nil, request)
     else point = step and step.waypoint end
-    if not point then self:Print("Este paso no tiene coordenadas guardadas."); return false end
+    if not point then
+        local goal = request.goal
+        local action = goal and (goal.t or goal.action)
+        local message = request.reason
+        if not message and goal then
+            if goal.navigationMode == "inventory" or (action == "accept" and goal.item) then
+                message = "Usa el objeto de la misión en tus bolsas."
+            elseif goal.navigationMode == "ability" then message = "Usa la habilidad indicada en la guía."
+            elseif goal.navigationMode == "escort" then message = "Sigue al personaje de la escolta."
+            elseif goal.npcName then message = "Habla con " .. goal.npcName .. ". Su posición no está disponible ahora."
+            end
+        end
+        self:Print(message or (step and "Este objetivo no tiene un destino disponible en el mapa." or "No hay un paso activo para marcar."))
+        return false
+    end
     self.char.arrow = true
     if self.UpdateNavigation then self:UpdateNavigation() end
-    if not (C_Map and C_Map.SetUserWaypoint and UiMapPoint and UiMapPoint.CreateFromCoordinates) then
-        self:Print("Este cliente no ofrece marcadores nativos de mapa."); return false
+    local goal = point.goal or request.goal
+    local label = point.label or point.title or (goal and (goal.npcName or goal.title)) or (step and step.title) or "Destino"
+    local info = call(C_Map and C_Map.GetMapInfo, point.mapID)
+    local location = string.format("%s · %s%.1f, %.1f", label, info and info.name and (info.name .. " ") or "", point.x * 100, point.y * 100)
+    if C_Map and C_Map.SetUserWaypoint and UiMapPoint and UiMapPoint.CreateFromCoordinates
+        and (not C_Map.CanSetUserWaypointOnMap or call(C_Map.CanSetUserWaypointOnMap, point.mapID)) then
+        local target = call(UiMapPoint.CreateFromCoordinates, point.mapID, point.x, point.y)
+        if target and call(C_Map.SetUserWaypoint, target) then
+            if self.ClearMapDestination then self:ClearMapDestination() end
+            call(C_SuperTrack and C_SuperTrack.SetSuperTrackedUserWaypoint, true)
+            self:Print("Destino marcado: " .. location)
+            return true
+        end
     end
-    if C_Map.CanSetUserWaypointOnMap and not call(C_Map.CanSetUserWaypointOnMap, point.mapID) then
-        self:Print("El juego no permite colocar un marcador en este mapa."); return false
+    if self.ShowMapDestination and self:ShowMapDestination(point, label) then
+        self:Print("Destino marcado: " .. location)
+        return true
     end
-    local target = call(UiMapPoint.CreateFromCoordinates, point.mapID, point.x, point.y)
-    if not target or not call(C_Map.SetUserWaypoint, target) then
-        self:Print("El juego no ha podido colocar el marcador."); return false
-    end
-    if C_SuperTrack and C_SuperTrack.SetSuperTrackedUserWaypoint then
-        call(C_SuperTrack.SetSuperTrackedUserWaypoint, true)
-    end
-    self:Print("Destino marcado en el mapa.")
-    return true
+    self:Print("Ubicación: " .. location .. ". El juego no ha podido mostrar el marcador.")
+    return false
 end
 
 function ns:Command(message)

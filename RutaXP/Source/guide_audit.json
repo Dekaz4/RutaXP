@@ -20,10 +20,11 @@
     },
     "localOverrides": {
       "file": "Source/guide_overrides.json",
-      "sha256": "220323b9856a82507c0c77c7e69c807b5a4ecc5def63480e9f9010f88ada26c4",
+      "sha256": "a160b0b2b85753f137852175ecaf60cf579120b5c64dcb2e12ae3ae70dae22e9",
       "applied": [
         "dun-morogh-cooking-instructor",
-        "darkshore-auberdine-pier-map"
+        "darkshore-auberdine-pier-map",
+        "duskwood-abercrombie-forever"
       ]
     },
     "navigationCoverage": {

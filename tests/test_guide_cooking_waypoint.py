@@ -144,7 +144,8 @@ class CookingGuideRebuildTests(unittest.TestCase):
                 self.assertEqual(actual, cooking_goals(json.loads((SOURCE / "leveling.json").read_text(encoding="utf-8")))[0])
                 self.assertEqual(actual["npc"], donor["npc"])
                 self.assertEqual(imported["provenance"]["localOverrides"]["applied"],
-                                 ["dun-morogh-cooking-instructor", "darkshore-auberdine-pier-map"])
+                                 ["dun-morogh-cooking-instructor", "darkshore-auberdine-pier-map",
+                                  "duskwood-abercrombie-forever"])
 
 
 if __name__ == "__main__":

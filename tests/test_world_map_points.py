@@ -59,7 +59,7 @@ function WorldMapFrame:GetCanvas() return Canvas end
 function WorldMapFrame:GetCanvasContainer() return Canvas end
 function WorldMapFrame:GetCanvasScale() return self.canvasScale or 1 end
 local levels = {PIN_FRAME_LEVEL_MAP_EXPLORATION=2002, PIN_FRAME_LEVEL_FLIGHT_POINT=2020,
-                PIN_FRAME_LEVEL_AREA_POI=2022, PIN_FRAME_LEVEL_GROUP_MEMBER=2650}
+                PIN_FRAME_LEVEL_AREA_POI=2022, PIN_FRAME_LEVEL_WAYPOINT_LOCATION=2610, PIN_FRAME_LEVEL_GROUP_MEMBER=2650}
 function WorldMapFrame:GetPinFrameLevelsManager()
     return {
         GetValidFrameLevel = function(_, key) return levels[key] or 2000 end,
@@ -224,6 +224,51 @@ class WorldMapPointsTests(unittest.TestCase):
         self.assertIs(self.g.NS.char.mapPointFilters.inn, False)
         reopened = self.g.OpenFilters()
         self.assertFalse(next(box for name, box in reopened.items() if "posada" in name.lower()).checked())
+
+    def test_explicit_destination_uses_game_atlas_while_filters_are_off_and_clears_on_close(self):
+        self.lua.execute("""
+            NS.char.mapPointFilters = {accept=false, objective=false, turnin=false}
+            C_AddOns = {LoadAddOn=function(name)
+                assert(name == "Blizzard_WorldMap")
+                function OpenWorldMap(id)
+                    WorldMapFrame:Show()
+                    WorldMapFrame.mapID = id
+                    WorldMapFrame.provider:OnMapChanged()
+                end
+            end}
+            WorldMapFrame:Hide()
+        """)
+        ns = self.g.NS
+        goal = self.lua.table(mapID=1431, x=.28, y=.315)
+        self.assertTrue(ns.ShowMapDestination(ns, goal, "Abercrombie"))
+        self.assertEqual(self.g.WorldMapFrame.mapID, 1431)
+        self.assertEqual(self.g.VisibleCount(), 1)
+        pin = next(f for f in self.g.PinFrames.values() if f.shown)
+        self.assertEqual((pin.icon.atlas, pin.width, pin.level), ("Waypoint-MapPin-Untracked", 30, 2610))
+        self.assertAlmostEqual(pin.offsetX, 280)
+        self.assertAlmostEqual(pin.offsetY, -189)
+        pin.scripts.OnEnter(pin)
+        self.assertEqual(self.g.GameTooltip.lines[1], "Abercrombie")
+        goal.x = .7
+        self.assertTrue(ns.ShowMapDestination(ns, goal, "Otra entrega"))
+        self.g.Flush()
+        self.assertEqual(self.g.VisibleCount(), 1)
+        self.assertAlmostEqual(pin.offsetX, 700)
+        self.lua.execute("WorldMapFrame:Hide(); WorldMapFrame.provider:OnHide(); WorldMapFrame:Show(); Redraw()")
+        self.assertEqual(self.g.VisibleCount(), 0)
+        self.assertIs(ns.char.mapPointFilters.accept, False)
+
+    def test_blocked_map_does_not_claim_a_pin_or_clear_native_waypoint(self):
+        self.lua.execute("""
+            function OpenWorldMap(id) end
+            C_Map = {ClearUserWaypoint=function() error("must preserve native waypoint") end}
+        """)
+        self.show_map()
+        ns = self.g.NS
+        self.assertFalse(ns.ShowMapDestination(ns, self.lua.table(mapID=1431, x=.28, y=.315), "Abercrombie"))
+        self.assertEqual(self.g.WorldMapFrame.mapID, 1436)
+        self.assertEqual(self.g.VisibleCount(), 3)
+        self.assertFalse(ns.ShowMapDestination(ns, self.lua.table(mapID=1431, x=28, y=31.5), "Abercrombie"))
 
     def test_switching_maps_removes_stale_pins_and_preserves_blizzard_flight_pin(self):
         self.lua.execute("""

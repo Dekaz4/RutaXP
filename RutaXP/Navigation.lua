@@ -370,10 +370,12 @@ function ns:GetBaseStepWaypoint(step)
     return questPoint(step.questID, step.action)
 end
 
-function ns:GetStepWaypoint(step, travel)
+function ns:GetStepWaypoint(step, travel, mapRequest)
     if travel == nil and self.GetGuideTravel then travel = self:GetGuideTravel() end
-    if travel then return travel.point end
-    local base = self:GetBaseStepWaypoint(step)
+    if travel then
+        if mapRequest then mapRequest.reason = travel.text or travel.title end
+        return travel.point
+    end
     if self.Recovery and self.Recovery.GetNavigationOverride then
         local override = safe(self.Recovery.GetNavigationOverride, self.Recovery)
         if validPoint(override) then return override end
@@ -397,6 +399,7 @@ function ns:GetStepWaypoint(step, travel)
         if view and view.following then
             local follow = safe(self.DuoAuto.GetNavigationOverride, self.DuoAuto)
             -- A missing peer target must not fall back to our future quest.
+            if mapRequest then mapRequest.reason = "Esperando el destino de tu compañero." end
             if not validPoint(follow) then return nil end
             if self.Waypoints and self.Waypoints.ResolveTarget then
                 local guide = self.guides[view.guideID]
@@ -409,14 +412,33 @@ function ns:GetStepWaypoint(step, travel)
             return follow
         end
     end
-    if step and step.goals and self.GetActiveGoal then
-        local _, _, status = self:GetActiveGoal(step)
-        if status == "blocked" then return nil end
+    local goal, base = step, nil
+    if step and step.goals and self.GetActiveGoal and not step.waypoint then
+        local active, activeIndex, status, reason = self:GetActiveGoal(step)
+        goal = active
+        local index = mapRequest and mapRequest.index
+        if index and index ~= activeIndex then
+            goal = step.goals[index]
+            if not goal then return nil end
+            local guide, _, state = self:GetCurrent()
+            status, reason = self:GetGoalStatus(goal, step, state, index, guide)
+        end
+        if mapRequest then mapRequest.goal = goal end
+        if status == "blocked" or (mapRequest and (not goal or status == "done" or status == "skip")) then
+            if mapRequest then mapRequest.reason = reason or "El paso ya no tiene objetivos pendientes." end
+            return nil
+        end
+        base = self:GetGoalWaypoint(goal)
+        -- A click on another pending row marks its own location without
+        -- activating an itinerary or changing progress for the current row.
+        if index and index ~= activeIndex then return base end
+    else
+        base = self:GetBaseStepWaypoint(step)
     end
     if self.Waypoints and self.Waypoints.Resolve then
-        local goal = step
-        if step and step.goals and self.GetActiveGoal then goal = self:GetActiveGoal(step) end
-        return self.Waypoints:Resolve(step, goal, base)
+        local nextPoint = self.Waypoints:Resolve(step, goal, base)
+        if not nextPoint and mapRequest then return base end
+        return nextPoint
     end
     return base
 end

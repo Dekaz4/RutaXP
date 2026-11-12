@@ -88,9 +88,8 @@ def lua_value(value: Any, indent: int = 0, compact: bool = False) -> str:
 def apply_guide_overrides(document: dict[str, Any], path: Path) -> list[str]:
     """Reapply audited navigation hints on import without changing quest logic.
 
-    A correction must match exactly one goal and donor in the stated step.
-    NPC/coordinate data is copied from that donor, never supplied speculatively.
-    The normal builder still emits the editable snapshot exactly as saved.
+    Individual corrections use a donor in the same step. Native contact points
+    apply to visits to the recorded NPC on that map, across chapters.
     """
     if not path.is_file():
         return []
@@ -128,6 +127,18 @@ def apply_guide_overrides(document: dict[str, Any], path: Path) -> list[str]:
         goal.update({key: donor[key] for key in fields})
         goal.update(patch.get("set", {}))
         applied.append(patch["id"])
+    for contact in overlay.get("nativeNpcLocations", []):
+        if not contact.get("provenance") or not all(isinstance(contact.get(k), (int, float))
+                and not isinstance(contact[k], bool) and 0 < contact[k] < 100 for k in ("x", "y")):
+            raise ValueError("Invalid native contact coordinates: " + contact["id"])
+        visits = [goal for guide in document["guides"] for step in guide["steps"] for goal in step["goals"]
+                  if goal.get("npc") == contact["npc"] and goal.get("map") == contact["map"]
+                  and goal.get("t") in ("accept", "turnin")]
+        if not visits:
+            raise ValueError("Native contact has no matching quest visit: " + contact["id"])
+        for goal in visits:
+            goal.update(x=contact["x"], y=contact["y"], f="l")
+        applied.append(contact["id"])
     source["localOverrides"] = {
         "file": "Source/guide_overrides.json", "sha256": hashlib.sha256(payload).hexdigest(), "applied": applied,
     }

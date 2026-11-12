@@ -20,8 +20,10 @@ for order, category in ipairs(categories) do
     category.order = order
     byKey[category.key] = category
 end
+-- A destination explicitly requested with «Mapa» is independent of POI filters.
+byKey.destination = {label="Destino de RutaXP", atlas="Waypoint-MapPin-Untracked", order=0}
 
-local map, provider, queued, disabledFlightProvider
+local map, provider, queued, disabledFlightProvider, destination
 local frames, used = {}, 0
 
 local function enabled(key)
@@ -85,9 +87,6 @@ end
 
 local function newFrame(canvas)
     local frame = CreateFrame("Frame", nil, canvas)
-    frame:SetSize(20, 20)
-    local levels = map.GetPinFrameLevelsManager and map:GetPinFrameLevelsManager()
-    if levels then frame:SetFrameLevel(levels:GetValidFrameLevel("PIN_FRAME_LEVEL_FLIGHT_POINT", 1)) end
     frame.background = frame:CreateTexture(nil, "BACKGROUND")
     frame.background:SetAllPoints()
     frame.icon = frame:CreateTexture(nil, "ARTWORK")
@@ -101,6 +100,14 @@ end
 
 local function setIcon(frame, point, textures)
     local category = byKey[point.category]
+    local focused = point.category == "destination"
+    local size = focused and 30 or 20
+    frame:SetSize(size, size)
+    local levels = map.GetPinFrameLevelsManager and map:GetPinFrameLevelsManager()
+    if levels then
+        local layer = focused and "PIN_FRAME_LEVEL_WAYPOINT_LOCATION" or "PIN_FRAME_LEVEL_FLIGHT_POINT"
+        frame:SetFrameLevel(levels:GetValidFrameLevel(layer, 1))
+    end
     local definition = category.legend and MapLegendPinDefinitions and MapLegendPinDefinitions[category.legend]
     local atlas = definition and definition.Atlas or category.atlas
     local back = definition and definition.BackgroundAtlas or category.back
@@ -204,21 +211,25 @@ local function render()
     if not mapID then clearFrom(1); return end
     applyFlightFilter()
     local native, groups, sites = nativePositions(), {}, {}
+    local function addPoint(point)
+        local key = math.floor(point.x * 1000 + .5) .. "/" .. math.floor(point.y * 1000 + .5)
+        local group = sites[key]
+        if not group then
+            group = {}
+            sites[key] = group
+            groups[#groups+1] = group
+        end
+        group[#group+1] = point
+    end
     local function include(points)
         for _, point in ipairs(points) do
             if byKey[point.category] and enabled(point.category) and usable(point.x) and usable(point.y)
                 and not covered(point, native) then
-                local key = math.floor(point.x * 1000 + .5) .. "/" .. math.floor(point.y * 1000 + .5)
-                local group = sites[key]
-                if not group then
-                    group = {}
-                    sites[key] = group
-                    groups[#groups+1] = group
-                end
-                group[#group+1] = point
+                addPoint(point)
             end
         end
     end
+    if destination and destination.mapID == mapID then addPoint(destination) end
     include(ns:GetMapServicePoints(mapID))
     if enabled("accept") or enabled("turnin") or enabled("objective") then include(ns:GetMapQuestPoints(mapID)) end
     local textures, canvas = trackingTextures(), map:GetCanvas()
@@ -257,12 +268,43 @@ function ns:InitializeMapPoints()
     end
     function provider:RefreshAllData() ns:RefreshMapPoints() end
     provider.OnShow = provider.RefreshAllData
-    provider.OnHide = provider.RemoveAllData
+    function provider:OnHide()
+        destination = nil
+        self:RemoveAllData()
+    end
     provider.OnCanvasScaleChanged = positionFrames
     provider.OnCanvasSizeChanged = positionFrames
     Menu.ModifyMenu("MENU_WORLD_MAP_TRACKING", drawMenu)
     map:AddDataProvider(provider)
     ns:RefreshMapPoints()
+end
+
+function ns:ClearMapDestination()
+    if destination then
+        destination = nil
+        self:RefreshMapPoints()
+    end
+end
+
+function ns:ShowMapDestination(point, label)
+    if type(point) ~= "table" or not usable(point.x) or not usable(point.y)
+        or type(point.mapID) ~= "number" or (issecretvalue and issecretvalue(point.mapID))
+        or not (point.mapID > 0 and point.mapID < math.huge) then return false end
+    if not OpenWorldMap and C_AddOns and C_AddOns.LoadAddOn then
+        pcall(C_AddOns.LoadAddOn, "Blizzard_WorldMap")
+    end
+    self:InitializeMapPoints()
+    if not provider or not OpenWorldMap or not self.char then return false end
+    -- OpenWorldMap respects game restrictions and selects the map after OnShow.
+    -- It has no return value, so verify the visible map before reporting success.
+    local opened = pcall(OpenWorldMap, point.mapID)
+    if not opened or not map:IsShown() or map:GetMapID() ~= point.mapID then
+        self:ClearMapDestination()
+        return false
+    end
+    destination = {category="destination", name=label or "Destino de la guía", mapID=point.mapID, x=point.x, y=point.y}
+    render()
+    return true
 end
 
 local events = CreateFrame("Frame")

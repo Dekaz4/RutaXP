@@ -20,10 +20,11 @@
     },
     "localOverrides": {
       "file": "Source/guide_overrides.json",
-      "sha256": "220323b9856a82507c0c77c7e69c807b5a4ecc5def63480e9f9010f88ada26c4",
+      "sha256": "a160b0b2b85753f137852175ecaf60cf579120b5c64dcb2e12ae3ae70dae22e9",
       "applied": [
         "dun-morogh-cooking-instructor",
-        "darkshore-auberdine-pier-map"
+        "darkshore-auberdine-pier-map",
+        "duskwood-abercrombie-forever"
       ]
     },
     "navigationCoverage": {
@@ -77336,10 +77337,10 @@
               "npc": 289,
               "npcName": "Abercrombie",
               "map": 1431,
-              "x": 28.11,
-              "y": 31.46,
+              "x": 27.97,
+              "y": 31.53,
               "z": 38.9,
-              "f": "e",
+              "f": "l",
               "instruction": "Habla con «Abercrombie» y entrega «El ermitaño».\nZona: Bosque del Ocaso."
             },
             {
@@ -77350,10 +77351,10 @@
               "npc": 289,
               "npcName": "Abercrombie",
               "map": 1431,
-              "x": 28.11,
-              "y": 31.46,
+              "x": 27.97,
+              "y": 31.53,
               "z": 38.9,
-              "f": "e",
+              "f": "l",
               "qlvl": 24,
               "instruction": "Habla con «Abercrombie» y acepta «Suministros de Villa Oscura».\nZona: Bosque del Ocaso."
             }
@@ -79145,10 +79146,10 @@
               "npc": 289,
               "npcName": "Abercrombie",
               "map": 1431,
-              "x": 28.11,
-              "y": 31.46,
+              "x": 27.97,
+              "y": 31.53,
               "z": 38.9,
-              "f": "e",
+              "f": "l",
               "instruction": "Habla con «Abercrombie» y entrega «Devolver el pelo».\nZona: Bosque del Ocaso."
             },
             {
@@ -79165,10 +79166,10 @@
                 "157": "Deliver the Thread"
               },
               "map": 1431,
-              "x": 28.11,
-              "y": 31.46,
+              "x": 27.97,
+              "y": 31.53,
               "z": 38.9,
-              "f": "e",
+              "f": "l",
               "qlvl": 24,
               "instruction": "Habla con «Abercrombie» y acepta «Zumo de zombi».\nZona: Bosque del Ocaso."
             }
@@ -80268,10 +80269,10 @@
               "npc": 289,
               "npcName": "Abercrombie",
               "map": 1431,
-              "x": 28.11,
-              "y": 31.46,
+              "x": 27.97,
+              "y": 31.53,
               "z": 38.9,
-              "f": "e",
+              "f": "l",
               "instruction": "Habla con «Abercrombie» y entrega «Entrega de zumo».\nZona: Bosque del Ocaso."
             },
             {
@@ -80288,10 +80289,10 @@
                 "159": "Juice Delivery"
               },
               "map": 1431,
-              "x": 28.11,
-              "y": 31.46,
+              "x": 27.97,
+              "y": 31.53,
               "z": 38.9,
-              "f": "e",
+              "f": "l",
               "qlvl": 27,
               "instruction": "Habla con «Abercrombie» y acepta «Un espantapájaros para necrófagos».\nZona: Bosque del Ocaso."
             }
@@ -80365,10 +80366,10 @@
               "npc": 289,
               "npcName": "Abercrombie",
               "map": 1431,
-              "x": 28.11,
-              "y": 31.46,
+              "x": 27.97,
+              "y": 31.53,
               "z": 38.9,
-              "f": "e",
+              "f": "l",
               "instruction": "Habla con «Abercrombie» y entrega «Un espantapájaros para necrófagos».\nZona: Bosque del Ocaso."
             }
           ]
@@ -93783,10 +93784,10 @@
                 "133": "Ghoulish Effigy"
               },
               "map": 1431,
-              "x": 28.11,
-              "y": 31.46,
+              "x": 27.97,
+              "y": 31.53,
               "z": 38.9,
-              "f": "e",
+              "f": "l",
               "qlvl": 30,
               "instruction": "Habla con «Abercrombie» y acepta «Ladrones ogros».\nZona: Bosque del Ocaso."
             }
@@ -94185,10 +94186,10 @@
               "npc": 289,
               "npcName": "Abercrombie",
               "map": 1431,
-              "x": 28.11,
-              "y": 31.46,
+              "x": 27.97,
+              "y": 31.53,
               "z": 38.9,
-              "f": "e",
+              "f": "l",
               "instruction": "Habla con «Abercrombie» y entrega «Ladrones ogros».\nZona: Bosque del Ocaso."
             },
             {
@@ -94205,10 +94206,10 @@
                 "134": "Ogre Thieves"
               },
               "map": 1431,
-              "x": 28.11,
-              "y": 31.46,
+              "x": 27.97,
+              "y": 31.53,
               "z": 38.9,
-              "f": "e",
+              "f": "l",
               "qlvl": 30,
               "instruction": "Habla con «Abercrombie» y acepta «Nota para el alcalde».\nZona: Bosque del Ocaso."
             }

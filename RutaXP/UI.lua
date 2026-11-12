@@ -460,7 +460,7 @@ function ns:CreateTracker()
                 local ok, reason = self.Recovery:StartForGoal(item.goalIndex)
                 if not ok and reason then self:Print(reason) end
             else
-                self:Navigate()
+                self:Navigate(item.goalIndex)
             end
         end)
         row:Hide()
@@ -581,7 +581,7 @@ function ns:RefreshUI()
 
     local waypoint
     if travel then waypoint = travel.point
-    elseif self.GetStepWaypoint then waypoint = self:GetStepWaypoint(step)
+    elseif self.GetStepWaypoint then waypoint = self:GetStepWaypoint(step, nil, {})
     else waypoint = step and step.waypoint end
     local objectives = travel and "" or self:GetObjectives(step)
     local sharedItems = sharedView and self.GetFollowingGoalItems and self:GetFollowingGoalItems(sharedView)
