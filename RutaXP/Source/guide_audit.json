@@ -509,7 +509,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "3e41c0e3f562454db7eae5a3e6fd2947e9a9c0e489c140a1587ef22019930ab7",
+      "sha256": "43e045e8f42bceb2c88a5211d00b7690fd19b9ad1fa2e8546b837a7aad9578ae",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -553,7 +553,8 @@
         "feralas-feathermoon-efficiency-2",
         "silithus-ironforge-districts-efficiency-2",
         "ashenvale-alliance-retire-alonso-5",
-        "ashenvale-horde-retire-alonso-2"
+        "ashenvale-horde-retire-alonso-2",
+        "wetlands-daily-delivery-6"
       ]
     }
   },
@@ -16863,6 +16864,6 @@
       "location",
       "requiredLevel"
     ],
-    "semanticsSha256": "9b1ec28b3333471ba0233d7c03b0ad1509ba5fcacd263a446b4b8deacf8dcdf2"
+    "semanticsSha256": "01c814b09550a9e52d8f5fba0da234cacb4029bfa5fd2d1406f56656c4dc51ee"
   }
 }

@@ -34,7 +34,7 @@
       "count": 1199,
       "pre": 1214,
       "preAll": 63,
-      "closedBy": 152,
+      "closedBy": 153,
       "only": 357,
       "optional": 414,
       "minLevel": 2287,
@@ -6931,6 +6931,17 @@
         "source": null,
         "snapshot": [
           98189
+        ]
+      },
+      {
+        "guideID": "forever/alliance/06-ashenvale",
+        "step": 48,
+        "goal": 1,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          484,
+          471
         ]
       },
       {
@@ -18927,6 +18938,49 @@
             "note": "Alonso, una adición Forever, se encuentra en la orilla oeste de Lago Mystral con tres rápidos Dragonslayer misiones."
           }
         }
+      },
+      {
+        "id": "wetlands-daily-delivery-6",
+        "guideID": "forever/alliance/06-ashenvale",
+        "revision": 6,
+        "evidence": {
+          "reason": "Daily Delivery is no longer offered after starting Young Crocolisk Skins. Both reported characters had turned in 484 and started its successor 471 before reaching Einar. Close only the obsolete introduction; the live journal still takes priority over closedBy, including the later delivery.",
+          "sources": [
+            {
+              "url": "https://www.wowhead.com/forever/quest=469/daily-delivery",
+              "detail": "First-hand report by MarsheValias says Daily Delivery is unavailable after picking up Young Crocolisk Skins. Comment date not exposed; corroborated with the live Forever report and client cache."
+            },
+            {
+              "url": "https://raw.githubusercontent.com/JIVESCORP/eg-link-output-wowf/156f29c9af78b1586883e8eb94a13467eb89638c/data/wowf/1.60.1.70862/quests.enUS.json",
+              "sha256": "0f8b890bbedc79f6c80b99511a88ff5f699048f4a34303bd6d0a0281cfde4b7a",
+              "license": "CC BY 4.0",
+              "attribution": "Data from Efficient Games (https://efficient.games).",
+              "facts": {
+                "469": {
+                  "nextQuestId": 484
+                },
+                "484": {
+                  "nextQuestId": 471
+                }
+              },
+              "detail": "Numeric chain facts only. The link alone does not prove exclusion; use together with the observed unavailable offer and the first-hand report."
+            }
+          ],
+          "liveObservation": {
+            "date": "2026-11-14",
+            "clientBuild": "1.60.1.70888",
+            "npc": 2093,
+            "map": 1437,
+            "questsTurnedIn": [
+              484
+            ],
+            "questsStarted": [
+              471
+            ],
+            "unavailableQuest": 469,
+            "detail": "User screenshot at the correct NPC shows no available quest. Two local character histories record the downstream progress. No character names or account data included."
+          }
+        }
       }
     ],
     "authoredTextPresenceLosses": [],
@@ -19188,6 +19242,291 @@
       "prerequisite_not_in_prior_path": [],
       "prerequisite_forward_local": [],
       "ordered_closed_branch": [
+        {
+          "guideID": "forever/alliance/06-ashenvale",
+          "step": 48,
+          "goal": 1,
+          "action": "accept",
+          "questID": 469,
+          "sourceFile": "guides/forever/alliance/06-ashenvale.guide",
+          "sourceLine": 382,
+          "sourceText": "accept 469                              -- Einar Stonegrip",
+          "closedBy": [
+            484
+          ],
+          "modeledScenarios": [
+            {
+              "path": 1,
+              "class": "WARRIOR",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PALADIN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "HUNTER",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "ROGUE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PRIEST",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "SHAMAN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "MAGE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "WARLOCK",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "DRUID",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARRIOR",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PALADIN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "HUNTER",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "ROGUE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PRIEST",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "SHAMAN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "MAGE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARLOCK",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "DRUID",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARRIOR",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PALADIN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "HUNTER",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "ROGUE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PRIEST",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "SHAMAN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "MAGE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARLOCK",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "DRUID",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            }
+          ]
+        },
         {
           "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
           "step": 50,
@@ -21668,7 +22007,7 @@
       "accept_without_future_turnin": 0,
       "prerequisite_not_in_prior_path": 0,
       "prerequisite_forward_local": 0,
-      "ordered_closed_branch": 10
+      "ordered_closed_branch": 11
     },
     "carriedTurnins": [
       {
@@ -32701,6 +33040,291 @@
       "scope": "Interacción del motor con datos válidos, no pérdida ni cambio de orden en la importación. La corrección runtime y sus pruebas se verifican por separado.",
       "relatedCandidates": [
         {
+          "guideID": "forever/alliance/06-ashenvale",
+          "step": 48,
+          "goal": 1,
+          "action": "accept",
+          "questID": 469,
+          "sourceFile": "guides/forever/alliance/06-ashenvale.guide",
+          "sourceLine": 382,
+          "sourceText": "accept 469                              -- Einar Stonegrip",
+          "closedBy": [
+            484
+          ],
+          "modeledScenarios": [
+            {
+              "path": 1,
+              "class": "WARRIOR",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PALADIN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "HUNTER",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "ROGUE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PRIEST",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "SHAMAN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "MAGE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "WARLOCK",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "DRUID",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARRIOR",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PALADIN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "HUNTER",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "ROGUE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PRIEST",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "SHAMAN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "MAGE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARLOCK",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "DRUID",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARRIOR",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PALADIN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "HUNTER",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "ROGUE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PRIEST",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "SHAMAN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "MAGE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARLOCK",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "DRUID",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            }
+          ]
+        },
+        {
           "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
           "step": 50,
           "goal": 2,
@@ -35184,5 +35808,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "067ba268530de6fba6875beceadfa99e2b0cc2be70066f49edf0942b73db1304"
+  "inputSha256": "6368d317317f4c31d07224dbbbb90b30ff1ebbf8c54ac7bdec83501ec4a8e28d"
 }

@@ -12259,6 +12259,135 @@
           "note": "Alonso, una adición Forever, se encuentra en la orilla oeste de Lago Mystral con tres rápidos Dragonslayer misiones."
         }
       }
+    },
+    {
+      "id": "wetlands-daily-delivery-6",
+      "guideID": "forever/alliance/06-ashenvale",
+      "previousRevision": 5,
+      "revision": 6,
+      "sourceShape": "9daa658ac8d65385db5c87c818128b35dd81fb4b586001e0b6c54832c008bca6",
+      "resultShape": "fcdd5a28da176b43fa521685d9465235dbcdc91a8e256f5c123bae67c5aebc85",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        4,
+        2,
+        3,
+        2,
+        2,
+        4,
+        2,
+        4,
+        8,
+        3,
+        1,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        5,
+        1,
+        1,
+        3,
+        1,
+        4,
+        3,
+        1,
+        4,
+        5,
+        3,
+        4,
+        5,
+        3,
+        10,
+        2,
+        1,
+        2,
+        2,
+        6,
+        3,
+        2,
+        1,
+        3,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        3,
+        2,
+        2,
+        1,
+        2,
+        1,
+        1,
+        1,
+        2,
+        8,
+        6,
+        2,
+        2,
+        6,
+        2,
+        1,
+        4,
+        3
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 469
+          },
+          "count": 1,
+          "set": {
+            "closedBy": [
+              484,
+              471
+            ]
+          }
+        }
+      ],
+      "evidence": {
+        "reason": "Daily Delivery is no longer offered after starting Young Crocolisk Skins. Both reported characters had turned in 484 and started its successor 471 before reaching Einar. Close only the obsolete introduction; the live journal still takes priority over closedBy, including the later delivery.",
+        "sources": [
+          {
+            "url": "https://www.wowhead.com/forever/quest=469/daily-delivery",
+            "detail": "First-hand report by MarsheValias says Daily Delivery is unavailable after picking up Young Crocolisk Skins. Comment date not exposed; corroborated with the live Forever report and client cache."
+          },
+          {
+            "url": "https://raw.githubusercontent.com/JIVESCORP/eg-link-output-wowf/156f29c9af78b1586883e8eb94a13467eb89638c/data/wowf/1.60.1.70862/quests.enUS.json",
+            "sha256": "0f8b890bbedc79f6c80b99511a88ff5f699048f4a34303bd6d0a0281cfde4b7a",
+            "license": "CC BY 4.0",
+            "attribution": "Data from Efficient Games (https://efficient.games).",
+            "facts": {
+              "469": {
+                "nextQuestId": 484
+              },
+              "484": {
+                "nextQuestId": 471
+              }
+            },
+            "detail": "Numeric chain facts only. The link alone does not prove exclusion; use together with the observed unavailable offer and the first-hand report."
+          }
+        ],
+        "liveObservation": {
+          "date": "2026-11-14",
+          "clientBuild": "1.60.1.70888",
+          "npc": 2093,
+          "map": 1437,
+          "questsTurnedIn": [
+            484
+          ],
+          "questsStarted": [
+            471
+          ],
+          "unavailableQuest": 469,
+          "detail": "User screenshot at the correct NPC shows no available quest. Two local character histories record the downstream progress. No character names or account data included."
+        }
+      }
     }
   ]
 }

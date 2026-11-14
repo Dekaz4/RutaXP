@@ -1,4 +1,4 @@
-# RutaXP 0.7.22 para WoW Forever
+# RutaXP 0.7.23 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,10 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## Entrega cotidiana en Los Humedales (0.7.23)
+
+Si ya empezaste «Piel de crocolisco joven» o «Deberes de aprendiz», la guía reconoce que la introducción «Entrega cotidiana» ha quedado atrás y continúa con las misiones de Rethiel el Guardaverde. También omite la entrega posterior de esa introducción si no la llevas en el diario. Si aún la tienes, conserva su entrega.
 
 ## Marcar un objetivo en el mapa (0.7.22)
 
@@ -275,7 +279,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.22.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.23.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.

@@ -62,6 +62,11 @@ def undo_visit_optimization(guide, revision):
 def original_order(document):
     """Undo reviewed moves and exact prerequisite edits before the old digest."""
     result = copy.deepcopy(document)
+    daily_accepts = [goal for guide in result["guides"] for step in guide["steps"] for goal in step["goals"]
+                     if goal.get("quest") == 469 and goal["t"] == "accept"]
+    if len(daily_accepts) != 1 or daily_accepts[0].get("closedBy") != [484, 471]:
+        raise AssertionError("The reviewed Daily Delivery exclusion changed")
+    del daily_accepts[0]["closedBy"]
     # Compare the historical Era baseline in its own coordinate system.
     hermit_visits = [goal for guide in result["guides"] for step in guide["steps"] for goal in step["goals"]
                      if goal.get("npc") == 289 and goal.get("map") == 1431 and goal["t"] in ("accept", "turnin")]
