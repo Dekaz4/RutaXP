@@ -1008,7 +1008,7 @@ La visita temprana a Menethil solo continúa esta cadena si el personaje ya llev
 | 30.1 | Recoger · Derrotar a Nek'rosh (#474) | Cabeza de Nek'rosh · Jefe Nek'rosh · mapa 1437 · 53.5, 54.7 |
 | 31.1 | Piedra de hogar · Mesón Aguahonda |  |
 | 31.2 | Entregar · Derrotar a Nek'rosh (#474) | Capitán Puñorrecio · mapa 1437 · 9.86, 57.49 · a elegir · Segadora para barriles |
-| 31.3 | Indicación · Tomal barco desdel muelle de Menethil a Isla Theramore en Marjal Revolcafango. |  |
+| 31.3 | Tomar barco · Barco de Menethil a Theramore | mapa 1437 · 4.74, 63.76 |
 | 32 | Takar el Profeta | Otra clase o raza |
 | 33.1 | Recoger · Diario de Henrig Soliceja | Diario de Henrig Soliceja · mapa 1441 · 30.7, 24.3 |
 | 33.2 | Aceptar · El diario de Henrig Soliceja (#1100) | Diario de Henrig Soliceja · desde nivel 29 |

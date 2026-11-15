@@ -80,7 +80,7 @@ def original_order(document):
     guides = {guide["id"]: guide for guide in result["guides"]}
     for revision in reversed(revisions):
         if revision.get("preservePendingVisits") or revision["id"] in {
-                "ashenvale-alliance-retire-alonso-5", "ashenvale-horde-retire-alonso-2"}:
+                "ashenvale-alliance-retire-alonso-5", "ashenvale-horde-retire-alonso-2", "menethil-theramore-boat-5"}:
             undo_visit_optimization(guides[revision["guideID"]], revision)
         if revision["id"] == "menethil-lightforge-chest-chain-4":
             acceptance = guides[revision["guideID"]]["steps"][17]["goals"][6]

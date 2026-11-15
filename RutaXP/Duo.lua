@@ -573,6 +573,69 @@ function Duo:GetPartnerQuest(id)
     if active == true then return { state = 1, basic = true } end
     -- The game may hide absent quests. Unknown is never reported as completed.
 end
+local function boatKey(goal, guide, index)
+    if not goal or (goal.t or goal.action) ~= "boat" or not guide then return nil end
+    local fields = { "boat", guide.routeRevision or 1, index }
+    for _, point in ipairs({ goal.departure or {}, goal.arrival or {} }) do
+        if not integer(point.map, 1, 100000) or type(point.x) ~= "number" or type(point.y) ~= "number"
+            or point.x ~= point.x or point.y ~= point.y
+            or point.x < 0 or point.x > 100 or point.y < 0 or point.y > 100
+            or point.f ~= nil and point.f ~= "e" and point.f ~= "l" then return nil end
+        fields[#fields + 1], fields[#fields + 2], fields[#fields + 3] = point.map,
+            math.floor(point.x * 1000 + .5), math.floor(point.y * 1000 + .5)
+        fields[#fields + 1] = point.f or "l"
+    end
+    fields[#fields + 1] = goal.arrival.radius or 25
+    local key = table.concat(fields, ".")
+    return token(key) and #key <= 64 and key or nil
+end
+local function boatAt(guide, cursor, checkpointID)
+    local step = guide and guide.steps[integer(cursor, 1, #guide.steps)]
+    for index, goal in ipairs(step and step.goals or {}) do
+        local key = boatKey(goal, guide, index)
+        if key and (not checkpointID or checkpointID == key)
+            and (not ns.MatchesConditions or ns:MatchesConditions(step.only) and ns:MatchesConditions(goal.only)) then
+            return goal, index, key
+        end
+    end
+end
+function Duo:GetBoatObservation(goal, step, index, guide, owner)
+    local stepIndex
+    for si, candidate in ipairs(guide and guide.steps or {}) do if candidate == step then stepIndex = si; break end end
+    local key = stepIndex and boatKey(goal, guide, index)
+    local missing = { known = false, done = false, status = "blocked", reason = "Llegada en barco sin confirmar." }
+    if not key then return missing end
+    if owner == "mine" then
+        local saved = ns.char and ns.char.progress and ns.char.progress[guide.id]
+        if not ns.BoatNavigation or saved and saved.review then return missing end
+        local arrived = safe(ns.BoatNavigation.IsComplete, ns.BoatNavigation, goal, guide, stepIndex, index, saved)
+        if type(arrived) ~= "boolean" then return missing end
+        return { known = true, done = arrived, status = arrived and "done" or "active",
+            reason = arrived and "Llegada a tierra confirmada en su personaje." or "Debe desembarcar y alcanzar el punto en tierra." }
+    end
+    local ctx, record = self:GetContext(), self.remoteCheckpoint
+    if not (ctx.enabled and ctx.known and ctx.online and ctx.sameParty and ctx.partnerHeaderFresh)
+        or ctx.partnerReview or ctx.guideID ~= guide.id or not record or not fresh(record.seen, 18)
+        or record.stopKind ~= "boat" or record.guideID ~= guide.id or record.cursor ~= stepIndex
+        or record.checkpointID ~= key or type(record.stopReady) ~= "boolean" then return missing end
+    return { known = true, done = record.stopReady, status = record.stopReady and "done" or "active",
+        reason = record.stopReady and "Tu compañero confirma su llegada a tierra." or "Tu compañero todavía no ha confirmado su llegada a tierra." }
+end
+function Duo:GetBoatCheckpoint()
+    local guide = ns.char and ns.guides[ns.char.activeGuide]
+    local state = guide and ns.char.progress[guide.id]
+    if not state or state.review or not ns.BoatNavigation then return nil end
+    local ctx, cursor = self:GetContext(), state.cursor
+    -- Keep acknowledging our real arrival for a partner still on that step,
+    -- even after our own cursor advances. A cursor alone never proves arrival.
+    if ctx.partnerHeaderFresh and not ctx.partnerReview and ctx.guideID == guide.id
+        and ctx.cursor and ctx.cursor <= cursor and boatAt(guide, ctx.cursor) then cursor = ctx.cursor end
+    local goal, index, key = boatAt(guide, cursor)
+    if not goal then return nil end
+    local ready = safe(ns.BoatNavigation.IsComplete, ns.BoatNavigation, goal, guide, cursor, index, state)
+    if type(ready) ~= "boolean" then return nil end
+    return { guideID = guide.id, cursor = cursor, checkpointID = key, stopKind = "boat", stopReady = ready }
+end
 function Duo:GetStepWaitStatus(step)
     local noWait = { waiting = false }
     if not step then return noWait end
@@ -591,6 +654,15 @@ function Duo:GetStepWaitStatus(step)
         local individual = not appliesToPartner(goal.only, ctx)
             or (ns.GetGoalProfessionRequirement and ns:GetGoalProfessionRequirement(goal, step) ~= nil)
         local skipped = ns.GetGoalStatus and ns:GetGoalStatus(goal, step, state, index) == "skip"
+        if action == "boat" and applicable and not individual and not skipped and not goal.optional then
+            local own = self:GetBoatObservation(goal, step, index, guide, "mine")
+            if own.done then
+                local peer = self:GetBoatObservation(goal, step, index, guide, "partner")
+                if not peer.done then return { waiting = true, kind = "boat", unknown = not peer.known,
+                    reason = peer.known and "Espera a que tu compañero desembarque y llegue al punto en tierra."
+                        or "Esperando confirmación reciente de la llegada de tu compañero." } end
+            end
+        end
         if id and applicable and not individual and not skipped and not goal.optional and action ~= "note" then
             local branch = self:GetGoalBranchState(goal, step, index, guide, "partner")
             if branch ~= false then
@@ -982,6 +1054,9 @@ function Duo:Receive(prefix, message, channel, sender)
             if not token(fields[5]) or not cursor or not token(fields[7]) or #fields[7] > 64
                 or not token(fields[8]) or #fields[8] > 24 or (fields[9] ~= "?" and fields[9] ~= "0" and fields[9] ~= "1")
                 or (fields[10] ~= "?" and not mapID) or (fields[11] ~= "?" and not level) then return false end
+            if fields[8] == "boat" and (not fresh(self.peer.headerSeen, 15) or self.peer.review
+                or self.peer.guideID ~= fields[5] or self.peer.cursor < cursor
+                or not boatAt(ns.guides[fields[5]], cursor, fields[7])) then return false end
             self.remoteCheckpoint = { known = true, seen = now(), guideID = fields[5], cursor = cursor,
                 checkpointID = fields[7], stopKind = fields[8], stopReady = boolean(fields[9]), mapID = mapID, level = level }
         elseif kind == "M" and #fields == 10 then
@@ -1016,7 +1091,8 @@ function Duo:Receive(prefix, message, channel, sender)
         local info = transport(self)
         info.receivedHeaders, info.lastHeader = increment(info.receivedHeaders), now()
     end
-    if kind == "H" or kind == "Q" or kind == "U" or kind == "B" or kind == "T" then self:Changed() else self:NavigationChanged() end
+    if kind == "H" or kind == "Q" or kind == "U" or kind == "B" or kind == "T"
+        or kind == "C" and fields[8] == "boat" then self:Changed() else self:NavigationChanged() end
     return true
 end
 function Duo:QueueAutoMessage(kind, packet)
@@ -1132,6 +1208,9 @@ function Duo:Tick(elapsed)
         -- header, counters in Q: neither creates extra per-objective traffic.
         local auxiliary = #ids == 0 or (self.lastSentQuest ~= nil and now() - self.lastSentQuest < 2)
         local meeting = self:Settings().meeting
+        local boat = self:GetBoatCheckpoint()
+        local boatSignal = boat and table.concat({ boat.guideID, boat.cursor, boat.checkpointID, "boat",
+            encodeBoolean(boat.stopReady), unknown(ctx.mapID), unknown(integer(safe(UnitLevel, "player"), 1, 100)) }, "|")
         local travel
         if ns.GetGuideTravelSignal then
             local dest, reached, ready, source, endpoint = ns:GetGuideTravelSignal()
@@ -1150,6 +1229,9 @@ function Duo:Tick(elapsed)
             if self:Send(self.autoQueue.kind, self.autoQueue.values) then self.lastSentAuto = now(); self.autoQueue = nil end
         elseif travel and (travel ~= self.lastTravelSignal or not self.lastTravelSent or now() - self.lastTravelSent >= 8) then
             if self:Send("T", travel) then self.lastTravelSignal, self.lastTravelSent = travel, now() end
+        elseif auxiliary and boatSignal and (boatSignal ~= self.lastBoatSignal or not self.lastSentCheckpoint
+            or now() - self.lastSentCheckpoint >= 10) then
+            if self:Send("C", boatSignal) then self.lastBoatSignal, self.lastSentCheckpoint = boatSignal, now() end
         elseif auxiliary and meetingValid(meeting) and (not self.lastSentMeeting or now() - self.lastSentMeeting >= 20) then
             local clear = meeting.clear == true
             if self:Send("M", table.concat({ meeting.revision, clear and 0 or meeting.mapID,

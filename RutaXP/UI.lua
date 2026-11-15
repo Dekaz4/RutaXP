@@ -20,6 +20,7 @@ local ACTION_ICONS = {
     sethome = { icon = "icon-sethome", color = { 0.58, 0.80, 1.00 } },
     hearth = { icon = "icon-hearth", color = { 0.58, 0.80, 1.00 } },
     getfp = { icon = "icon-getfp", color = { 0.60, 0.88, 0.52 } },
+    boat = { icon = "icon-goto", color = { 0.58, 0.80, 1.00 } },
     fly = { icon = "icon-fly", color = { 0.60, 0.88, 0.52 } },
     train = { icon = "icon-train", color = { 0.58, 0.80, 1.00 } },
     buy = { icon = "icon-buy", color = { 0.95, 0.78, 0.42 } },

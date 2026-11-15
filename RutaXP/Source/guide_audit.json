@@ -509,7 +509,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "fef6f509b00b44a46e4ddd8251d731208843cbb60a44ac1fa3ca392772d98c95",
+      "sha256": "2734ae4200ab6404e6db7fc8d85aba0b62022c858b0bcba9fba57b80234eba46",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -556,19 +556,20 @@
         "ashenvale-horde-retire-alonso-2",
         "wetlands-daily-delivery-6",
         "menethil-lightforge-chest-chain-4",
-        "ashenvale-later-lightforge-alternative-2"
+        "ashenvale-later-lightforge-alternative-2",
+        "menethil-theramore-boat-5"
       ]
     }
   },
   "totals": {
     "guides": 57,
     "goals": 7452,
-    "direct": 6568,
+    "direct": 6569,
     "generated_instruction": 7452,
     "missing_goal_note_text": 3663,
-    "missing": 288,
-    "no_fixed_point_expected": 300,
-    "empty_authored_subtitle": 819,
+    "missing": 287,
+    "no_fixed_point_expected": 299,
+    "empty_authored_subtitle": 818,
     "candidates": 582,
     "unclear_instruction": 6,
     "no_fixed_navigation": 12,
@@ -586,6 +587,11 @@
       "missing": 64,
       "no_fixed_point_expected": 64,
       "empty_authored_subtitle": 151
+    },
+    "boat": {
+      "goals": 1,
+      "direct": 1,
+      "generated_instruction": 1
     },
     "buy": {
       "goals": 27,
@@ -663,11 +669,11 @@
       "empty_authored_subtitle": 1
     },
     "note": {
-      "goals": 115,
-      "missing": 115,
-      "no_fixed_point_expected": 115,
-      "generated_instruction": 115,
-      "empty_authored_subtitle": 115
+      "goals": 114,
+      "missing": 114,
+      "no_fixed_point_expected": 114,
+      "generated_instruction": 114,
+      "empty_authored_subtitle": 114
     },
     "sethome": {
       "goals": 74,
@@ -1553,11 +1559,11 @@
         "goals": 128,
         "candidates": 4,
         "generated_instruction": 128,
-        "direct": 117,
+        "direct": 118,
         "missing_goal_note_text": 29,
-        "missing": 7,
-        "no_fixed_point_expected": 7,
-        "empty_authored_subtitle": 7
+        "missing": 6,
+        "no_fixed_point_expected": 6,
+        "empty_authored_subtitle": 6
       },
       "byAction": {
         "accept": {
@@ -1568,6 +1574,11 @@
           "missing": 2,
           "no_fixed_point_expected": 2,
           "empty_authored_subtitle": 1
+        },
+        "boat": {
+          "goals": 1,
+          "direct": 1,
+          "generated_instruction": 1
         },
         "buy": {
           "goals": 2,
@@ -1598,11 +1609,11 @@
           "generated_instruction": 15
         },
         "note": {
-          "goals": 2,
-          "missing": 2,
-          "no_fixed_point_expected": 2,
-          "generated_instruction": 2,
-          "empty_authored_subtitle": 2
+          "goals": 1,
+          "missing": 1,
+          "no_fixed_point_expected": 1,
+          "generated_instruction": 1,
+          "empty_authored_subtitle": 1
         },
         "sethome": {
           "goals": 2,
@@ -6933,30 +6944,6 @@
       "reason": "Usa el hogar realmente vinculado; no debe inventarse su posición.",
       "unresolved": false,
       "goalNote": null,
-      "stepNote": null,
-      "navigationMode": null,
-      "referenceNavigationKind": "missing"
-    },
-    {
-      "key": "forever/alliance/07-thousand-needles:31:3",
-      "guideID": "forever/alliance/07-thousand-needles",
-      "stepIndex": 31,
-      "goalIndex": 3,
-      "action": "note",
-      "questID": null,
-      "title": null,
-      "source": {
-        "repository": "https://github.com/julen92/SendaFH",
-        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
-        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
-        "guideID": "forever/alliance/07-thousand-needles",
-        "stepIndex": 31,
-        "goalIndex": 3
-      },
-      "classification": "semantic_no_location",
-      "reason": "Nota informativa; no establece un destino físico.",
-      "unresolved": false,
-      "goalNote": "Tomal barco desdel muelle de Menethil a Isla Theramore en Marjal Revolcafango.",
       "stepNote": null,
       "navigationMode": null,
       "referenceNavigationKind": "missing"
@@ -16865,8 +16852,12 @@
       "node",
       "area",
       "location",
-      "requiredLevel"
+      "requiredLevel",
+      "departure",
+      "departureLand",
+      "arrival",
+      "arrivalDock"
     ],
-    "semanticsSha256": "128a5277ef0bc9b2fe15cd060286d439df88e1b9f5b73d0f2dca6908266a9366"
+    "semanticsSha256": "cbc8954b2ace588e7f4e5c191ff61fd2bb2a10d02e2ecc5d67dc25b51682f54f"
   }
 }

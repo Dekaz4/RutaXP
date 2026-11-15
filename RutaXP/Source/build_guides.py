@@ -149,7 +149,7 @@ def apply_guide_overrides(document: dict[str, Any], path: Path) -> list[str]:
 
 ROUTE_FIELDS = ("t", "quest", "oi", "item", "count", "pre", "preAll", "closedBy", "chainStarted", "only", "optional",
                 "minLevel", "maxLevel", "level", "n", "class", "group", "order",
-                "profLine", "profRank", "profName", "requiresSkill")
+                "profLine", "profRank", "profName", "requiresSkill", "departure", "departureLand", "arrival", "arrivalDock")
 
 
 def route_shape(guide: dict[str, Any]) -> str:
@@ -166,10 +166,29 @@ def reviewed_additions(revision: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("Invalid added goals: " + revision["id"])
     for key, value in additions.items():
         goal = value.get("goal", {}) if isinstance(value, dict) else {}
-        if not isinstance(key, str) or not key or not isinstance(goal.get("quest"), int) or goal["quest"] <= 0 \
-                or goal.get("t") not in {"accept", "turnin", "kill", "collect", "complete"} \
-                or not value.get("evidence"):
-            raise ValueError("New quest action needs explicit evidence: " + revision["id"])
+        quest_action = isinstance(goal.get("quest"), int) and not isinstance(goal.get("quest"), bool) \
+            and goal["quest"] > 0 and goal.get("t") in {"accept", "turnin", "kill", "collect", "complete"}
+
+        def point_valid(point):
+            return isinstance(point, dict) and isinstance(point.get("map"), int) \
+                and not isinstance(point["map"], bool) and point["map"] > 0 \
+                and point.get("f") in {"e", "l"} \
+                and all(isinstance(point.get(field), (int, float)) and not isinstance(point[field], bool)
+                        and math.isfinite(point[field]) and 0 < point[field] < 100 for field in ("x", "y")) \
+                and ("radius" not in point or isinstance(point["radius"], (int, float))
+                     and not isinstance(point["radius"], bool) and math.isfinite(point["radius"]) and point["radius"] > 0)
+
+        boat_action = goal.get("t") == "boat" and "quest" not in goal and "questID" not in goal \
+            and isinstance(goal.get("location"), str) and bool(goal["location"].strip()) \
+            and all(point_valid(goal.get(field)) for field in ("departure", "arrival", "arrivalDock"))
+        if boat_action:
+            boat_action = goal["departure"]["map"] != goal["arrival"]["map"] \
+                and goal["arrivalDock"]["map"] == goal["arrival"]["map"] \
+                and all(goal.get(field) == goal["departure"][field] for field in ("map", "x", "y", "f")) \
+                and ("departureLand" not in goal or point_valid(goal["departureLand"]) \
+                     and goal["departureLand"]["map"] == goal["departure"]["map"])
+        if not isinstance(key, str) or not key or not (quest_action or boat_action) or not value.get("evidence"):
+            raise ValueError("New quest action or boat needs explicit valid evidence: " + revision["id"])
     return additions
 
 

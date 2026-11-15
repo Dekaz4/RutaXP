@@ -13326,6 +13326,275 @@
         "reason": "Si ya se eligió o completó la alternativa Lingotes Forjaluz, la visita posterior no vuelve a pedir Hierro Forjaluz ni Los lingotes perdidos. Una misión que sigue en el diario continúa siendo válida.",
         "review": "Preserve every step and saved mark. The same verified mutually exclusive 324/526 branches close the later carried-quest objectives through their acceptance. No newly added work and no rewind."
       }
+    },
+    {
+      "id": "menethil-theramore-boat-5",
+      "guideID": "forever/alliance/07-thousand-needles",
+      "previousRevision": 4,
+      "revision": 5,
+      "sourceShape": "e4a6548eb3edd7e68af2c7dc3b9f536dba92e44fab8dcb245362ded74db22b16",
+      "resultShape": "a55db2d6a8867594e1f3596d673f3bc094b208c3bd978f3b882dd02e57c0bddb",
+      "previousGoalCounts": [
+        11,
+        1,
+        2,
+        1,
+        2,
+        2,
+        3,
+        5,
+        1,
+        1,
+        1,
+        3,
+        2,
+        1,
+        4,
+        2,
+        12,
+        12,
+        2,
+        4,
+        6,
+        3,
+        2,
+        2,
+        5,
+        2,
+        1,
+        2,
+        3,
+        1,
+        3,
+        3,
+        2,
+        7,
+        7,
+        6,
+        1
+      ],
+      "firstAffectedStep": 31,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "title": "Menethil y el barco a Theramore",
+          "goals": [
+            [
+              31,
+              1
+            ],
+            [
+              31,
+              2
+            ],
+            {
+              "added": "menethil_theramore_boat"
+            }
+          ]
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        }
+      ],
+      "addedGoals": {
+        "menethil_theramore_boat": {
+          "goal": {
+            "t": "boat",
+            "title": "Barco de Menethil a Theramore",
+            "from": "Puerto de Menethil",
+            "location": "Isla Theramore",
+            "map": 1437,
+            "x": 4.74,
+            "y": 63.76,
+            "f": "e",
+            "departure": {
+              "map": 1437,
+              "x": 4.74,
+              "y": 63.76,
+              "f": "e",
+              "radius": 30
+            },
+            "arrivalDock": {
+              "map": 1445,
+              "x": 71.73,
+              "y": 56.66,
+              "f": "e",
+              "radius": 30
+            },
+            "arrival": {
+              "map": 1445,
+              "x": 67.46,
+              "y": 51.2,
+              "f": "e",
+              "radius": 25
+            },
+            "note": "En Menethil usa el muelle del sur. Desembarca en Theramore y avanza hasta los grifos, en tierra firme, para continuar el recorrido.",
+            "departureLand": {
+              "map": 1437,
+              "x": 9.52,
+              "y": 59.66,
+              "f": "e",
+              "radius": 80
+            }
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH/Nav/TravelData.lua",
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH/Nav/TravelData.lua",
+                "sha256": "1e7e2503c00b52fe96fa4001dc168ffb9d3805952dea4041c25dd6eb7f3c51a8",
+                "records": "Menethil/Theramore transport endpoints; flight node 7 on land in Menethil and flight node 32 on land in Theramore."
+              }
+            ],
+            "review": "Departure and dock are existing verified transport endpoints. Arrival is the separate inland flight-master contact, approximately 294 yards from the dock: map changes and docking alone do not prove disembarkation. Returning to the separate Menethil flight-master area clears the waiting state without mistaking the departing ship for walking away."
+          }
+        }
+      },
+      "retiredGoals": {
+        "31:3": {
+          "match": {
+            "t": "note"
+          },
+          "evidence": {
+            "originalGoal": {
+              "t": "note",
+              "text": "Tomal barco desdel muelle de Menethil a Isla Theramore en Marjal Revolcafango.",
+              "instruction": "Tomal barco desdel muelle de Menethil a Isla Theramore en Marjal Revolcafango."
+            },
+            "review": "Replace the informational boat sentence with a tracked transport. A previous note confirmation or omission is not evidence of arrival.",
+            "sources": [
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH/Nav/TravelData.lua",
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH/Nav/TravelData.lua",
+                "sha256": "1e7e2503c00b52fe96fa4001dc168ffb9d3805952dea4041c25dd6eb7f3c51a8",
+                "records": "Menethil/Theramore transport endpoints and flight node 32 on land in Theramore."
+              }
+            ]
+          }
+        }
+      },
+      "evidence": {
+        "reason": "El paso del barco ahora señala el muelle correcto de Menethil, mantiene el destino durante la travesía y espera hasta llegar a tierra firme en Theramore. Las marcas de la antigua nota no cuentan como llegada.",
+        "sources": [
+          {
+            "repository": "julen92/SendaFH",
+            "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+            "path": "addon/SendaFH/Nav/TravelData.lua",
+            "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH/Nav/TravelData.lua",
+            "sha256": "1e7e2503c00b52fe96fa4001dc168ffb9d3805952dea4041c25dd6eb7f3c51a8",
+            "records": "Menethil/Theramore transport endpoints and flight node 32 on land in Theramore."
+          }
+        ],
+        "progress": "Keep all 37 steps and the other two actions at step 31. Retire only the old note mark, preserve completed chapters, and do not create quest completion flags."
+      }
     }
   ]
 }

@@ -116,7 +116,7 @@ class GuideStructureAuditTests(unittest.TestCase):
         self.assertEqual(report["sourceComparison"]["structuralDifferences"], [])
         comparison = report["sourceComparison"]
         revisions = json.loads((ROOT / "RutaXP/Source/guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
-        self.assertEqual(len(revisions), 46)
+        self.assertEqual(len(revisions), 47)
         self.assertEqual([r["id"] for r in revisions[:7]],
                          ["westfall-alba-mines-2", "westfall-engineering-3", "zephras-alliance-service-2",
                           "redridge-alther-bridge-2", "mulgore-malah-centaurs-2", "tirisfal-rear-guard-2",
@@ -144,6 +144,9 @@ class GuideStructureAuditTests(unittest.TestCase):
         expected_actions["accept"] += 2
         expected_actions["turnin"] += 3
         expected_actions["collect"] += 1
+        # The Menethil transport replaces an informational note one-for-one.
+        expected_actions["note"] -= 1
+        expected_actions["boat"] = 1
         self.assertEqual(report["scope"]["actions"], expected_actions)
         coverage = report["workCoverage"]
         self.assertEqual(coverage["sourceQuestsWithObjectives"], 48)

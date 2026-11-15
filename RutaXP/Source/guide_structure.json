@@ -8,6 +8,7 @@
     "questIDs": 1902,
     "actions": {
       "accept": 2291,
+      "boat": 1,
       "buy": 27,
       "collect": 1105,
       "complete": 239,
@@ -18,7 +19,7 @@
       "interact": 50,
       "kill": 611,
       "level": 25,
-      "note": 115,
+      "note": 114,
       "sethome": 74,
       "talk": 10,
       "train": 126,
@@ -35,6 +36,7 @@
       "pre": 1217,
       "preAll": 63,
       "closedBy": 158,
+      "chainStarted": 3,
       "only": 357,
       "optional": 415,
       "minLevel": 2289,
@@ -43,7 +45,11 @@
       "n": 0,
       "class": 116,
       "group": 9,
-      "order": 0
+      "order": 0,
+      "departure": 1,
+      "departureLand": 1,
+      "arrival": 1,
+      "arrivalDock": 1
     },
     "stepConditions": 205,
     "sourceDslSteps": 2330,
@@ -7505,7 +7511,7 @@
         "goal": 3,
         "field": "t",
         "source": "accept",
-        "snapshot": "note"
+        "snapshot": "boat"
       },
       {
         "guideID": "forever/alliance/07-thousand-needles",
@@ -7540,6 +7546,62 @@
         "field": "minLevel",
         "source": 20,
         "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 3,
+        "field": "departure",
+        "source": null,
+        "snapshot": {
+          "map": 1437,
+          "x": 4.74,
+          "y": 63.76,
+          "f": "e",
+          "radius": 30
+        }
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 3,
+        "field": "departureLand",
+        "source": null,
+        "snapshot": {
+          "map": 1437,
+          "x": 9.52,
+          "y": 59.66,
+          "f": "e",
+          "radius": 80
+        }
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 3,
+        "field": "arrival",
+        "source": null,
+        "snapshot": {
+          "map": 1445,
+          "x": 67.46,
+          "y": 51.2,
+          "f": "e",
+          "radius": 25
+        }
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 31,
+        "goal": 3,
+        "field": "arrivalDock",
+        "source": null,
+        "snapshot": {
+          "map": 1445,
+          "x": 71.73,
+          "y": 56.66,
+          "f": "e",
+          "radius": 30
+        }
       },
       {
         "guideID": "forever/alliance/07-thousand-needles",
@@ -19432,6 +19494,25 @@
           ],
           "reason": "Si ya se eligió o completó la alternativa Lingotes Forjaluz, la visita posterior no vuelve a pedir Hierro Forjaluz ni Los lingotes perdidos. Una misión que sigue en el diario continúa siendo válida.",
           "review": "Preserve every step and saved mark. The same verified mutually exclusive 324/526 branches close the later carried-quest objectives through their acceptance. No newly added work and no rewind."
+        }
+      },
+      {
+        "id": "menethil-theramore-boat-5",
+        "guideID": "forever/alliance/07-thousand-needles",
+        "revision": 5,
+        "evidence": {
+          "reason": "El paso del barco ahora señala el muelle correcto de Menethil, mantiene el destino durante la travesía y espera hasta llegar a tierra firme en Theramore. Las marcas de la antigua nota no cuentan como llegada.",
+          "sources": [
+            {
+              "repository": "julen92/SendaFH",
+              "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+              "path": "addon/SendaFH/Nav/TravelData.lua",
+              "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH/Nav/TravelData.lua",
+              "sha256": "1e7e2503c00b52fe96fa4001dc168ffb9d3805952dea4041c25dd6eb7f3c51a8",
+              "records": "Menethil/Theramore transport endpoints and flight node 32 on land in Theramore."
+            }
+          ],
+          "progress": "Keep all 37 steps and the other two actions at step 31. Retire only the old note mark, preserve completed chapters, and do not create quest completion flags."
         }
       }
     ],
@@ -38249,5 +38330,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "b865a0177b95760683676b43350d874368c0c7deed44b73a9e54e84971584b4b"
+  "inputSha256": "139bece4f054e27c4d2dcbe7e6fd3f06ffd39dbb50eb3796c47f9e5efb75db19"
 }

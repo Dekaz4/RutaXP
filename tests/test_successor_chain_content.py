@@ -53,7 +53,7 @@ class SuccessorChainContentTests(unittest.TestCase):
                          [("turnin", 465), ("accept", 474), ("note", None)])
         self.assertEqual(steps[29]["goals"][0]["quest"], 474)
         self.assertEqual([(g["t"], g.get("quest")) for g in steps[30]["goals"]],
-                         [("hearth", None), ("turnin", 474), ("note", None)])
+                         [("hearth", None), ("turnin", 474), ("boat", None)])
         self.assertIn("élite", steps[29]["goals"][0]["note"])
         self.assertNotIn("saltarlo", steps[28]["goals"][2]["text"])
         self.assertNotIn("skip it", steps[28]["goals"][2]["text"])

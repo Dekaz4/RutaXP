@@ -621,6 +621,9 @@ local function countText(value)
 end
 local function goalObservation(goal,who,owner,observation,step,index,guide)
     local kind,q=action(goal),questID(goal)
+    if kind == "boat" and ns.Duo and ns.Duo.GetBoatObservation then
+        return ns.Duo:GetBoatObservation(goal,step,index,guide,owner)
+    end
     if kind=="level" then
         local target=goal.level or goal.n
         if finite(target) and finite(who.level) then
@@ -886,10 +889,15 @@ function P:GetSharedWaypoint(guideID,sharedCursor)
     local partnerCursor=ctx.guideID==guideID and cursor(ctx.cursor,g) or nil
     local refName,_,refOwner=reference(guideID,mine,partner,ctx,ownCursor,partnerCursor)
     local selected,who
+    local ownGoal = ownCursor == sharedCursor and ns.GetActiveGoal and ns:GetActiveGoal(g.steps[sharedCursor],own)
+    for _, item in ipairs(items) do
+        if item.action == "boat" and (ownGoal == item.goal or item.mine.done) then selected,who=item,mine;break end
+    end
     for _,item in ipairs(items) do
+        if selected then break end
         if not item.individual and not item.optional and item.status~="skip" and item.status~="done" then
             local service=not item.questID and item.action=="train"
-            if not service and (not item.known or item.status=="blocked" or item.status=="manual") then return nil,item.subtitle end
+            if item.action ~= "boat" and not service and (not item.known or item.status=="blocked" or item.status=="manual") then return nil,item.subtitle end
             selected=item
             if item.owner=="partner" then who=partner;refName=select(2,names(ctx))
             elseif item.owner=="mine" then who=mine;refName=names(ctx)
@@ -911,7 +919,12 @@ function P:GetSharedWaypoint(guideID,sharedCursor)
         end
     end
     if not selected then return nil,reason or "No hay un objetivo pendiente confirmado para señalar." end
-    local point,npc=authoredPoint(selected.goal,who)
+    local point,npc
+    if selected.action == "boat" then
+        local view=ns.BoatNavigation and read(ns.BoatNavigation.GetSharedView,ns.BoatNavigation,selected.goal,g,sharedCursor,selected.index)
+        if type(view)~="table" or type(view.point)~="table" then return nil,type(view)=="table" and view.text or "Espera aquí a tu compañero." end
+        point=copy(view.point)
+    else point,npc=authoredPoint(selected.goal,who) end
     if not point then return nil,"La fuente no ofrece una posición compatible confirmada para ese personaje." end
     point.source,point.guideID,point.sharedCursor,point.goalIndex="duo-follow",guideID,sharedCursor,selected.index
     point.questID,point.referenceName,point.goalTitle=selected.questID,refName,selected.title

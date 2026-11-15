@@ -268,6 +268,12 @@ def instruction_for(goal: Mapping[str, Any], zone_name: str | None = None, *, so
         who = _quote(npc) if npc else "un maestro de vuelo"
         base = f"Habla con {who}" + (f" en {_quote(origin)}" if origin else "") + ", abre el mapa de vuelos y selecciona "
         base += _quote(location) + "." if location else "el destino indicado por la guía."
+    elif action == "boat":
+        origin = visible_text(goal.get("from"))
+        base = "Ve al muelle" + (f" de {_quote(origin)}" if origin else " indicado")
+        base += ", espera al barco y sube con destino a "
+        base += _quote(location) + "." if location else "la zona indicada por la guía."
+        base += " Al llegar, baja del barco y sigue el muelle hacia tierra firme."
     elif action == "train":
         profession = _name(goal, "profName", "skill")
         if profession:

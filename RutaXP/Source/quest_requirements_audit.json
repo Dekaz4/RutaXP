@@ -7684,6 +7684,6 @@
     "Local dependency locations are diagnostic; this audit does not assume a previous zone was completed.",
     "No runtime quest completion, profession or player's progress is modified by this audit."
   ],
-  "inputSha256": "b865a0177b95760683676b43350d874368c0c7deed44b73a9e54e84971584b4b",
+  "inputSha256": "139bece4f054e27c4d2dcbe7e6fd3f06ffd39dbb50eb3796c47f9e5efb75db19",
   "evidenceSha256": "b5cf83fa6e2250a690074b4063701c75d45e3ff7c7a752a7f9573c73b5cd7c4d"
 }

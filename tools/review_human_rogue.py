@@ -22,7 +22,7 @@ RANGED = {2: "Arco", 3: "Arma de fuego", 16: "Arma arrojadiza", 18: "Ballesta"}
 ACCESSORIES = {2: "Collar", 11: "Anillo", 12: "Abalorio", 16: "Capa"}
 ACTION = dict(accept="Aceptar", turnin="Entregar", collect="Recoger", kill="Derrotar",
               complete="Completar", interact="Interactuar", train="Entrenar", talk="Hablar",
-              use="Usar", fly="Volar", getfp="Registrar vuelo", sethome="Fijar hogar",
+              use="Usar", fly="Volar", boat="Tomar barco", getfp="Registrar vuelo", sethome="Fijar hogar",
               hearth="Piedra de hogar", buy="Comprar", vendor="Vender", level="Nivel",
               goto="Ir", note="Indicación")
 WARNINGS = dict(no_source_data="sin datos externos de requisitos", missing_prerequisite="posible previa adicional",

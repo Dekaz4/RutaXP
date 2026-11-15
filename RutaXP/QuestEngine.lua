@@ -393,6 +393,10 @@ function ns:GetGoalStatus(goal, step, state, index, guide)
     local layout = guide and getGuideLayout(self, guide)
     local stepIndex = (layout and step and layout.stepOf[step]) or (state and state.cursor) or 1
     local action, id = goal.t or goal.action, goal.quest or goal.questID
+    if not id and action == "boat" and self.BoatNavigation
+        and self.BoatNavigation:IsComplete(goal, guide, stepIndex, index, state) then
+        return "done", "Desembarco confirmado"
+    end
     if not id and action == "fly" and self.FlightNavigation
         and self.FlightNavigation:IsComplete(goal, guide, stepIndex, index, state) then
         return "done", "Llegada confirmada"
@@ -407,6 +411,8 @@ function ns:GetGoalStatus(goal, step, state, index, guide)
     if onQuest and workDone then return "done", workDone end
     local key = confirmationKey(state, index, stepIndex)
     if state and state.skipped and state.skipped[key] then return "skip", "Omitido manualmente" end
+    -- A manual service confirmation is not evidence of disembarking.
+    if action == "boat" then return "active", "Desembarca y llega al punto indicado en tierra" end
     if state and state.confirmed and state.confirmed[key] then
         -- Older versions stored skipped quest goals as confirmations. Keep
         -- their navigation effect without claiming that a quest was done.
@@ -565,7 +571,7 @@ function ns:IsStepComplete(step, stateOverride)
             if status == "skip" then skippedQuestGoals = skippedQuestGoals + 1 end
         end
         if status ~= "done" and status ~= "skip" then
-            if q or goal.t == "level" then
+            if q or goal.t == "level" or goal.t == "boat" then
                 hasOpenNonService = true
             else
                 hasOpenService = true
@@ -737,10 +743,11 @@ end
 
 function ns:GetGoalTitle(goal)
     local action = goal.t or goal.action
+    if action == "boat" and goal.location then return "Barco a " .. goal.location end
     local verbs = { accept = "Acepta", turnin = "Entrega", complete = "Completa", kill = "Derrota",
         collect = "Reúne", goto = "Ve a", talk = "Habla con", interact = "Interactúa con",
         use = "Usa", sethome = "Hogar en", hearth = "Piedra de hogar a",
-        getfp = "Ruta de vuelo en", fly = "Vuela a", train = "Entrena habilidades", buy = "Compra",
+        getfp = "Ruta de vuelo en", fly = "Vuela a", boat = "Barco a", train = "Entrena habilidades", buy = "Compra",
         vendor = "Vende y repara", level = "Sube a nivel", note = "Nota" }
     local title
     if goal.quest or goal.questID then
@@ -784,6 +791,10 @@ end
 -- visible without changing completion, conditions or the selected objective.
 function ns:GetGoalInstruction(goal, step)
     if type(goal) ~= "table" then return nil end
+    if (goal.t or goal.action) == "boat" and self.BoatNavigation then
+        local view = self.BoatNavigation:GetView(goal)
+        if view then return view.text end
+    end
     if (goal.t or goal.action) == "fly" and self.FlightNavigation then
         local view = self.FlightNavigation:GetView(goal)
         if view then return view.text end
@@ -947,6 +958,10 @@ function ns:GetStepGoalItems(step, state)
                 end
                 if action == "fly" and index == currentIdx and self.FlightNavigation then
                     local view = self.FlightNavigation:GetView(goal)
+                    if view then subLines, details = {view.text}, view.text end
+                end
+                if action == "boat" and index == currentIdx and self.BoatNavigation then
+                    local view = self.BoatNavigation:GetView(goal)
                     if view then subLines, details = {view.text}, view.text end
                 end
                 local entry = {

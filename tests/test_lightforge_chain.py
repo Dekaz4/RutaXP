@@ -110,7 +110,7 @@ class LightforgeChainTests(unittest.TestCase):
         journal = primitive_copy(h.state.quests)
         h.initialize()
         state = h.ns.char.progress[GUIDE]
-        self.assertEqual(state.routeRevision, 4)
+        self.assertEqual(state.routeRevision, h.ns.guides[GUIDE].routeRevision)
         self.assertEqual(state.cursor, 18)
         self.assertTrue(state.skipped["18:7"])  # The captain's unchanged errand.
         self.assertTrue(state.skipped["20:1"])  # Crew work moved with its mark.
@@ -129,7 +129,7 @@ class LightforgeChainTests(unittest.TestCase):
         h.initialize()
         state = h.ns.char.progress[GUIDE]
         self.assertEqual(state.cursor, 38)
-        self.assertEqual(state.routeRevision, 4)
+        self.assertEqual(state.routeRevision, h.ns.guides[GUIDE].routeRevision)
         self.assertIsNone(state.requirementsRepair)
 
     def test_later_chapter_does_not_repeat_the_other_branch(self):

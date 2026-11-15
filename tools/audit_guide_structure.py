@@ -25,10 +25,10 @@ PIN = "5d207e28e82e2c529143b21ace74fe88692f0067"
 CLASSES = ("WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", "WARLOCK", "DRUID")
 RACES = {"Alliance": ("Human", "Dwarf", "Gnome", "NightElf", "Skyborne"),
          "Horde": ("Orc", "Troll", "Tauren", "Scourge", "Skyborne")}
-FIELDS = ("t", "quest", "oi", "item", "count", "pre", "preAll", "closedBy", "only", "optional",
-          "minLevel", "maxLevel", "level", "n", "class", "group", "order")
+FIELDS = ("t", "quest", "oi", "item", "count", "pre", "preAll", "closedBy", "chainStarted", "only", "optional",
+          "minLevel", "maxLevel", "level", "n", "class", "group", "order", "departure", "departureLand", "arrival", "arrivalDock")
 GOAL_ACTIONS = {"accept", "turnin", "kill", "collect", "train", "goto", "sethome", "complete", "hearth",
-                "buy", "getfp", "fly", "use", "note", "level", "interact", "vendor", "talk"}
+                "buy", "getfp", "fly", "boat", "use", "note", "level", "interact", "vendor", "talk"}
 CATEGORIES = ("work_before_accept", "turnin_without_accept", "accept_without_future_turnin",
               "prerequisite_not_in_prior_path", "prerequisite_forward_local", "ordered_closed_branch")
 

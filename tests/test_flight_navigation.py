@@ -216,7 +216,8 @@ class FlightNavigationTests(unittest.TestCase):
 
     def test_authored_guide_repair_preserves_observed_arrival_after_leaving_the_master(self):
         h = FlightHost()
-        self.assertEqual(h.guide.routeRevision, 4)
+        current_revision = h.guide.routeRevision
+        self.assertGreaterEqual(current_revision, 4)
         # Version 0.7.24 recorded the actual arrival against route revision 3.
         h.guide.routeRevision = 3
         h.ns.char.progress[GUIDE].routeRevision = 3
@@ -226,7 +227,7 @@ class FlightNavigationTests(unittest.TestCase):
         self.assertIn(f"{GUIDE}:3:18:1:7", saved["flightNavigation"]["arrivals"])
         repaired = FlightHost(saved=saved)
         repaired.move(1437, .1211, .6419)
-        self.assertEqual(repaired.ns.char.progress[GUIDE].routeRevision, 4)
+        self.assertEqual(repaired.ns.char.progress[GUIDE].routeRevision, current_revision)
         before = primitive_copy(repaired.ns.char)
         self.assertTrue(repaired.complete())
         self.assertEqual(repaired.ns.GetGoalStatus(repaired.ns, repaired.goal, repaired.step,

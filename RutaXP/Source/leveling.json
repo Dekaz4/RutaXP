@@ -509,7 +509,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "fef6f509b00b44a46e4ddd8251d731208843cbb60a44ac1fa3ca392772d98c95",
+      "sha256": "2734ae4200ab6404e6db7fc8d85aba0b62022c858b0bcba9fba57b80234eba46",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -556,7 +556,8 @@
         "ashenvale-horde-retire-alonso-2",
         "wetlands-daily-delivery-6",
         "menethil-lightforge-chest-chain-4",
-        "ashenvale-later-lightforge-alternative-2"
+        "ashenvale-later-lightforge-alternative-2",
+        "menethil-theramore-boat-5"
       ]
     }
   },
@@ -580,6 +581,7 @@
     "goals": 7452,
     "goalTypes": {
       "accept": 2291,
+      "boat": 1,
       "buy": 27,
       "collect": 1105,
       "complete": 239,
@@ -590,7 +592,7 @@
       "interact": 50,
       "kill": 611,
       "level": 25,
-      "note": 115,
+      "note": 114,
       "sethome": 74,
       "talk": 10,
       "train": 126,
@@ -600,13 +602,17 @@
     },
     "goalFields": {
       "area": 393,
+      "arrival": 1,
+      "arrivalDock": 1,
       "candidates": 586,
       "chainStarted": 3,
       "class": 116,
       "closedBy": 158,
       "count": 1200,
-      "f": 5496,
-      "from": 738,
+      "departure": 1,
+      "departureLand": 1,
+      "f": 5497,
+      "from": 739,
       "fromAlso": 97,
       "fromFaction": 11,
       "fromKind": 738,
@@ -619,13 +625,13 @@
       "item": 1215,
       "itemName": 1215,
       "level": 25,
-      "location": 399,
-      "map": 6569,
+      "location": 400,
+      "map": 6570,
       "minLevel": 2289,
       "navigationHint": 434,
       "navigationMode": 14,
       "node": 76,
-      "note": 3574,
+      "note": 3575,
       "npc": 4988,
       "npcName": 4377,
       "objName": 304,
@@ -651,10 +657,10 @@
       "spread": 671,
       "t": 7452,
       "target": 611,
-      "text": 224,
-      "title": 6499,
-      "x": 6569,
-      "y": 6569,
+      "text": 223,
+      "title": 6500,
+      "x": 6570,
+      "y": 6570,
       "z": 4473
     }
   },
@@ -96734,9 +96740,44 @@
               "instruction": "Habla con «Capitán Puñorrecio» y entrega «Derrotar a Nek'rosh».\nZona: Los Humedales.\nEntrega la cabeza al capitán Puñorrecio antes de salir de Menethil."
             },
             {
-              "t": "note",
-              "text": "Tomal barco desdel muelle de Menethil a Isla Theramore en Marjal Revolcafango.",
-              "instruction": "Tomal barco desdel muelle de Menethil a Isla Theramore en Marjal Revolcafango."
+              "t": "boat",
+              "title": "Barco de Menethil a Theramore",
+              "from": "Puerto de Menethil",
+              "location": "Isla Theramore",
+              "map": 1437,
+              "x": 4.74,
+              "y": 63.76,
+              "f": "e",
+              "departure": {
+                "map": 1437,
+                "x": 4.74,
+                "y": 63.76,
+                "f": "e",
+                "radius": 30
+              },
+              "arrivalDock": {
+                "map": 1445,
+                "x": 71.73,
+                "y": 56.66,
+                "f": "e",
+                "radius": 30
+              },
+              "arrival": {
+                "map": 1445,
+                "x": 67.46,
+                "y": 51.2,
+                "f": "e",
+                "radius": 25
+              },
+              "note": "En Menethil usa el muelle del sur. Desembarca en Theramore y avanza hasta los grifos, en tierra firme, para continuar el recorrido.",
+              "instruction": "Ve al muelle de «Puerto de Menethil», espera al barco y sube con destino a «Isla Theramore». Al llegar, baja del barco y sigue el muelle hacia tierra firme.\nZona: Los Humedales.\nEn Menethil usa el muelle del sur. Desembarca en Theramore y avanza hasta los grifos, en tierra firme, para continuar el recorrido.",
+              "departureLand": {
+                "map": 1437,
+                "x": 9.52,
+                "y": 59.66,
+                "f": "e",
+                "radius": 80
+              }
             }
           ]
         },
@@ -97936,7 +97977,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 4,
+      "routeRevision": 5,
       "progressMigrations": [
         {
           "from": 1,
@@ -98149,6 +98190,60 @@
             "19:1",
             "21:1"
           ]
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "goalMap": {},
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 30,
+            "31": 31,
+            "32": 32,
+            "33": 33,
+            "34": 34,
+            "35": 35,
+            "36": 36,
+            "37": 37,
+            "38": 38
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 37,
+          "firstAffectedStep": 31,
+          "addedGoalKeys": [
+            "31:3"
+          ],
+          "retiredGoalKeys": {
+            "31:3": true
+          }
         }
       ]
     },

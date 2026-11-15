@@ -435,6 +435,13 @@ function ns:GetStepWaypoint(step, travel, mapRequest)
     else
         base = self:GetBaseStepWaypoint(step)
     end
+    if self.BoatNavigation and goal and (goal.t or goal.action) == "boat" then
+        local nextPoint, handled, view = self.BoatNavigation:Resolve(goal)
+        if handled then
+            if mapRequest then mapRequest.reason = view.text end
+            return nextPoint
+        end
+    end
     if self.FlightNavigation and goal and (goal.t or goal.action) == "fly" then
         local nextPoint, handled = self.FlightNavigation:Resolve(goal, base)
         if handled then
@@ -722,6 +729,8 @@ local function updateArrow(self, frame)
     local point = self:GetArrowWaypoint(step, travel or false)
     local flight = not travel and self.FlightNavigation and self.FlightNavigation:CurrentView()
     if point and not point.flightNavigation then flight = nil end
+    local boat = not travel and self.BoatNavigation and self.BoatNavigation:CurrentView()
+    if point and not point.boatNavigation then boat = nil end
     if travel then step = travel end
     if not step and not point then
         if self.Walking then self.Walking:Clear() end
@@ -731,13 +740,14 @@ local function updateArrow(self, frame)
     end
     frame:Show()
 
-    if flight and not point then
+    local transport = boat or flight
+    if transport and not point then
         frame.dNorth, frame.dWest, frame.targetContinent, frame.arrived = nil, nil, nil, false
         frame.arrow:Hide()
         frame.distance:SetText("")
-        frame.navigationState, frame.navigationReason = flight.state, flight.text
-        frame.statusText, frame.destinationText = flight.title, flight.text
-        return flight.shortText
+        frame.navigationState, frame.navigationReason = transport.state, transport.text
+        frame.statusText, frame.destinationText = transport.title or transport.shortText, transport.text
+        return transport.shortText
     end
 
     if travel and not point then
@@ -822,13 +832,15 @@ local function updateArrow(self, frame)
             if not waiting and self.Duo then
                 local status = self.Duo.GetStepWaitStatus and safe(self.Duo.GetStepWaitStatus, self.Duo, step)
                 if type(status) == "table" then
-                    waiting, reason, waitKind = status.waiting == true, status.reason, status.unknown and "sync" or status.kind
+                    waiting, reason, waitKind = status.waiting == true, status.reason,
+                        status.kind == "boat" and status.unknown and "boat-unknown" or status.unknown and "sync" or status.kind
                 elseif self.Duo.ShouldWaitForStep then
                     waiting, reason = safe(self.Duo.ShouldWaitForStep, self.Duo, step)
                 end
             end
             if waiting then
-                message = waitKind == "sync" and "Sincronizando misiones" or "Esperando al compañero"
+                message = waitKind == "boat-unknown" and "Llegada del compañero sin confirmar"
+                    or waitKind == "sync" and "Sincronizando misiones" or "Esperando al compañero"
                 if waitKind ~= "sync" then hint = "Espera a tu compañero" end
                 frame.navigationReason = type(reason) == "string" and reason ~= "" and reason or message
                 frame.navigationState = "waiting"
@@ -857,7 +869,7 @@ local function updateArrow(self, frame)
         frame.arrow:Hide()
         frame.distance:SetText("")
         frame.statusText = point.navigationNotice or "Calculando camino…"
-        frame.destinationText = goalTitle or stepTitle or "Destino de la guía"
+        frame.destinationText = boat and boat.text or goalTitle or stepTitle or "Destino de la guía"
         return point.navigationHint
     end
 
@@ -910,6 +922,10 @@ local function updateArrow(self, frame)
     if flight then
         frame.destinationText = flight.text
         if distance <= CONTACT_RANGE then hint = flight.shortText or hint end
+    end
+    if boat then
+        frame.destinationText = boat.text
+        if boat.state == "landing" or distance <= CONTACT_RANGE then hint = boat.shortText or hint end
     end
 
     if right == nil or forward == nil then
