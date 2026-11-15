@@ -155,10 +155,18 @@ local function activeParent(goal, owner, observation)
     if not item or item.basic then return nil end
     return item.state == 1 or item.state == 2
 end
+local function branchState(goal, step, index, guide, owner, observation)
+    if ns.Duo and ns.Duo.GetGoalBranchState then
+        return ns.Duo:GetGoalBranchState(goal, step, index, guide, owner, observation)
+    end
+    return true
+end
 -- nil is unknown, false is a known unmet requirement. OR and AND retain their
 -- authored meaning; a partner's absent snapshot never becomes a missing quest.
 local function prerequisites(goal, who, owner, observation)
     local missing, unknown, orMissing = {}, {}, {}
+    local branch, branchReason = branchState(goal, nil, nil, nil, owner, observation)
+    if branch ~= true then return branch, branchReason, missing, unknown end
     if goal.minLevel and (not finite(who.level) or who.level < goal.minLevel) then
         return false, "Requiere nivel " .. tostring(goal.minLevel) .. ".", missing, unknown
     end
@@ -414,10 +422,10 @@ local function currentRecords(id, cursor, output, seen, mine, partner)
     local g = ns.guides and ns.guides[id]
     local step = g and g.steps and g.steps[tonumber(cursor) or 1]
     if not step then return end
-    for _, goal in ipairs(step.goals or { step }) do
+    for index, goal in ipairs(step.goals or { step }) do
         local q = questID(goal)
         if q and not seen[q] and (only(step.only, mine) and only(goal.only, mine) or only(step.only, partner) and only(goal.only, partner)) then
-            seen[q] = true; output[#output + 1] = {q=q,goal=goal,step=step,guide=g}
+            seen[q] = true; output[#output + 1] = {q=q,goal=goal,step=step,guide=g,goalIndex=index}
         end
     end
 end
@@ -465,12 +473,15 @@ function P:GetDifferences()
         for _, record in ipairs(records) do
             local q = record.q
             local a, b = observation(q,"mine"), observation(q,"partner")
-            local common = applies(record,mine) and applies(record,partner) and not profession(record.goal,record.step)
-                and identityAllowed(record.guide, mine) and identityAllowed(record.guide, partner)
+            local mineApplies = applies(record,mine) and identityAllowed(record.guide,mine)
+                and branchState(record.goal,record.step,record.goalIndex,record.guide,"mine",observation) ~= false
+            local partnerApplies = applies(record,partner) and identityAllowed(record.guide,partner)
+                and branchState(record.goal,record.step,record.goalIndex,record.guide,"partner",observation) ~= false
+            local common = mineApplies and partnerApplies and not profession(record.goal,record.step)
             local entry
             if not common then
-                entry={questID=q,title=title(q,record.goal.title),owner=applies(record,mine) and "mine" or "partner",kind="individual",
-                    text="Esta rama es individual por requisitos de guía, raza, clase, profesión o nivel. Cada uno conserva su cadena; no se compara como una misión compartida."}
+                entry={questID=q,title=title(q,record.goal.title),owner=mineApplies and "mine" or "partner",kind="individual",
+                    text="Esta rama es individual por su cadena o requisitos de guía, raza, clase, profesión o nivel. Cada uno conserva su cadena; no se compara como una misión compartida."}
             elseif not a then
                 entry={questID=q,title=title(q,record.goal.title),owner="mine",kind="unknown",
                     text="El cliente no permite confirmar tu registro actual para esta misión. No se deduce una diferencia con tu amigo ni se propone una recogida."}
@@ -608,7 +619,7 @@ local function countText(value)
     if value and finite(value.current) and finite(value.total) then return value.current.."/"..value.total end
     return value and value.finished==true and "completo" or "sin contador confirmado"
 end
-local function goalObservation(goal,who,owner,observation)
+local function goalObservation(goal,who,owner,observation,step,index,guide)
     local kind,q=action(goal),questID(goal)
     if kind=="level" then
         local target=goal.level or goal.n
@@ -617,6 +628,9 @@ local function goalObservation(goal,who,owner,observation)
         end
     end
     local item=q and observation(q,owner)
+    local branch, branchReason = branchState(goal,step,index,guide,owner,observation)
+    if branch == false then return {known=true,done=true,status="skip",reason=branchReason,quest=item,excluded=true} end
+    if branch == nil then return {known=false,done=false,status="blocked",reason=branchReason,quest=item} end
     if profession(goal) and (not item or item.state==0) then
         if owner~="mine" or not ns.CheckGoalProfession then
             return {known=false,done=false,status="blocked",reason="Profesión del compañero sin confirmar.",quest=item}
@@ -660,8 +674,11 @@ local function stepItems(g,stepIndex,mine,partner,observation)
         local a,b=applies(record,mine),applies(record,partner)
         local item={goal=goal,index=i,action=action(goal) or "manual",questID=questID(goal),title=goal.title or step.title,
             appliesMine=a,appliesPartner=b,individual=not(a and b) or profession(goal,step)~=nil,optional=goal.optional==true}
-        item.mine=a and goalObservation(goal,mine,"mine",observation) or {known=true,done=false,status="skip",reason="Rama de otra raza o clase."}
-        item.partner=b and goalObservation(goal,partner,"partner",observation) or {known=true,done=false,status="skip",reason="Rama de otra raza o clase."}
+        item.mine=a and goalObservation(goal,mine,"mine",observation,step,i,g) or {known=true,done=false,status="skip",reason="Rama de otra raza o clase."}
+        item.partner=b and goalObservation(goal,partner,"partner",observation,step,i,g) or {known=true,done=false,status="skip",reason="Rama de otra raza o clase."}
+        if item.mine.excluded then a=false;item.appliesMine=false end
+        if item.partner.excluded then b=false;item.appliesPartner=false end
+        item.individual=item.individual or not(a and b)
         item.known=(not a or item.mine.known) and (not b or item.partner.known)
         if item.individual or item.optional then
             item.status="skip"
@@ -732,9 +749,9 @@ local function ownProjection(g,mine,observation)
         for _,goal in ipairs(step.goals or {step}) do
             if applies({goal=goal,step=step},mine) and action(goal)~="note" then hasTask=true end
         end
-        for _,goal in ipairs(step.goals or {step}) do
+        for index,goal in ipairs(step.goals or {step}) do
             if applies({goal=goal,step=step},mine) and not goal.optional and not(action(goal)=="note" and hasTask) then
-                local state=goalObservation(goal,mine,"mine",observation)
+                local state=goalObservation(goal,mine,"mine",observation,step,index,g)
                 if not state.known then unknown=true end
                 if not state.done then pending=true end
             end

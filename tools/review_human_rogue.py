@@ -247,8 +247,10 @@ def review(guides, items, requirements, revisions):
         "Con la misión final, entrega la cabeza de VanCleef tras hacer las Minas de la Muerte para elegir la "
         "Túnica de Páramos de Poniente (+11 agilidad y +5 aguante).",
         "", "Los números de paso y fila son los del addon. Las coordenadas usan el mapa del catálogo de origen. "
-        f"Hay {totals['flagged']} filas con algún requisito pendiente de contrastar. Entre ellas siguen Lingotes Forjaluz (526) "
-        "y Una fiesta en tu honor (1271). Los tiempos de viaje quedan pendientes de medir en el juego.",
+        f"Hay {totals['flagged']} filas con requisitos o discrepancias entre fuentes señalados para revisión. "
+        "Lingotes Forjaluz (526) usa la corrección específica de Forever: primero Hierro Forjaluz (321), "
+        "y después una de las dos alternativas de lingotes. La referencia antigua que exige 324 se conserva "
+        "en la auditoría para mostrar la discrepancia. Los tiempos de viaje quedan pendientes de medir en el juego.",
         "", "| Capítulo | Pasos | Acciones compatibles / examinadas | Revisión |", "|---|---:|---:|---|",
         *summary, "", ORDER_REVIEW.rstrip(), "", body, ""])
 

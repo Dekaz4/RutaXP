@@ -12388,6 +12388,874 @@
           "detail": "User screenshot at the correct NPC shows no available quest. Two local character histories record the downstream progress. No character names or account data included."
         }
       }
+    },
+    {
+      "id": "menethil-lightforge-chest-chain-4",
+      "guideID": "forever/alliance/07-thousand-needles",
+      "previousRevision": 3,
+      "revision": 4,
+      "sourceShape": "f114024a0591ab359a0e3de1fcbaf8d130b354d246c2b726baf0ee2447c3b05b",
+      "resultShape": "e4a6548eb3edd7e68af2c7dc3b9f536dba92e44fab8dcb245362ded74db22b16",
+      "previousGoalCounts": [
+        11,
+        1,
+        2,
+        1,
+        2,
+        2,
+        3,
+        5,
+        1,
+        1,
+        1,
+        3,
+        2,
+        1,
+        4,
+        2,
+        12,
+        8,
+        4,
+        1,
+        5,
+        3,
+        2,
+        2,
+        5,
+        2,
+        1,
+        2,
+        3,
+        1,
+        3,
+        3,
+        2,
+        7,
+        7,
+        6,
+        1
+      ],
+      "firstAffectedStep": 18,
+      "affectedQuestIDs": [
+        270,
+        321,
+        324,
+        526
+      ],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "title": "Puerto de Menethil",
+          "goals": [
+            [
+              18,
+              1
+            ],
+            [
+              18,
+              2
+            ],
+            [
+              18,
+              3
+            ],
+            [
+              18,
+              4
+            ],
+            [
+              18,
+              5
+            ],
+            [
+              18,
+              6
+            ],
+            [
+              18,
+              8
+            ],
+            {
+              "added": "doomed_fleet_delivery"
+            },
+            {
+              "added": "lightforge_iron_accept"
+            },
+            {
+              "added": "lightforge_chest_delivery"
+            },
+            {
+              "added": "lost_ingots_accept"
+            },
+            [
+              18,
+              7
+            ]
+          ]
+        },
+        {
+          "title": "Múrlocs junto al naufragio",
+          "note": "Haz la misión de lingotes que lleves junto al cofre, al sur de Menethil. Después sigue hacia el naufragio de la Tercera Flota, al norte.",
+          "goals": [
+            {
+              "added": "lost_ingots_collect"
+            },
+            [
+              20,
+              1
+            ]
+          ]
+        },
+        {
+          "sourceStep": 19,
+          "set": {
+            "title": "Naufragio de la Tercera Flota"
+          }
+        },
+        {
+          "title": "Puerto de Menethil",
+          "goals": [
+            {
+              "added": "lost_ingots_delivery"
+            },
+            [
+              21,
+              1
+            ],
+            [
+              21,
+              2
+            ],
+            [
+              21,
+              3
+            ],
+            [
+              21,
+              4
+            ],
+            [
+              21,
+              5
+            ]
+          ]
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        }
+      ],
+      "addedGoals": {
+        "doomed_fleet_delivery": {
+          "goal": {
+            "title": "La flota maldita",
+            "t": "turnin",
+            "quest": 270,
+            "npc": 1217,
+            "npcName": "Glorin Frenteacerada",
+            "map": 1437,
+            "x": 10.58,
+            "y": 60.59,
+            "z": 9.7,
+            "f": "e",
+            "optional": true,
+            "closedBy": [
+              321,
+              324,
+              526,
+              322
+            ],
+            "note": "Si llevas La flota maldita, entrégala a Glorin antes de seguir con el hierro."
+          },
+          "evidence": {
+            "navigationDonor": "forever/alliance/30-40/03-ashenvale:31:1",
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+                "path": "src/corrections/Forever/foreverQuestFixes.lua",
+                "url": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L74-L105",
+                "sha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+                "facts": {
+                  "526": {
+                    "pre": [
+                      321
+                    ],
+                    "closedBy": [
+                      324
+                    ],
+                    "next": 322
+                  },
+                  "324": {
+                    "closedBy": [
+                      526
+                    ]
+                  }
+                }
+              }
+            ],
+            "review": "Existing pinned guide facts and contact points, with the Forever 321 prerequisite and mutually exclusive 324/526 branches. No quest narrative copied."
+          }
+        },
+        "lightforge_iron_accept": {
+          "goal": {
+            "title": "Hierro Forjaluz",
+            "minLevel": 20,
+            "t": "accept",
+            "quest": 321,
+            "npc": 1217,
+            "npcName": "Glorin Frenteacerada",
+            "pre": [
+              270
+            ],
+            "preTitles": {
+              "270": "La flota maldita"
+            },
+            "map": 1437,
+            "x": 10.58,
+            "y": 60.59,
+            "z": 9.7,
+            "f": "e",
+            "qlvl": 29,
+            "closedBy": [
+              324,
+              526,
+              322
+            ],
+            "note": "Glorin Frenteacerada, arriba en la posada. Después lleva esta misión al cofre del naufragio al sur del puerto.",
+            "chainStarted": [
+              270,
+              321,
+              324,
+              526,
+              322
+            ]
+          },
+          "evidence": {
+            "navigationDonor": "forever/alliance/30-40/03-ashenvale:31:2",
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+                "path": "src/corrections/Forever/foreverQuestFixes.lua",
+                "url": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L74-L105",
+                "sha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+                "facts": {
+                  "526": {
+                    "pre": [
+                      321
+                    ],
+                    "closedBy": [
+                      324
+                    ],
+                    "next": 322
+                  },
+                  "324": {
+                    "closedBy": [
+                      526
+                    ]
+                  }
+                }
+              }
+            ],
+            "review": "Existing pinned guide facts and contact points, with the Forever 321 prerequisite and mutually exclusive 324/526 branches. No quest narrative copied."
+          }
+        },
+        "lightforge_chest_delivery": {
+          "goal": {
+            "title": "Hierro Forjaluz",
+            "t": "turnin",
+            "quest": 321,
+            "object": 2734,
+            "objName": "Cofre con marcas de agua",
+            "map": 1437,
+            "x": 12.11,
+            "y": 64.19,
+            "z": 0.3,
+            "f": "e",
+            "note": "Al sur de Menethil, busca el cofre en el pequeño islote entre las dos partes del barco naufragado. Entrega aquí Hierro Forjaluz; no vuelvas todavía a Glorin."
+          },
+          "evidence": {
+            "navigationDonor": "forever/alliance/30-40/03-ashenvale:32:1",
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+                "path": "src/corrections/Forever/foreverQuestFixes.lua",
+                "url": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L74-L105",
+                "sha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+                "facts": {
+                  "526": {
+                    "pre": [
+                      321
+                    ],
+                    "closedBy": [
+                      324
+                    ],
+                    "next": 322
+                  },
+                  "324": {
+                    "closedBy": [
+                      526
+                    ]
+                  }
+                }
+              }
+            ],
+            "review": "Existing pinned guide facts and contact points, with the Forever 321 prerequisite and mutually exclusive 324/526 branches. No quest narrative copied."
+          }
+        },
+        "lost_ingots_accept": {
+          "goal": {
+            "title": "Los lingotes perdidos",
+            "minLevel": 20,
+            "t": "accept",
+            "quest": 324,
+            "object": 2734,
+            "objName": "Cofre con marcas de agua",
+            "pre": [
+              321
+            ],
+            "preTitles": {
+              "321": "Hierro Forjaluz"
+            },
+            "map": 1437,
+            "x": 12.11,
+            "y": 64.19,
+            "z": 0.3,
+            "f": "e",
+            "qlvl": 29,
+            "closedBy": [
+              322,
+              526
+            ],
+            "note": "Acepta la continuación del cofre después de entregar Hierro Forjaluz. Los lingotes perdidos y Lingotes Forjaluz son alternativas: solo necesitas una.",
+            "chainStarted": [
+              270,
+              321,
+              324,
+              526,
+              322
+            ]
+          },
+          "evidence": {
+            "navigationDonor": "forever/alliance/30-40/03-ashenvale:32:2",
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+                "path": "src/corrections/Forever/foreverQuestFixes.lua",
+                "url": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L74-L105",
+                "sha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+                "facts": {
+                  "526": {
+                    "pre": [
+                      321
+                    ],
+                    "closedBy": [
+                      324
+                    ],
+                    "next": 322
+                  },
+                  "324": {
+                    "closedBy": [
+                      526
+                    ]
+                  }
+                }
+              }
+            ],
+            "review": "Existing pinned guide facts and contact points, with the Forever 321 prerequisite and mutually exclusive 324/526 branches. No quest narrative copied."
+          }
+        },
+        "lost_ingots_collect": {
+          "goal": {
+            "title": "Los lingotes perdidos",
+            "note": "Recoge los cinco lingotes de los Asaltantes Branquiazul alrededor de este naufragio, antes de ir al barco de la tripulación maldita.",
+            "t": "collect",
+            "quest": 324,
+            "oi": 1,
+            "item": 2702,
+            "itemName": "Lingote Forjaluz",
+            "count": 5,
+            "map": 1437,
+            "x": 11.76,
+            "y": 64.38,
+            "f": "e",
+            "spots": [
+              {
+                "x": 12.6,
+                "y": 64.3,
+                "r": 45,
+                "n": 7
+              },
+              {
+                "x": 11.2,
+                "y": 66.2,
+                "r": 71,
+                "n": 6
+              },
+              {
+                "x": 9,
+                "y": 69.4,
+                "r": 56,
+                "n": 7
+              },
+              {
+                "x": 10.1,
+                "y": 71.5,
+                "r": 40,
+                "n": 5
+              },
+              {
+                "x": 19.9,
+                "y": 18.2,
+                "r": 48,
+                "n": 3
+              },
+              {
+                "x": 22.6,
+                "y": 18.2,
+                "r": 40,
+                "n": 2
+              },
+              {
+                "x": 25.4,
+                "y": 17.4,
+                "r": 55,
+                "n": 5
+              },
+              {
+                "x": 27.6,
+                "y": 16.5,
+                "r": 40,
+                "n": 2
+              },
+              {
+                "x": 29,
+                "y": 13.4,
+                "r": 42,
+                "n": 4
+              },
+              {
+                "x": 31.4,
+                "y": 12.2,
+                "r": 40,
+                "n": 1
+              }
+            ],
+            "from": "Asaltante Branquiazul",
+            "fromKind": "npc",
+            "spread": true
+          },
+          "evidence": {
+            "navigationDonor": "forever/alliance/30-40/03-ashenvale:33:1",
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+                "path": "src/corrections/Forever/foreverQuestFixes.lua",
+                "url": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L74-L105",
+                "sha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+                "facts": {
+                  "526": {
+                    "pre": [
+                      321
+                    ],
+                    "closedBy": [
+                      324
+                    ],
+                    "next": 322
+                  },
+                  "324": {
+                    "closedBy": [
+                      526
+                    ]
+                  }
+                }
+              }
+            ],
+            "review": "Existing pinned guide facts and contact points, with the Forever 321 prerequisite and mutually exclusive 324/526 branches. No quest narrative copied."
+          }
+        },
+        "lost_ingots_delivery": {
+          "goal": {
+            "title": "Los lingotes perdidos",
+            "t": "turnin",
+            "quest": 324,
+            "npc": 1217,
+            "npcName": "Glorin Frenteacerada",
+            "map": 1437,
+            "x": 10.58,
+            "y": 60.59,
+            "z": 9.7,
+            "f": "e"
+          },
+          "evidence": {
+            "navigationDonor": "forever/alliance/30-40/03-ashenvale:34:1",
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+                "path": "src/corrections/Forever/foreverQuestFixes.lua",
+                "url": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L74-L105",
+                "sha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+                "facts": {
+                  "526": {
+                    "pre": [
+                      321
+                    ],
+                    "closedBy": [
+                      324
+                    ],
+                    "next": 322
+                  },
+                  "324": {
+                    "closedBy": [
+                      526
+                    ]
+                  }
+                }
+              }
+            ],
+            "review": "Existing pinned guide facts and contact points, with the Forever 321 prerequisite and mutually exclusive 324/526 branches. No quest narrative copied."
+          }
+        }
+      },
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 526
+          },
+          "count": 1,
+          "set": {
+            "pre": [
+              321
+            ],
+            "preTitles": {
+              "321": "Hierro Forjaluz",
+              "322": "Arma bendita",
+              "324": "Los lingotes perdidos"
+            },
+            "note": "Alternativa de Glorin después de entregar Hierro Forjaluz en el cofre. Si has aceptado Los lingotes perdidos, sigue esa misión y omite esta alternativa.",
+            "chainStarted": [
+              270,
+              321,
+              324,
+              526,
+              322
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "collect",
+            "quest": 526
+          },
+          "count": 1,
+          "set": {
+            "map": 1437,
+            "x": 11.76,
+            "y": 64.38,
+            "f": "e",
+            "spots": [
+              {
+                "x": 12.6,
+                "y": 64.3,
+                "r": 45,
+                "n": 7
+              },
+              {
+                "x": 11.2,
+                "y": 66.2,
+                "r": 71,
+                "n": 6
+              },
+              {
+                "x": 9,
+                "y": 69.4,
+                "r": 56,
+                "n": 7
+              },
+              {
+                "x": 10.1,
+                "y": 71.5,
+                "r": 40,
+                "n": 5
+              },
+              {
+                "x": 19.9,
+                "y": 18.2,
+                "r": 48,
+                "n": 3
+              },
+              {
+                "x": 22.6,
+                "y": 18.2,
+                "r": 40,
+                "n": 2
+              },
+              {
+                "x": 25.4,
+                "y": 17.4,
+                "r": 55,
+                "n": 5
+              },
+              {
+                "x": 27.6,
+                "y": 16.5,
+                "r": 40,
+                "n": 2
+              },
+              {
+                "x": 29,
+                "y": 13.4,
+                "r": 42,
+                "n": 4
+              },
+              {
+                "x": 31.4,
+                "y": 12.2,
+                "r": 40,
+                "n": 1
+              }
+            ],
+            "note": "Recoge los cinco lingotes de los Asaltantes Branquiazul alrededor de este naufragio, antes de ir al barco de la tripulación maldita."
+          }
+        }
+      ],
+      "evidence": {
+        "sources": [
+          {
+            "repository": "Questie/QuestieDB",
+            "commit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+            "path": "src/corrections/Forever/foreverQuestFixes.lua",
+            "url": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L74-L105",
+            "sha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+            "facts": {
+              "526": {
+                "pre": [
+                  321
+                ],
+                "closedBy": [
+                  324
+                ],
+                "next": 322
+              },
+              "324": {
+                "closedBy": [
+                  526
+                ]
+              }
+            }
+          }
+        ],
+        "report": "The player carries Hierro Forjaluz (321) but the route asks Glorin for Lingotes Forjaluz (526) before the chest delivery.",
+        "review": "321 requires 270 in the existing pinned route; 321 is delivered to object 2734 at Wetlands 12.11,64.19. Forever 324 and 526 are mutually exclusive follow-ups after 321. Complete the murloc objective beside the chest before heading north to the independent cursed-crew work.",
+        "progress": "Keep 37 step numbers and map every prior goal exactly once; restore only unresolved affected chain tasks, without quest-completion credit or reopening completed chapters.",
+        "reason": "La visita temprana a Menethil solo continúa esta cadena si el personaje ya lleva o entregó La flota maldita, Hierro Forjaluz o una continuación. Primero entrega el hierro en el cofre y haz los múrlocs cercanos; después ve a la Tercera Flota. La ruta normal conserva su visita posterior a Ventormenta para quienes aún no han empezado este tramo de la cadena.",
+        "gate": "269 is picked up in this chapter but delivered later. Do not force a Stormwind detour or offer a locked 321/526 to characters who have only reached 269. chainStarted on the three acceptances also applies to their later work/delivery through the earlier acceptance."
+      }
+    },
+    {
+      "id": "ashenvale-later-lightforge-alternative-2",
+      "guideID": "forever/alliance/30-40/03-ashenvale",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "25ec2fe60e900f9f83523b4b09ab221fffd172009b95d092a844efbccf613e73",
+      "resultShape": "05a28f913c4fbc046d51980301cb1facce621b37b46b8a25794977ab79be1c13",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        5,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        3,
+        1,
+        1,
+        2,
+        2,
+        3,
+        1,
+        2,
+        1,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        3,
+        1,
+        1,
+        2,
+        3,
+        2,
+        2,
+        1,
+        1,
+        10
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 321
+          },
+          "count": 1,
+          "set": {
+            "closedBy": [
+              324,
+              526,
+              322
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 324
+          },
+          "count": 1,
+          "set": {
+            "closedBy": [
+              526,
+              322
+            ]
+          }
+        }
+      ],
+      "evidence": {
+        "sources": [
+          {
+            "repository": "Questie/QuestieDB",
+            "commit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+            "path": "src/corrections/Forever/foreverQuestFixes.lua",
+            "url": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L74-L105",
+            "sha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+            "facts": {
+              "526": {
+                "pre": [
+                  321
+                ],
+                "closedBy": [
+                  324
+                ],
+                "next": 322
+              },
+              "324": {
+                "closedBy": [
+                  526
+                ]
+              }
+            }
+          }
+        ],
+        "reason": "Si ya se eligió o completó la alternativa Lingotes Forjaluz, la visita posterior no vuelve a pedir Hierro Forjaluz ni Los lingotes perdidos. Una misión que sigue en el diario continúa siendo válida.",
+        "review": "Preserve every step and saved mark. The same verified mutually exclusive 324/526 branches close the later carried-quest objectives through their acceptance. No newly added work and no rewind."
+      }
     }
   ]
 }

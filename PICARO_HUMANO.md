@@ -1,6 +1,6 @@
 # Ruta del pícaro humano
 
-26 capítulos, 936 pasos y 2917 acciones examinadas. 2723 acciones son compatibles por raza y clase, incluidas las opcionales.
+26 capítulos, 936 pasos y 2923 acciones examinadas. 2729 acciones son compatibles por raza y clase, incluidas las opcionales.
 
 En 75 misiones del recorrido hay armas para el pícaro o cuero, capas y accesorios con atributos físicos. Desde nivel 10, la cadena de Keryn y Mathias Shaw da la Hoja de Astucia. Al aceptar o entregar una misión con equipo, pasa el ratón sobre la fila para ver qué recibes y qué puedes elegir.
 
@@ -8,7 +8,7 @@ Si usas Mutilar, conserva una daga para cada mano. Las hachas de una mano tambi�
 
 En Páramos de Poniente, la Hermandad de los Defias abre una cadena opcional para grupo. Con la misión final, entrega la cabeza de VanCleef tras hacer las Minas de la Muerte para elegir la Túnica de Páramos de Poniente (+11 agilidad y +5 aguante).
 
-Los números de paso y fila son los del addon. Las coordenadas usan el mapa del catálogo de origen. Hay 80 filas con algún requisito pendiente de contrastar. Entre ellas siguen Lingotes Forjaluz (526) y Una fiesta en tu honor (1271). Los tiempos de viaje quedan pendientes de medir en el juego.
+Los números de paso y fila son los del addon. Las coordenadas usan el mapa del catálogo de origen. Hay 80 filas con requisitos o discrepancias entre fuentes señalados para revisión. Lingotes Forjaluz (526) usa la corrección específica de Forever: primero Hierro Forjaluz (321), y después una de las dos alternativas de lingotes. La referencia antigua que exige 324 se conserva en la auditoría para mostrar la discrepancia. Los tiempos de viaje quedan pendientes de medir en el juego.
 
 | Capítulo | Pasos | Acciones compatibles / examinadas | Revisión |
 |---|---:|---:|---|
@@ -18,7 +18,7 @@ Los números de paso y fila son los del addon. Las coordenadas usan el mapa del 
 | Montañas Crestagrana | 19 | 59 / 68 | Recorrido ajustado |
 | Bosque del Ocaso | 29 | 87 / 88 | Recorrido ajustado |
 | Vallefresno, Los Humedales y Sierra Espolón | 65 | 164 / 176 | Recorrido ajustado |
-| Las Mil Agujas, Bosque del Ocaso y Los Humedales | 37 | 119 / 122 | Recorrido ajustado |
+| Las Mil Agujas, Bosque del Ocaso y Los Humedales | 37 | 125 / 128 | Recorrido ajustado |
 | Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta | 41 | 114 / 116 | Recorrido ajustado |
 | Desolace | 22 | 42 / 44 | Revisado |
 | Vallefresno & Los Humedales | 35 | 74 / 74 | Revisado |
@@ -903,7 +903,7 @@ Las ocho aceptaciones de Puerto de Menethil son viajes posteriores, con la posad
 
 ## Las Mil Agujas, Bosque del Ocaso y Los Humedales (28–31)
 
-Si se lleva el arco de Merrick, entrégalo durante la visita a Sirra. En el Circuito del Espejismo se entregan los caparazones a Wizzle y luego el veneno a Fizzle, quien puede ofrecer la continuación cuando ambas entregas constan en el diario.
+La visita temprana a Menethil solo continúa esta cadena si el personaje ya lleva o entregó La flota maldita, Hierro Forjaluz o una continuación. Primero entrega el hierro en el cofre y haz los múrlocs cercanos; después ve a la Tercera Flota. La ruta normal conserva su visita posterior a Ventormenta para quienes aún no han empezado este tramo de la cadena.
 
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
@@ -967,18 +967,24 @@ Si se lleva el arco de Merrick, entrégalo durante la visita a Sirra. En el Circ
 | 18.4 | Comprar · Cántaro de hidromiel, de Tabernero Helbrek | Cántaro de hidromiel enana · mapa 1437 · 10.7, 60.95 |
 | 18.5 | Entregar · La Tercera Flota (#288) | Primer oficial Fistimos · mapa 1437 · 10.9, 59.64 |
 | 18.6 | Aceptar · La tripulación maldita (#289) | Primer oficial Fistimos · desde nivel 22 · previa 288 · mapa 1437 · 10.9, 59.64 |
-| 18.7 | Aceptar · Lingotes Forjaluz (#526) | Glorin Frenteacerada · desde nivel 20 · mapa 1437 · 10.58, 60.59 · posible previa adicional |
-| 18.8 | Aceptar · Estandartes de batalla (#464) | Capitán Puñorrecio · desde nivel 23 · mapa 1437 · 9.86, 57.49 · posible previa adicional |
-| 19.1 | Derrotar · La tripulación maldita (#289) | Marinero maldito ×13 · mapa 1437 · 13.18, 30.72 |
-| 19.2 | Derrotar · La tripulación maldita (#289) | Marino maldito ×5 · mapa 1437 · 13.52, 30.95 |
-| 19.3 | Recoger · La tripulación maldita (#289) | Tabaquera de Snellig · Primer oficial Esnelim · mapa 1437 · 13.79, 30.18 |
-| 19.4 | Recoger · Deberes de aprendiz (#471) | Piel de crocolisco gigante ×6 · Crocolisco gigante de Los Humedales · mapa 1437 · 15.25, 29.22 |
-| 20.1 | Recoger · Lingotes Forjaluz (#526) | Lingote Forjaluz ×5 · Asaltante Branquiazul · mapa 1437 · 19.17, 19.51 |
-| 21.1 | Entregar · Lingotes Forjaluz (#526) | Glorin Frenteacerada · mapa 1437 · 10.58, 60.59 |
-| 21.2 | Entregar · La tripulación maldita (#289) | Primer oficial Fistimos · mapa 1437 · 10.9, 59.64 |
-| 21.3 | Aceptar · Purga de la maldición (#290) | Primer oficial Fistimos · desde nivel 22 · previa 289 · mapa 1437 · 10.9, 59.64 |
-| 21.4 | Entregar · Deberes de aprendiz (#471) | James Halloran · mapa 1437 · 8.55, 55.74 |
-| 21.5 | Vender · Puerto de Menethil | varios destinos o ubicaciones según objetivo |
+| 18.7 | Aceptar · Estandartes de batalla (#464) | Capitán Puñorrecio · desde nivel 23 · mapa 1437 · 9.86, 57.49 · posible previa adicional |
+| 18.8 | Entregar · La flota maldita (#270) | Glorin Frenteacerada · opcional · mapa 1437 · 10.58, 60.59 |
+| 18.9 | Aceptar · Hierro Forjaluz (#321) | Glorin Frenteacerada · desde nivel 20 · previa 270 · mapa 1437 · 10.58, 60.59 |
+| 18.10 | Entregar · Hierro Forjaluz (#321) | Cofre con marcas de agua · mapa 1437 · 12.11, 64.19 |
+| 18.11 | Aceptar · Los lingotes perdidos (#324) | Cofre con marcas de agua · desde nivel 20 · previa 321 · mapa 1437 · 12.11, 64.19 |
+| 18.12 | Aceptar · Lingotes Forjaluz (#526) | Glorin Frenteacerada · desde nivel 20 · previa 321 · mapa 1437 · 10.58, 60.59 · fuentes en desacuerdo sobre previas |
+| 19.1 | Recoger · Los lingotes perdidos (#324) | Lingote Forjaluz ×5 · Asaltante Branquiazul · mapa 1437 · 11.76, 64.38 |
+| 19.2 | Recoger · Lingotes Forjaluz (#526) | Lingote Forjaluz ×5 · Asaltante Branquiazul · mapa 1437 · 11.76, 64.38 |
+| 20.1 | Derrotar · La tripulación maldita (#289) | Marinero maldito ×13 · mapa 1437 · 13.18, 30.72 |
+| 20.2 | Derrotar · La tripulación maldita (#289) | Marino maldito ×5 · mapa 1437 · 13.52, 30.95 |
+| 20.3 | Recoger · La tripulación maldita (#289) | Tabaquera de Snellig · Primer oficial Esnelim · mapa 1437 · 13.79, 30.18 |
+| 20.4 | Recoger · Deberes de aprendiz (#471) | Piel de crocolisco gigante ×6 · Crocolisco gigante de Los Humedales · mapa 1437 · 15.25, 29.22 |
+| 21.1 | Entregar · Los lingotes perdidos (#324) | Glorin Frenteacerada · mapa 1437 · 10.58, 60.59 |
+| 21.2 | Entregar · Lingotes Forjaluz (#526) | Glorin Frenteacerada · mapa 1437 · 10.58, 60.59 |
+| 21.3 | Entregar · La tripulación maldita (#289) | Primer oficial Fistimos · mapa 1437 · 10.9, 59.64 |
+| 21.4 | Aceptar · Purga de la maldición (#290) | Primer oficial Fistimos · desde nivel 22 · previa 289 · mapa 1437 · 10.9, 59.64 |
+| 21.5 | Entregar · Deberes de aprendiz (#471) | James Halloran · mapa 1437 · 8.55, 55.74 |
+| 21.6 | Vender · Puerto de Menethil | varios destinos o ubicaciones según objetivo |
 | 22.1 | Recoger · Purga de la maldición (#290) | Llave de caja fuerte de intrépido · Capitán Halyndor · mapa 1437 · 15.45, 23.61 |
 | 22.2 | Entregar · Purga de la maldición (#290) | Caja fuerte de Intrepid cerrada · mapa 1437 · 14.38, 24.04 |
 | 22.3 | Aceptar · El ojo de Paleth (#292) | Caja fuerte de Intrepid cerrada · desde nivel 22 · previa 290 · mapa 1437 · 14.38, 24.04 |

@@ -163,6 +163,15 @@ local function isClosedBranch(self, goal)
     return false
 end
 
+local function isUnstartedChain(self, goal)
+    local ids = goal and goal.chainStarted
+    if not ids or #ids == 0 then return false end
+    for _, id in ipairs(ids) do
+        if self:IsQuestActive(id) or self:IsQuestDelivered(id) then return false end
+    end
+    return true
+end
+
 local function earlierAccept(self, layout, id, stepIndex, goalIndex)
     local found
     for _, entry in ipairs(layout and layout.accepts[id] or {}) do
@@ -172,6 +181,20 @@ local function earlierAccept(self, layout, id, stepIndex, goalIndex)
         end
     end
     return found
+end
+
+-- Shared with duo planning so carried work uses the same authored branch
+-- conditions as its acceptance, including after route revisions.
+function ns:GetGoalAcceptance(goal, step, index, guide)
+    if not goal then return nil end
+    if (goal.t or goal.action) == "accept" then return goal end
+    local id = goal.quest or goal.questID
+    if not id then return nil end
+    guide = guide or (self.char and self.guides[self.char.activeGuide])
+    local layout = guide and getGuideLayout(self, guide)
+    local stepIndex = layout and step and layout.stepOf[step]
+    if not stepIndex then return nil end
+    return earlierAccept(self, layout, id, stepIndex, index)
 end
 
 local professionNames = { [129]="Primeros auxilios", [164]="Herrería", [165]="Peletería", [171]="Alquimia",
@@ -399,6 +422,13 @@ function ns:GetGoalStatus(goal, step, state, index, guide)
     if not onQuest and (isClosedBranch(self, goal) or (id and action ~= "accept"
         and isClosedBranch(self, earlierAccept(self, layout, id, stepIndex, index)))) then
         return "skip", "Rama alternativa ya elegida"
+    end
+    -- An early visit can serve an already-started chain whose normal pickup
+    -- belongs to a later chapter. Keep its acceptance and work together, and
+    -- never suppress a quest actually carried in the live journal.
+    if not onQuest and (isUnstartedChain(self, goal) or (id and action ~= "accept"
+        and isUnstartedChain(self, earlierAccept(self, layout, id, stepIndex, index)))) then
+        return "skip", "Esta cadena se retoma en una visita posterior"
     end
     if goal.optional and not (self.char and self.char.optional) and not onQuest then return "skip", "Opcional desactivado" end
     local profession, professionReason = self:CheckGoalProfession(goal, step, guide)

@@ -106,7 +106,35 @@ function F:IsComplete(goal, guide, stepIndex, index, state)
     local saved = ns.char and ns.char.flightNavigation
     local record = key and type(saved) == "table" and type(saved.arrivals) == "table" and saved.arrivals[key]
     local _, ids = destinations(goal)
-    return type(record) == "table" and ids[record.destination] == true or false
+    if type(record) == "table" and ids[record.destination] == true then return true end
+    if not key or type(saved) ~= "table" or type(saved.arrivals) ~= "table" then return false end
+    -- A guide repair can reopen an earlier visit after the player has left its
+    -- landing point. Preserve a real arrival only through authored migrations
+    -- identifying the same action and the exact same destination set.
+    local prefix, target = guide.id .. ":", tostring(stepIndex) .. ":" .. tostring(index)
+    local signature, current = key:match(":([%d,]+)$"), guide.routeRevision or 1
+    for oldKey, oldRecord in pairs(saved.arrivals) do
+        if type(oldKey) == "string" and oldKey:sub(1, #prefix) == prefix
+            and type(oldRecord) == "table" and ids[oldRecord.destination] == true then
+            local revision, step, goalIndex, oldSignature = oldKey:sub(#prefix + 1):match("^(%d+):(%d+):(%d+):([%d,]+)$")
+            revision = tonumber(revision)
+            local mapped = step and (step .. ":" .. goalIndex)
+            if revision and revision < current and oldSignature == signature then
+                for _ = 1, 20 do
+                    local nextMigration
+                    for _, migration in ipairs(guide.progressMigrations or {}) do
+                        if migration.from == revision and migration.to > revision then nextMigration = migration; break end
+                    end
+                    if not nextMigration or (nextMigration.retiredGoalKeys or {})[mapped] then break end
+                    mapped = (nextMigration.goalMap or {})[mapped] or mapped
+                    revision = nextMigration.to
+                    if revision == current and mapped == target then return true end
+                    if revision >= current then break end
+                end
+            end
+        end
+    end
+    return false
 end
 
 local function classify(slot, state)

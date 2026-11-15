@@ -1,4 +1,4 @@
-# RutaXP 0.7.24 para WoW Forever
+# RutaXP 0.7.25 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,12 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## El cofre y los lingotes de Menethil (0.7.25)
+
+El recorrido comprueba los requisitos de «Hierro Forjaluz» y conduce al cofre del naufragio antes de aceptar la continuación. «Los lingotes perdidos» y «Lingotes Forjaluz» son alternativas: la guía sigue la que llevas en el diario y descarta la otra. Si todavía no has iniciado esta parte de la cadena, conserva la visita prevista para un capítulo posterior. Los lingotes se recogen junto al cofre antes del viaje a los barcos del norte.
+
+La actualización conserva el progreso y revisa los pasos afectados para retomar las acciones pendientes. Saltar una entrega no desbloquea su continuación: hace falta que el juego confirme la misión entregada.
 
 ## Vuelos y nombres de los puntos del mapa (0.7.24)
 
@@ -164,7 +170,7 @@ En Dúo puedes pulsar **Sincronizar de nuevo**, o escribir `/rutaxp sincronizar`
 
 ## Contenido conservado
 
-- 57 rutas de misiones para los niveles 1–60: 29 de Alianza y 28 de Horda, con 2.342 pasos y 7.446 objetivos. Incluyen los inicios clásicos y Skyborne en ambas facciones, con variantes de clase.
+- 57 rutas de misiones para los niveles 1–60: 29 de Alianza y 28 de Horda, con 2.342 pasos y 7.452 objetivos. Incluyen los inicios clásicos y Skyborne en ambas facciones, con variantes de clase.
 - Interfaz de Antigravity, panel compacto, iconos, flecha facetada con giro continuo y posiciones de ventanas por personaje.
 - 36 planes de talentos y sus 1.836 puntos, selector de builds y asistente del instructor. Las recomendaciones orientan al usuario; no compran habilidades ni gastan talentos por sí solas.
 - Búsqueda, filtros, opcionales, confirmación manual, datos y progreso por personaje.
@@ -285,7 +291,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.24.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.25.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.

@@ -509,7 +509,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "43e045e8f42bceb2c88a5211d00b7690fd19b9ad1fa2e8546b837a7aad9578ae",
+      "sha256": "1eeffef4f651fc92baa7d0c60fc51936872cea66a713dd88c11cbcefbf540f86",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -554,16 +554,18 @@
         "silithus-ironforge-districts-efficiency-2",
         "ashenvale-alliance-retire-alonso-5",
         "ashenvale-horde-retire-alonso-2",
-        "wetlands-daily-delivery-6"
+        "wetlands-daily-delivery-6",
+        "menethil-lightforge-chest-chain-4",
+        "ashenvale-later-lightforge-alternative-2"
       ]
     }
   },
   "totals": {
     "guides": 57,
-    "goals": 7446,
-    "direct": 6562,
-    "generated_instruction": 7446,
-    "missing_goal_note_text": 3662,
+    "goals": 7452,
+    "direct": 6568,
+    "generated_instruction": 7452,
+    "missing_goal_note_text": 3663,
     "missing": 288,
     "no_fixed_point_expected": 300,
     "empty_authored_subtitle": 819,
@@ -577,9 +579,9 @@
   },
   "byAction": {
     "accept": {
-      "goals": 2289,
-      "direct": 2225,
-      "generated_instruction": 2289,
+      "goals": 2291,
+      "direct": 2227,
+      "generated_instruction": 2291,
       "missing_goal_note_text": 1281,
       "missing": 64,
       "no_fixed_point_expected": 64,
@@ -592,9 +594,9 @@
       "candidates": 1
     },
     "collect": {
-      "goals": 1104,
-      "direct": 1104,
-      "generated_instruction": 1104,
+      "goals": 1105,
+      "direct": 1105,
+      "generated_instruction": 1105,
       "missing_goal_note_text": 591
     },
     "complete": {
@@ -687,10 +689,10 @@
       "direct": 9
     },
     "turnin": {
-      "goals": 2287,
-      "direct": 2287,
-      "generated_instruction": 2287,
-      "missing_goal_note_text": 778,
+      "goals": 2290,
+      "direct": 2290,
+      "generated_instruction": 2290,
+      "missing_goal_note_text": 779,
       "empty_authored_subtitle": 81
     },
     "use": {
@@ -1548,20 +1550,20 @@
       "guideID": "forever/alliance/07-thousand-needles",
       "title": "Las Mil Agujas, Bosque del Ocaso y Los Humedales",
       "counts": {
-        "goals": 122,
+        "goals": 128,
         "candidates": 4,
-        "generated_instruction": 122,
-        "direct": 111,
-        "missing_goal_note_text": 28,
+        "generated_instruction": 128,
+        "direct": 117,
+        "missing_goal_note_text": 29,
         "missing": 7,
         "no_fixed_point_expected": 7,
         "empty_authored_subtitle": 7
       },
       "byAction": {
         "accept": {
-          "goals": 39,
-          "direct": 37,
-          "generated_instruction": 39,
+          "goals": 41,
+          "direct": 39,
+          "generated_instruction": 41,
           "missing_goal_note_text": 16,
           "missing": 2,
           "no_fixed_point_expected": 2,
@@ -1573,9 +1575,9 @@
           "generated_instruction": 2
         },
         "collect": {
-          "goals": 19,
-          "direct": 19,
-          "generated_instruction": 19
+          "goals": 20,
+          "direct": 20,
+          "generated_instruction": 20
         },
         "fly": {
           "goals": 2,
@@ -1608,10 +1610,10 @@
           "generated_instruction": 2
         },
         "turnin": {
-          "goals": 36,
-          "direct": 36,
-          "generated_instruction": 36,
-          "missing_goal_note_text": 7,
+          "goals": 39,
+          "direct": 39,
+          "generated_instruction": 39,
+          "missing_goal_note_text": 8,
           "empty_authored_subtitle": 1
         },
         "vendor": {
@@ -16864,6 +16866,6 @@
       "location",
       "requiredLevel"
     ],
-    "semanticsSha256": "01c814b09550a9e52d8f5fba0da234cacb4029bfa5fd2d1406f56656c4dc51ee"
+    "semanticsSha256": "3b4be85529dc993f4a4e54cc6a5a17984646788c640927a43182d58907b7d4be"
   }
 }

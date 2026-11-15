@@ -368,6 +368,72 @@ local function makeRoom(cache, limit, timestamp)
     end
     if count >= limit and oldestID then cache[oldestID] = nil end
 end
+local function branchRules(goal, step, index, guide)
+    local accept = ns.GetGoalAcceptance and ns:GetGoalAcceptance(goal, step, index, guide)
+    return { goal or {}, accept ~= goal and accept or {} }
+end
+function Duo:GetGoalBranchQuestIDs(goal, step, index, guide)
+    local ids, seen = {}, {}
+    for _, rule in ipairs(branchRules(goal, step, index, guide)) do
+        for _, field in ipairs({ "chainStarted", "closedBy" }) do
+            for _, id in ipairs(rule[field] or {}) do
+                if integer(id, 1, 10000000) and not seen[id] then
+                    seen[id] = true; ids[#ids + 1] = id
+                end
+            end
+        end
+    end
+    return ids
+end
+
+-- Applicability belongs to each observed journal. Only a known absent quest
+-- can be excluded; an actual carried quest wins over stale branch history.
+function Duo:GetGoalBranchState(goal, step, index, guide, owner, observation)
+    local rules = branchRules(goal, step, index, guide)
+    local constrained = false
+    for _, rule in ipairs(rules) do
+        constrained = constrained or #(rule.chainStarted or {}) > 0 or #(rule.closedBy or {}) > 0
+    end
+    if not constrained then return true end
+    local cache = {}
+    local function state(id)
+        if not integer(id, 1, 10000000) then return nil end
+        if cache[id] ~= nil then return cache[id] ~= false and cache[id] or nil end
+        local q
+        if observation then q = observation(id, owner)
+        elseif owner == "mine" then q = self:LocalQuest(id)
+        else q = self:GetPartnerQuest(id) end
+        local value
+        if type(q) == "table" and q.known ~= false and not q.basic then value = integer(q.state, 0, 3) end
+        if not value and owner ~= "mine" and not observation then self:RequestQuest(id) end
+        cache[id] = value or false
+        return value
+    end
+    local own = state(goal.quest or goal.questID)
+    if own and own > 0 then return true end
+    if own == nil then return nil, "Falta confirmar la misión de este personaje." end
+    local unknown = false
+    for _, rule in ipairs(rules) do
+        for _, id in ipairs(rule.closedBy or {}) do
+            local value = state(id)
+            if value and value > 0 then return false, "Este personaje sigue otra rama de la cadena." end
+            if value == nil then unknown = true end
+        end
+        if rule.chainStarted and #rule.chainStarted > 0 then
+            local started, uncertain = false, false
+            for _, id in ipairs(rule.chainStarted) do
+                local value = state(id)
+                if value and value > 0 then started = true end
+                if value == nil then uncertain = true end
+            end
+            if not started and not uncertain then return false, "Este personaje retoma la cadena en una visita posterior." end
+            if not started then unknown = true end
+        end
+    end
+    if unknown then return nil, "Faltan datos recientes de las ramas de esta cadena." end
+    return true
+end
+
 function Duo:GetLocalQuestIDs()
     local ids, set = {}, {}
     local function add(q)
@@ -381,6 +447,11 @@ function Duo:GetLocalQuestIDs()
         add(step.questID)
         for _, goal in ipairs(step.goals or {}) do
             if not goal.only or not ns.MatchesConditions or ns:MatchesConditions(goal.only) then add(goal.quest or goal.questID) end
+        end
+        for index, goal in ipairs(step.goals or {}) do
+            if not goal.only or not ns.MatchesConditions or ns:MatchesConditions(goal.only) then
+                for _, id in ipairs(self:GetGoalBranchQuestIDs(goal, step, index, guide)) do add(id) end
+            end
         end
     end
     return ids, set
@@ -410,6 +481,11 @@ function Duo:GetQuestIDs()
         add(integer(peerStep.questID, 1, 10000000))
         for _, goal in ipairs(peerStep.goals or {}) do
             if appliesToPartner(goal.only, ctx) then add(integer(goal.quest or goal.questID, 1, 10000000)) end
+        end
+        for index, goal in ipairs(peerStep.goals or {}) do
+            if appliesToPartner(goal.only, ctx) then
+                for _, id in ipairs(self:GetGoalBranchQuestIDs(goal, peerStep, index, peerGuide)) do add(id) end
+            end
         end
     end
     for _, id in ipairs(localIDs) do add(id) end
@@ -516,17 +592,21 @@ function Duo:GetStepWaitStatus(step)
             or (ns.GetGoalProfessionRequirement and ns:GetGoalProfessionRequirement(goal, step) ~= nil)
         local skipped = ns.GetGoalStatus and ns:GetGoalStatus(goal, step, state, index) == "skip"
         if id and applicable and not individual and not skipped and not goal.optional and action ~= "note" then
-            local needed = action == "accept" and 1 or 2
-            local requirement = requirements[id] or { state = 1, objectives = {} }
-            if not requirements[id] then order[#order + 1] = id end
-            local objective = integer(goal.oi or goal.objective, 1, 32)
-            if needed == 2 and action ~= "turnin" and objective then requirement.objectives[objective] = true
-            else requirement.state = math.max(requirement.state, needed) end
-            if action == "turnin" or requirement.action ~= "turnin" and needed >= (requirement.needed or 0) then
-                requirement.action = action == "accept" and "accept" or action == "turnin" and "turnin" or "complete"
-                requirement.needed = needed
+            local branch = self:GetGoalBranchState(goal, step, index, guide, "partner")
+            if branch ~= false then
+                local needed = action == "accept" and 1 or 2
+                local requirement = requirements[id] or { state = 1, objectives = {} }
+                requirement.branchUnknown = requirement.branchUnknown or branch == nil
+                if not requirements[id] then order[#order + 1] = id end
+                local objective = integer(goal.oi or goal.objective, 1, 32)
+                if needed == 2 and action ~= "turnin" and objective then requirement.objectives[objective] = true
+                else requirement.state = math.max(requirement.state, needed) end
+                if action == "turnin" or requirement.action ~= "turnin" and needed >= (requirement.needed or 0) then
+                    requirement.action = action == "accept" and "accept" or action == "turnin" and "turnin" or "complete"
+                    requirement.needed = needed
+                end
+                requirements[id] = requirement
             end
-            requirements[id] = requirement
         end
     end
     if not next(requirements) then return noWait end
@@ -537,7 +617,7 @@ function Duo:GetStepWaitStatus(step)
     for _, id in ipairs(order) do
         local requirement = requirements[id]
         local q = self:GetPartnerQuest(id)
-        local unknownState = not q or q.basic or type(q.state) ~= "number"
+        local unknownState = requirement.branchUnknown or not q or q.basic or type(q.state) ~= "number"
         local pending = unknownState or q.state < requirement.state
         if not pending and q.state < 2 then
             for objective in pairs(requirement.objectives) do

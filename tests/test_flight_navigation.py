@@ -214,6 +214,42 @@ class FlightNavigationTests(unittest.TestCase):
         self.assertIsNone(h.view())
         self.assertFalse(h.complete())
 
+    def test_authored_guide_repair_preserves_observed_arrival_after_leaving_the_master(self):
+        h = FlightHost()
+        self.assertEqual(h.guide.routeRevision, 4)
+        # Version 0.7.24 recorded the actual arrival against route revision 3.
+        h.guide.routeRevision = 3
+        h.ns.char.progress[GUIDE].routeRevision = 3
+        h.move(1437, .0952, .5966)
+        self.assertEqual(h.view().state, "arrived")
+        saved = primitive_copy(h.ns.char)
+        self.assertIn(f"{GUIDE}:3:18:1:7", saved["flightNavigation"]["arrivals"])
+        repaired = FlightHost(saved=saved)
+        repaired.move(1437, .1211, .6419)
+        self.assertEqual(repaired.ns.char.progress[GUIDE].routeRevision, 4)
+        before = primitive_copy(repaired.ns.char)
+        self.assertTrue(repaired.complete())
+        self.assertEqual(repaired.ns.GetGoalStatus(repaired.ns, repaired.goal, repaired.step,
+            repaired.ns.char.progress[GUIDE], 1, repaired.guide)[0], "done")
+        self.assertEqual(primitive_copy(repaired.ns.char), before)
+        self.assertIsNone(repaired.view(), "An observed arrival must not request the departure master again")
+
+    def test_old_arrival_does_not_cover_a_retired_action_or_changed_destination(self):
+        for change in ("retired", "destination", "unmapped"):
+            with self.subTest(change=change):
+                h = FlightHost()
+                h.ns.char.flightNavigation = h.h.table({"arrivals": {
+                    f"{GUIDE}:3:18:1:7": {"destination": 7}}})
+                self.assertTrue(h.complete())
+                if change == "retired":
+                    h.guide.progressMigrations[3].retiredGoalKeys = h.h.table({"18:1": True})
+                elif change == "destination":
+                    for candidate in h.goal.candidates.values():
+                        candidate.destinationNodes = h.h.table([6])
+                else:
+                    h.guide.progressMigrations = h.h.table([])
+                self.assertFalse(h.complete())
+
     def test_snapshot_expires_on_leaving_origin_or_learning_a_new_path(self):
         h = FlightHost()
         h.observe()

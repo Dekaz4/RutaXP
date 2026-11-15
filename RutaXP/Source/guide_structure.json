@@ -4,12 +4,12 @@
   "scope": {
     "guides": 57,
     "steps": 2342,
-    "goals": 7446,
+    "goals": 7452,
     "questIDs": 1902,
     "actions": {
-      "accept": 2289,
+      "accept": 2291,
       "buy": 27,
-      "collect": 1104,
+      "collect": 1105,
       "complete": 239,
       "fly": 165,
       "getfp": 76,
@@ -22,22 +22,22 @@
       "sethome": 74,
       "talk": 10,
       "train": 126,
-      "turnin": 2287,
+      "turnin": 2290,
       "use": 18,
       "vendor": 48
     },
     "goalFields": {
-      "t": 7446,
-      "quest": 6493,
-      "oi": 1678,
-      "item": 1214,
-      "count": 1199,
-      "pre": 1214,
+      "t": 7452,
+      "quest": 6499,
+      "oi": 1679,
+      "item": 1215,
+      "count": 1200,
+      "pre": 1217,
       "preAll": 63,
-      "closedBy": 153,
+      "closedBy": 158,
       "only": 357,
-      "optional": 414,
-      "minLevel": 2287,
+      "optional": 415,
+      "minLevel": 2289,
       "maxLevel": 0,
       "level": 25,
       "n": 0,
@@ -7074,6 +7074,294 @@
       },
       {
         "guideID": "forever/alliance/07-thousand-needles",
+        "step": 18,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 18,
+        "goal": 7,
+        "field": "quest",
+        "source": 526,
+        "snapshot": 464
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 18,
+        "goal": 7,
+        "field": "closedBy",
+        "source": [
+          322,
+          324
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 18,
+        "goal": 7,
+        "field": "minLevel",
+        "source": 20,
+        "snapshot": 23
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 18,
+        "goal": 8,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 18,
+        "goal": 8,
+        "field": "quest",
+        "source": 464,
+        "snapshot": 270
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 18,
+        "goal": 8,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          321,
+          324,
+          526,
+          322
+        ]
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 18,
+        "goal": 8,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 18,
+        "goal": 8,
+        "field": "minLevel",
+        "source": 23,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 19,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 19,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 19,
+        "goal": 1,
+        "field": "quest",
+        "source": 289,
+        "snapshot": 324
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 19,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 2702
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 19,
+        "goal": 1,
+        "field": "count",
+        "source": 13,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 19,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 19,
+        "goal": 2,
+        "field": "quest",
+        "source": 289,
+        "snapshot": 526
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 19,
+        "goal": 2,
+        "field": "oi",
+        "source": 2,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 19,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 2702
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 20,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 20,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 20,
+        "goal": 1,
+        "field": "quest",
+        "source": 526,
+        "snapshot": 289
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 20,
+        "goal": 1,
+        "field": "item",
+        "source": 2702,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 20,
+        "goal": 1,
+        "field": "count",
+        "source": 5,
+        "snapshot": 13
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "goal": 1,
+        "field": "quest",
+        "source": 526,
+        "snapshot": 324
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "goal": 2,
+        "field": "quest",
+        "source": 289,
+        "snapshot": 526
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "goal": 3,
+        "field": "quest",
+        "source": 290,
+        "snapshot": 289
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "goal": 3,
+        "field": "pre",
+        "source": [
+          289
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 22,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "goal": 4,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "goal": 4,
+        "field": "quest",
+        "source": 471,
+        "snapshot": 290
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "goal": 4,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          289
+        ]
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "goal": 4,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 22
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "goal": 5,
+        "field": "t",
+        "source": "vendor",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
+        "step": 21,
+        "goal": 5,
+        "field": "quest",
+        "source": null,
+        "snapshot": 471
+      },
+      {
+        "guideID": "forever/alliance/07-thousand-needles",
         "step": 29,
         "field": "group shape/condition"
       },
@@ -9877,6 +10165,29 @@
         "field": "minLevel",
         "source": null,
         "snapshot": 20
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 31,
+        "goal": 2,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          324,
+          526,
+          322
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 32,
+        "goal": 2,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          526,
+          322
+        ]
       },
       {
         "guideID": "forever/alliance/30-40/05-arathi-highlands",
@@ -18981,6 +19292,77 @@
             "detail": "User screenshot at the correct NPC shows no available quest. Two local character histories record the downstream progress. No character names or account data included."
           }
         }
+      },
+      {
+        "id": "menethil-lightforge-chest-chain-4",
+        "guideID": "forever/alliance/07-thousand-needles",
+        "revision": 4,
+        "evidence": {
+          "sources": [
+            {
+              "repository": "Questie/QuestieDB",
+              "commit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+              "path": "src/corrections/Forever/foreverQuestFixes.lua",
+              "url": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L74-L105",
+              "sha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+              "facts": {
+                "526": {
+                  "pre": [
+                    321
+                  ],
+                  "closedBy": [
+                    324
+                  ],
+                  "next": 322
+                },
+                "324": {
+                  "closedBy": [
+                    526
+                  ]
+                }
+              }
+            }
+          ],
+          "report": "The player carries Hierro Forjaluz (321) but the route asks Glorin for Lingotes Forjaluz (526) before the chest delivery.",
+          "review": "321 requires 270 in the existing pinned route; 321 is delivered to object 2734 at Wetlands 12.11,64.19. Forever 324 and 526 are mutually exclusive follow-ups after 321. Complete the murloc objective beside the chest before heading north to the independent cursed-crew work.",
+          "progress": "Keep 37 step numbers and map every prior goal exactly once; restore only unresolved affected chain tasks, without quest-completion credit or reopening completed chapters.",
+          "reason": "La visita temprana a Menethil solo continúa esta cadena si el personaje ya lleva o entregó La flota maldita, Hierro Forjaluz o una continuación. Primero entrega el hierro en el cofre y haz los múrlocs cercanos; después ve a la Tercera Flota. La ruta normal conserva su visita posterior a Ventormenta para quienes aún no han empezado este tramo de la cadena.",
+          "gate": "269 is picked up in this chapter but delivered later. Do not force a Stormwind detour or offer a locked 321/526 to characters who have only reached 269. chainStarted on the three acceptances also applies to their later work/delivery through the earlier acceptance."
+        }
+      },
+      {
+        "id": "ashenvale-later-lightforge-alternative-2",
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "revision": 2,
+        "evidence": {
+          "sources": [
+            {
+              "repository": "Questie/QuestieDB",
+              "commit": "21be34023b72cf2ec3027cb9a61a8b72a1910857",
+              "path": "src/corrections/Forever/foreverQuestFixes.lua",
+              "url": "https://github.com/Questie/QuestieDB/blob/21be34023b72cf2ec3027cb9a61a8b72a1910857/src/corrections/Forever/foreverQuestFixes.lua#L74-L105",
+              "sha256": "03475d17adefa575679c1afd887a9896c00e9b8a59038ea8f5c00e68872b702b",
+              "facts": {
+                "526": {
+                  "pre": [
+                    321
+                  ],
+                  "closedBy": [
+                    324
+                  ],
+                  "next": 322
+                },
+                "324": {
+                  "closedBy": [
+                    526
+                  ]
+                }
+              }
+            }
+          ],
+          "reason": "Si ya se eligió o completó la alternativa Lingotes Forjaluz, la visita posterior no vuelve a pedir Hierro Forjaluz ni Los lingotes perdidos. Una misión que sigue en el diario continúa siendo válida.",
+          "review": "Preserve every step and saved mark. The same verified mutually exclusive 324/526 branches close the later carried-quest objectives through their acceptance. No newly added work and no rewind."
+        }
       }
     ],
     "authoredTextPresenceLosses": [],
@@ -19215,6 +19597,289 @@
       "work_before_accept": [],
       "turnin_without_accept": [
         {
+          "guideID": "forever/alliance/07-thousand-needles",
+          "step": 18,
+          "goal": 8,
+          "action": "turnin",
+          "questID": 270,
+          "sourceFile": "guides/forever/alliance/07-thousand-needles.guide",
+          "sourceLine": 185,
+          "sourceText": "accept 464                              -- Captain Stoutfist, by the keep",
+          "optional": true,
+          "modeledScenarios": [
+            {
+              "path": 1,
+              "class": "WARRIOR",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PALADIN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "HUNTER",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "ROGUE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PRIEST",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "SHAMAN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "MAGE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "WARLOCK",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "DRUID",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARRIOR",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PALADIN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "HUNTER",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "ROGUE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PRIEST",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "SHAMAN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "MAGE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARLOCK",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "DRUID",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARRIOR",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PALADIN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "HUNTER",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "ROGUE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PRIEST",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "SHAMAN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "MAGE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARLOCK",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "DRUID",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            }
+          ]
+        },
+        {
           "guideID": "forever/alliance/02-westfall",
           "step": 21,
           "goal": 4,
@@ -19253,6 +19918,859 @@
           "sourceText": "accept 469                              -- Einar Stonegrip",
           "closedBy": [
             484
+          ],
+          "modeledScenarios": [
+            {
+              "path": 1,
+              "class": "WARRIOR",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PALADIN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "HUNTER",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "ROGUE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PRIEST",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "SHAMAN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "MAGE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "WARLOCK",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "DRUID",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARRIOR",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PALADIN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "HUNTER",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "ROGUE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PRIEST",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "SHAMAN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "MAGE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARLOCK",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "DRUID",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARRIOR",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PALADIN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "HUNTER",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "ROGUE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PRIEST",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "SHAMAN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "MAGE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARLOCK",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "DRUID",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            }
+          ]
+        },
+        {
+          "guideID": "forever/alliance/07-thousand-needles",
+          "step": 18,
+          "goal": 12,
+          "action": "accept",
+          "questID": 526,
+          "closedBy": [
+            324
+          ],
+          "modeledScenarios": [
+            {
+              "path": 1,
+              "class": "WARRIOR",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PALADIN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "HUNTER",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "ROGUE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PRIEST",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "SHAMAN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "MAGE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "WARLOCK",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "DRUID",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARRIOR",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PALADIN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "HUNTER",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "ROGUE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PRIEST",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "SHAMAN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "MAGE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARLOCK",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "DRUID",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARRIOR",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PALADIN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "HUNTER",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "ROGUE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PRIEST",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "SHAMAN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "MAGE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARLOCK",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "DRUID",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            }
+          ]
+        },
+        {
+          "guideID": "forever/alliance/30-40/03-ashenvale",
+          "step": 31,
+          "goal": 2,
+          "action": "accept",
+          "questID": 321,
+          "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
+          "sourceLine": 213,
+          "sourceText": "accept 321",
+          "closedBy": [
+            324,
+            526
+          ],
+          "modeledScenarios": [
+            {
+              "path": 1,
+              "class": "WARRIOR",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PALADIN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "HUNTER",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "ROGUE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PRIEST",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "SHAMAN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "MAGE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "WARLOCK",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "DRUID",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARRIOR",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PALADIN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "HUNTER",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "ROGUE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PRIEST",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "SHAMAN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "MAGE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARLOCK",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "DRUID",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARRIOR",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PALADIN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "HUNTER",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "ROGUE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PRIEST",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "SHAMAN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "MAGE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARLOCK",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "DRUID",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            }
+          ]
+        },
+        {
+          "guideID": "forever/alliance/30-40/03-ashenvale",
+          "step": 32,
+          "goal": 2,
+          "action": "accept",
+          "questID": 324,
+          "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
+          "sourceLine": 218,
+          "sourceText": "accept 324",
+          "closedBy": [
+            526
           ],
           "modeledScenarios": [
             {
@@ -22003,11 +23521,11 @@
     },
     "counts": {
       "work_before_accept": 0,
-      "turnin_without_accept": 1,
+      "turnin_without_accept": 2,
       "accept_without_future_turnin": 0,
       "prerequisite_not_in_prior_path": 0,
       "prerequisite_forward_local": 0,
-      "ordered_closed_branch": 11
+      "ordered_closed_branch": 14
     },
     "carriedTurnins": [
       {
@@ -22217,12 +23735,12 @@
       {
         "guideID": "forever/alliance/07-thousand-needles",
         "step": 21,
-        "goal": 4,
+        "goal": 5,
         "action": "turnin",
         "questID": 471,
         "sourceFile": "guides/forever/alliance/07-thousand-needles.guide",
-        "sourceLine": 202,
-        "sourceText": "turnin 471                              -- James Halloran",
+        "sourceLine": 203,
+        "sourceText": "vendor nearest",
         "acceptedAt": {
           "guideID": "forever/alliance/06-ashenvale",
           "step": 57,
@@ -27725,7 +29243,7 @@
   },
   "dependencyCycleCandidates": [],
   "workCoverage": {
-    "acceptOccurrencesWithoutQuestLinkedWork": 959,
+    "acceptOccurrencesWithoutQuestLinkedWork": 960,
     "uniqueQuestIDs": 845,
     "sourceQuestsWithoutObjectives": 797,
     "sourceQuestIDsWithoutObjectives": [
@@ -33325,6 +34843,859 @@
           ]
         },
         {
+          "guideID": "forever/alliance/07-thousand-needles",
+          "step": 18,
+          "goal": 12,
+          "action": "accept",
+          "questID": 526,
+          "closedBy": [
+            324
+          ],
+          "modeledScenarios": [
+            {
+              "path": 1,
+              "class": "WARRIOR",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PALADIN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "HUNTER",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "ROGUE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PRIEST",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "SHAMAN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "MAGE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "WARLOCK",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "DRUID",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARRIOR",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PALADIN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "HUNTER",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "ROGUE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PRIEST",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "SHAMAN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "MAGE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARLOCK",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "DRUID",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARRIOR",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PALADIN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "HUNTER",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "ROGUE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PRIEST",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "SHAMAN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "MAGE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARLOCK",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "DRUID",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            }
+          ]
+        },
+        {
+          "guideID": "forever/alliance/30-40/03-ashenvale",
+          "step": 31,
+          "goal": 2,
+          "action": "accept",
+          "questID": 321,
+          "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
+          "sourceLine": 213,
+          "sourceText": "accept 321",
+          "closedBy": [
+            324,
+            526
+          ],
+          "modeledScenarios": [
+            {
+              "path": 1,
+              "class": "WARRIOR",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PALADIN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "HUNTER",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "ROGUE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PRIEST",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "SHAMAN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "MAGE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "WARLOCK",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "DRUID",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARRIOR",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PALADIN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "HUNTER",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "ROGUE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PRIEST",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "SHAMAN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "MAGE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARLOCK",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "DRUID",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARRIOR",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PALADIN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "HUNTER",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "ROGUE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PRIEST",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "SHAMAN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "MAGE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARLOCK",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "DRUID",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            }
+          ]
+        },
+        {
+          "guideID": "forever/alliance/30-40/03-ashenvale",
+          "step": 32,
+          "goal": 2,
+          "action": "accept",
+          "questID": 324,
+          "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
+          "sourceLine": 218,
+          "sourceText": "accept 324",
+          "closedBy": [
+            526
+          ],
+          "modeledScenarios": [
+            {
+              "path": 1,
+              "class": "WARRIOR",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PALADIN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "HUNTER",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "ROGUE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "PRIEST",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "SHAMAN",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "MAGE",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "WARLOCK",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 1,
+              "class": "DRUID",
+              "race": "NightElf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Dwarf",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARRIOR",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PALADIN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "HUNTER",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "ROGUE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "PRIEST",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "SHAMAN",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "MAGE",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "WARLOCK",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 2,
+              "class": "DRUID",
+              "race": "Gnome",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARRIOR",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PALADIN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "HUNTER",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "ROGUE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "PRIEST",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "SHAMAN",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "MAGE",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "WARLOCK",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 3,
+              "class": "DRUID",
+              "race": "Human",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARRIOR",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PALADIN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "HUNTER",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "ROGUE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "PRIEST",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "SHAMAN",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "MAGE",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "WARLOCK",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            },
+            {
+              "path": 4,
+              "class": "DRUID",
+              "race": "Skyborne",
+              "faction": "Alliance"
+            }
+          ]
+        },
+        {
           "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
           "step": 50,
           "goal": 2,
@@ -35808,5 +38179,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "6368d317317f4c31d07224dbbbb90b30ff1ebbf8c54ac7bdec83501ec4a8e28d"
+  "inputSha256": "eb541fe901b006bc9b923881fcdfc9596b3a9d0ee9685acd869ce79e00a41464"
 }

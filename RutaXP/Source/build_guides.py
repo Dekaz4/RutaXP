@@ -147,7 +147,7 @@ def apply_guide_overrides(document: dict[str, Any], path: Path) -> list[str]:
     return applied
 
 
-ROUTE_FIELDS = ("t", "quest", "oi", "item", "count", "pre", "preAll", "closedBy", "only", "optional",
+ROUTE_FIELDS = ("t", "quest", "oi", "item", "count", "pre", "preAll", "closedBy", "chainStarted", "only", "optional",
                 "minLevel", "maxLevel", "level", "n", "class", "group", "order",
                 "profLine", "profRank", "profName", "requiresSkill")
 

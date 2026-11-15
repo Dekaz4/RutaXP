@@ -509,7 +509,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "43e045e8f42bceb2c88a5211d00b7690fd19b9ad1fa2e8546b837a7aad9578ae",
+      "sha256": "1eeffef4f651fc92baa7d0c60fc51936872cea66a713dd88c11cbcefbf540f86",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -554,7 +554,9 @@
         "silithus-ironforge-districts-efficiency-2",
         "ashenvale-alliance-retire-alonso-5",
         "ashenvale-horde-retire-alonso-2",
-        "wetlands-daily-delivery-6"
+        "wetlands-daily-delivery-6",
+        "menethil-lightforge-chest-chain-4",
+        "ashenvale-later-lightforge-alternative-2"
       ]
     }
   },
@@ -575,11 +577,11 @@
       "Horde": 28
     },
     "steps": 2342,
-    "goals": 7446,
+    "goals": 7452,
     "goalTypes": {
-      "accept": 2289,
+      "accept": 2291,
       "buy": 27,
-      "collect": 1104,
+      "collect": 1105,
       "complete": 239,
       "fly": 165,
       "getfp": 76,
@@ -592,67 +594,68 @@
       "sethome": 74,
       "talk": 10,
       "train": 126,
-      "turnin": 2287,
+      "turnin": 2290,
       "use": 18,
       "vendor": 48
     },
     "goalFields": {
       "area": 393,
       "candidates": 586,
+      "chainStarted": 3,
       "class": 116,
-      "closedBy": 153,
-      "count": 1199,
-      "f": 5490,
-      "from": 737,
+      "closedBy": 158,
+      "count": 1200,
+      "f": 5496,
+      "from": 738,
       "fromAlso": 97,
       "fromFaction": 11,
-      "fromKind": 737,
+      "fromKind": 738,
       "fromRank": 17,
       "group": 9,
-      "instruction": 7446,
+      "instruction": 7452,
       "instructionAsHint": 2,
       "instructionReplacesContext": 6,
       "instructionVerb": 11,
-      "item": 1214,
-      "itemName": 1214,
+      "item": 1215,
+      "itemName": 1215,
       "level": 25,
       "location": 399,
-      "map": 6563,
-      "minLevel": 2287,
+      "map": 6569,
+      "minLevel": 2289,
       "navigationHint": 434,
       "navigationMode": 14,
       "node": 76,
-      "note": 3569,
-      "npc": 4985,
-      "npcName": 4374,
-      "objName": 302,
-      "object": 302,
-      "oi": 1678,
+      "note": 3574,
+      "npc": 4988,
+      "npcName": 4377,
+      "objName": 304,
+      "object": 304,
+      "oi": 1679,
       "only": 357,
-      "optional": 414,
-      "pre": 1214,
+      "optional": 415,
+      "pre": 1217,
       "preAll": 63,
-      "preTitles": 1391,
+      "preTitles": 1393,
       "profLine": 18,
       "profName": 18,
       "profRank": 18,
-      "qlvl": 2289,
-      "quest": 6493,
+      "qlvl": 2291,
+      "quest": 6499,
       "r": 2,
       "rank": 1,
       "rankMax": 1,
       "rewards": 8,
       "skill": 1,
       "skillLine": 1,
-      "spots": 1300,
-      "spread": 670,
-      "t": 7446,
+      "spots": 1301,
+      "spread": 671,
+      "t": 7452,
       "target": 611,
       "text": 224,
-      "title": 6493,
-      "x": 6563,
-      "y": 6563,
-      "z": 4468
+      "title": 6499,
+      "x": 6569,
+      "y": 6569,
+      "z": 4473
     }
   },
   "mapFrames": {
@@ -94776,30 +94779,6 @@
               "instruction": "Habla con «Primer oficial Fistimos» y acepta «La tripulación maldita».\nZona: Los Humedales."
             },
             {
-              "title": "Lingotes Forjaluz",
-              "minLevel": 20,
-              "note": "Glorin Frenteacerada, arriba en la posada",
-              "t": "accept",
-              "quest": 526,
-              "npc": 1217,
-              "npcName": "Glorin Frenteacerada",
-              "closedBy": [
-                322,
-                324
-              ],
-              "preTitles": {
-                "322": "Blessed Arm",
-                "324": "The Lost Ingots"
-              },
-              "map": 1437,
-              "x": 10.58,
-              "y": 60.59,
-              "z": 9.7,
-              "f": "e",
-              "qlvl": 29,
-              "instruction": "Habla con «Glorin Frenteacerada» y acepta «Lingotes Forjaluz».\nZona: Los Humedales.\nGlorin Frenteacerada, arriba en la posada."
-            },
-            {
               "title": "Estandartes de batalla",
               "minLevel": 23,
               "note": "Capitán Puñorrecio, por el mantenimiento",
@@ -94814,11 +94793,314 @@
               "f": "e",
               "qlvl": 28,
               "instruction": "Habla con «Capitán Puñorrecio» y acepta «Estandartes de batalla».\nZona: Los Humedales.\nCapitán Puñorrecio, por el mantenimiento."
+            },
+            {
+              "title": "La flota maldita",
+              "t": "turnin",
+              "quest": 270,
+              "npc": 1217,
+              "npcName": "Glorin Frenteacerada",
+              "map": 1437,
+              "x": 10.58,
+              "y": 60.59,
+              "z": 9.7,
+              "f": "e",
+              "optional": true,
+              "closedBy": [
+                321,
+                324,
+                526,
+                322
+              ],
+              "note": "Si llevas La flota maldita, entrégala a Glorin antes de seguir con el hierro.",
+              "instruction": "Opcional.\nHabla con «Glorin Frenteacerada» y entrega «La flota maldita».\nZona: Los Humedales.\nSi llevas La flota maldita, entrégala a Glorin antes de seguir con el hierro."
+            },
+            {
+              "title": "Hierro Forjaluz",
+              "minLevel": 20,
+              "t": "accept",
+              "quest": 321,
+              "npc": 1217,
+              "npcName": "Glorin Frenteacerada",
+              "pre": [
+                270
+              ],
+              "preTitles": {
+                "270": "La flota maldita"
+              },
+              "map": 1437,
+              "x": 10.58,
+              "y": 60.59,
+              "z": 9.7,
+              "f": "e",
+              "qlvl": 29,
+              "closedBy": [
+                324,
+                526,
+                322
+              ],
+              "note": "Glorin Frenteacerada, arriba en la posada. Después lleva esta misión al cofre del naufragio al sur del puerto.",
+              "instruction": "Habla con «Glorin Frenteacerada» y acepta «Hierro Forjaluz».\nZona: Los Humedales.\nGlorin Frenteacerada, arriba en la posada. Después lleva esta misión al cofre del naufragio al sur del puerto.",
+              "chainStarted": [
+                270,
+                321,
+                324,
+                526,
+                322
+              ]
+            },
+            {
+              "title": "Hierro Forjaluz",
+              "t": "turnin",
+              "quest": 321,
+              "object": 2734,
+              "objName": "Cofre con marcas de agua",
+              "map": 1437,
+              "x": 12.11,
+              "y": 64.19,
+              "z": 0.3,
+              "f": "e",
+              "note": "Al sur de Menethil, busca el cofre en el pequeño islote entre las dos partes del barco naufragado. Entrega aquí Hierro Forjaluz; no vuelvas todavía a Glorin.",
+              "instruction": "Interactúa con «Cofre con marcas de agua» para entregar «Hierro Forjaluz».\nZona: Los Humedales.\nAl sur de Menethil, busca el cofre en el pequeño islote entre las dos partes del barco naufragado. Entrega aquí Hierro Forjaluz; no vuelvas todavía a Glorin."
+            },
+            {
+              "title": "Los lingotes perdidos",
+              "minLevel": 20,
+              "t": "accept",
+              "quest": 324,
+              "object": 2734,
+              "objName": "Cofre con marcas de agua",
+              "pre": [
+                321
+              ],
+              "preTitles": {
+                "321": "Hierro Forjaluz"
+              },
+              "map": 1437,
+              "x": 12.11,
+              "y": 64.19,
+              "z": 0.3,
+              "f": "e",
+              "qlvl": 29,
+              "closedBy": [
+                322,
+                526
+              ],
+              "note": "Acepta la continuación del cofre después de entregar Hierro Forjaluz. Los lingotes perdidos y Lingotes Forjaluz son alternativas: solo necesitas una.",
+              "instruction": "Interactúa con «Cofre con marcas de agua» y acepta «Los lingotes perdidos».\nZona: Los Humedales.\nAcepta la continuación del cofre después de entregar Hierro Forjaluz. Los lingotes perdidos y Lingotes Forjaluz son alternativas: solo necesitas una.",
+              "chainStarted": [
+                270,
+                321,
+                324,
+                526,
+                322
+              ]
+            },
+            {
+              "title": "Lingotes Forjaluz",
+              "minLevel": 20,
+              "note": "Alternativa de Glorin después de entregar Hierro Forjaluz en el cofre. Si has aceptado Los lingotes perdidos, sigue esa misión y omite esta alternativa.",
+              "t": "accept",
+              "quest": 526,
+              "npc": 1217,
+              "npcName": "Glorin Frenteacerada",
+              "closedBy": [
+                322,
+                324
+              ],
+              "preTitles": {
+                "321": "Hierro Forjaluz",
+                "322": "Arma bendita",
+                "324": "Los lingotes perdidos"
+              },
+              "map": 1437,
+              "x": 10.58,
+              "y": 60.59,
+              "z": 9.7,
+              "f": "e",
+              "qlvl": 29,
+              "instruction": "Habla con «Glorin Frenteacerada» y acepta «Lingotes Forjaluz».\nZona: Los Humedales.\nAlternativa de Glorin después de entregar Hierro Forjaluz en el cofre. Si has aceptado Los lingotes perdidos, sigue esa misión y omite esta alternativa.",
+              "pre": [
+                321
+              ],
+              "chainStarted": [
+                270,
+                321,
+                324,
+                526,
+                322
+              ]
             }
           ]
         },
         {
-          "title": "El naufragio del tercer Fleet",
+          "title": "Múrlocs junto al naufragio",
+          "note": "Haz la misión de lingotes que lleves junto al cofre, al sur de Menethil. Después sigue hacia el naufragio de la Tercera Flota, al norte.",
+          "goals": [
+            {
+              "title": "Los lingotes perdidos",
+              "note": "Recoge los cinco lingotes de los Asaltantes Branquiazul alrededor de este naufragio, antes de ir al barco de la tripulación maldita.",
+              "t": "collect",
+              "quest": 324,
+              "oi": 1,
+              "item": 2702,
+              "itemName": "Lingote Forjaluz",
+              "count": 5,
+              "map": 1437,
+              "x": 11.76,
+              "y": 64.38,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 12.6,
+                  "y": 64.3,
+                  "r": 45,
+                  "n": 7
+                },
+                {
+                  "x": 11.2,
+                  "y": 66.2,
+                  "r": 71,
+                  "n": 6
+                },
+                {
+                  "x": 9,
+                  "y": 69.4,
+                  "r": 56,
+                  "n": 7
+                },
+                {
+                  "x": 10.1,
+                  "y": 71.5,
+                  "r": 40,
+                  "n": 5
+                },
+                {
+                  "x": 19.9,
+                  "y": 18.2,
+                  "r": 48,
+                  "n": 3
+                },
+                {
+                  "x": 22.6,
+                  "y": 18.2,
+                  "r": 40,
+                  "n": 2
+                },
+                {
+                  "x": 25.4,
+                  "y": 17.4,
+                  "r": 55,
+                  "n": 5
+                },
+                {
+                  "x": 27.6,
+                  "y": 16.5,
+                  "r": 40,
+                  "n": 2
+                },
+                {
+                  "x": 29,
+                  "y": 13.4,
+                  "r": 42,
+                  "n": 4
+                },
+                {
+                  "x": 31.4,
+                  "y": 12.2,
+                  "r": 40,
+                  "n": 1
+                }
+              ],
+              "from": "Asaltante Branquiazul",
+              "fromKind": "npc",
+              "spread": true,
+              "instruction": "Recoge «Lingote Forjaluz» (5 en total) del botín de «Asaltante Branquiazul».\nZona: Los Humedales.\nRecoge los cinco lingotes de los Asaltantes Branquiazul alrededor de este naufragio, antes de ir al barco de la tripulación maldita."
+            },
+            {
+              "title": "Lingotes Forjaluz",
+              "note": "Recoge los cinco lingotes de los Asaltantes Branquiazul alrededor de este naufragio, antes de ir al barco de la tripulación maldita.",
+              "t": "collect",
+              "quest": 526,
+              "oi": 1,
+              "item": 2702,
+              "itemName": "Lingote Forjaluz",
+              "count": 5,
+              "map": 1437,
+              "x": 11.76,
+              "y": 64.38,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 12.6,
+                  "y": 64.3,
+                  "r": 45,
+                  "n": 7
+                },
+                {
+                  "x": 11.2,
+                  "y": 66.2,
+                  "r": 71,
+                  "n": 6
+                },
+                {
+                  "x": 9,
+                  "y": 69.4,
+                  "r": 56,
+                  "n": 7
+                },
+                {
+                  "x": 10.1,
+                  "y": 71.5,
+                  "r": 40,
+                  "n": 5
+                },
+                {
+                  "x": 19.9,
+                  "y": 18.2,
+                  "r": 48,
+                  "n": 3
+                },
+                {
+                  "x": 22.6,
+                  "y": 18.2,
+                  "r": 40,
+                  "n": 2
+                },
+                {
+                  "x": 25.4,
+                  "y": 17.4,
+                  "r": 55,
+                  "n": 5
+                },
+                {
+                  "x": 27.6,
+                  "y": 16.5,
+                  "r": 40,
+                  "n": 2
+                },
+                {
+                  "x": 29,
+                  "y": 13.4,
+                  "r": 42,
+                  "n": 4
+                },
+                {
+                  "x": 31.4,
+                  "y": 12.2,
+                  "r": 40,
+                  "n": 1
+                }
+              ],
+              "from": "Asaltante Branquiazul",
+              "fromKind": "npc",
+              "spread": true,
+              "instruction": "Recoge «Lingote Forjaluz» (5 en total) del botín de «Asaltante Branquiazul».\nZona: Los Humedales.\nRecoge los cinco lingotes de los Asaltantes Branquiazul alrededor de este naufragio, antes de ir al barco de la tripulación maldita."
+            }
+          ]
+        },
+        {
+          "title": "Naufragio de la Tercera Flota",
           "note": "Sigue la costa norte hastal barco destruido. Cursed Sailors caminar por la playa, Cursed Marines la cubierta; Primer oficial Esnelim se encuentra en la playa junto a la proa. Giant Los Humedales Crocolisks acecha en la costa justo al norte de ella.",
           "goals": [
             {
@@ -94945,94 +95227,21 @@
           ]
         },
         {
-          "title": "Bluegill Raiders",
-          "note": "Sigue la costa noreste pasando el naufragio: el Bluegill Raiders mantiene el pantano más allá del Giant Crocolisks.",
-          "goals": [
-            {
-              "title": "Lingotes Forjaluz",
-              "note": "Lingote Forjaluz",
-              "t": "collect",
-              "quest": 526,
-              "oi": 1,
-              "item": 2702,
-              "itemName": "Lingote Forjaluz",
-              "count": 5,
-              "map": 1437,
-              "x": 19.17,
-              "y": 19.51,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 19.9,
-                  "y": 18.2,
-                  "r": 48,
-                  "n": 3
-                },
-                {
-                  "x": 22.6,
-                  "y": 18.2,
-                  "r": 40,
-                  "n": 2
-                },
-                {
-                  "x": 25.4,
-                  "y": 17.4,
-                  "r": 55,
-                  "n": 5
-                },
-                {
-                  "x": 27.6,
-                  "y": 16.5,
-                  "r": 40,
-                  "n": 2
-                },
-                {
-                  "x": 29,
-                  "y": 13.4,
-                  "r": 42,
-                  "n": 4
-                },
-                {
-                  "x": 31.4,
-                  "y": 12.2,
-                  "r": 40,
-                  "n": 1
-                },
-                {
-                  "x": 12.6,
-                  "y": 64.3,
-                  "r": 45,
-                  "n": 7
-                },
-                {
-                  "x": 11.2,
-                  "y": 66.2,
-                  "r": 71,
-                  "n": 6
-                },
-                {
-                  "x": 9,
-                  "y": 69.4,
-                  "r": 56,
-                  "n": 7
-                },
-                {
-                  "x": 10.1,
-                  "y": 71.5,
-                  "r": 40,
-                  "n": 5
-                }
-              ],
-              "from": "Asaltante Branquiazul",
-              "fromKind": "npc",
-              "spread": true,
-              "instruction": "Recoge «Lingote Forjaluz» (5 en total) del botín de «Asaltante Branquiazul».\nZona: Los Humedales."
-            }
-          ]
-        },
-        {
           "title": "Puerto de Menethil",
           "goals": [
+            {
+              "title": "Los lingotes perdidos",
+              "t": "turnin",
+              "quest": 324,
+              "npc": 1217,
+              "npcName": "Glorin Frenteacerada",
+              "map": 1437,
+              "x": 10.58,
+              "y": 60.59,
+              "z": 9.7,
+              "f": "e",
+              "instruction": "Habla con «Glorin Frenteacerada» y entrega «Los lingotes perdidos».\nZona: Los Humedales."
+            },
             {
               "title": "Lingotes Forjaluz",
               "note": "Glorin Frenteacerada",
@@ -97727,7 +97936,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 3,
+      "routeRevision": 4,
       "progressMigrations": [
         {
           "from": 1,
@@ -97866,6 +98075,80 @@
           "affectedQuestIDs": [],
           "previousStepCount": 37,
           "firstAffectedStep": 17
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "goalMap": {
+            "18:8": "18:7",
+            "18:7": "18:12",
+            "20:1": "19:2",
+            "19:1": "20:1",
+            "19:2": "20:2",
+            "19:3": "20:3",
+            "19:4": "20:4",
+            "21:1": "21:2",
+            "21:2": "21:3",
+            "21:3": "21:4",
+            "21:4": "21:5",
+            "21:5": "21:6"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "20": 19,
+            "19": 19,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 30,
+            "31": 31,
+            "32": 32,
+            "33": 33,
+            "34": 34,
+            "35": 35,
+            "36": 36,
+            "37": 37,
+            "38": 38
+          },
+          "affectedQuestIDs": [
+            270,
+            321,
+            324,
+            526
+          ],
+          "previousStepCount": 37,
+          "firstAffectedStep": 18,
+          "addedGoalKeys": [
+            "18:8",
+            "18:9",
+            "18:10",
+            "18:11",
+            "19:1",
+            "21:1"
+          ]
         }
       ]
     },
@@ -106075,7 +106358,12 @@
               "z": 9.7,
               "f": "e",
               "qlvl": 29,
-              "instruction": "Habla con «Glorin Frenteacerada» y acepta «Hierro Forjaluz».\nZona: Los Humedales."
+              "instruction": "Habla con «Glorin Frenteacerada» y acepta «Hierro Forjaluz».\nZona: Los Humedales.",
+              "closedBy": [
+                324,
+                526,
+                322
+              ]
             }
           ]
         },
@@ -106115,7 +106403,11 @@
               "z": 0.3,
               "f": "e",
               "qlvl": 29,
-              "instruction": "Interactúa con «Cofre con marcas de agua» y acepta «Los lingotes perdidos».\nZona: Los Humedales."
+              "instruction": "Interactúa con «Cofre con marcas de agua» y acepta «Los lingotes perdidos».\nZona: Los Humedales.",
+              "closedBy": [
+                526,
+                322
+              ]
             }
           ]
         },
@@ -106399,7 +106691,56 @@
       ],
       "_sendaLocale": "esES",
       "pack": "guides",
-      "version": 1
+      "version": 1,
+      "routeRevision": 2,
+      "progressMigrations": [
+        {
+          "from": 1,
+          "to": 2,
+          "goalMap": {},
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 30,
+            "31": 31,
+            "32": 32,
+            "33": 33,
+            "34": 34,
+            "35": 35,
+            "36": 36
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 35,
+          "firstAffectedStep": 36
+        }
+      ]
     },
     {
       "id": "forever/alliance/30-40/04-stranglethorn-vale",
