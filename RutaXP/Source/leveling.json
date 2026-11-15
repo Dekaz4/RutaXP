@@ -20,11 +20,12 @@
     },
     "localOverrides": {
       "file": "Source/guide_overrides.json",
-      "sha256": "a160b0b2b85753f137852175ecaf60cf579120b5c64dcb2e12ae3ae70dae22e9",
+      "sha256": "6335135ac0f5a3dfc1096eee0def7fb10ad143897ffc137ecddd27dfb10a3aea",
       "applied": [
         "dun-morogh-cooking-instructor",
         "darkshore-auberdine-pier-map",
-        "duskwood-abercrombie-forever"
+        "duskwood-abercrombie-forever",
+        "thousand-needles-lonebrow-journal-2026-11-09"
       ]
     },
     "navigationCoverage": {
@@ -96852,21 +96853,21 @@
           ]
         },
         {
-          "title": "El Great Lift",
-          "note": "Desde Theramore seguir la carretera al oeste de Dustwallow en el Baldíos y al sur a lo largo de ella; dar Campamento Taurajo un amplio amarre. El Great Lift en el extremo sur Baldíos' le lleva abajo en Las Mil Agujas. El diario se encuentra al pie del ascensor.",
+          "title": "Gran Elevador",
+          "note": "Desde Theramore, sigue la carretera hacia el oeste hasta Los Baldíos y luego hacia el sur. Rodea el Campamento Taurajo manteniendo la distancia. El Gran Elevador, al sur de Los Baldíos, baja a Las Mil Agujas. Desde su base, sigue el camino un poco más al sur: el diario está junto a otro esqueleto en la loma.",
           "goals": [
             {
-              "note": "Diario de Henrig Soliceja",
+              "note": "Sigue el camino hacia el sur; busca el diario junto al esqueleto de la loma. Recógelo y ábrelo en tus bolsas.",
               "t": "collect",
               "item": 5791,
               "itemName": "Diario de Henrig Soliceja",
               "map": 1441,
-              "x": 30.7,
-              "y": 24.3,
-              "f": "e",
+              "x": 31.3,
+              "y": 28.1,
+              "f": "l",
               "from": "Diario de Henrig Soliceja",
               "fromKind": "object",
-              "instruction": "Interactúa con «Diario de Henrig Soliceja» para reunir «Diario de Henrig Soliceja».\nZona: Las Mil Agujas."
+              "instruction": "Interactúa con «Diario de Henrig Soliceja» para reunir «Diario de Henrig Soliceja».\nZona: Las Mil Agujas.\nSigue el camino hacia el sur; busca el diario junto al esqueleto de la loma. Recógelo y ábrelo en tus bolsas."
             },
             {
               "title": "El diario de Henrig Soliceja",

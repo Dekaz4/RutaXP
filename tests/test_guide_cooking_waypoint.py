@@ -145,7 +145,7 @@ class CookingGuideRebuildTests(unittest.TestCase):
                 self.assertEqual(actual["npc"], donor["npc"])
                 self.assertEqual(imported["provenance"]["localOverrides"]["applied"],
                                  ["dun-morogh-cooking-instructor", "darkshore-auberdine-pier-map",
-                                  "duskwood-abercrombie-forever"])
+                                  "duskwood-abercrombie-forever", "thousand-needles-lonebrow-journal-2026-11-09"])
 
 
 if __name__ == "__main__":

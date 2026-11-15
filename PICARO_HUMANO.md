@@ -1010,7 +1010,7 @@ La visita temprana a Menethil solo continúa esta cadena si el personaje ya llev
 | 31.2 | Entregar · Derrotar a Nek'rosh (#474) | Capitán Puñorrecio · mapa 1437 · 9.86, 57.49 · a elegir · Segadora para barriles |
 | 31.3 | Tomar barco · Barco de Menethil a Theramore | mapa 1437 · 4.74, 63.76 |
 | 32 | Takar el Profeta | Otra clase o raza |
-| 33.1 | Recoger · Diario de Henrig Soliceja | Diario de Henrig Soliceja · mapa 1441 · 30.7, 24.3 |
+| 33.1 | Recoger · Sigue el camino hacia el sur; busca el diario junto al esqueleto de la loma. Recógelo y ábrelo en tus bolsas. | Diario de Henrig Soliceja · Diario de Henrig Soliceja · mapa 1441 · 31.3, 28.1 |
 | 33.2 | Aceptar · El diario de Henrig Soliceja (#1100) | Diario de Henrig Soliceja · desde nivel 29 |
 | 34.1 | Aceptar · Veneno de escórpidos salados (#1104) | Fizzle Pernolatón · desde nivel 28 · mapa 1441 · 78.06, 77.13 |
 | 34.2 | Entregar · Los hermanos Pernolatón (#1179) | Wizzle Pernolatón · mapa 1441 · 78.14, 77.12 |

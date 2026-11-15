@@ -20,11 +20,13 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
 
-## Barco de Menethil a Theramore (0.7.26)
+## Barco a Theramore y diario de Henrig (0.7.26)
 
 El paso del barco muestra un trayecto con flecha hasta el muelle sur de Menethil. Allí indica que esperes y embarques. Al llegar a Theramore, sigue la flecha hacia tierra, junto al maestro de vuelo: la guía reconoce la llegada y continúa con el avance automático activado.
 
 El cambio de mapa o una confirmación manual no cuentan como desembarco. En dúo, con sincronización disponible, el recorrido espera la llegada real de ambos jugadores. La actualización conserva las misiones y los pasos ya completados.
+
+El diario de Henrig Soliceja apunta ahora al nuevo esqueleto al sur del Gran Elevador, aproximadamente en 31.3, 28.1 de Las Mil Agujas. Recoge el libro junto al esqueleto y ábrelo desde tus bolsas para aceptar la misión.
 
 ## El cofre y los lingotes de Menethil (0.7.25)
 

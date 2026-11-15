@@ -93,5 +93,62 @@
         "corroboratingSourceUrl": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_Guides/Guides.lua#L1520"
       }
     }
+  ],
+  "nativeObjectLocations": [
+    {
+      "id": "thousand-needles-lonebrow-journal-2026-11-09",
+      "item": 5791,
+      "object": 19861,
+      "map": 1441,
+      "x": 31.3,
+      "y": 28.1,
+      "note": "Sigue el camino hacia el sur; busca el diario junto al esqueleto de la loma. Recógelo y ábrelo en tus bolsas.",
+      "visitText": [
+        {
+          "guideID": "forever/alliance/07-thousand-needles",
+          "title": "Gran Elevador",
+          "note": "Desde Theramore, sigue la carretera hacia el oeste hasta Los Baldíos y luego hacia el sur. Rodea el Campamento Taurajo manteniendo la distancia. El Gran Elevador, al sur de Los Baldíos, baja a Las Mil Agujas. Desde su base, sigue el camino un poco más al sur: el diario está junto a otro esqueleto en la loma."
+        }
+      ],
+      "provenance": {
+        "reason": "The official November 9 hotfix moved the journal beyond the old corpse and marks the new location with a skeleton. A live user visit confirmed the item is collectible at the new published coordinates.",
+        "hotfix": {
+          "date": "2026-11-09",
+          "url": "https://news.blizzard.com/es-es/article/24315281/correcciones-en-world-of-warcraft-forever-del-9-de-noviembre-de-2026",
+          "evidence": "Henrig Lonebrow journal relocated further along; a similar skeleton marks its location."
+        },
+        "coordinateReports": [
+          {
+            "url": "https://www.reddit.com/r/wowforever/comments/1xscish/lonebrows_journal/",
+            "observedCoordinates": [
+              31.3,
+              28.1
+            ]
+          },
+          {
+            "url": "https://www.reddit.com/r/wowforever/comments/1xt52to/henrig_lonebrows_journal_spawn_point_tip_rfk/",
+            "observedCoordinates": [
+              31,
+              28
+            ]
+          }
+        ],
+        "userConfirmation": {
+          "date": "2026-11-15",
+          "observedCoordinates": [
+            31.3,
+            28.1
+          ],
+          "result": "Item successfully collected at the reported live position"
+        },
+        "coordinateFrame": "Live Forever native coordinates (f=l); the approximate contact point was confirmed by the user. Do not apply Classic Era conversion.",
+        "previousNavigation": {
+          "map": 1441,
+          "x": 30.7,
+          "y": 24.3,
+          "f": "e"
+        }
+      }
+    }
   ]
 }

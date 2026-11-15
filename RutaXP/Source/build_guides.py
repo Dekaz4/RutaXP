@@ -89,7 +89,7 @@ def apply_guide_overrides(document: dict[str, Any], path: Path) -> list[str]:
     """Reapply audited navigation hints on import without changing quest logic.
 
     Individual corrections use a donor in the same step. Native contact points
-    apply to visits to the recorded NPC on that map, across chapters.
+    apply to visits to the recorded NPC or object on that map, across chapters.
     """
     if not path.is_file():
         return []
@@ -138,6 +138,28 @@ def apply_guide_overrides(document: dict[str, Any], path: Path) -> list[str]:
             raise ValueError("Native contact has no matching quest visit: " + contact["id"])
         for goal in visits:
             goal.update(x=contact["x"], y=contact["y"], f="l")
+        applied.append(contact["id"])
+    for contact in overlay.get("nativeObjectLocations", []):
+        if not contact.get("provenance") or not all(isinstance(contact.get(k), (int, float))
+                and not isinstance(contact[k], bool) and math.isfinite(contact[k]) and 0 < contact[k] < 100
+                for k in ("x", "y")) or not all(isinstance(contact.get(k), int)
+                and not isinstance(contact[k], bool) and contact[k] > 0 for k in ("item", "object", "map")):
+            raise ValueError("Invalid native object coordinates: " + contact["id"])
+        visits = [(guide, step, goal) for guide in document["guides"] for step in guide["steps"] for goal in step["goals"]
+                  if goal.get("map") == contact["map"] and goal.get("t") == "collect"
+                  and (goal.get("obj") == contact["object"] or goal.get("object") == contact["object"]
+                       or goal.get("item") == contact["item"] and goal.get("fromKind") == "object")]
+        if not visits:
+            raise ValueError("Native object has no matching collection: " + contact["id"])
+        for _, _, goal in visits:
+            goal.update(x=contact["x"], y=contact["y"], f="l")
+            if contact.get("note"):
+                goal["note"] = contact["note"]
+        for hint in contact.get("visitText", []):
+            matches = [step for guide, step, _ in visits if guide["id"] == hint["guideID"]]
+            if len(matches) != 1 or not hint.get("title") or not hint.get("note"):
+                raise ValueError("Native object visit text must match exactly once: " + contact["id"])
+            matches[0].update(title=hint["title"], note=hint["note"])
         applied.append(contact["id"])
     source["localOverrides"] = {
         "file": "Source/guide_overrides.json", "sha256": hashlib.sha256(payload).hexdigest(), "applied": applied,

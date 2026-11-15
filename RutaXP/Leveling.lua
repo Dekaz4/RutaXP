@@ -6754,10 +6754,10 @@ do
 					},
 				},
 				{
-					["title"] = "El Great Lift",
-					["note"] = "Desde Theramore seguir la carretera al oeste de Dustwallow en el Baldíos y al sur a lo largo de ella; dar Campamento Taurajo un amplio amarre. El Great Lift en el extremo sur Baldíos' le lleva abajo en Las Mil Agujas. El diario se encuentra al pie del ascensor.",
+					["title"] = "Gran Elevador",
+					["note"] = "Desde Theramore, sigue la carretera hacia el oeste hasta Los Baldíos y luego hacia el sur. Rodea el Campamento Taurajo manteniendo la distancia. El Gran Elevador, al sur de Los Baldíos, baja a Las Mil Agujas. Desde su base, sigue el camino un poco más al sur: el diario está junto a otro esqueleto en la loma.",
 					["goals"] = {
-						{ ["note"] = "Diario de Henrig Soliceja", ["t"] = "collect", ["item"] = 5791, ["itemName"] = "Diario de Henrig Soliceja", ["map"] = 1441, ["x"] = 30.7, ["y"] = 24.3, ["f"] = "e", ["from"] = "Diario de Henrig Soliceja", ["fromKind"] = "object", ["instruction"] = "Interactúa con «Diario de Henrig Soliceja» para reunir «Diario de Henrig Soliceja».\nZona: Las Mil Agujas." },
+						{ ["note"] = "Sigue el camino hacia el sur; busca el diario junto al esqueleto de la loma. Recógelo y ábrelo en tus bolsas.", ["t"] = "collect", ["item"] = 5791, ["itemName"] = "Diario de Henrig Soliceja", ["map"] = 1441, ["x"] = 31.3, ["y"] = 28.1, ["f"] = "l", ["from"] = "Diario de Henrig Soliceja", ["fromKind"] = "object", ["instruction"] = "Interactúa con «Diario de Henrig Soliceja» para reunir «Diario de Henrig Soliceja».\nZona: Las Mil Agujas.\nSigue el camino hacia el sur; busca el diario junto al esqueleto de la loma. Recógelo y ábrelo en tus bolsas." },
 						{ ["title"] = "El diario de Henrig Soliceja", ["minLevel"] = 29, ["note"] = "Para Díscolo Falfildel en Feralas, mucho más tarde", ["t"] = "accept", ["quest"] = 1100, ["item"] = 5791, ["itemName"] = "Diario de Henrig Soliceja", ["qlvl"] = 34, ["instruction"] = "Si tienes «Diario de Henrig Soliceja» en tus bolsas, haz clic derecho en él para iniciar «El diario de Henrig Soliceja».\nPara Díscolo Falfildel en Feralas, mucho más tarde." },
 					},
 				},

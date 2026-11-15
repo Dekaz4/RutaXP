@@ -76,6 +76,12 @@ def original_order(document):
         if (goal["x"], goal["y"], goal["f"]) != (27.97, 31.53, "l"):
             raise AssertionError("The verified Forever contact position changed")
         goal.update(x=28.11, y=31.46, f="e")
+    journals = [goal for guide in result["guides"] for step in guide["steps"] for goal in step["goals"]
+                if goal.get("item") == 5791 and goal["t"] == "collect"]
+    if len(journals) != 1 or (journals[0].get("map"), journals[0].get("x"), journals[0].get("y"), journals[0].get("f")) != (
+            1441, 31.3, 28.1, "l"):
+        raise AssertionError("The verified Forever journal relocation changed")
+    journals[0].update(x=30.7, y=24.3, f="e")
     revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
     guides = {guide["id"]: guide for guide in result["guides"]}
     for revision in reversed(revisions):
