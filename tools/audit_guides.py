@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOURCE = ROOT / "RutaXP" / "Source" / "leveling.json"
 SEMANTIC_FIELDS = (
     "t", "action", "quest", "questID", "oi", "item", "count", "only", "optional",
-    "minLevel", "maxLevel", "level", "n", "pre", "preAll", "closedBy", "group",
+    "minLevel", "maxLevel", "level", "n", "pre", "preAll", "closedBy", "chainStarted", "group",
     "profLine", "profName", "profRank", "class", "classes", "races", "factions",
     "node", "area", "location", "requiredLevel",
 )

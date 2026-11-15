@@ -19327,7 +19327,77 @@
           "review": "321 requires 270 in the existing pinned route; 321 is delivered to object 2734 at Wetlands 12.11,64.19. Forever 324 and 526 are mutually exclusive follow-ups after 321. Complete the murloc objective beside the chest before heading north to the independent cursed-crew work.",
           "progress": "Keep 37 step numbers and map every prior goal exactly once; restore only unresolved affected chain tasks, without quest-completion credit or reopening completed chapters.",
           "reason": "La visita temprana a Menethil solo continúa esta cadena si el personaje ya lleva o entregó La flota maldita, Hierro Forjaluz o una continuación. Primero entrega el hierro en el cofre y haz los múrlocs cercanos; después ve a la Tercera Flota. La ruta normal conserva su visita posterior a Ventormenta para quienes aún no han empezado este tramo de la cadena.",
-          "gate": "269 is picked up in this chapter but delivered later. Do not force a Stormwind detour or offer a locked 321/526 to characters who have only reached 269. chainStarted on the three acceptances also applies to their later work/delivery through the earlier acceptance."
+          "gate": "269 is picked up in this chapter but delivered later. Do not force a Stormwind detour or offer a locked 321/526 to characters who have only reached 269. chainStarted on the three acceptances also applies to their later work/delivery through the earlier acceptance.",
+          "previousNavigation": {
+            "20:1": {
+              "map": 1437,
+              "x": 19.17,
+              "y": 19.51,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 19.9,
+                  "y": 18.2,
+                  "r": 48,
+                  "n": 3
+                },
+                {
+                  "x": 22.6,
+                  "y": 18.2,
+                  "r": 40,
+                  "n": 2
+                },
+                {
+                  "x": 25.4,
+                  "y": 17.4,
+                  "r": 55,
+                  "n": 5
+                },
+                {
+                  "x": 27.6,
+                  "y": 16.5,
+                  "r": 40,
+                  "n": 2
+                },
+                {
+                  "x": 29,
+                  "y": 13.4,
+                  "r": 42,
+                  "n": 4
+                },
+                {
+                  "x": 31.4,
+                  "y": 12.2,
+                  "r": 40,
+                  "n": 1
+                },
+                {
+                  "x": 12.6,
+                  "y": 64.3,
+                  "r": 45,
+                  "n": 7
+                },
+                {
+                  "x": 11.2,
+                  "y": 66.2,
+                  "r": 71,
+                  "n": 6
+                },
+                {
+                  "x": 9,
+                  "y": 69.4,
+                  "r": 56,
+                  "n": 7
+                },
+                {
+                  "x": 10.1,
+                  "y": 71.5,
+                  "r": 40,
+                  "n": 5
+                }
+              ]
+            }
+          }
         }
       },
       {
@@ -38179,5 +38249,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "eb541fe901b006bc9b923881fcdfc9596b3a9d0ee9685acd869ce79e00a41464"
+  "inputSha256": "b865a0177b95760683676b43350d874368c0c7deed44b73a9e54e84971584b4b"
 }

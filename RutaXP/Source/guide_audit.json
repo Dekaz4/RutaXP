@@ -509,7 +509,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "1eeffef4f651fc92baa7d0c60fc51936872cea66a713dd88c11cbcefbf540f86",
+      "sha256": "fef6f509b00b44a46e4ddd8251d731208843cbb60a44ac1fa3ca392772d98c95",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -16853,6 +16853,7 @@
       "pre",
       "preAll",
       "closedBy",
+      "chainStarted",
       "group",
       "profLine",
       "profName",
@@ -16866,6 +16867,6 @@
       "location",
       "requiredLevel"
     ],
-    "semanticsSha256": "3b4be85529dc993f4a4e54cc6a5a17984646788c640927a43182d58907b7d4be"
+    "semanticsSha256": "128a5277ef0bc9b2fe15cd060286d439df88e1b9f5b73d0f2dca6908266a9366"
   }
 }

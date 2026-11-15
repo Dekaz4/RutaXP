@@ -82,6 +82,20 @@ def original_order(document):
         if revision.get("preservePendingVisits") or revision["id"] in {
                 "ashenvale-alliance-retire-alonso-5", "ashenvale-horde-retire-alonso-2"}:
             undo_visit_optimization(guides[revision["guideID"]], revision)
+        if revision["id"] == "menethil-lightforge-chest-chain-4":
+            acceptance = guides[revision["guideID"]]["steps"][17]["goals"][6]
+            if (acceptance.get("quest"), acceptance.get("pre"), acceptance.get("chainStarted")) != (
+                    526, [321], [270, 321, 324, 526, 322]):
+                raise AssertionError("The reviewed Lightforge prerequisite or early-chain condition changed")
+            del acceptance["pre"]
+            del acceptance["chainStarted"]
+        elif revision["id"] == "ashenvale-later-lightforge-alternative-2":
+            for quest, alternatives in ((321, [324, 526, 322]), (324, [526, 322])):
+                hits = [g for s in guides[revision["guideID"]]["steps"] for g in s["goals"]
+                        if g.get("quest") == quest and g["t"] == "accept"]
+                if len(hits) != 1 or hits[0].get("closedBy") != alternatives:
+                    raise AssertionError("The reviewed later Lightforge alternative changed")
+                del hits[0]["closedBy"]
     darkshore = next(g for g in result["guides"] if g["id"] == "forever/alliance/03-darkshore")
     ashenvale = next(g for g in result["guides"] if g["id"] == "forever/alliance/06-ashenvale")
     arbal = darkshore["steps"][31]["goals"].pop(2)
@@ -223,12 +237,12 @@ class WholeGuideCoverageTests(unittest.TestCase):
     def test_inventory_accounts_for_every_goal_and_keeps_legitimate_exceptions_explicit(self):
         report = self.report
         self.assertEqual(report["totals"]["guides"], 57)
-        self.assertEqual(report["totals"]["goals"], 7446)
+        self.assertEqual(report["totals"]["goals"], 7452)
         self.assertEqual(report["totals"]["steps"], 2342)
-        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7446)
-        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7446)
+        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7452)
+        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7452)
         self.assertEqual(sum(report["totals"].get(k, 0) for k in
-                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7446)
+                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7452)
         self.assertEqual(report["invalidNavigation"], [])
         for item in report["missingNavigation"]:
             self.assertTrue(item["classification"])
@@ -433,7 +447,7 @@ class ShippedGuideRenderingTests(unittest.TestCase):
             end
             return count,errorCount,table.concat(errors,"; ")
         ''')
-        self.assertEqual(result, (7446, 0, ""))
+        self.assertEqual(result, (7452, 0, ""))
 
     def test_all_bundled_points_and_candidate_frames_resolve_with_the_real_navigation_converter(self):
         host = AccessHost()

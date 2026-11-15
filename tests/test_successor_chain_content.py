@@ -112,12 +112,29 @@ class SuccessorChainContentTests(unittest.TestCase):
             old = {f"{si}:{gi}" for si, count in enumerate(revision["previousGoalCounts"], 1) for gi in range(1, count + 1)}
             mapped = {migration["goalMap"].get(key, key) for key in old}
             added = set(migration["addedGoalKeys"])
-            current = {f"{si}:{gi}" for si, step in enumerate(guide["steps"], 1) for gi in range(1, len(step["goals"]) + 1)}
+            counts = [revision["previousGoalCounts"][entry["sourceStep"] - 1] - len(entry.get("omitGoals", []))
+                      if "sourceStep" in entry else len(entry["goals"]) for entry in revision["steps"]]
+            current = {f"{si}:{gi}" for si, count in enumerate(counts, 1) for gi in range(1, count + 1)}
             self.assertEqual(len(mapped), len(old))
             self.assertFalse(mapped & added)
             self.assertEqual(mapped | added, current)
             self.assertEqual(len(added), len(revision["addedGoals"]))
-            self.assertEqual(migration["stepMap"][str(len(revision["previousGoalCounts"]) + 1)], len(guide["steps"]) + 1)
+            completed = migration["stepMap"][str(len(revision["previousGoalCounts"]) + 1)]
+            self.assertEqual(completed, len(counts) + 1)
+            number = migration["to"]
+            while number < guide["routeRevision"]:
+                following = next(m for m in guide["progressMigrations"] if m["from"] == number)
+                retained = current - set(following.get("retiredGoalKeys", {}))
+                remapped = {following["goalMap"].get(key, key) for key in retained}
+                self.assertEqual(len(remapped), len(retained))
+                additions = set(following.get("addedGoalKeys", []))
+                self.assertFalse(remapped & additions)
+                current = remapped | additions
+                completed = following["stepMap"].get(str(completed), completed)
+                number = following["to"]
+            self.assertEqual(current, {f"{si}:{gi}" for si, step in enumerate(guide["steps"], 1)
+                                       for gi in range(1, len(step["goals"]) + 1)})
+            self.assertEqual(completed, len(guide["steps"]) + 1)
         before = copy.deepcopy(self.document)
         self.builder.apply_guide_revisions(self.document, SOURCE / "guide_revisions.json")
         self.assertEqual(self.document, before)
