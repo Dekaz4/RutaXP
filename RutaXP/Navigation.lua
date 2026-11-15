@@ -435,6 +435,13 @@ function ns:GetStepWaypoint(step, travel, mapRequest)
     else
         base = self:GetBaseStepWaypoint(step)
     end
+    if self.FlightNavigation and goal and (goal.t or goal.action) == "fly" then
+        local nextPoint, handled = self.FlightNavigation:Resolve(goal, base)
+        if handled then
+            if nextPoint then nextPoint.flightNavigation = true end
+            return nextPoint
+        end
+    end
     if self.Waypoints and self.Waypoints.Resolve then
         local nextPoint = self.Waypoints:Resolve(step, goal, base)
         if not nextPoint and mapRequest then return base end
@@ -713,6 +720,8 @@ local function updateArrow(self, frame)
     local _, step = self:GetCurrent()
     local travel = self.GetGuideTravel and self:GetGuideTravel()
     local point = self:GetArrowWaypoint(step, travel or false)
+    local flight = not travel and self.FlightNavigation and self.FlightNavigation:CurrentView()
+    if point and not point.flightNavigation then flight = nil end
     if travel then step = travel end
     if not step and not point then
         if self.Walking then self.Walking:Clear() end
@@ -721,6 +730,15 @@ local function updateArrow(self, frame)
         return
     end
     frame:Show()
+
+    if flight and not point then
+        frame.dNorth, frame.dWest, frame.targetContinent, frame.arrived = nil, nil, nil, false
+        frame.arrow:Hide()
+        frame.distance:SetText("")
+        frame.navigationState, frame.navigationReason = flight.state, flight.text
+        frame.statusText, frame.destinationText = flight.title, flight.text
+        return flight.shortText
+    end
 
     if travel and not point then
         -- The tram and partner waits have instructions but no walkable target.
@@ -889,6 +907,10 @@ local function updateArrow(self, frame)
     frame.distance:SetText(distStr)
     if frame.distance.SetTextColor then frame.distance:SetTextColor(r, g, b) end
     frame.destinationText = subText
+    if flight then
+        frame.destinationText = flight.text
+        if distance <= CONTACT_RANGE then hint = flight.shortText or hint end
+    end
 
     if right == nil or forward == nil then
         frame.arrow:Hide()

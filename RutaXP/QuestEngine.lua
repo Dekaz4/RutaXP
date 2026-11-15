@@ -370,6 +370,10 @@ function ns:GetGoalStatus(goal, step, state, index, guide)
     local layout = guide and getGuideLayout(self, guide)
     local stepIndex = (layout and step and layout.stepOf[step]) or (state and state.cursor) or 1
     local action, id = goal.t or goal.action, goal.quest or goal.questID
+    if not id and action == "fly" and self.FlightNavigation
+        and self.FlightNavigation:IsComplete(goal, guide, stepIndex, index, state) then
+        return "done", "Llegada confirmada"
+    end
     if not id and (action == "fly" or action == "goto" or action == "hearth") and self.IsTravelServiceComplete
         and self:IsTravelServiceComplete(guide, stepIndex, index) then return "done", "Llegada confirmada" end
     if id and self:IsQuestDelivered(id) then return "done", "Misión entregada" end
@@ -750,6 +754,10 @@ end
 -- visible without changing completion, conditions or the selected objective.
 function ns:GetGoalInstruction(goal, step)
     if type(goal) ~= "table" then return nil end
+    if (goal.t or goal.action) == "fly" and self.FlightNavigation then
+        local view = self.FlightNavigation:GetView(goal)
+        if view then return view.text end
+    end
     local parts = {}
     local function append(text, context)
         if type(text) ~= "string" or not text:match("%S") then return end
@@ -906,6 +914,10 @@ function ns:GetStepGoalItems(step, state)
                         subLines[#subLines + 1] = hint
                         details = details and (details .. "\n" .. rewards) or rewards
                     end
+                end
+                if action == "fly" and index == currentIdx and self.FlightNavigation then
+                    local view = self.FlightNavigation:GetView(goal)
+                    if view then subLines, details = {view.text}, view.text end
                 end
                 local entry = {
                     index = index,

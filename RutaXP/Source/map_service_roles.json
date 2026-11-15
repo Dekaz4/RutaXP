@@ -1,0 +1,4842 @@
+{
+  "schemaVersion": 1,
+  "sources": {
+    "classic": {
+      "url": "https://raw.githubusercontent.com/cmangos/classic-db/c33f90b8eeb3f8bacb53d5cbfee45075c80b416c/Full_DB/ClassicDB_1_12_1_z2815.sql.gz",
+      "sha256": "4f92db520868ab4e566726f68b5b2e380ae781209beaf22237b4f7f04600d0c0",
+      "field": "creature_template.SubName",
+      "scope": "Merchant role facts for pfQuest vendor/repair IDs only. Spanish descriptions are local translations; inventory is not copied or inferred.",
+      "license": "GPL-3.0",
+      "licenseUrl": "https://github.com/cmangos/classic-db/blob/c33f90b8eeb3f8bacb53d5cbfee45075c80b416c/LICENSE.md",
+      "attribution": "CMaNGOS Classic-DB contributors"
+    },
+    "forever": {
+      "url": "https://raw.githubusercontent.com/JIVESCORP/eg-link-output-wowf/156f29c9af78b1586883e8eb94a13467eb89638c/data/wowf/1.60.1.70862/creature_details.enUS.json",
+      "sha256": "2e731187113b110658c1bb36f379f1ae4ff351fb66b6690b6d22b57cc1b7536e",
+      "field": "creatures[id].title",
+      "license": "CC BY 4.0",
+      "attribution": "Data from Efficient Games (https://efficient.games).",
+      "scope": "Observed Forever titles override the historical role when available. Sources describe merchant specialties, not a promise of current stock."
+    }
+  },
+  "titles": {
+    "Accessories Quartermaster": {
+      "label": "Intendencia de accesorios",
+      "category": "vendor_equipment"
+    },
+    "Alchemy & Herbalism Supplies": {
+      "label": "Suministros de alquimia y herboristería",
+      "category": "vendor_supplies"
+    },
+    "Alchemy Supplies": {
+      "label": "Suministros de alquimia",
+      "category": "vendor_supplies"
+    },
+    "Ale and Wine": {
+      "label": "Cerveza y vino",
+      "category": "vendor_food"
+    },
+    "Ammunition Vendor": {
+      "label": "Munición",
+      "category": "vendor_equipment"
+    },
+    "Apprentice Armorer": {
+      "label": "Armaduras",
+      "category": "vendor_equipment"
+    },
+    "Apprentice Clothier": {
+      "label": "Armaduras de tela",
+      "category": "vendor_equipment"
+    },
+    "Apprentice Weaponsmith": {
+      "label": "Aprendiz de armero",
+      "category": "vendor_goods"
+    },
+    "Apprentice Witch Doctor": {
+      "label": "Aprendiz de médico brujo",
+      "category": "vendor_goods"
+    },
+    "Apprentice of Cheese": {
+      "label": "Quesos",
+      "category": "vendor_food"
+    },
+    "Arathi Basin Battlemaster": {
+      "label": "Maestro de batalla de la Cuenca de Arathi",
+      "category": "vendor_goods"
+    },
+    "Arcane Goods": {
+      "label": "Artículos arcanos",
+      "category": "vendor_reagents"
+    },
+    "Arcane Goods Vendor": {
+      "label": "Artículos arcanos",
+      "category": "vendor_reagents"
+    },
+    "Arcane Trinkets Vendor": {
+      "label": "Abalorios arcanos",
+      "category": "vendor_reagents"
+    },
+    "Armor Crafter": {
+      "label": "Armaduras",
+      "category": "vendor_equipment"
+    },
+    "Armor Quartermaster": {
+      "label": "Intendencia de armaduras",
+      "category": "vendor_equipment"
+    },
+    "Armorer": {
+      "label": "Armaduras",
+      "category": "vendor_equipment"
+    },
+    "Armorer & Shieldcrafter": {
+      "label": "Armaduras y escudos",
+      "category": "vendor_equipment"
+    },
+    "Armorer & Shieldsmith": {
+      "label": "Armaduras y escudos",
+      "category": "vendor_equipment"
+    },
+    "Armorer and Shieldcrafter": {
+      "label": "Armaduras y escudos",
+      "category": "vendor_equipment"
+    },
+    "Armorsmith": {
+      "label": "Armaduras",
+      "category": "vendor_equipment"
+    },
+    "Axe Merchant": {
+      "label": "Hachas",
+      "category": "vendor_equipment"
+    },
+    "Axecrafter": {
+      "label": "Hachas",
+      "category": "vendor_equipment"
+    },
+    "Bael'dun Morale Officer": {
+      "label": "Oficial de moral de Bael’dun",
+      "category": "vendor_goods"
+    },
+    "Bag Merchant": {
+      "label": "Bolsas",
+      "category": "vendor_bags"
+    },
+    "Bag Vendor": {
+      "label": "Bolsas",
+      "category": "vendor_bags"
+    },
+    "Bags & Sacks": {
+      "label": "Bolsas",
+      "category": "vendor_bags"
+    },
+    "Bait and Tackle Supplier": {
+      "label": "Suministros de pesca",
+      "category": "vendor_supplies"
+    },
+    "Baker": {
+      "label": "Pan y productos de panadería",
+      "category": "vendor_food"
+    },
+    "Barmaid": {
+      "label": "Bebidas",
+      "category": "vendor_food"
+    },
+    "Bartender": {
+      "label": "Bebidas",
+      "category": "vendor_food"
+    },
+    "Basket Weaver": {
+      "label": "Cestas",
+      "category": "vendor_goods"
+    },
+    "Bear Trainer": {
+      "label": "Entrenador de osos",
+      "category": "vendor_mounts"
+    },
+    "Beverage Merchant": {
+      "label": "Bebidas",
+      "category": "vendor_food"
+    },
+    "Blacksmith": {
+      "label": "Herrero",
+      "category": "vendor_supplies"
+    },
+    "Blacksmithing & Mining Supplies": {
+      "label": "Suministros de herrería y minería",
+      "category": "vendor_supplies"
+    },
+    "Blacksmithing Supplier": {
+      "label": "Suministros de herrería",
+      "category": "vendor_supplies"
+    },
+    "Blacksmithing Supplies": {
+      "label": "Suministros de herrería",
+      "category": "vendor_supplies"
+    },
+    "Blade Merchant": {
+      "label": "Armas de filo",
+      "category": "vendor_equipment"
+    },
+    "Blade Trader": {
+      "label": "Armas de filo",
+      "category": "vendor_equipment"
+    },
+    "Blue Moon Odds and Ends": {
+      "label": "Artículos especiales",
+      "category": "vendor_goods"
+    },
+    "Boar Trainer": {
+      "label": "Entrenador de jabalíes",
+      "category": "vendor_mounts"
+    },
+    "Boat Vendor": {
+      "label": "Vendedor de barcos",
+      "category": "vendor_goods"
+    },
+    "Book Dealer": {
+      "label": "Libros",
+      "category": "vendor_goods"
+    },
+    "Bow & Arrow Merchant": {
+      "label": "Arcos y flechas",
+      "category": "vendor_equipment"
+    },
+    "Bow & Gun Merchant": {
+      "label": "Arcos y armas de fuego",
+      "category": "vendor_equipment"
+    },
+    "Bow Merchant": {
+      "label": "Arcos",
+      "category": "vendor_equipment"
+    },
+    "Bowyer": {
+      "label": "Arcos",
+      "category": "vendor_equipment"
+    },
+    "Bowyer & Fletching Goods": {
+      "label": "Arcos y flechas",
+      "category": "vendor_equipment"
+    },
+    "Bowyer & Gunsmith": {
+      "label": "Arcos y armas de fuego",
+      "category": "vendor_equipment"
+    },
+    "Bowyer *Temp*": {
+      "label": "Arcos",
+      "category": "vendor_equipment"
+    },
+    "Boy with kittens": {
+      "label": "Gatos",
+      "category": "vendor_mounts"
+    },
+    "Bread Merchant": {
+      "label": "Pan y productos de panadería",
+      "category": "vendor_food"
+    },
+    "Bread Vendor": {
+      "label": "Pan y productos de panadería",
+      "category": "vendor_food"
+    },
+    "Brotherhood of the Light": {
+      "label": "Hermandad de la Luz",
+      "category": "vendor_goods"
+    },
+    "Butcher": {
+      "label": "Carne",
+      "category": "vendor_food"
+    },
+    "Camp Trader": {
+      "label": "Comerciante",
+      "category": "vendor_goods"
+    },
+    "Chef": {
+      "label": "Cocina",
+      "category": "vendor_food"
+    },
+    "Cloth & Leather Armor Merchant": {
+      "label": "Armaduras de tela y cuero",
+      "category": "vendor_equipment"
+    },
+    "Cloth Armor Merchant": {
+      "label": "Armaduras de tela",
+      "category": "vendor_equipment"
+    },
+    "Cloth Armor and Accessories": {
+      "label": "Armaduras de tela y accesorios",
+      "category": "vendor_equipment"
+    },
+    "Clothier": {
+      "label": "Armaduras de tela",
+      "category": "vendor_equipment"
+    },
+    "Cobbler": {
+      "label": "Calzado",
+      "category": "vendor_equipment"
+    },
+    "Cockroach Vendor": {
+      "label": "Cucarachas",
+      "category": "vendor_mounts"
+    },
+    "Cook": {
+      "label": "Cocina",
+      "category": "vendor_food"
+    },
+    "Cooking Supplier": {
+      "label": "Suministros de cocina",
+      "category": "vendor_supplies"
+    },
+    "Cooking Supplies": {
+      "label": "Suministros de cocina",
+      "category": "vendor_supplies"
+    },
+    "Cool Guy": {
+      "label": "Mercancías por consultar",
+      "category": "vendor"
+    },
+    "Crazy Cat Lady": {
+      "label": "Gatos",
+      "category": "vendor_mounts"
+    },
+    "Darkmoon Faire Cards & Exotic Goods": {
+      "label": "Cartas y artículos de la Feria de la Luna Negra",
+      "category": "vendor_goods"
+    },
+    "Darkmoon Faire Drink Vendor": {
+      "label": "Bebidas de la Feria de la Luna Negra",
+      "category": "vendor_food"
+    },
+    "Darkmoon Faire Exotic Goods": {
+      "label": "Artículos de la Feria de la Luna Negra",
+      "category": "vendor_goods"
+    },
+    "Darkmoon Faire Food Vendor": {
+      "label": "Comida de la Feria de la Luna Negra",
+      "category": "vendor_food"
+    },
+    "Defilers Supply Officer": {
+      "label": "Suministros de los Rapiñadores",
+      "category": "vendor_goods"
+    },
+    "Demon Master": {
+      "label": "Instructor de demonios",
+      "category": "vendor_goods"
+    },
+    "Demon Trainer": {
+      "label": "Instructor de demonios",
+      "category": "vendor_goods"
+    },
+    "Drink Vendor": {
+      "label": "Bebidas",
+      "category": "vendor_food"
+    },
+    "Druid Trainer": {
+      "label": "Instructor de druida",
+      "category": "vendor_goods"
+    },
+    "Dwarven Weaponsmith": {
+      "label": "Armas",
+      "category": "vendor_equipment"
+    },
+    "Enchanting Supplier": {
+      "label": "Suministros de encantamiento",
+      "category": "vendor_supplies"
+    },
+    "Enchanting Supplies": {
+      "label": "Suministros de encantamiento",
+      "category": "vendor_supplies"
+    },
+    "Engineering & General Goods Supplier": {
+      "label": "Suministros de ingeniería y artículos generales",
+      "category": "vendor_supplies"
+    },
+    "Engineering Goods": {
+      "label": "Suministros de ingeniería",
+      "category": "vendor_supplies"
+    },
+    "Engineering Supplier": {
+      "label": "Suministros de ingeniería",
+      "category": "vendor_supplies"
+    },
+    "Engineering Supplies": {
+      "label": "Suministros de ingeniería",
+      "category": "vendor_supplies"
+    },
+    "Engineering and Mining Supplies": {
+      "label": "Suministros de ingeniería y minería",
+      "category": "vendor_supplies"
+    },
+    "Exotic Item Vendor": {
+      "label": "Artículos exóticos",
+      "category": "vendor_goods"
+    },
+    "Exotic Reagent Merchant": {
+      "label": "Reactivos",
+      "category": "vendor_reagents"
+    },
+    "Fireworks Merchant": {
+      "label": "Fuegos artificiales",
+      "category": "vendor_goods"
+    },
+    "Fireworks Vendor": {
+      "label": "Fuegos artificiales",
+      "category": "vendor_goods"
+    },
+    "Fish Merchant": {
+      "label": "Pescado",
+      "category": "vendor_food"
+    },
+    "Fish Merchant & Supplies": {
+      "label": "Pescado y suministros de pesca",
+      "category": "vendor_supplies"
+    },
+    "Fish Vendor": {
+      "label": "Pescado",
+      "category": "vendor_food"
+    },
+    "Fisherman": {
+      "label": "Pescador",
+      "category": "vendor_goods"
+    },
+    "Fisherman Supplies": {
+      "label": "Suministros de pesca",
+      "category": "vendor_supplies"
+    },
+    "Fishing Supplier": {
+      "label": "Suministros de pesca",
+      "category": "vendor_supplies"
+    },
+    "Fishing Supplies": {
+      "label": "Suministros de pesca",
+      "category": "vendor_supplies"
+    },
+    "Fishing Trainer & Supplies": {
+      "label": "Instructor y suministros de pesca",
+      "category": "vendor_supplies"
+    },
+    "Fletcher": {
+      "label": "Flechas",
+      "category": "vendor_equipment"
+    },
+    "Fletching Supplier": {
+      "label": "Flechas",
+      "category": "vendor_equipment"
+    },
+    "Florist": {
+      "label": "Flores",
+      "category": "vendor_goods"
+    },
+    "Food & Drink": {
+      "label": "Comida y bebida",
+      "category": "vendor_food"
+    },
+    "Food & Drink Merchant": {
+      "label": "Comida y bebida",
+      "category": "vendor_food"
+    },
+    "Food & Drink Vendor": {
+      "label": "Comida y bebida",
+      "category": "vendor_food"
+    },
+    "Food Merchant": {
+      "label": "Comida y bebida",
+      "category": "vendor_food"
+    },
+    "Food and Drink": {
+      "label": "Comida y bebida",
+      "category": "vendor_food"
+    },
+    "Food and Drinks": {
+      "label": "Comida y bebida",
+      "category": "vendor_food"
+    },
+    "Free Wheeling Merchant": {
+      "label": "Comerciante",
+      "category": "vendor_goods"
+    },
+    "Freewheeling Tradeswoman": {
+      "label": "Comerciante",
+      "category": "vendor_goods"
+    },
+    "Frostwolf Supply Officer": {
+      "label": "Suministros Lobo Gélido",
+      "category": "vendor_goods"
+    },
+    "Fruit Seller": {
+      "label": "Fruta",
+      "category": "vendor_food"
+    },
+    "Fruit Vendor": {
+      "label": "Fruta",
+      "category": "vendor_food"
+    },
+    "Fungus Vendor": {
+      "label": "Setas",
+      "category": "vendor_food"
+    },
+    "General & Trade Supplies": {
+      "label": "Suministros comerciales",
+      "category": "vendor_goods"
+    },
+    "General Goods": {
+      "label": "Artículos generales",
+      "category": "vendor_goods"
+    },
+    "General Goods Merchant": {
+      "label": "Artículos generales",
+      "category": "vendor_goods"
+    },
+    "General Goods Vendor": {
+      "label": "Artículos generales",
+      "category": "vendor_goods"
+    },
+    "General Supplies": {
+      "label": "Artículos generales",
+      "category": "vendor_goods"
+    },
+    "General Trade Goods Merchant": {
+      "label": "Suministros comerciales",
+      "category": "vendor_goods"
+    },
+    "General Trade Goods Vendor": {
+      "label": "Suministros comerciales",
+      "category": "vendor_goods"
+    },
+    "General Trade Supplier": {
+      "label": "Suministros comerciales",
+      "category": "vendor_goods"
+    },
+    "Gryphon Master": {
+      "label": "Maestro de grifos",
+      "category": "vendor_goods"
+    },
+    "Guild Tabard Vendor": {
+      "label": "Tabardos",
+      "category": "vendor_equipment"
+    },
+    "Gun Merchant": {
+      "label": "Armas de fuego",
+      "category": "vendor_equipment"
+    },
+    "Guns Merchant": {
+      "label": "Armas de fuego",
+      "category": "vendor_equipment"
+    },
+    "Guns Vendor": {
+      "label": "Armas de fuego",
+      "category": "vendor_equipment"
+    },
+    "Guns and Ammo Merchant": {
+      "label": "Armas de fuego y munición",
+      "category": "vendor_equipment"
+    },
+    "Gunsmith": {
+      "label": "Armas de fuego",
+      "category": "vendor_equipment"
+    },
+    "Gunsmith & Bowyer": {
+      "label": "Arcos y armas de fuego",
+      "category": "vendor_equipment"
+    },
+    "Hallow's End Treats": {
+      "label": "Dulces de Halloween",
+      "category": "vendor_food"
+    },
+    "Hatter": {
+      "label": "Sombreros",
+      "category": "vendor_equipment"
+    },
+    "Heavy Armor Merchant": {
+      "label": "Armaduras pesadas",
+      "category": "vendor_equipment"
+    },
+    "Herbalism & Alchemy Supplies": {
+      "label": "Suministros de alquimia y herboristería",
+      "category": "vendor_supplies"
+    },
+    "Herbalism Supplier": {
+      "label": "Suministros de herboristería",
+      "category": "vendor_supplies"
+    },
+    "Holiday Fireworks Vendor": {
+      "label": "Fuegos artificiales",
+      "category": "vendor_goods"
+    },
+    "Horse Breeder": {
+      "label": "Caballos",
+      "category": "vendor_mounts"
+    },
+    "Horse Vendor": {
+      "label": "Caballos",
+      "category": "vendor_mounts"
+    },
+    "Ice Cream Vendor": {
+      "label": "Helados",
+      "category": "vendor_food"
+    },
+    "Innkeeper": {
+      "label": "Posadero",
+      "category": "vendor_goods"
+    },
+    "Kennel Master": {
+      "label": "Maestro de canes",
+      "category": "vendor_mounts"
+    },
+    "Kodo Mounts": {
+      "label": "Kodos",
+      "category": "vendor_mounts"
+    },
+    "League of Arathor Supply Officer": {
+      "label": "Suministros de la Liga de Arathor",
+      "category": "vendor_goods"
+    },
+    "Leather & Mail Armor Merchant": {
+      "label": "Armaduras de cuero y malla",
+      "category": "vendor_equipment"
+    },
+    "Leather Armor & Leatherworking Supplies": {
+      "label": "Armaduras de cuero y suministros de peletería",
+      "category": "vendor_supplies"
+    },
+    "Leather Armor Merchant": {
+      "label": "Armaduras de cuero",
+      "category": "vendor_equipment"
+    },
+    "Leatherworking & Tailoring Supplies": {
+      "label": "Suministros de peletería y sastrería",
+      "category": "vendor_supplies"
+    },
+    "Leatherworking Supplies": {
+      "label": "Suministros de peletería",
+      "category": "vendor_supplies"
+    },
+    "Librarian": {
+      "label": "Libros",
+      "category": "vendor_goods"
+    },
+    "Light Armor & Weapons Merchant": {
+      "label": "Armaduras ligeras y armas",
+      "category": "vendor_equipment"
+    },
+    "Light Armor Merchant": {
+      "label": "Armaduras ligeras",
+      "category": "vendor_equipment"
+    },
+    "Lorekeeper": {
+      "label": "Libros",
+      "category": "vendor_goods"
+    },
+    "Lumberjack": {
+      "label": "Leñador",
+      "category": "vendor_goods"
+    },
+    "Mace & Staff Merchant": {
+      "label": "Mazas y bastones",
+      "category": "vendor_equipment"
+    },
+    "Mace & Staves Vendor": {
+      "label": "Mazas y bastones",
+      "category": "vendor_equipment"
+    },
+    "Macecrafter": {
+      "label": "Mazas",
+      "category": "vendor_equipment"
+    },
+    "Maces & Staves": {
+      "label": "Mazas y bastones",
+      "category": "vendor_equipment"
+    },
+    "Mail & Plate Merchant": {
+      "label": "Armaduras de malla y placas",
+      "category": "vendor_equipment"
+    },
+    "Mail Armor Merchant": {
+      "label": "Armaduras de malla",
+      "category": "vendor_equipment"
+    },
+    "Master Weaponsmith": {
+      "label": "Armas",
+      "category": "vendor_equipment"
+    },
+    "Master of Cooking Recipes": {
+      "label": "Recetas de cocina",
+      "category": "vendor_supplies"
+    },
+    "Meat Vendor": {
+      "label": "Carne",
+      "category": "vendor_food"
+    },
+    "Mechanostrider Merchant": {
+      "label": "Mecazancudos",
+      "category": "vendor_mounts"
+    },
+    "Merchant Supreme": {
+      "label": "Comerciante",
+      "category": "vendor_goods"
+    },
+    "Merlot Connoisseur": {
+      "label": "Vino",
+      "category": "vendor_food"
+    },
+    "Metalsmith": {
+      "label": "Herrero",
+      "category": "vendor_supplies"
+    },
+    "Mining Supplier": {
+      "label": "Suministros de minería",
+      "category": "vendor_supplies"
+    },
+    "Mining Supplies": {
+      "label": "Suministros de minería",
+      "category": "vendor_supplies"
+    },
+    "Mining and Smithing Supplies": {
+      "label": "Suministros de herrería y minería",
+      "category": "vendor_supplies"
+    },
+    "Mistress of Cheese": {
+      "label": "Quesos",
+      "category": "vendor_food"
+    },
+    "Morale Officer": {
+      "label": "Oficial de moral",
+      "category": "vendor_goods"
+    },
+    "Mount Quartermaster": {
+      "label": "Monturas",
+      "category": "vendor_mounts"
+    },
+    "Mount Vendor": {
+      "label": "Monturas",
+      "category": "vendor_mounts"
+    },
+    "Mushroom Farmer": {
+      "label": "Setas",
+      "category": "vendor_food"
+    },
+    "Mushroom Merchant": {
+      "label": "Setas",
+      "category": "vendor_food"
+    },
+    "Mushroom Seller": {
+      "label": "Setas",
+      "category": "vendor_food"
+    },
+    "Mushroom Vendor": {
+      "label": "Setas",
+      "category": "vendor_food"
+    },
+    "Night Elf Armorer": {
+      "label": "Armaduras",
+      "category": "vendor_equipment"
+    },
+    "Officer Accessories Quartermaster": {
+      "label": "Intendencia de accesorios",
+      "category": "vendor_equipment"
+    },
+    "Owl Trainer": {
+      "label": "Entrenador de búhos",
+      "category": "vendor_mounts"
+    },
+    "Panda Cub Caretaker": {
+      "label": "Cuidador de cachorros de panda",
+      "category": "vendor_mounts"
+    },
+    "Pie Vendor": {
+      "label": "Tartas",
+      "category": "vendor_food"
+    },
+    "Pirate Supplies": {
+      "label": "Suministros piratas",
+      "category": "vendor_goods"
+    },
+    "Pissed Vendor": {
+      "label": "Comerciante",
+      "category": "vendor_goods"
+    },
+    "Poison Supplier": {
+      "label": "Venenos",
+      "category": "vendor_reagents"
+    },
+    "Poison Supplies": {
+      "label": "Venenos",
+      "category": "vendor_reagents"
+    },
+    "Poison Vendor": {
+      "label": "Venenos",
+      "category": "vendor_reagents"
+    },
+    "Poisons & Reagents": {
+      "label": "Reactivos y venenos",
+      "category": "vendor_reagents"
+    },
+    "Portal Trainer": {
+      "label": "Instructor de portales",
+      "category": "vendor_goods"
+    },
+    "Potions & Herbs": {
+      "label": "Pociones y hierbas",
+      "category": "vendor_reagents"
+    },
+    "Potions, Scrolls and Reagents": {
+      "label": "Pociones, pergaminos y reactivos",
+      "category": "vendor_reagents"
+    },
+    "Prairie Dog Vendor": {
+      "label": "Perritos de la pradera",
+      "category": "vendor_mounts"
+    },
+    "Priest Trainer": {
+      "label": "Instructor de sacerdote",
+      "category": "vendor_goods"
+    },
+    "Quartermaster": {
+      "label": "Intendente",
+      "category": "vendor_goods"
+    },
+    "Race Vendor": {
+      "label": "Vendedor de las carreras",
+      "category": "vendor_goods"
+    },
+    "Ram Breeder": {
+      "label": "Carneros",
+      "category": "vendor_mounts"
+    },
+    "Raptor Handler": {
+      "label": "Raptores",
+      "category": "vendor_mounts"
+    },
+    "Rare Goods": {
+      "label": "Artículos raros",
+      "category": "vendor_goods"
+    },
+    "Reagent Supplier": {
+      "label": "Reactivos",
+      "category": "vendor_reagents"
+    },
+    "Reagent Supplies": {
+      "label": "Reactivos",
+      "category": "vendor_reagents"
+    },
+    "Reagent Vendor": {
+      "label": "Reactivos",
+      "category": "vendor_reagents"
+    },
+    "Reagents & Poisons": {
+      "label": "Reactivos y venenos",
+      "category": "vendor_reagents"
+    },
+    "Reagents Vendor": {
+      "label": "Reactivos",
+      "category": "vendor_reagents"
+    },
+    "Reagents and Herbs": {
+      "label": "Reactivos y hierbas",
+      "category": "vendor_reagents"
+    },
+    "Reagents/Totems Vendor": {
+      "label": "Reactivos y tótems",
+      "category": "vendor_reagents"
+    },
+    "Robe Merchant": {
+      "label": "Togas",
+      "category": "vendor_equipment"
+    },
+    "Robe Vendor": {
+      "label": "Togas",
+      "category": "vendor_equipment"
+    },
+    "Saber Handler": {
+      "label": "Sables de la noche",
+      "category": "vendor_mounts"
+    },
+    "Scrolls & Potions": {
+      "label": "Pergaminos y pociones",
+      "category": "vendor_reagents"
+    },
+    "Shady Dealer": {
+      "label": "Comerciante sospechoso",
+      "category": "vendor_goods"
+    },
+    "Shady Goods": {
+      "label": "Mercancías sospechosas",
+      "category": "vendor_goods"
+    },
+    "Shield Crafter": {
+      "label": "Escudos",
+      "category": "vendor_equipment"
+    },
+    "Shield Merchant": {
+      "label": "Escudos",
+      "category": "vendor_equipment"
+    },
+    "Silverwing Supply Officer": {
+      "label": "Suministros Ala de Plata",
+      "category": "vendor_goods"
+    },
+    "Smokywood Pastures": {
+      "label": "Productos de Pastos de Bosquehumeante",
+      "category": "vendor_goods"
+    },
+    "Snake Vendor": {
+      "label": "Serpientes",
+      "category": "vendor_mounts"
+    },
+    "Special Goods Dealer": {
+      "label": "Artículos especiales",
+      "category": "vendor_goods"
+    },
+    "Specialist Leatherworking Supplies": {
+      "label": "Suministros de peletería",
+      "category": "vendor_supplies"
+    },
+    "Specialist Tailoring Supplies": {
+      "label": "Suministros de sastrería",
+      "category": "vendor_supplies"
+    },
+    "Speciality Dress Maker": {
+      "label": "Vestidos",
+      "category": "vendor_equipment"
+    },
+    "Speciality Engineer": {
+      "label": "Suministros de ingeniería",
+      "category": "vendor_supplies"
+    },
+    "Speciality Goods": {
+      "label": "Artículos especiales",
+      "category": "vendor_goods"
+    },
+    "Speciality Tailoring Supplies": {
+      "label": "Suministros de sastrería",
+      "category": "vendor_supplies"
+    },
+    "Staff & Mace Merchant": {
+      "label": "Mazas y bastones",
+      "category": "vendor_equipment"
+    },
+    "Staff Merchant": {
+      "label": "Bastones",
+      "category": "vendor_equipment"
+    },
+    "Staves Merchant": {
+      "label": "Bastones",
+      "category": "vendor_equipment"
+    },
+    "Stormpike Supply Officer": {
+      "label": "Suministros Pico Tormenta",
+      "category": "vendor_goods"
+    },
+    "Stylish Clothier": {
+      "label": "Armaduras de tela",
+      "category": "vendor_equipment"
+    },
+    "Superior Armor Crafter": {
+      "label": "Armaduras",
+      "category": "vendor_equipment"
+    },
+    "Superior Armorer": {
+      "label": "Armaduras",
+      "category": "vendor_equipment"
+    },
+    "Superior Armorsmith": {
+      "label": "Armaduras",
+      "category": "vendor_equipment"
+    },
+    "Superior Axecrafter": {
+      "label": "Hachas",
+      "category": "vendor_equipment"
+    },
+    "Superior Bowyer": {
+      "label": "Arcos",
+      "category": "vendor_equipment"
+    },
+    "Superior Fisherman": {
+      "label": "Pescador",
+      "category": "vendor_goods"
+    },
+    "Superior Leatherworker": {
+      "label": "Armaduras de cuero",
+      "category": "vendor_equipment"
+    },
+    "Superior Macecrafter": {
+      "label": "Mazas",
+      "category": "vendor_equipment"
+    },
+    "Superior Tradesman": {
+      "label": "Comerciante",
+      "category": "vendor_goods"
+    },
+    "Superior Weaponsmith": {
+      "label": "Armas",
+      "category": "vendor_equipment"
+    },
+    "Sweet Treats": {
+      "label": "Dulces",
+      "category": "vendor_food"
+    },
+    "Sword and Dagger Merchant": {
+      "label": "Espadas y dagas",
+      "category": "vendor_equipment"
+    },
+    "Tabard Vendor": {
+      "label": "Tabardos",
+      "category": "vendor_equipment"
+    },
+    "Tackle and Bait": {
+      "label": "Suministros de pesca",
+      "category": "vendor_supplies"
+    },
+    "Tailoring & Leatherworking Supplies": {
+      "label": "Suministros de peletería y sastrería",
+      "category": "vendor_supplies"
+    },
+    "Tailoring Supplies": {
+      "label": "Suministros de sastrería",
+      "category": "vendor_supplies"
+    },
+    "Tailoring Supplies & Specialty Goods": {
+      "label": "Suministros de sastrería y artículos especiales",
+      "category": "vendor_supplies"
+    },
+    "The Argent Dawn": {
+      "label": "Alba Argenta",
+      "category": "vendor_goods"
+    },
+    "The Drunk": {
+      "label": "Mercancías por consultar",
+      "category": "vendor"
+    },
+    "The Thorium Brotherhood": {
+      "label": "Hermandad del Torio",
+      "category": "vendor_goods"
+    },
+    "Thrown Weapons Merchant": {
+      "label": "Armas arrojadizas",
+      "category": "vendor_equipment"
+    },
+    "Tools & Supplies": {
+      "label": "Herramientas y suministros",
+      "category": "vendor_goods"
+    },
+    "Totem Merchent": {
+      "label": "Tótems",
+      "category": "vendor_reagents"
+    },
+    "Trade Goods": {
+      "label": "Suministros comerciales",
+      "category": "vendor_goods"
+    },
+    "Trade Goods Supplier": {
+      "label": "Suministros comerciales",
+      "category": "vendor_goods"
+    },
+    "Trade Goods Supplies": {
+      "label": "Suministros comerciales",
+      "category": "vendor_goods"
+    },
+    "Trade Supplier": {
+      "label": "Suministros comerciales",
+      "category": "vendor_goods"
+    },
+    "Trade Supplies": {
+      "label": "Suministros comerciales",
+      "category": "vendor_goods"
+    },
+    "Tradesman": {
+      "label": "Comerciante",
+      "category": "vendor_goods"
+    },
+    "Tradeswoman": {
+      "label": "Comerciante",
+      "category": "vendor_goods"
+    },
+    "Traveling Baker": {
+      "label": "Pan y productos de panadería",
+      "category": "vendor_food"
+    },
+    "Traveling Merchant": {
+      "label": "Comerciante",
+      "category": "vendor_goods"
+    },
+    "Traveling Salesman": {
+      "label": "Comerciante",
+      "category": "vendor_goods"
+    },
+    "Two Handed Weapon Merchant": {
+      "label": "Armas de dos manos",
+      "category": "vendor_equipment"
+    },
+    "Two-Handed Weapons Merchant": {
+      "label": "Armas de dos manos",
+      "category": "vendor_equipment"
+    },
+    "Undead Horse Merchant": {
+      "label": "Caballos no-muertos",
+      "category": "vendor_mounts"
+    },
+    "Venture Armor Salesman": {
+      "label": "Armaduras",
+      "category": "vendor_equipment"
+    },
+    "Venture Co. Merchant": {
+      "label": "Comerciante",
+      "category": "vendor_goods"
+    },
+    "Vintner": {
+      "label": "Vino",
+      "category": "vendor_food"
+    },
+    "Waitress": {
+      "label": "Bebidas",
+      "category": "vendor_food"
+    },
+    "Wand Merchant": {
+      "label": "Varitas",
+      "category": "vendor_equipment"
+    },
+    "Wand Vendor": {
+      "label": "Varitas",
+      "category": "vendor_equipment"
+    },
+    "Wands Merchant": {
+      "label": "Varitas",
+      "category": "vendor_equipment"
+    },
+    "War Harness Maker": {
+      "label": "Arneses de guerra",
+      "category": "vendor_equipment"
+    },
+    "War Harness Vendor": {
+      "label": "Arneses de guerra",
+      "category": "vendor_equipment"
+    },
+    "Warlock Trainer": {
+      "label": "Instructor de brujo",
+      "category": "vendor_goods"
+    },
+    "Warsong Supply Officer": {
+      "label": "Suministros Grito de Guerra",
+      "category": "vendor_goods"
+    },
+    "Weapon Crafter": {
+      "label": "Armas",
+      "category": "vendor_equipment"
+    },
+    "Weapon Dealer": {
+      "label": "Armas",
+      "category": "vendor_equipment"
+    },
+    "Weapon Merchant": {
+      "label": "Armas",
+      "category": "vendor_equipment"
+    },
+    "Weapon Vendor": {
+      "label": "Armas",
+      "category": "vendor_equipment"
+    },
+    "Weapons Merchant": {
+      "label": "Armas",
+      "category": "vendor_equipment"
+    },
+    "Weapons Quartermaster": {
+      "label": "Intendencia de armas",
+      "category": "vendor_equipment"
+    },
+    "Weaponsmith": {
+      "label": "Armas",
+      "category": "vendor_equipment"
+    },
+    "Weaponsmith & Armorcrafter": {
+      "label": "Armas y armaduras",
+      "category": "vendor_equipment"
+    },
+    "Weaponsmith & Armorer": {
+      "label": "Armas y armaduras",
+      "category": "vendor_equipment"
+    },
+    "Weaponsmith & Gunsmith": {
+      "label": "Armas y armas de fuego",
+      "category": "vendor_equipment"
+    },
+    "Wine Vendor": {
+      "label": "Vino",
+      "category": "vendor_food"
+    },
+    "Wintersaber Trainers": {
+      "label": "Entrenador de sables de hielo",
+      "category": "vendor_mounts"
+    },
+    "Zandalar Supplies and Repair": {
+      "label": "Suministros Zandalar y reparaciones",
+      "category": "vendor_goods"
+    }
+  },
+  "npcs": {
+    "54": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "66": [
+      "Trade Supplies",
+      "classic"
+    ],
+    "74": [
+      "Cloth & Leather Armor Merchant",
+      "classic"
+    ],
+    "78": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "150": [
+      "Bowyer",
+      "classic"
+    ],
+    "151": [
+      "General Supplies",
+      "classic"
+    ],
+    "152": [
+      "General Supplies",
+      "classic"
+    ],
+    "167": [
+      "Metalsmith",
+      "classic"
+    ],
+    "190": [
+      "Cloth & Leather Armor Merchant",
+      "classic"
+    ],
+    "219": [
+      "Cloth & Leather Armor Merchant",
+      "classic"
+    ],
+    "222": [
+      "Macecrafter",
+      "classic"
+    ],
+    "225": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "226": [
+      "Armorer",
+      "classic"
+    ],
+    "227": [
+      "General Goods Vendor",
+      "classic"
+    ],
+    "228": [
+      "Bowyer",
+      "classic"
+    ],
+    "258": [
+      "Vintner",
+      "classic"
+    ],
+    "274": [
+      "Bartender",
+      "classic"
+    ],
+    "277": [
+      "Merlot Connoisseur",
+      "classic"
+    ],
+    "295": [
+      "Innkeeper",
+      "classic"
+    ],
+    "340": [
+      "Master of Cooking Recipes",
+      "classic"
+    ],
+    "372": [
+      "Mining Supplies",
+      "classic"
+    ],
+    "384": [
+      "Horse Breeder",
+      "classic"
+    ],
+    "465": [
+      "Bartender",
+      "classic"
+    ],
+    "483": [
+      "Mistress of Cheese",
+      "classic"
+    ],
+    "491": [
+      "Quartermaster",
+      "classic"
+    ],
+    "734": [
+      "Camp Trader",
+      "classic"
+    ],
+    "777": [
+      "Tradeswoman",
+      "classic"
+    ],
+    "789": [
+      "Fletcher",
+      "classic"
+    ],
+    "790": [
+      "Mining and Smithing Supplies",
+      "classic"
+    ],
+    "791": [
+      "General Supplies",
+      "classic"
+    ],
+    "793": [
+      "Shield Crafter",
+      "classic"
+    ],
+    "809": [
+      "Weapon Merchant",
+      "classic"
+    ],
+    "829": [
+      "General Supplies",
+      "classic"
+    ],
+    "836": [
+      "Cloth & Leather Armor Merchant",
+      "classic"
+    ],
+    "843": [
+      "Trade Supplies",
+      "classic"
+    ],
+    "844": [
+      "Traveling Salesman",
+      "classic"
+    ],
+    "894": [
+      "Fruit Seller",
+      "classic"
+    ],
+    "896": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "904": [
+      "Gunsmith",
+      "classic"
+    ],
+    "945": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "954": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "955": [
+      "Morale Officer",
+      "classic"
+    ],
+    "956": [
+      "Armorer",
+      "classic"
+    ],
+    "958": [
+      "Arcane Goods",
+      "classic"
+    ],
+    "959": [
+      "Clothier",
+      "classic"
+    ],
+    "960": [
+      "Tradesman",
+      "classic"
+    ],
+    "980": [
+      "Mail & Plate Merchant",
+      "classic"
+    ],
+    "981": [
+      "Weapon Merchant",
+      "classic"
+    ],
+    "982": [
+      "Food & Drink Vendor",
+      "classic"
+    ],
+    "983": [
+      "Arcane Goods Vendor",
+      "classic"
+    ],
+    "984": [
+      "Cloth & Leather Armor Merchant",
+      "classic"
+    ],
+    "989": [
+      "Trade Goods",
+      "classic"
+    ],
+    "1104": [
+      "Armorer",
+      "classic"
+    ],
+    "1146": [
+      "Superior Weaponsmith",
+      "classic"
+    ],
+    "1147": [
+      "Cloth & Leather Armor Merchant",
+      "classic"
+    ],
+    "1148": [
+      "Trade Goods",
+      "classic"
+    ],
+    "1149": [
+      "General Supplies",
+      "classic"
+    ],
+    "1198": [
+      "Bowyer",
+      "classic"
+    ],
+    "1213": [
+      "Armorer & Shieldcrafter",
+      "classic"
+    ],
+    "1214": [
+      "Clothier",
+      "classic"
+    ],
+    "1235": [
+      "Food Merchant",
+      "classic"
+    ],
+    "1237": [
+      "Food & Drink Merchant",
+      "classic"
+    ],
+    "1238": [
+      "Cloth & Leather Armor Merchant",
+      "classic"
+    ],
+    "1240": [
+      "Armorer",
+      "classic"
+    ],
+    "1243": [
+      "Gunsmith",
+      "classic"
+    ],
+    "1247": [
+      "Innkeeper",
+      "classic"
+    ],
+    "1249": [
+      "Armorer & Shieldcrafter",
+      "classic"
+    ],
+    "1250": [
+      "General & Trade Supplies",
+      "classic"
+    ],
+    "1257": [
+      "Arcane Goods Vendor",
+      "classic"
+    ],
+    "1261": [
+      "Ram Breeder",
+      "classic"
+    ],
+    "1273": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "1275": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "1285": [
+      "General Goods Vendor",
+      "classic"
+    ],
+    "1286": [
+      "Trade Supplier",
+      "classic"
+    ],
+    "1287": [
+      "Weapons Merchant",
+      "classic"
+    ],
+    "1288": [
+      "Mace & Staff Merchant",
+      "classic"
+    ],
+    "1289": [
+      "Weapons Merchant",
+      "classic"
+    ],
+    "1290": [
+      "Cloth Armor Merchant",
+      "classic"
+    ],
+    "1291": [
+      "Cloth Armor Merchant",
+      "classic"
+    ],
+    "1293": [
+      "Mail Armor Merchant",
+      "classic"
+    ],
+    "1294": [
+      "Mail Armor Merchant",
+      "classic"
+    ],
+    "1295": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "1296": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "1297": [
+      "Bow & Gun Merchant",
+      "classic"
+    ],
+    "1298": [
+      "Bow & Arrow Merchant",
+      "classic"
+    ],
+    "1299": [
+      "Clothier",
+      "classic"
+    ],
+    "1301": [
+      "Wine Vendor",
+      "classic"
+    ],
+    "1302": [
+      "Florist",
+      "classic"
+    ],
+    "1303": [
+      "Herbalism Supplier",
+      "classic"
+    ],
+    "1304": [
+      "Fireworks Vendor",
+      "classic"
+    ],
+    "1305": [
+      "Bartender",
+      "classic"
+    ],
+    "1306": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "1307": [
+      "Arcane Trinkets Vendor",
+      "classic"
+    ],
+    "1308": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "1309": [
+      "Robe Merchant",
+      "classic"
+    ],
+    "1310": [
+      "Hatter",
+      "classic"
+    ],
+    "1311": [
+      "Bartender",
+      "classic"
+    ],
+    "1312": [
+      "Wand Merchant",
+      "classic"
+    ],
+    "1313": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "1314": [
+      "Light Armor Merchant",
+      "classic"
+    ],
+    "1315": [
+      "Staves Merchant",
+      "classic"
+    ],
+    "1316": [
+      "Librarian",
+      "classic"
+    ],
+    "1318": [
+      "Enchanting Supplies",
+      "classic"
+    ],
+    "1319": [
+      "Shield Merchant",
+      "classic"
+    ],
+    "1320": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "1321": [
+      "Bag Vendor",
+      "classic"
+    ],
+    "1322": [
+      "Mail Armor Merchant",
+      "classic"
+    ],
+    "1323": [
+      "Heavy Armor Merchant",
+      "classic"
+    ],
+    "1324": [
+      "Blade Merchant",
+      "classic"
+    ],
+    "1325": [
+      "Shady Dealer",
+      "classic"
+    ],
+    "1326": [
+      "Poison Supplier",
+      "classic"
+    ],
+    "1328": [
+      "Barmaid",
+      "classic"
+    ],
+    "1333": [
+      "Two Handed Weapon Merchant",
+      "classic"
+    ],
+    "1339": [
+      "Cobbler",
+      "classic"
+    ],
+    "1341": [
+      "Mail Armor Merchant",
+      "classic"
+    ],
+    "1347": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "1348": [
+      "Staff & Mace Merchant",
+      "classic"
+    ],
+    "1349": [
+      "Mail Armor Merchant",
+      "classic"
+    ],
+    "1350": [
+      "Robe Vendor",
+      "classic"
+    ],
+    "1351": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "1362": [
+      "Armorer",
+      "classic"
+    ],
+    "1381": [
+      "Superior Armorer",
+      "classic"
+    ],
+    "1407": [
+      "Light Armor & Weapons Merchant",
+      "classic"
+    ],
+    "1441": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "1448": [
+      "Engineering & General Goods Supplier",
+      "classic"
+    ],
+    "1450": [
+      "Armorer",
+      "classic"
+    ],
+    "1452": [
+      "General Supplies",
+      "classic"
+    ],
+    "1453": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "1454": [
+      "Tailoring Supplies & Specialty Goods",
+      "classic"
+    ],
+    "1455": [
+      "Fletching Supplier",
+      "classic"
+    ],
+    "1456": [
+      "Tradesman",
+      "classic"
+    ],
+    "1457": [
+      "Shady Dealer",
+      "classic"
+    ],
+    "1459": [
+      "Bowyer",
+      "classic"
+    ],
+    "1460": [
+      "Horse Breeder",
+      "classic"
+    ],
+    "1461": [
+      "Gunsmith",
+      "classic"
+    ],
+    "1462": [
+      "Fletcher",
+      "classic"
+    ],
+    "1463": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "1464": [
+      "Innkeeper",
+      "classic"
+    ],
+    "1465": [
+      "Tradesman",
+      "classic"
+    ],
+    "1469": [
+      "Gunsmith",
+      "classic"
+    ],
+    "1471": [
+      "Superior Macecrafter",
+      "classic"
+    ],
+    "1474": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "1485": [
+      "Florist",
+      "classic"
+    ],
+    "1645": [
+      "Master Weaponsmith",
+      "classic"
+    ],
+    "1650": [
+      "Lumberjack",
+      "classic"
+    ],
+    "1668": [
+      "Bowyer",
+      "classic"
+    ],
+    "1669": [
+      "Free Wheeling Merchant",
+      "classic"
+    ],
+    "1670": [
+      "Bread Merchant",
+      "classic"
+    ],
+    "1671": [
+      "Fruit Seller",
+      "classic"
+    ],
+    "1672": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "1673": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "1678": [
+      "Bait and Tackle Supplier",
+      "classic"
+    ],
+    "1682": [
+      "General Supplies",
+      "classic"
+    ],
+    "1684": [
+      "Fishing Supplies",
+      "classic"
+    ],
+    "1685": [
+      "General Supplies",
+      "classic"
+    ],
+    "1686": [
+      "Gunsmith",
+      "classic"
+    ],
+    "1687": [
+      "Bowyer",
+      "classic"
+    ],
+    "1690": [
+      "Blacksmithing Supplies",
+      "classic"
+    ],
+    "1691": [
+      "General Supplies",
+      "classic"
+    ],
+    "1692": [
+      "Tradesman",
+      "classic"
+    ],
+    "1694": [
+      "Engineering Supplies",
+      "classic"
+    ],
+    "1695": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "1697": [
+      "Ale and Wine",
+      "classic"
+    ],
+    "1698": [
+      "Apprentice Weaponsmith",
+      "classic"
+    ],
+    "1857": [
+      "Pissed Vendor",
+      "classic"
+    ],
+    "1858": [
+      "Pissed Vendor",
+      "classic"
+    ],
+    "1859": [
+      "Bowyer *Temp*",
+      "classic"
+    ],
+    "2046": [
+      "Armorer & Shieldcrafter",
+      "classic"
+    ],
+    "2084": [
+      "General Goods",
+      "classic"
+    ],
+    "2113": [
+      "Cloth & Leather Armor Merchant",
+      "forever"
+    ],
+    "2115": [
+      "General Supplies",
+      "forever"
+    ],
+    "2116": [
+      "Apprentice Armorer",
+      "forever"
+    ],
+    "2117": [
+      "Apprentice Weaponsmith",
+      "forever"
+    ],
+    "2118": [
+      "Trade Supplies",
+      "forever"
+    ],
+    "2134": [
+      "General Supplies",
+      "forever"
+    ],
+    "2135": [
+      "Apprentice Armorer",
+      "forever"
+    ],
+    "2136": [
+      "Apprentice Weaponsmith",
+      "forever"
+    ],
+    "2137": [
+      "Leather Armor Merchant",
+      "forever"
+    ],
+    "2140": [
+      "General Supplies",
+      "forever"
+    ],
+    "2225": [
+      "Trade Goods",
+      "classic"
+    ],
+    "2303": [
+      "Food & Drink",
+      "classic"
+    ],
+    "2352": [
+      "Innkeeper",
+      "classic"
+    ],
+    "2357": [
+      "Horse Breeder",
+      "classic"
+    ],
+    "2364": [
+      "Waitress",
+      "classic"
+    ],
+    "2365": [
+      "Butcher",
+      "classic"
+    ],
+    "2366": [
+      "Bartender",
+      "classic"
+    ],
+    "2380": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "2381": [
+      "Trade Goods",
+      "classic"
+    ],
+    "2383": [
+      "Tackle and Bait",
+      "classic"
+    ],
+    "2388": [
+      "Innkeeper",
+      "classic"
+    ],
+    "2393": [
+      "Tradesman",
+      "classic"
+    ],
+    "2394": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "2397": [
+      "Cook",
+      "classic"
+    ],
+    "2401": [
+      "General Goods",
+      "classic"
+    ],
+    "2480": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "2481": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "2482": [
+      "Superior Weaponsmith",
+      "forever"
+    ],
+    "2483": [
+      "Superior Axecrafter",
+      "classic"
+    ],
+    "2622": [
+      "Shady Goods",
+      "forever"
+    ],
+    "2626": [
+      "Fisherman",
+      "forever"
+    ],
+    "2662": [
+      "Boat Vendor",
+      "classic"
+    ],
+    "2663": [
+      "Pirate Supplies",
+      "forever"
+    ],
+    "2664": [
+      "Cook",
+      "forever"
+    ],
+    "2668": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "2669": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "2670": [
+      "Tailoring Supplies",
+      "forever"
+    ],
+    "2672": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "2679": [
+      "Special Goods Dealer",
+      "classic"
+    ],
+    "2682": [
+      "Engineering Supplies",
+      "classic"
+    ],
+    "2683": [
+      "Engineering Supplies",
+      "classic"
+    ],
+    "2684": [
+      "Engineering Supplies",
+      "classic"
+    ],
+    "2685": [
+      "Engineering Supplies",
+      "forever"
+    ],
+    "2687": [
+      "Engineering Supplies",
+      "classic"
+    ],
+    "2688": [
+      "Engineering Supplies",
+      "classic"
+    ],
+    "2697": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "2698": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "2699": [
+      "Leatherworking Supplies",
+      "forever"
+    ],
+    "2803": [
+      "General Goods",
+      "classic"
+    ],
+    "2805": [
+      "Scrolls & Potions",
+      "classic"
+    ],
+    "2806": [
+      "General Goods",
+      "classic"
+    ],
+    "2808": [
+      "General Goods",
+      "classic"
+    ],
+    "2810": [
+      "Superior Tradesman",
+      "classic"
+    ],
+    "2812": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "2814": [
+      "Butcher",
+      "classic"
+    ],
+    "2816": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "2819": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "2820": [
+      "General Goods",
+      "classic"
+    ],
+    "2821": [
+      "Trade Goods",
+      "classic"
+    ],
+    "2832": [
+      "Food and Drink",
+      "forever"
+    ],
+    "2834": [
+      "Superior Fisherman",
+      "forever"
+    ],
+    "2838": [
+      "Fireworks Merchant",
+      "forever"
+    ],
+    "2839": [
+      "Superior Bowyer",
+      "forever"
+    ],
+    "2840": [
+      "Macecrafter",
+      "forever"
+    ],
+    "2842": [
+      "Superior Fisherman",
+      "forever"
+    ],
+    "2843": [
+      "Blade Trader",
+      "forever"
+    ],
+    "2844": [
+      "Blacksmithing Supplies",
+      "forever"
+    ],
+    "2845": [
+      "Superior Armorer",
+      "forever"
+    ],
+    "2846": [
+      "Leatherworking Supplies",
+      "forever"
+    ],
+    "2847": [
+      "Blacksmithing Supplies",
+      "forever"
+    ],
+    "2848": [
+      "Alchemy Supplies",
+      "forever"
+    ],
+    "2849": [
+      "Cloth Armor and Accessories",
+      "forever"
+    ],
+    "2880": [
+      "Boar Trainer",
+      "classic"
+    ],
+    "2881": [
+      "Bear Trainer",
+      "classic"
+    ],
+    "2908": [
+      "General Goods",
+      "classic"
+    ],
+    "2935": [
+      "Demon Trainer",
+      "classic"
+    ],
+    "2941": [
+      "Gryphon Master",
+      "classic"
+    ],
+    "2997": [
+      "Weapons Merchant",
+      "forever"
+    ],
+    "2999": [
+      "Blacksmithing Supplies",
+      "forever"
+    ],
+    "3000": [
+      "Weapon Merchant",
+      "classic"
+    ],
+    "3002": [
+      "Mining Supplier",
+      "forever"
+    ],
+    "3003": [
+      "Bread Vendor",
+      "forever"
+    ],
+    "3005": [
+      "Leatherworking & Tailoring Supplies",
+      "forever"
+    ],
+    "3010": [
+      "Alchemy Supplies",
+      "forever"
+    ],
+    "3012": [
+      "Enchanting Supplies",
+      "forever"
+    ],
+    "3014": [
+      "Herbalism Supplier",
+      "forever"
+    ],
+    "3015": [
+      "Bowyer & Fletching Goods",
+      "forever"
+    ],
+    "3016": [
+      "Basket Weaver",
+      "forever"
+    ],
+    "3017": [
+      "Fruit Vendor",
+      "forever"
+    ],
+    "3018": [
+      "Guns Merchant",
+      "forever"
+    ],
+    "3019": [
+      "Axe Merchant",
+      "forever"
+    ],
+    "3020": [
+      "Mace & Staff Merchant",
+      "forever"
+    ],
+    "3021": [
+      "Sword and Dagger Merchant",
+      "forever"
+    ],
+    "3022": [
+      "Staff Merchant",
+      "forever"
+    ],
+    "3023": [
+      "War Harness Vendor",
+      "forever"
+    ],
+    "3025": [
+      "Meat Vendor",
+      "forever"
+    ],
+    "3027": [
+      "Cooking Supplier",
+      "forever"
+    ],
+    "3029": [
+      "Fishing Supplier",
+      "forever"
+    ],
+    "3044": [
+      "Priest Trainer",
+      "forever"
+    ],
+    "3053": [
+      "Gun Merchant",
+      "classic"
+    ],
+    "3072": [
+      "General Goods",
+      "classic"
+    ],
+    "3073": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "3074": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "3075": [
+      "Armorer and Shieldcrafter",
+      "classic"
+    ],
+    "3076": [
+      "General Goods",
+      "classic"
+    ],
+    "3077": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "3078": [
+      "Gunsmith",
+      "classic"
+    ],
+    "3079": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "3080": [
+      "Armorer and Shieldcrafter",
+      "classic"
+    ],
+    "3081": [
+      "Trade Goods",
+      "classic"
+    ],
+    "3085": [
+      "Cooking Supplies",
+      "classic"
+    ],
+    "3086": [
+      "Waitress",
+      "classic"
+    ],
+    "3088": [
+      "Gunsmith",
+      "classic"
+    ],
+    "3089": [
+      "Butcher",
+      "classic"
+    ],
+    "3090": [
+      "Poison Supplier",
+      "classic"
+    ],
+    "3091": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "3092": [
+      "Cloth Armor Merchant",
+      "forever"
+    ],
+    "3093": [
+      "Leather Armor Merchant",
+      "forever"
+    ],
+    "3095": [
+      "Heavy Armor Merchant",
+      "forever"
+    ],
+    "3096": [
+      "Specialist Tailoring Supplies",
+      "classic"
+    ],
+    "3097": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "3133": [
+      "Engineering and Mining Supplies",
+      "classic"
+    ],
+    "3134": [
+      "Rare Goods",
+      "classic"
+    ],
+    "3135": [
+      "Poison Supplier",
+      "classic"
+    ],
+    "3138": [
+      "Mushroom Seller",
+      "classic"
+    ],
+    "3158": [
+      "General Goods",
+      "classic"
+    ],
+    "3159": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "3160": [
+      "Cloth & Leather Armor Merchant",
+      "classic"
+    ],
+    "3161": [
+      "Armorer & Shieldcrafter",
+      "classic"
+    ],
+    "3162": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "3163": [
+      "Weaponsmith",
+      "forever"
+    ],
+    "3164": [
+      "General Goods",
+      "forever"
+    ],
+    "3165": [
+      "Bowyer",
+      "forever"
+    ],
+    "3166": [
+      "Cloth & Leather Armor Merchant",
+      "forever"
+    ],
+    "3167": [
+      "Armorer & Shieldcrafter",
+      "forever"
+    ],
+    "3168": [
+      "Trade Supplies",
+      "forever"
+    ],
+    "3177": [
+      "Dwarven Weaponsmith",
+      "classic"
+    ],
+    "3178": [
+      "Fisherman",
+      "classic"
+    ],
+    "3180": [
+      "Speciality Goods",
+      "classic"
+    ],
+    "3186": [
+      "General Goods",
+      "classic"
+    ],
+    "3187": [
+      "Trade Supplies",
+      "classic"
+    ],
+    "3291": [
+      "Traveling Merchant",
+      "classic"
+    ],
+    "3298": [
+      "Food & Drink",
+      "classic"
+    ],
+    "3299": [
+      "Trade Supplier",
+      "classic"
+    ],
+    "3312": [
+      "Meat Vendor",
+      "forever"
+    ],
+    "3313": [
+      "General Goods Merchant",
+      "forever"
+    ],
+    "3314": [
+      "Weapon Merchant",
+      "forever"
+    ],
+    "3315": [
+      "Cloth & Leather Armor Merchant",
+      "forever"
+    ],
+    "3316": [
+      "Cloth & Leather Armor Merchant",
+      "forever"
+    ],
+    "3317": [
+      "Light Armor Merchant",
+      "forever"
+    ],
+    "3319": [
+      "Mail Armor Merchant",
+      "forever"
+    ],
+    "3321": [
+      "Leather Armor Merchant",
+      "forever"
+    ],
+    "3322": [
+      "Guns and Ammo Merchant",
+      "forever"
+    ],
+    "3323": [
+      "Reagents Vendor",
+      "forever"
+    ],
+    "3329": [
+      "Mushroom Vendor",
+      "forever"
+    ],
+    "3330": [
+      "Staff Merchant",
+      "forever"
+    ],
+    "3331": [
+      "Blade Merchant",
+      "forever"
+    ],
+    "3333": [
+      "Fishing Supplies",
+      "forever"
+    ],
+    "3334": [
+      "Poison Vendor",
+      "forever"
+    ],
+    "3335": [
+      "Reagents Vendor",
+      "forever"
+    ],
+    "3342": [
+      "Fruit Vendor",
+      "forever"
+    ],
+    "3343": [
+      "Blacksmithing Supplies",
+      "classic"
+    ],
+    "3346": [
+      "Enchanting Supplies",
+      "forever"
+    ],
+    "3348": [
+      "Alchemy Supplies",
+      "forever"
+    ],
+    "3349": [
+      "Staff Merchant",
+      "forever"
+    ],
+    "3350": [
+      "General Goods Vendor",
+      "forever"
+    ],
+    "3351": [
+      "Reagents Vendor",
+      "forever"
+    ],
+    "3356": [
+      "Blacksmithing Supplier",
+      "forever"
+    ],
+    "3358": [
+      "Mining Supplier",
+      "forever"
+    ],
+    "3359": [
+      "War Harness Maker",
+      "forever"
+    ],
+    "3360": [
+      "Mace & Staves Vendor",
+      "forever"
+    ],
+    "3361": [
+      "Weapon Vendor",
+      "forever"
+    ],
+    "3362": [
+      "Kennel Master",
+      "classic"
+    ],
+    "3364": [
+      "Tailoring Supplies",
+      "forever"
+    ],
+    "3366": [
+      "Leatherworking Supplies",
+      "forever"
+    ],
+    "3367": [
+      "General Trade Goods Merchant",
+      "forever"
+    ],
+    "3368": [
+      "Meat Vendor",
+      "forever"
+    ],
+    "3369": [
+      "Bag Vendor",
+      "forever"
+    ],
+    "3400": [
+      "Cooking Supplier",
+      "forever"
+    ],
+    "3405": [
+      "Herbalism Supplier",
+      "forever"
+    ],
+    "3409": [
+      "Weapon Vendor",
+      "forever"
+    ],
+    "3410": [
+      "Bow Merchant",
+      "forever"
+    ],
+    "3411": [
+      "Butcher",
+      "forever"
+    ],
+    "3413": [
+      "Engineering Supplies",
+      "forever"
+    ],
+    "3477": [
+      "Blacksmithing Supplier",
+      "forever"
+    ],
+    "3479": [
+      "Weaponsmith",
+      "forever"
+    ],
+    "3480": [
+      "Baker",
+      "forever"
+    ],
+    "3481": [
+      "General Supplies",
+      "forever"
+    ],
+    "3482": [
+      "Trade Supplies",
+      "forever"
+    ],
+    "3483": [
+      "Leather & Mail Armor Merchant",
+      "forever"
+    ],
+    "3485": [
+      "Tailoring Supplies",
+      "forever"
+    ],
+    "3486": [
+      "Clothier",
+      "forever"
+    ],
+    "3487": [
+      "Bags & Sacks",
+      "forever"
+    ],
+    "3488": [
+      "Bowyer & Gunsmith",
+      "forever"
+    ],
+    "3489": [
+      "Butcher",
+      "forever"
+    ],
+    "3490": [
+      "Reagents and Herbs",
+      "forever"
+    ],
+    "3491": [
+      "Weaponsmith",
+      "forever"
+    ],
+    "3492": [
+      "Cloth & Leather Armor Merchant",
+      "forever"
+    ],
+    "3493": [
+      "Armorer & Shieldcrafter",
+      "forever"
+    ],
+    "3495": [
+      "Engineering Goods",
+      "forever"
+    ],
+    "3497": [
+      "Fisherman",
+      "forever"
+    ],
+    "3498": [
+      "General Supplies",
+      "forever"
+    ],
+    "3499": [
+      "Trade Supplies",
+      "forever"
+    ],
+    "3500": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "3518": [
+      "Baker",
+      "classic"
+    ],
+    "3522": [
+      "Apprentice Clothier",
+      "forever"
+    ],
+    "3534": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "3536": [
+      "Freewheeling Tradeswoman",
+      "classic"
+    ],
+    "3537": [
+      "Merchant Supreme",
+      "classic"
+    ],
+    "3539": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "3540": [
+      "Fish Merchant",
+      "classic"
+    ],
+    "3541": [
+      "General Goods",
+      "classic"
+    ],
+    "3542": [
+      "Poisons & Reagents",
+      "classic"
+    ],
+    "3543": [
+      "Superior Armorsmith",
+      "classic"
+    ],
+    "3544": [
+      "Mushroom Seller",
+      "classic"
+    ],
+    "3546": [
+      "Food & Drink",
+      "classic"
+    ],
+    "3547": [
+      "Mushroom Farmer",
+      "forever"
+    ],
+    "3548": [
+      "Alchemy & Herbalism Supplies",
+      "forever"
+    ],
+    "3550": [
+      "Fishing Supplies",
+      "forever"
+    ],
+    "3551": [
+      "Poison Supplies",
+      "forever"
+    ],
+    "3552": [
+      "Leather Armor Merchant",
+      "forever"
+    ],
+    "3553": [
+      "Armorer",
+      "forever"
+    ],
+    "3554": [
+      "Clothier",
+      "forever"
+    ],
+    "3556": [
+      "Trade Goods",
+      "forever"
+    ],
+    "3558": [
+      "Poison Vendor",
+      "classic"
+    ],
+    "3559": [
+      "Poison Vendor",
+      "classic"
+    ],
+    "3561": [
+      "Poison Vendor",
+      "classic"
+    ],
+    "3562": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "3564": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "3565": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "3572": [
+      "Fisherman",
+      "forever"
+    ],
+    "3587": [
+      "General Supplies",
+      "classic"
+    ],
+    "3588": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "3589": [
+      "Bowyer",
+      "classic"
+    ],
+    "3590": [
+      "Clothier",
+      "classic"
+    ],
+    "3591": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "3592": [
+      "Armorer & Shieldcrafter",
+      "classic"
+    ],
+    "3608": [
+      "General Supplies",
+      "classic"
+    ],
+    "3609": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "3610": [
+      "Bowyer",
+      "classic"
+    ],
+    "3611": [
+      "Clothier",
+      "classic"
+    ],
+    "3612": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "3613": [
+      "Armorer & Shieldcrafter",
+      "classic"
+    ],
+    "3614": [
+      "Trade Supplies",
+      "classic"
+    ],
+    "3621": [
+      "Food & Drink",
+      "classic"
+    ],
+    "3625": [
+      "General Goods",
+      "classic"
+    ],
+    "3658": [
+      "Weapon Dealer",
+      "forever"
+    ],
+    "3682": [
+      "Weaponsmith & Armorcrafter",
+      "forever"
+    ],
+    "3683": [
+      "Stylish Clothier",
+      "classic"
+    ],
+    "3684": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "3685": [
+      "Kodo Mounts",
+      "classic"
+    ],
+    "3689": [
+      "Food & Drink",
+      "classic"
+    ],
+    "3700": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "3705": [
+      "Butcher",
+      "forever"
+    ],
+    "3708": [
+      "Food & Drink",
+      "classic"
+    ],
+    "3779": [
+      "Trade Goods Supplies",
+      "classic"
+    ],
+    "3881": [
+      "Butcher",
+      "forever"
+    ],
+    "3882": [
+      "Butcher",
+      "classic"
+    ],
+    "3883": [
+      "Baker",
+      "classic"
+    ],
+    "3884": [
+      "Baker",
+      "classic"
+    ],
+    "3933": [
+      "Butcher",
+      "classic"
+    ],
+    "3934": [
+      "Innkeeper",
+      "forever"
+    ],
+    "3935": [
+      "Butcher",
+      "classic"
+    ],
+    "3937": [
+      "Traveling Baker",
+      "classic"
+    ],
+    "3948": [
+      "Baker",
+      "classic"
+    ],
+    "3951": [
+      "Bowyer",
+      "classic"
+    ],
+    "3952": [
+      "Clothier",
+      "forever"
+    ],
+    "3953": [
+      "Leather Armor Merchant",
+      "forever"
+    ],
+    "3954": [
+      "Trade Goods",
+      "forever"
+    ],
+    "3955": [
+      "Trade Goods",
+      "forever"
+    ],
+    "3956": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "3957": [
+      "Cooking Supplies",
+      "classic"
+    ],
+    "3958": [
+      "Leatherworking Supplies",
+      "forever"
+    ],
+    "3959": [
+      "Baker",
+      "forever"
+    ],
+    "3960": [
+      "Butcher",
+      "classic"
+    ],
+    "3961": [
+      "Food & Drink Vendor",
+      "forever"
+    ],
+    "3962": [
+      "General Goods",
+      "forever"
+    ],
+    "3969": [
+      "Tools & Supplies",
+      "forever"
+    ],
+    "3970": [
+      "Reagent Supplies",
+      "forever"
+    ],
+    "4043": [
+      "Two-Handed Weapons Merchant",
+      "forever"
+    ],
+    "4082": [
+      "General Goods",
+      "forever"
+    ],
+    "4083": [
+      "Apprentice Witch Doctor",
+      "forever"
+    ],
+    "4084": [
+      "General Supplies",
+      "classic"
+    ],
+    "4085": [
+      "Venture Armor Salesman",
+      "classic"
+    ],
+    "4086": [
+      "Venture Co. Merchant",
+      "classic"
+    ],
+    "4164": [
+      "Night Elf Armorer",
+      "classic"
+    ],
+    "4165": [
+      "Portal Trainer",
+      "classic"
+    ],
+    "4167": [
+      "Food & Drink Vendor",
+      "classic"
+    ],
+    "4168": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "4169": [
+      "Meat Vendor",
+      "classic"
+    ],
+    "4170": [
+      "General Goods Vendor",
+      "classic"
+    ],
+    "4171": [
+      "Blade Merchant",
+      "classic"
+    ],
+    "4172": [
+      "Robe Vendor",
+      "classic"
+    ],
+    "4173": [
+      "Bow Merchant",
+      "classic"
+    ],
+    "4175": [
+      "Cloth Armor Merchant",
+      "classic"
+    ],
+    "4176": [
+      "Cloth Armor Merchant",
+      "classic"
+    ],
+    "4177": [
+      "Mail Armor Merchant",
+      "classic"
+    ],
+    "4178": [
+      "Mail Armor Merchant",
+      "classic"
+    ],
+    "4179": [
+      "Shield Merchant",
+      "classic"
+    ],
+    "4180": [
+      "Two Handed Weapon Merchant",
+      "classic"
+    ],
+    "4181": [
+      "Food & Drink Vendor",
+      "classic"
+    ],
+    "4182": [
+      "General Goods",
+      "classic"
+    ],
+    "4183": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "4184": [
+      "Speciality Dress Maker",
+      "forever"
+    ],
+    "4185": [
+      "Clothier",
+      "classic"
+    ],
+    "4186": [
+      "Leather Armor & Leatherworking Supplies",
+      "classic"
+    ],
+    "4187": [
+      "Armorer & Shieldsmith",
+      "classic"
+    ],
+    "4188": [
+      "Cloth Armor Merchant",
+      "classic"
+    ],
+    "4189": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "4190": [
+      "Baker",
+      "classic"
+    ],
+    "4191": [
+      "Food & Drink Vendor",
+      "classic"
+    ],
+    "4192": [
+      "Drink Vendor",
+      "classic"
+    ],
+    "4194": [
+      "Trade Supplies",
+      "classic"
+    ],
+    "4195": [
+      "Food & Drink Vendor",
+      "classic"
+    ],
+    "4200": [
+      "Fish Vendor",
+      "classic"
+    ],
+    "4203": [
+      "Weapon Merchant",
+      "classic"
+    ],
+    "4216": [
+      "Herbalism Supplier",
+      "classic"
+    ],
+    "4217": [
+      "Druid Trainer",
+      "classic"
+    ],
+    "4220": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "4221": [
+      "Fish Vendor",
+      "classic"
+    ],
+    "4222": [
+      "Fishing Supplier",
+      "classic"
+    ],
+    "4223": [
+      "Cooking Supplier",
+      "classic"
+    ],
+    "4225": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "4226": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "4228": [
+      "Enchanting Supplies",
+      "classic"
+    ],
+    "4229": [
+      "General Trade Supplier",
+      "classic"
+    ],
+    "4230": [
+      "Bag Merchant",
+      "classic"
+    ],
+    "4231": [
+      "Weapon Merchant",
+      "classic"
+    ],
+    "4232": [
+      "Axe Merchant",
+      "classic"
+    ],
+    "4233": [
+      "Mace & Staff Merchant",
+      "classic"
+    ],
+    "4234": [
+      "Staff Merchant",
+      "classic"
+    ],
+    "4235": [
+      "Thrown Weapons Merchant",
+      "classic"
+    ],
+    "4236": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "4237": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "4239": [
+      "Leather Armor Merchant",
+      "classic"
+    ],
+    "4240": [
+      "Shield Merchant",
+      "classic"
+    ],
+    "4241": [
+      "General Goods Vendor",
+      "classic"
+    ],
+    "4255": [
+      "Food and Drink",
+      "classic"
+    ],
+    "4256": [
+      "Mining Supplier",
+      "classic"
+    ],
+    "4257": [
+      "Blacksmithing Supplies",
+      "classic"
+    ],
+    "4259": [
+      "Blacksmithing Supplies",
+      "classic"
+    ],
+    "4265": [
+      "Cooking Supplies",
+      "classic"
+    ],
+    "4266": [
+      "Food & Drink Vendor",
+      "classic"
+    ],
+    "4305": [
+      "Fisherman",
+      "classic"
+    ],
+    "4307": [
+      "Fisherman",
+      "classic"
+    ],
+    "4443": [
+      "Totem Merchent",
+      "classic"
+    ],
+    "4445": [
+      "Race Vendor",
+      "classic"
+    ],
+    "4446": [
+      "Race Vendor",
+      "classic"
+    ],
+    "4553": [
+      "Cooking Supplier",
+      "forever"
+    ],
+    "4554": [
+      "Mushroom Vendor",
+      "forever"
+    ],
+    "4555": [
+      "General Goods Vendor",
+      "forever"
+    ],
+    "4556": [
+      "Weapons Merchant",
+      "forever"
+    ],
+    "4557": [
+      "Weapons Merchant",
+      "forever"
+    ],
+    "4558": [
+      "Light Armor Merchant",
+      "forever"
+    ],
+    "4559": [
+      "Heavy Armor Merchant",
+      "forever"
+    ],
+    "4560": [
+      "Heavy Armor Merchant",
+      "forever"
+    ],
+    "4561": [
+      "General Trade Supplier",
+      "forever"
+    ],
+    "4562": [
+      "Reagent Vendor",
+      "forever"
+    ],
+    "4569": [
+      "Blade Merchant",
+      "forever"
+    ],
+    "4570": [
+      "Staff Merchant",
+      "forever"
+    ],
+    "4571": [
+      "Fungus Vendor",
+      "forever"
+    ],
+    "4574": [
+      "Fishing Supplier",
+      "forever"
+    ],
+    "4575": [
+      "Reagent Supplier",
+      "classic"
+    ],
+    "4577": [
+      "Tailoring Supplies",
+      "forever"
+    ],
+    "4580": [
+      "Robe Vendor",
+      "forever"
+    ],
+    "4581": [
+      "Book Dealer",
+      "forever"
+    ],
+    "4585": [
+      "Poison Vendor",
+      "forever"
+    ],
+    "4587": [
+      "Engineering Supplier",
+      "classic"
+    ],
+    "4589": [
+      "Leatherworking Supplies",
+      "forever"
+    ],
+    "4590": [
+      "Bag Vendor",
+      "forever"
+    ],
+    "4592": [
+      "Thrown Weapons Merchant",
+      "forever"
+    ],
+    "4597": [
+      "Blacksmithing Supplier",
+      "forever"
+    ],
+    "4599": [
+      "Mining Supplier",
+      "forever"
+    ],
+    "4600": [
+      "Weapon Merchant",
+      "forever"
+    ],
+    "4601": [
+      "Weapon Merchant",
+      "forever"
+    ],
+    "4602": [
+      "Weapon Merchant",
+      "forever"
+    ],
+    "4603": [
+      "Gun Merchant",
+      "forever"
+    ],
+    "4604": [
+      "Bow Merchant",
+      "forever"
+    ],
+    "4610": [
+      "Alchemy Supplies",
+      "forever"
+    ],
+    "4615": [
+      "Herbalism Supplier",
+      "forever"
+    ],
+    "4617": [
+      "Enchanting Supplies",
+      "forever"
+    ],
+    "4730": [
+      "Saber Handler",
+      "classic"
+    ],
+    "4731": [
+      "Undead Horse Merchant",
+      "forever"
+    ],
+    "4775": [
+      "General Trade Goods Vendor",
+      "forever"
+    ],
+    "4782": [
+      "Bartender",
+      "classic"
+    ],
+    "4875": [
+      "Butcher",
+      "classic"
+    ],
+    "4876": [
+      "General Goods",
+      "classic"
+    ],
+    "4877": [
+      "Trade Supplies",
+      "classic"
+    ],
+    "4878": [
+      "Lorekeeper",
+      "classic"
+    ],
+    "4879": [
+      "Butcher",
+      "forever"
+    ],
+    "4883": [
+      "Armorer",
+      "forever"
+    ],
+    "4884": [
+      "Weaponsmith",
+      "forever"
+    ],
+    "4885": [
+      "Horse Breeder",
+      "classic"
+    ],
+    "4886": [
+      "Armorer & Shieldsmith",
+      "classic"
+    ],
+    "4888": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "4889": [
+      "Gunsmith",
+      "classic"
+    ],
+    "4890": [
+      "Weaponsmith & Armorer",
+      "classic"
+    ],
+    "4891": [
+      "Chef",
+      "classic"
+    ],
+    "4892": [
+      "Bowyer",
+      "classic"
+    ],
+    "4893": [
+      "Bartender",
+      "classic"
+    ],
+    "4894": [
+      "Cook",
+      "classic"
+    ],
+    "4896": [
+      "General Goods",
+      "classic"
+    ],
+    "4897": [
+      "Trade Supplies",
+      "classic"
+    ],
+    "4899": [
+      "Herbalism & Alchemy Supplies",
+      "classic"
+    ],
+    "4954": [
+      "Butcher",
+      "classic"
+    ],
+    "4981": [
+      "Apprentice of Cheese",
+      "classic"
+    ],
+    "5006": [
+      "Demon Trainer",
+      "classic"
+    ],
+    "5049": [
+      "Guild Tabard Vendor",
+      "classic"
+    ],
+    "5061": [
+      "Guild Tabard Vendor",
+      "classic"
+    ],
+    "5062": [
+      "Reagents/Totems Vendor",
+      "classic"
+    ],
+    "5100": [
+      "Trade Supplier",
+      "classic"
+    ],
+    "5101": [
+      "General Goods Vendor",
+      "classic"
+    ],
+    "5102": [
+      "Weapon Merchant",
+      "classic"
+    ],
+    "5103": [
+      "Weapon Merchant",
+      "classic"
+    ],
+    "5105": [
+      "Light Armor Merchant",
+      "classic"
+    ],
+    "5106": [
+      "Heavy Armor Merchant",
+      "classic"
+    ],
+    "5107": [
+      "Heavy Armor Merchant",
+      "classic"
+    ],
+    "5108": [
+      "Light Armor Merchant",
+      "classic"
+    ],
+    "5109": [
+      "Bread Vendor",
+      "classic"
+    ],
+    "5110": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "5111": [
+      "Innkeeper",
+      "classic"
+    ],
+    "5112": [
+      "Barmaid",
+      "classic"
+    ],
+    "5119": [
+      "Axe Merchant",
+      "classic"
+    ],
+    "5120": [
+      "Blade Merchant",
+      "classic"
+    ],
+    "5121": [
+      "Maces & Staves",
+      "classic"
+    ],
+    "5122": [
+      "Bow Merchant",
+      "classic"
+    ],
+    "5123": [
+      "Gun Merchant",
+      "classic"
+    ],
+    "5124": [
+      "Meat Vendor",
+      "classic"
+    ],
+    "5125": [
+      "Mail Armor Merchant",
+      "classic"
+    ],
+    "5126": [
+      "Heavy Armor Merchant",
+      "classic"
+    ],
+    "5128": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "5129": [
+      "Light Armor Merchant",
+      "classic"
+    ],
+    "5131": [
+      "Bread Vendor",
+      "classic"
+    ],
+    "5132": [
+      "Bag Vendor",
+      "classic"
+    ],
+    "5133": [
+      "Wands Merchant",
+      "classic"
+    ],
+    "5134": [
+      "General Goods",
+      "classic"
+    ],
+    "5135": [
+      "Trade Goods",
+      "classic"
+    ],
+    "5138": [
+      "Herbalism Supplier",
+      "classic"
+    ],
+    "5139": [
+      "Reagents & Poisons",
+      "classic"
+    ],
+    "5140": [
+      "Barmaid",
+      "classic"
+    ],
+    "5151": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "5152": [
+      "Weapon Merchant",
+      "classic"
+    ],
+    "5154": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "5155": [
+      "Cloth Armor Merchant",
+      "classic"
+    ],
+    "5156": [
+      "Robe Merchant",
+      "classic"
+    ],
+    "5158": [
+      "Enchanting Supplies",
+      "classic"
+    ],
+    "5160": [
+      "Cooking Supplier",
+      "classic"
+    ],
+    "5162": [
+      "Fishing Supplier",
+      "classic"
+    ],
+    "5163": [
+      "Trade Supplier",
+      "classic"
+    ],
+    "5169": [
+      "Shady Dealer",
+      "classic"
+    ],
+    "5170": [
+      "Blade Merchant",
+      "classic"
+    ],
+    "5173": [
+      "Warlock Trainer",
+      "classic"
+    ],
+    "5175": [
+      "Engineering Supplies",
+      "classic"
+    ],
+    "5178": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "5188": [
+      "Tabard Vendor",
+      "forever"
+    ],
+    "5189": [
+      "Tabard Vendor",
+      "forever"
+    ],
+    "5190": [
+      "Tabard Vendor",
+      "forever"
+    ],
+    "5191": [
+      "Tabard Vendor",
+      "classic"
+    ],
+    "5192": [
+      "Tabard Vendor",
+      "classic"
+    ],
+    "5193": [
+      "Tabard Vendor",
+      "classic"
+    ],
+    "5411": [
+      "Blacksmithing Supplies",
+      "classic"
+    ],
+    "5483": [
+      "Cooking Supplier",
+      "classic"
+    ],
+    "5494": [
+      "Fishing Supplier",
+      "classic"
+    ],
+    "5503": [
+      "Herbalism Supplier",
+      "classic"
+    ],
+    "5508": [
+      "Armor Crafter",
+      "classic"
+    ],
+    "5509": [
+      "Axe Merchant",
+      "classic"
+    ],
+    "5510": [
+      "Guns Vendor",
+      "classic"
+    ],
+    "5512": [
+      "Blacksmithing Supplies",
+      "classic"
+    ],
+    "5514": [
+      "Mining Supplier",
+      "classic"
+    ],
+    "5519": [
+      "Engineering Supplier",
+      "classic"
+    ],
+    "5520": [
+      "Demon Trainer",
+      "classic"
+    ],
+    "5565": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "5569": [
+      "Fireworks Vendor",
+      "classic"
+    ],
+    "5570": [
+      "Bartender",
+      "classic"
+    ],
+    "5594": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "5620": [
+      "Food and Drinks",
+      "classic"
+    ],
+    "5688": [
+      "Innkeeper",
+      "forever"
+    ],
+    "5748": [
+      "Fisherman",
+      "forever"
+    ],
+    "5749": [
+      "Demon Trainer",
+      "forever"
+    ],
+    "5750": [
+      "Demon Trainer",
+      "forever"
+    ],
+    "5753": [
+      "Demon Trainer",
+      "classic"
+    ],
+    "5754": [
+      "Wand Vendor",
+      "forever"
+    ],
+    "5757": [
+      "Enchanting Supplies",
+      "forever"
+    ],
+    "5758": [
+      "Enchanting Supplies",
+      "classic"
+    ],
+    "5783": [
+      "Specialist Leatherworking Supplies",
+      "classic"
+    ],
+    "5812": [
+      "Heavy Armor Merchant",
+      "forever"
+    ],
+    "5813": [
+      "Light Armor Merchant",
+      "classic"
+    ],
+    "5814": [
+      "Innkeeper",
+      "classic"
+    ],
+    "5815": [
+      "Demon Trainer",
+      "forever"
+    ],
+    "5816": [
+      "Wand Merchant",
+      "forever"
+    ],
+    "5817": [
+      "General Trade Goods Merchant",
+      "forever"
+    ],
+    "5819": [
+      "Heavy Armor Merchant",
+      "forever"
+    ],
+    "5820": [
+      "Leather Armor Merchant",
+      "forever"
+    ],
+    "5821": [
+      "Cloth Armor Merchant",
+      "forever"
+    ],
+    "5848": [
+      "Bael'dun Morale Officer",
+      "forever"
+    ],
+    "5870": [
+      "Butcher",
+      "forever"
+    ],
+    "5871": [
+      "Beverage Merchant",
+      "forever"
+    ],
+    "5886": [
+      "Mushroom Merchant",
+      "forever"
+    ],
+    "5940": [
+      "Fishing Supplies",
+      "classic"
+    ],
+    "5942": [
+      "Fishing Supplies",
+      "classic"
+    ],
+    "5944": [
+      "Tailoring & Leatherworking Supplies",
+      "forever"
+    ],
+    "6027": [
+      "Demon Trainer",
+      "forever"
+    ],
+    "6028": [
+      "Heavy Armor Merchant",
+      "forever"
+    ],
+    "6091": [
+      "Food & Drink Vendor",
+      "classic"
+    ],
+    "6272": [
+      "Innkeeper",
+      "classic"
+    ],
+    "6298": [
+      "Mining Supplier",
+      "classic"
+    ],
+    "6300": [
+      "Blacksmithing Supplies",
+      "classic"
+    ],
+    "6301": [
+      "General Trade Supplier",
+      "classic"
+    ],
+    "6328": [
+      "Demon Trainer",
+      "classic"
+    ],
+    "6367": [
+      "Crazy Cat Lady",
+      "classic"
+    ],
+    "6373": [
+      "Demon Trainer",
+      "classic"
+    ],
+    "6374": [
+      "Demon Trainer",
+      "classic"
+    ],
+    "6376": [
+      "Demon Trainer",
+      "classic"
+    ],
+    "6382": [
+      "Demon Trainer",
+      "classic"
+    ],
+    "6495": [
+      "Drink Vendor",
+      "classic"
+    ],
+    "6496": [
+      "Ice Cream Vendor",
+      "classic"
+    ],
+    "6567": [
+      "Tailoring Supplies",
+      "forever"
+    ],
+    "6568": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "6574": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "6576": [
+      "Tailoring Supplies",
+      "classic"
+    ],
+    "6727": [
+      "Innkeeper",
+      "classic"
+    ],
+    "6730": [
+      "Engineering Supplies",
+      "classic"
+    ],
+    "6731": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "6734": [
+      "Innkeeper",
+      "classic"
+    ],
+    "6735": [
+      "Innkeeper",
+      "classic"
+    ],
+    "6736": [
+      "Innkeeper",
+      "classic"
+    ],
+    "6739": [
+      "Innkeeper",
+      "forever"
+    ],
+    "6740": [
+      "Innkeeper",
+      "classic"
+    ],
+    "6741": [
+      "Innkeeper",
+      "forever"
+    ],
+    "6746": [
+      "Innkeeper",
+      "forever"
+    ],
+    "6747": [
+      "Innkeeper",
+      "classic"
+    ],
+    "6777": [
+      "Speciality Engineer",
+      "classic"
+    ],
+    "6779": [
+      "Poison Vendor",
+      "classic"
+    ],
+    "6790": [
+      "Innkeeper",
+      "classic"
+    ],
+    "6791": [
+      "Innkeeper",
+      "forever"
+    ],
+    "6807": [
+      "Innkeeper",
+      "forever"
+    ],
+    "6928": [
+      "Innkeeper",
+      "forever"
+    ],
+    "6929": [
+      "Innkeeper",
+      "forever"
+    ],
+    "7231": [
+      "Weapon Crafter",
+      "forever"
+    ],
+    "7485": [
+      "Food & Drink",
+      "classic"
+    ],
+    "7683": [
+      "Blue Moon Odds and Ends",
+      "forever"
+    ],
+    "7714": [
+      "Innkeeper",
+      "forever"
+    ],
+    "7731": [
+      "Innkeeper",
+      "forever"
+    ],
+    "7733": [
+      "Innkeeper",
+      "classic"
+    ],
+    "7737": [
+      "Innkeeper",
+      "classic"
+    ],
+    "7744": [
+      "Innkeeper",
+      "classic"
+    ],
+    "7747": [
+      "Mount Vendor",
+      "classic"
+    ],
+    "7748": [
+      "Horse Vendor",
+      "classic"
+    ],
+    "7852": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "7854": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "7940": [
+      "Tailoring Supplies",
+      "forever"
+    ],
+    "7941": [
+      "Food & Drink",
+      "classic"
+    ],
+    "7942": [
+      "General Supplies",
+      "classic"
+    ],
+    "7943": [
+      "Fish Vendor",
+      "classic"
+    ],
+    "7945": [
+      "Fishing Supplies",
+      "classic"
+    ],
+    "7947": [
+      "Trade Supplies",
+      "classic"
+    ],
+    "7952": [
+      "Raptor Handler",
+      "classic"
+    ],
+    "7955": [
+      "Mechanostrider Merchant",
+      "classic"
+    ],
+    "7976": [
+      "Weapon Merchant",
+      "classic"
+    ],
+    "7978": [
+      "Fruit Vendor",
+      "classic"
+    ],
+    "8116": [
+      "Holiday Fireworks Vendor",
+      "classic"
+    ],
+    "8117": [
+      "Holiday Fireworks Vendor",
+      "classic"
+    ],
+    "8118": [
+      "Holiday Fireworks Vendor",
+      "classic"
+    ],
+    "8121": [
+      "Holiday Fireworks Vendor",
+      "classic"
+    ],
+    "8122": [
+      "Holiday Fireworks Vendor",
+      "classic"
+    ],
+    "8125": [
+      "Butcher",
+      "classic"
+    ],
+    "8129": [
+      "Superior Armor Crafter",
+      "classic"
+    ],
+    "8131": [
+      "Gunsmith",
+      "classic"
+    ],
+    "8137": [
+      "Fisherman",
+      "classic"
+    ],
+    "8139": [
+      "General Goods",
+      "classic"
+    ],
+    "8143": [
+      "Food & Drink",
+      "classic"
+    ],
+    "8145": [
+      "Trade Supplies",
+      "classic"
+    ],
+    "8148": [
+      "Food & Drink",
+      "classic"
+    ],
+    "8150": [
+      "Food & Drink",
+      "classic"
+    ],
+    "8152": [
+      "Food & Drink",
+      "classic"
+    ],
+    "8157": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "8158": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "8159": [
+      "Light Armor Merchant",
+      "classic"
+    ],
+    "8160": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "8161": [
+      "Blacksmithing Supplies",
+      "classic"
+    ],
+    "8176": [
+      "Blacksmithing Supplies",
+      "classic"
+    ],
+    "8177": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "8178": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "8305": [
+      "Potions & Herbs",
+      "classic"
+    ],
+    "8307": [
+      "Baker",
+      "forever"
+    ],
+    "8358": [
+      "Cloth Armor Merchant",
+      "forever"
+    ],
+    "8359": [
+      "Leather Armor Merchant",
+      "forever"
+    ],
+    "8360": [
+      "Mail Armor Merchant",
+      "forever"
+    ],
+    "8361": [
+      "Reagent Vendor",
+      "forever"
+    ],
+    "8362": [
+      "General Goods Vendor",
+      "forever"
+    ],
+    "8363": [
+      "Trade Goods Supplier",
+      "forever"
+    ],
+    "8364": [
+      "Bag Vendor",
+      "forever"
+    ],
+    "8398": [
+      "Two Handed Weapon Merchant",
+      "forever"
+    ],
+    "8401": [
+      "Prairie Dog Vendor",
+      "forever"
+    ],
+    "8403": [
+      "Cockroach Vendor",
+      "forever"
+    ],
+    "8404": [
+      "Snake Vendor",
+      "forever"
+    ],
+    "8508": [
+      "Fisherman Supplies",
+      "classic"
+    ],
+    "8665": [
+      "Owl Trainer",
+      "classic"
+    ],
+    "8666": [
+      "Boy with kittens",
+      "classic"
+    ],
+    "8678": [
+      "Engineering Supplier",
+      "classic"
+    ],
+    "8679": [
+      "Engineering Supplies",
+      "classic"
+    ],
+    "8681": [
+      "Speciality Tailoring Supplies",
+      "classic"
+    ],
+    "8878": [
+      "Superior Macecrafter",
+      "classic"
+    ],
+    "8931": [
+      "Innkeeper",
+      "classic"
+    ],
+    "8934": [
+      "General Trade Goods Vendor",
+      "classic"
+    ],
+    "9099": [
+      "Pie Vendor",
+      "classic"
+    ],
+    "9179": [
+      "Blacksmithing Supplies",
+      "classic"
+    ],
+    "9356": [
+      "Innkeeper",
+      "classic"
+    ],
+    "9501": [
+      "Innkeeper",
+      "classic"
+    ],
+    "9548": [
+      "Gunsmith & Bowyer",
+      "classic"
+    ],
+    "9549": [
+      "Bowyer",
+      "forever"
+    ],
+    "9551": [
+      "Gunsmith & Bowyer",
+      "classic"
+    ],
+    "9552": [
+      "Bowyer",
+      "forever"
+    ],
+    "9553": [
+      "Bowyer",
+      "forever"
+    ],
+    "9555": [
+      "Bowyer",
+      "classic"
+    ],
+    "9636": [
+      "Trade Goods",
+      "classic"
+    ],
+    "9676": [
+      "Engineering Supplies",
+      "classic"
+    ],
+    "10118": [
+      "Fishing Supplies",
+      "classic"
+    ],
+    "10293": [
+      "Cloth Armor Merchant",
+      "classic"
+    ],
+    "10361": [
+      "Weaponsmith",
+      "classic"
+    ],
+    "10364": [
+      "Reagents & Poisons",
+      "classic"
+    ],
+    "10367": [
+      "Food and Drink",
+      "classic"
+    ],
+    "10369": [
+      "Weapon Merchant",
+      "classic"
+    ],
+    "10379": [
+      "Weapon Merchant",
+      "classic"
+    ],
+    "10380": [
+      "Leather Armor Merchant",
+      "forever"
+    ],
+    "10466": [
+      "Exotic Item Vendor",
+      "classic"
+    ],
+    "10618": [
+      "Wintersaber Trainers",
+      "classic"
+    ],
+    "10856": [
+      "The Argent Dawn",
+      "classic"
+    ],
+    "10857": [
+      "The Argent Dawn",
+      "classic"
+    ],
+    "11038": [
+      "The Argent Dawn",
+      "classic"
+    ],
+    "11103": [
+      "Innkeeper",
+      "classic"
+    ],
+    "11106": [
+      "Innkeeper",
+      "classic"
+    ],
+    "11116": [
+      "Innkeeper",
+      "classic"
+    ],
+    "11118": [
+      "Innkeeper",
+      "classic"
+    ],
+    "11137": [
+      "Weaponsmith",
+      "forever"
+    ],
+    "11182": [
+      "Heavy Armor Merchant",
+      "classic"
+    ],
+    "11183": [
+      "Light Armor Merchant",
+      "classic"
+    ],
+    "11184": [
+      "Weaponsmith & Gunsmith",
+      "classic"
+    ],
+    "11185": [
+      "Engineering Supplies",
+      "classic"
+    ],
+    "11186": [
+      "Mining Supplies",
+      "classic"
+    ],
+    "11187": [
+      "Food & Drink",
+      "classic"
+    ],
+    "11188": [
+      "Alchemy Supplies",
+      "classic"
+    ],
+    "11189": [
+      "Trade Goods Supplies",
+      "classic"
+    ],
+    "11536": [
+      "The Argent Dawn",
+      "classic"
+    ],
+    "11703": [
+      "Mail Armor Merchant",
+      "classic"
+    ],
+    "11874": [
+      "Superior Leatherworker",
+      "classic"
+    ],
+    "12019": [
+      "Food & Drink Merchant",
+      "forever"
+    ],
+    "12021": [
+      "General Goods",
+      "classic"
+    ],
+    "12022": [
+      "Trade Supplies",
+      "forever"
+    ],
+    "12023": [
+      "Light Armor Merchant",
+      "forever"
+    ],
+    "12024": [
+      "Weaponsmith",
+      "forever"
+    ],
+    "12026": [
+      "Food & Drink Merchant",
+      "classic"
+    ],
+    "12027": [
+      "General Goods Vendor",
+      "classic"
+    ],
+    "12028": [
+      "Trade Supplies",
+      "classic"
+    ],
+    "12029": [
+      "Bowyer",
+      "forever"
+    ],
+    "12031": [
+      "Fishing Supplies",
+      "classic"
+    ],
+    "12033": [
+      "Cooking Supplies",
+      "classic"
+    ],
+    "12036": [
+      "General Goods",
+      "classic"
+    ],
+    "12038": [
+      "Cooking Supplies",
+      "classic"
+    ],
+    "12039": [
+      "Butcher",
+      "classic"
+    ],
+    "12040": [
+      "Armorsmith",
+      "classic"
+    ],
+    "12043": [
+      "Trade Supplies",
+      "forever"
+    ],
+    "12044": [
+      "Blacksmithing & Mining Supplies",
+      "classic"
+    ],
+    "12045": [
+      "Axecrafter",
+      "classic"
+    ],
+    "12196": [
+      "Innkeeper",
+      "forever"
+    ],
+    "12776": [
+      "Demon Trainer",
+      "classic"
+    ],
+    "12777": [
+      "Armor Quartermaster",
+      "classic"
+    ],
+    "12781": [
+      "Officer Accessories Quartermaster",
+      "classic"
+    ],
+    "12782": [
+      "Weapons Quartermaster",
+      "classic"
+    ],
+    "12783": [
+      "Mount Vendor",
+      "classic"
+    ],
+    "12784": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "12785": [
+      "Food and Drink",
+      "classic"
+    ],
+    "12792": [
+      "Armor Quartermaster",
+      "classic"
+    ],
+    "12793": [
+      "Officer Accessories Quartermaster",
+      "classic"
+    ],
+    "12794": [
+      "Food and Drink",
+      "classic"
+    ],
+    "12795": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "12796": [
+      "Mount Quartermaster",
+      "classic"
+    ],
+    "12799": [
+      "Accessories Quartermaster",
+      "classic"
+    ],
+    "12805": [
+      "Accessories Quartermaster",
+      "classic"
+    ],
+    "12807": [
+      "Demon Master",
+      "classic"
+    ],
+    "12941": [
+      "Trade Supplies",
+      "classic"
+    ],
+    "12942": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "12943": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "12944": [
+      "The Thorium Brotherhood",
+      "classic"
+    ],
+    "12956": [
+      "Leatherworking Supplies",
+      "classic"
+    ],
+    "12957": [
+      "Trade Supplier",
+      "classic"
+    ],
+    "12958": [
+      "Trade Supplies",
+      "classic"
+    ],
+    "12959": [
+      "General Goods Vendor",
+      "classic"
+    ],
+    "12960": [
+      "General Goods",
+      "classic"
+    ],
+    "12962": [
+      "Fish Merchant & Supplies",
+      "forever"
+    ],
+    "13216": [
+      "Stormpike Supply Officer",
+      "classic"
+    ],
+    "13217": [
+      "Stormpike Supply Officer",
+      "classic"
+    ],
+    "13218": [
+      "Frostwolf Supply Officer",
+      "classic"
+    ],
+    "13219": [
+      "Frostwolf Supply Officer",
+      "classic"
+    ],
+    "13418": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "13420": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "13429": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "13430": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "13431": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "13432": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "13433": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "13434": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "13435": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "13436": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "13476": [
+      "Potions, Scrolls and Reagents",
+      "forever"
+    ],
+    "14301": [
+      "Bowyer",
+      "classic"
+    ],
+    "14322": [
+      "The Drunk",
+      "classic"
+    ],
+    "14480": [
+      "Sweet Treats",
+      "classic"
+    ],
+    "14481": [
+      "Sweet Treats",
+      "classic"
+    ],
+    "14581": [
+      "Weapons Quartermaster",
+      "classic"
+    ],
+    "14624": [
+      "The Thorium Brotherhood",
+      "classic"
+    ],
+    "14731": [
+      "Innkeeper",
+      "classic"
+    ],
+    "14737": [
+      "Blacksmithing Supplies",
+      "classic"
+    ],
+    "14738": [
+      "Cooking Supplier",
+      "classic"
+    ],
+    "14739": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "14740": [
+      "Fishing Trainer & Supplies",
+      "classic"
+    ],
+    "14753": [
+      "Silverwing Supply Officer",
+      "classic"
+    ],
+    "14754": [
+      "Warsong Supply Officer",
+      "classic"
+    ],
+    "14844": [
+      "Darkmoon Faire Drink Vendor",
+      "classic"
+    ],
+    "14845": [
+      "Darkmoon Faire Food Vendor",
+      "classic"
+    ],
+    "14846": [
+      "Darkmoon Faire Exotic Goods",
+      "classic"
+    ],
+    "14847": [
+      "Darkmoon Faire Cards & Exotic Goods",
+      "classic"
+    ],
+    "14921": [
+      "Zandalar Supplies and Repair",
+      "classic"
+    ],
+    "14961": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "14962": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "14963": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "14964": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "15006": [
+      "Arathi Basin Battlemaster",
+      "forever"
+    ],
+    "15124": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "15125": [
+      "Smokywood Pastures",
+      "classic"
+    ],
+    "15126": [
+      "Defilers Supply Officer",
+      "classic"
+    ],
+    "15127": [
+      "League of Arathor Supply Officer",
+      "classic"
+    ],
+    "15174": [
+      "Innkeeper",
+      "classic"
+    ],
+    "15175": [
+      "Reagent Vendor",
+      "classic"
+    ],
+    "15176": [
+      "Blacksmith",
+      "classic"
+    ],
+    "15179": [
+      "General Trade Goods Vendor",
+      "classic"
+    ],
+    "15315": [
+      "Weapon Merchant",
+      "classic"
+    ],
+    "15353": [
+      "Hallow's End Treats",
+      "classic"
+    ],
+    "15354": [
+      "Hallow's End Treats",
+      "classic"
+    ],
+    "15419": [
+      "Enchanting Supplier",
+      "classic"
+    ],
+    "16015": [
+      "Exotic Reagent Merchant",
+      "classic"
+    ],
+    "16019": [
+      "Panda Cub Caretaker",
+      "classic"
+    ],
+    "16023": [
+      "Panda Cub Caretaker",
+      "classic"
+    ],
+    "16256": [
+      "Innkeeper",
+      "classic"
+    ],
+    "16376": [
+      "Brotherhood of the Light",
+      "classic"
+    ],
+    "16458": [
+      "Innkeeper",
+      "classic"
+    ],
+    "17078": [
+      "Cool Guy",
+      "classic"
+    ],
+    "17598": [
+      "Ammunition Vendor",
+      "classic"
+    ]
+  }
+}

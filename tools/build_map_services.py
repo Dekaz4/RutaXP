@@ -9,14 +9,19 @@ Reads only the named files, verifies their contents and never accesses the netwo
 import argparse
 from collections import defaultdict
 import hashlib
+import gzip
 import json
 from pathlib import Path
+import re
 
 from lupa.lua51 import LuaRuntime
 
 
 ROOT = Path(__file__).resolve().parents[1]
 TARGET = ROOT / "RutaXP" / "MapServices.lua"
+ROLES = ROOT / "RutaXP/Source/map_service_roles.json"
+VENDOR_CATEGORIES = {"vendor", "vendor_goods", "vendor_food", "vendor_equipment", "vendor_supplies",
+                     "vendor_reagents", "vendor_bags", "vendor_mounts"}
 PF_FILES = {
     "db/units.lua": "b8de09aa33fd4b16edb2287b8c4224c86e6ee420e717a4d428e2935c22c4a922",
     "db/objects.lua": "be4846e2f2049cafba7da5ed18d6422bde35ed0e6f6ac34cb1215c1bbafd306e",
@@ -49,7 +54,43 @@ def checked_source(root, name, digest):
     return source.decode("utf-8")
 
 
+def role_catalog():
+    evidence = json.loads(ROLES.read_text(encoding="utf-8"))
+    if evidence["schemaVersion"] != 1:
+        raise ValueError("Unsupported merchant role evidence")
+    result = {}
+    for ident, (title, source) in evidence["npcs"].items():
+        translation = evidence["titles"][title]
+        if source not in evidence["sources"] or translation["category"] not in VENDOR_CATEGORIES \
+                or not translation["label"] or not ident.isdecimal():
+            raise ValueError("Invalid merchant role: " + ident)
+        result[int(ident)] = translation
+    return result
+
+
+def verify_roles(classic_path, forever_path):
+    """Check every shipped title against pinned bytes, without executing SQL."""
+    evidence = json.loads(ROLES.read_text(encoding="utf-8"))
+    for name, path in (("classic", classic_path), ("forever", forever_path)):
+        if hashlib.sha256(path.read_bytes()).hexdigest() != evidence["sources"][name]["sha256"]:
+            raise ValueError("Unexpected merchant source: " + name)
+    titles = {}
+    fields = re.compile(r"(?:VALUES \(|\),\()(\d+),'(?:[^'\\]|\\.)*',(NULL|'(?:[^'\\]|\\.)*'),")
+    with gzip.open(classic_path, "rt", encoding="utf-8") as stream:
+        for line in stream:
+            if line.startswith("INSERT INTO `creature_template` VALUES "):
+                for match in fields.finditer(line):
+                    if match[2] != "NULL":
+                        titles[match[1]] = match[2][1:-1].replace("\\'", "'")
+    live = json.loads(forever_path.read_bytes())["creatures"]
+    for ident, (title, source) in evidence["npcs"].items():
+        expected = live.get(ident, {}).get("title") if source == "forever" else titles.get(ident)
+        if title != expected:
+            raise ValueError("Merchant title does not match its source: " + ident)
+
+
 def service_catalog(pfquest, sendafh):
+    merchant_roles = role_catalog()
     lua = LuaRuntime()
     lua.execute("""pfDB = {units = {}, objects = {}}
         ns = {RegisterMapFrames = function() end,
@@ -80,7 +121,7 @@ def service_catalog(pfquest, sendafh):
         for player_class in trainer.classes.values():
             name = db.units.esES[trainer.npc] or trainer.npcName
             catalog[trainer.map].add(("trainer", trainer.faction, trainer.x, trainer.y,
-                                      name, trainer.f or "l", player_class))
+                                      name, trainer.f or "l", player_class, "", trainer.npc))
         assigned.add(trainer.npc)
 
     # A merchant who repairs gear gets the anvil, a merchant who keeps an inn gets
@@ -105,12 +146,16 @@ def service_catalog(pfquest, sendafh):
                 if english.startswith(("TEST ", "[UNUSED]", "Programmer ")):
                     continue
             name = "Buzón" if is_mail else db.units.esES[ident] or db.units.enUS[ident]
+            merchant = merchant_roles.get(ident) if category in {"vendor", "repair"} else None
+            point_category = merchant["category"] if category == "vendor" and merchant else category
+            detail = merchant["label"] if merchant else ""
             for map_id, coords in locations.items():
                 if not is_mail and len(coords) > 1 and (ident, map_id) not in overrides:
                     continue  # A roaming NPC has no single reliable position on this map.
                 for x, y in coords:
                     x, y, frame = overrides.get((ident, map_id), (x, y, "e"))
-                    catalog[map_id].add((category, side, x, y, name, frame))
+                    catalog[map_id].add((point_category, side, x, y, name, frame, False, detail,
+                                        0 if is_mail else ident))
             assigned.add(ident)
     return catalog
 
@@ -120,7 +165,12 @@ def main():
     parser.add_argument("--pfquest", type=Path, default=ROOT / ".sources/pfQuest")
     parser.add_argument("--sendafh", type=Path, default=ROOT / ".sources/SendaFH")
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--verify-roles", action="store_true", help="Verify role facts against pinned cached sources")
+    parser.add_argument("--classic-db", type=Path, default=ROOT / ".backups/requirements-audit/early-classic-template.sql.gz")
+    parser.add_argument("--forever-creatures", type=Path, default=ROOT / ".backups/map-services/creature_details.enUS.json")
     args = parser.parse_args()
+    if args.verify_roles:
+        verify_roles(args.classic_db, args.forever_creatures)
     catalog = service_catalog(args.pfquest, args.sendafh)
     lines = []
     for map_id, sites in sorted(catalog.items()):

@@ -225,6 +225,74 @@ class WorldMapPointsTests(unittest.TestCase):
         reopened = self.g.OpenFilters()
         self.assertFalse(next(box for name, box in reopened.items() if "posada" in name.lower()).checked())
 
+    def test_merchant_tooltips_explain_each_specialty_and_preserve_unknown_stock(self):
+        self.lua.execute('''
+            NS.char.mapPointFilters = {vendor=true}
+            Services[1436] = {
+                {category="vendor_bags", name="Alyssa Griffith", detail="Bolsas", x=.2, y=.3},
+                {category="vendor_supplies", name="Jillian Peletero", detail="Suministros de peletería", x=.2, y=.3},
+                {category="vendor", name="Mercader sin datos", x=.4, y=.5},
+            }
+            Quests[1436] = {}
+        ''')
+        self.show_map()
+        self.assertEqual(self.g.VisibleCount(), 2)
+        shared = next(f for f in self.g.PinFrames.values() if f.shown and len(f.points) == 2)
+        shared.scripts.OnEnter(shared)
+        lines = list(self.g.GameTooltip.lines.values())
+        self.assertIn("Alyssa Griffith", lines)
+        self.assertIn("Bolsas", lines)
+        self.assertIn("Jillian Peletero", lines)
+        self.assertIn("Suministros de peletería", lines)
+        self.assertNotIn("Otros vendedores", " ".join(lines))
+        unknown = next(f for f in self.g.PinFrames.values() if f.shown and len(f.points) == 1)
+        unknown.scripts.OnEnter(unknown)
+        self.assertEqual(list(self.g.GameTooltip.lines.values()),
+                         ["Mercader sin datos", "Mercancías por consultar"])
+
+    def test_legacy_vendor_choice_migrates_once_and_specialty_filters_are_independent(self):
+        self.lua.execute('''
+            NS.char.mapPointFilters = {vendor=true}
+            Services[1436] = {
+                {category="vendor_food", name="Comida", detail="Pan", x=.2, y=.3},
+                {category="vendor_supplies", name="Suministros", detail="Peletería", x=.4, y=.5},
+                {category="vendor", name="Vendedor", x=.6, y=.7},
+            }
+            Quests[1436] = {}
+        ''')
+        self.show_map()
+        self.assertEqual(self.g.VisibleCount(), 3)
+        self.assertIs(self.g.NS.char.mapPointFilters.vendorGroups, True)
+        filters = self.g.OpenFilters()
+        food = filters["Vendedores de comida y bebida"]
+        supplies = filters["Suministros de profesiones"]
+        unknown = filters["Vendedores sin especialidad conocida"]
+        unknown.toggle()
+        self.g.Flush()
+        self.assertTrue(food.checked())
+        self.assertTrue(supplies.checked())
+        self.assertEqual(self.g.VisibleCount(), 2)
+        food.toggle()
+        self.g.Flush()
+        self.assertTrue(supplies.checked())
+        self.assertFalse(unknown.checked())
+        self.assertEqual(self.g.VisibleCount(), 1)
+        reopened = self.g.OpenFilters()
+        self.assertFalse(reopened["Vendedores de comida y bebida"].checked())
+        self.assertTrue(reopened["Suministros de profesiones"].checked())
+
+    def test_new_character_vendor_filters_stay_off_until_each_one_is_selected(self):
+        self.show_map()
+        filters = self.g.OpenFilters()
+        food = filters["Vendedores de comida y bebida"]
+        supplies = filters["Suministros de profesiones"]
+        unknown = filters["Vendedores sin especialidad conocida"]
+        unknown.toggle()
+        self.g.Flush()
+        self.assertTrue(unknown.checked())
+        self.assertFalse(food.checked())
+        self.assertFalse(supplies.checked())
+
     def test_explicit_destination_uses_game_atlas_while_filters_are_off_and_clears_on_close(self):
         self.lua.execute("""
             NS.char.mapPointFilters = {accept=false, objective=false, turnin=false}

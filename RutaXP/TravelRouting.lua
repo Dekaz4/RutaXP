@@ -259,6 +259,30 @@ function routing.Rejoin(legs, zone, sample, reached)
     end
 end
 
+-- Compare reachable flight stops using the same documented ground/transport
+-- graph as Rejoin. This is a count of zone connections, not a flight network
+-- or a claim about travel time. A missing path stays unknown.
+function routing.DistanceTo(landing, zone, sample)
+    local network = graph[UnitFactionGroup("player")]
+    local origin = zone and currentNode(zone, sample)
+    local target = landing and nodeFor(landing)
+    if not network or not origin or not target then return nil end
+    if origin == target then return 0 end
+    local queue, seen, head = {{node=origin, distance=0}}, {[origin]=true}, 1
+    while head <= #queue do
+        local entry = queue[head]
+        for _, connection in ipairs(network[entry.node] or {}) do
+            if not seen[connection.target] then
+                local distance = entry.distance + 1
+                if connection.target == target then return distance end
+                seen[connection.target] = true
+                queue[#queue+1] = {node=connection.target, distance=distance}
+            end
+        end
+        head = head + 1
+    end
+end
+
 function routing.OnTaxi()
     local flying = value(UnitOnTaxi, 1, "player")
     return flying == true or flying == 1

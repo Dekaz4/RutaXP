@@ -44,7 +44,9 @@ class MapServiceTests(unittest.TestCase):
         self.lua.globals().available = True
         paladin = self.points(1453)
         self.assertEqual({p.category for p in paladin},
-                         {"bank", "auction", "repair", "vendor", "inn", "flight", "mailbox", "trainer"})
+                         {"bank", "auction", "repair", "vendor", "inn", "flight", "mailbox", "trainer",
+                          "vendor_goods", "vendor_food", "vendor_equipment", "vendor_supplies",
+                          "vendor_reagents", "vendor_bags", "vendor_mounts"})
         self.assertFalse(any(p.name == "Osborne" for p in paladin))
         self.lua.globals()["class"] = "ROGUE"
         self.assertTrue(any(p.name == "Osborne" for p in self.points(1453)))
@@ -54,6 +56,25 @@ class MapServiceTests(unittest.TestCase):
         horde_flights = [p.x for p in self.points(1446) if p.category == "flight"]
         self.assertEqual((len(ally_flights), len(horde_flights)), (1, 1))
         self.assertNotEqual(ally_flights, horde_flights)
+
+    def test_merchants_keep_their_names_and_show_a_sourced_specialty(self):
+        self.lua.globals().available = True
+        points = {p.npc: p for p in self.points(1453) if p.npc}
+        cases = {
+            1321: ("vendor_bags", "Bolsas"),
+            1326: ("vendor_reagents", "Venenos"),
+            5565: ("vendor_supplies", "Suministros de peletería"),
+            3518: ("vendor_food", "Pan y productos de panadería"),
+            1304: ("vendor_goods", "Fuegos artificiales"),
+            1297: ("repair", "Arcos y armas de fuego"),
+        }
+        for npc, expected in cases.items():
+            with self.subTest(npc=npc):
+                self.assertEqual((points[npc].category, points[npc].detail), expected)
+                self.assertTrue(points[npc].name)
+        # A name alone (the seasonal vendor) is not evidence of its stock.
+        self.assertEqual(points[15898].category, "vendor")
+        self.assertIsNone(points[15898].detail)
 
 
 if __name__ == "__main__":

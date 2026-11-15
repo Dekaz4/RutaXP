@@ -13,7 +13,14 @@ local categories = {
     {key="bank", label="Bancos", tracking="Banker", texture=136453},
     {key="auction", label="Casas de subastas", tracking="Auctioneer", texture=136452},
     {key="mailbox", label="Buzones", tracking="Mailbox", texture=136459},
-    {key="vendor", label="Otros vendedores", texture=132060, defaultOff=true},
+    {key="vendor_food", label="Vendedores de comida y bebida", texture=132060, defaultOff=true, vendor=true},
+    {key="vendor_equipment", label="Vendedores de armas y armaduras", texture=132060, defaultOff=true, vendor=true},
+    {key="vendor_supplies", label="Suministros de profesiones", texture=132060, defaultOff=true, vendor=true},
+    {key="vendor_reagents", label="Reactivos, venenos y pociones", texture=132060, defaultOff=true, vendor=true},
+    {key="vendor_bags", label="Vendedores de bolsas", texture=132060, defaultOff=true, vendor=true},
+    {key="vendor_mounts", label="Monturas y mascotas", texture=132060, defaultOff=true, vendor=true},
+    {key="vendor_goods", label="Artículos generales y especiales", texture=132060, defaultOff=true, vendor=true},
+    {key="vendor", label="Vendedores sin especialidad conocida", texture=132060, defaultOff=true, vendor=true},
 }
 local byKey = {}
 for order, category in ipairs(categories) do
@@ -26,8 +33,21 @@ byKey.destination = {label="Destino de RutaXP", atlas="Waypoint-MapPin-Untracked
 local map, provider, queued, disabledFlightProvider, destination
 local frames, used = {}, 0
 
+local function migrateVendorFilters(saved)
+    if type(saved) ~= "table" or saved.vendorGroups == true then return end
+    -- Expand the former single preference once. Afterwards changing the
+    -- general-merchandise checkbox must not change the other specialties.
+    if type(saved.vendor) == "boolean" then
+        for _, category in ipairs(categories) do
+            if category.vendor and saved[category.key] == nil then saved[category.key] = saved.vendor end
+        end
+    end
+    saved.vendorGroups = true
+end
+
 local function enabled(key)
     local saved = ns.char and ns.char.mapPointFilters
+    migrateVendorFilters(saved)
     if type(saved) == "table" and type(saved[key]) == "boolean" then return saved[key] end
     return not byKey[key].defaultOff
 end
@@ -36,6 +56,7 @@ local function toggle(key)
     if not ns.char then return end
     local value = not enabled(key)
     if type(ns.char.mapPointFilters) ~= "table" then ns.char.mapPointFilters = {} end
+    migrateVendorFilters(ns.char.mapPointFilters)
     ns.char.mapPointFilters[key] = value
     ns:RefreshMapPoints()
 end
@@ -75,8 +96,12 @@ local function tooltip(frame)
     GameTooltip:SetOwner(frame, "ANCHOR_RIGHT")
     for i, point in ipairs(frame.points) do
         if i == 1 then GameTooltip:SetText(point.name) else GameTooltip:AddLine(point.name, 1, .82, 0, true) end
-        local label = byKey[point.category].label
-        GameTooltip:AddLine(point.detail and (label .. " · " .. point.detail) or label, 1, 1, 1, true)
+        local category = byKey[point.category]
+        local label = category.label
+        if category.vendor then
+            label = point.detail or "Mercancías por consultar"
+        elseif point.detail then label = label .. " · " .. point.detail end
+        GameTooltip:AddLine(label, 1, 1, 1, true)
     end
     GameTooltip:Show()
 end

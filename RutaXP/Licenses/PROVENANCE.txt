@@ -115,3 +115,18 @@ https://worldofwarcraft.blizzard.com/es-es/news/24310968
 The Westfall chest (2041) comes from quest 166 at the end of the Defias
 chain. Quest links are in SendaFH_QuestDB/Quests.lua, item attributes in
 SendaFH_ItemDB/Items.lua and reward options in SendaFH_ItemDB/Forever.lua.
+
+Map merchant specialties
+------------------------
+MapServices.lua keeps pfQuest service locations and localized NPC names.
+Source/map_service_roles.json adds the factual creature_template.SubName
+roles from the CMaNGOS Classic-DB snapshot already credited above, with
+observed creature titles from Efficient Games, CC BY 4.0, build 1.60.1.70862:
+https://github.com/JIVESCORP/eg-link-output-wowf/blob/156f29c9af78b1586883e8eb94a13467eb89638c/data/wowf/1.60.1.70862/creature_details.enUS.json
+Attribution: Efficient Games (https://efficient.games).
+License: https://creativecommons.org/licenses/by/4.0/
+The Spanish specialty labels and filter groups are local adaptations.
+They describe the recorded role; no merchant inventory is copied or promised.
+The original title, source, exact hashes and translation are retained in
+Source/map_service_roles.json. tools/build_map_services.py --verify-roles
+checks that evidence against the pinned source files without networking.

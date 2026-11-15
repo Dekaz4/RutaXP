@@ -100,7 +100,9 @@ local function flatButton(parent, text, width, height, x, y, action, accent)
 end
 
 local function advanceGuide(button)
-    if button.groundDetour then
+    if button.flightGround then
+        ns.FlightNavigation:BeginGround()
+    elseif button.groundDetour then
         ns:BeginGroundDetour()
     elseif button.startsTravelHere then
         local ok, reason = ns:StartTravelHere()
@@ -613,11 +615,14 @@ function ns:RefreshUI()
     local restorePrevious = self.GetPreviousRestorableStep and self:GetPreviousRestorableStep()
     local canGoBack = not travel and (restorePrevious or editSteps and state.cursor > 1)
     self.previousButton:SetEnabled(canGoBack)
+    local flight = editSteps and self.FlightNavigation and self.FlightNavigation:CurrentView()
+    if waypoint and not waypoint.flightNavigation then flight = nil end
     for _, button in ipairs({self.nextButton, self.trackerNext}) do
         button.continuesGuide = continuation ~= nil
         button.startsTravelHere = travel and travel.waiting and travel.localStart == true
         button.groundDetour = travel and travel.groundOption ~= nil
-        button:SetText(button.groundDetour and "Ir sin vuelo" or button.startsTravelHere and "Empezar aquí"
+        button.flightGround = flight and flight.canGround == true
+        button:SetText((button.flightGround or button.groundDetour) and "Ir sin vuelo" or button.startsTravelHere and "Empezar aquí"
             or complete and "Continuar" or "Siguiente >")
         button:SetEnabled(button.groundDetour or button.startsTravelHere or editSteps and not complete or continuation ~= nil)
     end
