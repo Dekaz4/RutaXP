@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "scope": {
     "guides": 57,
-    "questIDs": 1902,
-    "acceptances": 2291,
-    "withReportedEvidence": 1851,
+    "questIDs": 1903,
+    "acceptances": 2294,
+    "withReportedEvidence": 1852,
     "withoutReportedEvidence": 51
   },
   "sourceCommits": {
@@ -50,9 +50,9 @@
     "missing_active_parent": 10,
     "missing_prerequisite": 49,
     "no_source_data": 55,
-    "prerequisite_conflict_review": 45,
+    "prerequisite_conflict_review": 46,
     "selector_conflict_review": 35,
-    "source_omission_review": 57
+    "source_omission_review": 58
   },
   "byGuide": [
     {
@@ -140,7 +140,7 @@
     },
     {
       "guideID": "forever/alliance/07-thousand-needles",
-      "acceptances": 41,
+      "acceptances": 42,
       "findings": {
         "level_conflict_review": 1,
         "missing_prerequisite": 1,
@@ -151,10 +151,12 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "acceptances": 46,
+      "acceptances": 48,
       "findings": {
         "level_conflict_review": 1,
-        "no_source_data": 6
+        "no_source_data": 6,
+        "prerequisite_conflict_review": 1,
+        "source_omission_review": 1
       }
     },
     {
@@ -3055,8 +3057,39 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 1,
+      "step": 2,
       "goal": 3,
+      "questID": 98230,
+      "title": "This Land Was Their Land",
+      "kind": "prerequisite_conflict_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          474,
+          98223
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [
+          474
+        ],
+        "any": []
+      },
+      "evidence": [
+        {
+          "source": "everythingquests",
+          "line": 15479
+        }
+      ],
+      "dependencyLocations": {
+        "474": []
+      }
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 2,
+      "goal": 4,
       "questID": 98072,
       "title": "Crocs of the Sky",
       "kind": "level_conflict_review",
@@ -3072,7 +3105,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 7,
+      "step": 8,
       "goal": 4,
       "questID": 98283,
       "title": "Carnage",
@@ -3084,7 +3117,29 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 16,
+      "step": 10,
+      "goal": 3,
+      "questID": 98291,
+      "title": "Muerte a los Faucedraco",
+      "kind": "source_omission_review",
+      "field": "prerequisites",
+      "authored": {
+        "all": [
+          98245,
+          98246
+        ],
+        "any": []
+      },
+      "reported": {
+        "all": [],
+        "any": []
+      },
+      "evidence": [],
+      "dependencyLocations": {}
+    },
+    {
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "step": 19,
       "goal": 1,
       "questID": 87318,
       "title": "Hearts of the Lost",
@@ -3096,7 +3151,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 16,
+      "step": 19,
       "goal": 3,
       "questID": 88758,
       "title": "Sentiments of the Lost",
@@ -3108,7 +3163,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 20,
+      "step": 23,
       "goal": 12,
       "questID": 98463,
       "title": "Talk of the Town",
@@ -3120,7 +3175,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 20,
+      "step": 23,
       "goal": 13,
       "questID": 98059,
       "title": "Hillsbrad's Hoard",
@@ -3132,7 +3187,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 38,
+      "step": 41,
       "goal": 2,
       "questID": 79536,
       "title": "Greater Friend of the Library",
@@ -7684,6 +7739,6 @@
     "Local dependency locations are diagnostic; this audit does not assume a previous zone was completed.",
     "No runtime quest completion, profession or player's progress is modified by this audit."
   ],
-  "inputSha256": "87a88dbec7bfa69d5f459af987c0fee46659feca4721525d61ae577b3aacd19e",
-  "evidenceSha256": "b5cf83fa6e2250a690074b4063701c75d45e3ff7c7a752a7f9573c73b5cd7c4d"
+  "inputSha256": "81199b4d51f4299868f20697217bc186e7199ae3895cdbb9d4f60994dbdc5d45",
+  "evidenceSha256": "8417e12fa9b40126e0e7610c5e8c3078ca2fcf28f9d180c52e19604433045442"
 }

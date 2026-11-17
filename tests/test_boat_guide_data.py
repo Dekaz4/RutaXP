@@ -14,7 +14,7 @@ SOURCE, builder = additions.SOURCE, additions.builder
 def shipping_boat():
     document = json.loads((SOURCE / "leveling.json").read_text(encoding="utf8"))
     guide = next(g for g in document["guides"] if g["id"] == GUIDE)
-    return guide, guide["steps"][30]["goals"][2]
+    return guide, next(goal for goal in guide["steps"][30]["goals"] if goal["t"] == "boat")
 
 
 class BoatGuideDataTests(unittest.TestCase):
@@ -30,7 +30,7 @@ class BoatGuideDataTests(unittest.TestCase):
 
     def test_reviewed_transport_is_a_nonquest_action_with_a_distinct_land_arrival(self):
         guide, boat = shipping_boat()
-        self.assertEqual((len(guide["steps"]), len(guide["steps"][30]["goals"])), (37, 3))
+        self.assertEqual((len(guide["steps"]), len(guide["steps"][30]["goals"])), (37, 4))
         self.assertEqual(boat["t"], "boat")
         self.assertNotIn("quest", boat)
         self.assertNotIn("questID", boat)
@@ -75,7 +75,8 @@ class BoatGuideDataTests(unittest.TestCase):
         for field in ("arrival", "departure", "departureLand", "arrivalDock"):
             with self.subTest(field=field):
                 changed = copy.deepcopy(guide)
-                changed["steps"][30]["goals"][2][field]["x"] += 1
+                boat = next(goal for goal in changed["steps"][30]["goals"] if goal["t"] == "boat")
+                boat[field]["x"] += 1
                 self.assertNotEqual(builder.route_shape(changed), original)
 
     def test_old_note_mark_is_archived_without_completing_the_boat(self):
@@ -85,16 +86,16 @@ class BoatGuideDataTests(unittest.TestCase):
                     "cursor": 31, "routeRevision": 4, "placed": True, "review": True,
                     "confirmed": {"31:1": True}, "skipped": {"31:2": True}}}}
                 saved["progress"][GUIDE][field]["31:3"] = True
-                h = MigrationHost(saved)
+                h = MigrationHost(saved, {98223: {"delivered": True}})
                 h.state.level = 30
                 h.initialize()
                 state = h.ns.char.progress[GUIDE]
                 self.assertEqual(state.cursor, 31)
-                self.assertEqual(state.routeRevision, 5)
+                self.assertEqual(state.routeRevision, h.ns.guides[GUIDE].routeRevision)
                 self.assertTrue(state.confirmed["31:1"])
-                self.assertTrue(state.skipped["31:2"])
-                self.assertIsNone(state.confirmed["31:3"])
-                self.assertIsNone(state.skipped["31:3"])
+                self.assertTrue(state.skipped["31:3"])
+                self.assertIsNone(state.confirmed["31:4"])
+                self.assertIsNone(state.skipped["31:4"])
                 self.assertTrue(h.ns.char.guideMigrationBackups[GUIDE + ":5"].progress[field]["31:3"])
 
     def test_completed_chapter_remains_complete(self):

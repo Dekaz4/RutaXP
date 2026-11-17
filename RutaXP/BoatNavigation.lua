@@ -24,6 +24,35 @@ local function keyFor(goal, guide, stepIndex, index)
     return table.concat({guide.id, guide.routeRevision or 1, stepIndex, index,
         signature(goal.departure), signature(goal.arrival)}, ":")
 end
+local function sameJourney(oldKey, key, guide)
+    if not key or type(oldKey) ~= "string" then return false end
+    if oldKey == key then return true end
+    local prefix = guide.id .. ":"
+    if oldKey:sub(1, #prefix) ~= prefix then return false end
+    local revision, si, gi, signature = oldKey:sub(#prefix + 1):match("^(%d+):(%d+):(%d+):(.+)$")
+    local current, targetStep, targetGoal, targetSignature = key:sub(#prefix + 1):match("^(%d+):(%d+):(%d+):(.+)$")
+    revision, current = tonumber(revision), tonumber(current)
+    if not revision or not current or signature ~= targetSignature then return false end
+    local slot, target = si .. ":" .. gi, targetStep .. ":" .. targetGoal
+    -- A real arrival or transport phase survives only an explicit mapping of
+    -- the same boat action with unchanged departure and land-arrival points.
+    for _ = 1, 20 do
+        if revision == current then return slot == target end
+        local nextRevision
+        for _, migration in ipairs(guide.progressMigrations or {}) do
+            if migration.from == revision and migration.to > revision then
+                if migration.retiredGoalKeys and migration.retiredGoalKeys[slot] then return false end
+                slot = migration.goalMap and migration.goalMap[slot]
+                if not slot then return false end
+                nextRevision = migration.to
+                break
+            end
+        end
+        if not nextRevision then return false end
+        revision = nextRevision
+    end
+    return false
+end
 local function storage()
     if not ns.char then return end
     if type(ns.char.boatNavigation) ~= "table" then ns.char.boatNavigation = {} end
@@ -35,8 +64,11 @@ function B:IsComplete(goal, guide, stepIndex, index, state)
     if state and state.review then return false end
     local key = keyFor(goal, guide, stepIndex, index)
     local saved = ns.char and ns.char.boatNavigation
-    return key ~= nil and type(saved) == "table" and type(saved.arrivals) == "table"
-        and saved.arrivals[key] == true
+    if not key or type(saved) ~= "table" or type(saved.arrivals) ~= "table" then return false end
+    for oldKey, complete in pairs(saved.arrivals) do
+        if complete == true and sameJourney(oldKey, key, guide) then return true end
+    end
+    return false
 end
 local function context(goal)
     if not ns.char or not ns.GetCurrent or not ns.GetActiveGoal then return end
@@ -73,8 +105,8 @@ local function arrived(ctx, zone, sample)
     local count = 0; for _ in pairs(saved.arrivals) do count = count + 1 end
     if count >= 128 then return false end
     saved.arrivals[ctx.key] = true
-    if saved.boarding == ctx.key then saved.boarding = nil end
-    if saved.landing == ctx.key then saved.landing = nil end
+    if sameJourney(saved.boarding, ctx.key, ctx.guide) then saved.boarding = nil end
+    if sameJourney(saved.landing, ctx.key, ctx.guide) then saved.landing = nil end
     B.arrivalDirty = true
     return true
 end
@@ -93,7 +125,8 @@ local function viewFor(ctx, observe, reviewPhase)
     if zone == ctx.goal.arrival.map then
         local atDock = near(ctx.goal.arrivalDock, zone, sample)
         if atDock and trackPhase then saved.landing = ctx.key end
-        if saved.boarding == ctx.key and saved.landing ~= ctx.key and not atDock then
+        if sameJourney(saved.boarding, ctx.key, ctx.guide)
+            and not sameJourney(saved.landing, ctx.key, ctx.guide) and not atDock then
             return {state="crossing", shortText="Espera a que atraque el barco",
                 text="Permanece a bordo hasta que el barco atraque en " .. name .. ". Después baja por el muelle y sigue la flecha."}
         end
@@ -105,12 +138,12 @@ local function viewFor(ctx, observe, reviewPhase)
         -- The source's verified land point is separate from the moving ship.
         -- Distance from the pier alone would also match a boat sailing away.
         local backOnLand = near(ctx.goal.departureLand, zone, sample)
-        if trackPhase and saved.boarding == ctx.key and backOnLand then
+        if trackPhase and sameJourney(saved.boarding, ctx.key, ctx.guide) and backOnLand then
             saved.boarding = nil
         end
         local atDock = near(ctx.goal.departure, zone, sample)
         if atDock and trackPhase then saved.boarding, saved.landing = ctx.key, nil end
-        if atDock or (saved.boarding == ctx.key and not backOnLand) then
+        if atDock or (sameJourney(saved.boarding, ctx.key, ctx.guide) and not backOnLand) then
             return {state="boarding", shortText="Espera el barco a " .. name,
                 text="Espera en este muelle y sube al barco hacia " .. name .. ". Permanece a bordo hasta llegar; después baja y sigue la flecha."}
         end

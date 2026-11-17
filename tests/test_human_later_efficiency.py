@@ -49,7 +49,9 @@ class LaterAllianceEfficiencyTests(unittest.TestCase):
         self.assertEqual((errands[0]["quest"], errands[-1]["quest"]), (2609, 2609))
 
     def test_returning_to_a_giver_keeps_prerequisites_and_optional_items_honest(self):
-        prospector = self.step("30-40/01-hillsbrad-foothills", 41)["goals"]
+        chapter = self.guides["forever/alliance/30-40/01-hillsbrad-foothills"]
+        prospector = next(step["goals"] for step in chapter["steps"]
+                          if any(q.get("quest") == 514 and q["t"] == "turnin" for q in step["goals"]))
         self.assertEqual([q.get("quest") for q in prospector], [514, 525, 98313, 1453, 98300, None])
         self.assertEqual(prospector[1]["pre"], [514])
         self.assertEqual(prospector[0]["npc"], prospector[1]["npc"])

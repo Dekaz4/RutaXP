@@ -23,12 +23,16 @@ class BoatHost:
         self.s.classToken, self.s.raceToken = "ROGUE", "Human"
         self.s.mapID, self.s.x, self.s.y = position
         self.guide = self.ns.guides[GUIDE]
-        self.step, self.goal = self.guide.steps[31], self.guide.steps[31].goals[3]
+        self.step = self.guide.steps[31]
+        self.goal_index, self.goal = next((gi, goal) for gi, goal in self.step.goals.items()
+                                         if goal.t == "boat")
+        self.goal_key = f"31:{self.goal_index}"
         self.h.g.RutaXPCharDB = self.h.table(saved or {
             "seen": True, "activeGuide": GUIDE, "auto": True,
             "duo": {"enabled": False, "autoPair": False},
             "progress": {GUIDE: {"cursor": 31, "routeRevision": self.guide.routeRevision,
-                "placed": True, "confirmed": {"31:1": True}, "skipped": {"31:2": True}}}})
+                "placed": True, "confirmed": {"31:1": True},
+                "skipped": {f"31:{gi}": True for gi in range(2, self.goal_index)}}}})
         self.h.g.EmitAddonEvent("ADDON_LOADED", "RutaXP")
         self.h.g.EmitAddonEvent("PLAYER_LOGIN")
         self.b = self.ns.BoatNavigation
@@ -46,13 +50,77 @@ class BoatHost:
         self.b.Tick(self.b, .6)
 
     def complete(self):
-        return self.b.IsComplete(self.b, self.goal, self.guide, 31, 3, self.ns.char.progress[GUIDE])
+        return self.b.IsComplete(self.b, self.goal, self.guide, 31, self.goal_index, self.ns.char.progress[GUIDE])
 
     def progress(self):
         return primitive_copy(self.ns.char.progress)
 
 
 class BoatNavigationTests(unittest.TestCase):
+    def old_boat_key(self, h, key):
+        self.assertGreater(h.guide.routeRevision, 5)
+        self.assertEqual(h.goal_index, 4)
+        prefix = f"{GUIDE}:{h.guide.routeRevision}:31:{h.goal_index}:"
+        self.assertTrue(key.startswith(prefix))
+        return f"{GUIDE}:5:31:3:" + key[len(prefix):]
+
+    def test_real_arrival_survives_moving_the_boat_row_in_a_route_repair(self):
+        h = BoatHost()
+        h.move((1445, .6746, .512))
+        h.tick()
+        arrivals = h.ns.char.boatNavigation.arrivals
+        key = next(iter(arrivals.keys()))
+        old = self.old_boat_key(h, key)
+        arrivals[key], arrivals[old] = None, True
+        h.move((1413, .5, .78))
+        before = primitive_copy(h.ns.char)
+        self.assertTrue(h.complete())
+        self.assertEqual(primitive_copy(h.ns.char), before)
+        self.assertFalse(h.ns.IsQuestDelivered(h.ns, 98223))
+
+    def test_transport_phase_survives_the_same_explicit_boat_mapping(self):
+        for phase, position, expected in (
+            ("boarding", (1437, .025, .6376), "boarding"),
+            ("landing", (1445, .69, .53), "landing"),
+        ):
+            with self.subTest(phase=phase):
+                h = BoatHost(position=(1437, .0474, .6376))
+                h.view()
+                saved = h.ns.char.boatNavigation
+                old = self.old_boat_key(h, saved.boarding)
+                saved.boarding = old
+                if phase == "landing":
+                    saved.landing = old
+                h.move(position)
+                self.assertEqual(h.view().state, expected)
+                self.assertFalse(h.complete())
+                if phase == "landing":
+                    self.assertIsNotNone(h.point())
+
+    def test_other_slot_or_changed_endpoints_do_not_inherit_old_arrival(self):
+        h = BoatHost(position=(1437, .0474, .6376))
+        h.view()
+        old = self.old_boat_key(h, h.ns.char.boatNavigation.boarding)
+        for invalid in (old.replace(":5:31:3:", ":5:31:2:"),
+                        old.replace("1437,e,", "1437,l,", 1),
+                        old + ",different", old.replace(":5:31:3:", ":99:31:3:")):
+            with self.subTest(key=invalid):
+                h.ns.char.boatNavigation.arrivals = h.h.table({invalid: True})
+                self.assertFalse(h.complete())
+
+    def test_retired_or_unmapped_old_action_does_not_count_as_arrived(self):
+        h = BoatHost(position=(1437, .0474, .6376))
+        h.view()
+        old = self.old_boat_key(h, h.ns.char.boatNavigation.boarding)
+        h.guide.routeRevision = 6
+        h.ns.char.boatNavigation.arrivals = h.h.table({old: True})
+        for mapping in ({}, {"31:3": "31:4"}):
+            h.guide.progressMigrations = h.h.table([{
+                "from": 5, "to": 6, "goalMap": mapping,
+                "retiredGoalKeys": {"31:3": True} if mapping else {},
+            }])
+            self.assertFalse(h.complete())
+
     def test_the_real_step_pins_the_south_pier_even_when_its_quest_was_skipped(self):
         h = BoatHost()
         before = h.progress()
@@ -156,7 +224,7 @@ class BoatNavigationTests(unittest.TestCase):
         h.tick()
         self.assertTrue(h.complete())
         self.assertEqual(h.ns.char.progress[GUIDE].cursor, 33)
-        self.assertIsNone(h.ns.char.progress[GUIDE].confirmed["31:3"])
+        self.assertIsNone(h.ns.char.progress[GUIDE].confirmed[h.goal_key])
         self.assertFalse(h.ns.IsQuestDelivered(h.ns, 474))
         h.move((1413, .5, .78))
         reloaded = BoatHost(saved=primitive_copy(h.ns.char), position=(1413, .5, .78))
@@ -192,7 +260,7 @@ class BoatNavigationTests(unittest.TestCase):
                     h.ns.char.progress[GUIDE].cursor = 30
                 before = primitive_copy(h.ns.char)
                 if mode == "shared":
-                    h.b.GetSharedView(h.b, h.goal, h.guide, 31, 3)
+                    h.b.GetSharedView(h.b, h.goal, h.guide, 31, h.goal_index)
                 elif mode == "review":
                     self.assertEqual(h.view().state, "landing")
                     self.assertAlmostEqual(h.point().x, .6746)
@@ -206,12 +274,12 @@ class BoatNavigationTests(unittest.TestCase):
     def test_manual_confirmation_or_skipping_cannot_create_an_arrival(self):
         h = BoatHost()
         state = h.ns.char.progress[GUIDE]
-        state.confirmed["31:3"] = True
+        state.confirmed[h.goal_key] = True
         h.ns.Sync(h.ns)
         self.assertEqual(h.ns.GetActiveGoal(h.ns)[2], "active")
         self.assertEqual(state.cursor, 31)
         self.assertFalse(h.complete())
-        state.skipped["31:3"] = True
+        state.skipped[h.goal_key] = True
         h.ns.Sync(h.ns)
         self.assertEqual(state.cursor, 33)
         self.assertFalse(h.complete())

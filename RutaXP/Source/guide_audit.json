@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "2734ae4200ab6404e6db7fc8d85aba0b62022c858b0bcba9fba57b80234eba46",
+      "sha256": "ac9e7ae1d329f69f34a38172c45144184d1edaccac643fbdb3d8d6554add6cc6",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -558,15 +558,17 @@
         "wetlands-daily-delivery-6",
         "menethil-lightforge-chest-chain-4",
         "ashenvale-later-lightforge-alternative-2",
-        "menethil-theramore-boat-5"
+        "menethil-theramore-boat-5",
+        "wetlands-old-habits-before-nekrosh-return-6",
+        "wetlands-stoutfist-howin-prerequisites-5"
       ]
     }
   },
   "totals": {
     "guides": 57,
-    "goals": 7452,
-    "direct": 6569,
-    "generated_instruction": 7452,
+    "goals": 7459,
+    "direct": 6576,
+    "generated_instruction": 7459,
     "missing_goal_note_text": 3663,
     "missing": 287,
     "no_fixed_point_expected": 299,
@@ -577,13 +579,13 @@
     "reference_only": 3,
     "conditional_navigation": 2,
     "conditional_point_expected": 2,
-    "steps": 2342
+    "steps": 2345
   },
   "byAction": {
     "accept": {
-      "goals": 2291,
-      "direct": 2227,
-      "generated_instruction": 2291,
+      "goals": 2294,
+      "direct": 2230,
+      "generated_instruction": 2294,
       "missing_goal_note_text": 1281,
       "missing": 64,
       "no_fixed_point_expected": 64,
@@ -601,9 +603,9 @@
       "candidates": 1
     },
     "collect": {
-      "goals": 1105,
-      "direct": 1105,
-      "generated_instruction": 1105,
+      "goals": 1106,
+      "direct": 1106,
+      "generated_instruction": 1106,
       "missing_goal_note_text": 591
     },
     "complete": {
@@ -696,9 +698,9 @@
       "direct": 9
     },
     "turnin": {
-      "goals": 2290,
-      "direct": 2290,
-      "generated_instruction": 2290,
+      "goals": 2293,
+      "direct": 2293,
+      "generated_instruction": 2293,
       "missing_goal_note_text": 779,
       "empty_authored_subtitle": 81
     },
@@ -1557,10 +1559,10 @@
       "guideID": "forever/alliance/07-thousand-needles",
       "title": "Las Mil Agujas, Bosque del Ocaso y Los Humedales",
       "counts": {
-        "goals": 128,
+        "goals": 130,
         "candidates": 4,
-        "generated_instruction": 128,
-        "direct": 118,
+        "generated_instruction": 130,
+        "direct": 120,
         "missing_goal_note_text": 29,
         "missing": 6,
         "no_fixed_point_expected": 6,
@@ -1568,9 +1570,9 @@
       },
       "byAction": {
         "accept": {
-          "goals": 41,
-          "direct": 39,
-          "generated_instruction": 41,
+          "goals": 42,
+          "direct": 40,
+          "generated_instruction": 42,
           "missing_goal_note_text": 16,
           "missing": 2,
           "no_fixed_point_expected": 2,
@@ -1622,9 +1624,9 @@
           "generated_instruction": 2
         },
         "turnin": {
-          "goals": 39,
-          "direct": 39,
-          "generated_instruction": 39,
+          "goals": 40,
+          "direct": 40,
+          "generated_instruction": 40,
           "missing_goal_note_text": 8,
           "empty_authored_subtitle": 1
         },
@@ -1640,9 +1642,9 @@
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
       "title": "Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta",
       "counts": {
-        "goals": 116,
-        "direct": 110,
-        "generated_instruction": 116,
+        "goals": 121,
+        "direct": 115,
+        "generated_instruction": 121,
         "missing_goal_note_text": 31,
         "missing": 2,
         "no_fixed_point_expected": 2,
@@ -1651,9 +1653,9 @@
       },
       "byAction": {
         "accept": {
-          "goals": 46,
-          "direct": 46,
-          "generated_instruction": 46,
+          "goals": 48,
+          "direct": 48,
+          "generated_instruction": 48,
           "missing_goal_note_text": 17,
           "empty_authored_subtitle": 1
         },
@@ -1663,9 +1665,9 @@
           "generated_instruction": 1
         },
         "collect": {
-          "goals": 13,
-          "direct": 13,
-          "generated_instruction": 13
+          "goals": 14,
+          "direct": 14,
+          "generated_instruction": 14
         },
         "complete": {
           "goals": 1,
@@ -1713,9 +1715,9 @@
           "missing_goal_note_text": 1
         },
         "turnin": {
-          "goals": 36,
-          "direct": 36,
-          "generated_instruction": 36,
+          "goals": 38,
+          "direct": 38,
+          "generated_instruction": 38,
           "missing_goal_note_text": 12
         }
       }
@@ -6945,7 +6947,7 @@
       "reason": "Usa el hogar realmente vinculado; no debe inventarse su posición.",
       "unresolved": false,
       "goalNote": null,
-      "stepNote": null,
+      "stepNote": "Entrega primero el libro y la cabeza antes de tomar el barco a Theramore.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
@@ -6998,9 +7000,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/01-hillsbrad-foothills:10:1",
+      "key": "forever/alliance/30-40/01-hillsbrad-foothills:13:1",
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "stepIndex": 10,
+      "stepIndex": 13,
       "goalIndex": 1,
       "action": "note",
       "questID": null,
@@ -7010,7 +7012,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "stepIndex": 10,
+        "stepIndex": 13,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -7022,9 +7024,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/01-hillsbrad-foothills:29:2",
+      "key": "forever/alliance/30-40/01-hillsbrad-foothills:32:2",
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "stepIndex": 29,
+      "stepIndex": 32,
       "goalIndex": 2,
       "action": "note",
       "questID": null,
@@ -7034,7 +7036,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "stepIndex": 29,
+        "stepIndex": 32,
         "goalIndex": 2
       },
       "classification": "semantic_no_location",
@@ -13960,9 +13962,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/30-40/01-hillsbrad-foothills:34:3",
+      "key": "forever/alliance/30-40/01-hillsbrad-foothills:37:3",
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "stepIndex": 34,
+      "stepIndex": 37,
       "goalIndex": 3,
       "action": "complete",
       "questID": 1447,
@@ -13972,7 +13974,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "stepIndex": 34,
+        "stepIndex": 37,
         "goalIndex": 3
       },
       "kind": "step_instructions_not_goal",
@@ -16859,6 +16861,6 @@
       "arrival",
       "arrivalDock"
     ],
-    "semanticsSha256": "cbc8954b2ace588e7f4e5c191ff61fd2bb2a10d02e2ecc5d67dc25b51682f54f"
+    "semanticsSha256": "cabac6e2d549604b64c19ae21debc81569a5fc2333ad83222617c425f7d92ce7"
   }
 }

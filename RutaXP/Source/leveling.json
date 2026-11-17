@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "2734ae4200ab6404e6db7fc8d85aba0b62022c858b0bcba9fba57b80234eba46",
+      "sha256": "ac9e7ae1d329f69f34a38172c45144184d1edaccac643fbdb3d8d6554add6cc6",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -558,7 +558,9 @@
         "wetlands-daily-delivery-6",
         "menethil-lightforge-chest-chain-4",
         "ashenvale-later-lightforge-alternative-2",
-        "menethil-theramore-boat-5"
+        "menethil-theramore-boat-5",
+        "wetlands-old-habits-before-nekrosh-return-6",
+        "wetlands-stoutfist-howin-prerequisites-5"
       ]
     }
   },
@@ -578,13 +580,13 @@
       "Alliance": 29,
       "Horde": 28
     },
-    "steps": 2342,
-    "goals": 7452,
+    "steps": 2345,
+    "goals": 7459,
     "goalTypes": {
-      "accept": 2291,
+      "accept": 2294,
       "boat": 1,
       "buy": 27,
-      "collect": 1105,
+      "collect": 1106,
       "complete": 239,
       "fly": 165,
       "getfp": 76,
@@ -597,7 +599,7 @@
       "sethome": 74,
       "talk": 10,
       "train": 126,
-      "turnin": 2290,
+      "turnin": 2293,
       "use": 18,
       "vendor": 48
     },
@@ -608,46 +610,46 @@
       "candidates": 586,
       "chainStarted": 3,
       "class": 116,
-      "closedBy": 158,
-      "count": 1200,
+      "closedBy": 159,
+      "count": 1201,
       "departure": 1,
       "departureLand": 1,
-      "f": 5497,
-      "from": 739,
+      "f": 5504,
+      "from": 740,
       "fromAlso": 97,
       "fromFaction": 11,
-      "fromKind": 738,
+      "fromKind": 739,
       "fromRank": 17,
       "group": 9,
-      "instruction": 7452,
+      "instruction": 7459,
       "instructionAsHint": 2,
       "instructionReplacesContext": 6,
       "instructionVerb": 11,
-      "item": 1215,
-      "itemName": 1215,
+      "item": 1216,
+      "itemName": 1216,
       "level": 25,
       "location": 400,
-      "map": 6570,
-      "minLevel": 2289,
+      "map": 6577,
+      "minLevel": 2292,
       "navigationHint": 434,
       "navigationMode": 14,
       "node": 76,
-      "note": 3575,
-      "npc": 4988,
-      "npcName": 4377,
-      "objName": 304,
-      "object": 304,
-      "oi": 1679,
+      "note": 3582,
+      "npc": 4992,
+      "npcName": 4381,
+      "objName": 306,
+      "object": 306,
+      "oi": 1680,
       "only": 357,
       "optional": 415,
       "pre": 1217,
-      "preAll": 63,
-      "preTitles": 1393,
+      "preAll": 64,
+      "preTitles": 1394,
       "profLine": 18,
       "profName": 18,
       "profRank": 18,
-      "qlvl": 2291,
-      "quest": 6499,
+      "qlvl": 2294,
+      "quest": 6506,
       "r": 2,
       "rank": 1,
       "rankMax": 1,
@@ -655,14 +657,14 @@
       "skill": 1,
       "skillLine": 1,
       "spots": 1301,
-      "spread": 671,
-      "t": 7452,
+      "spread": 672,
+      "t": 7459,
       "target": 611,
       "text": 223,
-      "title": 6500,
-      "x": 6570,
-      "y": 6570,
-      "z": 4473
+      "title": 6507,
+      "x": 6577,
+      "y": 6577,
+      "z": 4475
     }
   },
   "mapFrames": {
@@ -96696,7 +96698,7 @@
         },
         {
           "title": "Jefe Nek'rosh",
-          "note": "Ve al campamento al sureste de la catapulta. El jefe es élite; despeja los guardias y combátelo en grupo.",
+          "note": "Recoge la cabeza y el libro del campamento antes de regresar al capitán.",
           "goals": [
             {
               "t": "collect",
@@ -96714,17 +96716,47 @@
               "fromKind": "npc",
               "note": "Derrota al jefe Nek'rosh y recoge su cabeza. Es élite: hazlo en grupo.",
               "instruction": "Recoge «Cabeza de Nek'rosh» (1 en total) del botín de «Jefe Nek'rosh».\nZona: Los Humedales.\nDerrota al jefe Nek'rosh y recoge su cabeza. Es élite: hazlo en grupo."
+            },
+            {
+              "title": "Viejas costumbres",
+              "minLevel": 23,
+              "note": "Recoge el libro junto al campamento de Nek'rosh y acepta Viejas costumbres antes de volver a Menethil.",
+              "t": "accept",
+              "quest": 98223,
+              "object": 671518,
+              "objName": "Libro de hechizos andrajoso",
+              "map": 1437,
+              "x": 53.46,
+              "y": 54.52,
+              "f": "e",
+              "qlvl": 31,
+              "instruction": "Interactúa con «Libro de hechizos andrajoso» y acepta «Viejas costumbres».\nZona: Los Humedales.\nRecoge el libro junto al campamento de Nek'rosh y acepta Viejas costumbres antes de volver a Menethil."
             }
           ]
         },
         {
           "title": "Menethil y el barco a Theramore",
+          "note": "Entrega primero el libro y la cabeza antes de tomar el barco a Theramore.",
           "goals": [
             {
               "t": "hearth",
               "area": 2104,
               "location": "Mesón Aguahonda",
               "instruction": "Comprueba que tu piedra de hogar está vinculada a «Mesón Aguahonda» y úsala para regresar allí."
+            },
+            {
+              "title": "Viejas costumbres",
+              "t": "turnin",
+              "quest": 98223,
+              "npc": 2104,
+              "npcName": "Capitán Puñorrecio",
+              "map": 1437,
+              "x": 9.86,
+              "y": 57.49,
+              "z": 26.8,
+              "f": "e",
+              "note": "Entrega el libro a Capitán Puñorrecio; es un requisito de Esta era su tierra.",
+              "instruction": "Habla con «Capitán Puñorrecio» y entrega «Viejas costumbres».\nZona: Los Humedales.\nEntrega el libro a Capitán Puñorrecio; es un requisito de Esta era su tierra."
             },
             {
               "t": "turnin",
@@ -97978,7 +98010,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 5,
+      "routeRevision": 6,
       "progressMigrations": [
         {
           "from": 1,
@@ -98245,6 +98277,63 @@
           "retiredGoalKeys": {
             "31:3": true
           }
+        },
+        {
+          "from": 5,
+          "to": 6,
+          "goalMap": {
+            "31:2": "31:3",
+            "31:3": "31:4"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 30,
+            "31": 31,
+            "32": 32,
+            "33": 33,
+            "34": 34,
+            "35": 35,
+            "36": 36,
+            "37": 37,
+            "38": 38
+          },
+          "affectedQuestIDs": [
+            98223
+          ],
+          "previousStepCount": 37,
+          "firstAffectedStep": 30,
+          "addedGoalKeys": [
+            "30:2",
+            "31:2"
+          ]
         }
       ]
     },
@@ -98268,9 +98357,46 @@
       "sourceLicense": "GPL-3.0-only; avisos de datos en Licenses/",
       "steps": [
         {
+          "title": "El libro de Nek'rosh",
+          "note": "Recupera el libro que necesita Puñorrecio antes de pedirle Esta era su tierra. Si ya lo llevas o entregaste, continúa a Menethil.",
+          "goals": [
+            {
+              "title": "Viejas costumbres",
+              "minLevel": 23,
+              "note": "Si aún no tienes Viejas costumbres, recoge el libro de hechizos andrajoso junto al campamento de Nek'rosh. Después llévalo a Capitán Puñorrecio en Menethil. El diario de Henrig es otra misión.",
+              "t": "accept",
+              "quest": 98223,
+              "object": 671518,
+              "objName": "Libro de hechizos andrajoso",
+              "map": 1437,
+              "x": 53.46,
+              "y": 54.52,
+              "f": "e",
+              "qlvl": 31,
+              "closedBy": [
+                98230
+              ],
+              "instruction": "Interactúa con «Libro de hechizos andrajoso» y acepta «Viejas costumbres».\nZona: Los Humedales.\nSi aún no tienes Viejas costumbres, recoge el libro de hechizos andrajoso junto al campamento de Nek'rosh. Después llévalo a Capitán Puñorrecio en Menethil. El diario de Henrig es otra misión."
+            }
+          ]
+        },
+        {
           "title": "Puerto de Menethil",
           "note": "Capitán Puñorrecio está parado en Castillo de Menethil; James Halloran y Sylessa Duskwhisper está parado junto a la puerta norte.",
           "goals": [
+            {
+              "title": "Old Habits",
+              "t": "turnin",
+              "quest": 98223,
+              "npc": 2104,
+              "npcName": "Capitán Puñorrecio",
+              "map": 1437,
+              "x": 9.86,
+              "y": 57.49,
+              "z": 26.8,
+              "f": "e",
+              "instruction": "Habla con «Capitán Puñorrecio» y entrega «Old Habits».\nZona: Los Humedales."
+            },
             {
               "title": "From the Ashes",
               "minLevel": 23,
@@ -98303,10 +98429,12 @@
               "qlvl": 29,
               "instruction": "Habla con «Capitán Puñorrecio» y acepta «This Land Was Their Land».\nZona: Los Humedales.\nCapitán Puñorrecio: para Howin Plumamable.",
               "preAll": [
-                474
+                474,
+                98223
               ],
               "preTitles": {
-                "474": "Derrotar a Nek'rosh"
+                "474": "Derrotar a Nek'rosh",
+                "98223": "Viejas costumbres"
               }
             },
             {
@@ -98526,7 +98654,7 @@
         },
         {
           "title": "El Green Belt",
-          "note": "Siga la carretera noreste hacial Green Belt: Howin Plumamable campamentos a su lado, Rethiel el Guardaverde un corto camino al este.",
+          "note": "Entrega Esta era su tierra a Howin y acepta las dos misiones de tajobuches. Rethiel está al este.",
           "goals": [
             {
               "title": "This Land Was Their Land",
@@ -98557,18 +98685,18 @@
             },
             {
               "t": "accept",
-              "quest": 98291,
-              "title": "Muerte a los Faucedraco",
-              "minLevel": 22,
-              "qlvl": 30,
+              "quest": 98246,
+              "title": "Tiempos difíciles",
+              "minLevel": 21,
+              "qlvl": 29,
               "npc": 270637,
               "npcName": "Howin Plumamable",
               "map": 1437,
               "x": 49.36,
-              "y": 42.05,
-              "f": "e",
-              "note": "Habla con Howin antes de ir a los campamentos del este.",
-              "instruction": "Habla con «Howin Plumamable» y acepta «Muerte a los Faucedraco».\nZona: Los Humedales.\nHabla con Howin antes de ir a los campamentos del este."
+              "y": 42.13,
+              "f": "l",
+              "note": "Acepta también esta misión antes de buscar huevos e incisivos de tajobuche.",
+              "instruction": "Habla con «Howin Plumamable» y acepta «Tiempos difíciles».\nZona: Los Humedales.\nAcepta también esta misión antes de buscar huevos e incisivos de tajobuche."
             },
             {
               "title": "Carnage",
@@ -98586,6 +98714,188 @@
               "optional": true,
               "qlvl": 30,
               "instruction": "Opcional.\nHabla con «Rethiel el Guardaverde» y acepta «Carnage».\nZona: Los Humedales.\nRethiel el Guardaverde: Carnicería, un raptor de élite."
+            }
+          ]
+        },
+        {
+          "title": "Huevos e incisivos de tajobuche",
+          "note": "Reúne ambos encargos de Howin en las colinas de los raptores antes de volver.",
+          "goals": [
+            {
+              "title": "Razormaw Needling",
+              "note": "Razormaw Incisor",
+              "t": "collect",
+              "quest": 98245,
+              "oi": 1,
+              "item": 280103,
+              "itemName": "Razormaw Incisor",
+              "count": 10,
+              "map": 1437,
+              "x": 72.02,
+              "y": 39.88,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 71.9,
+                  "y": 39.5,
+                  "r": 40,
+                  "n": 2
+                },
+                {
+                  "x": 70,
+                  "y": 38,
+                  "r": 40,
+                  "n": 3
+                },
+                {
+                  "x": 67.6,
+                  "y": 36.6,
+                  "r": 42,
+                  "n": 4
+                },
+                {
+                  "x": 69.4,
+                  "y": 33,
+                  "r": 58,
+                  "n": 9
+                },
+                {
+                  "x": 70.3,
+                  "y": 30.4,
+                  "r": 40,
+                  "n": 5
+                },
+                {
+                  "x": 68.9,
+                  "y": 28.5,
+                  "r": 65,
+                  "n": 8
+                },
+                {
+                  "x": 67.4,
+                  "y": 31.7,
+                  "r": 60,
+                  "n": 10
+                },
+                {
+                  "x": 65.5,
+                  "y": 29.7,
+                  "r": 46,
+                  "n": 4
+                },
+                {
+                  "x": 39.9,
+                  "y": 17.7,
+                  "r": 40,
+                  "n": 2
+                },
+                {
+                  "x": 38.3,
+                  "y": 16.3,
+                  "r": 40,
+                  "n": 2
+                },
+                {
+                  "x": 35.4,
+                  "y": 19.6,
+                  "r": 40,
+                  "n": 3
+                },
+                {
+                  "x": 32.9,
+                  "y": 14.5,
+                  "r": 42,
+                  "n": 4
+                },
+                {
+                  "x": 33.6,
+                  "y": 17,
+                  "r": 40,
+                  "alt": true,
+                  "n": 1
+                },
+                {
+                  "x": 34,
+                  "y": 12.4,
+                  "r": 40,
+                  "alt": true,
+                  "n": 1
+                }
+              ],
+              "spread": true,
+              "instruction": "Reúne «Razormaw Incisor» (10 en total).\nZona: Los Humedales."
+            },
+            {
+              "t": "collect",
+              "quest": 98246,
+              "title": "Tiempos difíciles",
+              "oi": 1,
+              "item": 280132,
+              "itemName": "Huevo de tajobuche perfecto",
+              "count": 12,
+              "map": 1437,
+              "x": 68.3,
+              "y": 33.0,
+              "f": "l",
+              "spread": true,
+              "from": "Huevos de tajobuche",
+              "fromKind": "object",
+              "note": "Busca huevos en el suelo por esta zona de colinas; el punto marca el área de búsqueda, no un nido concreto. Recoge 12 huevos perfectos mientras reúnes los incisivos.",
+              "instruction": "Interactúa con «Huevos de tajobuche» para reunir «Huevo de tajobuche perfecto» (12 en total).\nZona: Los Humedales.\nBusca huevos en el suelo por esta zona de colinas; el punto marca el área de búsqueda, no un nido concreto. Recoge 12 huevos perfectos mientras reúnes los incisivos."
+            }
+          ]
+        },
+        {
+          "title": "Howin: huevos e incisivos",
+          "note": "Entrega ambos encargos; juntos desbloquean Muerte a los Faucedraco.",
+          "goals": [
+            {
+              "title": "Razormaw Needling",
+              "t": "turnin",
+              "quest": 98245,
+              "npc": 270637,
+              "npcName": "Howin Plumamable",
+              "map": 1437,
+              "x": 49.36,
+              "y": 42.05,
+              "f": "e",
+              "instruction": "Habla con «Howin Plumamable» y entrega «Razormaw Needling».\nZona: Los Humedales."
+            },
+            {
+              "t": "turnin",
+              "quest": 98246,
+              "title": "Tiempos difíciles",
+              "npc": 270637,
+              "npcName": "Howin Plumamable",
+              "map": 1437,
+              "x": 49.36,
+              "y": 42.13,
+              "f": "l",
+              "note": "Entrega los huevos y los incisivos antes de aceptar Muerte a los Faucedraco.",
+              "instruction": "Habla con «Howin Plumamable» y entrega «Tiempos difíciles».\nZona: Los Humedales.\nEntrega los huevos y los incisivos antes de aceptar Muerte a los Faucedraco."
+            },
+            {
+              "t": "accept",
+              "quest": 98291,
+              "title": "Muerte a los Faucedraco",
+              "minLevel": 22,
+              "qlvl": 30,
+              "npc": 270637,
+              "npcName": "Howin Plumamable",
+              "map": 1437,
+              "x": 49.36,
+              "y": 42.05,
+              "f": "e",
+              "note": "Habla con Howin antes de ir a los campamentos del este.",
+              "instruction": "Habla con «Howin Plumamable» y acepta «Muerte a los Faucedraco».\nZona: Los Humedales.\nHabla con Howin antes de ir a los campamentos del este.",
+              "preAll": [
+                98245,
+                98246
+              ],
+              "preTitles": {
+                "98245": "Agujas de tajobuche",
+                "98246": "Tiempos difíciles"
+              }
             }
           ]
         },
@@ -98980,110 +99290,6 @@
               "instruction": "Reúne «Pristine Crimson Scale» (8 en total).\nZona: Los Humedales."
             },
             {
-              "title": "Razormaw Needling",
-              "note": "Razormaw Incisor",
-              "t": "collect",
-              "quest": 98245,
-              "oi": 1,
-              "item": 280103,
-              "itemName": "Razormaw Incisor",
-              "count": 10,
-              "map": 1437,
-              "x": 72.02,
-              "y": 39.88,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 71.9,
-                  "y": 39.5,
-                  "r": 40,
-                  "n": 2
-                },
-                {
-                  "x": 70,
-                  "y": 38,
-                  "r": 40,
-                  "n": 3
-                },
-                {
-                  "x": 67.6,
-                  "y": 36.6,
-                  "r": 42,
-                  "n": 4
-                },
-                {
-                  "x": 69.4,
-                  "y": 33,
-                  "r": 58,
-                  "n": 9
-                },
-                {
-                  "x": 70.3,
-                  "y": 30.4,
-                  "r": 40,
-                  "n": 5
-                },
-                {
-                  "x": 68.9,
-                  "y": 28.5,
-                  "r": 65,
-                  "n": 8
-                },
-                {
-                  "x": 67.4,
-                  "y": 31.7,
-                  "r": 60,
-                  "n": 10
-                },
-                {
-                  "x": 65.5,
-                  "y": 29.7,
-                  "r": 46,
-                  "n": 4
-                },
-                {
-                  "x": 39.9,
-                  "y": 17.7,
-                  "r": 40,
-                  "n": 2
-                },
-                {
-                  "x": 38.3,
-                  "y": 16.3,
-                  "r": 40,
-                  "n": 2
-                },
-                {
-                  "x": 35.4,
-                  "y": 19.6,
-                  "r": 40,
-                  "n": 3
-                },
-                {
-                  "x": 32.9,
-                  "y": 14.5,
-                  "r": 42,
-                  "n": 4
-                },
-                {
-                  "x": 33.6,
-                  "y": 17,
-                  "r": 40,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 34,
-                  "y": 12.4,
-                  "r": 40,
-                  "alt": true,
-                  "n": 1
-                }
-              ],
-              "spread": true,
-              "instruction": "Reúne «Razormaw Incisor» (10 en total).\nZona: Los Humedales."
-            },
-            {
               "title": "Gleaning Our Future",
               "note": "Heart de Neru",
               "t": "collect",
@@ -99326,18 +99532,6 @@
               "instruction": "Habla con «Howin Plumamable» y entrega «Stopping the Cycle».\nZona: Los Humedales."
             },
             {
-              "title": "Razormaw Needling",
-              "t": "turnin",
-              "quest": 98245,
-              "npc": 270637,
-              "npcName": "Howin Plumamable",
-              "map": 1437,
-              "x": 49.36,
-              "y": 42.05,
-              "f": "e",
-              "instruction": "Habla con «Howin Plumamable» y entrega «Razormaw Needling».\nZona: Los Humedales."
-            },
-            {
               "title": "Word to Ironforge",
               "minLevel": 24,
               "note": "Para King Magni en Forjaz, al final de esta guía",
@@ -99569,7 +99763,7 @@
               "instruction": "Habla con «Capitán Puñorrecio» y entrega «From the Ashes».\nZona: Los Humedales."
             },
             {
-              "title": "Old Habits",
+              "title": "Viejas costumbres",
               "t": "turnin",
               "quest": 98223,
               "npc": 2104,
@@ -99579,7 +99773,8 @@
               "y": 57.49,
               "z": 26.8,
               "f": "e",
-              "instruction": "Habla con «Capitán Puñorrecio» y entrega «Old Habits».\nZona: Los Humedales."
+              "note": "Entrega el libro a Capitán Puñorrecio; es un requisito de Esta era su tierra.",
+              "instruction": "Habla con «Capitán Puñorrecio» y entrega «Viejas costumbres».\nZona: Los Humedales.\nEntrega el libro a Capitán Puñorrecio; es un requisito de Esta era su tierra."
             },
             {
               "title": "Crocs of the Sky",
@@ -102214,7 +102409,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 4,
+      "routeRevision": 5,
       "progressMigrations": [
         {
           "from": 1,
@@ -102492,6 +102687,190 @@
           "affectedQuestIDs": [],
           "previousStepCount": 41,
           "firstAffectedStep": 41
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "goalMap": {
+            "18:2": "2:1",
+            "1:1": "2:2",
+            "1:2": "2:3",
+            "1:3": "2:4",
+            "1:4": "2:5",
+            "2:1": "3:1",
+            "3:1": "4:1",
+            "3:2": "4:2",
+            "4:1": "5:1",
+            "5:1": "6:1",
+            "6:1": "7:1",
+            "6:2": "7:2",
+            "7:1": "8:1",
+            "7:2": "8:2",
+            "7:4": "8:4",
+            "13:2": "9:1",
+            "14:2": "10:1",
+            "7:3": "10:3",
+            "8:1": "11:1",
+            "8:2": "11:2",
+            "8:3": "11:3",
+            "9:1": "12:1",
+            "9:2": "12:2",
+            "10:1": "13:1",
+            "10:2": "13:2",
+            "11:1": "14:1",
+            "12:1": "15:1",
+            "12:2": "15:2",
+            "13:1": "16:1",
+            "13:3": "16:2",
+            "13:4": "16:3",
+            "13:5": "16:4",
+            "14:1": "17:1",
+            "14:3": "17:2",
+            "14:4": "17:3",
+            "15:1": "18:1",
+            "15:2": "18:2",
+            "15:3": "18:3",
+            "16:1": "19:1",
+            "16:2": "19:2",
+            "16:3": "19:3",
+            "16:4": "19:4",
+            "17:1": "20:1",
+            "17:2": "20:2",
+            "18:1": "21:1",
+            "18:3": "21:3",
+            "19:1": "22:1",
+            "20:1": "23:1",
+            "20:2": "23:2",
+            "20:3": "23:3",
+            "20:4": "23:4",
+            "20:5": "23:5",
+            "20:6": "23:6",
+            "20:7": "23:7",
+            "20:8": "23:8",
+            "20:9": "23:9",
+            "20:10": "23:10",
+            "20:11": "23:11",
+            "20:12": "23:12",
+            "20:13": "23:13",
+            "21:1": "24:1",
+            "21:2": "24:2",
+            "22:1": "25:1",
+            "22:2": "25:2",
+            "23:1": "26:1",
+            "24:1": "27:1",
+            "24:2": "27:2",
+            "24:3": "27:3",
+            "24:4": "27:4",
+            "24:5": "27:5",
+            "24:6": "27:6",
+            "25:1": "28:1",
+            "25:2": "28:2",
+            "26:1": "29:1",
+            "26:2": "29:2",
+            "27:1": "30:1",
+            "28:1": "31:1",
+            "28:2": "31:2",
+            "28:3": "31:3",
+            "28:4": "31:4",
+            "29:1": "32:1",
+            "29:2": "32:2",
+            "30:1": "33:1",
+            "31:1": "34:1",
+            "31:2": "34:2",
+            "31:3": "34:3",
+            "31:4": "34:4",
+            "31:5": "34:5",
+            "31:6": "34:6",
+            "31:7": "34:7",
+            "32:1": "35:1",
+            "33:1": "36:1",
+            "33:2": "36:2",
+            "34:1": "37:1",
+            "34:2": "37:2",
+            "34:3": "37:3",
+            "34:4": "37:4",
+            "34:5": "37:5",
+            "35:1": "38:1",
+            "36:1": "39:1",
+            "37:1": "40:1",
+            "37:2": "40:2",
+            "37:3": "40:3",
+            "38:1": "41:1",
+            "38:2": "41:2",
+            "38:3": "41:3",
+            "38:4": "41:4",
+            "39:1": "42:1",
+            "39:2": "42:2",
+            "40:1": "43:1",
+            "41:1": "44:1",
+            "41:2": "44:2",
+            "41:3": "44:3",
+            "41:4": "44:4",
+            "41:5": "44:5",
+            "41:6": "44:6"
+          },
+          "stepMap": {
+            "18": 2,
+            "1": 2,
+            "2": 3,
+            "3": 4,
+            "4": 5,
+            "5": 6,
+            "6": 7,
+            "7": 8,
+            "13": 9,
+            "14": 10,
+            "8": 11,
+            "9": 12,
+            "10": 13,
+            "11": 14,
+            "12": 15,
+            "15": 18,
+            "16": 19,
+            "17": 20,
+            "19": 22,
+            "20": 23,
+            "21": 24,
+            "22": 25,
+            "23": 26,
+            "24": 27,
+            "25": 28,
+            "26": 29,
+            "27": 30,
+            "28": 31,
+            "29": 32,
+            "30": 33,
+            "31": 34,
+            "32": 35,
+            "33": 36,
+            "34": 37,
+            "35": 38,
+            "36": 39,
+            "37": 40,
+            "38": 41,
+            "39": 42,
+            "40": 43,
+            "41": 44,
+            "42": 45
+          },
+          "affectedQuestIDs": [
+            98223,
+            98230,
+            98245,
+            98246,
+            98291,
+            98297,
+            98300
+          ],
+          "previousStepCount": 41,
+          "firstAffectedStep": 1,
+          "addedGoalKeys": [
+            "1:1",
+            "8:3",
+            "9:2",
+            "10:2",
+            "21:2"
+          ]
         }
       ]
     },

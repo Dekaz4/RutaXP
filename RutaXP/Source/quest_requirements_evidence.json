@@ -72158,6 +72158,36 @@
       "classMask": 0,
       "raceMask": 77
     },
+    "98246": {
+      "reportedFields": [
+        "minLevel",
+        "classMask",
+        "raceMask"
+      ],
+      "fieldSources": {
+        "minLevel": [
+          {
+            "source": "everythingquests",
+            "line": 8638
+          }
+        ],
+        "classMask": [
+          {
+            "source": "everythingquests",
+            "line": 8638
+          }
+        ],
+        "raceMask": [
+          {
+            "source": "everythingquests",
+            "line": 8638
+          }
+        ]
+      },
+      "minLevel": 21,
+      "classMask": 0,
+      "raceMask": 77
+    },
     "98251": {
       "reportedFields": [],
       "fieldSources": {}

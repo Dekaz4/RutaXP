@@ -112,11 +112,11 @@ class GuideStructureAuditTests(unittest.TestCase):
 
     def test_shipped_report_covers_all_guides_and_keeps_the_48_work_cases_explicit(self):
         report = json.loads((ROOT / "RutaXP/Source/guide_structure.json").read_text(encoding="utf-8"))
-        self.assertEqual((report["scope"]["guides"], report["scope"]["steps"], report["scope"]["goals"]), (57, 2342, 7452))
+        self.assertEqual((report["scope"]["guides"], report["scope"]["steps"], report["scope"]["goals"]), (57, 2345, 7459))
         self.assertEqual(report["sourceComparison"]["structuralDifferences"], [])
         comparison = report["sourceComparison"]
         revisions = json.loads((ROOT / "RutaXP/Source/guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
-        self.assertEqual(len(revisions), 47)
+        self.assertEqual(len(revisions), 49)
         self.assertEqual([r["id"] for r in revisions[:7]],
                          ["westfall-alba-mines-2", "westfall-engineering-3", "zephras-alliance-service-2",
                           "redridge-alther-bridge-2", "mulgore-malah-centaurs-2", "tirisfal-rear-guard-2",
@@ -147,6 +147,11 @@ class GuideStructureAuditTests(unittest.TestCase):
         # The Menethil transport replaces an informational note one-for-one.
         expected_actions["note"] -= 1
         expected_actions["boat"] = 1
+        # The book is picked up in the Nek'rosh visit and at chapter entry when
+        # missing; Trying Times adds its acceptance, eggs and delivery.
+        expected_actions["accept"] += 3
+        expected_actions["collect"] += 1
+        expected_actions["turnin"] += 3
         self.assertEqual(report["scope"]["actions"], expected_actions)
         coverage = report["workCoverage"]
         self.assertEqual(coverage["sourceQuestsWithObjectives"], 48)

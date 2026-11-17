@@ -13595,6 +13595,1004 @@
         ],
         "progress": "Keep all 37 steps and the other two actions at step 31. Retire only the old note mark, preserve completed chapters, and do not create quest completion flags."
       }
+    },
+    {
+      "id": "wetlands-old-habits-before-nekrosh-return-6",
+      "guideID": "forever/alliance/07-thousand-needles",
+      "previousRevision": 5,
+      "revision": 6,
+      "sourceShape": "a55db2d6a8867594e1f3596d673f3bc094b208c3bd978f3b882dd02e57c0bddb",
+      "resultShape": "e6a2d53fd021b09e5676a10df9486f85702681296bad6adf6b13b4f81e4c14e8",
+      "previousGoalCounts": [
+        11,
+        1,
+        2,
+        1,
+        2,
+        2,
+        3,
+        5,
+        1,
+        1,
+        1,
+        3,
+        2,
+        1,
+        4,
+        2,
+        12,
+        12,
+        2,
+        4,
+        6,
+        3,
+        2,
+        2,
+        5,
+        2,
+        1,
+        2,
+        3,
+        1,
+        3,
+        3,
+        2,
+        7,
+        7,
+        6,
+        1
+      ],
+      "firstAffectedStep": 30,
+      "affectedQuestIDs": [
+        98223
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "title": "Jefe Nek'rosh",
+          "note": "Recoge la cabeza y el libro del campamento antes de regresar al capitán.",
+          "goals": [
+            [
+              30,
+              1
+            ],
+            {
+              "added": "old_habits_book"
+            }
+          ]
+        },
+        {
+          "title": "Menethil y el barco a Theramore",
+          "note": "Entrega primero el libro y la cabeza antes de tomar el barco a Theramore.",
+          "goals": [
+            [
+              31,
+              1
+            ],
+            {
+              "added": "old_habits_delivery"
+            },
+            [
+              31,
+              2
+            ],
+            [
+              31,
+              3
+            ]
+          ]
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        }
+      ],
+      "addedGoals": {
+        "old_habits_book": {
+          "goal": {
+            "title": "Viejas costumbres",
+            "minLevel": 23,
+            "note": "Recoge el libro junto al campamento de Nek'rosh y acepta Viejas costumbres antes de volver a Menethil.",
+            "t": "accept",
+            "quest": 98223,
+            "object": 671518,
+            "objName": "Libro de hechizos andrajoso",
+            "map": 1437,
+            "x": 53.46,
+            "y": 54.52,
+            "f": "e",
+            "qlvl": 31
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverQuestRelationTraces.lua",
+                "line": 19537,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestRelationTraces.lua#L19537",
+                "sha256": "cb791f09a508dc5ad96bbc31d7eaab1bb7181aa5ed46552ca305bd4f0275abc5"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 5293,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5293",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "l10n/Forever/traces/lookupQuests/esES.lua",
+                "line": 1,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/l10n/Forever/traces/lookupQuests/esES.lua#L1",
+                "sha256": "2eea0f30738ad6273fc9a52db95fa2c537a830dcdf91c7630524e2bcd2e922a4"
+              }
+            ],
+            "review": "Old Habits 98223 must be delivered along with Defeat Nek'rosh 474 before 98230 is offered. Collect the existing authored book during the Nek'rosh visit; no uncorroborated active-474-only restriction is imposed.",
+            "navigationDonor": "forever/alliance/30-40/01-hillsbrad-foothills:10:2"
+          }
+        },
+        "old_habits_delivery": {
+          "goal": {
+            "title": "Viejas costumbres",
+            "t": "turnin",
+            "quest": 98223,
+            "npc": 2104,
+            "npcName": "Capitán Puñorrecio",
+            "map": 1437,
+            "x": 9.86,
+            "y": 57.49,
+            "z": 26.8,
+            "f": "e",
+            "note": "Entrega el libro a Capitán Puñorrecio; es un requisito de Esta era su tierra."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverQuestRelationTraces.lua",
+                "line": 19537,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestRelationTraces.lua#L19537",
+                "sha256": "cb791f09a508dc5ad96bbc31d7eaab1bb7181aa5ed46552ca305bd4f0275abc5"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 5293,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5293",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "l10n/Forever/traces/lookupQuests/esES.lua",
+                "line": 1,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/l10n/Forever/traces/lookupQuests/esES.lua#L1",
+                "sha256": "2eea0f30738ad6273fc9a52db95fa2c537a830dcdf91c7630524e2bcd2e922a4"
+              }
+            ],
+            "review": "Old Habits 98223 must be delivered along with Defeat Nek'rosh 474 before 98230 is offered. Collect the existing authored book during the Nek'rosh visit; no uncorroborated active-474-only restriction is imposed.",
+            "navigationDonor": "forever/alliance/30-40/01-hillsbrad-foothills:18:2"
+          }
+        }
+      },
+      "evidence": {
+        "review": "Bounded repair for the Captain Stoutfist / Howin quest chain. The book is picked up at the existing Nek'rosh stop and delivered at the existing Menethil stop, before leaving the continent. Completed chapters stay completed; no general travel optimization.",
+        "sources": [
+          {
+            "repository": "Questie/QuestieDB",
+            "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+            "path": "src/corrections/Forever/traces/foreverQuestRelationTraces.lua",
+            "line": 19537,
+            "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestRelationTraces.lua#L19537",
+            "sha256": "cb791f09a508dc5ad96bbc31d7eaab1bb7181aa5ed46552ca305bd4f0275abc5"
+          },
+          {
+            "repository": "Questie/QuestieDB",
+            "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+            "path": "l10n/Forever/traces/lookupQuests/esES.lua",
+            "line": 1,
+            "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/l10n/Forever/traces/lookupQuests/esES.lua#L1",
+            "sha256": "2eea0f30738ad6273fc9a52db95fa2c537a830dcdf91c7630524e2bcd2e922a4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wetlands-stoutfist-howin-prerequisites-5",
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "previousRevision": 4,
+      "revision": 5,
+      "sourceShape": "28315e744683dc227ce1a311d353e812d3669cf5b22d051db76c2bb0820d9712",
+      "resultShape": "1fe6ab8ee8ad5039d6564b049143bc931ad0ca872ed8f5b90445858015afbd72",
+      "previousGoalCounts": [
+        4,
+        1,
+        2,
+        1,
+        1,
+        2,
+        4,
+        3,
+        2,
+        2,
+        1,
+        2,
+        5,
+        4,
+        3,
+        4,
+        2,
+        3,
+        1,
+        13,
+        2,
+        2,
+        1,
+        6,
+        2,
+        2,
+        1,
+        4,
+        2,
+        1,
+        7,
+        1,
+        2,
+        5,
+        1,
+        1,
+        3,
+        4,
+        2,
+        1,
+        6
+      ],
+      "firstAffectedStep": 1,
+      "affectedQuestIDs": [
+        98223,
+        98230,
+        98245,
+        98246,
+        98291,
+        98297,
+        98300
+      ],
+      "addedGoals": {
+        "old_habits_later_delivery": {
+          "goal": {
+            "title": "Viejas costumbres",
+            "t": "turnin",
+            "quest": 98223,
+            "npc": 2104,
+            "npcName": "Capitán Puñorrecio",
+            "map": 1437,
+            "x": 9.86,
+            "y": 57.49,
+            "z": 26.8,
+            "f": "e",
+            "note": "Entrega el libro a Capitán Puñorrecio; es un requisito de Esta era su tierra."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverQuestRelationTraces.lua",
+                "line": 19537,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestRelationTraces.lua#L19537",
+                "sha256": "cb791f09a508dc5ad96bbc31d7eaab1bb7181aa5ed46552ca305bd4f0275abc5"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 5293,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5293",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "l10n/Forever/traces/lookupQuests/esES.lua",
+                "line": 1,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/l10n/Forever/traces/lookupQuests/esES.lua#L1",
+                "sha256": "2eea0f30738ad6273fc9a52db95fa2c537a830dcdf91c7630524e2bcd2e922a4"
+              }
+            ],
+            "review": "Old Habits 98223 must be delivered along with Defeat Nek'rosh 474 before 98230 is offered. Collect the existing authored book during the Nek'rosh visit; no uncorroborated active-474-only restriction is imposed.",
+            "navigationDonor": "forever/alliance/30-40/01-hillsbrad-foothills:18:2"
+          }
+        },
+        "trying_times_accept": {
+          "goal": {
+            "t": "accept",
+            "quest": 98246,
+            "title": "Tiempos difíciles",
+            "minLevel": 21,
+            "qlvl": 29,
+            "npc": 270637,
+            "npcName": "Howin Plumamable",
+            "map": 1437,
+            "x": 49.36,
+            "y": 42.13,
+            "f": "l",
+            "note": "Acepta también esta misión antes de buscar huevos e incisivos de tajobuche."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverQuestTraces.lua",
+                "line": 10908,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestTraces.lua#L10908",
+                "sha256": "261910d3453f8f7c123cd7ae9bcc11e2155f29ce7ab41958e85bc712db892630"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverItemTraces.lua",
+                "line": 5052,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverItemTraces.lua#L5052",
+                "sha256": "1ca9922b03be49b9b52388a3f36f476d2c3fa373b1073d076cca164eb25c5352"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverNpcTraces.lua",
+                "line": 13266,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverNpcTraces.lua#L13266",
+                "sha256": "9b0dbf4d3d999230c910dae9021e206d38d7876e874f3e785c300c0920ed9cec"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "l10n/Forever/traces/lookupQuests/esES.lua",
+                "line": 1,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/l10n/Forever/traces/lookupQuests/esES.lua#L1",
+                "sha256": "2eea0f30738ad6273fc9a52db95fa2c537a830dcdf91c7630524e2bcd2e922a4"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverQuestRelationTraces.lua",
+                "line": 19659,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestRelationTraces.lua#L19659",
+                "sha256": "cb791f09a508dc5ad96bbc31d7eaab1bb7181aa5ed46552ca305bd4f0275abc5"
+              }
+            ],
+            "review": "Independent level-21 quest. Both this quest and Razormaw Needling must be delivered before Death to the Dragonmaw. Objective is twelve Perfect Razormaw Eggs from world objects 671892 / 671931."
+          }
+        },
+        "trying_times_eggs": {
+          "goal": {
+            "t": "collect",
+            "quest": 98246,
+            "title": "Tiempos difíciles",
+            "oi": 1,
+            "item": 280132,
+            "itemName": "Huevo de tajobuche perfecto",
+            "count": 12,
+            "map": 1437,
+            "x": 68.3,
+            "y": 33.0,
+            "f": "l",
+            "spread": true,
+            "from": "Huevos de tajobuche",
+            "fromKind": "object",
+            "note": "Busca huevos en el suelo por esta zona de colinas; el punto marca el área de búsqueda, no un nido concreto. Recoge 12 huevos perfectos mientras reúnes los incisivos."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverQuestTraces.lua",
+                "line": 10908,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestTraces.lua#L10908",
+                "sha256": "261910d3453f8f7c123cd7ae9bcc11e2155f29ce7ab41958e85bc712db892630"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverItemTraces.lua",
+                "line": 5052,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverItemTraces.lua#L5052",
+                "sha256": "1ca9922b03be49b9b52388a3f36f476d2c3fa373b1073d076cca164eb25c5352"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverNpcTraces.lua",
+                "line": 13266,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverNpcTraces.lua#L13266",
+                "sha256": "9b0dbf4d3d999230c910dae9021e206d38d7876e874f3e785c300c0920ed9cec"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "l10n/Forever/traces/lookupQuests/esES.lua",
+                "line": 1,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/l10n/Forever/traces/lookupQuests/esES.lua#L1",
+                "sha256": "2eea0f30738ad6273fc9a52db95fa2c537a830dcdf91c7630524e2bcd2e922a4"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverQuestRelationTraces.lua",
+                "line": 19659,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestRelationTraces.lua#L19659",
+                "sha256": "cb791f09a508dc5ad96bbc31d7eaab1bb7181aa5ed46552ca305bd4f0275abc5"
+              }
+            ],
+            "review": "Independent level-21 quest. Both this quest and Razormaw Needling must be delivered before Death to the Dragonmaw. Objective is twelve Perfect Razormaw Eggs from world objects 671892 / 671931.",
+            "navigationSources": [
+              {
+                "url": "https://bindonforever.com/quest/98246",
+                "reviewed": "2026-11-17",
+                "coordinateFrame": "Native Forever world-map percentages; f=l. Wetlands 1437 conversion is identity at the pinned QuestieDB revision.",
+                "role": "Author route area for Raptor Ridge eggs, not an individual object spawn",
+                "map": 1437,
+                "x": 68.3,
+                "y": 33.0
+              }
+            ],
+            "coordinateEvidence": {
+              "repository": "Questie/QuestieDB",
+              "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+              "path": "data/Forever/conversion.json",
+              "line": 1,
+              "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/data/Forever/conversion.json#L1",
+              "sha256": "0229566017126c2577e77d2bcc7c9f995648fb27ed32a7918fa44ace0664fb22"
+            }
+          }
+        },
+        "trying_times_delivery": {
+          "goal": {
+            "t": "turnin",
+            "quest": 98246,
+            "title": "Tiempos difíciles",
+            "npc": 270637,
+            "npcName": "Howin Plumamable",
+            "map": 1437,
+            "x": 49.36,
+            "y": 42.13,
+            "f": "l",
+            "note": "Entrega los huevos y los incisivos antes de aceptar Muerte a los Faucedraco."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverQuestTraces.lua",
+                "line": 10908,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestTraces.lua#L10908",
+                "sha256": "261910d3453f8f7c123cd7ae9bcc11e2155f29ce7ab41958e85bc712db892630"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverItemTraces.lua",
+                "line": 5052,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverItemTraces.lua#L5052",
+                "sha256": "1ca9922b03be49b9b52388a3f36f476d2c3fa373b1073d076cca164eb25c5352"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverNpcTraces.lua",
+                "line": 13266,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverNpcTraces.lua#L13266",
+                "sha256": "9b0dbf4d3d999230c910dae9021e206d38d7876e874f3e785c300c0920ed9cec"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "l10n/Forever/traces/lookupQuests/esES.lua",
+                "line": 1,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/l10n/Forever/traces/lookupQuests/esES.lua#L1",
+                "sha256": "2eea0f30738ad6273fc9a52db95fa2c537a830dcdf91c7630524e2bcd2e922a4"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverQuestRelationTraces.lua",
+                "line": 19659,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestRelationTraces.lua#L19659",
+                "sha256": "cb791f09a508dc5ad96bbc31d7eaab1bb7181aa5ed46552ca305bd4f0275abc5"
+              }
+            ],
+            "review": "Independent level-21 quest. Both this quest and Razormaw Needling must be delivered before Death to the Dragonmaw. Objective is twelve Perfect Razormaw Eggs from world objects 671892 / 671931."
+          }
+        },
+        "old_habits_entry_book": {
+          "goal": {
+            "title": "Viejas costumbres",
+            "minLevel": 23,
+            "note": "Si aún no tienes Viejas costumbres, recoge el libro de hechizos andrajoso junto al campamento de Nek'rosh. Después llévalo a Capitán Puñorrecio en Menethil. El diario de Henrig es otra misión.",
+            "t": "accept",
+            "quest": 98223,
+            "object": 671518,
+            "objName": "Libro de hechizos andrajoso",
+            "map": 1437,
+            "x": 53.46,
+            "y": 54.52,
+            "f": "e",
+            "qlvl": 31,
+            "closedBy": [
+              98230
+            ]
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "src/corrections/Forever/traces/foreverQuestRelationTraces.lua",
+                "line": 19537,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestRelationTraces.lua#L19537",
+                "sha256": "cb791f09a508dc5ad96bbc31d7eaab1bb7181aa5ed46552ca305bd4f0275abc5"
+              },
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH_QuestDB/Quests.lua",
+                "line": 5293,
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5293",
+                "sha256": "29571619906bc566fc1066c080646e323807963d855af75f468717d812c916b8"
+              },
+              {
+                "repository": "Questie/QuestieDB",
+                "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+                "path": "l10n/Forever/traces/lookupQuests/esES.lua",
+                "line": 1,
+                "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/l10n/Forever/traces/lookupQuests/esES.lua#L1",
+                "sha256": "2eea0f30738ad6273fc9a52db95fa2c537a830dcdf91c7630524e2bcd2e922a4"
+              }
+            ],
+            "review": "Old Habits 98223 must be delivered along with Defeat Nek'rosh 474 before 98230 is offered. Collect the existing authored book during the Nek'rosh visit; no uncorroborated active-474-only restriction is imposed. This initial recovery pickup is skipped if the real quest This Land Was Their Land (98230) proves its mandatory Old Habits prerequisite was already unlocked; an actually carried Old Habits remains actionable.",
+            "navigationDonor": "forever/alliance/30-40/01-hillsbrad-foothills:10:2"
+          }
+        }
+      },
+      "steps": [
+        {
+          "title": "El libro de Nek'rosh",
+          "note": "Recupera el libro que necesita Puñorrecio antes de pedirle Esta era su tierra. Si ya lo llevas o entregaste, continúa a Menethil.",
+          "goals": [
+            {
+              "added": "old_habits_entry_book"
+            }
+          ]
+        },
+        {
+          "title": "Puerto de Menethil",
+          "note": "Capitán Puñorrecio está parado en Castillo de Menethil; James Halloran y Sylessa Duskwhisper está parado junto a la puerta norte.",
+          "goals": [
+            [
+              18,
+              2
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ]
+          ]
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "title": "El Green Belt",
+          "note": "Entrega Esta era su tierra a Howin y acepta las dos misiones de tajobuches. Rethiel está al este.",
+          "goals": [
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              2
+            ],
+            {
+              "added": "trying_times_accept"
+            },
+            [
+              7,
+              4
+            ]
+          ]
+        },
+        {
+          "title": "Huevos e incisivos de tajobuche",
+          "note": "Reúne ambos encargos de Howin en las colinas de los raptores antes de volver.",
+          "goals": [
+            [
+              13,
+              2
+            ],
+            {
+              "added": "trying_times_eggs"
+            }
+          ]
+        },
+        {
+          "title": "Howin: huevos e incisivos",
+          "note": "Entrega ambos encargos; juntos desbloquean Muerte a los Faucedraco.",
+          "goals": [
+            [
+              14,
+              2
+            ],
+            {
+              "added": "trying_times_delivery"
+            },
+            [
+              7,
+              3
+            ]
+          ]
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13,
+          "omitGoals": [
+            2
+          ]
+        },
+        {
+          "sourceStep": 14,
+          "omitGoals": [
+            2
+          ]
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "title": "Puerto de Menethil",
+          "note": "Oeste a lo largo del camino a Menethill.",
+          "goals": [
+            [
+              18,
+              1
+            ],
+            {
+              "added": "old_habits_later_delivery"
+            },
+            [
+              18,
+              3
+            ]
+          ]
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98230
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              474,
+              98223
+            ],
+            "preTitles": {
+              "474": "Derrotar a Nek'rosh",
+              "98223": "Viejas costumbres"
+            }
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 98291
+          },
+          "count": 1,
+          "set": {
+            "preAll": [
+              98245,
+              98246
+            ],
+            "preTitles": {
+              "98245": "Agujas de tajobuche",
+              "98246": "Tiempos difíciles"
+            }
+          }
+        }
+      ],
+      "originalGoalValues": {
+        "1:2": {
+          "preAll": [
+            474
+          ],
+          "preTitles": {
+            "474": "Derrotar a Nek'rosh"
+          }
+        },
+        "7:3": {
+          "preAll": null,
+          "preTitles": null
+        }
+      },
+      "evidence": {
+        "review": "Captain Stoutfist cannot offer This Land Was Their Land before Old Habits is delivered. Move its original delivery to the first Menethil visit for characters already carrying the book, retaining a later book pickup and an explicit recovery delivery. The user later clarified their other journal belonged to Henrig and is not proof of owning Old Habits. Add the omitted Trying Times quest and deliver it together with Razormaw Needling before Death to the Dragonmaw. All original actions are preserved; only this prerequisite chain is reordered. An initial recovery pickup routes characters missing the book to its camp before visiting the captain. Only an actual This Land Was Their Land (98230) closes this early recovery pickup; actual Old Habits journal state takes precedence.",
+        "sources": [
+          {
+            "repository": "Questie/QuestieDB",
+            "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+            "path": "src/corrections/Forever/traces/foreverQuestRelationTraces.lua",
+            "line": 19537,
+            "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestRelationTraces.lua#L19537",
+            "sha256": "cb791f09a508dc5ad96bbc31d7eaab1bb7181aa5ed46552ca305bd4f0275abc5"
+          },
+          {
+            "repository": "Questie/QuestieDB",
+            "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+            "path": "src/corrections/Forever/traces/foreverQuestRelationTraces.lua",
+            "line": 19659,
+            "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestRelationTraces.lua#L19659",
+            "sha256": "cb791f09a508dc5ad96bbc31d7eaab1bb7181aa5ed46552ca305bd4f0275abc5"
+          },
+          {
+            "repository": "Questie/QuestieDB",
+            "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+            "path": "src/corrections/Forever/traces/foreverQuestTraces.lua",
+            "line": 10908,
+            "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverQuestTraces.lua#L10908",
+            "sha256": "261910d3453f8f7c123cd7ae9bcc11e2155f29ce7ab41958e85bc712db892630"
+          },
+          {
+            "repository": "Questie/QuestieDB",
+            "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+            "path": "src/corrections/Forever/traces/foreverItemTraces.lua",
+            "line": 5052,
+            "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverItemTraces.lua#L5052",
+            "sha256": "1ca9922b03be49b9b52388a3f36f476d2c3fa373b1073d076cca164eb25c5352"
+          },
+          {
+            "repository": "Questie/QuestieDB",
+            "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+            "path": "src/corrections/Forever/traces/foreverNpcTraces.lua",
+            "line": 13266,
+            "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/src/corrections/Forever/traces/foreverNpcTraces.lua#L13266",
+            "sha256": "9b0dbf4d3d999230c910dae9021e206d38d7876e874f3e785c300c0920ed9cec"
+          },
+          {
+            "repository": "Questie/QuestieDB",
+            "commit": "e1652ce62113c152da682baf2d6fb85f1396bcfb",
+            "path": "l10n/Forever/traces/lookupQuests/esES.lua",
+            "line": 1,
+            "url": "https://github.com/Questie/QuestieDB/blob/e1652ce62113c152da682baf2d6fb85f1396bcfb/l10n/Forever/traces/lookupQuests/esES.lua#L1",
+            "sha256": "2eea0f30738ad6273fc9a52db95fa2c537a830dcdf91c7630524e2bcd2e922a4"
+          }
+        ],
+        "limits": [
+          "No unverified active-Nekrosh-only restriction is added. The original later pickup and delivery remain for manual recovery; the entry pickup has a direct-child exclusion for 98230 only to avoid sending already advanced characters back.",
+          "The northeast egg waypoint is an evidenced search area, not a guaranteed individual spawn."
+        ]
+      }
     }
   ]
 }

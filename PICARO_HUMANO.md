@@ -1,6 +1,6 @@
 # Ruta del pícaro humano
 
-26 capítulos, 936 pasos y 2923 acciones examinadas. 2729 acciones son compatibles por raza y clase, incluidas las opcionales.
+26 capítulos, 939 pasos y 2930 acciones examinadas. 2736 acciones son compatibles por raza y clase, incluidas las opcionales.
 
 En 75 misiones del recorrido hay armas para el pícaro o cuero, capas y accesorios con atributos físicos. Desde nivel 10, la cadena de Keryn y Mathias Shaw da la Hoja de Astucia. Al aceptar o entregar una misión con equipo, pasa el ratón sobre la fila para ver qué recibes y qué puedes elegir.
 
@@ -8,7 +8,7 @@ Si usas Mutilar, conserva una daga para cada mano. Las hachas de una mano tambi�
 
 En Páramos de Poniente, la Hermandad de los Defias abre una cadena opcional para grupo. Con la misión final, entrega la cabeza de VanCleef tras hacer las Minas de la Muerte para elegir la Túnica de Páramos de Poniente (+11 agilidad y +5 aguante).
 
-Los números de paso y fila son los del addon. Las coordenadas usan el mapa del catálogo de origen. Hay 80 filas con requisitos o discrepancias entre fuentes señalados para revisión. Lingotes Forjaluz (526) usa la corrección específica de Forever: primero Hierro Forjaluz (321), y después una de las dos alternativas de lingotes. La referencia antigua que exige 324 se conserva en la auditoría para mostrar la discrepancia. Los tiempos de viaje quedan pendientes de medir en el juego.
+Los números de paso y fila son los del addon. Las coordenadas usan el mapa del catálogo de origen. Hay 82 filas con requisitos o discrepancias entre fuentes señalados para revisión. Lingotes Forjaluz (526) usa la corrección específica de Forever: primero Hierro Forjaluz (321), y después una de las dos alternativas de lingotes. La referencia antigua que exige 324 se conserva en la auditoría para mostrar la discrepancia. Los tiempos de viaje quedan pendientes de medir en el juego.
 
 | Capítulo | Pasos | Acciones compatibles / examinadas | Revisión |
 |---|---:|---:|---|
@@ -18,8 +18,8 @@ Los números de paso y fila son los del addon. Las coordenadas usan el mapa del 
 | Montañas Crestagrana | 19 | 59 / 68 | Recorrido ajustado |
 | Bosque del Ocaso | 29 | 87 / 88 | Recorrido ajustado |
 | Vallefresno, Los Humedales y Sierra Espolón | 65 | 164 / 176 | Recorrido ajustado |
-| Las Mil Agujas, Bosque del Ocaso y Los Humedales | 37 | 125 / 128 | Recorrido ajustado |
-| Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta | 41 | 114 / 116 | Recorrido ajustado |
+| Las Mil Agujas, Bosque del Ocaso y Los Humedales | 37 | 127 / 130 | Recorrido ajustado |
+| Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta | 44 | 119 / 121 | Recorrido ajustado |
 | Desolace | 22 | 42 / 44 | Revisado |
 | Vallefresno & Los Humedales | 35 | 74 / 74 | Revisado |
 | Vega de Tuercespina | 36 | 115 / 116 | Revisado |
@@ -1006,9 +1006,11 @@ La visita temprana a Menethil solo continúa esta cadena si el personaje ya llev
 | 29.2 | Aceptar · Derrotar a Nek'rosh (#474) | Catapulta Faucedraco · desde nivel 23 · previa 465 · mapa 1437 · 47.27, 47.18 · a elegir · Segadora para barriles |
 | 29.3 | Indicación · Esta cadena continúa con Nek'rosh. Es élite: completadla en grupo y entregad su cabeza antes de salir de Menethil. |  |
 | 30.1 | Recoger · Derrotar a Nek'rosh (#474) | Cabeza de Nek'rosh · Jefe Nek'rosh · mapa 1437 · 53.5, 54.7 |
+| 30.2 | Aceptar · Viejas costumbres (#98223) | Libro de hechizos andrajoso · desde nivel 23 · mapa 1437 · 53.46, 54.52 |
 | 31.1 | Piedra de hogar · Mesón Aguahonda |  |
-| 31.2 | Entregar · Derrotar a Nek'rosh (#474) | Capitán Puñorrecio · mapa 1437 · 9.86, 57.49 · a elegir · Segadora para barriles |
-| 31.3 | Tomar barco · Barco de Menethil a Theramore | mapa 1437 · 4.74, 63.76 |
+| 31.2 | Entregar · Viejas costumbres (#98223) | Capitán Puñorrecio · mapa 1437 · 9.86, 57.49 |
+| 31.3 | Entregar · Derrotar a Nek'rosh (#474) | Capitán Puñorrecio · mapa 1437 · 9.86, 57.49 · a elegir · Segadora para barriles |
+| 31.4 | Tomar barco · Barco de Menethil a Theramore | mapa 1437 · 4.74, 63.76 |
 | 32 | Takar el Profeta | Otra clase o raza |
 | 33.1 | Recoger · Sigue el camino hacia el sur; busca el diario junto al esqueleto de la loma. Recógelo y ábrelo en tus bolsas. | Diario de Henrig Soliceja · Diario de Henrig Soliceja · mapa 1441 · 31.3, 28.1 |
 | 33.2 | Aceptar · El diario de Henrig Soliceja (#1100) | Diario de Henrig Soliceja · desde nivel 29 |
@@ -1040,122 +1042,127 @@ El prospector ofrece Más misterios al entregar la carta 514. Karnik y Roetten e
 
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
-| 1.1 | Aceptar · From the Ashes (#98221) | Capitán Puñorrecio · desde nivel 23 · mapa 1437 · 9.86, 57.49 |
-| 1.2 | Aceptar · This Land Was Their Land (#98230) | Capitán Puñorrecio · desde nivel 22 · previa 474 · mapa 1437 · 9.86, 57.49 |
-| 1.3 | Aceptar · Crocs of the Sky (#98072) | James Halloran · previa 471 · mapa 1437 · 8.55, 55.74 · discrepancia de nivel |
-| 1.4 | Aceptar · Flor de los cielos (#98208) | Sylessa Duskwhisper · desde nivel 22 · mapa 1437 · 7.96, 55.85 |
-| 2.1 | Recoger · Flor de los cielos (#98208) | Nord'el · Nord'el · mapa 1437 · 12.2, 63.8 |
-| 3.1 | Entregar · Flor de los cielos (#98208) | Sylessa Duskwhisper · mapa 1437 · 7.96, 55.85 |
-| 3.2 | Aceptar · Bloom of the Heavens (#98209) | Sylessa Duskwhisper · desde nivel 22 · previa 98208 · mapa 1437 · 7.96, 55.85 |
-| 4.1 | Aceptar · Understanding Our Present (#98216) | Prospector Whelgar · desde nivel 23 · previa 299 · mapa 1437 · 38.81, 52.39 · a elegir · Excavation Cloak |
-| 5.1 | Recoger · Understanding Our Present (#98216) | Titanic Keystone · Goaz Warder · mapa 1437 · 36.63, 52.32 |
-| 6.1 | Entregar · Understanding Our Present (#98216) | Prospector Whelgar · mapa 1437 · 38.81, 52.39 · a elegir · Excavation Cloak |
-| 6.2 | Aceptar · Gleaning Our Future (#98310) | Prospector Whelgar · desde nivel 24 · previa 98216 · mapa 1437 · 38.81, 52.39 · a elegir · Golem War Cloak |
-| 7.1 | Entregar · This Land Was Their Land (#98230) | Howin Plumamable · mapa 1437 · 49.36, 42.05 |
-| 7.2 | Aceptar · Razormaw Needling (#98245) | Howin Plumamable · desde nivel 21 · mapa 1437 · 49.36, 42.05 |
-| 7.3 | Aceptar · Muerte a los Faucedraco (#98291) | Howin Plumamable · desde nivel 22 · mapa 1437 · 49.36, 42.05 |
-| 7.4 | Aceptar · Carnage (#98283) | Rethiel el Guardaverde · desde nivel 22 · opcional · mapa 1437 · 56.37, 40.4 · a elegir · Razormaw Shorts · sin datos externos de requisitos |
-| 8.1 | Derrotar · Muerte a los Faucedraco (#98291) | Dragonmaw Reclaimer ×8 · mapa 1437 · 59.7, 44.9 |
-| 8.2 | Derrotar · Muerte a los Faucedraco (#98291) | Dragonmaw Soulbinder ×5 · mapa 1437 · 62.1, 43.8 |
-| 8.3 | Derrotar · Muerte a los Faucedraco (#98291) | Dragonmaw Infiltrator ×3 · mapa 1437 · 58.7, 47.3 |
-| 9.1 | Entregar · Muerte a los Faucedraco (#98291) | Howin Plumamable · mapa 1437 · 49.36, 42.05 |
-| 9.2 | Aceptar · Stopping the Cycle (#98297) | Howin Plumamable · desde nivel 24 · previa 98291 · mapa 1437 · 49.36, 42.05 · a elegir · Subdued Dragon's Fang |
-| 10.1 | Indicación · Destroy el cuatro conjuntos de Attack Plans en el campamento de From el Ashes. |  |
-| 10.2 | Aceptar · Old Habits (#98223) | Tattered Spellbook · desde nivel 23 · mapa 1437 · 53.46, 54.52 |
-| 11.1 | Recoger · Gleaning Our Future (#98310) | Heart of Golm · Golm · mapa 1437 · 64.46, 62.75 |
-| 12.1 | Derrotar · Stopping the Cycle (#98297) | Subdued Dragonspawn · mapa 1437 · 75.81, 48.18 |
-| 12.2 | Recoger · Gleaning Our Future (#98310) | Heart of Ados · Ados · mapa 1437 · 75.1, 48.25 |
-| 13.1 | Recoger · Crocs of the Sky (#98072) | Pristine Crimson Scale ×8 · mapa 1437 · 71.6, 47.43 |
-| 13.2 | Recoger · Razormaw Needling (#98245) | Razormaw Incisor ×10 · mapa 1437 · 72.02, 39.88 |
-| 13.3 | Recoger · Gleaning Our Future (#98310) | Heart of Neru · Neru · mapa 1437 · 60.46, 26.69 |
-| 13.4 | Recoger · Carnage (#98283) | Malignant Rotclaw Flesh · Maddened Rotclaw · opcional · mapa 1437 · 60, 26.77 |
-| 13.5 | Recoger · Carnage (#98283) | Carnage's Head · Carnage · opcional · mapa 1437 · 68.83, 28.79 |
-| 14.1 | Entregar · Stopping the Cycle (#98297) | Howin Plumamable · mapa 1437 · 49.36, 42.05 · a elegir · Subdued Dragon's Fang |
-| 14.2 | Entregar · Razormaw Needling (#98245) | Howin Plumamable · mapa 1437 · 49.36, 42.05 |
-| 14.3 | Aceptar · Word to Ironforge (#98300) | Howin Plumamable · desde nivel 24 · previa 98297 · mapa 1437 · 49.36, 42.05 |
-| 14.4 | Entregar · Carnage (#98283) | Rethiel el Guardaverde · opcional · mapa 1437 · 56.37, 40.4 · a elegir · Razormaw Shorts |
-| 15.1 | Recoger · Gleaning Our Future (#98310) | Heart of Modr · Modr · mapa 1437 · 50.51, 20.91 |
-| 15.2 | Aceptar · Spark of Freedom (#87491) | Captive Fire Elemental · desde nivel 27 · mapa 1437 · 45.65, 16.6 |
-| 15.3 | Entregar · Spark of Freedom (#87491) | Roggo Jartumul · mapa 1437 · 49.85, 18.09 |
-| 16.1 | Aceptar · Hearts of the Lost (#87318) | Comar Villardo · desde nivel 28 · mapa 1437 · 49.93, 12.55 · sin datos externos de requisitos |
-| 16.2 | Entregar · Hearts of the Lost (#87318) | Essene Villard · mapa 1437 · 51.54, 9 |
-| 16.3 | Aceptar · Sentiments of the Lost (#88758) | Essene Villard · desde nivel 28 · mapa 1437 · 51.54, 9 · sin datos externos de requisitos |
-| 16.4 | Entregar · Sentiments of the Lost (#88758) | Comar Villardo · mapa 1437 · 49.93, 12.55 |
-| 17.1 | Entregar · Gleaning Our Future (#98310) | Prospector Whelgar · mapa 1437 · 38.81, 52.39 · a elegir · Golem War Cloak |
-| 17.2 | Aceptar · For Further Study (#98313) | Prospector Whelgar · desde nivel 24 · previa 98310 · mapa 1437 · 38.81, 52.39 |
-| 18.1 | Entregar · From the Ashes (#98221) | Capitán Puñorrecio · mapa 1437 · 9.86, 57.49 |
-| 18.2 | Entregar · Old Habits (#98223) | Capitán Puñorrecio · mapa 1437 · 9.86, 57.49 |
-| 18.3 | Entregar · Crocs of the Sky (#98072) | James Halloran · mapa 1437 · 8.55, 55.74 |
-| 19.1 | Ir · Boat a Costasur | mapa 1437 · 4.5, 56.7 |
-| 20.1 | Registrar vuelo · Costasur | Darla Harris · mapa 1424 · 49.34, 52.27 |
-| 20.2 | Fijar hogar · Costasur | Tabernero Anderson · mapa 1424 · 51.17, 58.93 |
-| 20.3 | Entregar · The Shamed Lieutenant (#98219) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 |
-| 20.4 | Aceptar · Al lo largo de la costa (#536) | Teniente Farren Orinelle · desde nivel 25 · mapa 1424 · 51.46, 58.39 |
-| 20.5 | Aceptar · Sopa de tortuga calmante (#555) | Chef Jessen · desde nivel 28 · mapa 1424 · 51.89, 58.68 |
-| 20.6 | Comprar · Especias calmantes, de Micha Yance | Especias calmantes · mapa 1424 · 48.94, 55.03 |
-| 20.7 | Aceptar · Sospechas de una nueva Peste (#659) | Phin Odelic · desde nivel 30 · mapa 1424 · 50.35, 59.05 |
-| 20.8 | Aceptar · An Alarming Request (#92432) | Emissary Jacques · desde nivel 30 · mapa 1424 · 48.32, 60 |
-| 20.9 | Aceptar · Hermandad de asesinos (#505) | Magistrado Henry Maleb · desde nivel 26 · mapa 1424 · 48.14, 59.11 |
-| 20.10 | Aceptar · Capa de piel de yeti de Bartolo (#565) | Bartolo Ginsetti · desde nivel 29 · mapa 1424 · 49.43, 55.53 · fija · Capa de piel de yeti |
-| 20.11 | Aceptar · Una amenaza costosa (#564) | Darren Malavista · desde nivel 30 · mapa 1424 · 52.42, 55.96 · a elegir · Guantes de pastor |
-| 20.12 | Aceptar · Talk of the Town (#98463) | Posadero Kelly · desde nivel 28 · mapa 1424 · 51.57, 58.57 · sin datos externos de requisitos |
-| 20.13 | Aceptar · Hillsbrad's Hoard (#98059) | Captain McManus · desde nivel 23 · mapa 1424 · 46.47, 50.13 · sin datos externos de requisitos |
-| 21.1 | Derrotar · Al lo largo de la costa (#536) | Cazamareas Rompeanca ×10 · mapa 1424 · 46.03, 63.96 |
-| 21.2 | Derrotar · Al lo largo de la costa (#536) | Oráculo Rompeanca ×10 · mapa 1424 · 46.25, 63.04 |
-| 22.1 | Entregar · Al lo largo de la costa (#536) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 |
-| 22.2 | Aceptar · La prueba de Farren (#559) | Teniente Farren Orinelle · desde nivel 25 · previa 536 · mapa 1424 · 51.46, 58.39 |
-| 23.1 | Recoger · La prueba de Farren (#559) | Cabeza de múrloc ×10 · mapa 1424 · 48.62, 64.41 |
-| 24.1 | Entregar · La prueba de Farren (#559) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 |
-| 24.2 | Aceptar · La prueba de Farren (#560) | Teniente Farren Orinelle · desde nivel 25 · previa 559 · mapa 1424 · 51.46, 58.39 |
-| 24.3 | Entregar · La prueba de Farren (#560) | Alguacil Rutagrana · mapa 1424 · 49.47, 58.73 |
-| 24.4 | Aceptar · La prueba de Farren (#561) | Alguacil Rutagrana · desde nivel 25 · previa 560 · mapa 1424 · 49.47, 58.73 |
-| 24.5 | Entregar · La prueba de Farren (#561) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 |
-| 24.6 | Aceptar · Cambio de destino (#562) | Teniente Farren Orinelle · desde nivel 25 · previa 561 · mapa 1424 · 51.46, 58.39 · fija · Entrañas de pescado |
-| 25.1 | Derrotar · Cambio de destino (#562) | Cazacostas Espinadaga ×10 · mapa 1424 · 53.7, 63.47 |
-| 25.2 | Derrotar · Cambio de destino (#562) | Sirena Espinadaga ×10 · mapa 1424 · 53.21, 64.23 |
-| 26.1 | Entregar · Cambio de destino (#562) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 · fija · Entrañas de pescado |
-| 26.2 | Aceptar · Nueva asignación (#563) | Teniente Farren Orinelle · desde nivel 25 · previa 562 · mapa 1424 · 51.46, 58.39 |
-| 27.1 | Recoger · Sopa de tortuga calmante (#555) | Carne de tortuga ×10 · mapa 1424 · 55.91, 57.08 |
-| 28.1 | Derrotar · Hermandad de asesinos (#505) | Ladrón del Sindicato ×8 · mapa 1424 · 51.5, 21.1 |
-| 28.2 | Derrotar · Hermandad de asesinos (#505) | Asaltante de caminos del Sindicato ×12 · mapa 1424 · 51.5, 21.1 |
-| 28.3 | Aceptar · Documentos de planificación (#510) | Documentos de Hermandad · desde nivel 26 · mapa 1424 · 59.9, 7.9 |
-| 28.4 | Aceptar · Una carta cifrada (#511) | Documentos de Hermandad · desde nivel 30 · mapa 1424 · 59.9, 7.9 |
-| 29.1 | Recoger · Capa de piel de yeti de Bartolo (#565) | Piel de yeti ×10 · mapa 1424 · 47.4, 5.4 |
-| 29.2 | Indicación · Bartolo también quiere un Capa de montañero, un Descarga de paño de lana y Hilo refinado: fabricado o comprado; la capa se enciende cuando usted está de vuelta en Costasur más tarde. |  |
-| 30.1 | Ir · Ayuntamiento de Trabalomas | mapa 1424 · 29.7, 41.6 |
-| 31.1 | Entregar · Hillsbrad's Hoard (#98059) | Captain McManus · mapa 1424 · 46.47, 50.13 |
-| 31.2 | Entregar · Sopa de tortuga calmante (#555) | Chef Jessen · mapa 1424 · 51.89, 58.68 |
-| 31.3 | Entregar · Una carta cifrada (#511) | Maestro cultural Dibbs · mapa 1424 · 50.57, 57.09 |
-| 31.4 | Aceptar · Una carta para Pico Tormenta (#514) | Maestro cultural Dibbs · desde nivel 30 · previa 511 · mapa 1424 · 50.57, 57.09 |
-| 31.5 | Entregar · Hermandad de asesinos (#505) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
-| 31.6 | Entregar · Documentos de planificación (#510) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
-| 31.7 | Aceptar · Nobles muertes (#512) | Magistrado Henry Maleb · desde nivel 26 · previa 510 · mapa 1424 · 48.14, 59.11 |
-| 32.1 | Volar · Ventormenta | varios destinos o ubicaciones según objetivo |
-| 33.1 | Entregar · El diplomático desaparecido (#1245) | Elling Trias · mapa 1453 · 66.03, 74.1 |
-| 33.2 | Aceptar · El diplomático desaparecido (#1246) | Elling Trias · desde nivel 28 · previa 1245 · mapa 1453 · 66.03, 74.1 |
-| 34.1 | Entregar · El diplomático desaparecido (#1246) | Dashel Puñopiedra · mapa 1453 · 74.26, 59.17 |
-| 34.2 | Aceptar · El diplomático desaparecido (#1447) | Dashel Puñopiedra · desde nivel 28 · previa 1246 · mapa 1453 · 74.26, 59.17 |
-| 34.3 | Completar · El diplomático desaparecido (#1447) | varios destinos o ubicaciones según objetivo |
-| 34.4 | Entregar · El diplomático desaparecido (#1447) | Dashel Puñopiedra · mapa 1453 · 74.26, 59.17 |
-| 34.5 | Aceptar · El diplomático desaparecido (#1247) | Dashel Puñopiedra · desde nivel 28 · previa 1447 · mapa 1453 · 74.26, 59.17 |
-| 35 | El isleño | Otra clase o raza |
-| 36.1 | Entregar · Nueva asignación (#563) | Mayor Samuelson · mapa 1453 · 75.83, 36.72 |
-| 37.1 | Entregar · Limpieza del ojo (#293) | Arzobispo Benedictus · mapa 1453 · 50.31, 45.47 |
-| 37.2 | Entregar · En busca de sabiduría (#269) | Obispo Lontananza · mapa 1453 · 49.93, 45.99 |
-| 37.3 | Aceptar · La flota maldita (#270) | Obispo Lontananza · desde nivel 20 · previa 269 · mapa 1453 · 49.93, 45.99 |
-| 38.1 | Aceptar · Una petición de Malin (#690) | Archimago Malin · desde nivel 30 · mapa 1453 · 50.5, 87.47 |
-| 38.2 | Aceptar · Greater Friend of the Library (#79536) | Garion Wendell · desde nivel 20 · mapa 1453 · 48.95, 86.54 · a elegir · Field Researcher's Loop · sin datos externos de requisitos |
-| 38.3 | Entregar · Greater Friend of the Library (#79536) | Garion Wendell · mapa 1453 · 48.95, 86.54 · a elegir · Field Researcher's Loop |
-| 38.4 | Aceptar · James Hyal (#1301) | Connor Ríos · desde nivel 30 · mapa 1453 · 51.12, 95.52 |
-| 39.1 | Entregar · El diplomático desaparecido (#1247) | Elling Trias · mapa 1453 · 66.03, 74.1 |
-| 39.2 | Aceptar · El diplomático desaparecido (#1248) | Elling Trias · desde nivel 28 · previa 1247 · mapa 1453 · 66.03, 74.1 |
-| 40 | Entrenamiento druida | Otra clase o raza |
-| 41.1 | Entregar · Una carta para Pico Tormenta (#514) | Prospector Pico Tormenta · mapa 1455 · 74.64, 11.74 |
-| 41.2 | Aceptar · Más misterios (#525) | Prospector Pico Tormenta · desde nivel 30 · previa 514 · mapa 1455 · 74.64, 11.74 |
-| 41.3 | Entregar · For Further Study (#98313) | Karnik el Historiador · mapa 1455 · 77.54, 11.82 |
-| 41.4 | Aceptar · Los negocios de los Reivindicadores en Desolace (#1453) | Roetten Rocamartillo · desde nivel 30 · mapa 1455 · 69.95, 21.26 |
-| 41.5 | Entregar · Word to Ironforge (#98300) | Rey Magni Barbabronce · mapa 1455 · 39.09, 56.2 |
-| 41.6 | Entrenar · Level Conjuros 30 y 32 | varios destinos o ubicaciones según objetivo |
+| 1.1 | Aceptar · Viejas costumbres (#98223) | Libro de hechizos andrajoso · desde nivel 23 · mapa 1437 · 53.46, 54.52 |
+| 2.1 | Entregar · Old Habits (#98223) | Capitán Puñorrecio · mapa 1437 · 9.86, 57.49 |
+| 2.2 | Aceptar · From the Ashes (#98221) | Capitán Puñorrecio · desde nivel 23 · mapa 1437 · 9.86, 57.49 |
+| 2.3 | Aceptar · This Land Was Their Land (#98230) | Capitán Puñorrecio · desde nivel 22 · previa 474 + 98223 · mapa 1437 · 9.86, 57.49 · fuentes en desacuerdo sobre previas |
+| 2.4 | Aceptar · Crocs of the Sky (#98072) | James Halloran · previa 471 · mapa 1437 · 8.55, 55.74 · discrepancia de nivel |
+| 2.5 | Aceptar · Flor de los cielos (#98208) | Sylessa Duskwhisper · desde nivel 22 · mapa 1437 · 7.96, 55.85 |
+| 3.1 | Recoger · Flor de los cielos (#98208) | Nord'el · Nord'el · mapa 1437 · 12.2, 63.8 |
+| 4.1 | Entregar · Flor de los cielos (#98208) | Sylessa Duskwhisper · mapa 1437 · 7.96, 55.85 |
+| 4.2 | Aceptar · Bloom of the Heavens (#98209) | Sylessa Duskwhisper · desde nivel 22 · previa 98208 · mapa 1437 · 7.96, 55.85 |
+| 5.1 | Aceptar · Understanding Our Present (#98216) | Prospector Whelgar · desde nivel 23 · previa 299 · mapa 1437 · 38.81, 52.39 · a elegir · Excavation Cloak |
+| 6.1 | Recoger · Understanding Our Present (#98216) | Titanic Keystone · Goaz Warder · mapa 1437 · 36.63, 52.32 |
+| 7.1 | Entregar · Understanding Our Present (#98216) | Prospector Whelgar · mapa 1437 · 38.81, 52.39 · a elegir · Excavation Cloak |
+| 7.2 | Aceptar · Gleaning Our Future (#98310) | Prospector Whelgar · desde nivel 24 · previa 98216 · mapa 1437 · 38.81, 52.39 · a elegir · Golem War Cloak |
+| 8.1 | Entregar · This Land Was Their Land (#98230) | Howin Plumamable · mapa 1437 · 49.36, 42.05 |
+| 8.2 | Aceptar · Razormaw Needling (#98245) | Howin Plumamable · desde nivel 21 · mapa 1437 · 49.36, 42.05 |
+| 8.3 | Aceptar · Tiempos difíciles (#98246) | Howin Plumamable · desde nivel 21 · mapa 1437 · 49.36, 42.13 |
+| 8.4 | Aceptar · Carnage (#98283) | Rethiel el Guardaverde · desde nivel 22 · opcional · mapa 1437 · 56.37, 40.4 · a elegir · Razormaw Shorts · sin datos externos de requisitos |
+| 9.1 | Recoger · Razormaw Needling (#98245) | Razormaw Incisor ×10 · mapa 1437 · 72.02, 39.88 |
+| 9.2 | Recoger · Tiempos difíciles (#98246) | Huevo de tajobuche perfecto ×12 · Huevos de tajobuche · mapa 1437 · 68.3, 33 |
+| 10.1 | Entregar · Razormaw Needling (#98245) | Howin Plumamable · mapa 1437 · 49.36, 42.05 |
+| 10.2 | Entregar · Tiempos difíciles (#98246) | Howin Plumamable · mapa 1437 · 49.36, 42.13 |
+| 10.3 | Aceptar · Muerte a los Faucedraco (#98291) | Howin Plumamable · desde nivel 22 · previa 98245 + 98246 · mapa 1437 · 49.36, 42.05 · requisito sin corroboración |
+| 11.1 | Derrotar · Muerte a los Faucedraco (#98291) | Dragonmaw Reclaimer ×8 · mapa 1437 · 59.7, 44.9 |
+| 11.2 | Derrotar · Muerte a los Faucedraco (#98291) | Dragonmaw Soulbinder ×5 · mapa 1437 · 62.1, 43.8 |
+| 11.3 | Derrotar · Muerte a los Faucedraco (#98291) | Dragonmaw Infiltrator ×3 · mapa 1437 · 58.7, 47.3 |
+| 12.1 | Entregar · Muerte a los Faucedraco (#98291) | Howin Plumamable · mapa 1437 · 49.36, 42.05 |
+| 12.2 | Aceptar · Stopping the Cycle (#98297) | Howin Plumamable · desde nivel 24 · previa 98291 · mapa 1437 · 49.36, 42.05 · a elegir · Subdued Dragon's Fang |
+| 13.1 | Indicación · Destroy el cuatro conjuntos de Attack Plans en el campamento de From el Ashes. |  |
+| 13.2 | Aceptar · Old Habits (#98223) | Tattered Spellbook · desde nivel 23 · mapa 1437 · 53.46, 54.52 |
+| 14.1 | Recoger · Gleaning Our Future (#98310) | Heart of Golm · Golm · mapa 1437 · 64.46, 62.75 |
+| 15.1 | Derrotar · Stopping the Cycle (#98297) | Subdued Dragonspawn · mapa 1437 · 75.81, 48.18 |
+| 15.2 | Recoger · Gleaning Our Future (#98310) | Heart of Ados · Ados · mapa 1437 · 75.1, 48.25 |
+| 16.1 | Recoger · Crocs of the Sky (#98072) | Pristine Crimson Scale ×8 · mapa 1437 · 71.6, 47.43 |
+| 16.2 | Recoger · Gleaning Our Future (#98310) | Heart of Neru · Neru · mapa 1437 · 60.46, 26.69 |
+| 16.3 | Recoger · Carnage (#98283) | Malignant Rotclaw Flesh · Maddened Rotclaw · opcional · mapa 1437 · 60, 26.77 |
+| 16.4 | Recoger · Carnage (#98283) | Carnage's Head · Carnage · opcional · mapa 1437 · 68.83, 28.79 |
+| 17.1 | Entregar · Stopping the Cycle (#98297) | Howin Plumamable · mapa 1437 · 49.36, 42.05 · a elegir · Subdued Dragon's Fang |
+| 17.2 | Aceptar · Word to Ironforge (#98300) | Howin Plumamable · desde nivel 24 · previa 98297 · mapa 1437 · 49.36, 42.05 |
+| 17.3 | Entregar · Carnage (#98283) | Rethiel el Guardaverde · opcional · mapa 1437 · 56.37, 40.4 · a elegir · Razormaw Shorts |
+| 18.1 | Recoger · Gleaning Our Future (#98310) | Heart of Modr · Modr · mapa 1437 · 50.51, 20.91 |
+| 18.2 | Aceptar · Spark of Freedom (#87491) | Captive Fire Elemental · desde nivel 27 · mapa 1437 · 45.65, 16.6 |
+| 18.3 | Entregar · Spark of Freedom (#87491) | Roggo Jartumul · mapa 1437 · 49.85, 18.09 |
+| 19.1 | Aceptar · Hearts of the Lost (#87318) | Comar Villardo · desde nivel 28 · mapa 1437 · 49.93, 12.55 · sin datos externos de requisitos |
+| 19.2 | Entregar · Hearts of the Lost (#87318) | Essene Villard · mapa 1437 · 51.54, 9 |
+| 19.3 | Aceptar · Sentiments of the Lost (#88758) | Essene Villard · desde nivel 28 · mapa 1437 · 51.54, 9 · sin datos externos de requisitos |
+| 19.4 | Entregar · Sentiments of the Lost (#88758) | Comar Villardo · mapa 1437 · 49.93, 12.55 |
+| 20.1 | Entregar · Gleaning Our Future (#98310) | Prospector Whelgar · mapa 1437 · 38.81, 52.39 · a elegir · Golem War Cloak |
+| 20.2 | Aceptar · For Further Study (#98313) | Prospector Whelgar · desde nivel 24 · previa 98310 · mapa 1437 · 38.81, 52.39 |
+| 21.1 | Entregar · From the Ashes (#98221) | Capitán Puñorrecio · mapa 1437 · 9.86, 57.49 |
+| 21.2 | Entregar · Viejas costumbres (#98223) | Capitán Puñorrecio · mapa 1437 · 9.86, 57.49 |
+| 21.3 | Entregar · Crocs of the Sky (#98072) | James Halloran · mapa 1437 · 8.55, 55.74 |
+| 22.1 | Ir · Boat a Costasur | mapa 1437 · 4.5, 56.7 |
+| 23.1 | Registrar vuelo · Costasur | Darla Harris · mapa 1424 · 49.34, 52.27 |
+| 23.2 | Fijar hogar · Costasur | Tabernero Anderson · mapa 1424 · 51.17, 58.93 |
+| 23.3 | Entregar · The Shamed Lieutenant (#98219) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 |
+| 23.4 | Aceptar · Al lo largo de la costa (#536) | Teniente Farren Orinelle · desde nivel 25 · mapa 1424 · 51.46, 58.39 |
+| 23.5 | Aceptar · Sopa de tortuga calmante (#555) | Chef Jessen · desde nivel 28 · mapa 1424 · 51.89, 58.68 |
+| 23.6 | Comprar · Especias calmantes, de Micha Yance | Especias calmantes · mapa 1424 · 48.94, 55.03 |
+| 23.7 | Aceptar · Sospechas de una nueva Peste (#659) | Phin Odelic · desde nivel 30 · mapa 1424 · 50.35, 59.05 |
+| 23.8 | Aceptar · An Alarming Request (#92432) | Emissary Jacques · desde nivel 30 · mapa 1424 · 48.32, 60 |
+| 23.9 | Aceptar · Hermandad de asesinos (#505) | Magistrado Henry Maleb · desde nivel 26 · mapa 1424 · 48.14, 59.11 |
+| 23.10 | Aceptar · Capa de piel de yeti de Bartolo (#565) | Bartolo Ginsetti · desde nivel 29 · mapa 1424 · 49.43, 55.53 · fija · Capa de piel de yeti |
+| 23.11 | Aceptar · Una amenaza costosa (#564) | Darren Malavista · desde nivel 30 · mapa 1424 · 52.42, 55.96 · a elegir · Guantes de pastor |
+| 23.12 | Aceptar · Talk of the Town (#98463) | Posadero Kelly · desde nivel 28 · mapa 1424 · 51.57, 58.57 · sin datos externos de requisitos |
+| 23.13 | Aceptar · Hillsbrad's Hoard (#98059) | Captain McManus · desde nivel 23 · mapa 1424 · 46.47, 50.13 · sin datos externos de requisitos |
+| 24.1 | Derrotar · Al lo largo de la costa (#536) | Cazamareas Rompeanca ×10 · mapa 1424 · 46.03, 63.96 |
+| 24.2 | Derrotar · Al lo largo de la costa (#536) | Oráculo Rompeanca ×10 · mapa 1424 · 46.25, 63.04 |
+| 25.1 | Entregar · Al lo largo de la costa (#536) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 |
+| 25.2 | Aceptar · La prueba de Farren (#559) | Teniente Farren Orinelle · desde nivel 25 · previa 536 · mapa 1424 · 51.46, 58.39 |
+| 26.1 | Recoger · La prueba de Farren (#559) | Cabeza de múrloc ×10 · mapa 1424 · 48.62, 64.41 |
+| 27.1 | Entregar · La prueba de Farren (#559) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 |
+| 27.2 | Aceptar · La prueba de Farren (#560) | Teniente Farren Orinelle · desde nivel 25 · previa 559 · mapa 1424 · 51.46, 58.39 |
+| 27.3 | Entregar · La prueba de Farren (#560) | Alguacil Rutagrana · mapa 1424 · 49.47, 58.73 |
+| 27.4 | Aceptar · La prueba de Farren (#561) | Alguacil Rutagrana · desde nivel 25 · previa 560 · mapa 1424 · 49.47, 58.73 |
+| 27.5 | Entregar · La prueba de Farren (#561) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 |
+| 27.6 | Aceptar · Cambio de destino (#562) | Teniente Farren Orinelle · desde nivel 25 · previa 561 · mapa 1424 · 51.46, 58.39 · fija · Entrañas de pescado |
+| 28.1 | Derrotar · Cambio de destino (#562) | Cazacostas Espinadaga ×10 · mapa 1424 · 53.7, 63.47 |
+| 28.2 | Derrotar · Cambio de destino (#562) | Sirena Espinadaga ×10 · mapa 1424 · 53.21, 64.23 |
+| 29.1 | Entregar · Cambio de destino (#562) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 · fija · Entrañas de pescado |
+| 29.2 | Aceptar · Nueva asignación (#563) | Teniente Farren Orinelle · desde nivel 25 · previa 562 · mapa 1424 · 51.46, 58.39 |
+| 30.1 | Recoger · Sopa de tortuga calmante (#555) | Carne de tortuga ×10 · mapa 1424 · 55.91, 57.08 |
+| 31.1 | Derrotar · Hermandad de asesinos (#505) | Ladrón del Sindicato ×8 · mapa 1424 · 51.5, 21.1 |
+| 31.2 | Derrotar · Hermandad de asesinos (#505) | Asaltante de caminos del Sindicato ×12 · mapa 1424 · 51.5, 21.1 |
+| 31.3 | Aceptar · Documentos de planificación (#510) | Documentos de Hermandad · desde nivel 26 · mapa 1424 · 59.9, 7.9 |
+| 31.4 | Aceptar · Una carta cifrada (#511) | Documentos de Hermandad · desde nivel 30 · mapa 1424 · 59.9, 7.9 |
+| 32.1 | Recoger · Capa de piel de yeti de Bartolo (#565) | Piel de yeti ×10 · mapa 1424 · 47.4, 5.4 |
+| 32.2 | Indicación · Bartolo también quiere un Capa de montañero, un Descarga de paño de lana y Hilo refinado: fabricado o comprado; la capa se enciende cuando usted está de vuelta en Costasur más tarde. |  |
+| 33.1 | Ir · Ayuntamiento de Trabalomas | mapa 1424 · 29.7, 41.6 |
+| 34.1 | Entregar · Hillsbrad's Hoard (#98059) | Captain McManus · mapa 1424 · 46.47, 50.13 |
+| 34.2 | Entregar · Sopa de tortuga calmante (#555) | Chef Jessen · mapa 1424 · 51.89, 58.68 |
+| 34.3 | Entregar · Una carta cifrada (#511) | Maestro cultural Dibbs · mapa 1424 · 50.57, 57.09 |
+| 34.4 | Aceptar · Una carta para Pico Tormenta (#514) | Maestro cultural Dibbs · desde nivel 30 · previa 511 · mapa 1424 · 50.57, 57.09 |
+| 34.5 | Entregar · Hermandad de asesinos (#505) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
+| 34.6 | Entregar · Documentos de planificación (#510) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
+| 34.7 | Aceptar · Nobles muertes (#512) | Magistrado Henry Maleb · desde nivel 26 · previa 510 · mapa 1424 · 48.14, 59.11 |
+| 35.1 | Volar · Ventormenta | varios destinos o ubicaciones según objetivo |
+| 36.1 | Entregar · El diplomático desaparecido (#1245) | Elling Trias · mapa 1453 · 66.03, 74.1 |
+| 36.2 | Aceptar · El diplomático desaparecido (#1246) | Elling Trias · desde nivel 28 · previa 1245 · mapa 1453 · 66.03, 74.1 |
+| 37.1 | Entregar · El diplomático desaparecido (#1246) | Dashel Puñopiedra · mapa 1453 · 74.26, 59.17 |
+| 37.2 | Aceptar · El diplomático desaparecido (#1447) | Dashel Puñopiedra · desde nivel 28 · previa 1246 · mapa 1453 · 74.26, 59.17 |
+| 37.3 | Completar · El diplomático desaparecido (#1447) | varios destinos o ubicaciones según objetivo |
+| 37.4 | Entregar · El diplomático desaparecido (#1447) | Dashel Puñopiedra · mapa 1453 · 74.26, 59.17 |
+| 37.5 | Aceptar · El diplomático desaparecido (#1247) | Dashel Puñopiedra · desde nivel 28 · previa 1447 · mapa 1453 · 74.26, 59.17 |
+| 38 | El isleño | Otra clase o raza |
+| 39.1 | Entregar · Nueva asignación (#563) | Mayor Samuelson · mapa 1453 · 75.83, 36.72 |
+| 40.1 | Entregar · Limpieza del ojo (#293) | Arzobispo Benedictus · mapa 1453 · 50.31, 45.47 |
+| 40.2 | Entregar · En busca de sabiduría (#269) | Obispo Lontananza · mapa 1453 · 49.93, 45.99 |
+| 40.3 | Aceptar · La flota maldita (#270) | Obispo Lontananza · desde nivel 20 · previa 269 · mapa 1453 · 49.93, 45.99 |
+| 41.1 | Aceptar · Una petición de Malin (#690) | Archimago Malin · desde nivel 30 · mapa 1453 · 50.5, 87.47 |
+| 41.2 | Aceptar · Greater Friend of the Library (#79536) | Garion Wendell · desde nivel 20 · mapa 1453 · 48.95, 86.54 · a elegir · Field Researcher's Loop · sin datos externos de requisitos |
+| 41.3 | Entregar · Greater Friend of the Library (#79536) | Garion Wendell · mapa 1453 · 48.95, 86.54 · a elegir · Field Researcher's Loop |
+| 41.4 | Aceptar · James Hyal (#1301) | Connor Ríos · desde nivel 30 · mapa 1453 · 51.12, 95.52 |
+| 42.1 | Entregar · El diplomático desaparecido (#1247) | Elling Trias · mapa 1453 · 66.03, 74.1 |
+| 42.2 | Aceptar · El diplomático desaparecido (#1248) | Elling Trias · desde nivel 28 · previa 1247 · mapa 1453 · 66.03, 74.1 |
+| 43 | Entrenamiento druida | Otra clase o raza |
+| 44.1 | Entregar · Una carta para Pico Tormenta (#514) | Prospector Pico Tormenta · mapa 1455 · 74.64, 11.74 |
+| 44.2 | Aceptar · Más misterios (#525) | Prospector Pico Tormenta · desde nivel 30 · previa 514 · mapa 1455 · 74.64, 11.74 |
+| 44.3 | Entregar · For Further Study (#98313) | Karnik el Historiador · mapa 1455 · 77.54, 11.82 |
+| 44.4 | Aceptar · Los negocios de los Reivindicadores en Desolace (#1453) | Roetten Rocamartillo · desde nivel 30 · mapa 1455 · 69.95, 21.26 |
+| 44.5 | Entregar · Word to Ironforge (#98300) | Rey Magni Barbabronce · mapa 1455 · 39.09, 56.2 |
+| 44.6 | Entrenar · Level Conjuros 30 y 32 | varios destinos o ubicaciones según objetivo |
 
 ## Desolace (31–34)
 

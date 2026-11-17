@@ -42,7 +42,7 @@ class SuccessorChainContentTests(unittest.TestCase):
                 work = [i for i, goal in enumerate(goals) if goal.get("quest") == parent and goal["t"] in ("kill", "collect", "complete")]
                 self.assertTrue(work)
                 self.assertTrue(all(accepted < i < delivered for i in work))
-                self.assertEqual(goals[followup]["preAll"], [parent])
+                self.assertIn(parent, goals[followup]["preAll"])
                 self.assertFalse(any(goal.get("optional") for goal in goals if goal.get("quest") == parent))
         for parent, child in ((471, 98072), (299, 98216)):
             self.assertLess(self.index(goals, parent, "turnin"), self.index(goals, child, "accept"))
@@ -53,10 +53,33 @@ class SuccessorChainContentTests(unittest.TestCase):
                          [("turnin", 465), ("accept", 474), ("note", None)])
         self.assertEqual(steps[29]["goals"][0]["quest"], 474)
         self.assertEqual([(g["t"], g.get("quest")) for g in steps[30]["goals"]],
-                         [("hearth", None), ("turnin", 474), ("boat", None)])
+                         [("hearth", None), ("turnin", 98223), ("turnin", 474), ("boat", None)])
         self.assertIn("élite", steps[29]["goals"][0]["note"])
         self.assertNotIn("saltarlo", steps[28]["goals"][2]["text"])
         self.assertNotIn("skip it", steps[28]["goals"][2]["text"])
+
+    def test_stoutfist_book_is_collected_on_the_existing_visit_and_howin_parents_precede_work(self):
+        previous = self.guides[TH]["steps"]
+        self.assertEqual([(g["t"], g.get("quest")) for g in previous[29]["goals"]],
+                         [("collect", 474), ("accept", 98223)])
+        goals = self.route_goals(HI)
+        self.assertEqual((goals[0]["t"], goals[0]["quest"]), ("accept", 98223))
+        self.assertEqual(goals[0]["closedBy"], [98230])
+        self.assertEqual((goals[1]["t"], goals[1]["quest"]), ("turnin", 98223))
+        self.assertLess(self.index(goals, 98223, "turnin"), self.index(goals, 98230, "accept"))
+        land = goals[self.index(goals, 98230, "accept")]
+        self.assertEqual(land["preAll"], [474, 98223])
+        dragonmaw = goals[self.index(goals, 98291, "accept")]
+        self.assertEqual(dragonmaw["preAll"], [98245, 98246])
+        for parent in (98245, 98246):
+            self.assertLess(self.index(goals, parent, "accept"), self.index(goals, parent, "collect"))
+            self.assertLess(self.index(goals, parent, "collect"), self.index(goals, parent, "turnin"))
+            self.assertLess(self.index(goals, parent, "turnin"), self.index(goals, 98291, "accept"))
+        eggs = goals[self.index(goals, 98246, "collect")]
+        self.assertEqual((eggs["item"], eggs["count"], eggs["oi"]), (280132, 12, 1))
+        self.assertEqual((eggs["map"], eggs["x"], eggs["y"], eggs["f"]), (1437, 68.3, 33.0, "l"))
+        self.assertTrue(eggs["spread"])
+        self.assertEqual(sum(g.get("quest") == 98223 and g["t"] == "turnin" for g in goals), 2)
 
     def test_nordel_and_dragonmaw_objectives_match_sources_and_have_real_destinations(self):
         goals = self.route_goals(HI)

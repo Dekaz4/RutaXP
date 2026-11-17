@@ -18,6 +18,49 @@ spec.loader.exec_module(audit_module)
 # Captured before enrichment from all 7,444 source actions, conditions,
 # prerequisites, objective indices, item IDs, counts and profession requirements.
 ORIGINAL_SEMANTICS = "46bc091cc7034231f3f7138dc301eaff00126460d6abfe7745a3233ada32350d"
+STOUTFIST_REVISIONS = {"wetlands-old-habits-before-nekrosh-return-6", "wetlands-stoutfist-howin-prerequisites-5"}
+
+
+def undo_stoutfist_chain(guide, revision):
+    """Restore all original actions before older independent visit migrations."""
+    slots, owners = {}, {}
+    for step, entry in zip(guide["steps"], revision["steps"], strict=True):
+        if "sourceStep" in entry:
+            si = entry["sourceStep"]
+            refs = [[si, gi] for gi in range(1, revision["previousGoalCounts"][si - 1] + 1)
+                    if gi not in entry.get("omitGoals", [])]
+        else:
+            refs = entry["goals"]
+        for ref, goal in zip(refs, step["goals"], strict=True):
+            if isinstance(ref, dict):
+                added = revision["addedGoals"][ref["added"]]["goal"]
+                if any(goal.get(field) != added.get(field) for field in audit_module.SEMANTIC_FIELDS):
+                    raise AssertionError("Changed Stoutfist addition")
+                continue
+            key = f"{ref[0]}:{ref[1]}"
+            if key in slots:
+                raise AssertionError("Repeated Stoutfist source action")
+            owners.setdefault(ref[0], step)
+            original = copy.deepcopy(goal)
+            for patch in revision.get("goalChanges", []):
+                if all(original.get(k) == v for k, v in patch["match"].items()):
+                    for field, value in patch["set"].items():
+                        if original.get(field) != value:
+                            raise AssertionError("Changed Stoutfist prerequisite")
+                        previous = revision["originalGoalValues"][key][field]
+                        if previous is None:
+                            original.pop(field, None)
+                        else:
+                            original[field] = copy.deepcopy(previous)
+            slots[key] = original
+    restored = []
+    for si, count in enumerate(revision["previousGoalCounts"], 1):
+        step = copy.deepcopy(owners[si])
+        step["goals"] = [slots.pop(f"{si}:{gi}") for gi in range(1, count + 1)]
+        restored.append(step)
+    if slots:
+        raise AssertionError("Unexpected Stoutfist source actions")
+    guide["steps"] = restored
 
 
 def undo_visit_optimization(guide, revision):
@@ -85,6 +128,9 @@ def original_order(document):
     revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
     guides = {guide["id"]: guide for guide in result["guides"]}
     for revision in reversed(revisions):
+        if revision["id"] in STOUTFIST_REVISIONS:
+            undo_stoutfist_chain(guides[revision["guideID"]], revision)
+    for revision in reversed(revisions):
         if revision.get("preservePendingVisits") or revision["id"] in {
                 "ashenvale-alliance-retire-alonso-5", "ashenvale-horde-retire-alonso-2", "menethil-theramore-boat-5"}:
             undo_visit_optimization(guides[revision["guideID"]], revision)
@@ -113,7 +159,7 @@ def original_order(document):
     darkshore["steps"][27]["goals"].extend([arbal, escort["goals"][0]])
     escort["goals"] = [{"t": "goto", "map": 1439, "x": 44.4, "y": 76.4, "f": "e"}, {"t": "note"}]
     for revision in reversed(revisions):
-        if revision.get("preservePendingVisits") or not revision.get("addedGoals") or revision.get("retiredGoals"):
+        if revision.get("preservePendingVisits") or not revision.get("addedGoals") or revision.get("retiredGoals") or revision["id"] in STOUTFIST_REVISIONS:
             continue
         guide = next(g for g in result["guides"] if g["id"] == revision["guideID"])
         migration = next(m for m in guide["progressMigrations"] if m["from"] == revision["previousRevision"])
@@ -243,12 +289,12 @@ class WholeGuideCoverageTests(unittest.TestCase):
     def test_inventory_accounts_for_every_goal_and_keeps_legitimate_exceptions_explicit(self):
         report = self.report
         self.assertEqual(report["totals"]["guides"], 57)
-        self.assertEqual(report["totals"]["goals"], 7452)
-        self.assertEqual(report["totals"]["steps"], 2342)
-        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7452)
-        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7452)
+        self.assertEqual(report["totals"]["goals"], 7459)
+        self.assertEqual(report["totals"]["steps"], 2345)
+        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7459)
+        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7459)
         self.assertEqual(sum(report["totals"].get(k, 0) for k in
-                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7452)
+                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7459)
         self.assertEqual(report["invalidNavigation"], [])
         for item in report["missingNavigation"]:
             self.assertTrue(item["classification"])
@@ -453,7 +499,7 @@ class ShippedGuideRenderingTests(unittest.TestCase):
             end
             return count,errorCount,table.concat(errors,"; ")
         ''')
-        self.assertEqual(result, (7452, 0, ""))
+        self.assertEqual(result, (7459, 0, ""))
 
     def test_all_bundled_points_and_candidate_frames_resolve_with_the_real_navigation_converter(self):
         host = AccessHost()

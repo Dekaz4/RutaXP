@@ -1,4 +1,4 @@
-# RutaXP 0.7.26 para WoW Forever
+# RutaXP 0.7.27 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,12 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## El libro de Nek’rosh y la cadena de Howin (0.7.27)
+
+La visita a Nek’rosh incluye recoger «Viejas costumbres» y entregarla a Puñorrecio antes de salir de Menethil. Si falta el libro al empezar el siguiente capítulo, la flecha lleva a recogerlo antes de volver al capitán. Si ya lo llevas, la guía muestra directamente su entrega. «Esta era su tierra» requiere haber entregado tanto el libro como «Derrotar a Nek’rosh»; omitir una entrega no desbloquea la siguiente misión.
+
+La continuación de Howin incorpora «Tiempos difíciles» y entrega los huevos y los incisivos antes de aceptar «Muerte a los Faucedraco». Las misiones y las marcas guardadas se conservan al actualizar. Los capítulos terminados no vuelven a abrirse y las llegadas reales en barco siguen siendo válidas cuando cambia la posición del paso.
 
 ## Barco a Theramore y diario de Henrig (0.7.26)
 
@@ -299,7 +305,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.26.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.27.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.
