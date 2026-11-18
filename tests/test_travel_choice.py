@@ -52,14 +52,18 @@ class TravelDecisionTests(unittest.TestCase):
         self.assertIn(1175, {r.id for r in v.destinationGoals.values()})
 
     def test_group_filter_excludes_fights_but_preserves_ready_handins(self):
+        self.host.move((1437, .4936, .4205))
+        self.quest(98291, False)
+        self.assertEqual(self.view().hardLevel, 34)
         self.host.h.lua.execute("""
             C_QuestLog.GetQuestTagInfo = function(id)
                 if id == 1175 or id == 98291 then return {tagID=1} end
             end
         """)
-        self.host.move((1437, .4936, .4205))
-        self.quest(98291, False)
-        self.assertIsNone(self.view())
+        self.host.h.g.EmitAddonEvent("QUEST_DATA_LOAD_RESULT", 1175, True)
+        choice = self.host.ns.TravelChoice
+        self.assertIsNone(choice.GetRecommendation(choice, self.host.guide, self.host.step,
+                                                   self.host.ns.char.progress[GUIDE]))
         self.quest(98291, True)
         v = self.view()
         self.assertEqual([r.quest for r in v.localGoals.values()], [98291])

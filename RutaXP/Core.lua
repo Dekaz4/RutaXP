@@ -387,7 +387,9 @@ ns.events:SetScript("OnEvent", function(_, event, first, second)
     elseif ns.initialized then
         if ns.InvalidateGroupQuestInfo then
             if event == "QUEST_ACCEPTED" then ns:InvalidateGroupQuestInfo(second or first)
-            elseif event == "QUEST_DATA_LOAD_RESULT" then ns:InvalidateGroupQuestInfo(first)
+            elseif event == "QUEST_DATA_LOAD_RESULT" then
+                if not ns:InvalidateGroupQuestInfo(first) then return end
+                if ns.TravelChoice then ns.TravelChoice.at = nil end
             elseif event == "PLAYER_ENTERING_WORLD" then ns:InvalidateGroupQuestInfo() end
         end
         if event == "QUEST_TURNED_IN" then

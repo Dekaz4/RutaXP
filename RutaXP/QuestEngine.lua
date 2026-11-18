@@ -388,7 +388,13 @@ local function isGroupQuest(self, id, layout)
 end
 
 function ns:InvalidateGroupQuestInfo(id)
-    if id then groupCheckedAt[id] = nil else groupCheckedAt = {} end
+    if id == nil then
+        groupCheckedAt = {}
+        return true
+    end
+    if not finiteNumber(id) or groupCheckedAt[id] == nil then return false end
+    groupCheckedAt[id] = nil
+    return true
 end
 
 local groupReason = "Opcional en solitario. Activa «Incluir misiones de grupo» para hacerla."
