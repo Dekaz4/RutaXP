@@ -53,12 +53,16 @@ local function guideAllowed(guide, who, level)
 end
 
 local function questStats(guide, who, cache)
-    local seen, active, total, done = {}, 0, 0, 0
+    local seen, active, total, done, deferred = {}, 0, 0, 0, false
     for _, step in ipairs(guide.steps or {}) do
         if only(step.only, who) then
             for _, goal in ipairs(step.goals or {}) do
                 local id = goal.quest or goal.questID
-                if id and not seen[id] and not goal.optional and only(goal.only, who) then
+                if id and not seen[id] and only(goal.only, who)
+                    and ns.GetGroupDeferralReason and ns:GetGroupDeferralReason(goal, step, guide) then
+                    -- A later ready turn-in for this same quest can still count.
+                    deferred = true
+                elseif id and not seen[id] and not goal.optional and only(goal.only, who) then
                     seen[id], total = true, total + 1
                     if not cache[id] then
                         cache[id] = {
@@ -71,7 +75,7 @@ local function questStats(guide, who, cache)
             end
         end
     end
-    return active, total, done
+    return active, total, done, deferred
 end
 
 function Adaptation:Invalidate() self.cachedAt = nil end
@@ -114,7 +118,7 @@ function Adaptation:GetSuggestions()
             if only(goal.only, who) then
                 if goal.only and goal.only.classes then hasClass = true end
                 if goal.class and token(goal.class) == token(who.class) then hasClass = true end
-                if goal.group then hasGroup = goal.group end
+                if goal.group or ns.IsGroupQuest and ns:IsGroupQuest(goal.quest, current) then hasGroup = goal.group or true end
             end
         end
     end
@@ -123,7 +127,9 @@ function Adaptation:GetSuggestions()
     end
     if hasGroup then
         local advised = type(hasGroup) == "table" and tonumber(hasGroup.size) or nil
-        if real then
+        if ns.GetGroupDeferralReason and ns.char.includeGroupQuests ~= true then
+            append("Misiones de grupo opcionales", "Continúa con los objetivos en solitario. Las entregas de grupo que ya tengas listas siguen apareciendo.", nil, "Puedes retomar las misiones de grupo cuando te interese.")
+        elseif real then
             append("Revisad el objetivo de grupo", "Hay un dúo conectado, pero dos jugadores no garantizan superar un élite, mazmorra o requisito de grupo" .. (advised and (" de " .. advised .. " jugadores") or "") .. ". Revisad nivel, equipo y descripción; el requisito sigue intacto.", nil, "El paso está marcado como contenido de grupo.")
         else
             append("Este paso requiere revisar el grupo", "No hay un dúo conectado confirmado. Busca el grupo que pida el objetivo o déjalo pendiente; no se cambia su dificultad ni su estado.", nil, "El paso está marcado como contenido de grupo.")
@@ -134,8 +140,8 @@ function Adaptation:GetSuggestions()
     for _, id in ipairs(ns.order or {}) do
         local guide = ns.guides[id]
         if guide and guideAllowed(guide, who, level) then
-            local active, total, done = questStats(guide, who, cache)
-            if total == 0 or done < total then
+            local active, total, done, deferred = questStats(guide, who, cache)
+            if total == 0 and not deferred or done < total then
                 local rating = active * 50 + (guide.zone == who.map and 100 or 0) + (guide.races and 15 or 0) - math.abs(level - (guide.minLevel or 1))
                 if current and current.id == id then rating = rating + 5 end
                 if rating > score then best, score, bestActive = guide, rating, active end

@@ -199,7 +199,9 @@ function ns:GetTrackerPlannedUpcomingItems(guide,fromCursor,limit)
         if type(state.skipped)=="table" and state.skipped[key]
             or type(state.confirmed)=="table" and state.confirmed[key] then return false end
         local id=questID(goal)
-        if goal.optional and not char.optional and not (id and status(id).active) then return false end
+        if self.GetGroupDeferralReason and self:GetGroupDeferralReason(goal,step,guide,gi) then return false end
+        if goal.optional and not char.optional and not (id and status(id).active)
+            and not (id and char.includeGroupQuests and self.IsGroupQuest and self:IsGroupQuest(id,guide)) then return false end
         if not (id and status(id).active) then
             for _,closed in ipairs(type(goal.closedBy)=="table" and goal.closedBy or {}) do
                 if number(closed) and (status(closed).active or status(closed).delivered) then return false end

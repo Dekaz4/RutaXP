@@ -17,6 +17,8 @@ class BoatDuoHost(BoatHost):
         self.s.friendLevel, self.s.friendClass, self.s.friendRace = 30, "ROGUE", "Human"
         self.duo = self.ns.Duo
         self.ns.char.duo.wait = True
+        # Keep the elite-tagged Lonebrow journal as the post-boat checkpoint.
+        self.ns.char.includeGroupQuests = True
         self.duo.SetEnabled(self.duo, True)
 
     def run(self):
@@ -62,6 +64,7 @@ class BoatDuoTests(unittest.TestCase):
         b.move(LAND)
         self.exchange(a, b, 25)
         self.assertEqual((a.cursor(), b.cursor()), (33, 33))
+        self.assertEqual(a.ns.GetActiveGoal(a.ns)[0].item, 5791)
         self.assertTrue(a.complete() and b.complete())
         self.assertFalse(a.ns.IsQuestDelivered(a.ns, 474))
 

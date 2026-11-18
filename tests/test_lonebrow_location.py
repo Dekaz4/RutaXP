@@ -74,6 +74,8 @@ class LonebrowLocationTests(unittest.TestCase):
         state = h.ns.char.progress[GUIDE]
         state.cursor = 33
         step = h.guide.steps[33]
+        self.assertIsNone(h.ns.GetStepWaypoint(h.ns, step))
+        h.ns.SetIncludeGroupQuests(h.ns, True)
         point = h.ns.GetStepWaypoint(h.ns, step)
         self.assertEqual(point.mapID, 1441)
         self.assertAlmostEqual(point.x, .313)

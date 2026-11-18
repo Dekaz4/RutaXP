@@ -1,4 +1,4 @@
-# RutaXP 0.7.27 para WoW Forever
+# RutaXP 0.7.28 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,18 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## Subir en solitario, elegir el viaje y hablar con un NPC (0.7.28)
+
+Las misiones identificadas como élite, de mazmorra, de banda o de grupo quedan fuera del recorrido principal por defecto. La flecha continúa con los objetivos normales del mismo paso o del siguiente. Las misiones que ya hayas aceptado siguen en tu diario y sus entregas aparecen cuando están listas. En Los Humedales puedes pasar de largo ante Golm y los otros guardianes, hacer «Crocos del cielo» si la llevas y seguir hacia Costasur.
+
+El tramo de Golm sigue el criterio de la guía de Polestar para Forever, que recomienda dejar los cuatro guardianes para un grupo. Para los viajes también se tuvo en cuenta el criterio de completar varias misiones próximas con enemigos de nivel asequible. [Los Humedales y Costasur en Polestar](https://polestar.guide/guides/alliance/30-40/01-hillsbrad-foothills) · [Guía de leveo de Icy Veins](https://www.icy-veins.com/wow-classic/leveling-guide)
+
+En la ventana de `/rutaxp`, **Incluir misiones de grupo** las incorpora al recorrido del personaje. Si ya pasaste de largo y consigues compañeros, `/rutaxp grupo retomar` vuelve a una misión de grupo pendiente de tu capítulo. `/rutaxp grupo no` te devuelve al recorrido en solitario.
+
+Antes de un viaje largo compatible, RutaXP compara el trabajo cercano de tu diario con las misiones previstas tras el viaje. Tiene en cuenta los vuelos observados y los niveles documentados de los enemigos. **Hacer misiones cercanas** dirige la flecha al objetivo local. **Retomar viaje** recupera la salida. Cuando vais en dúo con ambos diarios sincronizados, la comparación tiene en cuenta las misiones compartidas y el nivel del compañero que vaya más bajo.
+
+Al hablar con un NPC, la guía contrasta lo que ofrece con las misiones que ya llevas. Puede indicarte qué aceptar allí y qué conviene entregar en la misma visita. Cuando falta «Viejas costumbres» en Menethil, **Marcar el libro** señala el libro de Nek’rosh.
 
 ## El libro de Nek’rosh y la cadena de Howin (0.7.27)
 
@@ -305,7 +317,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.27.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.28.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.

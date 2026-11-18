@@ -201,6 +201,14 @@ function ns:HandleFeatureCommand(command, rest)
         elseif tonumber(rest) then ok, reason = self.DuoJourney:BeginStop(tonumber(rest)) end
         if ok == false and reason then self:Print(reason) end
         self:ToggleFeatures("duo-stops")
+    elseif command == "grupo" then
+        if rest == "retomar" then
+            local _, reason = self:ResumeGroupQuests()
+            self:Print(reason)
+        elseif rest == "si" or rest == "sí" or rest == "no" then
+            self:SetIncludeGroupQuests(rest ~= "no")
+            self:Print(self.char.includeGroupQuests and "Misiones de grupo incluidas en tu ruta." or "Ruta en solitario activada.")
+        else self:Print("Usa /rutaxp grupo sí, /rutaxp grupo no o /rutaxp grupo retomar.") end
     elseif command == "pendientes" then
         local _, reason = self:ResumePendingQuests()
         if reason then self:Print(reason) end

@@ -130,3 +130,16 @@ They describe the recorded role; no merchant inventory is copied or promised.
 The original title, source, exact hashes and translation are retained in
 Source/map_service_roles.json. tools/build_map_services.py --verify-roles
 checks that evidence against the pinned source files without networking.
+
+Travel enemy levels
+-------------------
+TravelEnemyData.lua contains numeric creature levels and ranks matched to authored route objectives.
+Source: https://github.com/Questie/QuestieDB/tree/e1652ce62113c152da682baf2d6fb85f1396bcfb
+See QuestieDB-NOTICE.md. tools/build_travel_enemies.py pins the base table and Forever correction files by SHA-256.
+Alternative drop sources in the Shimmering Flats come from SendaFH Quests.lua and Items.lua (pinned above).
+
+Group quest tags
+----------------
+GroupQuestData.lua records quest IDs and their group classification for the leveling routes and prerequisites.
+Source: Zephras Forever quest index, https://zephras.com/forever/enUS/quest/, checked 2026-11-18.
+To verify the recorded subset, save the quest index HTML and pass it to tools/build_group_quests.py --check.

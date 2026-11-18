@@ -129,6 +129,7 @@ local function earlyOffer(self, id, npc, map)
     if id ~= 91777 and not (self.earlyQuestOffers and self.earlyQuestOffers[id] == true) then return nil end
     local char = self.char
     local guide = char and self.guides[char.activeGuide]
+    if char and not char.includeGroupQuests and self.IsGroupQuest and self:IsGroupQuest(id, guide) then return end
     local state = guide and char.progress and char.progress[guide.id]
     if not state or type(state.cursor) ~= "number" or state.review or guide.temporary or guide.recovery or not applies(self, guide)
         or self:IsQuestActive(id) or self:IsQuestDelivered(id) then return nil end
@@ -194,6 +195,9 @@ function ns:GetQuestOfferAdvice(questID)
     local guide = char and self.guides[char.activeGuide]
     if not guide then return "Selecciona una guía para ver cuándo aceptarla.", "estado" end
     if not applies(self, guide) then return "El capítulo activo es para otro personaje.", "estado" end
+    if not char.includeGroupQuests and self.IsGroupQuest and self:IsGroupQuest(questID,guide) and not self:IsQuestDelivered(questID) then
+        return "Opcional en solitario. Puedes aceptarla a mano si quieres hacerla con un grupo.", "opcional"
+    end
     if guide.id == ELWYNN and questID == 91777 then
         return booksAdvice(self)
     end

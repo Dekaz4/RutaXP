@@ -91,17 +91,26 @@ end
 
 -- Build a per-guide layout cache: where each quest is accepted and what quests
 -- are prerequisites for non-trivial quests later in the guide.
+local groupKinds = {group=true,elite=true,dungeon=true,raid=true}
+local function authoredGroup(group)
+    if type(group) == "table" then
+        return groupKinds[group.kind] == true or type(group.size) == "number" and group.size > 1
+    end
+    return group == true or groupKinds[group] == true or type(group) == "number" and group > 1
+end
+
 local guideCache = setmetatable({}, { __mode = "k" })
 local function getGuideLayout(self, guide)
     if not guide or not guide.steps then return nil end
     local cached = guideCache[guide]
     if cached then return cached end
-    cached = { stepOf = {}, accepts = {}, preOf = {}, work = {}, titles = {} }
+    cached = { stepOf = {}, accepts = {}, preOf = {}, work = {}, titles = {}, groupQuests = {}, hasPrerequisite = {} }
     for s, step in ipairs(guide.steps) do
         cached.stepOf[step] = s
         for g, goal in ipairs(step.goals or {}) do
             local q = goal.quest or goal.questID
             if q and goal.title then cached.titles[q] = goal.title end
+            if q and (authoredGroup(goal.group) or authoredGroup(step.group)) then cached.groupQuests[q] = true end
             local kind = goal.t or goal.action
             if q and (kind == "collect" or kind == "kill" or kind == "complete" or kind == "objective"
                 or kind == "interact" or kind == "use") then
@@ -109,6 +118,7 @@ local function getGuideLayout(self, guide)
                 table.insert(cached.work[q], { s=s, g=g, step=step, goal=goal })
             end
             if q and (goal.t or goal.action) == "accept" then
+                if goal.parent or goal.preAll or goal.pre then cached.hasPrerequisite[q] = true end
                 cached.accepts[q] = cached.accepts[q] or {}
                 table.insert(cached.accepts[q], { s = s, g = g, step = step, goal = goal })
                 if type(goal.parent) == "number" and goal.parent > 0 then
@@ -354,6 +364,189 @@ local function questLabel(layout, id, fallback)
         or (layout and layout.titles[id]) or fallback or ("Misión " .. tostring(id))
 end
 
+-- These Classic quest tags mean group content. PvP, daily, class and
+-- legendary tags alone say nothing about the number of players required.
+local groupTags = { [1]=true, [62]=true, [81]=true, [85]=true, [88]=true, [89]=true }
+local knownGroup = {}
+local groupCheckedAt = {}
+local function isGroupQuest(self, id, layout)
+    if knownGroup[id] or (layout and layout.groupQuests[id]) or (self.Data and self.Data.groupQuests and self.Data.groupQuests[id]) then return true end
+    local now = GetTime and GetTime()
+    local checked = groupCheckedAt[id]
+    if now and checked and now >= checked and now - checked < 10 then return false end
+    local api = C_QuestLog
+    local info = read(api and api.GetQuestTagInfo, id)
+    local tag
+    if type(info) == "table" then tag = info.tagID else tag = read(GetQuestTagInfo, id) end
+    if not (issecretvalue and issecretvalue(tag)) and groupTags[tag] then knownGroup[id] = true
+    else
+        local size = read(api and api.GetSuggestedGroupSize, id)
+        if finiteNumber(size) and size > 1 then knownGroup[id] = true end
+    end
+    groupCheckedAt[id] = not knownGroup[id] and now or nil
+    return knownGroup[id] == true
+end
+
+function ns:InvalidateGroupQuestInfo(id)
+    if id then groupCheckedAt[id] = nil else groupCheckedAt = {} end
+end
+
+local groupReason = "Opcional en solitario. Activa «Incluir misiones de grupo» para hacerla."
+local chainReason = "Opcional en solitario. Depende de una misión de grupo pendiente."
+
+function ns:IsGroupQuest(id, guide)
+    guide = guide or (self.char and self.guides[self.char.activeGuide])
+    return id ~= nil and isGroupQuest(self, id, guide and getGuideLayout(self, guide))
+end
+
+-- Cross-chapter prerequisites can be several links away from a group hunt.
+-- Only build the index when a prerequisite is absent from this chapter.
+local externalPickups, catalogSize
+local function previousChapterPickups(self, id)
+    local size = #(self.order or {})
+    if not externalPickups or catalogSize ~= size then
+        externalPickups, catalogSize = {}, size
+        for _, guideID in ipairs(self.order or {}) do
+            local guide = self.guides[guideID]
+            if guide and not guide.temporary and not guide.recovery and self:MatchesConditions(guide)
+                and self:MatchesConditions(guide.only) and (not guide.faction or guide.faction == UnitFactionGroup("player")) then
+                for _, step in ipairs(guide.steps or {}) do
+                    for _, goal in ipairs(step.goals or {step}) do
+                        local quest = goal.quest or goal.questID
+                        if quest and (goal.t or goal.action) == "accept" then
+                            externalPickups[quest] = externalPickups[quest] or {}
+                            table.insert(externalPickups[quest], {goal=goal,step=step})
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return externalPickups[id]
+end
+
+-- A dependent quest can still be reached if ANY alternative is attainable.
+-- Already carrying a child proves that its acceptance conditions were met.
+local function groupBlock(self, id, layout, pickup, seen)
+    if isGroupQuest(self, id, layout) then return groupReason end
+    local rows
+    if pickup then
+        if not (pickup.parent or pickup.preAll or pickup.pre) then return end
+    elseif layout and layout.accepts[id] then
+        if not layout.hasPrerequisite[id] then return end
+        rows = layout.accepts[id]
+    elseif seen then
+        rows = previousChapterPickups(self, id)
+        if not rows then return end
+    else return end
+    seen = seen or {}
+    if seen[id] then return end
+    seen[id] = true
+    local function pendingGroup(pre)
+        pre = math.abs(pre)
+        return groupBlock(self, pre, layout, nil, seen) ~= nil and not self:IsQuestDelivered(pre)
+    end
+    local function needsGroup(goal)
+        if goal.parent and pendingGroup(goal.parent) and not self:IsQuestActive(goal.parent) then return true end
+        for _, pre in ipairs(goal.preAll or {}) do if pendingGroup(pre) then return true end end
+        if goal.pre and #goal.pre > 0 then
+            for _, pre in ipairs(goal.pre) do if not pendingGroup(pre) then return false end end
+            return true
+        end
+        return false
+    end
+    local blocked
+    if pickup then blocked = needsGroup(pickup)
+    else
+        for _, row in ipairs(rows) do
+            if self:MatchesConditions(row.step.only) and self:MatchesConditions(row.goal.only) then
+                blocked = needsGroup(row.goal)
+                if not blocked then break end
+            end
+        end
+    end
+    seen[id] = nil
+    if blocked and not self:IsQuestActive(id) then return chainReason end
+end
+
+function ns:GetGroupDeferralReason(goal, step, guide, index, onQuest)
+    if not self.char or self.char.includeGroupQuests == true or not goal then return end
+    local id = goal.quest or goal.questID
+    guide = guide or self.guides[self.char.activeGuide]
+    local layout = guide and getGuideLayout(self, guide)
+    local action = goal.t or goal.action
+    if not id then
+        if authoredGroup(goal.group) or (step and authoredGroup(step.group) and
+            (action == "kill" or action == "complete" or action == "collect" or action == "objective" or action == "dungeon")) then
+            return groupReason
+        end
+        -- Some books are authored as a standalone collect followed by an
+        -- item-start accept. Keep that book with its quest on mixed visits.
+        if action == "collect" and goal.item and step then
+            local deferred
+            for _, row in ipairs(step.goals or {}) do
+                local quest = row.quest or row.questID
+                if quest and row.item == goal.item and (row.t or row.action) == "accept" and self:MatchesConditions(row.only) then
+                    deferred = groupBlock(self,quest,layout,row)
+                    if not deferred then return end
+                end
+            end
+            return deferred
+        end
+        return
+    end
+    local why = groupBlock(self, id, layout, action == "accept" and goal or nil)
+    if not why and (authoredGroup(goal.group) or step and authoredGroup(step.group)) then why = groupReason end
+    if not why then return end
+    if action == "turnin" then
+        if onQuest == nil then onQuest = self:IsQuestActive(id) end
+        if onQuest and read(C_QuestLog and C_QuestLog.IsComplete, id) == true then return end
+    end
+    return why
+end
+
+function ns:SetIncludeGroupQuests(enabled)
+    if not self.char then return end
+    self.char.includeGroupQuests = enabled == true
+    if self.Adaptation then self.Adaptation:Invalidate() end
+    if self.ClearDeferredGroupMapPin then self:ClearDeferredGroupMapPin() end
+    self:Sync()
+end
+
+function ns:ResumeGroupQuests()
+    local guide, _, state = self:GetCurrent()
+    if not guide or guide.temporary or guide.recovery or (self.GetGuideTravel and self:GetGuideTravel()) then
+        return false, "Vuelve a tu capítulo para retomar sus misiones de grupo."
+    end
+    local layout = getGuideLayout(self, guide)
+    -- Prefer a quest already in the journal to an unaccepted detour. Respect
+    -- manual row omissions and never change an unfinished quest into a turn-in.
+    local firstOffer
+    local function resume(si)
+        state.cursor, state.review, state.placed = si, nil, true
+        if self.UseManualDuoMode then self:UseManualDuoMode("Misiones de grupo retomadas manualmente") end
+        self:SetIncludeGroupQuests(true)
+        return true, "Misiones de grupo incluidas desde el paso " .. si .. "."
+    end
+    for si = 1, math.min(#guide.steps, state.cursor) do
+        local step = guide.steps[si]
+        if self:MatchesConditions(step.only) then
+            for gi, goal in ipairs(step.goals or {step}) do
+                local id, action = goal.quest or goal.questID, goal.t or goal.action
+                if id and isGroupQuest(self, id, layout) and self:GetGoalStatus(goal, step, state, gi, guide, true) == "active" then
+                    if self:IsQuestActive(id) then
+                        if action ~= "turnin" or read(C_QuestLog and C_QuestLog.IsComplete, id) == true then return resume(si) end
+                    elseif action == "accept" then
+                        firstOffer = firstOffer or si
+                    end
+                end
+            end
+        end
+    end
+    if firstOffer then return resume(firstOffer) end
+    return false, "No hay misiones de grupo pendientes que retomar en los pasos recorridos de este capítulo."
+end
+
 local function prerequisiteReason(self, layout, goal, ids, alternatives)
     local labels = {}
     for _, value in ipairs(ids) do
@@ -387,7 +580,7 @@ local function omittedWork(self, layout, id, state, stepIndex, goalIndex)
     return false
 end
 
-function ns:GetGoalStatus(goal, step, state, index, guide)
+function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
     if not self:MatchesConditions(step and step.only) or not self:MatchesConditions(goal.only) then return "skip", "Otro personaje" end
     guide = guide or (self.char and self.guides[self.char.activeGuide])
     local layout = guide and getGuideLayout(self, guide)
@@ -409,6 +602,8 @@ function ns:GetGoalStatus(goal, step, state, index, guide)
     -- Actual acceptance/objective credit supersedes an earlier manual skip.
     if onQuest and action == "accept" then return "done", "Aceptada" end
     if onQuest and workDone then return "done", workDone end
+    local deferred = not includeGroup and self:GetGroupDeferralReason(goal, step, guide, index, onQuest)
+    if deferred then return "skip", deferred end
     local key = confirmationKey(state, index, stepIndex)
     if state and state.skipped and state.skipped[key] then return "skip", "Omitido manualmente" end
     -- A manual service confirmation is not evidence of disembarking.
@@ -436,7 +631,10 @@ function ns:GetGoalStatus(goal, step, state, index, guide)
         and isUnstartedChain(self, earlierAccept(self, layout, id, stepIndex, index)))) then
         return "skip", "Esta cadena se retoma en una visita posterior"
     end
-    if goal.optional and not (self.char and self.char.optional) and not onQuest then return "skip", "Opcional desactivado" end
+    if goal.optional and not (self.char and self.char.optional) and not onQuest
+        and not (id and (includeGroup or self.char and self.char.includeGroupQuests) and isGroupQuest(self, id, layout)) then
+        return "skip", "Opcional desactivado"
+    end
     local profession, professionReason = self:CheckGoalProfession(goal, step, guide)
     if profession == false then return "skip", professionReason end
     if profession == nil then return "blocked", professionReason end
@@ -540,7 +738,10 @@ function ns:GetActiveGoal(step, state)
         if currentStep == step then state = currentState end
     end
     if not step then return nil end
-    if not step.goals then return step, 1, "active" end
+    if not step.goals then
+        if not self:GetGroupDeferralReason(step, step) then return step, 1, "active" end
+        return
+    end
     for index, goal in ipairs(step.goals) do
         local status, reason = self:GetGoalStatus(goal, step, state, index)
         if status ~= "done" and status ~= "skip" then
@@ -554,15 +755,17 @@ function ns:GetActiveGoal(step, state)
 end
 
 function ns:IsStepComplete(step, stateOverride)
-    if not step or not step.goals then return basicComplete(self, step) end
+    if not step or not step.goals then return self:GetGroupDeferralReason(step, step) ~= nil or basicComplete(self, step) end
     local state = stateOverride or select(3, self:GetCurrent())
     if not self:MatchesConditions(step.only) then return true end
     local hasOpenNonService = false
     local hasOpenService = false
+    local deferredGroup = false
     local questGoalsCount = 0
     local skippedQuestGoals = 0
     for index, goal in ipairs(step.goals) do
-        local status = self:GetGoalStatus(goal, step, state, index)
+        local status, reason = self:GetGoalStatus(goal, step, state, index)
+        if reason == groupReason or reason == chainReason then deferredGroup = true end
         local q = goal.quest or goal.questID
         -- Optional errands can be switched off independently of a required
         -- journey (for example the tram with the optional parcels in Forjaz).
@@ -583,7 +786,7 @@ function ns:IsStepComplete(step, stateOverride)
         -- If this step had quest goals and every single quest in it was skipped
         -- (e.g. outleveled grey quests or absent carried quests), do not stop for
         -- an auxiliary train/sethome/goto attached to those skipped quests.
-        if questGoalsCount > 0 and skippedQuestGoals == questGoalsCount then
+        if not deferredGroup and questGoalsCount > 0 and skippedQuestGoals == questGoalsCount then
             return true
         end
         return false
@@ -876,25 +1079,34 @@ function ns:GetStepGoalItems(step, state)
     if not step then return {} end
     if not state then _, _, state = self:GetCurrent() end
     if not step.goals then
+        local deferred = self:GetGroupDeferralReason(step,step)
         return { {
             index = 1,
             goal = step,
             action = step.action or "goto",
-            status = self:IsStepComplete(step) and "done" or "active",
-            isCurrent = true,
+            status = deferred and "skip" or self:IsStepComplete(step) and "done" or "active",
+            isCurrent = not deferred,
             title = step.title or "Objetivo",
-            subtitle = step.text or step.note,
+            subtitle = deferred or step.text or step.note,
         } }
     end
     local _, currentIdx = self:GetActiveGoal(step, state)
     local items = {}
     local doneItems = {}
     local pendingWorkByQuest = {}
+    local groupRows = {}
 
     for index, goal in ipairs(step.goals) do
         local status, reason = self:GetGoalStatus(goal, step, state, index)
         local manualSkip = status == "skip" and reason and reason:find("Omitido manualmente", 1, true) == 1
-        if status ~= "skip" or manualSkip or goal.t == "note" then
+        if status == "skip" and (reason == groupReason or reason == chainReason) then
+            local id = goal.quest or goal.questID
+            if id and not groupRows[id] and (state.review or not currentIdx) then
+                items[#items+1] = {action="note",status="skip",isCurrent=false,
+                    title="Opcional · " .. questLabel(nil,id,goal.title),subtitle=reason}
+                groupRows[id] = true
+            end
+        elseif status ~= "skip" or manualSkip or goal.t == "note" then
             local action = goal.t or goal.action or "goto"
             local id = goal.quest or goal.questID
             -- If an earlier objective in the same step for the same quest is still incomplete,
@@ -995,10 +1207,17 @@ function ns:GetObjectives(step)
     local _, current = self:GetActiveGoal(step, state)
     local lines = {}
     local skippedDone = 0
+    local groupRows = {}
     for index, goal in ipairs(step.goals) do
         local status, reason = self:GetGoalStatus(goal, step, state, index)
         local manualSkip = status == "skip" and reason and reason:find("Omitido manualmente", 1, true) == 1
-        if status ~= "skip" or manualSkip or goal.t == "note" then
+        if status == "skip" and (reason == groupReason or reason == chainReason) then
+            local id = goal.quest or goal.questID
+            if id and not groupRows[id] then
+                lines[#lines+1] = "|cff9ba8b8[Opcional] " .. questLabel(nil,id,goal.title) .. " · " .. reason .. "|r"
+                groupRows[id] = true
+            end
+        elseif status ~= "skip" or manualSkip or goal.t == "note" then
             if status == "done" and not state.review then
                 skippedDone = skippedDone + 1
             else

@@ -653,6 +653,7 @@ function Duo:GetStepWaitStatus(step)
         -- class to finish our class quest.
         local individual = not appliesToPartner(goal.only, ctx)
             or (ns.GetGoalProfessionRequirement and ns:GetGoalProfessionRequirement(goal, step) ~= nil)
+              or (id and ns.IsGroupQuest and ns:IsGroupQuest(id, guide))
         local skipped = ns.GetGoalStatus and ns:GetGoalStatus(goal, step, state, index) == "skip"
         if action == "boat" and applicable and not individual and not skipped and not goal.optional then
             local own = self:GetBoatObservation(goal, step, index, guide, "mine")

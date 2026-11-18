@@ -29,17 +29,21 @@ local function short(name)
     local prefix = text(name) and name:match("^[^,]+")
     return prefix and prefix:lower():gsub("^%s+", ""):gsub("%s+$", "") or nil
 end
+local function factionCode()
+    local faction = read(UnitFactionGroup, "player")
+    return faction == "Alliance" and "A" or faction == "Horde" and "H"
+end
+local function forFaction(c, code) return not c.faction or c.faction == "AH" or c.faction == code end
 local function destinations(goal)
     local ids, result = {}, {}
-    local faction = read(UnitFactionGroup, "player")
-    local code = faction == "Alliance" and "A" or faction == "Horde" and "H"
+    local code = factionCode()
     for _, c in ipairs(goal and goal.candidates or {}) do
-        if not c.faction or c.faction == "AH" or c.faction == code then
+        if forFaction(c, code) then
             for _, id in ipairs(c.destinationNodes or {}) do ids[id] = true end
         end
     end
     for _, c in ipairs(goal and goal.candidates or {}) do
-        if ids[c.flightNode] and (not c.faction or c.faction == "AH" or c.faction == code) then
+        if ids[c.flightNode] and forFaction(c, code) then
             result[#result + 1] = c
         end
     end
@@ -151,13 +155,54 @@ local function classify(slot, state)
     end
 end
 
+-- Journey planning can use a flight master visited outside an authored flight
+-- step. Store only directed connections actually offered to this character.
+local function rememberConnections(observation)
+    if not ns.char or not observation.origin then return end
+    local routes = ns.char.observedTaxiRoutes
+    if type(routes) ~= "table" then routes = {}; ns.char.observedTaxiRoutes = routes end
+    -- A legacy master may report only the current guide destination. Missing
+    -- rows and unreadable states are not observations about any old route.
+    local reachable = type(routes[observation.origin]) == "table" and routes[observation.origin] or {}
+    for id, node in pairs(observation.nodes) do
+        if node.slot and node.kind == "reachable" then reachable[id] = true
+        elseif node.kind == "unavailable" then reachable[id] = nil end
+    end
+    routes[observation.origin] = reachable
+    F.lastTaxiVisit = observation
+end
+
+function F:HasObservedConnection(origin, destination)
+    local routes = ns.char and ns.char.observedTaxiRoutes
+    return type(routes) == "table" and type(routes[origin]) == "table" and routes[origin][destination] == true
+end
+
+function F:GetPlanningConnection(goal, zone)
+    local landings, ids = destinations(goal)
+    local map = landings[1] and landings[1].map
+    if not map or map == zone then return end
+    for _, landing in ipairs(landings) do if map ~= landing.map then return end end
+    local sample, code = R.Sample(zone), factionCode()
+    local origin, nearest = nil, math.huge
+    for _, c in ipairs(goal.candidates or {}) do
+        if sample and c.flightNode and not ids[c.flightNode] and c.map == zone and forFaction(c, code) then
+            local _, _, distance = sample(c)
+            if distance < nearest then origin, nearest = c.flightNode, distance end
+        end
+    end
+    for _, landing in ipairs(landings) do
+        if origin and self:HasObservedConnection(origin, landing.flightNode) then return map, true end
+    end
+    return map, false
+end
+
 function F:ObserveTaxi()
-    self.observation, self.attempt, self.pendingError = nil, nil, nil
+    self.observation, self.lastTaxiVisit, self.attempt, self.pendingError = nil, nil, nil, nil
     local ctx = context()
-    if not ctx or R.OnTaxi() then return end
+    if not ns.char or R.OnTaxi() then return end
     local map = read(GetTaxiMapID)
     local nodes = number(map) and read(C_TaxiMap and C_TaxiMap.GetAllTaxiNodes, map)
-    local result = {key=ctx.key, owner=ns.char, nodes={}, slots={}, at=read(GetTime) or 0}
+    local result = {key=ctx and ctx.key, owner=ns.char, nodes={}, slots={}, at=read(GetTime) or 0}
     if type(nodes) == "table" then
         for _, node in ipairs(nodes) do
             if type(node) == "table" and number(node.nodeID) then
@@ -172,7 +217,7 @@ function F:ObserveTaxi()
                 end
             end
         end
-    else
+    elseif ctx then
         -- Older clients expose no node ID. Only identify this goal's exact
         -- destination name; never guess intermediate hubs from translated names.
         local count = read(NumTaxiNodes)
@@ -201,6 +246,8 @@ function F:ObserveTaxi()
             result.slots[slot] = id
         end
     end
+    rememberConnections(result)
+    if not ctx then return end
     local zone = R.Zone(); local sample = R.Sample(zone)
     if result.origin and originCandidate(ctx.goal, result.origin, zone, sample) then self.observation = result end
 end
@@ -320,11 +367,18 @@ end
 
 local function refresh() if ns.char and ns.Sync then ns:Sync() end end
 local function now() return read(GetTime) or 0 end
+local function freshVisit(self)
+    local observed = self.lastTaxiVisit
+    local t = now()
+    if observed and observed.owner == ns.char and t >= observed.at and t - observed.at <= 120 then
+        return observed
+    end
+end
 function F:RecordAttempt(slot)
     self.attempt = nil
     if not number(slot) or slot < 1 or slot ~= math.floor(slot) then self.pendingError = nil; return end
-    local ctx = context(); local observed = self.observation
-    if not ctx or not observed or observed.key ~= ctx.key or observed.owner ~= ns.char then self.pendingError = nil; return end
+    local observed = freshVisit(self)
+    if not observed then self.pendingError = nil; return end
     local id = observed.slots[slot]
     if not id then self.pendingError = nil; return end
     self.attempt = {id=id, observation=observed, at=now()}
@@ -335,14 +389,20 @@ function F:ApplyRejection()
     if not attempt or not rejected or rejected.observation ~= attempt.observation
         or math.abs(attempt.at - rejected.at) > .5 or now() - rejected.at > 1 then return end
     local node = attempt.observation.nodes[attempt.id]
-    if node and node.kind ~= "current" then node.kind = "unavailable" end
+    if node and node.kind ~= "current" then
+        node.kind = "unavailable"
+        local routes = ns.char and ns.char.observedTaxiRoutes
+        if type(routes) == "table" and type(routes[attempt.observation.origin]) == "table" then
+            routes[attempt.observation.origin][attempt.id] = nil
+        end
+    end
     self.pendingError, self.attempt = nil, nil
     refresh()
 end
 function F:ObserveError(message)
     if not text(message) or not text(ERR_TAXINOSUCHPATH) or message ~= ERR_TAXINOSUCHPATH then return end
-    local ctx = context(); local observed = self.observation
-    if not ctx or not observed or observed.owner ~= ns.char or observed.key ~= ctx.key then return end
+    local observed = freshVisit(self)
+    if not observed then return end
     self.pendingError = {observation=observed, at=now()}
     -- The server error can be raised inside TakeTaxiNode, before its secure
     -- post-hook. Defer correlation so a preceding click is not blamed.

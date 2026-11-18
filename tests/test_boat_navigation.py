@@ -216,20 +216,20 @@ class BoatNavigationTests(unittest.TestCase):
         h.move((1445, .6746, .512))
         h.tick()
         self.assertTrue(h.complete())
-        self.assertEqual(h.ns.char.progress[GUIDE].cursor, 33)
+        self.assertEqual(h.ns.GetActiveGoal(h.ns)[0].quest, 1104)
 
     def test_land_arrival_advances_automatically_and_survives_leaving_and_reload(self):
         h = BoatHost()
         h.move((1445, .6746, .512))
         h.tick()
         self.assertTrue(h.complete())
-        self.assertEqual(h.ns.char.progress[GUIDE].cursor, 33)
+        self.assertEqual(h.ns.GetActiveGoal(h.ns)[0].quest, 1104)
         self.assertIsNone(h.ns.char.progress[GUIDE].confirmed[h.goal_key])
         self.assertFalse(h.ns.IsQuestDelivered(h.ns, 474))
         h.move((1413, .5, .78))
         reloaded = BoatHost(saved=primitive_copy(h.ns.char), position=(1413, .5, .78))
         self.assertTrue(reloaded.complete())
-        self.assertEqual(reloaded.ns.char.progress[GUIDE].cursor, 33)
+        self.assertEqual(reloaded.ns.GetActiveGoal(reloaded.ns)[0].quest, 1104)
 
     def test_taxi_ghost_or_unreadable_position_cannot_complete_the_land_checkpoint(self):
         for state in ("flying", "dead", "positionUnavailable"):
@@ -281,14 +281,14 @@ class BoatNavigationTests(unittest.TestCase):
         self.assertFalse(h.complete())
         state.skipped[h.goal_key] = True
         h.ns.Sync(h.ns)
-        self.assertEqual(state.cursor, 33)
+        self.assertEqual(h.ns.GetActiveGoal(h.ns)[0].quest, 1104)
         self.assertFalse(h.complete())
 
     def test_already_in_theramore_on_land_needs_no_fictional_boarding_history(self):
         h = BoatHost(position=(1445, .6746, .512))
         h.tick()
         self.assertTrue(h.complete())
-        self.assertEqual(h.ns.char.progress[GUIDE].cursor, 33)
+        self.assertEqual(h.ns.GetActiveGoal(h.ns)[0].quest, 1104)
 
     def test_manual_navigation_mode_keeps_its_preference_after_confirmed_arrival(self):
         h = BoatHost()

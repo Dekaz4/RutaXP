@@ -354,6 +354,7 @@ end
 
 function ns:GetBaseStepWaypoint(step)
     if not step then return nil end
+    if not step.goals and self.GetGroupDeferralReason and self:GetGroupDeferralReason(step, step) then return nil end
     if step.waypoint then return validPoint(step.waypoint) and step.waypoint or nil end
     if step.goals then
         local goal, status
@@ -372,6 +373,19 @@ end
 
 function ns:GetStepWaypoint(step, travel, mapRequest)
     if travel == nil and self.GetGuideTravel then travel = self:GetGuideTravel() end
+    if self.char and self.char.localTravelChoice and self.GetTravelComparison and not (mapRequest and mapRequest.index) then
+        local _, entry = self:GetTravelComparison()
+        if entry then
+            if mapRequest then mapRequest.goal = entry.goal end
+            local base = self:GetLocalTravelPoint(entry)
+            if self.Waypoints and self.Waypoints.ResolveTarget then
+                local point = self.Waypoints:ResolveTarget({base=base, goal=entry.goal, guide=entry.guide,
+                    step=entry.step, stepIndex=entry.stepIndex, goalIndex=entry.index, source=base.source, key=base.targetKey})
+                if point or not mapRequest then return point end
+            end
+            return base
+        end
+    end
     if travel then
         if mapRequest then mapRequest.reason = travel.text or travel.title end
         return travel.point
@@ -727,6 +741,18 @@ local function updateArrow(self, frame)
     local _, step = self:GetCurrent()
     local travel = self.GetGuideTravel and self:GetGuideTravel()
     local point = self:GetArrowWaypoint(step, travel or false)
+    if not point and self.char.localTravelChoice and self.GetTravelComparison then
+        local _, entry = self:GetTravelComparison()
+        if entry then
+            frame.dNorth, frame.dWest, frame.targetContinent, frame.arrived = nil, nil, nil, false
+            frame:Show()
+            frame.arrow:Hide()
+            frame.distance:SetText("")
+            frame.statusText, frame.destinationText = "Ruta local sin confirmar", self:GetGoalTitle(entry.goal)
+            frame.navigationState, frame.navigationReason = "missing", frame.statusText
+            return
+        end
+    end
     local flight = not travel and self.FlightNavigation and self.FlightNavigation:CurrentView()
     if point and not point.flightNavigation then flight = nil end
     local boat = not travel and self.BoatNavigation and self.BoatNavigation:CurrentView()
@@ -765,6 +791,10 @@ local function updateArrow(self, frame)
     local activeGoal = point and point.goal or (step and step.goals and self.GetActiveGoal and self:GetActiveGoal(step))
     local goalTitle = activeGoal and self.GetGoalTitle and self:GetGoalTitle(activeGoal)
     local stepTitle = step and step.title
+    if point and (point.source == "local-travel-choice" or point.targetSource == "local-travel-choice"
+        or point.walkingGoal and point.walkingGoal.source == "local-travel-choice") then
+        stepTitle = "Mis misiones cercanas"
+    end
     local subText = (stepTitle and goalTitle and stepTitle ~= goalTitle)
         and (goalTitle .. "\n|cff9fb0c7" .. stepTitle .. "|r")
         or (goalTitle or stepTitle or "Siguiente destino")
@@ -785,7 +815,8 @@ local function updateArrow(self, frame)
     end
     local goal = point and point.goal
     local contact = goal and (point.candidateName or goal.npcName)
-    local questTarget = point and (point.source == "guide" or point.source == "game" or point.source == "learned")
+    local questTarget = point and (point.source == "guide" or point.source == "game" or point.source == "learned"
+        or point.source == "local-travel-choice")
     local segment
     if point and point.walking then
         segment = string.format("%d/%d", math.max(1, point.walkingIndex - 1), math.max(1, point.walkingCount - 1))

@@ -101,7 +101,9 @@ local function flatButton(parent, text, width, height, x, y, action, accent)
 end
 
 local function advanceGuide(button)
-    if button.flightGround then
+    if button.resumeTravelChoice then
+        ns:ResumeTravelChoice(button.resumeTravelChoice)
+    elseif button.flightGround then
         ns.FlightNavigation:BeginGround()
     elseif button.groundDetour then
         ns:BeginGroundDetour()
@@ -253,6 +255,9 @@ function ns:CreateUI()
     background:SetColorTexture(0.14, 0.18, 0.25, 1)
 
     self.stepCount = label(detail, "GameFontHighlightSmall", "", 18, -134, 488, SKY)
+    self.localTravelButton = flatButton(detail, "Hacer misiones cercanas", 174, 21, 330, -127,
+        function(button) self:ChooseLocalQuests(button.choiceKey) end)
+    self.localTravelButton:Hide()
     self.stepTitle = label(detail, "GameFontNormalLarge", "", 18, -154, 488, TEXT_MAIN)
     self.stepTitle:SetHeight(34)
 
@@ -313,7 +318,13 @@ function ns:CreateUI()
     label(frame, "GameFontHighlightSmall", "Opcionales", 766, -510, 80)
     optional:SetScript("OnClick", function(box) self.char.optional = box:GetChecked() and true or false; self:Sync() end)
 
-    label(frame, "GameFontDisableSmall", "Acepta y entrega misiones automáticamente al hablar con NPCs (mantén Shift para pausar).", 300, -536, 520)
+    local group = CreateFrame("CheckButton", nil, frame, "UICheckButtonTemplate")
+    self.groupQuestCheck = group
+    group:SetSize(24, 24)
+    group:SetPoint("TOPLEFT", 296, -530)
+    label(frame, "GameFontHighlightSmall", "Incluir misiones de grupo", 322, -536, 175)
+    group:SetScript("OnClick", function(box) self:SetIncludeGroupQuests(box:GetChecked() and true or false) end)
+    label(frame, "GameFontDisableSmall", "Mantén Mayús al hablar para pausar la recogida automática.", 507, -536, 316)
 
     self:CreateTracker()
     StaticPopupDialogs.RUTAXP_RESET_GUIDE = {
@@ -443,7 +454,9 @@ function ns:CreateTracker()
                 if item.goalDetails and item.goalDetails ~= item.goalSub then
                     GameTooltip:AddLine(item.goalDetails, 0.75, 0.82, 0.90, true)
                 end
-                GameTooltip:AddLine(item.questPlan and "Plan del diario: informa de próximos pasos sin cambiar la misión de la flecha."
+                GameTooltip:AddLine(item.choiceKey and "Clic para seguir estas misiones antes de viajar."
+                    or item.localObjective and "Clic para marcar este objetivo en el mapa."
+                    or item.questPlan and "Plan del diario: informa de próximos pasos sin cambiar la misión de la flecha."
                     or item.preview and "Vista previa: primero termina el paso actual. No modifica tu progreso."
                     or item.omitted and "Clic der.: volver a incluir este objetivo"
                     or item.blocked and "Clic izq.: retomar el requisito pendiente · Clic der.: omitir"
@@ -456,6 +469,14 @@ function ns:CreateTracker()
             if GameTooltip then GameTooltip:Hide() end
         end)
         row:SetScript("OnClick", function(item, mouseBtn)
+            if item.choiceKey then
+                if mouseBtn ~= "RightButton" then self:ChooseLocalQuests(item.choiceKey) end
+                return
+            end
+            if item.localObjective then
+                if mouseBtn ~= "RightButton" then self:Navigate() end
+                return
+            end
             if item.preview then return end
             if mouseBtn == "RightButton" and self.ToggleGoalConfirm and item.goalIndex then
                 self:ToggleGoalConfirm(item.goalIndex)
@@ -533,6 +554,7 @@ function ns:RefreshUI()
     self.trackCheck:SetChecked(self.char.tracker)
     if self.arrowCheck then self.arrowCheck:SetChecked(self.char.arrow ~= false) end
     if self.optionalCheck then self.optionalCheck:SetChecked(self.char.optional and true or false) end
+    if self.groupQuestCheck then self.groupQuestCheck:SetChecked(self.char.includeGroupQuests == true) end
 
     local currentZone = GetRealZoneText and GetRealZoneText() or nil
     local playerLevel = UnitLevel and UnitLevel("player") or 1
@@ -550,6 +572,18 @@ function ns:RefreshUI()
     self.currentDuoView = sharedView
     if not guide then self.detail:Hide(); self.tracker:Hide(); return end
     self.detail:Show()
+    local choice, localObjective
+    if not sharedView and self.GetTravelComparison then choice, localObjective = self:GetTravelComparison() end
+    local localTitle, localHint
+    if localObjective then
+        local goal = localObjective.goal
+        localTitle = self:GetGoalTitle(goal)
+        localHint = self:GetGoalHint(goal) or goal.target or goal.itemName or goal.objName
+        local npc = localObjective.point.candidateName or goal.npcName
+        if not localHint and npc then localHint = goal.t == "turnin" and ("Habla con " .. npc) or npc end
+    end
+    self.localTravelButton.choiceKey = choice and choice.key
+    self.localTravelButton:SetShown(choice and not localObjective and choice.localGoals and choice.localGoals[1] ~= nil or false)
 
     local faction = guide.faction == "Alliance" and "Alianza" or guide.faction == "Horde" and "Horda" or "Ambas facciones"
     local kind = (guide.zoneName or guide.kind or "Guía") .. " · " .. faction
@@ -583,7 +617,8 @@ function ns:RefreshUI()
     if sharedView then self.stepCount:SetText("DÚO · PASO " .. state.cursor .. " DE " .. #guide.steps .. " · Tu progreso: " .. sharedView.ownCursor) end
 
     local waypoint
-    if travel then waypoint = travel.point
+    if localObjective then waypoint = self:GetLocalTravelPoint(localObjective)
+    elseif travel then waypoint = travel.point
     elseif self.GetStepWaypoint then waypoint = self:GetStepWaypoint(step, nil, {})
     else waypoint = step and step.waypoint end
     local objectives = travel and "" or self:GetObjectives(step)
@@ -607,6 +642,11 @@ function ns:RefreshUI()
         text = continuation and ("Continúa en |cffffce72" .. continuation.title .. "|r.")
             or reason or "Elige otra ruta en «Guías»."
     end
+    if choice then
+        text = localObjective and (localTitle .. (localHint and ("\n" .. localHint) or "") .. "\n\n" .. choice.summary)
+            or (choice.summary .. "\n\n" .. text)
+        if localObjective then self.stepTitle:SetText("Mis misiones cercanas") end
+    end
     self.stepText:SetText(text)
     self.stepContent:SetHeight(math.max(182, self.stepText:GetStringHeight() + 12))
     local stepKey = guide.id .. ":" .. (travel and ("travel:" .. travel.title) or state.cursor)
@@ -614,23 +654,24 @@ function ns:RefreshUI()
 
     local editSteps = not travel and not sharedView
     local restorePrevious = self.GetPreviousRestorableStep and self:GetPreviousRestorableStep()
-    local canGoBack = not travel and (restorePrevious or editSteps and state.cursor > 1)
+    local canGoBack = not localObjective and not travel and (restorePrevious or editSteps and state.cursor > 1)
     self.previousButton:SetEnabled(canGoBack)
     local flight = editSteps and self.FlightNavigation and self.FlightNavigation:CurrentView()
     if waypoint and not waypoint.flightNavigation then flight = nil end
     for _, button in ipairs({self.nextButton, self.trackerNext}) do
+        button.resumeTravelChoice = localObjective and choice.key
         button.continuesGuide = continuation ~= nil
         button.startsTravelHere = travel and travel.waiting and travel.localStart == true
         button.groundDetour = travel and travel.groundOption ~= nil
         button.flightGround = flight and flight.canGround == true
-        button:SetText((button.flightGround or button.groundDetour) and "Ir sin vuelo" or button.startsTravelHere and "Empezar aquí"
+        button:SetText(localObjective and "Retomar viaje" or (button.flightGround or button.groundDetour) and "Ir sin vuelo" or button.startsTravelHere and "Empezar aquí"
             or complete and "Continuar" or "Siguiente >")
-        button:SetEnabled(button.groundDetour or button.startsTravelHere or editSteps and not complete or continuation ~= nil)
+        button:SetEnabled(localObjective or button.groundDetour or button.startsTravelHere or editSteps and not complete or continuation ~= nil)
     end
     for _, button in ipairs({self.skipButton, self.trackerSkip}) do
         button.skipsTravel = travel ~= nil
         button:SetText(travel and "Omitir viaje" or button == self.skipButton and "Saltar paso" or "Saltar")
-        button:SetEnabled(travel and not travel.waiting or editSteps and not complete)
+        button:SetEnabled(not localObjective and (travel and not travel.waiting or editSteps and not complete))
     end
     self.mapButton:SetEnabled(waypoint and true or false)
     self.mapButton:SetText(waypoint and "Marcar mapa" or "Sin pin")
@@ -639,17 +680,32 @@ function ns:RefreshUI()
     local lvlBadge = guide.minLevel and (" (" .. guide.minLevel .. "–" .. (guide.maxLevel or "?") .. ")") or ""
     self.trackerTitle:SetText(guide.title .. lvlBadge)
     local partnerVisit = sharedView and step and step.only and not self:MatchesConditions(step.only)
-    self.trackerStep:SetText(partnerVisit and ("Tu amigo · " .. step.title) or step and step.title or localFinish or "¡Zona completada!")
+    self.trackerStep:SetText(localObjective and "Mis misiones cercanas" or partnerVisit and ("Tu amigo · " .. step.title) or step and step.title or localFinish or "¡Zona completada!")
     self.trackerProgress:SetText(travelProgress or managed and "Dúo" or complete and "Completada" or ("Paso " .. state.cursor .. "/" .. #guide.steps))
     if sharedView then self.trackerProgress:SetText((partnerVisit and "Amigo " or "Juntos ") .. state.cursor .. " · Tú " .. sharedView.ownCursor) end
 
     local goalItems = sharedItems or ((not travel and step and self.GetStepGoalItems) and self:GetStepGoalItems(step, state) or {})
+    if localObjective then
+        goalItems = {{action=localObjective.goal.t, title=localTitle, isCurrent=true,
+            subtitle=localHint, details=self:GetGoalInstruction(localObjective.goal), localObjective=true}}
+    elseif choice then
+        local canStay = choice.localGoals and choice.localGoals[1] ~= nil
+        local items = {{action="note", title=canStay and (choice.preferLocal and "Hacer misiones cercanas · Recomendado"
+            or "Hacer misiones cercanas") or "Antes de viajar",
+            subtitle=choice.summary, choiceKey=canStay and choice.key or nil, preview=not canStay}}
+        if travel then
+            items[2] = {action="goto", title=travel.title, subtitle=travel.text, isCurrent=true}
+        else
+            for _, item in ipairs(goalItems) do items[#items + 1] = item end
+        end
+        goalItems = items
+    end
     local displayItems = {}
     for _, item in ipairs(goalItems) do displayItems[#displayItems + 1] = item end
     local expanded = self.char.trackerSize or self.tracker.isResizing
     local preview, planned = {}, 0
     local previewGetter = self.GetTrackerPlannedUpcomingItems or self.GetTrackerUpcomingItems
-    if not travel and previewGetter then
+    if not localObjective and not travel and previewGetter then
         for _, item in ipairs(previewGetter(self, guide, state.cursor, 12)) do
             if expanded or item.questPlan then
                 preview[#preview + 1] = item
@@ -677,6 +733,7 @@ function ns:RefreshUI()
             local omitted = item.status == "skip" and item.reason
                 and item.reason:find("^Omitido manualmente") ~= nil
             row.goalIndex = item.index
+            row.choiceKey, row.localObjective = item.choiceKey, item.localObjective
             row.goalTitle = omitted and ("Omitido · " .. item.title) or item.title
             row.omitted = omitted
             row.preview = item.preview == true

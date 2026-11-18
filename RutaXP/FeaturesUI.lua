@@ -271,6 +271,10 @@ function ns:UpdateFeatures()
     elseif tab == "adaptation" and self.Adaptation then
         local suggestions = self.Adaptation:GetSuggestions() or {}
         local lines = { "Propuestas según tu nivel, raza, clase y registro de misiones. Tú decides cuándo cambiar. La ruta del compañero no se cambia." }
+        add("Retomar misiones de grupo", function()
+            local _, reason = self:ResumeGroupQuests()
+            self:Print(reason)
+        end)
         for i, item in ipairs(suggestions) do
             lines[#lines + 1] = i .. ". " .. (item.title or "Propuesta") .. "\n" .. (item.text or item.reason or "")
             if item.guideID then

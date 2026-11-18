@@ -168,7 +168,7 @@ function ns:PlayerPoint()
 end
 
 function ns:Navigate(goalIndex)
-    local _, step = self:GetCurrent()
+    local guide, step = self:GetCurrent()
     local request = {index=goalIndex}
     local point
     if self.GetStepWaypoint then point = self:GetStepWaypoint(step, nil, request)
@@ -192,6 +192,16 @@ function ns:Navigate(goalIndex)
     if self.UpdateNavigation then self:UpdateNavigation() end
     local goal = point.goal or request.goal
     local label = point.label or point.title or (goal and (goal.npcName or goal.title)) or (step and step.title) or "Destino"
+    if point.guideID and point.stepIndex and self.guides[point.guideID] then
+        guide = self.guides[point.guideID]
+        step = guide.steps[point.stepIndex]
+    end
+    local pin = goal and goal.quest and {goal=goal, guide=guide, step=step, index=point.goalIndex or goalIndex}
+    return self:MarkMapDestination(point, label, pin)
+end
+
+function ns:MarkMapDestination(point, label, pin)
+    if pin then pin.mapID, pin.x, pin.y = point.mapID, point.x, point.y end
     local info = call(C_Map and C_Map.GetMapInfo, point.mapID)
     local location = string.format("%s · %s%.1f, %.1f", label, info and info.name and (info.name .. " ") or "", point.x * 100, point.y * 100)
     if C_Map and C_Map.SetUserWaypoint and UiMapPoint and UiMapPoint.CreateFromCoordinates
@@ -199,17 +209,38 @@ function ns:Navigate(goalIndex)
         local target = call(UiMapPoint.CreateFromCoordinates, point.mapID, point.x, point.y)
         if target and call(C_Map.SetUserWaypoint, target) then
             if self.ClearMapDestination then self:ClearMapDestination() end
+            if pin then pin.native = true end
+            self.guideQuestMapPin = pin
             call(C_SuperTrack and C_SuperTrack.SetSuperTrackedUserWaypoint, true)
             self:Print("Destino marcado: " .. location)
             return true
         end
     end
     if self.ShowMapDestination and self:ShowMapDestination(point, label) then
+        self.guideQuestMapPin = pin
         self:Print("Destino marcado: " .. location)
         return true
     end
     self:Print("Ubicación: " .. location .. ". El juego no ha podido mostrar el marcador.")
     return false
+end
+
+function ns:ClearDeferredGroupMapPin()
+    local pin = self.guideQuestMapPin
+    if not pin or not self.GetGroupDeferralReason or not self:GetGroupDeferralReason(pin.goal, pin.step, pin.guide, pin.index) then return end
+    self.guideQuestMapPin = nil
+    if pin.native then
+        -- Players and other addons can replace the native pin at any time.
+        local waypoint = call(C_Map and C_Map.GetUserWaypoint)
+        local ours = waypoint and call(function()
+            if waypoint.uiMapID ~= pin.mapID or not waypoint.position then return false end
+            local x, y = waypoint.position:GetXY()
+            return math.abs(x - pin.x) < 0.000001 and math.abs(y - pin.y) < 0.000001
+        end)
+        if ours then call(C_Map and C_Map.ClearUserWaypoint) end
+    elseif self.ClearMapDestination then
+        self:ClearMapDestination()
+    end
 end
 
 function ns:Command(message)
@@ -354,6 +385,11 @@ ns.events:SetScript("OnEvent", function(_, event, first, second)
         ns.initialized = true
         ns:Initialize()
     elseif ns.initialized then
+        if ns.InvalidateGroupQuestInfo then
+            if event == "QUEST_ACCEPTED" then ns:InvalidateGroupQuestInfo(second or first)
+            elseif event == "QUEST_DATA_LOAD_RESULT" then ns:InvalidateGroupQuestInfo(first)
+            elseif event == "PLAYER_ENTERING_WORLD" then ns:InvalidateGroupQuestInfo() end
+        end
         if event == "QUEST_TURNED_IN" then
             ns.turnedIn[first] = true
         elseif event == "QUEST_ACCEPTED" then

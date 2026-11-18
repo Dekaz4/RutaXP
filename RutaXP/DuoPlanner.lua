@@ -677,6 +677,10 @@ local function stepItems(g,stepIndex,mine,partner,observation)
         local a,b=applies(record,mine),applies(record,partner)
         local item={goal=goal,index=i,action=action(goal) or "manual",questID=questID(goal),title=goal.title or step.title,
             appliesMine=a,appliesPartner=b,individual=not(a and b) or profession(goal,step)~=nil,optional=goal.optional==true}
+        -- Group hunts are a personal opt-in. A party member's journal does
+        -- not prove that they chose to include the hunt in their guide.
+        if item.questID and ns.IsGroupQuest and ns:IsGroupQuest(item.questID,g)
+            or ns.GetGroupDeferralReason and ns:GetGroupDeferralReason(goal,step,g,i) then item.optional=true end
         item.mine=a and goalObservation(goal,mine,"mine",observation,step,i,g) or {known=true,done=false,status="skip",reason="Rama de otra raza o clase."}
         item.partner=b and goalObservation(goal,partner,"partner",observation,step,i,g) or {known=true,done=false,status="skip",reason="Rama de otra raza o clase."}
         if item.mine.excluded then a=false;item.appliesMine=false end
@@ -753,7 +757,8 @@ local function ownProjection(g,mine,observation)
             if applies({goal=goal,step=step},mine) and action(goal)~="note" then hasTask=true end
         end
         for index,goal in ipairs(step.goals or {step}) do
-            if applies({goal=goal,step=step},mine) and not goal.optional and not(action(goal)=="note" and hasTask) then
+            if applies({goal=goal,step=step},mine) and not goal.optional and not(action(goal)=="note" and hasTask)
+                and not (ns.GetGroupDeferralReason and ns:GetGroupDeferralReason(goal,step,g,index)) then
                 local state=goalObservation(goal,mine,"mine",observation,step,index,g)
                 if not state.known then unknown=true end
                 if not state.done then pending=true end

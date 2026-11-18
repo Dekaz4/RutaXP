@@ -2,7 +2,7 @@
 ## Title: RutaXP
 ## Notes: Guias completas mision por mision en espanol, flecha de navegacion y rutas propias para WoW Forever.
 ## Author: Diego
-## Version: 0.7.27
+## Version: 0.7.28
 ## Category: Quests
 ## Category-esES: Misiones
 ## Category-esMX: Misiones
@@ -16,6 +16,7 @@ MapFrames.lua
 Leveling.lua
 RogueRewardData.lua
 RogueRewards.lua
+GroupQuestData.lua
 QuestEngine.lua
 GuideMigrations.lua
 Navigation.lua
@@ -37,6 +38,9 @@ DuoPlanner.lua
 DuoAuto.lua
 DuoJourney.lua
 Adaptation.lua
+TravelEnemyData.lua
+TravelChoice.lua
+TravelChoiceUI.lua
 Recovery.lua
 Talents.lua
 TalentBuilds.lua
@@ -49,6 +53,7 @@ Extensions.lua
 EarlyQuestData.lua
 QuestVisitTurnin.lua
 QuestOfferAdvice.lua
+NPCQuestContext.lua
 NearbyQuestOffers.lua
 QuestOfferUI.lua
 MapServices.lua
