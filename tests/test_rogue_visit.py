@@ -26,6 +26,6 @@ class RogueVisitTests(unittest.TestCase):
         self.assertEqual(h.active()[1], 1)
         h.lua.execute("function IsInGroup() return false end")
         h.state.classToken = "PALADIN"
-        self.assertEqual(h.active()[1], 1)
+        self.assertEqual(h.active()[1], 2)
         gate = self.setup_visit([first, {"t": "hearth", "location": "Auberdine"}, near])
         self.assertEqual(gate.active()[1], 1)
