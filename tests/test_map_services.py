@@ -1,5 +1,6 @@
 """Public world-map service data, projected independently of the current guide."""
 
+import json
 from pathlib import Path
 import unittest
 
@@ -75,6 +76,20 @@ class MapServiceTests(unittest.TestCase):
         # A name alone (the seasonal vendor) is not evidence of its stock.
         self.assertEqual(points[15898].category, "vendor")
         self.assertIsNone(points[15898].detail)
+
+    def test_hillsbrad_merchants_use_the_correct_filters_and_vendor_stops(self):
+        self.lua.globals().available = True
+        points = [p for p in self.points(1424) if p.npc in (2404, 3543)]
+        self.assertCountEqual([(p.npc, p.category, p.detail) for p in points], [
+            (2404, "vendor_equipment", "Armas · En la herrería o sus alrededores"),
+            (3543, "vendor_equipment", "Armaduras"),
+        ])
+        document = json.loads((ROOT / "RutaXP/Source/leveling.json").read_text(encoding="utf-8"))
+        options = [{site.get("npc") for site in goal["candidates"]}
+                   for guide in document["guides"] for step in guide["steps"] for goal in step["goals"]
+                   if goal["t"] == "vendor" and goal.get("candidates")]
+        self.assertTrue(any(3543 in merchants for merchants in options))
+        self.assertFalse(any(2404 in merchants for merchants in options))
 
 
 if __name__ == "__main__":

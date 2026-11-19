@@ -5,7 +5,7 @@ local verbs = {accept="Acepta",turnin="Entrega",complete="Completa",objective="C
     kill="Derrota",collect="Reúne",goto="Ve a",travel="Viaja a",talk="Habla con",
     interact="Interactúa con",use="Usa",sethome="Fija tu hogar en",hearth="Usa la piedra de hogar hacia",
     getfp="Descubre la ruta de vuelo en",fly="Vuela a",train="Entrena habilidades",
-    buy="Compra",vendor="Vende y repara",level="Sube a nivel",note="Nota"}
+    buy="Compra",vendor="Vende",level="Sube a nivel",note="Nota"}
 
 local function read(fn,...)
     if type(fn)~="function" then return nil end

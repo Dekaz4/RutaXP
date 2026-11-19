@@ -132,6 +132,10 @@ def service_catalog(pfquest, sendafh):
         for ident, side in db.meta[role].items():
             if ident in assigned or side not in ("A", "H", "AH"):
                 continue
+            # The legacy repair pins at these two Hillsbrad merchants are
+            # unreliable in Forever. Keep their independent vendor records.
+            if role == "repair" and ident in (2404, 3543):
+                continue
             is_mail = category == "mailbox"
             record = db.objects.data[-ident] if is_mail else db.units.data[ident]
             if not record:
@@ -149,6 +153,10 @@ def service_catalog(pfquest, sendafh):
             merchant = merchant_roles.get(ident) if category in {"vendor", "repair"} else None
             point_category = merchant["category"] if category == "vendor" and merchant else category
             detail = merchant["label"] if merchant else ""
+            if category == "vendor" and ident == 2404:
+                # https://foreverbase.org/en/db/npc/2404/#sells
+                point_category = "vendor_equipment"
+                detail = "Armas · En la herrería o sus alrededores"
             for map_id, coords in locations.items():
                 if not is_mail and len(coords) > 1 and (ident, map_id) not in overrides:
                     continue  # A roaming NPC has no single reliable position on this map.

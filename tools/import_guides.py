@@ -247,6 +247,11 @@ def import_guides(source_path: Path, addon_path: Path, expected_commit: str) -> 
         raise ValueError(f"Pinned import must contain 57 leveling guides, found {len(guides)}")
 
     all_goals = [goal for guide in guides for step in guide["steps"] for goal in step["goals"]]
+    # Verringtan's recorded location near the smithy is only approximate.
+    # Direct routine visits to merchants with a reliable destination.
+    for goal in all_goals:
+        if goal["t"] == "vendor" and goal.get("candidates"):
+            goal["candidates"] = [site for site in goal["candidates"] if site.get("npc") != 2404]
     stats = {
         "registeredGuides": sum(categories.values()),
         "sourceCategories": dict(sorted(categories.items())),

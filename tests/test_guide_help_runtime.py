@@ -34,6 +34,22 @@ class GuideInstructionRuntimeTests(unittest.TestCase):
         self.assertIn("Lanza Leer línea Ley", row.subtitle)
         self.assertIn("Lanza Leer línea Ley", h.call("GetObjectives", step))
 
+    def test_generic_sales_and_authored_repairs_in_current_and_upcoming_rows(self):
+        h = fixtures.QuestEngineHost()
+        h.load((fixtures.ADDON / "TrackerPreview.lua").read_text(encoding="utf-8"), "RutaXP", h.ns)
+        visits = [{"t": "vendor", "candidates": [{"npc": 3543, "npcName": "Robert Aebischer"}]},
+                  {"t": "vendor", "npcName": "Reparador", "instructionVerb": "Repara",
+                   "instruction": "Repara tu equipo."}]
+        guide = h.group(visits)
+        h.initialize()
+        _, step, state = h.call("GetCurrent")
+        current = h.call("GetStepGoalItems", step, state)[0]
+        upcoming = h.call("GetTrackerUpcomingItems", guide, 0)
+        for rows in (current, upcoming):
+            self.assertEqual(rows[1].title, "Vende: Robert Aebischer")
+            self.assertEqual(rows[2].title, "Repara: Reparador")
+            self.assertIn("Repara tu equipo.", rows[2].details)
+
     def test_taming_presentation_does_not_change_the_quest_action(self):
         h = self.fixture({"t": "kill", "quest": 100, "instructionVerb": "Domestica",
                           "instruction": "Usa la fusta para domesticar la bestia."})

@@ -56114,15 +56114,6 @@
                 },
                 {
                   "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
-                },
-                {
-                  "faction": "A",
                   "npc": 3532,
                   "npcName": "Peletero Piroleño",
                   "map": 1421,
@@ -57562,15 +57553,6 @@
                   "map": 1417,
                   "x": 45.98,
                   "y": 47.72,
-                  "f": "e"
-                },
-                {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
                   "f": "e"
                 },
                 {
@@ -62261,15 +62243,6 @@
                   "y": 49.9
                 },
                 {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
-                },
-                {
                   "faction": "AH",
                   "npc": 3536,
                   "npcName": "Kris Legace",
@@ -64305,15 +64278,6 @@
                   "y": 49.9
                 },
                 {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
-                },
-                {
                   "faction": "AH",
                   "npc": 3536,
                   "npcName": "Kris Legace",
@@ -65826,15 +65790,6 @@
                   "map": 1423,
                   "x": 71.24,
                   "y": 49.9
-                },
-                {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
                 },
                 {
                   "faction": "AH",
@@ -67524,15 +67479,6 @@
                   "y": 49.9
                 },
                 {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
-                },
-                {
                   "faction": "AH",
                   "npc": 3536,
                   "npcName": "Kris Legace",
@@ -68912,15 +68858,6 @@
                   "map": 1423,
                   "x": 71.24,
                   "y": 49.9
-                },
-                {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
                 },
                 {
                   "faction": "AH",
@@ -71242,15 +71179,6 @@
                   "map": 1417,
                   "x": 45.98,
                   "y": 47.72,
-                  "f": "e"
-                },
-                {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
                   "f": "e"
                 },
                 {
@@ -74946,15 +74874,6 @@
                   "f": "e"
                 },
                 {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
-                },
-                {
                   "faction": "AH",
                   "npc": 3537,
                   "npcName": "Zixil",
@@ -76672,15 +76591,6 @@
                   "map": 1424,
                   "x": 51.21,
                   "y": 56.98,
-                  "f": "e"
-                },
-                {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
                   "f": "e"
                 },
                 {
@@ -78649,15 +78559,6 @@
                   "f": "e"
                 },
                 {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
-                },
-                {
                   "faction": "AH",
                   "npc": 3536,
                   "npcName": "Kris Legace",
@@ -79848,15 +79749,6 @@
                   "map": 1424,
                   "x": 51.21,
                   "y": 56.98,
-                  "f": "e"
-                },
-                {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
                   "f": "e"
                 },
                 {
@@ -83758,15 +83650,6 @@
                   "y": 49.9
                 },
                 {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
-                },
-                {
                   "faction": "AH",
                   "npc": 3536,
                   "npcName": "Kris Legace",
@@ -84946,15 +84829,6 @@
                   "map": 1423,
                   "x": 71.24,
                   "y": 49.9
-                },
-                {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
                 },
                 {
                   "faction": "AH",
@@ -86902,15 +86776,6 @@
                   "map": 1417,
                   "x": 45.98,
                   "y": 47.72,
-                  "f": "e"
-                },
-                {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
                   "f": "e"
                 },
                 {
@@ -89195,15 +89060,6 @@
                   "f": "e"
                 },
                 {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
-                },
-                {
                   "faction": "AH",
                   "npc": 3536,
                   "npcName": "Kris Legace",
@@ -90925,15 +90781,6 @@
                   "map": 1424,
                   "x": 80.14,
                   "y": 38.89,
-                  "f": "e"
-                },
-                {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
                   "f": "e"
                 },
                 {
@@ -93439,15 +93286,6 @@
                   "f": "e"
                 },
                 {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
-                },
-                {
                   "faction": "AH",
                   "npc": 3536,
                   "npcName": "Kris Legace",
@@ -95460,15 +95298,6 @@
                   "map": 1417,
                   "x": 45.98,
                   "y": 47.72,
-                  "f": "e"
-                },
-                {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
                   "f": "e"
                 },
                 {
@@ -110412,15 +110241,6 @@
                 },
                 {
                   "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
-                },
-                {
-                  "faction": "A",
                   "npc": 3532,
                   "npcName": "Peletero Piroleño",
                   "map": 1421,
@@ -118152,15 +117972,6 @@
                   "map": 1416,
                   "x": 39.45,
                   "y": 81.65,
-                  "f": "e"
-                },
-                {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
                   "f": "e"
                 },
                 {
@@ -158097,15 +157908,6 @@
                 },
                 {
                   "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
-                },
-                {
-                  "faction": "A",
                   "npc": 13217,
                   "npcName": "Thanthaldis Brillaneve",
                   "map": 1416,
@@ -172455,15 +172257,6 @@
                 },
                 {
                   "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
-                },
-                {
-                  "faction": "A",
                   "npc": 15127,
                   "npcName": "Samuel Halcón",
                   "map": 1417,
@@ -185913,15 +185706,6 @@
                   "map": 1423,
                   "x": 71.24,
                   "y": 49.9
-                },
-                {
-                  "faction": "A",
-                  "npc": 2404,
-                  "npcName": "Herrero Verrintan",
-                  "map": 1424,
-                  "x": 32.11,
-                  "y": 44.42,
-                  "f": "e"
                 },
                 {
                   "faction": "AH",

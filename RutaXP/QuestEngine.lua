@@ -957,7 +957,7 @@ function ns:GetGoalTitle(goal)
         collect = "Reúne", goto = "Ve a", talk = "Habla con", interact = "Interactúa con",
         use = "Usa", sethome = "Hogar en", hearth = "Piedra de hogar a",
         getfp = "Ruta de vuelo en", fly = "Vuela a", boat = "Barco a", train = "Entrena habilidades", buy = "Compra",
-        vendor = "Vende y repara", level = "Sube a nivel", note = "Nota" }
+        vendor = "Vende", level = "Sube a nivel", note = "Nota" }
     local title
     if goal.quest or goal.questID then
         local id = goal.quest or goal.questID
