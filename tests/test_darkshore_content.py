@@ -119,6 +119,8 @@ class DarkshoreContentTests(unittest.TestCase):
         state.cursor = 5
         step = h.ns.guides[ASHENVALE].steps[5]
         h.globals.UnitLevel = h.lua.eval("function() return 16 end")
+        self.assertEqual(h.status(step.goals[1], step, state, 1), "skip")
+        h.ns.char.optional = True
         self.assertEqual(h.status(step.goals[1], step, state, 1), "blocked")
         h.globals.UnitLevel = h.lua.eval("function() return 17 end")
         self.assertEqual(h.status(step.goals[1], step, state, 1), "active")

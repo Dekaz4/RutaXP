@@ -48,8 +48,14 @@ class ReviewedChainTests(unittest.TestCase):
         self.assertEqual([(g["t"], g.get("quest")) for g in mulgore[34]["goals"]], [("turnin", 99080), ("accept", 99082)])
         self.assertTrue(all(g["npc"] == 2993 for g in mulgore[34]["goals"]))
         tirisfal = self.guides["forever/horde/undead/01-tirisfal-glades"]["steps"]
-        self.assertEqual([(g["t"], g.get("quest")) for g in tirisfal[58]["goals"]], [("turnin", 356), ("accept", 99156)])
-        self.assertTrue(all(g["npc"] == 1495 for g in tirisfal[58]["goals"]))
+        linnea = next(i for i, step in enumerate(tirisfal)
+                      if any(g["t"] == "accept" and g.get("quest") == 99156 for g in step["goals"]))
+        visit = tirisfal[linnea]["goals"]
+        self.assertEqual([(g["t"], g.get("quest")) for g in visit], [("turnin", 356), ("accept", 99156)])
+        self.assertTrue(all(g["npc"] == 1495 for g in visit))
+        collect = next(i for i, step in enumerate(tirisfal)
+                       if any(g["t"] == "collect" and g.get("quest") == 99156 for g in step["goals"]))
+        self.assertLess(linnea, collect)
         silverpine = self.guides["forever/horde/03-silverpine-forest"]["steps"]
         self.assertEqual([(g["t"], g.get("quest")) for g in silverpine[20]["goals"]], [("collect", 91920)])
         self.assertEqual([(g["t"], g.get("quest")) for g in silverpine[23]["goals"]], [("turnin", 91921)])
