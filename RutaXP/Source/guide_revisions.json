@@ -14593,6 +14593,315 @@
           "The northeast egg waypoint is an evidenced search area, not a guaranteed individual spawn."
         ]
       }
+    },
+    {
+      "id": "wetlands-retire-villard-6",
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "previousRevision": 5,
+      "revision": 6,
+      "sourceShape": "1fe6ab8ee8ad5039d6564b049143bc931ad0ca872ed8f5b90445858015afbd72",
+      "resultShape": "41129b6200777e124914ca9508530b5adcd9c2a87769f75f06262c4c5f8423ec",
+      "previousGoalCounts": [
+        1,
+        5,
+        1,
+        2,
+        1,
+        1,
+        2,
+        4,
+        2,
+        3,
+        3,
+        2,
+        2,
+        1,
+        2,
+        4,
+        3,
+        3,
+        4,
+        2,
+        3,
+        1,
+        13,
+        2,
+        2,
+        1,
+        6,
+        2,
+        2,
+        1,
+        4,
+        2,
+        1,
+        7,
+        1,
+        2,
+        5,
+        1,
+        1,
+        3,
+        4,
+        2,
+        1,
+        6
+      ],
+      "firstAffectedStep": 45,
+      "affectedQuestIDs": [
+        87318,
+        88757,
+        88758
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 20,
+          "cursorFromStep": 19
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        }
+      ],
+      "retiredGoals": {
+        "19:1": {
+          "match": {
+            "t": "accept",
+            "quest": 87318,
+            "npc": 5683
+          },
+          "evidence": {
+            "reason": "The Forever removal list includes Hearts of the Lost (87318), Accessories of the Lost (88757) and Sentiments of the Lost (88758).",
+            "originalGoal": {
+              "title": "Hearts of the Lost",
+              "minLevel": 28,
+              "note": "Comar Villardo",
+              "t": "accept",
+              "quest": 87318,
+              "npc": 5683,
+              "npcName": "Comar Villardo",
+              "map": 1437,
+              "x": 49.93,
+              "y": 12.55,
+              "z": 79.3,
+              "f": "e",
+              "qlvl": 33,
+              "instruction": "Habla con «Comar Villardo» y acepta «Hearts of the Lost».\nZona: Los Humedales."
+            }
+          }
+        },
+        "19:2": {
+          "match": {
+            "t": "turnin",
+            "quest": 87318,
+            "npc": 271322
+          },
+          "evidence": {
+            "reason": "The Forever removal list includes Hearts of the Lost (87318), Accessories of the Lost (88757) and Sentiments of the Lost (88758).",
+            "originalGoal": {
+              "title": "Hearts of the Lost",
+              "note": "Essene Villard",
+              "t": "turnin",
+              "quest": 87318,
+              "npc": 271322,
+              "npcName": "Essene Villard",
+              "map": 1437,
+              "x": 51.54,
+              "y": 9,
+              "f": "e",
+              "instruction": "Habla con «Essene Villard» y entrega «Hearts of the Lost».\nZona: Los Humedales."
+            }
+          }
+        },
+        "19:3": {
+          "match": {
+            "t": "accept",
+            "quest": 88758,
+            "npc": 271322
+          },
+          "evidence": {
+            "reason": "The Forever removal list includes Hearts of the Lost (87318), Accessories of the Lost (88757) and Sentiments of the Lost (88758).",
+            "originalGoal": {
+              "title": "Sentiments of the Lost",
+              "minLevel": 28,
+              "t": "accept",
+              "quest": 88758,
+              "npc": 271322,
+              "npcName": "Essene Villard",
+              "map": 1437,
+              "x": 51.54,
+              "y": 9,
+              "f": "e",
+              "qlvl": 33,
+              "instruction": "Habla con «Essene Villard» y acepta «Sentiments of the Lost».\nZona: Los Humedales."
+            }
+          }
+        },
+        "19:4": {
+          "match": {
+            "t": "turnin",
+            "quest": 88758,
+            "npc": 5683
+          },
+          "evidence": {
+            "reason": "The Forever removal list includes Hearts of the Lost (87318), Accessories of the Lost (88757) and Sentiments of the Lost (88758).",
+            "originalGoal": {
+              "title": "Sentiments of the Lost",
+              "note": "Comar Villardo",
+              "t": "turnin",
+              "quest": 88758,
+              "npc": 5683,
+              "npcName": "Comar Villardo",
+              "map": 1437,
+              "x": 49.93,
+              "y": 12.55,
+              "z": 79.3,
+              "f": "e",
+              "instruction": "Habla con «Comar Villardo» y entrega «Sentiments of the Lost».\nZona: Los Humedales."
+            }
+          }
+        }
+      },
+      "evidence": {
+        "reason": "The Forever removal list includes Hearts of the Lost (87318), Accessories of the Lost (88757) and Sentiments of the Lost (88758).",
+        "sources": [
+          {
+            "url": "https://github.com/Questie/Questie/commit/b09f816f44a68712259a5227715b2edc49d8cd3e",
+            "detail": "Questie excludes all three quest IDs specifically on Forever."
+          },
+          {
+            "url": "https://www.curseforge.com/wow/addons/buddiesquestforever/files/9659361",
+            "detail": "On November 17, 2026, BuddiesQuestForever 1.0.90 retired all three legs after Corma offered no quest to a level 33 player on a live realm."
+          }
+        ],
+        "retiredStep": {
+          "step": 19,
+          "title": "Los Villards",
+          "note": "Comar Villardo espera al norte de Dun Modr por el Puente Thandol; Esenio un corto paseo más al noreste."
+        }
+      }
     }
   ]
 }

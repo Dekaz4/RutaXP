@@ -128,7 +128,9 @@ def original_order(document):
     revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
     guides = {guide["id"]: guide for guide in result["guides"]}
     for revision in reversed(revisions):
-        if revision["id"] in STOUTFIST_REVISIONS:
+        if revision["id"] == "wetlands-retire-villard-6":
+            undo_visit_optimization(guides[revision["guideID"]], revision)
+        elif revision["id"] in STOUTFIST_REVISIONS:
             undo_stoutfist_chain(guides[revision["guideID"]], revision)
     for revision in reversed(revisions):
         if revision.get("preservePendingVisits") or revision["id"] in {
@@ -289,12 +291,12 @@ class WholeGuideCoverageTests(unittest.TestCase):
     def test_inventory_accounts_for_every_goal_and_keeps_legitimate_exceptions_explicit(self):
         report = self.report
         self.assertEqual(report["totals"]["guides"], 57)
-        self.assertEqual(report["totals"]["goals"], 7459)
-        self.assertEqual(report["totals"]["steps"], 2345)
-        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7459)
-        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7459)
+        self.assertEqual(report["totals"]["goals"], 7455)
+        self.assertEqual(report["totals"]["steps"], 2344)
+        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7455)
+        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7455)
         self.assertEqual(sum(report["totals"].get(k, 0) for k in
-                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7459)
+                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7455)
         self.assertEqual(report["invalidNavigation"], [])
         for item in report["missingNavigation"]:
             self.assertTrue(item["classification"])
@@ -499,7 +501,7 @@ class ShippedGuideRenderingTests(unittest.TestCase):
             end
             return count,errorCount,table.concat(errors,"; ")
         ''')
-        self.assertEqual(result, (7459, 0, ""))
+        self.assertEqual(result, (7455, 0, ""))
 
     def test_all_bundled_points_and_candidate_frames_resolve_with_the_real_navigation_converter(self):
         host = AccessHost()

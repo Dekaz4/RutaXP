@@ -111,8 +111,8 @@ class TravelDecisionTests(unittest.TestCase):
         h = self.host
         self.quest(288, True)
         guide = h.ns.guides["forever/alliance/30-40/01-hillsbrad-foothills"]
-        step = guide.steps[22]
-        state = h.h.table({"cursor": 22, "confirmed": {}, "skipped": {}})
+        departure, step = next((i, s) for i, s in guide.steps.items() if s.title == "Boat a Costasur")
+        state = h.h.table({"cursor": departure, "confirmed": {}, "skipped": {}})
         h.ns.char.activeGuide = guide.id
         h.ns.char.progress[guide.id] = state
         choice = h.ns.TravelChoice
@@ -121,7 +121,7 @@ class TravelDecisionTests(unittest.TestCase):
         self.assertEqual(v.localGoals[1].quest, 288)
         self.assertTrue(all(row.map == 1424 for row in v.destinationGoals.values()))
         self.assertGreater(v.destinationCount, 0)
-        self.assertEqual(state.cursor, 22)
+        self.assertEqual(state.cursor, departure)
         goal = step.goals[1]
         goal.text = "Camina hasta el muelle"
         self.assertIsNone(choice.GetRecommendation(choice, guide, step, state))

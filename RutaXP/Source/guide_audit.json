@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "ac9e7ae1d329f69f34a38172c45144184d1edaccac643fbdb3d8d6554add6cc6",
+      "sha256": "88f4866fd1b4dcd0ff3723442b3393f8787f7ae54234bbc564005a64e67929fa",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -560,16 +560,17 @@
         "ashenvale-later-lightforge-alternative-2",
         "menethil-theramore-boat-5",
         "wetlands-old-habits-before-nekrosh-return-6",
-        "wetlands-stoutfist-howin-prerequisites-5"
+        "wetlands-stoutfist-howin-prerequisites-5",
+        "wetlands-retire-villard-6"
       ]
     }
   },
   "totals": {
     "guides": 57,
-    "goals": 7459,
-    "direct": 6576,
-    "generated_instruction": 7459,
-    "missing_goal_note_text": 3663,
+    "goals": 7455,
+    "direct": 6572,
+    "generated_instruction": 7455,
+    "missing_goal_note_text": 3662,
     "missing": 287,
     "no_fixed_point_expected": 299,
     "empty_authored_subtitle": 818,
@@ -579,14 +580,14 @@
     "reference_only": 3,
     "conditional_navigation": 2,
     "conditional_point_expected": 2,
-    "steps": 2345
+    "steps": 2344
   },
   "byAction": {
     "accept": {
-      "goals": 2294,
-      "direct": 2230,
-      "generated_instruction": 2294,
-      "missing_goal_note_text": 1281,
+      "goals": 2292,
+      "direct": 2228,
+      "generated_instruction": 2292,
+      "missing_goal_note_text": 1280,
       "missing": 64,
       "no_fixed_point_expected": 64,
       "empty_authored_subtitle": 151
@@ -698,9 +699,9 @@
       "direct": 9
     },
     "turnin": {
-      "goals": 2293,
-      "direct": 2293,
-      "generated_instruction": 2293,
+      "goals": 2291,
+      "direct": 2291,
+      "generated_instruction": 2291,
       "missing_goal_note_text": 779,
       "empty_authored_subtitle": 81
     },
@@ -1642,10 +1643,10 @@
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
       "title": "Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta",
       "counts": {
-        "goals": 121,
-        "direct": 115,
-        "generated_instruction": 121,
-        "missing_goal_note_text": 31,
+        "goals": 117,
+        "direct": 111,
+        "generated_instruction": 117,
+        "missing_goal_note_text": 30,
         "missing": 2,
         "no_fixed_point_expected": 2,
         "empty_authored_subtitle": 5,
@@ -1653,10 +1654,10 @@
       },
       "byAction": {
         "accept": {
-          "goals": 48,
-          "direct": 48,
-          "generated_instruction": 48,
-          "missing_goal_note_text": 17,
+          "goals": 46,
+          "direct": 46,
+          "generated_instruction": 46,
+          "missing_goal_note_text": 16,
           "empty_authored_subtitle": 1
         },
         "buy": {
@@ -1715,9 +1716,9 @@
           "missing_goal_note_text": 1
         },
         "turnin": {
-          "goals": 38,
-          "direct": 38,
-          "generated_instruction": 38,
+          "goals": 36,
+          "direct": 36,
+          "generated_instruction": 36,
           "missing_goal_note_text": 12
         }
       }
@@ -7024,9 +7025,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/01-hillsbrad-foothills:32:2",
+      "key": "forever/alliance/30-40/01-hillsbrad-foothills:31:2",
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "stepIndex": 32,
+      "stepIndex": 31,
       "goalIndex": 2,
       "action": "note",
       "questID": null,
@@ -7036,7 +7037,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "stepIndex": 32,
+        "stepIndex": 31,
         "goalIndex": 2
       },
       "classification": "semantic_no_location",
@@ -13962,9 +13963,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/30-40/01-hillsbrad-foothills:37:3",
+      "key": "forever/alliance/30-40/01-hillsbrad-foothills:36:3",
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "stepIndex": 37,
+      "stepIndex": 36,
       "goalIndex": 3,
       "action": "complete",
       "questID": 1447,
@@ -13974,7 +13975,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "stepIndex": 37,
+        "stepIndex": 36,
         "goalIndex": 3
       },
       "kind": "step_instructions_not_goal",
@@ -16861,6 +16862,6 @@
       "arrival",
       "arrivalDock"
     ],
-    "semanticsSha256": "cabac6e2d549604b64c19ae21debc81569a5fc2333ad83222617c425f7d92ce7"
+    "semanticsSha256": "fc1c0c41cb94b605ab8ccc74a766acdbca072598206081deeeb580cac6f26d7d"
   }
 }

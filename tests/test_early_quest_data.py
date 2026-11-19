@@ -29,7 +29,7 @@ class EarlyOfferCoverageTests(unittest.TestCase):
         # Multiple givers, recipe, unique watch, ordinary exploration, taming
         # item, a #3381 transport offered *after* bringing feathers, and a
         # contact introducing (but not starting) a future escort.
-        for quest in (109, 36, 64, 151, 89, 62, 6064, 3381, 979, 87318):
+        for quest in (109, 36, 64, 151, 89, 62, 6064, 3381, 979):
             self.assertIn(quest, self.allowed)
         self.assertNotIn(2781, self.allowed)  # Wanted poster, not an NPC offer.
         self.assertNotIn(91777, self.allowed)  # Separate explicitly optional off-route errand.

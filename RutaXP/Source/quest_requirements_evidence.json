@@ -61483,10 +61483,6 @@
       "classMask": 0,
       "raceMask": 77
     },
-    "87318": {
-      "reportedFields": [],
-      "fieldSources": {}
-    },
     "87491": {
       "reportedFields": [
         "minLevel",
@@ -61598,10 +61594,6 @@
         "conclusion": "The reviewed Questie correction requires all nine completed quests. EQ reports only 4733; its reported fields are retained unchanged, so the audit still exposes the discrepancy.",
         "reproduction": "Reapplied by --capture-eq from the bound guide_revisions.json evidence; it does not replace the captured EQ availability record."
       }
-    },
-    "88758": {
-      "reportedFields": [],
-      "fieldSources": {}
     },
     "90902": {
       "reportedFields": [

@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "scope": {
     "guides": 57,
-    "questIDs": 1903,
-    "acceptances": 2294,
+    "questIDs": 1901,
+    "acceptances": 2292,
     "withReportedEvidence": 1852,
-    "withoutReportedEvidence": 51
+    "withoutReportedEvidence": 49
   },
   "sourceCommits": {
     "everythingquests": "8e7aa971319226f984639d4dae06e864b50c4fb4",
@@ -49,7 +49,7 @@
     "level_conflict_review": 15,
     "missing_active_parent": 10,
     "missing_prerequisite": 49,
-    "no_source_data": 55,
+    "no_source_data": 53,
     "prerequisite_conflict_review": 46,
     "selector_conflict_review": 35,
     "source_omission_review": 58
@@ -151,10 +151,10 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "acceptances": 48,
+      "acceptances": 46,
       "findings": {
         "level_conflict_review": 1,
-        "no_source_data": 6,
+        "no_source_data": 4,
         "prerequisite_conflict_review": 1,
         "source_omission_review": 1
       }
@@ -3139,31 +3139,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 19,
-      "goal": 1,
-      "questID": 87318,
-      "title": "Hearts of the Lost",
-      "kind": "no_source_data",
-      "field": "availability",
-      "authored": null,
-      "reported": null,
-      "evidence": []
-    },
-    {
-      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 19,
-      "goal": 3,
-      "questID": 88758,
-      "title": "Sentiments of the Lost",
-      "kind": "no_source_data",
-      "field": "availability",
-      "authored": null,
-      "reported": null,
-      "evidence": []
-    },
-    {
-      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 23,
+      "step": 22,
       "goal": 12,
       "questID": 98463,
       "title": "Talk of the Town",
@@ -3175,7 +3151,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 23,
+      "step": 22,
       "goal": 13,
       "questID": 98059,
       "title": "Hillsbrad's Hoard",
@@ -3187,7 +3163,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 41,
+      "step": 40,
       "goal": 2,
       "questID": 79536,
       "title": "Greater Friend of the Library",
@@ -7739,6 +7715,6 @@
     "Local dependency locations are diagnostic; this audit does not assume a previous zone was completed.",
     "No runtime quest completion, profession or player's progress is modified by this audit."
   ],
-  "inputSha256": "81199b4d51f4299868f20697217bc186e7199ae3895cdbb9d4f60994dbdc5d45",
-  "evidenceSha256": "8417e12fa9b40126e0e7610c5e8c3078ca2fcf28f9d180c52e19604433045442"
+  "inputSha256": "5b1d2603c4e29517d002394a6e53f47514cd88f01941cf07991a97af59e72766",
+  "evidenceSha256": "ab0615cda0740566797134b91d400f1c8e9ad858a12e53005f7a2e98ac742c89"
 }
