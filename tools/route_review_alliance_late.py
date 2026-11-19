@@ -146,11 +146,11 @@ def apply(document):
         for step in guide["steps"]:
             for goal in step["goals"]:
                 kind, quest, name = goal["t"], goal.get("quest"), goal.get("text")
-                if kind == "goto":
-                    if chapter == HILLS and name == "Ayuntamiento de Trabalomas":
-                        goal.update(workForQuest=98059, note="Usa la solicitud sellada en la mesa del ayuntamiento de Trabalomas.")
-                        step["note"] = "Coloca la solicitud sellada en la mesa del ayuntamiento. Después vuelve con el capitán McManus en Costasur."
-                    elif chapter == DESOLACE and name == "Fuera de Fortaleza del Hacha de Trueno":
+                if chapter == HILLS and kind == "use" and quest == 98059:
+                    goal.update(workForQuest=quest, note="Junto a la mesa de contabilidad del ayuntamiento, haz clic derecho en la solicitud de tu mochila o escribe «/use item:279386» en el chat.")
+                    step["note"] = "La flecha señala el edificio. Vuelve con el capitán McManus en Costasur cuando el diario registre la entrega de la solicitud."
+                elif kind == "goto":
+                    if chapter == DESOLACE and name == "Fuera de Fortaleza del Hacha de Trueno":
                         goal.update(workForQuest=1440, note="Acompaña a Dalinda fuera de la fortaleza hasta que aparezca el crédito de la escolta.")
                     elif chapter == CRATER and name in PYLONS:
                         goal.update(workForQuest=PYLONS[name], note="Inspecciona el pilón hasta que el diario registre el descubrimiento.")

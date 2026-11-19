@@ -14,7 +14,7 @@
       "complete": 239,
       "fly": 165,
       "getfp": 76,
-      "goto": 98,
+      "goto": 97,
       "hearth": 84,
       "interact": 50,
       "kill": 611,
@@ -24,14 +24,14 @@
       "talk": 10,
       "train": 126,
       "turnin": 2291,
-      "use": 18,
+      "use": 19,
       "vendor": 48
     },
     "goalFields": {
       "t": 7455,
-      "quest": 6502,
-      "oi": 1680,
-      "item": 1216,
+      "quest": 6503,
+      "oi": 1681,
+      "item": 1217,
       "count": 1201,
       "pre": 1217,
       "preAll": 64,
@@ -9876,7 +9876,7 @@
         "goal": 1,
         "field": "t",
         "source": "accept",
-        "snapshot": "goto"
+        "snapshot": "use"
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -9884,7 +9884,23 @@
         "goal": 1,
         "field": "quest",
         "source": 1718,
-        "snapshot": null
+        "snapshot": 98059
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 31,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 31,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 279386
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -25146,6 +25162,17 @@
             "Source/quest_requirements_evidence.json#99153"
           ]
         }
+      },
+      {
+        "id": "hillsbrad-town-hall-request-8",
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "revision": 8,
+        "evidence": {
+          "quest": "https://zephras.com/forever/enUS/quest/98059/",
+          "item": "https://zephras.com/forever/enUS/item/279386/",
+          "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/01-hillsbrad-foothills.guide#L242-L247",
+          "reason": "La solicitud se usa en la mesa de contabilidad dentro del ayuntamiento. Las coordenadas orientan al edificio. La entrega a McManus requiere el crédito del diario."
+        }
       }
     ],
     "authoredTextPresenceLosses": [],
@@ -34983,7 +35010,7 @@
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
         "step": 31,
         "goal": 1,
-        "action": "goto",
+        "action": "use",
         "questID": 98059,
         "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
         "sourceLine": 277,
@@ -44177,5 +44204,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "35dea275f6954cdaf1bfe0820e8512125ca03f04462541cbe4175cf5cc316108"
+  "inputSha256": "c4ef3366399dee67feb2400c421f2ac9c25a80e53dbb2c1cdee51c9c95b78d5d"
 }

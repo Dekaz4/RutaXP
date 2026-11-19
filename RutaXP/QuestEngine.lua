@@ -174,7 +174,12 @@ local function getGuideLayout(self, guide)
             if q and (kind == "collect" or kind == "kill" or kind == "complete" or kind == "objective"
                 or kind == "interact" or kind == "use") then
                 cached.work[q] = cached.work[q] or {}
-                table.insert(cached.work[q], { s=s, g=g, step=step, goal=goal })
+                local entry = { s=s, g=g, step=step, goal=goal }
+                table.insert(cached.work[q], entry)
+                if goal.resumeAtTurnin then
+                    cached.turninWork = cached.turninWork or {}
+                    cached.turninWork[q] = entry
+                end
             end
             if q and (goal.t or goal.action) == "accept" then
                 if goal.parent or goal.preAll or goal.pre then cached.hasPrerequisite[q] = true end
@@ -406,15 +411,20 @@ local function matchedCandidate(self, goal)
 end
 
 local function questWorkReason(goal, id)
-    if read(C_QuestLog and C_QuestLog.IsComplete, id) == true then return "Objetivos completados" end
+    local complete = read(C_QuestLog and C_QuestLog.IsComplete, id)
+    if complete == true then return "Objetivos completados" end
     local oi = goal.oi or goal.objective or goal.workForObjective
     if oi then
         local objectives = read(C_QuestLog and C_QuestLog.GetQuestObjectives, id)
         local finished = objectives and objectives[oi] and objectives[oi].finished
-        if not (issecretvalue and issecretvalue(finished)) and finished == true then return "Objetivo completado" end
+        if not (issecretvalue and issecretvalue(finished)) then
+            if finished == true then return "Objetivo completado" end
+            if finished == false then return nil, true end
+        end
     elseif (goal.t or goal.action) == "collect" and goal.item and goal.count and itemCount(goal.item) >= goal.count then
         return "Objetos reunidos"
     end
+    return nil, complete == false
 end
 
 local function questLabel(layout, id, fallback)
@@ -726,7 +736,9 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
     if state and state.skipped and state.skipped[key] then return "skip", "Omitido manualmente" end
     -- A manual service confirmation is not evidence of disembarking.
     if action == "boat" then return "active", "Desembarca y llega al punto indicado en tierra" end
-    if state and state.confirmed and state.confirmed[key] then
+    -- A previous version treated this work as a visit. Its old arrival
+    -- confirmation cannot replace journal credit. Explicit skips still apply.
+    if state and state.confirmed and state.confirmed[key] and not goal.resumeAtTurnin then
         -- Older versions stored skipped quest goals as confirmations. Keep
         -- their navigation effect without claiming that a quest was done.
         if id then return "skip", "Omitido manualmente (versión anterior)" end
@@ -806,6 +818,17 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
             return "skip", "La misión no está en tu diario"
         end
         if action == "turnin" then
+            local work = layout and layout.turninWork and layout.turninWork[id]
+            if work and onQuest and work.s < stepIndex then
+                local credited, pending = questWorkReason(work.goal, id)
+                if not credited then
+                    if state and state.skipped and state.skipped[confirmationKey(state, work.g, work.s)] then
+                        return "skip", "Has omitido el objetivo pendiente de esta misión"
+                    end
+                    if not pending then return "blocked", "Esperando los objetivos del diario" end
+                    return "blocked", "Vuelve al paso " .. work.s .. " (" .. work.step.title .. ") para completar el objetivo.", work.s
+                end
+            end
             if onQuest and read(C_QuestLog and C_QuestLog.IsComplete, id) == false
                 and omittedWork(self, layout, id, state, stepIndex, index or 1) then
                 return "blocked", "Retoma los objetivos pendientes de «" .. questLabel(layout, id, goal.title) .. "»"
@@ -934,6 +957,23 @@ function ns:Sync()
     if guide and state and not state.placed and not state.review and self.char and self.char.auto then
         state.placed = true
         self:PlaceInGuide(guide, state)
+    end
+    -- Restored progress can start at the hand-in before the journal has
+    -- credited the preceding action. Rejoin that action on the same route.
+    local layout = getGuideLayout(self, guide)
+    local visit = guide and state and guide.steps[state.cursor]
+    if visit and layout.turninWork and self.char.auto and not state.review then
+        for index, row in ipairs(visit.goals or {}) do
+            if row.t == "turnin" and layout.turninWork[row.quest] then
+                local _, _, pendingStep = self:GetGoalStatus(row, visit, state, index, guide)
+                if pendingStep then
+                    if not (self.GetGuideTravel and self:GetGuideTravel())
+                        and not (self.DuoAuto and self.DuoAuto:ShouldPauseAutomation())
+                        and not (self.Duo and self.Duo:ShouldWaitForStep(visit)) then state.cursor = pendingStep end
+                    break
+                end
+            end
+        end
     end
     basicSync(self)
     if self.UpdateNavigation then self:UpdateNavigation() end
@@ -1083,6 +1123,9 @@ function ns:GetGoalTitle(goal)
         local candidate = matchedCandidate(self, goal)
         title = goal.title or goal.itemName or goal.npcName or (candidate and candidate.npcName)
             or goal.objName or goal.objectName or goal.location or goal.text
+    end
+    if goal.resumeAtTurnin and action == "use" and goal.item then
+        title = read(C_Item and C_Item.GetItemNameByID, goal.item) or goal.itemName or title
     end
     if action == "level" then title = tostring(goal.level or goal.n or "?") end
     if action == "train" and goal.class then title = "de tu clase" end

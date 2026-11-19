@@ -17013,6 +17013,85 @@
         "45": null,
         "67": null
       }
+    },
+    {
+      "id": "hillsbrad-town-hall-request-8",
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "previousRevision": 7,
+      "revision": 8,
+      "sourceShape": "9c784c1971609827fb8448bd25d6394a6239bbe28efacea3d99c8bc655c1dd4e",
+      "resultShape": "a9db840a54f287208afbb4fe00b7ff1a9d580940349480de49f03488b07923a9",
+      "preserveSteps": true,
+      "previousGoalCounts": [
+        1,
+        5,
+        1,
+        2,
+        1,
+        1,
+        2,
+        4,
+        2,
+        3,
+        3,
+        2,
+        2,
+        1,
+        2,
+        4,
+        3,
+        3,
+        2,
+        3,
+        1,
+        13,
+        2,
+        2,
+        1,
+        6,
+        2,
+        1,
+        4,
+        2,
+        1,
+        9,
+        1,
+        2,
+        5,
+        1,
+        1,
+        3,
+        4,
+        2,
+        1,
+        6
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "goto",
+            "map": 1424,
+            "x": 29.7,
+            "y": 41.6,
+            "f": "e"
+          },
+          "count": 1,
+          "set": {
+            "t": "use",
+            "quest": 98059,
+            "oi": 1,
+            "item": 279386,
+            "itemName": "Solicitud sellada de la compañía",
+            "resumeAtTurnin": true
+          }
+        }
+      ],
+      "evidence": {
+        "quest": "https://zephras.com/forever/enUS/quest/98059/",
+        "item": "https://zephras.com/forever/enUS/item/279386/",
+        "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/01-hillsbrad-foothills.guide#L242-L247",
+        "reason": "La solicitud se usa en la mesa de contabilidad dentro del ayuntamiento. Las coordenadas orientan al edificio. La entrega a McManus requiere el crédito del diario."
+      }
     }
   ]
 }

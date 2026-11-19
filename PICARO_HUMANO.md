@@ -1107,7 +1107,7 @@ Farren entrega 563 después de 562. El siguiente objetivo de 563 está en Ventor
 | 29.4 | Aceptar · Una carta cifrada (#511) | Documentos de Hermandad · desde nivel 30 · mapa 1424 · 59.9, 7.9 |
 | 30.1 | Recoger · Capa de piel de yeti de Bartolo (#565) | Piel de yeti ×10 · desvío opcional en solitario · mapa 1424 · 47.4, 5.4 |
 | 30.2 | Indicación · Bartolo pide una capa de montañero, una madeja de paño de lana, un hilo refinado y 10 pieles de yeti. Entrégaselos juntos en Costasur. | desvío opcional en solitario |
-| 31.1 | Ir · Ayuntamiento de Trabalomas | mapa 1424 · 29.7, 41.6 |
+| 31.1 | Usar · Ayuntamiento de Trabalomas (#98059) | Solicitud sellada de la compañía · Junto a la mesa de contabilidad del ayuntamiento, haz clic derecho en la solicitud de tu mochila o escribe «/use item:279386» en el chat. · mapa 1424 · 29.7, 41.6 |
 | 32.1 | Entregar · Hillsbrad's Hoard (#98059) | Captain McManus · mapa 1424 · 46.47, 50.13 |
 | 32.2 | Entregar · Cambio de destino (#562) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 · fija · Entrañas de pescado |
 | 32.3 | Aceptar · Nueva asignación (#563) | Teniente Farren Orinelle · desde nivel 25 · previa 562 · mapa 1424 · 51.46, 58.39 |

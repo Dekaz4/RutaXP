@@ -81,7 +81,9 @@ class AllianceLateReview(unittest.TestCase):
                 self.assertTrue(q["instruction"].startswith(q["reviewedVerb"] + " "))
 
     def test_gated_travel_keeps_independent_activities(self):
-        for chapter, groups in ((review.HILLS, {98059: 1}), (review.DESOLACE, {1440: 1}),
+        request, = [q for q in self.goals(review.HILLS) if q.get("workForQuest") == 98059]
+        self.assertEqual((request["t"], request["quest"], request["oi"], request["item"]), ("use", 98059, 1, 279386))
+        for chapter, groups in ((review.DESOLACE, {1440: 1}),
                                 (review.CRATER, {4285: 1, 4287: 1, 4288: 1}), (review.FELWOOD, {5156: 3})):
             actions = [q for q in self.goals(chapter) if q["t"] == "goto" and q.get("workForQuest") in groups]
             self.assertEqual(Counter(q["workForQuest"] for q in actions), groups)

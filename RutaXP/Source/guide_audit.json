@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "fca3749b28b442e7ace4a853aadad20993cb941bf50c43dfddc90a6fbff56195",
+      "sha256": "216dcf87d9a9d94a60025c3364b539cd661607d2edb29587bd00bbe2db0b01cb",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -571,7 +571,8 @@
         "booty-bay-captains-return-3",
         "aerie-peak-takeoff-2",
         "mulgore-kyle-level-4",
-        "tirisfal-bandarion-after-leonid-4"
+        "tirisfal-bandarion-after-leonid-4",
+        "hillsbrad-town-hall-request-8"
       ]
     }
   },
@@ -649,9 +650,9 @@
       "empty_authored_subtitle": 36
     },
     "goto": {
-      "goals": 98,
-      "direct": 98,
-      "generated_instruction": 98,
+      "goals": 97,
+      "direct": 97,
+      "generated_instruction": 97,
       "empty_authored_subtitle": 84
     },
     "hearth": {
@@ -718,9 +719,9 @@
       "empty_authored_subtitle": 81
     },
     "use": {
-      "goals": 18,
-      "direct": 18,
-      "generated_instruction": 18,
+      "goals": 19,
+      "direct": 19,
+      "generated_instruction": 19,
       "missing_goal_note_text": 3
     },
     "vendor": {
@@ -1699,9 +1700,9 @@
           "generated_instruction": 1
         },
         "goto": {
-          "goals": 2,
-          "direct": 2,
-          "generated_instruction": 2,
+          "goals": 1,
+          "direct": 1,
+          "generated_instruction": 1,
           "empty_authored_subtitle": 1
         },
         "kill": {
@@ -1732,6 +1733,11 @@
           "direct": 36,
           "generated_instruction": 36,
           "missing_goal_note_text": 12
+        },
+        "use": {
+          "goals": 1,
+          "direct": 1,
+          "generated_instruction": 1
         }
       }
     },
@@ -16361,6 +16367,6 @@
       "arrival",
       "arrivalDock"
     ],
-    "semanticsSha256": "bacd9e1f3c2ad39bf28b7a9e5762b2596c36b6c714d2be12afd1a59e2b37a4b1"
+    "semanticsSha256": "2884758855af314f5b01b57058c9f43030238a67a956f616a2e2ccd33f4e3837"
   }
 }

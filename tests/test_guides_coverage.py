@@ -153,6 +153,14 @@ def original_order(document):
     posters[0].update(object=142122, x=66.82, y=22.29, z=8)
     revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
     guides = {guide["id"]: guide for guide in result["guides"]}
+    hillsbrad = guides["forever/alliance/30-40/01-hillsbrad-foothills"]
+    table, = [row for step in hillsbrad["steps"] for row in step["goals"] if row.get("item") == 279386]
+    if (table["t"], table["quest"], table["oi"], table["map"], table["x"], table["y"]) != (
+            "use", 98059, 1, 1424, 29.7, 41.6):
+        raise AssertionError("The reviewed town hall action changed")
+    table["t"] = "goto"
+    for field in ("item", "quest", "oi"):
+        del table[field]
     for revision in reversed(revisions):
         if revision["id"] == "wetlands-retire-villard-6":
             undo_visit_optimization(guides[revision["guideID"]], revision)
