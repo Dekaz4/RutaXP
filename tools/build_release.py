@@ -109,12 +109,15 @@ def main():
     write_zip(payload, files)
     installer = compile_installer(payload)
     release_files = dict(files)
-    for name in ["Instalador_RutaXP.exe", "Instalar_RutaXP.bat", "Instalar.ps1", "LEEME_INSTALACION.txt", "README.md", "INFORME_GUIAS.md", "PICARO_HUMANO.md", "LICENSE", "NOTICE.md"]:
+    for name in ["Instalador_RutaXP.exe", "Instalar_RutaXP.bat", "Instalar.ps1", "LEEME_INSTALACION.txt", "README.md", "INFORME_GUIAS.md", "PICARO_HUMANO.md", "REVISION_GUIAS.html", "LICENSE", "NOTICE.md"]:
         release_files[name] = (ROOT / name).read_bytes()
     # Source for the executable and tools accompanies the binary distribution.
     for name in ["Installer.cs", "Updater.cs", "build_release.py", "import_guides.py", "build_talents.js", "vendor_pathing.py", "build_waypoints.py",
                  "guide_coordinates.py", "guide_instructions.py", "audit_guides.py", "audit_guide_structure.py", "refresh_guides.py", "publish_release.py",
                  "solo_leveling_route.py", "solo_hillsbrad_route.py", "solo_mid_route.py", "solo_late_route.py",
+                 "route_review_alliance_start.py", "route_review_alliance_late.py", "route_review_horde.py",
+                 "review_all_routes.py", "route_review_template.html", "capture_route_comparison.py",
+                 "route_comparison_facts.json", "route_review_alliance_late_capture.py", "route_review_alliance_late_sage.json",
                  "build_travel_connections.py", "audit_quest_requirements.py", "review_human_rogue.py",
                  "build_early_quest_offers.py", "build_map_services.py"]:
         release_files[f"tools/{name}"] = (ROOT / "tools" / name).read_bytes()

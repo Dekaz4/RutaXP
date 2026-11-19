@@ -32,9 +32,14 @@ class TravelDecisionTests(unittest.TestCase):
         before = self.host.progress()
         v = self.view()
         self.assertEqual([r.quest for r in v.localGoals.values()], [288, 270])
-        self.assertEqual({r.id for r in v.destinationGoals.values()}, {1110, 1104, 1105, 1176, 1175})
-        self.assertEqual(v.hardLevel, 34)
-        self.assertIn("34–35", v.summary)
+        self.assertEqual({r.id for r in v.destinationGoals.values()}, {1110, 1104, 1105, 1176})
+        self.assertIsNone(v.hardLevel)
+        self.host.ns.char.optional = True
+        full = self.view()
+        self.assertIn(1175, {r.id for r in full.destinationGoals.values()})
+        self.assertEqual(full.hardLevel, 34)
+        self.assertIn("34–35", full.summary)
+        self.host.ns.char.optional = False
         self.assertIn("Las Mil Agujas", v.summary)
         self.assertTrue(v.preferLocal)
         self.host.s.level = 35
@@ -42,6 +47,7 @@ class TravelDecisionTests(unittest.TestCase):
         self.assertEqual(self.host.progress(), before)
 
     def test_finished_objectives_and_ready_deliveries_have_no_combat_penalty(self):
+        self.host.ns.char.optional = True  # Include the southern basilisks in the comparison.
         self.quest(288, True)
         self.quest(1175, False, objectives=[{"finished": False}, {"finished": False}, {"finished": True}])
         self.assertEqual(self.view().hardLevel, 32)
@@ -52,6 +58,7 @@ class TravelDecisionTests(unittest.TestCase):
         self.assertIn(1175, {r.id for r in v.destinationGoals.values()})
 
     def test_group_filter_excludes_fights_but_preserves_ready_handins(self):
+        self.host.ns.char.optional = True  # Exercise the independent group filter.
         self.host.move((1437, .4936, .4205))
         self.quest(98291, False)
         self.assertEqual(self.view().hardLevel, 34)
@@ -97,7 +104,7 @@ class TravelDecisionTests(unittest.TestCase):
         h = self.host
         self.quest(288, True)
         h.h.lua.execute("C_QuestLog.IsComplete=function() return nil end")
-        self.assertEqual(self.view().localCount, 0)
+        self.assertIsNone(self.view())
         h.move((1437, .0474, .6376))
         self.assertEqual(h.view().state, "boarding")
         self.assertIsNone(self.view())

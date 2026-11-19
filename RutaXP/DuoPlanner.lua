@@ -67,7 +67,7 @@ local function applies(record, who)
         and (not record.goal.class or matches(record.goal.class, who.class))
 end
 local function questID(goal)
-    local q = goal and (goal.quest or goal.questID)
+    local q = goal and (goal.quest or goal.questID or goal.workForQuest)
     return finite(q) and q > 0 and q == math.floor(q) and q or nil
 end
 local function action(goal) return goal and (goal.t or goal.action) end
@@ -621,6 +621,9 @@ local function countText(value)
 end
 local function goalObservation(goal,who,owner,observation,step,index,guide)
     local kind,q=action(goal),questID(goal)
+    if goal.untilLevel and finite(who.level) and who.level >= goal.untilLevel then
+        return {known=true,done=true,status="done",reason="Nivel alcanzado."}
+    end
     if kind == "boat" and ns.Duo and ns.Duo.GetBoatObservation then
         return ns.Duo:GetBoatObservation(goal,step,index,guide,owner)
     end
@@ -645,6 +648,12 @@ local function goalObservation(goal,who,owner,observation,step,index,guide)
     if not q then return {known=false,done=false,status="manual",reason="Acción de viaje o servicio sin confirmación individual compartida."} end
     if not item or item.basic then return {known=false,done=false,status="blocked",reason="Registro individual sin confirmar.",quest=item} end
     if item.state==3 then return {known=true,done=true,status="done",reason="Entregada en su registro.",quest=item} end
+    if goal.workForQuest and item.state==0 then
+        return {known=true,done=true,status="skip",reason="Este personaje no lleva la misión.",quest=item,excluded=true}
+    end
+    if goal.workVisit and item.state==1 then
+        return {known=false,done=false,status="manual",reason="Visita sin confirmación individual compartida.",quest=item}
+    end
     if kind=="accept" then
         if item.state>0 then return {known=true,done=true,status="done",reason="Aceptada en su registro.",quest=item} end
         local ready,why=prerequisites(goal,who,owner,observation)
@@ -653,7 +662,7 @@ local function goalObservation(goal,who,owner,observation,step,index,guide)
     if item.state==0 then return {known=true,done=false,status="blocked",reason="La misión no está en su registro; necesita una recogida o recuperación comprobada.",quest=item} end
     if kind=="turnin" then return {known=true,done=false,status="active",reason=item.state==2 and "Lista para entregar individualmente." or "Todavía debe completar y entregar su misión.",quest=item} end
     if item.state==2 then return {known=true,done=true,status="done",reason="El juego confirma sus objetivos completos.",quest=item} end
-    local oi=goal.oi or goal.objective
+    local oi=goal.oi or goal.objective or goal.workForObjective
     if finite(oi) and oi>=1 and oi<=32 then
         local progress=ns.Duo and read(ns.Duo.GetObjectiveProgress,ns.Duo,q,oi)
         local value=type(progress)=="table" and progress[owner] or nil

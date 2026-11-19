@@ -135,6 +135,8 @@ def _documented_dwarf_taming(goal: Mapping[str, Any], source_commit: str | None)
 
 def instruction_verb(goal: Mapping[str, Any], *, source_commit: str | None = PINNED_COMMIT) -> str | None:
     """An explicit source instruction may correct a display verb, never ``t``."""
+    if source_commit == PINNED_COMMIT and goal.get("reviewedVerb") in ("Asusta", "Captura"):
+        return goal["reviewedVerb"]
     if _documented_dwarf_taming(goal, source_commit) or (
             (goal.get("t") or goal.get("action")) == "kill" and any(_TAMING.search(text) for text in _details(goal))):
         return "Domestica"
@@ -328,7 +330,7 @@ def enrich_goal(goal: Mapping[str, Any], zone_name: str | None = None, *, source
     verb = instruction_verb(goal, source_commit=source_commit)
     if verb:
         result["instructionVerb"] = verb
-    elif result.get("instructionVerb") == "Domestica":
+    elif result.get("instructionVerb") in ("Domestica", "Asusta", "Captura"):
         result.pop("instructionVerb")
     # The old crate step contradicts the separately sourced reputation guide.
     # Retain its raw note/text for audit; suppress its unsafe display only for

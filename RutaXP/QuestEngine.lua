@@ -68,6 +68,7 @@ end
 function ns:IsSoloLevelingDetour(goal)
     local char = self.char
     return goal and goal.levelingDetour and char and not char.optional and not (char.duo and char.duo.enabled)
+        and (not goal.detourBelowLevel or (read(UnitLevel, "player") or 1) < goal.detourBelowLevel)
 end
 
 function ns:GetLevelingDetourReason(goal, onQuest, complete)
@@ -391,7 +392,7 @@ end
 
 local function questWorkReason(goal, id)
     if read(C_QuestLog and C_QuestLog.IsComplete, id) == true then return "Objetivos completados" end
-    local oi = goal.oi or goal.objective
+    local oi = goal.oi or goal.objective or goal.workForObjective
     if oi then
         local objectives = read(C_QuestLog and C_QuestLog.GetQuestObjectives, id)
         local finished = objectives and objectives[oi] and objectives[oi].finished
@@ -520,7 +521,7 @@ end
 
 function ns:GetGroupDeferralReason(goal, step, guide, index, onQuest)
     if not self.char or self.char.includeGroupQuests == true or not goal then return end
-    local id = goal.quest or goal.questID
+    local id = goal.quest or goal.questID or goal.workForQuest
     guide = guide or self.guides[self.char.activeGuide]
     local layout = guide and getGuideLayout(self, guide)
     local action = goal.t or goal.action
@@ -629,12 +630,30 @@ local function omittedWork(self, layout, id, state, stepIndex, goalIndex)
     return false
 end
 
+-- These points exist only for work in the journal or to reach an XP threshold.
+function ns:GetAuxiliaryGoalStatus(goal)
+    if goal.untilLevel and (read(UnitLevel, "player") or 1) >= goal.untilLevel then
+        return "done", "Nivel alcanzado"
+    end
+    local id = goal.workForQuest
+    if id then
+        if self:IsQuestDelivered(id) then return "done", "Misión entregada" end
+        if not self:IsQuestActive(id) then return "skip", "La misión no está en tu diario" end
+        local credited = questWorkReason(goal, id)
+        if credited then return "done", credited end
+    end
+end
+
 function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
     if not self:MatchesConditions(step and step.only) or not self:MatchesConditions(goal.only) then return "skip", "Otro personaje" end
     guide = guide or (self.char and self.guides[self.char.activeGuide])
     local layout = guide and getGuideLayout(self, guide)
     local stepIndex = (layout and step and layout.stepOf[step]) or (state and state.cursor) or 1
     local action, id = goal.t or goal.action, goal.quest or goal.questID
+    if goal.untilLevel or goal.workForQuest then
+        local status, reason = self:GetAuxiliaryGoalStatus(goal)
+        if status then return status, reason end
+    end
     if not id and action == "boat" and self.BoatNavigation
         and self.BoatNavigation:IsComplete(goal, guide, stepIndex, index, state) then
         return "done", "Desembarco confirmado"
@@ -643,7 +662,7 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
         and self.FlightNavigation:IsComplete(goal, guide, stepIndex, index, state) then
         return "done", "Llegada confirmada"
     end
-    if not id and (action == "fly" or action == "goto" or action == "hearth") and self.IsTravelServiceComplete
+    if not id and (not goal.workForQuest or goal.workVisit) and (action == "fly" or action == "goto" or action == "hearth") and self.IsTravelServiceComplete
         and self:IsTravelServiceComplete(guide, stepIndex, index) then return "done", "Llegada confirmada" end
     if id and self:IsQuestDelivered(id) then return "done", "Misión entregada" end
     local onQuest = id and self:IsQuestActive(id)
@@ -664,7 +683,7 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
         if id then return "skip", "Omitido manualmente (versión anterior)" end
         return "done", "Confirmado manualmente"
     end
-    if action == "note" then
+    if action == "note" and not goal.workForQuest then
         if hasOnlyNotes(self, step) then return "manual", "Confirma tras leer la nota" end
         return "skip", "Información"
     end
@@ -743,6 +762,9 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
         if workDone then return "done", workDone end
         return "active", "Completa el objetivo de la misión"
     end
+    if goal.workForQuest and not goal.workVisit then
+        return "active", "Completa el objetivo de la misión en este lugar"
+    end
     if action == "level" then
         if playerLevel >= (goal.level or goal.n or 1000) then return "done", "Nivel alcanzado" end
         return "active", "Alcanza el nivel indicado antes de continuar"
@@ -756,16 +778,13 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
     return "manual", "Confirma al terminar esta acción"
 end
 
--- During a town visit a rogue travelling alone can hand in a ready quest
+-- During a town visit a solo player can hand in a ready quest
 -- to the NPC in front of them. Never pull an acceptance or an escort forward.
 local function readyAtContact(self, step, state, first)
     local char = self.char
     if not state or state.review or not char or char.auto ~= true or not char.activeGuide
-        or not char.activeGuide:match("^forever/alliance/") or (char.duo and char.duo.enabled)
+        or not char.activeGuide:match("^forever/") or (char.duo and char.duo.enabled)
         or read(IsInGroup) then return end
-    local _, class = UnitClass("player")
-    local _, race = UnitRace("player")
-    if class ~= "ROGUE" or race ~= "Human" then return end
     local guid = read(UnitGUID, "npc")
     if not guid and read(CheckInteractDistance, "target", 3) == true then guid = read(UnitGUID, "target") end
     local contact = type(guid) == "string" and tonumber(guid:match("^Creature%-%d+%-%d+%-%d+%-%d+%-(%d+)%-"))
@@ -817,7 +836,7 @@ function ns:IsStepComplete(step, stateOverride)
     for index, goal in ipairs(step.goals) do
         local status, reason = self:GetGoalStatus(goal, step, state, index)
         if reason == groupReason or reason == chainReason then deferredGroup = true end
-        local q = goal.quest or goal.questID
+        local q = goal.quest or goal.questID or goal.workForQuest
         -- Optional errands can be switched off independently of a required
         -- journey (for example the tram with the optional parcels in Forjaz).
         if q and not goal.optional and not self:IsSoloLevelingDetour(goal) and self:MatchesConditions(goal.only) then
@@ -1157,7 +1176,7 @@ function ns:GetStepGoalItems(step, state)
                     title="Opcional · " .. questLabel(nil,id,goal.title),subtitle=reason}
                 groupRows[id] = true
             end
-        elseif status ~= "skip" or manualSkip or (goal.t == "note" and not self:GetLevelingDetourReason(goal)) then
+        elseif status ~= "skip" or manualSkip or (goal.t == "note" and not goal.workForQuest and not self:GetLevelingDetourReason(goal)) then
             local action = goal.t or goal.action or "goto"
             local id = goal.quest or goal.questID
             -- If an earlier objective in the same step for the same quest is still incomplete,
@@ -1268,7 +1287,7 @@ function ns:GetObjectives(step)
                 lines[#lines+1] = "|cff9ba8b8[Opcional] " .. questLabel(nil,id,goal.title) .. " · " .. reason .. "|r"
                 groupRows[id] = true
             end
-        elseif status ~= "skip" or manualSkip or goal.t == "note" then
+        elseif status ~= "skip" or manualSkip or (goal.t == "note" and not goal.workForQuest and not self:GetLevelingDetourReason(goal)) then
             if status == "done" and not state.review then
                 skippedDone = skippedDone + 1
             else
@@ -1503,7 +1522,7 @@ function ns:OnNavigationTick()
     -- no longer returns it. A waiting partner may still hold this step.
     if not goal and step.goals then
         if self:IsStepComplete(step, state) then self:Sync() end
-    elseif goal and (goal.t == "goto" or goal.action == "goto" or goal.action == "travel")
+    elseif goal and (not goal.workForQuest or goal.workVisit) and (goal.t == "goto" or goal.action == "goto" or goal.action == "travel")
         and self.IsAtWaypoint and self:IsAtWaypoint(goal) then self:Sync() end
 end
 

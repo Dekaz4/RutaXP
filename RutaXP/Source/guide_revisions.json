@@ -16464,6 +16464,555 @@
         "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/02-badlands.guide",
         "reason": "El acceso desde las aldeas está al este. Fraggar (14.83,44.57) se encuentra por debajo de Garracha (9.75,44.47). El vuelo a Menethil parte de Pico Nidal (11.11,46.09). La repetible 2881 se conserva tras la entrega de 2880."
       }
+    },
+    {
+      "id": "mulgore-kyle-level-4",
+      "guideID": "forever/horde/tauren/01-mulgore",
+      "previousRevision": 3,
+      "revision": 4,
+      "sourceShape": "873c5b55018a023f39b42ab190e3b8f23403320b7944e556364a378a2aadb785",
+      "resultShape": "c4c2afb0806f36d1b11842b32d0b053023c934fa3eccc7785a3fed1a736ef2d9",
+      "previousGoalCounts": [
+        2,
+        1,
+        11,
+        3,
+        2,
+        2,
+        4,
+        3,
+        1,
+        5,
+        6,
+        1,
+        1,
+        5,
+        5,
+        7,
+        1,
+        3,
+        1,
+        2,
+        2,
+        10,
+        2,
+        3,
+        1,
+        7,
+        5,
+        1,
+        1,
+        2,
+        1,
+        2,
+        7,
+        1,
+        2,
+        1,
+        1,
+        3,
+        6,
+        1,
+        1,
+        2,
+        1,
+        3,
+        6,
+        3,
+        6,
+        5,
+        5,
+        5,
+        1,
+        2,
+        1,
+        3,
+        5,
+        3,
+        11,
+        2,
+        4,
+        4
+      ],
+      "firstAffectedStep": 25,
+      "affectedQuestIDs": [
+        99411
+      ],
+      "preserveSteps": true,
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 99411
+          },
+          "count": 1,
+          "set": {
+            "minLevel": 5
+          }
+        }
+      ],
+      "originalGoalValues": {
+        "25:1": {
+          "minLevel": 7
+        }
+      },
+      "evidence": {
+        "reason": "Ahab ofrece la misión desde nivel 5. El nivel de la misión es 7; se conserva el circuito de Pezuña de Sangre.",
+        "sources": [
+          "https://zephras.com/forever/enUS/quest/99411/",
+          "Source/quest_requirements_evidence.json#99411"
+        ]
+      }
+    },
+    {
+      "id": "tirisfal-bandarion-after-leonid-4",
+      "guideID": "forever/horde/undead/01-tirisfal-glades",
+      "previousRevision": 3,
+      "revision": 4,
+      "sourceShape": "e3894e87054fc9cda4e91cbc056aff91b158b26422fdfb696079339d2e3df650",
+      "resultShape": "31b74001193e4f57a42ee4b68a10843634f319e24b84ab5775ec80c3f899c9e8",
+      "previousGoalCounts": [
+        1,
+        2,
+        2,
+        15,
+        4,
+        3,
+        1,
+        5,
+        2,
+        1,
+        5,
+        6,
+        1,
+        2,
+        1,
+        5,
+        1,
+        3,
+        1,
+        2,
+        13,
+        2,
+        1,
+        3,
+        1,
+        6,
+        2,
+        1,
+        3,
+        1,
+        13,
+        1,
+        2,
+        2,
+        1,
+        7,
+        5,
+        2,
+        8,
+        1,
+        1,
+        4,
+        1,
+        2,
+        3,
+        2,
+        1,
+        15,
+        3,
+        1,
+        2,
+        4,
+        1,
+        3,
+        1,
+        4,
+        3,
+        4,
+        2,
+        2,
+        2,
+        2,
+        4,
+        7,
+        2,
+        1,
+        3,
+        1,
+        8,
+        1,
+        2
+      ],
+      "firstAffectedStep": 44,
+      "affectedQuestIDs": [
+        99152,
+        99153
+      ],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 45,
+          "omitGoals": [
+            1,
+            3
+          ],
+          "set": {
+            "title": "Botellas de Shadowvale",
+            "note": "Recoge las botellas para el elixir en el asentamiento de Shadowvale antes de volver a Rémol."
+          }
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        },
+        {
+          "sourceStep": 49
+        },
+        {
+          "sourceStep": 50
+        },
+        {
+          "sourceStep": 51
+        },
+        {
+          "sourceStep": 52
+        },
+        {
+          "sourceStep": 53
+        },
+        {
+          "sourceStep": 54
+        },
+        {
+          "sourceStep": 55
+        },
+        {
+          "sourceStep": 56
+        },
+        {
+          "sourceStep": 57
+        },
+        {
+          "sourceStep": 58
+        },
+        {
+          "sourceStep": 59
+        },
+        {
+          "sourceStep": 60
+        },
+        {
+          "sourceStep": 61
+        },
+        {
+          "sourceStep": 62
+        },
+        {
+          "sourceStep": 63
+        },
+        {
+          "sourceStep": 64
+        },
+        {
+          "sourceStep": 65
+        },
+        {
+          "sourceStep": 66
+        },
+        {
+          "title": "Bastión de Bandarion",
+          "note": "Habla con Leonid y escucha su conversación con Danitha. Después recoge los encargos de Hilda y Ephram en el mismo campamento.",
+          "goals": [
+            [
+              67,
+              1
+            ],
+            [
+              67,
+              2
+            ],
+            [
+              67,
+              3
+            ],
+            [
+              44,
+              1
+            ],
+            [
+              44,
+              2
+            ]
+          ]
+        },
+        {
+          "title": "Los sótanos de Shadowvale",
+          "note": "Recoge los seis huesos de los no-muertos y el fragmento de cristal en la misma salida desde Bandarion.",
+          "goals": [
+            [
+              45,
+              1
+            ],
+            [
+              45,
+              3
+            ]
+          ]
+        },
+        {
+          "title": "Hilda y Ephram",
+          "note": "Vuelve al bastión por el mismo camino y entrega ambos encargos antes de usar la piedra de hogar.",
+          "goals": [
+            [
+              46,
+              1
+            ],
+            [
+              46,
+              2
+            ]
+          ]
+        },
+        {
+          "sourceStep": 68
+        },
+        {
+          "sourceStep": 69
+        },
+        {
+          "sourceStep": 70
+        },
+        {
+          "sourceStep": 71
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 99152
+          },
+          "count": 1,
+          "set": {
+            "minLevel": 10,
+            "qlvl": 12
+          }
+        },
+        {
+          "match": {
+            "t": "collect",
+            "quest": 99152
+          },
+          "count": 1,
+          "unset": [
+            "only"
+          ],
+          "set": {}
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 99153
+          },
+          "count": 1,
+          "set": {
+            "minLevel": 10,
+            "qlvl": 12
+          }
+        },
+        {
+          "match": {
+            "t": "collect",
+            "quest": 99153
+          },
+          "count": 1,
+          "unset": [
+            "only"
+          ],
+          "set": {}
+        }
+      ],
+      "originalGoalValues": {
+        "44:1": {
+          "minLevel": 7,
+          "qlvl": 10
+        },
+        "45:1": {
+          "only": {
+            "classes": [
+              "PALADIN"
+            ]
+          }
+        },
+        "44:2": {
+          "minLevel": 7,
+          "qlvl": 10
+        },
+        "45:3": {
+          "only": {
+            "classes": [
+              "PALADIN"
+            ]
+          }
+        }
+      },
+      "evidence": {
+        "reason": "EverythingQuests y el cliente Forever sitúan ambas aceptaciones desde el nivel 10 para todas las clases de réprobo. ForeverLevel las encadena en su segunda visita a Bandarion. El elixir 95314 sigue en el primer recorrido por Shadowvale. El regreso ya programado a Leonid permite agrupar ambas misiones.",
+        "sources": [
+          "https://getforeverlevel.com/undead/",
+          "https://zephras.com/forever/enUS/quest/99152/",
+          "https://zephras.com/forever/enUS/quest/99153/",
+          "https://zephras.com/forever/enUS/quest/96896/",
+          "Source/quest_requirements_evidence.json#99152",
+          "Source/quest_requirements_evidence.json#99153"
+        ]
+      },
+      "originalStepConditions": {
+        "44": {
+          "classes": [
+            "PALADIN"
+          ]
+        },
+        "46": {
+          "classes": [
+            "PALADIN"
+          ]
+        },
+        "45": null,
+        "67": null
+      }
     }
   ]
 }

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RutaXP · Revisión de las guías de leveo</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f3ef;color:#182624;font:16px/1.48 Inter,"Segoe UI",sans-serif}
+main{max-width:1200px;margin:auto;padding:32px 4% 64px}header{border-bottom:3px solid #146559;padding-bottom:16px}
+h1{font:600 clamp(2rem,5vw,3.4rem)/1.06 Georgia,serif;margin:.4em 0}h2,h3,p{margin:8px 0}
+a{color:#105d60;text-underline-offset:2px}a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #328578;outline-offset:2px}
+.controls{display:flex;gap:12px;flex-wrap:wrap;padding:18px 0 8px}.controls label{display:grid;gap:3px;font-size:.83em;font-weight:600}
+input,select{border:1px solid #9aaba5;border-radius:4px;padding:8px;background:white;color:inherit;font:inherit;max-width:100%}
+.summary{font-weight:600}.count,.meta,small,.stages{color:#475b54}.chapter{margin:10px 0;border:1px solid #ccd2cc;border-radius:6px;background:#fff}
+summary{cursor:pointer}.chapter>summary{padding:12px 16px;font-weight:650}.meta{font-size:.86em;font-weight:400}
+.body{padding:0 16px 14px}.sources{padding-left:19px}.mission{border-top:1px solid #dfe3de;padding:8px 0}
+.mission>summary{font-weight:600}.decision{font-size:.83em;font-weight:500;color:#35645d}
+.stages{font-size:.9em}.details{padding:5px 0 3px 17px}.details p{margin:3px 0}.notes{border-left:3px solid #b47a2d;padding-left:9px}
+li{margin:3px 0}.services{margin:15px 0 4px}.hint{max-width:90ch}.method{margin-top:13px}
+@media(max-width:610px){main{padding:16px 12px 35px}.controls label{width:100%}.body{padding:0 10px 10px}.chapter>summary{padding:10px}.details{padding-left:8px}}
+</style></head><body><main>
+<header><h1>Revisión de las guías de leveo</h1><p id="scope" class="summary"></p>
+<details class="method"><summary>Cómo se compararon las rutas</summary>
+<p class="hint">Cada ficha reúne todas las apariciones de una misión en ese capítulo. Los enlaces de MacQuest y OpenXP llevan a la acción concreta de su recorrido para esa facción. El nivel entre paréntesis corresponde al comienzo del tramo de la otra guía. Sage aporta una tercera comparación para la Alianza.</p>
+<p class="hint">Para comparar el orden se tomaron dos recogidas o dos entregas sucesivas en personajes distintos, separadas por tres pasos como máximo. Cada guía externa cuenta una vez por pareja si ambas acciones aparecen en la misma sección. Los cambios de orden se pueden consultar en la segunda misión de la pareja.</p>
+<p class="hint">Los datos de disponibilidad proceden de EverythingQuests y de las comprobaciones de Forever citadas en cada capítulo. Una ausencia en otra ruta puede deberse a la raza, clase o variante elegida. Las discrepancias quedan señaladas. Los tiempos y la experiencia por hora siguen pendientes de medición en partida.</p></details></header>
+<section class="controls" aria-label="Filtros"><label>Buscar misión, ID o capítulo<input type="search" id="search" autocomplete="off"></label>
+<label>Facción<select id="side"><option value="">Ambas</option><option value="Alliance">Alianza</option><option value="Horde">Horda</option></select></label>
+<label>Capítulo<select id="chapter"><option value="">Todos los capítulos</option></select></label>
+<label>Mostrar<select id="filter"><option value="">Todas las misiones</option><option value="review">Con revisión específica</option>
+<option value="optional">Desvíos y misiones opcionales</option><option value="issues">Requisitos por comprobar</option><option value="missing">Sin coincidencia en los recorridos comparados</option></select></label>
+</section><p id="count" class="count" role="status"></p><div id="list"></div>
+<noscript>Abre el informe en un navegador con JavaScript para consultar el catálogo y sus filtros.</noscript>
+</main><script type="application/json" id="catalog">/*ROUTE_DATA*/</script><script>
+"use strict";
+const data=JSON.parse(document.getElementById("catalog").textContent);
+const $=id=>document.getElementById(id);
+const names={Alliance:"Alianza",Horde:"Horda"},verbs={A:"aceptar",O:"objetivo",E:"entregar"};
+function counted(n,one,many){return n.toLocaleString("es")+" "+(n===1?one:many)}
+function norm(s){return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim()}
+function el(tag,text,cls){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e}
+function link(url,text){const a=el("a",text);a.href=url;a.target="_blank";a.rel="noopener noreferrer";return a}
+const t=data.totals;
+$("scope").textContent=data.chapters.length+" capítulos · "+t.distinct.toLocaleString("es")+" misiones distintas · "+t.actions.toLocaleString("es")+" acciones de ruta";
+function options(){
+ const select=$("chapter"),current=select.value;
+ select.replaceChildren(new Option("Todos los capítulos",""));
+ for(const c of data.chapters)if(!$("side").value||$("side").value===c.side){
+  select.add(new Option(names[c.side]+" · "+c.levels+" · "+c.title,c.id));
+ }
+ if([...select.options].some(o=>o.value===current))select.value=current;
+}
+function line(box,text){if(text)box.append(el("p",text))}
+function mission(q){
+ const d=el("details",undefined,"mission"),s=el("summary",q.name+" · "+q.id+"  ");
+ s.append(el("span",q.review?q.review[0]:q.decision,"decision"));d.append(s);
+ const box=el("div",undefined,"details");d.append(box);
+ d.addEventListener("toggle",()=>{if(!d.open||box.hasChildNodes())return;
+  if(q.review){const p=el("p",q.review[1]+" ","notes");p.append(link(q.review[2],"Fuente de la revisión"));box.append(p)}
+  line(box,q.decision+". "+q.reason);
+  const actions=el("ol");actions.style.listStyle="none";actions.style.paddingLeft="0";
+  q.steps.forEach(([place],i)=>actions.append(el("li",place+" · "+q.instructions[i].replace(/\n/g," "))));
+  box.append(actions);
+  if(q.picks.length)line(box,"Recogida · "+q.picks.join(", "));
+  if(q.hands.length)line(box,"Entrega · "+q.hands.join(", "));
+  for(const visit of q.visits)line(box,visit);
+  for(const [source,stage,old,oldStep,step,fi,line1,line2] of q.order||[]){
+   const p=el("p","Orden de "+(stage==="A"?"recogida":"entrega")+" · RutaXP pasa por "+old+" (paso "+oldStep+") y después por "+q.id+" (paso "+step+"). "+source+" pasa primero por ");
+   p.append(link(data.pages[fi]+"#L"+line2,String(q.id)),document.createTextNode(" y después por "),link(data.pages[fi]+"#L"+line1,String(old)),document.createTextNode("."));box.append(p);
+  }
+  if(q.requirements.length)line(box,q.requirements.join(" · "));
+  if(q.children.length)line(box,"Misiones relacionadas que la citan como previa · "+q.children.join(", "));
+  if(!q.routes.length)line(box,"Sin coincidencia por ID en los recorridos alternativos de esta facción.");
+  for(const [name,stages] of q.routes){const p=el("p",name+" · ");
+   for(const stage of ["A","O","E"]){if(!stages[stage])continue;const [fi,n,lv]=stages[stage];
+    p.append(link(data.pages[fi]+(n?"#L"+n:""),verbs[stage]+(lv?" (nivel "+lv+")":"")),document.createTextNode("  "));
+   }box.append(p);
+  }
+  if(q.evidence)box.append(link(q.evidence,"Registro de requisitos"));
+  if(q.issues.length)line(box,q.issues.join(". ")+".");
+ });return d;
+}
+function match(q,c,search,filter){
+ if(search&&!norm(c.title).includes(search)&&!norm(q.name).includes(search)&&!String(q.id).includes(search))return false;
+ if(filter==="review")return !!q.review;if(filter==="issues")return q.issues.length>0;
+ if(filter==="optional")return ["Opcional","Grupo opcional","Si llevas los materiales","Desvío opcional","Según el nivel"].includes(q.decision);
+ if(filter==="missing")return q.routes.length===0;return true;
+}
+function render(){
+ const list=$("list"),search=norm($("search").value),filter=$("filter").value,selected=$("chapter").value,side=$("side").value;
+ list.replaceChildren();let num=0,chapters=0;
+ for(const c of data.chapters){
+  if(selected&&selected!==c.id||side&&side!==c.side)continue;
+  const qs=c.quests.filter(q=>match(q,c,search,filter));if(!qs.length)continue;
+  num+=qs.length;chapters++;
+  const d=el("details",undefined,"chapter"),title=el("summary",c.title+"  ");
+  title.append(el("span",names[c.side]+" · niveles "+c.levels+" · "+counted(qs.length,"misión","misiones"),"meta"));
+  const body=el("div",undefined,"body");d.append(title,body);list.append(d);
+  function populate(){if(body.hasChildNodes())return;
+   const refs=el("ul",undefined,"sources");for(const [url,note] of c.refs){const li=el("li");li.append(link(url,note));refs.append(li)}
+   body.append(refs,el("p",c.n+" pasos en este capítulo.","meta"));
+   if(c.order.checked)body.append(el("p","Orden de visita · "+counted(c.order.checked,"comparación","comparaciones")+" de parejas, "+(c.order.different||0)+" con distinto orden.","meta"));
+   for(const q of qs)body.append(mission(q));
+   if(c.other.length){const extra=el("details",undefined,"services");extra.append(el("summary","Viajes, servicios y otras acciones ("+c.other.length+")"));const ul=el("ul");
+    for(const [pos,act,text,condition] of c.other)ul.append(el("li",pos+" · "+act+" · "+text+(condition?" · "+condition:"")));
+    extra.append(ul);body.append(extra);}
+  }
+  d.addEventListener("toggle",()=>{if(d.open)populate()});if(selected||search){d.open=true;populate()}
+ }
+ $("count").textContent=counted(chapters,"capítulo","capítulos")+" · "+counted(num,"ficha de misión","fichas de misión");
+ if(!num)list.append(el("p","Prueba con otro nombre o cambia los filtros."));
+}
+$("side").addEventListener("change",()=>{options();render()});for(const id of ["filter","chapter"])$(id).addEventListener("change",render);
+$("search").addEventListener("input",render);options();render();
+</script></body></html>

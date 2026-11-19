@@ -4,6 +4,10 @@ ns.TravelChoice = Choice
 
 local work = {kill=true, collect=true, complete=true, objective=true, interact=true, use=true, talk=true}
 local transports = {boat=true, fly=true, hearth=true}
+-- A verified short circuit at Menethil. The next chapter places the pickup,
+-- flower and hand-in on the same coast. Its follow-up goes to Auberdine.
+local menethilFlower = 98208
+local wetlandsChapter = "forever/alliance/30-40/01-hillsbrad-foothills"
 local function read(fn, ...)
     if type(fn) ~= "function" then return end
     local ok, value = pcall(fn, ...)
@@ -141,7 +145,9 @@ local function localIndex(zone)
             for si, step in ipairs(guide.steps or {}) do
                 if applies(step) then
                     for gi, goal in ipairs(step.goals or {}) do
-                        if goal.quest and (goal.t == "turnin" or work[goal.t]) and applies(goal) then
+                        local flowerPickup = goal.t == "accept" and goal.quest == menethilFlower
+                            and guide.id == wetlandsChapter and zone == 1437
+                        if goal.quest and (goal.t == "turnin" or work[goal.t] or flowerPickup) and applies(goal) then
                             local onMap = goalMap(goal) == zone
                             if not onMap then
                                 for _, candidate in ipairs(goal.candidates or {}) do
@@ -179,7 +185,21 @@ local function enemyRange(id, active)
     return hardest or easiest
 end
 
-local function nearby(zone, level, duo, savedQuests)
+-- The catalog proves where this circuit goes; the game confirms that the
+-- character can take it. An empty journal by itself doesn't prove eligibility.
+local function flowerOffered(zone)
+    local lines = read(C_QuestLine and C_QuestLine.GetAvailableQuestLines, zone)
+    for _, info in ipairs(type(lines) == "table" and lines or {}) do
+        if read(function() return info.questID end) == menethilFlower
+            and read(function() return info.isHidden end) == false then return true end
+    end
+    local offers = read(C_GossipInfo and C_GossipInfo.GetAvailableQuests)
+    for _, info in ipairs(type(offers) == "table" and offers or {}) do
+        if read(function() return info.questID end) == menethilFlower then return true end
+    end
+end
+
+local function nearby(zone, level, duo, savedQuests, checkFlower)
     local best, journal = {}, {}
     for _, row in ipairs(localIndex(zone)) do
         local goal = row.goal
@@ -193,9 +213,13 @@ local function nearby(zone, level, duo, savedQuests)
                 if not duo or peer and not peer.basic and peer.state == (complete and 2 or 1) then
                     journal[id] = complete and "turnin" or "work"
                 end
+            elseif not active and checkFlower and id == menethilFlower and not ns:IsQuestDelivered(id)
+                and (savedQuests and savedQuests[id] or flowerOffered(zone)) then
+                journal[id] = "pickup"
             end
         end
-        if goal.t == "turnin" and journal[id] == "turnin" or work[goal.t] and journal[id] == "work" then
+        if goal.t == "turnin" and journal[id] == "turnin" or work[goal.t] and journal[id] == "work"
+            or goal.t == "accept" and journal[id] == "pickup" and level >= (goal.minLevel or 1) then
             local state = ns.char.progress and ns.char.progress[row.guide.id]
             local enemy = work[goal.t] and enemyRange(id, true)
             if (not enemy or enemy.min < level+3)
@@ -244,7 +268,7 @@ local function destinationBlock(trip, zone, level)
                             or not active and available[id] and status ~= "skip" and status ~= "done")
                         or goal.t == "turnin" and ready == true and status == "active") then
                         seen[id] = true
-                        goals[#goals+1] = {id=id, title=title(goal), map=goalMap(goal)}
+                        goals[#goals+1] = {id=id, title=title(goal), map=goalMap(goal), ready=ready == true}
                         local enemy = work[goal.t] and enemyRange(id, active)
                         if enemy and enemy.min >= level+3 and (not hard or enemy.min > hard.min) then
                             hard, hardGoal = enemy, title(goal)
@@ -258,13 +282,23 @@ local function destinationBlock(trip, zone, level)
 end
 
 local function compare(trip, zone, level, duo, savedQuests)
-    local localGoals = nearby(zone, level, duo, savedQuests)
+    local saltFlats = trip.kind == "boat" and zone == 1437 and trip.destination == 1445
+        and trip.guide.id == "forever/alliance/07-thousand-needles"
+    local earlyCrossing = saltFlats and level < 32 and not duo and not (ns.char.duo and ns.char.duo.enabled)
+    local localGoals = nearby(zone, level, duo, savedQuests, earlyCrossing or saltFlats and savedQuests and not duo)
     local dest, hard, hardTitle = destinationBlock(trip, zone, level)
     if #localGoals == 0 and not hard then return end
     -- Prefer a long transfer once its block is substantially larger than
     -- the work already in the journal. A confirmed flight reduces that cost.
     local localWeight = trip.flight and 1 or 2
     local prefer = #localGoals > 0 and (hard ~= nil or #localGoals * localWeight >= #dest)
+    if earlyCrossing and not trip.flight and #localGoals > 0 then
+        local readyAtDestination = false
+        for _, entry in ipairs(dest) do
+            if entry.ready then readyAtDestination = true; break end
+        end
+        if not readyAtDestination then prefer = true end
+    end
     local destination = trip.label or mapTitle(trip.destination) or "el destino"
     local names = {}
     for i=1,math.min(#localGoals,2) do names[i] = localGoals[i].title end
@@ -273,6 +307,12 @@ local function compare(trip, zone, level, duo, savedQuests)
         or #localGoals == 1 and "Tienes 1 misión cercana" or ("Tienes %d misiones cercanas"):format(#localGoals)
     if duo and #localGoals > 0 then localText = localText .. " en ambos diarios" end
     local details = {localText .. (#names > 0 and (" (" .. table.concat(names, ", ") .. ")") or "") .. "."}
+    for _, entry in ipairs(localGoals) do
+        if entry.goal.t == "accept" then
+            details[#details+1] = "Puedes recoger «" .. entry.title .. "» junto al puerto y entregarla allí."
+            break
+        end
+    end
     local destMap = dest[1] and dest[1].map
     for _, entry in ipairs(dest) do if entry.map ~= destMap then destMap = nil; break end end
     local place = destMap and mapTitle(destMap)
@@ -315,7 +355,7 @@ function Choice:GetRecommendation(guide, step, state, travel, activeKey)
 end
 
 local events = CreateFrame("Frame")
-for _, event in ipairs({"QUEST_LOG_UPDATE","QUEST_ACCEPTED","QUEST_TURNED_IN","PLAYER_ENTERING_WORLD","GROUP_ROSTER_UPDATE"}) do
+for _, event in ipairs({"QUEST_LOG_UPDATE","QUEST_ACCEPTED","QUEST_TURNED_IN","PLAYER_ENTERING_WORLD","GROUP_ROSTER_UPDATE","GOSSIP_SHOW"}) do
     events:RegisterEvent(event)
 end
 events:SetScript("OnEvent", function() Choice.at = nil end)

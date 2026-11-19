@@ -146,7 +146,7 @@ end
 local workActions={complete=true,objective=true,kill=true,collect=true,buy=true,
     talk=true,interact=true,use=true,goto=true,travel=true}
 local function questID(goal)
-    local id=number(goal.quest or goal.questID)
+    local id=number(goal.quest or goal.questID or goal.workForQuest)
     return id and id>0 and id==math.floor(id) and id or nil
 end
 
@@ -199,6 +199,8 @@ function ns:GetTrackerPlannedUpcomingItems(guide,fromCursor,limit)
         if type(state.skipped)=="table" and state.skipped[key]
             or type(state.confirmed)=="table" and state.confirmed[key] then return false end
         local id=questID(goal)
+        if self.GetAuxiliaryGoalStatus and (goal.untilLevel or goal.workForQuest)
+            and self:GetAuxiliaryGoalStatus(goal) then return false end
         if self.GetGroupDeferralReason and self:GetGroupDeferralReason(goal,step,guide,gi) then return false end
         if goal.levelingDetour and self.GetLevelingDetourReason then
             local quest=id or goal.detourQuest
@@ -225,7 +227,7 @@ function ns:GetTrackerPlannedUpcomingItems(guide,fromCursor,limit)
     local function finished(goal,id)
         local q=status(id)
         if q.complete then return true end
-        local oi=number(goal.oi or goal.objectiveIndex or goal.objective)
+        local oi=number(goal.oi or goal.objectiveIndex or goal.objective or goal.workForObjective)
         if oi and type(q.objectives[oi])=="table" then
             return read(function() return q.objectives[oi].finished end)==true
         end
@@ -255,7 +257,7 @@ function ns:GetTrackerPlannedUpcomingItems(guide,fromCursor,limit)
                     local q=status(id)
                     if q.active and not q.delivered then
                         local action=goal.t or goal.action
-                        local work=workActions[action] and not finished(goal,id)
+                        local work=(workActions[action] or goal.workForQuest) and not finished(goal,id)
                         if work or action=="turnin" then
                             local plan=plans[id]
                             if not plan then

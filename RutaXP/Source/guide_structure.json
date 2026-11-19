@@ -37,7 +37,7 @@
       "preAll": 64,
       "closedBy": 159,
       "chainStarted": 3,
-      "only": 357,
+      "only": 355,
       "optional": 415,
       "minLevel": 2290,
       "maxLevel": 0,
@@ -51,7 +51,7 @@
       "arrival": 1,
       "arrivalDock": 1
     },
-    "stepConditions": 205,
+    "stepConditions": 203,
     "sourceDslSteps": 2330,
     "sourceDslActions": {
       "accept": 2290,
@@ -15252,6 +15252,14 @@
       },
       {
         "guideID": "forever/horde/tauren/01-mulgore",
+        "step": 25,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 7,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/horde/tauren/01-mulgore",
         "step": 30,
         "goal": 2,
         "field": "pre",
@@ -16736,23 +16744,81 @@
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 59,
+        "step": 44,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 44,
         "goal": 1,
         "field": "t",
-        "source": "kill",
-        "snapshot": "turnin"
+        "source": "accept",
+        "snapshot": "collect"
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 59,
+        "step": 44,
         "goal": 1,
         "field": "quest",
-        "source": 371,
-        "snapshot": 356
+        "source": 99152,
+        "snapshot": 95314
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 59,
+        "step": 44,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 44,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 268801
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 44,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 8
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 44,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 7,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 45,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 45,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "hearth"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 45,
+        "goal": 1,
+        "field": "quest",
+        "source": 99152,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 45,
         "goal": 1,
         "field": "oi",
         "source": 1,
@@ -16760,11 +16826,911 @@
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 59,
+        "step": 45,
+        "goal": 1,
+        "field": "item",
+        "source": 286259,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 45,
+        "goal": 1,
+        "field": "count",
+        "source": 6,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 45,
+        "goal": 1,
+        "field": "only",
+        "source": {
+          "classes": [
+            "PALADIN"
+          ]
+        },
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 46,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 46,
+        "goal": 1,
+        "field": "quest",
+        "source": 99153,
+        "snapshot": 426
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 46,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 46,
+        "goal": 2,
+        "field": "quest",
+        "source": 99152,
+        "snapshot": 99142
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 46,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 47,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 47,
+        "goal": 1,
+        "field": "t",
+        "source": "hearth",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 47,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 1819
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 47,
+        "goal": 1,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          1498
+        ]
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 47,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 48,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 48,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 48,
+        "goal": 1,
+        "field": "quest",
+        "source": 426,
+        "snapshot": 1473
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 48,
+        "goal": 1,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          1501
+        ]
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 48,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 49,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 49,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 49,
+        "goal": 1,
+        "field": "quest",
+        "source": 1819,
+        "snapshot": 1881
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 49,
+        "goal": 1,
+        "field": "closedBy",
+        "source": [
+          1498
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 49,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 49,
         "goal": 2,
         "field": "t",
         "source": "kill",
         "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 49,
+        "goal": 2,
+        "field": "quest",
+        "source": 1819,
+        "snapshot": 1882
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 49,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 49,
+        "goal": 2,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          1884
+        ]
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 49,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 50,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 50,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 50,
+        "goal": 1,
+        "field": "quest",
+        "source": 1473,
+        "snapshot": 370
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 50,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 50,
+        "goal": 1,
+        "field": "closedBy",
+        "source": [
+          1501
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 50,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 51,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 51,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 51,
+        "goal": 1,
+        "field": "quest",
+        "source": 1881,
+        "snapshot": 1473
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 51,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 51,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 6285
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "goal": 1,
+        "field": "quest",
+        "source": 370,
+        "snapshot": 374
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "goal": 2,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "goal": 2,
+        "field": "count",
+        "source": 3,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "goal": 3,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "goal": 3,
+        "field": "quest",
+        "source": 370,
+        "snapshot": 371
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "goal": 3,
+        "field": "oi",
+        "source": 3,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "goal": 3,
+        "field": "count",
+        "source": 3,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "goal": 3,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          370
+        ]
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 52,
+        "goal": 3,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 53,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 53,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 53,
+        "goal": 1,
+        "field": "quest",
+        "source": 1473,
+        "snapshot": 96895
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 53,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 53,
+        "goal": 1,
+        "field": "item",
+        "source": 6285,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 53,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 54,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 54,
+        "goal": 1,
+        "field": "quest",
+        "source": 374,
+        "snapshot": 96895
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 54,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 54,
+        "goal": 2,
+        "field": "quest",
+        "source": 370,
+        "snapshot": 96897
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 54,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 54,
+        "goal": 3,
+        "field": "quest",
+        "source": 371,
+        "snapshot": 96898
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 54,
+        "goal": 3,
+        "field": "pre",
+        "source": [
+          370
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 54,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 5,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 55,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 55,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 55,
+        "goal": 1,
+        "field": "quest",
+        "source": 96895,
+        "snapshot": 96897
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 55,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 55,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 8
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 55,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 1,
+        "field": "quest",
+        "source": 96895,
+        "snapshot": 356
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 8
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 2,
+        "field": "quest",
+        "source": 96897,
+        "snapshot": 356
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 8
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 3,
+        "field": "quest",
+        "source": 96898,
+        "snapshot": 99142
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 3,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 3,
+        "field": "item",
+        "source": null,
+        "snapshot": 286204
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 3,
+        "field": "count",
+        "source": null,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 4,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 4,
+        "field": "quest",
+        "source": 96899,
+        "snapshot": 1882
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 4,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 4,
+        "field": "item",
+        "source": null,
+        "snapshot": 7227
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 4,
+        "field": "only",
+        "source": null,
+        "snapshot": {
+          "classes": [
+            "MAGE"
+          ]
+        }
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 56,
+        "goal": 4,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 57,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 57,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 57,
+        "goal": 1,
+        "field": "quest",
+        "source": 96897,
+        "snapshot": 356
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 57,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 57,
+        "goal": 1,
+        "field": "count",
+        "source": 8,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 57,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 57,
+        "goal": 2,
+        "field": "quest",
+        "source": 96897,
+        "snapshot": 99156
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 57,
+        "goal": 2,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 57,
+        "goal": 2,
+        "field": "count",
+        "source": 8,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 57,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          356
+        ]
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 57,
+        "goal": 2,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 57,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 6
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 58,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 58,
+        "goal": 1,
+        "field": "quest",
+        "source": 356,
+        "snapshot": 371
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 58,
+        "goal": 1,
+        "field": "count",
+        "source": 8,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 58,
+        "goal": 2,
+        "field": "quest",
+        "source": 356,
+        "snapshot": 371
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 58,
+        "goal": 2,
+        "field": "count",
+        "source": 8,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 59,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 59,
+        "goal": 1,
+        "field": "quest",
+        "source": 371,
+        "snapshot": 369
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 59,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 2872
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 59,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 4
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 59,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "collect"
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16780,7 +17746,15 @@
         "goal": 2,
         "field": "oi",
         "source": 2,
-        "snapshot": null
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 59,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 286326
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16794,16 +17768,6 @@
         "guideID": "forever/horde/undead/01-tirisfal-glades",
         "step": 59,
         "goal": 2,
-        "field": "pre",
-        "source": null,
-        "snapshot": [
-          356
-        ]
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 59,
-        "goal": 2,
         "field": "optional",
         "source": null,
         "snapshot": true
@@ -16812,17 +17776,12 @@
         "guideID": "forever/horde/undead/01-tirisfal-glades",
         "step": 59,
         "goal": 2,
-        "field": "minLevel",
+        "field": "group",
         "source": null,
-        "snapshot": 6
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 60,
-        "goal": 1,
-        "field": "t",
-        "source": "collect",
-        "snapshot": "kill"
+        "snapshot": {
+          "kind": "elite",
+          "rank": 1
+        }
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16830,7 +17789,7 @@
         "goal": 1,
         "field": "quest",
         "source": 369,
-        "snapshot": 371
+        "snapshot": 97558
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16838,7 +17797,7 @@
         "goal": 1,
         "field": "item",
         "source": 2872,
-        "snapshot": null
+        "snapshot": 278242
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16846,15 +17805,7 @@
         "goal": 1,
         "field": "count",
         "source": 4,
-        "snapshot": null
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 60,
-        "goal": 2,
-        "field": "t",
-        "source": "collect",
-        "snapshot": "kill"
+        "snapshot": 8
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16862,7 +17813,7 @@
         "goal": 2,
         "field": "quest",
         "source": 99156,
-        "snapshot": 371
+        "snapshot": 97558
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16878,7 +17829,7 @@
         "goal": 2,
         "field": "item",
         "source": 286326,
-        "snapshot": null
+        "snapshot": 278243
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16886,7 +17837,7 @@
         "goal": 2,
         "field": "count",
         "source": null,
-        "snapshot": 5
+        "snapshot": 6
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16910,10 +17861,23 @@
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
         "step": 61,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 61,
         "goal": 1,
-        "field": "quest",
-        "source": 97558,
-        "snapshot": 369
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 61,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16921,7 +17885,7 @@
         "goal": 1,
         "field": "item",
         "source": 278242,
-        "snapshot": 2872
+        "snapshot": null
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16929,7 +17893,15 @@
         "goal": 1,
         "field": "count",
         "source": 8,
-        "snapshot": 4
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 61,
+        "goal": 2,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16945,7 +17917,7 @@
         "goal": 2,
         "field": "oi",
         "source": 2,
-        "snapshot": 1
+        "snapshot": null
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16953,7 +17925,7 @@
         "goal": 2,
         "field": "item",
         "source": 278243,
-        "snapshot": 286326
+        "snapshot": null
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -16973,27 +17945,8 @@
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 61,
-        "goal": 2,
-        "field": "group",
-        "source": null,
-        "snapshot": {
-          "kind": "elite",
-          "rank": 1
-        }
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
         "step": 62,
         "field": "group shape/condition"
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 62,
-        "goal": 1,
-        "field": "t",
-        "source": "turnin",
-        "snapshot": "collect"
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -17001,31 +17954,7 @@
         "goal": 1,
         "field": "quest",
         "source": 356,
-        "snapshot": 97558
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 62,
-        "goal": 1,
-        "field": "oi",
-        "source": null,
-        "snapshot": 1
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 62,
-        "goal": 1,
-        "field": "item",
-        "source": null,
-        "snapshot": 278242
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 62,
-        "goal": 1,
-        "field": "count",
-        "source": null,
-        "snapshot": 8
+        "snapshot": 369
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -17033,31 +17962,91 @@
         "goal": 2,
         "field": "t",
         "source": "turnin",
-        "snapshot": "collect"
+        "snapshot": "accept"
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
         "step": 62,
         "goal": 2,
-        "field": "oi",
+        "field": "quest",
+        "source": 97558,
+        "snapshot": 492
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 62,
+        "goal": 2,
+        "field": "pre",
         "source": null,
-        "snapshot": 2
+        "snapshot": [
+          369
+        ]
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
         "step": 62,
         "goal": 2,
-        "field": "item",
-        "source": null,
-        "snapshot": 278243
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 62,
-        "goal": 2,
-        "field": "count",
+        "field": "minLevel",
         "source": null,
         "snapshot": 6
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 62,
+        "goal": 3,
+        "field": "quest",
+        "source": 99156,
+        "snapshot": 492
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 62,
+        "goal": 3,
+        "field": "optional",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 62,
+        "goal": 4,
+        "field": "quest",
+        "source": 96897,
+        "snapshot": 371
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 62,
+        "goal": 5,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 62,
+        "goal": 5,
+        "field": "quest",
+        "source": 96898,
+        "snapshot": 372
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 62,
+        "goal": 5,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          371
+        ]
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 62,
+        "goal": 5,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 5
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -17068,9 +18057,25 @@
         "guideID": "forever/horde/undead/01-tirisfal-glades",
         "step": 63,
         "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 63,
+        "goal": 1,
         "field": "quest",
         "source": 369,
-        "snapshot": 97558
+        "snapshot": 372
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 63,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -17078,7 +18083,7 @@
         "goal": 2,
         "field": "t",
         "source": "accept",
-        "snapshot": "turnin"
+        "snapshot": "kill"
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -17086,7 +18091,23 @@
         "goal": 2,
         "field": "quest",
         "source": 492,
-        "snapshot": 99156
+        "snapshot": 372
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 63,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 63,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 2
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -17102,33 +18123,9 @@
         "guideID": "forever/horde/undead/01-tirisfal-glades",
         "step": 63,
         "goal": 2,
-        "field": "optional",
-        "source": null,
-        "snapshot": true
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 63,
-        "goal": 2,
         "field": "minLevel",
         "source": 6,
         "snapshot": null
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 63,
-        "goal": 3,
-        "field": "quest",
-        "source": 492,
-        "snapshot": 96897
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 63,
-        "goal": 4,
-        "field": "quest",
-        "source": 371,
-        "snapshot": 96898
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -17147,67 +18144,9 @@
         "guideID": "forever/horde/undead/01-tirisfal-glades",
         "step": 64,
         "goal": 1,
-        "field": "quest",
-        "source": 372,
-        "snapshot": 369
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 64,
-        "goal": 1,
         "field": "oi",
         "source": 1,
         "snapshot": null
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 64,
-        "goal": 2,
-        "field": "t",
-        "source": "kill",
-        "snapshot": "accept"
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 64,
-        "goal": 2,
-        "field": "quest",
-        "source": 372,
-        "snapshot": 492
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 64,
-        "goal": 2,
-        "field": "oi",
-        "source": 2,
-        "snapshot": null
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 64,
-        "goal": 2,
-        "field": "count",
-        "source": 2,
-        "snapshot": null
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 64,
-        "goal": 2,
-        "field": "pre",
-        "source": null,
-        "snapshot": [
-          369
-        ]
-      },
-      {
-        "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 64,
-        "goal": 2,
-        "field": "minLevel",
-        "source": null,
-        "snapshot": 6
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -17218,13 +18157,34 @@
         "guideID": "forever/horde/undead/01-tirisfal-glades",
         "step": 65,
         "goal": 1,
-        "field": "t",
-        "source": "turnin",
-        "snapshot": "kill"
+        "field": "quest",
+        "source": 372,
+        "snapshot": 96899
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
-        "step": 65,
+        "step": 66,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 66,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 66,
+        "goal": 1,
+        "field": "quest",
+        "source": 96899,
+        "snapshot": 99152
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 66,
         "goal": 1,
         "field": "oi",
         "source": null,
@@ -17233,15 +18193,58 @@
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
         "step": 66,
-        "field": "group shape/condition"
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 286259
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
         "step": 66,
         "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 6
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 66,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 66,
+        "goal": 2,
         "field": "quest",
-        "source": 96899,
-        "snapshot": 372
+        "source": 96896,
+        "snapshot": 99153
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 66,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 66,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 286269
+      },
+      {
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "step": 66,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": null
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -17262,7 +18265,7 @@
         "goal": 1,
         "field": "quest",
         "source": null,
-        "snapshot": 96899
+        "snapshot": 99153
       },
       {
         "guideID": "forever/horde/undead/01-tirisfal-glades",
@@ -24115,11 +25118,39 @@
           "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/02-badlands.guide",
           "reason": "El acceso desde las aldeas está al este. Fraggar (14.83,44.57) se encuentra por debajo de Garracha (9.75,44.47). El vuelo a Menethil parte de Pico Nidal (11.11,46.09). La repetible 2881 se conserva tras la entrega de 2880."
         }
+      },
+      {
+        "id": "mulgore-kyle-level-4",
+        "guideID": "forever/horde/tauren/01-mulgore",
+        "revision": 4,
+        "evidence": {
+          "reason": "Ahab ofrece la misión desde nivel 5. El nivel de la misión es 7; se conserva el circuito de Pezuña de Sangre.",
+          "sources": [
+            "https://zephras.com/forever/enUS/quest/99411/",
+            "Source/quest_requirements_evidence.json#99411"
+          ]
+        }
+      },
+      {
+        "id": "tirisfal-bandarion-after-leonid-4",
+        "guideID": "forever/horde/undead/01-tirisfal-glades",
+        "revision": 4,
+        "evidence": {
+          "reason": "EverythingQuests y el cliente Forever sitúan ambas aceptaciones desde el nivel 10 para todas las clases de réprobo. ForeverLevel las encadena en su segunda visita a Bandarion. El elixir 95314 sigue en el primer recorrido por Shadowvale. El regreso ya programado a Leonid permite agrupar ambas misiones.",
+          "sources": [
+            "https://getforeverlevel.com/undead/",
+            "https://zephras.com/forever/enUS/quest/99152/",
+            "https://zephras.com/forever/enUS/quest/99153/",
+            "https://zephras.com/forever/enUS/quest/96896/",
+            "Source/quest_requirements_evidence.json#99152",
+            "Source/quest_requirements_evidence.json#99153"
+          ]
+        }
       }
     ],
     "authoredTextPresenceLosses": [],
     "sourceStepNotes": 1722,
-    "snapshotStepNotes": 1751
+    "snapshotStepNotes": 1752
   },
   "sourceReadProblems": [],
   "order": {
@@ -33947,9 +34978,194 @@
   },
   "dependencyCycleCandidates": [],
   "workCoverage": {
-    "acceptOccurrencesWithoutQuestLinkedWork": 960,
-    "uniqueQuestIDs": 843,
-    "sourceQuestsWithoutObjectives": 795,
+    "auxiliaryQuestWork": [
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 31,
+        "goal": 1,
+        "action": "goto",
+        "questID": 98059,
+        "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
+        "sourceLine": 277,
+        "sourceText": "accept 1718 npc 5479                -- Wu Shen",
+        "workForQuest": 98059
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 12,
+        "goal": 3,
+        "action": "goto",
+        "questID": 1440,
+        "workForQuest": 1440
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 19,
+        "goal": 3,
+        "action": "kill",
+        "questID": 93176,
+        "sourceFile": "guides/forever/alliance/30-40/05-arathi-highlands.guide",
+        "sourceLine": 191,
+        "sourceText": "kill 217589                         -- Hay Weevil: catch it, for My Little Friends",
+        "workForQuest": 93176,
+        "workForObjective": 2
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 28,
+        "goal": 3,
+        "action": "kill",
+        "questID": 93176,
+        "workForQuest": 93176,
+        "workForObjective": 3
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 35,
+        "goal": 1,
+        "action": "kill",
+        "questID": 93176,
+        "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
+        "sourceLine": 320,
+        "sourceText": "collect 4611 quest 705              -- Blue Pearl",
+        "workForQuest": 93176,
+        "workForObjective": 1
+      },
+      {
+        "guideID": "forever/alliance/40-50/07-un-goro-crater",
+        "step": 14,
+        "goal": 1,
+        "action": "goto",
+        "questID": 4285,
+        "sourceFile": "guides/forever/alliance/40-50/07-un-goro-crater.guide",
+        "sourceLine": 143,
+        "sourceText": "goto 56.5,12.5 \"Northern Crystal Pylon\"",
+        "workForQuest": 4285
+      },
+      {
+        "guideID": "forever/alliance/40-50/07-un-goro-crater",
+        "step": 16,
+        "goal": 1,
+        "action": "goto",
+        "questID": 4287,
+        "sourceFile": "guides/forever/alliance/40-50/07-un-goro-crater.guide",
+        "sourceLine": 155,
+        "sourceText": "goto 77.2,50.0 \"Eastern Crystal Pylon\"",
+        "workForQuest": 4287
+      },
+      {
+        "guideID": "forever/alliance/40-50/07-un-goro-crater",
+        "step": 20,
+        "goal": 1,
+        "action": "goto",
+        "questID": 4288,
+        "sourceFile": "guides/forever/alliance/40-50/07-un-goro-crater.guide",
+        "sourceLine": 176,
+        "sourceText": "goto 23.9,59.2 \"Western Crystal Pylon\"",
+        "workForQuest": 4288
+      },
+      {
+        "guideID": "forever/alliance/50-60/03-winterspring",
+        "step": 13,
+        "goal": 3,
+        "action": "use",
+        "questID": 5163,
+        "sourceFile": "guides/forever/alliance/50-60/03-winterspring.guide",
+        "sourceLine": 129,
+        "sourceText": "use 12928 @61.5,38.6 \"Umi's Mechanical Yeti\" -- On Legacki, by the inn",
+        "workForQuest": 5163,
+        "workForObjective": 1
+      },
+      {
+        "guideID": "forever/alliance/50-60/04-western-plaguelands",
+        "step": 23,
+        "goal": 1,
+        "action": "use",
+        "questID": 4971,
+        "sourceFile": "guides/forever/alliance/50-60/04-western-plaguelands.guide",
+        "sourceLine": 203,
+        "sourceText": "use 12627 @45.1,62.3 \"Temporal Displacer\"",
+        "workForQuest": 4971,
+        "workForObjective": 1
+      },
+      {
+        "guideID": "forever/alliance/50-60/05-silithus",
+        "step": 1,
+        "goal": 7,
+        "action": "use",
+        "questID": 5163,
+        "sourceFile": "guides/forever/alliance/50-60/05-silithus.guide",
+        "sourceLine": 51,
+        "sourceText": "use 12928 @51.1,26.9 \"Umi's Mechanical Yeti\" -- On Sprinkle",
+        "workForQuest": 5163,
+        "workForObjective": 2
+      },
+      {
+        "guideID": "forever/horde/50-60/03-winterspring",
+        "step": 5,
+        "goal": 3,
+        "action": "note",
+        "questID": 5163,
+        "sourceFile": "guides/forever/horde/50-60/03-winterspring.guide",
+        "sourceLine": 86,
+        "sourceText": "note Umi's third prank targets goblins in Gadgetzan and Un'Goro: keep it for later.",
+        "workForQuest": 5163,
+        "workForObjective": 1
+      },
+      {
+        "guideID": "forever/horde/50-60/03-winterspring",
+        "step": 17,
+        "goal": 1,
+        "action": "goto",
+        "questID": 8469,
+        "sourceFile": "guides/forever/horde/50-60/03-winterspring.guide",
+        "sourceLine": 156,
+        "sourceText": "goto 31.6,36.6 \"Frostfire Winterfall camp\"",
+        "workForQuest": 8469,
+        "workForObjective": 1
+      }
+    ],
+    "auxiliaryQuestVisits": [
+      {
+        "guideID": "forever/alliance/50-60/02-felwood",
+        "step": 11,
+        "goal": 3,
+        "action": "goto",
+        "questID": 5156,
+        "sourceFile": "guides/forever/alliance/50-60/02-felwood.guide",
+        "sourceLine": 107,
+        "sourceText": "goto 41.6,43.0 \"First crater\"",
+        "workForQuest": 5156,
+        "workVisit": true
+      },
+      {
+        "guideID": "forever/alliance/50-60/02-felwood",
+        "step": 11,
+        "goal": 4,
+        "action": "goto",
+        "questID": 5156,
+        "sourceFile": "guides/forever/alliance/50-60/02-felwood.guide",
+        "sourceLine": 108,
+        "sourceText": "goto 40.4,41.2 \"Second crater\"",
+        "workForQuest": 5156,
+        "workVisit": true
+      },
+      {
+        "guideID": "forever/alliance/50-60/02-felwood",
+        "step": 11,
+        "goal": 5,
+        "action": "goto",
+        "questID": 5156,
+        "sourceFile": "guides/forever/alliance/50-60/02-felwood.guide",
+        "sourceLine": 109,
+        "sourceText": "goto 42.2,40.3 \"Third crater\"",
+        "workForQuest": 5156,
+        "workVisit": true
+      }
+    ],
+    "acceptOccurrencesWithoutQuestLinkedWork": 958,
+    "uniqueQuestIDs": 841,
+    "sourceQuestsWithoutObjectives": 793,
     "sourceQuestIDsWithoutObjectives": [
       2,
       8,
@@ -34639,7 +35855,6 @@
       93036,
       93089,
       93090,
-      93176,
       93320,
       93735,
       93738,
@@ -34698,7 +35913,6 @@
       98024,
       98027,
       98046,
-      98059,
       98065,
       98094,
       98189,
@@ -37067,7 +38281,7 @@
             "sourceLine": 316,
             "sourceText": "accept 6031 optional                -- Meilosh: keep 30 Runecloth for him; he trades only at Neutral with the Timbermaw",
             "optional": true,
-            "note": "Meilosh: mantén 30 Paño rúnico para él; sólo comercia en Neutral con el Timbermaw",
+            "note": "Meilosh ofrece este encargo al alcanzar Amistoso con los Fauces de Madera. Lleva treinta paños rúnicos si quieres hacer la entrega.",
             "stepNote": "El pueblo Deadwood furbolg justo al oeste del túnel. Jefe Sangrefauce (56) se encuentra entre ellos. Meilosh, un furbolg amistoso, se encuentra en el extremo norte de la aldea."
           },
           {
@@ -37080,6 +38294,7 @@
             "sourceLine": 113,
             "sourceText": "turnin 6031 optional",
             "optional": true,
+            "note": "Meilosh ofrece este encargo al alcanzar Amistoso con los Fauces de Madera. Lleva treinta paños rúnicos si quieres hacer la entrega.",
             "stepNote": "Sólo con 30 Paño rúnico, y sólo en Neutral con el Timbermaw: sigue la carretera al norte a Bastión de los Fauces de Madera; Meilosh opera justo dentro de la entrada."
           }
         ],
@@ -42879,5 +44094,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "0c0d134278c8eabb11ba7b26310fe5ba20801885fb43acc1ea4543b29c4062d5"
+  "inputSha256": "9929491ec37dcf8f17c04b6316a9e972c698ce63f3cc2c960e62bedfd2fc173c"
 }

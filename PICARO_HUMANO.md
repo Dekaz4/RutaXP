@@ -39,25 +39,9 @@ Los números de paso y fila son los del addon. Las coordenadas usan el mapa del 
 | Silithus, Cráter de Un'Goro y Tierras de la Peste del Este | 27 | 94 / 94 | Recorrido ajustado |
 | Silithus, Frondavil, Cuna del Invierno y el Tierras de la Peste | 56 | 159 / 161 | Revisado |
 
-## Posibles ahorros en los otros 13 capítulos
+## Orden de las misiones
 
-Estas propuestas parten de los pasos de la versión 0.7.12. Para medir su efecto en partida hay que contar también caminos, esperas y tiempo de combate.
-
-| Capítulo y pasos | Valoración | Recorrido que se podría probar |
-|---|---|---|
-| Desolace · 5–9 | Una vuelta menos al puesto | Tras los sátiros, visitar el cofre de Malem. Al regresar a Punta de Nijel se podrían entregar juntos los componentes a Kreldig y el encargo a Vahlarriel, y aceptar ambas continuaciones. |
-| Vallefresno y Los Humedales · 8–16 | Una visita a Xavian | Una vez aceptada «Shared Fury» en el paso 11, conseguir la rama de Geltharis (#1031) y matar los sátiros (#98418) en la misma incursión. Los círculos de la Torre de Althalaxx conservan su secuencia. |
-| Vega de Tuercespina · 22–25 | Depende del espacio en el diario | Antes de salir de Bahía del Botín, recoger «OPA hostil» y «La isla fantasma», y pasar por el barón para aceptar «La piedra de las mareas». Hacer la costa y el crocolisco en el mismo viaje, guardando su piel para entregarla a Drizzlik al volver. |
-| Tierras Inhóspitas y Tierras del Interior · 13–15 | Desplazamiento corto | Al volver a Pico Nidal, entregar primero los collares a Fraggar y después las jaulas a Garracha. El siguiente vuelo sale hacia Puerto de Menethil. |
-| Tanaris · 5, 10 y 19–21 | Depende de la aparición del objetivo | Recoger el encargo de Caliph Escorpijón (#2781) al visitar el cartel por primera vez. Si está en la zona y el grupo puede derrotarlo al pasar en el paso 10, aprovechar la ocasión. |
-| Tierras del Interior, Tierras Devastadas y Loch Modan · 7 | Margen pequeño | Entregar los dos envíos a Lungertz en la misma conversación si ya están listos. Los destinatarios intermedios están muy cerca. Mantener el orden del encargo cronometrado de este capítulo. |
-| La Garganta de Fuego · 1 y 10 | Margen pequeño | En el Puesto del Torio se pueden ordenar las paradas según la entrada y la salida. Los encargos de Hansel ya se recogen y entregan juntos. |
-| Cráter de Un’Goro y Forjaz · 1, 12, 17 y 23 | Dos objetivos en la misma cueva | Si Torwa ofrece «Los simios de Un’Goro» (#4289) en la primera visita, aceptarla para recoger las tres pelambres durante el paso 12. Volver por las que falten si los gorilas no las sueltan todas. |
-| Estepas Ardientes, Azshara y Tierras Devastadas · 8–11 | Depende del botín | Si ya han salido las runas de «El equipamiento perdido de Kim'jael» (#5534), volver a Kim'jael antes de completar las piedras. Desde las piedras se puede continuar hacia el piloto. |
-| Frondavil · 7–11 | Depende de los enemigos que aparezcan | Si llevas los frascos de Laris, aprovechar los mocos que encuentres junto al camino de Jaedenar. La segunda entrada para recoger el agua necesita la entrega previa a Greta. |
-| Cuna del Invierno y Tierras de la Peste del Este · 9–12 | Conservar la vuelta a Vista Eterna | Umi recibe el pelaje (#3783) antes de ofrecer el encargo de los cuernos (#977). En las ruinas de Kel’Theril (paso 3) queda por comprobar el camino entre los cuatro fragmentos. |
-| Tierras de la Peste del Oeste, Tierras de la Peste del Este y Feralas · 8–17 | Reunir las tareas de dos granjas | Visitar a Janice (10) cuando se va al caldero de Piedra Mácula (13), antes de comprar el acelerador temporal. Hacer el diario y las llaves de Dalson (9) con el caldero de esa granja (16). Cada cadena mantiene sus entregas intermedias. |
-| Silithus, Frondavil, Cuna del Invierno y Tierras de la Peste · 27–30 | Una visita al Fuerte Cenarion | Tras completar el Lexicón con Havunth, ir directamente al ermitaño Ortell. Con la piedra del paso 30 disponible y sitio en las bolsas, entregar al regresar al fuerte «Queridísima Natalia», la cartera de Noggle y «Un propósito terrible». |
+Consulta las recogidas que puedes adelantar, las entregas en una misma visita y los desvíos opcionales en la [revisión por capítulo y misión](REVISION_GUIAS.html). Elige la Alianza y busca el capítulo de tu pícaro.
 
 
 ## Bosque de Elwynn (1–13)
@@ -172,8 +156,8 @@ Las continuaciones de McBride se aceptan antes de ir a Jorik, Paxton o Tordrin. 
 | 32.2 | Aceptar · Dientes de oro (#87) | Billy Maclure · desde nivel 5 · previa 84 · mapa 1429 · 43.13, 85.72 |
 | 32.3 | Ir · de Boca Mina Abisal | mapa 1429 · 39.5, 82.4 |
 | 33.1 | Recoger · Dientes de oro (#87) | Collar de Bernice · Dentdoro · mapa 1429 · 41.71, 78.03 |
-| 33.2 | Recoger · Escritura de Páramos de Poniente | opcional · mapa 1429 · 44.37, 74.93 |
-| 33.3 | Aceptar · La escritura de Furlbrow (#184) | Escritura de Páramos de Poniente · desde nivel 8 · opcional |
+| 33.2 | Recoger · Escritura de Páramos de Poniente | desvío opcional en solitario · mapa 1429 · 44.37, 74.93 |
+| 33.3 | Aceptar · La escritura de Furlbrow (#184) | Escritura de Páramos de Poniente · desde nivel 8 · desvío opcional en solitario |
 | 34.1 | Entregar · Intercambio de polvo de oro (#47) | Remy "Dos Veces" · mapa 1429 · 42.14, 67.26 |
 | 34.2 | Entregar · An Enticing Offer (#99130) | Remy "Dos Veces" · mapa 1429 · 42.14, 67.26 |
 | 34.3 | Aceptar · Baited for Success (#99131) | Remy "Dos Veces" · desde nivel 4 · previa 99130 · mapa 1429 · 42.14, 67.26 |
@@ -303,8 +287,8 @@ En Colina del Centinela se visita la torre antes de bajar a Thor y la posada. Tr
 | 3.1 | Aceptar · Estofado de los Páramos de Poniente (#36) | Verna Cejade · desde nivel 9 · mapa 1436 · 59.92, 19.42 |
 | 3.2 | Aceptar · La pobre y vieja Blanchy (#151) | Verna Cejade · desde nivel 9 · mapa 1436 · 59.92, 19.42 |
 | 3.3 | Aceptar · La reliquia olvidada (#64) | Granjero Cejade · desde nivel 9 · mapa 1436 · 59.95, 19.36 |
-| 3.4 | Aceptar · La escritura de Furlbrow (#184) | Escritura de Páramos de Poniente · desde nivel 8 · opcional |
-| 3.5 | Entregar · La escritura de Furlbrow (#184) | Granjero Cejade · opcional · mapa 1436 · 59.95, 19.36 |
+| 3.4 | Aceptar · La escritura de Furlbrow (#184) | Escritura de Páramos de Poniente · desde nivel 8 · desvío opcional en solitario |
+| 3.5 | Entregar · La escritura de Furlbrow (#184) | Granjero Cejade · desvío opcional en solitario · mapa 1436 · 59.95, 19.36 |
 | 3.6 | Recoger · Testing the Wells (#92742) | Jansen Stead Water Sample · mapa 1436 · 56.6, 18.6 |
 | 3.7 | Recoger · La pobre y vieja Blanchy (#151) | Un puñado de copos ×8 · Saco de avena · mapa 1436 · 56.92, 20.65 |
 | 4.1 | Entregar · Estofado de los Páramos de Poniente (#36) | Salma Saldean · mapa 1436 · 56.42, 30.52 |
@@ -518,19 +502,19 @@ La caja 411 se acepta durante la primera visita a la playa y se entrega en el pa
 | 29.7 | Aceptar · It's All Fun and Games Until... (#98042) | Libro del Crepúsculo · desde nivel 12 · mapa 1439 · 38.54, 86.05 |
 | 29.8 | Recoger · It's All Fun and Games Until... (#98042) | Peerless Eye · mapa 1439 · 38.47, 86.09 |
 | 29.9 | Aceptar · Los Poderes Subyacentes (#968) | Libro: Los Poderes inferiores · desde nivel 10 · opcional |
-| 29.10 | Aceptar · La fuga de Therylune (#945) | Therylune · desde nivel 10 · mapa 1439 · 38.64, 87.33 |
-| 29.11 | Completar · La fuga de Therylune (#945) | Escóltala para salir de la zona del glaive; la misión se entrega a Therysil en Vallefresno · varios destinos o ubicaciones según objetivo |
+| 29.10 | Aceptar · La fuga de Therylune (#945) | Therylune · desde nivel 10 · desvío opcional en solitario · mapa 1439 · 38.64, 87.33 |
+| 29.11 | Completar · La fuga de Therylune (#945) | Escóltala para salir de la zona del glaive; la misión se entrega a Therysil en Vallefresno · desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
 | 30.1 | Derrotar · SE BUSCA: ¡Viscoso! (#4740) | Viscoso · mapa 1439 · 36.44, 76.51 |
 | 30.2 | Aceptar · Tortuga marina varada (#4731) | desde nivel 13 · previa 4681 · mapa 1439 · 31.67, 83.68 |
 | 30.3 | Aceptar · Tortuga marina varada (#4732) | desde nivel 13 · previa 4681 · mapa 1439 · 31.23, 85.6 |
 | 30.4 | Aceptar · Criatura marina varada (#4733) | desde nivel 13 · previa 4681 · mapa 1439 · 31.26, 87.44 |
 | 31.1 | Entregar · El prospector despistado (#729) | Prospector Tripirrem · mapa 1439 · 35.73, 83.7 |
-| 31.2 | Aceptar · El prospector despistado (#731) | Prospector Tripirrem · desde nivel 15 · previa 729 · mapa 1439 · 35.73, 83.7 |
-| 31.3 | Completar · El prospector despistado (#731) | varios destinos o ubicaciones según objetivo |
+| 31.2 | Aceptar · El prospector despistado (#731) | Prospector Tripirrem · desde nivel 15 · previa 729 · desvío opcional en solitario · mapa 1439 · 35.73, 83.7 |
+| 31.3 | Completar · El prospector despistado (#731) | desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
 | 32.1 | Entregar · Vuelve con Onus (#950) | Onus · mapa 1439 · 43.55, 76.29 |
 | 32.2 | Aceptar · Las reliquias de Mathystra (#951) | Onus · desde nivel 12 · previa 950 · mapa 1439 · 43.55, 76.29 · a elegir · Cayada de madera dura |
 | 32.3 | Aceptar · Fuerzas henchidas (#98013) | Arbal · desde nivel 12 · previa 950 · mapa 1439 · 43.71, 76.49 · requisito sin corroboración |
-| 33.1 | Entregar · El prospector despistado (#731) | Arqueólogo Hollee · mapa 1439 · 37.44, 41.84 |
+| 33.1 | Entregar · El prospector despistado (#731) | Arqueólogo Hollee · desvío opcional en solitario · mapa 1439 · 37.44, 41.84 |
 | 33.2 | Entregar · Tortuga marina varada (#4731) | Gwennyth Bly'Leggonde · mapa 1439 · 36.62, 45.59 |
 | 33.3 | Entregar · Tortuga marina varada (#4732) | Gwennyth Bly'Leggonde · mapa 1439 · 36.62, 45.59 |
 | 33.4 | Entregar · Criatura marina varada (#4733) | Gwennyth Bly'Leggonde · mapa 1439 · 36.62, 45.59 |
@@ -607,27 +591,27 @@ El tramo desde Auberdine desemboca en una parada con Baros Alexston. Atenderlo a
 | 10.4 | Aceptar · Molino de Alther (#98386) | Supervisor Olento · desde nivel 15 · previa 89 · mapa 1433 · 27.05, 48.64 |
 | 11.1 | Recoger · Una visita poco grata (#34) | Colmillo de Panzallena · Panzallena · mapa 1433 · 10.59, 49.31 |
 | 12.1 | Entregar · Una visita poco grata (#34) | Martie Jainrose · mapa 1433 · 16.77, 46.33 |
-| 12.2 | Aceptar · Se busca: teniente Fangore (#180) | Se busca: Teniente Fangore · desde nivel 21 · mapa 1433 · 21.66, 46.44 · discrepancia de nivel |
+| 12.2 | Aceptar · Se busca: teniente Fangore (#180) | Se busca: Teniente Fangore · desde nivel 21 · desvío opcional en solitario · mapa 1433 · 21.66, 46.44 · discrepancia de nivel |
 | 13.1 | Recoger · Pescado a la venta (#127) | Pez luna moteado ×10 · mapa 1433 · 30.7, 56.46 |
 | 13.2 | Recoger · Cazadores furtivos (#150) | Aleta de múrloc ×8 · mapa 1433 · 30.7, 56.46 |
 | 14.1 | Derrotar · Molino de Alther (#98386) | Tarántula superior ×12 · mapa 1433 · 42.74, 38.46 |
 | 14.2 | Recoger · Estofado de Crestagrana (#92) | Carne de araña crujiente ×5 · mapa 1433 · 42.74, 38.46 |
 | 14.3 | Recoger · La amenaza de los Roca Negra (#20) | Hacha ajada por la batalla ×10 · mapa 1433 · 38.34, 40.17 |
 | 15.1 | Recoger · Ley de Salomón (#91) | Colgante Pellejo Negro ×10 · mapa 1433 · 63.63, 45.71 |
-| 15.2 | Recoger · Se busca: teniente Fangore (#180) | Pata de Fangore · Teniente Fangore · mapa 1433 · 75.09, 37.06 |
+| 15.2 | Recoger · Se busca: teniente Fangore (#180) | Pata de Fangore · Teniente Fangore · desvío opcional en solitario · mapa 1433 · 75.09, 37.06 |
 | 16.1 | Piedra de hogar · Villa del Lago |  |
 | 16.2 | Entregar · Estofado de Crestagrana (#92) | Chef Breanna · mapa 1433 · 17.59, 43.84 |
 | 16.3 | Entregar · Cazadores furtivos (#150) | Maestro de embarcadero Baren · mapa 1433 · 22.63, 47.38 · fija · Caña de pescar enana |
 | 16.4 | Entregar · Pescado a la venta (#127) | Maestro de embarcadero Baren · mapa 1433 · 22.63, 47.38 |
 | 16.5 | Entregar · Ley de Salomón (#91) | Bailiff Conacher · mapa 1433 · 24.63, 44.26 |
-| 16.6 | Entregar · Se busca: teniente Fangore (#180) | Magistrado Salomón · mapa 1433 · 24.9, 44.45 |
+| 16.6 | Entregar · Se busca: teniente Fangore (#180) | Magistrado Salomón · desvío opcional en solitario · mapa 1433 · 24.9, 44.45 |
 | 16.7 | Entregar · Molino de Alther (#98386) | Supervisor Olento · mapa 1433 · 27.05, 48.64 |
 | 16.8 | Entregar · La amenaza de los Roca Negra (#20) | Alguacil Marris · mapa 1433 · 28.41, 48.97 |
 | 16.9 | Vender · Volver a Villa del Lago | varios destinos o ubicaciones según objetivo |
 | 17.1 | Derrotar · La recompensa de Roca Negra (#128) | Campeón Roca Negra ×15 · mapa 1433 · 23.51, 17.25 |
-| 18.1 | Aceptar · Desaparecido en combate (#219) | Cabo Keeshan · desde nivel 19 · mapa 1433 · 23.3, 12.55 · a elegir · Cuero con huesos |
-| 18.2 | Completar · Desaparecido en combate (#219) | varios destinos o ubicaciones según objetivo |
-| 19.1 | Entregar · Desaparecido en combate (#219) | Alguacil Marris · mapa 1433 · 28.41, 48.97 · a elegir · Cuero con huesos |
+| 18.1 | Aceptar · Desaparecido en combate (#219) | Cabo Keeshan · desde nivel 19 · desvío opcional en solitario · mapa 1433 · 23.3, 12.55 · a elegir · Cuero con huesos |
+| 18.2 | Completar · Desaparecido en combate (#219) | desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
+| 19.1 | Entregar · Desaparecido en combate (#219) | Alguacil Marris · desvío opcional en solitario · mapa 1433 · 28.41, 48.97 · a elegir · Cuero con huesos |
 | 19.2 | Entregar · La recompensa de Roca Negra (#128) | Guardia Howe · mapa 1433 · 26.45, 57.85 |
 | 19.3 | Indicación · Bosque del Ocaso es el siguiente: sigue la carretera al oeste a Tres Caminos, luego al sur a Villa Oscura. |  |
 
@@ -648,8 +632,8 @@ Los dos cementerios comparten el contador de diez dedos. Se recogen al pasar por
 | 2.2 | Comprar · Tubo de bronce, de Herble Montepompa: stock limitado. Sold fuera? Neal Allen en Puerto de Menethil también lo vende. | Tubo de bronce · mapa 1431 · 77.99, 48.33 |
 | 3.1 | Derrotar · Vigilancia nocturna (#56) | Guerrero esquelético ×8 · mapa 1431 · 78.03, 67.01 |
 | 3.2 | Derrotar · Vigilancia nocturna (#56) | Mago esquelético ×6 · mapa 1431 · 78.25, 68.18 |
-| 3.3 | Recoger · Un viejo libro de historia: una gota rara de Bosque del Ocaso mobs | Un viejo libro de historia · opcional · mapa 1431 · 78.25, 68.18 |
-| 3.4 | Aceptar · Un libro de Historia viejo (#337) | Un viejo libro de historia · desde nivel 20 · opcional |
+| 3.3 | Recoger · Un viejo libro de historia: una gota rara de Bosque del Ocaso mobs | Un viejo libro de historia · desvío opcional en solitario · mapa 1431 · 78.25, 68.18 |
+| 3.4 | Aceptar · Un libro de Historia viejo (#337) | Un viejo libro de historia · desde nivel 20 · desvío opcional en solitario |
 | 4.1 | Entregar · Vigilancia nocturna (#56) | Comandante Althea Cerranegro · mapa 1431 · 73.54, 46.82 |
 | 4.2 | Aceptar · Vigilancia nocturna (#57) | Comandante Althea Cerranegro · desde nivel 18 · previa 56 · mapa 1431 · 73.54, 46.82 |
 | 4.3 | Vender · Villa Oscura | varios destinos o ubicaciones según objetivo |
@@ -737,9 +721,9 @@ Las ocho aceptaciones de Puerto de Menethil son viajes posteriores, con la posad
 | 3 | La Gracia de Elune | Otra clase o raza |
 | 4.1 | Entregar · Making Do (#97926) | Thundris Tejevientos · mapa 1439 · 37.4, 40.13 |
 | 4.2 | Ir · Grove del Ancients | mapa 1439 · 44.4, 76.4 |
-| 5.1 | Aceptar · El despertar (#5321) | Kerlonian Semprumbrío · desde nivel 17 · mapa 1439 · 44.4, 76.43 · a elegir · Rifle con vista de búho, Deerhide Pants |
-| 5.2 | Completar · El despertar (#5321) | Ve al sur con Kerlonian y usa el Cuerno de Despertar si se duerme. Pasa con él por el cruce de tres caminos junto a la bolsa. Cuando el diario lo confirme, sigue hasta Liladris. · mapa 1439 · 41.8, 90.2 |
-| 6.1 | Entregar · El despertar (#5321) | Liladris Rioluna · mapa 1440 · 27.26, 35.58 · a elegir · Rifle con vista de búho, Deerhide Pants |
+| 5.1 | Aceptar · El despertar (#5321) | Kerlonian Semprumbrío · desde nivel 17 · desvío opcional en solitario · mapa 1439 · 44.4, 76.43 · a elegir · Rifle con vista de búho, Deerhide Pants |
+| 5.2 | Completar · El despertar (#5321) | Ve al sur con Kerlonian y usa el Cuerno de Despertar si se duerme. Pasa con él por el cruce de tres caminos junto a la bolsa. Cuando el diario lo confirme, sigue hasta Liladris. · desvío opcional en solitario · mapa 1439 · 41.8, 90.2 |
+| 6.1 | Entregar · El despertar (#5321) | Liladris Rioluna · desvío opcional en solitario · mapa 1440 · 27.26, 35.58 · a elegir · Rifle con vista de búho, Deerhide Pants |
 | 6.2 | Entregar · La torre de Althalaxx (#967) | Delgren el Purificador · mapa 1440 · 26.2, 38.7 |
 | 6.3 | Aceptar · La torre de Althalaxx (#970) | Delgren el Purificador · desde nivel 13 · previa 967 · mapa 1440 · 26.2, 38.7 |
 | 6.4 | Aceptar · Cabello de Bathran (#1010) | Orendil Hojasangre · desde nivel 20 · mapa 1440 · 26.44, 38.59 |
@@ -760,7 +744,7 @@ Las ocho aceptaciones de Puerto de Menethil son viajes posteriores, con la posad
 | 10.1 | Entregar · La limpieza de Raene (#991) | Cadáver de Teronis · mapa 1440 · 20.31, 42.33 |
 | 10.2 | Aceptar · La limpieza de Raene (#1023) | Cadáver de Teronis · desde nivel 18 · previa 991 · mapa 1440 · 20.31, 42.33 |
 | 10.3 | Recoger · La limpieza de Raene (#1023) | Gema resplandeciente · mapa 1440 · 20.59, 42.2 |
-| 11.1 | Entregar · La fuga de Therylune (#945) | Therysil · mapa 1440 · 22.64, 51.92 |
+| 11.1 | Entregar · La fuga de Therylune (#945) | Therysil · desvío opcional en solitario · mapa 1440 · 22.64, 51.92 |
 | 12.1 | Recoger · La torre de Althalaxx (#973) | Escrito de Ilkrud Magthrull · Ilkrud Magthrull · mapa 1440 · 25.28, 60.69 |
 | 13.1 | Aceptar · La antigua estatuilla (#1007) | Talen · desde nivel 19 · mapa 1440 · 14.79, 31.29 |
 | 13.2 | Recoger · La antigua estatuilla (#1007) | Estatuilla antigua · Estatuilla antigua · mapa 1440 · 14.2, 20.6 |
@@ -888,7 +872,7 @@ Las ocho aceptaciones de Puerto de Menethil son viajes posteriores, con la posad
 | 61.1 | Entregar · El diplomático desaparecido (#1274) | Obispo DeLavey · mapa 1453 · 80.24, 44.07 |
 | 61.2 | Aceptar · El diplomático desaparecido (#1241) | Obispo DeLavey · desde nivel 28 · previa 1274 · mapa 1453 · 80.24, 44.07 |
 | 61.3 | Entregar · Hablando de fortaleza (#343) | Milton Gavilla · mapa 1453 · 77.07, 30.21 |
-| 61.4 | Entregar · Un libro de Historia viejo (#337) | Milton Gavilla · opcional · mapa 1453 · 77.07, 30.21 |
+| 61.4 | Entregar · Un libro de Historia viejo (#337) | Milton Gavilla · desvío opcional en solitario · mapa 1453 · 77.07, 30.21 |
 | 61.5 | Entregar · A Friend of the Family (#98190) | Alto Señor Bolvar Fordragon · mapa 1453 · 80.21, 38.35 |
 | 61.6 | Aceptar · A Friend of the Family (#98191) | Alto Señor Bolvar Fordragon · desde nivel 20 · previa 98190 · mapa 1453 · 80.21, 38.35 · a elegir · Royal Dagger |
 | 62.1 | Entregar · A Friend of the Family (#98191) | Lord Grisillo Quiebrasombras · mapa 1453 · 48.43, 50.22 · a elegir · Royal Dagger |
@@ -1020,20 +1004,20 @@ La visita temprana a Menethil solo continúa esta cadena si el personaje ya llev
 | 34.4 | Aceptar · Piezas de coches cohete (#1110) | Kravel Karbarbán · desde nivel 28 · mapa 1441 · 77.79, 77.27 |
 | 34.5 | Aceptar · Hemet Decautela (#5762) | Kravel Karbarbán · desde nivel 28 · mapa 1441 · 77.79, 77.27 |
 | 34.6 | Aceptar · Menos peso (#1176) | Pozík · desde nivel 29 · mapa 1441 · 80.18, 75.88 |
-| 34.7 | Aceptar · Un bache en la carretera (#1175) | Maestro rastreador Zherin · desde nivel 28 · mapa 1441 · 81.63, 77.95 |
+| 34.7 | Aceptar · Un bache en la carretera (#1175) | Maestro rastreador Zherin · desde nivel 28 · desvío opcional en solitario · mapa 1441 · 81.63, 77.95 |
 | 35.1 | Recoger · Piezas de coches cohete (#1110) | Partes de coche cohete ×30 · [Deprecated for 4.x]Restos del coche cohete · mapa 1441 · 82.8, 85.4 |
 | 35.2 | Recoger · Veneno de escórpidos salados (#1104) | Veneno de escórpido salado ×6 · mapa 1441 · 82.51, 87.8 |
 | 35.3 | Recoger · Caparazones endurecidos (#1105) | Caparazón de tortuga endurecido ×9 · mapa 1441 · 81.7, 89.22 |
 | 35.4 | Recoger · Menos peso (#1176) | Hueso hueco de buitre ×10 · Carroñero de los Llanos de Sal · mapa 1441 · 79.32, 89.16 |
-| 35.5 | Derrotar · Un bache en la carretera (#1175) | Basilisco Gapo Salino ×10 · mapa 1441 · 77.6, 64.88 |
-| 35.6 | Derrotar · Un bache en la carretera (#1175) | Vitropiel Gapo Salino ×10 · mapa 1441 · 76.92, 64.67 |
-| 35.7 | Derrotar · Un bache en la carretera (#1175) | Observador Gapo Salino ×6 · mapa 1441 · 83.48, 78.77 |
+| 35.5 | Derrotar · Un bache en la carretera (#1175) | Basilisco Gapo Salino ×10 · desvío opcional en solitario · mapa 1441 · 77.6, 64.88 |
+| 35.6 | Derrotar · Un bache en la carretera (#1175) | Vitropiel Gapo Salino ×10 · desvío opcional en solitario · mapa 1441 · 76.92, 64.67 |
+| 35.7 | Derrotar · Un bache en la carretera (#1175) | Observador Gapo Salino ×6 · desvío opcional en solitario · mapa 1441 · 83.48, 78.77 |
 | 36.1 | Entregar · Caparazones endurecidos (#1105) | Wizzle Pernolatón · mapa 1441 · 78.14, 77.12 |
 | 36.2 | Entregar · Veneno de escórpidos salados (#1104) | Fizzle Pernolatón · mapa 1441 · 78.06, 77.13 |
 | 36.3 | Aceptar · Martek el Exiliado (#1106) | Fizzle Pernolatón · desde nivel 26 · previa 1104 + 1105 · mapa 1441 · 78.06, 77.13 · requisito sin corroboración |
 | 36.4 | Entregar · Piezas de coches cohete (#1110) | Kravel Karbarbán · mapa 1441 · 77.79, 77.27 |
 | 36.5 | Entregar · Menos peso (#1176) | Pozík · mapa 1441 · 80.18, 75.88 |
-| 36.6 | Entregar · Un bache en la carretera (#1175) | Maestro rastreador Zherin · mapa 1441 · 81.63, 77.95 |
+| 36.6 | Entregar · Un bache en la carretera (#1175) | Maestro rastreador Zherin · desvío opcional en solitario · mapa 1441 · 81.63, 77.95 |
 | 37.1 | Piedra de hogar · Mesón Aguahonda |  |
 
 ## Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta (30–33)
@@ -1422,7 +1406,7 @@ El cofre de 1421 (64.46,18.3) está junto a la jaula de Galen (65.47,18.16). Rec
 |---|---|---|
 | 1.1 | Volar · Villa Oscura | varios destinos o ubicaciones según objetivo |
 | 2.1 | Aceptar · Contra la fauna feroz (#1396) | Vigía Biggs · desde nivel 30 · mapa 1435 · 26.74, 59.83 |
-| 2.2 | Aceptar · My Little Friends (#93176) | Amaryllis Webb · desde nivel 25 · mapa 1435 · 25.3, 54.39 · sin datos externos de requisitos |
+| 2.2 | Aceptar · My Little Friends (#93176) | Amaryllis Webb · desde nivel 25 · desvío opcional en solitario · mapa 1435 · 25.3, 54.39 · sin datos externos de requisitos |
 | 3.1 | Derrotar · Contra la fauna feroz (#1396) | Crocolisco Denteserra joven ×8 · mapa 1435 · 25.88, 52.18 |
 | 3.2 | Derrotar · Contra la fauna feroz (#1396) | Hilapenas ×10 · mapa 1435 · 25.97, 49.55 |
 | 3.3 | Derrotar · Contra la fauna feroz (#1396) | Jaguar del pantano ×10 · mapa 1435 · 26.43, 47.42 |
@@ -1452,11 +1436,11 @@ El cofre de 1421 (64.46,18.3) está junto a la jaula de Galen (65.47,18.16). Rec
 | 16.2 | Aceptar · La recompensa Aplastacresta (#500) | Alguacil Rutagrana · desde nivel 30 · mapa 1424 · 49.47, 58.73 |
 | 16.3 | Entregar · Costasur (#538) | Maestro cultural Dibbs · mapa 1424 · 50.57, 57.09 |
 | 16.4 | Aceptar · Proteger el conocimiento (#540) | Maestro cultural Dibbs · desde nivel 20 · previa 538 · mapa 1424 · 50.57, 57.09 |
-| 17.1 | Derrotar · Asesino oscuro | mapa 1424 · 50.06, 57.91 |
-| 17.2 | Recoger · Asesino oscuro | Contrato de asesino · Asesino oscuro · mapa 1424 · 50.06, 57.91 |
-| 17.3 | Aceptar · Contrato de asesino (#522) | desde nivel 30 · sin datos externos de requisitos |
-| 17.4 | Entregar · Contrato de asesino (#522) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
-| 17.5 | Aceptar · Muerte al Barón (#523) | Magistrado Henry Maleb · desde nivel 30 · previa 522 · mapa 1424 · 48.14, 59.11 |
+| 17.1 | Derrotar · Asesino oscuro | desvío opcional en solitario · mapa 1424 · 50.06, 57.91 |
+| 17.2 | Recoger · Asesino oscuro | Contrato de asesino · Asesino oscuro · desvío opcional en solitario · mapa 1424 · 50.06, 57.91 |
+| 17.3 | Aceptar · Contrato de asesino (#522) | desde nivel 30 · desvío opcional en solitario · sin datos externos de requisitos |
+| 17.4 | Entregar · Contrato de asesino (#522) | Magistrado Henry Maleb · desvío opcional en solitario · mapa 1424 · 48.14, 59.11 |
+| 17.5 | Aceptar · Muerte al Barón (#523) | Magistrado Henry Maleb · desde nivel 30 · previa 522 · desvío opcional en solitario · mapa 1424 · 48.14, 59.11 |
 | 17.6 | Entregar · Más misterios (#525) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
 | 17.7 | Aceptar · Consejo oscuro (#537) | Magistrado Henry Maleb · desde nivel 30 · previa 525 · mapa 1424 · 48.14, 59.11 |
 | 18.1 | Registrar vuelo · Refugio de la Zaga | varios destinos o ubicaciones según objetivo |
@@ -1465,7 +1449,7 @@ El cofre de 1421 (64.46,18.3) está junto a la jaula de Galen (65.47,18.16). Rec
 | 18.4 | Aceptar · Valer su peso en oro (#691) | Aprendiz Kryten · desde nivel 30 · mapa 1417 · 46.2, 47.75 · posible previa adicional |
 | 19.1 | Derrotar · Mansión Redilnorte (#681) | Bandolero de la Hermandad ×10 · mapa 1417 · 34.66, 31.69 |
 | 19.2 | Derrotar · Mansión Redilnorte (#681) | Mercenario de la Hermandad ×6 · mapa 1417 · 33.66, 29.8 |
-| 19.3 | Derrotar · Hay Weevil: cogerlo, para My Little Friends | Hay Weevil · mapa 1417 · 32.3, 27.64 |
+| 19.3 | Derrotar · Abre el equipo de entomología de Amaryllis y usa la herramienta correspondiente sobre el ejemplar. | Hay Weevil · mapa 1417 · 32.3, 27.64 |
 | 20.1 | Entregar · Mansión Redilnorte (#681) | Capitán Nials · mapa 1417 · 45.83, 47.56 |
 | 21.1 | Aceptar · El puente Thandol (#631) | Rhag Garmason · desde nivel 26 · mapa 1437 · 49.9, 18.24 · discrepancia de nivel |
 | 22.1 | Entregar · El puente Thandol (#631) | Cadáver de Ebenezer Herrumbra · mapa 1417 · 45.7, 93.1 |
@@ -1517,7 +1501,7 @@ El cofre de 1421 (64.46,18.3) está junto a la jaula de Galen (65.47,18.16). Rec
 | 41.1 | Derrotar · Una amenaza costosa (#564) | León de montaña ×8 · mapa 1416 · 43.19, 76.35 |
 | 41.2 | Derrotar · Una amenaza costosa (#564) | León de montaña descomunal ×10 · mapa 1416 · 44.21, 76.66 |
 | 41.3 | Recoger · Nobles muertes (#512) | Sello de Alterac ×7 · Espía del Sindicato · mapa 1416 · 58.15, 67.29 |
-| 41.4 | Recoger · Muerte al Barón (#523) | Cabeza de Barón Vardus · Barón Vardus · mapa 1416 · 60.33, 43.12 |
+| 41.4 | Recoger · Muerte al Barón (#523) | Cabeza de Barón Vardus · Barón Vardus · desvío opcional en solitario · mapa 1416 · 60.33, 43.12 |
 | 42.1 | Recoger · La recompensa Aplastacresta (#500) | Nudillos sucios ×9 · mapa 1416 · 55.5, 40.57 |
 | 42.2 | Recoger · Ogros Crushridge | Pergamino hechizado · Cofre de madera gastado · mapa 1416 · 39.18, 14.66 |
 | 42.3 | Aceptar · El pergamino encantado (#551) | Pergamino hechizado · desde nivel 30 |
@@ -1532,7 +1516,7 @@ El cofre de 1421 (64.46,18.3) está junto a la jaula de Galen (65.47,18.16). Rec
 | 45.1 | Piedra de hogar · Costasur |  |
 | 45.2 | Entregar · Consejo oscuro (#537) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
 | 45.3 | Entregar · Nobles muertes (#512) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
-| 45.4 | Entregar · Muerte al Barón (#523) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
+| 45.4 | Entregar · Muerte al Barón (#523) | Magistrado Henry Maleb · desvío opcional en solitario · mapa 1424 · 48.14, 59.11 |
 | 45.5 | Entregar · La recompensa Aplastacresta (#500) | Alguacil Rutagrana · mapa 1424 · 49.47, 58.73 |
 | 45.6 | Entregar · Capa de piel de yeti de Bartolo (#565) | Bartolo Ginsetti · desvío opcional en solitario · mapa 1424 · 49.43, 55.53 · fija · Capa de piel de yeti |
 | 45.7 | Entregar · Una amenaza costosa (#564) | Darren Malavista · mapa 1424 · 52.42, 55.96 · a elegir · Guantes de pastor |
@@ -1624,7 +1608,7 @@ El encargo 1455 del cofre no desbloquea ninguna de las tareas del cementerio ni 
 | 27.1 | Aceptar · Colección de kodos (#5501) | Bibbly F'utzbuckle · desde nivel 33 · mapa 1443 · 62.33, 38.99 |
 | 28.1 | Aceptar · La caza de ectoplamas (#6134) | Hornizz Zumbala · desde nivel 34 · mapa 1443 · 47.83, 61.83 |
 | 28.2 | Recoger · Colección de kodos (#5501) | Hueso de kodo ×10 · Huesos de kodo · mapa 1443 · 48.97, 60.09 |
-| 28.3 | Derrotar · Flesh Picker: cogerlo, para My Little Friends | Flesh Picker · mapa 1443 · 49.94, 60.4 |
+| 28.3 | Derrotar · Abre el equipo de entomología de Amaryllis y usa la herramienta correspondiente sobre el ejemplar. | Flesh Picker · mapa 1443 · 49.94, 60.4 |
 | 29.1 | Recoger · Carved Centaur Totems (#93224) | Carved Centaur Totem ×5 · mapa 1443 · 39.71, 61.41 |
 | 30.1 | Aceptar · ¡Sácame de aquí! (#6132) | Melizza Zumbala · desde nivel 34 · mapa 1443 · 33.95, 53.5 |
 | 30.2 | Completar · ¡Sácame de aquí! (#6132) | escolta a Melizza de vuelta hacial cementerio · mapa 1443 · 40.1, 61.6 |
@@ -1746,8 +1730,8 @@ La única acción en la visita tras los barcos es la entrega opcional 608. Pospo
 | 24.1 | Derrotar · Bucaneros Velasangre (#608) | Capitán Aguasmansas · desvío opcional en solitario · mapa 1434 · 32.87, 88.2 |
 | 24.2 | Derrotar · Bucaneros Velasangre (#608) | Capitán Sinquilla · desvío opcional en solitario · mapa 1434 · 29.32, 88.29 |
 | 24.3 | Derrotar · Bucaneros Velasangre (#608) | Maestro de Flota Firallon · desvío opcional en solitario · mapa 1434 · 30.58, 90.63 |
-| 24.4 | Recoger · Criba de Cortello | Criba de Cortello · mapa 1434 · 30.64, 90.17 |
-| 24.5 | Aceptar · El enigma de Cortello (#624) | Criba de Cortello · desde nivel 35 |
+| 24.4 | Recoger · Criba de Cortello | Criba de Cortello · desvío opcional en solitario · mapa 1434 · 30.64, 90.17 |
+| 24.5 | Aceptar · El enigma de Cortello (#624) | Criba de Cortello · desde nivel 35 · desvío opcional en solitario |
 | 25.1 | Recoger · Tallos de juncos akiris (#617) | Junco akiris ×10 · mapa 1434 · 28.21, 64.41 |
 | 26.1 | Recoger · Asusta a Trémulo (#606) | Tripas de Velo de Bruma ×5 · Gorila del Valle Velo de Bruma viejo · mapa 1434 · 30.88, 66.73 |
 | 26.2 | Aceptar · La fiebre de Tuercespina (#349) | Médico brujo Unbagwa · desde nivel 32 · mapa 1434 · 35.27, 60.41 · posible misión simultánea · posible previa adicional |
@@ -1771,7 +1755,7 @@ La única acción en la visita tras los barcos es la entrega opcional 608. Pospo
 | 33.1 | Recoger · Un plato bien frío (#212) | Anca de basilisco fría · Basilisco Ojogélido · mapa 1434 · 38.15, 40.36 |
 | 34.1 | Recoger · La pesca de perlas (#705) | Perla azul ×9 · Almeja gigante · mapa 1434 · 27.6, 29.2 |
 | 34.2 | Recoger · La maldición de las mareas (#611) | Piedra de las Mareas · Gazban · mapa 1434 · 24.97, 23.58 |
-| 35.1 | Derrotar · Arbor Tarantula: cogerlo, para My Little Friends | Arbor Tarantula · mapa 1434 · 43.1, 16.73 |
+| 35.1 | Derrotar · Abre el equipo de entomología de Amaryllis y usa la herramienta correspondiente sobre el ejemplar. | Arbor Tarantula · mapa 1434 · 43.1, 16.73 |
 | 35.2 | Entregar · Vuelve con el cabo Kaleb (#622) | Cabo Kaleb · mapa 1434 · 37.74, 3.3 |
 | 36.1 | Piedra de hogar · Bahía del Botín |  |
 | 36.2 | Entregar · La maldición de las mareas (#611) | Barón Revilgaz · mapa 1434 · 27.23, 76.87 |
@@ -1809,7 +1793,7 @@ La única acción en la visita tras los barcos es la entrega opcional 608. Pospo
 | 46.1 | Recoger · Madera a la deriva (#1398) | Madera a la deriva desecada ×8 · Madera a la deriva desecada · mapa 1435 · 91.94, 31.94 |
 | 47.1 | Entregar · Madera a la deriva (#1398) | Vigía Biggs · mapa 1435 · 26.74, 59.83 |
 | 47.2 | Aceptar · Envío de suministros (#1425) | Vigía Biggs · desde nivel 30 · previa 1398 · mapa 1435 · 26.74, 59.83 |
-| 47.3 | Entregar · My Little Friends (#93176) | Amaryllis Webb · mapa 1435 · 25.3, 54.39 |
+| 47.3 | Entregar · My Little Friends (#93176) | Amaryllis Webb · desvío opcional en solitario · mapa 1435 · 25.3, 54.39 |
 | 48.1 | Piedra de hogar · Ciudad de Ventormenta |  |
 | 48.2 | Entregar · En búsqueda del templo (#1448) | Brohann Barriliga · mapa 1453 · 69.45, 40.4 |
 | 48.3 | Aceptar · A las Tierras del Interior (#1449) | Brohann Barriliga · desde nivel 38 · previa 1448 · mapa 1453 · 69.45, 40.4 |
@@ -1947,7 +1931,7 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 21.6 | Entregar · Calidad mejorada (#7733) | Pratt McGrubben · mapa 1444 · 30.63, 42.71 · fija · Túnica hecha a mano de Pratt |
 | 21.7 | Entregar · Pellejo de yeti prístino (#7735) | Pratt McGrubben · desvío opcional en solitario · mapa 1444 · 30.63, 42.71 |
 | 22.1 | Ir · Zul'Farrak | desvío opcional en solitario · mapa 1446 · 38.7, 20 |
-| 23.1 | Nivel · farmear Yeti Fierescara en Vega Cicatriz Feral, Feralas |  |
+| 23.1 | Nivel · Si te falta experiencia para el 45, caza yetis en la Vega Cicatriz Feral. Después vuelve a la costa para los encargos de Zorbin. | mapa 1444 · 52.6, 57.3 |
 | 24.1 | Aceptar · Gigantes reducidos (#7003) | Zorbin Ventipnotizador · desde nivel 45 · mapa 1444 · 44.81, 43.42 · fija · Megarrebanador de Zorbin |
 | 24.2 | Aceptar · Combustible para el Ultra-reductor (#7721) | Zorbin Ventipnotizador · desde nivel 45 · mapa 1444 · 44.81, 43.42 |
 | 25.1 | Recoger · Gigantes reducidos (#7003) | Resíduo de reducción ×15 · mapa 1444 · 44.34, 46.61 |
@@ -2172,7 +2156,7 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
 | 1.1 | Volar · Gadgetzan | varios destinos o ubicaciones según objetivo |
-| 1.2 | Nivel · farmear en los Wastewanderers o los ogros Dunemaul alrededor de Gadgetzan |  |
+| 1.2 | Nivel · Si te falta experiencia para el 48, caza bandidos al este de Gadgetzan. Aprovecha sus bolsas de agua si aún llevas ese encargo. | mapa 1446 · 60.4, 24.3 |
 | 2.1 | Aceptar · La comida de Lar'korwi (#4290) | Abrecaminos Torwa · desde nivel 48 · mapa 1449 · 71.64, 75.96 |
 | 3.1 | Recoger · La comida de Lar'korwi (#4290) | Trozo de trillanodonte muerto · Cadáver reciente de trillanodonte · mapa 1449 · 68.74, 56.71 |
 | 4.1 | Entregar · La comida de Lar'korwi (#4290) | Abrecaminos Torwa · mapa 1449 · 71.64, 75.96 |
@@ -2487,12 +2471,12 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 10.1 | Entregar · Yeti... ¿ya hemos llegado? (#3783) | Umi Risitas · mapa 1452 · 60.88, 37.62 |
 | 10.2 | Aceptar · Yeti... ¿ya hemos llegado? (#977) | Umi Risitas · desde nivel 52 · previa 3783 · mapa 1452 · 60.88, 37.62 |
 | 10.3 | Entregar · Cuernos de quimera venfresco (#4809) | Felnok Acerovera · mapa 1452 · 61.63, 38.61 |
-| 11.1 | Indicación · Short de nivel 54 después de la yetis? Running el Templo Sumergido (50-54) en lugar de farmeo te lleva allí más rápido en un grupo. Come volver a Vista Eterna después. |  |
+| 11.1 | Indicación · Si ya tienes grupo, puedes ganar experiencia en el Templo Sumergido antes de volver a Vista Eterna. | desvío opcional en solitario |
 | 12.1 | Recoger · Yeti... ¿ya hemos llegado? (#977) | Cuerno de yeti prístino ×2 · mapa 1452 · 64.7, 40.59 |
 | 12.2 | Nivel · Los cuernos de Umi los sueltan las matriarcas y los patriarcas. Cuando los tengas, si falta experiencia, caza los yetis Cardo Nevado de nivel 55–56 en esas mismas colinas. | mapa 1452 · 66.4, 41.5 |
 | 13.1 | Entregar · Yeti... ¿ya hemos llegado? (#977) | Umi Risitas · mapa 1452 · 60.88, 37.62 |
 | 13.2 | Aceptar · Yeti... ¿ya hemos llegado? (#5163) | Umi Risitas · desde nivel 52 · previa 977 · mapa 1452 · 60.88, 37.62 |
-| 13.3 | Usar · Yeti mecánico de Umi | En Legacki, por la posada · mapa 1452 · 61.5, 38.6 |
+| 13.3 | Usar · Yeti mecánico de Umi | Selecciona a Legacki y usa el Yeti mecánico de Umi desde la mochila. · mapa 1452 · 61.5, 38.6 |
 | 13.4 | Derrotar · Yeti... ¿ya hemos llegado? (#5163) | Legacki · mapa 1452 · 61.54, 38.61 |
 | 13.5 | Aceptar · Lechúcico iracundo (#6604) | Harlo Contorecio · desde nivel 53 · mapa 1452 · 61.12, 38.43 |
 | 14.1 | Entregar · Lechúcico iracundo (#6604) | Jaron Tallapiedras · mapa 1452 · 52.14, 30.43 |
@@ -2609,7 +2593,7 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 18.1 | Recoger · Objetivo: El Tormento (#5222) | Llave de caldero rondado del Tormento · Señor de la caldera Razarch · mapa 1422 · 52.88, 66.08 |
 | 18.2 | Entregar · Objetivo: El Tormento (#5222) | Caldera de la Plaga · mapa 1422 · 53.02, 65.61 |
 | 18.3 | Aceptar · El regreso al Campamento del Orvallo (#5223) | Caldera de la Plaga · desde nivel 50 · previa 5222 · mapa 1422 · 53.02, 65.61 |
-| 18.4 | Nivel · farmear sobre congelación Necrófago en el Writhing Haunt, Tierras de la Peste del Oeste |  |
+| 18.4 | Nivel · Si te falta experiencia para el 55, caza necrófagos congeladores cerca del caldero de la granja de Mulgris. | mapa 1422 · 52.8, 64.7 |
 | 19.1 | Entregar · El regreso al Campamento del Orvallo (#5223) | Suma Sacerdotisa MacDonnel · mapa 1422 · 42.97, 84.5 |
 | 19.2 | Aceptar · Objetivo: Gangrena de Gahrron (#5225) | Suma Sacerdotisa MacDonnel · desde nivel 50 · previa 5223 · mapa 1422 · 42.97, 84.5 |
 | 19.3 | Aceptar · Scholomance (#5533) | Comandante Ashlam Puñovalor · desde nivel 55 · previa 5097 · mapa 1422 · 42.7, 84.03 |
@@ -2628,7 +2612,7 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 22.1 | Entregar · Un extraño historiador (#5153) | Cromi · mapa 1422 · 39.46, 66.76 |
 | 22.2 | Aceptar · Las Crónicas de Villa Darrow (#5154) | Cromi · desde nivel 50 · previa 5153 · mapa 1422 · 39.46, 66.76 |
 | 22.3 | Aceptar · Una cuestión de tiempo (#4971) | Cromi · desde nivel 53 · mapa 1422 · 39.46, 66.76 |
-| 23.1 | Usar · Temporal Displacer | mapa 1422 · 45.1, 62.3 |
+| 23.1 | Usar · Temporal Displacer | Usa el desplazador junto a un silo de Andorhal. Derrota a los parásitos que aparezcan hasta completar las diez bajas. · mapa 1422 · 45.1, 62.3 |
 | 23.2 | Derrotar · Una cuestión de tiempo (#4971) | Parásito temporal ×10 · mapa 1422 · 45.1, 62.3 |
 | 23.3 | Recoger · Las Crónicas de Villa Darrow (#5154) | Anales de Villa Darrow · Libro enmohecido · mapa 1422 · 43.42, 68.78 |
 | 23.4 | Recoger · Fragmentos esqueléticos (#5537) | Despellejador esquelético · mapa 1422 · 44.48, 68.65 |
@@ -2746,7 +2730,7 @@ En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del
 | 1.4 | Aceptar · Que jungla tan chunga (#4496) | Alquimista Morterozugg · desde nivel 50 · previa 4493 o 4494 · mapa 1446 · 50.89, 26.96 · requisito sin corroboración |
 | 1.5 | Entregar · Molde rima con... ¿oro? (#5538) | Krinkle Buenacero · mapa 1446 · 51.46, 28.81 |
 | 1.6 | Aceptar · La forja del Penacho en Llamas (#5801) | Krinkle Buenacero · desde nivel 55 · previa 5538 · mapa 1446 · 51.46, 28.81 |
-| 1.7 | Usar · Yeti mecánico de Umi | En Roxio · mapa 1446 · 51.1, 26.9 |
+| 1.7 | Usar · Yeti mecánico de Umi | Selecciona a Roxio y usa el Yeti mecánico de Umi desde la mochila. · mapa 1446 · 51.1, 26.9 |
 | 1.8 | Derrotar · Yeti... ¿ya hemos llegado? (#5163) | Roxio · mapa 1446 · 51.06, 26.87 |
 | 2.1 | Entregar · Encuentro en la tumba (#3912) | Gaeriyan · mapa 1446 · 53.92, 23.33 |
 | 2.2 | Aceptar · Una situación mortal (#3913) | Gaeriyan · desde nivel 47 · previa 3912 · mapa 1446 · 53.92, 23.33 |
@@ -2897,7 +2881,7 @@ En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del
 | 19.2 | Aceptar · Peinando el desierto (#9419) | Alguacil Murazul · desde nivel 1 · previa 9415 · mapa 1451 · 33.29, 51.06 · discrepancia de nivel |
 | 19.3 | Completar · Peinando el desierto (#9419) | varios destinos o ubicaciones según objetivo |
 | 19.4 | Entregar · Peinando el desierto (#9419) | Alguacil Murazul · mapa 1451 · 33.29, 51.06 |
-| 20.1 | Nivel · farmear en Triturador de arrastre en las dunas al este de Colmen'Zora, Silithus |  |
+| 20.1 | Nivel · Si te falta experiencia para el 58, caza los trituradores que recorren las dunas entre Colmen'Zora y el Fuerte Cenarion. | mapa 1451 · 33.3, 42.9 |
 | 21.1 | Entregar · Mensajes secretos (#8318) | Bor Bravacrín · mapa 1451 · 48.57, 37.78 |
 | 21.2 | Entregar · El misterio del Crepúsculo (#8284) | Geóloga Trotuina · mapa 1451 · 49.67, 37.46 |
 | 21.3 | Aceptar · El desertor (#8285) | Geóloga Trotuina · desde nivel 54 · previa 8284 · mapa 1451 · 49.67, 37.46 |

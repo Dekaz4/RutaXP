@@ -446,7 +446,7 @@ function Duo:GetLocalQuestIDs()
     if step and (not step.only or not ns.MatchesConditions or ns:MatchesConditions(step.only)) then
         add(step.questID)
         for _, goal in ipairs(step.goals or {}) do
-            if not goal.only or not ns.MatchesConditions or ns:MatchesConditions(goal.only) then add(goal.quest or goal.questID) end
+            if not goal.only or not ns.MatchesConditions or ns:MatchesConditions(goal.only) then add(goal.quest or goal.questID or goal.workForQuest) end
         end
         for index, goal in ipairs(step.goals or {}) do
             if not goal.only or not ns.MatchesConditions or ns:MatchesConditions(goal.only) then
@@ -480,7 +480,7 @@ function Duo:GetQuestIDs()
         and appliesToPartner(peerStep.only, ctx) then
         add(integer(peerStep.questID, 1, 10000000))
         for _, goal in ipairs(peerStep.goals or {}) do
-            if appliesToPartner(goal.only, ctx) then add(integer(goal.quest or goal.questID, 1, 10000000)) end
+            if appliesToPartner(goal.only, ctx) then add(integer(goal.quest or goal.questID or goal.workForQuest, 1, 10000000)) end
         end
         for index, goal in ipairs(peerStep.goals or {}) do
             if appliesToPartner(goal.only, ctx) then

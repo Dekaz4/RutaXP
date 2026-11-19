@@ -80,6 +80,28 @@ class GuideStructureAuditTests(unittest.TestCase):
         self.assertEqual(case["classification"], "needs_manual_review")
         self.assertEqual(case["unboundMatches"], [])
 
+    def test_explicit_auxiliary_work_is_attributed_to_its_own_quest(self):
+        rows = [{"t": "accept", "quest": 1}, {"t": "accept", "quest": 2},
+                {"t": "collect", "item": 99, "workForQuest": 1, "workForObjective": 2},
+                {"t": "turnin", "quest": 1}, {"t": "turnin", "quest": 2}]
+        records = {q: {"objectives": [{"type": "item", "id": 99}]} for q in (1, 2)}
+        coverage = audit({"guides": [guide("g", rows)]}, quest_records=records)["workCoverage"]
+        case, = coverage["cases"]
+        self.assertEqual((case["questID"], case["classification"], case["unboundMatches"]), (2, "needs_manual_review", []))
+        point, = coverage["auxiliaryQuestWork"]
+        self.assertEqual((point["questID"], point["workForObjective"], point["goal"]), (1, 2, 3))
+
+    def test_waypoint_arrival_and_work_outside_the_accept_to_turnin_interval_do_not_count_as_credit(self):
+        rows = [{"t": "use", "workForQuest": 3}, {"t": "accept", "quest": 3},
+                {"t": "goto", "workForQuest": 3, "workVisit": True}, {"t": "turnin", "quest": 3},
+                {"t": "accept", "quest": 3}, {"t": "note", "workForQuest": 3}, {"t": "turnin", "quest": 3}]
+        result = audit({"guides": [guide("g", rows)]}, quest_records={3: {"objectives": [{"type": "kill", "id": 11}]}})
+        self.assertEqual(result["order"]["counts"]["work_before_accept"], 0)
+        coverage = result["workCoverage"]
+        case, = coverage["cases"]
+        self.assertEqual([e["goal"] for e in case["occurrences"]], [2])
+        self.assertEqual([e["goal"] for e in coverage["auxiliaryQuestVisits"]], [3])
+
     def test_item_start_and_courier_are_not_claimed_missing_work(self):
         document = {"guides": [guide("g", [{"t": "accept", "quest": 1, "item": 99}, {"t": "turnin", "quest": 1},
                                             {"t": "accept", "quest": 2}, {"t": "turnin", "quest": 2}])]}
@@ -116,7 +138,7 @@ class GuideStructureAuditTests(unittest.TestCase):
         self.assertEqual(report["sourceComparison"]["structuralDifferences"], [])
         comparison = report["sourceComparison"]
         revisions = json.loads((ROOT / "RutaXP/Source/guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
-        self.assertEqual(len(revisions), 58)
+        self.assertEqual(len(revisions), 60)
         self.assertEqual([r["id"] for r in revisions[:7]],
                          ["westfall-alba-mines-2", "westfall-engineering-3", "zephras-alliance-service-2",
                           "redridge-alther-bridge-2", "mulgore-malah-centaurs-2", "tirisfal-rear-guard-2",
@@ -158,6 +180,11 @@ class GuideStructureAuditTests(unittest.TestCase):
         self.assertEqual(report["scope"]["actions"], expected_actions)
         coverage = report["workCoverage"]
         self.assertEqual(coverage["sourceQuestsWithObjectives"], 48)
+        self.assertEqual((coverage["acceptOccurrencesWithoutQuestLinkedWork"], coverage["uniqueQuestIDs"],
+                          coverage["sourceQuestsWithoutObjectives"]), (958, 841, 793))
+        self.assertTrue({93176, 98059}.isdisjoint(coverage["sourceQuestIDsWithoutObjectives"]))
+        self.assertEqual({e["workForObjective"] for e in coverage["auxiliaryQuestWork"] if e["questID"] == 93176}, {1, 2, 3})
+        self.assertEqual([e["questID"] for e in coverage["auxiliaryQuestVisits"]], [5156] * 3)
         self.assertEqual(coverage["unknownQuestIDs"], [])
         self.assertNotIn("needs_manual_review", coverage["classifications"])
         cases = {case["questID"]: case for case in coverage["cases"]}

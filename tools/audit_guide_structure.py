@@ -102,7 +102,7 @@ def events_for(guides, refs):
         for si, step in enumerate(guide["steps"], 1):
             for gi, goal in enumerate(step["goals"], 1):
                 events.append({"guideID": guide["id"], "step": si, "goal": gi, "action": goal.get("t"),
-                               "questID": goal.get("quest"), "data": goal, "stepData": step,
+                               "questID": goal.get("quest") or goal.get("workForQuest"), "data": goal, "stepData": step,
                                **refs.get((guide["id"], si, gi), {})})
     return events
 
@@ -110,7 +110,7 @@ def events_for(guides, refs):
 def reference(event):
     result = {key: event[key] for key in ("guideID", "step", "goal", "action", "questID", "sourceFile",
                                           "sourceLine", "sourceText") if key in event}
-    for key in ("only", "optional"):
+    for key in ("only", "optional", "workForQuest", "workForObjective", "workVisit"):
         if event["data"].get(key):
             result[key] = event["data"][key]
     if event["stepData"].get("only"):
@@ -223,9 +223,13 @@ def scan_order(guides, events):
                             continue
                         if action == "accept":
                             future = [(n, e) for n, e in by_quest[qid] if n > i]
-                            if not any(e["action"] == "turnin" for _, e in future):
+                            delivery = next((n for n, e in future if e["action"] == "turnin"), None)
+                            if delivery is None:
                                 add("accept_without_future_turnin", event, persona, path_index)
-                            if not any(e["action"] not in ("accept", "turnin") for _, e in future):
+                            # A waypoint resolved just by arrival has no quest credit.
+                            # Later work on a repeat pickup cannot cover the first hand-in.
+                            if not any(e["action"] not in ("accept", "turnin") and not e["data"].get("workVisit")
+                                       and (delivery is None or n < delivery) for n, e in future):
                                 no_work.setdefault((event["guideID"], event["step"], event["goal"]), reference(event))
                             for key in ("preAll", "pre"):
                                 dependencies = goal.get(key, [])
@@ -250,7 +254,8 @@ def scan_order(guides, events):
                                 key = (event["guideID"], event["step"], event["goal"])
                                 carried.setdefault(key, {**reference(event), "acceptedAt": reference(accepted[qid])})
                             done[qid] = event
-                        elif qid not in accepted:
+                        elif qid not in accepted and not goal.get("workForQuest"):
+                            # The runtime skips conditional auxiliary work with an empty journal.
                             add("work_before_accept", event, persona, path_index)
     return {"modeledScenarios": scenarios, "paths": paths, "guideLinkCycles": cycles, "danglingNext": dangling,
             "candidates": {k: list(v.values()) for k, v in findings.items()},
@@ -406,7 +411,10 @@ def classify_work(document, events, missing_work, quest_records):
                       "classification": classification, "explanation": explanation, "occurrences": occurrences,
                       "questGoals": [reference(e) for e in all_by_quest[qid]], "unboundMatches": [reference(e) for e in unbound],
                       "contexts": contexts, "runtimeRisk": "Un turnin no demuestra que sus objetivos estén terminados; comprobar IsComplete/objetivos reales antes de dirigir exclusivamente al NPC."})
-    return {"acceptOccurrencesWithoutQuestLinkedWork": len(missing_work), "uniqueQuestIDs": len(by_quest),
+    auxiliary = [reference(e) for e in events if e["data"].get("workForQuest")]
+    return {"auxiliaryQuestWork": [e for e in auxiliary if not e.get("workVisit")],
+            "auxiliaryQuestVisits": [e for e in auxiliary if e.get("workVisit")],
+            "acceptOccurrencesWithoutQuestLinkedWork": len(missing_work), "uniqueQuestIDs": len(by_quest),
             "sourceQuestsWithoutObjectives": len(empty), "sourceQuestIDsWithoutObjectives": empty,
             "sourceQuestsWithObjectives": len(cases), "unknownQuestIDs": unknown,
             "classifications": dict(sorted(Counter(c["classification"] for c in cases).items())), "cases": cases}

@@ -46,7 +46,7 @@
   },
   "counts": {
     "additional_gate_review": 5,
-    "level_conflict_review": 15,
+    "level_conflict_review": 12,
     "missing_active_parent": 10,
     "missing_prerequisite": 49,
     "no_source_data": 53,
@@ -309,7 +309,7 @@
       "guideID": "forever/horde/tauren/01-mulgore",
       "acceptances": 70,
       "findings": {
-        "level_conflict_review": 2,
+        "level_conflict_review": 1,
         "no_source_data": 1,
         "prerequisite_conflict_review": 2
       }
@@ -318,7 +318,6 @@
       "guideID": "forever/horde/undead/01-tirisfal-glades",
       "acceptances": 71,
       "findings": {
-        "level_conflict_review": 2,
         "missing_prerequisite": 5,
         "prerequisite_conflict_review": 1
       }
@@ -5088,23 +5087,6 @@
     },
     {
       "guideID": "forever/horde/tauren/01-mulgore",
-      "step": 25,
-      "goal": 1,
-      "questID": 99411,
-      "title": "Kyle's Gone Missing!",
-      "kind": "level_conflict_review",
-      "field": "minLevel",
-      "authored": 7,
-      "reported": 5,
-      "evidence": [
-        {
-          "source": "everythingquests",
-          "line": 8729
-        }
-      ]
-    },
-    {
-      "guideID": "forever/horde/tauren/01-mulgore",
       "step": 39,
       "goal": 5,
       "questID": 98424,
@@ -5259,41 +5241,7 @@
     },
     {
       "guideID": "forever/horde/undead/01-tirisfal-glades",
-      "step": 44,
-      "goal": 1,
-      "questID": 99152,
-      "title": "As Above, So Below",
-      "kind": "level_conflict_review",
-      "field": "minLevel",
-      "authored": 7,
-      "reported": 10,
-      "evidence": [
-        {
-          "source": "everythingquests",
-          "line": 8718
-        }
-      ]
-    },
-    {
-      "guideID": "forever/horde/undead/01-tirisfal-glades",
-      "step": 44,
-      "goal": 2,
-      "questID": 99153,
-      "title": "The One That Got Away",
-      "kind": "level_conflict_review",
-      "field": "minLevel",
-      "authored": 7,
-      "reported": 10,
-      "evidence": [
-        {
-          "source": "everythingquests",
-          "line": 8719
-        }
-      ]
-    },
-    {
-      "guideID": "forever/horde/undead/01-tirisfal-glades",
-      "step": 49,
+      "step": 47,
       "goal": 1,
       "questID": 1819,
       "title": "Ulag, el cuchillero",
@@ -5321,7 +5269,7 @@
     },
     {
       "guideID": "forever/horde/undead/01-tirisfal-glades",
-      "step": 50,
+      "step": 48,
       "goal": 1,
       "questID": 1473,
       "title": "Criatura abisal",
@@ -5349,7 +5297,7 @@
     },
     {
       "guideID": "forever/horde/undead/01-tirisfal-glades",
-      "step": 51,
+      "step": 49,
       "goal": 2,
       "questID": 1882,
       "title": "La Hacienda Balnir",
@@ -5375,12 +5323,12 @@
       "dependencyLocations": {
         "1881": [
           {
-            "step": 48,
+            "step": 46,
             "goal": 14,
             "action": "accept"
           },
           {
-            "step": 51,
+            "step": 49,
             "goal": 1,
             "action": "turnin"
           }
@@ -7715,6 +7663,6 @@
     "Local dependency locations are diagnostic; this audit does not assume a previous zone was completed.",
     "No runtime quest completion, profession or player's progress is modified by this audit."
   ],
-  "inputSha256": "0c0d134278c8eabb11ba7b26310fe5ba20801885fb43acc1ea4543b29c4062d5",
+  "inputSha256": "9929491ec37dcf8f17c04b6316a9e972c698ce63f3cc2c960e62bedfd2fc173c",
   "evidenceSha256": "ab0615cda0740566797134b91d400f1c8e9ad858a12e53005f7a2e98ac742c89"
 }

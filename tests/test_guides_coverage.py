@@ -24,12 +24,14 @@ MID_ROUTE_REVISIONS = {
     "stranglethorn-snapjaw-and-island-2", "swamp-caravan-and-galen-3",
     "desolace-karnitol-final-hearth-3", "booty-bay-captains-return-3", "aerie-peak-takeoff-2",
 }
+HORDE_ROUTE_REVISIONS = {"mulgore-kyle-level-4", "tirisfal-bandarion-after-leonid-4"}
 
 
 def undo_reassembled_steps(guide, revision):
     """Restore all original actions before older independent visit migrations."""
     slots, owners = {}, {}
-    for step, entry in zip(guide["steps"], revision["steps"], strict=True):
+    entries = revision.get("steps") or [{"sourceStep": si} for si in range(1, len(guide["steps"]) + 1)]
+    for step, entry in zip(guide["steps"], entries, strict=True):
         if "sourceStep" in entry:
             si = entry["sourceStep"]
             refs = [[si, gi] for gi in range(1, revision["previousGoalCounts"][si - 1] + 1)
@@ -49,6 +51,10 @@ def undo_reassembled_steps(guide, revision):
             original = copy.deepcopy(goal)
             for patch in revision.get("goalChanges", []):
                 if all(original.get(k) == v for k, v in patch["match"].items()):
+                    for field in patch.get("unset", []):
+                        if field in original:
+                            raise AssertionError(f"Retired field survived: {revision['id']}")
+                        original[field] = copy.deepcopy(revision["originalGoalValues"][key][field])
                     for field, value in patch["set"].items():
                         if original.get(field) != value:
                             raise AssertionError(f"Changed prerequisite: {revision['id']}")
@@ -61,6 +67,12 @@ def undo_reassembled_steps(guide, revision):
     restored = []
     for si, count in enumerate(revision["previousGoalCounts"], 1):
         step = copy.deepcopy(owners[si])
+        if str(si) in revision.get("originalStepConditions", {}):
+            condition = revision["originalStepConditions"][str(si)]
+            if condition is None:
+                step.pop("only", None)
+            else:
+                step["only"] = copy.deepcopy(condition)
         step["goals"] = [slots.pop(f"{si}:{gi}") for gi in range(1, count + 1)]
         restored.append(step)
     if slots:
@@ -144,10 +156,10 @@ def original_order(document):
     for revision in reversed(revisions):
         if revision["id"] == "wetlands-retire-villard-6":
             undo_visit_optimization(guides[revision["guideID"]], revision)
-        elif revision["id"] in STOUTFIST_REVISIONS or revision["id"] in MID_ROUTE_REVISIONS:
+        elif revision["id"] in STOUTFIST_REVISIONS | MID_ROUTE_REVISIONS | HORDE_ROUTE_REVISIONS:
             undo_reassembled_steps(guides[revision["guideID"]], revision)
     for revision in reversed(revisions):
-        if revision["id"] in MID_ROUTE_REVISIONS:
+        if revision["id"] in MID_ROUTE_REVISIONS | HORDE_ROUTE_REVISIONS:
             continue
         if revision.get("preservePendingVisits") or revision["id"] in {
                 "ashenvale-alliance-retire-alonso-5", "ashenvale-horde-retire-alonso-2", "menethil-theramore-boat-5"}:
