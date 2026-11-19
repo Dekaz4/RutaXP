@@ -63,6 +63,49 @@ local function itemCount(id)
     return read(C_Item and C_Item.GetItemCount, id, false) or read(GetItemCount, id, false) or 0
 end
 
+-- A costly errand can remain in the journal while the solo route moves on.
+-- Re-evaluate on each visit so carried materials and ready deliveries count.
+function ns:IsSoloLevelingDetour(goal)
+    local char = self.char
+    return goal and goal.levelingDetour and char and not char.optional and not (char.duo and char.duo.enabled)
+end
+
+function ns:GetLevelingDetourReason(goal, onQuest, complete)
+    if not self:IsSoloLevelingDetour(goal) then return end
+    local reason = "Desvío de leveo. Activa «Opcionales» si quieres hacerlo."
+    local action = goal.t or goal.action
+    local linked = goal.detourQuest
+    local id = goal.quest or goal.questID or linked
+    if linked and self:IsQuestDelivered(linked) then return reason end
+    if id and onQuest == nil then onQuest = self:IsQuestActive(id) end
+    if id and (action == "turnin" or linked) then
+        if onQuest and complete == nil then complete = read(C_QuestLog and C_QuestLog.IsComplete, id) end
+        if onQuest and complete then return end
+        if action == "turnin" and complete == false then return reason end
+    end
+    if id and not linked and action ~= "accept" and not onQuest then return reason end
+    if goal.detourItems and next(goal.detourItems) then
+        for item, count in pairs(goal.detourItems) do
+            if itemCount(tonumber(item)) < count then return reason end
+        end
+        if action == "accept" then
+            if goal.minLevel and (read(UnitLevel,"player") or 1) < goal.minLevel then return reason end
+            if goal.parent and not self:IsQuestActive(goal.parent) then return reason end
+            for _, pre in ipairs(goal.preAll or {}) do
+                if not self:IsQuestDelivered(math.abs(pre)) then return reason end
+            end
+            if goal.pre and #goal.pre > 0 then
+                for _, pre in ipairs(goal.pre) do
+                    if self:IsQuestDelivered(math.abs(pre)) then return end
+                end
+                return reason
+            end
+        end
+        return
+    end
+    return reason
+end
+
 local function confirmationKey(state, index, stepIndex)
     return tostring(stepIndex or (state and state.cursor) or 1) .. ":" .. tostring(index)
 end
@@ -160,7 +203,7 @@ end
 
 local function wasRequiredEarlier(self, layout, id, stepIndex)
     for _, entry in ipairs(layout and layout.accepts[id] or {}) do
-        if entry.s <= stepIndex and not entry.goal.optional and self:MatchesConditions(entry.step.only)
+        if entry.s <= stepIndex and not entry.goal.optional and not self:IsSoloLevelingDetour(entry.goal) and self:MatchesConditions(entry.step.only)
             and self:MatchesConditions(entry.goal.only) then return true end
     end
     return false
@@ -609,6 +652,7 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
     if onQuest and action == "accept" then return "done", "Aceptada" end
     if onQuest and workDone then return "done", workDone end
     local deferred = not includeGroup and self:GetGroupDeferralReason(goal, step, guide, index, onQuest)
+    deferred = deferred or self:GetLevelingDetourReason(goal, onQuest)
     if deferred then return "skip", deferred end
     local key = confirmationKey(state, index, stepIndex)
     if state and state.skipped and state.skipped[key] then return "skip", "Omitido manualmente" end
@@ -638,6 +682,7 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
         return "skip", "Esta cadena se retoma en una visita posterior"
     end
     if goal.optional and not (self.char and self.char.optional) and not onQuest
+        and not self:IsSoloLevelingDetour(goal)
         and not (id and (includeGroup or self.char and self.char.includeGroupQuests) and isGroupQuest(self, id, layout)) then
         return "skip", "Opcional desactivado"
     end
@@ -745,7 +790,7 @@ function ns:GetActiveGoal(step, state)
     end
     if not step then return nil end
     if not step.goals then
-        if not self:GetGroupDeferralReason(step, step) then return step, 1, "active" end
+        if not self:GetGroupDeferralReason(step, step) and not self:GetLevelingDetourReason(step) then return step, 1, "active" end
         return
     end
     for index, goal in ipairs(step.goals) do
@@ -761,7 +806,7 @@ function ns:GetActiveGoal(step, state)
 end
 
 function ns:IsStepComplete(step, stateOverride)
-    if not step or not step.goals then return self:GetGroupDeferralReason(step, step) ~= nil or basicComplete(self, step) end
+    if not step or not step.goals then return self:GetLevelingDetourReason(step) ~= nil or self:GetGroupDeferralReason(step, step) ~= nil or basicComplete(self, step) end
     local state = stateOverride or select(3, self:GetCurrent())
     if not self:MatchesConditions(step.only) then return true end
     local hasOpenNonService = false
@@ -775,7 +820,7 @@ function ns:IsStepComplete(step, stateOverride)
         local q = goal.quest or goal.questID
         -- Optional errands can be switched off independently of a required
         -- journey (for example the tram with the optional parcels in Forjaz).
-        if q and not goal.optional and self:MatchesConditions(goal.only) then
+        if q and not goal.optional and not self:IsSoloLevelingDetour(goal) and self:MatchesConditions(goal.only) then
             questGoalsCount = questGoalsCount + 1
             if status == "skip" then skippedQuestGoals = skippedQuestGoals + 1 end
         end
@@ -1085,7 +1130,7 @@ function ns:GetStepGoalItems(step, state)
     if not step then return {} end
     if not state then _, _, state = self:GetCurrent() end
     if not step.goals then
-        local deferred = self:GetGroupDeferralReason(step,step)
+        local deferred = self:GetGroupDeferralReason(step,step) or self:GetLevelingDetourReason(step)
         return { {
             index = 1,
             goal = step,
@@ -1112,7 +1157,7 @@ function ns:GetStepGoalItems(step, state)
                     title="Opcional · " .. questLabel(nil,id,goal.title),subtitle=reason}
                 groupRows[id] = true
             end
-        elseif status ~= "skip" or manualSkip or goal.t == "note" then
+        elseif status ~= "skip" or manualSkip or (goal.t == "note" and not self:GetLevelingDetourReason(goal)) then
             local action = goal.t or goal.action or "goto"
             local id = goal.quest or goal.questID
             -- If an earlier objective in the same step for the same quest is still incomplete,
@@ -1274,7 +1319,8 @@ function ns:GetGuideQuestStats(guide)
         if self:MatchesConditions(step.only) and step.goals then
             for _, goal in ipairs(step.goals) do
                 local q = goal.quest or goal.questID
-                if q and not seen[q] and not goal.optional and self:MatchesConditions(goal.only) then
+                if q and not seen[q] and not goal.optional and self:MatchesConditions(goal.only)
+                    and not self:GetLevelingDetourReason(goal) then
                     seen[q] = true
                     total = total + 1
                     if self:IsQuestDelivered(q) then

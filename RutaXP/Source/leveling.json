@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "88f4866fd1b4dcd0ff3723442b3393f8787f7ae54234bbc564005a64e67929fa",
+      "sha256": "4158dc05962f46d951b60cf4d8879696dd4a87f96af6bfbdf4db1dc2dd6cb922",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -561,7 +561,15 @@
         "menethil-theramore-boat-5",
         "wetlands-old-habits-before-nekrosh-return-6",
         "wetlands-stoutfist-howin-prerequisites-5",
-        "wetlands-retire-villard-6"
+        "wetlands-retire-villard-6",
+        "southshore-coast-return-7",
+        "nijels-point-one-return-2",
+        "xavian-shared-satyrs-3",
+        "stranglethorn-snapjaw-and-island-2",
+        "swamp-caravan-and-galen-3",
+        "desolace-karnitol-final-hearth-3",
+        "booty-bay-captains-return-3",
+        "aerie-peak-takeoff-2"
       ]
     }
   },
@@ -581,7 +589,7 @@
       "Alliance": 29,
       "Horde": 28
     },
-    "steps": 2344,
+    "steps": 2338,
     "goals": 7455,
     "goalTypes": {
       "accept": 2292,
@@ -615,7 +623,9 @@
       "count": 1201,
       "departure": 1,
       "departureLand": 1,
-      "f": 5500,
+      "detourItems": 90,
+      "detourQuest": 4,
+      "f": 5506,
       "from": 740,
       "fromAlso": 97,
       "fromFaction": 11,
@@ -629,8 +639,9 @@
       "item": 1216,
       "itemName": 1216,
       "level": 25,
+      "levelingDetour": 144,
       "location": 400,
-      "map": 6573,
+      "map": 6579,
       "minLevel": 2290,
       "navigationHint": 434,
       "navigationMode": 14,
@@ -657,15 +668,15 @@
       "rewards": 8,
       "skill": 1,
       "skillLine": 1,
-      "spots": 1301,
+      "spots": 1303,
       "spread": 672,
       "t": 7455,
       "target": 611,
       "text": 223,
       "title": 6503,
-      "x": 6573,
-      "y": 6573,
-      "z": 4473
+      "x": 6579,
+      "y": 6579,
+      "z": 4472
     }
   },
   "mapFrames": {
@@ -99728,7 +99739,14 @@
               "z": 17.7,
               "f": "e",
               "qlvl": 34,
-              "instruction": "Habla con «Bartolo Ginsetti» y acepta «Capa de piel de yeti de Bartolo».\nZona: Laderas de Trabalomas."
+              "instruction": "Habla con «Bartolo Ginsetti» y acepta «Capa de piel de yeti de Bartolo».\nZona: Laderas de Trabalomas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "2997": 1,
+                "2321": 1,
+                "3719": 1,
+                "3720": 10
+              }
             },
             {
               "title": "Una amenaza costosa",
@@ -100294,46 +100312,6 @@
           ]
         },
         {
-          "title": "Farren",
-          "goals": [
-            {
-              "title": "Cambio de destino",
-              "t": "turnin",
-              "quest": 562,
-              "npc": 2228,
-              "npcName": "Teniente Farren Orinelle",
-              "map": 1424,
-              "x": 51.46,
-              "y": 58.39,
-              "z": 11.7,
-              "f": "e",
-              "instruction": "Habla con «Teniente Farren Orinelle» y entrega «Cambio de destino».\nZona: Laderas de Trabalomas."
-            },
-            {
-              "title": "Nueva asignación",
-              "minLevel": 25,
-              "note": "Un informe para Castillo de Ventormenta",
-              "t": "accept",
-              "quest": 563,
-              "npc": 2228,
-              "npcName": "Teniente Farren Orinelle",
-              "pre": [
-                562
-              ],
-              "preTitles": {
-                "562": "Stormwind Ho!"
-              },
-              "map": 1424,
-              "x": 51.46,
-              "y": 58.39,
-              "z": 11.7,
-              "f": "e",
-              "qlvl": 32,
-              "instruction": "Habla con «Teniente Farren Orinelle» y acepta «Nueva asignación».\nZona: Laderas de Trabalomas.\nUn informe para Castillo de Ventormenta."
-            }
-          ]
-        },
-        {
           "title": "Snapjaws",
           "note": "Las tortugas Quijaforte se bañan a lo largo del río al este de Costasur, al sur de Molino Tarren (Horde).",
           "goals": [
@@ -100389,7 +100367,7 @@
         },
         {
           "title": "Campamento Syndicate",
-          "note": "El campamento Syndicate se encuentra en la frontera Alterac en el norte de Trabalomas, al oeste de Molino Tarren (Horde); los documentos se encuentran en el campamento.",
+          "note": "En la Daga de Corrahn, busca los papeles sobre la mesa del campamento. Acepta allí «Documentos de planificación» y «Una carta cifrada». Si no encuentras los papeles, hay otra mesa en el campamento del nordeste. Los ladrones y asaltantes de ambos campamentos cuentan para «Hermandad de asesinos».",
           "goals": [
             {
               "title": "Hermandad de asesinos",
@@ -100463,7 +100441,14 @@
               "y": 7.9,
               "f": "e",
               "qlvl": 34,
-              "instruction": "Interactúa con «Documentos de Hermandad» y acepta «Documentos de planificación».\nZona: Laderas de Trabalomas.\nDocumentos de la Hermandad."
+              "instruction": "Interactúa con «Documentos de Hermandad» y acepta «Documentos de planificación».\nZona: Laderas de Trabalomas.\nDocumentos de la Hermandad.",
+              "spots": [
+                {
+                  "x": 50.8,
+                  "y": 20.32,
+                  "object": 186420
+                }
+              ]
             },
             {
               "title": "Una carta cifrada",
@@ -100477,7 +100462,14 @@
               "y": 7.9,
               "f": "e",
               "qlvl": 34,
-              "instruction": "Interactúa con «Documentos de Hermandad» y acepta «Una carta cifrada».\nZona: Laderas de Trabalomas."
+              "instruction": "Interactúa con «Documentos de Hermandad» y acepta «Una carta cifrada».\nZona: Laderas de Trabalomas.",
+              "spots": [
+                {
+                  "x": 50.8,
+                  "y": 20.32,
+                  "object": 186420
+                }
+              ]
             }
           ]
         },
@@ -100567,12 +100559,27 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Piel de yeti» (10 en total).\nZona: Laderas de Trabalomas."
+              "instruction": "Reúne «Piel de yeti» (10 en total).\nZona: Laderas de Trabalomas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "2997": 1,
+                "2321": 1,
+                "3719": 1,
+                "3720": 10
+              }
             },
             {
               "t": "note",
-              "text": "Bartolo también quiere un Capa de montañero, un Descarga de paño de lana y Hilo refinado: fabricado o comprado; la capa se enciende cuando usted está de vuelta en Costasur más tarde.",
-              "instruction": "Bartolo también quiere un Capa de montañero, un Descarga de paño de lana y Hilo refinado: fabricado o comprado; la capa se enciende cuando usted está de vuelta en Costasur más tarde."
+              "text": "Bartolo pide una capa de montañero, una madeja de paño de lana, un hilo refinado y 10 pieles de yeti. Entrégaselos juntos en Costasur.",
+              "instruction": "Bartolo pide una capa de montañero, una madeja de paño de lana, un hilo refinado y 10 pieles de yeti. Entrégaselos juntos en Costasur.",
+              "levelingDetour": true,
+              "detourItems": {
+                "2997": 1,
+                "2321": 1,
+                "3719": 1,
+                "3720": 10
+              },
+              "detourQuest": 565
             }
           ]
         },
@@ -100592,7 +100599,8 @@
           ]
         },
         {
-          "title": "Costasur",
+          "title": "Entregas en Costasur",
+          "note": "De vuelta del ayuntamiento, visita al capitán McManus y a Farren. Entrega los encargos del pueblo antes del vuelo a Ventormenta.",
           "goals": [
             {
               "title": "Hillsbrad's Hoard",
@@ -100606,6 +100614,41 @@
               "y": 50.13,
               "f": "e",
               "instruction": "Habla con «Captain McManus» y entrega «Hillsbrad's Hoard».\nZona: Laderas de Trabalomas."
+            },
+            {
+              "title": "Cambio de destino",
+              "t": "turnin",
+              "quest": 562,
+              "npc": 2228,
+              "npcName": "Teniente Farren Orinelle",
+              "map": 1424,
+              "x": 51.46,
+              "y": 58.39,
+              "z": 11.7,
+              "f": "e",
+              "instruction": "Habla con «Teniente Farren Orinelle» y entrega «Cambio de destino».\nZona: Laderas de Trabalomas."
+            },
+            {
+              "title": "Nueva asignación",
+              "minLevel": 25,
+              "note": "Un informe para Castillo de Ventormenta",
+              "t": "accept",
+              "quest": 563,
+              "npc": 2228,
+              "npcName": "Teniente Farren Orinelle",
+              "pre": [
+                562
+              ],
+              "preTitles": {
+                "562": "Stormwind Ho!"
+              },
+              "map": 1424,
+              "x": 51.46,
+              "y": 58.39,
+              "z": 11.7,
+              "f": "e",
+              "qlvl": 32,
+              "instruction": "Habla con «Teniente Farren Orinelle» y acepta «Nueva asignación».\nZona: Laderas de Trabalomas.\nUn informe para Castillo de Ventormenta."
             },
             {
               "title": "Sopa de tortuga calmante",
@@ -102176,7 +102219,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 6,
+      "routeRevision": 7,
       "progressMigrations": [
         {
           "from": 1,
@@ -102779,6 +102822,104 @@
             "19:3": true,
             "19:4": true
           }
+        },
+        {
+          "from": 6,
+          "to": 7,
+          "goalMap": {
+            "29:1": "28:1",
+            "30:1": "29:1",
+            "30:2": "29:2",
+            "30:3": "29:3",
+            "30:4": "29:4",
+            "31:1": "30:1",
+            "31:2": "30:2",
+            "32:1": "31:1",
+            "33:1": "32:1",
+            "28:1": "32:2",
+            "28:2": "32:3",
+            "33:2": "32:4",
+            "33:3": "32:5",
+            "33:4": "32:6",
+            "33:5": "32:7",
+            "33:6": "32:8",
+            "33:7": "32:9",
+            "34:1": "33:1",
+            "35:1": "34:1",
+            "35:2": "34:2",
+            "36:1": "35:1",
+            "36:2": "35:2",
+            "36:3": "35:3",
+            "36:4": "35:4",
+            "36:5": "35:5",
+            "37:1": "36:1",
+            "38:1": "37:1",
+            "39:1": "38:1",
+            "39:2": "38:2",
+            "39:3": "38:3",
+            "40:1": "39:1",
+            "40:2": "39:2",
+            "40:3": "39:3",
+            "40:4": "39:4",
+            "41:1": "40:1",
+            "41:2": "40:2",
+            "42:1": "41:1",
+            "43:1": "42:1",
+            "43:2": "42:2",
+            "43:3": "42:3",
+            "43:4": "42:4",
+            "43:5": "42:5",
+            "43:6": "42:6"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "29": 28,
+            "30": 29,
+            "31": 30,
+            "32": 31,
+            "33": 32,
+            "28": 28,
+            "34": 33,
+            "35": 34,
+            "36": 35,
+            "37": 36,
+            "38": 37,
+            "39": 38,
+            "40": 39,
+            "41": 40,
+            "42": 41,
+            "43": 42,
+            "44": 43
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 43,
+          "firstAffectedStep": 28
         }
       ]
     },
@@ -103665,47 +103806,8 @@
           ]
         },
         {
-          "title": "Kreldig Ungor",
-          "goals": [
-            {
-              "title": "Componentes para Reivindicadores y Cía.",
-              "t": "turnin",
-              "quest": 1458,
-              "npc": 5638,
-              "npcName": "Kreldig Ungor",
-              "map": 1443,
-              "x": 66.2,
-              "y": 9.63,
-              "z": 166.8,
-              "f": "e",
-              "instruction": "Habla con «Kreldig Ungor» y entrega «Componentes para Reivindicadores y Cía.».\nZona: Desolace."
-            },
-            {
-              "title": "Componentes para Reivindicadores y Cía.",
-              "minLevel": 30,
-              "t": "accept",
-              "quest": 1459,
-              "npc": 5638,
-              "npcName": "Kreldig Ungor",
-              "pre": [
-                1458
-              ],
-              "preTitles": {
-                "1458": "Reagents for Reclaimers Inc."
-              },
-              "map": 1443,
-              "x": 66.2,
-              "y": 9.63,
-              "z": 166.8,
-              "f": "e",
-              "qlvl": 35,
-              "instruction": "Habla con «Kreldig Ungor» y acepta «Componentes para Reivindicadores y Cía.».\nZona: Desolace."
-            }
-          ]
-        },
-        {
-          "title": "Malem cofre",
-          "note": "El pecho se encuentra en las ruinas al suroeste de Punta de Nijel.",
+          "title": "Cofre de Malem",
+          "note": "Desde Sargeron sigue hacia el oeste hasta el cofre de Malem. Recoge el encargo del cofre antes de subir a Punta de Nijel.",
           "goals": [
             {
               "title": "Buscando a Vahlarriel",
@@ -103745,8 +103847,43 @@
           ]
         },
         {
-          "title": "Vahlarriel Destripademonios",
+          "title": "Kreldig y Vahlarriel",
+          "note": "Entrega los componentes a Kreldig y el encargo del cofre a Vahlarriel. Recoge ambas continuaciones antes de dejar Punta de Nijel.",
           "goals": [
+            {
+              "title": "Componentes para Reivindicadores y Cía.",
+              "t": "turnin",
+              "quest": 1458,
+              "npc": 5638,
+              "npcName": "Kreldig Ungor",
+              "map": 1443,
+              "x": 66.2,
+              "y": 9.63,
+              "z": 166.8,
+              "f": "e",
+              "instruction": "Habla con «Kreldig Ungor» y entrega «Componentes para Reivindicadores y Cía.».\nZona: Desolace."
+            },
+            {
+              "title": "Componentes para Reivindicadores y Cía.",
+              "minLevel": 30,
+              "t": "accept",
+              "quest": 1459,
+              "npc": 5638,
+              "npcName": "Kreldig Ungor",
+              "pre": [
+                1458
+              ],
+              "preTitles": {
+                "1458": "Reagents for Reclaimers Inc."
+              },
+              "map": 1443,
+              "x": 66.2,
+              "y": 9.63,
+              "z": 166.8,
+              "f": "e",
+              "qlvl": 35,
+              "instruction": "Habla con «Kreldig Ungor» y acepta «Componentes para Reivindicadores y Cía.».\nZona: Desolace."
+            },
             {
               "title": "Buscando a Vahlarriel",
               "t": "turnin",
@@ -104284,7 +104421,8 @@
               "f": "e",
               "optional": true,
               "qlvl": 35,
-              "instruction": "Opcional.\nHabla con «Cork Gizelton» y acepta «El guardaespaldas».\nZona: Desolace."
+              "instruction": "Opcional.\nHabla con «Cork Gizelton» y acepta «El guardaespaldas».\nZona: Desolace.",
+              "levelingDetour": true
             }
           ]
         },
@@ -104308,7 +104446,8 @@
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Opcional.\nAbre «El guardaespaldas» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+              "instruction": "Opcional.\nAbre «El guardaespaldas» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
+              "levelingDetour": true
             }
           ]
         },
@@ -104328,7 +104467,8 @@
               "z": 61.4,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nHabla con «Smeed Mezclatornillos» y entrega «El guardaespaldas».\nZona: Desolace."
+              "instruction": "Opcional.\nHabla con «Smeed Mezclatornillos» y entrega «El guardaespaldas».\nZona: Desolace.",
+              "levelingDetour": true
             },
             {
               "title": "El rodeo kodo",
@@ -105008,7 +105148,74 @@
       ],
       "_sendaLocale": "esES",
       "pack": "guides",
-      "version": 1
+      "version": 1,
+      "routeRevision": 2,
+      "progressMigrations": [
+        {
+          "from": 1,
+          "to": 2,
+          "goalMap": {
+            "8:1": "7:1",
+            "8:2": "7:2",
+            "7:1": "8:1",
+            "7:2": "8:2",
+            "9:1": "8:3",
+            "9:2": "8:4",
+            "10:1": "9:1",
+            "11:1": "10:1",
+            "11:2": "10:2",
+            "12:1": "11:1",
+            "12:2": "11:2",
+            "13:1": "12:1",
+            "13:2": "12:2",
+            "13:3": "12:3",
+            "13:4": "12:4",
+            "13:5": "12:5",
+            "14:1": "13:1",
+            "15:1": "14:1",
+            "16:1": "15:1",
+            "17:1": "16:1",
+            "18:1": "17:1",
+            "18:2": "17:2",
+            "19:1": "18:1",
+            "19:2": "18:2",
+            "20:1": "19:1",
+            "21:1": "20:1",
+            "22:1": "21:1",
+            "22:2": "21:2",
+            "22:3": "21:3",
+            "22:4": "21:4"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "8": 7,
+            "7": 7,
+            "9": 8,
+            "10": 9,
+            "11": 10,
+            "12": 11,
+            "13": 12,
+            "14": 13,
+            "15": 14,
+            "16": 15,
+            "17": 16,
+            "18": 17,
+            "19": 18,
+            "20": 19,
+            "21": 20,
+            "22": 21,
+            "23": 22
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 22,
+          "firstAffectedStep": 7
+        }
+      ]
     },
     {
       "id": "forever/alliance/30-40/03-ashenvale",
@@ -105535,71 +105742,8 @@
           ]
         },
         {
-          "title": "Anilia",
-          "note": "Sigue la carretera al este hasta los campamentos sátiros de Xavian; Anilia se esconde en su borde.",
-          "goals": [
-            {
-              "title": "¡Vil sátiro! ¡Dríade en peligro!",
-              "t": "turnin",
-              "quest": 1021,
-              "npc": 3920,
-              "npcName": "Anilia",
-              "map": 1440,
-              "x": 78.33,
-              "y": 44.82,
-              "z": 212.7,
-              "f": "e",
-              "instruction": "Habla con «Anilia» y entrega «¡Vil sátiro! ¡Dríade en peligro!».\nZona: Vallefresno."
-            },
-            {
-              "title": "La Rama de Cenario",
-              "minLevel": 26,
-              "t": "accept",
-              "quest": 1031,
-              "npc": 3920,
-              "npcName": "Anilia",
-              "pre": [
-                1021
-              ],
-              "preTitles": {
-                "1021": "Vile Satyr! Dryads in Danger!"
-              },
-              "map": 1440,
-              "x": 78.33,
-              "y": 44.82,
-              "z": 212.7,
-              "f": "e",
-              "qlvl": 32,
-              "instruction": "Habla con «Anilia» y acepta «La Rama de Cenario».\nZona: Vallefresno."
-            }
-          ]
-        },
-        {
-          "title": "Geltharis",
-          "note": "Geltharis dirige los sátiros Xavianos; él lleva la rama.",
-          "goals": [
-            {
-              "title": "La Rama de Cenario",
-              "note": "Rama de Cenario",
-              "t": "collect",
-              "quest": 1031,
-              "oi": 1,
-              "item": 5461,
-              "itemName": "Rama de Cenario",
-              "count": 1,
-              "map": 1440,
-              "x": 77.99,
-              "y": 42.42,
-              "f": "e",
-              "from": "Geltharis",
-              "fromKind": "npc",
-              "instruction": "Recoge «Rama de Cenario» (1 en total) del botín de «Geltharis».\nZona: Vallefresno."
-            }
-          ]
-        },
-        {
           "title": "Satyrnaar",
-          "note": "El Círculo de Encarcelamiento se encuentra en el campamento sátiro de Satyrnaar, más al este a lo largo de la carretera.",
+          "note": "Sigue la carretera hacia el este hasta Satyrnaar y usa el Círculo de Encarcelamiento antes de continuar a Canción del Bosque.",
           "goals": [
             {
               "title": "La Torre de Althalaxx",
@@ -105880,9 +106024,66 @@
           ]
         },
         {
-          "title": "Satyrs xavianos",
-          "note": "De vuelta al oeste a lo largo de la carretera a los campamentos sátiros de Xavian.",
+          "title": "Anilia en Xavian",
+          "note": "Desde Canción del Bosque, ve al oeste a Xavian. Habla con Anilia para que te encargue recuperar la rama.",
           "goals": [
+            {
+              "title": "¡Vil sátiro! ¡Dríade en peligro!",
+              "t": "turnin",
+              "quest": 1021,
+              "npc": 3920,
+              "npcName": "Anilia",
+              "map": 1440,
+              "x": 78.33,
+              "y": 44.82,
+              "z": 212.7,
+              "f": "e",
+              "instruction": "Habla con «Anilia» y entrega «¡Vil sátiro! ¡Dríade en peligro!».\nZona: Vallefresno."
+            },
+            {
+              "title": "La Rama de Cenario",
+              "minLevel": 26,
+              "t": "accept",
+              "quest": 1031,
+              "npc": 3920,
+              "npcName": "Anilia",
+              "pre": [
+                1021
+              ],
+              "preTitles": {
+                "1021": "Vile Satyr! Dryads in Danger!"
+              },
+              "map": 1440,
+              "x": 78.33,
+              "y": 44.82,
+              "z": 212.7,
+              "f": "e",
+              "qlvl": 32,
+              "instruction": "Habla con «Anilia» y acepta «La Rama de Cenario».\nZona: Vallefresno."
+            }
+          ]
+        },
+        {
+          "title": "La rama de Geltharis y los sátiros de Xavian",
+          "note": "Busca a Geltharis entre los sátiros. Los tres tipos que pide Maseara están en el mismo campamento. Completa los dos encargos antes de ir al sur a por los druidas.",
+          "goals": [
+            {
+              "title": "La Rama de Cenario",
+              "note": "Rama de Cenario",
+              "t": "collect",
+              "quest": 1031,
+              "oi": 1,
+              "item": 5461,
+              "itemName": "Rama de Cenario",
+              "count": 1,
+              "map": 1440,
+              "x": 77.99,
+              "y": 42.42,
+              "f": "e",
+              "from": "Geltharis",
+              "fromKind": "npc",
+              "instruction": "Recoge «Rama de Cenario» (1 en total) del botín de «Geltharis».\nZona: Vallefresno."
+            },
             {
               "title": "Shared Fury",
               "note": "Jurapenas Xavian",
@@ -107075,7 +107276,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 2,
+      "routeRevision": 3,
       "progressMigrations": [
         {
           "from": 1,
@@ -107122,6 +107323,113 @@
           "affectedQuestIDs": [],
           "previousStepCount": 35,
           "firstAffectedStep": 36
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "goalMap": {
+            "10:1": "8:1",
+            "11:1": "9:1",
+            "11:2": "9:2",
+            "11:3": "9:3",
+            "12:1": "10:1",
+            "13:1": "11:1",
+            "14:1": "12:1",
+            "14:2": "12:2",
+            "15:1": "13:1",
+            "15:2": "13:2",
+            "8:1": "14:1",
+            "8:2": "14:2",
+            "9:1": "15:1",
+            "16:1": "15:2",
+            "16:2": "15:3",
+            "16:3": "15:4",
+            "17:1": "16:1",
+            "18:1": "17:1",
+            "18:2": "17:2",
+            "19:1": "18:1",
+            "20:1": "19:1",
+            "20:2": "19:2",
+            "21:1": "20:1",
+            "21:2": "20:2",
+            "22:1": "21:1",
+            "22:2": "21:2",
+            "23:1": "22:1",
+            "23:2": "22:2",
+            "23:3": "22:3",
+            "23:4": "22:4",
+            "24:1": "23:1",
+            "24:2": "23:2",
+            "25:1": "24:1",
+            "25:2": "24:2",
+            "26:1": "25:1",
+            "26:2": "25:2",
+            "26:3": "25:3",
+            "27:1": "26:1",
+            "28:1": "27:1",
+            "29:1": "28:1",
+            "29:2": "28:2",
+            "30:1": "29:1",
+            "30:2": "29:2",
+            "30:3": "29:3",
+            "31:1": "30:1",
+            "31:2": "30:2",
+            "32:1": "31:1",
+            "32:2": "31:2",
+            "33:1": "32:1",
+            "34:1": "33:1",
+            "35:1": "34:1",
+            "35:2": "34:2",
+            "35:3": "34:3",
+            "35:4": "34:4",
+            "35:5": "34:5",
+            "35:6": "34:6",
+            "35:7": "34:7",
+            "35:8": "34:8",
+            "35:9": "34:9",
+            "35:10": "34:10"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "10": 8,
+            "11": 9,
+            "12": 10,
+            "13": 11,
+            "14": 12,
+            "15": 13,
+            "8": 8,
+            "9": 8,
+            "16": 15,
+            "17": 16,
+            "18": 17,
+            "19": 18,
+            "20": 19,
+            "21": 20,
+            "22": 21,
+            "23": 22,
+            "24": 23,
+            "25": 24,
+            "26": 25,
+            "27": 26,
+            "28": 27,
+            "29": 28,
+            "30": 29,
+            "31": 30,
+            "32": 31,
+            "33": 32,
+            "34": 33,
+            "35": 34,
+            "36": 35
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 35,
+          "firstAffectedStep": 8
         }
       ]
     },
@@ -109526,7 +109834,11 @@
               "itemName": "Colgante de Myzrael",
               "optional": true,
               "qlvl": 35,
-              "instruction": "Opcional.\nSi tienes «Colgante de Myzrael» en tus bolsas, haz clic derecho en él para iniciar «Cristal en las montañas».\nGluggle, un raro Múrloc en la costa al oeste del campamento, deja caer el Colgante de Myzrael: tómalo si lo conoces."
+              "instruction": "Opcional.\nSi tienes «Colgante de Myzrael» en tus bolsas, haz clic derecho en él para iniciar «Cristal en las montañas».\nGluggle, un raro Múrloc en la costa al oeste del campamento, deja caer el Colgante de Myzrael: tómalo si lo conoces.",
+              "levelingDetour": true,
+              "detourItems": {
+                "4614": 1
+              }
             }
           ]
         },
@@ -111033,7 +111345,8 @@
           ]
         },
         {
-          "title": "Bahía del Botín",
+          "title": "Encargos de Bahía del Botín",
+          "note": "Entrega los encargos de la primera vuelta. Habla con Krazek y Kebok en la taberna y sube a ver al barón antes de salir hacia el norte.",
           "goals": [
             {
               "t": "hearth",
@@ -111105,6 +111418,22 @@
               "instruction": "Habla con «Krazek» y entrega «Investiga el campamento».\nZona: Vega de Tuercespina."
             },
             {
+              "title": "La isla fantasma",
+              "minLevel": 32,
+              "note": "Krazek",
+              "t": "accept",
+              "quest": 616,
+              "npc": 773,
+              "npcName": "Krazek",
+              "map": 1434,
+              "x": 26.95,
+              "y": 77.21,
+              "z": 26.4,
+              "f": "e",
+              "qlvl": 37,
+              "instruction": "Habla con «Krazek» y acepta «La isla fantasma».\nZona: Vega de Tuercespina."
+            },
+            {
               "title": "Orejas de Sangrapellejo",
               "note": "Kebok",
               "t": "turnin",
@@ -111117,12 +111446,63 @@
               "z": 26.4,
               "f": "e",
               "instruction": "Habla con «Kebok» y entrega «Orejas de Sangrapellejo».\nZona: Vega de Tuercespina."
+            },
+            {
+              "title": "OPA hostil",
+              "minLevel": 31,
+              "note": "Kebok",
+              "t": "accept",
+              "quest": 213,
+              "npc": 737,
+              "npcName": "Kebok",
+              "map": 1434,
+              "x": 27,
+              "y": 77.13,
+              "z": 26.4,
+              "f": "e",
+              "qlvl": 36,
+              "instruction": "Habla con «Kebok» y acepta «OPA hostil».\nZona: Vega de Tuercespina."
+            },
+            {
+              "title": "La isla fantasma",
+              "note": "Barón Revilgaz, arriba en la taberna",
+              "t": "turnin",
+              "quest": 616,
+              "npc": 2496,
+              "npcName": "Barón Revilgaz",
+              "map": 1434,
+              "x": 27.23,
+              "y": 76.87,
+              "z": 28.9,
+              "f": "e",
+              "instruction": "Habla con «Barón Revilgaz» y entrega «La isla fantasma».\nZona: Vega de Tuercespina.\nBarón Revilgaz, arriba en la taberna."
+            },
+            {
+              "title": "La piedra de las mareas",
+              "minLevel": 32,
+              "t": "accept",
+              "quest": 578,
+              "npc": 2496,
+              "npcName": "Barón Revilgaz",
+              "pre": [
+                616
+              ],
+              "preTitles": {
+                "616": "The Haunted Isle"
+              },
+              "map": 1434,
+              "x": 27.23,
+              "y": 76.87,
+              "z": 28.9,
+              "f": "e",
+              "qlvl": 37,
+              "instruction": "Habla con «Barón Revilgaz» y acepta «La piedra de las mareas».\nZona: Vega de Tuercespina."
             }
           ]
         },
         {
-          "title": "Quijaforte Crocolisks",
-          "note": "Quijaforte Crocolisks disfruta en la costa y las islas a lo largo de la costa al norte de Bahía del Botín.",
+          "title": "Piel de crocolisco Quijaforte",
+          "note": "Busca los crocoliscos junto al río. Guarda la piel de Drizzlik y continúa hasta la isla encantada y el campamento de Nesingwary.",
           "goals": [
             {
               "title": "Hay que ensamblar",
@@ -111182,92 +111562,6 @@
           ]
         },
         {
-          "title": "Bahía del Botín",
-          "goals": [
-            {
-              "title": "Hay que ensamblar",
-              "note": "Drizzlik",
-              "t": "turnin",
-              "quest": 577,
-              "npc": 2495,
-              "npcName": "Drizzlik",
-              "map": 1434,
-              "x": 28.29,
-              "y": 77.59,
-              "z": 25.5,
-              "f": "e",
-              "instruction": "Habla con «Drizzlik» y entrega «Hay que ensamblar».\nZona: Vega de Tuercespina."
-            },
-            {
-              "title": "OPA hostil",
-              "minLevel": 31,
-              "note": "Kebok",
-              "t": "accept",
-              "quest": 213,
-              "npc": 737,
-              "npcName": "Kebok",
-              "map": 1434,
-              "x": 27,
-              "y": 77.13,
-              "z": 26.4,
-              "f": "e",
-              "qlvl": 36,
-              "instruction": "Habla con «Kebok» y acepta «OPA hostil».\nZona: Vega de Tuercespina."
-            },
-            {
-              "title": "La isla fantasma",
-              "minLevel": 32,
-              "note": "Krazek",
-              "t": "accept",
-              "quest": 616,
-              "npc": 773,
-              "npcName": "Krazek",
-              "map": 1434,
-              "x": 26.95,
-              "y": 77.21,
-              "z": 26.4,
-              "f": "e",
-              "qlvl": 37,
-              "instruction": "Habla con «Krazek» y acepta «La isla fantasma».\nZona: Vega de Tuercespina."
-            },
-            {
-              "title": "La isla fantasma",
-              "note": "Barón Revilgaz, arriba en la taberna",
-              "t": "turnin",
-              "quest": 616,
-              "npc": 2496,
-              "npcName": "Barón Revilgaz",
-              "map": 1434,
-              "x": 27.23,
-              "y": 76.87,
-              "z": 28.9,
-              "f": "e",
-              "instruction": "Habla con «Barón Revilgaz» y entrega «La isla fantasma».\nZona: Vega de Tuercespina.\nBarón Revilgaz, arriba en la taberna."
-            },
-            {
-              "title": "La piedra de las mareas",
-              "minLevel": 32,
-              "t": "accept",
-              "quest": 578,
-              "npc": 2496,
-              "npcName": "Barón Revilgaz",
-              "pre": [
-                616
-              ],
-              "preTitles": {
-                "616": "The Haunted Isle"
-              },
-              "map": 1434,
-              "x": 27.23,
-              "y": 76.87,
-              "z": 28.9,
-              "f": "e",
-              "qlvl": 37,
-              "instruction": "Habla con «Barón Revilgaz» y acepta «La piedra de las mareas».\nZona: Vega de Tuercespina."
-            }
-          ]
-        },
-        {
           "title": "La isla encantada",
           "note": "Sigue la costa oeste al norte; la isla encantada se encuentra frente a la orilla oeste del campamento de Nesingwary. Sólo tiene que llegar a ella.",
           "goals": [
@@ -111292,7 +111586,7 @@
         },
         {
           "title": "Expedición de Nesingwary",
-          "note": "Barnil recoge el Green Hills de Tuercespina: las páginas caen de casi todos los humanoides en la selva. Convierte las páginas en capítulos a medida que avanzas.",
+          "note": "Acepta la cacería de panteras de Sir S. J. Erlgadin. Guarda las páginas que encuentres al derrotar humanoides. Si quieres completar el libro de Barnil, activa «Opcionales».",
           "goals": [
             {
               "title": "Domina la pantera",
@@ -111336,7 +111630,8 @@
               "z": 11.1,
               "f": "e",
               "qlvl": 40,
-              "instruction": "Habla con «Barnil Jarropetra» y acepta «Las verdes colinas de Tuercespina».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Barnil Jarropetra» y acepta «Las verdes colinas de Tuercespina».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Capítulo I",
@@ -111351,7 +111646,8 @@
               "z": 11.1,
               "f": "e",
               "qlvl": 40,
-              "instruction": "Habla con «Barnil Jarropetra» y acepta «Capítulo I».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Barnil Jarropetra» y acepta «Capítulo I».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Capítulo II",
@@ -111366,7 +111662,8 @@
               "z": 11.1,
               "f": "e",
               "qlvl": 40,
-              "instruction": "Habla con «Barnil Jarropetra» y acepta «Capítulo II».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Barnil Jarropetra» y acepta «Capítulo II».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Capítulo III",
@@ -111381,7 +111678,8 @@
               "z": 11.1,
               "f": "e",
               "qlvl": 40,
-              "instruction": "Habla con «Barnil Jarropetra» y acepta «Capítulo III».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Barnil Jarropetra» y acepta «Capítulo III».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Capítulo IV",
@@ -111396,7 +111694,8 @@
               "z": 11.1,
               "f": "e",
               "qlvl": 40,
-              "instruction": "Habla con «Barnil Jarropetra» y acepta «Capítulo IV».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Barnil Jarropetra» y acepta «Capítulo IV».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             }
           ]
         },
@@ -112275,7 +112574,8 @@
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Abre «Capítulo I» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+              "instruction": "Abre «Capítulo I» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
+              "levelingDetour": true
             },
             {
               "title": "Capítulo II",
@@ -112735,7 +113035,8 @@
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Abre «Capítulo II» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+              "instruction": "Abre «Capítulo II» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
+              "levelingDetour": true
             },
             {
               "title": "Capítulo III",
@@ -113177,7 +113478,8 @@
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Abre «Capítulo III» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+              "instruction": "Abre «Capítulo III» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
+              "levelingDetour": true
             },
             {
               "title": "Capítulo IV",
@@ -113511,7 +113813,8 @@
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Abre «Capítulo IV» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+              "instruction": "Abre «Capítulo IV» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
+              "levelingDetour": true
             }
           ]
         },
@@ -113600,7 +113903,8 @@
               "y": 10.53,
               "z": 11.1,
               "f": "e",
-              "instruction": "Habla con «Barnil Jarropetra» y entrega «Capítulo I».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Barnil Jarropetra» y entrega «Capítulo I».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Capítulo II",
@@ -113613,7 +113917,8 @@
               "y": 10.53,
               "z": 11.1,
               "f": "e",
-              "instruction": "Habla con «Barnil Jarropetra» y entrega «Capítulo II».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Barnil Jarropetra» y entrega «Capítulo II».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Capítulo III",
@@ -113626,7 +113931,8 @@
               "y": 10.53,
               "z": 11.1,
               "f": "e",
-              "instruction": "Habla con «Barnil Jarropetra» y entrega «Capítulo III».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Barnil Jarropetra» y entrega «Capítulo III».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Capítulo IV",
@@ -113639,7 +113945,8 @@
               "y": 10.53,
               "z": 11.1,
               "f": "e",
-              "instruction": "Habla con «Barnil Jarropetra» y entrega «Capítulo IV».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Barnil Jarropetra» y entrega «Capítulo IV».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Las verdes colinas de Tuercespina",
@@ -113652,7 +113959,8 @@
               "y": 10.53,
               "z": 11.1,
               "f": "e",
-              "instruction": "Habla con «Barnil Jarropetra» y entrega «Las verdes colinas de Tuercespina».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Barnil Jarropetra» y entrega «Las verdes colinas de Tuercespina».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Domina la pantera",
@@ -113822,12 +114130,27 @@
         },
         {
           "title": "Bahía del Botín",
+          "note": "Usa la piedra de hogar y entrega a Drizzlik la piel que guardaste. Después visita al barón, a Kebok y a Krazek.",
           "goals": [
             {
               "t": "hearth",
               "area": 35,
               "location": "Bahía del Botín",
               "instruction": "Comprueba que tu piedra de hogar está vinculada a «Bahía del Botín» y úsala para regresar allí."
+            },
+            {
+              "title": "Hay que ensamblar",
+              "note": "Drizzlik",
+              "t": "turnin",
+              "quest": 577,
+              "npc": 2495,
+              "npcName": "Drizzlik",
+              "map": 1434,
+              "x": 28.29,
+              "y": 77.59,
+              "z": 25.5,
+              "f": "e",
+              "instruction": "Habla con «Drizzlik» y entrega «Hay que ensamblar».\nZona: Vega de Tuercespina."
             },
             {
               "title": "La piedra de las mareas",
@@ -114007,7 +114330,103 @@
       ],
       "_sendaLocale": "esES",
       "pack": "guides",
-      "version": 1
+      "version": 1,
+      "routeRevision": 2,
+      "progressMigrations": [
+        {
+          "from": 1,
+          "to": 2,
+          "goalMap": {
+            "24:3": "22:6",
+            "22:6": "22:7",
+            "24:2": "22:8",
+            "24:4": "22:9",
+            "24:5": "22:10",
+            "25:1": "24:1",
+            "26:1": "25:1",
+            "26:2": "25:2",
+            "26:3": "25:3",
+            "26:4": "25:4",
+            "26:5": "25:5",
+            "26:6": "25:6",
+            "27:1": "26:1",
+            "27:2": "26:2",
+            "28:1": "27:1",
+            "28:2": "27:2",
+            "29:1": "28:1",
+            "29:2": "28:2",
+            "29:3": "28:3",
+            "29:4": "28:4",
+            "29:5": "28:5",
+            "29:6": "28:6",
+            "29:7": "28:7",
+            "30:1": "29:1",
+            "30:2": "29:2",
+            "30:3": "29:3",
+            "30:4": "29:4",
+            "31:1": "30:1",
+            "31:2": "30:2",
+            "31:3": "30:3",
+            "31:4": "30:4",
+            "31:5": "30:5",
+            "31:6": "30:6",
+            "32:1": "31:1",
+            "33:1": "32:1",
+            "34:1": "33:1",
+            "24:1": "33:2",
+            "34:2": "33:3",
+            "34:3": "33:4",
+            "34:4": "33:5",
+            "34:5": "33:6",
+            "34:6": "33:7",
+            "35:1": "34:1",
+            "36:1": "35:1",
+            "36:2": "35:2"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "24": 22,
+            "23": 22,
+            "25": 24,
+            "26": 25,
+            "27": 26,
+            "28": 27,
+            "29": 28,
+            "30": 29,
+            "31": 30,
+            "32": 31,
+            "33": 32,
+            "34": 33,
+            "35": 34,
+            "36": 35,
+            "37": 36
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 36,
+          "firstAffectedStep": 22
+        }
+      ]
     },
     {
       "id": "forever/alliance/30-40/05-arathi-highlands",
@@ -114571,49 +114990,8 @@
           ]
         },
         {
-          "title": "La caravana perdida",
-          "note": "La caravana destruida se encuentra fuera de la carretera cerca de Biggs.",
-          "goals": [
-            {
-              "title": "La caravana perdida",
-              "note": "Componentes de zahorí",
-              "t": "collect",
-              "quest": 1421,
-              "oi": 1,
-              "item": 6170,
-              "itemName": "Componentes de zahorí",
-              "count": 1,
-              "map": 1435,
-              "x": 64.46,
-              "y": 18.3,
-              "f": "e",
-              "from": "Cofre de la caravana",
-              "fromKind": "object",
-              "instruction": "Interactúa con «Cofre de la caravana» para reunir «Componentes de zahorí» (1 en total)."
-            }
-          ]
-        },
-        {
-          "title": "Vigilante Biggs",
-          "goals": [
-            {
-              "title": "La caravana perdida",
-              "t": "turnin",
-              "quest": 1421,
-              "npc": 5476,
-              "npcName": "Vigía Biggs",
-              "map": 1435,
-              "x": 26.74,
-              "y": 59.83,
-              "z": 21.9,
-              "f": "e",
-              "instruction": "Habla con «Vigía Biggs» y entrega «La caravana perdida»."
-            }
-          ]
-        },
-        {
-          "title": "El Harborage",
-          "note": "Sigue la carretera hacial norte hastal draenei de la Harborage.",
+          "title": "Magtoor",
+          "note": "Desde Biggs sigue hacia el norte y recoge el encargo de Magtoor antes de adentrarte en el pantano.",
           "goals": [
             {
               "title": "Cristales draenetistas",
@@ -114695,6 +115073,29 @@
               "itemName": "Cayada de Noboru",
               "qlvl": 39,
               "instruction": "Si tienes «Cayada de Noboru» en tus bolsas, haz clic derecho en él para iniciar «Noboru el Garrote»."
+            }
+          ]
+        },
+        {
+          "title": "La caravana perdida",
+          "note": "Busca el cofre de la caravana junto al campamento de Galen. Recoge los componentes antes de iniciar la escolta.",
+          "goals": [
+            {
+              "title": "La caravana perdida",
+              "note": "Componentes de zahorí",
+              "t": "collect",
+              "quest": 1421,
+              "oi": 1,
+              "item": 6170,
+              "itemName": "Componentes de zahorí",
+              "count": 1,
+              "map": 1435,
+              "x": 64.46,
+              "y": 18.3,
+              "f": "e",
+              "from": "Cofre de la caravana",
+              "fromKind": "object",
+              "instruction": "Interactúa con «Cofre de la caravana» para reunir «Componentes de zahorí» (1 en total)."
             }
           ]
         },
@@ -114781,6 +115182,25 @@
               "instruction": "Habla con «Magtoor» y entrega «Cristales draenetistas»."
             }
           ]
+        },
+        {
+          "title": "Vigilante Biggs",
+          "goals": [
+            {
+              "title": "La caravana perdida",
+              "t": "turnin",
+              "quest": 1421,
+              "npc": 5476,
+              "npcName": "Vigía Biggs",
+              "map": 1435,
+              "x": 26.74,
+              "y": 59.83,
+              "z": 21.9,
+              "f": "e",
+              "instruction": "Habla con «Vigía Biggs» y entrega «La caravana perdida»."
+            }
+          ],
+          "note": "Tras entregar a Magtoor, baja al cruce de Biggs con los componentes de la caravana. Continúa hacia Villa Oscura para tomar el vuelo."
         },
         {
           "title": "Vuela a Ventormenta",
@@ -117377,7 +117797,11 @@
               "z": 48.4,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nInteractúa con «Fragmentos de Myzrael» para entregar «Cristal en las montañas».\nZona: Tierras Altas de Arathi.\nSólo si Gluggle le dio el colgante en Tuercespina."
+              "instruction": "Opcional.\nInteractúa con «Fragmentos de Myzrael» para entregar «Cristal en las montañas».\nZona: Tierras Altas de Arathi.\nSólo si Gluggle le dio el colgante en Tuercespina.",
+              "levelingDetour": true,
+              "detourItems": {
+                "4614": 1
+              }
             },
             {
               "title": "La princesa secuestrada",
@@ -119728,7 +120152,14 @@
               "y": 55.53,
               "z": 17.7,
               "f": "e",
-              "instruction": "Habla con «Bartolo Ginsetti» y entrega «Capa de piel de yeti de Bartolo».\nZona: Laderas de Trabalomas."
+              "instruction": "Habla con «Bartolo Ginsetti» y entrega «Capa de piel de yeti de Bartolo».\nZona: Laderas de Trabalomas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "2997": 1,
+                "2321": 1,
+                "3719": 1,
+                "3720": 10
+              }
             },
             {
               "title": "Una amenaza costosa",
@@ -120886,7 +121317,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 2,
+      "routeRevision": 3,
       "progressMigrations": [
         {
           "from": 1,
@@ -120949,6 +121380,77 @@
           "affectedQuestIDs": [],
           "previousStepCount": 48,
           "firstAffectedStep": 45
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "goalMap": {
+            "7:1": "5:1",
+            "8:1": "6:1",
+            "8:2": "6:2",
+            "8:3": "6:3",
+            "5:1": "7:1",
+            "9:1": "8:1",
+            "9:2": "8:2",
+            "9:3": "8:3",
+            "10:1": "9:1",
+            "10:2": "9:2",
+            "6:1": "10:1"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "7": 5,
+            "8": 6,
+            "5": 5,
+            "9": 8,
+            "10": 9,
+            "6": 5,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 30,
+            "31": 31,
+            "32": 32,
+            "33": 33,
+            "34": 34,
+            "35": 35,
+            "36": 36,
+            "37": 37,
+            "38": 38,
+            "39": 39,
+            "40": 40,
+            "41": 41,
+            "42": 42,
+            "43": 43,
+            "44": 44,
+            "45": 45,
+            "46": 46,
+            "47": 47,
+            "48": 48,
+            "49": 49
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 48,
+          "firstAffectedStep": 5
         }
       ]
     },
@@ -122958,7 +123460,11 @@
               "f": "e",
               "optional": true,
               "qlvl": 42,
-              "instruction": "Opcional.\nHabla con «Lucien Tosselramienta» y acepta «Es mejor la piedra que la tela».\nZona: Tierras Inhóspitas.\nLucien Tosselramienta, junto a Lotwil."
+              "instruction": "Opcional.\nHabla con «Lucien Tosselramienta» y acepta «Es mejor la piedra que la tela».\nZona: Tierras Inhóspitas.\nLucien Tosselramienta, junto a Lotwil.",
+              "levelingDetour": true,
+              "detourItems": {
+                "2868": 1
+              }
             },
             {
               "title": "Es mejor la piedra que la tela",
@@ -122973,7 +123479,11 @@
               "z": 244.7,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nHabla con «Lucien Tosselramienta» y entrega «Es mejor la piedra que la tela».\nZona: Tierras Inhóspitas.\nsólo si usted lleva Brazales de patrón de bronce (una nave de herrero)."
+              "instruction": "Opcional.\nHabla con «Lucien Tosselramienta» y entrega «Es mejor la piedra que la tela».\nZona: Tierras Inhóspitas.\nsólo si usted lleva Brazales de patrón de bronce (una nave de herrero).",
+              "levelingDetour": true,
+              "detourItems": {
+                "2868": 1
+              }
             },
             {
               "t": "note",
@@ -123801,38 +124311,8 @@
           ]
         },
         {
-          "title": "Punta de Nijel",
-          "goals": [
-            {
-              "t": "hearth",
-              "area": 608,
-              "location": "Punta de Nijel",
-              "instruction": "Comprueba que tu piedra de hogar está vinculada a «Punta de Nijel» y úsala para regresar allí."
-            },
-            {
-              "title": "El naufragio de Karnitol",
-              "note": "Kreldig Ungor",
-              "t": "turnin",
-              "quest": 1455,
-              "npc": 5638,
-              "npcName": "Kreldig Ungor",
-              "map": 1443,
-              "x": 66.2,
-              "y": 9.63,
-              "z": 166.8,
-              "f": "e",
-              "instruction": "Habla con «Kreldig Ungor» y entrega «El naufragio de Karnitol».\nZona: Desolace."
-            },
-            {
-              "t": "note",
-              "text": "La siguiente tarea de Kreldig, el Satchel de Karnitol, es una gota en la costa lejana: saltarla.",
-              "instruction": "La siguiente tarea de Kreldig, el Satchel de Karnitol, es una gota en la costa lejana: saltarla."
-            }
-          ]
-        },
-        {
           "title": "Bibbly F'utzbuckle",
-          "note": "Sigue la carretera hacial sur hasta Cabaña de Kormek.",
+          "note": "Desde la torre de Azore, sigue los caminos hasta la cabaña de Kormek, al este. Bibbly te envía al Cementerio de Kodos.",
           "goals": [
             {
               "title": "Colección de kodos",
@@ -124130,7 +124610,8 @@
               "y": 75.29,
               "f": "e",
               "qlvl": 38,
-              "instruction": "Habla con «Rigger Gizelton» y acepta «La caravana Gizelton».\nZona: Desolace."
+              "instruction": "Habla con «Rigger Gizelton» y acepta «La caravana Gizelton».\nZona: Desolace.",
+              "levelingDetour": true
             },
             {
               "title": "La caravana Gizelton",
@@ -124140,7 +124621,8 @@
               "x": 55.7,
               "y": 67.8,
               "f": "e",
-              "instruction": "Abre «La caravana Gizelton» en el registro y sigue los objetivos que indique el juego.\nZona: Desolace."
+              "instruction": "Abre «La caravana Gizelton» en el registro y sigue los objetivos que indique el juego.\nZona: Desolace.",
+              "levelingDetour": true
             },
             {
               "title": "La caravana Gizelton",
@@ -124154,7 +124636,8 @@
               "y": 61.86,
               "z": 61.4,
               "f": "e",
-              "instruction": "Habla con «Smeed Mezclatornillos» y entrega «La caravana Gizelton».\nZona: Desolace."
+              "instruction": "Habla con «Smeed Mezclatornillos» y entrega «La caravana Gizelton».\nZona: Desolace.",
+              "levelingDetour": true
             }
           ]
         },
@@ -124453,9 +124936,34 @@
           ]
         },
         {
-          "title": "Punta de Nijel",
-          "note": "Sigue la carretera hacial norte hasta Punta de Nijel.",
+          "title": "Regreso a Punta de Nijel",
+          "note": "Usa la piedra de hogar tras entregar a Bibbly. Reúne las entregas de Kreldig, el capitán Pentigast y el hermano Antón antes de volar a Theramore.",
           "goals": [
+            {
+              "t": "hearth",
+              "area": 608,
+              "location": "Punta de Nijel",
+              "instruction": "Comprueba que tu piedra de hogar está vinculada a «Punta de Nijel» y úsala para regresar allí."
+            },
+            {
+              "title": "El naufragio de Karnitol",
+              "note": "Kreldig Ungor",
+              "t": "turnin",
+              "quest": 1455,
+              "npc": 5638,
+              "npcName": "Kreldig Ungor",
+              "map": 1443,
+              "x": 66.2,
+              "y": 9.63,
+              "z": 166.8,
+              "f": "e",
+              "instruction": "Habla con «Kreldig Ungor» y entrega «El naufragio de Karnitol».\nZona: Desolace."
+            },
+            {
+              "t": "note",
+              "text": "La siguiente tarea de Kreldig, el Satchel de Karnitol, es una gota en la costa lejana: saltarla.",
+              "instruction": "La siguiente tarea de Kreldig, el Satchel de Karnitol, es una gota en la costa lejana: saltarla."
+            },
             {
               "title": "Componentes para Reivindicadores y Cía.",
               "note": "Kreldig Ungor",
@@ -124754,7 +125262,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 2,
+      "routeRevision": 3,
       "progressMigrations": [
         {
           "from": 1,
@@ -124808,6 +125316,84 @@
           "affectedQuestIDs": [],
           "previousStepCount": 39,
           "firstAffectedStep": 38
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "goalMap": {
+            "28:1": "27:1",
+            "29:1": "28:1",
+            "29:2": "28:2",
+            "29:3": "28:3",
+            "30:1": "29:1",
+            "31:1": "30:1",
+            "31:2": "30:2",
+            "32:1": "31:1",
+            "33:1": "32:1",
+            "33:2": "32:2",
+            "33:3": "32:3",
+            "34:1": "33:1",
+            "34:2": "33:2",
+            "34:3": "33:3",
+            "35:1": "34:1",
+            "35:2": "34:2",
+            "36:1": "35:1",
+            "37:1": "36:1",
+            "27:1": "37:1",
+            "27:2": "37:2",
+            "27:3": "37:3",
+            "38:1": "37:4",
+            "38:2": "37:5",
+            "38:3": "37:6",
+            "38:4": "37:7",
+            "38:5": "37:8",
+            "39:1": "38:1"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "28": 27,
+            "29": 28,
+            "30": 29,
+            "31": 30,
+            "32": 31,
+            "33": 32,
+            "34": 33,
+            "35": 34,
+            "36": 35,
+            "37": 36,
+            "27": 27,
+            "38": 37,
+            "39": 38,
+            "40": 39
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 39,
+          "firstAffectedStep": 27
         }
       ]
     },
@@ -126983,7 +127569,11 @@
               "f": "e",
               "optional": true,
               "qlvl": 35,
-              "instruction": "Opcional.\nHabla con «\"Ojolodo\" Jarl» y acepta «Jarl necesita una espada».\nZona: Marjal Revolcafango.\nsólo si lleva una Espada Ancha de Acero Lunar (una nave de herrero)."
+              "instruction": "Opcional.\nHabla con «\"Ojolodo\" Jarl» y acepta «Jarl necesita una espada».\nZona: Marjal Revolcafango.\nsólo si lleva una Espada Ancha de Acero Lunar (una nave de herrero).",
+              "levelingDetour": true,
+              "detourItems": {
+                "3853": 1
+              }
             },
             {
               "title": "Jarl necesita una espada",
@@ -126997,7 +127587,11 @@
               "z": 34.3,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nHabla con «\"Ojolodo\" Jarl» y entrega «Jarl necesita una espada».\nZona: Marjal Revolcafango."
+              "instruction": "Opcional.\nHabla con «\"Ojolodo\" Jarl» y entrega «Jarl necesita una espada».\nZona: Marjal Revolcafango.",
+              "levelingDetour": true,
+              "detourItems": {
+                "3853": 1
+              }
             }
           ]
         },
@@ -128183,7 +128777,8 @@
               "z": 28.8,
               "f": "e",
               "qlvl": 45,
-              "instruction": "Habla con «Maestro de flota Cuernomarino» y acepta «Bucaneros Velasangre».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Maestro de flota Cuernomarino» y acepta «Bucaneros Velasangre».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Tabaco rapé",
@@ -128233,7 +128828,8 @@
               "z": 7.5,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nDerrota a «Capitán Aguasmansas».\nZona: Vega de Tuercespina."
+              "instruction": "Opcional.\nDerrota a «Capitán Aguasmansas».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Bucaneros Velasangre",
@@ -128249,7 +128845,8 @@
               "z": 8.1,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nDerrota a «Capitán Sinquilla».\nZona: Vega de Tuercespina."
+              "instruction": "Opcional.\nDerrota a «Capitán Sinquilla».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Bucaneros Velasangre",
@@ -128265,7 +128862,8 @@
               "z": 7.5,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nDerrota a «Maestro de Flota Firallon».\nZona: Vega de Tuercespina."
+              "instruction": "Opcional.\nDerrota a «Maestro de Flota Firallon».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "note": "Criba de Cortello",
@@ -128310,26 +128908,6 @@
               "itemName": "Criba de Cortello",
               "qlvl": 43,
               "instruction": "Si tienes «Criba de Cortello» en tus bolsas, haz clic derecho en él para iniciar «El enigma de Cortello».\nparal Pantano de las Penas más tarde."
-            }
-          ]
-        },
-        {
-          "title": "Bahía del Botín",
-          "goals": [
-            {
-              "title": "Bucaneros Velasangre",
-              "note": "Maestro de flota Cuernomarino",
-              "t": "turnin",
-              "quest": 608,
-              "npc": 2487,
-              "npcName": "Maestro de flota Cuernomarino",
-              "map": 1434,
-              "x": 27.17,
-              "y": 77.01,
-              "z": 28.8,
-              "f": "e",
-              "optional": true,
-              "instruction": "Opcional.\nHabla con «Maestro de flota Cuernomarino» y entrega «Bucaneros Velasangre».\nZona: Vega de Tuercespina."
             }
           ]
         },
@@ -128743,8 +129321,8 @@
           ]
         },
         {
-          "title": "Bahía del Botín",
-          "note": "Vuelve a la ciudad; Shaky se encuentra en la boca del túnel.",
+          "title": "Entregas en Bahía del Botín",
+          "note": "Habla con Trémulo a la entrada del túnel y continúa hacia MacKinley. Si venciste a los tres capitanes, entrega también su encargo durante esta visita al puerto.",
           "goals": [
             {
               "title": "Asusta a Trémulo",
@@ -128829,6 +129407,22 @@
               "z": 15.5,
               "f": "e",
               "instruction": "Habla con «Fin Fizqueta» y entrega «La fiebre de Tuercespina».\nZona: Vega de Tuercespina."
+            },
+            {
+              "title": "Bucaneros Velasangre",
+              "note": "Maestro de flota Cuernomarino",
+              "t": "turnin",
+              "quest": 608,
+              "npc": 2487,
+              "npcName": "Maestro de flota Cuernomarino",
+              "map": 1434,
+              "x": 27.17,
+              "y": 77.01,
+              "z": 28.8,
+              "f": "e",
+              "optional": true,
+              "instruction": "Opcional.\nHabla con «Maestro de flota Cuernomarino» y entrega «Bucaneros Velasangre».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             },
             {
               "title": "Tallos de juncos akiris",
@@ -131591,7 +132185,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 2,
+      "routeRevision": 3,
       "progressMigrations": [
         {
           "from": 1,
@@ -131659,6 +132253,146 @@
           "affectedQuestIDs": [],
           "previousStepCount": 52,
           "firstAffectedStep": 21
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "goalMap": {
+            "26:1": "25:1",
+            "27:1": "26:1",
+            "27:2": "26:2",
+            "27:3": "26:3",
+            "28:1": "27:1",
+            "28:2": "27:2",
+            "29:1": "28:1",
+            "29:2": "28:2",
+            "29:3": "28:3",
+            "29:4": "28:4",
+            "29:5": "28:5",
+            "25:1": "28:6",
+            "29:6": "28:7",
+            "29:7": "28:8",
+            "30:1": "29:1",
+            "30:2": "29:2",
+            "31:1": "30:1",
+            "31:2": "30:2",
+            "32:1": "31:1",
+            "33:1": "32:1",
+            "34:1": "33:1",
+            "35:1": "34:1",
+            "35:2": "34:2",
+            "36:1": "35:1",
+            "36:2": "35:2",
+            "37:1": "36:1",
+            "37:2": "36:2",
+            "37:3": "36:3",
+            "37:4": "36:4",
+            "37:5": "36:5",
+            "37:6": "36:6",
+            "37:7": "36:7",
+            "37:8": "36:8",
+            "38:1": "37:1",
+            "38:2": "37:2",
+            "38:3": "37:3",
+            "38:4": "37:4",
+            "38:5": "37:5",
+            "38:6": "37:6",
+            "38:7": "37:7",
+            "38:8": "37:8",
+            "38:9": "37:9",
+            "38:10": "37:10",
+            "38:11": "37:11",
+            "38:12": "37:12",
+            "39:1": "38:1",
+            "39:2": "38:2",
+            "40:1": "39:1",
+            "40:2": "39:2",
+            "41:1": "40:1",
+            "41:2": "40:2",
+            "42:1": "41:1",
+            "42:2": "41:2",
+            "43:1": "42:1",
+            "44:1": "43:1",
+            "44:2": "43:2",
+            "45:1": "44:1",
+            "45:2": "44:2",
+            "45:3": "44:3",
+            "46:1": "45:1",
+            "46:2": "45:2",
+            "47:1": "46:1",
+            "48:1": "47:1",
+            "48:2": "47:2",
+            "48:3": "47:3",
+            "49:1": "48:1",
+            "49:2": "48:2",
+            "49:3": "48:3",
+            "50:1": "49:1",
+            "50:2": "49:2",
+            "50:3": "49:3",
+            "50:4": "49:4",
+            "51:1": "50:1",
+            "51:2": "50:2",
+            "52:1": "51:1",
+            "52:2": "51:2"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "26": 25,
+            "27": 26,
+            "28": 27,
+            "29": 28,
+            "25": 25,
+            "30": 29,
+            "31": 30,
+            "32": 31,
+            "33": 32,
+            "34": 33,
+            "35": 34,
+            "36": 35,
+            "37": 36,
+            "38": 37,
+            "39": 38,
+            "40": 39,
+            "41": 40,
+            "42": 41,
+            "43": 42,
+            "44": 43,
+            "45": 44,
+            "46": 45,
+            "47": 46,
+            "48": 47,
+            "49": 48,
+            "50": 49,
+            "51": 50,
+            "52": 51,
+            "53": 52
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 52,
+          "firstAffectedStep": 25
         }
       ]
     },
@@ -132084,13 +132818,17 @@
         },
         {
           "title": "Barranco Lethlor",
-          "note": "El nido Scalding Whelps en el barranco al este de Garek; dejal Scorched Guardians (elite) solo. El Corazón de draco negro cae raramente: tómelo si viene mientras farmear.",
+          "note": "Si te falta experiencia para el 43, derrota crías abrasadoras. Si cae el corazón, llévaselo a Sigrun. Al alcanzar el nivel puedes continuar.",
           "goals": [
             {
-              "note": "farmear en ayuda Scalding en Barranco Lethlor, Tierras Inhóspitas",
+              "note": "Busca crías abrasadoras en el Barranco Lethlor. Evita los guardianes de élite.",
               "t": "level",
               "level": 43,
-              "instruction": "Gana experiencia hasta alcanzar el nivel 43.\nfarmear en ayuda Scalding en Barranco Lethlor, Tierras Inhóspitas."
+              "instruction": "Gana experiencia hasta alcanzar el nivel 43.\nBusca crías abrasadoras en el Barranco Lethlor. Evita los guardianes de élite.",
+              "map": 1418,
+              "x": 71.2,
+              "y": 52.7,
+              "f": "e"
             },
             {
               "title": "Encantamientos de fuego abrasador",
@@ -132181,7 +132919,11 @@
               ],
               "optional": true,
               "spread": true,
-              "instruction": "Opcional.\nReúne «Corazón de draco negro» (1 en total).\nZona: Tierras Inhóspitas."
+              "instruction": "Opcional.\nReúne «Corazón de draco negro» (1 en total).\nZona: Tierras Inhóspitas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "4612": 1
+              }
             }
           ]
         },
@@ -132201,7 +132943,11 @@
               "z": 279.4,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nHabla con «Sigrun Extracero» y entrega «Encantamientos de fuego abrasador».\nZona: Tierras Inhóspitas."
+              "instruction": "Opcional.\nHabla con «Sigrun Extracero» y entrega «Encantamientos de fuego abrasador».\nZona: Tierras Inhóspitas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "4612": 1
+              }
             }
           ]
         },
@@ -132967,27 +133713,9 @@
           ]
         },
         {
-          "title": "Pico Nidal",
+          "title": "Entregas en Pico Nidal",
+          "note": "Entrega los collares a Fraggar al entrar en Pico Nidal. Después sube a ver a Garracha y toma el vuelo hacia Puerto de Menethil.",
           "goals": [
-            {
-              "title": "Las jaulas de Secacorteza",
-              "note": "Maestro de grifos Garracha",
-              "t": "turnin",
-              "quest": 2988,
-              "npc": 5636,
-              "npcName": "Maestro de grifos Garracha",
-              "map": 1425,
-              "x": 9.75,
-              "y": 44.47,
-              "z": 197.7,
-              "f": "e",
-              "instruction": "Habla con «Maestro de grifos Garracha» y entrega «Las jaulas de Secacorteza».\nZona: Tierras del Interior."
-            },
-            {
-              "t": "note",
-              "text": "La siguiente tarea de Talonaxe espera una guía posterior de Hinterlands.",
-              "instruction": "La siguiente tarea de Talonaxe espera una guía posterior de Hinterlands."
-            },
             {
               "title": "Los collares de trols",
               "note": "Fraggar Mantrueno",
@@ -133023,7 +133751,11 @@
               "f": "e",
               "optional": true,
               "qlvl": 45,
-              "instruction": "Opcional.\nHabla con «Fraggar Mantrueno» y acepta «Los collares de trols».\nZona: Tierras del Interior.\nFraggar sigue pagando por los collares: mano en los extras."
+              "instruction": "Opcional.\nHabla con «Fraggar Mantrueno» y acepta «Los collares de trols».\nZona: Tierras del Interior.\nFraggar sigue pagando por los collares: mano en los extras.",
+              "levelingDetour": true,
+              "detourItems": {
+                "9259": 5
+              }
             },
             {
               "title": "Los collares de trols",
@@ -133037,7 +133769,30 @@
               "z": 123.3,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nHabla con «Fraggar Mantrueno» y entrega «Los collares de trols».\nZona: Tierras del Interior."
+              "instruction": "Opcional.\nHabla con «Fraggar Mantrueno» y entrega «Los collares de trols».\nZona: Tierras del Interior.",
+              "levelingDetour": true,
+              "detourItems": {
+                "9259": 5
+              }
+            },
+            {
+              "title": "Las jaulas de Secacorteza",
+              "note": "Maestro de grifos Garracha",
+              "t": "turnin",
+              "quest": 2988,
+              "npc": 5636,
+              "npcName": "Maestro de grifos Garracha",
+              "map": 1425,
+              "x": 9.75,
+              "y": 44.47,
+              "z": 197.7,
+              "f": "e",
+              "instruction": "Habla con «Maestro de grifos Garracha» y entrega «Las jaulas de Secacorteza».\nZona: Tierras del Interior."
+            },
+            {
+              "t": "note",
+              "text": "La siguiente tarea de Talonaxe espera una guía posterior de Hinterlands.",
+              "instruction": "La siguiente tarea de Talonaxe espera una guía posterior de Hinterlands."
             }
           ]
         },
@@ -133753,7 +134508,45 @@
       ],
       "_sendaLocale": "esES",
       "pack": "guides",
-      "version": 1
+      "version": 1,
+      "routeRevision": 2,
+      "progressMigrations": [
+        {
+          "from": 1,
+          "to": 2,
+          "goalMap": {
+            "14:3": "14:1",
+            "14:4": "14:2",
+            "14:5": "14:3",
+            "14:1": "14:4",
+            "14:2": "14:5"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 18,
+          "firstAffectedStep": 14
+        }
+      ]
     },
     {
       "id": "forever/alliance/40-50/03-feralas",
@@ -135418,7 +136211,12 @@
                 }
               ],
               "optional": true,
-              "instruction": "Opcional.\nReúne «Pellejo de yeti prístino».\nZona: Feralas."
+              "instruction": "Opcional.\nReúne «Pellejo de yeti prístino».\nZona: Feralas.",
+              "levelingDetour": true,
+              "detourQuest": 7735,
+              "detourItems": {
+                "18969": 1
+              }
             },
             {
               "title": "Pellejo de yeti prístino",
@@ -135435,7 +136233,11 @@
               },
               "optional": true,
               "qlvl": 48,
-              "instruction": "Opcional.\nSi tienes «Pellejo de yeti prístino» en tus bolsas, haz clic derecho en él para iniciar «Pellejo de yeti prístino»."
+              "instruction": "Opcional.\nSi tienes «Pellejo de yeti prístino» en tus bolsas, haz clic derecho en él para iniciar «Pellejo de yeti prístino».",
+              "levelingDetour": true,
+              "detourItems": {
+                "18969": 1
+              }
             }
           ]
         },
@@ -135653,7 +136455,11 @@
               "z": 10.1,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nHabla con «Pratt McGrubben» y entrega «Pellejo de yeti prístino».\nZona: Feralas."
+              "instruction": "Opcional.\nHabla con «Pratt McGrubben» y entrega «Pellejo de yeti prístino».\nZona: Feralas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "18969": 1
+              }
             }
           ]
         },
@@ -135670,7 +136476,8 @@
               "optional": true,
               "area": 978,
               "text": "Zul'Farrak",
-              "instruction": "Opcional.\nDirígete al punto de la ruta: «Zul'Farrak».\nZona: Tanaris."
+              "instruction": "Opcional.\nDirígete al punto de la ruta: «Zul'Farrak».\nZona: Tanaris.",
+              "levelingDetour": true
             }
           ]
         },
@@ -138296,7 +139103,8 @@
                 }
               ],
               "qlvl": 50,
-              "instruction": "Habla con «Tooga» y acepta «La misión de Tooga».\nZona: Tanaris."
+              "instruction": "Habla con «Tooga» y acepta «La misión de Tooga».\nZona: Tanaris.",
+              "levelingDetour": true
             },
             {
               "title": "La misión de Tooga",
@@ -138314,7 +139122,8 @@
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Abre «La misión de Tooga» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+              "instruction": "Abre «La misión de Tooga» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
+              "levelingDetour": true
             },
             {
               "title": "La misión de Tooga",
@@ -138328,28 +139137,28 @@
               "y": 25.67,
               "z": 0.8,
               "f": "e",
-              "instruction": "Habla con «Thorta» y entrega «La misión de Tooga».\nZona: Tanaris."
+              "instruction": "Habla con «Thorta» y entrega «La misión de Tooga».\nZona: Tanaris.",
+              "levelingDetour": true
             }
           ]
         },
         {
-          "title": "Puerto Bonvapor",
+          "title": "Cartel de Gadgetzan",
           "goals": [
             {
               "title": "SE BUSCA: Caliph Escorpijón",
               "minLevel": 39,
-              "note": "El cartel buscado por Jefe de seguridad Silvaina",
+              "note": "Lee el cartel junto a Gadgetzan al volver para las entregas.",
               "t": "accept",
               "quest": 2781,
-              "object": 142122,
+              "object": 150075,
               "objName": "Cartel de Se busca",
               "map": 1446,
-              "x": 66.82,
-              "y": 22.29,
-              "z": 8,
+              "x": 51.8,
+              "y": 27.0,
               "f": "e",
               "qlvl": 46,
-              "instruction": "Interactúa con «Cartel de Se busca» y acepta «SE BUSCA: Caliph Escorpijón».\nZona: Tanaris.\nEl cartel buscado por Jefe de seguridad Silvaina."
+              "instruction": "Interactúa con «Cartel de Se busca» y acepta «SE BUSCA: Caliph Escorpijón».\nZona: Tanaris.\nLee el cartel junto a Gadgetzan al volver para las entregas."
             }
           ]
         },
@@ -140444,7 +141253,12 @@
               "z": 13.1,
               "f": "e",
               "qlvl": 50,
-              "instruction": "Habla con «Mago sangriento Lynnore» y acepta «El bocado de basilisco»."
+              "instruction": "Habla con «Mago sangriento Lynnore» y acepta «El bocado de basilisco».",
+              "levelingDetour": true,
+              "detourItems": {
+                "8394": 10,
+                "8396": 2
+              }
             },
             {
               "title": "El vigor del buitre",
@@ -140459,7 +141273,12 @@
               "z": 13.1,
               "f": "e",
               "qlvl": 50,
-              "instruction": "Habla con «Mago sangriento Lynnore» y acepta «El vigor del buitre»."
+              "instruction": "Habla con «Mago sangriento Lynnore» y acepta «El vigor del buitre».",
+              "levelingDetour": true,
+              "detourItems": {
+                "8396": 10,
+                "8391": 2
+              }
             }
           ]
         },
@@ -140997,7 +141816,12 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Cerebro de basilisco» (10 en total)."
+              "instruction": "Reúne «Cerebro de basilisco» (10 en total).",
+              "levelingDetour": true,
+              "detourItems": {
+                "8394": 10,
+                "8396": 2
+              }
             },
             {
               "title": "La vitalidad del jabalí",
@@ -141273,7 +142097,12 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Papada de hiena risitas» (2 en total)."
+              "instruction": "Reúne «Papada de hiena risitas» (2 en total).",
+              "levelingDetour": true,
+              "detourItems": {
+                "8396": 10,
+                "8391": 2
+              }
             },
             {
               "title": "Papadas de hiena risita",
@@ -141680,7 +142509,12 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Molleja de buitre» (10 en total)."
+              "instruction": "Reúne «Molleja de buitre» (10 en total).",
+              "levelingDetour": true,
+              "detourItems": {
+                "8396": 10,
+                "8391": 2
+              }
             },
             {
               "title": "El bocado de basilisco",
@@ -141776,7 +142610,12 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Molleja de buitre» (2 en total)."
+              "instruction": "Reúne «Molleja de buitre» (2 en total).",
+              "levelingDetour": true,
+              "detourItems": {
+                "8394": 10,
+                "8396": 2
+              }
             },
             {
               "title": "El golpe decisivo",
@@ -141891,7 +142730,12 @@
               "y": 14.3,
               "z": 13.1,
               "f": "e",
-              "instruction": "Habla con «Mago sangriento Lynnore» y entrega «El bocado de basilisco»."
+              "instruction": "Habla con «Mago sangriento Lynnore» y entrega «El bocado de basilisco».",
+              "levelingDetour": true,
+              "detourItems": {
+                "8394": 10,
+                "8396": 2
+              }
             },
             {
               "title": "El vigor del buitre",
@@ -141904,7 +142748,12 @@
               "y": 14.3,
               "z": 13.1,
               "f": "e",
-              "instruction": "Habla con «Mago sangriento Lynnore» y entrega «El vigor del buitre»."
+              "instruction": "Habla con «Mago sangriento Lynnore» y entrega «El vigor del buitre».",
+              "levelingDetour": true,
+              "detourItems": {
+                "8396": 10,
+                "8391": 2
+              }
             },
             {
               "title": "Papadas de hiena risita",
@@ -144610,7 +145459,7 @@
         },
         {
           "title": "Abrecaminos Torwa",
-          "note": "Viaja al oeste de Gadgetzan a la larga rampa hacia abajo en Cráter de Un'Goro. Torwa campamentos al pie de la rampa, en la esquina sureste del cráter.",
+          "note": "Baja la rampa hasta Torwa, al sureste del cráter. Si te ofrece «Los simios de Un'Goro» y tienes sitio en el diario, acéptala también. Pasarás junto a los gorilas al visitar a Memo 01.",
           "goals": [
             {
               "title": "La comida de Lar'korwi",
@@ -148879,14 +149728,18 @@
           ]
         },
         {
-          "title": "Grind a 50",
-          "note": "Los gorilas de Meseta Roca de Hierro vienen en pequeños grupos y no dejan nada para ti todavía; de Torwa piel misión viene más tarde. Manténgase fuera de la cueva más profunda: U'cha es nivel 55.",
+          "title": "Gorilas de la Meseta Roca de Hierro",
+          "note": "Caza gorilas en la meseta, cerca de donde encontraste a Memo 01. Si llevas «Los simios de Un'Goro», recoge las pelambres que caigan. Evita el fondo de la cueva de U'cha.",
           "goals": [
             {
-              "note": "farmear en Gorila de Un'Goro en Meseta Roca de Hierro, Cráter de Un'Goro",
+              "note": "Caza gorilas en la meseta, cerca de donde encontraste a Memo 01. Si llevas «Los simios de Un'Goro», recoge las pelambres que caigan. Evita el fondo de la cueva de U'cha.",
               "t": "level",
               "level": 50,
-              "instruction": "Gana experiencia hasta alcanzar el nivel 50.\nfarmear en Gorila de Un'Goro en Meseta Roca de Hierro, Cráter de Un'Goro."
+              "instruction": "Gana experiencia hasta alcanzar el nivel 50.\nCaza gorilas en la meseta, cerca de donde encontraste a Memo 01. Si llevas «Los simios de Un'Goro», recoge las pelambres que caigan. Evita el fondo de la cueva de U'cha.",
+              "map": 1449,
+              "x": 63.1,
+              "y": 17.4,
+              "f": "e"
             }
           ]
         },
@@ -152772,14 +153625,18 @@
           ]
         },
         {
-          "title": "Grind a 51",
-          "note": "El Centipaar silithid se arrastra alrededor del Noxious Lair en el oeste de Tanaris, justo al este de la rampa del cráter. El Workers es el pulls más fácil.",
+          "title": "Camino de Torwa",
+          "note": "Desde el Refugio de Marshal avanza hacia el sureste. Caza diemetradones jóvenes de nivel 49–50 al cruzar la selva oriental camino de Torwa.",
           "goals": [
             {
-              "note": "farmear en Trabajador Centipaar en el Noxious Lair, Tanaris",
+              "note": "Desde el Refugio de Marshal avanza hacia el sureste. Caza diemetradones jóvenes de nivel 49–50 al cruzar la selva oriental camino de Torwa.",
               "t": "level",
               "level": 51,
-              "instruction": "Gana experiencia hasta alcanzar el nivel 51.\nfarmear en Trabajador Centipaar en el Noxious Lair, Tanaris."
+              "instruction": "Gana experiencia hasta alcanzar el nivel 51.\nDesde el Refugio de Marshal avanza hacia el sureste. Caza diemetradones jóvenes de nivel 49–50 al cruzar la selva oriental camino de Torwa.",
+              "map": 1449,
+              "x": 60.7,
+              "y": 38.9,
+              "f": "e"
             }
           ]
         },
@@ -156547,7 +157404,11 @@
               "z": 186.2,
               "f": "e",
               "qlvl": 56,
-              "instruction": "Habla con «Oralius» y acepta «¡CINCUENTA! ¡SÍ!».\nZona: Las Estepas Ardientes.\nOralius: los orcos Blackrock dejan caer los medallones, mantenerlo abierto todo a través del Steppes."
+              "instruction": "Habla con «Oralius» y acepta «¡CINCUENTA! ¡SÍ!».\nZona: Las Estepas Ardientes.\nOralius: los orcos Blackrock dejan caer los medallones, mantenerlo abierto todo a través del Steppes.",
+              "levelingDetour": true,
+              "detourItems": {
+                "11467": 50
+              }
             },
             {
               "title": "El exterminio de los Ardentrañas",
@@ -157399,7 +158260,11 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Medallón Roca Negra» (50 en total).\nZona: Las Estepas Ardientes."
+              "instruction": "Reúne «Medallón Roca Negra» (50 en total).\nZona: Las Estepas Ardientes.",
+              "levelingDetour": true,
+              "detourItems": {
+                "11467": 50
+              }
             }
           ]
         },
@@ -157455,7 +158320,11 @@
               "y": 68.68,
               "z": 186.2,
               "f": "e",
-              "instruction": "Habla con «Oralius» y entrega «¡CINCUENTA! ¡SÍ!».\nZona: Las Estepas Ardientes."
+              "instruction": "Habla con «Oralius» y entrega «¡CINCUENTA! ¡SÍ!».\nZona: Las Estepas Ardientes.",
+              "levelingDetour": true,
+              "detourItems": {
+                "11467": 50
+              }
             },
             {
               "title": "Gor'tesh, el Señor bruto",
@@ -158504,7 +159373,12 @@
                 }
               ],
               "navigationHint": "La flecha señala un maestro de vuelo de salida. Habla con él y elige Castillo de Nethergarde; el juego confirma qué vuelos tienes disponibles.",
-              "instruction": "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «Castillo de Nethergarde».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige Castillo de Nethergarde; el juego confirma qué vuelos tienes disponibles."
+              "instruction": "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «Castillo de Nethergarde».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige Castillo de Nethergarde; el juego confirma qué vuelos tienes disponibles.",
+              "levelingDetour": true,
+              "detourItems": {
+                "10593": 1
+              },
+              "detourQuest": 3501
             }
           ]
         },
@@ -158525,7 +159399,11 @@
               "z": 0.8,
               "f": "e",
               "qlvl": 55,
-              "instruction": "Habla con «Kum'isha el Coleccionista» y acepta «Todo cuenta en grandes cantidades»."
+              "instruction": "Habla con «Kum'isha el Coleccionista» y acepta «Todo cuenta en grandes cantidades».",
+              "levelingDetour": true,
+              "detourItems": {
+                "10593": 1
+              }
             },
             {
               "title": "Todo cuenta en grandes cantidades",
@@ -158571,7 +159449,11 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Fragmento draenetista imperfecto»."
+              "instruction": "Reúne «Fragmento draenetista imperfecto».",
+              "levelingDetour": true,
+              "detourItems": {
+                "10593": 1
+              }
             },
             {
               "title": "Todo cuenta en grandes cantidades",
@@ -158584,7 +159466,11 @@
               "y": 35.65,
               "z": 0.8,
               "f": "e",
-              "instruction": "Habla con «Kum'isha el Coleccionista» y entrega «Todo cuenta en grandes cantidades»."
+              "instruction": "Habla con «Kum'isha el Coleccionista» y entrega «Todo cuenta en grandes cantidades».",
+              "levelingDetour": true,
+              "detourItems": {
+                "10593": 1
+              }
             }
           ]
         },
@@ -164436,8 +165322,8 @@
           ]
         },
         {
-          "title": "Pristine Yeti Horns",
-          "note": "De vuelta a las colinas: sólo los Ice Thistle Matriarchs y Patriarchs llevan los cuernos. Sigue matando yetis hastal nivel 54: de Harlo wildkin misiones son rojos antes de eso.",
+          "title": "Los cuernos de Umi",
+          "note": "Los cuernos de Umi los sueltan las matriarcas y los patriarcas. Cuando los tengas, si falta experiencia, caza los yetis Cardo Nevado de nivel 55–56 en esas mismas colinas.",
           "goals": [
             {
               "title": "Yeti... ¿ya hemos llegado?",
@@ -164523,10 +165409,14 @@
               "instruction": "Reúne «Cuerno de yeti prístino» (2 en total).\nZona: Cuna del Invierno."
             },
             {
-              "note": "farmear en Patriarca Cardo Nevado en Colinas Cardo Nevado, Cuna del Invierno",
+              "note": "Los cuernos de Umi los sueltan las matriarcas y los patriarcas. Cuando los tengas, si falta experiencia, caza los yetis Cardo Nevado de nivel 55–56 en esas mismas colinas.",
               "t": "level",
               "level": 54,
-              "instruction": "Gana experiencia hasta alcanzar el nivel 54.\nfarmear en Patriarca Cardo Nevado en Colinas Cardo Nevado, Cuna del Invierno."
+              "instruction": "Gana experiencia hasta alcanzar el nivel 54.\nLos cuernos de Umi los sueltan las matriarcas y los patriarcas. Cuando los tengas, si falta experiencia, caza los yetis Cardo Nevado de nivel 55–56 en esas mismas colinas.",
+              "map": 1452,
+              "x": 66.4,
+              "y": 41.5,
+              "f": "e"
             }
           ]
         },
@@ -165004,7 +165894,11 @@
               "z": 586.1,
               "f": "e",
               "qlvl": 56,
-              "instruction": "Habla con «Salfa» y acepta «Cuentas para Salfa».\nZona: Cuna del Invierno."
+              "instruction": "Habla con «Salfa» y acepta «Cuentas para Salfa».\nZona: Cuna del Invierno.",
+              "levelingDetour": true,
+              "detourItems": {
+                "21383": 5
+              }
             }
           ]
         },
@@ -165140,7 +166034,11 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Cuentas de Espíritu Nevada».\nZona: Cuna del Invierno."
+              "instruction": "Reúne «Cuentas de Espíritu Nevada».\nZona: Cuna del Invierno.",
+              "levelingDetour": true,
+              "detourItems": {
+                "21383": 5
+              }
             }
           ]
         },
@@ -165158,7 +166056,11 @@
               "y": 34.5,
               "z": 586.1,
               "f": "e",
-              "instruction": "Habla con «Salfa» y entrega «Cuentas para Salfa».\nZona: Cuna del Invierno."
+              "instruction": "Habla con «Salfa» y entrega «Cuentas para Salfa».\nZona: Cuna del Invierno.",
+              "levelingDetour": true,
+              "detourItems": {
+                "21383": 5
+              }
             }
           ]
         },
@@ -165529,7 +166431,11 @@
               "y": 50.09,
               "z": 86.3,
               "qlvl": 55,
-              "instruction": "Habla con «Duque Nicholas Zverenhoff» y acepta «Piedras de la Plaga de un invasor».\nZona: Tierras de la Peste del Este."
+              "instruction": "Habla con «Duque Nicholas Zverenhoff» y acepta «Piedras de la Plaga de un invasor».\nZona: Tierras de la Peste del Este.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12841": 10
+              }
             },
             {
               "title": "Piedras de la Plaga de un esbirro",
@@ -165553,7 +166459,11 @@
               "y": 50.09,
               "z": 86.3,
               "qlvl": 55,
-              "instruction": "Habla con «Duque Nicholas Zverenhoff» y acepta «Piedras de la Plaga de un esbirro».\nZona: Tierras de la Peste del Este."
+              "instruction": "Habla con «Duque Nicholas Zverenhoff» y acepta «Piedras de la Plaga de un esbirro».\nZona: Tierras de la Peste del Este.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12840": 20
+              }
             },
             {
               "title": "Zaeldarr el Marginado",
@@ -166032,7 +166942,11 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Piedra de la Plaga de un invasor».\nZona: Tierras de la Peste del Este."
+              "instruction": "Reúne «Piedra de la Plaga de un invasor».\nZona: Tierras de la Peste del Este.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12841": 10
+              }
             },
             {
               "title": "Piedras de la Plaga de un esbirro",
@@ -166512,7 +167426,11 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Piedra de la Plaga de esbirro».\nZona: Tierras de la Peste del Este."
+              "instruction": "Reúne «Piedra de la Plaga de esbirro».\nZona: Tierras de la Peste del Este.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12840": 20
+              }
             }
           ]
         },
@@ -166543,7 +167461,11 @@
               "x": 71.63,
               "y": 50.09,
               "z": 86.3,
-              "instruction": "Habla con «Duque Nicholas Zverenhoff» y entrega «Piedras de la Plaga de un invasor».\nZona: Tierras de la Peste del Este.\nDuque Nicolas Zverenhoff."
+              "instruction": "Habla con «Duque Nicholas Zverenhoff» y entrega «Piedras de la Plaga de un invasor».\nZona: Tierras de la Peste del Este.\nDuque Nicolas Zverenhoff.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12841": 10
+              }
             },
             {
               "title": "Piedras de la Plaga de un esbirro",
@@ -166555,7 +167477,11 @@
               "x": 71.63,
               "y": 50.09,
               "z": 86.3,
-              "instruction": "Habla con «Duque Nicholas Zverenhoff» y entrega «Piedras de la Plaga de un esbirro».\nZona: Tierras de la Peste del Este."
+              "instruction": "Habla con «Duque Nicholas Zverenhoff» y entrega «Piedras de la Plaga de un esbirro».\nZona: Tierras de la Peste del Este.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12840": 20
+              }
             }
           ]
         },
@@ -166971,7 +167897,11 @@
               "z": 65.2,
               "f": "e",
               "qlvl": 55,
-              "instruction": "Habla con «Oficial Argenta Purocorazón» y acepta «Piedras de la Plaga del esbirro».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Habla con «Oficial Argenta Purocorazón» y acepta «Piedras de la Plaga del esbirro».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12840": 20
+              }
             },
             {
               "title": "Piedras de la Plaga del invasor",
@@ -166996,7 +167926,11 @@
               "z": 65.2,
               "f": "e",
               "qlvl": 55,
-              "instruction": "Habla con «Oficial Argenta Purocorazón» y acepta «Piedras de la Plaga del invasor».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Habla con «Oficial Argenta Purocorazón» y acepta «Piedras de la Plaga del invasor».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12841": 10
+              }
             },
             {
               "title": "Una Peste en la Cruzada",
@@ -167541,7 +168475,11 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Piedra de la Plaga de esbirro».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Reúne «Piedra de la Plaga de esbirro».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12840": 20
+              }
             },
             {
               "title": "Piedras de la Plaga del invasor",
@@ -167658,7 +168596,11 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Piedra de la Plaga de un invasor».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Reúne «Piedra de la Plaga de un invasor».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12841": 10
+              }
             }
           ]
         },
@@ -168271,7 +169213,11 @@
               "y": 83.55,
               "z": 65.2,
               "f": "e",
-              "instruction": "Habla con «Oficial Argenta Purocorazón» y entrega «Piedras de la Plaga del esbirro».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Habla con «Oficial Argenta Purocorazón» y entrega «Piedras de la Plaga del esbirro».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12840": 20
+              }
             },
             {
               "title": "Piedras de la Plaga del invasor",
@@ -168284,7 +169230,11 @@
               "y": 83.55,
               "z": 65.2,
               "f": "e",
-              "instruction": "Habla con «Oficial Argenta Purocorazón» y entrega «Piedras de la Plaga del invasor».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Habla con «Oficial Argenta Purocorazón» y entrega «Piedras de la Plaga del invasor».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12841": 10
+              }
             },
             {
               "title": "Despejando el camino",
@@ -168504,7 +169454,7 @@
         },
         {
           "title": "Campamento del Orvallo",
-          "note": "Compra un Acelerador arcano de Alquimista Arbington paral caldero de Felstone, justo antes de irte: los aceleradores desaparecen después de los minutos de 30.",
+          "note": "Con la llave de Piedra Mácula entregada, recoge el encargo de Llanto de Dalson. Compra un acelerador solo si quieres hacer también la entrega de materiales del primer caldero.",
           "goals": [
             {
               "title": "Todas las torres",
@@ -168567,7 +169517,8 @@
               "y": 83.77,
               "z": 66.6,
               "f": "e",
-              "instruction": "Compra «Acelerador arcano» a «Alquimista Arbington».\nZona: Tierras de la Peste del Oeste.\nAcelerador arcano, de Alquimista Arbington."
+              "instruction": "Compra «Acelerador arcano» a «Alquimista Arbington».\nZona: Tierras de la Peste del Oeste.\nAcelerador arcano, de Alquimista Arbington.",
+              "levelingDetour": true
             }
           ]
         },
@@ -168597,7 +169548,8 @@
               "z": 59.3,
               "f": "e",
               "qlvl": 53,
-              "instruction": "Interactúa con «Caldera de la Plaga» y acepta «El caldero del Campo de Piedra Mácula».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Interactúa con «Caldera de la Plaga» y acepta «El caldero del Campo de Piedra Mácula».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             },
             {
               "title": "El caldero del Campo de Piedra Mácula",
@@ -168805,7 +169757,8 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Agitador óseo».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Reúne «Agitador óseo».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             },
             {
               "title": "El caldero del Campo de Piedra Mácula",
@@ -169363,7 +170316,8 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Paño rúnico».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Reúne «Paño rúnico».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             },
             {
               "title": "El caldero del Campo de Piedra Mácula",
@@ -169376,7 +170330,8 @@
               "y": 56.78,
               "z": 59.3,
               "f": "e",
-              "instruction": "Interactúa con «Caldera de la Plaga» para entregar «El caldero del Campo de Piedra Mácula».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Interactúa con «Caldera de la Plaga» para entregar «El caldero del Campo de Piedra Mácula».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             }
           ]
         },
@@ -169542,7 +170497,7 @@
         },
         {
           "title": "Campamento del Orvallo",
-          "note": "Compra dos más Arcano Quickeners para los calderos de Writhing Haunt y de Dalson, y cabalgue derecho allí: desaparecen después de los minutos 30.",
+          "note": "La ruta continúa con la llave de la Gangrena de Gahrron. Si haces las entregas de materiales opcionales, compra los dos aceleradores al salir. Caducan en 30 minutos.",
           "goals": [
             {
               "title": "El regreso al Campamento del Orvallo",
@@ -169672,7 +170627,8 @@
               "y": 83.77,
               "z": 66.6,
               "f": "e",
-              "instruction": "Compra «Acelerador arcano» (2 en total) a «Alquimista Arbington».\nZona: Tierras de la Peste del Oeste.\nAcelerador arcano, de Alquimista Arbington."
+              "instruction": "Compra «Acelerador arcano» (2 en total) a «Alquimista Arbington».\nZona: Tierras de la Peste del Oeste.\nAcelerador arcano, de Alquimista Arbington.",
+              "levelingDetour": true
             }
           ]
         },
@@ -169702,7 +170658,8 @@
               "z": 58.4,
               "f": "e",
               "qlvl": 55,
-              "instruction": "Interactúa con «Caldera de la Plaga» y acepta «El caldero de El Tormento».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Interactúa con «Caldera de la Plaga» y acepta «El caldero de El Tormento».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             },
             {
               "title": "El caldero de El Tormento",
@@ -169736,7 +170693,8 @@
                   "n": 1
                 }
               ],
-              "instruction": "Reúne «Intensificador somático».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Reúne «Intensificador somático».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             },
             {
               "title": "El caldero de El Tormento",
@@ -170294,7 +171252,8 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Paño rúnico».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Reúne «Paño rúnico».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             },
             {
               "title": "El caldero de El Tormento",
@@ -170307,7 +171266,8 @@
               "y": 65.61,
               "z": 58.4,
               "f": "e",
-              "instruction": "Interactúa con «Caldera de la Plaga» para entregar «El caldero de El Tormento».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Interactúa con «Caldera de la Plaga» para entregar «El caldero de El Tormento».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             }
           ]
         },
@@ -170336,7 +171296,8 @@
               "z": 58.9,
               "f": "e",
               "qlvl": 55,
-              "instruction": "Interactúa con «Caldera de la Plaga» y acepta «El caldero del Llanto de Dalson».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Interactúa con «Caldera de la Plaga» y acepta «El caldero del Llanto de Dalson».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             },
             {
               "title": "El caldero del Llanto de Dalson",
@@ -170370,7 +171331,8 @@
                   "n": 1
                 }
               ],
-              "instruction": "Reúne «Intensificador somático».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Reúne «Intensificador somático».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             },
             {
               "title": "El caldero del Llanto de Dalson",
@@ -170928,7 +171890,8 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Paño rúnico».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Reúne «Paño rúnico».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             },
             {
               "title": "El caldero del Llanto de Dalson",
@@ -170941,7 +171904,8 @@
               "y": 51.9,
               "z": 58.9,
               "f": "e",
-              "instruction": "Interactúa con «Caldera de la Plaga» para entregar «El caldero del Llanto de Dalson».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Interactúa con «Caldera de la Plaga» para entregar «El caldero del Llanto de Dalson».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             }
           ]
         },
@@ -175093,7 +176057,11 @@
               "z": 1.5,
               "f": "e",
               "qlvl": 55,
-              "instruction": "Habla con «Zorbin Ventipnotizador» y acepta «Encoge más gigantes».\nZona: Feralas."
+              "instruction": "Habla con «Zorbin Ventipnotizador» y acepta «Encoge más gigantes».\nZona: Feralas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "18956": 10
+              }
             },
             {
               "title": "Más combustible para el Ultra-reductor",
@@ -175114,7 +176082,11 @@
               "z": 1.5,
               "f": "e",
               "qlvl": 55,
-              "instruction": "Habla con «Zorbin Ventipnotizador» y acepta «Más combustible para el Ultra-reductor».\nZona: Feralas."
+              "instruction": "Habla con «Zorbin Ventipnotizador» y acepta «Más combustible para el Ultra-reductor».\nZona: Feralas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "18958": 6
+              }
             }
           ]
         },
@@ -175273,7 +176245,11 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Resíduo de reducción» (10 en total).\nZona: Feralas."
+              "instruction": "Reúne «Resíduo de reducción» (10 en total).\nZona: Feralas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "18956": 10
+              }
             },
             {
               "title": "Más combustible para el Ultra-reductor",
@@ -175422,7 +176398,11 @@
               "fromAlso": "Sea Spray",
               "fromKind": "npc",
               "spread": true,
-              "instruction": "Recoge «Núcleo elemental de Agua» (6 en total) del botín de «Elemental marino» o «Sea Spray».\nZona: Feralas."
+              "instruction": "Recoge «Núcleo elemental de Agua» (6 en total) del botín de «Elemental marino» o «Sea Spray».\nZona: Feralas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "18958": 6
+              }
             }
           ]
         },
@@ -175440,7 +176420,11 @@
               "y": 43.42,
               "z": 1.5,
               "f": "e",
-              "instruction": "Habla con «Zorbin Ventipnotizador» y entrega «Encoge más gigantes».\nZona: Feralas."
+              "instruction": "Habla con «Zorbin Ventipnotizador» y entrega «Encoge más gigantes».\nZona: Feralas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "18956": 10
+              }
             },
             {
               "title": "Más combustible para el Ultra-reductor",
@@ -175453,7 +176437,11 @@
               "y": 43.42,
               "z": 1.5,
               "f": "e",
-              "instruction": "Habla con «Zorbin Ventipnotizador» y entrega «Más combustible para el Ultra-reductor».\nZona: Feralas."
+              "instruction": "Habla con «Zorbin Ventipnotizador» y entrega «Más combustible para el Ultra-reductor».\nZona: Feralas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "18958": 6
+              }
             }
           ]
         },
@@ -180184,7 +181172,11 @@
               "y": 81.69,
               "z": 97.4,
               "qlvl": 60,
-              "instruction": "Habla con «Clavicus Knavingham» y acepta «Un donativo de lana»."
+              "instruction": "Habla con «Clavicus Knavingham» y acepta «Un donativo de lana».",
+              "levelingDetour": true,
+              "detourItems": {
+                "2592": 60
+              }
             },
             {
               "title": "Un donativo de lana",
@@ -180198,7 +181190,11 @@
               "y": 81.69,
               "z": 97.4,
               "optional": true,
-              "instruction": "Opcional.\nHabla con «Clavicus Knavingham» y entrega «Un donativo de lana».\nSesenta Paño de lana, si los lleva."
+              "instruction": "Opcional.\nHabla con «Clavicus Knavingham» y entrega «Un donativo de lana».\nSesenta Paño de lana, si los lleva.",
+              "levelingDetour": true,
+              "detourItems": {
+                "2592": 60
+              }
             },
             {
               "title": "Un donativo de seda",
@@ -180212,7 +181208,11 @@
               "y": 81.69,
               "z": 97.4,
               "qlvl": 60,
-              "instruction": "Habla con «Clavicus Knavingham» y acepta «Un donativo de seda»."
+              "instruction": "Habla con «Clavicus Knavingham» y acepta «Un donativo de seda».",
+              "levelingDetour": true,
+              "detourItems": {
+                "4306": 60
+              }
             },
             {
               "title": "Un donativo de paño mágico",
@@ -180226,7 +181226,11 @@
               "y": 81.69,
               "z": 97.4,
               "qlvl": 60,
-              "instruction": "Habla con «Clavicus Knavingham» y acepta «Un donativo de paño mágico»."
+              "instruction": "Habla con «Clavicus Knavingham» y acepta «Un donativo de paño mágico».",
+              "levelingDetour": true,
+              "detourItems": {
+                "4338": 60
+              }
             }
           ]
         },
@@ -181120,7 +182124,11 @@
               "z": 502,
               "f": "e",
               "qlvl": 60,
-              "instruction": "Habla con «Bubulo Acerbus» y acepta «Un donativo de lana»."
+              "instruction": "Habla con «Bubulo Acerbus» y acepta «Un donativo de lana».",
+              "levelingDetour": true,
+              "detourItems": {
+                "2592": 60
+              }
             },
             {
               "title": "Un donativo de seda",
@@ -181135,7 +182143,11 @@
               "z": 502,
               "f": "e",
               "qlvl": 60,
-              "instruction": "Habla con «Bubulo Acerbus» y acepta «Un donativo de seda»."
+              "instruction": "Habla con «Bubulo Acerbus» y acepta «Un donativo de seda».",
+              "levelingDetour": true,
+              "detourItems": {
+                "4306": 60
+              }
             },
             {
               "title": "Un donativo de paño mágico",
@@ -181150,7 +182162,11 @@
               "z": 502,
               "f": "e",
               "qlvl": 60,
-              "instruction": "Habla con «Bubulo Acerbus» y acepta «Un donativo de paño mágico»."
+              "instruction": "Habla con «Bubulo Acerbus» y acepta «Un donativo de paño mágico».",
+              "levelingDetour": true,
+              "detourItems": {
+                "4338": 60
+              }
             },
             {
               "title": "Un largo camino para unas babosas",
@@ -181202,7 +182218,11 @@
               "z": 502.3,
               "f": "e",
               "qlvl": 60,
-              "instruction": "Habla con «Mistina Escudacero» y acepta «Un donativo de lana»."
+              "instruction": "Habla con «Mistina Escudacero» y acepta «Un donativo de lana».",
+              "levelingDetour": true,
+              "detourItems": {
+                "2592": 60
+              }
             },
             {
               "title": "Un donativo de seda",
@@ -181217,7 +182237,11 @@
               "z": 502.3,
               "f": "e",
               "qlvl": 60,
-              "instruction": "Habla con «Mistina Escudacero» y acepta «Un donativo de seda»."
+              "instruction": "Habla con «Mistina Escudacero» y acepta «Un donativo de seda».",
+              "levelingDetour": true,
+              "detourItems": {
+                "4306": 60
+              }
             },
             {
               "title": "Un donativo de paño mágico",
@@ -181232,7 +182256,11 @@
               "z": 502.3,
               "f": "e",
               "qlvl": 60,
-              "instruction": "Habla con «Mistina Escudacero» y acepta «Un donativo de paño mágico»."
+              "instruction": "Habla con «Mistina Escudacero» y acepta «Un donativo de paño mágico».",
+              "levelingDetour": true,
+              "detourItems": {
+                "4338": 60
+              }
             },
             {
               "title": "Las humeantes Ruinas de Thaurissan",
@@ -181268,7 +182296,8 @@
               "z": 501.5,
               "f": "e",
               "qlvl": 60,
-              "instruction": "Habla con «Teniente Rotimer» y acepta «El imperativo soberano»."
+              "instruction": "Habla con «Teniente Rotimer» y acepta «El imperativo soberano».",
+              "levelingDetour": true
             }
           ]
         },
@@ -181475,7 +182504,9 @@
                 }
               ],
               "navigationHint": "La flecha señala un maestro de vuelo de salida. Habla con él y elige Costasur; el juego confirma qué vuelos tienes disponibles.",
-              "instruction": "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «Costasur».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige Costasur; el juego confirma qué vuelos tienes disponibles."
+              "instruction": "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «Costasur».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige Costasur; el juego confirma qué vuelos tienes disponibles.",
+              "levelingDetour": true,
+              "detourQuest": 7261
             },
             {
               "title": "El imperativo soberano",
@@ -181488,7 +182519,8 @@
               "y": 19.5,
               "z": 131.3,
               "f": "e",
-              "instruction": "Habla con «Teniente Haggerdin» y entrega «El imperativo soberano».\nZona: Laderas de Trabalomas."
+              "instruction": "Habla con «Teniente Haggerdin» y entrega «El imperativo soberano».\nZona: Laderas de Trabalomas.",
+              "levelingDetour": true
             }
           ]
         },
@@ -181918,15 +182950,20 @@
           ]
         },
         {
-          "title": "Los hongos Vale",
+          "title": "Al salir de la cripta",
           "goals": [
             {
-              "note": "farmear en Despellejador malsano en el Fungal Vale, Tierras de la Peste del Este",
+              "note": "Sal de la cripta y sigue hacia el oeste por el sur de las Tierras de la Peste del Este. Caza larvas carroñeras de nivel 54–55 en campo abierto antes de usar la piedra a Trinquete.",
               "t": "level",
               "level": 57,
-              "instruction": "Gana experiencia hasta alcanzar el nivel 57.\nfarmear en Despellejador malsano en el Fungal Vale, Tierras de la Peste del Este."
+              "instruction": "Gana experiencia hasta alcanzar el nivel 57.\nSal de la cripta y sigue hacia el oeste por el sur de las Tierras de la Peste del Este. Caza larvas carroñeras de nivel 54–55 en campo abierto antes de usar la piedra a Trinquete.",
+              "map": 1423,
+              "x": 14.3,
+              "y": 67.9,
+              "f": "l"
             }
-          ]
+          ],
+          "note": "Sal de la cripta y sigue hacia el oeste por el sur de las Tierras de la Peste del Este. Caza larvas carroñeras de nivel 54–55 en campo abierto antes de usar la piedra a Trinquete."
         },
         {
           "title": "Trinquete",
@@ -183058,7 +184095,8 @@
               "z": 251.2,
               "f": "e",
               "qlvl": 58,
-              "instruction": "Habla con «Greta Pezuñamusgo» y acepta «El golpe final».\nZona: Frondavil."
+              "instruction": "Habla con «Greta Pezuñamusgo» y acepta «El golpe final».\nZona: Frondavil.",
+              "levelingDetour": true
             }
           ]
         },
@@ -183079,7 +184117,8 @@
               "y": 46.87,
               "z": 247.1,
               "f": "e",
-              "instruction": "Derrota a «Moora».\nZona: Frondavil."
+              "instruction": "Derrota a «Moora».\nZona: Frondavil.",
+              "levelingDetour": true
             },
             {
               "title": "El golpe final",
@@ -183094,7 +184133,8 @@
               "y": 46.7,
               "z": 247.1,
               "f": "e",
-              "instruction": "Derrota a «Salia».\nZona: Frondavil."
+              "instruction": "Derrota a «Salia».\nZona: Frondavil.",
+              "levelingDetour": true
             },
             {
               "title": "El golpe final",
@@ -183110,7 +184150,8 @@
               "f": "e",
               "from": "Señor de las Sombras Fel'dan",
               "fromKind": "npc",
-              "instruction": "Recoge «Cabeza de Lord Fel'dan de las Sombras» del botín de «Señor de las Sombras Fel'dan».\nZona: Frondavil.\nSeñor de las Sombras Fel'dan."
+              "instruction": "Recoge «Cabeza de Lord Fel'dan de las Sombras» del botín de «Señor de las Sombras Fel'dan».\nZona: Frondavil.\nSeñor de las Sombras Fel'dan.",
+              "levelingDetour": true
             }
           ]
         },
@@ -183956,7 +184997,8 @@
               "y": 82.11,
               "z": 251.2,
               "f": "e",
-              "instruction": "Habla con «Greta Pezuñamusgo» y entrega «El golpe final».\nZona: Frondavil."
+              "instruction": "Habla con «Greta Pezuñamusgo» y entrega «El golpe final».\nZona: Frondavil.",
+              "levelingDetour": true
             }
           ]
         },
@@ -186147,7 +187189,11 @@
               "z": 11.5,
               "f": "e",
               "qlvl": 59,
-              "instruction": "Habla con «Ermitaño Ortell» y acepta «El creyente verdadero».\nZona: Silithus.\nHand él los diez mensajes que guardó."
+              "instruction": "Habla con «Ermitaño Ortell» y acepta «El creyente verdadero».\nZona: Silithus.\nHand él los diez mensajes que guardó.",
+              "levelingDetour": true,
+              "detourItems": {
+                "20404": 10
+              }
             },
             {
               "title": "El creyente verdadero",
@@ -186160,7 +187206,11 @@
               "y": 69.76,
               "z": 11.5,
               "f": "e",
-              "instruction": "Habla con «Ermitaño Ortell» y entrega «El creyente verdadero».\nZona: Silithus."
+              "instruction": "Habla con «Ermitaño Ortell» y entrega «El creyente verdadero».\nZona: Silithus.",
+              "levelingDetour": true,
+              "detourItems": {
+                "20404": 10
+              }
             }
           ]
         },
@@ -186957,19 +188007,21 @@
             {
               "t": "note",
               "text": "La Masacre se ajusta a los niveles de 55 a 60; el Dentoesquirla rabioso farmear abajo le lleva a 59 solo.",
-              "instruction": "La Masacre se ajusta a los niveles de 55 a 60; el Dentoesquirla rabioso farmear abajo le lleva a 59 solo."
+              "instruction": "La Masacre se ajusta a los niveles de 55 a 60; el Dentoesquirla rabioso farmear abajo le lleva a 59 solo.",
+              "levelingDetour": true
             }
           ]
         },
         {
-          "title": "Grind a 59",
-          "note": "Los osos Dentoesquirla rabioso recorren el valle nevado al sur de Matorral del Ala del Búho.",
+          "title": "Osos de Cuna del Invierno",
+          "note": "Puedes continuar hacia Aldea Estrella Fugaz y ganar experiencia con las entregas que quedan.",
           "goals": [
             {
               "note": "farmear en Dentoesquirla rabioso en el valle al sur de Matorral del Ala del Búho, Cuna del Invierno",
               "t": "level",
               "level": 59,
-              "instruction": "Gana experiencia hasta alcanzar el nivel 59.\nfarmear en Dentoesquirla rabioso en el valle al sur de Matorral del Ala del Búho, Cuna del Invierno."
+              "instruction": "Gana experiencia hasta alcanzar el nivel 59.\nfarmear en Dentoesquirla rabioso en el valle al sur de Matorral del Ala del Búho, Cuna del Invierno.",
+              "levelingDetour": true
             }
           ]
         },
@@ -187461,7 +188513,7 @@
         },
         {
           "title": "Ventormenta",
-          "note": "Vuelve a Aldea Rut'theran, tomal barco a Auberdine y el barco a Ventormenta Harbor. Trae sesenta Silk, sesenta Mageweave y sesenta Paño rúnico para Clavicus: compra lo que te falta en el Auction House.",
+          "note": "Vuelve a la Aldea Rut'theran y regresa en barco a Ventormenta por Auberdine. Fija tu hogar y visita al instructor. Clavicus acepta lotes de 60 unidades de tela si ya los llevas.",
           "goals": [
             {
               "t": "sethome",
@@ -188274,7 +189326,11 @@
                   "n": 2
                 }
               ],
-              "instruction": "Reúne «Paño de seda» (60 en total)."
+              "instruction": "Reúne «Paño de seda» (60 en total).",
+              "levelingDetour": true,
+              "detourItems": {
+                "4306": 60
+              }
             },
             {
               "title": "Un donativo de paño mágico",
@@ -188297,7 +189353,11 @@
                   "n": 6
                 }
               ],
-              "instruction": "Reúne «Tela de paño mágico» (60 en total).\nZona: Cuna del Invierno."
+              "instruction": "Reúne «Tela de paño mágico» (60 en total).\nZona: Cuna del Invierno.",
+              "levelingDetour": true,
+              "detourItems": {
+                "4338": 60
+              }
             },
             {
               "title": "Un donativo de seda",
@@ -188310,7 +189370,11 @@
               "x": 53.93,
               "y": 81.69,
               "z": 97.4,
-              "instruction": "Habla con «Clavicus Knavingham» y entrega «Un donativo de seda».\nClavicus Knavingham, en el Distrito de Mercaderes."
+              "instruction": "Habla con «Clavicus Knavingham» y entrega «Un donativo de seda».\nClavicus Knavingham, en el Distrito de Mercaderes.",
+              "levelingDetour": true,
+              "detourItems": {
+                "4306": 60
+              }
             },
             {
               "title": "Un donativo de paño mágico",
@@ -188322,7 +189386,11 @@
               "x": 53.93,
               "y": 81.69,
               "z": 97.4,
-              "instruction": "Habla con «Clavicus Knavingham» y entrega «Un donativo de paño mágico»."
+              "instruction": "Habla con «Clavicus Knavingham» y entrega «Un donativo de paño mágico».",
+              "levelingDetour": true,
+              "detourItems": {
+                "4338": 60
+              }
             },
             {
               "title": "Un donativo de paño rúnico",
@@ -188346,7 +189414,11 @@
               "y": 81.69,
               "z": 97.4,
               "qlvl": 60,
-              "instruction": "Habla con «Clavicus Knavingham» y acepta «Un donativo de paño rúnico»."
+              "instruction": "Habla con «Clavicus Knavingham» y acepta «Un donativo de paño rúnico».",
+              "levelingDetour": true,
+              "detourItems": {
+                "14047": 60
+              }
             },
             {
               "title": "Un donativo de paño rúnico",
@@ -188387,7 +189459,11 @@
                   "n": 1
                 }
               ],
-              "instruction": "Reúne «Paño rúnico» (60 en total)."
+              "instruction": "Reúne «Paño rúnico» (60 en total).",
+              "levelingDetour": true,
+              "detourItems": {
+                "14047": 60
+              }
             },
             {
               "title": "Un donativo de paño rúnico",
@@ -188399,13 +189475,17 @@
               "x": 53.93,
               "y": 81.69,
               "z": 97.4,
-              "instruction": "Habla con «Clavicus Knavingham» y entrega «Un donativo de paño rúnico»."
+              "instruction": "Habla con «Clavicus Knavingham» y entrega «Un donativo de paño rúnico».",
+              "levelingDetour": true,
+              "detourItems": {
+                "14047": 60
+              }
             }
           ]
         },
         {
           "title": "Forjaz",
-          "note": "Lleval Tren subterráneo a Forjaz. Bubulo Acerbus y Mistina Escudacero cada uno quieren sesenta Wool, sesenta Silk y sesenta Mageweave, luego sesenta Paño rúnico: 120 de cada uno en total, de sus bolsos o el Auction House.",
+          "note": "Toma el Tranvía Subterráneo a Forjaz y visita a Laris. Bubulo y Mistina aceptan por separado lotes de 60 unidades de tela si ya los llevas.",
           "goals": [
             {
               "title": "Un largo camino para unas babosas",
@@ -188496,7 +189576,11 @@
                   "n": 1
                 }
               ],
-              "instruction": "Reúne «Paño de lana» (60 en total)."
+              "instruction": "Reúne «Paño de lana» (60 en total).",
+              "levelingDetour": true,
+              "detourItems": {
+                "2592": 60
+              }
             },
             {
               "title": "Un donativo de seda",
@@ -188518,7 +189602,11 @@
                   "n": 2
                 }
               ],
-              "instruction": "Reúne «Paño de seda» (60 en total)."
+              "instruction": "Reúne «Paño de seda» (60 en total).",
+              "levelingDetour": true,
+              "detourItems": {
+                "4306": 60
+              }
             },
             {
               "title": "Un donativo de paño mágico",
@@ -188541,7 +189629,11 @@
                   "n": 6
                 }
               ],
-              "instruction": "Reúne «Tela de paño mágico» (60 en total).\nZona: Cuna del Invierno."
+              "instruction": "Reúne «Tela de paño mágico» (60 en total).\nZona: Cuna del Invierno.",
+              "levelingDetour": true,
+              "detourItems": {
+                "4338": 60
+              }
             },
             {
               "title": "Un donativo de lana",
@@ -188555,7 +189647,11 @@
               "y": 48.22,
               "z": 502,
               "f": "e",
-              "instruction": "Habla con «Bubulo Acerbus» y entrega «Un donativo de lana»."
+              "instruction": "Habla con «Bubulo Acerbus» y entrega «Un donativo de lana».",
+              "levelingDetour": true,
+              "detourItems": {
+                "2592": 60
+              }
             },
             {
               "title": "Un donativo de seda",
@@ -188568,7 +189664,11 @@
               "y": 48.22,
               "z": 502,
               "f": "e",
-              "instruction": "Habla con «Bubulo Acerbus» y entrega «Un donativo de seda»."
+              "instruction": "Habla con «Bubulo Acerbus» y entrega «Un donativo de seda».",
+              "levelingDetour": true,
+              "detourItems": {
+                "4306": 60
+              }
             },
             {
               "title": "Un donativo de paño mágico",
@@ -188581,7 +189681,11 @@
               "y": 48.22,
               "z": 502,
               "f": "e",
-              "instruction": "Habla con «Bubulo Acerbus» y entrega «Un donativo de paño mágico»."
+              "instruction": "Habla con «Bubulo Acerbus» y entrega «Un donativo de paño mágico».",
+              "levelingDetour": true,
+              "detourItems": {
+                "4338": 60
+              }
             },
             {
               "title": "Un donativo de paño rúnico",
@@ -188606,7 +189710,11 @@
               "z": 502,
               "f": "e",
               "qlvl": 60,
-              "instruction": "Habla con «Bubulo Acerbus» y acepta «Un donativo de paño rúnico»."
+              "instruction": "Habla con «Bubulo Acerbus» y acepta «Un donativo de paño rúnico».",
+              "levelingDetour": true,
+              "detourItems": {
+                "14047": 60
+              }
             },
             {
               "title": "Un donativo de paño rúnico",
@@ -188629,7 +189737,11 @@
                   "n": 12
                 }
               ],
-              "instruction": "Reúne «Paño rúnico» (60 en total).\nZona: Cuna del Invierno."
+              "instruction": "Reúne «Paño rúnico» (60 en total).\nZona: Cuna del Invierno.",
+              "levelingDetour": true,
+              "detourItems": {
+                "14047": 60
+              }
             },
             {
               "title": "Un donativo de paño rúnico",
@@ -188642,7 +189754,11 @@
               "y": 48.22,
               "z": 502,
               "f": "e",
-              "instruction": "Habla con «Bubulo Acerbus» y entrega «Un donativo de paño rúnico»."
+              "instruction": "Habla con «Bubulo Acerbus» y entrega «Un donativo de paño rúnico».",
+              "levelingDetour": true,
+              "detourItems": {
+                "14047": 60
+              }
             },
             {
               "title": "Un donativo de lana",
@@ -188670,7 +189786,11 @@
                   "n": 1
                 }
               ],
-              "instruction": "Reúne «Paño de lana» (60 en total)."
+              "instruction": "Reúne «Paño de lana» (60 en total).",
+              "levelingDetour": true,
+              "detourItems": {
+                "2592": 60
+              }
             },
             {
               "title": "Un donativo de seda",
@@ -188692,7 +189812,11 @@
                   "n": 2
                 }
               ],
-              "instruction": "Reúne «Paño de seda» (60 en total)."
+              "instruction": "Reúne «Paño de seda» (60 en total).",
+              "levelingDetour": true,
+              "detourItems": {
+                "4306": 60
+              }
             },
             {
               "title": "Un donativo de paño mágico",
@@ -188715,7 +189839,11 @@
                   "n": 6
                 }
               ],
-              "instruction": "Reúne «Tela de paño mágico» (60 en total).\nZona: Cuna del Invierno."
+              "instruction": "Reúne «Tela de paño mágico» (60 en total).\nZona: Cuna del Invierno.",
+              "levelingDetour": true,
+              "detourItems": {
+                "4338": 60
+              }
             },
             {
               "title": "Un donativo de lana",
@@ -188729,7 +189857,11 @@
               "y": 31.57,
               "z": 502.3,
               "f": "e",
-              "instruction": "Habla con «Mistina Escudacero» y entrega «Un donativo de lana»."
+              "instruction": "Habla con «Mistina Escudacero» y entrega «Un donativo de lana».",
+              "levelingDetour": true,
+              "detourItems": {
+                "2592": 60
+              }
             },
             {
               "title": "Un donativo de seda",
@@ -188742,7 +189874,11 @@
               "y": 31.57,
               "z": 502.3,
               "f": "e",
-              "instruction": "Habla con «Mistina Escudacero» y entrega «Un donativo de seda»."
+              "instruction": "Habla con «Mistina Escudacero» y entrega «Un donativo de seda».",
+              "levelingDetour": true,
+              "detourItems": {
+                "4306": 60
+              }
             },
             {
               "title": "Un donativo de paño mágico",
@@ -188755,7 +189891,11 @@
               "y": 31.57,
               "z": 502.3,
               "f": "e",
-              "instruction": "Habla con «Mistina Escudacero» y entrega «Un donativo de paño mágico»."
+              "instruction": "Habla con «Mistina Escudacero» y entrega «Un donativo de paño mágico».",
+              "levelingDetour": true,
+              "detourItems": {
+                "4338": 60
+              }
             },
             {
               "title": "Un donativo de paño rúnico",
@@ -188780,7 +189920,11 @@
               "z": 502.3,
               "f": "e",
               "qlvl": 60,
-              "instruction": "Habla con «Mistina Escudacero» y acepta «Un donativo de paño rúnico»."
+              "instruction": "Habla con «Mistina Escudacero» y acepta «Un donativo de paño rúnico».",
+              "levelingDetour": true,
+              "detourItems": {
+                "14047": 60
+              }
             },
             {
               "title": "Un donativo de paño rúnico",
@@ -188803,7 +189947,11 @@
                   "n": 12
                 }
               ],
-              "instruction": "Reúne «Paño rúnico» (60 en total).\nZona: Cuna del Invierno."
+              "instruction": "Reúne «Paño rúnico» (60 en total).\nZona: Cuna del Invierno.",
+              "levelingDetour": true,
+              "detourItems": {
+                "14047": 60
+              }
             },
             {
               "title": "Un donativo de paño rúnico",
@@ -188816,7 +189964,11 @@
               "y": 31.57,
               "z": 502.3,
               "f": "e",
-              "instruction": "Habla con «Mistina Escudacero» y entrega «Un donativo de paño rúnico»."
+              "instruction": "Habla con «Mistina Escudacero» y entrega «Un donativo de paño rúnico».",
+              "levelingDetour": true,
+              "detourItems": {
+                "14047": 60
+              }
             }
           ]
         },
@@ -189298,19 +190450,24 @@
             {
               "t": "note",
               "text": "Scholomance se ajusta a los niveles 58 a 60; La llave de Scholomance se entrega en Campamento del Orvallo a continuación.",
-              "instruction": "Scholomance se ajusta a los niveles 58 a 60; La llave de Scholomance se entrega en Campamento del Orvallo a continuación."
+              "instruction": "Scholomance se ajusta a los niveles 58 a 60; La llave de Scholomance se entrega en Campamento del Orvallo a continuación.",
+              "levelingDetour": true
             }
           ]
         },
         {
-          "title": "Grind a 60",
-          "note": "Cross el río al este de Tirion en Valle del Terror. El Valle del Terror Spirits persigue el bosque allí.",
+          "title": "El último tramo hasta el nivel 60",
+          "note": "Si ya tienes lista «Una Peste en la Cruzada», compara la experiencia de la entrega con lo que te falta. Cuando baste para llegar al 60, lleva el barril a Nathaniel Dumah en el Campamento del Orvallo. Los osos están en el bosque al sur de la granja de El Tormento.",
           "goals": [
             {
-              "note": "farmear en Espíritu del Valle del Terror en Valle del Terror, Tierras de la Peste del Este",
+              "note": "Si te falta experiencia, caza osos pardos malsanos de nivel 55–56 en las Tierras de la Peste del Oeste. Atrae uno cada vez.",
               "t": "level",
               "level": 60,
-              "instruction": "Gana experiencia hasta alcanzar el nivel 60.\nfarmear en Espíritu del Valle del Terror en Valle del Terror, Tierras de la Peste del Este."
+              "instruction": "Gana experiencia hasta alcanzar el nivel 60.\nSi te falta experiencia, caza osos pardos malsanos de nivel 55–56 en las Tierras de la Peste del Oeste. Atrae uno cada vez.",
+              "map": 1422,
+              "x": 55.16,
+              "y": 64.54,
+              "f": "e"
             }
           ]
         },

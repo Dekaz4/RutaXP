@@ -227,7 +227,9 @@ end
 
 function ns:ClearDeferredGroupMapPin()
     local pin = self.guideQuestMapPin
-    if not pin or not self.GetGroupDeferralReason or not self:GetGroupDeferralReason(pin.goal, pin.step, pin.guide, pin.index) then return end
+    if not pin then return end
+    if not (self.GetGroupDeferralReason and self:GetGroupDeferralReason(pin.goal, pin.step, pin.guide, pin.index))
+        and not (self.GetLevelingDetourReason and self:GetLevelingDetourReason(pin.goal)) then return end
     self.guideQuestMapPin = nil
     if pin.native then
         -- Players and other addons can replace the native pin at any time.

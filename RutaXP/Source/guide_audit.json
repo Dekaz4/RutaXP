@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "88f4866fd1b4dcd0ff3723442b3393f8787f7ae54234bbc564005a64e67929fa",
+      "sha256": "4158dc05962f46d951b60cf4d8879696dd4a87f96af6bfbdf4db1dc2dd6cb922",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -561,18 +561,26 @@
         "menethil-theramore-boat-5",
         "wetlands-old-habits-before-nekrosh-return-6",
         "wetlands-stoutfist-howin-prerequisites-5",
-        "wetlands-retire-villard-6"
+        "wetlands-retire-villard-6",
+        "southshore-coast-return-7",
+        "nijels-point-one-return-2",
+        "xavian-shared-satyrs-3",
+        "stranglethorn-snapjaw-and-island-2",
+        "swamp-caravan-and-galen-3",
+        "desolace-karnitol-final-hearth-3",
+        "booty-bay-captains-return-3",
+        "aerie-peak-takeoff-2"
       ]
     }
   },
   "totals": {
     "guides": 57,
     "goals": 7455,
-    "direct": 6572,
+    "direct": 6578,
     "generated_instruction": 7455,
     "missing_goal_note_text": 3662,
-    "missing": 287,
-    "no_fixed_point_expected": 299,
+    "missing": 281,
+    "no_fixed_point_expected": 293,
     "empty_authored_subtitle": 818,
     "candidates": 582,
     "unclear_instruction": 6,
@@ -580,7 +588,7 @@
     "reference_only": 3,
     "conditional_navigation": 2,
     "conditional_point_expected": 2,
-    "steps": 2344
+    "steps": 2338
   },
   "byAction": {
     "accept": {
@@ -666,9 +674,10 @@
     },
     "level": {
       "goals": 25,
-      "missing": 25,
-      "no_fixed_point_expected": 25,
+      "missing": 19,
+      "no_fixed_point_expected": 19,
       "generated_instruction": 25,
+      "direct": 6,
       "missing_goal_note_text": 1,
       "empty_authored_subtitle": 1
     },
@@ -1800,8 +1809,8 @@
           "goals": 13,
           "direct": 13,
           "generated_instruction": 13,
-          "missing_goal_note_text": 6,
-          "empty_authored_subtitle": 1
+          "empty_authored_subtitle": 1,
+          "missing_goal_note_text": 6
         }
       }
     },
@@ -2266,11 +2275,11 @@
         "goals": 43,
         "candidates": 6,
         "generated_instruction": 43,
-        "direct": 31,
+        "direct": 32,
         "missing_goal_note_text": 14,
         "empty_authored_subtitle": 12,
-        "missing": 6,
-        "no_fixed_point_expected": 6
+        "missing": 5,
+        "no_fixed_point_expected": 5
       },
       "byAction": {
         "accept": {
@@ -2317,8 +2326,7 @@
         },
         "level": {
           "goals": 1,
-          "missing": 1,
-          "no_fixed_point_expected": 1,
+          "direct": 1,
           "generated_instruction": 1
         },
         "note": {
@@ -2671,9 +2679,9 @@
         "generated_instruction": 111,
         "missing_goal_note_text": 54,
         "empty_authored_subtitle": 16,
-        "missing": 5,
-        "no_fixed_point_expected": 5,
-        "direct": 95
+        "missing": 3,
+        "no_fixed_point_expected": 3,
+        "direct": 97
       },
       "byAction": {
         "accept": {
@@ -2732,9 +2740,10 @@
         },
         "level": {
           "goals": 3,
-          "missing": 3,
-          "no_fixed_point_expected": 3,
-          "generated_instruction": 3
+          "missing": 1,
+          "no_fixed_point_expected": 1,
+          "generated_instruction": 3,
+          "direct": 2
         },
         "sethome": {
           "goals": 1,
@@ -2920,11 +2929,11 @@
       "title": "Cuna del Invierno & Tierras de la Peste del Este",
       "counts": {
         "goals": 100,
-        "direct": 88,
+        "direct": 89,
         "generated_instruction": 100,
         "missing_goal_note_text": 43,
-        "missing": 7,
-        "no_fixed_point_expected": 8,
+        "missing": 6,
+        "no_fixed_point_expected": 7,
         "empty_authored_subtitle": 11,
         "candidates": 4,
         "no_fixed_navigation": 1
@@ -2974,8 +2983,7 @@
         },
         "level": {
           "goals": 1,
-          "missing": 1,
-          "no_fixed_point_expected": 1,
+          "direct": 1,
           "generated_instruction": 1
         },
         "note": {
@@ -3110,9 +3118,9 @@
         "generated_instruction": 94,
         "missing_goal_note_text": 41,
         "empty_authored_subtitle": 11,
-        "direct": 81,
-        "missing": 3,
-        "no_fixed_point_expected": 3
+        "direct": 82,
+        "missing": 2,
+        "no_fixed_point_expected": 2
       },
       "byAction": {
         "accept": {
@@ -3156,8 +3164,7 @@
         },
         "level": {
           "goals": 1,
-          "missing": 1,
-          "no_fixed_point_expected": 1,
+          "direct": 1,
           "generated_instruction": 1
         },
         "sethome": {
@@ -3195,9 +3202,9 @@
         "generated_instruction": 161,
         "missing_goal_note_text": 71,
         "empty_authored_subtitle": 18,
-        "direct": 133,
-        "missing": 8,
-        "no_fixed_point_expected": 9,
+        "direct": 134,
+        "missing": 7,
+        "no_fixed_point_expected": 8,
         "no_fixed_navigation": 1
       },
       "byAction": {
@@ -3263,9 +3270,10 @@
         },
         "level": {
           "goals": 3,
-          "missing": 3,
-          "no_fixed_point_expected": 3,
-          "generated_instruction": 3
+          "missing": 2,
+          "no_fixed_point_expected": 2,
+          "generated_instruction": 3,
+          "direct": 1
         },
         "note": {
           "goals": 2,
@@ -7025,9 +7033,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/01-hillsbrad-foothills:31:2",
+      "key": "forever/alliance/30-40/01-hillsbrad-foothills:30:2",
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "stepIndex": 31,
+      "stepIndex": 30,
       "goalIndex": 2,
       "action": "note",
       "questID": null,
@@ -7037,21 +7045,21 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "stepIndex": 31,
+        "stepIndex": 30,
         "goalIndex": 2
       },
       "classification": "semantic_no_location",
       "reason": "Nota informativa; no establece un destino físico.",
       "unresolved": false,
-      "goalNote": "Bartolo también quiere un Capa de montañero, un Descarga de paño de lana y Hilo refinado: fabricado o comprado; la capa se enciende cuando usted está de vuelta en Costasur más tarde.",
+      "goalNote": "Bartolo pide una capa de montañero, una madeja de paño de lana, un hilo refinado y 10 pieles de yeti. Entrégaselos juntos en Costasur.",
       "stepNote": "Los yetis viven en la cueva en las colinas al norte de Costasur, en su camino de regreso al sur.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/02-desolace:13:4",
+      "key": "forever/alliance/30-40/02-desolace:12:4",
       "guideID": "forever/alliance/30-40/02-desolace",
-      "stepIndex": 13,
+      "stepIndex": 12,
       "goalIndex": 4,
       "action": "note",
       "questID": null,
@@ -7061,7 +7069,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/02-desolace",
-        "stepIndex": 13,
+        "stepIndex": 12,
         "goalIndex": 4
       },
       "classification": "semantic_no_location",
@@ -7073,9 +7081,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/02-desolace:22:1",
+      "key": "forever/alliance/30-40/02-desolace:21:1",
       "guideID": "forever/alliance/30-40/02-desolace",
-      "stepIndex": 22,
+      "stepIndex": 21,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -7085,7 +7093,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/02-desolace",
-        "stepIndex": 22,
+        "stepIndex": 21,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -7097,9 +7105,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/03-ashenvale:26:3",
+      "key": "forever/alliance/30-40/03-ashenvale:25:3",
       "guideID": "forever/alliance/30-40/03-ashenvale",
-      "stepIndex": 26,
+      "stepIndex": 25,
       "goalIndex": 3,
       "action": "complete",
       "questID": 1046,
@@ -7109,7 +7117,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/03-ashenvale",
-        "stepIndex": 26,
+        "stepIndex": 25,
         "goalIndex": 3
       },
       "classification": "documented_mixed_objective",
@@ -7121,9 +7129,9 @@
       "referenceNavigationKind": "candidates"
     },
     {
-      "key": "forever/alliance/30-40/03-ashenvale:30:1",
+      "key": "forever/alliance/30-40/03-ashenvale:29:1",
       "guideID": "forever/alliance/30-40/03-ashenvale",
-      "stepIndex": 30,
+      "stepIndex": 29,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -7133,7 +7141,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/03-ashenvale",
-        "stepIndex": 30,
+        "stepIndex": 29,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -7145,9 +7153,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/03-ashenvale:30:3",
+      "key": "forever/alliance/30-40/03-ashenvale:29:3",
       "guideID": "forever/alliance/30-40/03-ashenvale",
-      "stepIndex": 30,
+      "stepIndex": 29,
       "goalIndex": 3,
       "action": "note",
       "questID": null,
@@ -7157,7 +7165,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/03-ashenvale",
-        "stepIndex": 30,
+        "stepIndex": 29,
         "goalIndex": 3
       },
       "classification": "semantic_no_location",
@@ -7212,14 +7220,14 @@
       "reason": "Usa el hogar realmente vinculado; no debe inventarse su posición.",
       "unresolved": false,
       "goalNote": null,
-      "stepNote": null,
+      "stepNote": "Entrega los encargos de la primera vuelta. Habla con Krazek y Kebok en la taberna y sube a ver al barón antes de salir hacia el norte.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/04-stranglethorn-vale:34:1",
+      "key": "forever/alliance/30-40/04-stranglethorn-vale:33:1",
       "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-      "stepIndex": 34,
+      "stepIndex": 33,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -7229,21 +7237,21 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-        "stepIndex": 34,
+        "stepIndex": 33,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
       "reason": "Usa el hogar realmente vinculado; no debe inventarse su posición.",
       "unresolved": false,
       "goalNote": null,
-      "stepNote": null,
+      "stepNote": "Usa la piedra de hogar y entrega a Drizzlik la piel que guardaste. Después visita al barón, a Kebok y a Krazek.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/05-arathi-highlands:8:3",
+      "key": "forever/alliance/30-40/05-arathi-highlands:6:3",
       "guideID": "forever/alliance/30-40/05-arathi-highlands",
-      "stepIndex": 8,
+      "stepIndex": 6,
       "goalIndex": 3,
       "action": "accept",
       "questID": 1392,
@@ -7253,7 +7261,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/05-arathi-highlands",
-        "stepIndex": 8,
+        "stepIndex": 6,
         "goalIndex": 3
       },
       "classification": "item_start",
@@ -7457,9 +7465,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/06-badlands:27:1",
+      "key": "forever/alliance/30-40/06-badlands:37:1",
       "guideID": "forever/alliance/30-40/06-badlands",
-      "stepIndex": 27,
+      "stepIndex": 37,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -7469,21 +7477,21 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/06-badlands",
-        "stepIndex": 27,
+        "stepIndex": 37,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
       "reason": "Usa el hogar realmente vinculado; no debe inventarse su posición.",
       "unresolved": false,
       "goalNote": null,
-      "stepNote": null,
+      "stepNote": "Usa la piedra de hogar tras entregar a Bibbly. Reúne las entregas de Kreldig, el capitán Pentigast y el hermano Antón antes de volar a Theramore.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/30-40/06-badlands:27:3",
+      "key": "forever/alliance/30-40/06-badlands:37:3",
       "guideID": "forever/alliance/30-40/06-badlands",
-      "stepIndex": 27,
+      "stepIndex": 37,
       "goalIndex": 3,
       "action": "note",
       "questID": null,
@@ -7493,14 +7501,14 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/06-badlands",
-        "stepIndex": 27,
+        "stepIndex": 37,
         "goalIndex": 3
       },
       "classification": "semantic_no_location",
       "reason": "Nota informativa; no establece un destino físico.",
       "unresolved": false,
       "goalNote": "La siguiente tarea de Kreldig, el Satchel de Karnitol, es una gota en la costa lejana: saltarla.",
-      "stepNote": null,
+      "stepNote": "Usa la piedra de hogar tras entregar a Bibbly. Reúne las entregas de Kreldig, el capitán Pentigast y el hermano Antón antes de volar a Theramore.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
@@ -7601,9 +7609,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/40-50/01-stranglethorn-vale:37:1",
+      "key": "forever/alliance/40-50/01-stranglethorn-vale:36:1",
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-      "stepIndex": 37,
+      "stepIndex": 36,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -7613,7 +7621,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-        "stepIndex": 37,
+        "stepIndex": 36,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -7625,9 +7633,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/40-50/01-stranglethorn-vale:37:4",
+      "key": "forever/alliance/40-50/01-stranglethorn-vale:36:4",
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-      "stepIndex": 37,
+      "stepIndex": 36,
       "goalIndex": 4,
       "action": "note",
       "questID": null,
@@ -7637,7 +7645,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-        "stepIndex": 37,
+        "stepIndex": 36,
         "goalIndex": 4
       },
       "classification": "semantic_no_location",
@@ -7649,9 +7657,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/40-50/01-stranglethorn-vale:37:7",
+      "key": "forever/alliance/40-50/01-stranglethorn-vale:36:7",
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-      "stepIndex": 37,
+      "stepIndex": 36,
       "goalIndex": 7,
       "action": "note",
       "questID": null,
@@ -7661,7 +7669,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-        "stepIndex": 37,
+        "stepIndex": 36,
         "goalIndex": 7
       },
       "classification": "semantic_no_location",
@@ -7673,9 +7681,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/40-50/01-stranglethorn-vale:40:2",
+      "key": "forever/alliance/40-50/01-stranglethorn-vale:39:2",
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-      "stepIndex": 40,
+      "stepIndex": 39,
       "goalIndex": 2,
       "action": "note",
       "questID": null,
@@ -7685,7 +7693,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-        "stepIndex": 40,
+        "stepIndex": 39,
         "goalIndex": 2
       },
       "classification": "semantic_no_location",
@@ -7697,9 +7705,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/40-50/01-stranglethorn-vale:45:2",
+      "key": "forever/alliance/40-50/01-stranglethorn-vale:44:2",
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-      "stepIndex": 45,
+      "stepIndex": 44,
       "goalIndex": 2,
       "action": "note",
       "questID": null,
@@ -7709,7 +7717,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-        "stepIndex": 45,
+        "stepIndex": 44,
         "goalIndex": 2
       },
       "classification": "semantic_no_location",
@@ -7721,9 +7729,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/40-50/01-stranglethorn-vale:49:1",
+      "key": "forever/alliance/40-50/01-stranglethorn-vale:48:1",
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-      "stepIndex": 49,
+      "stepIndex": 48,
       "goalIndex": 1,
       "action": "hearth",
       "questID": null,
@@ -7733,7 +7741,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-        "stepIndex": 49,
+        "stepIndex": 48,
         "goalIndex": 1
       },
       "classification": "semantic_no_location",
@@ -7793,30 +7801,6 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/40-50/02-badlands:8:1",
-      "guideID": "forever/alliance/40-50/02-badlands",
-      "stepIndex": 8,
-      "goalIndex": 1,
-      "action": "level",
-      "questID": null,
-      "title": null,
-      "source": {
-        "repository": "https://github.com/julen92/SendaFH",
-        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
-        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
-        "guideID": "forever/alliance/40-50/02-badlands",
-        "stepIndex": 8,
-        "goalIndex": 1
-      },
-      "classification": "semantic_no_location",
-      "reason": "Requisito de nivel; no establece una zona de farmeo por sí solo.",
-      "unresolved": false,
-      "goalNote": "farmear en ayuda Scalding en Barranco Lethlor, Tierras Inhóspitas",
-      "stepNote": "El nido Scalding Whelps en el barranco al este de Garek; dejal Scorched Guardians (elite) solo. El Corazón de draco negro cae raramente: tómelo si viene mientras farmear.",
-      "navigationMode": null,
-      "referenceNavigationKind": "missing"
-    },
-    {
       "key": "forever/alliance/40-50/02-badlands:10:3",
       "guideID": "forever/alliance/40-50/02-badlands",
       "stepIndex": 10,
@@ -7865,10 +7849,10 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/40-50/02-badlands:14:2",
+      "key": "forever/alliance/40-50/02-badlands:14:5",
       "guideID": "forever/alliance/40-50/02-badlands",
       "stepIndex": 14,
-      "goalIndex": 2,
+      "goalIndex": 5,
       "action": "note",
       "questID": null,
       "title": null,
@@ -7878,13 +7862,13 @@
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/40-50/02-badlands",
         "stepIndex": 14,
-        "goalIndex": 2
+        "goalIndex": 5
       },
       "classification": "semantic_no_location",
       "reason": "Nota informativa; no establece un destino físico.",
       "unresolved": false,
       "goalNote": "La siguiente tarea de Talonaxe espera una guía posterior de Hinterlands.",
-      "stepNote": null,
+      "stepNote": "Entrega los collares a Fraggar al entrar en Pico Nidal. Después sube a ver a Garracha y toma el vuelo hacia Puerto de Menethil.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
@@ -8417,54 +8401,6 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/40-50/07-un-goro-crater:12:1",
-      "guideID": "forever/alliance/40-50/07-un-goro-crater",
-      "stepIndex": 12,
-      "goalIndex": 1,
-      "action": "level",
-      "questID": null,
-      "title": null,
-      "source": {
-        "repository": "https://github.com/julen92/SendaFH",
-        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
-        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
-        "guideID": "forever/alliance/40-50/07-un-goro-crater",
-        "stepIndex": 12,
-        "goalIndex": 1
-      },
-      "classification": "semantic_no_location",
-      "reason": "Requisito de nivel; no establece una zona de farmeo por sí solo.",
-      "unresolved": false,
-      "goalNote": "farmear en Gorila de Un'Goro en Meseta Roca de Hierro, Cráter de Un'Goro",
-      "stepNote": "Los gorilas de Meseta Roca de Hierro vienen en pequeños grupos y no dejan nada para ti todavía; de Torwa piel misión viene más tarde. Manténgase fuera de la cueva más profunda: U'cha es nivel 55.",
-      "navigationMode": null,
-      "referenceNavigationKind": "missing"
-    },
-    {
-      "key": "forever/alliance/40-50/07-un-goro-crater:28:1",
-      "guideID": "forever/alliance/40-50/07-un-goro-crater",
-      "stepIndex": 28,
-      "goalIndex": 1,
-      "action": "level",
-      "questID": null,
-      "title": null,
-      "source": {
-        "repository": "https://github.com/julen92/SendaFH",
-        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
-        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
-        "guideID": "forever/alliance/40-50/07-un-goro-crater",
-        "stepIndex": 28,
-        "goalIndex": 1
-      },
-      "classification": "semantic_no_location",
-      "reason": "Requisito de nivel; no establece una zona de farmeo por sí solo.",
-      "unresolved": false,
-      "goalNote": "farmear en Trabajador Centipaar en el Noxious Lair, Tanaris",
-      "stepNote": "El Centipaar silithid se arrastra alrededor del Noxious Lair en el oeste de Tanaris, justo al este de la rampa del cráter. El Workers es el pulls más fácil.",
-      "navigationMode": null,
-      "referenceNavigationKind": "missing"
-    },
-    {
       "key": "forever/alliance/40-50/07-un-goro-crater:37:1",
       "guideID": "forever/alliance/40-50/07-un-goro-crater",
       "stepIndex": 37,
@@ -8705,30 +8641,6 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/50-60/03-winterspring:12:2",
-      "guideID": "forever/alliance/50-60/03-winterspring",
-      "stepIndex": 12,
-      "goalIndex": 2,
-      "action": "level",
-      "questID": null,
-      "title": null,
-      "source": {
-        "repository": "https://github.com/julen92/SendaFH",
-        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
-        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
-        "guideID": "forever/alliance/50-60/03-winterspring",
-        "stepIndex": 12,
-        "goalIndex": 2
-      },
-      "classification": "semantic_no_location",
-      "reason": "Requisito de nivel; no establece una zona de farmeo por sí solo.",
-      "unresolved": false,
-      "goalNote": "farmear en Patriarca Cardo Nevado en Colinas Cardo Nevado, Cuna del Invierno",
-      "stepNote": "De vuelta a las colinas: sólo los Ice Thistle Matriarchs y Patriarchs llevan los cuernos. Sigue matando yetis hastal nivel 54: de Harlo wildkin misiones son rojos antes de eso.",
-      "navigationMode": null,
-      "referenceNavigationKind": "missing"
-    },
-    {
       "key": "forever/alliance/50-60/03-winterspring:25:4",
       "guideID": "forever/alliance/50-60/03-winterspring",
       "stepIndex": 25,
@@ -8897,30 +8809,6 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/50-60/05-silithus:26:1",
-      "guideID": "forever/alliance/50-60/05-silithus",
-      "stepIndex": 26,
-      "goalIndex": 1,
-      "action": "level",
-      "questID": null,
-      "title": null,
-      "source": {
-        "repository": "https://github.com/julen92/SendaFH",
-        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
-        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
-        "guideID": "forever/alliance/50-60/05-silithus",
-        "stepIndex": 26,
-        "goalIndex": 1
-      },
-      "classification": "semantic_no_location",
-      "reason": "Requisito de nivel; no establece una zona de farmeo por sí solo.",
-      "unresolved": false,
-      "goalNote": "farmear en Despellejador malsano en el Fungal Vale, Tierras de la Peste del Este",
-      "stepNote": null,
-      "navigationMode": null,
-      "referenceNavigationKind": "missing"
-    },
-    {
       "key": "forever/alliance/50-60/05-silithus:27:1",
       "guideID": "forever/alliance/50-60/05-silithus",
       "stepIndex": 27,
@@ -9060,7 +8948,7 @@
       "reason": "Requisito de nivel; no establece una zona de farmeo por sí solo.",
       "unresolved": false,
       "goalNote": "farmear en Dentoesquirla rabioso en el valle al sur de Matorral del Ala del Búho, Cuna del Invierno",
-      "stepNote": "Los osos Dentoesquirla rabioso recorren el valle nevado al sur de Matorral del Ala del Búho.",
+      "stepNote": "Puedes continuar hacia Aldea Estrella Fugaz y ganar experiencia con las entregas que quedan.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
@@ -9109,30 +8997,6 @@
       "unresolved": false,
       "goalNote": "Scholomance se ajusta a los niveles 58 a 60; La llave de Scholomance se entrega en Campamento del Orvallo a continuación.",
       "stepNote": "Running Scholomance (Castel Darrow, sureste de Tierras de la Peste del Oeste) o Stratholme en lugar de farmeo te lleva allí más rápido en un grupo. Saltar este paso a farmear solo.",
-      "navigationMode": null,
-      "referenceNavigationKind": "missing"
-    },
-    {
-      "key": "forever/alliance/50-60/06-silithus:53:1",
-      "guideID": "forever/alliance/50-60/06-silithus",
-      "stepIndex": 53,
-      "goalIndex": 1,
-      "action": "level",
-      "questID": null,
-      "title": null,
-      "source": {
-        "repository": "https://github.com/julen92/SendaFH",
-        "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
-        "compiledFile": "addon/SendaFH_Guides/Guides.lua",
-        "guideID": "forever/alliance/50-60/06-silithus",
-        "stepIndex": 53,
-        "goalIndex": 1
-      },
-      "classification": "semantic_no_location",
-      "reason": "Requisito de nivel; no establece una zona de farmeo por sí solo.",
-      "unresolved": false,
-      "goalNote": "farmear en Espíritu del Valle del Terror en Valle del Terror, Tierras de la Peste del Este",
-      "stepNote": "Cross el río al este de Tirion en Valle del Terror. El Valle del Terror Spirits persigue el bosque allí.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
@@ -13963,9 +13827,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/30-40/01-hillsbrad-foothills:36:3",
+      "key": "forever/alliance/30-40/01-hillsbrad-foothills:35:3",
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "stepIndex": 36,
+      "stepIndex": 35,
       "goalIndex": 3,
       "action": "complete",
       "questID": 1447,
@@ -13975,7 +13839,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "stepIndex": 36,
+        "stepIndex": 35,
         "goalIndex": 3
       },
       "kind": "step_instructions_not_goal",
@@ -13983,9 +13847,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/30-40/02-desolace:13:5",
+      "key": "forever/alliance/30-40/02-desolace:12:5",
       "guideID": "forever/alliance/30-40/02-desolace",
-      "stepIndex": 13,
+      "stepIndex": 12,
       "goalIndex": 5,
       "action": "complete",
       "questID": 1440,
@@ -13995,7 +13859,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/02-desolace",
-        "stepIndex": 13,
+        "stepIndex": 12,
         "goalIndex": 5
       },
       "kind": "unclear_instruction",
@@ -14003,9 +13867,9 @@
       "reason": "La fuente no explica la acción; necesita objetivos legibles del diario o revisión manual."
     },
     {
-      "key": "forever/alliance/30-40/02-desolace:17:1",
+      "key": "forever/alliance/30-40/02-desolace:16:1",
       "guideID": "forever/alliance/30-40/02-desolace",
-      "stepIndex": 17,
+      "stepIndex": 16,
       "goalIndex": 1,
       "action": "complete",
       "questID": 5821,
@@ -14015,7 +13879,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/02-desolace",
-        "stepIndex": 17,
+        "stepIndex": 16,
         "goalIndex": 1
       },
       "kind": "step_instructions_not_goal",
@@ -14023,9 +13887,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/30-40/02-desolace:19:1",
+      "key": "forever/alliance/30-40/02-desolace:18:1",
       "guideID": "forever/alliance/30-40/02-desolace",
-      "stepIndex": 19,
+      "stepIndex": 18,
       "goalIndex": 1,
       "action": "complete",
       "questID": 5561,
@@ -14035,7 +13899,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/02-desolace",
-        "stepIndex": 19,
+        "stepIndex": 18,
         "goalIndex": 1
       },
       "kind": "step_instructions_not_goal",
@@ -14063,9 +13927,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/30-40/03-ashenvale:17:1",
+      "key": "forever/alliance/30-40/03-ashenvale:16:1",
       "guideID": "forever/alliance/30-40/03-ashenvale",
-      "stepIndex": 17,
+      "stepIndex": 16,
       "goalIndex": 1,
       "action": "complete",
       "questID": 1012,
@@ -14075,7 +13939,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/03-ashenvale",
-        "stepIndex": 17,
+        "stepIndex": 16,
         "goalIndex": 1
       },
       "kind": "step_instructions_not_goal",
@@ -14083,9 +13947,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/30-40/03-ashenvale:26:3",
+      "key": "forever/alliance/30-40/03-ashenvale:25:3",
       "guideID": "forever/alliance/30-40/03-ashenvale",
-      "stepIndex": 26,
+      "stepIndex": 25,
       "goalIndex": 3,
       "action": "complete",
       "questID": 1046,
@@ -14095,7 +13959,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/03-ashenvale",
-        "stepIndex": 26,
+        "stepIndex": 25,
         "goalIndex": 3
       },
       "kind": "unclear_instruction",
@@ -14103,9 +13967,9 @@
       "reason": "La fuente no explica la acción; necesita objetivos legibles del diario o revisión manual."
     },
     {
-      "key": "forever/alliance/30-40/04-stranglethorn-vale:25:1",
+      "key": "forever/alliance/30-40/04-stranglethorn-vale:24:1",
       "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-      "stepIndex": 25,
+      "stepIndex": 24,
       "goalIndex": 1,
       "action": "complete",
       "questID": 578,
@@ -14115,7 +13979,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-        "stepIndex": 25,
+        "stepIndex": 24,
         "goalIndex": 1
       },
       "kind": "step_instructions_not_goal",
@@ -14123,9 +13987,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/30-40/05-arathi-highlands:9:2",
+      "key": "forever/alliance/30-40/05-arathi-highlands:8:2",
       "guideID": "forever/alliance/30-40/05-arathi-highlands",
-      "stepIndex": 9,
+      "stepIndex": 8,
       "goalIndex": 2,
       "action": "complete",
       "questID": 1393,
@@ -14135,7 +13999,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/05-arathi-highlands",
-        "stepIndex": 9,
+        "stepIndex": 8,
         "goalIndex": 2
       },
       "kind": "step_instructions_not_goal",
@@ -14243,9 +14107,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/30-40/06-badlands:33:2",
+      "key": "forever/alliance/30-40/06-badlands:32:2",
       "guideID": "forever/alliance/30-40/06-badlands",
-      "stepIndex": 33,
+      "stepIndex": 32,
       "goalIndex": 2,
       "action": "complete",
       "questID": 5943,
@@ -14255,7 +14119,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/30-40/06-badlands",
-        "stepIndex": 33,
+        "stepIndex": 32,
         "goalIndex": 2
       },
       "kind": "step_instructions_not_goal",
@@ -14323,9 +14187,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/40-50/01-stranglethorn-vale:46:2",
+      "key": "forever/alliance/40-50/01-stranglethorn-vale:45:2",
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-      "stepIndex": 46,
+      "stepIndex": 45,
       "goalIndex": 2,
       "action": "complete",
       "questID": 1448,
@@ -14335,7 +14199,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-        "stepIndex": 46,
+        "stepIndex": 45,
         "goalIndex": 2
       },
       "kind": "step_instructions_not_goal",
@@ -16862,6 +16726,6 @@
       "arrival",
       "arrivalDock"
     ],
-    "semanticsSha256": "fc1c0c41cb94b605ab8ccc74a766acdbca072598206081deeeb580cac6f26d7d"
+    "semanticsSha256": "99b3f3390dc770d9bf8c2bd62cc7787ad82b8b30945763ee22f48e8e4758b771"
   }
 }

@@ -59,7 +59,8 @@ local function questStats(guide, who, cache)
             for _, goal in ipairs(step.goals or {}) do
                 local id = goal.quest or goal.questID
                 if id and not seen[id] and only(goal.only, who)
-                    and ns.GetGroupDeferralReason and ns:GetGroupDeferralReason(goal, step, guide) then
+                    and ((ns.GetGroupDeferralReason and ns:GetGroupDeferralReason(goal, step, guide))
+                        or (ns.GetLevelingDetourReason and ns:GetLevelingDetourReason(goal))) then
                     -- A later ready turn-in for this same quest can still count.
                     deferred = true
                 elseif id and not seen[id] and not goal.optional and only(goal.only, who) then

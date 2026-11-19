@@ -200,7 +200,13 @@ function ns:GetTrackerPlannedUpcomingItems(guide,fromCursor,limit)
             or type(state.confirmed)=="table" and state.confirmed[key] then return false end
         local id=questID(goal)
         if self.GetGroupDeferralReason and self:GetGroupDeferralReason(goal,step,guide,gi) then return false end
+        if goal.levelingDetour and self.GetLevelingDetourReason then
+            local quest=id or goal.detourQuest
+            local q=quest and status(quest)
+            if self:GetLevelingDetourReason(goal,q and q.active,q and q.complete) then return false end
+        end
         if goal.optional and not char.optional and not (id and status(id).active)
+            and not (self.IsSoloLevelingDetour and self:IsSoloLevelingDetour(goal))
             and not (id and char.includeGroupQuests and self.IsGroupQuest and self:IsGroupQuest(id,guide)) then return false end
         if not (id and status(id).active) then
             for _,closed in ipairs(type(goal.closedBy)=="table" and goal.closedBy or {}) do

@@ -276,6 +276,7 @@ local function compile(plan)
         end
         local goal = copy(record.goal)
         goal.optional = nil -- A selected prerequisite is required for this recovery.
+        goal.levelingDetour, goal.detourItems, goal.detourQuest = nil, nil, nil
         previous.goals[#previous.goals + 1] = goal
     end
     if #steps == 0 or #steps > MAX_STEPS then return nil, "La recuperación no tiene una secuencia de acciones utilizable." end

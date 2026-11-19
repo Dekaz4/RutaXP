@@ -264,27 +264,27 @@ local function learnedPoint(goal)
     return validPoint(point) and point or nil
 end
 
--- Blizzard's own "available quest" marker on the map, throttled and cached.
+-- Cache the game's offers, but choose a pickup from the player's current position.
 local markerCache = {}
 local function availablePoint(goal)
     if not (goal.quest and goal.map and C_QuestLog and C_QuestLog.GetQuestsOnMap) then return nil end
     local now = type(GetTime) == "function" and GetTime() or 0
     local key = goal.quest .. ":" .. goal.map
     local cached = markerCache[key]
-    if cached and now - cached.time < 3 then return cached.point end
-    local point
-    local list = safe(C_QuestLog.GetQuestsOnMap, goal.map)
-    if type(list) == "table" then
-        for _, item in ipairs(list) do
-            if type(item) == "table" and item.questID == goal.quest and number(item.x) and number(item.y) then
-                local candidate = { mapID = goal.map, x = item.x, y = item.y, dynamic = true, source = "game" }
-                if validPoint(candidate) then point = candidate end
-                break
+    if not cached or now - cached.time >= 3 then
+        cached = { time = now, points = {} }
+        local offers = safe(C_QuestLog.GetQuestsOnMap, goal.map)
+        if type(offers) == "table" then
+            for _, item in ipairs(offers) do
+                if type(item) == "table" and item.questID == goal.quest then
+                    local candidate = { mapID = goal.map, x = item.x, y = item.y, dynamic = true, source = "game" }
+                    if validPoint(candidate) then cached.points[#cached.points + 1] = candidate end
+                end
             end
         end
+        markerCache[key] = cached
     end
-    markerCache[key] = { time = now, point = point }
-    return point
+    return nearestPoint(cached, cached.points)
 end
 
 local learner = CreateFrame("Frame")
@@ -355,6 +355,7 @@ end
 function ns:GetBaseStepWaypoint(step)
     if not step then return nil end
     if not step.goals and self.GetGroupDeferralReason and self:GetGroupDeferralReason(step, step) then return nil end
+    if not step.goals and self.GetLevelingDetourReason and self:GetLevelingDetourReason(step) then return nil end
     if step.waypoint then return validPoint(step.waypoint) and step.waypoint or nil end
     if step.goals then
         local goal, status

@@ -203,7 +203,9 @@ def review(guides, items, requirements, revisions):
                 for key, sep in (("preAll", " + "), ("pre", " o ")):
                     if goal.get(key):
                         notes.append("previa " + sep.join(map(str, goal[key])))
-                if goal.get("optional"):
+                if goal.get("levelingDetour"):
+                    notes.append("desvío opcional en solitario")
+                elif goal.get("optional"):
                     notes.append("opcional")
                 if goal.get("profLine"):
                     notes.append(goal.get("profName") or "según profesión")

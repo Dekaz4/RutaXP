@@ -35,9 +35,11 @@ end
 
 local function currentAdvice(self, row, state)
     local status, reason = self:GetGoalStatus(row.goal, row.step, state, row.g)
+    if status == "skip" and self.GetLevelingDetourReason and self:GetLevelingDetourReason(row.goal) then return reason, "opcional" end
     if status == "blocked" then return reason, "estado" end
     if status == "skip" and reason ~= "Opcional desactivado" then return reason, "estado" end
     if status == "done" then return reason, "estado" end
+    if self.IsSoloLevelingDetour and self:IsSoloLevelingDetour(row.goal) then return "Ya tienes los materiales. Acéptala para entregarla.", "ahora" end
     if row.goal.optional then return "Opcional en este paso.", "opcional" end
     return "Acéptala ahora para seguir este paso.", "ahora"
 end
@@ -248,6 +250,8 @@ function ns:GetQuestOfferAdvice(questID)
     end
     if early then return early, kind end
     if later then
+        local detour = self.GetLevelingDetourReason and self:GetLevelingDetourReason(later.goal)
+        if detour then return detour, "opcional" end
         if deferred then return deferred .. " Se recoge en el paso " .. later.s .. ".", "después" end
         if later.goal.optional then return "Opcional en el paso " .. later.s .. ".", "opcional" end
         return "Espera al paso " .. later.s .. " para aceptarla.", "después"

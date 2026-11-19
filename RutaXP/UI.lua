@@ -316,7 +316,12 @@ function ns:CreateUI()
     optional:SetSize(24, 24)
     optional:SetPoint("TOPLEFT", 740, -504)
     label(frame, "GameFontHighlightSmall", "Opcionales", 766, -510, 80)
-    optional:SetScript("OnClick", function(box) self.char.optional = box:GetChecked() and true or false; self:Sync() end)
+    optional:SetScript("OnClick", function(box)
+        self.char.optional = box:GetChecked() and true or false
+        if self.Adaptation then self.Adaptation:Invalidate() end
+        self:ClearDeferredGroupMapPin()
+        self:Sync()
+    end)
 
     local group = CreateFrame("CheckButton", nil, frame, "UICheckButtonTemplate")
     self.groupQuestCheck = group

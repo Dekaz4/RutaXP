@@ -1,4 +1,4 @@
-# RutaXP 0.7.30 para WoW Forever
+# RutaXP 0.7.31 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,10 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## Leveo en solitario del 32 al 60 (0.7.31)
+
+En la Daga de Corrahn puedes coger las dos misiones de la mesa mientras completas «Hermandad de asesinos» y llevar las tres a Costasur. Más adelante se agrupan visitas a los mismos pueblos. En solitario, la guía deja las escoltas largas, las páginas de Barnil y las donaciones de tela para quienes marquen **Opcionales**. Si llevas la tela necesaria, puedes aprovechar la entrega al pasar. En Un’Goro puedes hacer las cacerías camino de Torwa.
 
 ## Vendedores de Trabalomas (0.7.30)
 
@@ -325,7 +329,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.30.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.31.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.

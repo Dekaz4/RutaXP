@@ -15,9 +15,11 @@ from pathlib import Path
 try:
     from .audit_guides import audit
     from .guide_instructions import enrich_document
+    from .solo_leveling_route import apply_solo_leveling
 except ImportError:  # Direct CLI execution from the packaged tools directory.
     from audit_guides import audit
     from guide_instructions import enrich_document
+    from solo_leveling_route import apply_solo_leveling
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -30,6 +32,7 @@ def refresh(source: Path) -> tuple[dict, dict]:
     builder.apply_guide_overrides(document, source / "guide_overrides.json")
     builder.apply_guide_revisions(document, source / "guide_revisions.json")
     builder.apply_guide_locations(document, source / "guide_locations.json")
+    apply_solo_leveling(document)
     document = enrich_document(document)
     document["statistics"]["goalFields"] = dict(sorted(Counter(key for guide in document["guides"]
         for step in guide["steps"] for goal in step["goals"] for key in goal).items()))

@@ -3163,7 +3163,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-      "step": 40,
+      "step": 39,
       "goal": 2,
       "questID": 79536,
       "title": "Greater Friend of the Library",
@@ -3187,7 +3187,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/03-ashenvale",
-      "step": 11,
+      "step": 9,
       "goal": 3,
       "questID": 98418,
       "title": "Shared Fury",
@@ -3199,7 +3199,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/03-ashenvale",
-      "step": 14,
+      "step": 12,
       "goal": 2,
       "questID": 98027,
       "title": "Gleaming Crescent Necklace",
@@ -3211,7 +3211,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/03-ashenvale",
-      "step": 35,
+      "step": 34,
       "goal": 3,
       "questID": 1302,
       "title": "James Hyal",
@@ -3237,7 +3237,7 @@
       "dependencyLocations": {
         "1301": [
           {
-            "step": 35,
+            "step": 34,
             "goal": 2,
             "action": "turnin"
           }
@@ -3246,7 +3246,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-      "step": 26,
+      "step": 25,
       "goal": 3,
       "questID": 339,
       "title": "Capítulo I",
@@ -3267,12 +3267,12 @@
       "dependencyLocations": {
         "-338": [
           {
-            "step": 26,
+            "step": 25,
             "goal": 2,
             "action": "accept"
           },
           {
-            "step": 31,
+            "step": 30,
             "goal": 5,
             "action": "turnin"
           }
@@ -3281,7 +3281,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-      "step": 26,
+      "step": 25,
       "goal": 3,
       "questID": 339,
       "title": "Capítulo I",
@@ -3299,7 +3299,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-      "step": 26,
+      "step": 25,
       "goal": 4,
       "questID": 340,
       "title": "Capítulo II",
@@ -3320,12 +3320,12 @@
       "dependencyLocations": {
         "-338": [
           {
-            "step": 26,
+            "step": 25,
             "goal": 2,
             "action": "accept"
           },
           {
-            "step": 31,
+            "step": 30,
             "goal": 5,
             "action": "turnin"
           }
@@ -3334,7 +3334,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-      "step": 26,
+      "step": 25,
       "goal": 4,
       "questID": 340,
       "title": "Capítulo II",
@@ -3352,7 +3352,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-      "step": 26,
+      "step": 25,
       "goal": 5,
       "questID": 341,
       "title": "Capítulo III",
@@ -3373,12 +3373,12 @@
       "dependencyLocations": {
         "-338": [
           {
-            "step": 26,
+            "step": 25,
             "goal": 2,
             "action": "accept"
           },
           {
-            "step": 31,
+            "step": 30,
             "goal": 5,
             "action": "turnin"
           }
@@ -3387,7 +3387,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-      "step": 26,
+      "step": 25,
       "goal": 5,
       "questID": 341,
       "title": "Capítulo III",
@@ -3405,7 +3405,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-      "step": 26,
+      "step": 25,
       "goal": 6,
       "questID": 342,
       "title": "Capítulo IV",
@@ -3426,12 +3426,12 @@
       "dependencyLocations": {
         "-338": [
           {
-            "step": 26,
+            "step": 25,
             "goal": 2,
             "action": "accept"
           },
           {
-            "step": 31,
+            "step": 30,
             "goal": 5,
             "action": "turnin"
           }
@@ -3440,7 +3440,7 @@
     },
     {
       "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-      "step": 26,
+      "step": 25,
       "goal": 6,
       "questID": 342,
       "title": "Capítulo IV",
@@ -3817,7 +3817,7 @@
     },
     {
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-      "step": 27,
+      "step": 26,
       "goal": 2,
       "questID": 349,
       "title": "La fiebre de Tuercespina",
@@ -3843,12 +3843,12 @@
             "action": "accept"
           },
           {
-            "step": 28,
+            "step": 27,
             "goal": 2,
             "action": "collect"
           },
           {
-            "step": 29,
+            "step": 28,
             "goal": 5,
             "action": "turnin"
           }
@@ -3857,7 +3857,7 @@
     },
     {
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-      "step": 27,
+      "step": 26,
       "goal": 2,
       "questID": 349,
       "title": "La fiebre de Tuercespina",
@@ -3875,7 +3875,7 @@
     },
     {
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-      "step": 38,
+      "step": 37,
       "goal": 4,
       "questID": 1271,
       "title": "¡Una fiesta en tu honor!",
@@ -3923,7 +3923,7 @@
     },
     {
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-      "step": 38,
+      "step": 37,
       "goal": 8,
       "questID": 1364,
       "title": "La orden de Mazen",
@@ -3944,7 +3944,7 @@
     },
     {
       "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-      "step": 42,
+      "step": 41,
       "goal": 1,
       "questID": 1661,
       "title": "Libro de la nobleza",
@@ -7715,6 +7715,6 @@
     "Local dependency locations are diagnostic; this audit does not assume a previous zone was completed.",
     "No runtime quest completion, profession or player's progress is modified by this audit."
   ],
-  "inputSha256": "5b1d2603c4e29517d002394a6e53f47514cd88f01941cf07991a97af59e72766",
+  "inputSha256": "0c0d134278c8eabb11ba7b26310fe5ba20801885fb43acc1ea4543b29c4062d5",
   "evidenceSha256": "ab0615cda0740566797134b91d400f1c8e9ad858a12e53005f7a2e98ac742c89"
 }

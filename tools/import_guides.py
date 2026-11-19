@@ -25,6 +25,11 @@ import subprocess
 from typing import Any
 
 try:
+    from tools.solo_leveling_route import apply_solo_leveling
+except ModuleNotFoundError:  # Direct CLI execution from the tools directory.
+    from solo_leveling_route import apply_solo_leveling
+
+try:
     from lupa.lua51 import LuaRuntime, lua_type
 except ImportError as error:
     raise SystemExit("The initial import needs lupa with its Lua 5.1 runtime: python -m pip install lupa") from error
@@ -298,6 +303,7 @@ def import_guides(source_path: Path, addon_path: Path, expected_commit: str) -> 
             if not evidence_path.is_relative_to(source_path.resolve()) or hashlib.sha256(evidence_path.read_bytes()).hexdigest() != digest:
                 raise ValueError("Location evidence source changed: " + relative)
         builder.apply_guide_locations(document, locations)
+    apply_solo_leveling(document)
     instruction_spec = importlib.util.spec_from_file_location("rutaxp_guide_instructions", WORKSPACE / "tools" / "guide_instructions.py")
     if instruction_spec is None or instruction_spec.loader is None:
         raise ValueError("Cannot load the guide instruction builder")

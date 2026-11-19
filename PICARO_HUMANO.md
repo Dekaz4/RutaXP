@@ -1,6 +1,6 @@
 # Ruta del pícaro humano
 
-26 capítulos, 938 pasos y 2926 acciones examinadas. 2732 acciones son compatibles por raza y clase, incluidas las opcionales.
+26 capítulos, 932 pasos y 2926 acciones examinadas. 2732 acciones son compatibles por raza y clase, incluidas las opcionales.
 
 En 75 misiones del recorrido hay armas para el pícaro o cuero, capas y accesorios con atributos físicos. Desde nivel 10, la cadena de Keryn y Mathias Shaw da la Hoja de Astucia. Al aceptar o entregar una misión con equipo, pasa el ratón sobre la fila para ver qué recibes y qué puedes elegir.
 
@@ -19,14 +19,14 @@ Los números de paso y fila son los del addon. Las coordenadas usan el mapa del 
 | Bosque del Ocaso | 29 | 87 / 88 | Recorrido ajustado |
 | Vallefresno, Los Humedales y Sierra Espolón | 65 | 164 / 176 | Recorrido ajustado |
 | Las Mil Agujas, Bosque del Ocaso y Los Humedales | 37 | 127 / 130 | Recorrido ajustado |
-| Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta | 43 | 115 / 117 | Recorrido ajustado |
-| Desolace | 22 | 42 / 44 | Revisado |
-| Vallefresno & Los Humedales | 35 | 74 / 74 | Revisado |
-| Vega de Tuercespina | 36 | 115 / 116 | Revisado |
+| Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta | 42 | 115 / 117 | Recorrido ajustado |
+| Desolace | 21 | 42 / 44 | Recorrido ajustado |
+| Vallefresno & Los Humedales | 34 | 74 / 74 | Recorrido ajustado |
+| Vega de Tuercespina | 35 | 115 / 116 | Recorrido ajustado |
 | Tierras Altas de Arathi, Montañas de Alterac y Pantano de las Penas | 48 | 126 / 135 | Recorrido ajustado |
-| Tierras Inhóspitas & Desolace | 39 | 93 / 93 | Recorrido ajustado |
-| Vega de Tuercespina, Marjal Revolcafango y Pantano de las Penas | 52 | 156 / 173 | Recorrido ajustado |
-| Tierras Inhóspitas & Tierras del Interior | 18 | 39 / 43 | Revisado |
+| Tierras Inhóspitas & Desolace | 38 | 93 / 93 | Recorrido ajustado |
+| Vega de Tuercespina, Marjal Revolcafango y Pantano de las Penas | 51 | 156 / 173 | Recorrido ajustado |
+| Tierras Inhóspitas & Tierras del Interior | 18 | 39 / 43 | Recorrido ajustado |
 | Feralas | 26 | 84 / 84 | Recorrido ajustado |
 | Tanaris | 25 | 86 / 86 | Revisado |
 | Tierras del Interior, Las Tierras Devastadas y Loch Modan | 20 | 64 / 65 | Revisado |
@@ -1038,7 +1038,7 @@ La visita temprana a Menethil solo continúa esta cadena si el personaje ya llev
 
 ## Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta (30–33)
 
-El prospector ofrece Más misterios al entregar la carta 514. Karnik y Roetten están en el sector del prospector, a una visita de la sala del rey. La carta de nivel mínimo 30 ya se aceptó antes de este paso.
+Farren entrega 563 después de 562. El siguiente objetivo de 563 está en Ventormenta. Las tortugas y el circuito del Sindicato se pueden hacer antes de volver a Costasur. Se mantiene el orden de las entregas que abren 514 y 512.
 
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
@@ -1099,7 +1099,7 @@ El prospector ofrece Más misterios al entregar la carta 514. Karnik y Roetten e
 | 22.7 | Aceptar · Sospechas de una nueva Peste (#659) | Phin Odelic · desde nivel 30 · mapa 1424 · 50.35, 59.05 |
 | 22.8 | Aceptar · An Alarming Request (#92432) | Emissary Jacques · desde nivel 30 · mapa 1424 · 48.32, 60 |
 | 22.9 | Aceptar · Hermandad de asesinos (#505) | Magistrado Henry Maleb · desde nivel 26 · mapa 1424 · 48.14, 59.11 |
-| 22.10 | Aceptar · Capa de piel de yeti de Bartolo (#565) | Bartolo Ginsetti · desde nivel 29 · mapa 1424 · 49.43, 55.53 · fija · Capa de piel de yeti |
+| 22.10 | Aceptar · Capa de piel de yeti de Bartolo (#565) | Bartolo Ginsetti · desde nivel 29 · desvío opcional en solitario · mapa 1424 · 49.43, 55.53 · fija · Capa de piel de yeti |
 | 22.11 | Aceptar · Una amenaza costosa (#564) | Darren Malavista · desde nivel 30 · mapa 1424 · 52.42, 55.96 · a elegir · Guantes de pastor |
 | 22.12 | Aceptar · Talk of the Town (#98463) | Posadero Kelly · desde nivel 28 · mapa 1424 · 51.57, 58.57 · sin datos externos de requisitos |
 | 22.13 | Aceptar · Hillsbrad's Hoard (#98059) | Captain McManus · desde nivel 23 · mapa 1424 · 46.47, 50.13 · sin datos externos de requisitos |
@@ -1116,51 +1116,53 @@ El prospector ofrece Más misterios al entregar la carta 514. Karnik y Roetten e
 | 26.6 | Aceptar · Cambio de destino (#562) | Teniente Farren Orinelle · desde nivel 25 · previa 561 · mapa 1424 · 51.46, 58.39 · fija · Entrañas de pescado |
 | 27.1 | Derrotar · Cambio de destino (#562) | Cazacostas Espinadaga ×10 · mapa 1424 · 53.7, 63.47 |
 | 27.2 | Derrotar · Cambio de destino (#562) | Sirena Espinadaga ×10 · mapa 1424 · 53.21, 64.23 |
-| 28.1 | Entregar · Cambio de destino (#562) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 · fija · Entrañas de pescado |
-| 28.2 | Aceptar · Nueva asignación (#563) | Teniente Farren Orinelle · desde nivel 25 · previa 562 · mapa 1424 · 51.46, 58.39 |
-| 29.1 | Recoger · Sopa de tortuga calmante (#555) | Carne de tortuga ×10 · mapa 1424 · 55.91, 57.08 |
-| 30.1 | Derrotar · Hermandad de asesinos (#505) | Ladrón del Sindicato ×8 · mapa 1424 · 51.5, 21.1 |
-| 30.2 | Derrotar · Hermandad de asesinos (#505) | Asaltante de caminos del Sindicato ×12 · mapa 1424 · 51.5, 21.1 |
-| 30.3 | Aceptar · Documentos de planificación (#510) | Documentos de Hermandad · desde nivel 26 · mapa 1424 · 59.9, 7.9 |
-| 30.4 | Aceptar · Una carta cifrada (#511) | Documentos de Hermandad · desde nivel 30 · mapa 1424 · 59.9, 7.9 |
-| 31.1 | Recoger · Capa de piel de yeti de Bartolo (#565) | Piel de yeti ×10 · mapa 1424 · 47.4, 5.4 |
-| 31.2 | Indicación · Bartolo también quiere un Capa de montañero, un Descarga de paño de lana y Hilo refinado: fabricado o comprado; la capa se enciende cuando usted está de vuelta en Costasur más tarde. |  |
-| 32.1 | Ir · Ayuntamiento de Trabalomas | mapa 1424 · 29.7, 41.6 |
-| 33.1 | Entregar · Hillsbrad's Hoard (#98059) | Captain McManus · mapa 1424 · 46.47, 50.13 |
-| 33.2 | Entregar · Sopa de tortuga calmante (#555) | Chef Jessen · mapa 1424 · 51.89, 58.68 |
-| 33.3 | Entregar · Una carta cifrada (#511) | Maestro cultural Dibbs · mapa 1424 · 50.57, 57.09 |
-| 33.4 | Aceptar · Una carta para Pico Tormenta (#514) | Maestro cultural Dibbs · desde nivel 30 · previa 511 · mapa 1424 · 50.57, 57.09 |
-| 33.5 | Entregar · Hermandad de asesinos (#505) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
-| 33.6 | Entregar · Documentos de planificación (#510) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
-| 33.7 | Aceptar · Nobles muertes (#512) | Magistrado Henry Maleb · desde nivel 26 · previa 510 · mapa 1424 · 48.14, 59.11 |
-| 34.1 | Volar · Ventormenta | varios destinos o ubicaciones según objetivo |
-| 35.1 | Entregar · El diplomático desaparecido (#1245) | Elling Trias · mapa 1453 · 66.03, 74.1 |
-| 35.2 | Aceptar · El diplomático desaparecido (#1246) | Elling Trias · desde nivel 28 · previa 1245 · mapa 1453 · 66.03, 74.1 |
-| 36.1 | Entregar · El diplomático desaparecido (#1246) | Dashel Puñopiedra · mapa 1453 · 74.26, 59.17 |
-| 36.2 | Aceptar · El diplomático desaparecido (#1447) | Dashel Puñopiedra · desde nivel 28 · previa 1246 · mapa 1453 · 74.26, 59.17 |
-| 36.3 | Completar · El diplomático desaparecido (#1447) | varios destinos o ubicaciones según objetivo |
-| 36.4 | Entregar · El diplomático desaparecido (#1447) | Dashel Puñopiedra · mapa 1453 · 74.26, 59.17 |
-| 36.5 | Aceptar · El diplomático desaparecido (#1247) | Dashel Puñopiedra · desde nivel 28 · previa 1447 · mapa 1453 · 74.26, 59.17 |
-| 37 | El isleño | Otra clase o raza |
-| 38.1 | Entregar · Nueva asignación (#563) | Mayor Samuelson · mapa 1453 · 75.83, 36.72 |
-| 39.1 | Entregar · Limpieza del ojo (#293) | Arzobispo Benedictus · mapa 1453 · 50.31, 45.47 |
-| 39.2 | Entregar · En busca de sabiduría (#269) | Obispo Lontananza · mapa 1453 · 49.93, 45.99 |
-| 39.3 | Aceptar · La flota maldita (#270) | Obispo Lontananza · desde nivel 20 · previa 269 · mapa 1453 · 49.93, 45.99 |
-| 40.1 | Aceptar · Una petición de Malin (#690) | Archimago Malin · desde nivel 30 · mapa 1453 · 50.5, 87.47 |
-| 40.2 | Aceptar · Greater Friend of the Library (#79536) | Garion Wendell · desde nivel 20 · mapa 1453 · 48.95, 86.54 · a elegir · Field Researcher's Loop · sin datos externos de requisitos |
-| 40.3 | Entregar · Greater Friend of the Library (#79536) | Garion Wendell · mapa 1453 · 48.95, 86.54 · a elegir · Field Researcher's Loop |
-| 40.4 | Aceptar · James Hyal (#1301) | Connor Ríos · desde nivel 30 · mapa 1453 · 51.12, 95.52 |
-| 41.1 | Entregar · El diplomático desaparecido (#1247) | Elling Trias · mapa 1453 · 66.03, 74.1 |
-| 41.2 | Aceptar · El diplomático desaparecido (#1248) | Elling Trias · desde nivel 28 · previa 1247 · mapa 1453 · 66.03, 74.1 |
-| 42 | Entrenamiento druida | Otra clase o raza |
-| 43.1 | Entregar · Una carta para Pico Tormenta (#514) | Prospector Pico Tormenta · mapa 1455 · 74.64, 11.74 |
-| 43.2 | Aceptar · Más misterios (#525) | Prospector Pico Tormenta · desde nivel 30 · previa 514 · mapa 1455 · 74.64, 11.74 |
-| 43.3 | Entregar · For Further Study (#98313) | Karnik el Historiador · mapa 1455 · 77.54, 11.82 |
-| 43.4 | Aceptar · Los negocios de los Reivindicadores en Desolace (#1453) | Roetten Rocamartillo · desde nivel 30 · mapa 1455 · 69.95, 21.26 |
-| 43.5 | Entregar · Word to Ironforge (#98300) | Rey Magni Barbabronce · mapa 1455 · 39.09, 56.2 |
-| 43.6 | Entrenar · Level Conjuros 30 y 32 | varios destinos o ubicaciones según objetivo |
+| 28.1 | Recoger · Sopa de tortuga calmante (#555) | Carne de tortuga ×10 · mapa 1424 · 55.91, 57.08 |
+| 29.1 | Derrotar · Hermandad de asesinos (#505) | Ladrón del Sindicato ×8 · mapa 1424 · 51.5, 21.1 |
+| 29.2 | Derrotar · Hermandad de asesinos (#505) | Asaltante de caminos del Sindicato ×12 · mapa 1424 · 51.5, 21.1 |
+| 29.3 | Aceptar · Documentos de planificación (#510) | Documentos de Hermandad · desde nivel 26 · mapa 1424 · 59.9, 7.9 |
+| 29.4 | Aceptar · Una carta cifrada (#511) | Documentos de Hermandad · desde nivel 30 · mapa 1424 · 59.9, 7.9 |
+| 30.1 | Recoger · Capa de piel de yeti de Bartolo (#565) | Piel de yeti ×10 · desvío opcional en solitario · mapa 1424 · 47.4, 5.4 |
+| 30.2 | Indicación · Bartolo pide una capa de montañero, una madeja de paño de lana, un hilo refinado y 10 pieles de yeti. Entrégaselos juntos en Costasur. | desvío opcional en solitario |
+| 31.1 | Ir · Ayuntamiento de Trabalomas | mapa 1424 · 29.7, 41.6 |
+| 32.1 | Entregar · Hillsbrad's Hoard (#98059) | Captain McManus · mapa 1424 · 46.47, 50.13 |
+| 32.2 | Entregar · Cambio de destino (#562) | Teniente Farren Orinelle · mapa 1424 · 51.46, 58.39 · fija · Entrañas de pescado |
+| 32.3 | Aceptar · Nueva asignación (#563) | Teniente Farren Orinelle · desde nivel 25 · previa 562 · mapa 1424 · 51.46, 58.39 |
+| 32.4 | Entregar · Sopa de tortuga calmante (#555) | Chef Jessen · mapa 1424 · 51.89, 58.68 |
+| 32.5 | Entregar · Una carta cifrada (#511) | Maestro cultural Dibbs · mapa 1424 · 50.57, 57.09 |
+| 32.6 | Aceptar · Una carta para Pico Tormenta (#514) | Maestro cultural Dibbs · desde nivel 30 · previa 511 · mapa 1424 · 50.57, 57.09 |
+| 32.7 | Entregar · Hermandad de asesinos (#505) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
+| 32.8 | Entregar · Documentos de planificación (#510) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
+| 32.9 | Aceptar · Nobles muertes (#512) | Magistrado Henry Maleb · desde nivel 26 · previa 510 · mapa 1424 · 48.14, 59.11 |
+| 33.1 | Volar · Ventormenta | varios destinos o ubicaciones según objetivo |
+| 34.1 | Entregar · El diplomático desaparecido (#1245) | Elling Trias · mapa 1453 · 66.03, 74.1 |
+| 34.2 | Aceptar · El diplomático desaparecido (#1246) | Elling Trias · desde nivel 28 · previa 1245 · mapa 1453 · 66.03, 74.1 |
+| 35.1 | Entregar · El diplomático desaparecido (#1246) | Dashel Puñopiedra · mapa 1453 · 74.26, 59.17 |
+| 35.2 | Aceptar · El diplomático desaparecido (#1447) | Dashel Puñopiedra · desde nivel 28 · previa 1246 · mapa 1453 · 74.26, 59.17 |
+| 35.3 | Completar · El diplomático desaparecido (#1447) | varios destinos o ubicaciones según objetivo |
+| 35.4 | Entregar · El diplomático desaparecido (#1447) | Dashel Puñopiedra · mapa 1453 · 74.26, 59.17 |
+| 35.5 | Aceptar · El diplomático desaparecido (#1247) | Dashel Puñopiedra · desde nivel 28 · previa 1447 · mapa 1453 · 74.26, 59.17 |
+| 36 | El isleño | Otra clase o raza |
+| 37.1 | Entregar · Nueva asignación (#563) | Mayor Samuelson · mapa 1453 · 75.83, 36.72 |
+| 38.1 | Entregar · Limpieza del ojo (#293) | Arzobispo Benedictus · mapa 1453 · 50.31, 45.47 |
+| 38.2 | Entregar · En busca de sabiduría (#269) | Obispo Lontananza · mapa 1453 · 49.93, 45.99 |
+| 38.3 | Aceptar · La flota maldita (#270) | Obispo Lontananza · desde nivel 20 · previa 269 · mapa 1453 · 49.93, 45.99 |
+| 39.1 | Aceptar · Una petición de Malin (#690) | Archimago Malin · desde nivel 30 · mapa 1453 · 50.5, 87.47 |
+| 39.2 | Aceptar · Greater Friend of the Library (#79536) | Garion Wendell · desde nivel 20 · mapa 1453 · 48.95, 86.54 · a elegir · Field Researcher's Loop · sin datos externos de requisitos |
+| 39.3 | Entregar · Greater Friend of the Library (#79536) | Garion Wendell · mapa 1453 · 48.95, 86.54 · a elegir · Field Researcher's Loop |
+| 39.4 | Aceptar · James Hyal (#1301) | Connor Ríos · desde nivel 30 · mapa 1453 · 51.12, 95.52 |
+| 40.1 | Entregar · El diplomático desaparecido (#1247) | Elling Trias · mapa 1453 · 66.03, 74.1 |
+| 40.2 | Aceptar · El diplomático desaparecido (#1248) | Elling Trias · desde nivel 28 · previa 1247 · mapa 1453 · 66.03, 74.1 |
+| 41 | Entrenamiento druida | Otra clase o raza |
+| 42.1 | Entregar · Una carta para Pico Tormenta (#514) | Prospector Pico Tormenta · mapa 1455 · 74.64, 11.74 |
+| 42.2 | Aceptar · Más misterios (#525) | Prospector Pico Tormenta · desde nivel 30 · previa 514 · mapa 1455 · 74.64, 11.74 |
+| 42.3 | Entregar · For Further Study (#98313) | Karnik el Historiador · mapa 1455 · 77.54, 11.82 |
+| 42.4 | Aceptar · Los negocios de los Reivindicadores en Desolace (#1453) | Roetten Rocamartillo · desde nivel 30 · mapa 1455 · 69.95, 21.26 |
+| 42.5 | Entregar · Word to Ironforge (#98300) | Rey Magni Barbabronce · mapa 1455 · 39.09, 56.2 |
+| 42.6 | Entrenar · Level Conjuros 30 y 32 | varios destinos o ubicaciones según objetivo |
 
 ## Desolace (31–34)
+
+1458 y 1437 se aceptan en la primera visita. Los dos objetivos de 1458 están en Sargeron y el cofre de 1437 está fuera del puesto. 1459 y 1438 se aceptan tras sus respectivas entregas y se hacen más tarde.
 
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
@@ -1177,38 +1179,40 @@ El prospector ofrece Más misterios al entregar la carta 514. Karnik y Roetten e
 | 5.6 | Aceptar · Colección de orejas (#1387) | Cabo Melkins · desde nivel 30 · mapa 1443 · 66.74, 10.87 |
 | 6.1 | Recoger · Componentes para Reivindicadores y Cía. (#1458) | Garra de Odio Feroz ×10 · mapa 1443 · 70.11, 15.58 |
 | 6.2 | Recoger · Componentes para Reivindicadores y Cía. (#1458) | Cuerno de Odio Feroz ×10 · mapa 1443 · 70.11, 15.58 |
-| 7.1 | Entregar · Componentes para Reivindicadores y Cía. (#1458) | Kreldig Ungor · mapa 1443 · 66.2, 9.63 |
-| 7.2 | Aceptar · Componentes para Reivindicadores y Cía. (#1459) | Kreldig Ungor · desde nivel 30 · previa 1458 · mapa 1443 · 66.2, 9.63 |
-| 8.1 | Entregar · Buscando a Vahlarriel (#1437) | Cofre de Malem · mapa 1443 · 56.52, 17.84 |
-| 8.2 | Aceptar · Buscando a Vahlarriel (#1465) | Cofre de Malem · desde nivel 30 · previa 1437 · mapa 1443 · 56.52, 17.84 |
-| 9.1 | Entregar · Buscando a Vahlarriel (#1465) | Vahlarriel Destripademonios · mapa 1443 · 66.44, 11.82 |
-| 9.2 | Aceptar · Buscando a Vahlarriel (#1438) | Vahlarriel Destripademonios · desde nivel 30 · previa 1465 · mapa 1443 · 66.44, 11.82 |
-| 10.1 | Aceptar · El Cetro de la Luz (#5741) | Azore Aldamort · desde nivel 30 · mapa 1443 · 38.88, 27.16 |
-| 11.1 | Entregar · Buscando a Vahlarriel (#1438) | Dalinda Malem · mapa 1443 · 54.86, 26.13 |
-| 11.2 | Aceptar · Buscando a Tyranis (#1439) | Dalinda Malem · desde nivel 30 · previa 1438 · mapa 1443 · 54.86, 26.13 |
-| 12.1 | Recoger · Buscando a Tyranis (#1439) | Colgante de Tyranis · Tyranis Malem · mapa 1443 · 53.01, 29.08 |
-| 12.2 | Recoger · El Cetro de la Luz (#5741) | Cetro de Luz · Profeta Filo Ardiente · mapa 1443 · 55.17, 30.15 |
-| 13.1 | Entregar · Buscando a Tyranis (#1439) | Dalinda Malem · mapa 1443 · 54.86, 26.13 |
-| 13.2 | Aceptar · Vuelve con Vahlarriel (#1440) | Dalinda Malem · desde nivel 30 · previa 1439 · mapa 1443 · 54.86, 26.13 · a elegir · Cinturón de forcejeador, Capa de cuartel |
-| 13.3 | Ir · Fuera de Fortaleza del Hacha de Trueno | mapa 1443 · 58.3, 30.9 |
-| 13.4 | Indicación · Lead Dalinda fuera de la fortaleza; ella sale una vez que usted está libre de ella. Vahlarriel toma la entrega en Punta de Nijel al final de la guía. |  |
-| 13.5 | Completar · Vuelve con Vahlarriel (#1440) | varios destinos o ubicaciones según objetivo |
-| 14.1 | Entregar · El Cetro de la Luz (#5741) | Azore Aldamort · mapa 1443 · 38.88, 27.16 |
-| 15.1 | Recoger · Componentes para Reivindicadores y Cía. (#1459) | Veneno Scorpashi ×7 · Sacudidor Scorpashi · mapa 1443 · 40.39, 40.83 |
-| 16.1 | Aceptar · El guardaespaldas (#5821) | Cork Gizelton · desde nivel 30 · opcional · mapa 1443 · 66.54, 37.51 |
-| 17.1 | Completar · El guardaespaldas (#5821) | opcional · varios destinos o ubicaciones según objetivo |
-| 18.1 | Entregar · El guardaespaldas (#5821) | Smeed Mezclatornillos · opcional · mapa 1443 · 60.86, 61.86 |
-| 18.2 | Aceptar · El rodeo kodo (#5561) | Smeed Mezclatornillos · desde nivel 30 · mapa 1443 · 60.86, 61.86 |
-| 19.1 | Completar · El rodeo kodo (#5561) | varios destinos o ubicaciones según objetivo |
-| 19.2 | Recoger · Componentes para Reivindicadores y Cía. (#1459) | Pellejo de kodo mayor ×3 · Kodo envejecido · mapa 1443 · 57.76, 71.05 |
-| 20.1 | Entregar · El rodeo kodo (#5561) | Smeed Mezclatornillos · mapa 1443 · 60.86, 61.86 |
-| 21.1 | Recoger · Colección de orejas (#1387) | Oreja centauro ×15 · mapa 1443 · 65.59, 70.3 |
-| 22.1 | Piedra de hogar · Punta de Nijel |  |
-| 22.2 | Entregar · Vuelve con Vahlarriel (#1440) | Vahlarriel Destripademonios · mapa 1443 · 66.44, 11.82 · a elegir · Cinturón de forcejeador, Capa de cuartel |
-| 22.3 | Entregar · Colección de orejas (#1387) | Cabo Melkins · mapa 1443 · 66.74, 10.87 |
-| 22.4 | Entregar · Componentes para Reivindicadores y Cía. (#1459) | Kreldig Ungor · mapa 1443 · 66.2, 9.63 |
+| 7.1 | Entregar · Buscando a Vahlarriel (#1437) | Cofre de Malem · mapa 1443 · 56.52, 17.84 |
+| 7.2 | Aceptar · Buscando a Vahlarriel (#1465) | Cofre de Malem · desde nivel 30 · previa 1437 · mapa 1443 · 56.52, 17.84 |
+| 8.1 | Entregar · Componentes para Reivindicadores y Cía. (#1458) | Kreldig Ungor · mapa 1443 · 66.2, 9.63 |
+| 8.2 | Aceptar · Componentes para Reivindicadores y Cía. (#1459) | Kreldig Ungor · desde nivel 30 · previa 1458 · mapa 1443 · 66.2, 9.63 |
+| 8.3 | Entregar · Buscando a Vahlarriel (#1465) | Vahlarriel Destripademonios · mapa 1443 · 66.44, 11.82 |
+| 8.4 | Aceptar · Buscando a Vahlarriel (#1438) | Vahlarriel Destripademonios · desde nivel 30 · previa 1465 · mapa 1443 · 66.44, 11.82 |
+| 9.1 | Aceptar · El Cetro de la Luz (#5741) | Azore Aldamort · desde nivel 30 · mapa 1443 · 38.88, 27.16 |
+| 10.1 | Entregar · Buscando a Vahlarriel (#1438) | Dalinda Malem · mapa 1443 · 54.86, 26.13 |
+| 10.2 | Aceptar · Buscando a Tyranis (#1439) | Dalinda Malem · desde nivel 30 · previa 1438 · mapa 1443 · 54.86, 26.13 |
+| 11.1 | Recoger · Buscando a Tyranis (#1439) | Colgante de Tyranis · Tyranis Malem · mapa 1443 · 53.01, 29.08 |
+| 11.2 | Recoger · El Cetro de la Luz (#5741) | Cetro de Luz · Profeta Filo Ardiente · mapa 1443 · 55.17, 30.15 |
+| 12.1 | Entregar · Buscando a Tyranis (#1439) | Dalinda Malem · mapa 1443 · 54.86, 26.13 |
+| 12.2 | Aceptar · Vuelve con Vahlarriel (#1440) | Dalinda Malem · desde nivel 30 · previa 1439 · mapa 1443 · 54.86, 26.13 · a elegir · Cinturón de forcejeador, Capa de cuartel |
+| 12.3 | Ir · Fuera de Fortaleza del Hacha de Trueno | mapa 1443 · 58.3, 30.9 |
+| 12.4 | Indicación · Lead Dalinda fuera de la fortaleza; ella sale una vez que usted está libre de ella. Vahlarriel toma la entrega en Punta de Nijel al final de la guía. |  |
+| 12.5 | Completar · Vuelve con Vahlarriel (#1440) | varios destinos o ubicaciones según objetivo |
+| 13.1 | Entregar · El Cetro de la Luz (#5741) | Azore Aldamort · mapa 1443 · 38.88, 27.16 |
+| 14.1 | Recoger · Componentes para Reivindicadores y Cía. (#1459) | Veneno Scorpashi ×7 · Sacudidor Scorpashi · mapa 1443 · 40.39, 40.83 |
+| 15.1 | Aceptar · El guardaespaldas (#5821) | Cork Gizelton · desde nivel 30 · desvío opcional en solitario · mapa 1443 · 66.54, 37.51 |
+| 16.1 | Completar · El guardaespaldas (#5821) | desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
+| 17.1 | Entregar · El guardaespaldas (#5821) | Smeed Mezclatornillos · desvío opcional en solitario · mapa 1443 · 60.86, 61.86 |
+| 17.2 | Aceptar · El rodeo kodo (#5561) | Smeed Mezclatornillos · desde nivel 30 · mapa 1443 · 60.86, 61.86 |
+| 18.1 | Completar · El rodeo kodo (#5561) | varios destinos o ubicaciones según objetivo |
+| 18.2 | Recoger · Componentes para Reivindicadores y Cía. (#1459) | Pellejo de kodo mayor ×3 · Kodo envejecido · mapa 1443 · 57.76, 71.05 |
+| 19.1 | Entregar · El rodeo kodo (#5561) | Smeed Mezclatornillos · mapa 1443 · 60.86, 61.86 |
+| 20.1 | Recoger · Colección de orejas (#1387) | Oreja centauro ×15 · mapa 1443 · 65.59, 70.3 |
+| 21.1 | Piedra de hogar · Punta de Nijel |  |
+| 21.2 | Entregar · Vuelve con Vahlarriel (#1440) | Vahlarriel Destripademonios · mapa 1443 · 66.44, 11.82 · a elegir · Cinturón de forcejeador, Capa de cuartel |
+| 21.3 | Entregar · Colección de orejas (#1387) | Cabo Melkins · mapa 1443 · 66.74, 10.87 |
+| 21.4 | Entregar · Componentes para Reivindicadores y Cía. (#1459) | Kreldig Ungor · mapa 1443 · 66.2, 9.63 |
 
 ## Vallefresno & Los Humedales (33–35)
+
+Anilia y Geltharis están en Xavian, con los tres tipos de sátiros de 98418. La primera visita a Satyrnaar y la aceptación de 98418 en Canción del Bosque preceden al combate en Xavian. El otro círculo de 1140 y la cadena de Kayneth mantienen su secuencia.
 
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
@@ -1226,68 +1230,70 @@ El prospector ofrece Más misterios al entregar la carta 514. Karnik y Roetten e
 | 6.1 | Completar · La Vega del Aullido (#1022) | varios destinos o ubicaciones según objetivo |
 | 7.1 | Entregar · La limpieza de Raene (#1026) | Shael'dryn · mapa 1440 · 53.54, 46.22 |
 | 7.2 | Aceptar · La limpieza de Raene (#1027) | Shael'dryn · desde nivel 18 · previa 1026 · mapa 1440 · 53.54, 46.22 |
-| 8.1 | Entregar · ¡Vil sátiro! ¡Dríade en peligro! (#1021) | Anilia · mapa 1440 · 78.33, 44.82 |
-| 8.2 | Aceptar · La Rama de Cenario (#1031) | Anilia · desde nivel 26 · previa 1021 · mapa 1440 · 78.33, 44.82 |
-| 9.1 | Recoger · La Rama de Cenario (#1031) | Rama de Cenario · Geltharis · mapa 1440 · 77.99, 42.42 |
-| 10.1 | Interactuar · La Torre de Althalaxx (#1140) | Círculo de Encarcelamiento · mapa 1440 · 81.6, 48.57 |
-| 11.1 | Entregar · Kayneth Ventoleve (#4581) | mapa 1440 · 85.24, 44.71 |
-| 11.2 | Aceptar · Los males de los Renegados (#1011) | Kayneth Ventoleve · desde nivel 24 · previa 4581 · mapa 1440 · 85.24, 44.71 |
-| 11.3 | Aceptar · Shared Fury (#98418) | Maseara Autumnmoon · desde nivel 23 · mapa 1440 · 86.25, 45.81 · sin datos externos de requisitos |
-| 12.1 | Recoger · Los males de los Renegados (#1011) | Botella de enfermedad · Botella de enfermedad · mapa 1440 · 75.27, 71.8 |
-| 13.1 | Recoger · La limpieza de Raene (#1027) | Pomo de hierro · Cofre oxidado · mapa 1440 · 75.88, 73.52 |
-| 14.1 | Recoger · Lago Cielo Estrellado (#1035) | Piedra lunar caída · Oráculo Sombramatorral · mapa 1440 · 66.66, 82.17 |
-| 14.2 | Aceptar · Gleaming Crescent Necklace (#98027) | Gleaming Crescent Pendant · desde nivel 25 · mapa 1440 · 62.96, 71.55 · fija · Replica Crescent Necklace · sin datos externos de requisitos |
-| 15.1 | Entregar · Los males de los Renegados (#1011) | Kayneth Ventoleve · mapa 1440 · 85.24, 44.71 |
-| 15.2 | Aceptar · Druidas dementes (#1012) | Kayneth Ventoleve · desde nivel 24 · previa 1011 · mapa 1440 · 85.24, 44.71 · a elegir · Uthil's Cudgel |
-| 16.1 | Derrotar · Shared Fury (#98418) | Jurapenas Xavian ×5 · mapa 1440 · 79.61, 46.86 |
-| 16.2 | Derrotar · Shared Fury (#98418) | Clamainferno Xavian ×5 · mapa 1440 · 79.06, 45.55 |
-| 16.3 | Derrotar · Shared Fury (#98418) | Pícaro Xavian ×5 · mapa 1440 · 78.4, 45.12 |
-| 17.1 | Completar · Druidas dementes (#1012) | varios destinos o ubicaciones según objetivo |
-| 18.1 | Entregar · Druidas dementes (#1012) | Kayneth Ventoleve · mapa 1440 · 85.24, 44.71 · a elegir · Uthil's Cudgel |
-| 18.2 | Entregar · Shared Fury (#98418) | Maseara Autumnmoon · mapa 1440 · 86.25, 45.81 |
-| 19.1 | Interactuar · La Torre de Althalaxx (#1140) | Círculo de Encarcelamiento · mapa 1440 · 66.62, 57 |
-| 20.1 | Entregar · La limpieza de Raene (#1027) | Shael'dryn · mapa 1440 · 53.54, 46.22 |
-| 20.2 | Aceptar · La limpieza de Raene (#1028) | Shael'dryn · desde nivel 18 · previa 1027 · mapa 1440 · 53.54, 46.22 |
-| 21.1 | Entregar · La limpieza de Raene (#1028) | Santuario Oculto · mapa 1440 · 56.35, 49.2 |
-| 21.2 | Aceptar · La limpieza de Raene (#1055) | Santuario Oculto · desde nivel 18 · previa 1028 · mapa 1440 · 56.35, 49.2 |
-| 22.1 | Entregar · La limpieza de Raene (#1055) | Shael'dryn · mapa 1440 · 53.54, 46.22 |
-| 22.2 | Aceptar · La limpieza de Raene (#1029) | Shael'dryn · desde nivel 18 · previa 1055 · mapa 1440 · 53.54, 46.22 |
-| 23.1 | Entregar · Lago Cielo Estrellado (#1035) | Pelturas Lunablanca · mapa 1440 · 37.37, 51.79 · a elegir · Armadura riachuelo |
-| 23.2 | Entregar · Gleaming Crescent Necklace (#98027) | Maliynn · mapa 1440 · 36.62, 49.98 · fija · Replica Crescent Necklace |
-| 23.3 | Entregar · La limpieza de Raene (#1029) | Raene Correlobo · mapa 1440 · 36.62, 49.58 |
-| 23.4 | Aceptar · La limpieza de Raene (#1030) | Raene Correlobo · desde nivel 18 · previa 1029 · mapa 1440 · 36.62, 49.58 |
-| 24.1 | Entregar · La limpieza de Raene (#1030) | Krolg · mapa 1440 · 50.84, 75.08 |
-| 24.2 | Aceptar · La limpieza de Raene (#1045) | Krolg · desde nivel 18 · previa 1030 · mapa 1440 · 50.84, 75.08 |
-| 25.1 | Derrotar · La limpieza de Raene (#1045) | Ran Dentesangre ×4 · mapa 1440 · 54.75, 79.62 |
-| 25.2 | Derrotar · La limpieza de Raene (#1045) | Guardia Dentesangre ×4 · mapa 1440 · 54.67, 79.72 |
-| 26.1 | Entregar · La limpieza de Raene (#1045) | Krolg · mapa 1440 · 50.84, 75.08 |
-| 26.2 | Aceptar · La limpieza de Raene (#1046) | Krolg · desde nivel 18 · previa 1045 · mapa 1440 · 50.84, 75.08 · a elegir · Hoja de entrañas |
-| 26.3 | Completar · La limpieza de Raene (#1046) | varios destinos o ubicaciones según objetivo |
-| 27.1 | Entregar · La limpieza de Raene (#1046) | Raene Correlobo · mapa 1440 · 36.62, 49.58 · a elegir · Hoja de entrañas |
-| 28.1 | Entregar · La Torre de Althalaxx (#1140) | Delgren el Purificador · mapa 1440 · 26.2, 38.7 |
-| 29.1 | Entregar · La Vega del Aullido (#1022) | Centinela Melyria Sombrigélida · mapa 1440 · 22.23, 52.98 |
-| 29.2 | Entregar · La Rama de Cenario (#1031) | Illiyana · mapa 1440 · 21.73, 53.34 |
-| 30.1 | Piedra de hogar · Astranaar |  |
-| 30.2 | Volar · Auberdine | varios destinos o ubicaciones según objetivo |
-| 30.3 | Indicación · Tomal barco a Puerto de Menethil desde los muelles de Auberdine. |  |
-| 31.1 | Entregar · La flota maldita (#270) | Glorin Frenteacerada · mapa 1437 · 10.58, 60.59 |
-| 31.2 | Aceptar · Hierro Forjaluz (#321) | Glorin Frenteacerada · desde nivel 20 · previa 270 · mapa 1437 · 10.58, 60.59 |
-| 32.1 | Entregar · Hierro Forjaluz (#321) | Cofre con marcas de agua · mapa 1437 · 12.11, 64.19 |
-| 32.2 | Aceptar · Los lingotes perdidos (#324) | Cofre con marcas de agua · desde nivel 20 · previa 321 · mapa 1437 · 12.11, 64.19 |
-| 33.1 | Recoger · Los lingotes perdidos (#324) | Lingote Forjaluz ×5 · Asaltante Branquiazul · mapa 1437 · 11.76, 64.38 |
-| 34.1 | Entregar · Los lingotes perdidos (#324) | Glorin Frenteacerada · mapa 1437 · 10.58, 60.59 |
-| 35.1 | Entregar · Seeking Caitlin (#95737) | Caitlin Grassman · mapa 1437 · 11.88, 58.82 |
-| 35.2 | Entregar · James Hyal (#1301) | Vincent Hyal · mapa 1437 · 10.8, 60.4 |
-| 35.3 | Aceptar · James Hyal (#1302) | Vincent Hyal · desde nivel 30 · mapa 1437 · 10.8, 60.4 · posible previa adicional |
-| 35.4 | Entregar · El diplomático desaparecido (#1248) | Mikhail · mapa 1437 · 10.6, 60.77 |
-| 35.5 | Aceptar · El diplomático desaparecido (#1249) | Mikhail · desde nivel 28 · previa 1248 · mapa 1437 · 10.6, 60.77 |
-| 35.6 | Derrotar · El diplomático desaparecido (#1249) | Tapoke "El Flaco" Jahn · mapa 1437 · 10.54, 60.26 |
-| 35.7 | Entregar · El diplomático desaparecido (#1249) | Mikhail · mapa 1437 · 10.6, 60.77 |
-| 35.8 | Aceptar · El diplomático desaparecido (#1250) | Tapoke "El Flaco" Jahn · desde nivel 28 · previa 1249 · mapa 1437 · 10.54, 60.26 |
-| 35.9 | Entregar · El diplomático desaparecido (#1250) | Mikhail · mapa 1437 · 10.6, 60.77 |
-| 35.10 | Aceptar · El diplomático desaparecido (#1264) | Mikhail · desde nivel 28 · previa 1250 · mapa 1437 · 10.6, 60.77 |
+| 8.1 | Interactuar · La Torre de Althalaxx (#1140) | Círculo de Encarcelamiento · mapa 1440 · 81.6, 48.57 |
+| 9.1 | Entregar · Kayneth Ventoleve (#4581) | mapa 1440 · 85.24, 44.71 |
+| 9.2 | Aceptar · Los males de los Renegados (#1011) | Kayneth Ventoleve · desde nivel 24 · previa 4581 · mapa 1440 · 85.24, 44.71 |
+| 9.3 | Aceptar · Shared Fury (#98418) | Maseara Autumnmoon · desde nivel 23 · mapa 1440 · 86.25, 45.81 · sin datos externos de requisitos |
+| 10.1 | Recoger · Los males de los Renegados (#1011) | Botella de enfermedad · Botella de enfermedad · mapa 1440 · 75.27, 71.8 |
+| 11.1 | Recoger · La limpieza de Raene (#1027) | Pomo de hierro · Cofre oxidado · mapa 1440 · 75.88, 73.52 |
+| 12.1 | Recoger · Lago Cielo Estrellado (#1035) | Piedra lunar caída · Oráculo Sombramatorral · mapa 1440 · 66.66, 82.17 |
+| 12.2 | Aceptar · Gleaming Crescent Necklace (#98027) | Gleaming Crescent Pendant · desde nivel 25 · mapa 1440 · 62.96, 71.55 · fija · Replica Crescent Necklace · sin datos externos de requisitos |
+| 13.1 | Entregar · Los males de los Renegados (#1011) | Kayneth Ventoleve · mapa 1440 · 85.24, 44.71 |
+| 13.2 | Aceptar · Druidas dementes (#1012) | Kayneth Ventoleve · desde nivel 24 · previa 1011 · mapa 1440 · 85.24, 44.71 · a elegir · Uthil's Cudgel |
+| 14.1 | Entregar · ¡Vil sátiro! ¡Dríade en peligro! (#1021) | Anilia · mapa 1440 · 78.33, 44.82 |
+| 14.2 | Aceptar · La Rama de Cenario (#1031) | Anilia · desde nivel 26 · previa 1021 · mapa 1440 · 78.33, 44.82 |
+| 15.1 | Recoger · La Rama de Cenario (#1031) | Rama de Cenario · Geltharis · mapa 1440 · 77.99, 42.42 |
+| 15.2 | Derrotar · Shared Fury (#98418) | Jurapenas Xavian ×5 · mapa 1440 · 79.61, 46.86 |
+| 15.3 | Derrotar · Shared Fury (#98418) | Clamainferno Xavian ×5 · mapa 1440 · 79.06, 45.55 |
+| 15.4 | Derrotar · Shared Fury (#98418) | Pícaro Xavian ×5 · mapa 1440 · 78.4, 45.12 |
+| 16.1 | Completar · Druidas dementes (#1012) | varios destinos o ubicaciones según objetivo |
+| 17.1 | Entregar · Druidas dementes (#1012) | Kayneth Ventoleve · mapa 1440 · 85.24, 44.71 · a elegir · Uthil's Cudgel |
+| 17.2 | Entregar · Shared Fury (#98418) | Maseara Autumnmoon · mapa 1440 · 86.25, 45.81 |
+| 18.1 | Interactuar · La Torre de Althalaxx (#1140) | Círculo de Encarcelamiento · mapa 1440 · 66.62, 57 |
+| 19.1 | Entregar · La limpieza de Raene (#1027) | Shael'dryn · mapa 1440 · 53.54, 46.22 |
+| 19.2 | Aceptar · La limpieza de Raene (#1028) | Shael'dryn · desde nivel 18 · previa 1027 · mapa 1440 · 53.54, 46.22 |
+| 20.1 | Entregar · La limpieza de Raene (#1028) | Santuario Oculto · mapa 1440 · 56.35, 49.2 |
+| 20.2 | Aceptar · La limpieza de Raene (#1055) | Santuario Oculto · desde nivel 18 · previa 1028 · mapa 1440 · 56.35, 49.2 |
+| 21.1 | Entregar · La limpieza de Raene (#1055) | Shael'dryn · mapa 1440 · 53.54, 46.22 |
+| 21.2 | Aceptar · La limpieza de Raene (#1029) | Shael'dryn · desde nivel 18 · previa 1055 · mapa 1440 · 53.54, 46.22 |
+| 22.1 | Entregar · Lago Cielo Estrellado (#1035) | Pelturas Lunablanca · mapa 1440 · 37.37, 51.79 · a elegir · Armadura riachuelo |
+| 22.2 | Entregar · Gleaming Crescent Necklace (#98027) | Maliynn · mapa 1440 · 36.62, 49.98 · fija · Replica Crescent Necklace |
+| 22.3 | Entregar · La limpieza de Raene (#1029) | Raene Correlobo · mapa 1440 · 36.62, 49.58 |
+| 22.4 | Aceptar · La limpieza de Raene (#1030) | Raene Correlobo · desde nivel 18 · previa 1029 · mapa 1440 · 36.62, 49.58 |
+| 23.1 | Entregar · La limpieza de Raene (#1030) | Krolg · mapa 1440 · 50.84, 75.08 |
+| 23.2 | Aceptar · La limpieza de Raene (#1045) | Krolg · desde nivel 18 · previa 1030 · mapa 1440 · 50.84, 75.08 |
+| 24.1 | Derrotar · La limpieza de Raene (#1045) | Ran Dentesangre ×4 · mapa 1440 · 54.75, 79.62 |
+| 24.2 | Derrotar · La limpieza de Raene (#1045) | Guardia Dentesangre ×4 · mapa 1440 · 54.67, 79.72 |
+| 25.1 | Entregar · La limpieza de Raene (#1045) | Krolg · mapa 1440 · 50.84, 75.08 |
+| 25.2 | Aceptar · La limpieza de Raene (#1046) | Krolg · desde nivel 18 · previa 1045 · mapa 1440 · 50.84, 75.08 · a elegir · Hoja de entrañas |
+| 25.3 | Completar · La limpieza de Raene (#1046) | varios destinos o ubicaciones según objetivo |
+| 26.1 | Entregar · La limpieza de Raene (#1046) | Raene Correlobo · mapa 1440 · 36.62, 49.58 · a elegir · Hoja de entrañas |
+| 27.1 | Entregar · La Torre de Althalaxx (#1140) | Delgren el Purificador · mapa 1440 · 26.2, 38.7 |
+| 28.1 | Entregar · La Vega del Aullido (#1022) | Centinela Melyria Sombrigélida · mapa 1440 · 22.23, 52.98 |
+| 28.2 | Entregar · La Rama de Cenario (#1031) | Illiyana · mapa 1440 · 21.73, 53.34 |
+| 29.1 | Piedra de hogar · Astranaar |  |
+| 29.2 | Volar · Auberdine | varios destinos o ubicaciones según objetivo |
+| 29.3 | Indicación · Tomal barco a Puerto de Menethil desde los muelles de Auberdine. |  |
+| 30.1 | Entregar · La flota maldita (#270) | Glorin Frenteacerada · mapa 1437 · 10.58, 60.59 |
+| 30.2 | Aceptar · Hierro Forjaluz (#321) | Glorin Frenteacerada · desde nivel 20 · previa 270 · mapa 1437 · 10.58, 60.59 |
+| 31.1 | Entregar · Hierro Forjaluz (#321) | Cofre con marcas de agua · mapa 1437 · 12.11, 64.19 |
+| 31.2 | Aceptar · Los lingotes perdidos (#324) | Cofre con marcas de agua · desde nivel 20 · previa 321 · mapa 1437 · 12.11, 64.19 |
+| 32.1 | Recoger · Los lingotes perdidos (#324) | Lingote Forjaluz ×5 · Asaltante Branquiazul · mapa 1437 · 11.76, 64.38 |
+| 33.1 | Entregar · Los lingotes perdidos (#324) | Glorin Frenteacerada · mapa 1437 · 10.58, 60.59 |
+| 34.1 | Entregar · Seeking Caitlin (#95737) | Caitlin Grassman · mapa 1437 · 11.88, 58.82 |
+| 34.2 | Entregar · James Hyal (#1301) | Vincent Hyal · mapa 1437 · 10.8, 60.4 |
+| 34.3 | Aceptar · James Hyal (#1302) | Vincent Hyal · desde nivel 30 · mapa 1437 · 10.8, 60.4 · posible previa adicional |
+| 34.4 | Entregar · El diplomático desaparecido (#1248) | Mikhail · mapa 1437 · 10.6, 60.77 |
+| 34.5 | Aceptar · El diplomático desaparecido (#1249) | Mikhail · desde nivel 28 · previa 1248 · mapa 1437 · 10.6, 60.77 |
+| 34.6 | Derrotar · El diplomático desaparecido (#1249) | Tapoke "El Flaco" Jahn · mapa 1437 · 10.54, 60.26 |
+| 34.7 | Entregar · El diplomático desaparecido (#1249) | Mikhail · mapa 1437 · 10.6, 60.77 |
+| 34.8 | Aceptar · El diplomático desaparecido (#1250) | Tapoke "El Flaco" Jahn · desde nivel 28 · previa 1249 · mapa 1437 · 10.54, 60.26 |
+| 34.9 | Entregar · El diplomático desaparecido (#1250) | Mikhail · mapa 1437 · 10.6, 60.77 |
+| 34.10 | Aceptar · El diplomático desaparecido (#1264) | Mikhail · desde nivel 28 · previa 1250 · mapa 1437 · 10.6, 60.77 |
 
 ## Vega de Tuercespina (34–38)
+
+La piel 4104 se entrega en Bahía del Botín y 577 carece de sucesor en la ruta. Las misiones 213 y 616 no necesitan 577. Krazek y Kebok ya se visitan al entregar 201 y 189. La entrega de 616 al barón desbloquea 578. La siguiente vuelta con piedra de hogar permite entregar la piel.
 
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
@@ -1332,7 +1338,7 @@ El prospector ofrece Más misterios al entregar la carta 514. Karnik y Roetten e
 | 13.1 | Derrotar · Domina la pantera (#191) | Pantera ×10 · mapa 1434 · 30.4, 8.8 |
 | 13.2 | Derrotar · Domina el raptor (#194) | Raptor de Tuercespina ×10 · mapa 1434 · 27.79, 14.32 |
 | 13.3 | Derrotar · Domina el tigre (#187) | Tigre de Tuercespina mayor ×10 · mapa 1434 · 31.29, 16.62 |
-| 13.4 | Aceptar · Cristal en las montañas (#635) | Colgante de Myzrael · desde nivel 30 · opcional |
+| 13.4 | Aceptar · Cristal en las montañas (#635) | Colgante de Myzrael · desde nivel 30 · desvío opcional en solitario |
 | 14.1 | Entregar · Domina el raptor (#194) | Hemet Decautela · mapa 1434 · 35.66, 10.81 |
 | 14.2 | Aceptar · Domina el raptor (#195) | Hemet Decautela · desde nivel 28 · previa 194 · mapa 1434 · 35.66, 10.81 |
 | 14.3 | Entregar · Domina el tigre (#187) | Ajeck Rouack · mapa 1434 · 35.62, 10.62 |
@@ -1361,56 +1367,56 @@ El prospector ofrece Más misterios al entregar la carta 514. Karnik y Roetten e
 | 22.3 | Aceptar · Hay que ensamblar (#577) | Drizzlik · desde nivel 31 · previa 575 · mapa 1434 · 28.29, 77.59 |
 | 22.4 | Entregar · Fragmentos de cristales canto azules (#605) | Loquillo Pinchabujas · mapa 1434 · 27.12, 77.21 |
 | 22.5 | Entregar · Investiga el campamento (#201) | Krazek · mapa 1434 · 26.95, 77.21 |
-| 22.6 | Entregar · Orejas de Sangrapellejo (#189) | Kebok · mapa 1434 · 27, 77.13 |
+| 22.6 | Aceptar · La isla fantasma (#616) | Krazek · desde nivel 32 · mapa 1434 · 26.95, 77.21 |
+| 22.7 | Entregar · Orejas de Sangrapellejo (#189) | Kebok · mapa 1434 · 27, 77.13 |
+| 22.8 | Aceptar · OPA hostil (#213) | Kebok · desde nivel 31 · mapa 1434 · 27, 77.13 |
+| 22.9 | Entregar · La isla fantasma (#616) | Barón Revilgaz · mapa 1434 · 27.23, 76.87 |
+| 22.10 | Aceptar · La piedra de las mareas (#578) | Barón Revilgaz · desde nivel 32 · previa 616 · mapa 1434 · 27.23, 76.87 |
 | 23.1 | Recoger · Hay que ensamblar (#577) | Piel de crocolisco Quijaforte · Crocolisco Quijaforte · mapa 1434 · 37.86, 32.63 |
-| 24.1 | Entregar · Hay que ensamblar (#577) | Drizzlik · mapa 1434 · 28.29, 77.59 |
-| 24.2 | Aceptar · OPA hostil (#213) | Kebok · desde nivel 31 · mapa 1434 · 27, 77.13 |
-| 24.3 | Aceptar · La isla fantasma (#616) | Krazek · desde nivel 32 · mapa 1434 · 26.95, 77.21 |
-| 24.4 | Entregar · La isla fantasma (#616) | Barón Revilgaz · mapa 1434 · 27.23, 76.87 |
-| 24.5 | Aceptar · La piedra de las mareas (#578) | Barón Revilgaz · desde nivel 32 · previa 616 · mapa 1434 · 27.23, 76.87 |
-| 25.1 | Completar · La piedra de las mareas (#578) | varios destinos o ubicaciones según objetivo |
-| 26.1 | Aceptar · Domina la pantera (#192) | Sir S. J. Erlgadin · desde nivel 28 · previa 191 · mapa 1434 · 35.55, 10.55 |
-| 26.2 | Aceptar · Las verdes colinas de Tuercespina (#338) | Barnil Jarropetra · desde nivel 30 · previa 583 · mapa 1434 · 35.66, 10.53 |
-| 26.3 | Aceptar · Capítulo I (#339) | Barnil Jarropetra · desde nivel 30 · mapa 1434 · 35.66, 10.53 · posible misión simultánea · posible previa adicional |
-| 26.4 | Aceptar · Capítulo II (#340) | Barnil Jarropetra · desde nivel 30 · mapa 1434 · 35.66, 10.53 · posible misión simultánea · posible previa adicional |
-| 26.5 | Aceptar · Capítulo III (#341) | Barnil Jarropetra · desde nivel 30 · mapa 1434 · 35.66, 10.53 · posible misión simultánea · posible previa adicional |
-| 26.6 | Aceptar · Capítulo IV (#342) | Barnil Jarropetra · desde nivel 30 · mapa 1434 · 35.66, 10.53 · posible misión simultánea · posible previa adicional |
-| 27.1 | Aceptar · El misterio de Kurzen (#207) | Hermano Nimetz · desde nivel 30 · previa 204 + 203 · mapa 1434 · 37.83, 3.56 |
-| 27.2 | Aceptar · Fuerzas especiales (#574) | Sargento Yohwa · desde nivel 30 · previa 203 + 204 · mapa 1434 · 38.02, 3.33 |
-| 28.1 | Derrotar · Fuerzas especiales (#574) | Reductor de cabezas Kurzen ×6 · mapa 1434 · 46.33, 6.96 |
-| 28.2 | Derrotar · Fuerzas especiales (#574) | Comando Kurzen · mapa 1434 · 46.45, 6.93 |
-| 29.1 | Completar · El misterio de Kurzen (#207) | El misterio de Kurzen: cuatro leyendas troll · varios destinos o ubicaciones según objetivo |
-| 29.2 | Derrotar · Domina la pantera (#192) | Pantera Faucesombría ×10 · mapa 1434 · 48.09, 20.2 |
-| 29.3 | Recoger · OPA hostil (#213) | Cristal caído ×8 · Geólogo de Ventura y Cía. · mapa 1434 · 47.72, 18.96 |
-| 29.4 | Completar · Capítulo I (#339) | varios destinos o ubicaciones según objetivo |
-| 29.5 | Completar · Capítulo II (#340) | varios destinos o ubicaciones según objetivo |
-| 29.6 | Completar · Capítulo III (#341) | varios destinos o ubicaciones según objetivo |
-| 29.7 | Completar · Capítulo IV (#342) | varios destinos o ubicaciones según objetivo |
-| 30.1 | Entregar · Fuerzas especiales (#574) | Teniente Doren · mapa 1434 · 38.04, 3.01 |
-| 30.2 | Aceptar · La cocina de Krazek (#210) | Cabo Kaleb · desde nivel 32 · mapa 1434 · 37.74, 3.3 |
-| 30.3 | Entregar · El misterio de Kurzen (#207) | Hermano Nimetz · mapa 1434 · 37.83, 3.56 |
-| 30.4 | Aceptar · Brujería trol (#205) | Hermano Nimetz · desde nivel 30 · previa 207 · mapa 1434 · 37.83, 3.56 |
-| 31.1 | Entregar · Capítulo I (#339) | Barnil Jarropetra · mapa 1434 · 35.66, 10.53 |
-| 31.2 | Entregar · Capítulo II (#340) | Barnil Jarropetra · mapa 1434 · 35.66, 10.53 |
-| 31.3 | Entregar · Capítulo III (#341) | Barnil Jarropetra · mapa 1434 · 35.66, 10.53 |
-| 31.4 | Entregar · Capítulo IV (#342) | Barnil Jarropetra · mapa 1434 · 35.66, 10.53 |
-| 31.5 | Entregar · Las verdes colinas de Tuercespina (#338) | Barnil Jarropetra · mapa 1434 · 35.66, 10.53 |
-| 31.6 | Entregar · Domina la pantera (#192) | Sir S. J. Erlgadin · mapa 1434 · 35.55, 10.55 |
-| 32.1 | Recoger · Brujería trol (#205) | Fetiche Machacacráneos ×4 · Médico Brujo Machacacráneos · mapa 1434 · 42.45, 33.27 |
-| 33.1 | Entregar · Brujería trol (#205) | Hermano Nimetz · mapa 1434 · 37.83, 3.56 |
-| 34.1 | Piedra de hogar · Bahía del Botín |  |
-| 34.2 | Entregar · La piedra de las mareas (#578) | Barón Revilgaz · mapa 1434 · 27.23, 76.87 |
-| 34.3 | Aceptar · Elementales de agua (#601) | Barón Revilgaz · desde nivel 32 · previa 578 · mapa 1434 · 27.23, 76.87 |
-| 34.4 | Entregar · OPA hostil (#213) | Kebok · mapa 1434 · 27, 77.13 |
-| 34.5 | Entregar · La cocina de Krazek (#210) | Krazek · mapa 1434 · 26.95, 77.21 |
-| 34.6 | Aceptar · Un favor a Krazek (#627) | Krazek · desde nivel 32 · previa 210 · mapa 1434 · 26.95, 77.21 |
-| 35.1 | Recoger · Elementales de agua (#601) | Brazales elementales de Agua ×6 · Elemental de agua inferior · mapa 1434 · 21.53, 24.67 |
-| 36.1 | Entregar · Elementales de agua (#601) | Barón Revilgaz · mapa 1434 · 27.23, 76.87 |
-| 36.2 | Aceptar · Análisis mágico (#602) | Barón Revilgaz · desde nivel 32 · previa 601 · mapa 1434 · 27.23, 76.87 |
+| 24.1 | Completar · La piedra de las mareas (#578) | varios destinos o ubicaciones según objetivo |
+| 25.1 | Aceptar · Domina la pantera (#192) | Sir S. J. Erlgadin · desde nivel 28 · previa 191 · mapa 1434 · 35.55, 10.55 |
+| 25.2 | Aceptar · Las verdes colinas de Tuercespina (#338) | Barnil Jarropetra · desde nivel 30 · previa 583 · desvío opcional en solitario · mapa 1434 · 35.66, 10.53 |
+| 25.3 | Aceptar · Capítulo I (#339) | Barnil Jarropetra · desde nivel 30 · desvío opcional en solitario · mapa 1434 · 35.66, 10.53 · posible misión simultánea · posible previa adicional |
+| 25.4 | Aceptar · Capítulo II (#340) | Barnil Jarropetra · desde nivel 30 · desvío opcional en solitario · mapa 1434 · 35.66, 10.53 · posible misión simultánea · posible previa adicional |
+| 25.5 | Aceptar · Capítulo III (#341) | Barnil Jarropetra · desde nivel 30 · desvío opcional en solitario · mapa 1434 · 35.66, 10.53 · posible misión simultánea · posible previa adicional |
+| 25.6 | Aceptar · Capítulo IV (#342) | Barnil Jarropetra · desde nivel 30 · desvío opcional en solitario · mapa 1434 · 35.66, 10.53 · posible misión simultánea · posible previa adicional |
+| 26.1 | Aceptar · El misterio de Kurzen (#207) | Hermano Nimetz · desde nivel 30 · previa 204 + 203 · mapa 1434 · 37.83, 3.56 |
+| 26.2 | Aceptar · Fuerzas especiales (#574) | Sargento Yohwa · desde nivel 30 · previa 203 + 204 · mapa 1434 · 38.02, 3.33 |
+| 27.1 | Derrotar · Fuerzas especiales (#574) | Reductor de cabezas Kurzen ×6 · mapa 1434 · 46.33, 6.96 |
+| 27.2 | Derrotar · Fuerzas especiales (#574) | Comando Kurzen · mapa 1434 · 46.45, 6.93 |
+| 28.1 | Completar · El misterio de Kurzen (#207) | El misterio de Kurzen: cuatro leyendas troll · varios destinos o ubicaciones según objetivo |
+| 28.2 | Derrotar · Domina la pantera (#192) | Pantera Faucesombría ×10 · mapa 1434 · 48.09, 20.2 |
+| 28.3 | Recoger · OPA hostil (#213) | Cristal caído ×8 · Geólogo de Ventura y Cía. · mapa 1434 · 47.72, 18.96 |
+| 28.4 | Completar · Capítulo I (#339) | desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
+| 28.5 | Completar · Capítulo II (#340) | desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
+| 28.6 | Completar · Capítulo III (#341) | desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
+| 28.7 | Completar · Capítulo IV (#342) | desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
+| 29.1 | Entregar · Fuerzas especiales (#574) | Teniente Doren · mapa 1434 · 38.04, 3.01 |
+| 29.2 | Aceptar · La cocina de Krazek (#210) | Cabo Kaleb · desde nivel 32 · mapa 1434 · 37.74, 3.3 |
+| 29.3 | Entregar · El misterio de Kurzen (#207) | Hermano Nimetz · mapa 1434 · 37.83, 3.56 |
+| 29.4 | Aceptar · Brujería trol (#205) | Hermano Nimetz · desde nivel 30 · previa 207 · mapa 1434 · 37.83, 3.56 |
+| 30.1 | Entregar · Capítulo I (#339) | Barnil Jarropetra · desvío opcional en solitario · mapa 1434 · 35.66, 10.53 |
+| 30.2 | Entregar · Capítulo II (#340) | Barnil Jarropetra · desvío opcional en solitario · mapa 1434 · 35.66, 10.53 |
+| 30.3 | Entregar · Capítulo III (#341) | Barnil Jarropetra · desvío opcional en solitario · mapa 1434 · 35.66, 10.53 |
+| 30.4 | Entregar · Capítulo IV (#342) | Barnil Jarropetra · desvío opcional en solitario · mapa 1434 · 35.66, 10.53 |
+| 30.5 | Entregar · Las verdes colinas de Tuercespina (#338) | Barnil Jarropetra · desvío opcional en solitario · mapa 1434 · 35.66, 10.53 |
+| 30.6 | Entregar · Domina la pantera (#192) | Sir S. J. Erlgadin · mapa 1434 · 35.55, 10.55 |
+| 31.1 | Recoger · Brujería trol (#205) | Fetiche Machacacráneos ×4 · Médico Brujo Machacacráneos · mapa 1434 · 42.45, 33.27 |
+| 32.1 | Entregar · Brujería trol (#205) | Hermano Nimetz · mapa 1434 · 37.83, 3.56 |
+| 33.1 | Piedra de hogar · Bahía del Botín |  |
+| 33.2 | Entregar · Hay que ensamblar (#577) | Drizzlik · mapa 1434 · 28.29, 77.59 |
+| 33.3 | Entregar · La piedra de las mareas (#578) | Barón Revilgaz · mapa 1434 · 27.23, 76.87 |
+| 33.4 | Aceptar · Elementales de agua (#601) | Barón Revilgaz · desde nivel 32 · previa 578 · mapa 1434 · 27.23, 76.87 |
+| 33.5 | Entregar · OPA hostil (#213) | Kebok · mapa 1434 · 27, 77.13 |
+| 33.6 | Entregar · La cocina de Krazek (#210) | Krazek · mapa 1434 · 26.95, 77.21 |
+| 33.7 | Aceptar · Un favor a Krazek (#627) | Krazek · desde nivel 32 · previa 210 · mapa 1434 · 26.95, 77.21 |
+| 34.1 | Recoger · Elementales de agua (#601) | Brazales elementales de Agua ×6 · Elemental de agua inferior · mapa 1434 · 21.53, 24.67 |
+| 35.1 | Entregar · Elementales de agua (#601) | Barón Revilgaz · mapa 1434 · 27.23, 76.87 |
+| 35.2 | Aceptar · Análisis mágico (#602) | Barón Revilgaz · desde nivel 32 · previa 601 · mapa 1434 · 27.23, 76.87 |
 
 ## Tierras Altas de Arathi, Montañas de Alterac y Pantano de las Penas (37–40)
 
-En Costasur se hace una vuelta por los cuatro destinatarios independientes de misiones completadas. La entrega a Dibbs y sus continuaciones conservan su posición al final de la visita.
+El cofre de 1421 (64.46,18.3) está junto a la jaula de Galen (65.47,18.16). Recoger el encargo de Magtoor al salir del oeste permite visitar ambos en la misma salida. La escolta se inicia después del cofre y termina antes de las entregas en el oeste.
 
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
@@ -1422,17 +1428,17 @@ En Costasur se hace una vuelta por los cuatro destinatarios independientes de mi
 | 3.3 | Derrotar · Contra la fauna feroz (#1396) | Jaguar del pantano ×10 · mapa 1435 · 26.43, 47.42 |
 | 4.1 | Entregar · Contra la fauna feroz (#1396) | Vigía Biggs · mapa 1435 · 26.74, 59.83 |
 | 4.2 | Aceptar · La caravana perdida (#1421) | Vigía Biggs · desde nivel 30 · previa 1396 · mapa 1435 · 26.74, 59.83 |
-| 5.1 | Recoger · La caravana perdida (#1421) | Componentes de zahorí · Cofre de la caravana · mapa 1435 · 64.46, 18.3 |
-| 6.1 | Entregar · La caravana perdida (#1421) | Vigía Biggs · mapa 1435 · 26.74, 59.83 |
-| 7.1 | Aceptar · Cristales draenetistas (#1389) | Magtoor · desde nivel 30 · mapa 1435 · 25.98, 31.4 |
-| 8.1 | Recoger · Cristales draenetistas (#1389) | Cristal draenetista ×6 · Cristales draenetistas · mapa 1435 · 55.09, 30.08 |
-| 8.2 | Recoger · Retiro Fangoso | Cayada de Noboru · Noboru el Garrote · mapa 1435 · 54.9, 34.1 |
-| 8.3 | Aceptar · Noboru el Garrote (#1392) | Cayada de Noboru · desde nivel 29 |
-| 9.1 | Aceptar · La huida de Galen (#1393) | Galen Bonguarda · desde nivel 30 · mapa 1435 · 65.47, 18.16 |
-| 9.2 | Completar · La huida de Galen (#1393) | varios destinos o ubicaciones según objetivo |
-| 9.3 | Entregar · La huida de Galen (#1393) | Caja fuerte de Galen · mapa 1435 · 47.81, 39.76 |
-| 10.1 | Entregar · Noboru el Garrote (#1392) | Magtoor · mapa 1435 · 25.98, 31.4 |
-| 10.2 | Entregar · Cristales draenetistas (#1389) | Magtoor · mapa 1435 · 25.98, 31.4 |
+| 5.1 | Aceptar · Cristales draenetistas (#1389) | Magtoor · desde nivel 30 · mapa 1435 · 25.98, 31.4 |
+| 6.1 | Recoger · Cristales draenetistas (#1389) | Cristal draenetista ×6 · Cristales draenetistas · mapa 1435 · 55.09, 30.08 |
+| 6.2 | Recoger · Retiro Fangoso | Cayada de Noboru · Noboru el Garrote · mapa 1435 · 54.9, 34.1 |
+| 6.3 | Aceptar · Noboru el Garrote (#1392) | Cayada de Noboru · desde nivel 29 |
+| 7.1 | Recoger · La caravana perdida (#1421) | Componentes de zahorí · Cofre de la caravana · mapa 1435 · 64.46, 18.3 |
+| 8.1 | Aceptar · La huida de Galen (#1393) | Galen Bonguarda · desde nivel 30 · mapa 1435 · 65.47, 18.16 |
+| 8.2 | Completar · La huida de Galen (#1393) | varios destinos o ubicaciones según objetivo |
+| 8.3 | Entregar · La huida de Galen (#1393) | Caja fuerte de Galen · mapa 1435 · 47.81, 39.76 |
+| 9.1 | Entregar · Noboru el Garrote (#1392) | Magtoor · mapa 1435 · 25.98, 31.4 |
+| 9.2 | Entregar · Cristales draenetistas (#1389) | Magtoor · mapa 1435 · 25.98, 31.4 |
+| 10.1 | Entregar · La caravana perdida (#1421) | Vigía Biggs · mapa 1435 · 26.74, 59.83 |
 | 11.1 | Volar · Ventormenta | varios destinos o ubicaciones según objetivo |
 | 12.1 | Aceptar · Un plato bien frío (#212) | Angus Stern · desde nivel 35 · mapa 1453 · 51.79, 93.64 |
 | 12.2 | Aceptar · Morgan Stern (#1260) | Angus Stern · desde nivel 33 · mapa 1453 · 51.79, 93.64 |
@@ -1491,7 +1497,7 @@ En Costasur se hace una vuelta por los cuatro destinatarios independientes de mi
 | 31.1 | Completar · Sospechas de una nueva Peste (#660) | varios destinos o ubicaciones según objetivo |
 | 32.1 | Entregar · Sospechas de una nueva Peste (#660) | Quae · mapa 1417 · 60.18, 53.85 |
 | 32.2 | Aceptar · Sospechas de una nueva Peste (#661) | Quae · desde nivel 30 · previa 660 · mapa 1417 · 60.18, 53.85 · a elegir · Leotardos de paso ligero |
-| 33.1 | Entregar · Cristal en las montañas (#635) | Fragmentos de Myzrael · opcional · mapa 1417 · 62.5, 33.73 |
+| 33.1 | Entregar · Cristal en las montañas (#635) | Fragmentos de Myzrael · desvío opcional en solitario · mapa 1417 · 62.5, 33.73 |
 | 33.2 | Aceptar · La princesa secuestrada (#642) | Fragmentos de Myzrael · desde nivel 30 · mapa 1417 · 62.5, 33.73 |
 | 34.1 | Recoger · La princesa secuestrada (#642) | Mota de Myzrael ×12 · Kóbold Mostacho Seco · mapa 1417 · 76.23, 42.48 |
 | 34.2 | Recoger · Un favor a Krazek (#627) | Mineral de Petrosangre inferior ×4 · Depósito de sangrita inferior · mapa 1417 · 82.93, 35.65 |
@@ -1528,7 +1534,7 @@ En Costasur se hace una vuelta por los cuatro destinatarios independientes de mi
 | 45.3 | Entregar · Nobles muertes (#512) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
 | 45.4 | Entregar · Muerte al Barón (#523) | Magistrado Henry Maleb · mapa 1424 · 48.14, 59.11 |
 | 45.5 | Entregar · La recompensa Aplastacresta (#500) | Alguacil Rutagrana · mapa 1424 · 49.47, 58.73 |
-| 45.6 | Entregar · Capa de piel de yeti de Bartolo (#565) | Bartolo Ginsetti · mapa 1424 · 49.43, 55.53 · fija · Capa de piel de yeti |
+| 45.6 | Entregar · Capa de piel de yeti de Bartolo (#565) | Bartolo Ginsetti · desvío opcional en solitario · mapa 1424 · 49.43, 55.53 · fija · Capa de piel de yeti |
 | 45.7 | Entregar · Una amenaza costosa (#564) | Darren Malavista · mapa 1424 · 52.42, 55.96 · a elegir · Guantes de pastor |
 | 45.8 | Entregar · Proteger el conocimiento (#540) | Maestro cultural Dibbs · mapa 1424 · 50.57, 57.09 |
 | 45.9 | Aceptar · Vuelve con Milton (#542) | Maestro cultural Dibbs · desde nivel 20 · previa 540 · mapa 1424 · 50.57, 57.09 |
@@ -1545,7 +1551,7 @@ En Costasur se hace una vuelta por los cuatro destinatarios independientes de mi
 
 ## Tierras Inhóspitas & Desolace (39–41)
 
-En Punta de Nijel, Kreldig ofrece la continuación 1467 tras recibir 1466. El encargo de los tótems del capitán se entrega después en la misma visita.
+El encargo 1455 del cofre no desbloquea ninguna de las tareas del cementerio ni del sur. El hogar sigue vinculado a Punta de Nijel. Al volver por la cabaña de Kormek la piedra permite entregar 1455 con 1466 y salir en el vuelo previsto.
 
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
@@ -1588,8 +1594,8 @@ En Punta de Nijel, Kreldig ofrece la continuación 1467 tras recibir 1466. El en
 | 14.1 | Recoger · Estudio de los elementos: roca (#712) | Brazales de Brazal de roca ×5 · Elemental de piedra mayor · mapa 1418 · 6.65, 73.85 |
 | 14.2 | Recoger · ¡A gorronear! (#733) | Viruta de metal ×7 · mapa 1418 · 7.99, 73.84 |
 | 15.1 | Entregar · Estudio de los elementos: roca (#712) | Lotwil Veriatus · mapa 1418 · 25.95, 44.87 |
-| 15.2 | Aceptar · Es mejor la piedra que la tela (#716) | Lucien Tosselramienta · desde nivel 35 · previa 712 · opcional · mapa 1418 · 25.82, 44.24 |
-| 15.3 | Entregar · Es mejor la piedra que la tela (#716) | Lucien Tosselramienta · opcional · mapa 1418 · 25.82, 44.24 |
+| 15.2 | Aceptar · Es mejor la piedra que la tela (#716) | Lucien Tosselramienta · desde nivel 35 · previa 712 · desvío opcional en solitario · mapa 1418 · 25.82, 44.24 |
+| 15.3 | Entregar · Es mejor la piedra que la tela (#716) | Lucien Tosselramienta · desvío opcional en solitario · mapa 1418 · 25.82, 44.24 |
 | 15.4 | Indicación · de Lotwil próxima prueba necesita hecha a mano equipo: saltarlo. |  |
 | 16.1 | Recoger · La solución a la maldición (#709) | Tablilla de Ryun'eh · Cofre antiguo · mapa 1418 · 39.34, 18.82 |
 | 17.1 | Entregar · ¡A gorronear! (#733) | Sigrun Extracero · mapa 1418 · 53.8, 43.3 |
@@ -1615,37 +1621,37 @@ En Punta de Nijel, Kreldig ofrece la continuación 1467 tras recibir 1466. El en
 | 24.1 | Aceptar · El Libro de los Ancestros (#6027) | Azore Aldamort · desde nivel 30 · previa 5741 · mapa 1443 · 38.88, 27.16 |
 | 25.1 | Recoger · El Libro de los Ancestros (#6027) | Libro sobre los Antiguos · Lord Kragaru · mapa 1443 · 28.24, 6.67 |
 | 26.1 | Entregar · El Libro de los Ancestros (#6027) | Azore Aldamort · mapa 1443 · 38.88, 27.16 |
-| 27.1 | Piedra de hogar · Punta de Nijel |  |
-| 27.2 | Entregar · El naufragio de Karnitol (#1455) | Kreldig Ungor · mapa 1443 · 66.2, 9.63 |
-| 27.3 | Indicación · La siguiente tarea de Kreldig, el Satchel de Karnitol, es una gota en la costa lejana: saltarla. |  |
-| 28.1 | Aceptar · Colección de kodos (#5501) | Bibbly F'utzbuckle · desde nivel 33 · mapa 1443 · 62.33, 38.99 |
-| 29.1 | Aceptar · La caza de ectoplamas (#6134) | Hornizz Zumbala · desde nivel 34 · mapa 1443 · 47.83, 61.83 |
-| 29.2 | Recoger · Colección de kodos (#5501) | Hueso de kodo ×10 · Huesos de kodo · mapa 1443 · 48.97, 60.09 |
-| 29.3 | Derrotar · Flesh Picker: cogerlo, para My Little Friends | Flesh Picker · mapa 1443 · 49.94, 60.4 |
-| 30.1 | Recoger · Carved Centaur Totems (#93224) | Carved Centaur Totem ×5 · mapa 1443 · 39.71, 61.41 |
-| 31.1 | Aceptar · ¡Sácame de aquí! (#6132) | Melizza Zumbala · desde nivel 34 · mapa 1443 · 33.95, 53.5 |
-| 31.2 | Completar · ¡Sácame de aquí! (#6132) | escolta a Melizza de vuelta hacial cementerio · mapa 1443 · 40.1, 61.6 |
-| 32.1 | Entregar · ¡Sácame de aquí! (#6132) | Hornizz Zumbala · mapa 1443 · 47.83, 61.83 |
-| 33.1 | Aceptar · La caravana Gizelton (#5943) | Rigger Gizelton · desde nivel 32 · mapa 1443 · 45.4, 75.29 · a elegir · Pistolero Shottie |
-| 33.2 | Completar · La caravana Gizelton (#5943) | mapa 1443 · 55.7, 67.8 |
-| 33.3 | Entregar · La caravana Gizelton (#5943) | Smeed Mezclatornillos · mapa 1443 · 60.86, 61.86 · a elegir · Pistolero Shottie |
-| 34.1 | Recoger · Componentes para Reivindicadores y Cía. (#1466) | Cerebro de can manáfago ×10 · Devorador de maná · mapa 1443 · 56.49, 72.97 |
-| 34.2 | Recoger · Componentes para Reivindicadores y Cía. (#1466) | Ala abisal ×10 · Doncella infernal · mapa 1443 · 54.2, 70.77 |
-| 34.3 | Recoger · Componentes para Reivindicadores y Cía. (#1466) | Sangre de Guardiavil ×10 · Capitán Guardiavil · mapa 1443 · 56.95, 75.74 |
-| 35.1 | Derrotar · El sendero Escarlata (#261) | Devastador no-muerto ×30 · mapa 1443 · 63.97, 81.5 |
-| 35.2 | Recoger · La caza de ectoplamas (#6134) | Ectoplasma ×8 · Espectro Magrami · mapa 1443 · 64.18, 91.63 |
-| 36.1 | Entregar · La caza de ectoplamas (#6134) | Hornizz Zumbala · mapa 1443 · 47.83, 61.83 |
-| 37.1 | Entregar · Colección de kodos (#5501) | Bibbly F'utzbuckle · mapa 1443 · 62.33, 38.99 |
-| 38.1 | Entregar · Componentes para Reivindicadores y Cía. (#1466) | Kreldig Ungor · mapa 1443 · 66.2, 9.63 |
-| 38.2 | Aceptar · Componentes para Reivindicadores y Cía. (#1467) | Kreldig Ungor · desde nivel 30 · previa 1466 · mapa 1443 · 66.2, 9.63 · a elegir · Guanteletes Tempesfuego |
-| 38.3 | Entregar · Carved Centaur Totems (#93224) | Capitán Pentigast · mapa 1443 · 66.66, 10.93 |
-| 38.4 | Entregar · El sendero Escarlata (#261) | Hermano Antón · mapa 1443 · 66.52, 7.91 |
-| 38.5 | Aceptar · El sendero Escarlata (#1052) | Hermano Antón · desde nivel 34 · previa 261 · mapa 1443 · 66.52, 7.91 |
-| 39.1 | Volar · Theramore | varios destinos o ubicaciones según objetivo |
+| 27.1 | Aceptar · Colección de kodos (#5501) | Bibbly F'utzbuckle · desde nivel 33 · mapa 1443 · 62.33, 38.99 |
+| 28.1 | Aceptar · La caza de ectoplamas (#6134) | Hornizz Zumbala · desde nivel 34 · mapa 1443 · 47.83, 61.83 |
+| 28.2 | Recoger · Colección de kodos (#5501) | Hueso de kodo ×10 · Huesos de kodo · mapa 1443 · 48.97, 60.09 |
+| 28.3 | Derrotar · Flesh Picker: cogerlo, para My Little Friends | Flesh Picker · mapa 1443 · 49.94, 60.4 |
+| 29.1 | Recoger · Carved Centaur Totems (#93224) | Carved Centaur Totem ×5 · mapa 1443 · 39.71, 61.41 |
+| 30.1 | Aceptar · ¡Sácame de aquí! (#6132) | Melizza Zumbala · desde nivel 34 · mapa 1443 · 33.95, 53.5 |
+| 30.2 | Completar · ¡Sácame de aquí! (#6132) | escolta a Melizza de vuelta hacial cementerio · mapa 1443 · 40.1, 61.6 |
+| 31.1 | Entregar · ¡Sácame de aquí! (#6132) | Hornizz Zumbala · mapa 1443 · 47.83, 61.83 |
+| 32.1 | Aceptar · La caravana Gizelton (#5943) | Rigger Gizelton · desde nivel 32 · desvío opcional en solitario · mapa 1443 · 45.4, 75.29 · a elegir · Pistolero Shottie |
+| 32.2 | Completar · La caravana Gizelton (#5943) | desvío opcional en solitario · mapa 1443 · 55.7, 67.8 |
+| 32.3 | Entregar · La caravana Gizelton (#5943) | Smeed Mezclatornillos · desvío opcional en solitario · mapa 1443 · 60.86, 61.86 · a elegir · Pistolero Shottie |
+| 33.1 | Recoger · Componentes para Reivindicadores y Cía. (#1466) | Cerebro de can manáfago ×10 · Devorador de maná · mapa 1443 · 56.49, 72.97 |
+| 33.2 | Recoger · Componentes para Reivindicadores y Cía. (#1466) | Ala abisal ×10 · Doncella infernal · mapa 1443 · 54.2, 70.77 |
+| 33.3 | Recoger · Componentes para Reivindicadores y Cía. (#1466) | Sangre de Guardiavil ×10 · Capitán Guardiavil · mapa 1443 · 56.95, 75.74 |
+| 34.1 | Derrotar · El sendero Escarlata (#261) | Devastador no-muerto ×30 · mapa 1443 · 63.97, 81.5 |
+| 34.2 | Recoger · La caza de ectoplamas (#6134) | Ectoplasma ×8 · Espectro Magrami · mapa 1443 · 64.18, 91.63 |
+| 35.1 | Entregar · La caza de ectoplamas (#6134) | Hornizz Zumbala · mapa 1443 · 47.83, 61.83 |
+| 36.1 | Entregar · Colección de kodos (#5501) | Bibbly F'utzbuckle · mapa 1443 · 62.33, 38.99 |
+| 37.1 | Piedra de hogar · Punta de Nijel |  |
+| 37.2 | Entregar · El naufragio de Karnitol (#1455) | Kreldig Ungor · mapa 1443 · 66.2, 9.63 |
+| 37.3 | Indicación · La siguiente tarea de Kreldig, el Satchel de Karnitol, es una gota en la costa lejana: saltarla. |  |
+| 37.4 | Entregar · Componentes para Reivindicadores y Cía. (#1466) | Kreldig Ungor · mapa 1443 · 66.2, 9.63 |
+| 37.5 | Aceptar · Componentes para Reivindicadores y Cía. (#1467) | Kreldig Ungor · desde nivel 30 · previa 1466 · mapa 1443 · 66.2, 9.63 · a elegir · Guanteletes Tempesfuego |
+| 37.6 | Entregar · Carved Centaur Totems (#93224) | Capitán Pentigast · mapa 1443 · 66.66, 10.93 |
+| 37.7 | Entregar · El sendero Escarlata (#261) | Hermano Antón · mapa 1443 · 66.52, 7.91 |
+| 37.8 | Aceptar · El sendero Escarlata (#1052) | Hermano Antón · desde nivel 34 · previa 261 · mapa 1443 · 66.52, 7.91 |
+| 38.1 | Volar · Theramore | varios destinos o ubicaciones según objetivo |
 
 ## Vega de Tuercespina, Marjal Revolcafango y Pantano de las Penas (40–43)
 
-Dizzy ofrece su encargo tras la entrega a Crazz de 597, ya hecha al principio del paso. Se recoge antes de seguir hacia Cuernomarino y Deeg junto a la posada, manteniendo la entrega de 599 antes de 604.
+La única acción en la visita tras los barcos es la entrega opcional 608. Posponerla hasta la siguiente entrada a Bahía del Botín mantiene las tres muertes, el pergamino y la ruta de los naga y gorilas. 608 no abre ningún encargo posterior del recorrido.
 
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
@@ -1688,8 +1694,8 @@ Dizzy ofrece su encargo tras la entrega a Crazz de 597, ya hecha al principio de
 | 12.1 | Recoger · ¡Qué hambre! (#1177) | Cabeza de Ancalodo ×12 · mapa 1445 · 64.4, 29 |
 | 12.2 | Recoger · Sopa de fangorroca con tropezones (#1204) | Lengua Fangorroca bípeda ×8 · mapa 1445 · 64.21, 30.16 |
 | 13.1 | Entregar · Jarl necesita ojos (#1206) | "Ojolodo" Jarl · mapa 1445 · 55.44, 26.27 |
-| 13.2 | Aceptar · Jarl necesita una espada (#1203) | "Ojolodo" Jarl · desde nivel 30 · previa 1206 · opcional · mapa 1445 · 55.44, 26.27 · a elegir · Swamp Ring |
-| 13.3 | Entregar · Jarl necesita una espada (#1203) | "Ojolodo" Jarl · opcional · mapa 1445 · 55.44, 26.27 · a elegir · Swamp Ring |
+| 13.2 | Aceptar · Jarl necesita una espada (#1203) | "Ojolodo" Jarl · desde nivel 30 · previa 1206 · desvío opcional en solitario · mapa 1445 · 55.44, 26.27 · a elegir · Swamp Ring |
+| 13.3 | Entregar · Jarl necesita una espada (#1203) | "Ojolodo" Jarl · desvío opcional en solitario · mapa 1445 · 55.44, 26.27 · a elegir · Swamp Ring |
 | 14.1 | Entregar · ¡Qué hambre! (#1177) | Fangolpe Piesucio · mapa 1445 · 35.15, 38.26 · a elegir · Trituradores de barro |
 | 15.1 | Entregar · Los desertores (#1286) | Balos Jacken · mapa 1445 · 36.09, 54.31 |
 | 15.2 | Aceptar · Los desertores (#1287) | Balos Jacken · desde nivel 30 · previa 1286 · mapa 1445 · 36.09, 54.31 |
@@ -1734,86 +1740,88 @@ Dizzy ofrece su encargo tras la entrega a Crazz de 597, ya hecha al principio de
 | 22.4 | Recoger · Bucaneros Velasangre (#604) | Cartas Velasangre · Cartas Velasangre · mapa 1434 · 27.73, 83.1 |
 | 22.5 | Recoger · Bucaneros Velasangre (#604) | Pedido Velasangre · Pedido Velasangre · mapa 1434 · 27.74, 83.13 |
 | 23.1 | Entregar · Bucaneros Velasangre (#604) | Maestro de flota Cuernomarino · mapa 1434 · 27.17, 77.01 |
-| 23.2 | Aceptar · Bucaneros Velasangre (#608) | Maestro de flota Cuernomarino · desde nivel 37 · previa 604 · mapa 1434 · 27.17, 77.01 |
+| 23.2 | Aceptar · Bucaneros Velasangre (#608) | Maestro de flota Cuernomarino · desde nivel 37 · previa 604 · desvío opcional en solitario · mapa 1434 · 27.17, 77.01 |
 | 23.3 | Entregar · Tabaco rapé (#587) | Deeg · mapa 1434 · 26.92, 77.35 |
 | 23.4 | Entregar · ¡Ojo! (#576) | Dizzy el Tuerto · mapa 1434 · 28.59, 75.9 · fija · Manteo marea oscura |
-| 24.1 | Derrotar · Bucaneros Velasangre (#608) | Capitán Aguasmansas · opcional · mapa 1434 · 32.87, 88.2 |
-| 24.2 | Derrotar · Bucaneros Velasangre (#608) | Capitán Sinquilla · opcional · mapa 1434 · 29.32, 88.29 |
-| 24.3 | Derrotar · Bucaneros Velasangre (#608) | Maestro de Flota Firallon · opcional · mapa 1434 · 30.58, 90.63 |
+| 24.1 | Derrotar · Bucaneros Velasangre (#608) | Capitán Aguasmansas · desvío opcional en solitario · mapa 1434 · 32.87, 88.2 |
+| 24.2 | Derrotar · Bucaneros Velasangre (#608) | Capitán Sinquilla · desvío opcional en solitario · mapa 1434 · 29.32, 88.29 |
+| 24.3 | Derrotar · Bucaneros Velasangre (#608) | Maestro de Flota Firallon · desvío opcional en solitario · mapa 1434 · 30.58, 90.63 |
 | 24.4 | Recoger · Criba de Cortello | Criba de Cortello · mapa 1434 · 30.64, 90.17 |
 | 24.5 | Aceptar · El enigma de Cortello (#624) | Criba de Cortello · desde nivel 35 |
-| 25.1 | Entregar · Bucaneros Velasangre (#608) | Maestro de flota Cuernomarino · opcional · mapa 1434 · 27.17, 77.01 |
-| 26.1 | Recoger · Tallos de juncos akiris (#617) | Junco akiris ×10 · mapa 1434 · 28.21, 64.41 |
-| 27.1 | Recoger · Asusta a Trémulo (#606) | Tripas de Velo de Bruma ×5 · Gorila del Valle Velo de Bruma viejo · mapa 1434 · 30.88, 66.73 |
-| 27.2 | Aceptar · La fiebre de Tuercespina (#349) | Médico brujo Unbagwa · desde nivel 32 · mapa 1434 · 35.27, 60.41 · posible misión simultánea · posible previa adicional |
-| 27.3 | Recoger · La fiebre de Tuercespina (#349) | Colmillo de gorila · mapa 1434 · 35.09, 60.75 |
-| 28.1 | Entregar · La fiebre de Tuercespina (#349) | Médico brujo Unbagwa · mapa 1434 · 35.27, 60.41 |
-| 28.2 | Recoger · La fiebre de Tuercespina (#348) | Corazón de Mokk · Mokk el Salvaje · mapa 1434 · 35.05, 60.88 |
-| 29.1 | Entregar · Asusta a Trémulo (#606) | Phillipe el "Trémulo" · mapa 1434 · 26.9, 73.59 |
-| 29.2 | Aceptar · Vuelve con MacKinley (#607) | Phillipe el "Trémulo" · desde nivel 30 · previa 606 · mapa 1434 · 26.9, 73.59 |
-| 29.3 | Entregar · Vuelve con MacKinley (#607) | MacKinley "Lobo de Mar" · mapa 1434 · 27.78, 77.07 |
-| 29.4 | Aceptar · El vudú debido (#609) | MacKinley "Lobo de Mar" · desde nivel 30 · previa 607 · mapa 1434 · 27.78, 77.07 |
-| 29.5 | Entregar · La fiebre de Tuercespina (#348) | Fin Fizqueta · mapa 1434 · 27.61, 76.74 |
-| 29.6 | Entregar · Tallos de juncos akiris (#617) | Corsario Bloads · mapa 1434 · 26.76, 76.38 |
-| 29.7 | Aceptar · Tallos de juncos akiris (#623) | Corsario Bloads · desde nivel 38 · previa 617 · mapa 1434 · 26.76, 76.38 |
-| 30.1 | Recoger · El vudú debido (#609) | Pie deforme de Maury · Maury "Patón" Wilkins · mapa 1434 · 35.26, 51.27 |
-| 30.2 | Recoger · El vudú debido (#609) | Telescopio dorado de Jon-Jon · Jon-Jon el Cuervo · mapa 1434 · 34.92, 51.84 |
-| 31.1 | Recoger · El secreto de Zanzil (#621) | Mezcla de Zanzil ×12 · mapa 1434 · 34.92, 51.84 |
-| 31.2 | Recoger · El vudú debido (#609) | Anillo enorme de Chucky · Chucky "Diezdedos" · mapa 1434 · 40, 58.24 |
-| 32.1 | Recoger · La minería de Ventura y Cía. (#600) | Cristal canto azul ×10 · Supervisor Cozzle · mapa 1434 · 36.52, 57.06 |
-| 33.1 | Recoger · Colmillos de Machacacráneos (#209) | Colmillo Machacacráneos ×18 · mapa 1434 · 45.61, 41.6 |
-| 34.1 | Recoger · Un plato bien frío (#212) | Anca de basilisco fría · Basilisco Ojogélido · mapa 1434 · 38.15, 40.36 |
-| 35.1 | Recoger · La pesca de perlas (#705) | Perla azul ×9 · Almeja gigante · mapa 1434 · 27.6, 29.2 |
-| 35.2 | Recoger · La maldición de las mareas (#611) | Piedra de las Mareas · Gazban · mapa 1434 · 24.97, 23.58 |
-| 36.1 | Derrotar · Arbor Tarantula: cogerlo, para My Little Friends | Arbor Tarantula · mapa 1434 · 43.1, 16.73 |
-| 36.2 | Entregar · Vuelve con el cabo Kaleb (#622) | Cabo Kaleb · mapa 1434 · 37.74, 3.3 |
-| 37.1 | Piedra de hogar · Bahía del Botín |  |
-| 37.2 | Entregar · La maldición de las mareas (#611) | Barón Revilgaz · mapa 1434 · 27.23, 76.87 |
-| 37.3 | Entregar · El vudú debido (#609) | MacKinley "Lobo de Mar" · mapa 1434 · 27.78, 77.07 |
-| 37.4 | Indicación · La siguiente tarea de MacKinley te envía después de los ogros de élite: olvídate. |  |
-| 37.5 | Entregar · La minería de Ventura y Cía. (#600) | Loquillo Pinchabujas · mapa 1434 · 27.12, 77.21 |
-| 37.6 | Entregar · El secreto de Zanzil (#621) | Loquillo Pinchabujas · mapa 1434 · 27.12, 77.21 |
-| 37.7 | Indicación · El siguiente recado de Crank de Zanzil comienza en Las Mil Agujas: saltarlo. |  |
-| 37.8 | Entregar · Colmillos de Machacacráneos (#209) | Kebok · mapa 1434 · 27, 77.13 |
-| 38.1 | Volar · Ventormenta | varios destinos o ubicaciones según objetivo |
-| 38.2 | Fijar hogar · Ciudad de Ventormenta | varios destinos o ubicaciones según objetivo |
-| 38.3 | Entregar · Un plato bien frío (#212) | Angus Stern · mapa 1453 · 51.79, 93.64 |
-| 38.4 | Aceptar · ¡Una fiesta en tu honor! (#1271) | Angus Stern · desde nivel 30 · previa 1222 · mapa 1453 · 51.79, 93.64 · fuentes en desacuerdo sobre previas |
-| 38.5 | Entregar · ¡Una fiesta en tu honor! (#1271) | Angus Stern · mapa 1453 · 51.79, 93.64 |
-| 38.6 | Aceptar · La orden de Mazen (#1363) | Mazen Mac'Nadir · desde nivel 37 · mapa 1453 · 51.8, 74.24 |
-| 38.7 | Entregar · La orden de Mazen (#1363) | Acólito Dellis · mapa 1453 · 51.4, 73.81 |
-| 38.8 | Aceptar · La orden de Mazen (#1364) | Acólito Dellis · desde nivel 37 · previa 1363 · mapa 1453 · 51.4, 73.81 · a elegir · Botas del placer errante · requisito sin corroboración |
-| 38.9 | Aceptar · Suministros de vital importancia (#1477) | Sumo Hechicero Andromath · desde nivel 40 · mapa 1453 · 48.71, 87.62 |
-| 38.10 | Entregar · Vuelve con Milton (#542) | Milton Gavilla · mapa 1453 · 77.07, 30.21 |
-| 38.11 | Aceptar · En búsqueda del templo (#1448) | Brohann Barriliga · desde nivel 38 · mapa 1453 · 69.45, 40.4 |
-| 38.12 | Entrenar · Ventormenta | varios destinos o ubicaciones según objetivo |
-| 39.1 | Entrenar · Randal Predatio | opcional · mapa 1429 · 84.32, 64.87 |
-| 39.2 | Vender · Katie Hunter: otros colores, 20g | Katie Hunter · opcional · mapa 1429 · 84.15, 65.49 |
+| 25.1 | Recoger · Tallos de juncos akiris (#617) | Junco akiris ×10 · mapa 1434 · 28.21, 64.41 |
+| 26.1 | Recoger · Asusta a Trémulo (#606) | Tripas de Velo de Bruma ×5 · Gorila del Valle Velo de Bruma viejo · mapa 1434 · 30.88, 66.73 |
+| 26.2 | Aceptar · La fiebre de Tuercespina (#349) | Médico brujo Unbagwa · desde nivel 32 · mapa 1434 · 35.27, 60.41 · posible misión simultánea · posible previa adicional |
+| 26.3 | Recoger · La fiebre de Tuercespina (#349) | Colmillo de gorila · mapa 1434 · 35.09, 60.75 |
+| 27.1 | Entregar · La fiebre de Tuercespina (#349) | Médico brujo Unbagwa · mapa 1434 · 35.27, 60.41 |
+| 27.2 | Recoger · La fiebre de Tuercespina (#348) | Corazón de Mokk · Mokk el Salvaje · mapa 1434 · 35.05, 60.88 |
+| 28.1 | Entregar · Asusta a Trémulo (#606) | Phillipe el "Trémulo" · mapa 1434 · 26.9, 73.59 |
+| 28.2 | Aceptar · Vuelve con MacKinley (#607) | Phillipe el "Trémulo" · desde nivel 30 · previa 606 · mapa 1434 · 26.9, 73.59 |
+| 28.3 | Entregar · Vuelve con MacKinley (#607) | MacKinley "Lobo de Mar" · mapa 1434 · 27.78, 77.07 |
+| 28.4 | Aceptar · El vudú debido (#609) | MacKinley "Lobo de Mar" · desde nivel 30 · previa 607 · mapa 1434 · 27.78, 77.07 |
+| 28.5 | Entregar · La fiebre de Tuercespina (#348) | Fin Fizqueta · mapa 1434 · 27.61, 76.74 |
+| 28.6 | Entregar · Bucaneros Velasangre (#608) | Maestro de flota Cuernomarino · desvío opcional en solitario · mapa 1434 · 27.17, 77.01 |
+| 28.7 | Entregar · Tallos de juncos akiris (#617) | Corsario Bloads · mapa 1434 · 26.76, 76.38 |
+| 28.8 | Aceptar · Tallos de juncos akiris (#623) | Corsario Bloads · desde nivel 38 · previa 617 · mapa 1434 · 26.76, 76.38 |
+| 29.1 | Recoger · El vudú debido (#609) | Pie deforme de Maury · Maury "Patón" Wilkins · mapa 1434 · 35.26, 51.27 |
+| 29.2 | Recoger · El vudú debido (#609) | Telescopio dorado de Jon-Jon · Jon-Jon el Cuervo · mapa 1434 · 34.92, 51.84 |
+| 30.1 | Recoger · El secreto de Zanzil (#621) | Mezcla de Zanzil ×12 · mapa 1434 · 34.92, 51.84 |
+| 30.2 | Recoger · El vudú debido (#609) | Anillo enorme de Chucky · Chucky "Diezdedos" · mapa 1434 · 40, 58.24 |
+| 31.1 | Recoger · La minería de Ventura y Cía. (#600) | Cristal canto azul ×10 · Supervisor Cozzle · mapa 1434 · 36.52, 57.06 |
+| 32.1 | Recoger · Colmillos de Machacacráneos (#209) | Colmillo Machacacráneos ×18 · mapa 1434 · 45.61, 41.6 |
+| 33.1 | Recoger · Un plato bien frío (#212) | Anca de basilisco fría · Basilisco Ojogélido · mapa 1434 · 38.15, 40.36 |
+| 34.1 | Recoger · La pesca de perlas (#705) | Perla azul ×9 · Almeja gigante · mapa 1434 · 27.6, 29.2 |
+| 34.2 | Recoger · La maldición de las mareas (#611) | Piedra de las Mareas · Gazban · mapa 1434 · 24.97, 23.58 |
+| 35.1 | Derrotar · Arbor Tarantula: cogerlo, para My Little Friends | Arbor Tarantula · mapa 1434 · 43.1, 16.73 |
+| 35.2 | Entregar · Vuelve con el cabo Kaleb (#622) | Cabo Kaleb · mapa 1434 · 37.74, 3.3 |
+| 36.1 | Piedra de hogar · Bahía del Botín |  |
+| 36.2 | Entregar · La maldición de las mareas (#611) | Barón Revilgaz · mapa 1434 · 27.23, 76.87 |
+| 36.3 | Entregar · El vudú debido (#609) | MacKinley "Lobo de Mar" · mapa 1434 · 27.78, 77.07 |
+| 36.4 | Indicación · La siguiente tarea de MacKinley te envía después de los ogros de élite: olvídate. |  |
+| 36.5 | Entregar · La minería de Ventura y Cía. (#600) | Loquillo Pinchabujas · mapa 1434 · 27.12, 77.21 |
+| 36.6 | Entregar · El secreto de Zanzil (#621) | Loquillo Pinchabujas · mapa 1434 · 27.12, 77.21 |
+| 36.7 | Indicación · El siguiente recado de Crank de Zanzil comienza en Las Mil Agujas: saltarlo. |  |
+| 36.8 | Entregar · Colmillos de Machacacráneos (#209) | Kebok · mapa 1434 · 27, 77.13 |
+| 37.1 | Volar · Ventormenta | varios destinos o ubicaciones según objetivo |
+| 37.2 | Fijar hogar · Ciudad de Ventormenta | varios destinos o ubicaciones según objetivo |
+| 37.3 | Entregar · Un plato bien frío (#212) | Angus Stern · mapa 1453 · 51.79, 93.64 |
+| 37.4 | Aceptar · ¡Una fiesta en tu honor! (#1271) | Angus Stern · desde nivel 30 · previa 1222 · mapa 1453 · 51.79, 93.64 · fuentes en desacuerdo sobre previas |
+| 37.5 | Entregar · ¡Una fiesta en tu honor! (#1271) | Angus Stern · mapa 1453 · 51.79, 93.64 |
+| 37.6 | Aceptar · La orden de Mazen (#1363) | Mazen Mac'Nadir · desde nivel 37 · mapa 1453 · 51.8, 74.24 |
+| 37.7 | Entregar · La orden de Mazen (#1363) | Acólito Dellis · mapa 1453 · 51.4, 73.81 |
+| 37.8 | Aceptar · La orden de Mazen (#1364) | Acólito Dellis · desde nivel 37 · previa 1363 · mapa 1453 · 51.4, 73.81 · a elegir · Botas del placer errante · requisito sin corroboración |
+| 37.9 | Aceptar · Suministros de vital importancia (#1477) | Sumo Hechicero Andromath · desde nivel 40 · mapa 1453 · 48.71, 87.62 |
+| 37.10 | Entregar · Vuelve con Milton (#542) | Milton Gavilla · mapa 1453 · 77.07, 30.21 |
+| 37.11 | Aceptar · En búsqueda del templo (#1448) | Brohann Barriliga · desde nivel 38 · mapa 1453 · 69.45, 40.4 |
+| 37.12 | Entrenar · Ventormenta | varios destinos o ubicaciones según objetivo |
+| 38.1 | Entrenar · Randal Predatio | opcional · mapa 1429 · 84.32, 64.87 |
+| 38.2 | Vender · Katie Hunter: otros colores, 20g | Katie Hunter · opcional · mapa 1429 · 84.15, 65.49 |
+| 39 | Equitación en 40 | Otra clase o raza |
 | 40 | Equitación en 40 | Otra clase o raza |
-| 41 | Equitación en 40 | Otra clase o raza |
-| 42 | paladín: Libro de la nobleza | Otra clase o raza |
-| 43 | brujo: Invoca un malignoecus | Otra clase o raza |
-| 44.1 | Volar · Villa Oscura | varios destinos o ubicaciones según objetivo |
-| 44.2 | Aceptar · Madera a la deriva (#1398) | Vigía Biggs · desde nivel 30 · previa 1421 · mapa 1435 · 26.74, 59.83 |
-| 45.1 | Entregar · El enigma de Cortello (#624) | Un viejo pergamino · mapa 1435 · 22.87, 48.19 |
-| 45.2 | Indicación · El siguiente pergamino del acertijo se encuentra en el oeste de Dustwallow: saltarlo. |  |
-| 45.3 | Recoger · La orden de Mazen (#1364) | Ensayos sobre convergencia dimensional de Khadgar · mapa 1435 · 15.77, 40.78 |
-| 46.1 | Recoger · La orden de Mazen (#1364) | Ensayos sobre convergencia dimensional de Khadgar · mapa 1435 · 15.77, 40.78 |
-| 46.2 | Completar · En búsqueda del templo (#1448) | mapa 1435 · 70.2, 45.2 |
-| 47.1 | Recoger · Madera a la deriva (#1398) | Madera a la deriva desecada ×8 · Madera a la deriva desecada · mapa 1435 · 91.94, 31.94 |
-| 48.1 | Entregar · Madera a la deriva (#1398) | Vigía Biggs · mapa 1435 · 26.74, 59.83 |
-| 48.2 | Aceptar · Envío de suministros (#1425) | Vigía Biggs · desde nivel 30 · previa 1398 · mapa 1435 · 26.74, 59.83 |
-| 48.3 | Entregar · My Little Friends (#93176) | Amaryllis Webb · mapa 1435 · 25.3, 54.39 |
-| 49.1 | Piedra de hogar · Ciudad de Ventormenta |  |
-| 49.2 | Entregar · En búsqueda del templo (#1448) | Brohann Barriliga · mapa 1453 · 69.45, 40.4 |
-| 49.3 | Aceptar · A las Tierras del Interior (#1449) | Brohann Barriliga · desde nivel 38 · previa 1448 · mapa 1453 · 69.45, 40.4 |
-| 50.1 | Entregar · Componentes para Reivindicadores y Cía. (#1467) | Roetten Rocamartillo · mapa 1455 · 69.95, 21.26 · a elegir · Guanteletes Tempesfuego |
-| 50.2 | Aceptar · ¡Vetaferro te necesita! (#707) | Prospector Pico Tormenta · desde nivel 30 · mapa 1455 · 74.64, 11.74 |
-| 50.3 | Entregar · Ir a Forjaz a buscar el "Compendio" de Yagyin (#727) | Gerrig Agarrahueso · mapa 1455 · 50.83, 5.62 |
+| 41 | paladín: Libro de la nobleza | Otra clase o raza |
+| 42 | brujo: Invoca un malignoecus | Otra clase o raza |
+| 43.1 | Volar · Villa Oscura | varios destinos o ubicaciones según objetivo |
+| 43.2 | Aceptar · Madera a la deriva (#1398) | Vigía Biggs · desde nivel 30 · previa 1421 · mapa 1435 · 26.74, 59.83 |
+| 44.1 | Entregar · El enigma de Cortello (#624) | Un viejo pergamino · mapa 1435 · 22.87, 48.19 |
+| 44.2 | Indicación · El siguiente pergamino del acertijo se encuentra en el oeste de Dustwallow: saltarlo. |  |
+| 44.3 | Recoger · La orden de Mazen (#1364) | Ensayos sobre convergencia dimensional de Khadgar · mapa 1435 · 15.77, 40.78 |
+| 45.1 | Recoger · La orden de Mazen (#1364) | Ensayos sobre convergencia dimensional de Khadgar · mapa 1435 · 15.77, 40.78 |
+| 45.2 | Completar · En búsqueda del templo (#1448) | mapa 1435 · 70.2, 45.2 |
+| 46.1 | Recoger · Madera a la deriva (#1398) | Madera a la deriva desecada ×8 · Madera a la deriva desecada · mapa 1435 · 91.94, 31.94 |
+| 47.1 | Entregar · Madera a la deriva (#1398) | Vigía Biggs · mapa 1435 · 26.74, 59.83 |
+| 47.2 | Aceptar · Envío de suministros (#1425) | Vigía Biggs · desde nivel 30 · previa 1398 · mapa 1435 · 26.74, 59.83 |
+| 47.3 | Entregar · My Little Friends (#93176) | Amaryllis Webb · mapa 1435 · 25.3, 54.39 |
+| 48.1 | Piedra de hogar · Ciudad de Ventormenta |  |
+| 48.2 | Entregar · En búsqueda del templo (#1448) | Brohann Barriliga · mapa 1453 · 69.45, 40.4 |
+| 48.3 | Aceptar · A las Tierras del Interior (#1449) | Brohann Barriliga · desde nivel 38 · previa 1448 · mapa 1453 · 69.45, 40.4 |
+| 49.1 | Entregar · Componentes para Reivindicadores y Cía. (#1467) | Roetten Rocamartillo · mapa 1455 · 69.95, 21.26 · a elegir · Guanteletes Tempesfuego |
+| 49.2 | Aceptar · ¡Vetaferro te necesita! (#707) | Prospector Pico Tormenta · desde nivel 30 · mapa 1455 · 74.64, 11.74 |
+| 49.3 | Entregar · Ir a Forjaz a buscar el "Compendio" de Yagyin (#727) | Gerrig Agarrahueso · mapa 1455 · 50.83, 5.62 |
+| 50 | Equitación en 40 | Otra clase o raza |
 | 51 | Equitación en 40 | Otra clase o raza |
-| 52 | Equitación en 40 | Otra clase o raza |
 
 ## Tierras Inhóspitas & Tierras del Interior (43–44)
+
+El acceso desde las aldeas está al este. Fraggar (14.83,44.57) se encuentra por debajo de Garracha (9.75,44.47). El vuelo a Menethil parte de Pico Nidal (11.11,46.09). La repetible 2881 se conserva tras la entrega de 2880.
 
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
@@ -1828,9 +1836,9 @@ Dizzy ofrece su encargo tras la entrega a Crazz de 597, ya hecha al principio de
 | 6.1 | Recoger · Terremotos (#732) | Signo de la Tierra · Jefe Tho'grun · mapa 1418 · 12.62, 75.49 |
 | 7.1 | Entregar · Terremotos (#732) | Garek · mapa 1418 · 61.94, 54.26 |
 | 7.2 | Indicación · La siguiente tarea de Garek es una caza de élite: saltarla. |  |
-| 8.1 | Nivel · farmear en ayuda Scalding en Barranco Lethlor, Tierras Inhóspitas |  |
-| 8.2 | Recoger · Encantamientos de fuego abrasador (#706) | Corazón de draco negro · opcional · mapa 1418 · 69.67, 53.81 |
-| 9.1 | Entregar · Encantamientos de fuego abrasador (#706) | Sigrun Extracero · opcional · mapa 1418 · 53.8, 43.3 |
+| 8.1 | Nivel · Busca crías abrasadoras en el Barranco Lethlor. Evita los guardianes de élite. | mapa 1418 · 71.2, 52.7 |
+| 8.2 | Recoger · Encantamientos de fuego abrasador (#706) | Corazón de draco negro · desvío opcional en solitario · mapa 1418 · 69.67, 53.81 |
+| 9.1 | Entregar · Encantamientos de fuego abrasador (#706) | Sigrun Extracero · desvío opcional en solitario · mapa 1418 · 53.8, 43.3 |
 | 10.1 | Volar · Costasur | varios destinos o ubicaciones según objetivo |
 | 10.2 | Entregar · El sendero Escarlata (#1052) | Raleigh el Devoto · mapa 1424 · 51.47, 58.35 |
 | 10.3 | Indicación · El siguiente recado de Raleigh está en el monasterio de Scarlet: saltarlo. |  |
@@ -1847,11 +1855,11 @@ Dizzy ofrece su encargo tras la entrega a Crazz de 597, ya hecha al principio de
 | 13.2 | Interactuar · Las jaulas de Secacorteza (#2988) | Segunda jaula Secacorteza · mapa 1425 · 23.13, 58.82 |
 | 13.3 | Interactuar · Las jaulas de Secacorteza (#2988) | Tercera jaula Secacorteza · mapa 1425 · 31.99, 57.31 |
 | 13.4 | Recoger · Los collares de trols (#2880) | Collar tribal trol ×5 · mapa 1425 · 31.9, 57.58 |
-| 14.1 | Entregar · Las jaulas de Secacorteza (#2988) | Maestro de grifos Garracha · mapa 1425 · 9.75, 44.47 |
-| 14.2 | Indicación · La siguiente tarea de Talonaxe espera una guía posterior de Hinterlands. |  |
-| 14.3 | Entregar · Los collares de trols (#2880) | Fraggar Mantrueno · mapa 1425 · 14.83, 44.57 |
-| 14.4 | Aceptar · Los collares de trols (#2881) | Fraggar Mantrueno · desde nivel 40 · previa 2880 · opcional · mapa 1425 · 14.83, 44.57 |
-| 14.5 | Entregar · Los collares de trols (#2881) | Fraggar Mantrueno · opcional · mapa 1425 · 14.83, 44.57 |
+| 14.1 | Entregar · Los collares de trols (#2880) | Fraggar Mantrueno · mapa 1425 · 14.83, 44.57 |
+| 14.2 | Aceptar · Los collares de trols (#2881) | Fraggar Mantrueno · desde nivel 40 · previa 2880 · desvío opcional en solitario · mapa 1425 · 14.83, 44.57 |
+| 14.3 | Entregar · Los collares de trols (#2881) | Fraggar Mantrueno · desvío opcional en solitario · mapa 1425 · 14.83, 44.57 |
+| 14.4 | Entregar · Las jaulas de Secacorteza (#2988) | Maestro de grifos Garracha · mapa 1425 · 9.75, 44.47 |
+| 14.5 | Indicación · La siguiente tarea de Talonaxe espera una guía posterior de Hinterlands. |  |
 | 15.1 | Volar · Puerto de Menethil | varios destinos o ubicaciones según objetivo |
 | 15.2 | Ir · Boat a Theramore | mapa 1437 · 4.7, 63.8 |
 | 16.1 | Entregar · Tallos de juncos akiris (#623) | Corsario Groy · mapa 1445 · 68.84, 53.22 |
@@ -1923,8 +1931,8 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 16.2 | Entregar · Una entrega en Thalanaar (#4281) | Díscolo Falfildel · mapa 1444 · 89.64, 46.57 |
 | 16.3 | Entregar · El diario de Henrig Soliceja (#1100) | Díscolo Falfildel · mapa 1444 · 89.64, 46.57 |
 | 17.1 | Recoger · Calidad mejorada (#7733) | Pellejo de yeti de Cicatriz de ira ×10 · Fierescara acechante · mapa 1444 · 55.29, 53.76 |
-| 17.2 | Recoger · Pellejo de yeti prístino | opcional · mapa 1444 · 55.29, 53.76 |
-| 17.3 | Aceptar · Pellejo de yeti prístino (#7735) | desde nivel 40 · previa 2821 · opcional · requisito sin corroboración |
+| 17.2 | Recoger · Pellejo de yeti prístino | desvío opcional en solitario · mapa 1444 · 55.29, 53.76 |
+| 17.3 | Aceptar · Pellejo de yeti prístino (#7735) | desde nivel 40 · previa 2821 · desvío opcional en solitario · requisito sin corroboración |
 | 18.1 | Aceptar · El guardián gigante (#2844) | Muerdepiedras · desde nivel 44 · mapa 1444 · 42.39, 22 |
 | 19.1 | Entregar · El guardián gigante (#2844) | Shay Correhoja · mapa 1444 · 38.22, 10.3 |
 | 19.2 | Aceptar · Las andanzas de Shay (#2845) | Shay Correhoja · desde nivel 44 · previa 2844 · mapa 1444 · 38.22, 10.3 · a elegir · Cincho seto |
@@ -1937,8 +1945,8 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 21.4 | Entregar · La bienvenida de un héroe (#4266) | Shandris Plumaluna · mapa 1444 · 30.28, 46.17 · a elegir · Hoja élfica ceremonial |
 | 21.5 | Indicación · Shandris luego le pide que lleve noticias a Darnassus: saltarlo, Gadgetzan te envía allí en su lugar. |  |
 | 21.6 | Entregar · Calidad mejorada (#7733) | Pratt McGrubben · mapa 1444 · 30.63, 42.71 · fija · Túnica hecha a mano de Pratt |
-| 21.7 | Entregar · Pellejo de yeti prístino (#7735) | Pratt McGrubben · opcional · mapa 1444 · 30.63, 42.71 |
-| 22.1 | Ir · Zul'Farrak | opcional · mapa 1446 · 38.7, 20 |
+| 21.7 | Entregar · Pellejo de yeti prístino (#7735) | Pratt McGrubben · desvío opcional en solitario · mapa 1444 · 30.63, 42.71 |
+| 22.1 | Ir · Zul'Farrak | desvío opcional en solitario · mapa 1446 · 38.7, 20 |
 | 23.1 | Nivel · farmear Yeti Fierescara en Vega Cicatriz Feral, Feralas |  |
 | 24.1 | Aceptar · Gigantes reducidos (#7003) | Zorbin Ventipnotizador · desde nivel 45 · mapa 1444 · 44.81, 43.42 · fija · Megarrebanador de Zorbin |
 | 24.2 | Aceptar · Combustible para el Ultra-reductor (#7721) | Zorbin Ventipnotizador · desde nivel 45 · mapa 1444 · 44.81, 43.42 |
@@ -2013,10 +2021,10 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 17.1 | Derrotar · El Valle Cardizal (#3362) | Cardizal nudoso ×8 · mapa 1446 · 29.34, 62.44 |
 | 17.2 | Derrotar · El Valle Cardizal (#3362) | Enraizador Cardizal ×8 · mapa 1446 · 28.87, 61.86 |
 | 17.3 | Recoger · El goblin sediento (#2605) | Glándula cargada de rocío · Colector de rocío Cardizal · mapa 1446 · 28.19, 62.93 |
-| 18.1 | Aceptar · La misión de Tooga (#1560) | Tooga · desde nivel 40 · mapa 1446 · 29.48, 60.51 |
-| 18.2 | Completar · La misión de Tooga (#1560) | varios destinos o ubicaciones según objetivo |
-| 18.3 | Entregar · La misión de Tooga (#1560) | Thorta · mapa 1446 · 66.58, 25.67 |
-| 19.1 | Aceptar · SE BUSCA: Caliph Escorpijón (#2781) | Cartel de Se busca · desde nivel 39 · mapa 1446 · 66.82, 22.29 |
+| 18.1 | Aceptar · La misión de Tooga (#1560) | Tooga · desde nivel 40 · desvío opcional en solitario · mapa 1446 · 29.48, 60.51 |
+| 18.2 | Completar · La misión de Tooga (#1560) | desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
+| 18.3 | Entregar · La misión de Tooga (#1560) | Thorta · desvío opcional en solitario · mapa 1446 · 66.58, 25.67 |
+| 19.1 | Aceptar · SE BUSCA: Caliph Escorpijón (#2781) | Cartel de Se busca · desde nivel 39 · mapa 1446 · 51.8, 27 |
 | 20.1 | Entregar · Investigación en la Guarida Ponzoñosa (#82) | Alquimista Morterozugg · mapa 1446 · 50.89, 26.96 |
 | 20.2 | Entregar · El Valle Cardizal (#3362) | Tran'rek · mapa 1446 · 51.57, 26.76 |
 | 20.3 | Entregar · El goblin sediento (#2605) | Marin Tragonublo · mapa 1446 · 51.81, 28.66 |
@@ -2059,8 +2067,8 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 6.1 | Aceptar · Papadas de hiena risita (#2581) | Mago sangriento Drazial · desde nivel 45 · mapa 1419 · 50.55, 14.2 |
 | 6.2 | Aceptar · La vitalidad del jabalí (#2583) | Mago sangriento Drazial · desde nivel 45 · mapa 1419 · 50.55, 14.2 |
 | 6.3 | Aceptar · El golpe decisivo (#2585) | Mago sangriento Drazial · desde nivel 45 · mapa 1419 · 50.55, 14.2 |
-| 6.4 | Aceptar · El bocado de basilisco (#2601) | Mago sangriento Lynnore · desde nivel 45 · mapa 1419 · 50.64, 14.3 |
-| 6.5 | Aceptar · El vigor del buitre (#2603) | Mago sangriento Lynnore · desde nivel 45 · mapa 1419 · 50.64, 14.3 |
+| 6.4 | Aceptar · El bocado de basilisco (#2601) | Mago sangriento Lynnore · desde nivel 45 · desvío opcional en solitario · mapa 1419 · 50.64, 14.3 |
+| 6.5 | Aceptar · El vigor del buitre (#2603) | Mago sangriento Lynnore · desde nivel 45 · desvío opcional en solitario · mapa 1419 · 50.64, 14.3 |
 | 7.1 | Registrar vuelo · Castillo de Nethergarde | Alexandra Constantine · mapa 1419 · 65.54, 24.34 |
 | 7.2 | Entregar · Suministros para Nethergarde (#1395) | Intendente Lungertz · mapa 1419 · 66.52, 21.39 |
 | 7.3 | Entregar · Thadius Sombramacabra (#2990) | mapa 1419 · 66.9, 19.47 |
@@ -2070,18 +2078,18 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 8.1 | Recoger · Papadas de hiena risita (#2581) | Pulmón aplastado de jabalí ×2 · mapa 1419 · 62.29, 26.71 |
 | 8.2 | Recoger · La vitalidad del jabalí (#2583) | Pulmón aplastado de jabalí ×3 · mapa 1419 · 62.29, 26.71 |
 | 8.3 | Recoger · El golpe decisivo (#2585) | Pulmón aplastado de jabalí · mapa 1419 · 62.29, 26.71 |
-| 8.4 | Recoger · El bocado de basilisco (#2601) | Cerebro de basilisco ×10 · mapa 1419 · 61.82, 26.17 |
+| 8.4 | Recoger · El bocado de basilisco (#2601) | Cerebro de basilisco ×10 · desvío opcional en solitario · mapa 1419 · 61.82, 26.17 |
 | 8.5 | Recoger · La vitalidad del jabalí (#2583) | Cerebro de basilisco · mapa 1419 · 61.82, 26.17 |
 | 9.1 | Recoger · Papadas de hiena risita (#2581) | Papada de hiena risitas ×3 · mapa 1419 · 61.46, 35.06 |
-| 9.2 | Recoger · El vigor del buitre (#2603) | Papada de hiena risitas ×2 · mapa 1419 · 61.46, 35.06 |
+| 9.2 | Recoger · El vigor del buitre (#2603) | Papada de hiena risitas ×2 · desvío opcional en solitario · mapa 1419 · 61.46, 35.06 |
 | 9.3 | Recoger · Papadas de hiena risita (#2581) | Pinza de scorpok · mapa 1419 · 60.86, 35.37 |
 | 9.4 | Recoger · La vitalidad del jabalí (#2583) | Pinza de scorpok ×2 · mapa 1419 · 60.86, 35.37 |
 | 9.5 | Recoger · El golpe decisivo (#2585) | Pinza de scorpok ×3 · mapa 1419 · 60.86, 35.37 |
-| 9.6 | Recoger · El vigor del buitre (#2603) | Molleja de buitre ×10 · mapa 1419 · 61.11, 36.19 |
-| 9.7 | Recoger · El bocado de basilisco (#2601) | Molleja de buitre ×2 · mapa 1419 · 61.11, 36.19 |
+| 9.6 | Recoger · El vigor del buitre (#2603) | Molleja de buitre ×10 · desvío opcional en solitario · mapa 1419 · 61.11, 36.19 |
+| 9.7 | Recoger · El bocado de basilisco (#2601) | Molleja de buitre ×2 · desvío opcional en solitario · mapa 1419 · 61.11, 36.19 |
 | 9.8 | Recoger · El golpe decisivo (#2585) | Molleja de buitre ×2 · mapa 1419 · 61.11, 36.19 |
-| 10.1 | Entregar · El bocado de basilisco (#2601) | Mago sangriento Lynnore · mapa 1419 · 50.64, 14.3 |
-| 10.2 | Entregar · El vigor del buitre (#2603) | Mago sangriento Lynnore · mapa 1419 · 50.64, 14.3 |
+| 10.1 | Entregar · El bocado de basilisco (#2601) | Mago sangriento Lynnore · desvío opcional en solitario · mapa 1419 · 50.64, 14.3 |
+| 10.2 | Entregar · El vigor del buitre (#2603) | Mago sangriento Lynnore · desvío opcional en solitario · mapa 1419 · 50.64, 14.3 |
 | 10.3 | Entregar · Papadas de hiena risita (#2581) | Mago sangriento Drazial · mapa 1419 · 50.55, 14.2 |
 | 10.4 | Entregar · La vitalidad del jabalí (#2583) | Mago sangriento Drazial · mapa 1419 · 50.55, 14.2 |
 | 10.5 | Entregar · El golpe decisivo (#2585) | Mago sangriento Drazial · mapa 1419 · 50.55, 14.2 |
@@ -2196,7 +2204,7 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 9.6 | Recoger · Expedición Salvación (#3881) | Cajón de alimentos · Cajón de alimentos · mapa 1449 · 68.54, 36.54 |
 | 10.1 | Entregar · Buscando a Memo 01 (#4243) | Memo 01 · mapa 1449 · 67.66, 16.76 |
 | 11.1 | Ir · Zul'Farrak | opcional · mapa 1446 · 38.7, 20 |
-| 12.1 | Nivel · farmear en Gorila de Un'Goro en Meseta Roca de Hierro, Cráter de Un'Goro |  |
+| 12.1 | Nivel · Caza gorilas en la meseta, cerca de donde encontraste a Memo 01. Si llevas «Los simios de Un'Goro», recoge las pelambres que caigan. Evita el fondo de la cueva de U'cha. | mapa 1449 · 63.1, 17.4 |
 | 13.1 | Entregar · Muigin y Larion (#4141) | Muigin · mapa 1449 · 42.94, 9.64 |
 | 13.2 | Aceptar · Visita a Gregan (#4142) | Muigin · desde nivel 47 · previa 4141 · mapa 1449 · 42.94, 9.64 |
 | 13.3 | Entregar · Cristales de poder (#4284) | J.D. Collie · mapa 1449 · 41.92, 2.7 |
@@ -2245,7 +2253,7 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 25.1 | Completar · Un poco de ayuda de mis amigos (#4491) | varios destinos o ubicaciones según objetivo |
 | 26.1 | Entregar · Un poco de ayuda de mis amigos (#4491) | Spraggle Habitus · mapa 1449 · 43.62, 8.5 |
 | 27.1 | Ir · El Temple de Atal'Hakkar | opcional · mapa 1435 · 69.9, 53.6 |
-| 28.1 | Nivel · farmear en Trabajador Centipaar en el Noxious Lair, Tanaris |  |
+| 28.1 | Nivel · Desde el Refugio de Marshal avanza hacia el sureste. Caza diemetradones jóvenes de nivel 49–50 al cruzar la selva oriental camino de Torwa. | mapa 1449 · 60.7, 38.9 |
 | 29.1 | Aceptar · El cebo para Lar'korwi (#4292) | Abrecaminos Torwa · desde nivel 48 · previa 4291 · mapa 1449 · 71.64, 75.96 · a elegir · Túnica de acechador de las llanuras |
 | 30.1 | Recoger · El cebo para Lar'korwi (#4292) | Cabeza de Lar'korwi · Lar'korwi · mapa 1449 · 79.65, 49.83 |
 | 31.1 | Entregar · Los simios de Un'Goro (#4289) | Abrecaminos Torwa · mapa 1449 · 71.64, 75.96 |
@@ -2313,7 +2321,7 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 12.2 | Entregar · Vuelve con Tymor (#3461) | Tymor · mapa 1455 · 30.96, 4.83 |
 | 13.1 | Volar · Villa del Lago | varios destinos o ubicaciones según objetivo |
 | 14.1 | Registrar vuelo · Vigilia de Morgan | varios destinos o ubicaciones según objetivo |
-| 14.2 | Aceptar · ¡CINCUENTA! ¡SÍ! (#4283) | Oralius · desde nivel 50 · mapa 1428 · 84.56, 68.68 |
+| 14.2 | Aceptar · ¡CINCUENTA! ¡SÍ! (#4283) | Oralius · desde nivel 50 · desvío opcional en solitario · mapa 1428 · 84.56, 68.68 |
 | 14.3 | Aceptar · El exterminio de los Ardentrañas (#3823) | Oralius · desde nivel 48 · mapa 1428 · 84.56, 68.68 |
 | 15.1 | Derrotar · El exterminio de los Ardentrañas (#3823) | Ogro Pirontraña ×15 · mapa 1428 · 83.83, 53.61 |
 | 15.2 | Derrotar · El exterminio de los Ardentrañas (#3823) | Ogro mago Pirontraña · mapa 1428 · 83.52, 52.21 |
@@ -2329,19 +2337,19 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 21.2 | Aceptar · Felnok Acerovera (#4808) | Tinkee Vaporio · desde nivel 50 · previa 4726 · mapa 1428 · 65.24, 24 |
 | 21.3 | Entregar · La tablilla de los Siete (#4296) | Maxwort Suprandor · mapa 1428 · 65.15, 23.91 |
 | 22.1 | Recoger · Gor'tesh, el Señor bruto (#3824) | Cabeza cortada Gor'tesh · Gor'tesh · mapa 1428 · 39.33, 55.3 |
-| 22.2 | Recoger · ¡CINCUENTA! ¡SÍ! (#4283) | Medallón Roca Negra ×50 · mapa 1428 · 39.33, 55.58 |
+| 22.2 | Recoger · ¡CINCUENTA! ¡SÍ! (#4283) | Medallón Roca Negra ×50 · desvío opcional en solitario · mapa 1428 · 39.33, 55.58 |
 | 23.1 | Aceptar · El legado de los Hierro Negro (#3801) | Franclorn Forjador · desde nivel 48 · opcional · mapa 1428 · 28.96, 28.93 · sin datos externos de requisitos |
 | 23.2 | Entregar · El legado de los Hierro Negro (#3801) | Franclorn Forjador · opcional · mapa 1428 · 28.96, 28.93 |
-| 24.1 | Entregar · ¡CINCUENTA! ¡SÍ! (#4283) | Oralius · mapa 1428 · 84.56, 68.68 |
+| 24.1 | Entregar · ¡CINCUENTA! ¡SÍ! (#4283) | Oralius · desvío opcional en solitario · mapa 1428 · 84.56, 68.68 |
 | 24.2 | Entregar · Gor'tesh, el Señor bruto (#3824) | Oralius · mapa 1428 · 84.56, 68.68 |
 | 24.3 | Aceptar · Una cabeza ogro empalada = FIESTA (#3825) | Oralius · desde nivel 48 · previa 3824 · mapa 1428 · 84.56, 68.68 |
 | 25.1 | Interactuar · Una cabeza ogro empalada = FIESTA (#3825) | Montículo de tierra blanda · mapa 1428 · 81, 46.79 |
 | 26.1 | Entregar · Una cabeza ogro empalada = FIESTA (#3825) | Oralius · mapa 1428 · 84.56, 68.68 |
 | 26.2 | Vender · Vigilia de Morgan | varios destinos o ubicaciones según objetivo |
-| 27.1 | Volar · Castillo de Nethergarde | varios destinos o ubicaciones según objetivo |
-| 28.1 | Aceptar · Todo cuenta en grandes cantidades (#3501) | Kum'isha el Coleccionista · desde nivel 45 · mapa 1419 · 51.98, 35.65 |
-| 28.2 | Recoger · Todo cuenta en grandes cantidades (#3501) | Fragmento draenetista imperfecto · mapa 1419 · 47.63, 30 |
-| 28.3 | Entregar · Todo cuenta en grandes cantidades (#3501) | Kum'isha el Coleccionista · mapa 1419 · 51.98, 35.65 |
+| 27.1 | Volar · Castillo de Nethergarde | desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
+| 28.1 | Aceptar · Todo cuenta en grandes cantidades (#3501) | Kum'isha el Coleccionista · desde nivel 45 · desvío opcional en solitario · mapa 1419 · 51.98, 35.65 |
+| 28.2 | Recoger · Todo cuenta en grandes cantidades (#3501) | Fragmento draenetista imperfecto · desvío opcional en solitario · mapa 1419 · 47.63, 30 |
+| 28.3 | Entregar · Todo cuenta en grandes cantidades (#3501) | Kum'isha el Coleccionista · desvío opcional en solitario · mapa 1419 · 51.98, 35.65 |
 | 29.1 | Volar · Pico Nidal | varios destinos o ubicaciones según objetivo |
 | 29.2 | Recoger · ¿Creados por Elune? (#3661) | Pluma de lechúcico ×15 · Pluma de lechúcico · mapa 1425 · 39.08, 52.94 |
 | 30.1 | Piedra de hogar · Forjaz |  |
@@ -2481,7 +2489,7 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 10.3 | Entregar · Cuernos de quimera venfresco (#4809) | Felnok Acerovera · mapa 1452 · 61.63, 38.61 |
 | 11.1 | Indicación · Short de nivel 54 después de la yetis? Running el Templo Sumergido (50-54) en lugar de farmeo te lleva allí más rápido en un grupo. Come volver a Vista Eterna después. |  |
 | 12.1 | Recoger · Yeti... ¿ya hemos llegado? (#977) | Cuerno de yeti prístino ×2 · mapa 1452 · 64.7, 40.59 |
-| 12.2 | Nivel · farmear en Patriarca Cardo Nevado en Colinas Cardo Nevado, Cuna del Invierno |  |
+| 12.2 | Nivel · Los cuernos de Umi los sueltan las matriarcas y los patriarcas. Cuando los tengas, si falta experiencia, caza los yetis Cardo Nevado de nivel 55–56 en esas mismas colinas. | mapa 1452 · 66.4, 41.5 |
 | 13.1 | Entregar · Yeti... ¿ya hemos llegado? (#977) | Umi Risitas · mapa 1452 · 60.88, 37.62 |
 | 13.2 | Aceptar · Yeti... ¿ya hemos llegado? (#5163) | Umi Risitas · desde nivel 52 · previa 977 · mapa 1452 · 60.88, 37.62 |
 | 13.3 | Usar · Yeti mecánico de Umi | En Legacki, por la posada · mapa 1452 · 61.5, 38.6 |
@@ -2499,9 +2507,9 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 18.1 | Entregar · Lechúcico iracundo (#4864) | Jaron Tallapiedras · mapa 1452 · 52.14, 30.43 |
 | 19.1 | Entregar · Fuentes extrañas (#4842) | Donova Cubilnevado · mapa 1452 · 31.27, 45.16 · fija · Capa río profundo |
 | 20.1 | Entregar · Actividad de los Nevada (#8464) | Salfa · mapa 1452 · 27.73, 34.5 · a elegir · Guantes del Abrecaminos |
-| 20.2 | Aceptar · Cuentas para Salfa (#8469) | Salfa · desde nivel 50 · previa 8464 · mapa 1452 · 27.73, 34.5 |
-| 21.1 | Recoger · Cuentas para Salfa (#8469) | Cuentas de Espíritu Nevada · mapa 1452 · 27.9, 34.48 |
-| 22.1 | Entregar · Cuentas para Salfa (#8469) | Salfa · mapa 1452 · 27.73, 34.5 |
+| 20.2 | Aceptar · Cuentas para Salfa (#8469) | Salfa · desde nivel 50 · previa 8464 · desvío opcional en solitario · mapa 1452 · 27.73, 34.5 |
+| 21.1 | Recoger · Cuentas para Salfa (#8469) | Cuentas de Espíritu Nevada · desvío opcional en solitario · mapa 1452 · 27.9, 34.48 |
+| 22.1 | Entregar · Cuentas para Salfa (#8469) | Salfa · desvío opcional en solitario · mapa 1452 · 27.73, 34.5 |
 | 23.1 | Registrar vuelo · Campamento del Orvallo | varios destinos o ubicaciones según objetivo |
 | 23.2 | Entregar · El informe Vista Eterna (#6028) | Oficial Argenta Purocorazón · mapa 1422 · 42.97, 83.55 |
 | 24.1 | Entregar · Pamela, mi hermana (#5601) | Pamela Rutagrana · mapa 1423 · 31.15, 77.98 |
@@ -2520,15 +2528,15 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 27.5 | Entregar · El duque Nicolas Zverenhoff (#6030) | Duque Nicholas Zverenhoff · mapa 1423 · 71.63, 50.09 |
 | 27.6 | Aceptar · Comisión del Alba Argenta (#5503) | Duque Nicholas Zverenhoff · desde nivel 50 · mapa 1423 · 71.63, 50.09 |
 | 27.7 | Entregar · Comisión del Alba Argenta (#5503) | Duque Nicholas Zverenhoff · mapa 1423 · 71.63, 50.09 |
-| 27.8 | Aceptar · Piedras de la Plaga de un invasor (#5509) | Duque Nicholas Zverenhoff · desde nivel 50 · previa 5401 o 5503 o 5405 · mapa 1423 · 71.63, 50.09 · requisito sin corroboración |
-| 27.9 | Aceptar · Piedras de la Plaga de un esbirro (#5510) | Duque Nicholas Zverenhoff · desde nivel 50 · previa 5401 o 5503 o 5405 · mapa 1423 · 71.63, 50.09 · requisito sin corroboración |
+| 27.8 | Aceptar · Piedras de la Plaga de un invasor (#5509) | Duque Nicholas Zverenhoff · desde nivel 50 · previa 5401 o 5503 o 5405 · desvío opcional en solitario · mapa 1423 · 71.63, 50.09 · requisito sin corroboración |
+| 27.9 | Aceptar · Piedras de la Plaga de un esbirro (#5510) | Duque Nicholas Zverenhoff · desde nivel 50 · previa 5401 o 5503 o 5405 · desvío opcional en solitario · mapa 1423 · 71.63, 50.09 · requisito sin corroboración |
 | 27.10 | Aceptar · Zaeldarr el Marginado (#6021) | Custodio Alen · desde nivel 50 · opcional · mapa 1423 · 69.93, 53.72 |
 | 28.1 | Derrotar · Los defensores de Villa Darrow (#5211) | Espíritu de Villa Darrow ×15 · mapa 1423 · 69.61, 46.79 |
-| 28.2 | Recoger · Piedras de la Plaga de un invasor (#5509) | Piedra de la Plaga de un invasor · mapa 1423 · 69.79, 47.19 |
-| 28.3 | Recoger · Piedras de la Plaga de un esbirro (#5510) | Piedra de la Plaga de esbirro · mapa 1423 · 68.77, 55.79 |
+| 28.2 | Recoger · Piedras de la Plaga de un invasor (#5509) | Piedra de la Plaga de un invasor · desvío opcional en solitario · mapa 1423 · 69.79, 47.19 |
+| 28.3 | Recoger · Piedras de la Plaga de un esbirro (#5510) | Piedra de la Plaga de esbirro · desvío opcional en solitario · mapa 1423 · 68.77, 55.79 |
 | 29.1 | Entregar · Los defensores de Villa Darrow (#5211) | Carlin Rutagrana · mapa 1423 · 71.7, 50.04 |
-| 29.2 | Entregar · Piedras de la Plaga de un invasor (#5509) | Duque Nicholas Zverenhoff · mapa 1423 · 71.63, 50.09 |
-| 29.3 | Entregar · Piedras de la Plaga de un esbirro (#5510) | Duque Nicholas Zverenhoff · mapa 1423 · 71.63, 50.09 |
+| 29.2 | Entregar · Piedras de la Plaga de un invasor (#5509) | Duque Nicholas Zverenhoff · desvío opcional en solitario · mapa 1423 · 71.63, 50.09 |
+| 29.3 | Entregar · Piedras de la Plaga de un esbirro (#5510) | Duque Nicholas Zverenhoff · desvío opcional en solitario · mapa 1423 · 71.63, 50.09 |
 | 30.1 | Recoger · Zaeldarr el Marginado (#6021) | Cabeza de Zaeldarr · Zaeldarr el Marginado · opcional · mapa 1423 · 23.07, 72.63 |
 | 31.1 | Aceptar · Libro de entradas de Augustus (#6164) | Augustus el Agraciado · desde nivel 50 · mapa 1423 · 11.36, 26.37 |
 | 31.2 | Recoger · Libro de entradas de Augustus (#6164) | Libro de cocina de Augustus · Libro de cocina de Augustus · mapa 1423 · 14.04, 24.22 |
@@ -2543,16 +2551,16 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 |---|---|---|
 | 1.1 | Volar · Campamento del Orvallo | varios destinos o ubicaciones según objetivo |
 | 1.2 | Aceptar · Despejando el camino (#5092) | Comandante Ashlam Puñovalor · desde nivel 50 · mapa 1422 · 42.7, 84.03 · posible previa adicional |
-| 1.3 | Aceptar · Piedras de la Plaga del esbirro (#5402) | Oficial Argenta Purocorazón · desde nivel 50 · previa 5401 o 5503 o 5405 · mapa 1422 · 42.97, 83.55 · requisito sin corroboración |
-| 1.4 | Aceptar · Piedras de la Plaga del invasor (#5403) | Oficial Argenta Purocorazón · desde nivel 50 · previa 5401 o 5503 o 5405 · mapa 1422 · 42.97, 83.55 · requisito sin corroboración |
+| 1.3 | Aceptar · Piedras de la Plaga del esbirro (#5402) | Oficial Argenta Purocorazón · desde nivel 50 · previa 5401 o 5503 o 5405 · desvío opcional en solitario · mapa 1422 · 42.97, 83.55 · requisito sin corroboración |
+| 1.4 | Aceptar · Piedras de la Plaga del invasor (#5403) | Oficial Argenta Purocorazón · desde nivel 50 · previa 5401 o 5503 o 5405 · desvío opcional en solitario · mapa 1422 · 42.97, 83.55 · requisito sin corroboración |
 | 1.5 | Aceptar · Una Peste en la Cruzada (#5903) | Nathaniel Dumah · desde nivel 48 · mapa 1422 · 43.42, 84.83 |
 | 2.1 | Entregar · Tía Marlene (#5152) | Marlene Sendaroja · mapa 1422 · 49.17, 78.57 |
 | 2.2 | Aceptar · Un extraño historiador (#5153) | Marlene Sendaroja · desde nivel 50 · previa 5152 · mapa 1422 · 49.17, 78.57 |
 | 2.3 | Recoger · Un extraño historiador (#5153) | Alianza de Joseph · Monumento de Joseph Rutagrana · mapa 1422 · 49.7, 76.76 |
 | 3.1 | Derrotar · Despejando el camino (#5092) | Despellejador esquelético ×10 · mapa 1422 · 49.4, 77.07 |
 | 3.2 | Derrotar · Despejando el camino (#5092) | Necrófago esclavizante ×10 · mapa 1422 · 49.9, 77.09 |
-| 3.3 | Recoger · Piedras de la Plaga del esbirro (#5402) | Piedra de la Plaga de esbirro · mapa 1422 · 49.9, 77.09 |
-| 3.4 | Recoger · Piedras de la Plaga del invasor (#5403) | Piedra de la Plaga de un invasor · mapa 1422 · 54.16, 80.43 |
+| 3.3 | Recoger · Piedras de la Plaga del esbirro (#5402) | Piedra de la Plaga de esbirro · desvío opcional en solitario · mapa 1422 · 49.9, 77.09 |
+| 3.4 | Recoger · Piedras de la Plaga del invasor (#5403) | Piedra de la Plaga de un invasor · desvío opcional en solitario · mapa 1422 · 54.16, 80.43 |
 | 4.1 | Aceptar · La naturaleza también sufre (#4984) | Mulgris Riohondo · desde nivel 51 · mapa 1422 · 53.73, 64.66 |
 | 5.1 | Derrotar · La naturaleza también sufre (#4984) | Lobo malsano ×8 · mapa 1422 · 51.09, 64.35 |
 | 6.1 | Entregar · La naturaleza también sufre (#4984) | Mulgris Riohondo · mapa 1422 · 53.73, 64.66 |
@@ -2571,8 +2579,8 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 10.1 | Aceptar · Más vale tarde que nunca (#5021) | Janice Piedra Mácula · desde nivel 50 · mapa 1422 · 38.4, 54.05 |
 | 10.2 | Entregar · Más vale tarde que nunca (#5021) | Paquete de Janice · mapa 1422 · 38.73, 55.24 |
 | 10.3 | Aceptar · Más vale tarde que nunca (#5022) | Paquete de Janice · desde nivel 50 · previa 5021 · mapa 1422 · 38.73, 55.24 |
-| 11.1 | Entregar · Piedras de la Plaga del esbirro (#5402) | Oficial Argenta Purocorazón · mapa 1422 · 42.97, 83.55 |
-| 11.2 | Entregar · Piedras de la Plaga del invasor (#5403) | Oficial Argenta Purocorazón · mapa 1422 · 42.97, 83.55 |
+| 11.1 | Entregar · Piedras de la Plaga del esbirro (#5402) | Oficial Argenta Purocorazón · desvío opcional en solitario · mapa 1422 · 42.97, 83.55 |
+| 11.2 | Entregar · Piedras de la Plaga del invasor (#5403) | Oficial Argenta Purocorazón · desvío opcional en solitario · mapa 1422 · 42.97, 83.55 |
 | 11.3 | Entregar · Despejando el camino (#5092) | Comandante Ashlam Puñovalor · mapa 1422 · 42.7, 84.03 |
 | 11.4 | Aceptar · Todas las torres (#5097) | Comandante Ashlam Puñovalor · desde nivel 50 · previa 5092 · mapa 1422 · 42.7, 84.03 |
 | 11.5 | Aceptar · Las calderas de la Plaga (#5215) | Comandante Ashlam Puñovalor · desde nivel 50 · previa 5092 · mapa 1422 · 42.7, 84.03 |
@@ -2588,11 +2596,11 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 14.1 | Entregar · Todas las torres (#5097) | Comandante Ashlam Puñovalor · mapa 1422 · 42.7, 84.03 |
 | 14.2 | Entregar · El regreso al Campamento del Orvallo (#5217) | Suma Sacerdotisa MacDonnel · mapa 1422 · 42.97, 84.5 |
 | 14.3 | Aceptar · Objetivo: Llanto de Dalson (#5219) | Suma Sacerdotisa MacDonnel · desde nivel 50 · previa 5217 · mapa 1422 · 42.97, 84.5 |
-| 14.4 | Comprar · Acelerador arcano, de Alquimista Arbington | Acelerador arcano · mapa 1422 · 42.66, 83.77 |
-| 15.1 | Aceptar · El caldero del Campo de Piedra Mácula (#5218) | Caldera de la Plaga · desde nivel 50 · previa 5217 o 5230 · mapa 1422 · 37.25, 56.78 · fuentes en desacuerdo sobre previas |
-| 15.2 | Recoger · El caldero del Campo de Piedra Mácula (#5218) | Agitador óseo · mapa 1422 · 37.36, 56.33 |
-| 15.3 | Recoger · El caldero del Campo de Piedra Mácula (#5218) | Paño rúnico · mapa 1422 · 37.36, 56.33 |
-| 15.4 | Entregar · El caldero del Campo de Piedra Mácula (#5218) | Caldera de la Plaga · mapa 1422 · 37.25, 56.78 |
+| 14.4 | Comprar · Acelerador arcano, de Alquimista Arbington | Acelerador arcano · desvío opcional en solitario · mapa 1422 · 42.66, 83.77 |
+| 15.1 | Aceptar · El caldero del Campo de Piedra Mácula (#5218) | Caldera de la Plaga · desde nivel 50 · previa 5217 o 5230 · desvío opcional en solitario · mapa 1422 · 37.25, 56.78 · fuentes en desacuerdo sobre previas |
+| 15.2 | Recoger · El caldero del Campo de Piedra Mácula (#5218) | Agitador óseo · desvío opcional en solitario · mapa 1422 · 37.36, 56.33 |
+| 15.3 | Recoger · El caldero del Campo de Piedra Mácula (#5218) | Paño rúnico · desvío opcional en solitario · mapa 1422 · 37.36, 56.33 |
+| 15.4 | Entregar · El caldero del Campo de Piedra Mácula (#5218) | Caldera de la Plaga · desvío opcional en solitario · mapa 1422 · 37.25, 56.78 |
 | 16.1 | Recoger · Objetivo: Llanto de Dalson (#5219) | Llave del caldero de las lágrimas de Dalson · Señor de la caldera Molevolus · mapa 1422 · 46.11, 52.61 |
 | 16.2 | Entregar · Objetivo: Llanto de Dalson (#5219) | Caldera de la Plaga · mapa 1422 · 46.18, 51.9 |
 | 16.3 | Aceptar · El regreso al Campamento del Orvallo (#5220) | Caldera de la Plaga · desde nivel 50 · previa 5219 · mapa 1422 · 46.18, 51.9 |
@@ -2608,15 +2616,15 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 19.4 | Aceptar · Ah, Andorhal (#211) | Comandante Ashlam Puñovalor · desde nivel 50 · previa 5097 · opcional · mapa 1422 · 42.7, 84.03 |
 | 19.5 | Entregar · Scholomance (#5533) | Alquimista Arbington · mapa 1422 · 42.66, 83.77 |
 | 19.6 | Aceptar · Fragmentos esqueléticos (#5537) | Alquimista Arbington · desde nivel 55 · previa 5533 · mapa 1422 · 42.66, 83.77 |
-| 19.7 | Comprar · Acelerador arcano, de Alquimista Arbington | Acelerador arcano ×2 · mapa 1422 · 42.66, 83.77 |
-| 20.1 | Aceptar · El caldero de El Tormento (#5224) | Caldera de la Plaga · desde nivel 50 · previa 5223 o 5234 · mapa 1422 · 53.02, 65.61 · fuentes en desacuerdo sobre previas |
-| 20.2 | Recoger · El caldero de El Tormento (#5224) | Intensificador somático · mapa 1422 · 52.76, 65.2 |
-| 20.3 | Recoger · El caldero de El Tormento (#5224) | Paño rúnico · mapa 1422 · 52.76, 65.2 |
-| 20.4 | Entregar · El caldero de El Tormento (#5224) | Caldera de la Plaga · mapa 1422 · 53.02, 65.61 |
-| 21.1 | Aceptar · El caldero del Llanto de Dalson (#5221) | Caldera de la Plaga · desde nivel 50 · previa 5220 o 5232 · mapa 1422 · 46.18, 51.9 · fuentes en desacuerdo sobre previas |
-| 21.2 | Recoger · El caldero del Llanto de Dalson (#5221) | Intensificador somático · mapa 1422 · 48.05, 67.39 |
-| 21.3 | Recoger · El caldero del Llanto de Dalson (#5221) | Paño rúnico · mapa 1422 · 48.05, 67.39 |
-| 21.4 | Entregar · El caldero del Llanto de Dalson (#5221) | Caldera de la Plaga · mapa 1422 · 46.18, 51.9 |
+| 19.7 | Comprar · Acelerador arcano, de Alquimista Arbington | Acelerador arcano ×2 · desvío opcional en solitario · mapa 1422 · 42.66, 83.77 |
+| 20.1 | Aceptar · El caldero de El Tormento (#5224) | Caldera de la Plaga · desde nivel 50 · previa 5223 o 5234 · desvío opcional en solitario · mapa 1422 · 53.02, 65.61 · fuentes en desacuerdo sobre previas |
+| 20.2 | Recoger · El caldero de El Tormento (#5224) | Intensificador somático · desvío opcional en solitario · mapa 1422 · 52.76, 65.2 |
+| 20.3 | Recoger · El caldero de El Tormento (#5224) | Paño rúnico · desvío opcional en solitario · mapa 1422 · 52.76, 65.2 |
+| 20.4 | Entregar · El caldero de El Tormento (#5224) | Caldera de la Plaga · desvío opcional en solitario · mapa 1422 · 53.02, 65.61 |
+| 21.1 | Aceptar · El caldero del Llanto de Dalson (#5221) | Caldera de la Plaga · desde nivel 50 · previa 5220 o 5232 · desvío opcional en solitario · mapa 1422 · 46.18, 51.9 · fuentes en desacuerdo sobre previas |
+| 21.2 | Recoger · El caldero del Llanto de Dalson (#5221) | Intensificador somático · desvío opcional en solitario · mapa 1422 · 48.05, 67.39 |
+| 21.3 | Recoger · El caldero del Llanto de Dalson (#5221) | Paño rúnico · desvío opcional en solitario · mapa 1422 · 48.05, 67.39 |
+| 21.4 | Entregar · El caldero del Llanto de Dalson (#5221) | Caldera de la Plaga · desvío opcional en solitario · mapa 1422 · 46.18, 51.9 |
 | 22.1 | Entregar · Un extraño historiador (#5153) | Cromi · mapa 1422 · 39.46, 66.76 |
 | 22.2 | Aceptar · Las Crónicas de Villa Darrow (#5154) | Cromi · desde nivel 50 · previa 5153 · mapa 1422 · 39.46, 66.76 |
 | 22.3 | Aceptar · Una cuestión de tiempo (#4971) | Cromi · desde nivel 53 · mapa 1422 · 39.46, 66.76 |
@@ -2704,12 +2712,12 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 53.2 | Aceptar · Encuentra a Ranshalla (#979) | Erelas Cieloámbar · desde nivel 52 · previa 978 · mapa 1438 · 55.5, 92.05 |
 | 54.1 | Volar · Feathermoon | varios destinos o ubicaciones según objetivo |
 | 54.2 | Aceptar · El Templo Sumergido (#3445) | Ángelas Brisaluna · desde nivel 46 · mapa 1444 · 31.83, 45.61 |
-| 55.1 | Aceptar · Encoge más gigantes (#7725) | Zorbin Ventipnotizador · desde nivel 45 · previa 7003 · mapa 1444 · 44.81, 43.42 |
-| 55.2 | Aceptar · Más combustible para el Ultra-reductor (#7726) | Zorbin Ventipnotizador · desde nivel 45 · previa 7721 · mapa 1444 · 44.81, 43.42 |
-| 56.1 | Recoger · Encoge más gigantes (#7725) | Resíduo de reducción ×10 · mapa 1444 · 44.34, 46.61 |
-| 56.2 | Recoger · Más combustible para el Ultra-reductor (#7726) | Núcleo elemental de Agua ×6 · Elemental marino · mapa 1444 · 44.97, 46.29 |
-| 57.1 | Entregar · Encoge más gigantes (#7725) | Zorbin Ventipnotizador · mapa 1444 · 44.81, 43.42 |
-| 57.2 | Entregar · Más combustible para el Ultra-reductor (#7726) | Zorbin Ventipnotizador · mapa 1444 · 44.81, 43.42 |
+| 55.1 | Aceptar · Encoge más gigantes (#7725) | Zorbin Ventipnotizador · desde nivel 45 · previa 7003 · desvío opcional en solitario · mapa 1444 · 44.81, 43.42 |
+| 55.2 | Aceptar · Más combustible para el Ultra-reductor (#7726) | Zorbin Ventipnotizador · desde nivel 45 · previa 7721 · desvío opcional en solitario · mapa 1444 · 44.81, 43.42 |
+| 56.1 | Recoger · Encoge más gigantes (#7725) | Resíduo de reducción ×10 · desvío opcional en solitario · mapa 1444 · 44.34, 46.61 |
+| 56.2 | Recoger · Más combustible para el Ultra-reductor (#7726) | Núcleo elemental de Agua ×6 · Elemental marino · desvío opcional en solitario · mapa 1444 · 44.97, 46.29 |
+| 57.1 | Entregar · Encoge más gigantes (#7725) | Zorbin Ventipnotizador · desvío opcional en solitario · mapa 1444 · 44.81, 43.42 |
+| 57.2 | Entregar · Más combustible para el Ultra-reductor (#7726) | Zorbin Ventipnotizador · desvío opcional en solitario · mapa 1444 · 44.81, 43.42 |
 | 58.1 | Entregar · Visita a Gregan (#4142) | Gregan Vomitabrebaje · mapa 1444 · 45.12, 25.57 |
 | 58.2 | Recoger · El Elixir de Videre (#3909) | Elixir de Videre · Gregan Vomitabrebaje · mapa 1444 · 45.12, 25.57 |
 | 59.1 | Volar · Trinquete | varios destinos o ubicaciones según objetivo |
@@ -2791,10 +2799,10 @@ En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del
 | 17.3 | Aceptar · El buen carácter de Emma (#5048) | Agente Real Bathrilor · desde nivel 50 · previa 5022 · mapa 1453 · 57.17, 48.07 |
 | 17.4 | Entregar · El buen carácter de Emma (#5048) | Vieja Emma · mapa 1453 · 60.2, 57.03 |
 | 17.5 | Aceptar · Talismán de la buena suerte (#5050) | Vieja Emma · desde nivel 50 · previa 5048 o 5049 · mapa 1453 · 60.2, 57.03 |
-| 17.6 | Aceptar · Un donativo de lana (#7791) | Clavicus Knavingham · desde nivel 12 · mapa 1453 · 53.93, 81.69 |
-| 17.7 | Entregar · Un donativo de lana (#7791) | Clavicus Knavingham · opcional · mapa 1453 · 53.93, 81.69 |
-| 17.8 | Aceptar · Un donativo de seda (#7793) | Clavicus Knavingham · desde nivel 26 · mapa 1453 · 53.93, 81.69 |
-| 17.9 | Aceptar · Un donativo de paño mágico (#7794) | Clavicus Knavingham · desde nivel 40 · mapa 1453 · 53.93, 81.69 |
+| 17.6 | Aceptar · Un donativo de lana (#7791) | Clavicus Knavingham · desde nivel 12 · desvío opcional en solitario · mapa 1453 · 53.93, 81.69 |
+| 17.7 | Entregar · Un donativo de lana (#7791) | Clavicus Knavingham · desvío opcional en solitario · mapa 1453 · 53.93, 81.69 |
+| 17.8 | Aceptar · Un donativo de seda (#7793) | Clavicus Knavingham · desde nivel 26 · desvío opcional en solitario · mapa 1453 · 53.93, 81.69 |
+| 17.9 | Aceptar · Un donativo de paño mágico (#7794) | Clavicus Knavingham · desde nivel 40 · desvío opcional en solitario · mapa 1453 · 53.93, 81.69 |
 | 18.1 | Aceptar · El primero y el último (#6182) | Alto Señor Bolvar Fordragon · desde nivel 56 · mapa 1453 · 80.21, 38.35 |
 | 18.2 | Entregar · El primero y el último (#6182) | Maestro Mathias Shaw · mapa 1453 · 78.31, 70.74 |
 | 18.3 | Aceptar · Honrar a los muertos (#6183) | Maestro Mathias Shaw · desde nivel 56 · previa 6182 · mapa 1453 · 78.31, 70.74 |
@@ -2802,18 +2810,18 @@ En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del
 | 18.5 | Aceptar · Flint Sombramás (#6184) | Maestro Mathias Shaw · desde nivel 56 · previa 6183 · mapa 1453 · 78.31, 70.74 |
 | 19.1 | Entrenar · Forjaz | varios destinos o ubicaciones según objetivo |
 | 19.2 | Aceptar · La reconquista de Silithus (#8275) | Emisario Cenarion Lunajade · desde nivel 54 · mapa 1455 · 58.54, 47.32 |
-| 19.3 | Aceptar · Un donativo de lana (#7807) | Bubulo Acerbus · desde nivel 12 · mapa 1455 · 74.09, 48.22 |
-| 19.4 | Aceptar · Un donativo de seda (#7808) | Bubulo Acerbus · desde nivel 26 · mapa 1455 · 74.09, 48.22 |
-| 19.5 | Aceptar · Un donativo de paño mágico (#7809) | Bubulo Acerbus · desde nivel 40 · mapa 1455 · 74.09, 48.22 |
+| 19.3 | Aceptar · Un donativo de lana (#7807) | Bubulo Acerbus · desde nivel 12 · desvío opcional en solitario · mapa 1455 · 74.09, 48.22 |
+| 19.4 | Aceptar · Un donativo de seda (#7808) | Bubulo Acerbus · desde nivel 26 · desvío opcional en solitario · mapa 1455 · 74.09, 48.22 |
+| 19.5 | Aceptar · Un donativo de paño mágico (#7809) | Bubulo Acerbus · desde nivel 40 · desvío opcional en solitario · mapa 1455 · 74.09, 48.22 |
 | 19.6 | Entregar · Un largo camino para unas babosas (#4512) | Laris Cadenartida · mapa 1455 · 75.77, 23.38 |
 | 19.7 | Aceptar · Un largo camino para unas babosas (#4513) | Laris Cadenartida · desde nivel 48 · previa 4512 · mapa 1455 · 75.77, 23.38 |
-| 19.8 | Aceptar · Un donativo de lana (#7802) | Mistina Escudacero · desde nivel 12 · mapa 1455 · 43.22, 31.57 |
-| 19.9 | Aceptar · Un donativo de seda (#7803) | Mistina Escudacero · desde nivel 26 · mapa 1455 · 43.22, 31.57 |
-| 19.10 | Aceptar · Un donativo de paño mágico (#7804) | Mistina Escudacero · desde nivel 40 · mapa 1455 · 43.22, 31.57 |
+| 19.8 | Aceptar · Un donativo de lana (#7802) | Mistina Escudacero · desde nivel 12 · desvío opcional en solitario · mapa 1455 · 43.22, 31.57 |
+| 19.9 | Aceptar · Un donativo de seda (#7803) | Mistina Escudacero · desde nivel 26 · desvío opcional en solitario · mapa 1455 · 43.22, 31.57 |
+| 19.10 | Aceptar · Un donativo de paño mágico (#7804) | Mistina Escudacero · desde nivel 40 · desvío opcional en solitario · mapa 1455 · 43.22, 31.57 |
 | 19.11 | Entregar · Las humeantes Ruinas de Thaurissan (#3701) | Historiador Real Archesonus · mapa 1455 · 38.37, 55.31 |
-| 19.12 | Aceptar · El imperativo soberano (#7261) | Teniente Rotimer · desde nivel 51 · mapa 1455 · 32.21, 63.26 |
-| 20.1 | Volar · Costasur | varios destinos o ubicaciones según objetivo |
-| 20.2 | Entregar · El imperativo soberano (#7261) | Teniente Haggerdin · mapa 1424 · 43.4, 19.5 |
+| 19.12 | Aceptar · El imperativo soberano (#7261) | Teniente Rotimer · desde nivel 51 · desvío opcional en solitario · mapa 1455 · 32.21, 63.26 |
+| 20.1 | Volar · Costasur | desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
+| 20.2 | Entregar · El imperativo soberano (#7261) | Teniente Haggerdin · desvío opcional en solitario · mapa 1424 · 43.4, 19.5 |
 | 21.1 | Volar · Capilla de la Esperanza de la Luz | varios destinos o ubicaciones según objetivo |
 | 21.2 | Entregar · Los héroes de Villa Darrow (#5168) | Carlin Rutagrana · mapa 1423 · 71.7, 50.04 |
 | 21.3 | Aceptar · Los merodeadores de Villa Dorrow (#5206) | Carlin Rutagrana · desde nivel 50 · previa 5168 + 5181 · mapa 1423 · 71.7, 50.04 |
@@ -2824,7 +2832,7 @@ En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del
 | 24.1 | Recoger · La súplica de Hameya (#6024) | Llave de Hameya · Infiltrador Hameya · mapa 1423 · 61.96, 11.11 |
 | 25.1 | Entregar · La súplica de Hameya (#6024) | Túmulo de porquería · mapa 1423 · 23.58, 73.79 · fija · Destripador de Hameya |
 | 25.2 | Recoger · De recuerdos olvidados (#5781) | Martillo de Taelan · Mercutio Comerroña · opcional · mapa 1423 · 23.85, 74.22 |
-| 26.1 | Nivel · farmear en Despellejador malsano en el Fungal Vale, Tierras de la Peste del Este |  |
+| 26.1 | Nivel · Sal de la cripta y sigue hacia el oeste por el sur de las Tierras de la Peste del Este. Caza larvas carroñeras de nivel 54–55 en campo abierto antes de usar la piedra a Trinquete. | mapa 1423 · 14.3, 67.9 |
 | 27.1 | Piedra de hogar · Trinquete |  |
 
 ## Silithus, Frondavil, Cuna del Invierno y el Tierras de la Peste (57–60)
@@ -2846,10 +2854,10 @@ En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del
 | 3.4 | Interactuar · Sofocar las llamas de protección (#5165) | Blandón de la Maldad · mapa 1448 · 37.68, 52.69 |
 | 3.5 | Recoger · Corazón de plata (#4084) | Garras de plata ×11 · mapa 1448 · 38.04, 52.75 |
 | 4.1 | Entregar · Sofocar las llamas de protección (#5165) | Greta Pezuñamusgo · mapa 1448 · 51.21, 82.11 |
-| 4.2 | Aceptar · El golpe final (#5242) | Greta Pezuñamusgo · desde nivel 48 · previa 5165 · mapa 1448 · 51.21, 82.11 · a elegir · Guantes de cuero infestados |
-| 5.1 | Derrotar · El golpe final (#5242) | Moora · mapa 1448 · 38.81, 46.87 |
-| 5.2 | Derrotar · El golpe final (#5242) | Salia · mapa 1448 · 38.79, 46.7 |
-| 5.3 | Recoger · El golpe final (#5242) | Cabeza de Lord Fel'dan de las Sombras · Señor de las Sombras Fel'dan · mapa 1448 · 38.82, 46.78 |
+| 4.2 | Aceptar · El golpe final (#5242) | Greta Pezuñamusgo · desde nivel 48 · previa 5165 · desvío opcional en solitario · mapa 1448 · 51.21, 82.11 · a elegir · Guantes de cuero infestados |
+| 5.1 | Derrotar · El golpe final (#5242) | Moora · desvío opcional en solitario · mapa 1448 · 38.81, 46.87 |
+| 5.2 | Derrotar · El golpe final (#5242) | Salia · desvío opcional en solitario · mapa 1448 · 38.79, 46.7 |
+| 5.3 | Recoger · El golpe final (#5242) | Cabeza de Lord Fel'dan de las Sombras · Señor de las Sombras Fel'dan · desvío opcional en solitario · mapa 1448 · 38.82, 46.78 |
 | 6.1 | Recoger · Corazón de plata (#4084) | Corazón Troncoferro · mapa 1448 · 48.51, 29.84 |
 | 6.2 | Recoger · Corazón de plata (#4084) | Garras de plata ×11 · mapa 1448 · 49.28, 32.56 |
 | 7.1 | Aceptar · El espíritu de un Ancestro (#4261) | Arei · desde nivel 49 · previa 4442 · mapa 1448 · 49.57, 29.6 · a elegir · Manto de las nubes · sin datos externos de requisitos |
@@ -2860,7 +2868,7 @@ En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del
 | 8.4 | Entregar · Paño rúnico (#6031) | Meilosh · opcional · mapa 1448 · 65.69, 2.81 · a elegir · Bufas sombradermas |
 | 9.1 | Entregar · Corazón de plata (#4084) | Eridan Vientoazul · mapa 1448 · 51.35, 81.51 |
 | 9.2 | Aceptar · Aquementas (#4005) | Eridan Vientoazul · desde nivel 47 · previa 4084 · mapa 1448 · 51.35, 81.51 |
-| 9.3 | Entregar · El golpe final (#5242) | Greta Pezuñamusgo · mapa 1448 · 51.21, 82.11 · a elegir · Guantes de cuero infestados |
+| 9.3 | Entregar · El golpe final (#5242) | Greta Pezuñamusgo · desvío opcional en solitario · mapa 1448 · 51.21, 82.11 · a elegir · Guantes de cuero infestados |
 | 10.1 | Piedra de hogar · Trinquete |  |
 | 10.2 | Volar · Gadgetzan | varios destinos o ubicaciones según objetivo |
 | 10.3 | Entregar · Superpegajoso (#4504) | Tran'rek · mapa 1446 · 51.57, 26.76 |
@@ -2907,8 +2915,8 @@ En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del
 | 28.3 | Vender · Fuerte Cenarion | varios destinos o ubicaciones según objetivo |
 | 29.1 | Entregar · El Lexicón del Crepúsculo (#8279) | Ermitaño Ortell · mapa 1451 · 67.19, 69.76 |
 | 29.2 | Aceptar · Un propósito terrible (#8287) | Ermitaño Ortell · desde nivel 54 · previa 8279 · mapa 1451 · 67.19, 69.76 |
-| 29.3 | Aceptar · El creyente verdadero (#8323) | Ermitaño Ortell · desde nivel 54 · previa 8279 · mapa 1451 · 67.19, 69.76 |
-| 29.4 | Entregar · El creyente verdadero (#8323) | Ermitaño Ortell · mapa 1451 · 67.19, 69.76 |
+| 29.3 | Aceptar · El creyente verdadero (#8323) | Ermitaño Ortell · desde nivel 54 · previa 8279 · desvío opcional en solitario · mapa 1451 · 67.19, 69.76 |
+| 29.4 | Entregar · El creyente verdadero (#8323) | Ermitaño Ortell · desvío opcional en solitario · mapa 1451 · 67.19, 69.76 |
 | 30.1 | Piedra de hogar · Fuerte Cenarion |  |
 | 30.2 | Entregar · Un propósito terrible (#8287) | Comandante Mar'alith · mapa 1451 · 49.2, 34.18 |
 | 31.1 | Volar · Gadgetzan | varios destinos o ubicaciones según objetivo |
@@ -2920,8 +2928,8 @@ En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del
 | 33.2 | Entregar · Yeti... ¿ya hemos llegado? (#5163) | Umi Risitas · mapa 1452 · 60.88, 37.62 |
 | 34.1 | Aceptar · Guardianes del altar (#4901) | Ranshalla · desde nivel 52 · previa 979 · mapa 1452 · 63.07, 59.48 |
 | 34.2 | Completar · Guardianes del altar (#4901) | varios destinos o ubicaciones según objetivo |
-| 35.1 | Indicación · La Masacre se ajusta a los niveles de 55 a 60; el Dentoesquirla rabioso farmear abajo le lleva a 59 solo. |  |
-| 36.1 | Nivel · farmear en Dentoesquirla rabioso en el valle al sur de Matorral del Ala del Búho, Cuna del Invierno |  |
+| 35.1 | Indicación · La Masacre se ajusta a los niveles de 55 a 60; el Dentoesquirla rabioso farmear abajo le lleva a 59 solo. | desvío opcional en solitario |
+| 36.1 | Nivel · farmear en Dentoesquirla rabioso en el valle al sur de Matorral del Ala del Búho, Cuna del Invierno | desvío opcional en solitario |
 | 37.1 | Entregar · ¡A la Cuna del Invierno! (#5249) | Wynd Cazanoche · mapa 1452 · 51.97, 30.39 |
 | 38.1 | Entregar · Baba misteriosa (#5085) | Donova Cubilnevado · opcional · mapa 1452 · 31.27, 45.16 |
 | 39.1 | Entregar · Umber, el archivista (#6844) | Umber · mapa 1450 · 44.88, 35.6 |
@@ -2940,32 +2948,32 @@ En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del
 | 44.4 | Entregar · Lechúcico de Elune (#4902) | Archidruida Fandral Corzocelada · mapa 1457 · 34.81, 9.26 · a elegir · Lanzaespinas |
 | 45.1 | Fijar hogar · Ciudad de Ventormenta | varios destinos o ubicaciones según objetivo |
 | 45.2 | Entrenar · Ventormenta | varios destinos o ubicaciones según objetivo |
-| 45.3 | Recoger · Un donativo de seda (#7793) | Paño de seda ×60 · mapa 1453 · 72.36, 35.12 |
-| 45.4 | Recoger · Un donativo de paño mágico (#7794) | Tela de paño mágico ×60 · mapa 1452 · 71.2, 81.8 |
-| 45.5 | Entregar · Un donativo de seda (#7793) | Clavicus Knavingham · mapa 1453 · 53.93, 81.69 |
-| 45.6 | Entregar · Un donativo de paño mágico (#7794) | Clavicus Knavingham · mapa 1453 · 53.93, 81.69 |
-| 45.7 | Aceptar · Un donativo de paño rúnico (#7795) | Clavicus Knavingham · desde nivel 50 · previa 7791 + 7793 + 7794 · mapa 1453 · 53.93, 81.69 |
-| 45.8 | Recoger · Un donativo de paño rúnico (#7795) | Paño rúnico ×60 · mapa 1453 · 69.17, 82.72 |
-| 45.9 | Entregar · Un donativo de paño rúnico (#7795) | Clavicus Knavingham · mapa 1453 · 53.93, 81.69 |
+| 45.3 | Recoger · Un donativo de seda (#7793) | Paño de seda ×60 · desvío opcional en solitario · mapa 1453 · 72.36, 35.12 |
+| 45.4 | Recoger · Un donativo de paño mágico (#7794) | Tela de paño mágico ×60 · desvío opcional en solitario · mapa 1452 · 71.2, 81.8 |
+| 45.5 | Entregar · Un donativo de seda (#7793) | Clavicus Knavingham · desvío opcional en solitario · mapa 1453 · 53.93, 81.69 |
+| 45.6 | Entregar · Un donativo de paño mágico (#7794) | Clavicus Knavingham · desvío opcional en solitario · mapa 1453 · 53.93, 81.69 |
+| 45.7 | Aceptar · Un donativo de paño rúnico (#7795) | Clavicus Knavingham · desde nivel 50 · previa 7791 + 7793 + 7794 · desvío opcional en solitario · mapa 1453 · 53.93, 81.69 |
+| 45.8 | Recoger · Un donativo de paño rúnico (#7795) | Paño rúnico ×60 · desvío opcional en solitario · mapa 1453 · 69.17, 82.72 |
+| 45.9 | Entregar · Un donativo de paño rúnico (#7795) | Clavicus Knavingham · desvío opcional en solitario · mapa 1453 · 53.93, 81.69 |
 | 46.1 | Entregar · Un largo camino para unas babosas (#4513) | Laris Cadenartida · mapa 1455 · 75.77, 23.38 |
-| 46.3 | Recoger · Un donativo de lana (#7807) | Paño de lana ×60 · mapa 1453 · 73.75, 59.18 |
-| 46.4 | Recoger · Un donativo de seda (#7808) | Paño de seda ×60 · mapa 1453 · 72.1, 35.33 |
-| 46.5 | Recoger · Un donativo de paño mágico (#7809) | Tela de paño mágico ×60 · mapa 1452 · 71.2, 81.8 |
-| 46.6 | Entregar · Un donativo de lana (#7807) | Bubulo Acerbus · mapa 1455 · 74.09, 48.22 |
-| 46.7 | Entregar · Un donativo de seda (#7808) | Bubulo Acerbus · mapa 1455 · 74.09, 48.22 |
-| 46.8 | Entregar · Un donativo de paño mágico (#7809) | Bubulo Acerbus · mapa 1455 · 74.09, 48.22 |
-| 46.9 | Aceptar · Un donativo de paño rúnico (#7811) | Bubulo Acerbus · desde nivel 50 · previa 7807 + 7808 + 7809 · mapa 1455 · 74.09, 48.22 |
-| 46.10 | Recoger · Un donativo de paño rúnico (#7811) | Paño rúnico ×60 · mapa 1452 · 61.29, 38.14 |
-| 46.11 | Entregar · Un donativo de paño rúnico (#7811) | Bubulo Acerbus · mapa 1455 · 74.09, 48.22 |
-| 46.12 | Recoger · Un donativo de lana (#7802) | Paño de lana ×60 · mapa 1453 · 73.75, 59.18 |
-| 46.13 | Recoger · Un donativo de seda (#7803) | Paño de seda ×60 · mapa 1453 · 72.1, 35.33 |
-| 46.14 | Recoger · Un donativo de paño mágico (#7804) | Tela de paño mágico ×60 · mapa 1452 · 71.2, 81.8 |
-| 46.15 | Entregar · Un donativo de lana (#7802) | Mistina Escudacero · mapa 1455 · 43.22, 31.57 |
-| 46.16 | Entregar · Un donativo de seda (#7803) | Mistina Escudacero · mapa 1455 · 43.22, 31.57 |
-| 46.17 | Entregar · Un donativo de paño mágico (#7804) | Mistina Escudacero · mapa 1455 · 43.22, 31.57 |
-| 46.18 | Aceptar · Un donativo de paño rúnico (#7805) | Mistina Escudacero · desde nivel 50 · previa 7802 + 7803 + 7804 · mapa 1455 · 43.22, 31.57 |
-| 46.19 | Recoger · Un donativo de paño rúnico (#7805) | Paño rúnico ×60 · mapa 1452 · 61.29, 38.14 |
-| 46.20 | Entregar · Un donativo de paño rúnico (#7805) | Mistina Escudacero · mapa 1455 · 43.22, 31.57 |
+| 46.3 | Recoger · Un donativo de lana (#7807) | Paño de lana ×60 · desvío opcional en solitario · mapa 1453 · 73.75, 59.18 |
+| 46.4 | Recoger · Un donativo de seda (#7808) | Paño de seda ×60 · desvío opcional en solitario · mapa 1453 · 72.1, 35.33 |
+| 46.5 | Recoger · Un donativo de paño mágico (#7809) | Tela de paño mágico ×60 · desvío opcional en solitario · mapa 1452 · 71.2, 81.8 |
+| 46.6 | Entregar · Un donativo de lana (#7807) | Bubulo Acerbus · desvío opcional en solitario · mapa 1455 · 74.09, 48.22 |
+| 46.7 | Entregar · Un donativo de seda (#7808) | Bubulo Acerbus · desvío opcional en solitario · mapa 1455 · 74.09, 48.22 |
+| 46.8 | Entregar · Un donativo de paño mágico (#7809) | Bubulo Acerbus · desvío opcional en solitario · mapa 1455 · 74.09, 48.22 |
+| 46.9 | Aceptar · Un donativo de paño rúnico (#7811) | Bubulo Acerbus · desde nivel 50 · previa 7807 + 7808 + 7809 · desvío opcional en solitario · mapa 1455 · 74.09, 48.22 |
+| 46.10 | Recoger · Un donativo de paño rúnico (#7811) | Paño rúnico ×60 · desvío opcional en solitario · mapa 1452 · 61.29, 38.14 |
+| 46.11 | Entregar · Un donativo de paño rúnico (#7811) | Bubulo Acerbus · desvío opcional en solitario · mapa 1455 · 74.09, 48.22 |
+| 46.12 | Recoger · Un donativo de lana (#7802) | Paño de lana ×60 · desvío opcional en solitario · mapa 1453 · 73.75, 59.18 |
+| 46.13 | Recoger · Un donativo de seda (#7803) | Paño de seda ×60 · desvío opcional en solitario · mapa 1453 · 72.1, 35.33 |
+| 46.14 | Recoger · Un donativo de paño mágico (#7804) | Tela de paño mágico ×60 · desvío opcional en solitario · mapa 1452 · 71.2, 81.8 |
+| 46.15 | Entregar · Un donativo de lana (#7802) | Mistina Escudacero · desvío opcional en solitario · mapa 1455 · 43.22, 31.57 |
+| 46.16 | Entregar · Un donativo de seda (#7803) | Mistina Escudacero · desvío opcional en solitario · mapa 1455 · 43.22, 31.57 |
+| 46.17 | Entregar · Un donativo de paño mágico (#7804) | Mistina Escudacero · desvío opcional en solitario · mapa 1455 · 43.22, 31.57 |
+| 46.18 | Aceptar · Un donativo de paño rúnico (#7805) | Mistina Escudacero · desde nivel 50 · previa 7802 + 7803 + 7804 · desvío opcional en solitario · mapa 1455 · 43.22, 31.57 |
+| 46.19 | Recoger · Un donativo de paño rúnico (#7805) | Paño rúnico ×60 · desvío opcional en solitario · mapa 1452 · 61.29, 38.14 |
+| 46.20 | Entregar · Un donativo de paño rúnico (#7805) | Mistina Escudacero · desvío opcional en solitario · mapa 1455 · 43.22, 31.57 |
 | 47.1 | Volar · Campamento del Orvallo | varios destinos o ubicaciones según objetivo |
 | 47.2 | Entregar · La forja del Penacho en Llamas (#5801) | Alquimista Arbington · mapa 1422 · 42.66, 83.77 |
 | 47.3 | Aceptar · El escarabajo de Araj (#5803) | Alquimista Arbington · desde nivel 55 · previa 5801 · opcional · mapa 1422 · 42.66, 83.77 |
@@ -2982,8 +2990,8 @@ En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del
 | 50.1 | Entregar · Una Peste en la Cruzada (#5904) | Barril de termitas · mapa 1422 · 48.34, 31.99 |
 | 50.2 | Aceptar · Una Peste en la Cruzada (#6389) | Barril de termitas · desde nivel 48 · previa 5904 · mapa 1422 · 48.34, 31.99 |
 | 51.1 | Entregar · De recuerdos olvidados (#5781) | Tirión Vadín · opcional · mapa 1422 · 67.3, 24.2 |
-| 52.1 | Indicación · Scholomance se ajusta a los niveles 58 a 60; La llave de Scholomance se entrega en Campamento del Orvallo a continuación. |  |
-| 53.1 | Nivel · farmear en Espíritu del Valle del Terror en Valle del Terror, Tierras de la Peste del Este |  |
+| 52.1 | Indicación · Scholomance se ajusta a los niveles 58 a 60; La llave de Scholomance se entrega en Campamento del Orvallo a continuación. | desvío opcional en solitario |
+| 53.1 | Nivel · Si te falta experiencia, caza osos pardos malsanos de nivel 55–56 en las Tierras de la Peste del Oeste. Atrae uno cada vez. | mapa 1422 · 55.16, 64.54 |
 | 54.1 | Entregar · Una Peste en la Cruzada (#6389) | Nathaniel Dumah · mapa 1422 · 43.42, 84.83 |
 | 54.2 | Entregar · El escarabajo de Araj (#5803) | Alquimista Arbington · opcional · mapa 1422 · 42.66, 83.77 |
 | 54.3 | Aceptar · La llave de Scholomance (#5505) | Alquimista Arbington · desde nivel 55 · previa 5803 · opcional · mapa 1422 · 42.66, 83.77 |

@@ -3,7 +3,7 @@
   "sourceCommit": "5d207e28e82e2c529143b21ace74fe88692f0067",
   "scope": {
     "guides": 57,
-    "steps": 2344,
+    "steps": 2338,
     "goals": 7455,
     "questIDs": 1901,
     "actions": {
@@ -9662,15 +9662,10 @@
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
         "step": 28,
-        "field": "group shape/condition"
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 28,
         "goal": 1,
         "field": "t",
         "source": "fly",
-        "snapshot": "turnin"
+        "snapshot": "collect"
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -9678,7 +9673,31 @@
         "goal": 1,
         "field": "quest",
         "source": null,
-        "snapshot": 562
+        "snapshot": 555
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 28,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 28,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 3712
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 28,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -9691,7 +9710,7 @@
         "goal": 1,
         "field": "t",
         "source": "turnin",
-        "snapshot": "collect"
+        "snapshot": "kill"
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -9699,7 +9718,7 @@
         "goal": 1,
         "field": "quest",
         "source": 1245,
-        "snapshot": 555
+        "snapshot": 505
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -9707,19 +9726,106 @@
         "goal": 1,
         "field": "oi",
         "source": null,
-        "snapshot": 1
+        "snapshot": 2
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
         "step": 29,
         "goal": 1,
-        "field": "item",
+        "field": "count",
         "source": null,
-        "snapshot": 3712
+        "snapshot": 8
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
         "step": 29,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 2,
+        "field": "quest",
+        "source": 1246,
+        "snapshot": 505
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 12
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1245
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 29,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 28,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 30,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 30,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 30,
+        "goal": 1,
+        "field": "quest",
+        "source": 1246,
+        "snapshot": 565
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 30,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 4
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 30,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 3720
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 30,
         "goal": 1,
         "field": "count",
         "source": null,
@@ -9728,47 +9834,10 @@
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
         "step": 30,
-        "field": "group shape/condition"
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
-        "goal": 1,
-        "field": "t",
-        "source": "turnin",
-        "snapshot": "kill"
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
-        "goal": 1,
-        "field": "quest",
-        "source": 1246,
-        "snapshot": 505
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
-        "goal": 1,
-        "field": "oi",
-        "source": null,
-        "snapshot": 2
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
-        "goal": 1,
-        "field": "count",
-        "source": null,
-        "snapshot": 8
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
         "goal": 2,
         "field": "t",
         "source": "accept",
-        "snapshot": "kill"
+        "snapshot": "note"
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -9776,23 +9845,7 @@
         "goal": 2,
         "field": "quest",
         "source": 1447,
-        "snapshot": 505
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
-        "goal": 2,
-        "field": "oi",
-        "source": null,
-        "snapshot": 1
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
-        "goal": 2,
-        "field": "count",
-        "source": null,
-        "snapshot": 12
+        "snapshot": null
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -9814,54 +9867,6 @@
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
-        "goal": 3,
-        "field": "t",
-        "source": "complete",
-        "snapshot": "accept"
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
-        "goal": 3,
-        "field": "quest",
-        "source": 1447,
-        "snapshot": 510
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
-        "goal": 3,
-        "field": "minLevel",
-        "source": null,
-        "snapshot": 26
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
-        "goal": 4,
-        "field": "t",
-        "source": "turnin",
-        "snapshot": "accept"
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
-        "goal": 4,
-        "field": "quest",
-        "source": 1447,
-        "snapshot": 511
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 30,
-        "goal": 4,
-        "field": "minLevel",
-        "source": null,
-        "snapshot": 30
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
         "step": 31,
         "field": "group shape/condition"
       },
@@ -9871,7 +9876,7 @@
         "goal": 1,
         "field": "t",
         "source": "accept",
-        "snapshot": "collect"
+        "snapshot": "goto"
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -9879,31 +9884,7 @@
         "goal": 1,
         "field": "quest",
         "source": 1718,
-        "snapshot": 565
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 31,
-        "goal": 1,
-        "field": "oi",
-        "source": null,
-        "snapshot": 4
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 31,
-        "goal": 1,
-        "field": "item",
-        "source": null,
-        "snapshot": 3720
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 31,
-        "goal": 1,
-        "field": "count",
-        "source": null,
-        "snapshot": 10
+        "snapshot": null
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -9916,10 +9897,7 @@
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
         "step": 32,
-        "goal": 1,
-        "field": "t",
-        "source": "turnin",
-        "snapshot": "goto"
+        "field": "group shape/condition"
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -9927,12 +9905,20 @@
         "goal": 1,
         "field": "quest",
         "source": 563,
-        "snapshot": null
+        "snapshot": 98059
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
         "step": 33,
         "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 33,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "fly"
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -9940,48 +9926,6 @@
         "goal": 1,
         "field": "quest",
         "source": 293,
-        "snapshot": 98059
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 33,
-        "goal": 2,
-        "field": "quest",
-        "source": 269,
-        "snapshot": 555
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 33,
-        "goal": 3,
-        "field": "t",
-        "source": "accept",
-        "snapshot": "turnin"
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 33,
-        "goal": 3,
-        "field": "quest",
-        "source": 270,
-        "snapshot": 511
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 33,
-        "goal": 3,
-        "field": "pre",
-        "source": [
-          269
-        ],
-        "snapshot": null
-      },
-      {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 33,
-        "goal": 3,
-        "field": "minLevel",
-        "source": 20,
         "snapshot": null
       },
       {
@@ -9995,7 +9939,7 @@
         "goal": 1,
         "field": "t",
         "source": "accept",
-        "snapshot": "fly"
+        "snapshot": "turnin"
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -10003,7 +9947,7 @@
         "goal": 1,
         "field": "quest",
         "source": 690,
-        "snapshot": null
+        "snapshot": 1245
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -10025,11 +9969,42 @@
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 2,
+        "field": "quest",
+        "source": 79536,
+        "snapshot": 1246
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1245
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 34,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 20,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 35,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
         "step": 35,
         "goal": 1,
         "field": "quest",
         "source": 1247,
-        "snapshot": 1245
+        "snapshot": 1246
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -10037,7 +10012,7 @@
         "goal": 2,
         "field": "quest",
         "source": 1248,
-        "snapshot": 1246
+        "snapshot": 1447
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -10048,7 +10023,7 @@
           1247
         ],
         "snapshot": [
-          1245
+          1246
         ]
       },
       {
@@ -10062,7 +10037,7 @@
         "goal": 1,
         "field": "t",
         "source": "train",
-        "snapshot": "turnin"
+        "snapshot": "accept"
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -10070,7 +10045,15 @@
         "goal": 1,
         "field": "quest",
         "source": null,
-        "snapshot": 1246
+        "snapshot": 1718
+      },
+      {
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "step": 36,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 30
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
@@ -10089,29 +10072,1524 @@
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
         "step": 37,
         "goal": 1,
+        "field": "quest",
+        "source": 514,
+        "snapshot": 563
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "field": "step count"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 7,
+        "goal": 1,
+        "field": "quest",
+        "source": 1458,
+        "snapshot": 1437
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 7,
+        "goal": 2,
+        "field": "quest",
+        "source": 1459,
+        "snapshot": 1465
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 7,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1458
+        ],
+        "snapshot": [
+          1437
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 8,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 8,
+        "goal": 1,
+        "field": "quest",
+        "source": 1437,
+        "snapshot": 1458
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 8,
+        "goal": 2,
+        "field": "quest",
+        "source": 1465,
+        "snapshot": 1459
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 8,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1437
+        ],
+        "snapshot": [
+          1458
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 9,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 9,
+        "goal": 1,
         "field": "t",
         "source": "turnin",
         "snapshot": "accept"
       },
       {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 37,
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 9,
         "goal": 1,
         "field": "quest",
-        "source": 514,
-        "snapshot": 1718
+        "source": 1465,
+        "snapshot": 5741
       },
       {
-        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 37,
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 9,
         "goal": 1,
         "field": "minLevel",
         "source": null,
         "snapshot": 30
       },
       {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 10,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 10,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 10,
+        "goal": 1,
+        "field": "quest",
+        "source": 5741,
+        "snapshot": 1438
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 10,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 11,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 11,
+        "goal": 1,
+        "field": "quest",
+        "source": 1438,
+        "snapshot": 1439
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 11,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 11,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 6767
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 11,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 11,
+        "goal": 2,
+        "field": "quest",
+        "source": 1439,
+        "snapshot": 5741
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 11,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 11,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 15750
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 11,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 11,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1438
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 11,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 12,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 12,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 12,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 12,
+        "goal": 1,
+        "field": "item",
+        "source": 6767,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 12,
+        "goal": 2,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 12,
+        "goal": 2,
+        "field": "quest",
+        "source": 5741,
+        "snapshot": 1440
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 12,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 12,
+        "goal": 2,
+        "field": "item",
+        "source": 15750,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 12,
+        "goal": 2,
+        "field": "count",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 12,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1439
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 12,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 13,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 13,
+        "goal": 1,
+        "field": "quest",
+        "source": 1439,
+        "snapshot": 5741
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 14,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 14,
+        "goal": 1,
+        "field": "quest",
+        "source": 5741,
+        "snapshot": 1459
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 14,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 14,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 6248
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 14,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 7
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 15,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 15,
+        "goal": 1,
+        "field": "quest",
+        "source": 1459,
+        "snapshot": 5821
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 15,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 15,
+        "goal": 1,
+        "field": "item",
+        "source": 6248,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 15,
+        "goal": 1,
+        "field": "count",
+        "source": 7,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 15,
+        "goal": 1,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 15,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 16,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "complete"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 16,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 17,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 17,
+        "goal": 1,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "complete"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 1,
+        "field": "quest",
+        "source": 5821,
+        "snapshot": 5561
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 1,
+        "field": "optional",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 2,
+        "field": "quest",
+        "source": 5561,
+        "snapshot": 1459
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 6249
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 3
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 19,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 19,
+        "goal": 1,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 20,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 20,
+        "goal": 1,
+        "field": "quest",
+        "source": 5561,
+        "snapshot": 1387
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 20,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 20,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 6067
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 20,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 15
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 21,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 21,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "hearth"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 21,
+        "goal": 1,
+        "field": "quest",
+        "source": 1387,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 21,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 21,
+        "goal": 1,
+        "field": "item",
+        "source": 6067,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 21,
+        "goal": 1,
+        "field": "count",
+        "source": 15,
+        "snapshot": null
+      },
+      {
         "guideID": "forever/alliance/30-40/03-ashenvale",
-        "step": 31,
+        "field": "step count"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 8,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 8,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "interact"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 8,
+        "goal": 1,
+        "field": "quest",
+        "source": 1021,
+        "snapshot": 1140
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 8,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 9,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 9,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 9,
+        "goal": 1,
+        "field": "quest",
+        "source": 1031,
+        "snapshot": 4581
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 9,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 9,
+        "goal": 1,
+        "field": "item",
+        "source": 5461,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 9,
+        "goal": 1,
+        "field": "count",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 10,
+        "goal": 1,
+        "field": "t",
+        "source": "interact",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 10,
+        "goal": 1,
+        "field": "quest",
+        "source": 1140,
+        "snapshot": 1011
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 10,
+        "goal": 1,
+        "field": "oi",
+        "source": 2,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 10,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 5440
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 10,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 11,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 11,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 11,
+        "goal": 1,
+        "field": "quest",
+        "source": 4581,
+        "snapshot": 1027
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 11,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 11,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 5519
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 12,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 12,
+        "goal": 1,
+        "field": "quest",
+        "source": 1011,
+        "snapshot": 1035
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 12,
+        "goal": 1,
+        "field": "item",
+        "source": 5440,
+        "snapshot": 5508
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 13,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 13,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 13,
+        "goal": 1,
+        "field": "quest",
+        "source": 1027,
+        "snapshot": 1011
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 13,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 13,
+        "goal": 1,
+        "field": "item",
+        "source": 5519,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 14,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 14,
+        "goal": 1,
+        "field": "quest",
+        "source": 1035,
+        "snapshot": 1021
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 14,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 14,
+        "goal": 1,
+        "field": "item",
+        "source": 5508,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 14,
+        "goal": 1,
+        "field": "count",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 14,
+        "goal": 2,
+        "field": "quest",
+        "source": 98027,
+        "snapshot": 1031
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 14,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1021
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 14,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 25,
+        "snapshot": 26
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 15,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 15,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 15,
+        "goal": 1,
+        "field": "quest",
+        "source": 1011,
+        "snapshot": 1031
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 15,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 15,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 5461
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 15,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 15,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 15,
+        "goal": 2,
+        "field": "quest",
+        "source": 1012,
+        "snapshot": 98418
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 15,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 15,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 15,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1011
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 15,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 24,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 16,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 16,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "complete"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 16,
+        "goal": 1,
+        "field": "quest",
+        "source": 98418,
+        "snapshot": 1012
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 16,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 16,
+        "goal": 1,
+        "field": "count",
+        "source": 5,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 17,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 17,
+        "goal": 1,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 18,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 18,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "interact"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 18,
+        "goal": 1,
+        "field": "quest",
+        "source": 1012,
+        "snapshot": 1140
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 18,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 19,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 19,
+        "goal": 1,
+        "field": "t",
+        "source": "interact",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 19,
+        "goal": 1,
+        "field": "quest",
+        "source": 1140,
+        "snapshot": 1027
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 19,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 20,
+        "goal": 1,
+        "field": "quest",
+        "source": 1027,
+        "snapshot": 1028
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 20,
+        "goal": 2,
+        "field": "quest",
+        "source": 1028,
+        "snapshot": 1055
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 20,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1027
+        ],
+        "snapshot": [
+          1028
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 21,
+        "goal": 1,
+        "field": "quest",
+        "source": 1028,
+        "snapshot": 1055
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 21,
+        "goal": 2,
+        "field": "quest",
+        "source": 1055,
+        "snapshot": 1029
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 21,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1028
+        ],
+        "snapshot": [
+          1055
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 22,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 22,
+        "goal": 1,
+        "field": "quest",
+        "source": 1055,
+        "snapshot": 1035
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 22,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 22,
+        "goal": 2,
+        "field": "quest",
+        "source": 1029,
+        "snapshot": 98027
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 22,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1055
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 22,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 18,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 23,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 23,
+        "goal": 1,
+        "field": "quest",
+        "source": 1035,
+        "snapshot": 1030
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 23,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 23,
+        "goal": 2,
+        "field": "quest",
+        "source": 98027,
+        "snapshot": 1045
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 23,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1030
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 23,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 18
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 24,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 24,
+        "goal": 1,
+        "field": "quest",
+        "source": 1030,
+        "snapshot": 1045
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 24,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 24,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 4
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 24,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 24,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 24,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 4
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 24,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1030
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 24,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 18,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 25,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 25,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 25,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 25,
+        "goal": 1,
+        "field": "count",
+        "source": 4,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 25,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 25,
+        "goal": 2,
+        "field": "quest",
+        "source": 1045,
+        "snapshot": 1046
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 25,
+        "goal": 2,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 25,
+        "goal": 2,
+        "field": "count",
+        "source": 4,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 25,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1045
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 25,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 18
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 26,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 26,
+        "goal": 1,
+        "field": "quest",
+        "source": 1045,
+        "snapshot": 1046
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 27,
+        "goal": 1,
+        "field": "quest",
+        "source": 1046,
+        "snapshot": 1140
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 28,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 28,
+        "goal": 1,
+        "field": "quest",
+        "source": 1140,
+        "snapshot": 1022
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 29,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 29,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "hearth"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 29,
+        "goal": 1,
+        "field": "quest",
+        "source": 1022,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 29,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "fly"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 29,
+        "goal": 2,
+        "field": "quest",
+        "source": 1031,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 30,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 30,
+        "goal": 1,
+        "field": "t",
+        "source": "hearth",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 30,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 270
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 30,
+        "goal": 2,
+        "field": "t",
+        "source": "fly",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 30,
+        "goal": 2,
+        "field": "quest",
+        "source": null,
+        "snapshot": 321
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 30,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          270
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 30,
         "goal": 2,
         "field": "closedBy",
         "source": null,
@@ -10123,7 +11601,43 @@
       },
       {
         "guideID": "forever/alliance/30-40/03-ashenvale",
-        "step": 32,
+        "step": 30,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 20
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 31,
+        "goal": 1,
+        "field": "quest",
+        "source": 270,
+        "snapshot": 321
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 31,
+        "goal": 2,
+        "field": "quest",
+        "source": 321,
+        "snapshot": 324
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 31,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          270
+        ],
+        "snapshot": [
+          321
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 31,
         "goal": 2,
         "field": "closedBy",
         "source": null,
@@ -10131,6 +11645,1096 @@
           526,
           322
         ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 32,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 32,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 32,
+        "goal": 1,
+        "field": "quest",
+        "source": 321,
+        "snapshot": 324
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 32,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 32,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 2702
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 32,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 33,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 33,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 33,
+        "goal": 1,
+        "field": "item",
+        "source": 2702,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 33,
+        "goal": 1,
+        "field": "count",
+        "source": 5,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 34,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "step": 34,
+        "goal": 1,
+        "field": "quest",
+        "source": 324,
+        "snapshot": 95737
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "field": "step count"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 22,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 22,
+        "goal": 6,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 22,
+        "goal": 6,
+        "field": "quest",
+        "source": 189,
+        "snapshot": 616
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 22,
+        "goal": 6,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 32
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 24,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 24,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "complete"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 24,
+        "goal": 1,
+        "field": "quest",
+        "source": 577,
+        "snapshot": 578
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 25,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 25,
+        "goal": 1,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 25,
+        "goal": 1,
+        "field": "quest",
+        "source": 578,
+        "snapshot": 192
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 25,
+        "goal": 1,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          191
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 25,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 28
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 26,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 26,
+        "goal": 1,
+        "field": "quest",
+        "source": 192,
+        "snapshot": 207
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 26,
+        "goal": 1,
+        "field": "pre",
+        "source": [
+          191
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 26,
+        "goal": 1,
+        "field": "preAll",
+        "source": null,
+        "snapshot": [
+          204,
+          203
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 26,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 28,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 26,
+        "goal": 2,
+        "field": "quest",
+        "source": 338,
+        "snapshot": 574
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 26,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          583
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 26,
+        "goal": 2,
+        "field": "preAll",
+        "source": null,
+        "snapshot": [
+          203,
+          204
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 27,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 27,
+        "goal": 1,
+        "field": "quest",
+        "source": 207,
+        "snapshot": 574
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 27,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 27,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 6
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 27,
+        "goal": 1,
+        "field": "preAll",
+        "source": [
+          204,
+          203
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 27,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 27,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 27,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 27,
+        "goal": 2,
+        "field": "preAll",
+        "source": [
+          203,
+          204
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 27,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 28,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 28,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "complete"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 28,
+        "goal": 1,
+        "field": "quest",
+        "source": 574,
+        "snapshot": 207
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 28,
+        "goal": 1,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 28,
+        "goal": 1,
+        "field": "count",
+        "source": 6,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 28,
+        "goal": 2,
+        "field": "quest",
+        "source": 574,
+        "snapshot": 192
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 28,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 1,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 1,
+        "field": "quest",
+        "source": 207,
+        "snapshot": 574
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 2,
+        "field": "quest",
+        "source": 192,
+        "snapshot": 210
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 2,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 32
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 3,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 3,
+        "field": "quest",
+        "source": 213,
+        "snapshot": 207
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 3,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 3,
+        "field": "item",
+        "source": 4106,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 3,
+        "field": "count",
+        "source": 8,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 4,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 4,
+        "field": "quest",
+        "source": 339,
+        "snapshot": 205
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 4,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          207
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 29,
+        "goal": 4,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 30,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 30,
+        "goal": 1,
+        "field": "quest",
+        "source": 574,
+        "snapshot": 339
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 30,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 30,
+        "goal": 2,
+        "field": "quest",
+        "source": 210,
+        "snapshot": 340
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 30,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 32,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 30,
+        "goal": 3,
+        "field": "quest",
+        "source": 207,
+        "snapshot": 341
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 30,
+        "goal": 4,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 30,
+        "goal": 4,
+        "field": "quest",
+        "source": 205,
+        "snapshot": 342
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 30,
+        "goal": 4,
+        "field": "pre",
+        "source": [
+          207
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 30,
+        "goal": 4,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 31,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 31,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 31,
+        "goal": 1,
+        "field": "quest",
+        "source": 339,
+        "snapshot": 205
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 31,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 31,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 2466
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 31,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 4
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 32,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 32,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 32,
+        "goal": 1,
+        "field": "item",
+        "source": 2466,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 32,
+        "goal": 1,
+        "field": "count",
+        "source": 4,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 33,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 33,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "hearth"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 33,
+        "goal": 1,
+        "field": "quest",
+        "source": 205,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 34,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 34,
+        "goal": 1,
+        "field": "t",
+        "source": "hearth",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 34,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 601
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 34,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 34,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 3923
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 34,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 6
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 35,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 35,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 35,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 35,
+        "goal": 1,
+        "field": "item",
+        "source": 3923,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 35,
+        "goal": 1,
+        "field": "count",
+        "source": 6,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 5,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 5,
+        "goal": 1,
+        "field": "quest",
+        "source": 1421,
+        "snapshot": 1389
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 5,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 5,
+        "goal": 1,
+        "field": "item",
+        "source": 6170,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 5,
+        "goal": 1,
+        "field": "count",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 5,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 6,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 6,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 6,
+        "goal": 1,
+        "field": "quest",
+        "source": 1421,
+        "snapshot": 1389
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 6,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 6,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 6071
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 6,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 6
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 7,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 7,
+        "goal": 1,
+        "field": "quest",
+        "source": 1389,
+        "snapshot": 1421
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 7,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 7,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 6170
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 7,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 7,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 1,
+        "field": "quest",
+        "source": 1389,
+        "snapshot": 1393
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 1,
+        "field": "item",
+        "source": 6071,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 1,
+        "field": "count",
+        "source": 6,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 2,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "complete"
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 2,
+        "field": "quest",
+        "source": null,
+        "snapshot": 1393
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 2,
+        "field": "item",
+        "source": 6196,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 3,
+        "field": "quest",
+        "source": 1392,
+        "snapshot": 1393
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 3,
+        "field": "item",
+        "source": 6196,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 8,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 29,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 9,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 9,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 9,
+        "goal": 1,
+        "field": "quest",
+        "source": 1393,
+        "snapshot": 1392
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 9,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 9,
+        "goal": 2,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 9,
+        "goal": 2,
+        "field": "quest",
+        "source": 1393,
+        "snapshot": 1389
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 10,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "step": 10,
+        "goal": 1,
+        "field": "quest",
+        "source": 1392,
+        "snapshot": 1421
       },
       {
         "guideID": "forever/alliance/30-40/05-arathi-highlands",
@@ -10150,71 +12754,501 @@
       },
       {
         "guideID": "forever/alliance/30-40/06-badlands",
-        "step": 38,
-        "goal": 2,
+        "field": "step count"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 27,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 27,
+        "goal": 1,
         "field": "t",
-        "source": "turnin",
+        "source": "hearth",
         "snapshot": "accept"
       },
       {
         "guideID": "forever/alliance/30-40/06-badlands",
-        "step": 38,
-        "goal": 2,
+        "step": 27,
+        "goal": 1,
         "field": "quest",
-        "source": 93224,
-        "snapshot": 1467
-      },
-      {
-        "guideID": "forever/alliance/30-40/06-badlands",
-        "step": 38,
-        "goal": 2,
-        "field": "pre",
         "source": null,
-        "snapshot": [
-          1466
-        ]
+        "snapshot": 5501
       },
       {
         "guideID": "forever/alliance/30-40/06-badlands",
-        "step": 38,
-        "goal": 2,
+        "step": 27,
+        "goal": 1,
         "field": "minLevel",
         "source": null,
-        "snapshot": 30
+        "snapshot": 33
       },
       {
         "guideID": "forever/alliance/30-40/06-badlands",
-        "step": 38,
-        "goal": 3,
+        "step": 28,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 28,
+        "goal": 1,
+        "field": "quest",
+        "source": 5501,
+        "snapshot": 6134
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 28,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 33,
+        "snapshot": 34
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 29,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 29,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 29,
+        "goal": 1,
+        "field": "quest",
+        "source": 6134,
+        "snapshot": 93224
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 29,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 29,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 254432
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 29,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 29,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 34,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 30,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 30,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 30,
+        "goal": 1,
+        "field": "quest",
+        "source": 93224,
+        "snapshot": 6132
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 30,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 30,
+        "goal": 1,
+        "field": "item",
+        "source": 254432,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 30,
+        "goal": 1,
+        "field": "count",
+        "source": 5,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 30,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 34
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 31,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 31,
+        "goal": 1,
         "field": "t",
         "source": "accept",
         "snapshot": "turnin"
       },
       {
         "guideID": "forever/alliance/30-40/06-badlands",
-        "step": 38,
+        "step": 31,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 34,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 32,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 32,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 32,
+        "goal": 1,
+        "field": "quest",
+        "source": 6132,
+        "snapshot": 5943
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 32,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 32
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 1,
+        "field": "quest",
+        "source": 5943,
+        "snapshot": 1466
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 6250
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 32,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 2,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 2,
+        "field": "quest",
+        "source": 5943,
+        "snapshot": 1466
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 6251
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 3,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
         "goal": 3,
         "field": "quest",
-        "source": 1467,
-        "snapshot": 93224
+        "source": 5943,
+        "snapshot": 1466
       },
       {
         "guideID": "forever/alliance/30-40/06-badlands",
-        "step": 38,
+        "step": 33,
         "goal": 3,
-        "field": "pre",
-        "source": [
-          1466
-        ],
+        "field": "oi",
+        "source": null,
+        "snapshot": 3
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 3,
+        "field": "item",
+        "source": null,
+        "snapshot": 6252
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 33,
+        "goal": 3,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 34,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 34,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 34,
+        "goal": 1,
+        "field": "quest",
+        "source": 1466,
+        "snapshot": 261
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 34,
+        "goal": 1,
+        "field": "item",
+        "source": 6250,
         "snapshot": null
       },
       {
         "guideID": "forever/alliance/30-40/06-badlands",
-        "step": 38,
-        "goal": 3,
-        "field": "minLevel",
+        "step": 34,
+        "goal": 1,
+        "field": "count",
+        "source": 10,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 34,
+        "goal": 2,
+        "field": "quest",
+        "source": 1466,
+        "snapshot": 6134
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 34,
+        "goal": 2,
+        "field": "oi",
+        "source": 2,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 34,
+        "goal": 2,
+        "field": "item",
+        "source": 6251,
+        "snapshot": 15849
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 34,
+        "goal": 2,
+        "field": "count",
+        "source": 10,
+        "snapshot": 8
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 35,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 35,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 35,
+        "goal": 1,
+        "field": "quest",
+        "source": 261,
+        "snapshot": 6134
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 35,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 35,
+        "goal": 1,
+        "field": "count",
         "source": 30,
         "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 36,
+        "goal": 1,
+        "field": "quest",
+        "source": 6134,
+        "snapshot": 5501
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 37,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 37,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "hearth"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 37,
+        "goal": 1,
+        "field": "quest",
+        "source": 5501,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 38,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 38,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "fly"
+      },
+      {
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "step": 38,
+        "goal": 1,
+        "field": "quest",
+        "source": 1466,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "field": "step count"
       },
       {
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
@@ -10303,6 +13337,1509 @@
         "snapshot": [
           599
         ]
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 25,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 25,
+        "goal": 1,
+        "field": "quest",
+        "source": 608,
+        "snapshot": 617
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 25,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 25,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 4029
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 25,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 25,
+        "goal": 1,
+        "field": "optional",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 26,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 26,
+        "goal": 1,
+        "field": "quest",
+        "source": 617,
+        "snapshot": 606
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 26,
+        "goal": 1,
+        "field": "item",
+        "source": 4029,
+        "snapshot": 3919
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 26,
+        "goal": 1,
+        "field": "count",
+        "source": 10,
+        "snapshot": 5
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 27,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 27,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 27,
+        "goal": 1,
+        "field": "quest",
+        "source": 606,
+        "snapshot": 349
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 27,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 27,
+        "goal": 1,
+        "field": "item",
+        "source": 3919,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 27,
+        "goal": 1,
+        "field": "count",
+        "source": 5,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 27,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 27,
+        "goal": 2,
+        "field": "quest",
+        "source": 349,
+        "snapshot": 348
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 27,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 27,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 2797
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 27,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 27,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 32,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 28,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 28,
+        "goal": 1,
+        "field": "quest",
+        "source": 349,
+        "snapshot": 606
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 28,
+        "goal": 2,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 28,
+        "goal": 2,
+        "field": "quest",
+        "source": 348,
+        "snapshot": 607
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 28,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 28,
+        "goal": 2,
+        "field": "item",
+        "source": 2797,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 28,
+        "goal": 2,
+        "field": "count",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 28,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          606
+        ]
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 28,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 29,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 29,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 29,
+        "goal": 1,
+        "field": "quest",
+        "source": 606,
+        "snapshot": 609
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 29,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 29,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 3924
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 29,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 29,
+        "goal": 2,
+        "field": "quest",
+        "source": 607,
+        "snapshot": 609
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 29,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 29,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 3925
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 29,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          606
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 29,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 30,
+        "goal": 1,
+        "field": "quest",
+        "source": 609,
+        "snapshot": 621
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 30,
+        "goal": 1,
+        "field": "item",
+        "source": 3924,
+        "snapshot": 4016
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 30,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 12
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 30,
+        "goal": 2,
+        "field": "oi",
+        "source": 2,
+        "snapshot": 3
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 30,
+        "goal": 2,
+        "field": "item",
+        "source": 3925,
+        "snapshot": 3926
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 31,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 31,
+        "goal": 1,
+        "field": "quest",
+        "source": 621,
+        "snapshot": 600
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 31,
+        "goal": 1,
+        "field": "item",
+        "source": 4016,
+        "snapshot": 3917
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 31,
+        "goal": 1,
+        "field": "count",
+        "source": 12,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 32,
+        "goal": 1,
+        "field": "quest",
+        "source": 600,
+        "snapshot": 209
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 32,
+        "goal": 1,
+        "field": "item",
+        "source": 3917,
+        "snapshot": 1524
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 32,
+        "goal": 1,
+        "field": "count",
+        "source": 10,
+        "snapshot": 18
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 33,
+        "goal": 1,
+        "field": "quest",
+        "source": 209,
+        "snapshot": 212
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 33,
+        "goal": 1,
+        "field": "item",
+        "source": 1524,
+        "snapshot": 2476
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 33,
+        "goal": 1,
+        "field": "count",
+        "source": 18,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 34,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 34,
+        "goal": 1,
+        "field": "quest",
+        "source": 212,
+        "snapshot": 705
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 34,
+        "goal": 1,
+        "field": "item",
+        "source": 2476,
+        "snapshot": 4611
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 34,
+        "goal": 1,
+        "field": "count",
+        "source": 1,
+        "snapshot": 9
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 35,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 35,
+        "goal": 1,
+        "field": "quest",
+        "source": 705,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 35,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 35,
+        "goal": 1,
+        "field": "item",
+        "source": 4611,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 35,
+        "goal": 1,
+        "field": "count",
+        "source": 9,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 35,
+        "goal": 2,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 35,
+        "goal": 2,
+        "field": "quest",
+        "source": 611,
+        "snapshot": 622
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 35,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 35,
+        "goal": 2,
+        "field": "item",
+        "source": 4034,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 35,
+        "goal": 2,
+        "field": "count",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 36,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 36,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "hearth"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 36,
+        "goal": 2,
+        "field": "quest",
+        "source": 622,
+        "snapshot": 611
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 1,
+        "field": "t",
+        "source": "hearth",
+        "snapshot": "fly"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "sethome"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 2,
+        "field": "quest",
+        "source": 611,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 3,
+        "field": "quest",
+        "source": 609,
+        "snapshot": 212
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 4,
+        "field": "t",
+        "source": "note",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 4,
+        "field": "quest",
+        "source": null,
+        "snapshot": 1271
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 4,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1222
+        ]
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 4,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 5,
+        "field": "quest",
+        "source": 600,
+        "snapshot": 1271
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 6,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 6,
+        "field": "quest",
+        "source": 621,
+        "snapshot": 1363
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 6,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 37
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 7,
+        "field": "t",
+        "source": "note",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 7,
+        "field": "quest",
+        "source": null,
+        "snapshot": 1363
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 8,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 8,
+        "field": "quest",
+        "source": 209,
+        "snapshot": 1364
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 8,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1363
+        ]
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 37,
+        "goal": 8,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 37
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 38,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 38,
+        "goal": 1,
+        "field": "t",
+        "source": "fly",
+        "snapshot": "train"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 38,
+        "goal": 1,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 38,
+        "goal": 2,
+        "field": "t",
+        "source": "sethome",
+        "snapshot": "vendor"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 38,
+        "goal": 2,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 39,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 39,
+        "goal": 2,
+        "field": "t",
+        "source": "vendor",
+        "snapshot": "note"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 39,
+        "goal": 2,
+        "field": "optional",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 40,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 40,
+        "goal": 2,
+        "field": "t",
+        "source": "note",
+        "snapshot": "vendor"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 40,
+        "goal": 2,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 41,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 41,
+        "goal": 1,
+        "field": "t",
+        "source": "train",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 41,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 1661
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 41,
+        "goal": 1,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          4485,
+          4486
+        ]
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 41,
+        "goal": 1,
+        "field": "optional",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 41,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 40
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 41,
+        "goal": 2,
+        "field": "t",
+        "source": "vendor",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 41,
+        "goal": 2,
+        "field": "quest",
+        "source": null,
+        "snapshot": 1661
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 41,
+        "goal": 2,
+        "field": "optional",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 42,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 42,
+        "goal": 1,
+        "field": "quest",
+        "source": 1661,
+        "snapshot": 4488
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 42,
+        "goal": 1,
+        "field": "closedBy",
+        "source": [
+          4485,
+          4486
+        ],
+        "snapshot": [
+          3631,
+          4487,
+          4489
+        ]
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 43,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 43,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "fly"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 43,
+        "goal": 1,
+        "field": "quest",
+        "source": 4488,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 43,
+        "goal": 1,
+        "field": "closedBy",
+        "source": [
+          3631,
+          4487,
+          4489
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 43,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 40,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 44,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 44,
+        "goal": 1,
+        "field": "t",
+        "source": "fly",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 44,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 624
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 44,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "note"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 44,
+        "goal": 2,
+        "field": "quest",
+        "source": 1398,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 44,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1421
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 44,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 45,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 45,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 45,
+        "goal": 1,
+        "field": "quest",
+        "source": 624,
+        "snapshot": 1364
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 45,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 45,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 6065
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 45,
+        "goal": 2,
+        "field": "t",
+        "source": "note",
+        "snapshot": "complete"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 45,
+        "goal": 2,
+        "field": "quest",
+        "source": null,
+        "snapshot": 1448
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 46,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 46,
+        "goal": 1,
+        "field": "quest",
+        "source": 1364,
+        "snapshot": 1398
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 46,
+        "goal": 1,
+        "field": "item",
+        "source": 6065,
+        "snapshot": 6146
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 46,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 8
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 47,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 47,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 47,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 47,
+        "goal": 1,
+        "field": "item",
+        "source": 6146,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 47,
+        "goal": 1,
+        "field": "count",
+        "source": 8,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 48,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "hearth"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 48,
+        "goal": 1,
+        "field": "quest",
+        "source": 1398,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 48,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 48,
+        "goal": 2,
+        "field": "quest",
+        "source": 1425,
+        "snapshot": 1448
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 48,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          1398
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 48,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 48,
+        "goal": 3,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 48,
+        "goal": 3,
+        "field": "quest",
+        "source": 93176,
+        "snapshot": 1449
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 48,
+        "goal": 3,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          1448
+        ]
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 48,
+        "goal": 3,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 38
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 49,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 49,
+        "goal": 1,
+        "field": "t",
+        "source": "hearth",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 49,
+        "goal": 1,
+        "field": "quest",
+        "source": null,
+        "snapshot": 1467
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 49,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 49,
+        "goal": 2,
+        "field": "quest",
+        "source": 1448,
+        "snapshot": 707
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 49,
+        "goal": 2,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          738
+        ]
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 49,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 49,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 49,
+        "goal": 3,
+        "field": "quest",
+        "source": 1449,
+        "snapshot": 727
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 49,
+        "goal": 3,
+        "field": "pre",
+        "source": [
+          1448
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 49,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 38,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 50,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 50,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "train"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 50,
+        "goal": 1,
+        "field": "quest",
+        "source": 1467,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 50,
+        "goal": 1,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 50,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "vendor"
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 50,
+        "goal": 2,
+        "field": "quest",
+        "source": 707,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 50,
+        "goal": 2,
+        "field": "closedBy",
+        "source": [
+          738
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 50,
+        "goal": 2,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 50,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "step": 51,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 1,
+        "field": "quest",
+        "source": 2988,
+        "snapshot": 2880
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 2,
+        "field": "t",
+        "source": "note",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 2,
+        "field": "quest",
+        "source": null,
+        "snapshot": 2881
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          2880
+        ]
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 2,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 40
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 3,
+        "field": "quest",
+        "source": 2880,
+        "snapshot": 2881
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 3,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 4,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 4,
+        "field": "quest",
+        "source": 2881,
+        "snapshot": 2988
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 4,
+        "field": "pre",
+        "source": [
+          2880
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 4,
+        "field": "optional",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 4,
+        "field": "minLevel",
+        "source": 40,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 5,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "note"
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 5,
+        "field": "quest",
+        "source": 2881,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "step": 14,
+        "goal": 5,
+        "field": "optional",
+        "source": true,
+        "snapshot": null
       },
       {
         "guideID": "forever/alliance/40-50/03-feralas",
@@ -19506,11 +24043,83 @@
             "note": "Comar Villardo espera al norte de Dun Modr por el Puente Thandol; Esenio un corto paseo más al noreste."
           }
         }
+      },
+      {
+        "id": "southshore-coast-return-7",
+        "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+        "revision": 7,
+        "evidence": {
+          "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
+          "reason": "Farren entrega 563 después de 562. El siguiente objetivo de 563 está en Ventormenta. Las tortugas y el circuito del Sindicato se pueden hacer antes de volver a Costasur. Se mantiene el orden de las entregas que abren 514 y 512."
+        }
+      },
+      {
+        "id": "nijels-point-one-return-2",
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "revision": 2,
+        "evidence": {
+          "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/02-desolace.guide",
+          "reason": "1458 y 1437 se aceptan en la primera visita. Los dos objetivos de 1458 están en Sargeron y el cofre de 1437 está fuera del puesto. 1459 y 1438 se aceptan tras sus respectivas entregas y se hacen más tarde."
+        }
+      },
+      {
+        "id": "xavian-shared-satyrs-3",
+        "guideID": "forever/alliance/30-40/03-ashenvale",
+        "revision": 3,
+        "evidence": {
+          "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/03-ashenvale.guide",
+          "reason": "Anilia y Geltharis están en Xavian, con los tres tipos de sátiros de 98418. La primera visita a Satyrnaar y la aceptación de 98418 en Canción del Bosque preceden al combate en Xavian. El otro círculo de 1140 y la cadena de Kayneth mantienen su secuencia."
+        }
+      },
+      {
+        "id": "stranglethorn-snapjaw-and-island-2",
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "revision": 2,
+        "evidence": {
+          "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/04-stranglethorn-vale.guide",
+          "reason": "La piel 4104 se entrega en Bahía del Botín y 577 carece de sucesor en la ruta. Las misiones 213 y 616 no necesitan 577. Krazek y Kebok ya se visitan al entregar 201 y 189. La entrega de 616 al barón desbloquea 578. La siguiente vuelta con piedra de hogar permite entregar la piel."
+        }
+      },
+      {
+        "id": "swamp-caravan-and-galen-3",
+        "guideID": "forever/alliance/30-40/05-arathi-highlands",
+        "revision": 3,
+        "evidence": {
+          "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/05-arathi-highlands.guide",
+          "reason": "El cofre de 1421 (64.46,18.3) está junto a la jaula de Galen (65.47,18.16). Recoger el encargo de Magtoor al salir del oeste permite visitar ambos en la misma salida. La escolta se inicia después del cofre y termina antes de las entregas en el oeste."
+        }
+      },
+      {
+        "id": "desolace-karnitol-final-hearth-3",
+        "guideID": "forever/alliance/30-40/06-badlands",
+        "revision": 3,
+        "evidence": {
+          "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/06-badlands.guide",
+          "reason": "El encargo 1455 del cofre no desbloquea ninguna de las tareas del cementerio ni del sur. El hogar sigue vinculado a Punta de Nijel. Al volver por la cabaña de Kormek la piedra permite entregar 1455 con 1466 y salir en el vuelo previsto."
+        }
+      },
+      {
+        "id": "booty-bay-captains-return-3",
+        "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+        "revision": 3,
+        "evidence": {
+          "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
+          "reason": "La única acción en la visita tras los barcos es la entrega opcional 608. Posponerla hasta la siguiente entrada a Bahía del Botín mantiene las tres muertes, el pergamino y la ruta de los naga y gorilas. 608 no abre ningún encargo posterior del recorrido."
+        }
+      },
+      {
+        "id": "aerie-peak-takeoff-2",
+        "guideID": "forever/alliance/40-50/02-badlands",
+        "revision": 2,
+        "evidence": {
+          "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/02-badlands.guide",
+          "reason": "El acceso desde las aldeas está al este. Fraggar (14.83,44.57) se encuentra por debajo de Garracha (9.75,44.47). El vuelo a Menethil parte de Pico Nidal (11.11,46.09). La repetible 2881 se conserva tras la entrega de 2880."
+        }
       }
     ],
     "authoredTextPresenceLosses": [],
     "sourceStepNotes": 1722,
-    "snapshotStepNotes": 1745
+    "snapshotStepNotes": 1751
   },
   "sourceReadProblems": [],
   "order": {
@@ -20619,13 +25228,13 @@
         },
         {
           "guideID": "forever/alliance/30-40/03-ashenvale",
-          "step": 31,
+          "step": 30,
           "goal": 2,
           "action": "accept",
           "questID": 321,
           "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
-          "sourceLine": 213,
-          "sourceText": "accept 321",
+          "sourceLine": 206,
+          "sourceText": "fly \"Auberdine\"",
           "closedBy": [
             324,
             526
@@ -20905,13 +25514,13 @@
         },
         {
           "guideID": "forever/alliance/30-40/03-ashenvale",
-          "step": 32,
+          "step": 31,
           "goal": 2,
           "action": "accept",
           "questID": 324,
           "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
-          "sourceLine": 218,
-          "sourceText": "accept 324",
+          "sourceLine": 213,
+          "sourceText": "accept 321",
           "closedBy": [
             526
           ],
@@ -21190,13 +25799,13 @@
         },
         {
           "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-          "step": 50,
+          "step": 49,
           "goal": 2,
           "action": "accept",
           "questID": 707,
           "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-          "sourceLine": 428,
-          "sourceText": "accept 707                          -- Prospector Stormpike: for Prospector Ironband in Loch Modan, keep it",
+          "sourceLine": 421,
+          "sourceText": "turnin 1448                         -- Brohann Caskbelly",
           "closedBy": [
             738
           ],
@@ -23934,13 +28543,13 @@
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 35,
+        "step": 34,
         "goal": 1,
         "action": "turnin",
         "questID": 1245,
         "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-        "sourceLine": 295,
-        "sourceText": "turnin 1247",
+        "sourceLine": 289,
+        "sourceText": "accept 690                          -- Archmage Malin",
         "acceptedAt": {
           "guideID": "forever/alliance/07-thousand-needles",
           "step": 17,
@@ -23954,7 +28563,7 @@
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 39,
+        "step": 38,
         "goal": 1,
         "action": "turnin",
         "questID": 293,
@@ -23971,7 +28580,7 @@
       },
       {
         "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-        "step": 39,
+        "step": 38,
         "goal": 2,
         "action": "turnin",
         "questID": 269,
@@ -24017,7 +28626,7 @@
         "sourceText": "turnin 1453                         -- Kreldig Ungor",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 43,
+          "step": 42,
           "goal": 4,
           "action": "accept",
           "questID": 1453
@@ -24025,16 +28634,16 @@
       },
       {
         "guideID": "forever/alliance/30-40/03-ashenvale",
-        "step": 31,
+        "step": 30,
         "goal": 1,
         "action": "turnin",
         "questID": 270,
         "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
-        "sourceLine": 212,
-        "sourceText": "turnin 270",
+        "sourceLine": 205,
+        "sourceText": "hearth \"Astranaar\"",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 39,
+          "step": 38,
           "goal": 3,
           "action": "accept",
           "questID": 270
@@ -24042,16 +28651,13 @@
       },
       {
         "guideID": "forever/alliance/30-40/03-ashenvale",
-        "step": 35,
+        "step": 34,
         "goal": 2,
         "action": "turnin",
         "questID": 1301,
-        "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
-        "sourceLine": 230,
-        "sourceText": "turnin 1301                         -- Vincent Hyal",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 40,
+          "step": 39,
           "goal": 4,
           "action": "accept",
           "questID": 1301
@@ -24059,16 +28665,13 @@
       },
       {
         "guideID": "forever/alliance/30-40/03-ashenvale",
-        "step": 35,
+        "step": 34,
         "goal": 4,
         "action": "turnin",
         "questID": 1248,
-        "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
-        "sourceLine": 232,
-        "sourceText": "turnin 1248                         -- Mikhail",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 41,
+          "step": 40,
           "goal": 2,
           "action": "accept",
           "questID": 1248
@@ -24122,7 +28725,7 @@
         "sourceText": "turnin 525                          -- Magistrate Henry Maleb",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 43,
+          "step": 42,
           "goal": 2,
           "action": "accept",
           "questID": 525
@@ -24139,7 +28742,7 @@
         "sourceText": "turnin 690                          -- Skuerto",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 40,
+          "step": 39,
           "goal": 1,
           "action": "accept",
           "questID": 690
@@ -24212,13 +28815,10 @@
         "sourceText": "turnin 602                          -- Archmage Ansirem Runeweaver",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-          "step": 36,
+          "step": 35,
           "goal": 2,
           "action": "accept",
-          "questID": 602,
-          "sourceFile": "guides/forever/alliance/30-40/04-stranglethorn-vale.guide",
-          "sourceLine": 263,
-          "sourceText": "accept 602                          -- For Archmage Ansirem in Alterac Mountains"
+          "questID": 602
         }
       },
       {
@@ -24232,8 +28832,8 @@
         "sourceText": "turnin 512",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 33,
-          "goal": 7,
+          "step": 32,
+          "goal": 9,
           "action": "accept",
           "questID": 512
         }
@@ -24340,13 +28940,10 @@
         "sourceText": "turnin 1302                         -- Clerk Lendry",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/03-ashenvale",
-          "step": 35,
+          "step": 34,
           "goal": 3,
           "action": "accept",
-          "questID": 1302,
-          "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
-          "sourceLine": 231,
-          "sourceText": "accept 1302"
+          "questID": 1302
         }
       },
       {
@@ -24360,13 +28957,10 @@
         "sourceText": "turnin 1264                         -- Commander Samaul",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/03-ashenvale",
-          "step": 35,
+          "step": 34,
           "goal": 10,
           "action": "accept",
-          "questID": 1264,
-          "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
-          "sourceLine": 238,
-          "sourceText": "accept 1264"
+          "questID": 1264
         }
       },
       {
@@ -24445,13 +29039,13 @@
         },
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
-          "step": 37,
+          "step": 36,
           "goal": 1,
           "action": "accept",
           "questID": 1718,
           "sourceFile": "guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
-          "sourceLine": 308,
-          "sourceText": "turnin 514                          -- Prospector Stormpike, Hall of Explorers",
+          "sourceLine": 301,
+          "sourceText": "train class",
           "stepOnly": {
             "classes": [
               "WARRIOR"
@@ -24470,13 +29064,10 @@
         "sourceText": "turnin 627                          -- Krazek",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-          "step": 34,
-          "goal": 6,
+          "step": 33,
+          "goal": 7,
           "action": "accept",
-          "questID": 627,
-          "sourceFile": "guides/forever/alliance/30-40/04-stranglethorn-vale.guide",
-          "sourceLine": 256,
-          "sourceText": "accept 627                          -- The ore drops from Drywhisker kobolds in Arathi Highlands"
+          "questID": 627
         }
       },
       {
@@ -24521,13 +29112,13 @@
       },
       {
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-        "step": 38,
+        "step": 37,
         "goal": 3,
         "action": "turnin",
         "questID": 212,
         "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-        "sourceLine": 345,
-        "sourceText": "turnin 212                          -- Angus Stern",
+        "sourceLine": 331,
+        "sourceText": "turnin 609                          -- \"Sea Wolf\" MacKinley",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/05-arathi-highlands",
           "step": 12,
@@ -24541,13 +29132,10 @@
       },
       {
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-        "step": 38,
+        "step": 37,
         "goal": 10,
         "action": "turnin",
         "questID": 542,
-        "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-        "sourceLine": 352,
-        "sourceText": "turnin 542                          -- Milton Sheaf, the Royal Library in Stormwind Keep",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/05-arathi-highlands",
           "step": 45,
@@ -24561,13 +29149,10 @@
       },
       {
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-        "step": 48,
+        "step": 47,
         "goal": 3,
         "action": "turnin",
         "questID": 93176,
-        "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-        "sourceLine": 414,
-        "sourceText": "turnin 93176                        -- Amaryllis Webb: My Little Friends, from 30-40/05-arathi-highlands",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/05-arathi-highlands",
           "step": 2,
@@ -24581,33 +29166,30 @@
       },
       {
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-        "step": 50,
+        "step": 49,
         "goal": 1,
         "action": "turnin",
         "questID": 1467,
         "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-        "sourceLine": 427,
-        "sourceText": "turnin 1467                         -- Roetten Stonehammer",
+        "sourceLine": 420,
+        "sourceText": "hearth \"Stormwind City\"",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/06-badlands",
-          "step": 38,
-          "goal": 2,
+          "step": 37,
+          "goal": 5,
           "action": "accept",
-          "questID": 1467,
-          "sourceFile": "guides/forever/alliance/30-40/06-badlands.guide",
-          "sourceLine": 266,
-          "sourceText": "turnin 93224                        -- Captain Pentigast"
+          "questID": 1467
         }
       },
       {
         "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-        "step": 50,
+        "step": 49,
         "goal": 3,
         "action": "turnin",
         "questID": 727,
         "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-        "sourceLine": 429,
-        "sourceText": "turnin 727                          -- Gerrig Bonegrip",
+        "sourceLine": 422,
+        "sourceText": "accept 1449                         -- for Falstad Wildhammer at Aerie Peak: keep it",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/06-badlands",
           "step": 18,
@@ -24650,13 +29232,10 @@
         "sourceText": "turnin 1052                         -- Raleigh the Devout",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/06-badlands",
-          "step": 38,
-          "goal": 5,
+          "step": 37,
+          "goal": 8,
           "action": "accept",
-          "questID": 1052,
-          "sourceFile": "guides/forever/alliance/30-40/06-badlands.guide",
-          "sourceLine": 269,
-          "sourceText": "accept 1052                         -- for Raleigh the Devout in Southshore: keep it"
+          "questID": 1052
         }
       },
       {
@@ -24670,13 +29249,13 @@
         "sourceText": "turnin 1449                         -- Falstad Wildhammer",
         "acceptedAt": {
           "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-          "step": 49,
+          "step": 48,
           "goal": 3,
           "action": "accept",
           "questID": 1449,
           "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-          "sourceLine": 422,
-          "sourceText": "accept 1449                         -- for Falstad Wildhammer at Aerie Peak: keep it"
+          "sourceLine": 414,
+          "sourceText": "turnin 93176                        -- Amaryllis Webb: My Little Friends, from 30-40/05-arathi-highlands"
         }
       },
       {
@@ -24690,13 +29269,10 @@
         "sourceText": "turnin 623                          -- Privateer Groy",
         "acceptedAt": {
           "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-          "step": 29,
-          "goal": 7,
+          "step": 28,
+          "goal": 8,
           "action": "accept",
-          "questID": 623,
-          "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-          "sourceLine": 290,
-          "sourceText": "accept 623                          -- for Privateer Groy in Theramore: keep it"
+          "questID": 623
         }
       },
       {
@@ -24790,13 +29366,10 @@
         "sourceText": "turnin 1477                         -- Watchmaster Sorigal",
         "acceptedAt": {
           "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-          "step": 38,
+          "step": 37,
           "goal": 9,
           "action": "accept",
-          "questID": 1477,
-          "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-          "sourceLine": 351,
-          "sourceText": "accept 1477                         -- High Sorcerer Andromath: for Nethergarde Keep, keep it"
+          "questID": 1477
         }
       },
       {
@@ -24810,13 +29383,13 @@
         "sourceText": "turnin 1364                         -- Watcher Mahar Ba",
         "acceptedAt": {
           "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-          "step": 38,
+          "step": 37,
           "goal": 8,
           "action": "accept",
           "questID": 1364,
           "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-          "sourceLine": 350,
-          "sourceText": "accept 1364"
+          "sourceLine": 336,
+          "sourceText": "turnin 209                          -- Kebok"
         }
       },
       {
@@ -24830,13 +29403,10 @@
         "sourceText": "turnin 1425",
         "acceptedAt": {
           "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-          "step": 48,
+          "step": 47,
           "goal": 2,
           "action": "accept",
-          "questID": 1425,
-          "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-          "sourceLine": 413,
-          "sourceText": "accept 1425                         -- for Nethergarde Keep: keep it"
+          "questID": 1425
         }
       },
       {
@@ -24870,13 +29440,13 @@
         "sourceText": "turnin 707",
         "acceptedAt": {
           "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-          "step": 50,
+          "step": 49,
           "goal": 2,
           "action": "accept",
           "questID": 707,
           "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-          "sourceLine": 428,
-          "sourceText": "accept 707                          -- Prospector Stormpike: for Prospector Ironband in Loch Modan, keep it"
+          "sourceLine": 421,
+          "sourceText": "turnin 1448                         -- Brohann Caskbelly"
         }
       },
       {
@@ -26219,13 +30789,13 @@
         },
         "acceptedAt": {
           "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-          "step": 43,
+          "step": 42,
           "goal": 1,
           "action": "accept",
           "questID": 4488,
           "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-          "sourceLine": 385,
-          "sourceText": "accept 4488                         -- Demisette Cloyce, in the Slaughtered Lamb: Strahad Farsan in Ratchet takes it at the end of the next guide",
+          "sourceLine": 380,
+          "sourceText": "accept 1661                         -- Duthorian Rall, in the Cathedral of Light",
           "stepOnly": {
             "classes": [
               "WARLOCK"
@@ -30410,13 +34980,10 @@
         "occurrences": [
           {
             "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-            "step": 26,
+            "step": 25,
             "goal": 2,
             "action": "accept",
-            "questID": 338,
-            "sourceFile": "guides/forever/alliance/30-40/04-stranglethorn-vale.guide",
-            "sourceLine": 202,
-            "sourceText": "accept 338                          -- Barnil Stonepot"
+            "questID": 338
           },
           {
             "guideID": "forever/horde/30-40/02-stranglethorn-vale",
@@ -30433,23 +35000,17 @@
         "questGoals": [
           {
             "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-            "step": 26,
+            "step": 25,
             "goal": 2,
             "action": "accept",
-            "questID": 338,
-            "sourceFile": "guides/forever/alliance/30-40/04-stranglethorn-vale.guide",
-            "sourceLine": 202,
-            "sourceText": "accept 338                          -- Barnil Stonepot"
+            "questID": 338
           },
           {
             "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-            "step": 31,
+            "step": 30,
             "goal": 5,
             "action": "turnin",
-            "questID": 338,
-            "sourceFile": "guides/forever/alliance/30-40/04-stranglethorn-vale.guide",
-            "sourceLine": 238,
-            "sourceText": "turnin 338"
+            "questID": 338
           },
           {
             "guideID": "forever/horde/30-40/02-stranglethorn-vale",
@@ -30478,15 +35039,12 @@
         "contexts": [
           {
             "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
-            "step": 26,
+            "step": 25,
             "goal": 2,
             "action": "accept",
             "questID": 338,
-            "sourceFile": "guides/forever/alliance/30-40/04-stranglethorn-vale.guide",
-            "sourceLine": 202,
-            "sourceText": "accept 338                          -- Barnil Stonepot",
             "note": "Barnil Jarropetra",
-            "stepNote": "Barnil recoge el Green Hills de Tuercespina: las páginas caen de casi todos los humanoides en la selva. Convierte las páginas en capítulos a medida que avanzas."
+            "stepNote": "Acepta la cacería de panteras de Sir S. J. Erlgadin. Guarda las páginas que encuentres al derrotar humanoides. Si quieres completar el libro de Barnil, activa «Opcionales»."
           },
           {
             "guideID": "forever/horde/30-40/02-stranglethorn-vale",
@@ -31200,12 +35758,12 @@
           {
             "guideID": "forever/alliance/40-50/02-badlands",
             "step": 14,
-            "goal": 4,
+            "goal": 2,
             "action": "accept",
             "questID": 2881,
             "sourceFile": "guides/forever/alliance/40-50/02-badlands.guide",
-            "sourceLine": 119,
-            "sourceText": "accept 2881 optional                -- Fraggar keeps paying for necklaces: hand in any extras",
+            "sourceLine": 117,
+            "sourceText": "note Talonaxe's next task waits for a later Hinterlands guide.",
             "optional": true
           }
         ],
@@ -31213,23 +35771,23 @@
           {
             "guideID": "forever/alliance/40-50/02-badlands",
             "step": 14,
-            "goal": 4,
+            "goal": 2,
             "action": "accept",
             "questID": 2881,
             "sourceFile": "guides/forever/alliance/40-50/02-badlands.guide",
-            "sourceLine": 119,
-            "sourceText": "accept 2881 optional                -- Fraggar keeps paying for necklaces: hand in any extras",
+            "sourceLine": 117,
+            "sourceText": "note Talonaxe's next task waits for a later Hinterlands guide.",
             "optional": true
           },
           {
             "guideID": "forever/alliance/40-50/02-badlands",
             "step": 14,
-            "goal": 5,
+            "goal": 3,
             "action": "turnin",
             "questID": 2881,
             "sourceFile": "guides/forever/alliance/40-50/02-badlands.guide",
-            "sourceLine": 120,
-            "sourceText": "turnin 2881 optional",
+            "sourceLine": 118,
+            "sourceText": "turnin 2880                         -- Fraggar Thundermantle",
             "optional": true
           }
         ],
@@ -31238,14 +35796,27 @@
           {
             "guideID": "forever/alliance/40-50/02-badlands",
             "step": 14,
-            "goal": 4,
+            "goal": 2,
             "action": "accept",
             "questID": 2881,
             "sourceFile": "guides/forever/alliance/40-50/02-badlands.guide",
-            "sourceLine": 119,
-            "sourceText": "accept 2881 optional                -- Fraggar keeps paying for necklaces: hand in any extras",
+            "sourceLine": 117,
+            "sourceText": "note Talonaxe's next task waits for a later Hinterlands guide.",
             "optional": true,
-            "note": "Fraggar sigue pagando por los collares: mano en los extras"
+            "note": "Fraggar sigue pagando por los collares: mano en los extras",
+            "stepNote": "Entrega los collares a Fraggar al entrar en Pico Nidal. Después sube a ver a Garracha y toma el vuelo hacia Puerto de Menethil."
+          },
+          {
+            "guideID": "forever/alliance/40-50/02-badlands",
+            "step": 14,
+            "goal": 3,
+            "action": "turnin",
+            "questID": 2881,
+            "sourceFile": "guides/forever/alliance/40-50/02-badlands.guide",
+            "sourceLine": 118,
+            "sourceText": "turnin 2880                         -- Fraggar Thundermantle",
+            "optional": true,
+            "stepNote": "Entrega los collares a Fraggar al entrar en Pico Nidal. Después sube a ver a Garracha y toma el vuelo hacia Puerto de Menethil."
           }
         ],
         "runtimeRisk": "Un turnin no demuestra que sus objetivos estén terminados; comprobar IsComplete/objetivos reales antes de dirigir exclusivamente al NPC."
@@ -35255,13 +39826,13 @@
         },
         {
           "guideID": "forever/alliance/30-40/03-ashenvale",
-          "step": 31,
+          "step": 30,
           "goal": 2,
           "action": "accept",
           "questID": 321,
           "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
-          "sourceLine": 213,
-          "sourceText": "accept 321",
+          "sourceLine": 206,
+          "sourceText": "fly \"Auberdine\"",
           "closedBy": [
             324,
             526
@@ -35541,13 +40112,13 @@
         },
         {
           "guideID": "forever/alliance/30-40/03-ashenvale",
-          "step": 32,
+          "step": 31,
           "goal": 2,
           "action": "accept",
           "questID": 324,
           "sourceFile": "guides/forever/alliance/30-40/03-ashenvale.guide",
-          "sourceLine": 218,
-          "sourceText": "accept 324",
+          "sourceLine": 213,
+          "sourceText": "accept 321",
           "closedBy": [
             526
           ],
@@ -35826,13 +40397,13 @@
         },
         {
           "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
-          "step": 50,
+          "step": 49,
           "goal": 2,
           "action": "accept",
           "questID": 707,
           "sourceFile": "guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
-          "sourceLine": 428,
-          "sourceText": "accept 707                          -- Prospector Stormpike: for Prospector Ironband in Loch Modan, keep it",
+          "sourceLine": 421,
+          "sourceText": "turnin 1448                         -- Brohann Caskbelly",
           "closedBy": [
             738
           ],
@@ -38308,5 +42879,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "5b1d2603c4e29517d002394a6e53f47514cd88f01941cf07991a97af59e72766"
+  "inputSha256": "0c0d134278c8eabb11ba7b26310fe5ba20801885fb43acc1ea4543b29c4062d5"
 }

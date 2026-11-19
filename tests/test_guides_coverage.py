@@ -19,9 +19,14 @@ spec.loader.exec_module(audit_module)
 # prerequisites, objective indices, item IDs, counts and profession requirements.
 ORIGINAL_SEMANTICS = "46bc091cc7034231f3f7138dc301eaff00126460d6abfe7745a3233ada32350d"
 STOUTFIST_REVISIONS = {"wetlands-old-habits-before-nekrosh-return-6", "wetlands-stoutfist-howin-prerequisites-5"}
+MID_ROUTE_REVISIONS = {
+    "southshore-coast-return-7", "nijels-point-one-return-2", "xavian-shared-satyrs-3",
+    "stranglethorn-snapjaw-and-island-2", "swamp-caravan-and-galen-3",
+    "desolace-karnitol-final-hearth-3", "booty-bay-captains-return-3", "aerie-peak-takeoff-2",
+}
 
 
-def undo_stoutfist_chain(guide, revision):
+def undo_reassembled_steps(guide, revision):
     """Restore all original actions before older independent visit migrations."""
     slots, owners = {}, {}
     for step, entry in zip(guide["steps"], revision["steps"], strict=True):
@@ -35,18 +40,18 @@ def undo_stoutfist_chain(guide, revision):
             if isinstance(ref, dict):
                 added = revision["addedGoals"][ref["added"]]["goal"]
                 if any(goal.get(field) != added.get(field) for field in audit_module.SEMANTIC_FIELDS):
-                    raise AssertionError("Changed Stoutfist addition")
+                    raise AssertionError(f"Changed addition: {revision['id']}")
                 continue
             key = f"{ref[0]}:{ref[1]}"
             if key in slots:
-                raise AssertionError("Repeated Stoutfist source action")
+                raise AssertionError(f"Repeated source action: {revision['id']}")
             owners.setdefault(ref[0], step)
             original = copy.deepcopy(goal)
             for patch in revision.get("goalChanges", []):
                 if all(original.get(k) == v for k, v in patch["match"].items()):
                     for field, value in patch["set"].items():
                         if original.get(field) != value:
-                            raise AssertionError("Changed Stoutfist prerequisite")
+                            raise AssertionError(f"Changed prerequisite: {revision['id']}")
                         previous = revision["originalGoalValues"][key][field]
                         if previous is None:
                             original.pop(field, None)
@@ -59,7 +64,7 @@ def undo_stoutfist_chain(guide, revision):
         step["goals"] = [slots.pop(f"{si}:{gi}") for gi in range(1, count + 1)]
         restored.append(step)
     if slots:
-        raise AssertionError("Unexpected Stoutfist source actions")
+        raise AssertionError(f"Unexpected source actions: {revision['id']}")
     guide["steps"] = restored
 
 
@@ -125,14 +130,25 @@ def original_order(document):
             1441, 31.3, 28.1, "l"):
         raise AssertionError("The verified Forever journal relocation changed")
     journals[0].update(x=30.7, y=24.3, f="e")
+    # Both Forever wanted posters offer 2781. Compare the original Steamwheedle
+    # post with the archived positions after verifying its Gadgetzan replacement.
+    tanaris = next(g for g in result["guides"] if g["id"] == "forever/alliance/40-50/04-tanaris")
+    posters = [q for step in tanaris["steps"] for q in step["goals"]
+               if q.get("quest") == 2781 and q["t"] == "accept"]
+    if len(posters) != 1 or tuple(posters[0].get(k) for k in ("object", "map", "x", "y", "z", "f")) != (
+            150075, 1446, 51.8, 27.0, None, "e"):
+        raise AssertionError("The reviewed Gadgetzan wanted poster changed")
+    posters[0].update(object=142122, x=66.82, y=22.29, z=8)
     revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
     guides = {guide["id"]: guide for guide in result["guides"]}
     for revision in reversed(revisions):
         if revision["id"] == "wetlands-retire-villard-6":
             undo_visit_optimization(guides[revision["guideID"]], revision)
-        elif revision["id"] in STOUTFIST_REVISIONS:
-            undo_stoutfist_chain(guides[revision["guideID"]], revision)
+        elif revision["id"] in STOUTFIST_REVISIONS or revision["id"] in MID_ROUTE_REVISIONS:
+            undo_reassembled_steps(guides[revision["guideID"]], revision)
     for revision in reversed(revisions):
+        if revision["id"] in MID_ROUTE_REVISIONS:
+            continue
         if revision.get("preservePendingVisits") or revision["id"] in {
                 "ashenvale-alliance-retire-alonso-5", "ashenvale-horde-retire-alonso-2", "menethil-theramore-boat-5"}:
             undo_visit_optimization(guides[revision["guideID"]], revision)
@@ -292,7 +308,7 @@ class WholeGuideCoverageTests(unittest.TestCase):
         report = self.report
         self.assertEqual(report["totals"]["guides"], 57)
         self.assertEqual(report["totals"]["goals"], 7455)
-        self.assertEqual(report["totals"]["steps"], 2344)
+        self.assertEqual(report["totals"]["steps"], 2338)
         self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7455)
         self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7455)
         self.assertEqual(sum(report["totals"].get(k, 0) for k in

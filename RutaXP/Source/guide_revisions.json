@@ -14902,6 +14902,1568 @@
           "note": "Comar Villardo espera al norte de Dun Modr por el Puente Thandol; Esenio un corto paseo más al noreste."
         }
       }
+    },
+    {
+      "id": "southshore-coast-return-7",
+      "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
+      "previousRevision": 6,
+      "revision": 7,
+      "sourceShape": "41129b6200777e124914ca9508530b5adcd9c2a87769f75f06262c4c5f8423ec",
+      "resultShape": "9c784c1971609827fb8448bd25d6394a6239bbe28efacea3d99c8bc655c1dd4e",
+      "previousGoalCounts": [
+        1,
+        5,
+        1,
+        2,
+        1,
+        1,
+        2,
+        4,
+        2,
+        3,
+        3,
+        2,
+        2,
+        1,
+        2,
+        4,
+        3,
+        3,
+        2,
+        3,
+        1,
+        13,
+        2,
+        2,
+        1,
+        6,
+        2,
+        2,
+        1,
+        4,
+        2,
+        1,
+        7,
+        1,
+        2,
+        5,
+        1,
+        1,
+        3,
+        4,
+        2,
+        1,
+        6
+      ],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "title": "Entregas en Costasur",
+          "note": "De vuelta del ayuntamiento, visita al capitán McManus y a Farren. Entrega los encargos del pueblo antes del vuelo a Ventormenta.",
+          "goals": [
+            [
+              33,
+              1
+            ],
+            [
+              28,
+              1
+            ],
+            [
+              28,
+              2
+            ],
+            [
+              33,
+              2
+            ],
+            [
+              33,
+              3
+            ],
+            [
+              33,
+              4
+            ],
+            [
+              33,
+              5
+            ],
+            [
+              33,
+              6
+            ],
+            [
+              33,
+              7
+            ]
+          ]
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        }
+      ],
+      "evidence": {
+        "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/01-hillsbrad-foothills.guide",
+        "reason": "Farren entrega 563 después de 562. El siguiente objetivo de 563 está en Ventormenta. Las tortugas y el circuito del Sindicato se pueden hacer antes de volver a Costasur. Se mantiene el orden de las entregas que abren 514 y 512."
+      }
+    },
+    {
+      "id": "nijels-point-one-return-2",
+      "guideID": "forever/alliance/30-40/02-desolace",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "0c171ad03a5ec0a4185994e8eb32885abe6d7b1df87a7994b6f8ece7e7af7092",
+      "resultShape": "6e208c2ef1f32f152eb6ae3076ac7d5a94c1969e8b9014abacd884b750499946",
+      "previousGoalCounts": [
+        1,
+        2,
+        2,
+        1,
+        6,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        5,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        1,
+        1,
+        4
+      ],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 8,
+          "set": {
+            "title": "Cofre de Malem",
+            "note": "Desde Sargeron sigue hacia el oeste hasta el cofre de Malem. Recoge el encargo del cofre antes de subir a Punta de Nijel."
+          }
+        },
+        {
+          "title": "Kreldig y Vahlarriel",
+          "note": "Entrega los componentes a Kreldig y el encargo del cofre a Vahlarriel. Recoge ambas continuaciones antes de dejar Punta de Nijel.",
+          "goals": [
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              9,
+              1
+            ],
+            [
+              9,
+              2
+            ]
+          ]
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        }
+      ],
+      "evidence": {
+        "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/02-desolace.guide",
+        "reason": "1458 y 1437 se aceptan en la primera visita. Los dos objetivos de 1458 están en Sargeron y el cofre de 1437 está fuera del puesto. 1459 y 1438 se aceptan tras sus respectivas entregas y se hacen más tarde."
+      }
+    },
+    {
+      "id": "xavian-shared-satyrs-3",
+      "guideID": "forever/alliance/30-40/03-ashenvale",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "05a28f913c4fbc046d51980301cb1facce621b37b46b8a25794977ab79be1c13",
+      "resultShape": "befd65213b460bc334578369d1adedfbb9980276214391327d25652d7ecaa0f8",
+      "previousGoalCounts": [
+        5,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        3,
+        1,
+        1,
+        2,
+        2,
+        3,
+        1,
+        2,
+        1,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        3,
+        1,
+        1,
+        2,
+        3,
+        2,
+        2,
+        1,
+        1,
+        10
+      ],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 10,
+          "set": {
+            "note": "Sigue la carretera hacia el este hasta Satyrnaar y usa el Círculo de Encarcelamiento antes de continuar a Canción del Bosque."
+          }
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 8,
+          "set": {
+            "title": "Anilia en Xavian",
+            "note": "Desde Canción del Bosque, ve al oeste a Xavian. Habla con Anilia para que te encargue recuperar la rama."
+          }
+        },
+        {
+          "title": "La rama de Geltharis y los sátiros de Xavian",
+          "note": "Busca a Geltharis entre los sátiros. Los tres tipos que pide Maseara están en el mismo campamento. Completa los dos encargos antes de ir al sur a por los druidas.",
+          "goals": [
+            [
+              9,
+              1
+            ],
+            [
+              16,
+              1
+            ],
+            [
+              16,
+              2
+            ],
+            [
+              16,
+              3
+            ]
+          ]
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        }
+      ],
+      "evidence": {
+        "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/03-ashenvale.guide",
+        "reason": "Anilia y Geltharis están en Xavian, con los tres tipos de sátiros de 98418. La primera visita a Satyrnaar y la aceptación de 98418 en Canción del Bosque preceden al combate en Xavian. El otro círculo de 1140 y la cadena de Kayneth mantienen su secuencia."
+      }
+    },
+    {
+      "id": "stranglethorn-snapjaw-and-island-2",
+      "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "f4794afe5a744f3a6ae266d7490a334df47cb47899bdb365758f178cfb0413e9",
+      "resultShape": "3b12143d594550a2029e053953a1bfcd9377e0a6e207543ff1c7a176af3a98e0",
+      "previousGoalCounts": [
+        2,
+        1,
+        1,
+        6,
+        2,
+        4,
+        1,
+        2,
+        5,
+        3,
+        4,
+        7,
+        4,
+        5,
+        2,
+        9,
+        1,
+        1,
+        3,
+        1,
+        1,
+        6,
+        1,
+        5,
+        1,
+        6,
+        2,
+        2,
+        7,
+        4,
+        6,
+        1,
+        1,
+        6,
+        1,
+        2
+      ],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "title": "Encargos de Bahía del Botín",
+          "note": "Entrega los encargos de la primera vuelta. Habla con Krazek y Kebok en la taberna y sube a ver al barón antes de salir hacia el norte.",
+          "goals": [
+            [
+              22,
+              1
+            ],
+            [
+              22,
+              2
+            ],
+            [
+              22,
+              3
+            ],
+            [
+              22,
+              4
+            ],
+            [
+              22,
+              5
+            ],
+            [
+              24,
+              3
+            ],
+            [
+              22,
+              6
+            ],
+            [
+              24,
+              2
+            ],
+            [
+              24,
+              4
+            ],
+            [
+              24,
+              5
+            ]
+          ]
+        },
+        {
+          "sourceStep": 23,
+          "set": {
+            "title": "Piel de crocolisco Quijaforte",
+            "note": "Busca los crocoliscos junto al río. Guarda la piel de Drizzlik y continúa hasta la isla encantada y el campamento de Nesingwary."
+          }
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "title": "Bahía del Botín",
+          "note": "Usa la piedra de hogar y entrega a Drizzlik la piel que guardaste. Después visita al barón, a Kebok y a Krazek.",
+          "goals": [
+            [
+              34,
+              1
+            ],
+            [
+              24,
+              1
+            ],
+            [
+              34,
+              2
+            ],
+            [
+              34,
+              3
+            ],
+            [
+              34,
+              4
+            ],
+            [
+              34,
+              5
+            ],
+            [
+              34,
+              6
+            ]
+          ]
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        }
+      ],
+      "evidence": {
+        "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/04-stranglethorn-vale.guide",
+        "reason": "La piel 4104 se entrega en Bahía del Botín y 577 carece de sucesor en la ruta. Las misiones 213 y 616 no necesitan 577. Krazek y Kebok ya se visitan al entregar 201 y 189. La entrega de 616 al barón desbloquea 578. La siguiente vuelta con piedra de hogar permite entregar la piel."
+      }
+    },
+    {
+      "id": "swamp-caravan-and-galen-3",
+      "guideID": "forever/alliance/30-40/05-arathi-highlands",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "d99253447d2ec244bbc9e559eb536e56ccf0fecead9c0b9b4b15267ba787aafc",
+      "resultShape": "10db99d757df60dfda3c50942ed51be525b46861e23c681578d15982b125e0c5",
+      "previousGoalCounts": [
+        1,
+        2,
+        3,
+        2,
+        1,
+        1,
+        1,
+        3,
+        3,
+        2,
+        1,
+        5,
+        8,
+        1,
+        1,
+        4,
+        7,
+        4,
+        3,
+        1,
+        1,
+        1,
+        5,
+        1,
+        2,
+        4,
+        6,
+        2,
+        1,
+        4,
+        1,
+        2,
+        2,
+        2,
+        2,
+        3,
+        2,
+        3,
+        1,
+        2,
+        4,
+        4,
+        2,
+        5,
+        12,
+        3,
+        3,
+        1
+      ],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 7,
+          "set": {
+            "title": "Magtoor",
+            "note": "Desde Biggs sigue hacia el norte y recoge el encargo de Magtoor antes de adentrarte en el pantano."
+          }
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 5,
+          "set": {
+            "note": "Busca el cofre de la caravana junto al campamento de Galen. Recoge los componentes antes de iniciar la escolta."
+          }
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 6,
+          "set": {
+            "note": "Tras entregar a Magtoor, baja al cruce de Biggs con los componentes de la caravana. Continúa hacia Villa Oscura para tomar el vuelo."
+          }
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        }
+      ],
+      "evidence": {
+        "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/05-arathi-highlands.guide",
+        "reason": "El cofre de 1421 (64.46,18.3) está junto a la jaula de Galen (65.47,18.16). Recoger el encargo de Magtoor al salir del oeste permite visitar ambos en la misma salida. La escolta se inicia después del cofre y termina antes de las entregas en el oeste."
+      }
+    },
+    {
+      "id": "desolace-karnitol-final-hearth-3",
+      "guideID": "forever/alliance/30-40/06-badlands",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "02aa752a4088747e591b354ea98d4b089e07290e6a380075c518dbed7668ae8a",
+      "resultShape": "be04cecf8cd63f43fdd51f91c2997c97beab4473825c42cb555a7d6100bf1a77",
+      "previousGoalCounts": [
+        2,
+        3,
+        1,
+        5,
+        4,
+        3,
+        4,
+        3,
+        1,
+        2,
+        2,
+        4,
+        2,
+        2,
+        4,
+        1,
+        1,
+        2,
+        2,
+        2,
+        4,
+        7,
+        2,
+        1,
+        1,
+        1,
+        3,
+        1,
+        3,
+        1,
+        2,
+        1,
+        3,
+        3,
+        2,
+        1,
+        1,
+        5,
+        1
+      ],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 28,
+          "set": {
+            "note": "Desde la torre de Azore, sigue los caminos hasta la cabaña de Kormek, al este. Bibbly te envía al Cementerio de Kodos."
+          }
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "title": "Regreso a Punta de Nijel",
+          "note": "Usa la piedra de hogar tras entregar a Bibbly. Reúne las entregas de Kreldig, el capitán Pentigast y el hermano Antón antes de volar a Theramore.",
+          "goals": [
+            [
+              27,
+              1
+            ],
+            [
+              27,
+              2
+            ],
+            [
+              27,
+              3
+            ],
+            [
+              38,
+              1
+            ],
+            [
+              38,
+              2
+            ],
+            [
+              38,
+              3
+            ],
+            [
+              38,
+              4
+            ],
+            [
+              38,
+              5
+            ]
+          ]
+        },
+        {
+          "sourceStep": 39
+        }
+      ],
+      "evidence": {
+        "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/06-badlands.guide",
+        "reason": "El encargo 1455 del cofre no desbloquea ninguna de las tareas del cementerio ni del sur. El hogar sigue vinculado a Punta de Nijel. Al volver por la cabaña de Kormek la piedra permite entregar 1455 con 1466 y salir en el vuelo previsto."
+      }
+    },
+    {
+      "id": "booty-bay-captains-return-3",
+      "guideID": "forever/alliance/40-50/01-stranglethorn-vale",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "6dde9c75d01276207cea491b97a0ad86773200de9de036d5c733bdea657823f1",
+      "resultShape": "7198e582742faecbdd9c1468fa875f19c4dfe782809ed0c9c0d063aa4987bc9a",
+      "previousGoalCounts": [
+        4,
+        2,
+        2,
+        4,
+        1,
+        2,
+        3,
+        1,
+        1,
+        2,
+        14,
+        2,
+        3,
+        1,
+        2,
+        5,
+        5,
+        2,
+        16,
+        3,
+        8,
+        5,
+        4,
+        5,
+        1,
+        1,
+        3,
+        2,
+        7,
+        2,
+        2,
+        1,
+        1,
+        1,
+        2,
+        2,
+        8,
+        12,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        3,
+        2,
+        1,
+        3,
+        3,
+        4,
+        2,
+        2
+      ],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "title": "Entregas en Bahía del Botín",
+          "note": "Habla con Trémulo a la entrada del túnel y continúa hacia MacKinley. Si venciste a los tres capitanes, entrega también su encargo durante esta visita al puerto.",
+          "goals": [
+            [
+              29,
+              1
+            ],
+            [
+              29,
+              2
+            ],
+            [
+              29,
+              3
+            ],
+            [
+              29,
+              4
+            ],
+            [
+              29,
+              5
+            ],
+            [
+              25,
+              1
+            ],
+            [
+              29,
+              6
+            ],
+            [
+              29,
+              7
+            ]
+          ]
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        },
+        {
+          "sourceStep": 49
+        },
+        {
+          "sourceStep": 50
+        },
+        {
+          "sourceStep": 51
+        },
+        {
+          "sourceStep": 52
+        }
+      ],
+      "evidence": {
+        "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/01-stranglethorn-vale.guide",
+        "reason": "La única acción en la visita tras los barcos es la entrega opcional 608. Posponerla hasta la siguiente entrada a Bahía del Botín mantiene las tres muertes, el pergamino y la ruta de los naga y gorilas. 608 no abre ningún encargo posterior del recorrido."
+      }
+    },
+    {
+      "id": "aerie-peak-takeoff-2",
+      "guideID": "forever/alliance/40-50/02-badlands",
+      "previousRevision": 1,
+      "revision": 2,
+      "sourceShape": "6881d7dc26b5871a4605da15f59ffd82c4dd27e3e74e10df632da31045234b7a",
+      "resultShape": "4240a879c5ed26809065492c364bc94cea7166579b91635b086234307ef86bdc",
+      "previousGoalCounts": [
+        1,
+        1,
+        1,
+        3,
+        2,
+        1,
+        2,
+        2,
+        1,
+        3,
+        7,
+        2,
+        4,
+        5,
+        2,
+        1,
+        4,
+        1
+      ],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "title": "Entregas en Pico Nidal",
+          "note": "Entrega los collares a Fraggar al entrar en Pico Nidal. Después sube a ver a Garracha y toma el vuelo hacia Puerto de Menethil.",
+          "goals": [
+            [
+              14,
+              3
+            ],
+            [
+              14,
+              4
+            ],
+            [
+              14,
+              5
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              14,
+              2
+            ]
+          ]
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        }
+      ],
+      "evidence": {
+        "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/02-badlands.guide",
+        "reason": "El acceso desde las aldeas está al este. Fraggar (14.83,44.57) se encuentra por debajo de Garracha (9.75,44.47). El vuelo a Menethil parte de Pico Nidal (11.11,46.09). La repetible 2881 se conserva tras la entrega de 2880."
+      }
     }
   ]
 }
