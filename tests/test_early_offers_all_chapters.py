@@ -15,7 +15,7 @@ def future_pickup(host, guide):
             seen.add(goal.quest)
             if (si > 1 and goal.npc and host.ns.earlyQuestOffers[goal.quest]
                     and not host.ns.earlyQuestAlternatives[goal.quest]
-                    and not any((step.only, goal.only, goal.optional, goal.profLine, goal.parent,
+                    and not any((step.only, goal.only, goal.optional, goal.levelingDetour, goal.profLine, goal.parent,
                                  goal.requiresSkill, step.requiresSkill, goal.closedBy))):
                 return si, step, gi, goal
 
@@ -68,6 +68,23 @@ class AllChapterPickupTests(unittest.TestCase):
                 self.assertEqual(state.cursor, 1)
                 state.cursor = si
                 self.assertEqual(h.status(goal, step, state, gi), "done")
+
+    def test_dokimi_early_offer_only_after_finding_the_sealed_crate(self):
+        h = self.host
+        guide_id = "forever/horde/50-60/04-azshara"
+        h.state.faction, h.state.raceToken, h.state.level = "Horde", "Orc", 60
+        h.call("SelectGuide", guide_id)
+        state = h.ns.char.progress[guide_id]
+        state.cursor, state.review = 1, False
+        h.state.offer, h.state.giver = 91899, 256386
+        h.lua.execute("TEST.bags={}; C_Item={GetItemCount=function(id) return TEST.bags[id] or 0 end}")
+        h.call("HandleQuestAutomation", "QUEST_GREETING")
+        self.assertIsNone(h.state.selected)
+        h.state.bags[248765] = 1
+        h.call("HandleQuestAutomation", "QUEST_GREETING")
+        self.assertEqual(h.state.selected, 91899)
+        h.call("HandleQuestAutomation", "QUEST_DETAIL")
+        self.assertTrue(h.call("IsQuestActive", 91899))
 
     def test_earlier_visits_to_remy_and_baine(self):
         h = self.host
