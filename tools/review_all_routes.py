@@ -82,6 +82,9 @@ def local_verdict(goals, stages, group, needed):
         if any(g.get("detourItems") for g in slow):
             return "Si llevas los materiales", "Aprovecha el paso por el personaje cuando tengas lo necesario en la mochila."
         return "Desvío opcional", "La ruta rápida permite seguir con las demás tareas y aprovechar después una entrega lista."
+    after = next((g["soloAfter"] for g in goals if g.get("soloAfter")), None)
+    if after:
+        return "Si hiciste la previa", "Se incorpora al itinerario al entregar " + ", ".join(map(str, after)) + " o si ya llevas el encargo."
     if all(g.get("optional") for g in goals):
         return "Opcional", "El capítulo deja esta tarea a elección del jugador."
     if needed:
@@ -129,10 +132,11 @@ def compare_visit_order(guide, missions, hits):
 
 def make_report():
     if __package__:
-        from . import route_review_horde, route_review_alliance_start, route_review_alliance_late
+        from . import route_review_horde, route_review_alliance_start, route_review_alliance_late, unmatched_solo
     else:
-        import route_review_horde, route_review_alliance_start, route_review_alliance_late
+        import route_review_horde, route_review_alliance_start, route_review_alliance_late, unmatched_solo
     reviews = (route_review_horde, route_review_alliance_start, route_review_alliance_late)
+    solo = unmatched_solo.decisions()
     references = {key: value for module in reviews for key, value in module.REFERENCES.items()}
     notes = {key: value for module in reviews for key, value in module.NOTES.items()}
     doc = load(SOURCE / "leveling.json")
@@ -147,6 +151,7 @@ def make_report():
             findings[row["guideID"], row["questID"]].append(text)
     hits, pages = independent_routes()
     groups = set(map(int, re.findall(r"\[(\d+)\]\s*=\s*true", (ROOT / "RutaXP/GroupQuestData.lua").read_text(encoding="utf8"))))
+    groups.discard(3380)  # The outdoor conversation with Marvon is solo in QuestEngine.
     timing = (ROOT / "RutaXP/EarlyQuestData.lua").read_text(encoding="utf8")
     early = set(map(int, re.findall(r"\[(\d+)\]\s*=\s*true", timing.split("ns.deferredQuestOffers")[0])))
     delayed = dict((int(q), why) for q, why in re.findall(r'\[(\d+)\]\s*=\s*"([^"]+)"', timing.split("ns.deferredQuestOffers = {")[1].split("\n}")[0]))
@@ -239,6 +244,9 @@ def make_report():
             row["evidence"] = evidence_link(evidence["quests"].get(str(qid), {}), evidence["sources"])
             row["decision"], row["reason"] = local_verdict(goals, {s for _,s in row["steps"]},
                 qid in groups or any(g.get("group") for g in goals), row["children"])
+            if qid in solo:
+                case = solo[qid]
+                row["solo"] = [case["policy"], case["reason"], case["url"]]
             editorial = notes.get((gid, qid))
             if editorial:
                 examined_notes.add((gid,qid))
@@ -253,6 +261,9 @@ def make_report():
     unused = set(notes) - examined_notes
     if unused:
         raise ValueError(f"Editorial notes do not match the catalog: {sorted(unused)}")
+    if distinct - matched != solo.keys():
+        raise ValueError(f"Solo decisions do not cover the unmatched set: {sorted((distinct - matched) ^ solo.keys())}")
+    totals["soloReviewed"] = len(solo)
     return {"chapters":chapters, "pages":pages, "totals":dict(totals, distinct=len(distinct), matched=len(matched))}
 
 

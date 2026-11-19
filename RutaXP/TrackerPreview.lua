@@ -199,10 +199,12 @@ function ns:GetTrackerPlannedUpcomingItems(guide,fromCursor,limit)
         if type(state.skipped)=="table" and state.skipped[key]
             or type(state.confirmed)=="table" and state.confirmed[key] then return false end
         local id=questID(goal)
-        if self.GetAuxiliaryGoalStatus and (goal.untilLevel or goal.workForQuest)
+        if goal.offerLimits and id and not status(id).active and self.GetUnavailableOfferReason
+            and self:GetUnavailableOfferReason(goal) then return false end
+        if self.GetAuxiliaryGoalStatus and (goal.untilLevel or goal.workForQuest or goal.starterItem or goal.detourOffers)
             and self:GetAuxiliaryGoalStatus(goal) then return false end
         if self.GetGroupDeferralReason and self:GetGroupDeferralReason(goal,step,guide,gi) then return false end
-        if goal.levelingDetour and self.GetLevelingDetourReason then
+        if (goal.levelingDetour or goal.soloAfter) and self.GetLevelingDetourReason then
             local quest=id or goal.detourQuest
             local q=quest and status(quest)
             if self:GetLevelingDetourReason(goal,q and q.active,q and q.complete) then return false end

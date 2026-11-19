@@ -1,4 +1,4 @@
-# RutaXP 0.7.32 para WoW Forever
+# RutaXP 0.7.33 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,12 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## Misiones para subir en solitario (0.7.33)
+
+Se revisaron individualmente las 223 misiones de RutaXP sin coincidencia en MacQuest, OpenXP o Sage. De ellas, 109 merecen la pena en el recorrido cuando se cumplen sus requisitos, 88 mantienen sus condiciones anteriores y 26 se pueden omitir en solitario. Abre el [informe de las 223 misiones](REVISION_GUIAS.html#revision-223) para consultar cada decisión y su fuente.
+
+En Gadgetzan siguen en ruta las cinco primeras bolsas de agua. La repetición se aprovecha si ya llevas otras cinco. En Gloomrise puedes completar los tres encargos del cementerio juntos y aprovechar el pergamino de la matriarca si ya lo llevas. Activa **Opcionales** si prefieres hacer los desvíos.
 
 ## Revisión del 1 al 60 (0.7.32)
 
@@ -335,7 +341,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.32.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.33.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.

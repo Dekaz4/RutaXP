@@ -35101,6 +35101,18 @@
         "workForObjective": 2
       },
       {
+        "guideID": "forever/alliance/50-60/05-silithus",
+        "step": 22,
+        "goal": 1,
+        "action": "kill",
+        "questID": 5206,
+        "sourceFile": "guides/forever/alliance/50-60/05-silithus.guide",
+        "sourceLine": 207,
+        "sourceText": "kill 8529 optional                  -- Scourge Champion",
+        "optional": true,
+        "workForQuest": 5206
+      },
+      {
         "guideID": "forever/horde/50-60/03-winterspring",
         "step": 5,
         "goal": 3,
@@ -35123,6 +35135,17 @@
         "sourceText": "goto 31.6,36.6 \"Frostfire Winterfall camp\"",
         "workForQuest": 8469,
         "workForObjective": 1
+      },
+      {
+        "guideID": "forever/horde/50-60/05-eastern-plaguelands",
+        "step": 13,
+        "goal": 1,
+        "action": "collect",
+        "questID": 6022,
+        "sourceFile": "guides/forever/horde/50-60/05-eastern-plaguelands.guide",
+        "sourceLine": 129,
+        "sourceText": "collect 15447 x7",
+        "workForQuest": 6022
       }
     ],
     "auxiliaryQuestVisits": [
@@ -35160,6 +35183,66 @@
         "sourceLine": 109,
         "sourceText": "goto 42.2,40.3 \"Third crater\"",
         "workForQuest": 5156,
+        "workVisit": true
+      },
+      {
+        "guideID": "forever/horde/30-40/01-desolace",
+        "step": 37,
+        "goal": 1,
+        "action": "goto",
+        "questID": 515,
+        "sourceFile": "guides/forever/horde/30-40/01-desolace.guide",
+        "sourceLine": 346,
+        "sourceText": "goto 53.0,65.0 \"Daggerspine shore\"",
+        "workForQuest": 515,
+        "workVisit": true
+      },
+      {
+        "guideID": "forever/horde/30-40/01-desolace",
+        "step": 38,
+        "goal": 1,
+        "action": "goto",
+        "questID": 515,
+        "sourceFile": "guides/forever/horde/30-40/01-desolace.guide",
+        "sourceLine": 351,
+        "sourceText": "goto 36.0,68.0 \"Torn Fin beach\"",
+        "workForQuest": 515,
+        "workVisit": true
+      },
+      {
+        "guideID": "forever/horde/40-50/03-feralas",
+        "step": 18,
+        "goal": 1,
+        "action": "goto",
+        "questID": 1172,
+        "sourceFile": "guides/forever/horde/40-50/03-feralas.guide",
+        "sourceLine": 170,
+        "sourceText": "goto 53.4,74.7 \"Dragon caves\"",
+        "workForQuest": 1172,
+        "workVisit": true
+      },
+      {
+        "guideID": "forever/horde/40-50/03-feralas",
+        "step": 22,
+        "goal": 2,
+        "action": "goto",
+        "questID": 3128,
+        "sourceFile": "guides/forever/horde/40-50/03-feralas.guide",
+        "sourceLine": 200,
+        "sourceText": "goto 60.6,47.4 \"Forest walkers\"",
+        "workForQuest": 3128,
+        "workVisit": true
+      },
+      {
+        "guideID": "forever/horde/50-60/05-eastern-plaguelands",
+        "step": 30,
+        "goal": 1,
+        "action": "fly",
+        "questID": 2741,
+        "sourceFile": "guides/forever/horde/50-60/05-eastern-plaguelands.guide",
+        "sourceLine": 232,
+        "sourceText": "fly \"Camp Mojache\"",
+        "workForQuest": 2741,
         "workVisit": true
       }
     ],
@@ -44094,5 +44177,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "9929491ec37dcf8f17c04b6316a9e972c698ce63f3cc2c960e62bedfd2fc173c"
+  "inputSha256": "35dea275f6954cdaf1bfe0820e8512125ca03f04462541cbe4175cf5cc316108"
 }

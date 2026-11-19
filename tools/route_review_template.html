@@ -25,6 +25,7 @@ li{margin:3px 0}.services{margin:15px 0 4px}.hint{max-width:90ch}.method{margin-
 <label>Facción<select id="side"><option value="">Ambas</option><option value="Alliance">Alianza</option><option value="Horde">Horda</option></select></label>
 <label>Capítulo<select id="chapter"><option value="">Todos los capítulos</option></select></label>
 <label>Mostrar<select id="filter"><option value="">Todas las misiones</option><option value="review">Con revisión específica</option>
+<option value="solo">Las 223 revisadas para subir solo</option><option value="detour">Desvíos de esas 223 que puedes saltarte</option>
 <option value="optional">Desvíos y misiones opcionales</option><option value="issues">Requisitos por comprobar</option><option value="missing">Sin coincidencia en los recorridos comparados</option></select></label>
 </section><p id="count" class="count" role="status"></p><div id="list"></div>
 <noscript>Abre el informe en un navegador con JavaScript para consultar el catálogo y sus filtros.</noscript>
@@ -33,6 +34,7 @@ li{margin:3px 0}.services{margin:15px 0 4px}.hint{max-width:90ch}.method{margin-
 const data=JSON.parse(document.getElementById("catalog").textContent);
 const $=id=>document.getElementById(id);
 const names={Alliance:"Alianza",Horde:"Horda"},verbs={A:"aceptar",O:"objetivo",E:"entregar"};
+const soloLabels={keep:"Conservar en la ruta",detour:"Opcional en solitario",existing:"Ya opcional o condicionada"};
 function counted(n,one,many){return n.toLocaleString("es")+" "+(n===1?one:many)}
 function norm(s){return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim()}
 function el(tag,text,cls){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e}
@@ -50,10 +52,11 @@ function options(){
 function line(box,text){if(text)box.append(el("p",text))}
 function mission(q){
  const d=el("details",undefined,"mission"),s=el("summary",q.name+" · "+q.id+"  ");
- s.append(el("span",q.review?q.review[0]:q.decision,"decision"));d.append(s);
+ s.append(el("span",q.solo?soloLabels[q.solo[0]]:q.review?q.review[0]:q.decision,"decision"));d.append(s);
  const box=el("div",undefined,"details");d.append(box);
  d.addEventListener("toggle",()=>{if(!d.open||box.hasChildNodes())return;
-  if(q.review){const p=el("p",q.review[1]+" ","notes");p.append(link(q.review[2],"Fuente de la revisión"));box.append(p)}
+  if(q.solo){const p=el("p",q.solo[1]+" ","notes");p.append(link(q.solo[2],"Comprobar la misión"));box.append(p)}
+  if(q.review&&!q.solo){const p=el("p",q.review[1]+" ","notes");p.append(link(q.review[2],"Fuente de la revisión"));box.append(p)}
   line(box,q.decision+". "+q.reason);
   const actions=el("ol");actions.style.listStyle="none";actions.style.paddingLeft="0";
   q.steps.forEach(([place],i)=>actions.append(el("li",place+" · "+q.instructions[i].replace(/\n/g," "))));
@@ -79,17 +82,18 @@ function mission(q){
 }
 function match(q,c,search,filter){
  if(search&&!norm(c.title).includes(search)&&!norm(q.name).includes(search)&&!String(q.id).includes(search))return false;
- if(filter==="review")return !!q.review;if(filter==="issues")return q.issues.length>0;
+ if(filter==="solo")return !!q.solo;if(filter==="detour")return q.solo?.[0]==="detour";
+ if(filter==="review")return !!(q.review||q.solo);if(filter==="issues")return q.issues.length>0;
  if(filter==="optional")return ["Opcional","Grupo opcional","Si llevas los materiales","Desvío opcional","Según el nivel"].includes(q.decision);
  if(filter==="missing")return q.routes.length===0;return true;
 }
 function render(){
  const list=$("list"),search=norm($("search").value),filter=$("filter").value,selected=$("chapter").value,side=$("side").value;
- list.replaceChildren();let num=0,chapters=0;
+ list.replaceChildren();let num=0,chapters=0;const questIds=new Set();
  for(const c of data.chapters){
   if(selected&&selected!==c.id||side&&side!==c.side)continue;
   const qs=c.quests.filter(q=>match(q,c,search,filter));if(!qs.length)continue;
-  num+=qs.length;chapters++;
+  num+=qs.length;chapters++;for(const q of qs)questIds.add(q.id);
   const d=el("details",undefined,"chapter"),title=el("summary",c.title+"  ");
   title.append(el("span",names[c.side]+" · niveles "+c.levels+" · "+counted(qs.length,"misión","misiones"),"meta"));
   const body=el("div",undefined,"body");d.append(title,body);list.append(d);
@@ -104,9 +108,11 @@ function render(){
   }
   d.addEventListener("toggle",()=>{if(d.open)populate()});if(selected||search){d.open=true;populate()}
  }
- $("count").textContent=counted(chapters,"capítulo","capítulos")+" · "+counted(num,"ficha de misión","fichas de misión");
+ $("count").textContent=counted(chapters,"capítulo","capítulos")+" · "+counted(num,"ficha de misión","fichas de misión")+" · "+counted(questIds.size,"misión distinta","misiones distintas");
  if(!num)list.append(el("p","Prueba con otro nombre o cambia los filtros."));
 }
 $("side").addEventListener("change",()=>{options();render()});for(const id of ["filter","chapter"])$(id).addEventListener("change",render);
-$("search").addEventListener("input",render);options();render();
+$("search").addEventListener("input",render);
+if(location.hash==="#revision-223")$("filter").value="solo";
+options();render();
 </script></body></html>

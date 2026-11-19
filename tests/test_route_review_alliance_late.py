@@ -6,6 +6,7 @@ from pathlib import Path
 import unittest
 
 from tools import route_review_alliance_late as review
+from tools import unmatched_solo
 from tools.guide_instructions import enrich_document
 from tools.route_review_alliance_late_capture import Page
 
@@ -57,6 +58,7 @@ class AllianceLateReview(unittest.TestCase):
         copy["guides"].append(deepcopy(controls))
         review.apply(copy)
         self.assertEqual(copy["guides"][-1], controls)
+        unmatched_solo.apply(copy)
         self.assertEqual(copy["guides"][:-1], self.catalog["guides"])
         self.assertEqual(review.apply(deepcopy(copy)), copy)
 

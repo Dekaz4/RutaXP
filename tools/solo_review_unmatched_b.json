@@ -1,0 +1,418 @@
+{
+  "3123": {
+    "policy": "keep",
+    "reason": "Los diez lechúcicos dan experiencia por las bajas y 4.200 PX base por usar la vasija. La guía ya visita las colinas de Tierras del Interior y regresa al médico brujo en Feralas.",
+    "url": "https://zephras.com/forever/enUS/quest/3123/"
+  },
+  "3124": {
+    "policy": "keep",
+    "reason": "Los diez hipogrifos cuentan al usar la vasija en sus cadáveres. Es una cacería de enemigos normales con 4.200 PX base y deja abierta la captura de dragones feéricos.",
+    "url": "https://zephras.com/forever/enUS/quest/3124/"
+  },
+  "3125": {
+    "policy": "keep",
+    "reason": "Los ocho dragones feéricos se cazan en el bosque al oeste del Campamento Mojache. La distancia a Uzer'i es corta y la captura vale 3.900 PX base además de las bajas.",
+    "url": "https://zephras.com/forever/enUS/quest/3125/"
+  },
+  "3126": {
+    "policy": "detour",
+    "reason": "Hay que localizar tres antárboles errantes dispersos por los caminos y volver a Uzer'i. La siguiente etapa busca gigantes y la recompensa final exige además la larga recolección de materiales.",
+    "url": "https://zephras.com/forever/enUS/quest/3126/"
+  },
+  "3127": {
+    "policy": "existing",
+    "reason": "Hay que capturar siete gigantes. La reducción de Zorbin puede facilitar los combates en la costa si ya llevas su aparato. Se conserva la elección de grupo para preparar ese viaje.",
+    "url": "https://zephras.com/forever/enUS/quest/3127/"
+  },
+  "3128": {
+    "policy": "detour",
+    "reason": "Pide dos troncos, seis minerales, veinte tendones y cuarenta fragmentos. Obliga a buscar varias especies en Feralas y su principal continuación es la recompensa que también exige los gigantes.",
+    "url": "https://zephras.com/forever/enUS/quest/3128/"
+  },
+  "3129": {
+    "policy": "keep",
+    "reason": "Cuando hayas entregado los materiales y los espíritus de gigantes, espera con Uzer'i. Son 4.700 PX base y un arma a elegir en la misma conversación. No hace falta salir otra vez de Mojache.",
+    "url": "https://zephras.com/forever/enUS/quest/3129/"
+  },
+  "3380": {
+    "policy": "keep",
+    "reason": "Este primer encargo termina al hablar con Marvon al aire libre en Tanaris. Se recoge durante la visita a Uzer'i en Mojache y se entrega al pasar por el Pilar Partido camino de Un'Goro. La entrada en la mazmorra llega en encargos posteriores.",
+    "url": "https://zephras.com/forever/enUS/quest/3380/"
+  },
+  "3381": {
+    "policy": "existing",
+    "reason": "Las dos plumas abren el transporte de Sanath en Azshara. Es útil para visitar la torre, pero buscar hipogrifos solo para este acceso añade una parada a ambas facciones.",
+    "url": "https://zephras.com/forever/enUS/quest/3381/"
+  },
+  "3504": {
+    "policy": "keep",
+    "reason": "Recoge la carta en Orgrimmar cuando ya estás con los entrenadores. Se entrega en Valormok al mismo tiempo que los pagos para Jediga y abre la investigación de Rimtori.",
+    "url": "https://zephras.com/forever/enUS/quest/3504/"
+  },
+  "3505": {
+    "policy": "keep",
+    "reason": "Las dos clases de elfos de sangre y el tomo están en el mismo campamento. Puedes eliminar enemigos de uno en uno y recoger allí mismo el encargo sobre Rimtori.",
+    "url": "https://zephras.com/forever/enUS/quest/3505/"
+  },
+  "3506": {
+    "policy": "keep",
+    "reason": "Ya estás junto al tomo cuando recibes el encargo. El cristal y la maga están en el campamento y la cabeza se entrega al regresar a Valormok.",
+    "url": "https://zephras.com/forever/enUS/quest/3506/"
+  },
+  "3507": {
+    "policy": "keep",
+    "reason": "Ag'tor te envía de vuelta a Belgrom. El siguiente tramo ya vuela a Orgrimmar y permite cobrar el cierre de la cadena sin otra salida de combate.",
+    "url": "https://zephras.com/forever/enUS/quest/3507/"
+  },
+  "3562": {
+    "policy": "keep",
+    "reason": "Acepta el pago durante la visita a Cima del Trueno y llévalo a Jediga cuando pases por Valormok. La entrega coincide con otros pagos y figura con 6.350 PX base.",
+    "url": "https://zephras.com/forever/enUS/quest/3562/"
+  },
+  "3563": {
+    "policy": "keep",
+    "reason": "Recoge la nota de Jes'rimon durante la visita a Orgrimmar. Se entrega a Jediga junto con el pago de Magatha en Azshara por otros 6.350 PX base.",
+    "url": "https://zephras.com/forever/enUS/quest/3563/"
+  },
+  "3721": {
+    "policy": "existing",
+    "reason": "Oglethorpe entrega el pollo mecánico después de completar las tres escoltas OOX. Si ya llevas las tres, puedes cobrar en Bahía del Botín. Buscar y escoltar los tres robots solo por la mascota añade varios viajes.",
+    "url": "https://zephras.com/forever/enUS/quest/3721/"
+  },
+  "3761": {
+    "policy": "keep",
+    "reason": "Puedes reunir las veinte muestras de tierra al recoger los cristales de Un'Goro y llevarlas a Ghede en la visita prevista a Cima del Trueno. Esta primera entrega vale 4.700 PX base.",
+    "url": "https://zephras.com/forever/enUS/quest/3761/"
+  },
+  "3782": {
+    "policy": "keep",
+    "reason": "Tras entregar la tierra, Hamuul te manda con el vale de semillas a Bashana en el mismo Alto de los Ancestros. El encargo termina antes de empezar a cultivar.",
+    "url": "https://zephras.com/forever/enUS/quest/3782/"
+  },
+  "3784": {
+    "policy": "keep",
+    "reason": "Acepta el recado del tabernero en Entrañas. La visita prevista a Hamuul en Cima del Trueno permite cobrarlo y recoger el encargo de tierra de Un'Goro al pasar.",
+    "url": "https://zephras.com/forever/enUS/quest/3784/"
+  },
+  "3785": {
+    "policy": "existing",
+    "reason": "Para la primera investigación en Darnassus hay que sacar diez muestras de mañagrana con semillas, tierra y la faltriquera. La producción tiene resultado variable y se mantiene a elección del jugador.",
+    "url": "https://zephras.com/forever/enUS/quest/3785/"
+  },
+  "3786": {
+    "policy": "detour",
+    "reason": "Bashana pide diez mañagranas. La faltriquera consume semillas y dos muestras de tierra por intento y el resultado varía. El cultivo puede hacerse en paralelo si eliges esta rama.",
+    "url": "https://zephras.com/forever/enUS/quest/3786/"
+  },
+  "3803": {
+    "policy": "existing",
+    "reason": "Mathrengyl pide otras diez mañagranas tras la primera investigación. La repetición da 560 PX base y un alijo. Compensa si ya llevas el excedente a Darnassus.",
+    "url": "https://zephras.com/forever/enUS/quest/3803/"
+  },
+  "3804": {
+    "policy": "detour",
+    "reason": "Bashana acepta un segundo lote de diez mañagranas por 560 PX base y un alijo. Aprovecha la visita a Cima del Trueno si ya llevas el lote completo.",
+    "url": "https://zephras.com/forever/enUS/quest/3804/",
+    "materials": {
+      "11040": 10
+    }
+  },
+  "3821": {
+    "policy": "keep",
+    "reason": "Sha'ni se encuentra en Roca Machacamiedo durante la salida a las Estepas Ardientes. Localizarla da 5.100 PX base y permite recoger su siguiente encargo en el mismo sitio.",
+    "url": "https://zephras.com/forever/enUS/quest/3821/"
+  },
+  "3822": {
+    "policy": "keep",
+    "reason": "Una vez en las cuevas de Sha'ni, busca a Krom'Grul para recuperar su aro. El regreso a Kargath ya incluye la entrega de fragmentos. El aro de recompensa aporta 10 de aguante.",
+    "url": "https://zephras.com/forever/enUS/quest/3822/"
+  },
+  "3961": {
+    "policy": "keep",
+    "reason": "J. D. Collie y Linken están en el Refugio de Marshal. Después de entregar el tótem, llévalo a Linken en la misma visita por 2.700 PX base adicionales.",
+    "url": "https://zephras.com/forever/enUS/quest/3961/"
+  },
+  "4005": {
+    "policy": "keep",
+    "reason": "Ya se pasa por Tanaris y el Refugio de Marshal. Usa el libro en el círculo de la península y permanece allí mientras Aquementas transforma los componentes. El objetivo es obtener el tótem.",
+    "url": "https://zephras.com/forever/enUS/quest/4005/"
+  },
+  "4061": {
+    "policy": "keep",
+    "reason": "Los fragmentos de los gólems se recogen durante la visita a la excavación de Thaurissan. La entrega coincide en Kargath con la del aro de Sha'ni.",
+    "url": "https://zephras.com/forever/enUS/quest/4061/"
+  },
+  "4084": {
+    "policy": "keep",
+    "reason": "Las garras se pueden empezar al pasar junto a los osos y lobos de Frondavil. Completa el corazón con los antárboles de Troncoferro y vuelve con Eridan junto con los otros encargos del santuario.",
+    "url": "https://zephras.com/forever/enUS/quest/4084/"
+  },
+  "4120": {
+    "policy": "keep",
+    "reason": "Los doce osos y doce lobos son enemigos normales en el recorrido de Frondavil. La cacería suma experiencia por cada baja y 5.100 PX base al volver por Feralas.",
+    "url": "https://zephras.com/forever/enUS/quest/4120/"
+  },
+  "4300": {
+    "policy": "keep",
+    "reason": "Consigue ocho garras de ravasaurio mientras haces las cacerías de Un'Goro. Jes'rimon recibe el encargo en la visita a Orgrimmar y ofrece, entre las recompensas, un anillo.",
+    "url": "https://zephras.com/forever/enUS/quest/4300/"
+  },
+  "4494": {
+    "policy": "keep",
+    "reason": "El informe de Orgrimmar se entrega al alquimista en la parada de Gadgetzan. Allí abre el siguiente trabajo de los silítidos, que la guía ya hace en Un'Goro.",
+    "url": "https://zephras.com/forever/enUS/quest/4494/"
+  },
+  "4521": {
+    "policy": "detour",
+    "reason": "Treinta lechubestias repartidas entre dos poblaciones y una entrega posterior en Frondavil son mucho combate para una sola misión. Se puede elegir para complementar las bajas en Cuna del Invierno.",
+    "url": "https://zephras.com/forever/enUS/quest/4521/"
+  },
+  "4542": {
+    "policy": "keep",
+    "reason": "Recoge el mensaje en lo alto del Gran Elevador y entrégalo al registrar el vuelo de Poblado Viento Libre. Ambas paradas forman parte del acceso a Las Mil Agujas.",
+    "url": "https://zephras.com/forever/enUS/quest/4542/"
+  },
+  "4741": {
+    "policy": "detour",
+    "reason": "Tras las primeras treinta bajas, Trull pide otras trece lechubestias lunadón en Cuna del Invierno. Ocupan una parada propia y se vuelve a informar a Frondavil.",
+    "url": "https://zephras.com/forever/enUS/quest/4741/"
+  },
+  "4881": {
+    "policy": "detour",
+    "reason": "Los centauros Galak ya forman parte de la ruta. Si cae la nota de asesinato, ábrela al pasar y avisa a Kanati durante la visita al campamento. Buscar al mensajero solo por la nota consume tiempo.",
+    "url": "https://zephras.com/forever/enUS/quest/4881/",
+    "materials": {
+      "12564": 1
+    }
+  },
+  "4966": {
+    "policy": "keep",
+    "reason": "Si ya avisaste a Kanati, la defensa comienza y termina en su campamento. Resuelve el ataque con él y elige equipo, incluidos unos brazales de cuero con 5 de agilidad.",
+    "url": "https://zephras.com/forever/enUS/quest/4966/"
+  },
+  "4973": {
+    "policy": "detour",
+    "reason": "Esta es la repetición después de los primeros relojes de Cromi. Volver a registrar los escombros de Andorhal en busca de otros cinco da solo 580 PX base y otro amortiguador.",
+    "url": "https://zephras.com/forever/enUS/quest/4973/"
+  },
+  "5086": {
+    "policy": "existing",
+    "reason": "Donova pide tres gotitas de horrores tóxicos de Frondavil. La siguiente visita a Cuna del Invierno permite entregarlas si elegiste hacer la cacería.",
+    "url": "https://zephras.com/forever/enUS/quest/5086/"
+  },
+  "5087": {
+    "policy": "existing",
+    "reason": "Los corredores Nevada recorren los caminos con el cajón. Se conserva como encuentro opcional para quien los cruce, porque salir a buscarlos o esperar la patrulla puede alargar la visita.",
+    "url": "https://zephras.com/forever/enUS/quest/5087/"
+  },
+  "5094": {
+    "policy": "keep",
+    "reason": "La salida de Entrañas ya pasa por El Baluarte. El mensaje al sumo ejecutor se entrega al recoger los encargos de la zona.",
+    "url": "https://zephras.com/forever/enUS/quest/5094/"
+  },
+  "5096": {
+    "policy": "keep",
+    "reason": "Quemar la tienda de mando y plantar el estandarte en un mismo campamento abre los calderos de Vandis. Esta rama permite avanzar con tareas individuales en las granjas.",
+    "url": "https://zephras.com/forever/enUS/quest/5096/"
+  },
+  "5098": {
+    "policy": "existing",
+    "reason": "Hay que marcar las puertas de cuatro atalayas en Andorhal, con enemigos alrededor de los accesos. La ruta conserva la selección de grupo y admite que vuelvas a entregar si ya marcaste las cuatro.",
+    "url": "https://zephras.com/forever/enUS/quest/5098/"
+  },
+  "5168": {
+    "policy": "existing",
+    "reason": "El tratado y el escudo están en dos puntos distintos de las Tierras de la Peste. Se conserva la selección de grupo para esta rama de Villa Darrow y la entrega de las reliquias si ya las tienes.",
+    "url": "https://zephras.com/forever/enUS/quest/5168/"
+  },
+  "5206": {
+    "policy": "detour",
+    "reason": "Tras las reliquias de Villa Darrow hay que volver a salir de la capilla y usar el cristal para conseguir cinco calaveras de los campeones de la Plaga de nivel alto. Esta salida abre el tramo final de la batalla de Villa Darrow.",
+    "url": "https://zephras.com/forever/enUS/quest/5206/"
+  },
+  "5218": {
+    "policy": "existing",
+    "reason": "Es la repetición del caldero de Piedramácula. Consume seis agitadores óseos, paño y un acelerador por 530 PX base. La primera muestra del caldero pertenece a otra misión.",
+    "url": "https://zephras.com/forever/enUS/quest/5218/"
+  },
+  "5221": {
+    "policy": "existing",
+    "reason": "Esta recarga del Llanto de Dalson gasta cinco intensificadores, paño y un acelerador para obtener 560 PX base. El recorrido rápido ya permite pasar a la siguiente granja.",
+    "url": "https://zephras.com/forever/enUS/quest/5221/"
+  },
+  "5224": {
+    "policy": "existing",
+    "reason": "En El Tormento la recarga vuelve a gastar intensificadores, paño y un acelerador por 560 PX base. Se conserva la elección para quien quiera la repetición de reputación.",
+    "url": "https://zephras.com/forever/enUS/quest/5224/"
+  },
+  "5228": {
+    "policy": "keep",
+    "reason": "Derrington y Vandis están juntos en El Baluarte. Hablar con los dos al entregar «Distracción Escarlata» abre la serie de muestras en las granjas.",
+    "url": "https://zephras.com/forever/enUS/quest/5228/"
+  },
+  "5229": {
+    "policy": "keep",
+    "reason": "El señor del caldero, su llave y la botella se resuelven en Campo de Piedramácula, donde el capítulo ya hace los encargos de Janice. La primera muestra da 5.250 PX base.",
+    "url": "https://zephras.com/forever/enUS/quest/5229/"
+  },
+  "5230": {
+    "policy": "keep",
+    "reason": "Lleva la primera botella llena a Vandis en la siguiente vuelta a El Baluarte. Allí cobras y recoges la misión del caldero de Dalson.",
+    "url": "https://zephras.com/forever/enUS/quest/5230/"
+  },
+  "5231": {
+    "policy": "keep",
+    "reason": "El señor del caldero y la botella del Llanto de Dalson están en la misma granja. Es la primera muestra, con 5.650 PX base, y se completa usando la llave junto al caldero.",
+    "url": "https://zephras.com/forever/enUS/quest/5231/"
+  },
+  "5402": {
+    "policy": "existing",
+    "reason": "Veinte piedras de esbirro dan una ficha del Alba Argenta y 560 PX base. Aprovecha las piedras reunidas durante las bajas del recorrido y la visita al oficial Purocorazón.",
+    "url": "https://zephras.com/forever/enUS/quest/5402/"
+  },
+  "5403": {
+    "policy": "existing",
+    "reason": "Se necesitan diez piedras de invasor para Purocorazón. Si ya están en las bolsas, la entrega añade una ficha y 560 PX base en la misma visita que la de las piedras de esbirro.",
+    "url": "https://zephras.com/forever/enUS/quest/5403/"
+  },
+  "5405": {
+    "policy": "keep",
+    "reason": "Garush entrega la Comisión del Alba Argenta en El Baluarte. Equiparla permite recoger piedras durante las misiones que ya combaten a la Plaga.",
+    "url": "https://zephras.com/forever/enUS/quest/5405/"
+  },
+  "5407": {
+    "policy": "existing",
+    "reason": "Garush acepta diez piedras de invasor. La ruta ya comprueba el lote en la mochila antes de dedicar una parada a esa ficha de reputación.",
+    "url": "https://zephras.com/forever/enUS/quest/5407/"
+  },
+  "5408": {
+    "policy": "existing",
+    "reason": "La entrega de Garush exige veinte piedras de esbirro y da 560 PX base. Conserva las que caigan por el camino y cobra al volver a El Baluarte con el lote.",
+    "url": "https://zephras.com/forever/enUS/quest/5408/"
+  },
+  "5509": {
+    "policy": "existing",
+    "reason": "El duque de la Capilla de la Esperanza de la Luz acepta diez piedras de invasor. La parada coincide con otras entregas de la Plaga cuando ya tienes esas diez.",
+    "url": "https://zephras.com/forever/enUS/quest/5509/"
+  },
+  "5510": {
+    "policy": "existing",
+    "reason": "Para entregar piedras de esbirro en la capilla se necesitan veinte. La ficha y los 560 PX base se aprovechan al regresar con el lote recogido en las misiones de la zona.",
+    "url": "https://zephras.com/forever/enUS/quest/5510/"
+  },
+  "5527": {
+    "policy": "keep",
+    "reason": "El relicario está en las ruinas de Viento del Sur, en Silithus. Entrégalo a Rabine durante el regreso previsto a Claro de la Luna. Aporta 6.600 PX base y coincide con la entrega del encargo de Umber.",
+    "url": "https://zephras.com/forever/enUS/quest/5527/"
+  },
+  "5635": {
+    "policy": "keep",
+    "reason": "La visita a la instructora de Villadorada permite recoger el encargo de Oración desesperada si lo ofrece. La guía pasa después por Laurena en Ventormenta. Una curación de emergencia aporta valor durante el resto del leveo del sacerdote.",
+    "url": "https://zephras.com/forever/enUS/quest/5635/"
+  },
+  "5637": {
+    "policy": "keep",
+    "reason": "El sacerdote enano ya visita a Maxan en Kharanos y a Laurena durante el recorrido por las capitales. Aprovecha esas conversaciones para el encargo de Oración desesperada.",
+    "url": "https://zephras.com/forever/enUS/quest/5637/"
+  },
+  "5646": {
+    "policy": "keep",
+    "reason": "Es un encargo de sacerdote no muerto entre Ur'kyo y Aelthalyste. Se puede llevar desde Orgrimmar hasta la visita prevista a Entrañas para la instrucción racial.",
+    "url": "https://zephras.com/forever/enUS/quest/5646/"
+  },
+  "5673": {
+    "policy": "keep",
+    "reason": "La sacerdotisa elfa de la noche puede llevar el aviso de Laurena a Alathea al pasar por Darnassus. Aprovecha dos visitas previstas para la instrucción de Gracia de Elune.",
+    "url": "https://zephras.com/forever/enUS/quest/5673/"
+  },
+  "5680": {
+    "policy": "keep",
+    "reason": "El sacerdote trol resuelve el encargo de Guardia de las Sombras con Ur'kyo en Orgrimmar. El interés está en la habilidad y la visita coincide con el instructor.",
+    "url": "https://zephras.com/forever/enUS/quest/5680/"
+  },
+  "5901": {
+    "policy": "keep",
+    "reason": "Llena la jarra usando los montículos del camino al este de Valle del Terror. Las cien termitas se recogen por montículos y la entrega coincide con los otros encargos de El Baluarte.",
+    "url": "https://zephras.com/forever/enUS/quest/5901/"
+  },
+  "5902": {
+    "policy": "keep",
+    "reason": "Lleva el barril al aserradero de Crestanorte al pasar por las granjas. Allí entregas y recoges la etapa de regreso en el mismo barril.",
+    "url": "https://zephras.com/forever/enUS/quest/5902/"
+  },
+  "5926": {
+    "policy": "keep",
+    "reason": "La tabernera remite al druida a Turak en el Alto de los Ancestros. Durante esa visita se recoge la siguiente instrucción de clase, importante para el leveo del druida.",
+    "url": "https://zephras.com/forever/enUS/quest/5926/"
+  },
+  "5941": {
+    "policy": "keep",
+    "reason": "Si ya reuniste las calaveras, lleva las reliquias a Cromi en la siguiente visita a Andorhal. Esta entrega de 3.300 PX base termina antes de la batalla grupal.",
+    "url": "https://zephras.com/forever/enUS/quest/5941/"
+  },
+  "6022": {
+    "policy": "detour",
+    "reason": "En el Cruce de Corin hay que reunir siete piezas de podredumbre viva antes de que caduquen a los diez minutos y molerlas. Si vas solo y no salen a tiempo, repetir las bajas retrasa el resto del recorrido.",
+    "url": "https://zephras.com/forever/enUS/quest/6022/"
+  },
+  "6029": {
+    "policy": "keep",
+    "reason": "Recoge el informe en Vista Eterna entre los demás encargos y entrégalo a Garush cuando la ruta llegue a El Baluarte. Vale 2.550 PX base sin bajas adicionales.",
+    "url": "https://zephras.com/forever/enUS/quest/6029/"
+  },
+  "6031": {
+    "policy": "existing",
+    "reason": "Meilosh exige reputación amistosa con los Fauces de Madera y treinta paños rúnicos. La entrega de equipo se mantiene para quien alcance esa reputación y ya disponga del paño.",
+    "url": "https://zephras.com/forever/enUS/quest/6031/"
+  },
+  "6065": {
+    "policy": "keep",
+    "reason": "Kary remite al cazador a Yaw en el Poblado Pezuña de Sangre, donde comienza la instrucción para domesticar bestias. La mascota facilita el resto de la subida en solitario.",
+    "url": "https://zephras.com/forever/enUS/quest/6065/"
+  },
+  "6141": {
+    "policy": "keep",
+    "reason": "El hermano Cuerviz se visita con los demás encargos de Ventormenta y el hermano Antón está en la parada de Punta de Nijel. La carta se entrega al llegar a Desolace.",
+    "url": "https://zephras.com/forever/enUS/quest/6141/"
+  },
+  "6390": {
+    "policy": "keep",
+    "reason": "Tras colocar el barril en Crestanorte, se informa a Mickey en El Baluarte al final del recorrido. Cierra la cadena de las termitas por 5.650 PX base con la vuelta ya prevista.",
+    "url": "https://zephras.com/forever/enUS/quest/6390/"
+  },
+  "6504": {
+    "policy": "existing",
+    "reason": "El manual exige doce páginas distintas repartidas en tres capítulos. Entregarlo con los capítulos completos aprovecha la visita a Gurda. Perseguir las páginas que falten puede requerir muchas más bajas.",
+    "url": "https://zephras.com/forever/enUS/quest/6504/"
+  },
+  "6543": {
+    "policy": "keep",
+    "reason": "Los tres informes coinciden con la ruta por Vallefresno y con el registro del vuelo en Zoram'gar. Entrégalos a Kadrak cuando el camino vuelva al sur hacia Los Baldíos.",
+    "url": "https://zephras.com/forever/enUS/quest/6543/"
+  },
+  "6605": {
+    "policy": "keep",
+    "reason": "Harlo entrega el recado mientras recoges otras misiones en Vista Eterna. Winna lo recibe en el puesto de Frondavil por el que ya pasa la ruta.",
+    "url": "https://zephras.com/forever/enUS/quest/6605/"
+  },
+  "7261": {
+    "policy": "existing",
+    "reason": "La audiencia con Haggerdin está fuera del Valle de Alterac. Exige apartarse desde Forjaz hacia la entrada del campo de batalla, un viaje ya marcado como opcional en la ruta rápida.",
+    "url": "https://zephras.com/forever/enUS/quest/7261/"
+  },
+  "7725": {
+    "policy": "existing",
+    "reason": "La repetición de Zorbin pide otros diez residuos de gigantes reducidos por 560 PX base. Aprovecha los residuos que ya llevas o que caigan al hacer los muisek.",
+    "url": "https://zephras.com/forever/enUS/quest/7725/"
+  },
+  "7726": {
+    "policy": "existing",
+    "reason": "Zorbin vuelve a pedir seis núcleos de los elementales de la costa por 560 PX base. La entrega se aprovecha con los núcleos disponibles cuando ya pasas por el embarcadero.",
+    "url": "https://zephras.com/forever/enUS/quest/7726/"
+  },
+  "7738": {
+    "policy": "existing",
+    "reason": "La piel perfecta es un objeto que inicia misión. Si cae mientras cazas yetis para «Calidad mejorada», llévala a Jangdor durante la misma vuelta al Campamento Mojache.",
+    "url": "https://zephras.com/forever/enUS/quest/7738/"
+  }
+}

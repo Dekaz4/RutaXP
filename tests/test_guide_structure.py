@@ -184,7 +184,8 @@ class GuideStructureAuditTests(unittest.TestCase):
                           coverage["sourceQuestsWithoutObjectives"]), (958, 841, 793))
         self.assertTrue({93176, 98059}.isdisjoint(coverage["sourceQuestIDsWithoutObjectives"]))
         self.assertEqual({e["workForObjective"] for e in coverage["auxiliaryQuestWork"] if e["questID"] == 93176}, {1, 2, 3})
-        self.assertEqual([e["questID"] for e in coverage["auxiliaryQuestVisits"]], [5156] * 3)
+        self.assertCountEqual([e["questID"] for e in coverage["auxiliaryQuestVisits"]],
+                              [5156] * 3 + [515, 515, 1172, 3128, 2741])
         self.assertEqual(coverage["unknownQuestIDs"], [])
         self.assertNotIn("needs_manual_review", coverage["classifications"])
         cases = {case["questID"]: case for case in coverage["cases"]}

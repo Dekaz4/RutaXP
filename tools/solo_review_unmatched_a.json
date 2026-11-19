@@ -1,0 +1,384 @@
+{
+  "2": {
+    "policy": "detour",
+    "reason": "Garrafilada patrulla al sureste del campamento y es el trofeo de mayor nivel de los tres. Aprovecha la garra si la consigues al pasar. Buscar a la criatura a propósito queda en Opcionales.",
+    "url": "https://zephras.com/forever/enUS/quest/2/",
+    "materials": {
+      "16305": 1
+    }
+  },
+  "17": {
+    "policy": "existing",
+    "reason": "Ghak pide doce setas de Uldaman. Se recogen en la expedición con las urnas de Agmond y se entregan al volver a Thelsamar. La visita a la mazmorra sigue siendo de grupo.",
+    "url": "https://zephras.com/forever/enUS/quest/17/"
+  },
+  "23": {
+    "policy": "keep",
+    "reason": "El oso de la caza recorre las ruinas de Stardust, donde la ruta ya busca el agua del chamán que lleve la llamada correspondiente. Abre su zarpa y llévala a Senani durante la visita al Puesto del Hachazo.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/07-ashenvale.guide#L162-L166"
+  },
+  "24": {
+    "policy": "keep",
+    "reason": "La pantera Shadumbra se encuentra entre la visita a los sátiros y la vuelta al lago Mystral. Llevar la cabeza a Senani aprovecha la misma piedra de hogar que las entregas de los sátiros y los elementales.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/07-ashenvale.guide#L224-L228"
+  },
+  "212": {
+    "policy": "detour",
+    "reason": "Angus encarga un anca fresca en Ventormenta con un plazo de treinta minutos. La ruta normal intercala otros capítulos antes de cazar el basilisco en Tuercespina. Activa Opcionales solo si vas a hacer expresamente la ida y la vuelta.",
+    "url": "https://theforeverera.com/en/quests/212/"
+  },
+  "247": {
+    "policy": "keep",
+    "reason": "Senani da la recompensa final en el mismo puesto, una vez entregados los tres trofeos de Ursangous, Shadumbra y Garrafilada. Cóbrala si has completado las tres cacerías.",
+    "url": "https://zephras.com/forever/enUS/quest/247/"
+  },
+  "351": {
+    "policy": "existing",
+    "reason": "El localizador de Tanaris se obtiene como botín y se entrega en el robot OOX-17/TN. Mantén opcional la visita al robot si no buscas su escolta.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/04-tanaris.guide#L134-L140"
+  },
+  "461": {
+    "policy": "existing",
+    "reason": "Tras entregar el libro del habla de los muertos, queda la estantería de la bodega. Si ya estás allí por el libro, puedes cobrar en el mismo sótano. La rama de la biblioteca permanece opcional.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/03-silverpine-forest.guide#L232-L240"
+  },
+  "474": {
+    "policy": "existing",
+    "reason": "Nek’rosh es el jefe élite de los Faucedraco. Se activa para grupo y aún puedes cobrar su cabeza al capitán durante la visita al castillo de Menethil.",
+    "url": "https://zephras.com/forever/enUS/quest/474/"
+  },
+  "485": {
+    "policy": "existing",
+    "reason": "El localizador de las Tierras del Interior solo inicia el encargo de su robot. Su recogida y el acercamiento a OOX-09/HL siguen en la rama opcional.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/05-the-hinterlands.guide#L206-L214"
+  },
+  "486": {
+    "policy": "keep",
+    "reason": "Es una sola baja al final del circuito de Teldrassil y Athridas recibe la entrega al regresar a Dolanaar. Da 1.150 puntos de experiencia base y permite elegir entre un hacha y una maza útiles a ese nivel.",
+    "url": "https://zephras.com/forever/enUS/quest/486/"
+  },
+  "493": {
+    "policy": "keep",
+    "reason": "Recoge el envío de Renferrel en El Sepulcro y llévalo a Lydon durante la primera visita prevista a Molino Tarren, junto con los encargos para el mismo pueblo.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/03-silverpine-forest.guide#L284-L288"
+  },
+  "503": {
+    "policy": "detour",
+    "reason": "La llave del carcelero exige entrar en Strahnbrad y volver desde allí. El campamento tiene enemigos de nivel 35–37 y este capítulo va del 30 al 33. Deja el rescate para Opcionales o para una visita posterior.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L394-L405"
+  },
+  "506": {
+    "policy": "keep",
+    "reason": "Si ya liberaste a Gol’dir, acepta su informe allí y entrégaselo a Krusk al pasar por Molino Tarren. La continuación son dos conversaciones y da 2.100 puntos de experiencia base.",
+    "url": "https://zephras.com/forever/enUS/quest/506/"
+  },
+  "515": {
+    "policy": "detour",
+    "reason": "Además de una poción de sangre de trol fuerte, Lydon exige cinco espinas de naga y cinco ojos de múrloc. Son dos playas tras la visita a Molino Tarren. Deja la compra y el circuito costero para Opcionales.",
+    "url": "https://zephras.com/forever/enUS/quest/515/"
+  },
+  "516": {
+    "policy": "keep",
+    "reason": "Al final del circuito sur de Argénteos se juntan seis esclavos y seis guardianes Corvozarpa en las mismas ruinas. Después se entregan con las demás misiones de El Sepulcro.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/03-silverpine-forest.guide#L241-L250"
+  },
+  "517": {
+    "policy": "existing",
+    "reason": "Tras el primer elixir hay que recuperar un barril en el campamento de la costa sureste. La guía lo reserva para la rama de grupo antes de regresar con Lydon.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L354-L358"
+  },
+  "522": {
+    "policy": "existing",
+    "reason": "Si un asesino deja el contrato en Costasur, abre el objeto y entrégalo al magistrado en esa misma visita. Esperar a que aparezca el asesino sigue siendo opcional.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/05-arathi-highlands.guide#L167-L178"
+  },
+  "523": {
+    "policy": "existing",
+    "reason": "El magistrado ofrece al barón después de recibir el contrato. Si lo tienes, busca a Vardus mientras haces los otros encargos de Alterac y entrega la cabeza al regresar a Costasur.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/05-arathi-highlands.guide#L167-L178"
+  },
+  "524": {
+    "policy": "existing",
+    "reason": "La última prueba del elixir se resuelve colocando el barril junto a la posada de Molino Tarren. Está al lado de Lydon si completaste el paso anterior, dentro de la misma rama opcional.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L363-L371"
+  },
+  "535": {
+    "policy": "keep",
+    "reason": "El tabernero de Molino Tarren vende la cerveza que pide Valik. Ya pasas por el tabernero y sales por la carretera hacia el campamento del Sindicato. La conversación con Valik se resuelve con una sola jarra.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L372-L376"
+  },
+  "540": {
+    "policy": "existing",
+    "reason": "El encargo de Dibbs acompaña la incursión en Alterac y está marcado para grupo. Entrega el conocimiento al regresar a Costasur si ya está listo.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/05-arathi-highlands.guide#L160-L166"
+  },
+  "542": {
+    "policy": "keep",
+    "reason": "Si Dibbs ya recibió el conocimiento, recoge el envío de vuelta. Milton está en la biblioteca de Ventormenta y la ruta vuelve a la capital para varias entregas.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/05-arathi-highlands.guide#L339-L355"
+  },
+  "625": {
+    "policy": "keep",
+    "reason": "Si ya encontraste el primer pergamino de Cortello, acepta la siguiente pista en el mismo objeto. El nuevo pergamino está en Marjal Revolcafango, que ya visitas por las cacerías y los componentes.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/03-feralas.guide#L60-L66"
+  },
+  "648": {
+    "policy": "existing",
+    "reason": "El robot de Tanaris camina bajo escolta tras encontrarlo con el localizador. El recorrido rápido deja a elección del jugador acompañarlo. Obnoticus coincide luego con las otras entregas en Bahía del Botín.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/04-tanaris.guide#L134-L140"
+  },
+  "704": {
+    "policy": "existing",
+    "reason": "Las cuatro urnas de Agmond se recogen en la salida a Uldaman junto con las setas de Ghak. Conserva la salida de grupo y cobra las urnas que ya tengas al volver al prospector.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/05-the-hinterlands.guide#L143-L148"
+  },
+  "706": {
+    "policy": "existing",
+    "reason": "El corazón de draco negro exige enfrentarse a los dracos de Tierras Inhóspitas. La parada de Sigrun se aprovecha si ya conseguiste el corazón, y la cacería queda reservada para grupo.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/02-badlands.guide#L46-L50"
+  },
+  "824": {
+    "policy": "keep",
+    "reason": "Tras entregar el globo de agua a Mastok, lleva el aviso a Je’neu. El vuelo a la Avanzada de Zoram’gar ya se hace por el rey de los Corruptos y ambas entregas coinciden.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/07-ashenvale.guide#L201-L214"
+  },
+  "836": {
+    "policy": "existing",
+    "reason": "La segunda parte de OOX-09/HL consiste en escoltar el robot por las Tierras del Interior. Queda en Opcionales. Si lo acompañaste, tienes una entrega en Bahía del Botín junto a las de los otros robots.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/05-the-hinterlands.guide#L206-L214"
+  },
+  "838": {
+    "policy": "keep",
+    "reason": "En esta parte de «Scholomance» solo hablas con el boticario Dithers, a pocos pasos de Derrington en El Baluarte. La conversación coincide con la vuelta del caldero y se puede hacer solo.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/06-silithus.guide#L245-L253"
+  },
+  "857": {
+    "policy": "detour",
+    "reason": "La caja fuerte está en el fondo de la excavación enana de Bael Modan. Supone internarse en el puesto para un único encargo de Feegly antes del Gran Elevador. Deja esa incursión para Opcionales.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/06-hillsbrad-foothills.guide#L245-L250"
+  },
+  "885": {
+    "policy": "existing",
+    "reason": "Washte Pawne es una serpiente alada rara que puede aparecer en la cresta mientras haces otros encargos. Abre la pluma si cae y entrégala en Campamento Taurajo. La búsqueda sigue siendo opcional.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/04-the-barrens.guide#L451-L464"
+  },
+  "897": {
+    "policy": "existing",
+    "reason": "El Cosechador comparte zona con las batidas de Los Baldíos. La ruta permite seguir si falta el objeto que inicia la misión y entregarlo después a Jorn cuando pases por Taurajo.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/04-the-barrens.guide#L435-L440"
+  },
+  "898": {
+    "policy": "detour",
+    "reason": "Gilthares sale del fuerte caminando y sufre ataques de soldados hasta Trinquete. Ya vuelves allí por otras entregas y puedes hacer ese trayecto a tu ritmo. La escolta queda en Opcionales.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/04-the-barrens.guide#L136-L140"
+  },
+  "990": {
+    "policy": "keep",
+    "reason": "Selarin te envía desde Auberdine a Raene en Astranaar. La visita a la posada de Astranaar coincide con fijar el hogar y recoger otros encargos, así que el mensaje aprovecha ese traslado.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/03-darkshore.guide#L373-L381"
+  },
+  "1046": {
+    "policy": "keep",
+    "reason": "Krolg ofrece la última entrega tras la parte anterior de la limpieza. Aprovecha la calavera y la vara de la cadena y cobra en Astranaar con Raene.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/03-ashenvale.guide#L184-L188"
+  },
+  "1123": {
+    "policy": "keep",
+    "reason": "Hamuul ofrece este mensaje en la visita a Cima del Trueno. Al llegar a Claro de la Luna, Rabine recibe la entrega y ofrece la siguiente parte que utiliza la ruta.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/03-winterspring.guide#L204-L212"
+  },
+  "1151": {
+    "policy": "existing",
+    "reason": "La prueba de Dorn exige los fragmentos de Rok’Alim en Las Mil Agujas y una vuelta a la zona de salida. La cacería del elemental queda en el recorrido de grupo.",
+    "url": "https://zephras.com/forever/enUS/quest/1151/"
+  },
+  "1172": {
+    "policy": "existing",
+    "reason": "La cueva de los dragones oculta los cinco huevos de Onyxia. La incursión se reserva para grupo antes del desafío a Mok’Morokk. Si ya rompiste los huevos, puedes volver a Draz’Zilb.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/03-feralas.guide#L157-L167"
+  },
+  "1173": {
+    "policy": "existing",
+    "reason": "Desafiar a Mok’Morokk es el combate de grupo que cierra la cadena de los huevos. Hazlo si eliges esa rama y entrega con Draz’Zilb al terminar.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/03-feralas.guide#L177-L184"
+  },
+  "1185": {
+    "policy": "keep",
+    "reason": "Después de entregar la previa de la quitina, Umber ofrece y resuelve este encargo en el mismo lugar de Claro de la Luna. Ambas facciones pueden aprovechar la conversación.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/06-silithus.guide#L290-L293"
+  },
+  "1260": {
+    "policy": "keep",
+    "reason": "Angus ofrece el mensaje en Ventormenta. Morgan recibe la entrega cuando ya fijas el hogar en Theramore y recoges su siguiente trabajo allí.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/05-arathi-highlands.guide#L128-L135"
+  },
+  "1288": {
+    "policy": "keep",
+    "reason": "Tras entregar el informe anterior al capitán Vimes en Theramore, se lo llevas a Jaina dentro de la misma fortaleza. La visita coincide con la vuelta a la isla y con otra entrega.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/01-stranglethorn-vale.guide#L177-L185"
+  },
+  "1362": {
+    "policy": "keep",
+    "reason": "Regthar da el aviso al cerrar su encargo en Los Baldíos. Se entrega a Felgur en Desolace durante la visita que también recoge una misión de la zona.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/03-arathi-highlands.guide#L401-L406"
+  },
+  "1364": {
+    "policy": "keep",
+    "reason": "La orden de Dellis se recoge en Ventormenta. Los ensayos coinciden con la pasada por el Pantano de las Penas, y la entrega a Mahar Ba aprovecha el registro del vuelo y otros encargos en Nethergarde.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/01-stranglethorn-vale.guide#L340-L355"
+  },
+  "1392": {
+    "policy": "detour",
+    "reason": "Noboru patrulla por la zona de los cristales draenetistas. Si encuentras su cayada, abre el objeto y entrégalo con los cristales a Magtoor. La guía en solitario puede continuar si la patrulla no está.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/05-arathi-highlands.guide#L105-L110",
+    "materials": {
+      "6196": 1
+    }
+  },
+  "1431": {
+    "policy": "keep",
+    "reason": "La presentación de Drok a Keldran se completa en Orgrimmar antes de salir de la ciudad. Abre el encargo que se entrega en la visita prevista a Desolace.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L126-L132"
+  },
+  "1432": {
+    "policy": "keep",
+    "reason": "Lleva el mensaje de Keldran a Takata en Desolace. Takata abre dos ramas del mismo campamento, la de los sátiros y la de Maurin.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L126-L132"
+  },
+  "1433": {
+    "policy": "keep",
+    "reason": "Maurin está en el mismo campamento que Takata. Hacer esta presentación durante la visita abre la recogida de gemas de los espíritus ardientes.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L185-L193"
+  },
+  "1434": {
+    "policy": "keep",
+    "reason": "Los cuatro tipos de sátiros que pide Takata comparten campamento. Las veintiocho bajas aportan experiencia de combate y la entrega coincide con el regreso por Maurin y los centauros.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L185-L193"
+  },
+  "1435": {
+    "policy": "keep",
+    "reason": "Las quince gemas se recogen en el mismo circuito de Desolace en que puede caer la primera parte de «El corruptor». Se entregan a Maurin al pasar de nuevo por el campamento de Takata.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L185-L193"
+  },
+  "1480": {
+    "policy": "existing",
+    "reason": "El objeto que abre «El corruptor» puede caer mientras reúnes gemas para Maurin. La ruta conserva la rama opcional y permite aprovechar el hallazgo en la visita de entrega.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L213-L218"
+  },
+  "1481": {
+    "policy": "existing",
+    "reason": "La cabellera del acechasombras exige volver hacia el norte de Desolace. La continuación de Maurin conserva el filtro opcional para que puedas seguir el circuito de los centauros.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L219-L230"
+  },
+  "1482": {
+    "policy": "existing",
+    "reason": "Maurin pide después un cristal de oráculo en el noroeste de Desolace. El desplazamiento hasta allí solo interesa si estás siguiendo la cadena opcional.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L240-L247"
+  },
+  "1484": {
+    "policy": "existing",
+    "reason": "Si ya conseguiste el cristal, puedes cerrar la última conversación de la rama con Maurin y Takata. Ambos están en el mismo campamento y la cadena mantiene su selección opcional.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/30-40/01-desolace.guide#L275-L281"
+  },
+  "1523": {
+    "policy": "keep",
+    "reason": "El chamán tauren recibe de Xanis la presentación a Kranal. La ruta ya se dirige a Los Baldíos y continúa con el siguiente paso para conseguir el tótem de fuego.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/tauren/01-mulgore.guide#L412-L416"
+  },
+  "1860": {
+    "policy": "keep",
+    "reason": "Es la presentación del mago humano a Jennea en Ventormenta. Se toma en Villadorada durante el entrenamiento y permite aprovechar la visita a la instructora para la misión del Lago Espejo.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/human/01-elwynn-forest.guide#L505-L514"
+  },
+  "1861": {
+    "policy": "keep",
+    "reason": "Para el mago al que Jennea se la ofrezca, basta tomar una muestra en el Lago Espejo, al oeste de Elwynn, de camino a Páramos de Poniente. La entrega puede esperar al regreso para entrenar en Ventormenta.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L654-L659"
+  },
+  "1878": {
+    "policy": "detour",
+    "reason": "La repetición pide otras cinco bolsas y concede 375 puntos de experiencia base. Aprovecha las sobrantes de los bandidos en Gadgetzan y continúa si aún faltan. La primera entrega de cinco se mantiene.",
+    "url": "https://zephras.com/forever/enUS/quest/1878/",
+    "materials": {
+      "8483": 5
+    }
+  },
+  "1918": {
+    "policy": "keep",
+    "reason": "El globo de Tideress se consigue en el lago Mystral. Abre el objeto y llévalo al Puesto del Hachazo con las otras entregas. Mastok dará el mensaje para la visita a Zoram’gar.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/07-ashenvale.guide#L181-L185"
+  },
+  "2205": {
+    "policy": "keep",
+    "reason": "La presentación de Keryn al maestro Shaw prepara el encargo de robar a los Defias. La cadena del pícaro humano permite conseguir una daga útil desde nivel 10.",
+    "url": "https://zephras.com/forever/enUS/quest/2205/"
+  },
+  "2206": {
+    "policy": "keep",
+    "reason": "El pícaro puede robar el calendario al maestro del embarcadero en Elwynn y regresar a Shaw con la visita a Ventormenta. La recompensa es la Hoja de Astucia.",
+    "url": "https://zephras.com/forever/enUS/quest/2206/"
+  },
+  "2641": {
+    "policy": "keep",
+    "reason": "Roxio pide un solo tragano violeta. La ruta ya visita las Tierras del Interior y vuelve más adelante a Gadgetzan, donde se resuelven seguidas las dos continuaciones.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/04-tanaris.guide#L114-L125"
+  },
+  "2661": {
+    "policy": "keep",
+    "reason": "Roxio te entrega la mezcla para Marin al volver con el tragano. Ambos están en Gadgetzan y recorrer esa corta distancia abre el elixir final.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/06-azshara.guide#L302-L315"
+  },
+  "2662": {
+    "policy": "keep",
+    "reason": "Al llevar el envío a Marin puedes terminar el encargo del elixir con el mismo personaje. Aprovecha la conversación antes de seguir hacia los otros encargos de Gadgetzan.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/06-azshara.guide#L302-L315"
+  },
+  "2741": {
+    "policy": "detour",
+    "reason": "El huevomático da 4.200 puntos de experiencia base, pero el recorrido desvía al personaje al sur de Feralas para buscar un huevo y vuelve a Gadgetzan para cobrar. Si ya llevas el huevo, aprovecha la máquina al pasar.",
+    "url": "https://zephras.com/forever/enUS/quest/2741/",
+    "materials": {
+      "8564": 1
+    }
+  },
+  "2766": {
+    "policy": "existing",
+    "reason": "El localizador de Feralas inicia la visita a OOX-22/FE. La búsqueda del objeto y la parada con el robot permanecen opcionales para los interesados en sus escoltas.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/02-feralas.guide#L295-L299"
+  },
+  "2767": {
+    "policy": "existing",
+    "reason": "Escoltar a OOX-22/FE por Feralas añade un recorrido a la velocidad del robot. La rama opcional conserva su entrega con Obnoticus si completaste la escolta.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/02-feralas.guide#L300-L305"
+  },
+  "2881": {
+    "policy": "existing",
+    "reason": "Tras la primera entrega a Fraggar, aprovecha otros cinco collares que sobren de matar troles. Se puede seguir la ruta sin repetir la cacería.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/40-50/02-badlands.guide#L115-L123"
+  },
+  "2932": {
+    "policy": "keep",
+    "reason": "La pica de Nimboya se llena con los cráneos de veinte troles Vilrama en la aldea que recorre el capítulo. Las bajas dan experiencia y Nimboya recibe la pica al volver a Grom’gol por otros encargos.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/01-stranglethorn-vale.guide#L185-L193"
+  },
+  "2978": {
+    "policy": "keep",
+    "reason": "Busca el pergamino mientras ya matas ogros y recoges cobalto en el campamento Gordunni. Su entrega a Rok coincide con esas misiones y abre la del orbe.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/02-feralas.guide#L221-L229"
+  },
+  "2979": {
+    "policy": "keep",
+    "reason": "El orbe del señor de la magia se consigue en la zona de las tres cacerías Gordunni. Entrégalo a Rok con esas bajas y recoge el envío a Orgrimmar.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/02-feralas.guide#L230-L240"
+  },
+  "2995": {
+    "policy": "keep",
+    "reason": "Los tres documentos de Vallealto se queman en una misma visita al puesto élfico. Oran recibe la entrega cuando ya regresas a Entrañas para otros encargos.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/05-the-hinterlands.guide#L113-L118"
+  },
+  "3002": {
+    "policy": "keep",
+    "reason": "Transporta el orbe que acabas de entregar a Rok. Uthel’nay está en Orgrimmar y la visita prevista permite entregar también los encargos del espíritu y entrenar.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/40-50/02-feralas.guide#L268-L277"
+  }
+}

@@ -626,8 +626,9 @@
       "departure": 1,
       "departureLand": 1,
       "detourBelowLevel": 11,
-      "detourItems": 157,
-      "detourQuest": 8,
+      "detourItems": 189,
+      "detourOffers": 3,
+      "detourQuest": 25,
       "f": 5520,
       "from": 740,
       "fromAlso": 97,
@@ -635,6 +636,7 @@
       "fromKind": 739,
       "fromRank": 17,
       "group": 9,
+      "groupVisitFor": 1,
       "instruction": 7455,
       "instructionAsHint": 2,
       "instructionReplacesContext": 6,
@@ -642,7 +644,7 @@
       "item": 1216,
       "itemName": 1216,
       "level": 25,
-      "levelingDetour": 294,
+      "levelingDetour": 394,
       "location": 400,
       "map": 6593,
       "minLevel": 2290,
@@ -654,6 +656,7 @@
       "npcName": 4377,
       "objName": 306,
       "object": 306,
+      "offerLimits": 2,
       "oi": 1680,
       "only": 355,
       "optional": 415,
@@ -672,16 +675,19 @@
       "rewards": 8,
       "skill": 1,
       "skillLine": 1,
+      "soloAfter": 28,
+      "soloWhenOffered": 1,
       "spots": 1303,
       "spread": 672,
+      "starterItem": 8,
       "t": 7455,
       "target": 611,
       "text": 223,
       "title": 6503,
       "untilLevel": 3,
       "workForObjective": 8,
-      "workForQuest": 16,
-      "workVisit": 3,
+      "workForQuest": 23,
+      "workVisit": 8,
       "x": 6593,
       "y": 6593,
       "z": 4472
@@ -35875,7 +35881,9 @@
               "y": 82.9,
               "z": 36.3,
               "f": "e",
-              "instruction": "Compra «Manzana roja lustrosa» (4 en total) a «Homer Pedregosa».\nZona: Bosque de Elwynn.\nShiny Red Apples, de Homer Pedregosa, paral Applejack Still."
+              "instruction": "Compra «Manzana roja lustrosa» (4 en total) a «Homer Pedregosa».\nZona: Bosque de Elwynn.\nShiny Red Apples, de Homer Pedregosa, paral Applejack Still.",
+              "detourQuest": 91736,
+              "levelingDetour": true
             }
           ]
         },
@@ -35922,7 +35930,10 @@
               "x": 24.6,
               "y": 58,
               "f": "e",
-              "instruction": "Reúne «Thunder Applejack» (1 en total).\nZona: Bosque de Elwynn.\nThunder Applejack, desdel todavía."
+              "instruction": "Reúne «Thunder Applejack» (1 en total).\nZona: Bosque de Elwynn.\nThunder Applejack, desdel todavía.",
+              "starterItem": 247824,
+              "detourQuest": 91738,
+              "levelingDetour": true
             }
           ]
         },
@@ -35978,7 +35989,11 @@
               "z": 38.7,
               "f": "e",
               "qlvl": 10,
-              "instruction": "Habla con «Sargento De Vries» y acepta «An Apple Treat».\nZona: Bosque de Elwynn.\nSargento De Vries: quiere tu Thunder Applejack."
+              "instruction": "Habla con «Sargento De Vries» y acepta «An Apple Treat».\nZona: Bosque de Elwynn.\nSargento De Vries: quiere tu Thunder Applejack.",
+              "levelingDetour": true,
+              "detourItems": {
+                "247824": 1
+              }
             },
             {
               "title": "An Apple Treat",
@@ -35991,7 +36006,11 @@
               "y": 73.2,
               "z": 38.7,
               "f": "e",
-              "instruction": "Habla con «Sargento De Vries» y entrega «An Apple Treat».\nZona: Bosque de Elwynn."
+              "instruction": "Habla con «Sargento De Vries» y entrega «An Apple Treat».\nZona: Bosque de Elwynn.",
+              "levelingDetour": true,
+              "detourItems": {
+                "247824": 1
+              }
             }
           ]
         },
@@ -101292,7 +101311,9 @@
                 }
               ],
               "qlvl": 35,
-              "instruction": "Habla con «Garion Wendell» y acepta «Greater Friend of the Library»."
+              "instruction": "Habla con «Garion Wendell» y acepta «Greater Friend of the Library».",
+              "levelingDetour": true,
+              "soloWhenOffered": true
             },
             {
               "title": "Greater Friend of the Library",
@@ -101311,7 +101332,8 @@
                   "n": 2
                 }
               ],
-              "instruction": "Habla con «Garion Wendell» y entrega «Greater Friend of the Library»."
+              "instruction": "Habla con «Garion Wendell» y entrega «Greater Friend of the Library».",
+              "levelingDetour": true
             },
             {
               "title": "James Hyal",
@@ -115136,7 +115158,10 @@
               "f": "e",
               "from": "Noboru el Garrote",
               "fromKind": "npc",
-              "instruction": "Recoge «Cayada de Noboru» del botín de «Noboru el Garrote»."
+              "instruction": "Recoge «Cayada de Noboru» del botín de «Noboru el Garrote».",
+              "starterItem": 6196,
+              "detourQuest": 1392,
+              "levelingDetour": true
             },
             {
               "title": "Noboru el Garrote",
@@ -115146,7 +115171,11 @@
               "item": 6196,
               "itemName": "Cayada de Noboru",
               "qlvl": 39,
-              "instruction": "Si tienes «Cayada de Noboru» en tus bolsas, haz clic derecho en él para iniciar «Noboru el Garrote»."
+              "instruction": "Si tienes «Cayada de Noboru» en tus bolsas, haz clic derecho en él para iniciar «Noboru el Garrote».",
+              "levelingDetour": true,
+              "detourItems": {
+                "6196": 1
+              }
             }
           ]
         },
@@ -115240,7 +115269,11 @@
               "y": 31.4,
               "z": 22.1,
               "f": "e",
-              "instruction": "Habla con «Magtoor» y entrega «Noboru el Garrote»."
+              "instruction": "Habla con «Magtoor» y entrega «Noboru el Garrote».",
+              "levelingDetour": true,
+              "detourItems": {
+                "6196": 1
+              }
             },
             {
               "title": "Cristales draenetistas",
@@ -115499,7 +115532,8 @@
               "y": 93.64,
               "z": 108.4,
               "qlvl": 40,
-              "instruction": "Habla con «Angus Stern» y acepta «Un plato bien frío».\nAngus Stern, Ventormenta Harbor road."
+              "instruction": "Habla con «Angus Stern» y acepta «Un plato bien frío».\nAngus Stern, Ventormenta Harbor road.",
+              "levelingDetour": true
             },
             {
               "title": "Morgan Stern",
@@ -129841,7 +129875,8 @@
               "from": "Basilisco Ojogélido",
               "fromKind": "npc",
               "spread": true,
-              "instruction": "Recoge «Anca de basilisco fría» (1 en total) del botín de «Basilisco Ojogélido».\nZona: Vega de Tuercespina."
+              "instruction": "Recoge «Anca de basilisco fría» (1 en total) del botín de «Basilisco Ojogélido».\nZona: Vega de Tuercespina.",
+              "levelingDetour": true
             }
           ]
         },
@@ -130351,7 +130386,8 @@
               "x": 51.79,
               "y": 93.64,
               "z": 108.4,
-              "instruction": "Habla con «Angus Stern» y entrega «Un plato bien frío»."
+              "instruction": "Habla con «Angus Stern» y entrega «Un plato bien frío».",
+              "levelingDetour": true
             },
             {
               "title": "¡Una fiesta en tu honor!",
@@ -137947,7 +137983,11 @@
               "z": 8.8,
               "f": "e",
               "qlvl": 44,
-              "instruction": "Habla con «Grifoperador Llantalunket» y acepta «Cazador de bolsas de agua».\nZona: Tanaris."
+              "instruction": "Habla con «Grifoperador Llantalunket» y acepta «Cazador de bolsas de agua».\nZona: Tanaris.",
+              "levelingDetour": true,
+              "detourItems": {
+                "8483": 5
+              }
             },
             {
               "title": "Justicia para bandidos",
@@ -138343,7 +138383,11 @@
               "fromAlso": "Wastewander Thief",
               "fromKind": "npc",
               "spread": true,
-              "instruction": "Recoge «Faltriquera de agua de Deambulador» del botín de «Mago oscuro Deambulador» o «Wastewander Thief».\nZona: Tanaris."
+              "instruction": "Recoge «Faltriquera de agua de Deambulador» del botín de «Mago oscuro Deambulador» o «Wastewander Thief».\nZona: Tanaris.",
+              "levelingDetour": true,
+              "detourItems": {
+                "8483": 5
+              }
             }
           ]
         },
@@ -138362,7 +138406,11 @@
               "y": 28.45,
               "z": 8.8,
               "f": "e",
-              "instruction": "Habla con «Grifoperador Llantalunket» y entrega «Cazador de bolsas de agua».\nZona: Tanaris.\nGrifoperador Luglunket."
+              "instruction": "Habla con «Grifoperador Llantalunket» y entrega «Cazador de bolsas de agua».\nZona: Tanaris.\nGrifoperador Luglunket.",
+              "levelingDetour": true,
+              "detourItems": {
+                "8483": 5
+              }
             },
             {
               "title": "Más justicia para bandidos",
@@ -172619,7 +172667,8 @@
               "z": 68.6,
               "f": "e",
               "qlvl": 56,
-              "instruction": "Habla con «Cromi» y acepta «Contar el tiempo».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Habla con «Cromi» y acepta «Contar el tiempo».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             }
           ]
         },
@@ -172679,7 +172728,8 @@
               ],
               "from": "Arcón pequeño",
               "fromKind": "object",
-              "instruction": "Interactúa con «Arcón pequeño» para reunir «Reloj de Andorhal» (5 en total).\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Interactúa con «Arcón pequeño» para reunir «Reloj de Andorhal» (5 en total).\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             }
           ]
         },
@@ -172697,7 +172747,8 @@
               "y": 66.76,
               "z": 68.6,
               "f": "e",
-              "instruction": "Habla con «Cromi» y entrega «Contar el tiempo».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Habla con «Cromi» y entrega «Contar el tiempo».\nZona: Tierras de la Peste del Oeste.",
+              "levelingDetour": true
             }
           ]
         },
@@ -182939,7 +182990,8 @@
               "y": 50.04,
               "z": 86.8,
               "qlvl": 60,
-              "instruction": "Habla con «Carlin Rutagrana» y acepta «Los merodeadores de Villa Dorrow».\nZona: Tierras de la Peste del Este."
+              "instruction": "Habla con «Carlin Rutagrana» y acepta «Los merodeadores de Villa Dorrow».\nZona: Tierras de la Peste del Este.",
+              "levelingDetour": true
             }
           ]
         },
@@ -182996,7 +183048,10 @@
               ],
               "optional": true,
               "spread": true,
-              "instruction": "Opcional.\nDerrota a «Campeón de la Plaga».\nZona: Tierras de la Peste del Este."
+              "instruction": "Opcional.\nDerrota a «Campeón de la Plaga».\nZona: Tierras de la Peste del Este.",
+              "detourQuest": 5206,
+              "levelingDetour": true,
+              "workForQuest": 5206
             },
             {
               "title": "Los merodeadores de Villa Dorrow",
@@ -183011,7 +183066,8 @@
               "x": 81.5,
               "y": 44,
               "f": "e",
-              "instruction": "Reúne «Calavera resonadora» (5 en total).\nZona: Tierras de la Peste del Este.\nCalavera resonadora, del Scourge Champions."
+              "instruction": "Reúne «Calavera resonadora» (5 en total).\nZona: Tierras de la Peste del Este.\nCalavera resonadora, del Scourge Champions.",
+              "levelingDetour": true
             }
           ]
         },
@@ -183029,7 +183085,8 @@
               "x": 71.7,
               "y": 50.04,
               "z": 86.8,
-              "instruction": "Habla con «Carlin Rutagrana» y entrega «Los merodeadores de Villa Dorrow».\nZona: Tierras de la Peste del Este."
+              "instruction": "Habla con «Carlin Rutagrana» y entrega «Los merodeadores de Villa Dorrow».\nZona: Tierras de la Peste del Este.",
+              "levelingDetour": true
             },
             {
               "title": "Vuelve con Chromie",
@@ -183050,7 +183107,10 @@
               "y": 50.04,
               "z": 86.8,
               "qlvl": 60,
-              "instruction": "Habla con «Carlin Rutagrana» y acepta «Vuelve con Chromie».\nZona: Tierras de la Peste del Este.\nCromi en Andorhal: mantenerlo."
+              "instruction": "Habla con «Carlin Rutagrana» y acepta «Vuelve con Chromie».\nZona: Tierras de la Peste del Este.\nCromi en Andorhal: mantenerlo.",
+              "soloAfter": [
+                5206
+              ]
             }
           ]
         },
@@ -190447,7 +190507,10 @@
               "y": 66.76,
               "z": 68.6,
               "f": "e",
-              "instruction": "Habla con «Cromi» y entrega «Vuelve con Chromie».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Habla con «Cromi» y entrega «Vuelve con Chromie».\nZona: Tierras de la Peste del Oeste.",
+              "soloAfter": [
+                5206
+              ]
             },
             {
               "title": "El escarabajo de Araj",
@@ -257782,7 +257845,8 @@
               "z": 61.8,
               "f": "e",
               "qlvl": 20,
-              "instruction": "Habla con «Gilthares Ramafuego» y acepta «Escapar del fuerte».\nZona: Los Baldíos."
+              "instruction": "Habla con «Gilthares Ramafuego» y acepta «Escapar del fuerte».\nZona: Los Baldíos.",
+              "levelingDetour": true
             },
             {
               "title": "Escapar del fuerte",
@@ -257799,7 +257863,8 @@
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Abre «Escapar del fuerte» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+              "instruction": "Abre «Escapar del fuerte» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
+              "levelingDetour": true
             }
           ]
         },
@@ -257818,7 +257883,8 @@
               "y": 39.03,
               "z": 23.2,
               "f": "e",
-              "instruction": "Habla con «Capitán Thalo'thas Solbrillante» y entrega «Escapar del fuerte».\nZona: Los Baldíos."
+              "instruction": "Habla con «Capitán Thalo'thas Solbrillante» y entrega «Escapar del fuerte».\nZona: Los Baldíos.",
+              "levelingDetour": true
             },
             {
               "title": "Las armas del Fuerte del Norte",
@@ -273545,7 +273611,11 @@
               "item": 271343,
               "itemName": "Note Scrap",
               "qlvl": 23,
-              "instruction": "Si tienes «Note Scrap» en tus bolsas, haz clic derecho en él para iniciar «The Offering Stone».\nNote Scrap, de un Guardián Corvozarpa."
+              "instruction": "Si tienes «Note Scrap» en tus bolsas, haz clic derecho en él para iniciar «The Offering Stone».\nNote Scrap, de un Guardián Corvozarpa.",
+              "levelingDetour": true,
+              "detourItems": {
+                "271343": 1
+              }
             },
             {
               "title": "The Offering Stone",
@@ -273558,7 +273628,11 @@
               "x": 58.1,
               "y": 69.8,
               "f": "e",
-              "instruction": "Interactúa con «Offering Stone» para entregar «The Offering Stone».\nZona: Bosque de Argénteos."
+              "instruction": "Interactúa con «Offering Stone» para entregar «The Offering Stone».\nZona: Bosque de Argénteos.",
+              "levelingDetour": true,
+              "detourItems": {
+                "271343": 1
+              }
             },
             {
               "title": "The Tortured Soul",
@@ -273572,7 +273646,10 @@
               "y": 69.84,
               "f": "e",
               "qlvl": 23,
-              "instruction": "Interactúa con «Offering Stone» y acepta «The Tortured Soul».\nZona: Bosque de Argénteos."
+              "instruction": "Interactúa con «Offering Stone» y acepta «The Tortured Soul».\nZona: Bosque de Argénteos.",
+              "soloAfter": [
+                95884
+              ]
             },
             {
               "title": "The Tortured Soul",
@@ -273607,7 +273684,10 @@
                   "n": 2
                 }
               ],
-              "instruction": "Reúne «Alma torturada» (1 en total).\nZona: Bosque de Argénteos.\nAlma torturada, del Tortured Souls entre las ruinas."
+              "instruction": "Reúne «Alma torturada» (1 en total).\nZona: Bosque de Argénteos.\nAlma torturada, del Tortured Souls entre las ruinas.",
+              "soloAfter": [
+                95884
+              ]
             },
             {
               "title": "The Tortured Soul",
@@ -273619,7 +273699,10 @@
               "x": 58.09,
               "y": 69.84,
               "f": "e",
-              "instruction": "Interactúa con «Offering Stone» para entregar «The Tortured Soul».\nZona: Bosque de Argénteos."
+              "instruction": "Interactúa con «Offering Stone» para entregar «The Tortured Soul».\nZona: Bosque de Argénteos.",
+              "soloAfter": [
+                95884
+              ]
             }
           ]
         },
@@ -273634,7 +273717,12 @@
               "y": 69.8,
               "f": "e",
               "text": "Offering Stone",
-              "instruction": "Dirígete al punto de la ruta: «Offering Stone».\nZona: Bosque de Argénteos."
+              "instruction": "Dirígete al punto de la ruta: «Offering Stone».\nZona: Bosque de Argénteos.",
+              "detourQuest": 95885,
+              "groupVisitFor": 95885,
+              "soloAfter": [
+                95883
+              ]
             },
             {
               "title": "The Offering of Blood",
@@ -273649,7 +273737,10 @@
               "f": "e",
               "optional": true,
               "qlvl": 23,
-              "instruction": "Opcional.\nInteractúa con «Offering Stone» y acepta «The Offering of Blood».\nZona: Bosque de Argénteos."
+              "instruction": "Opcional.\nInteractúa con «Offering Stone» y acepta «The Offering of Blood».\nZona: Bosque de Argénteos.",
+              "soloAfter": [
+                95883
+              ]
             },
             {
               "title": "The Offering of Blood",
@@ -273671,7 +273762,10 @@
                 }
               ],
               "optional": true,
-              "instruction": "Opcional.\nDerrota a «Alma torturada».\nZona: Bosque de Argénteos."
+              "instruction": "Opcional.\nDerrota a «Alma torturada».\nZona: Bosque de Argénteos.",
+              "soloAfter": [
+                95883
+              ]
             },
             {
               "title": "The Offering of Blood",
@@ -273684,7 +273778,10 @@
               "y": 69.84,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nInteractúa con «Offering Stone» para entregar «The Offering of Blood».\nZona: Bosque de Argénteos."
+              "instruction": "Opcional.\nInteractúa con «Offering Stone» para entregar «The Offering of Blood».\nZona: Bosque de Argénteos.",
+              "soloAfter": [
+                95883
+              ]
             }
           ]
         },
@@ -276113,7 +276210,8 @@
               "z": -85.2,
               "f": "e",
               "qlvl": 30,
-              "instruction": "Habla con «Maestro boticario Faranell» y acepta «Elixir de agonía».\nManténgalo: la costa Trabalomas, más adelante en la ruta."
+              "instruction": "Habla con «Maestro boticario Faranell» y acepta «Elixir de agonía».\nManténgalo: la costa Trabalomas, más adelante en la ruta.",
+              "levelingDetour": true
             },
             {
               "only": {
@@ -278086,7 +278184,8 @@
               "z": 91.7,
               "f": "e",
               "qlvl": 30,
-              "instruction": "Habla con «Feegly el Exiliado» y acepta «La Lágrima de las Lunas».\nZona: Los Baldíos."
+              "instruction": "Habla con «Feegly el Exiliado» y acepta «La Lágrima de las Lunas».\nZona: Los Baldíos.",
+              "levelingDetour": true
             },
             {
               "title": "La Lágrima de las Lunas",
@@ -278103,7 +278202,8 @@
               "f": "e",
               "from": "Caja fuerte del general Trenzado",
               "fromKind": "object",
-              "instruction": "Interactúa con «Caja fuerte del general Trenzado» para reunir «Lágrima de las lunas» (1 en total).\nZona: Los Baldíos.\nCaja fuerte del general Trenzado."
+              "instruction": "Interactúa con «Caja fuerte del general Trenzado» para reunir «Lágrima de las lunas» (1 en total).\nZona: Los Baldíos.\nCaja fuerte del general Trenzado.",
+              "levelingDetour": true
             },
             {
               "title": "La Lágrima de las Lunas",
@@ -278116,7 +278216,8 @@
               "y": 86.31,
               "z": 91.7,
               "f": "e",
-              "instruction": "Habla con «Feegly el Exiliado» y entrega «La Lágrima de las Lunas».\nZona: Los Baldíos."
+              "instruction": "Habla con «Feegly el Exiliado» y entrega «La Lágrima de las Lunas».\nZona: Los Baldíos.",
+              "levelingDetour": true
             }
           ]
         },
@@ -280892,7 +280993,10 @@
               "from": "Garrafilada",
               "fromFaction": "A",
               "fromKind": "npc",
-              "instruction": "Recoge «Garra de Garrafilada» del botín de «Garrafilada».\nZona: Vallefresno."
+              "instruction": "Recoge «Garra de Garrafilada» del botín de «Garrafilada».\nZona: Vallefresno.",
+              "starterItem": 16305,
+              "detourQuest": 2,
+              "levelingDetour": true
             },
             {
               "title": "La garra de Garrafilada",
@@ -280908,7 +281012,11 @@
                 "6383": "The Ashenvale Hunt"
               },
               "qlvl": 30,
-              "instruction": "Si tienes «Garra de Garrafilada» en tus bolsas, haz clic derecho en él para iniciar «La garra de Garrafilada»."
+              "instruction": "Si tienes «Garra de Garrafilada» en tus bolsas, haz clic derecho en él para iniciar «La garra de Garrafilada».",
+              "levelingDetour": true,
+              "detourItems": {
+                "16305": 1
+              }
             }
           ]
         },
@@ -281225,7 +281333,11 @@
               "y": 61.46,
               "z": 101.9,
               "f": "e",
-              "instruction": "Habla con «Senani Truenozón» y entrega «La garra de Garrafilada».\nZona: Vallefresno."
+              "instruction": "Habla con «Senani Truenozón» y entrega «La garra de Garrafilada».\nZona: Vallefresno.",
+              "levelingDetour": true,
+              "detourItems": {
+                "16305": 1
+              }
             },
             {
               "title": "La cabeza de Shadumbra",
@@ -281263,7 +281375,12 @@
               "z": 101.9,
               "f": "e",
               "qlvl": 30,
-              "instruction": "Habla con «Senani Truenozón» y acepta «El fin de la Caza».\nZona: Vallefresno."
+              "instruction": "Habla con «Senani Truenozón» y acepta «El fin de la Caza».\nZona: Vallefresno.",
+              "soloAfter": [
+                2,
+                23,
+                24
+              ]
             },
             {
               "title": "El fin de la Caza",
@@ -281276,7 +281393,12 @@
               "y": 61.46,
               "z": 101.9,
               "f": "e",
-              "instruction": "Habla con «Senani Truenozón» y entrega «El fin de la Caza».\nZona: Vallefresno."
+              "instruction": "Habla con «Senani Truenozón» y entrega «El fin de la Caza».\nZona: Vallefresno.",
+              "soloAfter": [
+                2,
+                23,
+                24
+              ]
             }
           ]
         },
@@ -281850,7 +281972,10 @@
               "f": "e",
               "from": "Broodmother Valraxx",
               "fromKind": "npc",
-              "instruction": "Recoge «Bloody Parchment» del botín de «Broodmother Valraxx».\nZona: Mulgore.\nBloody Parchment, de Broodmother Valraxx."
+              "instruction": "Recoge «Bloody Parchment» del botín de «Broodmother Valraxx».\nZona: Mulgore.\nBloody Parchment, de Broodmother Valraxx.",
+              "starterItem": 273658,
+              "detourQuest": 96294,
+              "levelingDetour": true
             },
             {
               "title": "A Darker Truth",
@@ -281860,7 +281985,11 @@
               "item": 273658,
               "itemName": "Bloody Parchment",
               "qlvl": 30,
-              "instruction": "Si tienes «Bloody Parchment» en tus bolsas, haz clic derecho en él para iniciar «A Darker Truth»."
+              "instruction": "Si tienes «Bloody Parchment» en tus bolsas, haz clic derecho en él para iniciar «A Darker Truth».",
+              "levelingDetour": true,
+              "detourItems": {
+                "273658": 1
+              }
             }
           ]
         },
@@ -281913,7 +282042,11 @@
               "map": 1412,
               "x": 33.42,
               "y": 22.52,
-              "instruction": "Habla con «Muln Earthfury» y entrega «A Darker Truth».\nZona: Mulgore."
+              "instruction": "Habla con «Muln Earthfury» y entrega «A Darker Truth».\nZona: Mulgore.",
+              "levelingDetour": true,
+              "detourItems": {
+                "273658": 1
+              }
             }
           ]
         },
@@ -282909,7 +283042,10 @@
               "f": "e",
               "from": "Mensajero Galak",
               "fromKind": "npc",
-              "instruction": "Recoge «Nota de asesinato» del botín de «Mensajero Galak».\nZona: Las Mil Agujas."
+              "instruction": "Recoge «Nota de asesinato» del botín de «Mensajero Galak».\nZona: Las Mil Agujas.",
+              "starterItem": 12564,
+              "detourQuest": 4881,
+              "levelingDetour": true
             },
             {
               "title": "Complot de asesinato",
@@ -282919,7 +283055,11 @@
               "item": 12564,
               "itemName": "Nota de asesinato",
               "qlvl": 28,
-              "instruction": "Si tienes «Nota de asesinato» en tus bolsas, haz clic derecho en él para iniciar «Complot de asesinato»."
+              "instruction": "Si tienes «Nota de asesinato» en tus bolsas, haz clic derecho en él para iniciar «Complot de asesinato».",
+              "levelingDetour": true,
+              "detourItems": {
+                "12564": 1
+              }
             }
           ]
         },
@@ -283175,7 +283315,11 @@
               "y": 32.06,
               "z": -52.5,
               "f": "e",
-              "instruction": "Habla con «Kanati Nubegris» y entrega «Complot de asesinato».\nZona: Las Mil Agujas."
+              "instruction": "Habla con «Kanati Nubegris» y entrega «Complot de asesinato».\nZona: Las Mil Agujas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "12564": 1
+              }
             },
             {
               "title": "Defensa de Kanati Nube Gris",
@@ -283196,7 +283340,10 @@
               "z": -52.5,
               "f": "e",
               "qlvl": 28,
-              "instruction": "Habla con «Kanati Nubegris» y acepta «Defensa de Kanati Nube Gris».\nZona: Las Mil Agujas."
+              "instruction": "Habla con «Kanati Nubegris» y acepta «Defensa de Kanati Nube Gris».\nZona: Las Mil Agujas.",
+              "soloAfter": [
+                4881
+              ]
             },
             {
               "title": "Defensa de Kanati Nube Gris",
@@ -283215,7 +283362,10 @@
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Para «Defensa de Kanati Nube Gris», sigue esta indicación de la guía:\nMatar al Asesino Galak que viene para Kanati.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+              "instruction": "Para «Defensa de Kanati Nube Gris», sigue esta indicación de la guía:\nMatar al Asesino Galak que viene para Kanati.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
+              "soloAfter": [
+                4881
+              ]
             },
             {
               "title": "Defensa de Kanati Nube Gris",
@@ -283228,7 +283378,10 @@
               "y": 32.06,
               "z": -52.5,
               "f": "e",
-              "instruction": "Habla con «Kanati Nubegris» y entrega «Defensa de Kanati Nube Gris».\nZona: Las Mil Agujas."
+              "instruction": "Habla con «Kanati Nubegris» y entrega «Defensa de Kanati Nube Gris».\nZona: Las Mil Agujas.",
+              "soloAfter": [
+                4881
+              ]
             }
           ]
         },
@@ -291951,7 +292104,11 @@
               "y": 65,
               "f": "e",
               "text": "Daggerspine",
-              "instruction": "Dirígete al punto de la ruta: «Daggerspine».\nZona: Laderas de Trabalomas."
+              "instruction": "Dirígete al punto de la ruta: «Daggerspine».\nZona: Laderas de Trabalomas.",
+              "detourQuest": 515,
+              "levelingDetour": true,
+              "workForQuest": 515,
+              "workVisit": true
             },
             {
               "title": "Elixir de agonía",
@@ -292051,7 +292208,8 @@
               "fromAlso": "Daggerspine Shorehunter",
               "fromKind": "npc",
               "spread": true,
-              "instruction": "Opcional.\nRecoge «Escama Dagaespinazo» (5 en total) del botín de «Acechacostas Espinadaga» o «Daggerspine Shorehunter».\nZona: Laderas de Trabalomas."
+              "instruction": "Opcional.\nRecoge «Escama Dagaespinazo» (5 en total) del botín de «Acechacostas Espinadaga» o «Daggerspine Shorehunter».\nZona: Laderas de Trabalomas.",
+              "levelingDetour": true
             }
           ]
         },
@@ -292066,7 +292224,11 @@
               "y": 68,
               "f": "e",
               "text": "Playa Rotín Fin",
-              "instruction": "Dirígete al punto de la ruta: «Playa Rotín Fin».\nZona: Laderas de Trabalomas."
+              "instruction": "Dirígete al punto de la ruta: «Playa Rotín Fin».\nZona: Laderas de Trabalomas.",
+              "detourQuest": 515,
+              "levelingDetour": true,
+              "workForQuest": 515,
+              "workVisit": true
             },
             {
               "title": "Elixir de agonía",
@@ -292187,7 +292349,8 @@
               "fromAlso": "Torn Fin Coastrunner",
               "fromKind": "npc",
               "spread": true,
-              "instruction": "Opcional.\nRecoge «Ojo de aleta rasgado» (5 en total) del botín de «Habitabosta Rompeanca» o «Torn Fin Coastrunner».\nZona: Laderas de Trabalomas."
+              "instruction": "Opcional.\nRecoge «Ojo de aleta rasgado» (5 en total) del botín de «Habitabosta Rompeanca» o «Torn Fin Coastrunner».\nZona: Laderas de Trabalomas.",
+              "levelingDetour": true
             }
           ]
         },
@@ -292208,7 +292371,8 @@
               "z": 57.6,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nHabla con «Boticario Lydon» y entrega «Elixir de agonía».\nZona: Laderas de Trabalomas."
+              "instruction": "Opcional.\nHabla con «Boticario Lydon» y entrega «Elixir de agonía».\nZona: Laderas de Trabalomas.",
+              "levelingDetour": true
             },
             {
               "title": "Elixir de agonía",
@@ -292230,7 +292394,10 @@
               "f": "e",
               "optional": true,
               "qlvl": 30,
-              "instruction": "Opcional.\nHabla con «Boticario Lydon» y acepta «Elixir de agonía».\nZona: Laderas de Trabalomas."
+              "instruction": "Opcional.\nHabla con «Boticario Lydon» y acepta «Elixir de agonía».\nZona: Laderas de Trabalomas.",
+              "soloAfter": [
+                515
+              ]
             }
           ]
         },
@@ -292261,7 +292428,10 @@
               "optional": true,
               "from": "Barril de cerveza Machacacanillas",
               "fromKind": "object",
-              "instruction": "Opcional.\nInteractúa con «Barril de cerveza Machacacanillas» para reunir «Barril de cerveza Machacacanillas» (1 en total).\nZona: Laderas de Trabalomas."
+              "instruction": "Opcional.\nInteractúa con «Barril de cerveza Machacacanillas» para reunir «Barril de cerveza Machacacanillas» (1 en total).\nZona: Laderas de Trabalomas.",
+              "soloAfter": [
+                515
+              ]
             }
           ]
         },
@@ -292273,7 +292443,20 @@
               "t": "hearth",
               "area": 272,
               "location": "Molino Tarren",
-              "instruction": "Comprueba que tu piedra de hogar está vinculada a «Molino Tarren» y úsala para regresar allí."
+              "instruction": "Comprueba que tu piedra de hogar está vinculada a «Molino Tarren» y úsala para regresar allí.",
+              "levelingDetour": true,
+              "detourOffers": [
+                {
+                  "t": "turnin",
+                  "quest": 517,
+                  "levelingDetour": true
+                },
+                {
+                  "t": "turnin",
+                  "quest": 524,
+                  "levelingDetour": true
+                }
+              ]
             },
             {
               "title": "Elixir de agonía",
@@ -292288,7 +292471,10 @@
               "z": 57.6,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nHabla con «Boticario Lydon» y entrega «Elixir de agonía».\nZona: Laderas de Trabalomas."
+              "instruction": "Opcional.\nHabla con «Boticario Lydon» y entrega «Elixir de agonía».\nZona: Laderas de Trabalomas.",
+              "soloAfter": [
+                515
+              ]
             },
             {
               "title": "Elixir de agonía",
@@ -292310,7 +292496,10 @@
               "f": "e",
               "optional": true,
               "qlvl": 30,
-              "instruction": "Opcional.\nHabla con «Boticario Lydon» y acepta «Elixir de agonía».\nZona: Laderas de Trabalomas."
+              "instruction": "Opcional.\nHabla con «Boticario Lydon» y acepta «Elixir de agonía».\nZona: Laderas de Trabalomas.",
+              "soloAfter": [
+                517
+              ]
             },
             {
               "title": "Elixir de agonía",
@@ -292325,7 +292514,10 @@
               "z": 61.9,
               "f": "e",
               "optional": true,
-              "instruction": "Opcional.\nInteractúa con «Alfombra polvorienta» para entregar «Elixir de agonía».\nZona: Laderas de Trabalomas.\nPlace el Barril contaminado en el Alfombra polvorienta junto a la posada."
+              "instruction": "Opcional.\nInteractúa con «Alfombra polvorienta» para entregar «Elixir de agonía».\nZona: Laderas de Trabalomas.\nPlace el Barril contaminado en el Alfombra polvorienta junto a la posada.",
+              "soloAfter": [
+                517
+              ]
             }
           ]
         },
@@ -292668,7 +292860,8 @@
               "z": 56.3,
               "f": "e",
               "qlvl": 36,
-              "instruction": "Habla con «Krusk» y acepta «Gol'dir».\nZona: Laderas de Trabalomas."
+              "instruction": "Habla con «Krusk» y acepta «Gol'dir».\nZona: Laderas de Trabalomas.",
+              "levelingDetour": true
             },
             {
               "title": "La venganza de Helcular",
@@ -292744,7 +292937,8 @@
               ],
               "from": "Jailor Borhuin",
               "fromKind": "npc",
-              "instruction": "Recoge «Llave de hierro oxidada» del botín de «Jailor Borhuin»."
+              "instruction": "Recoge «Llave de hierro oxidada» del botín de «Jailor Borhuin».",
+              "levelingDetour": true
             },
             {
               "title": "Gol'dir",
@@ -292758,7 +292952,8 @@
               "y": 43.74,
               "z": 171.9,
               "f": "e",
-              "instruction": "Habla con «Gol'dir» y entrega «Gol'dir»."
+              "instruction": "Habla con «Gol'dir» y entrega «Gol'dir».",
+              "levelingDetour": true
             },
             {
               "title": "El legado de Lodonegro",
@@ -292779,7 +292974,10 @@
               "z": 171.9,
               "f": "e",
               "qlvl": 36,
-              "instruction": "Habla con «Gol'dir» y acepta «El legado de Lodonegro»."
+              "instruction": "Habla con «Gol'dir» y acepta «El legado de Lodonegro».",
+              "soloAfter": [
+                503
+              ]
             }
           ]
         },
@@ -292799,7 +292997,10 @@
               "y": 20.66,
               "z": 56.3,
               "f": "e",
-              "instruction": "Habla con «Krusk» y entrega «El legado de Lodonegro».\nZona: Laderas de Trabalomas."
+              "instruction": "Habla con «Krusk» y entrega «El legado de Lodonegro».\nZona: Laderas de Trabalomas.",
+              "soloAfter": [
+                503
+              ]
             }
           ]
         },
@@ -302177,7 +302378,15 @@
               "z": 73.7,
               "f": "e",
               "qlvl": 34,
-              "instruction": "Habla con «Rutherford Twing» y acepta «Paquete de curación elemental de los Rapiñadores».\nZona: Tierras Altas de Arathi."
+              "instruction": "Habla con «Rutherford Twing» y acepta «Paquete de curación elemental de los Rapiñadores».\nZona: Tierras Altas de Arathi.",
+              "levelingDetour": true,
+              "offerLimits": {
+                "maxLevel": 34,
+                "minRep": {
+                  "factionID": 510,
+                  "standing": 3000
+                }
+              }
             },
             {
               "title": "Paquete de curación elemental de los Rapiñadores",
@@ -302190,7 +302399,15 @@
               "y": 29.67,
               "z": 73.7,
               "f": "e",
-              "instruction": "Habla con «Rutherford Twing» y entrega «Paquete de curación elemental de los Rapiñadores».\nZona: Tierras Altas de Arathi."
+              "instruction": "Habla con «Rutherford Twing» y entrega «Paquete de curación elemental de los Rapiñadores».\nZona: Tierras Altas de Arathi.",
+              "levelingDetour": true,
+              "offerLimits": {
+                "maxLevel": 34,
+                "minRep": {
+                  "factionID": 510,
+                  "standing": 3000
+                }
+              }
             }
           ]
         },
@@ -316605,7 +316822,10 @@
               "x": 54.9,
               "y": 34.1,
               "f": "e",
-              "instruction": "Derrota a «Noboru el Garrote»."
+              "instruction": "Derrota a «Noboru el Garrote».",
+              "starterItem": 6196,
+              "detourQuest": 1392,
+              "levelingDetour": true
             },
             {
               "t": "collect",
@@ -316617,7 +316837,10 @@
               "f": "e",
               "from": "Noboru el Garrote",
               "fromKind": "npc",
-              "instruction": "Recoge «Cayada de Noboru» del botín de «Noboru el Garrote»."
+              "instruction": "Recoge «Cayada de Noboru» del botín de «Noboru el Garrote».",
+              "starterItem": 6196,
+              "detourQuest": 1392,
+              "levelingDetour": true
             },
             {
               "title": "Noboru el Garrote",
@@ -316627,7 +316850,11 @@
               "item": 6196,
               "itemName": "Cayada de Noboru",
               "qlvl": 39,
-              "instruction": "Si tienes «Cayada de Noboru» en tus bolsas, haz clic derecho en él para iniciar «Noboru el Garrote»."
+              "instruction": "Si tienes «Cayada de Noboru» en tus bolsas, haz clic derecho en él para iniciar «Noboru el Garrote».",
+              "levelingDetour": true,
+              "detourItems": {
+                "6196": 1
+              }
             }
           ]
         },
@@ -316796,7 +317023,11 @@
               "y": 31.4,
               "z": 22.1,
               "f": "e",
-              "instruction": "Habla con «Magtoor» y entrega «Noboru el Garrote»."
+              "instruction": "Habla con «Magtoor» y entrega «Noboru el Garrote».",
+              "levelingDetour": true,
+              "detourItems": {
+                "6196": 1
+              }
             },
             {
               "title": "Cristales draenetistas",
@@ -319337,7 +319568,10 @@
               "fromAlso": "Wastewander Thief",
               "fromKind": "npc",
               "spread": true,
-              "instruction": "Recoge «Faltriquera de agua de Deambulador» (10 en total) del botín de «Mago oscuro Deambulador» o «Wastewander Thief».\nZona: Tanaris.\nbolsas de agua en sus bolsas."
+              "instruction": "Recoge «Faltriquera de agua de Deambulador» (10 en total) del botín de «Mago oscuro Deambulador» o «Wastewander Thief».\nZona: Tanaris.\nbolsas de agua en sus bolsas.",
+              "starterItem": 8483,
+              "detourQuest": 1878,
+              "levelingDetour": true
             }
           ]
         },
@@ -319412,7 +319646,11 @@
               "z": 8.8,
               "f": "e",
               "qlvl": 44,
-              "instruction": "Habla con «Grifoperador Llantalunket» y acepta «Cazador de bolsas de agua».\nZona: Tanaris."
+              "instruction": "Habla con «Grifoperador Llantalunket» y acepta «Cazador de bolsas de agua».\nZona: Tanaris.",
+              "levelingDetour": true,
+              "detourItems": {
+                "8483": 5
+              }
             },
             {
               "title": "Cazador de bolsas de agua",
@@ -319425,7 +319663,11 @@
               "y": 28.45,
               "z": 8.8,
               "f": "e",
-              "instruction": "Habla con «Grifoperador Llantalunket» y entrega «Cazador de bolsas de agua».\nZona: Tanaris."
+              "instruction": "Habla con «Grifoperador Llantalunket» y entrega «Cazador de bolsas de agua».\nZona: Tanaris.",
+              "levelingDetour": true,
+              "detourItems": {
+                "8483": 5
+              }
             }
           ]
         },
@@ -328508,7 +328750,10 @@
               "y": 74.7,
               "f": "e",
               "text": "Cuevas Dragon",
-              "instruction": "Dirígete al punto de la ruta: «Cuevas Dragon».\nZona: Marjal Revolcafango."
+              "instruction": "Dirígete al punto de la ruta: «Cuevas Dragon».\nZona: Marjal Revolcafango.",
+              "detourQuest": 1172,
+              "workForQuest": 1172,
+              "workVisit": true
             },
             {
               "title": "Los hijos de Onyxia",
@@ -328971,7 +329216,8 @@
               "z": 25.5,
               "f": "e",
               "qlvl": 50,
-              "instruction": "Habla con «Médico brujo Uzer'i» y acepta «Materiales naturales».\nZona: Feralas."
+              "instruction": "Habla con «Médico brujo Uzer'i» y acepta «Materiales naturales».\nZona: Feralas.",
+              "levelingDetour": true
             },
             {
               "title": "La marca de la calidad",
@@ -329153,7 +329399,8 @@
               "fromAlso": "Sprite Darter",
               "fromKind": "npc",
               "spread": true,
-              "instruction": "Recoge «Minerales taraceados» (6 en total) del botín de «Duende dragón» o «Sprite Darter».\nZona: Feralas."
+              "instruction": "Recoge «Minerales taraceados» (6 en total) del botín de «Duende dragón» o «Sprite Darter».\nZona: Feralas.",
+              "levelingDetour": true
             },
             {
               "t": "goto",
@@ -329162,7 +329409,11 @@
               "y": 47.4,
               "f": "e",
               "text": "Caminadores Forest",
-              "instruction": "Dirígete al punto de la ruta: «Caminadores Forest».\nZona: Feralas."
+              "instruction": "Dirígete al punto de la ruta: «Caminadores Forest».\nZona: Feralas.",
+              "detourQuest": 3128,
+              "levelingDetour": true,
+              "workForQuest": 3128,
+              "workVisit": true
             },
             {
               "title": "Materiales naturales",
@@ -329211,7 +329462,8 @@
               "from": "Caminabosques deambulante",
               "fromKind": "npc",
               "spread": true,
-              "instruction": "Recoge «Tronco astillado» (2 en total) del botín de «Caminabosques deambulante».\nZona: Feralas."
+              "instruction": "Recoge «Tronco astillado» (2 en total) del botín de «Caminabosques deambulante».\nZona: Feralas.",
+              "levelingDetour": true
             }
           ]
         },
@@ -329423,7 +329675,8 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Tendón resistente» (20 en total).\nZona: Feralas."
+              "instruction": "Reúne «Tendón resistente» (20 en total).\nZona: Feralas.",
+              "levelingDetour": true
             },
             {
               "title": "Materiales naturales",
@@ -329624,7 +329877,8 @@
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Fragmentos metálicos» (40 en total).\nZona: Feralas."
+              "instruction": "Reúne «Fragmentos metálicos» (40 en total).\nZona: Feralas.",
+              "levelingDetour": true
             }
           ]
         },
@@ -330251,7 +330505,8 @@
               "y": 43.36,
               "z": 25.5,
               "f": "e",
-              "instruction": "Habla con «Médico brujo Uzer'i» y entrega «Materiales naturales».\nZona: Feralas."
+              "instruction": "Habla con «Médico brujo Uzer'i» y entrega «Materiales naturales».\nZona: Feralas.",
+              "levelingDetour": true
             },
             {
               "title": "Vengarse de las Nortearroyo",
@@ -345092,7 +345347,8 @@
               "z": 25.5,
               "f": "e",
               "qlvl": 50,
-              "instruction": "Habla con «Médico brujo Uzer'i» y acepta «Antárboles muisek».\nZona: Feralas."
+              "instruction": "Habla con «Médico brujo Uzer'i» y acepta «Antárboles muisek».\nZona: Feralas.",
+              "levelingDetour": true
             }
           ]
         },
@@ -345146,7 +345402,8 @@
               "from": "Caminabosques deambulante",
               "fromKind": "npc",
               "spread": true,
-              "instruction": "Recoge «Miniatura treant» del botín de «Caminabosques deambulante».\nZona: Feralas."
+              "instruction": "Recoge «Miniatura treant» del botín de «Caminabosques deambulante».\nZona: Feralas.",
+              "levelingDetour": true
             }
           ]
         },
@@ -345164,7 +345421,8 @@
               "y": 43.36,
               "z": 25.5,
               "f": "e",
-              "instruction": "Habla con «Médico brujo Uzer'i» y entrega «Antárboles muisek».\nZona: Feralas."
+              "instruction": "Habla con «Médico brujo Uzer'i» y entrega «Antárboles muisek».\nZona: Feralas.",
+              "levelingDetour": true
             },
             {
               "title": "Gigantes de montaña muisek",
@@ -345185,7 +345443,10 @@
               "z": 25.5,
               "f": "e",
               "qlvl": 50,
-              "instruction": "Habla con «Médico brujo Uzer'i» y acepta «Gigantes de montaña muisek».\nZona: Feralas."
+              "instruction": "Habla con «Médico brujo Uzer'i» y acepta «Gigantes de montaña muisek».\nZona: Feralas.",
+              "soloAfter": [
+                3126
+              ]
             }
           ]
         },
@@ -345454,7 +345715,10 @@
                   "n": 3
                 }
               ],
-              "instruction": "Reúne «Muisek gigante de montaña».\nZona: Feralas."
+              "instruction": "Reúne «Muisek gigante de montaña».\nZona: Feralas.",
+              "soloAfter": [
+                3126
+              ]
             }
           ]
         },
@@ -345676,7 +345940,10 @@
               "y": 43.36,
               "z": 25.5,
               "f": "e",
-              "instruction": "Habla con «Médico brujo Uzer'i» y entrega «Gigantes de montaña muisek».\nZona: Feralas."
+              "instruction": "Habla con «Médico brujo Uzer'i» y entrega «Gigantes de montaña muisek».\nZona: Feralas.",
+              "soloAfter": [
+                3126
+              ]
             },
             {
               "title": "Armas del espíritu",
@@ -345699,7 +345966,11 @@
               "z": 25.5,
               "f": "e",
               "qlvl": 50,
-              "instruction": "Habla con «Médico brujo Uzer'i» y acepta «Armas del espíritu».\nZona: Feralas."
+              "instruction": "Habla con «Médico brujo Uzer'i» y acepta «Armas del espíritu».\nZona: Feralas.",
+              "soloAfter": [
+                3127,
+                3128
+              ]
             },
             {
               "title": "Armas del espíritu",
@@ -345712,7 +345983,11 @@
               "y": 43.36,
               "z": 25.5,
               "f": "e",
-              "instruction": "Habla con «Médico brujo Uzer'i» y entrega «Armas del espíritu».\nZona: Feralas."
+              "instruction": "Habla con «Médico brujo Uzer'i» y entrega «Armas del espíritu».\nZona: Feralas.",
+              "soloAfter": [
+                3127,
+                3128
+              ]
             }
           ]
         },
@@ -361073,7 +361348,8 @@
               "z": 357.2,
               "f": "e",
               "qlvl": 56,
-              "instruction": "Habla con «Trull Fallarruina» y acepta «Guardianes salvajes».\nZona: Frondavil.\nTrull Fallarruina: las lechuzas están en Cuna del Invierno."
+              "instruction": "Habla con «Trull Fallarruina» y acepta «Guardianes salvajes».\nZona: Frondavil.\nTrull Fallarruina: las lechuzas están en Cuna del Invierno.",
+              "levelingDetour": true
             }
           ]
         },
@@ -363142,7 +363418,8 @@
                 }
               ],
               "spread": true,
-              "instruction": "Derrota a «Lechubestia enfurecida» (15 en total).\nZona: Cuna del Invierno."
+              "instruction": "Derrota a «Lechubestia enfurecida» (15 en total).\nZona: Cuna del Invierno.",
+              "levelingDetour": true
             }
           ]
         },
@@ -363525,7 +363802,8 @@
                 }
               ],
               "spread": true,
-              "instruction": "Derrota a «Lechubestia pulgosa» (15 en total).\nZona: Cuna del Invierno."
+              "instruction": "Derrota a «Lechubestia pulgosa» (15 en total).\nZona: Cuna del Invierno.",
+              "levelingDetour": true
             },
             {
               "note": "Frasco vacío de piroagua, una gota rara de los furbolgs Winterfall",
@@ -365213,7 +365491,8 @@
               "z": 159.3,
               "f": "e",
               "qlvl": 50,
-              "instruction": "Habla con «Bashana Runatótem» y acepta «Investigar la mañagrana»."
+              "instruction": "Habla con «Bashana Runatótem» y acepta «Investigar la mañagrana».",
+              "levelingDetour": true
             },
             {
               "title": "Investigar la mañagrana",
@@ -365221,7 +365500,8 @@
               "quest": 3786,
               "navigationHint": "Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización.",
               "navigationMode": "inventory",
-              "instruction": "Reúne 10 «Mañagrana» mediante el cultivo con «Faltriquera de siempre verde» y Tierra de Un'Goro. Comprueba lo que requiere la faltriquera; la mañagrana es un resultado del cultivo, no un objeto fijo del suelo.\nAcceso o lugar: Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización."
+              "instruction": "Reúne 10 «Mañagrana» mediante el cultivo con «Faltriquera de siempre verde» y Tierra de Un'Goro. Comprueba lo que requiere la faltriquera; la mañagrana es un resultado del cultivo, no un objeto fijo del suelo.\nAcceso o lugar: Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización.",
+              "levelingDetour": true
             },
             {
               "title": "Investigar la mañagrana",
@@ -365234,7 +365514,8 @@
               "y": 34.19,
               "z": 159.3,
               "f": "e",
-              "instruction": "Habla con «Bashana Runatótem» y entrega «Investigar la mañagrana»."
+              "instruction": "Habla con «Bashana Runatótem» y entrega «Investigar la mañagrana».",
+              "levelingDetour": true
             },
             {
               "title": "Mañagrana para Cima del Trueno",
@@ -365255,7 +365536,11 @@
               "z": 159.3,
               "f": "e",
               "qlvl": 55,
-              "instruction": "Habla con «Bashana Runatótem» y acepta «Mañagrana para Cima del Trueno»."
+              "instruction": "Habla con «Bashana Runatótem» y acepta «Mañagrana para Cima del Trueno».",
+              "levelingDetour": true,
+              "detourItems": {
+                "11040": 10
+              }
             },
             {
               "title": "Mañagrana para Cima del Trueno",
@@ -365263,7 +365548,11 @@
               "quest": 3804,
               "navigationHint": "Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización.",
               "navigationMode": "inventory",
-              "instruction": "Reúne la cantidad de «Mañagrana» que pida el registro mediante el cultivo con «Faltriquera de siempre verde» y Tierra de Un'Goro. Comprueba el resultado y los requisitos en tus bolsas antes de entregarla.\nAcceso o lugar: Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización."
+              "instruction": "Reúne la cantidad de «Mañagrana» que pida el registro mediante el cultivo con «Faltriquera de siempre verde» y Tierra de Un'Goro. Comprueba el resultado y los requisitos en tus bolsas antes de entregarla.\nAcceso o lugar: Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización.",
+              "levelingDetour": true,
+              "detourItems": {
+                "11040": 10
+              }
             },
             {
               "title": "Mañagrana para Cima del Trueno",
@@ -365276,7 +365565,11 @@
               "y": 34.19,
               "z": 159.3,
               "f": "e",
-              "instruction": "Habla con «Bashana Runatótem» y entrega «Mañagrana para Cima del Trueno»."
+              "instruction": "Habla con «Bashana Runatótem» y entrega «Mañagrana para Cima del Trueno».",
+              "levelingDetour": true,
+              "detourItems": {
+                "11040": 10
+              }
             }
           ]
         },
@@ -366601,7 +366894,26 @@
                 }
               ],
               "navigationHint": "La flecha señala un maestro de vuelo de salida. Habla con él y elige El Cruce; el juego confirma qué vuelos tienes disponibles.",
-              "instruction": "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «El Cruce».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige El Cruce; el juego confirma qué vuelos tienes disponibles."
+              "instruction": "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «El Cruce».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige El Cruce; el juego confirma qué vuelos tienes disponibles.",
+              "levelingDetour": true,
+              "detourOffers": [
+                {
+                  "t": "accept",
+                  "quest": 91899,
+                  "levelingDetour": true,
+                  "detourItems": {
+                    "248765": 1
+                  }
+                },
+                {
+                  "t": "accept",
+                  "quest": 91904,
+                  "levelingDetour": true,
+                  "detourItems": {
+                    "248770": 1
+                  }
+                }
+              ]
             }
           ]
         },
@@ -366622,7 +366934,11 @@
               "f": "e",
               "qlvl": 60,
               "instruction": "Habla con «Dokimi» y acepta «A Sealed Crate».\nZona: Los Baldíos.",
-              "instructionReplacesContext": true
+              "instructionReplacesContext": true,
+              "levelingDetour": true,
+              "detourItems": {
+                "248765": 1
+              }
             },
             {
               "title": "A Sealed Crate",
@@ -366631,7 +366947,11 @@
               "navigationHint": "Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización.",
               "navigationMode": "inventory",
               "instruction": "Necesitas «Sealed Apprentice Crate» (objeto 248765). Verifica los materiales de la caja y el requisito del registro antes de entregarla. Las notas de la fuente discrepan sobre cómo obtenerla; no se ha documentado un punto de recogida.\nAcceso o lugar: Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización.",
-              "instructionReplacesContext": true
+              "instructionReplacesContext": true,
+              "levelingDetour": true,
+              "detourItems": {
+                "248765": 1
+              }
             },
             {
               "title": "A Sealed Crate",
@@ -366644,7 +366964,11 @@
               "y": 29.35,
               "f": "e",
               "instruction": "Habla con «Dokimi» y entrega «A Sealed Crate».\nZona: Los Baldíos.",
-              "instructionReplacesContext": true
+              "instructionReplacesContext": true,
+              "levelingDetour": true,
+              "detourItems": {
+                "248765": 1
+              }
             },
             {
               "title": "A Sealed Crate",
@@ -366658,7 +366982,11 @@
               "f": "e",
               "qlvl": 60,
               "instruction": "Habla con «Dokimi» y acepta «A Sealed Crate».\nZona: Los Baldíos.",
-              "instructionReplacesContext": true
+              "instructionReplacesContext": true,
+              "levelingDetour": true,
+              "detourItems": {
+                "248770": 1
+              }
             },
             {
               "title": "A Sealed Crate",
@@ -366667,7 +366995,11 @@
               "navigationHint": "Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización.",
               "navigationMode": "inventory",
               "instruction": "Necesitas «Sealed Apprentice Crate» (objeto 248770). Verifica los materiales de la caja y el requisito del registro antes de entregarla. Las notas de la fuente discrepan sobre cómo obtenerla; no se ha documentado un punto de recogida.\nAcceso o lugar: Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización.",
-              "instructionReplacesContext": true
+              "instructionReplacesContext": true,
+              "levelingDetour": true,
+              "detourItems": {
+                "248770": 1
+              }
             },
             {
               "title": "A Sealed Crate",
@@ -366680,7 +367012,11 @@
               "y": 29.35,
               "f": "e",
               "instruction": "Habla con «Dokimi» y entrega «A Sealed Crate».\nZona: Los Baldíos.",
-              "instructionReplacesContext": true
+              "instructionReplacesContext": true,
+              "levelingDetour": true,
+              "detourItems": {
+                "248770": 1
+              }
             }
           ]
         },
@@ -369242,7 +369578,8 @@
               "y": 63.51,
               "z": 125.2,
               "qlvl": 58,
-              "instruction": "Habla con «Nathanos Clamañublo» y acepta «Matar con un propósito».\nZona: Tierras de la Peste del Este."
+              "instruction": "Habla con «Nathanos Clamañublo» y acepta «Matar con un propósito».\nZona: Tierras de la Peste del Este.",
+              "levelingDetour": true
             },
             {
               "title": "Los pequeños problemas de la no-vida",
@@ -371061,7 +371398,10 @@
               "fromAlso": "Hate Shrieker",
               "fromKind": "npc",
               "spread": true,
-              "instruction": "Recoge «Caña viva» (7 en total) del botín de «Necrófago tartamudo» o «Hate Shrieker».\nZona: Tierras de la Peste del Este."
+              "instruction": "Recoge «Caña viva» (7 en total) del botín de «Necrófago tartamudo» o «Hate Shrieker».\nZona: Tierras de la Peste del Este.",
+              "detourQuest": 6022,
+              "levelingDetour": true,
+              "workForQuest": 6022
             },
             {
               "title": "Matar con un propósito",
@@ -371069,7 +371409,8 @@
               "quest": 6022,
               "navigationHint": "Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización.",
               "navigationMode": "inventory",
-              "instruction": "Recoge 7 «Caña viva» de la Plaga de Cruce de Corin. Usa «Mano y almirez» para triturarlas y obtener «Putrefacción coagulada» antes de que pasen 10 minutos: las muestras caducan.\nAcceso o lugar: Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización."
+              "instruction": "Recoge 7 «Caña viva» de la Plaga de Cruce de Corin. Usa «Mano y almirez» para triturarlas y obtener «Putrefacción coagulada» antes de que pasen 10 minutos: las muestras caducan.\nAcceso o lugar: Esta acción requiere comprobar o combinar objetos de las bolsas; sigue las instrucciones de la misión y revisa su requisito en el diario. No tiene un punto fijo de finalización.",
+              "levelingDetour": true
             }
           ]
         },
@@ -371087,7 +371428,8 @@
               "x": 22.23,
               "y": 63.51,
               "z": 125.2,
-              "instruction": "Habla con «Nathanos Clamañublo» y entrega «Matar con un propósito».\nZona: Tierras de la Peste del Este."
+              "instruction": "Habla con «Nathanos Clamañublo» y entrega «Matar con un propósito».\nZona: Tierras de la Peste del Este.",
+              "levelingDetour": true
             },
             {
               "title": "Los pequeños problemas de la no-vida",
@@ -371854,7 +372196,8 @@
               "y": 52.79,
               "z": 357.2,
               "f": "e",
-              "instruction": "Habla con «Trull Fallarruina» y entrega «Guardianes salvajes».\nZona: Frondavil."
+              "instruction": "Habla con «Trull Fallarruina» y entrega «Guardianes salvajes».\nZona: Frondavil.",
+              "levelingDetour": true
             },
             {
               "title": "Guardianes salvajes",
@@ -371875,7 +372218,8 @@
               "z": 357.2,
               "f": "e",
               "qlvl": 58,
-              "instruction": "Habla con «Trull Fallarruina» y acepta «Guardianes salvajes».\nZona: Frondavil."
+              "instruction": "Habla con «Trull Fallarruina» y acepta «Guardianes salvajes».\nZona: Frondavil.",
+              "levelingDetour": true
             }
           ]
         },
@@ -372197,7 +372541,8 @@
                 }
               ],
               "spread": true,
-              "instruction": "Derrota a «Lechubestia lunadón» (13 en total).\nZona: Cuna del Invierno."
+              "instruction": "Derrota a «Lechubestia lunadón» (13 en total).\nZona: Cuna del Invierno.",
+              "levelingDetour": true
             }
           ]
         },
@@ -372485,7 +372830,11 @@
               "z": 9.4,
               "f": "e",
               "qlvl": 60,
-              "instruction": "Interactúa con «Huevomático» y acepta «El Superhuevomático».\nZona: Tanaris.\nLa máquina Egg-O-Matic."
+              "instruction": "Interactúa con «Huevomático» y acepta «El Superhuevomático».\nZona: Tanaris.\nLa máquina Egg-O-Matic.",
+              "levelingDetour": true,
+              "detourItems": {
+                "8564": 1
+              }
             }
           ]
         },
@@ -372850,7 +373199,14 @@
                 }
               ],
               "navigationHint": "La flecha señala un maestro de vuelo de salida. Habla con él y elige Campamento Mojache; el juego confirma qué vuelos tienes disponibles.",
-              "instruction": "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «Campamento Mojache».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige Campamento Mojache; el juego confirma qué vuelos tienes disponibles."
+              "instruction": "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «Campamento Mojache».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige Campamento Mojache; el juego confirma qué vuelos tienes disponibles.",
+              "workForQuest": 2741,
+              "workVisit": true,
+              "detourQuest": 2741,
+              "levelingDetour": true,
+              "detourItems": {
+                "8564": 1
+              }
             },
             {
               "title": "El Superhuevomático",
@@ -372886,7 +373242,11 @@
               "from": "Huevo de hipogrifo",
               "fromKind": "object",
               "spread": true,
-              "instruction": "Interactúa con «Huevo de hipogrifo» para reunir «Huevo de hipogrifo».\nZona: Feralas."
+              "instruction": "Interactúa con «Huevo de hipogrifo» para reunir «Huevo de hipogrifo».\nZona: Feralas.",
+              "levelingDetour": true,
+              "detourItems": {
+                "8564": 1
+              }
             }
           ]
         },
@@ -376134,7 +376494,15 @@
                 }
               ],
               "navigationHint": "La flecha señala un maestro de vuelo de salida. Habla con él y elige Gadgetzan; el juego confirma qué vuelos tienes disponibles.",
-              "instruction": "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «Gadgetzan».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige Gadgetzan; el juego confirma qué vuelos tienes disponibles."
+              "instruction": "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «Gadgetzan».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige Gadgetzan; el juego confirma qué vuelos tienes disponibles.",
+              "levelingDetour": true,
+              "detourOffers": [
+                {
+                  "t": "turnin",
+                  "quest": 2741,
+                  "levelingDetour": true
+                }
+              ]
             },
             {
               "title": "El Superhuevomático",
@@ -376147,7 +376515,11 @@
               "y": 26.97,
               "z": 9.4,
               "f": "e",
-              "instruction": "Interactúa con «Huevomático» para entregar «El Superhuevomático».\nZona: Tanaris."
+              "instruction": "Interactúa con «Huevomático» para entregar «El Superhuevomático».\nZona: Tanaris.",
+              "levelingDetour": true,
+              "detourItems": {
+                "8564": 1
+              }
             }
           ]
         },
@@ -377701,7 +378073,8 @@
               "y": 50.04,
               "z": 86.8,
               "qlvl": 60,
-              "instruction": "Habla con «Carlin Rutagrana» y acepta «Los merodeadores de Villa Dorrow».\nZona: Tierras de la Peste del Este."
+              "instruction": "Habla con «Carlin Rutagrana» y acepta «Los merodeadores de Villa Dorrow».\nZona: Tierras de la Peste del Este.",
+              "levelingDetour": true
             },
             {
               "title": "El duque Nicolas Zverenhoff",
@@ -377734,7 +378107,8 @@
               "x": 81.5,
               "y": 44,
               "f": "e",
-              "instruction": "Reúne «Calavera resonadora» (5 en total).\nZona: Tierras de la Peste del Este."
+              "instruction": "Reúne «Calavera resonadora» (5 en total).\nZona: Tierras de la Peste del Este.",
+              "levelingDetour": true
             }
           ]
         },
@@ -377752,7 +378126,8 @@
               "x": 71.7,
               "y": 50.04,
               "z": 86.8,
-              "instruction": "Habla con «Carlin Rutagrana» y entrega «Los merodeadores de Villa Dorrow».\nZona: Tierras de la Peste del Este."
+              "instruction": "Habla con «Carlin Rutagrana» y entrega «Los merodeadores de Villa Dorrow».\nZona: Tierras de la Peste del Este.",
+              "levelingDetour": true
             },
             {
               "title": "Vuelve con Chromie",
@@ -377772,7 +378147,10 @@
               "y": 50.04,
               "z": 86.8,
               "qlvl": 60,
-              "instruction": "Habla con «Carlin Rutagrana» y acepta «Vuelve con Chromie».\nZona: Tierras de la Peste del Este."
+              "instruction": "Habla con «Carlin Rutagrana» y acepta «Vuelve con Chromie».\nZona: Tierras de la Peste del Este.",
+              "soloAfter": [
+                5206
+              ]
             }
           ]
         },
@@ -377888,7 +378266,10 @@
               "y": 66.76,
               "z": 68.6,
               "f": "e",
-              "instruction": "Habla con «Cromi» y entrega «Vuelve con Chromie».\nZona: Tierras de la Peste del Oeste."
+              "instruction": "Habla con «Cromi» y entrega «Vuelve con Chromie».\nZona: Tierras de la Peste del Oeste.",
+              "soloAfter": [
+                5206
+              ]
             },
             {
               "t": "note",
@@ -378482,7 +378863,8 @@
               "y": 52.79,
               "z": 357.2,
               "f": "e",
-              "instruction": "Habla con «Trull Fallarruina» y entrega «Guardianes salvajes».\nZona: Frondavil."
+              "instruction": "Habla con «Trull Fallarruina» y entrega «Guardianes salvajes».\nZona: Frondavil.",
+              "levelingDetour": true
             },
             {
               "t": "note",

@@ -1,0 +1,356 @@
+{
+  "7791": {
+    "policy": "existing",
+    "reason": "Clavicus acepta 60 paños de lana en Ventormenta. Aprovecha la visita si ya llevas el lote. La lana cuenta para el donativo rúnico de este mismo intendente.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/05-silithus.guide#L160"
+  },
+  "7793": {
+    "policy": "existing",
+    "reason": "La seda se entrega a Clavicus en la visita a Ventormenta. Completar el lote de 60 con botín acumulado ahorra volver a enemigos de nivel bajo.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/05-silithus.guide#L162"
+  },
+  "7794": {
+    "policy": "existing",
+    "reason": "Clavicus pide 60 paños mágicos como parte de sus donativos previos al rúnico. Se conserva el cobro durante la visita si ya tienes todo el paño.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/05-silithus.guide#L163"
+  },
+  "7795": {
+    "policy": "existing",
+    "reason": "Tras entregar a Clavicus lana, seda y paño mágico puedes donar 60 paños rúnicos. La ruta aprovecha un lote completo al final del recorrido.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/06-silithus.guide#L326"
+  },
+  "7804": {
+    "policy": "existing",
+    "reason": "La entrega a Mistina en Forjaz consume 60 paños mágicos y cuenta para su donativo rúnico. Merece la parada cuando ya llevas el lote.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/05-silithus.guide#L187"
+  },
+  "7805": {
+    "policy": "existing",
+    "reason": "Mistina pide 60 paños rúnicos después de sus tres donativos anteriores. Reunirlos expresamente retrasa el último tramo al 60, así que se aprovecha el paño que ya tienes.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/06-silithus.guide#L350"
+  },
+  "7807": {
+    "policy": "existing",
+    "reason": "Bubulo recibe 60 paños de lana en la visita a Ciudad Manitas. Se evita volver a zonas de nivel bajo por una de las tres donaciones que abren la rúnica.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/05-silithus.guide#L182"
+  },
+  "7808": {
+    "policy": "existing",
+    "reason": "Reserva la entrega de 60 paños de seda a Bubulo para una visita a Forjaz con el lote completo. El único encargo de la ruta que lo pide como previa es su donativo rúnico.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/05-silithus.guide#L183"
+  },
+  "7809": {
+    "policy": "existing",
+    "reason": "Si ya tienes 60 paños mágicos, entrégalos a Bubulo al pasar por Ciudad Manitas. Completar la donación por separado solo adelanta otro encargo de paño.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/05-silithus.guide#L184"
+  },
+  "7811": {
+    "policy": "existing",
+    "reason": "Bubulo acepta el lote de 60 paños rúnicos después de sus donaciones de lana, seda y paño mágico. La visita con los materiales listos permite cobrar sin una cacería adicional.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/06-silithus.guide#L341"
+  },
+  "7820": {
+    "policy": "existing",
+    "reason": "Lleva a Rumstag los 60 paños de lana solo si los has guardado para la parada en Cima del Trueno. La guía continúa cuando falta lana.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/03-winterspring.guide#L197"
+  },
+  "7821": {
+    "policy": "existing",
+    "reason": "La seda de Rumstag se cobra en la visita prevista a Cima del Trueno. Volver a zonas que suelten los 60 paños añade un viaje por un donativo de reputación.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/03-winterspring.guide#L198"
+  },
+  "7822": {
+    "policy": "existing",
+    "reason": "Entrega a Rumstag los 60 paños mágicos que tengas acumulados al pasar por Cima del Trueno. La ruta de la Horda sigue con sus objetivos de nivel si falta paño.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/03-winterspring.guide#L199"
+  },
+  "7824": {
+    "policy": "existing",
+    "reason": "El donativo de 60 paños rúnicos a Rashona exige los de lana, seda y paño mágico de esta misma intendente. Se comprueban las tres entregas y el lote antes de proponértelo.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/04-azshara.guide#L97"
+  },
+  "7826": {
+    "policy": "existing",
+    "reason": "Rashona recibe 60 paños de lana en Orgrimmar. Completar esta entrega cuando ya tienes lana suma una previa para el donativo rúnico sin salir de la ciudad.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/03-winterspring.guide#L238"
+  },
+  "7827": {
+    "policy": "existing",
+    "reason": "El lote de 60 paños de seda de Rashona puede entregarse en la misma visita que sus demás donaciones. Ir a buscar seda a niveles altos retrasa el siguiente bloque de misiones.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/03-winterspring.guide#L239"
+  },
+  "7831": {
+    "policy": "existing",
+    "reason": "Los 60 paños mágicos de Rashona contribuyen a abrir su entrega rúnica. La visita a Orgrimmar merece la pena si ya has reunido todo el lote.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/03-winterspring.guide#L240"
+  },
+  "7833": {
+    "policy": "existing",
+    "reason": "Vehena tiene un donativo de 60 paños de lana distinto del de Rashona. El mismo lote solo puede entregarse una vez, así que comprueba qué tienes al hablar con cada una.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/03-winterspring.guide#L232"
+  },
+  "7834": {
+    "policy": "existing",
+    "reason": "Vehena pide 60 paños de seda al pasar por Orgrimmar. Guárdalos para esta entrega si buscas su donativo rúnico y deja que la ruta siga cuando falte algún paño.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/03-winterspring.guide#L233"
+  },
+  "7835": {
+    "policy": "existing",
+    "reason": "El donativo de 60 paños mágicos a Vehena completa una de sus tres previas. Se conserva para la visita a Orgrimmar con la tela ya reunida.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/03-winterspring.guide#L234"
+  },
+  "7836": {
+    "policy": "existing",
+    "reason": "Los 60 paños rúnicos de Vehena se entregan después de sus propios lotes de lana, seda y paño mágico. Conserva la oportunidad si los tienes al volver a Orgrimmar.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/04-azshara.guide#L90"
+  },
+  "8263": {
+    "policy": "detour",
+    "reason": "Rutherford ofrece estas provisiones para la Cuenca de Arathi entre los niveles 25 y 34 si eres Amistoso con los Rapiñadores. La ruta pasa por él entre el 37 y el 40, cuando normalmente ya ha caducado la oferta.",
+    "offerLimits": {"maxLevel": 34, "minRep": {"factionID": 510, "standing": 3000}},
+    "url": "https://forevermastery.com/en/quests/8263"
+  },
+  "8276": {
+    "policy": "keep",
+    "reason": "Recoge el aviso en Orgrimmar y llévalo al Fuerte Cenarion al entrar en Silithus. El recorrido ya pasa por ambos personajes y puedes cobrar durante el traslado previsto.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/50-60/04-azshara.guide#L47"
+  },
+  "8466": {
+    "policy": "existing",
+    "reason": "Grazle recibe cinco plumas de los Muertobosque después de combatirlos en el sur de Frondavil. La repetición se deja a elección de quien quiera reputación y ya tenga las plumas.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/02-felwood.guide#L51"
+  },
+  "8467": {
+    "policy": "existing",
+    "reason": "Nafien también acepta cinco plumas en el extremo norte de Frondavil. Conviene aprovechar las sobrantes al llegar al túnel y seguir hacia Cuna del Invierno si faltan.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/02-felwood.guide#L148"
+  },
+  "8469": {
+    "policy": "existing",
+    "reason": "Salfa pide cinco cuentas de espíritu Nevada después de la primera misión contra los fúrbolgs. En ambas facciones se mantiene el filtro que permite entregar las cuentas acumuladas.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/03-winterspring.guide#L167"
+  },
+  "8470": {
+    "policy": "existing",
+    "reason": "El tótem Muertobosque inicia el encargo desde la mochila y Kernda lo recibe dentro del bastión. Buscar el objeto y subir reputación para hablar con ella son desvíos opcionales.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/02-felwood.guide#L143"
+  },
+  "8471": {
+    "policy": "existing",
+    "reason": "El tótem Nevada cae en Cuna del Invierno. Si lo consigues y Kernda ya te atiende, puedes aprovechar un paso posterior por el bastión. Ambas facciones conservan este encargo como opcional.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/50-60/03-winterspring.guide#L91"
+  },
+  "79536": {
+    "policy": "detour",
+    "reason": "Garion ofrece el premio tras donar veinte libros distintos. Si ya has llegado a veinte, cobra al pasar por Ventormenta: puedes elegir un anillo con 7 de agilidad y 7 de aguante. Buscar los veinte libros expresamente retrasa la subida.",
+    "url": "https://foreverchanges.pro/item/281634/field-researchers-loop"
+  },
+  "91736": {
+    "policy": "existing",
+    "reason": "El alambique cambia cuatro manzanas rojas por una botella de Thunder Applejack. Comprar las manzanas y subir al alambique se deja como desvío opcional en la visita a Arroyoeste.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/human/01-elwynn-forest.guide#L450"
+  },
+  "91738": {
+    "policy": "detour",
+    "reason": "De Vries está junto a Rainer en el cuartel de Arroyoeste. Puedes recoger y entregar el encargo en esa misma visita si llevas la botella de Thunder Applejack del alambique.",
+    "url": "https://www.wowhead.com/forever/item=247824/thunder-applejack",
+    "materials": {
+      "247824": 1
+    }
+  },
+  "91899": {
+    "policy": "detour",
+    "reason": "Dokimi recibe la caja de aprendiz sellada 248765 en El Cruce. Es una entrega comercial. Se aprovecha si ya llevas esa caja antes del vuelo a Trinquete.",
+    "url": "https://zephras.com/forever/enUS/quest/91899/",
+    "materials": {
+      "248765": 1
+    }
+  },
+  "91904": {
+    "policy": "detour",
+    "reason": "Este segundo encargo de Dokimi comprueba otra caja sellada, la 248770. Solo conviene pasar por El Cruce con esa variante preparada o si eliges hacer la actividad comercial.",
+    "url": "https://zephras.com/forever/enUS/quest/91904/",
+    "materials": {
+      "248770": 1
+    }
+  },
+  "92646": {
+    "policy": "keep",
+    "reason": "La variante de la Horda del enfrentamiento con Lorthuna termina con Ayessa. Abre «The Fate of Zephras» y permite continuar hacia Mulgore desde la isla inicial.",
+    "url": "https://zephras.com/forever/enUS/quest/92646/"
+  },
+  "92871": {
+    "policy": "keep",
+    "reason": "Ayessa te envía a Valennia tras derrotar a Belathaan. La entrega abre la defensa de la torre que utiliza el itinerario de la Horda para progresar en la isla.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/skyborne/01-zephras-isle.guide#L446"
+  },
+  "92910": {
+    "policy": "existing",
+    "reason": "La pieza de un gólem cosechador abre una entrega a Ozwin. Se mantiene opcional para aprovecharla si cae durante las bajas de gólems de las granjas.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/02-westfall.guide#L132"
+  },
+  "92911": {
+    "policy": "existing",
+    "reason": "El segundo encargo de Ozwin pide ocho muelles, cuatro moduladores de cobre y una mira. Dos componentes requieren fabricación o compra, por lo que completar ese lote es opcional.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/02-westfall.guide#L104"
+  },
+  "92947": {
+    "policy": "keep",
+    "reason": "Ambas facciones combaten a los guardianes, invocadores y maestros de espadas Al'Aketh en la ofensiva de la isla. Este asalto abre la entrada al santuario interior.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/skyborne/01-zephras-isle.guide#L440"
+  },
+  "93089": {
+    "policy": "keep",
+    "reason": "Los Skyborne de la Alianza hablan con Elaadrin tras resolver el destino de Zephras. Esa conversación abre el viaje a Dalaran y encaja en la salida de la isla.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/skyborne/01-zephras-isle.guide#L534"
+  },
+  "93090": {
+    "policy": "keep",
+    "reason": "La variante de la Horda lleva a Ayessa y abre su envío al Anillo de la Tierra. Completar esta conversación permite continuar al capítulo de Kalimdor.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/skyborne/01-zephras-isle.guide#L654"
+  },
+  "93740": {
+    "policy": "keep",
+    "reason": "Los diez amuletos caen en el campamento Al'Aketh mientras haces las bajas y buscas al comandante Belguilos para Yorana. Vuelves a Valanaar por varios encargos y puedes entregarlos juntos.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/skyborne/01-zephras-isle.guide#L447"
+  },
+  "93746": {
+    "policy": "keep",
+    "reason": "Belathaan está en el camino al norte de Valanaar. Matarlo desbloquea tanto el envío a Valennia como la recogida de amuletos durante la siguiente visita a los cultores.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/skyborne/01-zephras-isle.guide#L443"
+  },
+  "93835": {
+    "policy": "keep",
+    "reason": "La variante de la Alianza termina con Elaadrin y abre su encargo sobre el destino de la isla. Mantiene la secuencia que acaba en el portal hacia Dalaran.",
+    "url": "https://zephras.com/forever/enUS/quest/93835/"
+  },
+  "93836": {
+    "policy": "keep",
+    "reason": "En la ruta de la Horda, Ayessa te pide hablar con Talaanis. Es el enlace entre el enfrentamiento con Lorthuna y la conversación que prepara la partida de la isla.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/skyborne/01-zephras-isle.guide#L651"
+  },
+  "93958": {
+    "policy": "keep",
+    "reason": "Hyusaa envía a ambas facciones ante Valennia en el santuario. Esa entrega abre la versión correspondiente del encuentro con Lorthuna, necesaria para la salida de Zephras.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/skyborne/01-zephras-isle.guide#L456"
+  },
+  "94369": {
+    "policy": "keep",
+    "reason": "En la ruta de la Alianza, Elaadrin te manda con Talaanis después de Lorthuna. El diálogo desbloquea la siguiente conversación con Elaadrin y el viaje a Dalaran.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/skyborne/01-zephras-isle.guide#L531"
+  },
+  "94824": {
+    "policy": "keep",
+    "reason": "Para un sacerdote gnomo, ir de Maxan en Kharanos a Mims en Forjaz encaja con la visita a la ciudad. Es la presentación para aprender Confounding Flash.",
+    "url": "https://zephras.com/forever/enUS/quest/94824/"
+  },
+  "94946": {
+    "policy": "keep",
+    "reason": "El portal conduce al siguiente tramo de la Alianza a través de Dalaran. Hablar con Denaaris forma parte del traslado desde la isla inicial.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/skyborne/01-zephras-isle.guide#L536"
+  },
+  "95217": {
+    "policy": "existing",
+    "reason": "Frast Dokner ofrece este encargo a herreros en la cantera. Se deja opcional para que los personajes que suben otras profesiones puedan continuar con las misiones de Dun Morogh.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L408"
+  },
+  "95349": {
+    "policy": "keep",
+    "reason": "El envío de Ayessa termina con Alaana en Mulgore. Es la salida de la isla para los Skyborne de la Horda y abre «Welcome to Azeroth» en la nueva zona.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/skyborne/01-zephras-isle.guide#L656"
+  },
+  "95883": {
+    "policy": "keep",
+    "reason": "Si ya entregaste el recorte en la piedra, los no muertos de las ruinas cercanas sueltan el alma y vuelves al mismo sitio. Se han registrado entregas de 1.400 puntos de experiencia al nivel 20. La tercera parte, de élite, sigue siendo opcional.",
+    "url": "https://zephras.com/forever/enUS/quest/95883/",
+    "preferAfter": [
+      95884
+    ]
+  },
+  "95884": {
+    "policy": "detour",
+    "reason": "La nota de un guardián Corvozarpa inicia el encargo. Con ella en la mochila puedes entregarla en el peligro de Beren y abrir el encargo del alma durante el trayecto al Molino Tarren.",
+    "url": "https://zephras.com/forever/enUS/quest/95884/",
+    "materials": {
+      "271343": 1
+    }
+  },
+  "95885": {
+    "policy": "existing",
+    "reason": "La tercera parte de la piedra pide completar un combate de élite. Es opcional aunque ya hayas entregado el alma de la segunda parte. Puedes continuar hacia el Molino Tarren.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/05-stonetalon-mountains.guide#L239"
+  },
+  "95981": {
+    "policy": "keep",
+    "reason": "Los zahoríes y magos de Dalaran patrullan los caminos de Molino Ámbar. Ya visitas el asentamiento para recoger los colgantes y entregas ambos encargos a Allister al regresar.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/03-silverpine-forest.guide#L244"
+  },
+  "96138": {
+    "policy": "existing",
+    "reason": "El arco de Merrick se obtiene como botín y abre una cacería de guerreros y capataces Puñastilla. Buscar el arco expresamente añade un desvío en el Bosque del Ocaso.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/07-thousand-needles.guide#L152"
+  },
+  "96241": {
+    "policy": "keep",
+    "reason": "Extrae las cinco muestras de los cadáveres roídos de Gloomrise mientras cazas arañas para los otros dos encargos. Los tres se entregan juntos al volver al campamento.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/07-ashenvale.guide#L259"
+  },
+  "96259": {
+    "policy": "keep",
+    "reason": "Combate contra los soldados y las crías en el mismo cementerio donde recoges seda y muestras. Las quince bajas normales dan experiencia y el regreso a Muln ya está previsto.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/07-ashenvale.guide#L261"
+  },
+  "96260": {
+    "policy": "keep",
+    "reason": "Las hilanderas sueltan las tres sedas cristalinas en el circuito de Gloomrise. Puedes conseguirlas junto a los cadáveres que necesitas para Mazu'kon y volver al mismo campamento.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/07-ashenvale.guide#L260"
+  },
+  "96294": {
+    "policy": "detour",
+    "reason": "El pergamino lo lleva Valraxx, la matriarca de élite al norte de Gloomrise. Si ya lo conseguiste, ábrelo y entrégalo a Muln junto con las otras misiones. La ruta en solitario puede dejar atrás a la matriarca.",
+    "url": "https://zephras.com/forever/enUS/quest/96294/",
+    "materials": {
+      "273658": 1
+    }
+  },
+  "97263": {
+    "policy": "existing",
+    "reason": "El paquete del buzón de Ciudad Manitas se entrega a Eldrun junto a la Gran Forja. Se conserva como pequeño recado opcional durante la visita a Forjaz antes de tomar el tranvía.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L606"
+  },
+  "98093": {
+    "policy": "keep",
+    "reason": "Los lagartos y acechadores de Sulhasa están en la llanura que cruzas entre Gann y Loma Espina Negra. Puedes cazar al ir y volver, y entregar cuando regreses a Gann.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/04-the-barrens.guide#L444"
+  },
+  "98291": {
+    "policy": "existing",
+    "reason": "Howin exige varias bajas en los campamentos Faucedraco del este tras sus dos encargos previos. La guía de solitario evita esta misión de grupo y reserva su continuación para quien la complete.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L5308"
+  },
+  "98297": {
+    "policy": "existing",
+    "reason": "Tras entregar «Muerte a los Faucedraco», Howin envía de nuevo a los campamentos por un dragonante. El regreso para ese combate se mantiene fuera del itinerario obligatorio en solitario.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/01-hillsbrad-foothills.guide#L111"
+  },
+  "98298": {
+    "policy": "existing",
+    "reason": "Los seis restos de huargen quedan en un ramal al sur de Molino Ámbar y la oferta de Dalar depende del progreso de la serie de Arugal. Se conserva el desvío opcional.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/03-silverpine-forest.guide#L246"
+  },
+  "98299": {
+    "policy": "keep",
+    "reason": "Los dos tipos de refugiado ocupan el camino del bucle sur de Argénteos. Haz las bajas al pasar y entrega a Dalar al regresar al Sepulcro por los otros encargos.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/03-silverpine-forest.guide#L247"
+  },
+  "98310": {
+    "policy": "existing",
+    "reason": "Los cuatro corazones de los vigías exigen combates y desplazamientos separados por Los Humedales. El filtro de grupo permite saltarlos al subir solo y aprovechar la entrega si ya tienes los cuatro.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/01-hillsbrad-foothills.guide#L103"
+  },
+  "99052": {
+    "policy": "existing",
+    "reason": "Orgnil pide el cinturón de Aggor, un gigante marino de élite. Se conserva como combate opcional para quien consiga ayuda, con regreso a Cerrotajo.",
+    "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/horde/orc-troll/01-durotar.guide#L505"
+  }
+}

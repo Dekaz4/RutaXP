@@ -39,7 +39,10 @@ local function currentAdvice(self, row, state)
     if status == "blocked" then return reason, "estado" end
     if status == "skip" and reason ~= "Opcional desactivado" then return reason, "estado" end
     if status == "done" then return reason, "estado" end
-    if self.IsSoloLevelingDetour and self:IsSoloLevelingDetour(row.goal) then return "Ya tienes los materiales. Acéptala para entregarla.", "ahora" end
+    if self.IsSoloLevelingDetour and self:IsSoloLevelingDetour(row.goal) then
+        if row.goal.soloWhenOffered then return "Ya puedes recoger la recompensa con este personaje.", "ahora" end
+        return "Ya tienes los materiales. Acéptala para entregarla.", "ahora"
+    end
     if row.goal.optional then return "Opcional en este paso.", "opcional" end
     return "Acéptala ahora para seguir este paso.", "ahora"
 end

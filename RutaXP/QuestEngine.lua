@@ -67,13 +67,28 @@ end
 -- Re-evaluate on each visit so carried materials and ready deliveries count.
 function ns:IsSoloLevelingDetour(goal)
     local char = self.char
-    return goal and goal.levelingDetour and char and not char.optional and not (char.duo and char.duo.enabled)
-        and (not goal.detourBelowLevel or (read(UnitLevel, "player") or 1) < goal.detourBelowLevel)
+    if not goal or not char or char.optional or (char.duo and char.duo.enabled) then return false end
+    if goal.soloAfter and not self:IsQuestActive(goal.quest or goal.groupVisitFor) then
+        for _, qid in ipairs(goal.soloAfter) do
+            if not self:IsQuestDelivered(qid) then return true end
+        end
+    end
+    return goal.levelingDetour and (not goal.detourBelowLevel or (read(UnitLevel, "player") or 1) < goal.detourBelowLevel)
 end
 
 function ns:GetLevelingDetourReason(goal, onQuest, complete)
     if not self:IsSoloLevelingDetour(goal) then return end
     local reason = "Desvío de leveo. Activa «Opcionales» si quieres hacerlo."
+    if goal.soloWhenOffered and self.IsQuestOnOpenMenu and self:IsQuestOnOpenMenu(goal.quest, goal.npc) then return end
+    if goal.soloAfter and not goal.levelingDetour then return "Puedes retomarla al entregar la misión previa opcional." end
+    if goal.detourOffers then
+        for _, offer in ipairs(goal.detourOffers) do
+            if not self:IsQuestDelivered(offer.quest) and
+                (self:IsQuestActive(offer.quest) and read(C_QuestLog and C_QuestLog.IsComplete, offer.quest) == true
+                 or not self:GetLevelingDetourReason(offer)) then return end
+        end
+        return reason
+    end
     local action = goal.t or goal.action
     local linked = goal.detourQuest
     local id = goal.quest or goal.questID or linked
@@ -414,6 +429,9 @@ local groupTags = { [1]=true, [62]=true, [81]=true, [85]=true, [88]=true, [89]=t
 local knownGroup = {}
 local groupCheckedAt = {}
 local function isGroupQuest(self, id, layout)
+    -- The Sunken Temple breadcrumb ends at Marvon in Tanaris. The dungeon tag
+    -- also applies to this outdoor conversation, before the trip into the temple.
+    if id == 3380 then return false end
     if knownGroup[id] or (layout and layout.groupQuests[id]) or (self.Data and self.Data.groupQuests and self.Data.groupQuests[id]) then return true end
     local now = GetTime and GetTime()
     local checked = groupCheckedAt[id]
@@ -521,7 +539,7 @@ end
 
 function ns:GetGroupDeferralReason(goal, step, guide, index, onQuest)
     if not self.char or self.char.includeGroupQuests == true or not goal then return end
-    local id = goal.quest or goal.questID or goal.workForQuest
+    local id = goal.quest or goal.questID or goal.workForQuest or goal.groupVisitFor
     guide = guide or self.guides[self.char.activeGuide]
     local layout = guide and getGuideLayout(self, guide)
     local action = goal.t or goal.action
@@ -632,6 +650,14 @@ end
 
 -- These points exist only for work in the journal or to reach an XP threshold.
 function ns:GetAuxiliaryGoalStatus(goal)
+    if goal.starterItem and (itemCount(goal.starterItem) >= (goal.count or 1) or self:IsQuestActive(goal.detourQuest)
+        or self:IsQuestDelivered(goal.detourQuest)) then return "done", "Objeto de inicio conseguido" end
+    if goal.detourOffers then
+        for _, offer in ipairs(goal.detourOffers) do
+            if not self:IsQuestDelivered(offer.quest) then return end
+        end
+        return "done", "Las entregas de esta visita ya están hechas"
+    end
     if goal.untilLevel and (read(UnitLevel, "player") or 1) >= goal.untilLevel then
         return "done", "Nivel alcanzado"
     end
@@ -644,13 +670,36 @@ function ns:GetAuxiliaryGoalStatus(goal)
     end
 end
 
+function ns:GetUnavailableOfferReason(goal, playerLevel)
+    local limits = goal.offerLimits
+    if not limits then return end
+    playerLevel = playerLevel or read(UnitLevel, "player")
+    local reason
+    if limits.maxLevel and playerLevel and playerLevel > limits.maxLevel then
+        reason = "Solo puedes aceptarla hasta el nivel " .. limits.maxLevel
+    elseif limits.minRep then
+        local rep = limits.minRep
+        local data = read(C_Reputation and C_Reputation.GetFactionDataByID, rep.factionID)
+        local standing = type(data) == "table" and read(function() return data.currentStanding end)
+        if type(standing) ~= "number" then
+            local _, _, _, _, _, value = read(GetFactionInfoByID, rep.factionID)
+            standing = value
+        end
+        if type(standing) == "number" and standing < rep.standing then
+            reason = "Te falta reputación para aceptar esta misión"
+        end
+    end
+    if reason and self.IsQuestOnOpenMenu and self:IsQuestOnOpenMenu(goal.quest or goal.questID, goal.npc) then return end
+    return reason
+end
+
 function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
     if not self:MatchesConditions(step and step.only) or not self:MatchesConditions(goal.only) then return "skip", "Otro personaje" end
     guide = guide or (self.char and self.guides[self.char.activeGuide])
     local layout = guide and getGuideLayout(self, guide)
     local stepIndex = (layout and step and layout.stepOf[step]) or (state and state.cursor) or 1
     local action, id = goal.t or goal.action, goal.quest or goal.questID
-    if goal.untilLevel or goal.workForQuest then
+    if goal.untilLevel or goal.workForQuest or goal.starterItem or goal.detourOffers then
         local status, reason = self:GetAuxiliaryGoalStatus(goal)
         if status then return status, reason end
     end
@@ -709,6 +758,10 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
     if profession == false then return "skip", professionReason end
     if profession == nil then return "blocked", professionReason end
     local playerLevel = UnitLevel("player") or 1
+    if goal.offerLimits and not onQuest then
+        local reason = self:GetUnavailableOfferReason(goal, playerLevel)
+        if reason then return "skip", reason end
+    end
     if action == "accept" then
         -- Grey is an XP classification, not proof that a quest/reward is
         -- expendable. This policy is off by default and protects known

@@ -35,6 +35,15 @@ local function menuOffers(kind, detailID)
     return offers
 end
 
+function ns:IsQuestOnOpenMenu(id, npc)
+    if not npc or self:GetQuestContactNPC() ~= npc then return false end
+    for _, kind in ipairs({"QUEST_DETAIL", "GOSSIP_SHOW", "QUEST_GREETING"}) do
+        local offers = menuOffers(kind, id)
+        if offers and offers[id] then return true end
+    end
+    return false
+end
+
 local function journal(id)
     if ns.turnedIn[id] == true then return "delivered" end
     local active = readable(C_QuestLog and C_QuestLog.IsOnQuest, id)

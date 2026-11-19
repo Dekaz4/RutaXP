@@ -117,6 +117,7 @@ def main():
                  "solo_leveling_route.py", "solo_hillsbrad_route.py", "solo_mid_route.py", "solo_late_route.py",
                  "route_review_alliance_start.py", "route_review_alliance_late.py", "route_review_horde.py",
                  "review_all_routes.py", "route_review_template.html", "capture_route_comparison.py",
+                 "unmatched_solo.py", "solo_review_unmatched_a.json", "solo_review_unmatched_b.json", "solo_review_unmatched_c.json",
                  "route_comparison_facts.json", "route_review_alliance_late_capture.py", "route_review_alliance_late_sage.json",
                  "build_travel_connections.py", "audit_quest_requirements.py", "review_human_rogue.py",
                  "build_early_quest_offers.py", "build_map_services.py"]:

@@ -221,14 +221,14 @@ Las continuaciones de McBride se aceptan antes de ir a Jorik, Paxton o Tordrin. 
 | 49.1 | Entregar · La fuga (#114) | Maybell Maclure · mapa 1429 · 43.15, 89.62 |
 | 50.1 | Entregar · ¡Princesa debe morir! (#88) | La vieja Pedregosa · mapa 1429 · 34.66, 84.48 |
 | 50.2 | Entregar · Dientes de oro (#87) | "Tía" Bernice Pedregosa · mapa 1429 · 34.49, 84.25 |
-| 50.3 | Comprar · Shiny Red Apples, de Homer Pedregosa, paral Applejack Still | Manzana roja lustrosa ×4 · mapa 1429 · 33.69, 82.9 |
+| 50.3 | Comprar · Shiny Red Apples, de Homer Pedregosa, paral Applejack Still | Manzana roja lustrosa ×4 · desvío opcional en solitario · mapa 1429 · 33.69, 82.9 |
 | 51.1 | Aceptar · Applejack Still (#91736) | desde nivel 1 · opcional · mapa 1429 · 24.55, 58.04 · sin datos externos de requisitos |
 | 51.2 | Entregar · Applejack Still (#91736) | opcional · mapa 1429 · 24.55, 58.04 |
-| 51.3 | Recoger · Thunder Applejack, desdel todavía | Thunder Applejack · mapa 1429 · 24.6, 58 |
+| 51.3 | Recoger · Thunder Applejack, desdel todavía | Thunder Applejack · desvío opcional en solitario · mapa 1429 · 24.6, 58 |
 | 52.1 | Entregar · El Cuartel de Arroyoeste necesita ayuda (#239) | Ayudante del alguacil Rainer · mapa 1429 · 24.23, 74.45 |
 | 52.2 | Aceptar · Recompensas por los gnolls Zarparrío (#11) | Ayudante del alguacil Rainer · desde nivel 6 · previa 76 · mapa 1429 · 24.23, 74.45 · fuentes en desacuerdo sobre previas |
-| 52.3 | Aceptar · An Apple Treat (#91738) | Sargento De Vries · desde nivel 7 · mapa 1429 · 24.08, 73.2 |
-| 52.4 | Entregar · An Apple Treat (#91738) | Sargento De Vries · mapa 1429 · 24.08, 73.2 |
+| 52.3 | Aceptar · An Apple Treat (#91738) | Sargento De Vries · desde nivel 7 · desvío opcional en solitario · mapa 1429 · 24.08, 73.2 |
+| 52.4 | Entregar · An Apple Treat (#91738) | Sargento De Vries · desvío opcional en solitario · mapa 1429 · 24.08, 73.2 |
 | 53.1 | Recoger · Recompensas por los gnolls Zarparrío (#11) | Banda gnoll pintada ×8 · mapa 1429 · 27.45, 79.89 |
 | 53.2 | Recoger · Planificación de recogida de oro: Bronco Mordeveloz | Planificación de recogida de oro · Bronco Mordeveloz · mapa 1429 · 27.72, 86.03 |
 | 53.3 | Aceptar · El Coleccionista (#123) | Planificación de recogida de oro · desde nivel 7 |
@@ -1131,8 +1131,8 @@ Farren entrega 563 después de 562. El siguiente objetivo de 563 está en Ventor
 | 38.2 | Entregar · En busca de sabiduría (#269) | Obispo Lontananza · mapa 1453 · 49.93, 45.99 |
 | 38.3 | Aceptar · La flota maldita (#270) | Obispo Lontananza · desde nivel 20 · previa 269 · mapa 1453 · 49.93, 45.99 |
 | 39.1 | Aceptar · Una petición de Malin (#690) | Archimago Malin · desde nivel 30 · mapa 1453 · 50.5, 87.47 |
-| 39.2 | Aceptar · Greater Friend of the Library (#79536) | Garion Wendell · desde nivel 20 · mapa 1453 · 48.95, 86.54 · a elegir · Field Researcher's Loop · sin datos externos de requisitos |
-| 39.3 | Entregar · Greater Friend of the Library (#79536) | Garion Wendell · mapa 1453 · 48.95, 86.54 · a elegir · Field Researcher's Loop |
+| 39.2 | Aceptar · Greater Friend of the Library (#79536) | Garion Wendell · desde nivel 20 · desvío opcional en solitario · mapa 1453 · 48.95, 86.54 · a elegir · Field Researcher's Loop · sin datos externos de requisitos |
+| 39.3 | Entregar · Greater Friend of the Library (#79536) | Garion Wendell · desvío opcional en solitario · mapa 1453 · 48.95, 86.54 · a elegir · Field Researcher's Loop |
 | 39.4 | Aceptar · James Hyal (#1301) | Connor Ríos · desde nivel 30 · mapa 1453 · 51.12, 95.52 |
 | 40.1 | Entregar · El diplomático desaparecido (#1247) | Elling Trias · mapa 1453 · 66.03, 74.1 |
 | 40.2 | Aceptar · El diplomático desaparecido (#1248) | Elling Trias · desde nivel 28 · previa 1247 · mapa 1453 · 66.03, 74.1 |
@@ -1414,17 +1414,17 @@ El cofre de 1421 (64.46,18.3) está junto a la jaula de Galen (65.47,18.16). Rec
 | 4.2 | Aceptar · La caravana perdida (#1421) | Vigía Biggs · desde nivel 30 · previa 1396 · mapa 1435 · 26.74, 59.83 |
 | 5.1 | Aceptar · Cristales draenetistas (#1389) | Magtoor · desde nivel 30 · mapa 1435 · 25.98, 31.4 |
 | 6.1 | Recoger · Cristales draenetistas (#1389) | Cristal draenetista ×6 · Cristales draenetistas · mapa 1435 · 55.09, 30.08 |
-| 6.2 | Recoger · Retiro Fangoso | Cayada de Noboru · Noboru el Garrote · mapa 1435 · 54.9, 34.1 |
-| 6.3 | Aceptar · Noboru el Garrote (#1392) | Cayada de Noboru · desde nivel 29 |
+| 6.2 | Recoger · Retiro Fangoso | Cayada de Noboru · Noboru el Garrote · desvío opcional en solitario · mapa 1435 · 54.9, 34.1 |
+| 6.3 | Aceptar · Noboru el Garrote (#1392) | Cayada de Noboru · desde nivel 29 · desvío opcional en solitario |
 | 7.1 | Recoger · La caravana perdida (#1421) | Componentes de zahorí · Cofre de la caravana · mapa 1435 · 64.46, 18.3 |
 | 8.1 | Aceptar · La huida de Galen (#1393) | Galen Bonguarda · desde nivel 30 · mapa 1435 · 65.47, 18.16 |
 | 8.2 | Completar · La huida de Galen (#1393) | varios destinos o ubicaciones según objetivo |
 | 8.3 | Entregar · La huida de Galen (#1393) | Caja fuerte de Galen · mapa 1435 · 47.81, 39.76 |
-| 9.1 | Entregar · Noboru el Garrote (#1392) | Magtoor · mapa 1435 · 25.98, 31.4 |
+| 9.1 | Entregar · Noboru el Garrote (#1392) | Magtoor · desvío opcional en solitario · mapa 1435 · 25.98, 31.4 |
 | 9.2 | Entregar · Cristales draenetistas (#1389) | Magtoor · mapa 1435 · 25.98, 31.4 |
 | 10.1 | Entregar · La caravana perdida (#1421) | Vigía Biggs · mapa 1435 · 26.74, 59.83 |
 | 11.1 | Volar · Ventormenta | varios destinos o ubicaciones según objetivo |
-| 12.1 | Aceptar · Un plato bien frío (#212) | Angus Stern · desde nivel 35 · mapa 1453 · 51.79, 93.64 |
+| 12.1 | Aceptar · Un plato bien frío (#212) | Angus Stern · desde nivel 35 · desvío opcional en solitario · mapa 1453 · 51.79, 93.64 |
 | 12.2 | Aceptar · Morgan Stern (#1260) | Angus Stern · desde nivel 33 · mapa 1453 · 51.79, 93.64 |
 | 12.3 | Aceptar · Hermano Antón (#6141) | Hermano Cuerviz · desde nivel 34 · mapa 1453 · 52.62, 43.18 |
 | 12.4 | Aceptar · Costasur (#538) | Milton Gavilla · desde nivel 20 · previa 337 · mapa 1453 · 77.07, 30.21 |
@@ -1752,7 +1752,7 @@ La única acción en la visita tras los barcos es la entrega opcional 608. Pospo
 | 30.2 | Recoger · El vudú debido (#609) | Anillo enorme de Chucky · Chucky "Diezdedos" · mapa 1434 · 40, 58.24 |
 | 31.1 | Recoger · La minería de Ventura y Cía. (#600) | Cristal canto azul ×10 · Supervisor Cozzle · mapa 1434 · 36.52, 57.06 |
 | 32.1 | Recoger · Colmillos de Machacacráneos (#209) | Colmillo Machacacráneos ×18 · mapa 1434 · 45.61, 41.6 |
-| 33.1 | Recoger · Un plato bien frío (#212) | Anca de basilisco fría · Basilisco Ojogélido · mapa 1434 · 38.15, 40.36 |
+| 33.1 | Recoger · Un plato bien frío (#212) | Anca de basilisco fría · Basilisco Ojogélido · desvío opcional en solitario · mapa 1434 · 38.15, 40.36 |
 | 34.1 | Recoger · La pesca de perlas (#705) | Perla azul ×9 · Almeja gigante · mapa 1434 · 27.6, 29.2 |
 | 34.2 | Recoger · La maldición de las mareas (#611) | Piedra de las Mareas · Gazban · mapa 1434 · 24.97, 23.58 |
 | 35.1 | Derrotar · Abre el equipo de entomología de Amaryllis y usa la herramienta correspondiente sobre el ejemplar. | Arbor Tarantula · mapa 1434 · 43.1, 16.73 |
@@ -1767,7 +1767,7 @@ La única acción en la visita tras los barcos es la entrega opcional 608. Pospo
 | 36.8 | Entregar · Colmillos de Machacacráneos (#209) | Kebok · mapa 1434 · 27, 77.13 |
 | 37.1 | Volar · Ventormenta | varios destinos o ubicaciones según objetivo |
 | 37.2 | Fijar hogar · Ciudad de Ventormenta | varios destinos o ubicaciones según objetivo |
-| 37.3 | Entregar · Un plato bien frío (#212) | Angus Stern · mapa 1453 · 51.79, 93.64 |
+| 37.3 | Entregar · Un plato bien frío (#212) | Angus Stern · desvío opcional en solitario · mapa 1453 · 51.79, 93.64 |
 | 37.4 | Aceptar · ¡Una fiesta en tu honor! (#1271) | Angus Stern · desde nivel 30 · previa 1222 · mapa 1453 · 51.79, 93.64 · fuentes en desacuerdo sobre previas |
 | 37.5 | Entregar · ¡Una fiesta en tu honor! (#1271) | Angus Stern · mapa 1453 · 51.79, 93.64 |
 | 37.6 | Aceptar · La orden de Mazen (#1363) | Mazen Mac'Nadir · desde nivel 37 · mapa 1453 · 51.8, 74.24 |
@@ -1978,14 +1978,14 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 8.2 | Derrotar · Justicia para bandidos (#1690) | Ladrón Deambulador · mapa 1446 · 63.93, 29.09 |
 | 8.3 | Recoger · Cazador de bolsas de agua (#1707) | Faltriquera de agua de Deambulador ×5 · Mago oscuro Deambulador · mapa 1446 · 63.93, 29.09 |
 | 9.1 | Entregar · Cazador de bolsas de agua (#1707) | Grifoperador Llantalunket · mapa 1446 · 52.49, 28.45 |
-| 9.2 | Aceptar · Cazador de bolsas de agua (#1878) | Grifoperador Llantalunket · desde nivel 40 · previa 1707 · mapa 1446 · 52.49, 28.45 |
+| 9.2 | Aceptar · Cazador de bolsas de agua (#1878) | Grifoperador Llantalunket · desde nivel 40 · previa 1707 · desvío opcional en solitario · mapa 1446 · 52.49, 28.45 |
 | 9.3 | Entregar · Justicia para bandidos (#1690) | Ingeniero jefe Pasaquillas · mapa 1446 · 52.46, 28.51 |
 | 9.4 | Aceptar · Más justicia para bandidos (#1691) | Ingeniero jefe Pasaquillas · desde nivel 40 · previa 1690 · mapa 1446 · 52.46, 28.51 |
 | 10.1 | Derrotar · Más justicia para bandidos (#1691) | Mago oscuro Deambulador ×10 · mapa 1446 · 58.93, 35.85 |
 | 10.2 | Derrotar · Más justicia para bandidos (#1691) | Pícaro Deambulador ×8 · mapa 1446 · 58.62, 36.68 |
 | 10.3 | Derrotar · Más justicia para bandidos (#1691) | Asesino Deambulador ×6 · mapa 1446 · 58.75, 36.41 |
-| 10.4 | Recoger · Cazador de bolsas de agua (#1878) | Faltriquera de agua de Deambulador · Mago oscuro Deambulador · mapa 1446 · 58.75, 36.41 |
-| 11.1 | Entregar · Cazador de bolsas de agua (#1878) | Grifoperador Llantalunket · mapa 1446 · 52.49, 28.45 |
+| 10.4 | Recoger · Cazador de bolsas de agua (#1878) | Faltriquera de agua de Deambulador · Mago oscuro Deambulador · desvío opcional en solitario · mapa 1446 · 58.75, 36.41 |
+| 11.1 | Entregar · Cazador de bolsas de agua (#1878) | Grifoperador Llantalunket · desvío opcional en solitario · mapa 1446 · 52.49, 28.45 |
 | 11.2 | Entregar · Más justicia para bandidos (#1691) | Ingeniero jefe Pasaquillas · mapa 1446 · 52.46, 28.51 |
 | 11.3 | Aceptar · El goblin sediento (#2605) | Marin Tragonublo · desde nivel 44 · mapa 1446 · 51.81, 28.66 |
 | 11.4 | Aceptar · El Territorio Machacaduna (#5863) | Andi Lynn · desde nivel 44 · mapa 1446 · 52.82, 27.4 |
@@ -2623,9 +2623,9 @@ Se visita a Pratt al lado de la posada antes de salir a buscar a Ángelas. Ánge
 | 25.4 | Aceptar · Carlin, el hermano de Joseph (#5210) | Cromi · desde nivel 50 · previa 5154 · mapa 1422 · 39.46, 66.76 |
 | 26.1 | Recoger · Contar el tiempo (#4972) | Reloj de Andorhal ×5 · Arcón pequeño · mapa 1422 · 40.32, 66.47 |
 | 27.1 | Entregar · Contar el tiempo (#4972) | Cromi · mapa 1422 · 39.46, 66.76 |
-| 27.2 | Aceptar · Contar el tiempo (#4973) | Cromi · desde nivel 53 · previa 4972 · mapa 1422 · 39.46, 66.76 |
-| 28.1 | Recoger · Contar el tiempo (#4973) | Reloj de Andorhal ×5 · Arcón pequeño · mapa 1422 · 40.32, 66.47 |
-| 29.1 | Entregar · Contar el tiempo (#4973) | Cromi · mapa 1422 · 39.46, 66.76 |
+| 27.2 | Aceptar · Contar el tiempo (#4973) | Cromi · desde nivel 53 · previa 4972 · desvío opcional en solitario · mapa 1422 · 39.46, 66.76 |
+| 28.1 | Recoger · Contar el tiempo (#4973) | Reloj de Andorhal ×5 · Arcón pequeño · desvío opcional en solitario · mapa 1422 · 40.32, 66.47 |
+| 29.1 | Entregar · Contar el tiempo (#4973) | Cromi · desvío opcional en solitario · mapa 1422 · 39.46, 66.76 |
 | 30.1 | Aceptar · Negocios inconclusos (#6004) | Kirsta Sombraprofunda · desde nivel 50 · mapa 1422 · 51.92, 28.06 |
 | 31.1 | Derrotar · Negocios inconclusos (#6004) | Médico Escarlata ×2 · mapa 1422 · 51.76, 44.83 |
 | 31.2 | Derrotar · Negocios inconclusos (#6004) | Cazador Escarlata ×2 · mapa 1422 · 51.63, 44.53 |
@@ -2808,10 +2808,10 @@ En Forjaz se visitan los donantes y Laris por sectores antes de ir a la sala del
 | 20.2 | Entregar · El imperativo soberano (#7261) | Teniente Haggerdin · desvío opcional en solitario · mapa 1424 · 43.4, 19.5 |
 | 21.1 | Volar · Capilla de la Esperanza de la Luz | varios destinos o ubicaciones según objetivo |
 | 21.2 | Entregar · Los héroes de Villa Darrow (#5168) | Carlin Rutagrana · mapa 1423 · 71.7, 50.04 |
-| 21.3 | Aceptar · Los merodeadores de Villa Dorrow (#5206) | Carlin Rutagrana · desde nivel 50 · previa 5168 + 5181 · mapa 1423 · 71.7, 50.04 |
-| 22.1 | Derrotar · Campeón de la Plaga | opcional · mapa 1423 · 66.62, 43.08 |
-| 22.2 | Recoger · Los merodeadores de Villa Dorrow (#5206) | Calavera resonadora ×5 · mapa 1423 · 81.5, 44 |
-| 23.1 | Entregar · Los merodeadores de Villa Dorrow (#5206) | Carlin Rutagrana · mapa 1423 · 71.7, 50.04 |
+| 21.3 | Aceptar · Los merodeadores de Villa Dorrow (#5206) | Carlin Rutagrana · desde nivel 50 · previa 5168 + 5181 · desvío opcional en solitario · mapa 1423 · 71.7, 50.04 |
+| 22.1 | Derrotar · Campeón de la Plaga | desvío opcional en solitario · mapa 1423 · 66.62, 43.08 |
+| 22.2 | Recoger · Los merodeadores de Villa Dorrow (#5206) | Calavera resonadora ×5 · desvío opcional en solitario · mapa 1423 · 81.5, 44 |
+| 23.1 | Entregar · Los merodeadores de Villa Dorrow (#5206) | Carlin Rutagrana · desvío opcional en solitario · mapa 1423 · 71.7, 50.04 |
 | 23.2 | Aceptar · Vuelve con Chromie (#5941) | Carlin Rutagrana · desde nivel 50 · previa 5206 · mapa 1423 · 71.7, 50.04 |
 | 24.1 | Recoger · La súplica de Hameya (#6024) | Llave de Hameya · Infiltrador Hameya · mapa 1423 · 61.96, 11.11 |
 | 25.1 | Entregar · La súplica de Hameya (#6024) | Túmulo de porquería · mapa 1423 · 23.58, 73.79 · fija · Destripador de Hameya |
