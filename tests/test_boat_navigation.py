@@ -8,10 +8,11 @@ from test_talent_trainer_regressions import TalentTrainerHost
 
 
 GUIDE = "forever/alliance/07-thousand-needles"
+DESOLACE = "forever/alliance/30-40/02-desolace"
 
 
 class BoatHost:
-    def __init__(self, saved=None, position=(1437, .10, .59)):
+    def __init__(self, saved=None, position=(1437, .10, .59), guide_id=GUIDE, step_index=31, quests=None):
         self.h = TalentTrainerHost(full_toc=True)
         self.ns, self.s = self.h.ns, self.h.state
         self.h.g.ACCESS_NS = self.ns
@@ -22,17 +23,20 @@ class BoatHost:
         self.s.members, self.s.level = 0, 30
         self.s.classToken, self.s.raceToken = "ROGUE", "Human"
         self.s.mapID, self.s.x, self.s.y = position
-        self.guide = self.ns.guides[GUIDE]
-        self.step = self.guide.steps[31]
+        self.guide = self.ns.guides[guide_id]
+        self.step_index = step_index
+        self.step = self.guide.steps[step_index]
         self.goal_index, self.goal = next((gi, goal) for gi, goal in self.step.goals.items()
                                          if goal.t == "boat")
-        self.goal_key = f"31:{self.goal_index}"
+        self.goal_key = f"{step_index}:{self.goal_index}"
+        for quest, value in (quests or {}).items():
+            self.s.quests[quest] = self.h.table(value)
         self.h.g.RutaXPCharDB = self.h.table(saved or {
-            "seen": True, "activeGuide": GUIDE, "auto": True,
+            "seen": True, "activeGuide": guide_id, "auto": True,
             "duo": {"enabled": False, "autoPair": False},
-            "progress": {GUIDE: {"cursor": 31, "routeRevision": self.guide.routeRevision,
-                "placed": True, "confirmed": {"31:1": True},
-                "skipped": {f"31:{gi}": True for gi in range(2, self.goal_index)}}}})
+            "progress": {guide_id: {"cursor": step_index, "routeRevision": self.guide.routeRevision,
+                "placed": True, "confirmed": {f"{step_index}:1": True} if self.goal_index > 1 else {},
+                "skipped": {f"{step_index}:{gi}": True for gi in range(2, self.goal_index)}}}})
         self.h.g.EmitAddonEvent("ADDON_LOADED", "RutaXP")
         self.h.g.EmitAddonEvent("PLAYER_LOGIN")
         self.b = self.ns.BoatNavigation
@@ -50,7 +54,8 @@ class BoatHost:
         self.b.Tick(self.b, .6)
 
     def complete(self):
-        return self.b.IsComplete(self.b, self.goal, self.guide, 31, self.goal_index, self.ns.char.progress[GUIDE])
+        return self.b.IsComplete(self.b, self.goal, self.guide, self.step_index, self.goal_index,
+                                 self.ns.char.progress[self.guide.id])
 
     def progress(self):
         return primitive_copy(self.ns.char.progress)
@@ -321,6 +326,82 @@ class BoatNavigationTests(unittest.TestCase):
         h.move((1437, .0952, .5966))
         self.assertEqual(h.view().state, "approach")
         self.assertEqual(primitive_copy(h.ns.char), before)
+
+
+class AuberdineBoatTests(unittest.TestCase):
+    def journey(self, position=(1437, .096, .597), *, saved=None, quest=True):
+        quests = {98209: {"onQuest": True, "complete": True}} if quest else {}
+        return BoatHost(saved, position, DESOLACE, 2, quests)
+
+    def test_north_pier_stopover_and_disembarkation_lead_to_thundris(self):
+        h = self.journey()
+        point = h.point()
+        self.assertEqual(h.view().state, "approach")
+        self.assertEqual(point.mapID, 1437)
+        self.assertAlmostEqual(point.x, .0449)
+        self.assertAlmostEqual(point.y, .5666)
+        h.move((1437, .0449, .5666))
+        self.assertIn("Costasur", h.view().shortText)
+        self.assertIsNone(h.point())
+        h.move((1424, .5067, .7044))
+        h.ns.UpdateNavigation(h.ns)
+        self.assertEqual(h.ns.navigationFrame.navigationState, "stopover")
+        self.assertIn("Quédate a bordo", h.ns.navigationFrame.hint.text)
+        self.assertIsNone(h.point())
+        self.assertFalse(h.complete())
+        h = self.journey((1424, .465, .782), saved=primitive_copy(h.ns.char))
+        self.assertEqual(h.view().state, "stopover")
+        self.assertIsNone(h.point())
+        h.move((1439, .3234, .4413))
+        h.tick()
+        self.assertFalse(h.complete(), "The ship at its final dock is not proof of landing")
+        self.assertEqual(h.view().state, "landing")
+        h.move((1439, .3704, .4413))
+        h.tick()
+        self.assertTrue(h.complete())
+        goal = h.ns.GetActiveGoal(h.ns)[0]
+        self.assertEqual((goal.t, goal.quest, goal.npc), ("turnin", 98209, 3649))
+        self.assertAlmostEqual(h.point().x, .374)
+
+    def test_entering_the_stopover_from_land_points_to_the_local_pier(self):
+        h = self.journey((1424, .4944, .521))
+        self.assertEqual(h.view().state, "approach")
+        p = h.point()
+        self.assertEqual(p.mapID, 1424)
+        self.assertAlmostEqual(p.x, .5067)
+        h.move((1424, .5067, .7044))
+        self.assertEqual(h.view().state, "stopover")
+
+    def test_real_stopover_chapter_keeps_astranaar_flight_without_the_flower(self):
+        h = self.journey((1439, .364, .455), quest=False)
+        h.tick()
+        self.assertTrue(h.complete())
+        self.assertEqual(h.ns.char.progress[DESOLACE].cursor, 2)
+        goal = h.ns.GetActiveGoal(h.ns)[0]
+        self.assertEqual((goal.t, goal.location), ("fly", "Astranaar"))
+
+    def test_returning_to_menethil_with_a_completed_quest_still_requires_crossing(self):
+        h = self.journey(quest=False)
+        h.s.quests[98209] = h.h.table({"delivered": True})
+        self.assertFalse(h.complete())
+        self.assertEqual(h.view().state, "approach")
+        h.move((1424, .5067, .7044))
+        self.assertFalse(h.complete())
+        self.assertEqual(h.view().state, "stopover")
+
+    def test_saved_flight_and_astranaar_do_not_reopen_the_crossing(self):
+        h = self.journey(quest=False)
+        h.s.quests[98209] = h.h.table({"delivered": True})
+        h.s.flying = True
+        h.move((1439, .374, .55))
+        self.assertEqual(h.ns.GetActiveGoal(h.ns)[0].t, "fly")
+        h.s.flying = False
+        h.move((1440, .345, .4802))
+        self.assertEqual(h.ns.FlightNavigation.CurrentView(h.ns.FlightNavigation).state, "arrived")
+        h.ns.Sync(h.ns)
+        self.assertGreater(h.ns.char.progress[DESOLACE].cursor, 2)
+        self.assertFalse(primitive_copy(h.ns.char.boatNavigation.arrivals),
+                         "Taking a flight independently must not record a ship landing")
 
 
 if __name__ == "__main__":

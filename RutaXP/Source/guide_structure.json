@@ -4,11 +4,11 @@
   "scope": {
     "guides": 57,
     "steps": 2338,
-    "goals": 7455,
+    "goals": 7456,
     "questIDs": 1901,
     "actions": {
       "accept": 2292,
-      "boat": 1,
+      "boat": 2,
       "buy": 27,
       "collect": 1106,
       "complete": 239,
@@ -28,7 +28,7 @@
       "vendor": 48
     },
     "goalFields": {
-      "t": 7455,
+      "t": 7456,
       "quest": 6503,
       "oi": 1681,
       "item": 1217,
@@ -46,10 +46,14 @@
       "class": 116,
       "group": 9,
       "order": 0,
-      "departure": 1,
-      "departureLand": 1,
-      "arrival": 1,
-      "arrivalDock": 1
+      "departure": 2,
+      "departureLand": 2,
+      "arrival": 2,
+      "arrivalDock": 2,
+      "stopover": 1,
+      "arrivalAlternatives": 1,
+      "visitQuest": 1,
+      "requiredTravel": 1
     },
     "stepConditions": 203,
     "sourceDslSteps": 2330,
@@ -10095,6 +10099,145 @@
       {
         "guideID": "forever/alliance/30-40/02-desolace",
         "field": "step count"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 2,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 2,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "boat"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 2,
+        "goal": 1,
+        "field": "quest",
+        "source": 98209,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 2,
+        "goal": 1,
+        "field": "departure",
+        "source": null,
+        "snapshot": {
+          "map": 1437,
+          "x": 4.49,
+          "y": 56.66,
+          "f": "e",
+          "radius": 30
+        }
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 2,
+        "goal": 1,
+        "field": "departureLand",
+        "source": null,
+        "snapshot": {
+          "map": 1437,
+          "x": 9.52,
+          "y": 59.66,
+          "f": "e",
+          "radius": 80
+        }
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 2,
+        "goal": 1,
+        "field": "arrival",
+        "source": null,
+        "snapshot": {
+          "map": 1439,
+          "x": 37.04,
+          "y": 44.13,
+          "f": "e",
+          "radius": 80
+        }
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 2,
+        "goal": 1,
+        "field": "arrivalDock",
+        "source": null,
+        "snapshot": {
+          "map": 1439,
+          "x": 32.34,
+          "y": 44.13,
+          "f": "e",
+          "radius": 30
+        }
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 2,
+        "goal": 1,
+        "field": "stopover",
+        "source": null,
+        "snapshot": {
+          "map": 1424,
+          "x": 50.67,
+          "y": 70.44,
+          "f": "e",
+          "radius": 35,
+          "name": "Costasur"
+        }
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 2,
+        "goal": 1,
+        "field": "arrivalAlternatives",
+        "source": null,
+        "snapshot": [
+          {
+            "map": 1439,
+            "x": 37.4,
+            "y": 40.13,
+            "f": "e",
+            "radius": 35
+          },
+          {
+            "map": 1439,
+            "x": 36.4,
+            "y": 45.62,
+            "f": "e",
+            "radius": 30
+          }
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 2,
+        "goal": 1,
+        "field": "visitQuest",
+        "source": null,
+        "snapshot": 98209
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 2,
+        "goal": 2,
+        "field": "t",
+        "source": "fly",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 2,
+        "goal": 2,
+        "field": "quest",
+        "source": null,
+        "snapshot": 98209
       },
       {
         "guideID": "forever/alliance/30-40/02-desolace",
@@ -25173,6 +25316,15 @@
           "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/01-hillsbrad-foothills.guide#L242-L247",
           "reason": "La solicitud se usa en la mesa de contabilidad dentro del ayuntamiento. Las coordenadas orientan al edificio. La entrega a McManus requiere el crédito del diario."
         }
+      },
+      {
+        "id": "desolace-menethil-auberdine-boat-3",
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "revision": 3,
+        "evidence": {
+          "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/02-desolace.guide",
+          "reason": "La nota del segundo paso mencionaba el barco al cambiar de continente. El trayecto ahora se sigue antes de la entrega de Nord’el y del vuelo a Astranaar."
+        }
       }
     ],
     "authoredTextPresenceLosses": [],
@@ -29656,12 +29808,12 @@
       {
         "guideID": "forever/alliance/30-40/02-desolace",
         "step": 2,
-        "goal": 1,
+        "goal": 2,
         "action": "turnin",
         "questID": 98209,
         "sourceFile": "guides/forever/alliance/30-40/02-desolace.guide",
-        "sourceLine": 58,
-        "sourceText": "turnin 98209                        -- Thundris Windweaver: Nord'el, from Sylessa in Menethil",
+        "sourceLine": 59,
+        "sourceText": "fly \"Astranaar\"",
         "acceptedAt": {
           "guideID": "forever/alliance/30-40/01-hillsbrad-foothills",
           "step": 4,
@@ -44204,5 +44356,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "c4ef3366399dee67feb2400c421f2ac9c25a80e53dbb2c1cdee51c9c95b78d5d"
+  "inputSha256": "a1e70cc03cfba50f969c3f52c4025e6d1e35f541b6c59954f7209cef62950d07"
 }

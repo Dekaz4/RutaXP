@@ -21,8 +21,10 @@ end
 local function keyFor(goal, guide, stepIndex, index)
     if not goal or goal.t ~= "boat" or not guide or not stepIndex or not index
         or not valid(goal.departure) or not valid(goal.arrival) then return end
-    return table.concat({guide.id, guide.routeRevision or 1, stepIndex, index,
+    local key = table.concat({guide.id, guide.routeRevision or 1, stepIndex, index,
         signature(goal.departure), signature(goal.arrival)}, ":")
+    if valid(goal.stopover) then key = key .. ":" .. signature(goal.stopover) end
+    return key
 end
 local function sameJourney(oldKey, key, guide)
     if not key or type(oldKey) ~= "string" then return false end
@@ -64,9 +66,23 @@ function B:IsComplete(goal, guide, stepIndex, index, state)
     if state and state.review then return false end
     local key = keyFor(goal, guide, stepIndex, index)
     local saved = ns.char and ns.char.boatNavigation
-    if not key or type(saved) ~= "table" or type(saved.arrivals) ~= "table" then return false end
-    for oldKey, complete in pairs(saved.arrivals) do
-        if complete == true and sameJourney(oldKey, key, guide) then return true end
+    if not key then return false end
+    if type(saved) == "table" and type(saved.arrivals) == "table" then
+        for oldKey, complete in pairs(saved.arrivals) do
+            if complete == true and sameJourney(oldKey, key, guide) then return true end
+        end
+    end
+    -- An existing save can already be on the onward flight or on land beyond
+    -- the destination town. This satisfies the crossing without recording a
+    -- ship landing. The quest flag alone cannot settle it back in Menethil.
+    if goal.visitQuest then
+        local zone = R.Zone()
+        local frames = ns.mapFrames and ns.mapFrames.era
+        local current, destination = frames and frames[zone], frames and frames[goal.arrival.map]
+        if current and destination and current.c == destination.c and read(UnitIsDeadOrGhost, "player") == false
+            and (read(UnitOnTaxi, "player") == true or (zone ~= goal.arrival.map and not ns:IsQuestActive(goal.visitQuest))) then
+            return true, "Ya estás en el continente de destino"
+        end
     end
     return false
 end
@@ -98,8 +114,15 @@ local function arrived(ctx, zone, sample)
     -- Forever 70888 exposes no documented public on-ship predicate. A dock
     -- position (even after the map changes) cannot prove disembarkation.
     -- The authored arrival is on land, beyond the vessel's footprint.
-    if not ctx.key or read(UnitOnTaxi, "player") ~= false or read(UnitIsDeadOrGhost, "player") ~= false
-        or not near(ctx.goal.arrival, zone, sample) then return false end
+    if not ctx.key or zone ~= ctx.goal.arrival.map or read(UnitOnTaxi, "player") ~= false
+        or read(UnitIsDeadOrGhost, "player") ~= false then return false end
+    local onLand = near(ctx.goal.arrival, zone, sample)
+    if not onLand then
+        for _, landmark in ipairs(ctx.goal.arrivalAlternatives or {}) do
+            if near(landmark, zone, sample) then onLand = true; break end
+        end
+    end
+    if not onLand then return false end
     local saved = storage()
     if saved.arrivals[ctx.key] then return false end
     local count = 0; for _ in pairs(saved.arrivals) do count = count + 1 end
@@ -122,6 +145,18 @@ local function viewFor(ctx, observe, reviewPhase)
     if R.OnTaxi() then return {state="flying", shortText="Espera a aterrizar", text="Al aterrizar, retoma el trayecto a " .. name .. "."} end
     local saved = reviewPhase or (observe and storage()) or (ns.char and ns.char.boatNavigation) or {}
     local trackPhase = observe or reviewPhase ~= nil
+    local stop = ctx.goal.stopover
+    if valid(stop) and zone == stop.map then
+        local atPier = near(stop, zone, sample)
+        if atPier and trackPhase then saved.boarding, saved.landing = ctx.key, nil end
+        if atPier or sameJourney(saved.boarding, ctx.key, ctx.guide) then
+            return {state="stopover", shortText="Quédate a bordo en " .. stop.name,
+                text="Esta es la escala de " .. stop.name .. ". Quédate en el mismo barco hasta " .. name .. ". Si has bajado, vuelve a subir en este muelle."}
+        end
+        return {state="approach", shortText="Ve al muelle de " .. stop.name,
+            text="Ve al muelle de " .. stop.name .. " y toma el barco hacia " .. name .. ".",
+            point=point(stop, ctx, "Muelle hacia " .. name, "stopover")}
+    end
     if zone == ctx.goal.arrival.map then
         local atDock = near(ctx.goal.arrivalDock, zone, sample)
         if atDock and trackPhase then saved.landing = ctx.key end
@@ -131,7 +166,7 @@ local function viewFor(ctx, observe, reviewPhase)
                 text="Permanece a bordo hasta que el barco atraque en " .. name .. ". Después baja por el muelle y sigue la flecha."}
         end
         return {state="landing", shortText="Desembarca y sigue la flecha",
-            text="Baja del barco y sigue el muelle hacia el maestro de vuelo de " .. name .. ". La guía continúa al llegar a tierra.",
+            text="Baja del barco y sigue el muelle hacia " .. (stop and "el pueblo de " or "el maestro de vuelo de ") .. name .. ". La guía continúa al llegar a tierra.",
             point=point(ctx.goal.arrival, ctx, "Desembarca en " .. name, "landing")}
     end
     if zone == ctx.goal.departure.map then
@@ -144,12 +179,16 @@ local function viewFor(ctx, observe, reviewPhase)
         local atDock = near(ctx.goal.departure, zone, sample)
         if atDock and trackPhase then saved.boarding, saved.landing = ctx.key, nil end
         if atDock or (sameJourney(saved.boarding, ctx.key, ctx.guide) and not backOnLand) then
+            if stop then
+                return {state="boarding", shortText="Sube al barco a " .. stop.name,
+                    text="Sube en este muelle al barco de " .. stop.name .. ". Quédate a bordo durante esa escala y baja en " .. name .. "."}
+            end
             return {state="boarding", shortText="Espera el barco a " .. name,
                 text="Espera en este muelle y sube al barco hacia " .. name .. ". Permanece a bordo hasta llegar; después baja y sigue la flecha."}
         end
         return {state="approach", shortText="Ve al muelle de salida",
             text=ctx.goal.note or ("Ve al muelle y toma el barco hacia " .. name .. "."),
-            point=point(ctx.goal.departure, ctx, "Muelle hacia " .. name, "departure")}
+            point=point(ctx.goal.departure, ctx, "Muelle hacia " .. (stop and stop.name or name), "departure")}
     end
     if not zone then
         return {state="crossing", shortText="Continúa el viaje en barco",

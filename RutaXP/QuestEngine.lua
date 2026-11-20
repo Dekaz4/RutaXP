@@ -713,9 +713,9 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
         local status, reason = self:GetAuxiliaryGoalStatus(goal)
         if status then return status, reason end
     end
-    if not id and action == "boat" and self.BoatNavigation
-        and self.BoatNavigation:IsComplete(goal, guide, stepIndex, index, state) then
-        return "done", "Desembarco confirmado"
+    if not id and action == "boat" and self.BoatNavigation then
+        local complete, reason = self.BoatNavigation:IsComplete(goal, guide, stepIndex, index, state)
+        if complete then return "done", reason or "Desembarco confirmado" end
     end
     if not id and action == "fly" and self.FlightNavigation
         and self.FlightNavigation:IsComplete(goal, guide, stepIndex, index, state) then
@@ -920,7 +920,7 @@ function ns:IsStepComplete(step, stateOverride)
             if status == "skip" then skippedQuestGoals = skippedQuestGoals + 1 end
         end
         if status ~= "done" and status ~= "skip" then
-            if q or goal.t == "level" or goal.t == "boat" then
+            if q or goal.t == "level" or goal.t == "boat" or goal.requiredTravel then
                 hasOpenNonService = true
             else
                 hasOpenService = true

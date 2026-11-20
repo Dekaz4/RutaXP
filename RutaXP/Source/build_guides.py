@@ -171,7 +171,8 @@ def apply_guide_overrides(document: dict[str, Any], path: Path) -> list[str]:
 
 ROUTE_FIELDS = ("t", "quest", "oi", "item", "count", "pre", "preAll", "closedBy", "chainStarted", "only", "optional",
                 "minLevel", "maxLevel", "level", "n", "class", "group", "order",
-                "profLine", "profRank", "profName", "requiresSkill", "departure", "departureLand", "arrival", "arrivalDock")
+                "profLine", "profRank", "profName", "requiresSkill", "departure", "departureLand", "arrival", "arrivalDock",
+                "stopover", "arrivalAlternatives", "visitQuest", "requiredTravel")
 
 
 def route_shape(guide: dict[str, Any]) -> str:
@@ -209,6 +210,16 @@ def reviewed_additions(revision: dict[str, Any]) -> dict[str, Any]:
                 and all(goal.get(field) == goal["departure"][field] for field in ("map", "x", "y", "f")) \
                 and ("departureLand" not in goal or point_valid(goal["departureLand"]) \
                      and goal["departureLand"]["map"] == goal["departure"]["map"])
+            if "stopover" in goal:
+                stop = goal["stopover"]
+                boat_action = boat_action and point_valid(stop) and isinstance(stop.get("name"), str) \
+                    and bool(stop["name"].strip()) and stop["map"] not in (goal["departure"]["map"], goal["arrival"]["map"])
+            if "arrivalAlternatives" in goal:
+                alternatives = goal["arrivalAlternatives"]
+                boat_action = boat_action and isinstance(alternatives, list) and bool(alternatives) \
+                    and all(point_valid(p) and p["map"] == goal["arrival"]["map"] for p in alternatives)
+            if "visitQuest" in goal:
+                boat_action = boat_action and type(goal["visitQuest"]) is int and goal["visitQuest"] > 0
         if not isinstance(key, str) or not key or not (quest_action or boat_action) or not value.get("evidence"):
             raise ValueError("New quest action or boat needs explicit valid evidence: " + revision["id"])
     return additions

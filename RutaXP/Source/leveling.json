@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "216dcf87d9a9d94a60025c3364b539cd661607d2edb29587bd00bbe2db0b01cb",
+      "sha256": "5c215123b9c13e9968624c850cde6aa088912acb7312d075959d0265a130980d",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -572,7 +572,8 @@
         "aerie-peak-takeoff-2",
         "mulgore-kyle-level-4",
         "tirisfal-bandarion-after-leonid-4",
-        "hillsbrad-town-hall-request-8"
+        "hillsbrad-town-hall-request-8",
+        "desolace-menethil-auberdine-boat-3"
       ]
     }
   },
@@ -593,10 +594,10 @@
       "Horde": 28
     },
     "steps": 2338,
-    "goals": 7455,
+    "goals": 7456,
     "goalTypes": {
       "accept": 2292,
-      "boat": 1,
+      "boat": 2,
       "buy": 27,
       "collect": 1106,
       "complete": 239,
@@ -617,28 +618,29 @@
     },
     "goalFields": {
       "area": 393,
-      "arrival": 1,
-      "arrivalDock": 1,
+      "arrival": 2,
+      "arrivalAlternatives": 1,
+      "arrivalDock": 2,
       "candidates": 586,
       "chainStarted": 3,
       "class": 116,
       "closedBy": 159,
       "count": 1201,
-      "departure": 1,
-      "departureLand": 1,
+      "departure": 2,
+      "departureLand": 2,
       "detourBelowLevel": 11,
       "detourItems": 189,
       "detourOffers": 3,
       "detourQuest": 25,
-      "f": 5520,
-      "from": 740,
+      "f": 5521,
+      "from": 741,
       "fromAlso": 97,
       "fromFaction": 11,
       "fromKind": 739,
       "fromRank": 17,
       "group": 9,
       "groupVisitFor": 1,
-      "instruction": 7455,
+      "instruction": 7456,
       "instructionAsHint": 2,
       "instructionReplacesContext": 6,
       "instructionVerb": 19,
@@ -646,13 +648,13 @@
       "itemName": 1217,
       "level": 25,
       "levelingDetour": 394,
-      "location": 400,
-      "map": 6593,
+      "location": 401,
+      "map": 6594,
       "minLevel": 2290,
       "navigationHint": 434,
       "navigationMode": 14,
       "node": 76,
-      "note": 3592,
+      "note": 3593,
       "npc": 4988,
       "npcName": 4377,
       "objName": 306,
@@ -672,6 +674,7 @@
       "r": 2,
       "rank": 1,
       "rankMax": 1,
+      "requiredTravel": 1,
       "resumeAtTurnin": 1,
       "reviewedVerb": 8,
       "rewards": 8,
@@ -682,16 +685,18 @@
       "spots": 1303,
       "spread": 672,
       "starterItem": 8,
-      "t": 7455,
+      "stopover": 1,
+      "t": 7456,
       "target": 611,
       "text": 223,
-      "title": 6503,
+      "title": 6504,
       "untilLevel": 3,
+      "visitQuest": 1,
       "workForObjective": 8,
       "workForQuest": 23,
       "workVisit": 8,
-      "x": 6593,
-      "y": 6593,
+      "x": 6594,
+      "y": 6594,
       "z": 4472
     }
   },
@@ -103304,11 +103309,76 @@
         },
         {
           "title": "Auberdine",
-          "note": "Tomal barco a Auberdine desde los muelles de Menethil. Thundris Tejevientos se encuentra en Auberdine, norte de capitán de vuelo.",
+          "note": "Desde Menethil, el barco hace escala en Costasur antes de llegar a Auberdine. Thundris está al norte de los hipogrifos. Después habla con Caylais para volar a Astranaar.",
           "goals": [
             {
+              "t": "boat",
+              "title": "Barco a Auberdine por Costasur",
+              "from": "Puerto de Menethil",
+              "location": "Auberdine",
+              "map": 1437,
+              "x": 4.49,
+              "y": 56.66,
+              "f": "e",
+              "departure": {
+                "map": 1437,
+                "x": 4.49,
+                "y": 56.66,
+                "f": "e",
+                "radius": 30
+              },
+              "departureLand": {
+                "map": 1437,
+                "x": 9.52,
+                "y": 59.66,
+                "f": "e",
+                "radius": 80
+              },
+              "stopover": {
+                "map": 1424,
+                "x": 50.67,
+                "y": 70.44,
+                "f": "e",
+                "radius": 35,
+                "name": "Costasur"
+              },
+              "arrivalDock": {
+                "map": 1439,
+                "x": 32.34,
+                "y": 44.13,
+                "f": "e",
+                "radius": 30
+              },
+              "arrival": {
+                "map": 1439,
+                "x": 37.04,
+                "y": 44.13,
+                "f": "e",
+                "radius": 80
+              },
+              "arrivalAlternatives": [
+                {
+                  "map": 1439,
+                  "x": 37.4,
+                  "y": 40.13,
+                  "f": "e",
+                  "radius": 35
+                },
+                {
+                  "map": 1439,
+                  "x": 36.4,
+                  "y": 45.62,
+                  "f": "e",
+                  "radius": 30
+                }
+              ],
+              "visitQuest": 98209,
+              "note": "En Menethil toma el barco del muelle norte. Quédate a bordo en Costasur. Baja en Auberdine y recorre la pasarela hacia la posada.",
+              "instruction": "Ve al muelle de «Puerto de Menethil», espera al barco y sube con destino a «Auberdine». Al llegar, baja del barco y sigue el muelle hacia tierra firme.\nZona: Los Humedales.\nEn Menethil toma el barco del muelle norte. Quédate a bordo en Costasur. Baja en Auberdine y recorre la pasarela hacia la posada."
+            },
+            {
               "title": "Bloom of the Heavens",
-              "note": "Thundris Tejevientos: Nord'el, de Sylessa en Menetil",
+              "note": "Entrega Nord’el a Thundris en el norte de Auberdine.",
               "t": "turnin",
               "quest": 98209,
               "npc": 3649,
@@ -103318,7 +103388,7 @@
               "y": 40.13,
               "z": 8.3,
               "f": "e",
-              "instruction": "Habla con «Thundris Tejevientos» y entrega «Bloom of the Heavens».\nZona: Costa Oscura.\nThundris Tejevientos: Nord'el, de Sylessa en Menetil."
+              "instruction": "Habla con «Thundris Tejevientos» y entrega «Bloom of the Heavens».\nZona: Costa Oscura.\nEntrega Nord’el a Thundris en el norte de Auberdine."
             },
             {
               "t": "fly",
@@ -103519,7 +103589,8 @@
                 }
               ],
               "navigationHint": "La flecha señala un maestro de vuelo de salida. Habla con él y elige Astranaar; el juego confirma qué vuelos tienes disponibles.",
-              "instruction": "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «Astranaar».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige Astranaar; el juego confirma qué vuelos tienes disponibles."
+              "instruction": "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «Astranaar».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige Astranaar; el juego confirma qué vuelos tienes disponibles.",
+              "requiredTravel": true
             }
           ]
         },
@@ -105304,7 +105375,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 2,
+      "routeRevision": 3,
       "progressMigrations": [
         {
           "from": 1,
@@ -105369,6 +105440,44 @@
           "affectedQuestIDs": [],
           "previousStepCount": 22,
           "firstAffectedStep": 7
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "goalMap": {
+            "2:1": "2:2",
+            "2:2": "2:3"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 21,
+          "firstAffectedStep": 2,
+          "addedGoalKeys": [
+            "2:1"
+          ]
         }
       ]
     },

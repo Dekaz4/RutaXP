@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "216dcf87d9a9d94a60025c3364b539cd661607d2edb29587bd00bbe2db0b01cb",
+      "sha256": "5c215123b9c13e9968624c850cde6aa088912acb7312d075959d0265a130980d",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -572,15 +572,16 @@
         "aerie-peak-takeoff-2",
         "mulgore-kyle-level-4",
         "tirisfal-bandarion-after-leonid-4",
-        "hillsbrad-town-hall-request-8"
+        "hillsbrad-town-hall-request-8",
+        "desolace-menethil-auberdine-boat-3"
       ]
     }
   },
   "totals": {
     "guides": 57,
-    "goals": 7455,
-    "direct": 6592,
-    "generated_instruction": 7455,
+    "goals": 7456,
+    "direct": 6593,
+    "generated_instruction": 7456,
     "missing_goal_note_text": 3658,
     "missing": 267,
     "no_fixed_point_expected": 279,
@@ -604,9 +605,9 @@
       "empty_authored_subtitle": 151
     },
     "boat": {
-      "goals": 1,
-      "direct": 1,
-      "generated_instruction": 1
+      "goals": 2,
+      "direct": 2,
+      "generated_instruction": 2
     },
     "buy": {
       "goals": 27,
@@ -1745,10 +1746,10 @@
       "guideID": "forever/alliance/30-40/02-desolace",
       "title": "Desolace",
       "counts": {
-        "goals": 44,
+        "goals": 45,
         "candidates": 5,
-        "generated_instruction": 44,
-        "direct": 37,
+        "generated_instruction": 45,
+        "direct": 38,
         "missing_goal_note_text": 20,
         "empty_authored_subtitle": 8,
         "missing": 2,
@@ -1762,6 +1763,11 @@
           "generated_instruction": 11,
           "missing_goal_note_text": 9,
           "empty_authored_subtitle": 1
+        },
+        "boat": {
+          "goals": 1,
+          "direct": 1,
+          "generated_instruction": 1
         },
         "collect": {
           "goals": 9,
@@ -16365,8 +16371,12 @@
       "departure",
       "departureLand",
       "arrival",
-      "arrivalDock"
+      "arrivalDock",
+      "stopover",
+      "arrivalAlternatives",
+      "visitQuest",
+      "requiredTravel"
     ],
-    "semanticsSha256": "2884758855af314f5b01b57058c9f43030238a67a956f616a2e2ccd33f4e3837"
+    "semanticsSha256": "cf8388816c0ad0de7df0c46dffa9aee4162a1075179a88f63f1ba3df65b51a14"
   }
 }

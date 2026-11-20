@@ -1,6 +1,6 @@
 # Ruta del pícaro humano
 
-26 capítulos, 932 pasos y 2926 acciones examinadas. 2732 acciones son compatibles por raza y clase, incluidas las opcionales.
+26 capítulos, 932 pasos y 2927 acciones examinadas. 2733 acciones son compatibles por raza y clase, incluidas las opcionales.
 
 En 75 misiones del recorrido hay armas para el pícaro o cuero, capas y accesorios con atributos físicos. Desde nivel 10, la cadena de Keryn y Mathias Shaw da la Hoja de Astucia. Al aceptar o entregar una misión con equipo, pasa el ratón sobre la fila para ver qué recibes y qué puedes elegir.
 
@@ -20,7 +20,7 @@ Los números de paso y fila son los del addon. Las coordenadas usan el mapa del 
 | Vallefresno, Los Humedales y Sierra Espolón | 65 | 164 / 176 | Recorrido ajustado |
 | Las Mil Agujas, Bosque del Ocaso y Los Humedales | 37 | 127 / 130 | Recorrido ajustado |
 | Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta | 42 | 115 / 117 | Recorrido ajustado |
-| Desolace | 21 | 42 / 44 | Recorrido ajustado |
+| Desolace | 21 | 43 / 45 | Recorrido ajustado |
 | Vallefresno & Los Humedales | 34 | 74 / 74 | Recorrido ajustado |
 | Vega de Tuercespina | 35 | 115 / 116 | Recorrido ajustado |
 | Tierras Altas de Arathi, Montañas de Alterac y Pantano de las Penas | 48 | 126 / 135 | Recorrido ajustado |
@@ -1151,8 +1151,9 @@ Farren entrega 563 después de 562. El siguiente objetivo de 563 está en Ventor
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
 | 1.1 | Volar · Puerto de Menethil | varios destinos o ubicaciones según objetivo |
-| 2.1 | Entregar · Bloom of the Heavens (#98209) | Thundris Tejevientos · mapa 1439 · 37.4, 40.13 |
-| 2.2 | Volar · Astranaar | varios destinos o ubicaciones según objetivo |
+| 2.1 | Tomar barco · Barco a Auberdine por Costasur | mapa 1437 · 4.49, 56.66 |
+| 2.2 | Entregar · Bloom of the Heavens (#98209) | Thundris Tejevientos · mapa 1439 · 37.4, 40.13 |
+| 2.3 | Volar · Astranaar | varios destinos o ubicaciones según objetivo |
 | 3 | Duramen | Otra clase o raza |
 | 4.1 | Ir · Risco Cortaviento | mapa 1442 · 69.9, 50.5 |
 | 5.1 | Registrar vuelo · Punta de Nijel | Baritanas Rioceleste · mapa 1443 · 64.66, 10.54 |

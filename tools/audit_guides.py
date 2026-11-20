@@ -23,6 +23,7 @@ SEMANTIC_FIELDS = (
     "minLevel", "maxLevel", "level", "n", "pre", "preAll", "closedBy", "chainStarted", "group",
     "profLine", "profName", "profRank", "class", "classes", "races", "factions",
     "node", "area", "location", "requiredLevel", "departure", "departureLand", "arrival", "arrivalDock",
+    "stopover", "arrivalAlternatives", "visitQuest", "requiredTravel",
 )
 POINT_FIELDS = ("map", "x", "y", "z", "f", "r")
 EXCEPTIONS = {

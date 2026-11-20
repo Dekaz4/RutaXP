@@ -8,6 +8,7 @@ from test_westfall_migration import MigrationHost
 
 
 GUIDE = "forever/alliance/07-thousand-needles"
+DESOLACE = "forever/alliance/30-40/02-desolace"
 SOURCE, builder = additions.SOURCE, additions.builder
 
 
@@ -18,6 +19,49 @@ def shipping_boat():
 
 
 class BoatGuideDataTests(unittest.TestCase):
+    def test_desolace_landing_precedes_thundris_and_the_astranaar_flight_in_existing_saves(self):
+        for cursor in (2, 3, 22):
+            with self.subTest(cursor=cursor):
+                saved = {"seen": True, "auto": False, "activeGuide": DESOLACE, "progress": {
+                    DESOLACE: {"cursor": cursor, "routeRevision": 2, "placed": True,
+                               "skipped": {"2:1": True}, "confirmed": {"2:2": True}}}}
+                host = MigrationHost(saved)
+                host.state.level = 33
+                host.initialize()
+                guide = host.ns.guides[DESOLACE]
+                state = host.ns.char.progress[DESOLACE]
+                self.assertEqual((state.cursor, state.routeRevision), (cursor, 3))
+                self.assertTrue(state.skipped["2:2"])
+                self.assertTrue(state.confirmed["2:3"])
+                self.assertIsNone(state.skipped["2:1"])
+                self.assertIsNone(state.confirmed["2:1"])
+                boat, thundris, flight = [guide.steps[2].goals[i] for i in (1, 2, 3)]
+                self.assertEqual((boat.t, boat.departure.map, boat.departure.x, boat.departure.y),
+                                 ("boat", 1437, 4.49, 56.66))
+                self.assertEqual((boat.stopover.name, boat.stopover.map, boat.stopover.x, boat.stopover.y),
+                                 ("Costasur", 1424, 50.67, 70.44))
+                self.assertEqual((boat.arrivalDock.map, boat.arrivalDock.x, boat.arrivalDock.y),
+                                 (1439, 32.34, 44.13))
+                self.assertEqual((boat.visitQuest, thundris.t, thundris.quest, thundris.npc),
+                                 (98209, "turnin", 98209, 3649))
+                self.assertEqual((flight.t, flight.location, flight.requiredTravel), ("fly", "Astranaar", True))
+                self.assertIn("Quédate a bordo en Costasur", boat.instruction)
+
+    def test_optional_boat_data_must_describe_distinct_ports_and_valid_land_on_the_arrival_map(self):
+        revisions = json.loads((SOURCE / "guide_revisions.json").read_bytes())["revisions"]
+        reviewed = next(r for r in revisions if r["id"] == "desolace-menethil-auberdine-boat-3")
+        for field, replacement in (
+            ("stopover", {"map": 1437, "x": 50, "y": 70, "f": "e", "name": "Costasur"}),
+            ("stopover", {"map": 1424, "x": 50, "y": 70, "f": "e", "name": ""}),
+            ("arrivalAlternatives", [{"map": 1437, "x": 9.5, "y": 59.6, "f": "e"}]),
+            ("visitQuest", True),
+        ):
+            with self.subTest(field=field, value=replacement):
+                revision = copy.deepcopy(reviewed)
+                revision["addedGoals"]["barco_auberdine"]["goal"][field] = replacement
+                with self.assertRaises(ValueError):
+                    builder.reviewed_additions(revision)
+
     def revision_fixture(self):
         case = additions.ReviewedAdditionsTests()
         guide, result, revision = case.fixture()

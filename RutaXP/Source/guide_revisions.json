@@ -17092,6 +17092,230 @@
         "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/01-hillsbrad-foothills.guide#L242-L247",
         "reason": "La solicitud se usa en la mesa de contabilidad dentro del ayuntamiento. Las coordenadas orientan al edificio. La entrega a McManus requiere el crédito del diario."
       }
+    },
+    {
+      "id": "desolace-menethil-auberdine-boat-3",
+      "guideID": "forever/alliance/30-40/02-desolace",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "6e208c2ef1f32f152eb6ae3076ac7d5a94c1969e8b9014abacd884b750499946",
+      "resultShape": "c336691a977055531400267245e3e840192e925435d099c85b9bf42a78be1e4d",
+      "previousGoalCounts": [
+        1,
+        2,
+        2,
+        1,
+        6,
+        2,
+        2,
+        4,
+        1,
+        2,
+        2,
+        5,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        1,
+        1,
+        4
+      ],
+      "firstAffectedStep": 2,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "title": "Auberdine",
+          "note": "Desde Menethil, el barco hace escala en Costasur antes de llegar a Auberdine. Thundris está al norte de los hipogrifos. Después habla con Caylais para volar a Astranaar.",
+          "goals": [
+            {
+              "added": "barco_auberdine"
+            },
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ]
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        }
+      ],
+      "addedGoals": {
+        "barco_auberdine": {
+          "goal": {
+            "t": "boat",
+            "title": "Barco a Auberdine por Costasur",
+            "from": "Puerto de Menethil",
+            "location": "Auberdine",
+            "map": 1437,
+            "x": 4.49,
+            "y": 56.66,
+            "f": "e",
+            "departure": {
+              "map": 1437,
+              "x": 4.49,
+              "y": 56.66,
+              "f": "e",
+              "radius": 30
+            },
+            "departureLand": {
+              "map": 1437,
+              "x": 9.52,
+              "y": 59.66,
+              "f": "e",
+              "radius": 80
+            },
+            "stopover": {
+              "map": 1424,
+              "x": 50.67,
+              "y": 70.44,
+              "f": "e",
+              "radius": 35,
+              "name": "Costasur"
+            },
+            "arrivalDock": {
+              "map": 1439,
+              "x": 32.34,
+              "y": 44.13,
+              "f": "e",
+              "radius": 30
+            },
+            "arrival": {
+              "map": 1439,
+              "x": 37.04,
+              "y": 44.13,
+              "f": "e",
+              "radius": 80
+            },
+            "arrivalAlternatives": [
+              {
+                "map": 1439,
+                "x": 37.4,
+                "y": 40.13,
+                "f": "e",
+                "radius": 35
+              },
+              {
+                "map": 1439,
+                "x": 36.4,
+                "y": 45.62,
+                "f": "e",
+                "radius": 30
+              }
+            ],
+            "visitQuest": 98209,
+            "note": "En Menethil toma el barco del muelle norte. Quédate a bordo en Costasur. Baja en Auberdine y recorre la pasarela hacia la posada."
+          },
+          "evidence": {
+            "sources": [
+              {
+                "repository": "julen92/SendaFH",
+                "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
+                "path": "addon/SendaFH/Nav/TravelData.lua",
+                "url": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH/Nav/TravelData.lua#L354-L357",
+                "sha256": "1e7e2503c00b52fe96fa4001dc168ffb9d3805952dea4041c25dd6eb7f3c51a8",
+                "records": "One ship path-11167: Menethil stop 1, Southshore stop 2, Auberdine stop 3. Nodes 7 and 26, Auberdine innkeeper 6737."
+              },
+              {
+                "url": "https://mygameacademia.com/forever/travel",
+                "records": "Dock coordinates and direction of travel for the three ports."
+              },
+              {
+                "url": "https://zephras.com/forever/enUS/quest/98209/",
+                "records": "Nord’el delivery at Thundris Windweaver, north of the Auberdine flight master."
+              }
+            ],
+            "review": "The inland arrival is around the Auberdine inn. The quest and flight contacts are also valid evidence of disembarkation; none of their radii includes the ship berth."
+          }
+        }
+      },
+      "evidence": {
+        "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/02-desolace.guide",
+        "reason": "La nota del segundo paso mencionaba el barco al cambiar de continente. El trayecto ahora se sigue antes de la entrega de Nord’el y del vuelo a Astranaar."
+      },
+      "textReplacements": {
+        "Thundris Tejevientos: Nord'el, de Sylessa en Menetil": "Entrega Nord’el a Thundris en el norte de Auberdine."
+      },
+      "goalChanges": [
+        {
+          "match": {
+            "t": "fly",
+            "location": "Astranaar"
+          },
+          "count": 1,
+          "set": {
+            "requiredTravel": true
+          }
+        }
+      ],
+      "originalGoalValues": {
+        "2:2": {
+          "requiredTravel": null
+        }
+      }
     }
   ]
 }

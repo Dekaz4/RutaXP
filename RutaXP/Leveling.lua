@@ -8327,10 +8327,11 @@ do
 				},
 				{
 					["title"] = "Auberdine",
-					["note"] = "Tomal barco a Auberdine desde los muelles de Menethil. Thundris Tejevientos se encuentra en Auberdine, norte de capitán de vuelo.",
+					["note"] = "Desde Menethil, el barco hace escala en Costasur antes de llegar a Auberdine. Thundris está al norte de los hipogrifos. Después habla con Caylais para volar a Astranaar.",
 					["goals"] = {
-						{ ["title"] = "Bloom of the Heavens", ["note"] = "Thundris Tejevientos: Nord'el, de Sylessa en Menetil", ["t"] = "turnin", ["quest"] = 98209, ["npc"] = 3649, ["npcName"] = "Thundris Tejevientos", ["map"] = 1439, ["x"] = 37.4, ["y"] = 40.13, ["z"] = 8.3, ["f"] = "e", ["instruction"] = "Habla con «Thundris Tejevientos» y entrega «Bloom of the Heavens».\nZona: Costa Oscura.\nThundris Tejevientos: Nord'el, de Sylessa en Menetil." },
-						{ ["t"] = "fly", ["area"] = 415, ["location"] = "Astranaar", ["candidates"] = { { ["map"] = 1439, ["x"] = 36.4, ["y"] = 45.62, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 26, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1438, ["x"] = 58.4, ["y"] = 93.93, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 27, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1440, ["x"] = 34.5, ["y"] = 48.02, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 28, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1444, ["x"] = 89.46, ["y"] = 45.87, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 31, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1445, ["x"] = 67.46, ["y"] = 51.2, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 32, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1442, ["x"] = 36.54, ["y"] = 7.23, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 33, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1443, ["x"] = 64.67, ["y"] = 10.44, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 37, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1446, ["x"] = 50.95, ["y"] = 29.33, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 39, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1444, ["x"] = 30.26, ["y"] = 43.32, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 41, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1450, ["x"] = 47.91, ["y"] = 67.11, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 49, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1452, ["x"] = 62.33, ["y"] = 36.64, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 52, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1447, ["x"] = 11.9, ["y"] = 77.48, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 64, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1448, ["x"] = 62.46, ["y"] = 24.19, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 65, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1451, ["x"] = 50.68, ["y"] = 34.59, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 73, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1449, ["x"] = 45.3, ["y"] = 5.97, ["f"] = "e", ["faction"] = "AH", ["flightNode"] = 79, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1413, ["x"] = 63.12, ["y"] = 37.11, ["f"] = "e", ["faction"] = "AH", ["flightNode"] = 80, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } } }, ["navigationHint"] = "La flecha señala un maestro de vuelo de salida. Habla con él y elige Astranaar; el juego confirma qué vuelos tienes disponibles.", ["instruction"] = "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «Astranaar».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige Astranaar; el juego confirma qué vuelos tienes disponibles." },
+						{ ["t"] = "boat", ["title"] = "Barco a Auberdine por Costasur", ["from"] = "Puerto de Menethil", ["location"] = "Auberdine", ["map"] = 1437, ["x"] = 4.49, ["y"] = 56.66, ["f"] = "e", ["departure"] = { ["map"] = 1437, ["x"] = 4.49, ["y"] = 56.66, ["f"] = "e", ["radius"] = 30 }, ["departureLand"] = { ["map"] = 1437, ["x"] = 9.52, ["y"] = 59.66, ["f"] = "e", ["radius"] = 80 }, ["stopover"] = { ["map"] = 1424, ["x"] = 50.67, ["y"] = 70.44, ["f"] = "e", ["radius"] = 35, ["name"] = "Costasur" }, ["arrivalDock"] = { ["map"] = 1439, ["x"] = 32.34, ["y"] = 44.13, ["f"] = "e", ["radius"] = 30 }, ["arrival"] = { ["map"] = 1439, ["x"] = 37.04, ["y"] = 44.13, ["f"] = "e", ["radius"] = 80 }, ["arrivalAlternatives"] = { { ["map"] = 1439, ["x"] = 37.4, ["y"] = 40.13, ["f"] = "e", ["radius"] = 35 }, { ["map"] = 1439, ["x"] = 36.4, ["y"] = 45.62, ["f"] = "e", ["radius"] = 30 } }, ["visitQuest"] = 98209, ["note"] = "En Menethil toma el barco del muelle norte. Quédate a bordo en Costasur. Baja en Auberdine y recorre la pasarela hacia la posada.", ["instruction"] = "Ve al muelle de «Puerto de Menethil», espera al barco y sube con destino a «Auberdine». Al llegar, baja del barco y sigue el muelle hacia tierra firme.\nZona: Los Humedales.\nEn Menethil toma el barco del muelle norte. Quédate a bordo en Costasur. Baja en Auberdine y recorre la pasarela hacia la posada." },
+						{ ["title"] = "Bloom of the Heavens", ["note"] = "Entrega Nord’el a Thundris en el norte de Auberdine.", ["t"] = "turnin", ["quest"] = 98209, ["npc"] = 3649, ["npcName"] = "Thundris Tejevientos", ["map"] = 1439, ["x"] = 37.4, ["y"] = 40.13, ["z"] = 8.3, ["f"] = "e", ["instruction"] = "Habla con «Thundris Tejevientos» y entrega «Bloom of the Heavens».\nZona: Costa Oscura.\nEntrega Nord’el a Thundris en el norte de Auberdine." },
+						{ ["t"] = "fly", ["area"] = 415, ["location"] = "Astranaar", ["candidates"] = { { ["map"] = 1439, ["x"] = 36.4, ["y"] = 45.62, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 26, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1438, ["x"] = 58.4, ["y"] = 93.93, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 27, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1440, ["x"] = 34.5, ["y"] = 48.02, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 28, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1444, ["x"] = 89.46, ["y"] = 45.87, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 31, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1445, ["x"] = 67.46, ["y"] = 51.2, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 32, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1442, ["x"] = 36.54, ["y"] = 7.23, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 33, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1443, ["x"] = 64.67, ["y"] = 10.44, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 37, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1446, ["x"] = 50.95, ["y"] = 29.33, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 39, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1444, ["x"] = 30.26, ["y"] = 43.32, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 41, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1450, ["x"] = 47.91, ["y"] = 67.11, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 49, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1452, ["x"] = 62.33, ["y"] = 36.64, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 52, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1447, ["x"] = 11.9, ["y"] = 77.48, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 64, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1448, ["x"] = 62.46, ["y"] = 24.19, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 65, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1451, ["x"] = 50.68, ["y"] = 34.59, ["f"] = "e", ["faction"] = "A", ["flightNode"] = 73, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1449, ["x"] = 45.3, ["y"] = 5.97, ["f"] = "e", ["faction"] = "AH", ["flightNode"] = 79, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } }, { ["map"] = 1413, ["x"] = 63.12, ["y"] = 37.11, ["f"] = "e", ["faction"] = "AH", ["flightNode"] = 80, ["navigationRole"] = "flight-origin", ["destinationNodes"] = { 28 } } }, ["navigationHint"] = "La flecha señala un maestro de vuelo de salida. Habla con él y elige Astranaar; el juego confirma qué vuelos tienes disponibles.", ["instruction"] = "Habla con un maestro de vuelo, abre el mapa de vuelos y selecciona «Astranaar».\nAcceso o lugar: La flecha señala un maestro de vuelo de salida. Habla con él y elige Astranaar; el juego confirma qué vuelos tienes disponibles.", ["requiredTravel"] = true },
 					},
 				},
 				{
@@ -8493,7 +8494,7 @@ do
 			["_sendaLocale"] = "esES",
 			["pack"] = "guides",
 			["version"] = 1,
-			["routeRevision"] = 2,
+			["routeRevision"] = 3,
 			["progressMigrations"] = {
 				{
 					["from"] = 1,
@@ -8558,6 +8559,44 @@ do
 					["affectedQuestIDs"] = {},
 					["previousStepCount"] = 22,
 					["firstAffectedStep"] = 7,
+				},
+				{
+					["from"] = 2,
+					["to"] = 3,
+					["goalMap"] = {
+						["2:1"] = "2:2",
+						["2:2"] = "2:3",
+					},
+					["stepMap"] = {
+						[1] = 1,
+						[2] = 2,
+						[3] = 3,
+						[4] = 4,
+						[5] = 5,
+						[6] = 6,
+						[7] = 7,
+						[8] = 8,
+						[9] = 9,
+						[10] = 10,
+						[11] = 11,
+						[12] = 12,
+						[13] = 13,
+						[14] = 14,
+						[15] = 15,
+						[16] = 16,
+						[17] = 17,
+						[18] = 18,
+						[19] = 19,
+						[20] = 20,
+						[21] = 21,
+						[22] = 22,
+					},
+					["affectedQuestIDs"] = {},
+					["previousStepCount"] = 21,
+					["firstAffectedStep"] = 2,
+					["addedGoalKeys"] = {
+						"2:1",
+					},
 				},
 			},
 		})

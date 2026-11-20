@@ -125,6 +125,24 @@ class FlightNavigationTests(unittest.TestCase):
         self.assertIsNone(h.view().intermediate)
         self.assertFalse(h.complete())
 
+    def test_caylais_points_out_the_astranaar_icon_only_when_reachable(self):
+        h = FlightHost()
+        guide = h.ns.guides["forever/alliance/30-40/02-desolace"]
+        goal = next(row for step in guide.steps.values() for row in step.goals.values()
+                    if row.t == "fly" and row.location == "Astranaar")
+        # Exercise the real flight goal with this master's map already open.
+        h.step.goals[1] = h.goal = goal
+        h.move(1439, .364, .4562)
+        h.s.flights[1].nodeID, h.s.flights[1].name = 26, "Auberdine"
+        h.s.flights[3].nodeID, h.s.flights[3].name = 28, "Astranaar, Vallefresno"
+        h.observe()
+        self.assertEqual(h.view().state, "available")
+        self.assertIn("derecha", h.view().text)
+        self.assertIn("Astranaar, Vallefresno", h.view().text)
+        h.s.flights[3].kind, h.s.flights[3].state, h.s.flights[3].routes = "UNREACHABLE", 2, 0
+        h.observe()
+        self.assertNotIn("derecha", h.view().text)
+
     def test_absent_or_unreadable_destination_is_unknown(self):
         h = FlightHost()
         h.s.flights[2].state, h.s.flights[2].kind = None, None

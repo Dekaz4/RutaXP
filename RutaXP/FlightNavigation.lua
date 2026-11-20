@@ -321,8 +321,13 @@ function F:GetView(goal, base)
     for id in pairs(ids) do
         local record = observed and observed.nodes[id]
         if record and record.kind == "reachable" then
+            local instruction = "El vuelo a " .. name .. " está disponible. Elígelo en el mapa de vuelos."
+            if observed.origin == 26 and id == 28 then
+                instruction = "Desde el icono verde de Auberdine, baja un poco y mira a la derecha. Elige «" ..
+                    (record.name or name) .. "»."
+            end
             return {state="available", title="Vuela a " .. name, shortText="Elige " .. name,
-                text="El vuelo a " .. name .. " está disponible. Elígelo en el mapa de vuelos.", point=base, canGround=canGround}
+                text=instruction, point=base, canGround=canGround}
         end
         if not record or record.kind ~= "unavailable" then allUnavailable = false end
     end

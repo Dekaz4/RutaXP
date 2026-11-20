@@ -26,7 +26,8 @@ CLASSES = ("WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", 
 RACES = {"Alliance": ("Human", "Dwarf", "Gnome", "NightElf", "Skyborne"),
          "Horde": ("Orc", "Troll", "Tauren", "Scourge", "Skyborne")}
 FIELDS = ("t", "quest", "oi", "item", "count", "pre", "preAll", "closedBy", "chainStarted", "only", "optional",
-          "minLevel", "maxLevel", "level", "n", "class", "group", "order", "departure", "departureLand", "arrival", "arrivalDock")
+          "minLevel", "maxLevel", "level", "n", "class", "group", "order", "departure", "departureLand", "arrival", "arrivalDock",
+          "stopover", "arrivalAlternatives", "visitQuest", "requiredTravel")
 GOAL_ACTIONS = {"accept", "turnin", "kill", "collect", "train", "goto", "sethome", "complete", "hearth",
                 "buy", "getfp", "fly", "boat", "use", "note", "level", "interact", "vendor", "talk"}
 CATEGORIES = ("work_before_accept", "turnin_without_accept", "accept_without_future_turnin",

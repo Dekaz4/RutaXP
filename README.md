@@ -1,4 +1,4 @@
-# RutaXP 0.7.34 para WoW Forever
+# RutaXP 0.7.35 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -341,7 +341,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.34.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.35.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.
