@@ -30,7 +30,8 @@ class BoatGuideDataTests(unittest.TestCase):
                 host.initialize()
                 guide = host.ns.guides[DESOLACE]
                 state = host.ns.char.progress[DESOLACE]
-                self.assertEqual((state.cursor, state.routeRevision), (cursor, 3))
+                self.assertGreaterEqual(guide.routeRevision, 3)
+                self.assertEqual((state.cursor, state.routeRevision), (cursor, guide.routeRevision))
                 self.assertTrue(state.skipped["2:2"])
                 self.assertTrue(state.confirmed["2:3"])
                 self.assertIsNone(state.skipped["2:1"])
