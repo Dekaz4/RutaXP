@@ -1,4 +1,4 @@
-RUTAXP 0.7.37 - WoW Forever
+RUTAXP 0.7.38 - WoW Forever
 
 ACTUALIZACIONES
 El mismo Instalador_RutaXP.exe sirve para instalar, actualizar y reparar:
@@ -209,6 +209,8 @@ COMANDOS
 /rutaxp partida       Guardar y retomar: partida guardar / reanudar
 /rutaxp paradas       Propuestas: parada 1 / parada fin
 /rutaxp sesion        Mediciones e informe copiable
+/rutaxp limpiar       Revisar y abandonar en lote las misiones prescindibles
+/rutaxp limpiar ver   Ver que misiones se conservan y por que
 /rutaxp recuperar     Explicar bloqueos; recuperar 1 inicia propuesta 1
 /rutaxp volver        Cancelar recuperacion y volver a ruta guardada
 /rutaxp adaptar       Propuestas de ruta

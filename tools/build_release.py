@@ -115,7 +115,7 @@ def main():
     for name in ["Installer.cs", "Updater.cs", "build_release.py", "import_guides.py", "build_talents.js", "vendor_pathing.py", "build_waypoints.py",
                  "guide_coordinates.py", "guide_instructions.py", "audit_guides.py", "audit_guide_structure.py", "refresh_guides.py", "publish_release.py",
                  "solo_leveling_route.py", "solo_hillsbrad_route.py", "solo_mid_route.py", "solo_late_route.py",
-                 "gnome_warlock_route.py", "desolace_solo_targets.py",
+                 "gnome_warlock_route.py", "desolace_solo_targets.py", "build_quest_cleanup_data.py",
                  "route_review_alliance_start.py", "route_review_alliance_late.py", "route_review_horde.py",
                  "review_all_routes.py", "route_review_template.html", "capture_route_comparison.py",
                  "unmatched_solo.py", "solo_review_unmatched_a.json", "solo_review_unmatched_b.json", "solo_review_unmatched_c.json",

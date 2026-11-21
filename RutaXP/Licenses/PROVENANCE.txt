@@ -15,6 +15,11 @@ timed or immediate events and checks branch restrictions against the route.
 Source hashes and selection rules are in tools/build_early_quest_offers.py.
 The offline evidence is in Source/early_quest_timing.json.
 
+QuestCleanupData.lua contains numeric prerequisite links and a subset of normal
+leveling quest IDs from the pinned SendaFH_QuestDB/Quests.lua identified below.
+tools/build_quest_cleanup_data.py records the exact SHA-256 and selection rules.
+See SendaFH-QuestDB-DATA.txt for the source database notices.
+
 Original guide routes: Polestar, by Fitz and contributors.
 Spanish adaptation and translation: SendaFH / Forever Hispano.
 Source: https://github.com/julen92/SendaFH

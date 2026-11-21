@@ -209,6 +209,8 @@ function ns:HandleFeatureCommand(command, rest)
             self:SetIncludeGroupQuests(rest ~= "no")
             self:Print(self.char.includeGroupQuests and "Misiones de grupo incluidas en tu ruta." or "Ruta en solitario activada.")
         else self:Print("Usa /rutaxp grupo sí, /rutaxp grupo no o /rutaxp grupo retomar.") end
+    elseif command == "limpiar" or command == "limpieza" then
+        self:ShowQuestCleanup(rest:lower() == "ver")
     elseif command == "pendientes" then
         local _, reason = self:ResumePendingQuests()
         if reason then self:Print(reason) end
