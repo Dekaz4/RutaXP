@@ -65,7 +65,9 @@ function TR.BuildIndex(classToken, build)
     for _, spell in ipairs(data and data.trainerSpells or {}) do
         -- The class-wide list spans several roles. Only the chosen build's
         -- key abilities get the strongest recommendation.
-        for _, token in ipairs(splitSpells(spell.name)) do add(token, math.min(2, RANK[spell.prio] or 1)) end
+        if spell.source ~= "starting" and spell.source ~= "quest" then
+            for _, token in ipairs(splitSpells(spell.name)) do add(token, math.min(2, RANK[spell.prio] or 1)) end
+        end
     end
     if build and build.data and build.data.class == classToken then
         for _, token in ipairs(splitSpells(build.skills)) do add(token, 3) end

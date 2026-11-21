@@ -778,7 +778,6 @@ function T.CreatePanel()
     infoCard.text:SetSpacing(2)
 
     -- Tab selector: Talent Order (10-60) vs Trainer Spells to Buy (1-60)
-    panel.activeTab = "talents"
     panel.tabTalentsBtn = createPillButton(panel, 204, 20, "Talentos (Niv. 10–60)", function()
         panel.activeTab = "talents"
         panel.lastScrolledBuild = nil
@@ -895,6 +894,31 @@ local function renderSpentTalents(panel, c)
     return #talents
 end
 
+local function gnomeWarlockAdvice(level)
+    local combat, demon
+    if level < 4 and not safe(ns.IsQuestDelivered, ns, 179) then
+        combat = "Activa Piel de demonio. Elige un lobo apartado y lanza Descarga de las Sombras desde lejos. Haz clic derecho en el cuerpo para recoger la carne."
+    elseif level < 4 then
+        combat = "Elige un trogg apartado. Si aprendiste Inmolar, lánzalo desde lejos y continúa con Descarga de las Sombras. Deja que Inmolar siga haciendo daño."
+    elseif level < 6 then
+        combat = "Aprende Corrupción cuando pases por el instructor. Úsala al principio si el enemigo tiene mucha salud. Si le queda poca, remata con Descarga de las Sombras."
+    elseif level < 8 then
+        combat = "Aprende el rango 2 de Descarga de las Sombras. Entre peleas, usa Transfusión de vida si te sobra salud y te falta maná. Si ambas barras están bajas, come y bebe."
+    else
+        combat = "Deja que Terror de agonía haga daño en los combates largos. Miedo te da tiempo para escapar si aparece otro enemigo, pero puede hacerlo correr hacia sus aliados."
+    end
+    if safe(IsPlayerSpell, 688) or safe(ns.IsQuestDelivered, ns, 1599) then
+        demon = "Pulsa P y arrastra Invocar a diablillo a tu barra. Una vez invocado, selecciona un enemigo y pulsa Atacar en la barra de tu mascota."
+    elseif safe(C_QuestLog and C_QuestLog.IsComplete, 1599) then
+        demon = "Ya tienes los talismanes. Si llevas la infusión de Nori, entrégala a Durnan antes de que se enfríe. Luego habla con Alamar para aprender a invocar al diablillo."
+    elseif safe(ns.IsQuestActive, ns, 1599) then
+        demon = "Haz Novato con La cueva de los trols. Entra por el túnel izquierdo y recoge 3 talismanes de los Novicios Peloescarcha. Llévaselos a Alamar."
+    else
+        demon = "Al entregar las 8 carnes a Sten, lleva el memorándum a Alamar en Yunquemar. Acepta Novato y aprende Inmolar si tienes el cobre."
+    end
+    return "|cffffd966Combate|r\n" .. combat .. "\n\n|cff8ec5ffTu primer demonio|r\n" .. demon
+end
+
 function T.RenderPanel()
     local panel = T.panel
     if not panel or not panel:IsShown() then return end
@@ -952,12 +976,16 @@ function T.RenderPanel()
         end
     end
 
-    local activeTab = panel.activeTab or "talents"
+    local starter = c.isPlayerClass and p.raceToken == "Gnome" and data.class == "WARLOCK" and p.level < T.FIRST_LEVEL
+    local activeTab = panel.activeTab or (starter and "spells" or "talents")
     if panel.tabTalentsBtn then
         panel.tabTalentsBtn.label:SetText(showLiveRanks and "Tus talentos" or "Talentos (Niv. 10–60)")
         panel.tabTalentsBtn:SetActiveStyle(activeTab == "talents", true)
     end
-    if panel.tabSpellsBtn then panel.tabSpellsBtn:SetActiveStyle(activeTab == "spells", true) end
+    if panel.tabSpellsBtn then
+        panel.tabSpellsBtn.label:SetText(data.class == "WARLOCK" and "Hechizos y demonios (1–60)" or "Habilidades a Comprar (1–60)")
+        panel.tabSpellsBtn:SetActiveStyle(activeTab == "spells", true)
+    end
 
     -- Find next/current trainer spell for the player's level
     local trainerSpells = data.trainerSpells or {}
@@ -974,7 +1002,11 @@ function T.RenderPanel()
 
     -- Next Highlight Box (shows Next Talent in Talents tab, or Next Trainer Skill in Spells tab)
     if activeTab == "spells" and nextSpellEntry then
-        if c.isPlayerClass and nextSpellEntry.level <= p.level then
+        if nextSpellEntry.source == "starting" then
+            panel.nextCard.header:SetText("|cffffd966EN TU LIBRO DE HECHIZOS DESDE EL NIVEL 1|r")
+        elseif nextSpellEntry.source == "quest" then
+            panel.nextCard.header:SetText(string.format("|cffffd966RECOMPENSA DE MISIÓN DESDE EL NIVEL %d|r", nextSpellEntry.level))
+        elseif c.isPlayerClass and nextSpellEntry.level <= p.level then
             panel.nextCard.header:SetText(string.format("|cffffd966HABILIDADES DISPONIBLES EN INSTRUCTOR (NIVEL %d):|r", nextSpellEntry.level))
         else
             panel.nextCard.header:SetText(string.format("|cff8ec5ffPRÓXIMAS HABILIDADES EN INSTRUCTOR (NIVEL %d):|r", nextSpellEntry.level))
@@ -1018,7 +1050,7 @@ function T.RenderPanel()
     if p.raceGuide then
         infoLines[#infoLines + 1] = "|cffc9b3ffConsejo " .. p.raceName .. ":|r |cffd5deeb" .. p.raceGuide.tip .. "|r"
     end
-    panel.infoCard.text:SetText(table.concat(infoLines, "\n"))
+    panel.infoCard.text:SetText(starter and gnomeWarlockAdvice(p.level) or table.concat(infoLines, "\n"))
 
     -- Render Scroll List: either 51 Talent Picks OR Level 1-60 Trainer Spells
     local y = 0
@@ -1035,7 +1067,11 @@ function T.RenderPanel()
             local isCurrentOrNext = (sp == nextSpellEntry)
             local isPast = c.isPlayerClass and (sp.level < p.level) and not isCurrentOrNext
             local prioTag
-            if sp.prio == "must" then
+            if sp.source == "starting" then
+                prioTag = "|cff8ec5ff[Inicial]|r"
+            elseif sp.source == "quest" then
+                prioTag = "|cffffd966[Misión]|r"
+            elseif sp.prio == "must" then
                 prioTag = "|cff7edd9c[COMPRAR]|r"
             elseif sp.prio == "good" then
                 prioTag = "|cff8ec5ff[Útil]|r"
@@ -1284,11 +1320,14 @@ for _, ev in ipairs({
     "PLAYER_TALENT_UPDATE",
     "PLAYER_REGEN_ENABLED",
     "TRAINER_SHOW",
+    "QUEST_ACCEPTED",
+    "QUEST_TURNED_IN",
+    "QUEST_WATCH_UPDATE",
 }) do
     pcall(evFrame.RegisterEvent, evFrame, ev)
 end
 
-evFrame:SetScript("OnEvent", function(_, event, arg1)
+evFrame:SetScript("OnEvent", function(_, event, arg1, arg2)
     if event == "PLAYER_LOGIN" then
         hookTalentKeybindFunctions()
         attachToBlizzardFrame()
@@ -1296,6 +1335,9 @@ evFrame:SetScript("OnEvent", function(_, event, arg1)
     elseif event == "ADDON_LOADED" and (arg1 == "Blizzard_PlayerSpells" or arg1 == "Blizzard_TalentUI") then
         attachToBlizzardFrame()
         T.Refresh()
+    elseif event == "QUEST_ACCEPTED" or event == "QUEST_TURNED_IN" or event == "QUEST_WATCH_UPDATE" then
+        local questID = event == "QUEST_ACCEPTED" and (arg2 or arg1) or arg1
+        if (questID == 1599 or questID == 179) and T.panel and T.panel:IsShown() then T.RenderPanel() end
     elseif event == "TRAINER_SHOW" then
         if T.panel and T.panel:IsShown() then
             T.panel.activeTab = "spells"

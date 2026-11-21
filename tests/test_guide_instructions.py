@@ -67,6 +67,37 @@ class GuideInstructionTests(unittest.TestCase):
                 goal = instructions.enrich_goal({"t": "kill", "target": "Criatura", "note": note})
                 self.assertNotIn("instructionVerb", goal)
 
+    def test_gnome_warlock_uses_one_trainer_visit_and_one_troll_trip(self):
+        from test_quest_engine import QuestEngineHost
+
+        host = QuestEngineHost(catalog=True)
+        guide = host.ns.guides["forever/alliance/dwarf-gnome/01-dun-morogh"]
+        visit = guide.steps[3]
+        host.state.raceToken, host.state.classToken, host.state.level = "Gnome", "WARLOCK", 2
+        host.initialize()
+
+        def visible(step):
+            return [g for g in step.goals.values() if host.call("MatchesConditions", g.only)]
+
+        self.assertEqual([(g.t, g.quest) for g in visible(visit)], [
+            ("turnin", 179), ("accept", 3115), ("accept", 233), ("accept", 170),
+            ("turnin", 3115), ("accept", 1599), ("train", None)])
+        letter, pickup = visible(visit)[4:6]
+        self.assertEqual((letter.npc, pickup.npc, pickup.minLevel), (460, 460, 1))
+        self.assertEqual(pickup.closedBy[1], 1598)
+        cave = visible(guide.steps[10])
+        self.assertEqual({g.quest for g in cave}, {182, 3361, 1599})
+        charms, = [g for g in cave if g.quest == 1599]
+        self.assertEqual((charms.item, charms["count"], charms["from"]), (6753, 3, "Novicio Peloescarcha"))
+        back = visible(guide.steps[12])
+        self.assertLess([g.quest for g in back].index(3364), [g.quest for g in back].index(1599))
+        self.assertIn("Invocar diablillo", next(g.instruction for g in back if g.quest == 1599))
+
+        host.state.classToken = "MAGE"
+        for si in (3, 5, 10, 12):
+            self.assertNotIn(1599, [g.quest for g in visible(guide.steps[si])])
+        self.assertFalse(host.call("MatchesConditions", guide.steps[78].only))
+
     def test_dun_morogh_rods_after_creature_names_are_taming_instructions(self):
         document = json.loads((ROOT / "RutaXP/Source/leveling.json").read_text(encoding="utf-8"))
         guide = next(g for g in document["guides"] if g["id"] == "forever/alliance/dwarf-gnome/01-dun-morogh")

@@ -1,17 +1,18 @@
 local _, ns = ...
 
 local humanRogue = { classes = { "ROGUE" }, races = { "Human" } }
+local gnomeWarlock = { classes = { "WARLOCK" }, races = { "Gnome" } }
 local labels = { dps = "DPS", agi = "agilidad", str = "fuerza", ap = "poder de ataque",
-    crit = "% de crítico", hit = "% de golpe" }
--- The catalog uses percentage points for hit and crit. A client rating uses
--- a different scale, so only the four like-for-like stats are compared.
+    crit = "% de crítico", hit = "% de golpe", sp = "poder con hechizos", int = "intelecto", sta = "aguante" }
+-- Client ratings and catalog percentages use different units.
 local itemStatKeys = { dps = "ITEM_MOD_DAMAGE_PER_SECOND_SHORT", agi = "ITEM_MOD_AGILITY_SHORT",
-    str = "ITEM_MOD_STRENGTH_SHORT", ap = "ITEM_MOD_ATTACK_POWER_SHORT" }
+    str = "ITEM_MOD_STRENGTH_SHORT", ap = "ITEM_MOD_ATTACK_POWER_SHORT", sp = "ITEM_MOD_SPELL_POWER_SHORT",
+    int = "ITEM_MOD_INTELLECT_SHORT", sta = "ITEM_MOD_STAMINA_SHORT" }
 -- Inventory types on rewards and equipped slot IDs differ for weapons and paired slots.
 local equipmentSlots = {
     [1]={1}, [2]={2}, [3]={3}, [5]={5}, [6]={6}, [7]={7}, [8]={8}, [9]={9}, [10]={10},
     [11]={11,12}, [12]={13,14}, [13]={16,17}, [15]={18}, [16]={15}, [20]={5},
-    [21]={16}, [22]={17}, [25]={18}, [26]={18},
+    [17]={16}, [21]={16}, [22]={17}, [23]={17}, [25]={18}, [26]={18},
 }
 local slotLabels = { [2]="cuello", [11]="anillo 1", [12]="anillo 2", [13]="abalorio 1",
     [14]="abalorio 2", [15]="capa equipada", [16]="mano principal", [17]="mano secundaria", [18]="arma a distancia" }
@@ -47,8 +48,10 @@ local function equippedDifference(slot, label, reward, candidateValue)
     return label .. " " .. diff .. " " .. labels[reward.stat]
 end
 
-local function compareEquipment(reward, clientValue)
+local function compareEquipment(reward, clientValue, caster)
     local slots = equipmentSlots[reward.inv]
+    if caster and reward.inv == 13 then slots = equipmentSlots[21] end
+    if reward.inv == 17 and readable(GetInventoryItemLink, "player", 17) then return nil end
     if not slots or not clientValue then return nil end
     local comparisons = {}
     for _, slot in ipairs(slots) do
@@ -101,8 +104,14 @@ local function rewardsAtTurnin(questID, catalog)
     return catalog
 end
 
-function ns:GetRogueQuestRewardInfo(questID, action)
-    local rewards = self.rogueQuestRewards and self.rogueQuestRewards[questID]
+local function playerCatalog(self)
+    if self:MatchesConditions(humanRogue) then return self.rogueQuestRewards, false end
+    if self:MatchesConditions(gnomeWarlock) then return self.warlockQuestRewards, true end
+end
+
+function ns:GetLevelingQuestRewardInfo(questID, action)
+    local catalog, caster = playerCatalog(self)
+    local rewards = catalog and catalog[questID]
     if not rewards or not rewards[1] then
         if questID == 65 and self:MatchesConditions(humanRogue) then
             return "Cadena opcional · Túnica de cuero",
@@ -111,7 +120,6 @@ function ns:GetRogueQuestRewardInfo(questID, action)
         end
         return nil
     end
-    if not self:MatchesConditions(humanRogue) then return nil end
     if action == "turnin" then
         rewards = rewardsAtTurnin(questID, rewards)
         if not rewards[1] then return nil end
@@ -142,10 +150,10 @@ function ns:GetRogueQuestRewardInfo(questID, action)
             local amount = numberText(value) .. " " .. labels[reward.stat]
             summary = kind .. " (" .. amount .. ")"
             line = line .. " · " .. amount
-            local comparison = compareEquipment(reward, clientValue)
+            local comparison = compareEquipment(reward, clientValue, caster)
             if comparison then line = line .. " (" .. comparison .. ")" end
         end
-        if reward.stat == "dps" then
+        if reward.stat == "dps" and not caster then
             local agility = statValue(stats, itemStatKeys.agi) or reward.agility
             if agility and agility > 0 then line = line .. " · +" .. numberText(agility) .. " agilidad" end
         end
@@ -158,6 +166,11 @@ function ns:GetRogueQuestRewardInfo(questID, action)
         table.concat(details, "\n")
 end
 
+function ns:GetRogueQuestRewardInfo(questID, action)
+    if self:MatchesConditions(humanRogue) then return self:GetLevelingQuestRewardInfo(questID, action) end
+    return nil
+end
+
 local events = CreateFrame("Frame")
 pcall(events.RegisterEvent, events, "ITEM_DATA_LOAD_RESULT")
 events:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
@@ -166,11 +179,13 @@ pcall(events.RegisterEvent, events, "QUEST_ITEM_UPDATE")
 events:RegisterEvent("QUEST_FINISHED")
 
 local function refreshReward(questID, turninOnly)
-    if not ns.initialized or not ns.RefreshUI or not ns:MatchesConditions(humanRogue) then return end
+    if not ns.initialized or not ns.RefreshUI then return end
+    local catalog = playerCatalog(ns)
+    if not catalog then return end
     local goal = ns:GetActiveGoal()
     local current = goal and (goal.quest or goal.questID)
     local action = goal and (goal.t or goal.action)
-    if (action == "turnin" or not turninOnly and action == "accept") and ns.rogueQuestRewards and ns.rogueQuestRewards[current]
+    if (action == "turnin" or not turninOnly and action == "accept") and catalog[current]
         and (not questID or questID == current) then ns:RefreshUI() end
 end
 
@@ -182,7 +197,8 @@ events:SetScript("OnEvent", function(_, event, id, success)
         else
             questID = readable(GetQuestID)
         end
-        if questID and ns.rogueQuestRewards and ns.rogueQuestRewards[questID] then
+        local catalog = questID and playerCatalog(ns)
+        if catalog and catalog[questID] then
             -- Blizzard updates panel visibility during this same event.
             if C_Timer and C_Timer.After then C_Timer.After(0, function() refreshReward(questID, true) end)
             else refreshReward(questID, true) end

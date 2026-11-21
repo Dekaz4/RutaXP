@@ -316,6 +316,11 @@ def propose(document, reference):
             for point in points:
                 if not located(point):
                     continue
+                # Gakin's two binding rituals take place in the cellar of the
+                # Slaughtered Lamb. The same demon IDs also serve Horde quests.
+                if (point["map"] != 1453 and kind == "npc"
+                        and (goal.get("quest"), ident) in {(1689, 5676), (1739, 5677)}):
+                    continue
                 candidate = source_candidate(kind, ident, point, record.get("name"), oi)
                 # Quest targets can be hostile; NPC allegiance is NOT a player
                 # eligibility filter. Existing goal/step/guide conditions apply.

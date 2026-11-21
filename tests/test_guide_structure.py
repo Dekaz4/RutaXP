@@ -138,7 +138,11 @@ class GuideStructureAuditTests(unittest.TestCase):
         self.assertEqual(report["sourceComparison"]["structuralDifferences"], [])
         comparison = report["sourceComparison"]
         revisions = json.loads((ROOT / "RutaXP/Source/guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
-        self.assertEqual(len(revisions), 62)
+        revision_ids = [entry["id"] for entry in revisions]
+        self.assertEqual(len(set(revision_ids)), len(revision_ids))
+        self.assertEqual(revision_ids.index("desolace-menethil-auberdine-boat-3"), 61)
+        self.assertLess(revision_ids.index("dun-morogh-warlock-first-demons-3"),
+                        revision_ids.index("dun-morogh-western-visits-4"))
         self.assertEqual([r["id"] for r in revisions[:7]],
                          ["westfall-alba-mines-2", "westfall-engineering-3", "zephras-alliance-service-2",
                           "redridge-alther-bridge-2", "mulgore-malah-centaurs-2", "tirisfal-rear-guard-2",

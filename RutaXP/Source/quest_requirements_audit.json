@@ -869,7 +869,7 @@
     {
       "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
       "step": 12,
-      "goal": 6,
+      "goal": 4,
       "questID": 94373,
       "title": "Clamor de Tierra",
       "crossSourceReview": "corroborated_single_completed_parent",
@@ -1239,7 +1239,7 @@
     },
     {
       "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-      "step": 57,
+      "step": 58,
       "goal": 1,
       "questID": 96408,
       "title": "A Visitor to Dun Morogh",
@@ -1256,7 +1256,7 @@
     },
     {
       "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-      "step": 59,
+      "step": 60,
       "goal": 2,
       "questID": 94465,
       "title": "La llamada del fuego",
@@ -1282,7 +1282,7 @@
     },
     {
       "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-      "step": 60,
+      "step": 61,
       "goal": 2,
       "questID": 94466,
       "title": "La llamada del fuego",
@@ -1307,7 +1307,7 @@
     },
     {
       "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-      "step": 62,
+      "step": 63,
       "goal": 2,
       "questID": 94467,
       "title": "La llamada del fuego",
@@ -1332,7 +1332,7 @@
     },
     {
       "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-      "step": 62,
+      "step": 63,
       "goal": 6,
       "questID": 94468,
       "title": "La llamada del fuego",
@@ -1357,7 +1357,7 @@
     },
     {
       "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-      "step": 65,
+      "step": 66,
       "goal": 4,
       "questID": 96391,
       "title": "Underground Map",
@@ -7663,6 +7663,6 @@
     "Local dependency locations are diagnostic; this audit does not assume a previous zone was completed.",
     "No runtime quest completion, profession or player's progress is modified by this audit."
   ],
-  "inputSha256": "a1e70cc03cfba50f969c3f52c4025e6d1e35f541b6c59954f7209cef62950d07",
+  "inputSha256": "e29d86c4ca9601ee8d71631d605c1d72dde3be408ae1c366261726cf76573819",
   "evidenceSha256": "ab0615cda0740566797134b91d400f1c8e9ad858a12e53005f7a2e98ac742c89"
 }

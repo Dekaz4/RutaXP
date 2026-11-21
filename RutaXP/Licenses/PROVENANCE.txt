@@ -110,6 +110,9 @@ notice is reproduced in ForeverLevelingBiS-MIT.txt. Items.lua provides
 Blizzard Classic Era item facts when no Forever-specific record exists.
 Missing reward lists use SendaFH_Codex, and item names use SendaFH_Names_esES.
 In-game comparisons use the values available on that player's client.
+WarlockRewardData.lua uses the same quest, item and name tables, filtered to
+the Gnome Warlock's linked chapters. Wand DPS uses weapon damage and speed.
+tools/build_warlock_rewards.py reproduces this catalog from the pinned source.
 Rogue one-handed axes and the two-dagger requirement for Mutilate:
 https://worldofwarcraft.blizzard.com/es-es/news/24310968
 The Westfall chest (2041) comes from quest 166 at the end of the Defias

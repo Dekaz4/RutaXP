@@ -7515,24 +7515,6 @@
             "npc": 5676,
             "npcName": "Summoned Voidwalker",
             "objectiveIndex": 1
-          },
-          {
-            "map": 1454,
-            "x": 49.3,
-            "y": 50,
-            "f": "e",
-            "npc": 5676,
-            "npcName": "Summoned Voidwalker",
-            "objectiveIndex": 1
-          },
-          {
-            "map": 1458,
-            "x": 86.6,
-            "y": 27.1,
-            "f": "e",
-            "npc": 5676,
-            "npcName": "Summoned Voidwalker",
-            "objectiveIndex": 1
           }
         ],
         "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
@@ -7540,38 +7522,6 @@
       "evidence": [
         {
           "candidateIndex": 1,
-          "kind": "quest-objective",
-          "entityType": "npc",
-          "entityID": 5676,
-          "objectiveIndex": 1,
-          "sourceFile": "addon/SendaFH_Codex/Npcs1.lua",
-          "sourceSha256": "d4673aa84c1a8adfc94c9c775788d38b254aac20997917eec5ee9459d121fefc",
-          "via": {
-            "questID": 1689,
-            "objectiveIndex": 1,
-            "objectiveType": "kill",
-            "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
-            "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6"
-          }
-        },
-        {
-          "candidateIndex": 2,
-          "kind": "quest-objective",
-          "entityType": "npc",
-          "entityID": 5676,
-          "objectiveIndex": 1,
-          "sourceFile": "addon/SendaFH_Codex/Npcs1.lua",
-          "sourceSha256": "d4673aa84c1a8adfc94c9c775788d38b254aac20997917eec5ee9459d121fefc",
-          "via": {
-            "questID": 1689,
-            "objectiveIndex": 1,
-            "objectiveType": "kill",
-            "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
-            "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6"
-          }
-        },
-        {
-          "candidateIndex": 3,
           "kind": "quest-objective",
           "entityType": "npc",
           "entityID": 5676,
@@ -7607,24 +7557,6 @@
             "npc": 5676,
             "npcName": "Summoned Voidwalker",
             "objectiveIndex": 1
-          },
-          {
-            "map": 1454,
-            "x": 49.3,
-            "y": 50,
-            "f": "e",
-            "npc": 5676,
-            "npcName": "Summoned Voidwalker",
-            "objectiveIndex": 1
-          },
-          {
-            "map": 1458,
-            "x": 86.6,
-            "y": 27.1,
-            "f": "e",
-            "npc": 5676,
-            "npcName": "Summoned Voidwalker",
-            "objectiveIndex": 1
           }
         ],
         "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
@@ -7632,38 +7564,6 @@
       "evidence": [
         {
           "candidateIndex": 1,
-          "kind": "quest-objective",
-          "entityType": "npc",
-          "entityID": 5676,
-          "objectiveIndex": 1,
-          "sourceFile": "addon/SendaFH_Codex/Npcs1.lua",
-          "sourceSha256": "d4673aa84c1a8adfc94c9c775788d38b254aac20997917eec5ee9459d121fefc",
-          "via": {
-            "questID": 1689,
-            "objectiveIndex": 1,
-            "objectiveType": "kill",
-            "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
-            "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6"
-          }
-        },
-        {
-          "candidateIndex": 2,
-          "kind": "quest-objective",
-          "entityType": "npc",
-          "entityID": 5676,
-          "objectiveIndex": 1,
-          "sourceFile": "addon/SendaFH_Codex/Npcs1.lua",
-          "sourceSha256": "d4673aa84c1a8adfc94c9c775788d38b254aac20997917eec5ee9459d121fefc",
-          "via": {
-            "questID": 1689,
-            "objectiveIndex": 1,
-            "objectiveType": "kill",
-            "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
-            "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6"
-          }
-        },
-        {
-          "candidateIndex": 3,
           "kind": "quest-objective",
           "entityType": "npc",
           "entityID": 5676,
@@ -24128,24 +24028,6 @@
             "npc": 5677,
             "npcName": "Summoned Succubus",
             "objectiveIndex": 1
-          },
-          {
-            "map": 1454,
-            "x": 49.4,
-            "y": 50,
-            "f": "e",
-            "npc": 5677,
-            "npcName": "Summoned Succubus",
-            "objectiveIndex": 1
-          },
-          {
-            "map": 1458,
-            "x": 86.7,
-            "y": 27.1,
-            "f": "e",
-            "npc": 5677,
-            "npcName": "Summoned Succubus",
-            "objectiveIndex": 1
           }
         ],
         "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
@@ -24153,38 +24035,6 @@
       "evidence": [
         {
           "candidateIndex": 1,
-          "kind": "quest-objective",
-          "entityType": "npc",
-          "entityID": 5677,
-          "objectiveIndex": 1,
-          "sourceFile": "addon/SendaFH_Codex/Npcs1.lua",
-          "sourceSha256": "d4673aa84c1a8adfc94c9c775788d38b254aac20997917eec5ee9459d121fefc",
-          "via": {
-            "questID": 1739,
-            "objectiveIndex": 1,
-            "objectiveType": "kill",
-            "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
-            "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6"
-          }
-        },
-        {
-          "candidateIndex": 2,
-          "kind": "quest-objective",
-          "entityType": "npc",
-          "entityID": 5677,
-          "objectiveIndex": 1,
-          "sourceFile": "addon/SendaFH_Codex/Npcs1.lua",
-          "sourceSha256": "d4673aa84c1a8adfc94c9c775788d38b254aac20997917eec5ee9459d121fefc",
-          "via": {
-            "questID": 1739,
-            "objectiveIndex": 1,
-            "objectiveType": "kill",
-            "sourceFile": "addon/SendaFH_Codex/Quests1.lua",
-            "sourceSha256": "95c48fe04d58e9b26fca481fd0b7690a8536facfa3e7b04296482500219448f6"
-          }
-        },
-        {
-          "candidateIndex": 3,
           "kind": "quest-objective",
           "entityType": "npc",
           "entityID": 5677,
@@ -100387,8 +100237,8 @@
       "located": 424
     },
     "patches": 433,
-    "candidates": 3780,
-    "mixedMapPatches": 193,
-    "candidatesWithoutHeight": 3780
+    "candidates": 3774,
+    "mixedMapPatches": 190,
+    "candidatesWithoutHeight": 3774
   }
 }

@@ -38,13 +38,13 @@ Consulta las recogidas que puedes adelantar, las entregas en una misma visita y 
 """
 
 
-def route(document):
+def route(document, start=START, persona=PERSONA):
     by_id = {g["id"]: g for g in document["guides"]}
     visited = []
-    guide = by_id[START]
+    guide = by_id[start]
     while True:
-        if guide["id"] in visited or not guide_fits(guide, PERSONA):
-            raise ValueError("Unexpected cycle or incompatible guide in human route")
+        if guide["id"] in visited or not guide_fits(guide, persona):
+            raise ValueError(f"Unexpected cycle or incompatible guide for {persona}: {guide['id']}")
         visited.append(guide["id"])
         yield guide
         targets = links(guide)
@@ -55,7 +55,7 @@ def route(document):
         guide = by_id[targets[0]]
 
 
-def gear(raw):
+def item_attributes(raw, class_mask):
     if not raw:
         return
     fields = raw.split()
@@ -65,8 +65,15 @@ def gear(raw):
         hit = re.fullmatch(r"([A-Za-z]+)(-?\d+(?:\.\d+)?)", token)
         if hit:
             stats[hit[1]] = float(hit[2])
-    if quality < 1 or not (int(stats.get("cls", 8)) & 8):
+    if quality >= 1 and int(stats.get("cls", class_mask)) & class_mask:
+        return inv, req, cls, sub, stats
+
+
+def gear(raw):
+    attributes = item_attributes(raw, 8)
+    if not attributes:
         return
+    inv, req, cls, sub, stats = attributes
     weapon = None
     if inv in (13, 21, 22):
         weapon = MELEE.get(sub)
@@ -92,7 +99,7 @@ def ids(text):
     return [int(n) for n in text.split(",") if n]
 
 
-def rewards(document, guides, upstream):
+def rewards(document, guides, upstream, *, persona=PERSONA, race_mask=1, class_mask=8, equipment=gear):
     ref = PinnedReference(upstream, document)
     stats, names = {}, {}
     database = {}
@@ -104,15 +111,15 @@ def rewards(document, guides, upstream):
     ref.ns.Names = ref.lua.table()
     ref.ns.Names.Add = lambda _, kind, rows: names.update(rows.items()) if kind == "item" else None
     ref._load("addon/SendaFH_Names_esES/Names.lua")
-    quests = {q["quest"] for g in guides for s in g["steps"] if fits(s.get("only"), PERSONA)
-              for q in s["goals"] if q["t"] in ("accept", "turnin") and fits(q.get("only"), PERSONA)}
+    quests = {q["quest"] for g in guides for s in g["steps"] if fits(s.get("only"), persona)
+              for q in s["goals"] if q["t"] in ("accept", "turnin") and fits(q.get("only"), persona)}
     result = {}
     for qid in sorted(quests):
         row = database["quests"][qid]
         if row:
             head, choice, fixed, _ = row.split("|", 3)
             _, _, _, _, race, cls, _ = map(int, head.split())
-            if (cls and not cls & 8) or (race and not race & 1):
+            if (cls and not cls & class_mask) or (race and not race & race_mask):
                 continue
             groups = [(False, ids(fixed)), (True, ids(choice))]
         else:
@@ -121,13 +128,14 @@ def rewards(document, guides, upstream):
         items = []
         for choice, item_ids in groups:
             for item in item_ids:
-                value = gear(stats.get(item))
+                value = equipment(stats.get(item))
                 if value and not any(record["id"] == item for record in items):
                     name = names.get(item) or database["names"][item] or ref.get("item", item).get("name")
                     if name:
                         items.append(dict(id=item, name=name, choice=choice, **value))
         if items:
-            result[qid] = sorted(items, key=lambda r: (r["choice"], r["kind"] != "Daga", r["stat"] != "dps", r["id"]))
+            first_kind = "Varita" if persona[0] == "WARLOCK" else "Daga"
+            result[qid] = sorted(items, key=lambda r: (r["choice"], r["kind"] != first_kind, r["stat"] != "dps", r["id"]))
     return result
 
 

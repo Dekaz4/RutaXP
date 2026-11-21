@@ -1,4 +1,4 @@
-# RutaXP 0.7.35 para WoW Forever
+# RutaXP 0.7.36 para WoW Forever
 
 Guías de leveo en español, flecha de navegación, talentos e instructor de clase. Abre la biblioteca con `/rutaxp` o `/rutas`.
 
@@ -19,6 +19,14 @@ El setup no abre WoW, no instala comprobadores en segundo plano y no bloquea el 
 ### Publicar una versión nueva
 
 Modifica la versión del TOC y el valor de respaldo de `Updates.lua`, confirma y sube los cambios de código a GitHub. Después ejecuta `python tools/publish_release.py --publish --notes-file notas.txt`, con las notas de la versión en ese archivo. La herramienta construye, prueba, sube a un borrador y verifica los archivos antes de publicar la versión completa. Un cambio de código no cuenta como actualización hasta publicar su release.
+
+## Brujo gnomo en solitario (0.7.36)
+
+En Dun Morogh entregas la carta a Alamar y aceptas «Novato» en la misma visita. Puedes conseguir los tres talismanes del diablillo mientras haces los demás encargos de la cueva. En Las Birras, la ruta recoge la carne de MacGrann antes de ir al este hacia la cantera. El capítulo conserva el progreso de los personajes que ya lo empezaron.
+
+La guía lleva al brujo al círculo de Gakin en Ventormenta para invocar al abisario. Si quieres la súcubo o el íncubo, puedes activar **Opcionales** o aceptar la cadena de Gakin al pasar. La guía sigue la rama que lleves en el diario. A nivel 40, la misión del malignoecus da también equitación de aprendiz.
+
+Para subir con **Aflicción**, el panel recomienda Corrupción instantánea al 14, Succionar vida al 30 y Arruinar al 40. En los 26 capítulos del recorrido, las filas de 66 misiones identifican recompensas de equipo útiles para el brujo gnomo, entre ellas varitas, bastones y tela. Pasa el ratón sobre la fila al aceptar o entregar para ver los objetos.
 
 ## Misiones para subir en solitario (0.7.33)
 
@@ -341,7 +349,7 @@ Cada uno debe aceptar y entregar sus misiones. Algunos objetos y misiones de cla
 
 ## Instalación
 
-1. Descarga y descomprime `RutaXP-0.7.35.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
+1. Descarga y descomprime `RutaXP-0.7.36.zip` desde [Releases](https://github.com/Dekaz4/RutaXP/releases/latest).
 2. Ejecuta `Instalador_RutaXP.exe` o `Instalar_RutaXP.bat` y selecciona tu cliente de **WoW Forever**. También puedes copiar manualmente la carpeta `RutaXP` a su `Interface/AddOns`.
 3. Comprueba que existe `Interface/AddOns/RutaXP/RutaXP.toc`.
 4. Reinicia WoW si has añadido el addon por primera vez; una recarga no detecta carpetas nuevas. Actívalo en Accesorios y escribe `/rutaxp`.

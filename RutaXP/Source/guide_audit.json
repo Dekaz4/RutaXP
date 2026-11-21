@@ -30,7 +30,7 @@
     },
     "navigationCoverage": {
       "file": "Source/guide_locations.json",
-      "sha256": "fe3ec25704126c15a19abf6eaf92ae33c311f567b6183c48fe32dacc6583f812",
+      "sha256": "0f3de2014f92bf9c3379dc6dae17382dfe655239c2b8b21e567545b33f23d657",
       "sourceFiles": {
         "addon/SendaFH/Lookup/Codex.lua": "e7f9a72059376cf699a712b28fe5d2731d232bf9648d04e1358147506fb0a072",
         "addon/SendaFH/Nav/TravelData.lua": "1e7e2503c00b52fe96fa4001dc168ffb9d3805952dea4041c25dd6eb7f3c51a8",
@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "5c215123b9c13e9968624c850cde6aa088912acb7312d075959d0265a130980d",
+      "sha256": "a5a6488099961148ad8986e7bfe4dea32e749724639ca8419bf9e735e0961925",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -573,7 +573,9 @@
         "mulgore-kyle-level-4",
         "tirisfal-bandarion-after-leonid-4",
         "hillsbrad-town-hall-request-8",
-        "desolace-menethil-auberdine-boat-3"
+        "desolace-menethil-auberdine-boat-3",
+        "dun-morogh-warlock-first-demons-3",
+        "dun-morogh-western-visits-4"
       ]
     }
   },
@@ -582,7 +584,7 @@
     "goals": 7456,
     "direct": 6593,
     "generated_instruction": 7456,
-    "missing_goal_note_text": 3658,
+    "missing_goal_note_text": 3657,
     "missing": 267,
     "no_fixed_point_expected": 279,
     "empty_authored_subtitle": 810,
@@ -716,7 +718,7 @@
       "goals": 2291,
       "direct": 2291,
       "generated_instruction": 2291,
-      "missing_goal_note_text": 778,
+      "missing_goal_note_text": 777,
       "empty_authored_subtitle": 81
     },
     "use": {
@@ -2291,7 +2293,7 @@
         "candidates": 6,
         "generated_instruction": 43,
         "direct": 32,
-        "missing_goal_note_text": 14,
+        "missing_goal_note_text": 13,
         "empty_authored_subtitle": 12,
         "missing": 5,
         "no_fixed_point_expected": 5
@@ -2355,7 +2357,7 @@
           "goals": 13,
           "direct": 13,
           "generated_instruction": 13,
-          "missing_goal_note_text": 4
+          "missing_goal_note_text": 3
         }
       }
     },
@@ -6118,7 +6120,7 @@
       "classification": "semantic_no_location",
       "reason": "Requisito de nivel; no establece una zona de farmeo por sí solo.",
       "unresolved": false,
-      "goalNote": "Unos cuantos troggs más afuera si eres corto",
+      "goalNote": "Si te falta experiencia para alcanzar el nivel 3, derrota algunos troggs más cerca de Balir.",
       "stepNote": null,
       "navigationMode": null,
       "referenceNavigationKind": "missing"
@@ -6142,8 +6144,8 @@
       "classification": "semantic_no_location",
       "reason": "Requisito de nivel; no establece una zona de farmeo por sí solo.",
       "unresolved": false,
-      "goalNote": "Algunos Trol Peloescarcha Whelps si usted es corto",
-      "stepNote": "Grelin y Nori Rumborgullo campamento en el extremo suroeste del valle, debajo de la cueva del troll.",
+      "goalNote": "Si te falta experiencia para el nivel 4, derrota crías de trol Peloescarcha en las laderas cercanas.",
+      "stepNote": "Grelin y Nori acampan al suroeste del valle. Habla con Grelin antes de subir hacia la cueva.",
       "navigationMode": null,
       "referenceNavigationKind": "missing"
     },
@@ -6196,9 +6198,9 @@
       "referenceNavigationKind": "missing"
     },
     {
-      "key": "forever/alliance/dwarf-gnome/01-dun-morogh:65:4",
+      "key": "forever/alliance/dwarf-gnome/01-dun-morogh:66:4",
       "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-      "stepIndex": 65,
+      "stepIndex": 66,
       "goalIndex": 4,
       "action": "accept",
       "questID": 96391,
@@ -6208,7 +6210,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-        "stepIndex": 65,
+        "stepIndex": 66,
         "goalIndex": 4
       },
       "classification": "item_start",
@@ -13174,9 +13176,9 @@
       "reason": "La explicación está en el paso; comprobar que la fila compacta permita consultarla."
     },
     {
-      "key": "forever/alliance/dwarf-gnome/01-dun-morogh:68:2",
+      "key": "forever/alliance/dwarf-gnome/01-dun-morogh:57:2",
       "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-      "stepIndex": 68,
+      "stepIndex": 57,
       "goalIndex": 2,
       "action": "complete",
       "questID": 312,
@@ -13186,7 +13188,7 @@
         "commit": "5d207e28e82e2c529143b21ace74fe88692f0067",
         "compiledFile": "addon/SendaFH_Guides/Guides.lua",
         "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-        "stepIndex": 68,
+        "stepIndex": 57,
         "goalIndex": 2
       },
       "kind": "step_instructions_not_goal",
@@ -16377,6 +16379,6 @@
       "visitQuest",
       "requiredTravel"
     ],
-    "semanticsSha256": "cf8388816c0ad0de7df0c46dffa9aee4162a1075179a88f63f1ba3df65b51a14"
+    "semanticsSha256": "815b4de26ef7895dd7d541d0d66209d5430c9dca24f9ebf8155ce5211c2c3196"
   }
 }

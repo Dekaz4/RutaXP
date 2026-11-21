@@ -114,12 +114,12 @@ def main():
     # Source for the executable and tools accompanies the binary distribution.
     for name in ["Installer.cs", "Updater.cs", "build_release.py", "import_guides.py", "build_talents.js", "vendor_pathing.py", "build_waypoints.py",
                  "guide_coordinates.py", "guide_instructions.py", "audit_guides.py", "audit_guide_structure.py", "refresh_guides.py", "publish_release.py",
-                 "solo_leveling_route.py", "solo_hillsbrad_route.py", "solo_mid_route.py", "solo_late_route.py",
+                 "solo_leveling_route.py", "solo_hillsbrad_route.py", "solo_mid_route.py", "solo_late_route.py", "gnome_warlock_route.py",
                  "route_review_alliance_start.py", "route_review_alliance_late.py", "route_review_horde.py",
                  "review_all_routes.py", "route_review_template.html", "capture_route_comparison.py",
                  "unmatched_solo.py", "solo_review_unmatched_a.json", "solo_review_unmatched_b.json", "solo_review_unmatched_c.json",
                  "route_comparison_facts.json", "route_review_alliance_late_capture.py", "route_review_alliance_late_sage.json",
-                 "build_travel_connections.py", "audit_quest_requirements.py", "review_human_rogue.py",
+                 "build_travel_connections.py", "audit_quest_requirements.py", "review_human_rogue.py", "build_warlock_rewards.py",
                  "build_early_quest_offers.py", "build_map_services.py"]:
         release_files[f"tools/{name}"] = (ROOT / "tools" / name).read_bytes()
     for source in (ROOT / "tests").rglob("*"):

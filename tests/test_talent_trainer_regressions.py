@@ -545,6 +545,25 @@ class TrainerRegressionTests(unittest.TestCase):
 
 
 class TalentCatalogRegressionTests(unittest.TestCase):
+    def test_solo_warlock_unlocks_drains_on_time_and_does_not_shop_for_quest_spells(self):
+        h = TalentTrainerHost()
+        h.state.classToken, h.state.raceToken = "WARLOCK", "Gnome"
+        h.live("WARLOCK")
+        build = h.t.Evaluate().build
+        self.assertEqual(build.key, "affliction_drain")
+        picks = {pick.level: (build.data.nodes[pick.node].name, pick.rank) for pick in build.picks.values()}
+        self.assertEqual(picks[14], ("Improved Corruption", 5))
+        self.assertEqual(picks[30], ("Siphon Life", 1))
+        self.assertEqual(picks[40], ("Wrack", 1))
+        self.assertEqual(build.data.nodes[105923].name, "Grim Reach")
+        trainer = h.tr.BuildIndex("WARLOCK", build)
+        self.assertIsNone(trainer[h.tr.Normalize("Invocar a diablillo")])
+        self.assertIsNone(trainer[h.tr.Normalize("Invocar a corcel nefasto")])
+        self.assertIsNone(trainer[h.tr.Normalize("Ritual de condena")])
+        self.assertEqual(trainer[h.tr.Normalize("Terror de agonía")].rank, 3)
+        healthstone = min(sp.level for sp in build.data.trainerSpells.values() if "Crear piedra de salud" in sp.name)
+        self.assertEqual(healthstone, 10)
+
     def test_all_36_builds_keep_51_legal_picks_and_truthful_distributions(self):
         h = TalentTrainerHost()
         builds = 0

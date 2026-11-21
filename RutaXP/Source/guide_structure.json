@@ -98,13 +98,373 @@
       },
       {
         "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 23,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 23,
+        "field": "quest",
+        "source": 3115,
+        "snapshot": 233
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 23,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          179
+        ]
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 23,
+        "field": "only",
+        "source": {
+          "classes": [
+            "WARLOCK"
+          ]
+        },
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 23,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 24,
+        "field": "quest",
+        "source": 233,
+        "snapshot": 170
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 25,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 25,
+        "field": "quest",
+        "source": 170,
+        "snapshot": 3115
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 25,
+        "field": "pre",
+        "source": [
+          179
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 25,
+        "field": "only",
+        "source": null,
+        "snapshot": {
+          "classes": [
+            "WARLOCK"
+          ]
+        }
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 25,
+        "field": "minLevel",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 26,
+        "field": "t",
+        "source": "train",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 26,
+        "field": "quest",
+        "source": null,
+        "snapshot": 1599
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 26,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          1598
+        ]
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 26,
+        "field": "only",
+        "source": null,
+        "snapshot": {
+          "classes": [
+            "WARLOCK"
+          ]
+        }
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 26,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 3,
+        "goal": 26,
+        "field": "class",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 5,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
         "step": 12,
-        "goal": 6,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 2,
+        "field": "quest",
+        "source": 3361,
+        "snapshot": 3365
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          3364
+        ]
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 4
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 3,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 3,
+        "field": "quest",
+        "source": 3365,
+        "snapshot": 1599
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 3,
+        "field": "pre",
+        "source": [
+          3364
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 3,
+        "field": "only",
+        "source": null,
+        "snapshot": {
+          "classes": [
+            "WARLOCK"
+          ]
+        }
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 3,
+        "field": "minLevel",
+        "source": 4,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 4,
+        "field": "t",
+        "source": "train",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 4,
+        "field": "quest",
+        "source": null,
+        "snapshot": 94373
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 4,
         "field": "preAll",
         "source": null,
         "snapshot": [
           98581
         ]
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 4,
+        "field": "only",
+        "source": null,
+        "snapshot": {
+          "classes": [
+            "SHAMAN"
+          ]
+        }
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 4,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 4
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 4,
+        "field": "class",
+        "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 5,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "train"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 5,
+        "field": "quest",
+        "source": 1599,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 5,
+        "field": "only",
+        "source": {
+          "classes": [
+            "WARLOCK"
+          ]
+        },
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 5,
+        "field": "class",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 6,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 6,
+        "field": "quest",
+        "source": 94373,
+        "snapshot": 3361
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 6,
+        "field": "only",
+        "source": {
+          "classes": [
+            "SHAMAN"
+          ]
+        },
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 12,
+        "goal": 6,
+        "field": "minLevel",
+        "source": 4,
+        "snapshot": null
       },
       {
         "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
@@ -118,13 +478,542 @@
       },
       {
         "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 57,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 57,
+        "goal": 1,
+        "field": "quest",
+        "source": 96408,
+        "snapshot": 312
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 57,
+        "goal": 1,
+        "field": "closedBy",
+        "source": [
+          96392
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 57,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 9,
+        "snapshot": 7
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 58,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 58,
+        "goal": 1,
+        "field": "quest",
+        "source": 413,
+        "snapshot": 96408
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 58,
+        "goal": 1,
+        "field": "closedBy",
+        "source": null,
+        "snapshot": [
+          96392
+        ]
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 58,
+        "goal": 1,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 9
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
         "step": 59,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 59,
+        "goal": 1,
+        "field": "quest",
+        "source": 94449,
+        "snapshot": 413
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 60,
+        "goal": 1,
+        "field": "quest",
+        "source": 94465,
+        "snapshot": 94449
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 60,
+        "goal": 2,
+        "field": "quest",
+        "source": 94466,
+        "snapshot": 94465
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 60,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          94465
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 60,
         "goal": 2,
         "field": "preAll",
         "source": null,
         "snapshot": [
           94449
         ]
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 61,
+        "goal": 1,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 61,
+        "goal": 1,
+        "field": "quest",
+        "source": 94466,
+        "snapshot": 94465
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 61,
+        "goal": 1,
+        "field": "oi",
+        "source": 2,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 61,
+        "goal": 1,
+        "field": "item",
+        "source": 6652,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 61,
+        "goal": 1,
+        "field": "count",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 61,
+        "goal": 2,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 61,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 61,
+        "goal": 2,
+        "field": "item",
+        "source": 5026,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 61,
+        "goal": 2,
+        "field": "count",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 61,
+        "goal": 2,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          94465
+        ]
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 61,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 62,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 62,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 62,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 62,
+        "goal": 1,
+        "field": "item",
+        "source": null,
+        "snapshot": 6652
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 62,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 62,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 62,
+        "goal": 2,
+        "field": "quest",
+        "source": 94467,
+        "snapshot": 94466
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 62,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 62,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 5026
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 62,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 62,
+        "goal": 2,
+        "field": "pre",
+        "source": [
+          94466
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 62,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 63,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 63,
+        "goal": 1,
+        "field": "quest",
+        "source": 94468,
+        "snapshot": 94466
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 64,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 64,
+        "goal": 1,
+        "field": "quest",
+        "source": 96408,
+        "snapshot": 94468
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 1,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 1,
+        "field": "quest",
+        "source": 433,
+        "snapshot": 96408
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 1,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 1,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 2,
+        "field": "t",
+        "source": "kill",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 2,
+        "field": "quest",
+        "source": 96390,
+        "snapshot": 96392
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 2,
+        "field": "oi",
+        "source": 1,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 2,
+        "field": "count",
+        "source": 10,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 9
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 3,
+        "field": "t",
+        "source": "collect",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 3,
+        "field": "quest",
+        "source": null,
+        "snapshot": 96392
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 3,
+        "field": "item",
+        "source": 274268,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 4,
+        "field": "quest",
+        "source": 96391,
+        "snapshot": 96390
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 4,
+        "field": "item",
+        "source": 274268,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 65,
+        "goal": 4,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          96392
+        ]
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 66,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 66,
+        "goal": 1,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "kill"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 66,
+        "goal": 1,
+        "field": "oi",
+        "source": null,
+        "snapshot": 1
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 66,
+        "goal": 1,
+        "field": "count",
+        "source": null,
+        "snapshot": 10
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 67,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 67,
+        "goal": 1,
+        "field": "quest",
+        "source": 96390,
+        "snapshot": 433
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 68,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 68,
+        "goal": 1,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 68,
+        "goal": 1,
+        "field": "quest",
+        "source": 312,
+        "snapshot": 96390
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 68,
+        "goal": 1,
+        "field": "minLevel",
+        "source": 7,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 68,
+        "goal": 2,
+        "field": "t",
+        "source": "complete",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "step": 68,
+        "goal": 2,
+        "field": "quest",
+        "source": 312,
+        "snapshot": 96391
       },
       {
         "guideID": "forever/alliance/human/01-elwynn-forest",
@@ -25325,6 +26214,35 @@
           "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/02-desolace.guide",
           "reason": "La nota del segundo paso mencionaba el barco al cambiar de continente. El trayecto ahora se sigue antes de la entrega de Nord’el y del vuelo a Astranaar."
         }
+      },
+      {
+        "id": "dun-morogh-warlock-first-demons-3",
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "revision": 3,
+        "evidence": {
+          "sources": [
+            "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L124-L217",
+            "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L1424",
+            "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Items.lua#L23",
+            "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Npcs.lua#L279-L280",
+            "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L598-L652"
+          ],
+          "reason": "Alamar recibe el memorándum y ofrece Novato desde el nivel 1. Recoger ambos encargos de la puerta antes de hablar con él evita volver a entrar. Los tres talismanes se reúnen durante la salida de Grelin. La entrega del diablillo coincide con el regreso de la infusión y el abisario se obtiene al viajar a Ventormenta."
+        }
+      },
+      {
+        "id": "dun-morogh-western-visits-4",
+        "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+        "revision": 4,
+        "evidence": {
+          "sources": [
+            "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L201-L219",
+            "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L469-L482",
+            "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L549-L556",
+            "https://www.wowhead.com/classic/quest=312/tundra-macgranns-stolen-stash"
+          ],
+          "reason": "Se entrega primero la infusión cronometrada, se recoge la taza de Durnan y se visitan los instructores antes de buscar a Félix en la puerta. La carne de MacGrann se recoge al salir de Las Birras hacia el almacén. Así se evita regresar desde la cantera oriental para un único encargo. La posición de los encargos de clase de nivel 10 se conserva."
+        }
       }
     ],
     "authoredTextPresenceLosses": [],
@@ -40588,59 +41506,59 @@
         "occurrences": [
           {
             "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-            "step": 64,
+            "step": 65,
             "goal": 2,
             "action": "accept",
             "questID": 96392,
             "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
-            "sourceLine": 530,
-            "sourceText": "accept 96392"
+            "sourceLine": 538,
+            "sourceText": "kill 6123 quest 96390                       -- Dark Iron Spy"
           }
         ],
         "questGoals": [
           {
             "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-            "step": 64,
+            "step": 65,
             "goal": 2,
             "action": "accept",
             "questID": 96392,
             "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
-            "sourceLine": 530,
-            "sourceText": "accept 96392"
+            "sourceLine": 538,
+            "sourceText": "kill 6123 quest 96390                       -- Dark Iron Spy"
           },
           {
             "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-            "step": 64,
+            "step": 65,
             "goal": 3,
             "action": "turnin",
             "questID": 96392,
             "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
-            "sourceLine": 531,
-            "sourceText": "turnin 96392"
+            "sourceLine": 539,
+            "sourceText": "collect 274268                              -- Dark Iron Map"
           }
         ],
         "unboundMatches": [],
         "contexts": [
           {
             "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-            "step": 64,
+            "step": 65,
             "goal": 2,
             "action": "accept",
             "questID": 96392,
             "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
-            "sourceLine": 530,
-            "sourceText": "accept 96392",
+            "sourceLine": 538,
+            "sourceText": "kill 6123 quest 96390                       -- Dark Iron Spy",
             "stepNote": "Farsen acampa en la cresta con vistas al Cantera de Gol'Bolar desdel oeste. Habla con él para su visión."
           },
           {
             "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
-            "step": 64,
+            "step": 65,
             "goal": 3,
             "action": "turnin",
             "questID": 96392,
             "sourceFile": "guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide",
-            "sourceLine": 531,
-            "sourceText": "turnin 96392",
+            "sourceLine": 539,
+            "sourceText": "collect 274268                              -- Dark Iron Map",
             "stepNote": "Farsen acampa en la cresta con vistas al Cantera de Gol'Bolar desdel oeste. Habla con él para su visión."
           }
         ],
@@ -44356,5 +45274,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "a1e70cc03cfba50f969c3f52c4025e6d1e35f541b6c59954f7209cef62950d07"
+  "inputSha256": "e29d86c4ca9601ee8d71631d605c1d72dde3be408ae1c366261726cf76573819"
 }

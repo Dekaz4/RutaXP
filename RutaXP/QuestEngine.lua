@@ -68,6 +68,7 @@ end
 function ns:IsSoloLevelingDetour(goal)
     local char = self.char
     if not goal or not char or char.optional or (char.duo and char.duo.enabled) then return false end
+    if goal.detourOnly and not self:MatchesConditions(goal.detourOnly) then return false end
     if goal.soloAfter and not self:IsQuestActive(goal.quest or goal.groupVisitFor) then
         for _, qid in ipairs(goal.soloAfter) do
             if not self:IsQuestDelivered(qid) then return true end
@@ -1327,8 +1328,8 @@ function ns:GetStepGoalItems(step, state)
 
                 local details = self:GetGoalInstruction(goal, index == currentIdx and step or nil)
                 if index == currentIdx and status == "active" and (action == "accept" or action == "turnin")
-                    and self.GetRogueQuestRewardInfo then
-                    local hint, rewards = self:GetRogueQuestRewardInfo(id, action)
+                    and self.GetLevelingQuestRewardInfo then
+                    local hint, rewards = self:GetLevelingQuestRewardInfo(id, action)
                     if hint then
                         subLines[#subLines + 1] = hint
                         details = details and (details .. "\n" .. rewards) or rewards

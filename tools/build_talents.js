@@ -9,6 +9,7 @@ const { TABLES, treeFacts } = require('../.sources/SendaFH/tools/lib/talents/bui
 const BUILD = '1.60.1.70374';
 const PALADIN_BUILD = '1.60.1.70862';
 const ROGUE_BUILD = '1.60.1.70888';
+const WARLOCK_BUILD = '1.60.1.71037';
 const OUT_FILE = path.resolve(__dirname, '../RutaXP/TalentBuilds.lua');
 
 const CLASS_META = {
@@ -66,7 +67,7 @@ const CLASS_META = {
     nameEs: 'Brujo',
     specs: ['Affliction', 'Demonology', 'Destruction'],
     specsEs: ['Aflicción', 'Demonología', 'Destrucción'],
-    summary: 'El Brujo es una máquina de subir de nivel sin descansos: Aflicción drena vida mientras tus maldiciones consumen a varios enemigos, Demonología convierte a tu demonio en un tanque indestructible con Vínculo de alma, y Destrucción revienta objetivos con fuego y sombra.',
+    summary: 'Aflicción combina daño periódico y drenajes para subir en solitario. El abisario retiene al enemigo mientras recuperas salud. Demonología refuerza al demonio y Destrucción se centra en el daño directo.',
   },
   DRUID: {
     skillLine: 574,
@@ -1184,34 +1185,36 @@ const PLANS = {
     {
       key: 'affliction_drain',
       spec: 'Affliction',
-      title: 'Aflicción — Drenar Vida y Cero Descansos',
+      title: 'Aflicción — Subida en solitario',
       role: 'Recomendada · Solitario',
       recommended: true,
       split: '36/15/0',
-      stats: 'Poder con las Sombras > Aguante > Intelecto > Espíritu',
-      weapons: 'Varita con buen DPS + Bastón o Daga con Aguante e Intelecto',
-      skills: 'Corrupción, Maldición de agonía, Succionar vida, Drenar vida, Transfusión de vida, Drenar alma y Abisario',
-      rotation: 'Manda a tu Abisario -> Maldición de agonía -> Corrupción -> Succionar vida -> Drenar vida / Varita -> Usa Transfusión de vida para recuperar maná sin parar jamás.',
+      stats: 'Poder con hechizos o daño de las Sombras, aguante e intelecto.',
+      weapons: 'Varita mágica inferior desde el 5 y superior desde el 13 si están a buen precio. Elige el arma principal por sus atributos.',
+      skills: 'Descarga de las Sombras, Corrupción, Terror de agonía, Transfusión de vida, Drenar alma, Drenar vida, Succionar vida y Crear piedra de salud',
+      rotation: 'Empieza con Descarga de las Sombras y manda al diablillo cuando lo consigas. En combates largos añade Corrupción desde el 4 y Terror de agonía desde el 8. Remata con varita si tienes una.',
       notes: {
-        10: 'Corrupción mejorada (5/5) hace que tu Corrupción sea instantánea: imprescindible desde nivel 10.',
-        15: 'Transfusión de vida mejorada y Drenajes mejorados convierten tu salud en maná infinito.',
-        20: 'Concentración vil evita que los golpes enemigos interrumpan tu Drenar vida, y Abisario mejorado mantiene el agro.',
-        30: 'Succionar vida añade otro daño en el tiempo que te cura constantemente, y Ocaso te regala Descargas de las Sombras instantáneas.',
-        40: 'Maestría de las Sombras y Wrack disparan el daño de todas tus maldiciones.',
+        10: 'Pon aquí el primer punto. Cada rango acorta el lanzamiento de Corrupción.',
+        14: 'Con el quinto punto, Corrupción es instantánea. Ya puedes aplicarla mientras te mueves.',
+        20: 'Concentración vil ayuda a mantener Drenar vida mientras recibes golpes.',
+        23: 'Con Cosecha de almas, canaliza Drenar alma cuando le quede poca salud a un enemigo que dé experiencia. Si muere bajo su efecto, recuperarás maná más rápido.',
+        25: 'Cuando se active Ocaso, aprovecha la Descarga de las Sombras instantánea.',
+        30: 'Añade Succionar vida cuando el enemigo vaya a sobrevivir varios segundos.',
+        40: 'Canaliza Arruinar con Corrupción, Terror de agonía y Succionar vida activos. Los tres infligen daño el doble de a menudo durante la canalización.',
+        46: 'Abisario mejorado refuerza Tormento. Actualiza su grimorio cuando pases por el instructor de demonios.',
       },
       seq: [
         ['Improved Corruption', 5, 'Affliction'],
-        ['Improved Life Tap', 2, 'Affliction'],
-        ['Suppression', 3, 'Affliction'],
         ['Improved Drains', 3, 'Affliction'],
-        ['Soul Harvest', 2, 'Affliction'],
+        ['Improved Life Tap', 2, 'Affliction'],
         ['Fel Concentration', 3, 'Affliction'],
-        ['Improved Bane of Agony', 2, 'Affliction'],
+        ['Soul Harvest', 2, 'Affliction'],
         ['Nightfall', 2, 'Affliction'],
-        ['Malevolence', 3, 'Affliction'],
+        ['Improved Bane of Agony', 2, 'Affliction'],
+        ['Suppression', 1, 'Affliction'],
         ['Siphon Life', 1, 'Affliction'],
         ['Soul Siphon', 3, 'Affliction'],
-        ['Pandemic', 1, 'Affliction'],
+        ['Suppression', 1, 'Affliction'],
         ['Shadow Mastery', 5, 'Affliction'],
         ['Wrack', 1, 'Affliction'],
         ['Demonic Embrace', 5, 'Demonology'],
@@ -1219,6 +1222,9 @@ const PLANS = {
         ['Fel Vitality', 3, 'Demonology'],
         ['Demonic Aegis', 2, 'Demonology'],
         ['Master Summoner', 2, 'Demonology'],
+        ['Suppression', 1, 'Affliction'],
+        ['Malevolence', 3, 'Affliction'],
+        ['Pandemic', 1, 'Affliction'],
       ],
     },
     {
@@ -1575,8 +1581,8 @@ const RACE_GUIDES = {
   Gnome: {
     nameEs: 'Gnomo',
     faction: 'Alliance',
-    perks: 'Mente expansiva (+5% Intelecto total), Artista del escape (rompe inmovilizaciones y frenados) y Especialización en Ingeniería.',
-    tip: 'Para Mago y Brujo, ese +5% de Intelecto se traduce en más maná máximo y más crítico con hechizos. Guarda siempre Artista del escape para salir de redes o raíces.',
+    perks: 'Mente expansiva aumenta un 5% tu maná, ira o energía máximos. Tus dispositivos de ingeniería fallan menos.',
+    tip: 'Usa Artista del escape si una red o una raíz te impide alejarte. ¡Eureka! te ayuda a ahorrar recursos cuando encadenas ataques.',
   },
   Skyborne: {
     nameEs: 'Altonato / Elfo',
@@ -1762,24 +1768,50 @@ const TRAINER_SPELLS = {
     [60, 'Intelecto Arcano máximo y rangos finales de ataque', 'must', 'Completa tu repertorio de nivel 60'],
   ],
   WARLOCK: [
-    [1, 'Descarga de las Sombras, Piel de demonio e Invocar diablillo (Misión)', 'must', 'Haz la misión del Diablillo nada más empezar'],
-    [4, 'Corrupción (Rango 1) y Maldición de debilidad', 'must', 'Corrupción es tu daño en el tiempo principal'],
-    [6, 'Transfusión de vida (Life Tap Rango 1)', 'must', 'Convierte tu salud en maná para no parar nunca'],
-    [8, 'Miedo (Fear) y Maldición de agonía (Rango 1)', 'must', 'Maldición de agonía + Corrupción matan a cualquier enemigo'],
-    [10, 'Invocar abisario (Misión de clase) y Drenar alma', 'must', '¡El Abisario es tu tanque personal! Usa Drenar alma para conseguir Fragmentos'],
-    [12, 'Cauce de salud (Health Funnel) y Maldición de temeridad', 'must', 'Cura a tu Abisario rápidamente tras cada combate'],
-    [14, 'Drenar vida (Drain Life Rango 1)', 'must', 'Te cura mientras dañas al enemigo'],
-    [16, 'Aliento inagotable y Crear piedra de salud', 'must', 'Crea siempre tu Piedra de salud (poción gratis)'],
-    [18, 'Dolor abrasador y Crear piedra de alma (Soulstone)', 'must', 'Guarda tu Piedra de alma sobre ti mismo para revivir si mueres'],
-    [20, 'Invocar súcubo (Misión), Armadura demoníaca y Lluvia de fuego', 'must', 'Armadura demoníaca aumenta mucho tu regeneración de vida'],
-    [22, 'Ojo de Kilrogg y Sentir demonios', 'save', 'Opcionales; ahorra oro'],
-    [26, 'Detectar invisibilidad', 'good', 'Útil contra enemigos en sigilo'],
-    [30, 'Invocar manáfago (Misión) y Llamas infernales', 'good', 'El Manáfago silencia magos y disipa magia'],
-    [32, 'Maldición de los elementos / Sombras', 'good', 'Aumenta el daño mágico en mazmorras'],
-    [40, 'Montura gratis: Invocar corcel vil + Aullido de terror', 'must', '¡En nivel 40 aprendes tu Corcel vil gratis en el instructor de brujos!'],
-    [42, 'Espiral de la muerte (Death Coil)', 'must', 'Espanta al enemigo 3s al instante y te cura una gran cantidad de vida'],
-    [50, 'Fuego de alma y rangos altos de Corrupción, Agonía y Drenar vida', 'must', 'Mantén tus tres efectos periódicos siempre al máximo rango'],
-    [60, 'Ritual de perdición / Rangos finales de nivel 60', 'must', 'Completa tus hechizos de nivel 60'],
+    // Names and levels from the Forever client (SpellName, SpellLevels, WARLOCK_BUILD).
+    [1, 'Descarga de las Sombras y Piel de demonio', 'must', 'Activa Piel de demonio y usa Descarga de las Sombras para atacar desde lejos.', 'starting'],
+    [1, 'Inmolar', 'good', 'Tu primera compra añade daño inicial y periódico de fuego.'],
+    [1, 'Invocar a diablillo', 'must', 'Completa la misión de tu instructor en la zona inicial para aprender a invocarlo.', 'quest'],
+    [4, 'Corrupción', 'must', 'Aplícala pronto para que haga daño mientras ataca tu demonio.'],
+    [6, 'Transfusión de vida (Life Tap) y Descarga de las Sombras', 'must', 'Mejora la descarga y recupera maná entre combates cuando tengas salud de sobra.'],
+    [8, 'Terror de agonía (Bane of Agony) y Miedo (Fear)', 'must', 'Usa Agonía contra enemigos duraderos. Evita que un enemigo asustado corra hacia otra patrulla.'],
+    [10, 'Invocar a abisario', 'must', 'Haz la cadena de clase. Activa Tormento para que el abisario atraiga los ataques.', 'quest'],
+    [10, 'Drenar alma y Crear piedra de salud', 'must', 'Remata con Drenar alma a un enemigo que dé experiencia para conseguir un fragmento. Prepara una piedra de salud.'],
+    [12, 'Cauce de salud (Health Funnel)', 'good', 'Transfiere parte de tu salud al demonio cuando necesite ayuda.'],
+    [14, 'Drenar vida (Drain Life) y Corrupción', 'must', 'Drenar vida te cura mientras atacas. Corrupción ya tiene un segundo rango.'],
+    [16, 'Transfusión de vida', 'must', 'Aprende el nuevo rango. Si usas abisario, busca el grimorio de Sacrificio para protegerte.'],
+    [18, 'Crear piedra de alma (Create Soulstone) y Terror de agonía', 'must', 'Usa la piedra de alma sobre ti antes de entrar en una zona difícil.'],
+    [18, 'Dolor abrasador', 'good', 'Ataque rápido que genera mucha amenaza. Vigila a quién está atacando el enemigo.'],
+    [20, 'Armadura demoníaca y Maldición de los Elementos', 'good', 'Mantén la armadura activa. La maldición puede coexistir con Terror de agonía.'],
+    [20, 'Invocar a súcubo / Invocar a íncubo', 'good', 'Ambos son sayaad. Hacen daño cuerpo a cuerpo mientras tú lanzas hechizos.', 'quest'],
+    [20, 'Lluvia de fuego', 'good', 'Útil para hacer daño a varios enemigos agrupados.'],
+    [22, 'Drenar vida y Crear piedra de salud', 'must', 'Mejora ambos cuando pases por el instructor.'],
+    [22, 'Ojo de Kilrogg', 'save', 'Sirve para explorar desde una posición segura.'],
+    [24, 'Corrupción', 'must', 'Aprende el nuevo rango para tus combates habituales.'],
+    [24, 'Captar demonios', 'save', 'Muestra demonios cercanos en el minimapa.'],
+    [26, 'Transfusión de vida', 'must', 'Actualízala en la próxima visita.'],
+    [26, 'Detectar invisibilidad', 'save', 'Resérvalo para enemigos invisibles.'],
+    [28, 'Terror de agonía', 'must', 'Usa el nuevo rango contra enemigos que aguanten varios pulsos.'],
+    [30, 'Drenar vida y Armadura demoníaca', 'must', 'Actualiza el drenaje y la armadura si vas en solitario.'],
+    [30, 'Invocar a manáfago', 'good', 'Su control contra lanzadores es útil. Puedes dejar su cadena para cuando te venga de paso.', 'quest'],
+    [30, 'Piroinferno', 'good', 'Inflige daño a tu alrededor y también te cuesta salud.'],
+    [32, 'Miedo', 'good', 'El rango superior prolonga el control sobre un segundo enemigo.'],
+    [34, 'Corrupción y Crear piedra de salud', 'must', 'Aprovecha la misma visita para mejorar la piedra.'],
+    [36, 'Transfusión de vida y Crear piedra de hechizos', 'good', 'La piedra de hechizos proporciona un encantamiento temporal para el arma.'],
+    [38, 'Drenar vida, Terror de agonía y Succionar vida', 'must', 'El rango de Succionar vida requiere haber aprendido el talento.'],
+    [40, 'Invocar a corcel nefasto', 'must', 'Tu instructor de la capital te envía a Trinquete para conseguir la montura de clase.', 'quest'],
+    [40, 'Aullido de terror', 'good', 'Úsalo para escapar cuando se junten varios enemigos. Los que huyen pueden atraer otra patrulla.'],
+    [42, 'Espiral mortal (Death Coil)', 'must', 'Te cura y te da margen para alejarte de un enemigo.'],
+    [44, 'Corrupción', 'must', 'Mejora tu principal efecto periódico.'],
+    [46, 'Drenar vida, Transfusión de vida y Crear piedra de salud', 'must', 'Compra estos rangos en la misma visita.'],
+    [48, 'Terror de agonía y Succionar vida', 'must', 'Succionar vida requiere el talento de Aflicción.'],
+    [48, 'Fuego de alma', 'good', 'Descarga de fuego que consume un fragmento de alma.'],
+    [50, 'Armadura demoníaca y Crear piedra de alma', 'good', 'Renueva la armadura y prepara la piedra antes de salir.'],
+    [54, 'Corrupción y Drenar vida', 'must', 'Ambos rangos sirven hasta el 60.'],
+    [56, 'Transfusión de vida y Miedo', 'good', 'Aprovecha una visita para actualizar ambos.'],
+    [58, 'Terror de agonía, Succionar vida y Crear piedra de salud', 'must', 'Mejora tus efectos periódicos y lleva una piedra para emergencias.'],
+    [60, 'Armadura demoníaca y Crear piedra de alma', 'good', 'Compra los rangos que uses para el contenido que quieras hacer al 60.'],
+    [60, 'Ritual de condena', 'save', 'Puedes dejarlo para después de alcanzar el 60.', 'quest'],
   ],
   DRUID: [
     [1, 'Cólera (Wrath), Toque de sanación y Marca de lo Salvaje', 'must', 'Mantén siempre Marca de lo Salvaje sobre ti'],
@@ -1834,9 +1866,10 @@ async function main() {
   const reviewedData = {
     PALADIN: await readTalentData(PALADIN_BUILD),
     ROGUE: await readTalentData(ROGUE_BUILD),
+    WARLOCK: await readTalentData(WARLOCK_BUILD),
   };
   const lines = [
-    `-- Auto-generated by tools/build_talents.js from Forever DB2: Rogue ${ROGUE_BUILD}, Paladin ${PALADIN_BUILD}, other classes ${BUILD}.`,
+    `-- Auto-generated by tools/build_talents.js from Forever DB2: Rogue ${ROGUE_BUILD}, Warlock ${WARLOCK_BUILD}, Paladin ${PALADIN_BUILD}, other classes ${BUILD}.`,
     'local _, ns = ...',
     'ns.Talents = ns.Talents or {}',
     'local T = ns.Talents',
@@ -1964,7 +1997,9 @@ async function main() {
     lines.push('\t},');
     lines.push('\ttrainerSpells = {');
     for (const s of (TRAINER_SPELLS[cls] || [])) {
-      lines.push(`\t\t{ level = ${s[0]}, name = ${luaStr(s[1])}, prio = ${luaStr(s[2])}, tip = ${luaStr(s[3])} },`);
+      const [level, name, priority, tip, source] = s;
+      const sourceField = source ? `, source = ${luaStr(source)}` : '';
+      lines.push(`\t\t{ level = ${level}, name = ${luaStr(name)}, prio = ${luaStr(priority)}, tip = ${luaStr(tip)}${sourceField} },`);
     }
     lines.push('\t},');
     lines.push('})', '');

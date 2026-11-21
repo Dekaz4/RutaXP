@@ -30,7 +30,7 @@
     },
     "navigationCoverage": {
       "file": "Source/guide_locations.json",
-      "sha256": "fe3ec25704126c15a19abf6eaf92ae33c311f567b6183c48fe32dacc6583f812",
+      "sha256": "0f3de2014f92bf9c3379dc6dae17382dfe655239c2b8b21e567545b33f23d657",
       "sourceFiles": {
         "addon/SendaFH/Lookup/Codex.lua": "e7f9a72059376cf699a712b28fe5d2731d232bf9648d04e1358147506fb0a072",
         "addon/SendaFH/Nav/TravelData.lua": "1e7e2503c00b52fe96fa4001dc168ffb9d3805952dea4041c25dd6eb7f3c51a8",
@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "5c215123b9c13e9968624c850cde6aa088912acb7312d075959d0265a130980d",
+      "sha256": "a5a6488099961148ad8986e7bfe4dea32e749724639ca8419bf9e735e0961925",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -573,7 +573,9 @@
         "mulgore-kyle-level-4",
         "tirisfal-bandarion-after-leonid-4",
         "hillsbrad-town-hall-request-8",
-        "desolace-menethil-auberdine-boat-3"
+        "desolace-menethil-auberdine-boat-3",
+        "dun-morogh-warlock-first-demons-3",
+        "dun-morogh-western-visits-4"
       ]
     }
   },
@@ -631,6 +633,7 @@
       "detourBelowLevel": 11,
       "detourItems": 189,
       "detourOffers": 3,
+      "detourOnly": 14,
       "detourQuest": 25,
       "f": 5521,
       "from": 741,
@@ -647,14 +650,14 @@
       "item": 1217,
       "itemName": 1217,
       "level": 25,
-      "levelingDetour": 394,
+      "levelingDetour": 395,
       "location": 401,
       "map": 6594,
       "minLevel": 2290,
       "navigationHint": 434,
       "navigationMode": 14,
       "node": 76,
-      "note": 3593,
+      "note": 3594,
       "npc": 4988,
       "npcName": 4377,
       "objName": 306,
@@ -680,7 +683,7 @@
       "rewards": 8,
       "skill": 1,
       "skillLine": 1,
-      "soloAfter": 28,
+      "soloAfter": 41,
       "soloWhenOffered": 1,
       "spots": 1303,
       "spread": 672,
@@ -11782,8 +11785,8 @@
           ]
         },
         {
-          "title": "Lobos Young",
-          "note": "Lobos jóvenes andrajosos recorre la nieve justo al sur de Yunquemar.",
+          "title": "Lobos jóvenes",
+          "note": "Busca los lobos jóvenes en la nieve al sur de Sten. Haz clic derecho sobre cada lobo abatido para recoger la carne. Cuando lleves ocho, vuelve a Sten.",
           "goals": [
             {
               "title": "Los enanos modistos",
@@ -11857,10 +11860,10 @@
                   "n": 5
                 }
               ],
-              "from": "Lobo maderero",
-              "fromAlso": "Young Wolf",
+              "from": "Lobo joven andrajoso",
+              "fromAlso": "Lobo maderero andrajoso",
               "fromKind": "npc",
-              "instruction": "Recoge «Carne de lobo dura» (8 en total) del botín de «Lobo maderero» o «Young Wolf».\nZona: Dun Morogh."
+              "instruction": "Recoge «Carne de lobo dura» (8 en total) del botín de «Lobo joven andrajoso» o «Lobo maderero andrajoso».\nZona: Dun Morogh."
             }
           ]
         },
@@ -12379,7 +12382,7 @@
             {
               "title": "Memorándum corrupto",
               "minLevel": 1,
-              "note": "Sten Brazofuerte: Memorándum corrupto",
+              "note": "Antes de entrar en Yunquemar, recoge también el correo de Sten y el encargo de Balir, que está a su lado.",
               "only": {
                 "classes": [
                   "WARLOCK"
@@ -12401,26 +12404,7 @@
               "z": 383.7,
               "f": "e",
               "qlvl": 1,
-              "instruction": "Habla con «Sten Brazofuerte» y acepta «Memorándum corrupto».\nZona: Dun Morogh.\nSten Brazofuerte: Memorándum corrupto."
-            },
-            {
-              "title": "Memorándum corrupto",
-              "note": "Alamar Grimm, dentro de Yunquemar",
-              "only": {
-                "classes": [
-                  "WARLOCK"
-                ]
-              },
-              "t": "turnin",
-              "quest": 3115,
-              "npc": 460,
-              "npcName": "Alamar Grimm",
-              "map": 1426,
-              "x": 28.65,
-              "y": 66.14,
-              "z": 399,
-              "f": "e",
-              "instruction": "Habla con «Alamar Grimm» y entrega «Memorándum corrupto».\nZona: Dun Morogh.\nAlamar Grimm, dentro de Yunquemar."
+              "instruction": "Habla con «Sten Brazofuerte» y acepta «Memorándum corrupto».\nZona: Dun Morogh.\nAntes de entrar en Yunquemar, recoge también el correo de Sten y el encargo de Balir, que está a su lado."
             },
             {
               "title": "Entrega de correo en el Valle de Crestanevada",
@@ -12466,7 +12450,53 @@
               "instruction": "Habla con «Balir Martilloescarcha» y acepta «Una nueva amenaza».\nZona: Dun Morogh.\nBalir Martilloescarcha, junto a Sten."
             },
             {
-              "note": "Level 2 hechizos, dentro de Yunquemar",
+              "title": "Memorándum corrupto",
+              "note": "Alamar es tu instructor de brujo. Está dentro de Yunquemar. Sigue hablando con él para aceptar «Novato».",
+              "only": {
+                "classes": [
+                  "WARLOCK"
+                ]
+              },
+              "t": "turnin",
+              "quest": 3115,
+              "npc": 460,
+              "npcName": "Alamar Grimm",
+              "map": 1426,
+              "x": 28.65,
+              "y": 66.14,
+              "z": 399,
+              "f": "e",
+              "instruction": "Habla con «Alamar Grimm» y entrega «Memorándum corrupto».\nZona: Dun Morogh.\nAlamar es tu instructor de brujo. Está dentro de Yunquemar. Sigue hablando con él para aceptar «Novato»."
+            },
+            {
+              "title": "Novato",
+              "minLevel": 1,
+              "note": "Esta misión te enseñará a invocar tu primer demonio. Sigue la ruta de los troggs y los jabalíes. Conseguirás los talismanes cuando Grelin te envíe a la cueva de los trols.",
+              "only": {
+                "classes": [
+                  "WARLOCK"
+                ]
+              },
+              "t": "accept",
+              "quest": 1599,
+              "npc": 460,
+              "npcName": "Alamar Grimm",
+              "closedBy": [
+                1598
+              ],
+              "preTitles": {
+                "1598": "The Stolen Tome"
+              },
+              "map": 1426,
+              "x": 28.65,
+              "y": 66.14,
+              "z": 399,
+              "f": "e",
+              "qlvl": 4,
+              "instruction": "Habla con «Alamar Grimm» y acepta «Novato».\nZona: Dun Morogh.\nEsta misión te enseñará a invocar tu primer demonio. Sigue la ruta de los troggs y los jabalíes. Conseguirás los talismanes cuando Grelin te envíe a la cueva de los trols."
+            },
+            {
+              "note": "Aprende las habilidades de nivel 2 en Yunquemar.",
               "t": "train",
               "candidates": [
                 {
@@ -13261,13 +13291,13 @@
                 }
               ],
               "class": true,
-              "instruction": "Visita al instructor de tu clase y revisa las habilidades disponibles.\nLevel 2 hechizos, dentro de Yunquemar."
+              "instruction": "Visita al instructor de tu clase y revisa las habilidades disponibles.\nAprende las habilidades de nivel 2 en Yunquemar."
             }
           ]
         },
         {
           "title": "Los troggs",
-          "note": "Trogges Mentuesos y Trogges Comepiedras fornidos excavar por todo el valle al sur de Yunquemar.",
+          "note": "Busca los dos tipos de trogg al sur de Yunquemar. El registro de misiones lleva la cuenta de cada uno.",
           "goals": [
             {
               "title": "Una nueva amenaza",
@@ -13459,10 +13489,10 @@
               "instruction": "Habla con «Balir Martilloescarcha» y entrega «Una nueva amenaza».\nZona: Dun Morogh."
             },
             {
-              "note": "Unos cuantos troggs más afuera si eres corto",
+              "note": "Si te falta experiencia para alcanzar el nivel 3, derrota algunos troggs más cerca de Balir.",
               "t": "level",
               "level": 3,
-              "instruction": "Gana experiencia hasta alcanzar el nivel 3.\nUnos cuantos troggs más afuera si eres corto."
+              "instruction": "Gana experiencia hasta alcanzar el nivel 3.\nSi te falta experiencia para alcanzar el nivel 3, derrota algunos troggs más cerca de Balir."
             },
             {
               "title": "Las penurias de un refugiado",
@@ -13479,39 +13509,12 @@
               "f": "e",
               "qlvl": 3,
               "instruction": "Habla con «Félix Rayaullido» y acepta «Las penurias de un refugiado».\nZona: Dun Morogh.\nFélix Rayaullido, por la puerta de Yunquemar."
-            },
-            {
-              "title": "Novato",
-              "minLevel": 1,
-              "note": "Alamar Grimm, dentro de Yunquemar",
-              "only": {
-                "classes": [
-                  "WARLOCK"
-                ]
-              },
-              "t": "accept",
-              "quest": 1599,
-              "npc": 460,
-              "npcName": "Alamar Grimm",
-              "closedBy": [
-                1598
-              ],
-              "preTitles": {
-                "1598": "The Stolen Tome"
-              },
-              "map": 1426,
-              "x": 28.65,
-              "y": 66.14,
-              "z": 399,
-              "f": "e",
-              "qlvl": 4,
-              "instruction": "Habla con «Alamar Grimm» y acepta «Novato».\nZona: Dun Morogh.\nAlamar Grimm, dentro de Yunquemar."
             }
           ]
         },
         {
           "title": "Talin Ojoagudo",
-          "note": "de Talin campamento se encuentra en el extremo oeste del valle. Caja de Felix se encuentra en la nieve al sur de ella, su Chest por la cueva del troll y su Bucket de Bolts al este de la cueva: agarrarlos a medida que pasa.",
+          "note": "Talin acampa al oeste del valle. Recoge su encargo de cazar jabalíes. La caja de Félix está al sur del campamento y sus otras dos piezas, junto a la cueva de los trols.",
           "goals": [
             {
               "title": "Entrega de correo en el Valle de Crestanevada",
@@ -13567,7 +13570,7 @@
         },
         {
           "title": "Los jabalíes",
-          "note": "Jabalíes del risco pequeño pasta alrededor del campamento de Talin y a lo largo del lado oeste del valle.",
+          "note": "Caza los jabalíes alrededor del campamento de Talin y recoge la caja de Félix antes de volver.",
           "goals": [
             {
               "title": "Cazador de jabalíes",
@@ -13710,7 +13713,7 @@
         },
         {
           "title": "Grelin Barbablanca",
-          "note": "Grelin y Nori Rumborgullo campamento en el extremo suroeste del valle, debajo de la cueva del troll.",
+          "note": "Grelin y Nori acampan al suroeste del valle. Habla con Grelin antes de subir hacia la cueva.",
           "goals": [
             {
               "title": "Entrega de correo en el Valle de Crestanevada",
@@ -13742,20 +13745,20 @@
               "instruction": "Habla con «Grelin Barbablanca» y acepta «La cueva de los trols».\nZona: Dun Morogh."
             },
             {
-              "note": "Algunos Trol Peloescarcha Whelps si usted es corto",
+              "note": "Si te falta experiencia para el nivel 4, derrota crías de trol Peloescarcha en las laderas cercanas.",
               "t": "level",
               "level": 4,
-              "instruction": "Gana experiencia hasta alcanzar el nivel 4.\nAlgunos Trol Peloescarcha Whelps si usted es corto."
+              "instruction": "Gana experiencia hasta alcanzar el nivel 4.\nSi te falta experiencia para el nivel 4, derrota crías de trol Peloescarcha en las laderas cercanas."
             }
           ]
         },
         {
-          "title": "La cueva del troll",
-          "note": "Trol Peloescarcha Whelps llena las laderas al sur y al este del campamento de Grelin.",
+          "title": "La cueva de los trols",
+          "note": "Las crías de trol Peloescarcha están en las laderas al sur y al este de Grelin. Recoge también el cofre y el cubo de Félix al pasar por la cueva.",
           "goals": [
             {
               "title": "La cueva de los trols",
-              "note": "Frostmane trol Whelp",
+              "note": "Busca las crías en las laderas al sur y al este del campamento de Grelin.",
               "t": "kill",
               "quest": 182,
               "oi": 1,
@@ -13806,7 +13809,7 @@
                 }
               ],
               "spread": true,
-              "instruction": "Derrota a «Cría de trol Peloescarcha» (14 en total).\nZona: Dun Morogh.\nFrostmane trol Whelp."
+              "instruction": "Derrota a «Cría de trol Peloescarcha» (14 en total).\nZona: Dun Morogh.\nBusca las crías en las laderas al sur y al este del campamento de Grelin."
             },
             {
               "title": "Las penurias de un refugiado",
@@ -13842,7 +13845,7 @@
             },
             {
               "title": "Novato",
-              "note": "Feather Charms, de los Novicios Frostmane",
+              "note": "En la cueva, selecciona un novicio cada vez. Haz clic derecho en su cuerpo para recoger el botín. Antes de volver con Grelin, comprueba que llevas los tres talismanes.",
               "only": {
                 "classes": [
                   "WARLOCK"
@@ -13874,7 +13877,7 @@
               ],
               "from": "Novicio Peloescarcha",
               "fromKind": "npc",
-              "instruction": "Recoge «Talismán de plumas» (3 en total) del botín de «Novicio Peloescarcha».\nZona: Dun Morogh.\nFeather Charms, de los Novicios Frostmane."
+              "instruction": "Recoge «Talismán de plumas» (3 en total) del botín de «Novicio Peloescarcha».\nZona: Dun Morogh.\nEn la cueva, selecciona un novicio cada vez. Haz clic derecho en su cuerpo para recoger el botín. Antes de volver con Grelin, comprueba que llevas los tres talismanes."
             }
           ]
         },
@@ -13935,7 +13938,7 @@
         },
         {
           "title": "Yunquemar",
-          "note": "El Scalding Mornbrew dura cinco minutos: ir directamente al norte a Durnan Cortapieles dentro de Yunquemar.",
+          "note": "La infusión de Nori se enfría en cinco minutos. Ve directamente a Yunquemar y entrégasela a Durnan antes de los demás recados.",
           "goals": [
             {
               "title": "Entrega una infusión de albaza hirviendo",
@@ -13950,20 +13953,6 @@
               "z": 392.8,
               "f": "e",
               "instruction": "Habla con «Durnan Cortapieles» y entrega «Entrega una infusión de albaza hirviendo».\nZona: Dun Morogh.\nDurnan Cortapieles, dentro de Yunquemar."
-            },
-            {
-              "title": "Las penurias de un refugiado",
-              "note": "Félix Rayaullido",
-              "t": "turnin",
-              "quest": 3361,
-              "npc": 8416,
-              "npcName": "Félix Rayaullido",
-              "map": 1426,
-              "x": 28.55,
-              "y": 67.64,
-              "z": 395.5,
-              "f": "e",
-              "instruction": "Habla con «Félix Rayaullido» y entrega «Las penurias de un refugiado».\nZona: Dun Morogh."
             },
             {
               "title": "Devuelve la taza",
@@ -13987,7 +13976,52 @@
               "instruction": "Habla con «Durnan Cortapieles» y acepta «Devuelve la taza».\nZona: Dun Morogh."
             },
             {
-              "note": "Nivel 4 se deletrea, antes del campamento de Gozwin",
+              "title": "Novato",
+              "note": "Abre el libro de hechizos (P), arrastra Invocar diablillo a tu barra y úsalo. Con él a tu lado, continúa hacia el campamento de Gozwin.",
+              "only": {
+                "classes": [
+                  "WARLOCK"
+                ]
+              },
+              "t": "turnin",
+              "quest": 1599,
+              "npc": 460,
+              "npcName": "Alamar Grimm",
+              "map": 1426,
+              "x": 28.65,
+              "y": 66.14,
+              "z": 399,
+              "f": "e",
+              "instruction": "Habla con «Alamar Grimm» y entrega «Novato».\nZona: Dun Morogh.\nAbre el libro de hechizos (P), arrastra Invocar diablillo a tu barra y úsalo. Con él a tu lado, continúa hacia el campamento de Gozwin."
+            },
+            {
+              "title": "Clamor de Tierra",
+              "minLevel": 4,
+              "note": "Teo Hammerstorm, dentro de Yunquemar",
+              "only": {
+                "classes": [
+                  "SHAMAN"
+                ]
+              },
+              "t": "accept",
+              "quest": 94373,
+              "npc": 257446,
+              "npcName": "Teo Hammerstorm",
+              "map": 1426,
+              "x": 28.79,
+              "y": 66.18,
+              "f": "e",
+              "qlvl": 4,
+              "instruction": "Habla con «Teo Hammerstorm» y acepta «Clamor de Tierra».\nZona: Dun Morogh.\nTeo Hammerstorm, dentro de Yunquemar.",
+              "preAll": [
+                98581
+              ],
+              "preTitles": {
+                "98581": "Archaic Rune"
+              }
+            },
+            {
+              "note": "Aprovecha esta visita para aprender las habilidades de nivel 4 antes de ir al campamento de Gozwin.",
               "t": "train",
               "candidates": [
                 {
@@ -14782,52 +14816,21 @@
                 }
               ],
               "class": true,
-              "instruction": "Visita al instructor de tu clase y revisa las habilidades disponibles.\nNivel 4 se deletrea, antes del campamento de Gozwin."
+              "instruction": "Visita al instructor de tu clase y revisa las habilidades disponibles.\nAprovecha esta visita para aprender las habilidades de nivel 4 antes de ir al campamento de Gozwin."
             },
             {
-              "title": "Novato",
-              "note": "Alamar Grimm: Invocar diablillo",
-              "only": {
-                "classes": [
-                  "WARLOCK"
-                ]
-              },
+              "title": "Las penurias de un refugiado",
+              "note": "Félix Rayaullido",
               "t": "turnin",
-              "quest": 1599,
-              "npc": 460,
-              "npcName": "Alamar Grimm",
+              "quest": 3361,
+              "npc": 8416,
+              "npcName": "Félix Rayaullido",
               "map": 1426,
-              "x": 28.65,
-              "y": 66.14,
-              "z": 399,
+              "x": 28.55,
+              "y": 67.64,
+              "z": 395.5,
               "f": "e",
-              "instruction": "Habla con «Alamar Grimm» y entrega «Novato».\nZona: Dun Morogh.\nAlamar Grimm: Invocar diablillo."
-            },
-            {
-              "title": "Clamor de Tierra",
-              "minLevel": 4,
-              "note": "Teo Hammerstorm, dentro de Yunquemar",
-              "only": {
-                "classes": [
-                  "SHAMAN"
-                ]
-              },
-              "t": "accept",
-              "quest": 94373,
-              "npc": 257446,
-              "npcName": "Teo Hammerstorm",
-              "map": 1426,
-              "x": 28.79,
-              "y": 66.18,
-              "f": "e",
-              "qlvl": 4,
-              "instruction": "Habla con «Teo Hammerstorm» y acepta «Clamor de Tierra».\nZona: Dun Morogh.\nTeo Hammerstorm, dentro de Yunquemar.",
-              "preAll": [
-                98581
-              ],
-              "preTitles": {
-                "98581": "Archaic Rune"
-              }
+              "instruction": "Habla con «Félix Rayaullido» y entrega «Las penurias de un refugiado».\nZona: Dun Morogh."
             }
           ]
         },
@@ -22340,6 +22343,59 @@
           ]
         },
         {
+          "title": "Tundra MacGrann",
+          "note": "Desde Las Birras, ve al sureste hasta Tundra MacGrann. El cofre de la carne está en la cueva de Viejo Barbahielo (38.5, 53.9). Espera a que salga de patrulla, abre el cofre y vuelve con MacGrann antes de seguir hacia el almacén.",
+          "goals": [
+            {
+              "title": "La reserva robada de Tundra MacGrann",
+              "minLevel": 7,
+              "note": "Tundra MacGrann",
+              "t": "accept",
+              "quest": 312,
+              "npc": 1266,
+              "npcName": "Tundra MacGrann",
+              "map": 1426,
+              "x": 34.57,
+              "y": 51.65,
+              "z": 483.9,
+              "f": "e",
+              "qlvl": 12,
+              "instruction": "Habla con «Tundra MacGrann» y acepta «La reserva robada de Tundra MacGrann».\nZona: Dun Morogh."
+            },
+            {
+              "title": "La reserva robada de Tundra MacGrann",
+              "t": "complete",
+              "quest": 312,
+              "candidates": [
+                {
+                  "map": 1426,
+                  "x": 38.5,
+                  "y": 53.9,
+                  "f": "e",
+                  "object": 272,
+                  "objName": "MacGrann's Meat Locker",
+                  "objectiveIndex": 1
+                }
+              ],
+              "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
+              "instruction": "Abre «La reserva robada de Tundra MacGrann» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+            },
+            {
+              "title": "La reserva robada de Tundra MacGrann",
+              "t": "turnin",
+              "quest": 312,
+              "npc": 1266,
+              "npcName": "Tundra MacGrann",
+              "map": 1426,
+              "x": 34.57,
+              "y": 51.65,
+              "z": 483.9,
+              "f": "e",
+              "instruction": "Habla con «Tundra MacGrann» y entrega «La reserva robada de Tundra MacGrann».\nZona: Dun Morogh."
+            }
+          ]
+        },
+        {
           "title": "Almacén de Steelgrill",
           "goals": [
             {
@@ -22999,59 +23055,6 @@
           ]
         },
         {
-          "title": "Tundra MacGrann",
-          "note": "Los campamentos de Tundra MacGrann en Valle Escalofrío, al sur de Brewnall. Las carnes de His están en el casillero de la cueva de de Viejo Barbahielo al noreste de su campamento: agárralas y vete rápidamente.",
-          "goals": [
-            {
-              "title": "La reserva robada de Tundra MacGrann",
-              "minLevel": 7,
-              "note": "Tundra MacGrann",
-              "t": "accept",
-              "quest": 312,
-              "npc": 1266,
-              "npcName": "Tundra MacGrann",
-              "map": 1426,
-              "x": 34.57,
-              "y": 51.65,
-              "z": 483.9,
-              "f": "e",
-              "qlvl": 12,
-              "instruction": "Habla con «Tundra MacGrann» y acepta «La reserva robada de Tundra MacGrann».\nZona: Dun Morogh."
-            },
-            {
-              "title": "La reserva robada de Tundra MacGrann",
-              "t": "complete",
-              "quest": 312,
-              "candidates": [
-                {
-                  "map": 1426,
-                  "x": 38.5,
-                  "y": 53.9,
-                  "f": "e",
-                  "object": 272,
-                  "objName": "MacGrann's Meat Locker",
-                  "objectiveIndex": 1
-                }
-              ],
-              "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Abre «La reserva robada de Tundra MacGrann» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
-            },
-            {
-              "title": "La reserva robada de Tundra MacGrann",
-              "t": "turnin",
-              "quest": 312,
-              "npc": 1266,
-              "npcName": "Tundra MacGrann",
-              "map": 1426,
-              "x": 34.57,
-              "y": 51.65,
-              "z": 483.9,
-              "f": "e",
-              "instruction": "Habla con «Tundra MacGrann» y entrega «La reserva robada de Tundra MacGrann».\nZona: Dun Morogh."
-            }
-          ]
-        },
-        {
           "title": "El Libro de la Divinidad",
           "note": "Sigue la carretera hasta Forjaz y tomar el Mystic Ward: Brandur Martiyerro, Tiza Forjabatalla y Muiredon Forjabatalla están en el Hall de Mysteries. John Turner, un mendigo, vagan por la ciudad. He pide diez Paño de lino: los troggs y trolls de Dun Morogh lo dejan caer, y el Auction House lo vende.",
           "only": {
@@ -23520,7 +23523,7 @@
             {
               "title": "El Cordero Degollado",
               "minLevel": 10,
-              "note": "Llago Llavenegra: Gakin el Presotenebra en Ventormenta lo toma",
+              "note": "Recoge el encargo de Llago antes de tomar el tranvía de Forjaz a Ventormenta. Gakin te ayudará a conseguir el abisario.",
               "only": {
                 "classes": [
                   "WARLOCK"
@@ -23544,7 +23547,7 @@
               "z": 501.5,
               "f": "e",
               "qlvl": 10,
-              "instruction": "Habla con «Llago Llavenegra» y acepta «El Cordero Degollado».\nLlago Llavenegra: Gakin el Presotenebra en Ventormenta lo toma."
+              "instruction": "Habla con «Llago Llavenegra» y acepta «El Cordero Degollado».\nRecoge el encargo de Llago antes de tomar el tranvía de Forjaz a Ventormenta. Gakin te ayudará a conseguir el abisario."
             }
           ]
         },
@@ -24607,7 +24610,7 @@
         },
         {
           "title": "Gakin el Presotenebra",
-          "note": "Gakin el Presotenebra espera en el sótano del Slaughtered Lamb, en el Barrio de los Magos.",
+          "note": "Tras bajar del tranvía en Ventormenta, ve al Barrio de los Magos. Gakin espera en el sótano de la taberna El Cordero Degollado.",
           "only": {
             "classes": [
               "WARLOCK"
@@ -24645,7 +24648,7 @@
         },
         {
           "title": "Surena Caledon",
-          "note": "Leave Ventormenta por la puerta principal, ir al sur a Villadorada y al este a lo largo de la carretera a la Plantación de Calabazas de Brackwell. Surena Caledon (nivel 9) se encuentra junto a su casa de campo.",
+          "note": "Sal por la puerta principal de Ventormenta y sigue la carretera hasta Villadorada. Desde allí ve al este, a la Plantación de Calabazas de Brackwell. Surena está junto a la casa.",
           "only": {
             "classes": [
               "WARLOCK"
@@ -24672,7 +24675,7 @@
         },
         {
           "title": "El vínculo",
-          "note": "Volver a Gakin. Usal Gargantilla de Petrosangre en el círculo de convocatoria en el sótano de de Slaughtered Lamb y derrotar el vacio que llama. Páramos de Poniente es el siguiente, al oeste de Villadorada.",
+          "note": "Regresa al sótano de El Cordero Degollado con la gargantilla de Surena. Tras entregar «El vínculo», continúa hacia Páramos de Poniente por la carretera al oeste de Villadorada.",
           "only": {
             "classes": [
               "WARLOCK"
@@ -24714,7 +24717,7 @@
             },
             {
               "title": "El vínculo",
-              "note": "Sojuzgar al caminante vacío",
+              "note": "Entra en el círculo de invocación del sótano de El Cordero Degollado. Usa la Gargantilla de Petrosangre de tu mochila y derrota al abisario que aparece.",
               "t": "complete",
               "quest": 1689,
               "candidates": [
@@ -24726,32 +24729,14 @@
                   "npc": 5676,
                   "npcName": "Summoned Voidwalker",
                   "objectiveIndex": 1
-                },
-                {
-                  "map": 1454,
-                  "x": 49.3,
-                  "y": 50,
-                  "f": "e",
-                  "npc": 5676,
-                  "npcName": "Summoned Voidwalker",
-                  "objectiveIndex": 1
-                },
-                {
-                  "map": 1458,
-                  "x": 86.6,
-                  "y": 27.1,
-                  "f": "e",
-                  "npc": 5676,
-                  "npcName": "Summoned Voidwalker",
-                  "objectiveIndex": 1
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Para «El vínculo», sigue esta indicación de la guía:\nSojuzgar al caminante vacío.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+              "instruction": "Para «El vínculo», sigue esta indicación de la guía:\nEntra en el círculo de invocación del sótano de El Cordero Degollado. Usa la Gargantilla de Petrosangre de tu mochila y derrota al abisario que aparece.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
             },
             {
               "title": "El vínculo",
-              "note": "Summon Abisario",
+              "note": "Aprendes Invocar abisario. Arrastra el hechizo del libro a tu barra. Cuando luches con él, ordénale atacar primero para que el enemigo se fije en él.",
               "t": "turnin",
               "quest": 1689,
               "npc": 6122,
@@ -24760,7 +24745,7 @@
               "x": 39.22,
               "y": 85.23,
               "z": 101.5,
-              "instruction": "Habla con «Gakin el Presotenebra» y entrega «El vínculo».\nSummon Abisario."
+              "instruction": "Habla con «Gakin el Presotenebra» y entrega «El vínculo».\nAprendes Invocar abisario. Arrastra el hechizo del libro a tu barra. Cuando luches con él, ordénale atacar primero para que el enemigo se fije en él."
             }
           ]
         },
@@ -24827,7 +24812,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 2,
+      "routeRevision": 4,
       "progressMigrations": [
         {
           "from": 1,
@@ -24919,6 +24904,230 @@
           "affectedQuestIDs": [],
           "previousStepCount": 80,
           "firstAffectedStep": 81
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "goalMap": {
+            "3:24": "3:23",
+            "3:25": "3:24",
+            "3:23": "3:25",
+            "5:4": "3:26",
+            "3:26": "3:27"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "5": 3,
+            "4": 3,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 30,
+            "31": 31,
+            "32": 32,
+            "33": 33,
+            "34": 34,
+            "35": 35,
+            "36": 36,
+            "37": 37,
+            "38": 38,
+            "39": 39,
+            "40": 40,
+            "41": 41,
+            "42": 42,
+            "43": 43,
+            "44": 44,
+            "45": 45,
+            "46": 46,
+            "47": 47,
+            "48": 48,
+            "49": 49,
+            "50": 50,
+            "51": 51,
+            "52": 52,
+            "53": 53,
+            "54": 54,
+            "55": 55,
+            "56": 56,
+            "57": 57,
+            "58": 58,
+            "59": 59,
+            "60": 60,
+            "61": 61,
+            "62": 62,
+            "63": 63,
+            "64": 64,
+            "65": 65,
+            "66": 66,
+            "67": 67,
+            "68": 68,
+            "69": 69,
+            "70": 70,
+            "71": 71,
+            "72": 72,
+            "73": 73,
+            "74": 74,
+            "75": 75,
+            "76": 76,
+            "77": 77,
+            "78": 78,
+            "79": 79,
+            "80": 80,
+            "81": 81
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 80,
+          "firstAffectedStep": 3
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "goalMap": {
+            "12:3": "12:2",
+            "12:5": "12:3",
+            "12:6": "12:4",
+            "12:4": "12:5",
+            "12:2": "12:6",
+            "68:1": "57:1",
+            "68:2": "57:2",
+            "68:3": "57:3",
+            "57:1": "58:1",
+            "58:1": "59:1",
+            "59:1": "60:1",
+            "59:2": "60:2",
+            "60:1": "61:1",
+            "60:2": "61:2",
+            "61:1": "62:1",
+            "61:2": "62:2",
+            "62:1": "63:1",
+            "62:2": "63:2",
+            "62:3": "63:3",
+            "62:4": "63:4",
+            "62:5": "63:5",
+            "62:6": "63:6",
+            "63:1": "64:1",
+            "64:1": "65:1",
+            "64:2": "65:2",
+            "64:3": "65:3",
+            "64:4": "65:4",
+            "64:5": "65:5",
+            "65:1": "66:1",
+            "65:2": "66:2",
+            "65:3": "66:3",
+            "65:4": "66:4",
+            "66:1": "67:1",
+            "67:1": "68:1",
+            "67:2": "68:2"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "15": 15,
+            "16": 16,
+            "17": 17,
+            "18": 18,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22,
+            "23": 23,
+            "24": 24,
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 30,
+            "31": 31,
+            "32": 32,
+            "33": 33,
+            "34": 34,
+            "35": 35,
+            "36": 36,
+            "37": 37,
+            "38": 38,
+            "39": 39,
+            "40": 40,
+            "41": 41,
+            "42": 42,
+            "43": 43,
+            "44": 44,
+            "45": 45,
+            "46": 46,
+            "47": 47,
+            "48": 48,
+            "49": 49,
+            "50": 50,
+            "51": 51,
+            "52": 52,
+            "53": 53,
+            "54": 54,
+            "55": 55,
+            "56": 56,
+            "68": 57,
+            "57": 57,
+            "58": 57,
+            "59": 57,
+            "60": 57,
+            "61": 57,
+            "62": 57,
+            "63": 57,
+            "64": 57,
+            "65": 57,
+            "66": 57,
+            "67": 57,
+            "69": 69,
+            "70": 70,
+            "71": 71,
+            "72": 72,
+            "73": 73,
+            "74": 74,
+            "75": 75,
+            "76": 76,
+            "77": 77,
+            "78": 78,
+            "79": 79,
+            "80": 80,
+            "81": 81
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 80,
+          "firstAffectedStep": 12
         }
       ]
     },
@@ -39015,24 +39224,6 @@
                   "map": 1453,
                   "x": 25.1,
                   "y": 77.4,
-                  "f": "e",
-                  "npc": 5676,
-                  "npcName": "Summoned Voidwalker",
-                  "objectiveIndex": 1
-                },
-                {
-                  "map": 1454,
-                  "x": 49.3,
-                  "y": 50,
-                  "f": "e",
-                  "npc": 5676,
-                  "npcName": "Summoned Voidwalker",
-                  "objectiveIndex": 1
-                },
-                {
-                  "map": 1458,
-                  "x": 86.6,
-                  "y": 27.1,
                   "f": "e",
                   "npc": 5676,
                   "npcName": "Summoned Voidwalker",
@@ -72525,7 +72716,7 @@
             {
               "title": "Devoradora de almas",
               "minLevel": 20,
-              "note": "Gakin el Presotenebra: Takar el Profeta en el Baldíos lo toma, más tarde",
+              "note": "Gakin inicia la cadena de la súcubo y el íncubo. Para seguirla con tu gnomo en solitario, activa «Opcionales» o acepta esta misión en su taberna. Verás a Takar al pasar por Los Baldíos camino de Las Mil Agujas.",
               "only": {
                 "classes": [
                   "WARLOCK"
@@ -72539,7 +72730,16 @@
               "x": 39.22,
               "y": 85.23,
               "z": 101.5,
-              "instruction": "Habla con «Gakin el Presotenebra» y acepta «Devoradora de almas».\nGakin el Presotenebra: Takar el Profeta en el Baldíos lo toma, más tarde."
+              "instruction": "Habla con «Gakin el Presotenebra» y acepta «Devoradora de almas».\nGakin inicia la cadena de la súcubo y el íncubo. Para seguirla con tu gnomo en solitario, activa «Opcionales» o acepta esta misión en su taberna. Verás a Takar al pasar por Los Baldíos camino de Las Mil Agujas.",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "levelingDetour": true
             },
             {
               "title": "La reacción Arcana",
@@ -96742,7 +96942,7 @@
         },
         {
           "title": "Takar el Profeta",
-          "note": "En la carretera hacial sur a través de Baldíos, Takar el Profeta acampa al este de la carretera, al noreste de Campamento Taurajo; entra desdel este y mantente alejado de los guardias Horde.",
+          "note": "Habla con Takar al este del camino, al nordeste del Campamento Taurajo. Acércate por el este para evitar a los guardias de la Horda.",
           "only": {
             "classes": [
               "WARLOCK"
@@ -96761,12 +96961,23 @@
               "y": 57.1,
               "z": 91.8,
               "f": "e",
-              "instruction": "Habla con «Takar el Vidente» y entrega «Devoradora de almas».\nZona: Los Baldíos.\nTakar el Profeta."
+              "instruction": "Habla con «Takar el Vidente» y entrega «Devoradora de almas».\nZona: Los Baldíos.\nTakar el Profeta.",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                1716
+              ]
             },
             {
               "title": "Duramen",
               "minLevel": 20,
-              "note": "Duramen: en Vallefresno, en el camino a Desolace",
+              "note": "El duramen está en Vallefresno. Recógelo cuando la ruta vuelva a pasar por Astranaar camino de Desolace.",
               "t": "accept",
               "quest": 1738,
               "npc": 6244,
@@ -96783,7 +96994,18 @@
               "z": 91.8,
               "f": "e",
               "qlvl": 20,
-              "instruction": "Habla con «Takar el Vidente» y acepta «Duramen».\nZona: Los Baldíos.\nDuramen: en Vallefresno, en el camino a Desolace."
+              "instruction": "Habla con «Takar el Vidente» y acepta «Duramen».\nZona: Los Baldíos.\nEl duramen está en Vallefresno. Recógelo cuando la ruta vuelva a pasar por Astranaar camino de Desolace.",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                1716
+              ]
             },
             {
               "title": "¿Qué es el amor?",
@@ -96806,7 +97028,18 @@
               "f": "e",
               "optional": true,
               "qlvl": 20,
-              "instruction": "Opcional.\nHabla con «Takar el Vidente» y acepta «¿Qué es el amor?».\nZona: Los Baldíos.\nWhat Is Love?: el incubus, junto al succubus; el Wooden Figurine está cerca del Duramen."
+              "instruction": "Opcional.\nHabla con «Takar el Vidente» y acepta «¿Qué es el amor?».\nZona: Los Baldíos.\nWhat Is Love?: el incubus, junto al succubus; el Wooden Figurine está cerca del Duramen.",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                1716
+              ]
             }
           ]
         },
@@ -103596,7 +103829,7 @@
         },
         {
           "title": "Duramen",
-          "note": "Desde Astranaar viaje al noroeste en las colinas: el Duramen es un árbol brillante al norte de carretera a Atalaya de Maestra. Si usted tomó What Is Love?, el Wooden Figurine se encuentra en una casa entre los árboles al norte de Atalaya de Maestra (26.6,22.0). A continuación, volver más allá de Astranaar a la Talondeep Path.",
+          "note": "Desde Astranaar, ve al árbol de las ruinas de Ordil'Aran y recoge el duramen. Si llevas «¿Qué es el amor?», encontrarás la figurilla en la casa al norte de la Atalaya de Maestra. Regresa hacia Astranaar para continuar el viaje.",
           "only": {
             "classes": [
               "WARLOCK"
@@ -103618,7 +103851,18 @@
               "f": "e",
               "from": "Duramen",
               "fromKind": "object",
-              "instruction": "Interactúa con «Duramen» para reunir «Duramen» (1 en total).\nZona: Vallefresno."
+              "instruction": "Interactúa con «Duramen» para reunir «Duramen» (1 en total).\nZona: Vallefresno.",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                1738
+              ]
             },
             {
               "title": "¿Qué es el amor?",
@@ -103636,7 +103880,18 @@
               "optional": true,
               "from": "Wooden Figurine",
               "fromKind": "object",
-              "instruction": "Opcional.\nInteractúa con «Wooden Figurine» para reunir «Figurilla de madera» (1 en total).\nZona: Vallefresno.\nWooden Figurine, al norte de Atalaya de Maestra."
+              "instruction": "Opcional.\nInteractúa con «Wooden Figurine» para reunir «Figurilla de madera» (1 en total).\nZona: Vallefresno.\nWooden Figurine, al norte de Atalaya de Maestra.",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                65602
+              ]
             }
           ]
         },
@@ -116554,7 +116809,7 @@
         },
         {
           "title": "El vínculo",
-          "note": "Gakin el Presotenebra espera en el sótano de de Slaughtered Lamb, en el Barrio de los Magos. Usal Núcleo de duramen en el círculo de convocatoria allí y derrotar el sucubus que llama. Si tomó What Is Love?, darle el Wooden Figurine también, colocarlo en el mismo círculo y derrotar al incubus.",
+          "note": "Baja a la cripta de El Cordero Degollado en el Barrio de los Magos. Gakin recibe los objetos y ofrece la invocación correspondiente a cada uno.",
           "only": {
             "classes": [
               "WARLOCK"
@@ -116572,7 +116827,18 @@
               "x": 39.22,
               "y": 85.23,
               "z": 101.5,
-              "instruction": "Habla con «Gakin el Presotenebra» y entrega «Duramen»."
+              "instruction": "Habla con «Gakin el Presotenebra» y entrega «Duramen».",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                1738
+              ]
             },
             {
               "title": "El vínculo",
@@ -116592,11 +116858,22 @@
               "y": 85.23,
               "z": 101.5,
               "qlvl": 20,
-              "instruction": "Habla con «Gakin el Presotenebra» y acepta «El vínculo»."
+              "instruction": "Habla con «Gakin el Presotenebra» y acepta «El vínculo».",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                1738
+              ]
             },
             {
               "title": "El vínculo",
-              "note": "Sojuzgar el sucubus",
+              "note": "Usa el Núcleo de duramen en el círculo de la cripta, derrota a la súcubo y habla otra vez con Gakin.",
               "t": "complete",
               "quest": 1739,
               "candidates": [
@@ -116608,28 +116885,21 @@
                   "npc": 5677,
                   "npcName": "Summoned Succubus",
                   "objectiveIndex": 1
-                },
-                {
-                  "map": 1454,
-                  "x": 49.4,
-                  "y": 50,
-                  "f": "e",
-                  "npc": 5677,
-                  "npcName": "Summoned Succubus",
-                  "objectiveIndex": 1
-                },
-                {
-                  "map": 1458,
-                  "x": 86.7,
-                  "y": 27.1,
-                  "f": "e",
-                  "npc": 5677,
-                  "npcName": "Summoned Succubus",
-                  "objectiveIndex": 1
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Para «El vínculo», sigue esta indicación de la guía:\nSojuzgar el sucubus.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+              "instruction": "Para «El vínculo», sigue esta indicación de la guía:\nUsa el Núcleo de duramen en el círculo de la cripta, derrota a la súcubo y habla otra vez con Gakin.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                1739
+              ]
             },
             {
               "title": "El vínculo",
@@ -116642,7 +116912,18 @@
               "x": 39.22,
               "y": 85.23,
               "z": 101.5,
-              "instruction": "Habla con «Gakin el Presotenebra» y entrega «El vínculo».\nSummon Súcubo."
+              "instruction": "Habla con «Gakin el Presotenebra» y entrega «El vínculo».\nSummon Súcubo.",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                1739
+              ]
             },
             {
               "title": "¿Qué es el amor?",
@@ -116656,7 +116937,18 @@
               "y": 85.23,
               "z": 101.5,
               "optional": true,
-              "instruction": "Opcional.\nHabla con «Gakin el Presotenebra» y entrega «¿Qué es el amor?».\nWhat Is Love?, si lo tomaste."
+              "instruction": "Opcional.\nHabla con «Gakin el Presotenebra» y entrega «¿Qué es el amor?».\nWhat Is Love?, si lo tomaste.",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                65602
+              ]
             },
             {
               "title": "El vínculo",
@@ -116677,11 +116969,22 @@
               "z": 101.5,
               "optional": true,
               "qlvl": 20,
-              "instruction": "Opcional.\nHabla con «Gakin el Presotenebra» y acepta «El vínculo»."
+              "instruction": "Opcional.\nHabla con «Gakin el Presotenebra» y acepta «El vínculo».",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                65602
+              ]
             },
             {
               "title": "El vínculo",
-              "note": "Summoned Incubus, en el mismo círculo",
+              "note": "Usa la figurilla en el círculo de la cripta, derrota al íncubo y vuelve con Gakin.",
               "t": "kill",
               "quest": 65603,
               "oi": 1,
@@ -116699,7 +117002,18 @@
                 }
               ],
               "optional": true,
-              "instruction": "Opcional.\nDerrota a «Summoned Incubus».\nSummoned Incubus, en el mismo círculo."
+              "instruction": "Opcional.\nDerrota a «Summoned Incubus».\nUsa la figurilla en el círculo de la cripta, derrota al íncubo y vuelve con Gakin.",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                65603
+              ]
             },
             {
               "title": "El vínculo",
@@ -116713,7 +117027,18 @@
               "y": 85.23,
               "z": 101.5,
               "optional": true,
-              "instruction": "Opcional.\nHabla con «Gakin el Presotenebra» y entrega «El vínculo».\nGakin te une el íncubo."
+              "instruction": "Opcional.\nHabla con «Gakin el Presotenebra» y entrega «El vínculo».\nGakin te une el íncubo.",
+              "detourOnly": {
+                "classes": [
+                  "WARLOCK"
+                ],
+                "races": [
+                  "Gnome"
+                ]
+              },
+              "soloAfter": [
+                65603
+              ]
             }
           ]
         },
@@ -131632,7 +131957,7 @@
             {
               "title": "Invoca un malignoecus",
               "minLevel": 40,
-              "note": "Demisette Cloyce, en el Slaughtered Lamb: Strahad Farsan en Trinquete lo toma al final de la siguiente guía",
+              "note": "A nivel 40 esta cadena enseña Invocar malignoecus y equitación de aprendiz. Recoge el encargo de Demisette y entrégalo a Strahad en la visita a Trinquete.",
               "t": "accept",
               "quest": 4488,
               "npc": 461,
@@ -131652,7 +131977,7 @@
               "y": 84.96,
               "z": 101.5,
               "qlvl": 40,
-              "instruction": "Habla con «Demisette Cloyce» y acepta «Invoca un malignoecus».\nDemisette Cloyce, en el Slaughtered Lamb: Strahad Farsan en Trinquete lo toma al final de la siguiente guía."
+              "instruction": "Habla con «Demisette Cloyce» y acepta «Invoca un malignoecus».\nA nivel 40 esta cadena enseña Invocar malignoecus y equitación de aprendiz. Recoge el encargo de Demisette y entrégalo a Strahad en la visita a Trinquete."
             }
           ]
         },
@@ -132473,7 +132798,7 @@
         },
         {
           "title": "Equitación en 40",
-          "note": "Al nivel 40 con oro 100 puedes aprender a montar, y aprender que te da una montura. Binjy Plumasilba enseña gnomos en Almacén de Steelgrill, al este de Kharanos, junto a los mecanostriders de Milli Plumasilba. Forever puede dejar que cualquier raza aprenda de cualquier equitación instructor (sin confirmar). Collectibles, Mounts · Level 40 lista cada color.",
+          "note": "Binjy enseña equitación en el depósito al este de Kharanos. Si eres brujo, la misión del malignoecus de nivel 40 ya incluye la equitación de aprendiz. Visita a Milli si quieres comprar un mecazancudo.",
           "only": {
             "races": [
               "Gnome"
@@ -134621,7 +134946,8 @@
               "y": 35.5,
               "z": 40.5,
               "f": "e",
-              "instruction": "Habla con «Strahad Farsan» y entrega «Invoca un malignoecus».\nZona: Los Baldíos."
+              "instruction": "Habla con «Strahad Farsan» y entrega «Invoca un malignoecus».\nZona: Los Baldíos.\nHabla con Strahad para aprender Invocar malignoecus. Si también quieres el manáfago, su cadena de nivel 30 pasa por Trinquete, Forjaz, Costasur, Las Mil Agujas y Los Humedales. Para un gnomo, Llago Llavenegra ofrece el encargo inicial en Forjaz.",
+              "note": "Habla con Strahad para aprender Invocar malignoecus. Si también quieres el manáfago, su cadena de nivel 30 pasa por Trinquete, Forjaz, Costasur, Las Mil Agujas y Los Humedales. Para un gnomo, Llago Llavenegra ofrece el encargo inicial en Forjaz."
             }
           ]
         },

@@ -17316,6 +17316,977 @@
           "requiredTravel": null
         }
       }
+    },
+    {
+      "id": "dun-morogh-warlock-first-demons-3",
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "287103378716814534f9849171a6b260953686ce519ad2b1e22babb5ac2573f4",
+      "resultShape": "9bd987ff26e96751a07d1ab3fe1f052d35a005463346327d65474df22d71c091",
+      "previousGoalCounts": [
+        1,
+        1,
+        26,
+        2,
+        4,
+        3,
+        2,
+        1,
+        3,
+        4,
+        3,
+        6,
+        5,
+        1,
+        4,
+        6,
+        4,
+        8,
+        7,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        5,
+        2,
+        3,
+        5,
+        4,
+        2,
+        1,
+        5,
+        1,
+        2,
+        1,
+        3,
+        2,
+        3,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3,
+        1,
+        2,
+        2,
+        1,
+        5,
+        6,
+        9,
+        1,
+        6,
+        1,
+        1,
+        2,
+        2,
+        2,
+        6,
+        1,
+        5,
+        4,
+        1,
+        2,
+        3,
+        14,
+        4,
+        3,
+        3,
+        4,
+        9,
+        1,
+        2,
+        1,
+        4,
+        1,
+        1
+      ],
+      "preservePendingVisits": true,
+      "firstAffectedStep": 3,
+      "affectedQuestIDs": [],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2,
+          "set": {
+            "note": "Busca los lobos jóvenes en la nieve al sur de Sten. Haz clic derecho sobre cada lobo abatido para recoger la carne. Cuando lleves ocho, vuelve a Sten.",
+            "title": "Lobos jóvenes"
+          }
+        },
+        {
+          "title": "Yunquemar",
+          "goals": [
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              3,
+              9
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              3,
+              11
+            ],
+            [
+              3,
+              12
+            ],
+            [
+              3,
+              13
+            ],
+            [
+              3,
+              14
+            ],
+            [
+              3,
+              15
+            ],
+            [
+              3,
+              16
+            ],
+            [
+              3,
+              17
+            ],
+            [
+              3,
+              18
+            ],
+            [
+              3,
+              19
+            ],
+            [
+              3,
+              20
+            ],
+            [
+              3,
+              21
+            ],
+            [
+              3,
+              22
+            ],
+            [
+              3,
+              24
+            ],
+            [
+              3,
+              25
+            ],
+            [
+              3,
+              23
+            ],
+            [
+              5,
+              4
+            ],
+            [
+              3,
+              26
+            ]
+          ]
+        },
+        {
+          "sourceStep": 4,
+          "set": {
+            "note": "Busca los dos tipos de trogg al sur de Yunquemar. El registro de misiones lleva la cuenta de cada uno."
+          }
+        },
+        {
+          "sourceStep": 5,
+          "omitGoals": [
+            4
+          ]
+        },
+        {
+          "sourceStep": 6,
+          "set": {
+            "note": "Talin acampa al oeste del valle. Recoge su encargo de cazar jabalíes. La caja de Félix está al sur del campamento y sus otras dos piezas, junto a la cueva de los trols."
+          }
+        },
+        {
+          "sourceStep": 7,
+          "set": {
+            "note": "Caza los jabalíes alrededor del campamento de Talin y recoge la caja de Félix antes de volver."
+          }
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9,
+          "set": {
+            "note": "Grelin y Nori acampan al suroeste del valle. Habla con Grelin antes de subir hacia la cueva."
+          }
+        },
+        {
+          "sourceStep": 10,
+          "set": {
+            "note": "Las crías de trol Peloescarcha están en las laderas al sur y al este de Grelin. Recoge también el cofre y el cubo de Félix al pasar por la cueva.",
+            "title": "La cueva de los trols"
+          }
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12,
+          "set": {
+            "note": "La infusión de Nori se enfría en cinco minutos. Ve directamente a Yunquemar y entrégasela a Durnan antes de los demás recados."
+          }
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        },
+        {
+          "sourceStep": 49
+        },
+        {
+          "sourceStep": 50
+        },
+        {
+          "sourceStep": 51
+        },
+        {
+          "sourceStep": 52
+        },
+        {
+          "sourceStep": 53
+        },
+        {
+          "sourceStep": 54
+        },
+        {
+          "sourceStep": 55
+        },
+        {
+          "sourceStep": 56
+        },
+        {
+          "sourceStep": 57
+        },
+        {
+          "sourceStep": 58
+        },
+        {
+          "sourceStep": 59
+        },
+        {
+          "sourceStep": 60
+        },
+        {
+          "sourceStep": 61
+        },
+        {
+          "sourceStep": 62
+        },
+        {
+          "sourceStep": 63
+        },
+        {
+          "sourceStep": 64
+        },
+        {
+          "sourceStep": 65
+        },
+        {
+          "sourceStep": 66
+        },
+        {
+          "sourceStep": 67
+        },
+        {
+          "sourceStep": 68
+        },
+        {
+          "sourceStep": 69
+        },
+        {
+          "sourceStep": 70
+        },
+        {
+          "sourceStep": 71
+        },
+        {
+          "sourceStep": 72
+        },
+        {
+          "sourceStep": 73
+        },
+        {
+          "sourceStep": 74
+        },
+        {
+          "sourceStep": 75
+        },
+        {
+          "sourceStep": 76,
+          "set": {
+            "note": "Tras bajar del tranvía en Ventormenta, ve al Barrio de los Magos. Gakin espera en el sótano de la taberna El Cordero Degollado."
+          }
+        },
+        {
+          "sourceStep": 77,
+          "set": {
+            "note": "Sal por la puerta principal de Ventormenta y sigue la carretera hasta Villadorada. Desde allí ve al este, a la Plantación de Calabazas de Brackwell. Surena está junto a la casa."
+          }
+        },
+        {
+          "sourceStep": 78,
+          "set": {
+            "note": "Regresa al sótano de El Cordero Degollado con la gargantilla de Surena. Tras entregar «El vínculo», continúa hacia Páramos de Poniente por la carretera al oeste de Villadorada."
+          }
+        },
+        {
+          "sourceStep": 79
+        },
+        {
+          "sourceStep": 80
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "collect",
+            "quest": 179
+          },
+          "count": 1,
+          "set": {
+            "from": "Lobo joven andrajoso",
+            "fromAlso": "Lobo maderero andrajoso"
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 3115
+          },
+          "count": 1,
+          "set": {
+            "note": "Antes de entrar en Yunquemar, recoge también el correo de Sten y el encargo de Balir, que está a su lado."
+          }
+        },
+        {
+          "match": {
+            "t": "turnin",
+            "quest": 3115
+          },
+          "count": 1,
+          "set": {
+            "note": "Alamar es tu instructor de brujo. Está dentro de Yunquemar. Sigue hablando con él para aceptar «Novato»."
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 1599
+          },
+          "count": 1,
+          "set": {
+            "note": "Esta misión te enseñará a invocar tu primer demonio. Sigue la ruta de los troggs y los jabalíes. Conseguirás los talismanes cuando Grelin te envíe a la cueva de los trols."
+          }
+        },
+        {
+          "match": {
+            "t": "kill",
+            "quest": 182
+          },
+          "count": 1,
+          "set": {
+            "note": "Busca las crías en las laderas al sur y al este del campamento de Grelin."
+          }
+        },
+        {
+          "match": {
+            "t": "collect",
+            "quest": 1599
+          },
+          "count": 1,
+          "set": {
+            "note": "En la cueva, selecciona un novicio cada vez. Haz clic derecho en su cuerpo para recoger el botín. Antes de volver con Grelin, comprueba que llevas los tres talismanes."
+          }
+        },
+        {
+          "match": {
+            "t": "turnin",
+            "quest": 1599
+          },
+          "count": 1,
+          "set": {
+            "note": "Abre el libro de hechizos (P), arrastra Invocar diablillo a tu barra y úsalo. Con él a tu lado, continúa hacia el campamento de Gozwin."
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 1715
+          },
+          "count": 1,
+          "set": {
+            "note": "Recoge el encargo de Llago antes de tomar el tranvía de Forjaz a Ventormenta. Gakin te ayudará a conseguir el abisario."
+          }
+        },
+        {
+          "match": {
+            "t": "complete",
+            "quest": 1689
+          },
+          "count": 1,
+          "set": {
+            "note": "Entra en el círculo de invocación del sótano de El Cordero Degollado. Usa la Gargantilla de Petrosangre de tu mochila y derrota al abisario que aparece."
+          }
+        },
+        {
+          "match": {
+            "t": "turnin",
+            "quest": 1689
+          },
+          "count": 1,
+          "set": {
+            "note": "Aprendes Invocar abisario. Arrastra el hechizo del libro a tu barra. Cuando luches con él, ordénale atacar primero para que el enemigo se fije en él."
+          }
+        }
+      ],
+      "textReplacements": {
+        "Unos cuantos troggs más afuera si eres corto": "Si te falta experiencia para alcanzar el nivel 3, derrota algunos troggs más cerca de Balir.",
+        "Algunos Trol Peloescarcha Whelps si usted es corto": "Si te falta experiencia para el nivel 4, derrota crías de trol Peloescarcha en las laderas cercanas.",
+        "Nivel 4 se deletrea, antes del campamento de Gozwin": "Aprovecha esta visita para aprender las habilidades de nivel 4 antes de ir al campamento de Gozwin.",
+        "Level 2 hechizos, dentro de Yunquemar": "Aprende las habilidades de nivel 2 en Yunquemar."
+      },
+      "evidence": {
+        "sources": [
+          "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L124-L217",
+          "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L1424",
+          "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Items.lua#L23",
+          "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Npcs.lua#L279-L280",
+          "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L598-L652"
+        ],
+        "reason": "Alamar recibe el memorándum y ofrece Novato desde el nivel 1. Recoger ambos encargos de la puerta antes de hablar con él evita volver a entrar. Los tres talismanes se reúnen durante la salida de Grelin. La entrega del diablillo coincide con el regreso de la infusión y el abisario se obtiene al viajar a Ventormenta."
+      }
+    },
+    {
+      "id": "dun-morogh-western-visits-4",
+      "guideID": "forever/alliance/dwarf-gnome/01-dun-morogh",
+      "previousRevision": 3,
+      "revision": 4,
+      "sourceShape": "9bd987ff26e96751a07d1ab3fe1f052d35a005463346327d65474df22d71c091",
+      "resultShape": "dd7133d02831648450a13af46f82e40510cdb79b0c776a9a3ee958754d5a7b34",
+      "previousGoalCounts": [
+        1,
+        1,
+        27,
+        2,
+        3,
+        3,
+        2,
+        1,
+        3,
+        4,
+        3,
+        6,
+        5,
+        1,
+        4,
+        6,
+        4,
+        8,
+        7,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        5,
+        2,
+        3,
+        5,
+        4,
+        2,
+        1,
+        5,
+        1,
+        2,
+        1,
+        3,
+        2,
+        3,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3,
+        1,
+        2,
+        2,
+        1,
+        5,
+        6,
+        9,
+        1,
+        6,
+        1,
+        1,
+        2,
+        2,
+        2,
+        6,
+        1,
+        5,
+        4,
+        1,
+        2,
+        3,
+        14,
+        4,
+        3,
+        3,
+        4,
+        9,
+        1,
+        2,
+        1,
+        4,
+        1,
+        1
+      ],
+      "preservePendingVisits": true,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "title": "Yunquemar",
+          "note": "La infusión de Nori se enfría en cinco minutos. Ve directamente a Yunquemar y entrégasela a Durnan antes de los demás recados.",
+          "goals": [
+            [
+              12,
+              1
+            ],
+            [
+              12,
+              3
+            ],
+            [
+              12,
+              5
+            ],
+            [
+              12,
+              6
+            ],
+            [
+              12,
+              4
+            ],
+            [
+              12,
+              2
+            ]
+          ]
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        },
+        {
+          "sourceStep": 36
+        },
+        {
+          "sourceStep": 37
+        },
+        {
+          "sourceStep": 38
+        },
+        {
+          "sourceStep": 39
+        },
+        {
+          "sourceStep": 40
+        },
+        {
+          "sourceStep": 41
+        },
+        {
+          "sourceStep": 42
+        },
+        {
+          "sourceStep": 43
+        },
+        {
+          "sourceStep": 44
+        },
+        {
+          "sourceStep": 45
+        },
+        {
+          "sourceStep": 46
+        },
+        {
+          "sourceStep": 47
+        },
+        {
+          "sourceStep": 48
+        },
+        {
+          "sourceStep": 49
+        },
+        {
+          "sourceStep": 50
+        },
+        {
+          "sourceStep": 51
+        },
+        {
+          "sourceStep": 52
+        },
+        {
+          "sourceStep": 53
+        },
+        {
+          "sourceStep": 54
+        },
+        {
+          "sourceStep": 55
+        },
+        {
+          "sourceStep": 56
+        },
+        {
+          "sourceStep": 68,
+          "set": {
+            "note": "Desde Las Birras, ve al sureste hasta Tundra MacGrann. El cofre de la carne está en la cueva de Viejo Barbahielo (38.5, 53.9). Espera a que salga de patrulla, abre el cofre y vuelve con MacGrann antes de seguir hacia el almacén."
+          }
+        },
+        {
+          "sourceStep": 57
+        },
+        {
+          "sourceStep": 58
+        },
+        {
+          "sourceStep": 59
+        },
+        {
+          "sourceStep": 60
+        },
+        {
+          "sourceStep": 61
+        },
+        {
+          "sourceStep": 62
+        },
+        {
+          "sourceStep": 63
+        },
+        {
+          "sourceStep": 64
+        },
+        {
+          "sourceStep": 65
+        },
+        {
+          "sourceStep": 66
+        },
+        {
+          "sourceStep": 67
+        },
+        {
+          "sourceStep": 69
+        },
+        {
+          "sourceStep": 70
+        },
+        {
+          "sourceStep": 71
+        },
+        {
+          "sourceStep": 72
+        },
+        {
+          "sourceStep": 73
+        },
+        {
+          "sourceStep": 74
+        },
+        {
+          "sourceStep": 75
+        },
+        {
+          "sourceStep": 76
+        },
+        {
+          "sourceStep": 77
+        },
+        {
+          "sourceStep": 78
+        },
+        {
+          "sourceStep": 79
+        },
+        {
+          "sourceStep": 80
+        }
+      ],
+      "evidence": {
+        "sources": [
+          "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L201-L219",
+          "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L469-L482",
+          "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/dwarf-gnome/01-dun-morogh.guide#L549-L556",
+          "https://www.wowhead.com/classic/quest=312/tundra-macgranns-stolen-stash"
+        ],
+        "reason": "Se entrega primero la infusión cronometrada, se recoge la taza de Durnan y se visitan los instructores antes de buscar a Félix en la puerta. La carne de MacGrann se recoge al salir de Las Birras hacia el almacén. Así se evita regresar desde la cantera oriental para un único encargo. La posición de los encargos de clase de nivel 10 se conserva."
+      }
     }
   ]
 }
