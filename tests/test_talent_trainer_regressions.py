@@ -1,6 +1,7 @@
 """LuaJIT regressions for live talent validation and Forever trainer advice."""
 
 import unittest
+from pathlib import Path
 
 from lupa.luajit21 import LuaRuntime
 
@@ -68,12 +69,12 @@ end
 
 
 class TalentTrainerHost:
-    def __init__(self, talent_module=False):
+    def __init__(self, full_toc=False, *, talent_module=False):
         self.lua = LuaRuntime(unpack_returned_tuples=True)
         self.lua.execute(WOW_STUBS)
         self.lua.execute(UI_STUBS)
         self.lua.execute(TALENT_STUBS)
-        if talent_module:
+        if full_toc or talent_module:
             self.lua.execute(r"""
                 local original = CreateFrame
                 TEST.eventFrames = {}
@@ -93,7 +94,13 @@ class TalentTrainerHost:
         self.ns = self.lua.table_from({"char": self.lua.table()})
         load = self.lua.eval("function(s, ns) assert(loadstring(s))('RutaXP', ns) end")
         files = ["Talents.lua", "TalentBuilds.lua", "Trainer.lua"]
-        if talent_module:
+        if full_toc:
+            # Archived navigation tests still exercise version 0.7.38's modules
+            # in their original order, independently of the installed suite.
+            manifest = Path(__file__).parent / "fixtures" / "RutaXP-0.7.38.toc"
+            files = [line.strip() for line in manifest.read_text(encoding="utf-8-sig").splitlines()
+                     if line.strip().endswith(".lua") and not line.lstrip().startswith("#")]
+        elif talent_module:
             files = ["TalentCore.lua", "Talents.lua", "TalentBuilds.lua"]
         for filename in files:
             load((ADDON / filename).read_text(encoding="utf-8-sig"), self.ns)
