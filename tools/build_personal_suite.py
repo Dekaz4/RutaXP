@@ -12,13 +12,12 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 
-from suite_lua import bind_namespace
+from suite_lua import SUITE_FILES, bind_namespace
 from suite_map_journal import transform_lua as transform_journal_map
 from suite_rested import transform_lua as transform_rested
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULES = ("OpenMap", "ForeverDungeonJournal", "RXPGuides")
-BASE = ("RutaXP.toc", "TalentCore.lua", "Talents.lua", "TalentBuilds.lua", "Suite.lua")
 ASSETS = {".blp", ".tga", ".png", ".ogg", ".mp3", ".wav", ".ttf", ".otf", ".atlas"}
 ASSET_ROOT = re.compile(r"(Interface)([/\\]+)(AddOns)\2(OpenMap|ForeverDungeonJournal|RXPGuides)(?=[/\\])", re.I)
 FILE_TAG = re.compile(r"""<!--.*?-->|<(?:Script|Include)\b[^<>]*?\bfile\s*=\s*(["'])([^"']+)\1[^<>]*>""", re.S)
@@ -168,7 +167,7 @@ def compose(template, roots, destination):
                     raise ValueError(f"Duplicate archive entry: {name}")
                 checksums[name] = hashlib.sha256(data).hexdigest()
                 archive.writestr("RutaXP/" + name, data)
-            for name in BASE:
+            for name in SUITE_FILES:
                 write(name, toc.encode("utf8") if name == "RutaXP.toc" else (template / name).read_bytes())
             for module in modules:
                 for name, data in module.contents():
@@ -195,8 +194,11 @@ def compose(template, roots, destination):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--addons", required=True, type=Path, help="WoW Forever Interface/AddOns folder")
-    parser.add_argument("--output", type=Path, default=ROOT / "dist/RutaXP-1.0.0-personal.zip")
+    parser.add_argument("--output", type=Path)
     args = parser.parse_args()
+    if args.output is None:
+        _, metadata = lines_and_metadata((ROOT / "RutaXP/RutaXP.toc").read_text(encoding="utf-8-sig"))
+        args.output = ROOT / "dist" / f"RutaXP-{metadata['Version']}-personal.zip"
     from suite_rested import prepare_official_source
     roots = {name: args.addons / name for name in MODULES}
     with tempfile.TemporaryDirectory(prefix="RutaXP-official-") as temp:

@@ -16,6 +16,11 @@ import sys
 import xml.etree.ElementTree as ET
 from zipfile import ZipFile, ZIP_DEFLATED
 
+if __package__:
+    from .suite_lua import SUITE_FILES
+else:
+    from suite_lua import SUITE_FILES
+
 ROOT = Path(__file__).resolve().parents[1]
 ADDON = ROOT / "RutaXP"
 SUITE_INSTALLER = "Instalar_Suite_RutaXP.exe"
@@ -24,7 +29,7 @@ SUITE_INSTALLER = "Instalar_Suite_RutaXP.exe"
 def runtime_files():
     # The old quest routes remain in source history and the workspace. Only
     # this explicitly public shell is distributed through the update channel.
-    names = ("RutaXP.toc", "TalentCore.lua", "Talents.lua", "TalentBuilds.lua", "Suite.lua", SUITE_INSTALLER)
+    names = (*SUITE_FILES, SUITE_INSTALLER)
     notices = [p for p in (ADDON / "Licenses").iterdir() if p.is_file() and p.suffix.lower() in (".md", ".txt")]
     return sorted([ADDON / name for name in names] + notices)
 
@@ -58,7 +63,7 @@ def check_toc():
             check_dependency(source)
     public = set(p.resolve() for p in runtime_files())
     if not checked <= public or re.search(r"^##\s*X-RutaXP-Embedded\s*:", text, re.I | re.M):
-        raise RuntimeError("The public TOC must load only the talents and suite launcher")
+        raise RuntimeError("Unexpected file in the public suite TOC")
     return version
 
 
@@ -126,7 +131,7 @@ def main():
     for name in ["Installer.cs", "Updater.cs", "build_release.py", "publish_release.py", "build_talents.js",
                  "build_personal_suite.py", "suite_lua.py", "suite_map_journal.py", "suite_rested.py", "Install-Suite.ps1",
                  "suite_setup.py", "build_suite_setup.py", "verify_personal_suite.py", "PersonalSetup.cs",
-                 "build_personal_setup.py"]:
+                 "build_personal_setup.py", "suite_world_services.py"]:
         release_files[f"tools/{name}"] = (ROOT / "tools" / name).read_bytes()
     test_dir = ROOT / "tests"
     for pattern in ("test_install_suite.py", "test_personal_*.py", "test_suite_*.py", "test_installers.py", "test_installers.ps1",

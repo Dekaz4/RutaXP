@@ -7,3 +7,5 @@ RutaXP conserva su guía de talentos, las recomendaciones de habilidades y los d
 - **RestedXP**. Motor y guías de la revisión oficial cbe05e351e083108d08b35908347952fb0eaf06e. Se mantiene la licencia del proyecto, CC BY-NC-SA 4.0, y los avisos de las bibliotecas. La adaptación localiza recursos bajo RutaXP, aísla los datos de usuario y configura los talentos de RestedXP como opcionales. [Fuente y licencia de RestedXP](https://github.com/RestedXP/RXPGuides/tree/cbe05e351e083108d08b35908347952fb0eaf06e)
 
 World of Warcraft y sus recursos pertenecen a Blizzard Entertainment.
+
+Las ubicaciones de servicios que RutaXP superpone en OpenMap proceden de los datos de pfQuest y del catálogo de Forever de SendaFH. El generador `tools/suite_world_services.py` identifica las revisiones, verifica los archivos de origen y conserva el sistema de coordenadas de cada ubicación. Los avisos de ambos proyectos se incluyen en `RutaXP/Licenses`.

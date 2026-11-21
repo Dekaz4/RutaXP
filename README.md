@@ -22,6 +22,8 @@ La distribución pública contiene el constructor para Windows. Ejecuta **Instal
 | Selector de guías oficiales de RestedXP | `/rutaxp guias` |
 | Guía de talentos y habilidades de RutaXP | **N** o `/rutaxp talentos` |
 
+Las casillas de seguimiento de la lupa del minimapa y del panel de OpenMap comparten la misma selección. Pulsa **M** para consultar los servicios de tu facción en otra zona o continente. Los instructores de clase corresponden a la clase de tu personaje. Al activar **Misiones de nivel bajo**, el mapa muestra las ofertas que el cliente comunica para cada zona.
+
 Una instalación nueva abre el diario al pulsar una entrada de mazmorra en OpenMap. Si ya elegiste otra acción en OpenMap, el instalador conserva tu preferencia. En el panel de talentos puedes seguir consultando la distribución por nivel y las habilidades de tu clase. RestedXP se encarga del recorrido de leveo.
 
 ## Reconstrucción desde el código
@@ -35,7 +37,7 @@ python tools/build_personal_suite.py --addons 'E:\WOW\World of Warcraft\_forever
 La composición lee los módulos locales y usa la revisión oficial de RestedXP registrada en `tools/suite_rested.py`. El ZIP se genera en `dist`. La instalación es independiente de la compilación.
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/Install-Suite.ps1 -Client 'E:\WOW\World of Warcraft\_forever_' -Archive dist/RutaXP-1.0.0-personal.zip
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/Install-Suite.ps1 -Client 'E:\WOW\World of Warcraft\_forever_' -Archive dist/RutaXP-1.0.1-personal.zip
 ```
 
 La última versión de las antiguas rutas propias fue la [0.7.38](https://github.com/Dekaz4/RutaXP/releases/tag/v0.7.38). Sus datos se mantienen en el historial del proyecto. El paquete personal usa únicamente la guía de talentos de aquella versión.
