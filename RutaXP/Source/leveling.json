@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "a5a6488099961148ad8986e7bfe4dea32e749724639ca8419bf9e735e0961925",
+      "sha256": "fddb1f2ddefefe06a8e4797040814d27cc0a039897ca1f9cae5e906366f206cb",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -575,7 +575,8 @@
         "hillsbrad-town-hall-request-8",
         "desolace-menethil-auberdine-boat-3",
         "dun-morogh-warlock-first-demons-3",
-        "dun-morogh-western-visits-4"
+        "dun-morogh-western-visits-4",
+        "desolace-venom-and-kodo-hides-4"
       ]
     }
   },
@@ -636,10 +637,10 @@
       "detourOnly": 14,
       "detourQuest": 25,
       "f": 5521,
-      "from": 741,
-      "fromAlso": 97,
+      "from": 742,
+      "fromAlso": 98,
       "fromFaction": 11,
-      "fromKind": 739,
+      "fromKind": 740,
       "fromRank": 17,
       "group": 9,
       "groupVisitFor": 1,
@@ -650,7 +651,7 @@
       "item": 1217,
       "itemName": 1217,
       "level": 25,
-      "levelingDetour": 395,
+      "levelingDetour": 398,
       "location": 401,
       "map": 6594,
       "minLevel": 2290,
@@ -104591,8 +104592,8 @@
           ]
         },
         {
-          "title": "Veneno de Scorpashi",
-          "note": "Los escorpiones Scorpashi cazan las colinas alrededor de Cabaña de Kormek en la carretera al sur.",
+          "title": "Veneno y pellejos en el Cementerio de Kodos",
+          "note": "En los alrededores del cementerio, recoge los dos materiales de Kreldig en la misma visita. Puedes empezar por los escorpiones o por los kodos envejecidos que encuentres a tu paso. Al sudeste también hay escorpiones de nivel 30–31 que sueltan el veneno.",
           "goals": [
             {
               "title": "Componentes para Reivindicadores y Cía.",
@@ -104609,279 +104610,135 @@
               "f": "e",
               "spots": [
                 {
-                  "x": 40.4,
-                  "y": 40.8,
-                  "r": 76,
-                  "n": 1
+                  "x": 44.12,
+                  "y": 45.51
+                },
+                {
+                  "x": 45.24,
+                  "y": 47.94
+                },
+                {
+                  "x": 42.68,
+                  "y": 50.14
                 },
                 {
                   "x": 41.8,
-                  "y": 57.3,
-                  "r": 76,
-                  "n": 1
+                  "y": 57.33
                 },
                 {
-                  "x": 37.5,
-                  "y": 73.8,
-                  "r": 76,
-                  "n": 2
+                  "x": 55.48,
+                  "y": 45.7
                 },
                 {
-                  "x": 28.9,
-                  "y": 82.3,
-                  "r": 76,
-                  "n": 2
+                  "x": 57.1,
+                  "y": 48.48
                 },
                 {
-                  "x": 49.6,
-                  "y": 91.8,
-                  "r": 76,
-                  "n": 2
+                  "x": 58.51,
+                  "y": 54.37
                 },
                 {
-                  "x": 53.2,
-                  "y": 68.9,
-                  "r": 76,
-                  "n": 1
+                  "x": 60.83,
+                  "y": 54.52
                 },
                 {
-                  "x": 59.4,
-                  "y": 54.5,
-                  "r": 76,
-                  "n": 3
+                  "x": 62.72,
+                  "y": 48.33
                 },
                 {
-                  "x": 67.8,
-                  "y": 68,
-                  "r": 76,
-                  "n": 1
+                  "x": 53.15,
+                  "y": 68.88
                 },
                 {
-                  "x": 79.5,
-                  "y": 36.1,
-                  "r": 76,
-                  "n": 3
+                  "x": 56.0,
+                  "y": 64.65
                 },
                 {
-                  "x": 68.9,
-                  "y": 20.2,
-                  "r": 86,
-                  "n": 4
+                  "x": 59.45,
+                  "y": 64.24
                 },
                 {
-                  "x": 59.9,
-                  "y": 33.5,
-                  "r": 76,
-                  "n": 1
+                  "x": 64.05,
+                  "y": 63.8
                 },
                 {
-                  "x": 54.6,
-                  "y": 6.9,
-                  "r": 76,
-                  "n": 1
+                  "x": 59.86,
+                  "y": 33.48
                 },
                 {
-                  "x": 44.1,
-                  "y": 45.5,
-                  "r": 76,
-                  "alt": true,
-                  "n": 1
+                  "x": 63.6,
+                  "y": 37.61
                 },
                 {
-                  "x": 44,
-                  "y": 49,
-                  "r": 76,
-                  "alt": true,
-                  "n": 2
+                  "x": 54.32,
+                  "y": 22.04
                 },
                 {
-                  "x": 56.3,
-                  "y": 47.1,
-                  "r": 76,
-                  "alt": true,
-                  "n": 2
+                  "x": 65.68,
+                  "y": 26.83
                 },
                 {
-                  "x": 54.3,
-                  "y": 20.4,
-                  "r": 76,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 44.2,
-                  "y": 73,
-                  "r": 76,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 60.4,
-                  "y": 27.8,
-                  "r": 76,
-                  "alt": true,
-                  "n": 3
-                },
-                {
-                  "x": 56,
-                  "y": 64.7,
-                  "r": 76,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 57.7,
-                  "y": 19.4,
-                  "r": 76,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 62.7,
-                  "y": 48.3,
-                  "r": 76,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 55.1,
-                  "y": 14.4,
-                  "r": 76,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 63.8,
-                  "y": 34.5,
-                  "r": 107,
-                  "alt": true,
-                  "n": 5
-                },
-                {
-                  "x": 51.4,
-                  "y": 8.3,
-                  "r": 96,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 59.5,
-                  "y": 64.2,
-                  "r": 76,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 58,
-                  "y": 10.7,
-                  "r": 76,
-                  "alt": true,
-                  "n": 3
-                },
-                {
-                  "x": 65,
-                  "y": 57.1,
-                  "r": 76,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 65.8,
-                  "y": 25.6,
-                  "r": 116,
-                  "alt": true,
-                  "n": 9
-                },
-                {
-                  "x": 63.2,
-                  "y": 17.4,
-                  "r": 90,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 64.1,
-                  "y": 63.8,
-                  "r": 76,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 61.8,
-                  "y": 72.5,
-                  "r": 130,
-                  "alt": true,
-                  "n": 5
-                },
-                {
-                  "x": 70.8,
-                  "y": 33.7,
-                  "r": 122,
-                  "alt": true,
-                  "n": 9
-                },
-                {
-                  "x": 46.5,
-                  "y": 86.9,
-                  "r": 76,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 71.4,
-                  "y": 27.5,
-                  "r": 111,
-                  "alt": true,
-                  "n": 8
-                },
-                {
-                  "x": 71,
-                  "y": 58.9,
-                  "r": 103,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 61.1,
-                  "y": 79.3,
-                  "r": 76,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 55.8,
-                  "y": 85.4,
-                  "r": 76,
-                  "alt": true,
-                  "n": 3
-                },
-                {
-                  "x": 71.6,
-                  "y": 64.6,
-                  "r": 76,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 75.8,
-                  "y": 33.1,
-                  "r": 114,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 77.6,
-                  "y": 44,
-                  "r": 76,
-                  "alt": true,
-                  "n": 1
+                  "x": 71.12,
+                  "y": 33.22
                 }
               ],
-              "from": "Sacudidor Scorpashi",
-              "fromAlso": "Scorpashi Lasher",
+              "from": "Azotador Scorpashi",
+              "fromAlso": "Sacudidor Scorpashi",
               "fromKind": "npc",
               "spread": true,
-              "instruction": "Recoge «Veneno Scorpashi» (7 en total) del botín de «Sacudidor Scorpashi» o «Scorpashi Lasher».\nZona: Desolace."
+              "instruction": "Recoge «Veneno Scorpashi» (7 en total) del botín de «Azotador Scorpashi» o «Sacudidor Scorpashi».\nZona: Desolace."
+            },
+            {
+              "title": "Componentes para Reivindicadores y Cía.",
+              "note": "Pellejo de kodo mayor",
+              "t": "collect",
+              "quest": 1459,
+              "oi": 2,
+              "item": 6249,
+              "itemName": "Pellejo de kodo mayor",
+              "count": 3,
+              "map": 1443,
+              "x": 49.36,
+              "y": 41.23,
+              "f": "e",
+              "spots": [
+                {
+                  "x": 49.37,
+                  "y": 40.17
+                },
+                {
+                  "x": 50.51,
+                  "y": 56.63
+                },
+                {
+                  "x": 51.95,
+                  "y": 56.1
+                },
+                {
+                  "x": 53.65,
+                  "y": 56.69
+                },
+                {
+                  "x": 52.61,
+                  "y": 57.46
+                },
+                {
+                  "x": 48.29,
+                  "y": 60.25
+                },
+                {
+                  "x": 50.82,
+                  "y": 61.17
+                },
+                {
+                  "x": 52.24,
+                  "y": 60.64
+                }
+              ],
+              "from": "Kodo envejecido",
+              "fromKind": "npc",
+              "spread": true,
+              "instruction": "Recoge «Pellejo de kodo mayor» (3 en total) del botín de «Kodo envejecido».\nZona: Desolace."
             }
           ]
         },
@@ -104964,13 +104821,14 @@
               "z": 61.4,
               "f": "e",
               "qlvl": 34,
-              "instruction": "Habla con «Smeed Mezclatornillos» y acepta «El rodeo kodo».\nZona: Desolace."
+              "instruction": "Habla con «Smeed Mezclatornillos» y acepta «El rodeo kodo».\nZona: Desolace.",
+              "levelingDetour": true
             }
           ]
         },
         {
           "title": "Cementerio de Kodos",
-          "note": "de Usa Smeed Recombobulador kodo en un Kodo envejecido y caminar el kodo domesticado de vuelta a su campamento, cinco veces; Aged Kodos también dejar caer las pieles.",
+          "note": "Usa el recombobulador en un kodo anciano, envejecido o moribundo. Guíalo hasta Smeed y comprueba que se cuenta la entrega antes de buscar otro. Smeed pide cinco.",
           "goals": [
             {
               "title": "El rodeo kodo",
@@ -105024,81 +104882,8 @@
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Abre «El rodeo kodo» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
-            },
-            {
-              "title": "Componentes para Reivindicadores y Cía.",
-              "note": "Pellejo de kodo mayor",
-              "t": "collect",
-              "quest": 1459,
-              "oi": 2,
-              "item": 6249,
-              "itemName": "Pellejo de kodo mayor",
-              "count": 3,
-              "map": 1443,
-              "x": 57.76,
-              "y": 71.05,
-              "f": "e",
-              "spots": [
-                {
-                  "x": 57.8,
-                  "y": 71.1,
-                  "r": 40,
-                  "n": 1
-                },
-                {
-                  "x": 56.8,
-                  "y": 82.5,
-                  "r": 40,
-                  "n": 2
-                },
-                {
-                  "x": 51.5,
-                  "y": 60.9,
-                  "r": 40,
-                  "n": 2
-                },
-                {
-                  "x": 53.1,
-                  "y": 57.1,
-                  "r": 40,
-                  "n": 2
-                },
-                {
-                  "x": 51.2,
-                  "y": 56.4,
-                  "r": 40,
-                  "n": 2
-                },
-                {
-                  "x": 48.3,
-                  "y": 60.3,
-                  "r": 40,
-                  "n": 1
-                },
-                {
-                  "x": 49.4,
-                  "y": 40.6,
-                  "r": 40,
-                  "n": 3
-                },
-                {
-                  "x": 58.5,
-                  "y": 34.5,
-                  "r": 40,
-                  "n": 3
-                },
-                {
-                  "x": 44.8,
-                  "y": 19.3,
-                  "r": 40,
-                  "n": 2
-                }
-              ],
-              "from": "Kodo envejecido",
-              "fromKind": "npc",
-              "spread": true,
-              "instruction": "Recoge «Pellejo de kodo mayor» (3 en total) del botín de «Kodo envejecido».\nZona: Desolace."
+              "instruction": "Abre «El rodeo kodo» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
+              "levelingDetour": true
             }
           ]
         },
@@ -105116,13 +104901,14 @@
               "y": 61.86,
               "z": 61.4,
               "f": "e",
-              "instruction": "Habla con «Smeed Mezclatornillos» y entrega «El rodeo kodo».\nZona: Desolace."
+              "instruction": "Habla con «Smeed Mezclatornillos» y entrega «El rodeo kodo».\nZona: Desolace.",
+              "levelingDetour": true
             }
           ]
         },
         {
           "title": "Poblado Kolkar",
-          "note": "El Kolkar recorre las llanuras alrededor de Poblado Kolkar; sus oídos son para Cabo Melkins.",
+          "note": "En el borde suroeste del poblado encontrarás centauros y exploradores Kolkar de nivel 30–31. Recoge las 15 orejas y guárdalas para el cabo Melkins en Punta de Nijel.",
           "goals": [
             {
               "title": "Colección de orejas",
@@ -105134,442 +104920,32 @@
               "itemName": "Oreja centauro",
               "count": 15,
               "map": 1443,
-              "x": 65.59,
-              "y": 70.3,
+              "x": 68.55,
+              "y": 52.17,
               "f": "e",
               "spots": [
                 {
-                  "x": 66.3,
-                  "y": 71.5,
-                  "r": 49,
-                  "n": 4
+                  "x": 68.7,
+                  "y": 50.0
                 },
                 {
-                  "x": 68.3,
-                  "y": 82.5,
-                  "r": 59,
-                  "n": 5
+                  "x": 68.67,
+                  "y": 47.94
                 },
                 {
-                  "x": 76,
-                  "y": 75.9,
-                  "r": 40,
-                  "n": 1
+                  "x": 69.35,
+                  "y": 46.87
                 },
                 {
-                  "x": 73.5,
-                  "y": 66.7,
-                  "r": 40,
-                  "n": 3
-                },
-                {
-                  "x": 74.1,
-                  "y": 50,
-                  "r": 68,
-                  "n": 9
-                },
-                {
-                  "x": 69.7,
-                  "y": 40,
-                  "r": 66,
-                  "n": 6
-                },
-                {
-                  "x": 39.7,
-                  "y": 61.4,
-                  "r": 40,
-                  "n": 1
-                },
-                {
-                  "x": 30,
-                  "y": 67.7,
-                  "r": 44,
-                  "n": 3
-                },
-                {
-                  "x": 29.4,
-                  "y": 51.8,
-                  "r": 40,
-                  "n": 5
-                },
-                {
-                  "x": 36.6,
-                  "y": 80.2,
-                  "r": 40,
-                  "n": 5
-                },
-                {
-                  "x": 39.3,
-                  "y": 95.9,
-                  "r": 64,
-                  "n": 15
-                },
-                {
-                  "x": 59.9,
-                  "y": 89.9,
-                  "r": 40,
-                  "n": 1
-                },
-                {
-                  "x": 67.2,
-                  "y": 69.8,
-                  "r": 40,
-                  "alt": true,
-                  "n": 3
-                },
-                {
-                  "x": 66.7,
-                  "y": 74.8,
-                  "r": 59,
-                  "alt": true,
-                  "n": 5
-                },
-                {
-                  "x": 68.6,
-                  "y": 73.5,
-                  "r": 40,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 69.4,
-                  "y": 70.1,
-                  "r": 45,
-                  "alt": true,
-                  "n": 3
-                },
-                {
-                  "x": 65.3,
-                  "y": 77.5,
-                  "r": 48,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 70.6,
-                  "y": 71.9,
-                  "r": 40,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 70.6,
-                  "y": 74.6,
-                  "r": 42,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 69.5,
-                  "y": 77.2,
-                  "r": 43,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 71.5,
-                  "y": 67.9,
-                  "r": 42,
-                  "alt": true,
-                  "n": 3
-                },
-                {
-                  "x": 66.5,
-                  "y": 80.2,
-                  "r": 59,
-                  "alt": true,
-                  "n": 8
-                },
-                {
-                  "x": 73.2,
-                  "y": 73.3,
-                  "r": 40,
-                  "alt": true,
-                  "n": 5
-                },
-                {
-                  "x": 70.7,
-                  "y": 80.1,
-                  "r": 46,
-                  "alt": true,
-                  "n": 3
-                },
-                {
-                  "x": 72.5,
-                  "y": 78.3,
-                  "r": 40,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 75.1,
-                  "y": 68.8,
-                  "r": 40,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 76.1,
-                  "y": 72.3,
-                  "r": 40,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 68.4,
-                  "y": 51.4,
-                  "r": 45,
-                  "alt": true,
-                  "n": 5
-                },
-                {
-                  "x": 64.1,
-                  "y": 90.1,
-                  "r": 41,
-                  "alt": true,
-                  "n": 3
-                },
-                {
-                  "x": 71.1,
-                  "y": 49.7,
-                  "r": 56,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 69.4,
-                  "y": 47.9,
-                  "r": 40,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 73.5,
-                  "y": 47,
-                  "r": 53,
-                  "alt": true,
-                  "n": 11
-                },
-                {
-                  "x": 68.5,
-                  "y": 44.2,
-                  "r": 45,
-                  "alt": true,
-                  "n": 5
-                },
-                {
-                  "x": 71,
-                  "y": 44.7,
-                  "r": 61,
-                  "alt": true,
-                  "n": 8
-                },
-                {
-                  "x": 69,
-                  "y": 41.9,
-                  "r": 40,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 74,
-                  "y": 44.1,
-                  "r": 40,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 71.7,
-                  "y": 41.6,
-                  "r": 50,
-                  "alt": true,
-                  "n": 5
-                },
-                {
-                  "x": 73.1,
-                  "y": 42.1,
-                  "r": 57,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 40.2,
-                  "y": 84.2,
-                  "r": 40,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 40.3,
-                  "y": 87.3,
-                  "r": 53,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 40.1,
-                  "y": 89.7,
-                  "r": 40,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 37.9,
-                  "y": 81.9,
-                  "r": 53,
-                  "alt": true,
-                  "n": 5
-                },
-                {
-                  "x": 37.9,
-                  "y": 85,
-                  "r": 57,
-                  "alt": true,
-                  "n": 7
-                },
-                {
-                  "x": 40.3,
-                  "y": 93.1,
-                  "r": 40,
-                  "alt": true,
-                  "n": 7
-                },
-                {
-                  "x": 36.3,
-                  "y": 61.1,
-                  "r": 50,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 38.4,
-                  "y": 90.5,
-                  "r": 45,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 36,
-                  "y": 59.1,
-                  "r": 40,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 38.8,
-                  "y": 93.5,
-                  "r": 46,
-                  "alt": true,
-                  "n": 8
-                },
-                {
-                  "x": 35.2,
-                  "y": 82.1,
-                  "r": 67,
-                  "alt": true,
-                  "n": 11
-                },
-                {
-                  "x": 36.4,
-                  "y": 88.3,
-                  "r": 48,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 35,
-                  "y": 85.1,
-                  "r": 44,
-                  "alt": true,
-                  "n": 5
-                },
-                {
-                  "x": 34.7,
-                  "y": 56.8,
-                  "r": 43,
-                  "alt": true,
-                  "n": 3
-                },
-                {
-                  "x": 33,
-                  "y": 65.9,
-                  "r": 40,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 34.6,
-                  "y": 53.7,
-                  "r": 40,
-                  "alt": true,
-                  "n": 3
-                },
-                {
-                  "x": 35.8,
-                  "y": 91.5,
-                  "r": 40,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 35,
-                  "y": 89.9,
-                  "r": 41,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 31.9,
-                  "y": 60.2,
-                  "r": 44,
-                  "alt": true,
-                  "n": 7
-                },
-                {
-                  "x": 32.8,
-                  "y": 54.7,
-                  "r": 60,
-                  "alt": true,
-                  "n": 9
-                },
-                {
-                  "x": 31,
-                  "y": 65.8,
-                  "r": 40,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 29.8,
-                  "y": 61.3,
-                  "r": 49,
-                  "alt": true,
-                  "n": 5
-                },
-                {
-                  "x": 30,
-                  "y": 58,
-                  "r": 51,
-                  "alt": true,
-                  "n": 7
-                },
-                {
-                  "x": 30.8,
-                  "y": 51.3,
-                  "r": 40,
-                  "alt": true,
-                  "n": 3
-                },
-                {
-                  "x": 30,
-                  "y": 54.6,
-                  "r": 52,
-                  "alt": true,
-                  "n": 7
+                  "x": 68.62,
+                  "y": 45.66
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Oreja centauro» (15 en total).\nZona: Desolace."
+              "instruction": "Recoge «Oreja centauro» (15 en total) del botín de «Centauro Kolkar» o «Explorador Kolkar».\nZona: Desolace.",
+              "fromKind": "npc",
+              "fromAlso": "Explorador Kolkar",
+              "from": "Centauro Kolkar"
             }
           ]
         },
@@ -105630,7 +105006,7 @@
       "_sendaLocale": "esES",
       "pack": "guides",
       "version": 1,
-      "routeRevision": 3,
+      "routeRevision": 4,
       "progressMigrations": [
         {
           "from": 1,
@@ -105733,6 +105109,40 @@
           "addedGoalKeys": [
             "2:1"
           ]
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "goalMap": {
+            "18:2": "14:2"
+          },
+          "stepMap": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12,
+            "13": 13,
+            "14": 14,
+            "18": 14,
+            "15": 14,
+            "16": 14,
+            "17": 14,
+            "19": 19,
+            "20": 20,
+            "21": 21,
+            "22": 22
+          },
+          "affectedQuestIDs": [],
+          "previousStepCount": 21,
+          "firstAffectedStep": 14
         }
       ]
     },

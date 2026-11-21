@@ -137,7 +137,7 @@ class SoloMidRouteTests(unittest.TestCase):
                 first = copy.deepcopy(guide)
                 apply_mid_detours(document)
                 self.assertEqual(guide, first)
-        self.assertEqual(total, 39)
+        self.assertEqual(total, 42)  # Includes the pickup, five kodo returns and hand-in at Smeed.
 
     def test_saved_booty_bay_cursor_revisits_uncollected_offers_with_marks_intact(self):
         route = ALLIANCE + "30-40/04-stranglethorn-vale"

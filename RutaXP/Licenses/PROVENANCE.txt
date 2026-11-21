@@ -140,6 +140,9 @@ TravelEnemyData.lua contains numeric creature levels and ranks matched to author
 Source: https://github.com/Questie/QuestieDB/tree/e1652ce62113c152da682baf2d6fb85f1396bcfb
 See QuestieDB-NOTICE.md. tools/build_travel_enemies.py pins the base table and Forever correction files by SHA-256.
 Alternative drop sources in the Shimmering Flats come from SendaFH Quests.lua and Items.lua (pinned above).
+tools/desolace_solo_targets.py uses Desolace spawns from QuestieDB's pinned
+data/Forever/foreverNpcDB.lua. The quest item sources and the route through
+Kolkar Village come from SendaFH's Items.lua and Alliance Desolace guide.
 
 Group quest tags
 ----------------

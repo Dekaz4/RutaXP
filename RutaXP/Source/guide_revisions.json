@@ -18287,6 +18287,131 @@
         ],
         "reason": "Se entrega primero la infusión cronometrada, se recoge la taza de Durnan y se visitan los instructores antes de buscar a Félix en la puerta. La carne de MacGrann se recoge al salir de Las Birras hacia el almacén. Así se evita regresar desde la cantera oriental para un único encargo. La posición de los encargos de clase de nivel 10 se conserva."
       }
+    },
+    {
+      "id": "desolace-venom-and-kodo-hides-4",
+      "guideID": "forever/alliance/30-40/02-desolace",
+      "previousRevision": 3,
+      "revision": 4,
+      "sourceShape": "c336691a977055531400267245e3e840192e925435d099c85b9bf42a78be1e4d",
+      "resultShape": "14eaebab28b057a0ff172eb0a79100aa076008f1fc9df5665ce82fef89ec6c34",
+      "previousGoalCounts": [
+        1,
+        3,
+        2,
+        1,
+        6,
+        2,
+        2,
+        4,
+        1,
+        2,
+        2,
+        5,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        1,
+        1,
+        4
+      ],
+      "preservePendingVisits": true,
+      "firstAffectedStep": 14,
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "sourceStep": 9
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "sourceStep": 12
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "title": "Veneno y pellejos en el Cementerio de Kodos",
+          "note": "En los alrededores del cementerio, recoge los dos materiales de Kreldig en la misma visita. Puedes empezar por los escorpiones o por los kodos envejecidos que encuentres a tu paso. Al sudeste también hay escorpiones de nivel 30–31 que sueltan el veneno.",
+          "goals": [
+            [
+              14,
+              1
+            ],
+            [
+              18,
+              2
+            ]
+          ]
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "title": "Cementerio de Kodos",
+          "note": "Usa el recombobulador en un kodo anciano, envejecido o moribundo. Guíalo hasta Smeed y comprueba que se cuenta la entrega antes de buscar otro. Smeed pide cinco.",
+          "goals": [
+            [
+              18,
+              1
+            ]
+          ]
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        }
+      ],
+      "evidence": {
+        "sources": [
+          "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Items.lua#L794-L795",
+          "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Npcs.lua",
+          "https://db.icy-veins.com/wow-forever/quests/1459",
+          "https://db.icy-veins.com/wow-forever/quests/5561"
+        ],
+        "reason": "Kreldig pide siete venenos y tres pellejos en el mismo encargo. Sus presas comparten los alrededores del Cementerio de Kodos. Los dos objetivos se muestran juntos al llegar, antes de los viajes de ida y vuelta que pide Smeed en su rodeo opcional."
+      }
     }
   ]
 }
