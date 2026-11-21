@@ -32,6 +32,12 @@ class ReleaseTests(unittest.TestCase):
                 entries[f"RutaXP/{name}"] = checksum
             runtime_names = {n for n in archive.namelist() if n.startswith("RutaXP/")}
             self.assertEqual(runtime_names, set(entries) | {"RutaXP/manifest.sha256"})
+            public = {"RutaXP/" + name for name in (
+                "RutaXP.toc", "Suite.lua", "TalentCore.lua", "Talents.lua", "TalentBuilds.lua",
+                "Instalar_Suite_RutaXP.exe", "manifest.sha256",
+            )}
+            self.assertEqual({n for n in runtime_names if not n.startswith("RutaXP/Licenses/")}, public)
+            self.assertTrue(archive.read("RutaXP/Instalar_Suite_RutaXP.exe").startswith(b"MZ"))
             for name, checksum in entries.items():
                 self.assertEqual(hashlib.sha256(archive.read(name)).hexdigest(), checksum)
 
@@ -60,9 +66,15 @@ class ReleaseTests(unittest.TestCase):
             for name in runtime.namelist():
                 self.assertTrue(name.startswith("RutaXP/"))
                 self.assertEqual(runtime.read(name), release.read(name))
-            for name in ("Instalador_RutaXP.exe", "tools/Updater.cs", "tools/publish_release.py", "LICENSE", "NOTICE.md"):
+            for name in ("Instalador_RutaXP.exe", "tools/Updater.cs", "tools/publish_release.py", "LICENSE", "NOTICE.md",
+                         "tools/Install-Suite.ps1", "tools/build_personal_suite.py", "tools/suite_rested.py",
+                         "tools/suite_lua.py", "tools/suite_map_journal.py", "tools/build_suite_setup.py", "tools/suite_setup.py",
+                         "tools/PersonalSetup.cs", "tools/build_personal_setup.py", "tools/verify_personal_suite.py",
+                         "tests/test_install_suite.py", "tests/test_personal_suite.py", "tests/test_suite_rested.py",
+                         "tests/test_suite_lua.py", "tests/test_suite_map_journal.py"):
                 self.assertEqual(release.read(name), (ROOT / name).read_bytes())
             self.assertFalse(any(n.startswith((".sources/", ".backups/", ".git/")) or "/WTF/" in n for n in release.namelist()))
+            self.assertFalse(any(n.lower().endswith(("-personal.zip", "_personal.exe")) for n in release.namelist()))
 
     @unittest.skipUnless(os.name == "nt" and shutil.which("powershell.exe"), "Windows PowerShell required")
     def test_actual_embedded_release_and_ps_installer_update_temp_client_preserving_backup_and_wtf(self):
@@ -92,7 +104,18 @@ $unpacked=Join-Path $TemporaryRoot 'unpacked release'
 $third=Install-RutaXP -Source (Join-Path $unpacked 'RutaXP') -AddOns ($addons+'\')
 if (-not $third.Backup -or -not [IO.File]::Exists((Join-Path $third.Backup 'RutaXP.toc'))) { throw 'PS update lost previous addon.' }
 $manifest=Get-RutaXPManifest $third.Target
-if ($manifest.Count -lt 100) { throw 'Full runtime was not installed.' }
+foreach ($component in @('TalentCore.lua', 'Talents.lua', 'TalentBuilds.lua', 'Suite.lua', 'Instalar_Suite_RutaXP.exe')) {
+    if (!$manifest.ContainsKey($component)) { throw "Missing component: $component" }
+}
+if ($manifest.ContainsKey('Leveling.lua')) { throw 'Obsolete leveling engine installed.' }
+[IO.File]::AppendAllText((Join-Path $third.Target 'RutaXP.toc'), "`n## X-RutaXP-Embedded: OpenMap, ForeverDungeonJournal, RXPGuides`n")
+$blocked = $false
+try { Install-RutaXP -Source (Join-Path $unpacked 'RutaXP') -AddOns $addons } catch { $blocked = $_.Exception.Message -like '*suite personal*' }
+if (!$blocked) { throw 'PowerShell installer did not protect the embedded suite.' }
+$blocked = $false
+$stream = $assembly.GetManifestResourceStream($resource)
+try { [RutaXPInstaller.InstallerCore]::InstallFromArchive($stream,$addons) } catch { $blocked = $_.Exception.Message -like '*suite personal*' } finally { $stream.Dispose() }
+if (!$blocked) { throw 'Public bundle did not protect the embedded suite.' }
 if ([IO.File]::ReadAllText($saved) -ne 'player saved data') { throw 'SavedVariables changed.' }
 Write-Output 'Full EXE payload and PS update verified in temporary client.'
 """

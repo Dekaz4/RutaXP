@@ -235,6 +235,7 @@ namespace RutaXPUpdater
         {
             if (string.IsNullOrWhiteSpace(versionFloor)) versionFloor = null;
             string addons = ResolveClient(client); RequireClosed(running);
+            InstallerCore.RequirePublicTarget(Path.Combine(addons, "RutaXP"));
             ReleaseInfo release = ParseRelease(Encoding.UTF8.GetString(Download(fetch, LatestUrl, 1024 * 1024)));
             string installed = ReadInstalledVersion(addons);
             if (installed != null && CompareVersions(release.Version, installed) < 0
@@ -263,6 +264,7 @@ namespace RutaXPUpdater
         public static UpdateResult InstallBundled(Stream stream, string client, Func<bool> running, Action beforeActivate)
         {
             string addons = ResolveClient(client); RequireClosed(running);
+            InstallerCore.RequirePublicTarget(Path.Combine(addons, "RutaXP"));
             if (stream == null || !stream.CanRead) throw new IOException("No se encuentra la copia incluida en este instalador.");
             byte[] archive;
             using (MemoryStream bytes = new MemoryStream())
@@ -312,6 +314,7 @@ namespace RutaXPUpdater
         public static InstallResult Restore(string client, string name, Func<bool> running, Action beforeActivate)
         {
             string addons = ResolveClient(client); RequireClosed(running);
+            InstallerCore.RequirePublicTarget(Path.Combine(addons, "RutaXP"));
             if (string.IsNullOrWhiteSpace(name)) name = null;
             if (name != null && !Regex.IsMatch(name, @"^\.RutaXP\.backup\.[a-f0-9]{32}$")) throw new IOException("Selecciona una copia anterior de este mismo cliente.");
             List<BackupInfo> copies = Backups(addons); BackupInfo chosen = null;
@@ -473,6 +476,7 @@ namespace RutaXPUpdater
                     if (bundled == null) throw new IOException("Este ejecutable no contiene una copia del addon.");
                     Console.WriteLine("Copia incluida instalada y validada: " + bundled.Version + ". No se ha comprobado GitHub ni se abrira WoW.");
                     if (bundled.Backup != null) Console.WriteLine("Copia anterior: " + bundled.Backup);
+                    Console.WriteLine("Para integrar tus tres addons, abre " + Path.Combine(bundled.Target, "Instalar_Suite_RutaXP.exe"));
                     return 0;
                 }
                 if (action == "--restore")
@@ -497,6 +501,7 @@ namespace RutaXPUpdater
                 ClientSettings.Save(settings, "latest", result.Version);
                 Console.WriteLine((result.Changed ? "Instalacion verificada: " : "Ya tienes la ultima version verificada: ") + result.Version);
                 if (result.Backup != null) Console.WriteLine("Copia anterior: " + result.Backup);
+                Console.WriteLine("Para integrar tus tres addons, abre " + Path.Combine(result.Target, "Instalar_Suite_RutaXP.exe"));
                 return 0;
             }
             catch (Exception problem) { Console.Error.WriteLine("No se ha completado la accion: " + problem.Message + "\nTu instalacion y WTF no se borran. Si hay un fallo de instalacion se intenta recuperar la copia anterior."); return 1; }

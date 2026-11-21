@@ -275,7 +275,7 @@ function T.State(build, ranks, level, granted)
 end
 
 local function charTalents()
-    if not ns.char then return {} end
+    if not ns.char then return { builds = {} } end
     if type(ns.char.talents) ~= "table" then
         ns.char.talents = { builds = {} }
     end

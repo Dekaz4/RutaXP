@@ -21,6 +21,17 @@ namespace RutaXPInstaller
     // WoW installation. No detection or user prompts run when used as a library.
     public static class InstallerCore
     {
+        public static void RequirePublicTarget(string target)
+        {
+            string toc = Path.Combine(target, "RutaXP.toc");
+            RejectLinks(toc);
+            if ((File.Exists(toc) && Regex.IsMatch(File.ReadAllText(toc), @"^##\s*X-RutaXP-Embedded\s*:", RegexOptions.IgnoreCase | RegexOptions.Multiline))
+                || Directory.Exists(Path.Combine(target, "Modules", "RXPGuides"))
+                || Directory.Exists(Path.Combine(target, "Modules", "OpenMap"))
+                || Directory.Exists(Path.Combine(target, "Modules", "ForeverDungeonJournal")))
+                throw new IOException("Tienes la suite personal de RutaXP. Usa el instalador personal para actualizarla o Install-Suite.ps1 -Restore para recuperar tus addons anteriores.");
+        }
+
         public static string Normalize(string path)
         {
             if (string.IsNullOrWhiteSpace(path)) throw new ArgumentException("Introduce una ruta absoluta.");
@@ -209,6 +220,7 @@ namespace RutaXPInstaller
             if (resolved.Count != 1 || !resolved[0].Equals(addons, StringComparison.OrdinalIgnoreCase)) throw new IOException("Selecciona una sola carpeta Interface\\AddOns de Forever.");
             string target = Path.Combine(addons, "RutaXP");
             GuardChild(addons, target, "RutaXP");
+            RequirePublicTarget(target);
             if (source.Equals(target, StringComparison.OrdinalIgnoreCase) || source.StartsWith(target + "\\", StringComparison.OrdinalIgnoreCase) || target.StartsWith(source + "\\", StringComparison.OrdinalIgnoreCase))
                 throw new IOException("Origen y destino deben ser distintos y no contenerse entre si.");
             Dictionary<string, string> manifest = Manifest(source);
@@ -233,6 +245,7 @@ namespace RutaXPInstaller
                 }
                 ValidateManifest(stage, manifest);
                 GuardChild(addons, target, "RutaXP"); GuardChild(addons, backup, ".RutaXP.backup." + token);
+                RequirePublicTarget(target);
                 if (Directory.Exists(target)) { Files(target); Directory.Move(target, backup); oldMoved = true; }
                 if (beforeActivate != null) beforeActivate();
                 GuardChild(addons, stage, ".RutaXP.stage." + token); GuardChild(addons, target, "RutaXP");

@@ -1,70 +1,14 @@
-RUTAXP 0.7.38 - INSTALACION Y ACTUALIZACIONES
+RUTAXP 1.0.0 PARA WOW FOREVER
 
-INSTALAR Y ACTUALIZAR LOS DOS
-Descarga Instalador_RutaXP.exe desde https://github.com/Dekaz4/RutaXP/releases/latest
-Guardalo fuera de la carpeta del addon. El mismo EXE sirve siempre:
-1. Cierra WoW y ejecuta el setup.
-2. Elige Instalar o actualizar (Enter). La primera vez selecciona Forever.
-3. Espera a que confirme la instalacion. Abre WoW como siempre.
-La carpeta queda recordada en tu ordenador. No se toca el progreso de WTF.
+Paquete personal ya preparado
+1. Cierra WoW.
+2. Ejecuta Instalar_RutaXP_Personal.exe y comprueba el directorio del cliente.
+3. Abre WoW. Escribe /rutaxp para abrir el mapa, las mazmorras, las guías o los talentos.
 
-SI FALLA
-Reparar: descarga de nuevo la ultima version aunque ya este instalada.
-Restaurar: recupera una copia anterior valida, sin descargar nada.
-Instalar copia incluida: instala los archivos del EXE, sin conexion.
-La copia incluida puede ser mas antigua que la ultima publicada. El setup
-no baja de version al instalar o actualizar: para eso existe Restaurar.
-Si una instalacion falla durante la activacion, recupera la copia anterior.
-No instala servicios ni abre el juego. Ejecutadlo ambos para actualizar.
+Distribución pública
+Ejecuta Instalar_Suite_RutaXP.exe para montar la suite a partir de las copias de tu ordenador.
+Si actualizaste con el setup de la versión 0.7, el constructor está en Interface/AddOns/RutaXP.
+El paquete personal incorpora exclusivamente las guías oficiales de RestedXP.
 
-INSTALACION MANUAL
-
-1. Descomprime todo el ZIP en una carpeta.
-2. Ejecuta Instalador_RutaXP.exe o Instalar_RutaXP.bat.
-3. Selecciona un UNICO cliente de WoW Forever.
-   Si lo indicas manualmente, puedes usar la carpeta del cliente o
-   su Interface\AddOns, con o sin barra final.
-4. El instalador valida los archivos, prepara la copia nueva y conserva
-   la anterior como .RutaXP.backup.* junto al addon. Muestra esa ruta.
-   Si falla durante la activacion, restaura la copia anterior.
-5. Reinicia WoW si acabas de instalar un addon nuevo; /reload no detecta
-   carpetas nuevas. Activa RutaXP en Accesorios.
-
-No se modifican WTF ni tus SavedVariables.
-
-INSTALACION MANUAL
-Copia RutaXP a Interface\AddOns del cliente de Forever. Debe quedar:
-...\Interface\AddOns\RutaXP\RutaXP.toc
-
-EN EL JUEGO
-/rutaxp               Biblioteca de guias
-/rutaxp zona          Seleccionar una ruta recomendada
-/rutaxp talentos      Talentos (tambien desde el panel o tecla N)
-/rutaxp herramientas  Duo, mediciones, bloqueos, ajustes de ruta y puntos
-/rutaxp autoduo       Activar/desactivar configuracion automatica de grupo
-/rutaxp sincronizar   Renovar los datos del duo conservando progreso y opciones
-/rutaxp conexion      Consultar en el chat el estado de la conexion con el compañero
-En Duo tienes Progreso, Ruta comun, Diferencias, Reunion, Partida y Paradas.
-Instalad 0.5.0 o posterior los dos y formad grupo de dos de la misma faccion: se detecta
-al amigo y se acuerda una guia compatible con espera al rezagado.
-El adelantado acompaña al amigo conservando su propio progreso guardado.
-Si falta una ruta comun comprobada, el panel explica que falta; los inicios
-individuales de raza o clase pueden requerir avanzar antes de coincidir.
-Puedes volver al control manual desde el panel o con /rutaxp autoduo.
-Arrastra bordes o esquinas del panel compacto para ampliarlo: muestra mas
-objetivos y las proximas misiones. Recuerda el tamaño; la rueda desplaza
-el contenido que no quepa. La vista previa conserva el progreso.
-/rutaxp diagnostico   Datos para reportar un fallo de guia o flecha
-/rutaxp recalcular    Buscar de nuevo el recorrido terrestre
-/rutaxp camino        Activar/desactivar seguimiento por terreno
-
-La flecha sigue los giros de un camino calculado con datos de terreno de
-Forever. El motor y los mapas ya vienen incluidos; no necesitas instalar
-otro addon. La primera busqueda puede tardar unos instantes. Si no hay
-cobertura, avisa Direccion orientativa. Se conservan las confirmaciones
-de accesos y transportes; un giro nunca completa una mision.
-
-Se conservan la interfaz de Antigravity, la flecha facetada, 57 rutas,
-36 planes de talentos y el asistente del instructor. Las rutas siguen
-en beta: esta revision tiene pruebas simuladas y requiere validacion
-dentro del juego. Ver README.md para cambios, comandos y creditos.
+Las copias anteriores se guardan en RutaXP-Suite-Backups dentro de la carpeta del cliente.
+Para restaurarlas cierra WoW y ejecuta Instalar_RutaXP_Personal.exe --restore.

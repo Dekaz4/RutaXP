@@ -5,6 +5,7 @@ __pycache__/
 .pytest_cache/
 dist/
 /Instalador_RutaXP.exe
+/RutaXP/Instalar_Suite_RutaXP.exe
 /Actualizador_RutaXP.exe
 /tools/payload.zip
 *.user

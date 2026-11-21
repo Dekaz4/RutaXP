@@ -183,6 +183,18 @@ function Remove-RutaXPStage {
     }
 }
 
+function Assert-RutaXPPublicTarget {
+    param([string]$Target)
+    $toc = Join-Path $Target 'RutaXP.toc'
+    Assert-RutaXPNoLinks $toc
+    if (([IO.File]::Exists($toc) -and [IO.File]::ReadAllText($toc) -match '(?im)^##\s*X-RutaXP-Embedded\s*:') -or
+        [IO.Directory]::Exists((Join-Path $Target 'Modules\OpenMap')) -or
+        [IO.Directory]::Exists((Join-Path $Target 'Modules\ForeverDungeonJournal')) -or
+        [IO.Directory]::Exists((Join-Path $Target 'Modules\RXPGuides'))) {
+        throw 'Tienes la suite personal de RutaXP. Usa el instalador personal para actualizarla o Install-Suite.ps1 -Restore para recuperar tus addons anteriores.'
+    }
+}
+
 function Install-RutaXP {
     param(
         [Parameter(Mandatory=$true)][string]$Source,
@@ -196,6 +208,7 @@ function Install-RutaXP {
     $parent = $resolved[0]
     $target = Join-Path $parent 'RutaXP'
     Assert-RutaXPChild $parent $target 'RutaXP'
+    Assert-RutaXPPublicTarget $target
     if ($sourcePath -ieq $target -or $sourcePath.StartsWith($target + '\', [StringComparison]::OrdinalIgnoreCase) -or $target.StartsWith($sourcePath + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Origen y destino deben ser distintos y no contenerse entre si.' }
     $manifest = Get-RutaXPManifest $sourcePath
     if (Test-Path -LiteralPath $target) { @(Get-RutaXPFiles $target) | Out-Null }
@@ -218,6 +231,7 @@ function Install-RutaXP {
         Assert-RutaXPManifest $stage $manifest
         Assert-RutaXPChild $parent $target 'RutaXP'
         Assert-RutaXPChild $parent $backup ('.RutaXP.backup.' + $token)
+        Assert-RutaXPPublicTarget $target
         if (Test-Path -LiteralPath $target) {
             @(Get-RutaXPFiles $target) | Out-Null
             # Exact literal rename: unlike Move-Item, never nest in an existing destination.

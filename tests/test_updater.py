@@ -50,6 +50,8 @@ class UpdaterTests(unittest.TestCase):
     def test_restore_is_validated_local_to_client_and_preserves_both_copies(self): self.check_case("restore")
     def test_running_game_blocks_changes_and_local_settings_can_change_client(self): self.check_case("settings")
     def test_embedded_offline_install_repair_downgrade_and_rollback(self): self.check_case("bundled")
+    def test_embedded_personal_suite_is_preserved_on_public_update_repair_and_bundled_install(self):
+        self.check_case("personal")
 
     def test_executable_never_launches_wow_or_remote_programs(self):
         text = (ROOT / "tools/Updater.cs").read_text(encoding="utf-8")

@@ -68,17 +68,18 @@ end
 
 
 class TalentTrainerHost:
-    def __init__(self, full_toc=False):
+    def __init__(self, talent_module=False):
         self.lua = LuaRuntime(unpack_returned_tuples=True)
         self.lua.execute(WOW_STUBS)
         self.lua.execute(UI_STUBS)
         self.lua.execute(TALENT_STUBS)
-        if full_toc:
+        if talent_module:
             self.lua.execute(r"""
                 local original = CreateFrame
                 TEST.eventFrames = {}
                 CreateFrame = function(...)
                     local frame = original(...)
+                    function frame:UnregisterEvent(event) self.events[event] = nil end
                     TEST.eventFrames[#TEST.eventFrames + 1] = frame
                     return frame
                 end
@@ -92,9 +93,8 @@ class TalentTrainerHost:
         self.ns = self.lua.table_from({"char": self.lua.table()})
         load = self.lua.eval("function(s, ns) assert(loadstring(s))('RutaXP', ns) end")
         files = ["Talents.lua", "TalentBuilds.lua", "Trainer.lua"]
-        if full_toc:
-            files = [line.strip() for line in (ADDON / "RutaXP.toc").read_text(encoding="utf-8-sig").splitlines()
-                     if line.strip().endswith(".lua") and not line.strip().startswith("#")]
+        if talent_module:
+            files = ["TalentCore.lua", "Talents.lua", "TalentBuilds.lua"]
         for filename in files:
             load((ADDON / filename).read_text(encoding="utf-8-sig"), self.ns)
         self.t, self.tr, self.state = self.ns.Talents, self.ns.TrainerAdvice, self.g.TEST
@@ -145,7 +145,8 @@ class TalentCompatibilityTests(unittest.TestCase):
         self.assertIsNone(c.staged.unspent)
 
     def test_level_nine_paladin_previews_first_talent_then_validates_at_unlock(self):
-        h = TalentTrainerHost(full_toc=True)
+        h = TalentTrainerHost(talent_module=True)
+        h.g.EmitAddonEvent("ADDON_LOADED", "RutaXP")
         h.state.classToken, h.state.raceToken, h.state.level = "PALADIN", "Dwarf", 9
         h.live("PALADIN")
         guide = h.t.Registry.PALADIN.builds[4]
@@ -589,18 +590,22 @@ class TalentCatalogRegressionTests(unittest.TestCase):
         self.assertEqual(builds, 36)
 
 
-class FullTocIntegrationTests(unittest.TestCase):
-    def test_shipping_load_order_handles_missing_capabilities_and_recovers_live_talents(self):
-        h = TalentTrainerHost(full_toc=True)
+class TalentModuleIntegrationTests(unittest.TestCase):
+    def test_module_loads_saved_choices_and_recovers_live_talents(self):
+        h = TalentTrainerHost(talent_module=True)
+        key = h.t.Registry.MAGE.builds[2].key
+        h.g.RutaXPCharDB = h.table({"talents": {"builds": {"MAGE": key}}, "seen": True})
         h.g.EmitAddonEvent("ADDON_LOADED", "RutaXP")
         h.g.EmitAddonEvent("PLAYER_LOGIN")
         self.assertTrue(h.ns.initialized)
-        self.assertEqual(len(h.ns.order), 57)
+        self.assertEqual(h.t.GetChoice("MAGE"), key)
+        self.assertTrue(h.g.RutaXPCharDB.seen)
+        self.assertIsNone(h.ns.guides)
         self.assertEqual(len(list(h.t.Registry.items())), 9)
-        self.assertIsNotNone(h.ns.navigationFrame)
+        self.assertIsNone(h.ns.navigationFrame)
         # No C_Traits or world-position API is provided: retain the guide and
         # explain that live talent state cannot be read instead of inventing it.
-        h.ns.Command(h.ns, "talentos")
+        h.g.SlashCmdList.RUTAXP("talentos")
         self.assertEqual(len(h.t.panel.rows), 51)
         self.assertIn("NO DISPONIBLE", h.t.panel.nextCard.header.text)
         self.assertIsNone(h.t.current.state.unspent)
@@ -609,8 +614,28 @@ class FullTocIntegrationTests(unittest.TestCase):
         self.assertTrue(h.t.current.compatible)
         self.assertEqual(h.t.current.state.unspent, 1)
         self.assertIn("TIENES 1", h.t.panel.nextCard.header.text)
-        rows = h.services([{"name": "Descarga de Escarcha", "category": "available", "cost": 100}])
-        self.assertIn("COMPRAR", rows[1].RutaXPBadge.text)
+        h.t.TogglePanel(True, "spells")
+        self.assertEqual(h.t.panel.activeTab, "spells")
+        self.assertTrue(len(h.t.panel.rows) > 0)
+
+    def test_suite_commands_and_gnome_quest_advice_work_without_the_old_quest_engine(self):
+        h = TalentTrainerHost(talent_module=True)
+        h.g.EmitAddonEvent("ADDON_LOADED", "RutaXP")
+        h.g.NS = h.ns
+        h.lua.execute("""
+            function NS:HandleSuiteCommand(command, rest)
+                TEST.command, TEST.args = command, rest
+                return true
+            end
+            TEST.quests[1599] = { onQuest = true }
+            TEST.quests[179] = { delivered = true }
+        """)
+        self.assertTrue(h.ns.IsQuestActive(h.ns, 1599))
+        self.assertTrue(h.ns.IsQuestDelivered(h.ns, 179))
+        h.g.SlashCmdList.RUTAXP("  MAPA  ejemplo  ")
+        self.assertEqual((h.state.command, h.state.args), ("mapa", "ejemplo"))
+        h.g.SlashCmdList.RUTAXP("n")
+        self.assertTrue(h.t.panel.IsShown(h.t.panel))
 
 
 if __name__ == "__main__":

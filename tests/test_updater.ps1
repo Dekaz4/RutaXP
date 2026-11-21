@@ -98,6 +98,24 @@ try {
     $addons=New-Client 'Game';$target=New-Addon (Join-Path $addons 'RutaXP') '0.9.0' 'old'
     Use-Package $package
     switch($Case) {
+        'personal' {
+            $tocPath = Join-Path $target 'RutaXP.toc'
+            $oldToc = [IO.File]::ReadAllText($tocPath)
+            foreach ($version in @('0.9.0','0.10.0')) {
+                Put $tocPath (($oldToc.Replace('0.9.0',$version)) + "`n## X-RutaXP-Embedded: OpenMap, ForeverDungeonJournal, RXPGuides`n")
+                Seal $target
+                Assert-Throws { Update $addons }
+                Assert-Throws { Update $addons $true }
+                $stream = [IO.MemoryStream]::new([byte[]]$script:Responses[$package.ZipUrl])
+                try { Assert-Throws { [RutaXPUpdater.UpdaterCore]::InstallBundled($stream,$addons,$script:IsRunning,$null) } } finally { $stream.Dispose() }
+                Assert-True ($script:FetchCount -eq 0) 'A public update attempted to download before detecting a personal suite.'
+                Assert-True ([IO.File]::ReadAllText($tocPath).Contains('X-RutaXP-Embedded')) 'The embedded suite was replaced.'
+            }
+            Put $tocPath $oldToc
+            [IO.Directory]::CreateDirectory((Join-Path $target 'Modules\RXPGuides')) | Out-Null
+            Assert-Throws { Update $addons }
+            Assert-Wtf $addons
+        }
         'metadata' {
             Assert-True ([RutaXPUpdater.UpdaterCore]::CompareVersions('0.10.0','0.9.9') -gt 0) 'Version 10 must sort after 9.'
             Assert-True ([RutaXPUpdater.UpdaterCore]::CompareVersions('1.0.0','0.99.99') -gt 0) 'Major version comparison failed.'

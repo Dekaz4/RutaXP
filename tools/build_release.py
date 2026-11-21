@@ -12,17 +12,21 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
+import sys
 import xml.etree.ElementTree as ET
 from zipfile import ZipFile, ZIP_DEFLATED
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDON = ROOT / "RutaXP"
+SUITE_INSTALLER = "Instalar_Suite_RutaXP.exe"
 
 
 def runtime_files():
-    return sorted(p for p in ADDON.rglob("*") if p.is_file()
-                  and "__pycache__" not in p.parts and p.suffix not in {".pyc", ".pyo"}
-                  and p.name != "manifest.sha256")
+    # The old quest routes remain in source history and the workspace. Only
+    # this explicitly public shell is distributed through the update channel.
+    names = ("RutaXP.toc", "TalentCore.lua", "Talents.lua", "TalentBuilds.lua", "Suite.lua", SUITE_INSTALLER)
+    notices = [p for p in (ADDON / "Licenses").iterdir() if p.is_file() and p.suffix.lower() in (".md", ".txt")]
+    return sorted([ADDON / name for name in names] + notices)
 
 
 def digest(data):
@@ -52,6 +56,9 @@ def check_toc():
         if line and not line.startswith("#"):
             source = ADDON / line.replace("\\", "/")
             check_dependency(source)
+    public = set(p.resolve() for p in runtime_files())
+    if not checked <= public or re.search(r"^##\s*X-RutaXP-Embedded\s*:", text, re.I | re.M):
+        raise RuntimeError("The public TOC must load only the talents and suite launcher")
     return version
 
 
@@ -103,28 +110,28 @@ def compile_installer(payload):
 
 def main():
     version = check_toc()
+    # The helper's builder checks both the SHA-256 of its cached EXE and the
+    # fingerprint of its public inputs before reusing a release executable.
+    subprocess.run([sys.executable, str(ROOT / "tools/build_suite_setup.py")], cwd=ROOT, check=True)
+    shutil.copyfile(ROOT / "dist" / SUITE_INSTALLER, ADDON / SUITE_INSTALLER)
     write_manifest(version)
     payload = ROOT / "tools" / "payload.zip"
     files = archive_files()
     write_zip(payload, files)
     installer = compile_installer(payload)
     release_files = dict(files)
-    for name in ["Instalador_RutaXP.exe", "Instalar_RutaXP.bat", "Instalar.ps1", "LEEME_INSTALACION.txt", "README.md", "INFORME_GUIAS.md", "PICARO_HUMANO.md", "REVISION_GUIAS.html", "LICENSE", "NOTICE.md"]:
+    for name in ["Instalador_RutaXP.exe", "Instalar_RutaXP.bat", "Instalar.ps1", "LEEME_INSTALACION.txt", "README.md", "LICENSE", "NOTICE.md"]:
         release_files[name] = (ROOT / name).read_bytes()
     # Source for the executable and tools accompanies the binary distribution.
-    for name in ["Installer.cs", "Updater.cs", "build_release.py", "import_guides.py", "build_talents.js", "vendor_pathing.py", "build_waypoints.py",
-                 "guide_coordinates.py", "guide_instructions.py", "audit_guides.py", "audit_guide_structure.py", "refresh_guides.py", "publish_release.py",
-                 "solo_leveling_route.py", "solo_hillsbrad_route.py", "solo_mid_route.py", "solo_late_route.py",
-                 "gnome_warlock_route.py", "desolace_solo_targets.py", "build_quest_cleanup_data.py",
-                 "route_review_alliance_start.py", "route_review_alliance_late.py", "route_review_horde.py",
-                 "review_all_routes.py", "route_review_template.html", "capture_route_comparison.py",
-                 "unmatched_solo.py", "solo_review_unmatched_a.json", "solo_review_unmatched_b.json", "solo_review_unmatched_c.json",
-                 "route_comparison_facts.json", "route_review_alliance_late_capture.py", "route_review_alliance_late_sage.json",
-                 "build_travel_connections.py", "audit_quest_requirements.py", "review_human_rogue.py", "build_warlock_rewards.py",
-                 "build_early_quest_offers.py", "build_map_services.py"]:
+    for name in ["Installer.cs", "Updater.cs", "build_release.py", "publish_release.py", "build_talents.js",
+                 "build_personal_suite.py", "suite_lua.py", "suite_map_journal.py", "suite_rested.py", "Install-Suite.ps1",
+                 "suite_setup.py", "build_suite_setup.py", "verify_personal_suite.py", "PersonalSetup.cs",
+                 "build_personal_setup.py"]:
         release_files[f"tools/{name}"] = (ROOT / "tools" / name).read_bytes()
-    for source in (ROOT / "tests").rglob("*"):
-        if source.is_file() and source.suffix in {".py", ".ps1"} and "__pycache__" not in source.parts:
+    test_dir = ROOT / "tests"
+    for pattern in ("test_install_suite.py", "test_personal_*.py", "test_suite_*.py", "test_installers.py", "test_installers.ps1",
+                    "test_updater.py", "test_updater.ps1", "test_release.py", "test_publish_release.py"):
+        for source in sorted(test_dir.glob(pattern)):
             release_files[source.relative_to(ROOT).as_posix()] = source.read_bytes()
     destination = ROOT / "dist"
     destination.mkdir(exist_ok=True)
