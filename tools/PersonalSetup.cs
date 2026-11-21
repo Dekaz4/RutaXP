@@ -71,7 +71,7 @@ internal static class PersonalSetup
             }
             client = Path.GetFullPath(client).TrimEnd('\\', '/');
             string prompt = restore ? "¿Restaurar los addons anteriores?" :
-                "¿Instalar RutaXP con OpenMap, Dungeon Journal, las guías oficiales de RestedXP y tus talentos?\n\nSe guardará una copia de los addons anteriores.";
+                "¿Sustituir la instalación anterior por la nueva versión de RutaXP?\n\nOpenMap, Dungeon Journal y RestedXP quedarán dentro de RutaXP. Las copias anteriores se guardarán fuera de AddOns.";
             if (MessageBox.Show(prompt + "\n\n" + client + "\n\nCierra WoW antes de continuar.", "RutaXP personal",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Information) != DialogResult.OK) return 0;
 
@@ -94,7 +94,8 @@ internal static class PersonalSetup
                 progress.ShowDialog();
                 if (failure != null) throw failure;
             }
-            MessageBox.Show(restore ? "Se ha restaurado la instalación anterior." : "Abre WoW y escribe /rutaxp.", "RutaXP personal");
+            MessageBox.Show(restore ? "Se ha restaurado la instalación anterior." :
+                "En la selección de personajes, abre Accesorios y comprueba que RutaXP está activado para tu personaje.\n\nEn el juego, pulsa M para ver el mapa o escribe /rutaxp para abrir el menú.", "RutaXP personal");
             return 0;
         }
         catch (Exception error)

@@ -53,10 +53,14 @@ class UpdaterTests(unittest.TestCase):
     def test_embedded_personal_suite_is_preserved_on_public_update_repair_and_bundled_install(self):
         self.check_case("personal")
 
-    def test_executable_never_launches_wow_or_remote_programs(self):
+    def test_interactive_handoff_preserves_the_suite_and_runs_only_the_verified_helper(self):
+        self.check_case("suite_handoff")
+
+    def test_executable_only_starts_the_local_suite_installer(self):
         text = (ROOT / "tools/Updater.cs").read_text(encoding="utf-8")
-        self.assertNotIn("Process.Start", text)
-        self.assertNotIn("ProcessStartInfo", text)
+        self.assertEqual(text.count("Process.Start("), 1)
+        self.assertIn("Process.Start(helper)", text)
+        self.assertEqual(text.count("new ProcessStartInfo("), 1)
         self.assertNotIn("--play", text)
         self.assertNotIn(".Kill(", text)
         self.assertNotIn("powershell.exe", text.lower())

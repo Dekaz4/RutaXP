@@ -7,7 +7,7 @@ import re
 # first-party runtime. Native modules are added only to the personal package.
 SUITE_FILES = ("RutaXP.toc", "TalentCore.lua", "Talents.lua", "TalentBuilds.lua",
                "Suite.lua", "WorldMapTracking.lua", "WorldMapServiceData.lua",
-               "WorldMapServices.lua", "WorldMapQuestTracking.lua")
+               "WorldMapServices.lua", "WorldMapQuestTracking.lua", "WorldMapNative.lua")
 
 
 # These are the only tokens needed to distinguish a chunk's varargs from a

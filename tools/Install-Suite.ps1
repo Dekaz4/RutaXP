@@ -9,6 +9,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2
 $modules = @('OpenMap','ForeverDungeonJournal','RXPGuides')
+$legacyBackupName = '\.RutaXP\.backup\.[0-9a-f]{32}'
 # Imported RestedXP guides stay with the separate installation, in its own
 # SavedVariables. Only the native map and journal settings enter the suite.
 $settingsModules = @('OpenMap','ForeverDungeonJournal')
@@ -151,7 +152,7 @@ function WriteCombined([string[]]$paths,[string]$dest) {
     } finally { $output.Dispose() }
 }
 function TargetPath([string]$relative) {
-    if ($relative -notmatch '^Interface/AddOns/(RutaXP|OpenMap|ForeverDungeonJournal|RXPGuides)$' -and
+    if ($relative -notmatch "^Interface/AddOns/(RutaXP|OpenMap|ForeverDungeonJournal|RXPGuides|$legacyBackupName)$" -and
         $relative -notmatch '^WTF/Account/[^/\\]+/([^/\\]+/[^/\\]+/)?SavedVariables/RutaXP\.lua$') { throw 'Destino ajeno a RutaXP.' }
     $target = ChildPath $game $relative
     Assert-NoLink $target
@@ -244,6 +245,15 @@ try {
         foreach ($module in $modules) {
             $dest = "Interface/AddOns/$module"
             if ([IO.Directory]::Exists((TargetPath $dest))) { $rows.Add(@{dest=$dest;old=$true;add=$false;sources=@()}) }
+        }
+        # Older updaters kept backups inside AddOns. Move only their named
+        # RutaXP copies into the same reversible transaction as the upgrade.
+        foreach ($backup in Get-ChildItem -LiteralPath $addons -Directory -Force -Filter '.RutaXP.backup.*') {
+            if ($backup.Name -notmatch "^$legacyBackupName$") { continue }
+            $dest = "Interface/AddOns/$($backup.Name)"
+            $toc = ChildPath (TargetPath $dest) 'RutaXP.toc'
+            Assert-NoLink $toc
+            if ([IO.File]::Exists($toc)) { $rows.Add(@{dest=$dest;old=$true;add=$false;sources=@()}) }
         }
         foreach ($saved in SavedDirectories) {
             $dest = ($saved.Substring($game.Length + 1).Replace('\','/')) + '/RutaXP.lua'

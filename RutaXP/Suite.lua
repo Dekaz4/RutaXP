@@ -8,9 +8,13 @@ function RutaXPModuleContext(name)
     return name, modules[name]
 end
 
+function ns.GetEmbeddedModule(name)
+    return modules[name]
+end
+
 local entries = {
     {key="guias", label="Guías de RestedXP", icon="INV_Misc_Book_09", module="RXPGuides"},
-    {key="mapa", label="Mapa del mundo", icon="INV_Misc_Map_01", module="OpenMap"},
+    {key="mapa", label="Mapa del mundo", icon="INV_Misc_Map_01"},
     {key="mazmorras", label="Diario de mazmorras", icon="INV_Misc_Book_11", module="ForeverDungeonJournal"},
     {key="talentos", label="Guía de talentos", icon="Ability_Marksmanship"},
 }

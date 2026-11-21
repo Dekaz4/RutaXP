@@ -21,14 +21,18 @@ namespace RutaXPInstaller
     // WoW installation. No detection or user prompts run when used as a library.
     public static class InstallerCore
     {
-        public static void RequirePublicTarget(string target)
+        public static bool IsEmbeddedSuite(string target)
         {
             string toc = Path.Combine(target, "RutaXP.toc");
             RejectLinks(toc);
-            if ((File.Exists(toc) && Regex.IsMatch(File.ReadAllText(toc), @"^##\s*X-RutaXP-Embedded\s*:", RegexOptions.IgnoreCase | RegexOptions.Multiline))
+            return (File.Exists(toc) && Regex.IsMatch(File.ReadAllText(toc), @"^##\s*X-RutaXP-Embedded\s*:", RegexOptions.IgnoreCase | RegexOptions.Multiline))
                 || Directory.Exists(Path.Combine(target, "Modules", "RXPGuides"))
                 || Directory.Exists(Path.Combine(target, "Modules", "OpenMap"))
-                || Directory.Exists(Path.Combine(target, "Modules", "ForeverDungeonJournal")))
+                || Directory.Exists(Path.Combine(target, "Modules", "ForeverDungeonJournal"));
+        }
+        public static void RequirePublicTarget(string target)
+        {
+            if (IsEmbeddedSuite(target))
                 throw new IOException("Tienes la suite personal de RutaXP. Usa el instalador personal para actualizarla o Install-Suite.ps1 -Restore para recuperar tus addons anteriores.");
         }
 

@@ -1,14 +1,16 @@
-RUTAXP 1.0.0 PARA WOW FOREVER
+RUTAXP 1.0.2 PARA WOW FOREVER
 
 Paquete personal ya preparado
 1. Cierra WoW.
 2. Ejecuta Instalar_RutaXP_Personal.exe y comprueba el directorio del cliente.
-3. Abre WoW. Escribe /rutaxp para abrir el mapa, las mazmorras, las guías o los talentos.
+3. En la selección de personajes, abre Accesorios y comprueba que RutaXP está activado para tu personaje.
+4. Pulsa M para ver los servicios marcados en la lupa del minimapa. Escribe /rutaxp para abrir el menú.
 
 Distribución pública
-Ejecuta Instalar_Suite_RutaXP.exe para montar la suite a partir de las copias de tu ordenador.
+Abre Instalador_RutaXP.exe 1.0.2 y elige Instalar o actualizar. El instalador prepara la suite y sustituye los addons anteriores en una sola operación.
+También puedes ejecutar Instalar_Suite_RutaXP.exe para montar la suite a partir de las copias de tu ordenador.
 Si actualizaste con el setup de la versión 0.7, el constructor está en Interface/AddOns/RutaXP.
 El paquete personal incorpora exclusivamente las guías oficiales de RestedXP.
 
-Las copias anteriores se guardan en RutaXP-Suite-Backups dentro de la carpeta del cliente.
+Las copias anteriores, incluidas las que el antiguo instalador dejó dentro de AddOns, se guardan en RutaXP-Suite-Backups dentro de la carpeta del cliente.
 Para restaurarlas cierra WoW y ejecuta Instalar_RutaXP_Personal.exe --restore.

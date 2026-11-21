@@ -137,10 +137,14 @@ def check_launcher(suite):
     lua.execute(suite, "RutaXP", ns)
     lua.globals().ROOT = ns
     lua.execute("""
+        assert(ROOT.GetEmbeddedModule('OpenMap') == nil)
+        assert(ROOT:HandleSuiteCommand('mapa') and actions.mapa)
+        actions.mapa = nil
         local _, rxp = RutaXPModuleContext('RXPGuides')
         local _, map = RutaXPModuleContext('OpenMap')
         local _, journal = RutaXPModuleContext('ForeverDungeonJournal')
         assert(map~=journal and journal~=rxp and map~=rxp)
+        assert(ROOT.GetEmbeddedModule('OpenMap') == map)
         assert(select(2, RutaXPModuleContext('OpenMap'))==map)
         rxp.v2 = {ShowGuideSelectionMenu=function() actions.guias=true end}
         ROOT.Talents = {TogglePanel=function() actions.talentos=true end}

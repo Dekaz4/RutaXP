@@ -98,6 +98,58 @@ try {
     $addons=New-Client 'Game';$target=New-Addon (Join-Path $addons 'RutaXP') '0.9.0' 'old'
     Use-Package $package
     switch($Case) {
+        'suite_handoff' {
+            $script:launches = 0
+            $script:installSuite = $false
+            $show = [Action[Diagnostics.ProcessStartInfo]] {
+                param($launch)
+                $script:launches++
+                Assert-True ($launch.Arguments -ceq ('--addons "'+$addons+'"')) 'Automatic installation should take only the selected client.'
+                Assert-True (!$launch.UseShellExecute) 'The handoff should launch the verified executable directly.'
+                Assert-True ([IO.Path]::GetFileName($launch.FileName) -ceq 'Instalar_Suite_RutaXP.exe') 'Wrong executable.'
+                Assert-True ($launch.WorkingDirectory -eq [IO.Path]::GetDirectoryName($launch.FileName)) 'Wrong working directory.'
+                Assert-True (!$launch.FileName.StartsWith($addons,[StringComparison]::OrdinalIgnoreCase)) 'Executed a file from the game folder.'
+                Assert-True ([IO.File]::ReadAllText($launch.FileName) -ceq 'verified fixture') 'Did not use the helper from the verified package.'
+                if (!$script:installSuite) { throw 'The simulated native installer failed before activation.' }
+                if ($script:launches -le 2) { Assert-Old $target }
+                else { Assert-True ([IO.File]::ReadAllText((Join-Path $target 'Modules\OpenMap\local.lua')) -ceq '-- personal') 'The updater replaced the previous suite with a public shell.' }
+                # Simulate just the constructor's committed result. Its real rollback is exercised in test_personal_suite_install.
+                $toc = [IO.File]::ReadAllText((Join-Path $source 'RutaXP.toc')) + "`n## X-RutaXP-Embedded: OpenMap, ForeverDungeonJournal, RXPGuides`n"
+                Put (Join-Path $target 'RutaXP.toc') $toc
+                foreach ($name in @('OpenMap','ForeverDungeonJournal','RXPGuides')) { Put (Join-Path $target ('Modules\'+$name+'\local.lua')) '-- personal' }
+                Seal $target
+            }
+            Assert-Throws { [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,$show) }
+            Assert-Old $target
+            Put (Join-Path $source 'Instalar_Suite_RutaXP.exe') 'verified fixture'
+            Seal $source
+            $package = New-Package $source
+            Use-Package $package
+            Assert-Throws { [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,$show) }
+            Assert-Old $target
+            Assert-Throws { [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,[Action[Diagnostics.ProcessStartInfo]]{param($ignored)}) }
+            Assert-Old $target
+            $script:installSuite = $true
+            $first = [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,$show)
+            Assert-True $first.Changed 'First update did not activate the suite.'
+            $current = [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,$show)
+            Assert-True $current.Changed 'An equal-version update did not run the integrated installer.'
+            Put (Join-Path $target 'Instalar_Suite_RutaXP.exe') 'locally replaced and resealed'
+            Seal $target
+            $fixed = [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,$show)
+            Assert-True $fixed.Changed 'An update should use the verified installer even when the game folder contains a different helper.'
+            $personal = [RutaXPUpdater.UpdaterCore]::Update($addons,$true,$null,$script:Fetch,$script:IsRunning,$null,$show)
+            Assert-True $personal.Changed 'Repair should activate the suite through its own transaction.'
+            $stream = [IO.MemoryStream]::new($package.Archive)
+            try {
+                $bundled = [RutaXPUpdater.UpdaterCore]::InstallBundled($stream,$addons,$script:IsRunning,$null,$show)
+                Assert-True $bundled.Changed 'Bundled setup should activate the suite through its own transaction.'
+            } finally { $stream.Dispose() }
+            $script:Responses[$package.SumUrl] = [Text.Encoding]::UTF8.GetBytes(('0'*64)+'  '+$package.Name)
+            Assert-Throws { [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,$show) }
+            Assert-True ($script:launches -eq 6) 'Missing, unverified, or duplicate launcher invocation.'
+            Assert-Wtf $addons
+        }
         'personal' {
             $tocPath = Join-Path $target 'RutaXP.toc'
             $oldToc = [IO.File]::ReadAllText($tocPath)

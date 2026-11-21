@@ -109,6 +109,31 @@ class LocalSuiteInstallTests(unittest.TestCase):
             self.assertTrue((self.addons / module / "old").is_file())
         self.assertFalse((self.client / "escape").exists())
 
+    def test_clean_reinstall_replaces_old_files_and_archives_only_rutaxp_backups(self):
+        self.script("-Archive", self.archive)
+        stale = self.addons / "RutaXP/obsolete.lua"
+        stale.write_text("-- Old version")
+        legacy = self.addons / (".RutaXP.backup." + "a" * 32)
+        legacy.mkdir()
+        (legacy / "RutaXP.toc").write_text("## Title: RutaXP")
+        unrelated = [self.addons / "AnotherAddon", self.addons / ".RutaXP.backup.mine",
+                     self.addons / (".RutaXP.backup." + "b" * 32)]
+        for folder in unrelated:
+            folder.mkdir()
+            (folder / "keep.lua").write_text("keep")
+        duplicate = self.addons / "OpenMap"
+        duplicate.mkdir()
+        (duplicate / "OpenMap.toc").touch()
+        self.script("-Archive", self.archive)
+        self.assertFalse(stale.exists())
+        self.assertFalse(duplicate.exists())
+        self.assertFalse(legacy.exists())
+        self.assertTrue((self.addons / "RutaXP/Suite.lua").is_file())
+        self.assertTrue(all((d / "keep.lua").read_text() == "keep" for d in unrelated))
+        self.script("-Restore")
+        self.assertTrue((legacy / "RutaXP.toc").is_file())
+        self.assertTrue((self.addons / "RutaXP/old").is_file())
+
     def test_recovers_interrupted_activation_before_restoring(self):
         store = self.client / "RutaXP-Suite-Backups"
         transaction = store / ("20260102030405000-" + "a" * 32)
