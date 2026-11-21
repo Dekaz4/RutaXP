@@ -15,6 +15,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 from suite_lua import SUITE_FILES, bind_namespace
 from suite_map_journal import transform_lua as transform_journal_map
 from suite_rested import transform_lua as transform_rested
+import suite_journey
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULES = ("OpenMap", "ForeverDungeonJournal", "RXPGuides")
@@ -153,6 +154,11 @@ def compose(template, roots, destination):
     for module in modules:
         headers += [f"## X-{module.name}-{key}: {module.metadata[key]}" for key in ("Title", "Version")]
         load += [module.prefix + rel for rel, _ in module.entries]
+    journey = roots.get("Journey")
+    if journey:
+        _, journey_meta = lines_and_metadata((journey / "Journey.toc").read_text(encoding="utf-8-sig"))
+        headers.append("## X-RutaXP-Journey-UI: " + journey_meta["Version"])
+        load.extend(suite_journey.entries(journey))
     toc = "\n".join(headers) + "\n" + base.strip() + "\n\n" + "\n".join(load) + "\n"
 
     destination.parent.mkdir(parents=True, exist_ok=True)
@@ -171,6 +177,9 @@ def compose(template, roots, destination):
                 write(name, toc.encode("utf8") if name == "RutaXP.toc" else (template / name).read_bytes())
             for module in modules:
                 for name, data in module.contents():
+                    write(name, data)
+            if journey:
+                for name, data in suite_journey.contents(journey):
                     write(name, data)
             write("Bindings.xml", merged_bindings(modules))
             for name in ("NOTICE.md", "LICENSE"):
@@ -200,9 +209,12 @@ def main():
         _, metadata = lines_and_metadata((ROOT / "RutaXP/RutaXP.toc").read_text(encoding="utf-8-sig"))
         args.output = ROOT / "dist" / f"RutaXP-{metadata['Version']}-personal.zip"
     from suite_rested import prepare_official_source
-    roots = {name: args.addons / name for name in MODULES}
+    from suite_setup import find_native_sources, client_from
+    roots = find_native_sources(client_from(args.addons))
+    local_rested = args.addons / "RXPGuides"
     with tempfile.TemporaryDirectory(prefix="RutaXP-official-") as temp:
-        roots["RXPGuides"] = prepare_official_source(roots["RXPGuides"], ROOT / ".sources" / "suite", Path(temp) / "RXPGuides")
+        roots["RXPGuides"] = prepare_official_source(local_rested if (local_rested / "RXPGuides.toc").is_file() else None,
+                                                     ROOT / ".sources" / "suite", Path(temp) / "RXPGuides")
         loaded = compose(ROOT / "RutaXP", roots, args.output)
     print(f"{args.output} · " + ", ".join(f"{name}: {count}" for name,count in loaded.items()))
 

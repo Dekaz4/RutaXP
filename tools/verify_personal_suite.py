@@ -9,6 +9,10 @@ from zipfile import ZipFile
 from zlib import crc32
 
 from lupa.lua51 import LuaRuntime
+if __package__:
+    from . import suite_journey
+else:
+    import suite_journey
 
 
 MODULES = ("OpenMap", "ForeverDungeonJournal", "RXPGuides")
@@ -146,7 +150,7 @@ def check_launcher(suite):
         assert(map~=journal and journal~=rxp and map~=rxp)
         assert(ROOT.GetEmbeddedModule('OpenMap') == map)
         assert(select(2, RutaXPModuleContext('OpenMap'))==map)
-        rxp.v2 = {ShowGuideSelectionMenu=function() actions.guias=true end}
+        ROOT.OpenGuideLibrary = function() actions.guias=true end
         ROOT.Talents = {TogglePanel=function() actions.talentos=true end}
         ROOT:HandleSuiteCommand('')
         assert(#buttons==4)
@@ -258,6 +262,21 @@ def verify(archive_path, official_path, addons=None):
         check_launcher(tree.read("Suite.lua"))
         report = {"compiled_lua":len(scripts), "xml":len(graph)-len(scripts), "literal_assets":len(assets),
                   "bindings":check_bindings(tree), "registrations":compare_guides(tree, entries, reference)}
+        journey_paths = {n for n in tree.names.values() if n.startswith(suite_journey.PREFIX)}
+        if meta.get("X-RutaXP-Journey-UI"):
+            journey_scripts = [p for p in graph if p.startswith(suite_journey.PREFIX)]
+            expected = set(suite_journey.entries(None))
+            expected.update(suite_journey.PREFIX + "images/" + p for p in suite_journey.IMAGES)
+            expected.add(suite_journey.PREFIX + "license.txt")
+            if journey_scripts != suite_journey.entries(None) or journey_paths != expected:
+                raise ValueError("Unexpected Journey load order, assets or guide content")
+            if addons is not None and (addons / "Journey/Journey.toc").is_file():
+                for name, data in suite_journey.contents(addons / "Journey"):
+                    if archive.read("RutaXP/" + name) != data:
+                        raise ValueError(f"The packaged Journey component differs from the local source: {name}")
+            report["journey_ui"] = meta["X-RutaXP-Journey-UI"]
+        elif journey_paths:
+            raise ValueError("Journey files are present without the UI load metadata")
         if addons is not None:
             check_native_bindings(tree, reference, addons)
             report["native_assets"] = check_native_assets(tree, reference, addons)

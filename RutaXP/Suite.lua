@@ -4,7 +4,15 @@ local modules = {}
 -- Each native chunk receives the same private table as its siblings, just as
 -- it would when WoW loads that addon's individual TOC.
 function RutaXPModuleContext(name)
-    if not modules[name] then modules[name] = {} end
+    if not modules[name] then
+        modules[name] = {}
+        if name == "RXPGuides" then
+            modules[name].rutaXPManualQuesting = function()
+                return (ns.GuideResume and ns.GuideResume.HoldingJournal()) or
+                    (ns.GuideCarryover and ns.GuideCarryover.IsResuming())
+            end
+        end
+    end
     return name, modules[name]
 end
 
@@ -13,7 +21,7 @@ function ns.GetEmbeddedModule(name)
 end
 
 local entries = {
-    {key="guias", label="Guías de RestedXP", icon="INV_Misc_Book_09", module="RXPGuides"},
+    {key="guias", label="Biblioteca de guías", icon="INV_Misc_Book_09", module="RXPGuides"},
     {key="mapa", label="Mapa del mundo", icon="INV_Misc_Map_01"},
     {key="mazmorras", label="Diario de mazmorras", icon="INV_Misc_Book_11", module="ForeverDungeonJournal"},
     {key="talentos", label="Guía de talentos", icon="Ability_Marksmanship"},
@@ -31,10 +39,7 @@ local function open(entry)
     elseif entry.key == "mazmorras" and ForeverDungeonJournal_Toggle then
         if not (ForeverDungeonJournalFrame and ForeverDungeonJournalFrame:IsShown()) then ForeverDungeonJournal_Toggle() end
     elseif entry.key == "guias" then
-        local rxp = modules.RXPGuides
-        if rxp.v2 and rxp.v2.ShowGuideSelectionMenu then rxp.v2:ShowGuideSelectionMenu()
-        elseif rxp.RXPFrame and rxp.RXPFrame.DropDownMenu then rxp.RXPFrame.DropDownMenu()
-        else ns:Print("RestedXP todavía está cargando su biblioteca de guías."); return end
+        ns.OpenGuideLibrary()
     else
         ns:Print("El diario de mazmorras todavía está cargando."); return
     end
@@ -75,6 +80,8 @@ end
 
 function ns:HandleSuiteCommand(command)
     if command == "" then showMenu(); return true end
+    if command == "guia" or command == "guía" then ns.ToggleGuidePanel(); return true end
+    if command == "zona" then ns.ActivateZoneGuide(); return true end
     if command == "guías" then command = "guias" end
     for _, entry in ipairs(entries) do
         if command == entry.key then open(entry); return true end

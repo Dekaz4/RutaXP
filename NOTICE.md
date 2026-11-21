@@ -8,4 +8,6 @@ RutaXP conserva su guía de talentos, las recomendaciones de habilidades y los d
 
 World of Warcraft y sus recursos pertenecen a Blizzard Entertainment.
 
+El instalador personal puede usar la presentación y las imágenes de la copia local de Journey. El aviso del titular se conserva en `Modules/Journey/license.txt`. Los archivos originales de Journey se leen en el ordenador del usuario al preparar el paquete.
+
 Las ubicaciones de servicios que RutaXP superpone en OpenMap proceden de los datos de pfQuest y del catálogo de Forever de SendaFH. El generador `tools/suite_world_services.py` identifica las revisiones, verifica los archivos de origen y conserva el sistema de coordenadas de cada ubicación. Los avisos de ambos proyectos se incluyen en `RutaXP/Licenses`.

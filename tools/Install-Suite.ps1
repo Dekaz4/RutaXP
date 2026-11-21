@@ -152,7 +152,7 @@ function WriteCombined([string[]]$paths,[string]$dest) {
     } finally { $output.Dispose() }
 }
 function TargetPath([string]$relative) {
-    if ($relative -notmatch "^Interface/AddOns/(RutaXP|OpenMap|ForeverDungeonJournal|RXPGuides|$legacyBackupName)$" -and
+    if ($relative -notmatch "^Interface/AddOns/(RutaXP|OpenMap|ForeverDungeonJournal|RXPGuides|Journey|$legacyBackupName)$" -and
         $relative -notmatch '^WTF/Account/[^/\\]+/([^/\\]+/[^/\\]+/)?SavedVariables/RutaXP\.lua$') { throw 'Destino ajeno a RutaXP.' }
     $target = ChildPath $game $relative
     Assert-NoLink $target
@@ -238,11 +238,20 @@ try {
     MakeDirectory (ChildPath $tx 'new')
     $planPath = ChildPath $tx 'plan.json'
     try {
-        $packageHash = StagePackage (ChildPath $tx 'new/0')
+        $staged = ChildPath $tx 'new/0'
+        $packageHash = StagePackage $staged
         $rows = [Collections.Generic.List[object]]::new()
         $suite = TargetPath 'Interface/AddOns/RutaXP'
         $rows.Add(@{ dest='Interface/AddOns/RutaXP'; old=[IO.Directory]::Exists($suite); add=$true; sources=@() })
-        foreach ($module in $modules) {
+        $replace = $modules
+        $newToc = [IO.File]::ReadAllText((ChildPath $staged 'RutaXP.toc'))
+        if ($newToc -match '(?im)^## X-RutaXP-Journey-UI:\s*\S+') {
+            foreach ($component in @('ui/GuideContainer.lua','lib/TomCats/Arrows.lua')) {
+                if (![IO.File]::Exists((ChildPath $staged "Modules/Journey/$component"))) { throw 'Faltan componentes de Journey en la nueva suite.' }
+            }
+            $replace += 'Journey'
+        }
+        foreach ($module in $replace) {
             $dest = "Interface/AddOns/$module"
             if ([IO.Directory]::Exists((TargetPath $dest))) { $rows.Add(@{dest=$dest;old=$true;add=$false;sources=@()}) }
         }

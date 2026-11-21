@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILD_VERSION = "6.13.0"
 NAME = "Instalar_Suite_RutaXP"
 SCRIPTS = ("suite_setup.py", "build_suite_setup.py", "build_personal_suite.py",
-           "suite_lua.py", "suite_map_journal.py", "suite_rested.py")
+           "suite_lua.py", "suite_map_journal.py", "suite_rested.py", "suite_journey.py")
 
 
 def bundle_inputs(root):

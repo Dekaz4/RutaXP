@@ -60,6 +60,18 @@ class PortableSuiteSetupTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 suite_setup.compose_bundle(self.client, self.addons / "unsafe.zip", self.work)
 
+    def test_second_update_finds_journey_after_it_moved_out_of_addons(self):
+        for name in ("OpenMap", "ForeverDungeonJournal"):
+            (self.addons/name).mkdir()
+            (self.addons/name/(name+".toc")).touch()
+        tx = self.client / "RutaXP-Suite-Backups" / ("2"*17 + "-" + "b"*32)
+        prior = tx / "prior/0"
+        prior.mkdir(parents=True)
+        (prior/"Journey.toc").touch()
+        (tx/"plan.json").write_text(json.dumps({"rows":[{"dest":"Interface/AddOns/Journey"}]}))
+        (tx/"committed").touch()
+        self.assertEqual(suite_setup.find_native_sources(self.client)["Journey"], prior)
+
     def test_public_data_inputs_only(self):
         allowed = build_suite_setup.bundle_inputs(build_suite_setup.ROOT)
         self.assertTrue(all(p.is_file() for p in allowed))

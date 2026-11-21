@@ -103,11 +103,34 @@ def transform_lua(module, relpath, text):
     # this installation's database and any future explicit imports separate.
     text = _SAVED_VARIABLE.sub(lambda hit: SAVED_VARIABLE_RENAMES[hit.group()], text)
     if path == "rxpguides.lua":
+        action = "function addon:QuestAutomation(event, arg1, arg2, arg3)"
+        text = text.replace(action, action + "\n    if addon.rutaXPManualQuesting and addon.rutaXPManualQuesting() then return end")
         for field in ("Version", "Title"):
             text = text.replace(
                 f'GetAddOnMetadata(addonName, "{field}")',
                 f'GetAddOnMetadata("RutaXP", "X-RXPGuides-{field}")',
             )
+        # The Journey tracker has its own visibility setting. Its active guide
+        # still needs the engine when RestedXP's original window was hidden.
+        text = text.replace("if profile.standbyMode and not profile.showEnabled then",
+                            "if profile.standbyMode and not profile.showEnabled and not addon.rutaXPJourney then")
+        # Journey's zone detection and library own first login for this build.
+        # Keep the original configurator available for explicit settings changes.
+        text = text.replace("addon.ui.v2.configurator:Open(true)",
+                            'if not C_AddOns.GetAddOnMetadata("RutaXP", "X-RutaXP-Journey-UI") then '
+                            'addon.ui.v2.configurator:Open(true) end')
+    elif path == "communications.lua":
+        action = "function addon.comms.grouping:ShareQuest(questId)"
+        text = text.replace(action, action + "\n    if addon.rutaXPManualQuesting and addon.rutaXPManualQuesting() then return end")
+    elif path == "map.lua":
+        # Forever's arrow keeps its *last* element after hiding. Expose the
+        # chosen waypoint independently of whether its original frame is shown.
+        text = text.replace("local function updateArrowData()",
+                            "local function updateArrowData()\n    addon.rutaXPWaypoint = nil")
+        text = text.replace("af.dist, af.orientation, af.element = 0, 0, element",
+                            "addon.rutaXPWaypoint = element\n            af.dist, af.orientation, af.element = 0, 0, element")
+        text = text.replace("if #addon.activeWaypoints == 0 and not forceArrowUpdate then",
+                            "if #addon.activeWaypoints == 0 and not forceArrowUpdate then\n        addon.rutaXPWaypoint = nil")
     elif path == "questlog.lua":
         text = text.replace('arg1 == addonName then', 'arg1 == "RutaXP" then')
     elif path == "settingspanel.lua":

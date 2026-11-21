@@ -131,10 +131,10 @@ def main():
     for name in ["Installer.cs", "Updater.cs", "build_release.py", "publish_release.py", "build_talents.js",
                  "build_personal_suite.py", "suite_lua.py", "suite_map_journal.py", "suite_rested.py", "Install-Suite.ps1",
                  "suite_setup.py", "build_suite_setup.py", "verify_personal_suite.py", "PersonalSetup.cs",
-                 "build_personal_setup.py", "suite_world_services.py"]:
+                 "build_personal_setup.py", "suite_world_services.py", "suite_journey.py", "build_guide_legacy.py"]:
         release_files[f"tools/{name}"] = (ROOT / "tools" / name).read_bytes()
     test_dir = ROOT / "tests"
-    for pattern in ("test_install_suite.py", "test_personal_*.py", "test_suite_*.py", "test_installers.py", "test_installers.ps1",
+    for pattern in ("test_install_suite.py", "test_personal_*.py", "test_suite_*.py", "test_guide_*.py", "test_installers.py", "test_installers.ps1",
                     "test_updater.py", "test_updater.ps1", "test_release.py", "test_publish_release.py"):
         for source in sorted(test_dir.glob(pattern)):
             release_files[source.relative_to(ROOT).as_posix()] = source.read_bytes()

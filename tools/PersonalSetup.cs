@@ -71,7 +71,7 @@ internal static class PersonalSetup
             }
             client = Path.GetFullPath(client).TrimEnd('\\', '/');
             string prompt = restore ? "¿Restaurar los addons anteriores?" :
-                "¿Sustituir la instalación anterior por la nueva versión de RutaXP?\n\nOpenMap, Dungeon Journal y RestedXP quedarán dentro de RutaXP. Las copias anteriores se guardarán fuera de AddOns.";
+                "¿Sustituir la instalación anterior por la nueva versión de RutaXP?\n\nEl instalador reunirá el mapa, las mazmorras y las guías en RutaXP. Si el paquete incluye la interfaz de Journey, también apartará su copia separada. Podrás restaurar los addons anteriores.";
             if (MessageBox.Show(prompt + "\n\n" + client + "\n\nCierra WoW antes de continuar.", "RutaXP personal",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Information) != DialogResult.OK) return 0;
 

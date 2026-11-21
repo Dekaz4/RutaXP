@@ -38,13 +38,14 @@ class LocalSuiteInstallTests(unittest.TestCase):
 
     def pack(self):
         manifest = self.package / "manifest.sha256"
+        files = sorted(p for p in self.package.rglob("*") if p.is_file() and p != manifest)
         manifest.write_text("\n".join(
-            f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.name}"
-            for path in sorted(self.package.iterdir()) if path != manifest
+            f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.relative_to(self.package).as_posix()}"
+            for path in files
         ) + "\n", encoding="utf8")
         with ZipFile(self.archive, "w") as bundle:
-            for path in self.package.iterdir():
-                bundle.write(path, "RutaXP/" + path.name)
+            for path in [*files, manifest]:
+                bundle.write(path, "RutaXP/" + path.relative_to(self.package).as_posix())
 
     def script(self, *arguments, ok=True):
         result = subprocess.run(
@@ -108,6 +109,28 @@ class LocalSuiteInstallTests(unittest.TestCase):
         for module in (*MODULES, "RutaXP"):
             self.assertTrue((self.addons / module / "old").is_file())
         self.assertFalse((self.client / "escape").exists())
+
+    def test_journey_is_retired_only_for_a_verified_journey_presentation(self):
+        native = self.addons / "Journey"
+        native.mkdir()
+        (native / "Journey.toc").write_text("## Version: 4.00.13")
+        self.script("-Archive", self.archive)
+        self.assertTrue(native.is_dir())
+        toc = self.package/"RutaXP.toc"
+        toc.write_text("## X-RutaXP-Journey-UI: 4.00.13\n" + toc.read_text())
+        self.pack()
+        self.script("-Archive", self.archive, ok=False)
+        self.assertTrue(native.is_dir())
+        for filename in ("ui/GuideContainer.lua","lib/TomCats/Arrows.lua"):
+            path=self.package/"Modules/Journey"/filename
+            path.parent.mkdir(parents=True,exist_ok=True)
+            path.touch()
+        self.pack()
+        self.script("-Archive", self.archive)
+        self.assertFalse(native.exists())
+        self.assertTrue((self.addons/"RutaXP/Modules/Journey/lib/TomCats/Arrows.lua").is_file())
+        self.script("-Restore")
+        self.assertTrue((native/"Journey.toc").is_file())
 
     def test_clean_reinstall_replaces_old_files_and_archives_only_rutaxp_backups(self):
         self.script("-Archive", self.archive)

@@ -56,23 +56,24 @@ def find_native_sources(client):
     addons = client / "Interface/AddOns"
     roots = {}
     needed = ("OpenMap", "ForeverDungeonJournal")
-    for name in needed:
+    candidates = (*needed, "Journey")
+    for name in candidates:
         if (addons / name / (name + ".toc")).is_file():
             roots[name] = addons / name
     backups = client / "RutaXP-Suite-Backups"
-    if len(roots) != len(needed) and backups.is_dir():
+    if len(roots) != len(candidates) and backups.is_dir():
         for tx in sorted(backups.iterdir(), reverse=True):
             if (not re.fullmatch(r"\d{17}-[0-9a-f]{32}", tx.name)
                     or not (tx / "committed").is_file() or (tx / "restored").exists()):
                 continue
             rows = json.loads((tx / "plan.json").read_text(encoding="utf-8-sig"))["rows"]
             for index, row in enumerate(rows):
-                for name in needed:
+                for name in candidates:
                     if name not in roots and row.get("dest") == f"Interface/AddOns/{name}":
                         original = tx / "prior" / str(index)
                         if (original / (name + ".toc")).is_file():
                             roots[name] = original
-            if len(roots) == len(needed):
+            if len(roots) == len(candidates):
                 break
     missing = [name for name in needed if name not in roots]
     if missing:

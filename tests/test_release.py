@@ -36,6 +36,7 @@ class ReleaseTests(unittest.TestCase):
                 "RutaXP.toc", "Suite.lua", "TalentCore.lua", "Talents.lua", "TalentBuilds.lua",
                 "WorldMapTracking.lua", "WorldMapServiceData.lua", "WorldMapServices.lua",
                 "WorldMapQuestTracking.lua", "WorldMapNative.lua", "Instalar_Suite_RutaXP.exe", "manifest.sha256",
+                "GuideEngine.lua", "GuideLegacyAnchors.lua", "GuideCarryover.lua", "GuideResume.lua", "GuideLibrary.lua", "GuideJourney.lua",
             )}
             self.assertEqual({n for n in runtime_names if not n.startswith("RutaXP/Licenses/")}, public)
             self.assertTrue(archive.read("RutaXP/Instalar_Suite_RutaXP.exe").startswith(b"MZ"))
