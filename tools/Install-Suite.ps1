@@ -200,7 +200,16 @@ function WriteCombined([string[]]$paths,[string]$dest) {
         }
     } finally { $output.Dispose() }
 }
-function TargetPath([string]$relative) {
+function TargetPath([string]$relative, [bool]$nativeDelta = $false) {
+    if ($nativeDelta) {
+        if (!$relative.StartsWith('Interface/AddOns/RutaXP/', [StringComparison]::Ordinal) -or
+            $relative -match '^Interface/AddOns/RutaXP/(Modules|Source|Bindings\.xml)(/|$)|^Interface/AddOns/RutaXP/manifest\.sha256/' -or $relative.Contains('\')) {
+            throw 'Destino fuera del parche nativo de RutaXP.'
+        }
+        $target = ChildPath $game $relative
+        Assert-NoLink $target
+        return $target
+    }
     if ($relative -notmatch "^Interface/AddOns/(RutaXP|OpenMap|ForeverDungeonJournal|RXPGuides|Journey|LFGForever|LFGForeverLanguageSpanish|$legacyBackupName)$" -and
         $relative -notmatch '^WTF/Account/[^/\\]+/([^/\\]+/[^/\\]+/)?SavedVariables/RutaXP\.lua$') { throw 'Destino ajeno a RutaXP.' }
     $target = ChildPath $game $relative
@@ -298,12 +307,12 @@ function MoveOldTransactions([string]$old,[string]$external) {
         Transfer $item.FullName $next
     }
 }
-function Rollback([string]$tx,$rows) {
+function Rollback([string]$tx,$rows,[bool]$nativeDelta = $false) {
     [IO.File]::WriteAllText((ChildPath $tx 'restoring'),'')
     MakeDirectory (ChildPath $tx 'after')
     for ($i = $rows.Count - 1; $i -ge 0; $i--) {
         $row = $rows[$i]
-        $target = TargetPath $row.dest
+        $target = TargetPath $row.dest $nativeDelta
         if ($row.dest -match "^Interface/AddOns/($legacyBackupName)$") {
             # Restore an archived updater copy to its new discovery location.
             $target = ChildPath $store $Matches[1]
@@ -311,6 +320,9 @@ function Rollback([string]$tx,$rows) {
         }
         $prior = ChildPath $tx "prior/$i"
         $stage = ChildPath $tx "new/$i"
+        if ($nativeDelta -and ([IO.Directory]::Exists($target) -or [IO.Directory]::Exists($prior) -or [IO.Directory]::Exists($stage))) {
+            throw 'Se esperaba un archivo al restaurar el parche de RutaXP.'
+        }
         $replaced = [IO.File]::Exists($prior) -or [IO.Directory]::Exists($prior)
         if ($replaced -or (!$row.old -and $row.add -and !(Test-Path -LiteralPath $stage))) {
             if (Test-Path -LiteralPath $target) { Transfer $target (ChildPath $tx "after/$i") }
@@ -365,19 +377,21 @@ try {
         $plan = ChildPath $tx 'plan.json'
         Assert-NoLink $plan
         if (!(Test-Path -LiteralPath $plan) -or (Test-Path -LiteralPath (ChildPath $tx 'restored'))) { continue }
-        $rows = @((ConvertFrom-Json ([IO.File]::ReadAllText($plan))).rows)
+        $savedPlan = ConvertFrom-Json ([IO.File]::ReadAllText($plan))
+        $rows = @($savedPlan.rows)
+        $nativeDelta = $null -ne $savedPlan.PSObject.Properties['type'] -and $savedPlan.type -eq 'RutaXP-native-delta-v1'
         if (!(Test-Path -LiteralPath (ChildPath $tx 'committed')) -or (Test-Path -LiteralPath (ChildPath $tx 'restoring'))) {
-            Rollback $tx $rows
+            Rollback $tx $rows $nativeDelta
             continue
         }
-        $active += @{root=$tx;rows=$rows}
+        $active += @{root=$tx;rows=$rows;nativeDelta=$nativeDelta}
         foreach ($row in $rows) {
             foreach ($source in $row.sources) { $migrated["$($row.dest)|$source"] = $true }
         }
     }
     if ($Restore) {
         if (!$active.Count) { Write-Output 'No hay una instalacion de la suite para restaurar.'; return }
-        for ($i = $active.Count - 1; $i -ge 0; $i--) { Rollback $active[$i].root $active[$i].rows }
+        for ($i = $active.Count - 1; $i -ge 0; $i--) { Rollback $active[$i].root $active[$i].rows $active[$i].nativeDelta }
         Write-Output 'Instalacion anterior restaurada. Las copias de la suite se conservan en RutaXP-Suite-Backups.'
         return
     }

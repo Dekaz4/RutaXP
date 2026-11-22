@@ -1,10 +1,12 @@
 # RutaXP para WoW Forever
 
-RutaXP 1.2.11 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos, el selector de rutas, la brújula y el panel de talentos comparten el estilo de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
+RutaXP 1.2.12 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos, el selector de rutas, la brújula y el panel de talentos comparten el estilo de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
 
 ## Actualizar
 
 Con WoW cerrado, abre **Instalador_RutaXP.exe** y pulsa **1**. Los instaladores desde la versión 1.0.2 reciben el constructor actualizado desde GitHub. Si conservas el ejecutable de la serie 0.7, 1.0.0 o 1.0.1, sustituye ese archivo una vez por [el instalador actual](https://github.com/Dekaz4/RutaXP/releases/latest/download/Instalador_RutaXP.exe). El instalador guarda las copias de recuperación fuera de la carpeta que actualiza Battle.net y traslada allí las copias anteriores. Si tienes el cliente en `E:\WOW\World of Warcraft\_forever_`, las encontrarás en `E:\WOW\RutaXP-Suite-Backups\World of Warcraft\_forever_`. Para montar la suite utiliza tus copias locales de OpenMap, Dungeon Journal y Journey, incluidas las de una instalación anterior. Si falta un módulo, la opción 1 descarga y verifica su paquete oficial. También busca los ZIP oficiales en la carpeta Descargas de Windows y en las carpetas configuradas en Chrome, Edge, Brave y Firefox, aunque estén en otra unidad. Si falla la descarga directa de uno de esos dos módulos, el instalador abre la página del autor y espera la descarga. Si el ZIP está en otra carpeta, al final de la espera puedes seleccionarlo en cualquier unidad. Los 29 capítulos de Alianza y los 28 de Horda vienen con RutaXP.
+
+Con el instalador 1.2.12, la opción 1 comprueba primero la versión. Si estás al día, termina sin descargar ningún paquete. Si tu versión tiene una actualización incremental, descarga y escribe solo los archivos modificados. La opción 2 verifica y repara la suite completa. Los ejecutables anteriores pueden descargar el paquete completo para iniciar el constructor actualizado.
 
 La opción **1** también instala **LFG Forever** de Artefius con su paquete de idioma español. Ambos vienen con el instalador y aparecen por separado en la lista de accesorios de WoW. Entra con tu personaje y escribe **/lfg** para buscar grupo.
 
@@ -52,7 +54,7 @@ Desde la raíz del proyecto y con Python 3.10 o posterior, indica la carpeta de 
 
 ```powershell
 python tools/build_personal_suite.py --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
-python tools/verify_personal_suite.py dist/RutaXP-1.2.11-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
+python tools/verify_personal_suite.py dist/RutaXP-1.2.12-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
 ```
 
 Los créditos y las licencias se encuentran en [NOTICE.md](NOTICE.md) y en `RutaXP/Licenses`.

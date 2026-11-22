@@ -7,7 +7,6 @@ never installs into a game directory or runs the installer executable.
 from __future__ import annotations
 
 import hashlib
-import os
 from pathlib import Path
 import re
 import shutil
@@ -18,10 +17,12 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 if __package__:
     from .suite_lua import suite_files
-    from .build_suite_setup import LFG_ARCHIVES
+    from .build_suite_setup import LFG_ARCHIVES, compile_windows, current_snapshot
+    from .release_deltas import CATALOG, published_deltas
 else:
     from suite_lua import suite_files
-    from build_suite_setup import LFG_ARCHIVES
+    from build_suite_setup import LFG_ARCHIVES, compile_windows, current_snapshot
+    from release_deltas import CATALOG, published_deltas
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDON = ROOT / "RutaXP"
@@ -91,22 +92,8 @@ def write_zip(path, files):
 
 
 def compile_installer(payload):
-    windows = Path(os.environ.get("WINDIR", r"C:\Windows"))
-    framework = windows / "Microsoft.NET" / "Framework64" / "v4.0.30319"
-    if not (framework / "csc.exe").is_file():
-        framework = windows / "Microsoft.NET" / "Framework" / "v4.0.30319"
-    compiler = framework / "csc.exe"
-    if not compiler.is_file():
-        raise RuntimeError("The Windows .NET Framework C# compiler was not found.")
     output = ROOT / "Instalador_RutaXP.exe"
-    subprocess.run([str(compiler), "/nologo", "/target:exe", "/optimize+",
-                    "/main:RutaXPUpdater.Program",
-                    f"/out:{output}", "/r:System.IO.Compression.dll",
-                    "/r:System.IO.Compression.FileSystem.dll",
-                    "/r:System.Web.Extensions.dll", "/r:System.Windows.Forms.dll",
-                    f"/resource:{payload},RutaXPInstaller.payload.zip", str(ROOT / "tools" / "Installer.cs"),
-                    str(ROOT / "tools" / "Updater.cs")],
-                   check=True, cwd=ROOT)
+    compile_windows(ROOT, output, "RutaXPUpdater.Program", payload)
     # An exact resource match prevents distributing a stale embedded addon.
     if payload.read_bytes() not in output.read_bytes():
         raise RuntimeError("The installer does not contain the current payload.")
@@ -130,16 +117,18 @@ def main():
     for name in LFG_ARCHIVES:
         release_files[name] = (ROOT / name).read_bytes()
     # Source for the executable and tools accompanies the binary distribution.
-    for name in ["Installer.cs", "Updater.cs", "build_release.py", "publish_release.py", "build_talents.js",
+    for name in ["Installer.cs", "Updater.cs", "DeltaApply.cs", "release_deltas.py", "build_release.py", "publish_release.py", "build_talents.js",
                  "build_personal_suite.py", "suite_lua.py", "suite_map_journal.py", "suite_rested.py", "Install-Suite.ps1",
                  "suite_setup.py", "build_suite_setup.py", "verify_personal_suite.py", "PersonalSetup.cs",
                  "build_personal_setup.py", "suite_world_services.py", "suite_journey.py", "build_guide_legacy.py",
                  "build_dungeon_quest_links.py", "official_sources.py"]:
         release_files[f"tools/{name}"] = (ROOT / "tools" / name).read_bytes()
+    for record in (ROOT / CATALOG).glob("*.json"):
+        release_files[record.relative_to(ROOT).as_posix()] = record.read_bytes()
     test_dir = ROOT / "tests"
     for pattern in ("test_install_suite.py", "test_personal_*.py", "test_suite_*.py", "test_guide_*.py",
                     "test_dungeon_*.py", "test_quest_focus.py", "test_installers.py", "test_installers.ps1",
-                    "test_updater.py", "test_updater.ps1", "test_release.py", "test_publish_release.py",
+                     "test_updater.py", "test_updater.ps1", "test_release.py", "test_publish_release.py", "test_*delta*.py", "test_incremental_updater.py",
                     "test_walking_lookahead.py", "test_walking_history.py", "test_corpse_navigation.py",
                     "test_golden_quest_arrow.py", "test_navigation_world_consistency.py", "test_features_session_ui.py",
                     "test_access_navigation.py", "test_duo.py", "test_duo_enhanced.py", "test_duo_journey.py",
@@ -155,6 +144,7 @@ def main():
     shutil.copyfile(payload, addon_zip)
     shutil.copyfile(installer, destination / installer.name)
     assets = [zip_path, addon_zip, destination / installer.name]
+    assets.extend(published_deltas(ROOT, current_snapshot(ROOT), destination))
     (destination / "SHA256SUMS.txt").write_text(
         "".join(f"{digest(path.read_bytes())}  {path.name}\n" for path in assets), encoding="utf-8", newline="\n")
     print(f"Verified RutaXP {version}: {len(files)} addon files, {len(release_files)} packaged files.")

@@ -238,12 +238,18 @@ namespace RutaXPInstaller
             if (Directory.Exists(path)) { Files(path); Directory.Delete(path, true); }
         }
 
-        static void InheritAddonAccess(string target)
+        internal static void InheritAddonAccess(string target)
         {
+            string root = Path.GetPathRoot(target);
+            if (Regex.IsMatch(root, @"^[a-zA-Z]:"))
+            {
+                string format = new DriveInfo(root).DriveFormat;
+                if (format == "FAT" || format == "FAT32" || format == "exFAT") return;
+            }
             // A same-volume rename keeps the staging DACL. icacls resets both the
             // root and its descendants to the ACL of their new parent.
             ProcessStartInfo start = new ProcessStartInfo(
-                Path.Combine(Environment.SystemDirectory, "icacls.exe"), "\"" + target + "\" /reset /T /Q /L");
+                Path.Combine(Environment.SystemDirectory, "icacls.exe"), "\"" + target + "\" /reset /Q /L" + (Directory.Exists(target) ? " /T" : ""));
             start.UseShellExecute = false;
             start.CreateNoWindow = true;
             using (Process process = Process.Start(start))

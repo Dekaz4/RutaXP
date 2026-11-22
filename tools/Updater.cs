@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using Microsoft.Win32;
@@ -20,7 +21,9 @@ namespace RutaXPUpdater
     {
         public string Tag, Version, ArchiveName, ArchiveUrl, ChecksumsUrl;
         public long ArchiveSize;
+        public readonly Dictionary<string, DeltaAsset> Deltas = new Dictionary<string, DeltaAsset>(StringComparer.Ordinal);
     }
+    public sealed class DeltaAsset { public string Name, Url; public long Size; }
     public sealed class UpdateResult
     {
         public string Version, Target, Backup;
@@ -94,16 +97,20 @@ namespace RutaXPUpdater
                 IDictionary<string, object> asset = item as IDictionary<string, object>;
                 if (asset == null) throw new IOException("Archivo de release no valido.");
                 string name = Text(asset, "name");
-                if (name != result.ArchiveName && name != "SHA256SUMS.txt") continue;
+                Match delta = Regex.Match(name ?? "", @"^RutaXP-([0-9.]+)-a-([0-9.]+)-delta\.zip$");
+                if (delta.Success && (delta.Groups[2].Value != version || CompareVersions(delta.Groups[1].Value, version) >= 0))
+                    throw new IOException("Version de actualizacion incremental no valida.");
+                if (name != result.ArchiveName && name != "SHA256SUMS.txt" && !delta.Success) continue;
                 if (!seen.Add(name)) throw new IOException("El release contiene archivos duplicados.");
                 string url = Text(asset, "browser_download_url");
                 ValidateAssetUrl(url, tag, name);
                 object size;
                 long length;
                 if (!asset.TryGetValue("size", out size) || !long.TryParse(Convert.ToString(size, System.Globalization.CultureInfo.InvariantCulture), out length)
-                    || length <= 0 || length > (name == result.ArchiveName ? MaxArchiveBytes : 1024 * 1024))
+                    || length <= 0 || length > (name == "SHA256SUMS.txt" ? 1024 * 1024 : MaxArchiveBytes))
                     throw new IOException("El archivo publicado supera los limites permitidos.");
                 if (name == result.ArchiveName) { result.ArchiveUrl = url; result.ArchiveSize = length; }
+                else if (delta.Success) result.Deltas.Add(delta.Groups[1].Value, new DeltaAsset { Name = name, Url = url, Size = length });
                 else result.ChecksumsUrl = url;
             }
             if (result.ArchiveUrl == null || result.ChecksumsUrl == null) throw new IOException("El release necesita el ZIP del addon y SHA256SUMS.txt.");
@@ -138,6 +145,95 @@ namespace RutaXPUpdater
             if (archive == null || archive.LongLength == 0 || archive.LongLength > MaxArchiveBytes)
                 throw new IOException("Descarga vacia o demasiado grande.");
             if (Hash(archive) != PublishedHash(sums, name)) throw new IOException("El SHA256 del ZIP no coincide; no se ha instalado nada.");
+        }
+        static readonly UTF8Encoding StrictUtf8 = new UTF8Encoding(false, true);
+
+        static byte[] ReadDeltaEntry(IDictionary<string, ZipArchiveEntry> entries, string name, long limit)
+        {
+            ZipArchiveEntry entry;
+            if (!entries.TryGetValue(name, out entry) || entry.Length > limit)
+                throw new IOException("Falta un archivo del paquete incremental o supera el limite: " + name);
+            entries.Remove(name);
+            using (Stream input = entry.Open())
+            using (BinaryReader reader = new BinaryReader(input))
+            {
+                byte[] data = reader.ReadBytes(checked((int)entry.Length));
+                if (data.LongLength != entry.Length || input.ReadByte() != -1) throw new IOException("Longitud incorrecta: " + name);
+                return data;
+            }
+        }
+        static bool ValidDeltaPath(string path)
+        {
+            if (path.Length == 0 || path.Length > 240 || path.Contains("\\")) return false;
+            foreach (string part in path.Split('/'))
+                if (part.Length == 0 || part.EndsWith(".") || part.EndsWith(" ") || part.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0
+                    || Regex.IsMatch(part, @"^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(\.|$)", RegexOptions.IgnoreCase)) return false;
+            return true;
+        }
+        static string DeltaHash(string text)
+        {
+            if (text == "-") return null;
+            if (!Regex.IsMatch(text, "^[a-f0-9]{64}$")) throw new IOException("Huella de archivo incremental no valida.");
+            return text;
+        }
+        static void CheckDeltaToc(byte[] data, string version)
+        {
+            if (data == null || data.Length > 1024 * 1024) throw new IOException("Falta el TOC de la actualizacion incremental.");
+            var matches = Regex.Matches(StrictUtf8.GetString(data).TrimStart('\uFEFF'), @"^## Version:[ \t]*(\S+)[ \t]*\r?$", RegexOptions.Multiline);
+            if (matches.Count != 1 || matches[0].Groups[1].Value != version)
+                throw new IOException("La version del TOC no coincide con la actualizacion incremental.");
+        }
+        static List<IncrementalChange> ReadDelta(byte[] data, string from, string to)
+        {
+            using (MemoryStream stream = new MemoryStream(data, false))
+            using (ZipArchive zip = new ZipArchive(stream, ZipArchiveMode.Read))
+            {
+                if (zip.Entries.Count < 3 || zip.Entries.Count > MaxEntries) throw new IOException("Numero de entradas incremental no valido.");
+                var entries = new Dictionary<string, ZipArchiveEntry>(StringComparer.Ordinal);
+                long expanded = 0;
+                foreach (ZipArchiveEntry entry in zip.Entries)
+                {
+                    if (!ValidDeltaPath(entry.FullName) || entries.ContainsKey(entry.FullName)
+                        || ((entry.ExternalAttributes >> 16) & 0xF000) == 0xA000
+                        || (entry.ExternalAttributes & (int)FileAttributes.ReparsePoint) != 0
+                        || entry.Length < 0 || entry.Length > MaxEntryBytes || entry.Length > MaxArchiveBytes - expanded)
+                        throw new IOException("Entrada incremental no valida: " + entry.FullName);
+                    expanded += entry.Length;
+                    entries.Add(entry.FullName, entry);
+                }
+                var changes = new List<IncrementalChange>();
+                var paths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                using (var descriptor = new StringReader(StrictUtf8.GetString(ReadDeltaEntry(entries, "delta.tsv", 4 * 1024 * 1024))))
+                {
+                    if (descriptor.ReadLine() != "RutaXP-delta-v1\t" + from + "\t" + to)
+                        throw new IOException("El paquete incremental corresponde a otra version.");
+                    string row;
+                    while ((row = descriptor.ReadLine()) != null)
+                    {
+                        string[] cells = row.Split('\t');
+                        if (cells.Length != 3 || !ValidDeltaPath(cells[2]) || !paths.Add(cells[2]) || paths.Count > MaxEntries)
+                            throw new IOException("Entrada duplicada o no valida en delta.tsv.");
+                        var change = new IncrementalChange { Path = cells[2], OldHash = DeltaHash(cells[0]), NewHash = DeltaHash(cells[1]) };
+                        if (change.OldHash == change.NewHash) throw new IOException("Cambio incremental vacio: " + change.Path);
+                        if (change.NewHash != null)
+                        {
+                            change.Data = ReadDeltaEntry(entries, "files/" + change.Path, MaxEntryBytes);
+                            if (Hash(change.Data) != change.NewHash) throw new IOException("Contenido incremental incorrecto: " + change.Path);
+                        }
+                        if (change.Path == "RutaXP.toc")
+                        {
+                            change.OldData = ReadDeltaEntry(entries, "old/RutaXP.toc", 1024 * 1024);
+                            if (Hash(change.OldData) != change.OldHash) throw new IOException("TOC de origen incremental incorrecto.");
+                            CheckDeltaToc(change.OldData, from);
+                            CheckDeltaToc(change.Data, to);
+                        }
+                        changes.Add(change);
+                    }
+                }
+                if (entries.Count != 0 || !changes.Exists(delegate(IncrementalChange c) { return c.Path == "RutaXP.toc"; }))
+                    throw new IOException("El contenido del paquete incremental no coincide con el descriptor.");
+                return changes;
+            }
         }
         public static void ValidateArchive(byte[] data)
         {
@@ -198,6 +294,37 @@ namespace RutaXPUpdater
             InstallerCore.RejectLinks(root);
             if (!File.Exists(Path.Combine(root, "RutaXP.toc"))) return null;
             try { return TocVersion(root); } catch (IOException) { return null; }
+        }
+        internal static bool CompleteSuite(string addons, string version)
+        {
+            string root = Path.Combine(addons, "RutaXP"), manifest = Path.Combine(root, "manifest.sha256");
+            foreach (string entry in new[] { @"RutaXP\RutaXP.toc", @"RutaXP\manifest.sha256", @"RutaXP\Leveling.lua",
+                @"RutaXP\Modules\OpenMap\Core.lua", @"RutaXP\Modules\ForeverDungeonJournal\Core\Journal.lua",
+                @"LFGForever\LFGForever.toc", @"LFGForeverLanguageSpanish\LFGForeverLanguageSpanish.toc", @"LFGForeverLanguageSpanish\Spanish.lua" })
+            {
+                string path = Path.Combine(addons, entry);
+                InstallerCore.RejectLinks(path);
+                if (!File.Exists(path)) return false;
+            }
+            if (!HasJourneyPresentation(root)) return false;
+            string tocLine = Hash(File.ReadAllBytes(Path.Combine(root, "RutaXP.toc"))) + "  RutaXP.toc";
+            using (var reader = File.OpenText(manifest))
+            {
+                if (reader.ReadLine() != "# RutaXP " + version) return false;
+                string row;
+                while ((row = reader.ReadLine()) != null)
+                    if (row == tocLine) return true;
+            }
+            return false;
+        }
+        internal static UpdateResult ApplyDelta(string addons, byte[] archive, string from, string to, Action guard)
+        {
+            if (CompareVersions(from, to) >= 0 || archive == null || archive.LongLength == 0 || archive.LongLength > MaxArchiveBytes)
+                throw new IOException("Version o tamano de actualizacion incremental no valido.");
+            List<IncrementalChange> changes = ReadDelta(archive, from, to);
+            string root = Path.GetDirectoryName(Path.GetDirectoryName(addons));
+            string backup = IncrementalInstall.Apply(root, changes, guard);
+            return new UpdateResult { Version = to, Target = Path.Combine(addons, "RutaXP"), Backup = backup, Changed = true };
         }
         public static string ResolveClient(string path)
         {
@@ -279,6 +406,14 @@ namespace RutaXPUpdater
             string target = Path.Combine(addons, "RutaXP");
             if (suiteSetup == null) InstallerCore.RequirePublicTarget(target);
             ReleaseInfo release = ParseRelease(Encoding.UTF8.GetString(Download(fetch, LatestUrl, 1024 * 1024)));
+            string gameRoot = Path.GetDirectoryName(Path.GetDirectoryName(addons));
+            Action guard = delegate { RequireClosed(running); if (beforeActivate != null) beforeActivate(); RequireClosed(running); };
+            bool fullRequired = false;
+            if (suiteSetup != null)
+            {
+                try { IncrementalInstall.Recover(gameRoot, delegate { RequireClosed(running); }); }
+                catch (IncrementalBaseMismatchException) { fullRequired = true; }
+            }
             string installed = ReadInstalledVersion(addons);
             if (installed != null && CompareVersions(release.Version, installed) < 0
                 || versionFloor != null && CompareVersions(release.Version, versionFloor) < 0)
@@ -289,7 +424,36 @@ namespace RutaXPUpdater
                 try { InstallerCore.Manifest(target); valid = true; } catch (IOException) { }
                 if (valid) { RequireClosed(running); return new UpdateResult { Version = release.Version, Target = target, LatestVerified = true }; }
             }
+            bool eligibleSuite = suiteSetup != null && !repair && !fullRequired && installed != null && CompleteSuite(addons, installed);
+            if (eligibleSuite && installed == release.Version)
+                return new UpdateResult { Version = installed, Target = target, LatestVerified = true };
             string sums = Encoding.UTF8.GetString(Download(fetch, release.ChecksumsUrl, 1024 * 1024));
+            DeltaAsset delta;
+            if (eligibleSuite && release.Deltas.TryGetValue(installed, out delta))
+            {
+                byte[] patch = Download(fetch, delta.Url, delta.Size);
+                if (patch.LongLength != delta.Size) throw new IOException("Tamano de la actualizacion incremental incorrecto.");
+                VerifyArchiveHash(patch, sums, delta.Name);
+                try
+                {
+                    UpdateResult patched = ApplyDelta(addons, patch, installed, release.Version, guard);
+                    patched.LatestVerified = true;
+                    return patched;
+                }
+                catch (IncrementalBaseMismatchException)
+                {
+                    // An older launcher or a constructor can finish this release during the download.
+                    try
+                    {
+                        IncrementalInstall.Recover(gameRoot, delegate { RequireClosed(running); });
+                        if (ReadInstalledVersion(addons) == release.Version && CompleteSuite(addons, release.Version))
+                            return new UpdateResult { Version = release.Version, Target = target, LatestVerified = true };
+                    }
+                    catch (IncrementalBaseMismatchException) { /* The full constructor owns the pending transaction. */ }
+                    fullRequired = true;
+                    Console.WriteLine("La instalacion local requiere el paquete completo.");
+                }
+            }
             string expected = PublishedHash(sums, release.ArchiveName);
             byte[] archive = repair ? null : ReadMatchingBundle(openBundled, release.ArchiveSize, expected);
             if (archive == null)
@@ -301,7 +465,8 @@ namespace RutaXPUpdater
             try
             {
                 ExtractVerifiedPackage(archive, release, temp);
-                UpdateResult result = ActivatePackage(temp, addons, release.Version, running, beforeActivate, suiteSetup);
+                UpdateResult result = ActivatePackage(temp, addons, release.Version, running, beforeActivate, suiteSetup,
+                    (repair || fullRequired) && CompareVersions(release.Version, "1.2.12") >= 0);
                 result.LatestVerified = true;
                 return result;
             }
@@ -347,14 +512,21 @@ namespace RutaXPUpdater
             HashSet<string> entries = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (string line in toc.Split('\n')) entries.Add(line.Trim().Replace('\\', '/'));
             foreach (string script in new[] { "Modules/Journey/ui/UI.lua", "Modules/Journey/ui/TaskDetailContainers.lua", "Modules/Journey/lib/TomCats/Arrows.lua" })
-                if (!entries.Contains(script) || !File.Exists(Path.Combine(target, script))) return false;
+            {
+                string path = Path.Combine(target, script);
+                InstallerCore.RejectLinks(path);
+                if (!entries.Contains(script) || !File.Exists(path)) return false;
+            }
             return true;
         }
         static UpdateResult ActivatePackage(string verified, string addons, string version,
-            Func<bool> running, Action beforeActivate, Action<ProcessStartInfo> suiteSetup)
+            Func<bool> running, Action beforeActivate, Action<ProcessStartInfo> suiteSetup, bool forceFull = false)
         {
             RequireClosed(running);
             string target = Path.Combine(addons, "RutaXP");
+            string installedVersion = ReadInstalledVersion(addons);
+            if (installedVersion != null && CompareVersions(installedVersion, version) > 0)
+                throw new IOException("Otro instalador ya aplico una version mas reciente. Vuelve a consultar la ultima version.");
             var result = new UpdateResult { Target = target, Version = version };
             Action guardedActivation = delegate { RequireClosed(running); if (beforeActivate != null) beforeActivate(); RequireClosed(running); };
             if (suiteSetup != null)
@@ -364,7 +536,7 @@ namespace RutaXPUpdater
                 string executable = Path.Combine(verified, "Instalar_Suite_RutaXP.exe");
                 InstallerCore.RejectLinks(executable);
                 if (!File.Exists(executable)) throw new IOException("El paquete no contiene el instalador de la suite.");
-                var helper = new ProcessStartInfo(executable, "--addons \"" + addons + "\"")
+                var helper = new ProcessStartInfo(executable, "--addons \"" + addons + "\"" + (forceFull ? " --full" : ""))
                     { WorkingDirectory = verified, UseShellExecute = false, CreateNoWindow = true,
                       RedirectStandardError = true, RedirectStandardOutput = true };
                 guardedActivation();
@@ -488,9 +660,58 @@ namespace RutaXPUpdater
         }
     }
 
+    // Local entry point bundled by the suite constructor for older launchers.
+    public static class DeltaBridge
+    {
+        public static int Main(string[] args)
+        {
+            return Run(args, Program.WowRunning);
+        }
+        internal static int Run(string[] args, Func<bool> running)
+        {
+            try
+            {
+                if (args.Length != 4) throw new IOException("Se necesitan AddOns, el paquete incremental, la version anterior y la nueva.");
+                string addons = UpdaterCore.ResolveClient(args[0]);
+                string from = UpdaterCore.StableVersion(args[2]), to = UpdaterCore.StableVersion(args[3]);
+                if (UpdaterCore.CompareVersions(from, to) >= 0) throw new IOException("Versiones incrementales no validas.");
+                Action guard = delegate { UpdaterCore.RequireClosed(running); };
+                guard();
+                IncrementalInstall.Recover(Path.GetDirectoryName(Path.GetDirectoryName(addons)), guard);
+                if (UpdaterCore.ReadInstalledVersion(addons) != from || !UpdaterCore.CompleteSuite(addons, from)) return 3;
+                string file = Path.GetFullPath(args[1]);
+                InstallerCore.RejectLinks(file);
+                byte[] patch;
+                using (FileStream stream = File.OpenRead(file))
+                using (BinaryReader reader = new BinaryReader(stream))
+                {
+                    if (stream.Length == 0 || stream.Length > UpdaterCore.MaxArchiveBytes) throw new IOException("Paquete incremental demasiado grande o vacio.");
+                    patch = reader.ReadBytes((int)stream.Length);
+                }
+                UpdaterCore.ApplyDelta(addons, patch, from, to, guard);
+                return 0;
+            }
+            catch (IncrementalBaseMismatchException) { return 3; }
+            catch (Exception ex) { Console.Error.WriteLine("No se ha completado la actualizacion incremental: " + ex.Message); return 1; }
+        }
+    }
+
     public static class Program
     {
-        static bool WowRunning()
+        internal static Mutex TryBeginInstallation(string addons)
+        {
+            string key = UpdaterCore.Hash(Encoding.UTF8.GetBytes(InstallerCore.Normalize(addons).ToUpperInvariant()));
+            var mutex = new Mutex(false, @"Local\RutaXP-install-" + key);
+            try
+            {
+                if (mutex.WaitOne(0)) return mutex;
+            }
+            catch (AbandonedMutexException) { return mutex; }
+            catch { mutex.Dispose(); throw; }
+            mutex.Dispose();
+            return null;
+        }
+        internal static bool WowRunning()
         {
             foreach (string name in new string[] { "Wow", "WowB", "WowClassicB", "WowClassic", "Wow-64", "WorldOfWarcraft" })
                 foreach (Process process in Process.GetProcessesByName(name)) { process.Dispose(); return true; }
@@ -577,12 +798,15 @@ namespace RutaXPUpdater
         {
             if (url.EndsWith("-addon.zip", StringComparison.Ordinal))
                 Console.WriteLine("Descargando el paquete de la version publicada...");
+            else if (url.EndsWith("-delta.zip", StringComparison.Ordinal))
+                Console.WriteLine("Descargando solo los archivos que han cambiado...");
             return HttpDownloads.Fetch(url, maximum);
         }
         [STAThread]
         public static int Main(string[] args)
         {
             bool interactive = args.Length == 0;
+            Mutex installation = null;
             try
             {
                 Console.OutputEncoding = Encoding.UTF8; Console.Title = "RutaXP: instalar y actualizar";
@@ -603,8 +827,17 @@ namespace RutaXPUpdater
                 if (action == null) return 0;
                 string settings = ClientSettings.DirectoryPath;
                 string addons = client == null ? SelectClient(settings, action, Discover, ChooseClient) : UpdaterCore.ResolveClient(client);
-                ClientSettings.Save(settings, "client", addons);
                 Console.WriteLine("Cliente: " + Path.GetDirectoryName(Path.GetDirectoryName(addons)));
+                if (action != "--choose-client")
+                {
+                    installation = TryBeginInstallation(addons);
+                    if (installation == null)
+                    {
+                        Console.WriteLine("Ya hay otra instalacion de RutaXP en curso para este cliente. Sigue el progreso en la primera ventana.");
+                        return 0;
+                    }
+                }
+                ClientSettings.Save(settings, "client", addons);
                 if (action == "--choose-client") { Console.WriteLine("Cliente recordado. Cada ordenador guarda su propia ruta."); return 0; }
                 if (action == "--install-bundled")
                 {
@@ -634,11 +867,16 @@ namespace RutaXPUpdater
                 Console.WriteLine("Consultando la ultima version publica de Dekaz4/RutaXP...");
                 UpdateResult result = UpdaterCore.Update(addons, action == "--repair", floor, FetchReleaseFile, WowRunning, null, InstallSuite, OpenBundled);
                 ClientSettings.Save(settings, "latest", result.Version);
-                Console.WriteLine("Suite RutaXP " + result.Version + " instalada y verificada en " + result.Target + ".");
+                Console.WriteLine(result.Changed ? "Suite RutaXP " + result.Version + " instalada y verificada en " + result.Target + "."
+                    : "RutaXP " + result.Version + " ya esta al dia.");
                 return 0;
             }
             catch (Exception problem) { Console.Error.WriteLine("No se ha completado la accion: " + problem.Message + "\nTu instalacion y WTF no se borran. Si hay un fallo de instalacion se intenta recuperar la copia anterior."); return 1; }
-            finally { if (interactive) { Console.WriteLine("Pulsa Enter para cerrar."); try { Console.ReadLine(); } catch { } } }
+            finally
+            {
+                if (installation != null) { installation.ReleaseMutex(); installation.Dispose(); }
+                if (interactive) { Console.WriteLine("Pulsa Enter para cerrar."); try { Console.ReadLine(); } catch { } }
+            }
         }
     }
 }

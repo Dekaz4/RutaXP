@@ -21,7 +21,7 @@ class UpdaterTests(unittest.TestCase):
         if not compiler.is_file():
             raise unittest.SkipTest("The .NET Framework C# compiler is unavailable")
         cls.assembly = cls.base / "Updater.Tests.dll"
-        sources = [str(ROOT / "tools/Installer.cs"), str(ROOT / "tools/Updater.cs")]
+        sources = [str(ROOT / "tools" / name) for name in ("Installer.cs", "Updater.cs", "DeltaApply.cs")]
         refs = ["/r:" + str(framework / name) for name in (
             "System.IO.Compression.dll", "System.IO.Compression.FileSystem.dll",
             "System.Web.Extensions.dll", "System.Windows.Forms.dll")]

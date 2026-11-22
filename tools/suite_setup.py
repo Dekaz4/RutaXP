@@ -19,6 +19,8 @@ if __package__:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_personal_suite as composer
 import official_sources
+import release_deltas
+from zipfile import ZipFile
 
 
 LOCAL_COMPOSE_MODULES = ("OpenMap", "ForeverDungeonJournal")
@@ -187,7 +189,93 @@ def activate(client, archive=None, *, prepared=None):
     return process.stdout.strip()
 
 
-def run(client, cache, output=None, restore=False, archive=None, compose_only=False, report=print):
+def legacy_suite_intact(client, record, root):
+    """Older launchers pass identical arguments for Update and Repair. Honour both."""
+    addons = client / "Interface/AddOns"
+    addon = addons / "RutaXP"
+    toc = (addon / "RutaXP.toc").read_text(encoding="utf-8-sig")
+    metadata = composer.lines_and_metadata(toc)[1]
+    if (metadata.get("X-RutaXP-Journey-UI") != INSTALL_VERSIONS["Journey"]
+            or any(metadata.get(f"X-{name}-Version") != version
+                   for name, version in INSTALL_VERSIONS.items() if name != "Journey")):
+        return False
+    entries = {}
+    with (addon / "manifest.sha256").open(encoding="utf-8") as stream:
+        if stream.readline().rstrip() != "# RutaXP " + record["version"]:
+            return False
+        for row in stream:
+            match = re.fullmatch(r"([a-f0-9]{64})  (.+)", row.rstrip("\r\n"))
+            if not match:
+                return False
+            digest, name = match.groups()
+            if name in entries or any(part in ("", ".", "..") or composer.INVALID_WINDOWS_PART.search(part)
+                                      for part in name.replace("\\", "/").split("/")):
+                return False
+            path = addon / name
+            if not path.resolve().is_relative_to(addon.resolve()) or release_deltas.sha(path.read_bytes()) != digest:
+                return False
+            entries[name] = digest
+    if ("RutaXP.toc" not in entries or any(entries.get(name) != expected
+            for name, expected in record["files"].items() if name != "RutaXP.toc")):
+        return False
+    for component in ("OpenMap/Core.lua", "ForeverDungeonJournal/Core/Journal.lua", "Journey/ui/UI.lua",
+                      "Journey/ui/TaskDetailContainers.lua", "Journey/lib/TomCats/Arrows.lua"):
+        if "Modules/" + component not in entries:
+            return False
+    for package in ("LFGForever", "LFGForeverLanguageSpanish"):
+        with ZipFile(root / "tools/vendor/lfg-forever" / (package + ".zip")) as archive:
+            for info in archive.infolist():
+                if not info.is_dir() and (addons / info.filename).read_bytes() != archive.read(info):
+                    return False
+    return True
+
+
+def update_existing(client, report):
+    root = resources()
+    bridge = root / "tools/RutaXPDelta.exe"
+    addon = client / "Interface/AddOns/RutaXP"
+    if not bridge.is_file() or not (addon / "RutaXP.toc").is_file():
+        return None
+    def record_for(folder):
+        toc = (folder / "RutaXP.toc").read_text(encoding="utf-8-sig")
+        version = composer.lines_and_metadata(toc)[1].get("Version", "")
+        if not release_deltas.VERSION.fullmatch(version):
+            return None
+        record = root / release_deltas.CATALOG / (version + ".json")
+        return json.loads(record.read_bytes()) if record.is_file() else None
+    old, new = record_for(addon), record_for(root / "RutaXP")
+    if not old or not new or old["recipe"] != new["recipe"]:
+        return None
+    if tuple(map(int, old["version"].split("."))) > tuple(map(int, new["version"].split("."))):
+        raise ValueError("El constructor es anterior a la versión instalada.")
+    report("Comprobando la instalación existente de RutaXP…")
+    try:
+        if not legacy_suite_intact(client, old, root):
+            return None
+    except (FileNotFoundError, UnicodeError):
+        return None
+    if old["version"] == new["version"]:
+        # A legacy repair may be restarting a transaction interrupted after the
+        # manifest swap. Let the transaction manager finish its recovery first.
+        for plan in backup_path(backup_store(client)).glob("*/plan.json"):
+            tx = plan.parent
+            if not (tx / "restored").exists() and ((tx / "restoring").exists() or not (tx / "committed").exists()):
+                return None
+        return f'RutaXP {new["version"]} ya está al día.'
+    with tempfile.TemporaryDirectory(prefix="RutaXP-cambios-") as workspace:
+        patch = Path(workspace) / "delta.zip"
+        release_deltas.write_delta(root, old, new, patch)
+        report("Aplicando los archivos que han cambiado…")
+        result = subprocess.run([str(bridge), str(addon.parent), str(patch), old["version"], new["version"]],
+                                capture_output=True, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+        if result.returncode == 3:
+            return None
+        if result.returncode:
+            raise RuntimeError(result.stderr.decode("utf-8", "replace").strip() or "Ha fallado la actualización incremental.")
+    return f'RutaXP {new["version"]} actualizada.'
+
+
+def run(client, cache, output=None, restore=False, archive=None, compose_only=False, report=print, full=False):
     if restore:
         return activate(client)
     if archive:
@@ -196,6 +284,10 @@ def run(client, cache, output=None, restore=False, archive=None, compose_only=Fa
         destination = output or (Path.cwd() / "RutaXP-personal.zip")
         compose_bundle(client, destination, cache)
         return f"Paquete preparado en {destination.resolve()}" if compose_only else activate(client, destination)
+    if not full:
+        result = update_existing(client, report)
+        if result is not None:
+            return result
     store = backup_path(backup_store(client))
     roots = find_native_sources(client, required=(), versions=INSTALL_VERSIONS)
     store.mkdir(parents=True, exist_ok=True)
@@ -356,6 +448,7 @@ def main(argv=None):
     parser.add_argument("--output", type=Path)
     parser.add_argument("--cache", type=Path, default=settings_root() / "Suite/Descargas")
     parser.add_argument("--wait-launcher", type=int, help=argparse.SUPPRESS)
+    parser.add_argument("--full", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     gui = args.gui or not argv
     try:
@@ -374,7 +467,7 @@ def main(argv=None):
             for stream in (sys.stdout, sys.stderr):
                 if hasattr(stream, "reconfigure") and not stream.isatty():
                     stream.reconfigure(encoding="utf-8", line_buffering=True)
-            print(run(client, args.cache, args.output, args.restore, args.archive, args.compose_only))
+            print(run(client, args.cache, args.output, args.restore, args.archive, args.compose_only, full=args.full))
         else:
             raise ValueError("Indica la ruta de WoW Forever con --client o --addons.")
         return 0

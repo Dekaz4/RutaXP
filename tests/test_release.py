@@ -54,6 +54,8 @@ class ReleaseTests(unittest.TestCase):
         addon = ROOT / "dist" / f"RutaXP-{VERSION}-addon.zip"
         self.assertEqual(addon.read_bytes(), (ROOT / "tools/payload.zip").read_bytes())
         names = {f"RutaXP-{VERSION}.zip", addon.name, "Instalador_RutaXP.exe"}
+        from tools.publish_release import asset_names
+        names.update(asset_names(VERSION)[3:-1])
         checksums = {}
         for line in (ROOT / "dist/SHA256SUMS.txt").read_text(encoding="utf-8").splitlines():
             checksum, name = line.split("  ", 1)

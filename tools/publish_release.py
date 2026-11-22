@@ -26,6 +26,11 @@ import tempfile
 import time
 from zipfile import BadZipFile, ZipFile
 
+if __package__:
+    from .release_deltas import CATALOG, compatible_bases, delta_name
+else:
+    from release_deltas import CATALOG, compatible_bases, delta_name
+
 
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = "Dekaz4/RutaXP"
@@ -51,9 +56,15 @@ def version_from_toc(data):
     return stable_version(values[0])
 
 
-def asset_names(version):
+def asset_names(version, root=ROOT):
     stable_version(version)
-    return (f"RutaXP-{version}.zip", f"RutaXP-{version}-addon.zip", "Instalador_RutaXP.exe", "SHA256SUMS.txt")
+    record = root / CATALOG / (version + ".json")
+    deltas = []
+    if record.is_file():
+        target = json.loads(record.read_bytes())
+        deltas = [delta_name(old["version"], version) for old in compatible_bases(root, target)]
+    return (f"RutaXP-{version}.zip", f"RutaXP-{version}-addon.zip", "Instalador_RutaXP.exe",
+            *deltas, "SHA256SUMS.txt")
 
 
 def digest(path):
@@ -91,7 +102,7 @@ def checksums(path, expected_names):
             raise PublishError("SHA256SUMS.txt contiene una entrada inválida, duplicada o ajena a esta versión.")
         result[match[2]] = match[1].lower()
     if set(result) != set(expected_names):
-        raise PublishError("SHA256SUMS.txt no contiene exactamente los tres archivos de la versión.")
+        raise PublishError("SHA256SUMS.txt no coincide con los archivos de la versión.")
     return result
 
 
@@ -121,7 +132,7 @@ def inspect_archives(directory, version):
 
 
 def verify_local_assets(directory, version):
-    names = asset_names(version)
+    names = asset_names(version, directory.parent)
     for name in names:
         path = directory / name
         if not path.is_file() or path.is_symlink() or path.stat().st_size == 0:
@@ -130,10 +141,9 @@ def verify_local_assets(directory, version):
     for name, value in expected.items():
         if digest(directory / name) != value:
             raise PublishError(f"El hash local no coincide: {name}")
-    for name in names[2:-1]:
-        with (directory / name).open("rb") as stream:
-            if stream.read(2) != b"MZ":
-                raise PublishError(f"El ejecutable no tiene una cabecera Windows válida: {name}")
+    with (directory / "Instalador_RutaXP.exe").open("rb") as stream:
+        if stream.read(2) != b"MZ":
+            raise PublishError("El instalador no tiene una cabecera Windows válida.")
     inspect_archives(directory, version)
     return {name: {"sha256": digest(directory / name), "size": (directory / name).stat().st_size} for name in names}
 
@@ -266,7 +276,7 @@ class Publisher:
         existing = self.find_release(version)
         if existing and existing.get("draft") is not True:
             raise PublishError("La versión ya está publicada; nunca se modifican releases publicadas.")
-        print("Construyendo los cuatro assets de publicación…")
+        print("Construyendo el instalador, los paquetes completos y las actualizaciones incrementales…")
         self.run([sys.executable, "-B", "tools/build_release.py"], timeout=900)
         print("Ejecutando la suite completa antes de subir archivos…")
         self.run([sys.executable, "-B", "-m", "unittest", "discover", "-s", "tests"], timeout=1800)
@@ -332,7 +342,7 @@ def main(argv=None):
     try:
         version = version_from_toc((ROOT / "RutaXP/RutaXP.toc").read_text(encoding="utf-8-sig"))
         if not args.publish:
-            print(f"Plan sin efectos: {REPOSITORY}, tag v{version}, cuatro assets: " + ", ".join(asset_names(version)))
+            print(f"Plan sin efectos: {REPOSITORY}, tag v{version}, archivos: " + ", ".join(asset_names(version)))
             print("Para ejecutar: python tools/publish_release.py --publish --notes-file RUTA_AL_ARCHIVO_DE_NOTAS")
             return 0
         if not args.notes_file:
