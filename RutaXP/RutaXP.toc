@@ -70,6 +70,7 @@ DungeonQuestData.lua
 RestedQuestState.lua
 QuestFocus.lua
 DungeonPlanner.lua
+DungeonPreparationUI.lua
 GuideRestore.lua
 GuideOriginal.lua
 GuideJourney.lua

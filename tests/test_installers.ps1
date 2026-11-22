@@ -71,6 +71,7 @@ function Archive-Source {
 
 try {
     [IO.Directory]::CreateDirectory($FixtureRoot) | Out-Null
+    $FixtureRoot = (Get-Item -LiteralPath $FixtureRoot).FullName
     $source=New-Addon (Join-Path $FixtureRoot 'Source [beta] con espacios') 'new'
     if ($Case -eq 'paths') {
         $base=Join-Path $FixtureRoot 'World of Warcraft [prueba]'
