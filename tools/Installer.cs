@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Reflection;
+using System.Security.AccessControl;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Win32;
@@ -236,6 +238,52 @@ namespace RutaXPInstaller
             if (Directory.Exists(path)) { Files(path); Directory.Delete(path, true); }
         }
 
+        static void InheritAddonAccess(string target)
+        {
+            // A same-volume rename keeps the staging DACL. icacls resets both the
+            // root and its descendants to the ACL of their new parent.
+            ProcessStartInfo start = new ProcessStartInfo(
+                Path.Combine(Environment.SystemDirectory, "icacls.exe"), "\"" + target + "\" /reset /T /Q /L");
+            start.UseShellExecute = false;
+            start.CreateNoWindow = true;
+            using (Process process = Process.Start(start))
+            {
+                process.WaitForExit();
+                if (process.ExitCode != 0)
+                    throw new IOException("Windows no pudo aplicar los permisos de AddOns a " + target + " (icacls " + process.ExitCode + ").");
+            }
+        }
+
+        // Explicit restore keeps a local backup's custom access rules. Normal
+        // inherited rights still come from AddOns, as for its other children.
+        static void RestoreBackupMetadata(string source, string target)
+        {
+            Stack<string> entries = new Stack<string>();
+            entries.Push(target);
+            while (entries.Count > 0)
+            {
+                string to = entries.Pop();
+                string from = source + to.Substring(target.Length);
+                RejectLinks(from);
+                RejectLinks(to);
+                FileAttributes current = File.GetAttributes(to);
+                bool directory = (current & FileAttributes.Directory) != 0;
+                if (directory)
+                    foreach (string entry in Directory.GetFileSystemEntries(to)) entries.Push(entry);
+                FileAttributes saved = File.GetAttributes(from);
+                const FileAttributes mask = FileAttributes.ReadOnly | FileAttributes.Hidden | FileAttributes.System | FileAttributes.Archive | FileAttributes.NotContentIndexed;
+                if ((current & mask) != (saved & mask)) File.SetAttributes(to, (current & ~mask) | (saved & mask));
+                FileSystemSecurity acl = directory
+                    ? (FileSystemSecurity)Directory.GetAccessControl(from, AccessControlSections.Access)
+                    : File.GetAccessControl(from, AccessControlSections.Access);
+                if (!acl.AreAccessRulesProtected && acl.GetAccessRules(true, false, typeof(SecurityIdentifier)).Count == 0) continue;
+                FileSystemSecurity copy = directory ? (FileSystemSecurity)new DirectorySecurity() : new FileSecurity();
+                copy.SetSecurityDescriptorBinaryForm(acl.GetSecurityDescriptorBinaryForm(), AccessControlSections.Access);
+                if (directory) Directory.SetAccessControl(to, (DirectorySecurity)copy);
+                else File.SetAccessControl(to, (FileSecurity)copy);
+            }
+        }
+
         public static InstallResult InstallFromDirectory(string source, string addons)
         {
             return InstallFromDirectory(source, addons, null, null);
@@ -244,6 +292,11 @@ namespace RutaXPInstaller
         // Optional callbacks make copy and commit failures testable without
         // changing real permissions, running WoW or invoking the UI.
         public static InstallResult InstallFromDirectory(string source, string addons, Action<string, string> copy, Action beforeActivate)
+        {
+            return InstallFromDirectory(source, addons, copy, beforeActivate, false);
+        }
+
+        internal static InstallResult InstallFromDirectory(string source, string addons, Action<string, string> copy, Action beforeActivate, bool restoreMetadata)
         {
             source = Normalize(source); addons = Normalize(addons);
             List<string> resolved = ResolveDestinations(addons);
@@ -277,6 +330,12 @@ namespace RutaXPInstaller
                     RejectLinks(from);
                     Directory.CreateDirectory(Path.GetDirectoryName(to));
                     if (copy == null) File.Copy(from, to, false); else copy(from, to);
+                    FileAttributes attributes = File.GetAttributes(to);
+                    if ((attributes & FileAttributes.ReadOnly) != 0)
+                    {
+                        RejectLinks(to);
+                        File.SetAttributes(to, attributes & ~FileAttributes.ReadOnly);
+                    }
                 }
                 ValidateManifest(stage, manifest);
                 GuardChild(addons, target, "RutaXP"); GuardChild(store, backup, ".RutaXP.backup." + token);
@@ -286,6 +345,8 @@ namespace RutaXPInstaller
                 GuardChild(store, stage, ".RutaXP.stage." + token); GuardChild(addons, target, "RutaXP");
                 Directory.Move(stage, target); activated = true;
                 ValidateManifest(target, manifest);
+                InheritAddonAccess(target);
+                if (restoreMetadata) RestoreBackupMetadata(source, target);
                 return new InstallResult { Target = target, Backup = oldMoved ? backup : null };
             }
             catch (Exception problem)

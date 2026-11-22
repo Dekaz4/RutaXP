@@ -151,7 +151,8 @@ function source.Waypoint()
         return
     end
     local hint = leg and (hasText(leg.shortText) or leg.title) or (nav and hasText(nav.hint:GetText()))
-    return point.mapID, point.x, point.y, hint or (activity and planner:Hint()) or hasText(point.navigationNotice) or ""
+    return point.mapID, point.x, point.y, hint or (activity and planner:Hint()) or hasText(point.navigationNotice) or "",
+        point.walking and point.walkingWorld or nil
 end
 
 function source.TravelHint()

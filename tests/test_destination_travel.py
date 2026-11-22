@@ -1,4 +1,5 @@
 """Exercise per-character transport planning with Forever's map frames and real crossings."""
+import math
 import unittest
 from pathlib import Path
 
@@ -95,6 +96,77 @@ class DestinationTravelTests(unittest.TestCase):
         h=Destinations((1439,.43,.90))
         pin,view=h.route((1440,.29,.15))
         self.assertEqual((pin.mapID,view.kind),(1439,"road"))
+
+    def test_road_across_duskwood_and_stranglethorn_points_forward_until_map_changes(self):
+        duskwood, stranglethorn = (1431,.445,.8751), (1434,.4081,.0419)
+        for entry, exit in ((duskwood,stranglethorn),(stranglethorn,duskwood)):
+            with self.subTest(departure=entry[0]):
+                h = Destinations(entry)
+                def world(pos):
+                    p = h.h.table(dict(zip(("mapID","x","y"),pos)))
+                    return h.ns.GetWaypointWorldPosition(h.ns,p)
+                c,n,w = world(entry)
+                _,en,ew = world(exit)
+                length = math.hypot(en-n,ew-w)
+                def move(yards):
+                    p = h.ns.WorldToWaypoint(h.ns,c,n+(en-n)*yards/length,w+(ew-w)*yards/length,entry[0])
+                    h.locate((entry[0],p.x,p.y))
+                goal = (exit[0],.4,.5)
+                move(-60)
+                approach,v = h.route(goal)
+                self.assertEqual((v.kind,v.state,approach.mapID),("road","approach",entry[0]))
+                self.assertAlmostEqual(approach.x,entry[1])
+                move(-26)
+                forward,v = h.route(goal)
+                self.assertEqual((v.kind,v.state,forward.mapID),("road","crossing",entry[0]))
+                self.assertNotEqual(approach.targetKey,forward.targetKey)
+                self.assertAlmostEqual(world((forward.mapID,forward.x,forward.y))[1],en)
+                self.assertAlmostEqual(world((forward.mapID,forward.x,forward.y))[2],ew)
+                # Leaving the small approach circle, pausing and reloading all keep the forward target.
+                for d in (-38,33):
+                    move(d)
+                    self.assertEqual(h.route(goal)[0].targetKey,forward.targetKey)
+                h = Destinations((h.s.mapID,h.s.x,h.s.y),save=primitive_copy(h.ns.char))
+                self.assertEqual(h.route(goal)[0].targetKey,forward.targetKey)
+                for d in (length-2,length+17,length-9):
+                    move(d)
+                    pin,v = h.route(goal)
+                    self.assertIsNone(pin)
+                    self.assertEqual(v.state,"crossing")
+                    self.assertIn("carretera",v.text)
+                # Deliberately return well behind the entry and the approach may be shown again.
+                move(-115)
+                self.assertEqual(h.route(goal)[0].targetKey,approach.targetKey)
+                move(0)
+                self.assertEqual(h.route(goal)[0].targetKey,forward.targetKey)
+                h.locate(exit)
+                pin,v = h.route(goal)
+                self.assertEqual((pin.mapID,pin.x,pin.y),goal)
+                self.assertIsNone(v)
+
+    def test_adjacent_chapter_walk_crosses_road_at_the_actual_border(self):
+        h = Destinations((1431,.445,.8751))
+        goal = (1434,.4,.1)
+        pin,v = h.route(goal,"chapter")
+        self.assertEqual((v.state,pin.mapID),("crossing",1431))
+        self.assertGreater(pin.y,.8751)
+        h.locate((1434,.4081,.0419))
+        pin,v = h.route(goal,"chapter")
+        self.assertEqual((pin.mapID,pin.x,pin.y),goal)
+        self.assertIsNone(v)
+
+    def test_road_uses_live_origin_map_even_when_reverse_api_prefers_next_zone(self):
+        h = Destinations((1431,.445,.8751))
+        h.h.lua.execute("""
+            local reverse = C_Map.GetMapPosFromWorldPos
+            function C_Map.GetMapPosFromWorldPos(c, p, map)
+                return reverse(c,p,map==1431 and 1434 or map)
+            end
+        """)
+        pin,v = h.route((1434,.4,.5))
+        self.assertEqual((v.kind,v.state,pin.mapID),("road","crossing",1431))
+        self.assertAlmostEqual(pin.x,.450625,places=5)
+        self.assertAlmostEqual(pin.y,.905741,places=5)
 
     def test_unknown_destination_and_tram_have_no_remote_arrow(self):
         h=Destinations((1455,.78,.5137))

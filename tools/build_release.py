@@ -135,7 +135,8 @@ def main():
     test_dir = ROOT / "tests"
     for pattern in ("test_install_suite.py", "test_personal_*.py", "test_suite_*.py", "test_guide_*.py",
                     "test_dungeon_*.py", "test_quest_focus.py", "test_installers.py", "test_installers.ps1",
-                    "test_updater.py", "test_updater.ps1", "test_release.py", "test_publish_release.py"):
+                    "test_updater.py", "test_updater.ps1", "test_release.py", "test_publish_release.py",
+                    "test_walking_lookahead.py", "test_walking_history.py"):
         for source in sorted(test_dir.glob(pattern)):
             release_files[source.relative_to(ROOT).as_posix()] = source.read_bytes()
     destination = ROOT / "dist"

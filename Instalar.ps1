@@ -253,6 +253,11 @@ function Install-RutaXP {
             Assert-RutaXPNoLinks $from
             [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($to)) | Out-Null
             & $CopyFile $from $to | Out-Null
+            $attributes = [IO.File]::GetAttributes($to)
+            if ($attributes -band [IO.FileAttributes]::ReadOnly) {
+                Assert-RutaXPNoLinks $to
+                [IO.File]::SetAttributes($to, ($attributes -band (-bnot [IO.FileAttributes]::ReadOnly)))
+            }
         }
         Assert-RutaXPManifest $stage $manifest
         Assert-RutaXPChild $parent $target 'RutaXP'
@@ -270,6 +275,10 @@ function Install-RutaXP {
         [IO.Directory]::Move($stage, $target)
         $activated = $true
         Assert-RutaXPManifest $target $manifest
+        # A same-volume rename preserves the staging ACL instead of inheriting AddOns.
+        $icacls = Join-Path ([Environment]::SystemDirectory) 'icacls.exe'
+        & $icacls $target /reset /T /Q /L | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw "Windows no pudo aplicar los permisos de AddOns a $target (icacls $LASTEXITCODE)." }
         return [pscustomobject]@{ Target=$target; Backup=$(if ($oldMoved) { $backup } else { $null }) }
     } catch {
         $problem = $_.Exception.Message

@@ -439,4 +439,15 @@ class OriginalGuideJourneyTests(unittest.TestCase):
             ns:GetArrowWaypoint(); tick(); tick()
             assert(RutaXPJourneyScreenArrow.container:IsShown() and directQueries==0)
             assert(RutaXPJourneyScreenArrow.label.text=="Tramo 2/3")
+            local hud=RutaXPJourneyScreenArrow
+            local hides=0
+            local hide=hud.container.Hide
+            function hud.container:Hide() hides=hides+1; hide(self) end
+            sampledTurn.walking=true
+            sampledTurn.walkingWorld={continent=1,north=417,west=500}
+            ns:GetArrowWaypoint(); tick(); tick()
+            assert(hud.distLabel:GetText()==scope.FormatJourneyDistance(17))
+            sampledTurn.walkingWorld={continent=1,north=447,west=500}
+            ns:GetArrowWaypoint(); tick(); tick()
+            assert(hud.distLabel:GetText()==scope.FormatJourneyDistance(47) and hides==0)
         """)

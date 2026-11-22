@@ -212,6 +212,73 @@ end
 local function sameFloor(pz,z)
     return not finite(pz) or not finite(z) or math.abs(pz-z)<=12
 end
+-- A shortcut is safe on the path engine's mesh only if it takes the same
+-- ordered cell-to-cell moves (including diagonals) as the certified route.
+-- This bounded walk only reads the grid scale, never decompresses terrain.
+local function cellMoves(ax,ay,bx,by,cell)
+    ax,ay,bx,by=ax/cell,ay/cell,bx/cell,by/cell
+    local x,y,ex,ey=math.floor(ax),math.floor(ay),math.floor(bx),math.floor(by)
+    local dx,dy=bx-ax,by-ay
+    local sx,sy=dx>=0 and 1 or -1,dy>=0 and 1 or -1
+    local function crossing(v,start,delta,sign)
+        if delta==0 then return math.huge end
+        return (v+(sign>0 and 1 or 0)-start)/delta
+    end
+    local moves={}
+    while x~=ex or y~=ey do
+        local tx=x~=ex and crossing(x,ax,dx,sx) or math.huge
+        local ty=y~=ey and crossing(y,ay,dy,sy) or math.huge
+        local mx,my=tx<=ty and sx or 0,ty<=tx and sy or 0
+        moves[#moves+1]=string.char(5+3*mx+my)
+        x,y=x+mx,y+my
+    end
+    return table.concat(moves)
+end
+
+local function steeringPoint(points,index,continent,px,py,pz)
+    local node=points[index]
+    if index>=#points or distance(px,py,node.x,node.y)>25 then return node end
+    local previous=points[index-1]
+    local off,_,u,z=projection(px,py,previous,node,pz)
+    if off>1.5 or not finite(z) or (finite(pz) and math.abs(z-pz)>2) then return node end
+    local ax,ay=previous.x+(node.x-previous.x)*u,previous.y+(node.y-previous.y)*u
+    local grid=ns.PathingNamespace and ns.PathingNamespace.PathGrid
+    local data=RutaXPPathData and RutaXPPathData[continent]
+    local cell=grid and data and finite(grid.TILE) and finite(data.cells) and data.cells>0 and grid.TILE/data.cells
+    -- Tile origins are integer multiples of the cell size on both axes.
+    if cell and (math.floor(px/cell)~=math.floor(ax/cell) or math.floor(py/cell)~=math.floor(ay/cell)) then return node end
+    local origin={x=px,y=py,z=pz or z}
+    local aim=node
+    local walked=distance(ax,ay,node.x,node.y)
+    local grade=finite(pz) and .35 or .05
+    if math.abs(node.z-z)>grade*walked then return node end
+    local moves=cell and cellMoves(ax,ay,node.x,node.y,cell) or ""
+    for j=index,math.min(#points-1,index+5) do
+        local a,b=points[j],points[j+1]
+        local dx,dy=b.x-a.x,b.y-a.y
+        local length=math.sqrt(dx*dx+dy*dy)
+        local incoming=distance(ax,ay,a.x,a.y)
+        if length<.01 or incoming<.01 or walked>=36 or not finite(a.z) or not finite(b.z) then break end
+        if ((a.x-ax)*dx+(a.y-ay)*dy)<.98*incoming*length or math.abs(b.z-a.z)>grade*length then break end
+        local fraction=math.min(1,(36-walked)/length)
+        local target=fraction==1 and b or {x=a.x+fraction*dx,y=a.y+fraction*dy,z=a.z+fraction*(b.z-a.z)}
+        local safe=true
+        for k=index,j do
+            local bend=points[k]
+            local gap,_,_,height=projection(bend.x,bend.y,origin,target)
+            if gap>(cell and 1.5 or .00001) or math.abs(bend.z-height)>1 then safe=false; break end
+        end
+        if not safe then break end
+        if cell then
+            moves=moves..cellMoves(a.x,a.y,target.x,target.y,cell)
+            if cellMoves(px,py,target.x,target.y,cell)~=moves then break end
+        end
+        aim=target
+        if fraction<1 then break end
+        walked,ax,ay=walked+length,a.x,a.y
+    end
+    return aim
+end
 function W:_Follow(px,py,pz)
     local points,index=self.points,math.max(2,self.index or 2)
     local originZ=self.pathZ
@@ -473,14 +540,15 @@ function W:Resolve(point)
             end
             return blockedWaypoint(self, out)
         end
-        local aim=ns.WorldToWaypoint and ns:WorldToWaypoint(continent,node.x,node.y,here.mapID)
+        local visual=steeringPoint(points,index,continent,px,py,pz)
+        local aim=ns.WorldToWaypoint and ns:WorldToWaypoint(continent,visual.x,visual.y,here.mapID)
         if not aim then
             self.phase,self.text="unavailable","No se puede situar el siguiente giro en este mapa"
             return blockedWaypoint(self, out)
         end
-        out.mapID,out.x,out.y,out.z=aim.mapID,aim.x,aim.y,node.z
+        out.mapID,out.x,out.y,out.z=aim.mapID,aim.x,aim.y,visual.z
         out.walking,out.walkingIndex,out.walkingCount=true,index,#points
-        out.walkingWorld={continent=continent,north=node.x,west=node.y}
+        out.walkingWorld={continent=continent,north=visual.x,west=visual.y}
         out.walkingDistance=distance(px,py,node.x,node.y)+(self.left[index] or 0)
         out.walkingFinal,out.walkingGoal=index==#points and not self.pending and not self.refreshWanted,point
         out.navigationNotice=nil

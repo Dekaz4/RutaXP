@@ -2,8 +2,10 @@
 
 import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
+import stat
 import subprocess
 import tempfile
 import unittest
@@ -137,6 +139,79 @@ class LocalSuiteInstallTests(unittest.TestCase):
         for module in (*MODULES, "RutaXP"):
             self.assertTrue((self.addons / module / "old").is_file())
         self.assertFalse((self.client / "escape").exists())
+
+    @unittest.skipUnless(os.name == "nt", "NTFS permissions required")
+    def test_new_files_inherit_destination_access_and_rollback_preserves_prior_access(self):
+        def grant(path, *rules):
+            subprocess.run(["icacls", str(path), "/grant", *rules], check=True, capture_output=True)
+
+        def acl(*paths):
+            # Get just DACLs, without admin rights or translated account names.
+            code = """
+            $sections = [Security.AccessControl.AccessControlSections]::Access
+            foreach ($p in (ConvertFrom-Json $env:RUTAXP_TEST_PATHS)) {
+                if ([IO.Directory]::Exists($p)) { $a = [IO.Directory]::GetAccessControl($p) }
+                else { $a = [IO.File]::GetAccessControl($p) }
+                $a.GetSecurityDescriptorSddlForm($sections)
+            }
+            """
+            result = subprocess.run([POWERSHELL, "-NoProfile", "-NonInteractive", "-Command", code],
+                                    env={**os.environ, "RUTAXP_TEST_PATHS": json.dumps(list(map(str, paths)))},
+                                    capture_output=True, text=True, check=True)
+            return result.stdout.splitlines()
+
+        saved = self.client / "WTF/Account/Friend/SavedVariables"
+        saved.mkdir(parents=True)
+        settings = saved / "RutaXP.lua"
+        settings.write_text("RutaXPDB = {}")
+        (saved / "OpenMap.lua").write_text("OpenMapDB = {}")
+        # LOCAL SERVICE and NETWORK SERVICE simulate the patcher and another
+        # account, with deliberately different access in AddOns, WTF and staging.
+        grant(self.addons, "*S-1-5-19:(OI)(CI)(M)", "*S-1-5-20:(OI)(CI)(RX)")
+        grant(saved, "*S-1-5-19:(OI)(CI)(RX)")
+        self.store.mkdir(parents=True)
+        grant(self.store, "*S-1-5-20:(OI)(CI)(M)")
+        original = self.addons / "RutaXP/old"
+        grant(original, "*S-1-5-20:(M)")
+        original.chmod(stat.S_IREAD)
+        self.addCleanup(lambda: original.exists() and original.chmod(stat.S_IWRITE))
+        old = acl(original, settings)
+        control = self.addons / "Neighbour"
+        (control / "nested").mkdir(parents=True)
+        control_file = control / "nested/file.lua"
+        control_file.touch()
+        control_saved = saved / "Unrelated.lua"
+        control_saved.touch()
+        expected = acl(control, control / "nested", control_file, control_saved)
+        self.assertNotEqual(expected[2], expected[3])
+        source = self.package / "nested/file.lua"
+        source.parent.mkdir()
+        source.write_text("-- test")
+        source.chmod(stat.S_IREAD)
+        self.addCleanup(lambda: source.chmod(stat.S_IWRITE))
+        self.pack()
+
+        # This open file allows staging its contents but prevents renaming the
+        # original at activation time, after the new addon has already landed.
+        with settings.open("rb"):
+            self.script("-AddonDirectory", self.package, ok=False)
+        self.assertEqual(acl(original, settings), old)
+        self.assertTrue(original.stat().st_file_attributes & stat.FILE_ATTRIBUTE_READONLY)
+        self.assertEqual(len(list(self.store.glob("*/restored"))), 1)
+        self.assertFalse(any(self.store.glob("*/committed")))
+
+        self.script("-AddonDirectory", self.package)
+        installed = self.addons / "RutaXP"
+        leaf = installed / "nested/file.lua"
+        self.assertEqual(acl(installed, leaf.parent, leaf, settings), expected)
+        self.assertFalse(leaf.stat().st_file_attributes & stat.FILE_ATTRIBUTE_READONLY)
+        with leaf.open("ab"):
+            pass
+        self.assertTrue(source.stat().st_file_attributes & stat.FILE_ATTRIBUTE_READONLY)
+        self.assertEqual(acl(control, control / "nested", control_file, control_saved), expected)
+        self.script("-Restore")
+        self.assertEqual(acl(original, settings), old)
+        self.assertTrue(original.stat().st_file_attributes & stat.FILE_ATTRIBUTE_READONLY)
 
     def test_journey_is_retired_only_for_a_verified_journey_presentation(self):
         native = self.addons / "Journey"

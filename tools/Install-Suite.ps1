@@ -107,6 +107,10 @@ function StagePackage([string]$target) {
             $dest = ChildPath $target ($file.Substring($source.Length + 1))
             MakeDirectory ([IO.Path]::GetDirectoryName($dest))
             [IO.File]::Copy($file,$dest)
+            $attributes = [IO.File]::GetAttributes($dest)
+            if ($attributes -band [IO.FileAttributes]::ReadOnly) {
+                [IO.File]::SetAttributes($dest, ($attributes -band (-bnot [IO.FileAttributes]::ReadOnly)))
+            }
         }
     } else {
         Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -184,6 +188,22 @@ function Transfer([string]$from,[string]$to) {
     Assert-NoLink $to
     if ([IO.Directory]::Exists($from)) { [IO.Directory]::Move($from,$to) }
     else { [IO.File]::Move($from,$to) }
+}
+function InheritDestinationAccess([string]$target) {
+    if ([Environment]::OSVersion.Platform -ne [PlatformID]::Win32NT) { return }
+    $volumeRoot = [IO.Path]::GetPathRoot($target)
+    if ($volumeRoot -match '^[a-z]:') {
+        $volume = [IO.DriveInfo]::new($volumeRoot)
+        if ($volume.DriveFormat -in @('FAT','FAT32','exFAT')) { return }
+    }
+    # A same-volume rename retains the external stage's ACL. Only reset the
+    # newly activated object so it inherits the actual AddOns or WTF parent.
+    Assert-NoLink $target
+    $argsList = @($target, '/reset', '/L', '/Q')
+    if ([IO.Directory]::Exists($target)) { $argsList += '/T' }
+    $icacls = [IO.Path]::Combine([Environment]::SystemDirectory, 'icacls.exe')
+    & $icacls @argsList | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw 'No se pudieron heredar los permisos de la carpeta de destino.' }
 }
 function MoveOldTransactions([string]$old,[string]$external) {
     foreach ($item in Get-ChildItem -LiteralPath $old -Force -Directory) {
@@ -367,7 +387,10 @@ try {
                 $row = $rows[$i]
                 $target = TargetPath $row.dest
                 if ($row.old) { Transfer $target (ChildPath $tx "prior/$i") }
-                if ($row.add) { Transfer (ChildPath $tx "new/$i") $target }
+                if ($row.add) {
+                    Transfer (ChildPath $tx "new/$i") $target
+                    InheritDestinationAccess $target
+                }
             }
             [IO.File]::WriteAllText((ChildPath $tx 'committed'),'')
         } catch { Rollback $tx $rows; throw }

@@ -39,6 +39,21 @@ function Assert-Old {
     Assert-RutaXPManifest $Target $Before
     Assert-True ([IO.File]::ReadAllText((Join-Path $Target 'Core.lua')) -eq '-- old') 'The previous version changed.'
 }
+function Grant-FixtureAccess {
+    param([string]$Path, [string]$Sid)
+    $options = [Security.AccessControl.InheritanceFlags]'ContainerInherit, ObjectInherit'
+    $sidObject = [Security.Principal.SecurityIdentifier]::new($Sid)
+    $rule = [Security.AccessControl.FileSystemAccessRule]::new($sidObject, 'ReadAndExecute', $options, 'None', 'Allow')
+    $acl = [IO.Directory]::GetAccessControl($Path)
+    $acl.AddAccessRule($rule)
+    [IO.Directory]::SetAccessControl($Path, $acl)
+}
+function Has-InheritedAccess {
+    param([string]$Path, [string]$Sid)
+    $acl = [IO.File]::GetAccessControl($Path)
+    $rules = $acl.GetAccessRules($false, $true, [Security.Principal.SecurityIdentifier])
+    return @($rules | Where-Object { $_.IdentityReference.Value -eq $Sid -and ($_.FileSystemRights -band [Security.AccessControl.FileSystemRights]::ReadData) }).Count -gt 0
+}
 function Archive-Source {
     param([string]$Source, [string]$Extra)
     $memory=New-Object IO.MemoryStream
@@ -93,6 +108,10 @@ try {
         foreach ($engine in @('PS','CS')) {
             $addons=New-Destination $engine
             $store=Join-Path $FixtureRoot ("RutaXP-Suite-Backups\" + $engine + "\_classic_beta_")
+            [IO.Directory]::CreateDirectory($store) | Out-Null
+            Grant-FixtureAccess $addons 'S-1-5-19'
+            Grant-FixtureAccess $store 'S-1-5-20'
+            (Get-Item -LiteralPath (Join-Path $source 'Core.lua')).IsReadOnly = $true
             $target=New-Addon (Join-Path $addons 'RutaXP') 'old'
             Put (Join-Path $target 'custom-guide.lua') '-- preserve me'
             Seal-Addon $target
@@ -106,12 +125,22 @@ try {
             Assert-True ([IO.Directory]::Exists($result.Backup)) 'Successful update must preserve the previous folder.'
             Assert-Old $result.Backup $before
             Assert-RutaXPManifest $target (Get-RutaXPManifest $source)
+            foreach ($path in @($target, (Join-Path $target 'Sub'), (Join-Path $target 'Sub\ui.lua'))) {
+                Assert-True (Has-InheritedAccess $path 'S-1-5-19') "New tree did not inherit AddOns access: $path"
+                Assert-True (-not (Has-InheritedAccess $path 'S-1-5-20')) "The staging ACL leaked into AddOns: $path"
+            }
+            Assert-True (-not (Get-Item -LiteralPath (Join-Path $target 'Core.lua')).IsReadOnly) 'Read-only attribute leaked from the package.'
+            Assert-True (Get-Item -LiteralPath (Join-Path $source 'Core.lua')).IsReadOnly 'The source lost its original read-only bit.'
             Assert-True (Test-Path -LiteralPath (Join-Path $target 'Source\editable.json')) 'A non-TOC source file was lost.'
         }
     } elseif ($Case -eq 'failures') {
         foreach ($engine in @('PS','CS')) {
             $addons=New-Destination $engine
             $target=New-Addon (Join-Path $addons 'RutaXP') 'old'
+            Grant-FixtureAccess $target 'S-1-5-19'
+            $oldAcl=[IO.File]::GetAccessControl($target).GetSecurityDescriptorSddlForm('Access')
+            $oldFile=Get-Item -LiteralPath (Join-Path $target 'Core.lua')
+            $oldFile.IsReadOnly=$true
             $before=Get-RutaXPManifest $target
             if ($engine -eq 'PS') {
                 Assert-Throws { Install-RutaXP $source $addons -CopyFile { throw 'simulated copy failure' } }
@@ -130,6 +159,19 @@ try {
                 Assert-Throws { [RutaXPInstaller.InstallerCore]::InstallFromDirectory($source,$addons,$null,$activate) }
             }
             Assert-Old $target $before
+            $store=Get-RutaXPBackupStore $addons
+            $breakStage={
+                $stage=[IO.Directory]::GetDirectories($store,'.RutaXP.stage.*')[0]
+                [IO.File]::AppendAllText((Join-Path $stage 'Sub\ui.lua'),'invalid after activation')
+            }
+            if ($engine -eq 'PS') {
+                Assert-Throws { Install-RutaXP $source $addons -BeforeActivate $breakStage }
+            } else {
+                Assert-Throws { [RutaXPInstaller.InstallerCore]::InstallFromDirectory($source,$addons,$null,[Action]$breakStage) }
+            }
+            Assert-Old $target $before
+            Assert-True ([IO.File]::GetAccessControl($target).GetSecurityDescriptorSddlForm('Access') -ceq $oldAcl) 'Rollback changed the original permissions.'
+            Assert-True (Get-Item -LiteralPath $oldFile.FullName).IsReadOnly 'Rollback changed the original attributes.'
             Assert-True (@(Get-ChildItem -LiteralPath $addons -Force | Where-Object { $_.Name -like '.RutaXP.*' }).Count -eq 0) 'Failed transaction left a staging or backup folder after successful rollback.'
         }
     } elseif ($Case -eq 'invalid') {

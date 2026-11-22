@@ -82,6 +82,14 @@ function Assert-Wtf { param([string]$Addons)
     Assert-True ([IO.File]::ReadAllText((Join-Path $client 'WTF\Account\untouched.lua')) -eq '-- never touch WTF') 'WTF changed.'
     Assert-True ([IO.File]::ReadAllText((Join-Path $Addons 'OtherAddon\keep.lua')) -eq '-- other addon') 'Another addon changed.'
 }
+function Fixture-FileAccess { param([string]$Path)
+    # Windows may reorder equivalent inherited allow ACEs while applying the DACL.
+    $acl=[IO.File]::GetAccessControl($Path)
+    $rules=$acl.GetAccessRules($true,$true,[Security.Principal.SecurityIdentifier]) | ForEach-Object {
+        '{0},{1},{2},{3}' -f $_.IdentityReference.Value, $_.AccessControlType, $_.FileSystemRights, $_.IsInherited
+    } | Sort-Object
+    return "$($acl.AreAccessRulesProtected):" + ($rules -join '|')
+}
 function Patch-ZipLength { param([byte[]]$Bytes,[uint32]$Length)
     $copy=[byte[]]$Bytes.Clone()
     for($i=0;$i -lt $copy.Length-46;$i++) {
@@ -242,6 +250,18 @@ try {
             Assert-Wtf $addons
         }
         'restore' {
+            $account=[Security.Principal.SecurityIdentifier]::new('S-1-5-19')
+            $access=[IO.Directory]::GetAccessControl($target)
+            $access.SetAccessRuleProtection($true, $true)
+            $access.AddAccessRule([Security.AccessControl.FileSystemAccessRule]::new($account,'ReadAndExecute','ContainerInherit, ObjectInherit','None','Allow'))
+            [IO.Directory]::SetAccessControl($target,$access)
+            $core=Join-Path $target 'Core.lua'
+            $fileAccess=[IO.File]::GetAccessControl($core)
+            $fileAccess.AddAccessRule([Security.AccessControl.FileSystemAccessRule]::new([Security.Principal.SecurityIdentifier]::new('S-1-5-20'),'Read','Allow'))
+            [IO.File]::SetAccessControl($core,$fileAccess)
+            (Get-Item -LiteralPath $core).IsReadOnly=$true
+            $savedRootAcl=[IO.Directory]::GetAccessControl($target).GetSecurityDescriptorSddlForm('Access')
+            $savedFileAcl=Fixture-FileAccess $core
             $result=Update $addons;$oldBackup=$result.Backup
             $store=[RutaXPInstaller.InstallerCore]::BackupStore($addons)
             Assert-True ([IO.Path]::GetDirectoryName($oldBackup) -eq $store) 'The public updater placed a backup in the game folder.'
@@ -255,6 +275,12 @@ try {
             Assert-Throws {[RutaXPUpdater.UpdaterCore]::Restore($addons,$foreignName,$script:IsRunning,$null)}
             $restored=[RutaXPUpdater.UpdaterCore]::Restore($addons,$null,$script:IsRunning,$null)
             Assert-Old $target;Assert-Old $oldBackup
+            foreach ($folder in @($target,$oldBackup)) {
+                Assert-True ([IO.Directory]::GetAccessControl($folder).GetSecurityDescriptorSddlForm('Access') -ceq $savedRootAcl) 'Restoring must preserve the root protected DACL.'
+                $file=Join-Path $folder 'Core.lua'
+                Assert-True ((Fixture-FileAccess $file) -ceq $savedFileAcl) 'The file lost explicit or inherited permissions during restore.'
+                Assert-True (Get-Item -LiteralPath $file).IsReadOnly 'Restoring must preserve original file attributes.'
+            }
             Assert-True ([RutaXPUpdater.UpdaterCore]::TocVersion($restored.Backup) -eq '0.10.0') 'Restoring must also back up the current version.'
             [RutaXPInstaller.InstallerCore]::Manifest($restored.Backup) | Out-Null
             $legacyName='.RutaXP.backup.'+[guid]::NewGuid().ToString('N')

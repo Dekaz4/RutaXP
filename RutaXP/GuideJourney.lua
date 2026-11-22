@@ -289,10 +289,17 @@ local function updateTarget()
     elseif status == "journal" then waypoint = ns.GuideCarryover.Waypoint
     elseif current then waypoint = engine.Waypoint end
     if not waypoint then clearArrow(); return end
-    local map, x, y, label = waypoint()
+    local map, x, y, label, walking = waypoint()
     if not finite(map) or not finite(x) or not finite(y) or
         x < 0 or x > 1 or y < 0 or y > 1 then clearArrow(); return end
-    local world, point = C_Map.GetWorldPosFromMapPos(map, CreateVector2D(x, y))
+    local world, point
+    if walking and finite(walking.continent) and finite(walking.north) and finite(walking.west) then
+        -- Steering and UnitPosition use terrain yards. Reprojecting a short
+        -- turn through the map can place it behind a player who has passed it.
+        world, point = walking.continent, {x=walking.north, y=walking.west}
+    else
+        world, point = C_Map.GetWorldPosFromMapPos(map, CreateVector2D(x, y))
+    end
     sampleOrigin()
     local px, py, _, playerWorld = compassPosition("player")
     -- World yards have independent origins on each continent. Never point
@@ -302,11 +309,12 @@ local function updateTarget()
     end
     if playerWorld ~= world then clearArrow(); return "Destino en otro continente" end
     if not compassFacing() then clearArrow(); return "Esperando la orientación del personaje" end
-    if not target or target.map ~= map or target.x ~= x or target.y ~= y or arrow.mapID ~= map then
-        clearArrow()
-        arrow:SetTarget(x,y,map,false,point)
-        if arrow.mapID ~= map then return "Esperando la posición en el mapa" end
-        target = {map=map, x=x, y=y}
+    if not target or arrow.mapID ~= map or arrow.worldTargetX ~= point.x or arrow.worldTargetY ~= point.y then
+        -- SetTarget replaces the current destination. ClearTarget also hides
+        -- the HUD, which made it blink at every turn even on the same road.
+        arrow:SetTarget(x,y,map,not not (walking and target),point)
+        if arrow.mapID ~= map then clearArrow(); return "Esperando la posición en el mapa" end
+        target = true
     end
     arrow.screenLabel = label or title
 end

@@ -366,7 +366,7 @@ namespace RutaXPUpdater
             if (chosen == null) throw new IOException("No hay una copia anterior valida para restaurar.");
             InstallerCore.Manifest(chosen.Path); RequireClosed(running);
             Action guardedActivation = delegate { RequireClosed(running); if (beforeActivate != null) beforeActivate(); RequireClosed(running); };
-            return InstallerCore.InstallFromDirectory(chosen.Path, addons, null, guardedActivation);
+            return InstallerCore.InstallFromDirectory(chosen.Path, addons, null, guardedActivation, true);
         }
     }
 

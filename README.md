@@ -32,7 +32,7 @@ Los servicios se dibujan también en la primera apertura del mapa. En pueblos co
 
 Si el objetivo está en otro continente, el panel de Journey indica cómo llegar al siguiente transporte. La brújula señala el muelle o el maestro de vuelo. Las conexiones observadas en el mapa de vuelo de ese personaje permiten incorporar vuelos al viaje. En la travesía de Menethil a Auberdine, la guía indica que permanezcas a bordo en Costasur y recupera el destino de misión al llegar. La brújula comparte la opción `/rutaxp flecha` y conserva la posición que ya habías elegido.
 
-Para desplazamientos largos por varias zonas, la guía calcula primero la parada local. Mientras busca un camino transitable puede mostrar «Rumbo orientativo» hacia esa parada. Cuando encuentra el camino, la brújula pasa a guiarte por sus giros.
+Para desplazamientos largos por varias zonas, la guía calcula primero la parada local. Mientras busca un camino transitable puede mostrar «Rumbo orientativo» hacia esa parada. En las rectas la brújula apunta más adelante cuando el terreno permite seguir de frente. Al llegar a una curva o al destino señala el punto preciso. En un paso entre zonas te guía hasta la salida de la carretera y retoma la misión cuando cambias de zona.
 
 ### Misiones de mundo y mazmorras
 

@@ -199,6 +199,68 @@ local function nearStop(p,sample,radius)
     return sample and select(3,sample(p)) <= radius^2
 end
 
+local function roadKey(e)
+    return table.concat({e.from.map,e.from.x,e.from.y,e.to.map,e.to.x,e.to.y},":")
+end
+
+local function roadExitPoint(self,e,c,n,w)
+    local map=e.from.map
+    local point=self:WorldToWaypoint(c,n,w,map)
+    if point and point.mapID==map then return point end
+    -- Some clients answer the reverse lookup with the neighbouring zone
+    -- despite the requested map. Its live rectangle may still contain the exit.
+    local c1,top,left=self:GetWaypointWorldPosition({mapID=map,x=0,y=0})
+    local c2,bottom,right=self:GetWaypointWorldPosition({mapID=map,x=1,y=1})
+    if c1==c and c2==c and top~=bottom and left~=right then
+        local x,y=(w-left)/(right-left),(n-top)/(bottom-top)
+        if x>=0 and x<=1 and y>=0 and y<=1 then return {mapID=map,x=x,y=y} end
+    end
+    -- The adjacent exit is a verified point on this road and continent.
+    return self:ResolveWaypointPoint(e.to)
+end
+
+local function crossingView(self,e,saved,sample)
+    local c,n,w = world(e.from)
+    local c2,n2,w2 = world(e.to)
+    local point
+    if c and c == c2 then
+        local dn,dw = n2-n,w2-w
+        local length = math.sqrt(dn*dn+dw*dw)
+        if sample then
+            local sn,sw = sample(e.from)
+            if sn then
+                -- sn/sw point from player to entry. Keep the exit while
+                -- walking forward, even after leaving the entry's 30 yards.
+                local along = length > 0 and -(sn*dn+sw*dw)/length or 0
+                local sideways = length > 0 and math.abs(sn*dw-sw*dn)/length or math.sqrt(sn*sn+sw*sw)
+                if along < -95 or sideways > 95 + math.min(length*.15,75) then return end
+                local exitDistance = (sn+dn)^2+(sw+dw)^2
+                if exitDistance <= 10^2 or along >= length then saved.atRoadExit = true
+                elseif exitDistance > 30^2 and along < length-20 then saved.atRoadExit = nil end
+            end
+        end
+        if not saved.atRoadExit then
+            point = roadExitPoint(self,e,c,n2,w2)
+        end
+    elseif sample then
+        local _,_,distance = sample(e.from)
+        if distance < math.huge and distance > 95^2 then return end
+    end
+    local name = e.to.name or mapName(e.to.map)
+    local title = "Cruza hacia "..name
+    local text = "Sigue la carretera hacia "..name.." hasta que cambie la zona."
+    if point then
+        point.label,point.source = title,"destination-travel"
+        point.targetKey = saved.key..":"..roadKey(e)..":exit"
+    end
+    return view("road","crossing",title,text,point)
+end
+
+local function startCrossing(self,e,saved,sample)
+    saved.road, saved.atRoadExit = roadKey(e), nil
+    return crossingView(self,e,saved,sample)
+end
+
 -- The map can change well out at sea. The landing, another known inland
 -- crossing/flight master, or the quest location itself is positive evidence
 -- that the player can continue on land after a missed sample or hearthstone.
@@ -218,7 +280,7 @@ local function onArrivalSide(edge,network,sample,destination)
 end
 
 local function routeState(self, channel, key)
-    if not self.char then return {} end
+    if not self.char then return {key=key} end
     local trips=self.char.destinationTrips
     if type(trips) ~= "table" then trips={}; self.char.destinationTrips=trips end
     if type(trips[channel]) ~= "table" or trips[channel].key ~= key then trips[channel]={key=key} end
@@ -274,7 +336,19 @@ function ns:RouteDestination(destination,key,channel)
         else saved.board,saved.origin=nil,nil end
     end
     if R.OnTaxi() then
+        saved.road,saved.atRoadExit=nil,nil
         return nil,view("flight","flying","Espera a aterrizar", "Estás en vuelo. Al aterrizar se recalculará el siguiente tramo.")
+    end
+    if saved.road and zone then
+        for _,e in ipairs(fixed and fixed[start] or {}) do
+            if e.kind=="road" and roadKey(e)==saved.road then
+                local crossing=crossingView(self,e,saved,sample)
+                if crossing then return crossing.point,crossing end
+                break
+            end
+        end
+        saved.road,saved.atRoadExit=nil,nil
+        cached[channel]=nil
     end
     if (actual==destination.mapID or zone==finish) and (zone~=TELDRASSIL or start==target) then
         saved.started=nil
@@ -284,7 +358,17 @@ function ns:RouteDestination(destination,key,channel)
         local here=self.PlayerPoint and self:PlayerPoint()
         local c = here and world(here)
         local destC=world(destination)
-        if c and destC and c==destC and localChapterTrip(fixed,start,target,here,destination) then return destination end
+        if c and destC and c==destC and localChapterTrip(fixed,start,target,here,destination) then
+            -- Keep authored local walks, but hand off to the forward exit
+            -- when that walk reaches the actual road into its next zone.
+            for _,e in ipairs(fixed and fixed[start] or {}) do
+                if e.kind=="road" and e.target==target and nearStop(e.from,sample,30) then
+                    local crossing=startCrossing(self,e,saved,sample)
+                    return crossing.point,crossing
+                end
+            end
+            return destination
+        end
     end
     saved.started=true
     if not zone or not target then
@@ -319,6 +403,10 @@ function ns:RouteDestination(destination,key,channel)
         return nil,view("tram","boarding","Toma el tranvía a "..mapName(e.to.map),"Baja en "..mapName(e.to.map).." y sal por la estación.")
     end
     local at = R.Near({map=zone,x=e.from.x,y=e.from.y,f=e.from.f,radius=(e.kind=="flight" and 12 or 30)},sample)
+    if at and e.kind=="road" then
+        local crossing=startCrossing(self,e,saved,sample)
+        return crossing.point,crossing
+    end
     local title,text=instruction(e,zone,at)
     if arrival then text=arrival..". "..text end
     if at and transport(e) then saved.board,saved.origin=portKey(e),start end
@@ -326,7 +414,7 @@ function ns:RouteDestination(destination,key,channel)
     if not at then point=self:ResolveWaypointPoint(e.from) end
     if point then
         point.label,point.source=title,"destination-travel"
-        point.targetKey=saved.key..":"..(portKey(e) or (e.from.map..":"..e.from.x..":"..e.from.y))
+        point.targetKey=saved.key..":"..(e.kind=="road" and roadKey(e)..":entry" or portKey(e) or (e.from.map..":"..e.from.x..":"..e.from.y))
     end
     return point,view(e.kind,at and "boarding" or "approach",title,text,point)
 end
