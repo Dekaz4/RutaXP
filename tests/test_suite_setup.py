@@ -292,7 +292,10 @@ class PortableSuiteSetupTests(unittest.TestCase):
     def test_public_data_inputs_only(self):
         allowed = build_suite_setup.bundle_inputs(build_suite_setup.ROOT)
         self.assertTrue(all(p.is_file() for p in allowed))
-        self.assertTrue(all(p.suffix.lower() not in (".zip", ".exe", ".blp") for p in allowed))
+        archives = {p.relative_to(build_suite_setup.ROOT).as_posix() for p in allowed if p.suffix.lower() == ".zip"}
+        self.assertEqual(archives, {"tools/vendor/lfg-forever/LFGForever.zip",
+                                    "tools/vendor/lfg-forever/LFGForeverLanguageSpanish.zip"})
+        self.assertTrue(all(p.suffix.lower() not in (".exe", ".blp") for p in allowed))
         self.assertFalse(any("Modules" in p.parts or ".sources" in p.parts for p in allowed))
 
     @unittest.skipUnless(os.name == "nt", "Requires the Windows setup executable")

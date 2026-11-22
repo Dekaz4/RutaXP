@@ -18,6 +18,8 @@ else:
 ROOT = Path(__file__).resolve().parents[1]
 BUILD_VERSION = "6.13.0"
 NAME = "Instalar_Suite_RutaXP"
+LFG_ARCHIVES = ("tools/vendor/lfg-forever/LFGForever.zip",
+                "tools/vendor/lfg-forever/LFGForeverLanguageSpanish.zip")
 SCRIPTS = ("suite_setup.py", "build_suite_setup.py", "build_personal_suite.py",
            "suite_lua.py", "suite_map_journal.py", "suite_journey.py", "official_sources.py")
 
@@ -28,6 +30,7 @@ def bundle_inputs(root):
         *(f for f in sorted((root / "RutaXP/Licenses").iterdir())
           if f.is_file() and f.suffix.lower() in (".md", ".txt")),
         root / "tools/Install-Suite.ps1", root / "NOTICE.md", root / "LICENSE",
+        *(root / name for name in LFG_ARCHIVES),
     ]
 
 

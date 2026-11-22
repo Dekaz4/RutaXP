@@ -140,6 +140,45 @@ class LocalSuiteInstallTests(unittest.TestCase):
             self.assertTrue((self.addons / module / "old").is_file())
         self.assertFalse((self.client / "escape").exists())
 
+    def test_lfg_and_spanish_install_repair_and_restore_with_the_suite(self):
+        addons = ("LFGForever", "LFGForeverLanguageSpanish")
+        vendor = SCRIPT.parent / "vendor/lfg-forever"
+        existing = self.addons / addons[0]
+        existing.mkdir()
+        (existing / "LFGForever.toc").write_bytes(b"## Version: old\n")
+        (existing / "old.lua").write_bytes(b"-- from previous installation")
+        character = self.client / "WTF/Account/test/Realm/Friend/SavedVariables"
+        character.mkdir(parents=True)
+        prefs = character / "LFGForever.lua"
+        prefs.write_bytes(b"LFGForeverCharDB = { role = 'HEALER' }")
+        progress = character / "RutaXP.lua"
+        progress.write_bytes(b"RutaXPCharDB = { step = 11 }")
+
+        self.script("-Archive", self.archive, "-IncludeLFG")
+        for name in addons:
+            with ZipFile(vendor / (name + ".zip")) as original:
+                files = {entry.filename for entry in original.infolist() if not entry.is_dir()}
+                installed = {p.relative_to(self.addons).as_posix() for p in
+                             (self.addons / name).rglob("*") if p.is_file()}
+                self.assertEqual(files, installed)
+                for file in files:
+                    self.assertEqual((self.addons / file).read_bytes(), original.read(file), file)
+        self.script("-Archive", self.archive, "-IncludeLFG")
+        self.assertEqual(len(list(self.store.glob("*/committed"))), 1)
+        locale = self.addons / "LFGForeverLanguageSpanish/Spanish.lua"
+        expected = locale.read_bytes()
+        locale.write_bytes(b"-- incomplete update")
+        self.script("-Archive", self.archive, "-IncludeLFG")
+        self.assertEqual(locale.read_bytes(), expected)
+        self.assertEqual(len(list(self.store.glob("*/committed"))), 2)
+
+        self.script("-Restore")
+        self.assertEqual((existing / "old.lua").read_bytes(), b"-- from previous installation")
+        self.assertEqual((existing / "LFGForever.toc").read_bytes(), b"## Version: old\n")
+        self.assertFalse(locale.parent.exists())
+        self.assertEqual(prefs.read_bytes(), b"LFGForeverCharDB = { role = 'HEALER' }")
+        self.assertEqual(progress.read_bytes(), b"RutaXPCharDB = { step = 11 }")
+
     def test_prepared_tree_is_verified_consumed_repairable_and_restorable(self):
         prepared = self.store / ".RutaXP-stage-abc123" / "RutaXP"
         self.script("-PreparedDirectory", self.package, ok=False)

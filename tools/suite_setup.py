@@ -172,7 +172,7 @@ def activate(client, archive=None, *, prepared=None):
     args = [str(powershell), "-NoLogo", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass",
             "-File", str(script), "-Client", str(client)]
     if prepared is not None:
-        args += ["-PreparedDirectory", str(prepared.resolve(strict=True))]
+        args += ["-PreparedDirectory", str(prepared.resolve(strict=True)), "-IncludeLFG"]
     elif archive is not None:
         args += ["-Archive", str(archive.resolve(strict=True))]
     else:

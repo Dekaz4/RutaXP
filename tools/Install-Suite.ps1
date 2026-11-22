@@ -5,7 +5,10 @@ param(
     [Parameter(Mandatory,ParameterSetName='Zip')][string]$Archive,
     [Parameter(Mandatory,ParameterSetName='Directory')][string]$AddonDirectory,
     [Parameter(Mandatory,ParameterSetName='Prepared')][string]$PreparedDirectory,
-    [Parameter(Mandatory,ParameterSetName='Restore')][switch]$Restore
+    [Parameter(Mandatory,ParameterSetName='Restore')][switch]$Restore,
+    [Parameter(ParameterSetName='Prepared')]
+    [Parameter(ParameterSetName='Zip')]
+    [Parameter(ParameterSetName='Directory')][switch]$IncludeLFG
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2
@@ -66,11 +69,14 @@ function AllFiles([string]$root) {
         }
     }
 }
-function FileHash([string]$file) {
+function StreamHash([IO.Stream]$stream) {
     $algorithm = [Security.Cryptography.SHA256]::Create()
-    $stream = [IO.File]::OpenRead($file)
     try { return [BitConverter]::ToString($algorithm.ComputeHash($stream)).Replace('-','') }
-    finally { $stream.Dispose(); $algorithm.Dispose() }
+    finally { $algorithm.Dispose() }
+}
+function FileHash([string]$file) {
+    $stream = [IO.File]::OpenRead($file)
+    try { return StreamHash $stream } finally { $stream.Dispose() }
 }
 function ReadPackage([string]$root) {
     $manifest = ChildPath $root 'manifest.sha256'
@@ -195,7 +201,7 @@ function WriteCombined([string[]]$paths,[string]$dest) {
     } finally { $output.Dispose() }
 }
 function TargetPath([string]$relative) {
-    if ($relative -notmatch "^Interface/AddOns/(RutaXP|OpenMap|ForeverDungeonJournal|RXPGuides|Journey|$legacyBackupName)$" -and
+    if ($relative -notmatch "^Interface/AddOns/(RutaXP|OpenMap|ForeverDungeonJournal|RXPGuides|Journey|LFGForever|LFGForeverLanguageSpanish|$legacyBackupName)$" -and
         $relative -notmatch '^WTF/Account/[^/\\]+/([^/\\]+/[^/\\]+/)?SavedVariables/RutaXP\.lua$') { throw 'Destino ajeno a RutaXP.' }
     $target = ChildPath $game $relative
     Assert-NoLink $target
@@ -206,6 +212,36 @@ function Transfer([string]$from,[string]$to) {
     Assert-NoLink $to
     if ([IO.Directory]::Exists($from)) { [IO.Directory]::Move($from,$to) }
     else { [IO.File]::Move($from,$to) }
+}
+function StageLfgAddon([string]$name,[string]$checksum,$rows,[string]$tx) {
+    $archive = ChildPath $PSScriptRoot "vendor/lfg-forever/$name.zip"
+    Assert-NoLink $archive
+    if ((FileHash $archive) -ne $checksum) { throw "El paquete oficial de $name esta incompleto o alterado." }
+    $dest = "Interface/AddOns/$name"
+    $target = TargetPath $dest
+    $old = [IO.Directory]::Exists($target)
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $zip = [IO.Compression.ZipFile]::OpenRead($archive)
+    try {
+        $files = @($zip.Entries | Where-Object { $_.Name })
+        $identical = $old -and @(AllFiles $target).Count -eq $files.Count
+        foreach ($file in $files) {
+            if (!$file.FullName.StartsWith("$name/",[StringComparison]::Ordinal)) { throw "Raiz inesperada en $name." }
+            if (!$identical) { continue }
+            $installed = ChildPath $target $file.FullName.Substring($name.Length + 1)
+            if (![IO.File]::Exists($installed)) { $identical = $false; continue }
+            $stream = $file.Open()
+            try { $identical = (StreamHash $stream) -eq (FileHash $installed) } finally { $stream.Dispose() }
+        }
+        if ($identical) { return }
+        $stage = ChildPath $tx "new/$($rows.Count)"
+        foreach ($file in $files) {
+            $out = ChildPath $stage $file.FullName.Substring($name.Length + 1)
+            MakeDirectory ([IO.Path]::GetDirectoryName($out))
+            [IO.Compression.ZipFileExtensions]::ExtractToFile($file,$out,$false)
+        }
+        $rows.Add(@{dest=$dest;old=$old;add=$true;sources=@()})
+    } finally { $zip.Dispose() }
 }
 function InheritDestinationAccess([string]$target) {
     if ([Environment]::OSVersion.Platform -ne [PlatformID]::Win32NT) { return }
@@ -355,6 +391,10 @@ try {
         $rows = [Collections.Generic.List[object]]::new()
         $suite = TargetPath 'Interface/AddOns/RutaXP'
         $rows.Add(@{ dest='Interface/AddOns/RutaXP'; old=[IO.Directory]::Exists($suite); add=$true; sources=@() })
+        if ($IncludeLFG) {
+            StageLfgAddon 'LFGForever' '58723a6c4dad2343a78b70d81deb205b5db2b7b99fb42e47c64a703ea3066fe7' $rows $tx
+            StageLfgAddon 'LFGForeverLanguageSpanish' 'c752f1c01146cd09666f05062d560b41ee87d6dfffffd95a684d10a0767bf116' $rows $tx
+        }
         $replace = $modules
         $newToc = [IO.File]::ReadAllText((ChildPath $staged 'RutaXP.toc'))
         if ($newToc -match '(?im)^##\s*X-RutaXP-Embedded\s*:[^\r\n]*\bRXPGuides\b') {

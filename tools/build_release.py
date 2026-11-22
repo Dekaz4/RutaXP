@@ -18,8 +18,10 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 if __package__:
     from .suite_lua import suite_files
+    from .build_suite_setup import LFG_ARCHIVES
 else:
     from suite_lua import suite_files
+    from build_suite_setup import LFG_ARCHIVES
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDON = ROOT / "RutaXP"
@@ -124,6 +126,8 @@ def main():
     installer = compile_installer(payload)
     release_files = dict(files)
     for name in ["Instalador_RutaXP.exe", "Instalar_RutaXP.bat", "Instalar.ps1", "LEEME_INSTALACION.txt", "README.md", "LICENSE", "NOTICE.md"]:
+        release_files[name] = (ROOT / name).read_bytes()
+    for name in LFG_ARCHIVES:
         release_files[name] = (ROOT / name).read_bytes()
     # Source for the executable and tools accompanies the binary distribution.
     for name in ["Installer.cs", "Updater.cs", "build_release.py", "publish_release.py", "build_talents.js",
