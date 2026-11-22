@@ -30,8 +30,27 @@ function ChildPath([string]$root,[string]$relative) {
         }
     }
     $full = [IO.Path]::GetFullPath([IO.Path]::Combine($root, ($parts -join [IO.Path]::DirectorySeparatorChar)))
-    if (!$full.StartsWith($root + [IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)) { throw 'Ruta fuera del destino.' }
+    if (!$full.StartsWith($root.TrimEnd('\','/') + [IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)) { throw 'Ruta fuera del destino.' }
     return $full
+}
+function BackupStore([string]$clientPath) {
+    $clientDirectory = Get-Item -LiteralPath $clientPath -Force
+    $gameDirectory = $clientDirectory
+    $name = $clientDirectory.Name
+    if ($clientDirectory.Parent -and ($name -in @('_forever_', '_classic_beta_') -or
+        [IO.File]::Exists((Join-Path $clientDirectory.Parent.FullName '.build.info')))) {
+        $gameDirectory = $clientDirectory.Parent
+    }
+    if (!$gameDirectory.Parent) {
+        if ($gameDirectory -eq $clientDirectory -or [IO.File]::Exists((Join-Path $gameDirectory.FullName '.build.info'))) {
+            throw 'La instalacion ocupa la raiz de la unidad. Usa una carpeta de juego para conservar copias externas en la misma unidad.'
+        }
+        $gameDirectory = $clientDirectory
+    }
+    $folder = if ($gameDirectory.Name -eq 'RutaXP-Suite-Backups') { 'RutaXP-Suite-Backups-External' } else { 'RutaXP-Suite-Backups' }
+    $result = ChildPath $gameDirectory.Parent.FullName "$folder/$($gameDirectory.Name)"
+    if ($gameDirectory.FullName -ne $clientPath) { $result = ChildPath $result $name }
+    return $result
 }
 function MakeDirectory([string]$path) { [void][IO.Directory]::CreateDirectory($path) }
 function AllFiles([string]$root) {
@@ -166,12 +185,56 @@ function Transfer([string]$from,[string]$to) {
     if ([IO.Directory]::Exists($from)) { [IO.Directory]::Move($from,$to) }
     else { [IO.File]::Move($from,$to) }
 }
+function MoveOldTransactions([string]$old,[string]$external) {
+    foreach ($item in Get-ChildItem -LiteralPath $old -Force -Directory) {
+        if ($item.Name -notmatch '^\d{17}-[0-9a-f]{32}$') { continue }
+        Assert-NoLink $item.FullName
+        $plan = ChildPath $item.FullName 'plan.json'
+        Assert-NoLink $plan
+        if (![IO.File]::Exists($plan)) {
+            # A crash during extraction predates plan.json and changes no
+            # addon. Preserve its partial payload away from the patcher.
+            $new = ChildPath $item.FullName 'new'
+            Assert-NoLink $new
+            if (![IO.Directory]::Exists($new)) { continue }
+            $incomplete = ChildPath $external 'Incomplete-transactions'
+            Assert-NoLink $incomplete
+            MakeDirectory $incomplete
+            Transfer $item.FullName (ChildPath $incomplete ($item.Name + '-' + [guid]::NewGuid().ToString('N')))
+            continue
+        }
+        $next = ChildPath $external $item.Name
+        if (Test-Path -LiteralPath $next) {
+            # A copied (rather than moved) history can contain both versions.
+            # Keep both unchanged. Only an identical copy may be taken out of
+            # the active history without losing a restore or pending rollback.
+            $originalFiles = @(AllFiles $item.FullName)
+            if (@(AllFiles $next).Count -ne $originalFiles.Count) { throw 'Hay dos copias distintas de una misma transaccion de RutaXP.' }
+            foreach ($file in $originalFiles) {
+                $other = ChildPath $next ($file.Substring($item.FullName.Length + 1))
+                if (![IO.File]::Exists($other) -or (FileHash $file) -ne (FileHash $other)) {
+                    throw 'Hay dos copias distintas de una misma transaccion de RutaXP.'
+                }
+            }
+            $dupes = ChildPath $external 'Archived-duplicates'
+            Assert-NoLink $dupes
+            MakeDirectory $dupes
+            $next = ChildPath $dupes ($item.Name + '-' + [guid]::NewGuid().ToString('N'))
+        }
+        Transfer $item.FullName $next
+    }
+}
 function Rollback([string]$tx,$rows) {
     [IO.File]::WriteAllText((ChildPath $tx 'restoring'),'')
     MakeDirectory (ChildPath $tx 'after')
     for ($i = $rows.Count - 1; $i -ge 0; $i--) {
         $row = $rows[$i]
         $target = TargetPath $row.dest
+        if ($row.dest -match "^Interface/AddOns/($legacyBackupName)$") {
+            # Restore an archived updater copy to its new discovery location.
+            $target = ChildPath $store $Matches[1]
+            Assert-NoLink $target
+        }
         $prior = ChildPath $tx "prior/$i"
         $stage = ChildPath $tx "new/$i"
         $replaced = [IO.File]::Exists($prior) -or [IO.Directory]::Exists($prior)
@@ -203,13 +266,22 @@ if (!$forever) {
 }
 if (!$forever) { throw 'Selecciona el cliente de WoW Forever.' }
 CheckClosed
-$store = ChildPath $game 'RutaXP-Suite-Backups'
+$store = BackupStore $game
 Assert-NoLink $store
 MakeDirectory $store
 $lockPath = ChildPath $store 'install.lock'
 Assert-NoLink $lockPath
 $lock = [IO.File]::Open($lockPath,'OpenOrCreate','Write','None')
+$oldLock = $null
 try {
+    $oldStore = ChildPath $game 'RutaXP-Suite-Backups'
+    Assert-NoLink $oldStore
+    if ([IO.Directory]::Exists($oldStore)) {
+        $oldLockPath = ChildPath $oldStore 'install.lock'
+        Assert-NoLink $oldLockPath
+        $oldLock = [IO.File]::Open($oldLockPath,'OpenOrCreate','Write','None')
+        MoveOldTransactions $oldStore $store
+    }
     $active = @()
     $migrated = @{}
     foreach ($txn in @(Get-ChildItem -LiteralPath $store -Directory -Force | Sort-Object Name)) {
@@ -308,4 +380,18 @@ try {
             Remove-Item -LiteralPath $tx -Recurse -Force
         }
     }
-} finally { $lock.Dispose() }
+} finally {
+    if ($oldLock) {
+        $oldLock.Dispose()
+        try {
+            # Never recursively remove the legacy root. A concurrently opened
+            # legacy lock or an unrecognised file simply keeps it in place.
+            if ([IO.Directory]::GetFileSystemEntries($oldStore).Count -eq 1 -and [IO.File]::Exists($oldLockPath)) {
+                Assert-NoLink $oldLockPath
+                [IO.File]::Delete($oldLockPath)
+                [IO.Directory]::Delete($oldStore, $false)
+            }
+        } catch [IO.IOException] {} catch [UnauthorizedAccessException] {}
+    }
+    $lock.Dispose()
+}

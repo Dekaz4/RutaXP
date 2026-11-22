@@ -164,6 +164,27 @@ function Assert-RutaXPManifest {
     foreach ($key in $Manifest.Keys) { if (-not $actual.ContainsKey($key) -or $actual[$key] -ne $Manifest[$key]) { throw "La copia no coincide: $key" } }
 }
 
+function Get-RutaXPBackupStore {
+    param([string]$AddOns)
+    $client = [IO.Path]::GetDirectoryName([IO.Path]::GetDirectoryName((Get-RutaXPFullPath $AddOns)))
+    $name = [IO.Path]::GetFileName($client)
+    $parent = [IO.Path]::GetDirectoryName($client)
+    if (!$parent) { throw 'No hay una carpeta exterior a la instalacion en esta unidad.' }
+    $flavor = $name -in @('_forever_', '_classic_beta_') -or [IO.File]::Exists((Join-Path $parent '.build.info'))
+    $game = if ($flavor) { $parent } else { $client }
+    $outside = [IO.Path]::GetDirectoryName($game)
+    if (!$outside) {
+        if ([IO.File]::Exists((Join-Path $game '.build.info'))) { throw 'La instalacion ocupa la raiz de la unidad; no hay una carpeta exterior en esa unidad para las copias.' }
+        $outside = $parent; $game = $client; $flavor = $false
+    }
+    $gameName = [IO.Path]::GetFileName($game)
+    $folder = if ($gameName -ieq 'RutaXP-Suite-Backups') { 'RutaXP-Suite-Backups-External' } else { 'RutaXP-Suite-Backups' }
+    $store = Join-Path (Join-Path $outside $folder) $gameName
+    if ($flavor) { $store = Join-Path $store $name }
+    Assert-RutaXPNoLinks $store
+    return $store
+}
+
 function Assert-RutaXPChild {
     param([string]$Parent, [string]$Child, [string]$ExpectedName)
     $parentPath = Get-RutaXPFullPath $Parent
@@ -215,12 +236,17 @@ function Install-RutaXP {
     Assert-RutaXPNoLinks $parent
     [IO.Directory]::CreateDirectory($parent) | Out-Null
     $token = [guid]::NewGuid().ToString('N')
-    $stage = Join-Path $parent ('.RutaXP.stage.' + $token)
-    $backup = Join-Path $parent ('.RutaXP.backup.' + $token)
-    $failed = Join-Path $parent ('.RutaXP.failed.' + $token)
+    $store = Get-RutaXPBackupStore $parent
+    [IO.Directory]::CreateDirectory($store) | Out-Null
+    $stage = Join-Path $store ('.RutaXP.stage.' + $token)
+    $backup = Join-Path $store ('.RutaXP.backup.' + $token)
+    $failed = Join-Path $store ('.RutaXP.failed.' + $token)
+    $lockPath = Join-Path $store 'install.lock'
+    Assert-RutaXPNoLinks $lockPath
+    $installLock = [IO.File]::Open($lockPath, 'OpenOrCreate', 'Write', 'None')
     $oldMoved = $false; $activated = $false
     try {
-        Assert-RutaXPChild $parent $stage ('.RutaXP.stage.' + $token)
+        Assert-RutaXPChild $store $stage ('.RutaXP.stage.' + $token)
         [IO.Directory]::CreateDirectory($stage) | Out-Null
         foreach ($relative in $manifest.Keys) {
             $from = Join-Path $sourcePath $relative; $to = Join-Path $stage $relative
@@ -230,7 +256,7 @@ function Install-RutaXP {
         }
         Assert-RutaXPManifest $stage $manifest
         Assert-RutaXPChild $parent $target 'RutaXP'
-        Assert-RutaXPChild $parent $backup ('.RutaXP.backup.' + $token)
+        Assert-RutaXPChild $store $backup ('.RutaXP.backup.' + $token)
         Assert-RutaXPPublicTarget $target
         if (Test-Path -LiteralPath $target) {
             @(Get-RutaXPFiles $target) | Out-Null
@@ -239,7 +265,7 @@ function Install-RutaXP {
             $oldMoved = $true
         }
         & $BeforeActivate | Out-Null
-        Assert-RutaXPChild $parent $stage ('.RutaXP.stage.' + $token)
+        Assert-RutaXPChild $store $stage ('.RutaXP.stage.' + $token)
         Assert-RutaXPChild $parent $target 'RutaXP'
         [IO.Directory]::Move($stage, $target)
         $activated = $true
@@ -249,17 +275,19 @@ function Install-RutaXP {
         $problem = $_.Exception.Message
         try {
             if ($activated -and (Test-Path -LiteralPath $target)) {
-                Assert-RutaXPChild $parent $target 'RutaXP'; Assert-RutaXPChild $parent $failed ('.RutaXP.failed.' + $token)
+                Assert-RutaXPChild $parent $target 'RutaXP'; Assert-RutaXPChild $store $failed ('.RutaXP.failed.' + $token)
                 [IO.Directory]::Move($target, $failed)
             }
             if ($oldMoved) {
-                Assert-RutaXPChild $parent $backup ('.RutaXP.backup.' + $token); Assert-RutaXPChild $parent $target 'RutaXP'
+                Assert-RutaXPChild $store $backup ('.RutaXP.backup.' + $token); Assert-RutaXPChild $parent $target 'RutaXP'
                 [IO.Directory]::Move($backup, $target)
             }
         } catch { throw "Fallo: $problem. Restauracion automatica imposible; tu copia anterior se conserva en $backup. $($_.Exception.Message)" }
         throw "Instalacion cancelada; se conserva la version anterior. $problem"
     } finally {
-        foreach ($temporary in @($stage, $failed)) { try { Remove-RutaXPStage $parent $temporary } catch { Write-Warning "Carpeta temporal conservada: $temporary. $($_.Exception.Message)" } }
+        try {
+            foreach ($temporary in @($stage, $failed)) { try { Remove-RutaXPStage $store $temporary } catch { Write-Warning "Carpeta temporal conservada: $temporary. $($_.Exception.Message)" } }
+        } finally { $installLock.Dispose() }
     }
 }
 

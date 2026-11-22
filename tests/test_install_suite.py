@@ -21,7 +21,8 @@ class LocalSuiteInstallTests(unittest.TestCase):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)
         self.work = Path(temp.name)
-        self.client = self.work / "_forever_"
+        self.client = self.work / "World of Warcraft/_forever_"
+        self.store = self.work / "RutaXP-Suite-Backups/World of Warcraft/_forever_"
         self.addons = self.client / "Interface/AddOns"
         for module in (*MODULES, "RutaXP"):
             old = self.addons / module
@@ -84,8 +85,9 @@ class LocalSuiteInstallTests(unittest.TestCase):
         (account / "RutaXP.lua").write_bytes(newer)
         self.script("-AddonDirectory", self.package)
         self.assertEqual((account / "RutaXP.lua").read_bytes(), newer)
-        store = self.client / "RutaXP-Suite-Backups"
+        store = self.store
         self.assertEqual(len(list(store.glob("*/committed"))), 1)
+        self.assertFalse((self.client / "RutaXP-Suite-Backups").exists())
         (self.package / "Suite.lua").write_bytes(b"-- next version")
         self.pack()
         self.script("-Archive", self.archive)
@@ -122,7 +124,7 @@ class LocalSuiteInstallTests(unittest.TestCase):
         self.assertTrue((self.addons / "RutaXP/Modules/RXPGuides").is_dir())
         self.assertEqual(saved.read_bytes(), progress)
         self.script("-Archive", self.archive)
-        store = self.client / "RutaXP-Suite-Backups"
+        store = self.store
         self.assertEqual(len(list(store.glob("*/committed"))), 2)
         self.assertTrue(any(store.glob("*/prior/0/Modules/RXPGuides/GuideWindow.lua")))
 
@@ -180,7 +182,8 @@ class LocalSuiteInstallTests(unittest.TestCase):
         self.assertTrue((self.addons / "RutaXP/Suite.lua").is_file())
         self.assertTrue(all((d / "keep.lua").read_text() == "keep" for d in unrelated))
         self.script("-Restore")
-        self.assertTrue((legacy / "RutaXP.toc").is_file())
+        self.assertTrue((self.store / legacy.name / "RutaXP.toc").is_file())
+        self.assertFalse(legacy.exists())
         self.assertTrue((self.addons / "RutaXP/old").is_file())
 
     def test_recovers_interrupted_activation_before_restoring(self):
@@ -195,7 +198,8 @@ class LocalSuiteInstallTests(unittest.TestCase):
             {"dest": "Interface/AddOns/RutaXP", "old": True, "add": True, "sources": []},
         ]}))
         self.script("-Restore")
-        self.assertTrue((transaction / "restored").exists())
+        self.assertTrue((self.store / transaction.name / "restored").exists())
+        self.assertFalse(transaction.exists())
         self.assertTrue((self.addons / "OpenMap/old").exists())
         self.assertTrue((self.addons / "RutaXP/old").exists())
 
@@ -212,3 +216,37 @@ class LocalSuiteInstallTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn(b"Cierra WoW", result.stderr)
         self.assertFalse((self.client / "RutaXP-Suite-Backups").exists())
+        self.assertFalse(self.store.exists())
+
+    def test_mixed_legacy_and_external_history_remains_restorable(self):
+        self.script("-Archive", self.archive)
+        txn = next(p.parent for p in self.store.glob("*/committed"))
+        old_store = self.client / "RutaXP-Suite-Backups"
+        old_store.mkdir()
+        original = old_store / txn.name
+        txn.rename(original)
+        interrupted_stage = old_store / ("20260102030405001-" + "b" * 32) / "new/0"
+        interrupted_stage.mkdir(parents=True)
+        (interrupted_stage / "partial.lua").write_text("partial")
+        (old_store / "unrelated").mkdir()
+        (self.package / "Suite.lua").write_bytes(b"-- update")
+        self.pack()
+        self.script("-Archive", self.archive)
+        self.assertTrue((old_store / "unrelated").is_dir())
+        self.assertFalse(original.exists())
+        self.assertEqual(len(list(self.store.glob("*/committed"))), 2)
+        self.assertFalse(interrupted_stage.exists())
+        self.assertEqual(len(list((self.store / "Incomplete-transactions").glob("*/new/0/partial.lua"))), 1)
+        self.script("-Restore")
+        self.assertEqual((self.addons / "RutaXP/old").read_text(), "RutaXP")
+        self.assertEqual(len(list(self.store.glob("*/restored"))), 2)
+
+    def test_duplicate_external_copy_is_preserved_without_rolling_back_twice(self):
+        self.script("-Archive", self.archive)
+        txn = next(p.parent for p in self.store.glob("*/committed"))
+        legacy = self.client / "RutaXP-Suite-Backups" / txn.name
+        shutil.copytree(txn, legacy)
+        self.script("-Restore")
+        self.assertTrue((self.addons / "RutaXP/old").is_file())
+        self.assertFalse(legacy.exists())
+        self.assertEqual(len(list((self.store / "Archived-duplicates").glob("*/prior/0/old"))), 1)

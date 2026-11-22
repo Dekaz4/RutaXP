@@ -158,6 +158,18 @@ function visible(name)
     end
     return count, pin
 end
+function service(name)
+    for _, f in ipairs(frames) do
+        if f:IsVisible() then
+            if f.name == name then return f, f end
+            for _, member in ipairs(f.serviceMembers or {}) do
+                if member.name == name then return f, member.pin end
+            end
+        end
+    end
+end
+GameTooltip = {lines={}, SetOwner=function(self) self.lines={} end,
+    AddLine=function(self,text) self.lines[#self.lines+1]=text end, Show=noop}
 """
 
 
@@ -181,16 +193,15 @@ class NativeServiceMapTests(unittest.TestCase):
             "Tabernero Belm": (.4738, .5252, 32),
         }.items():
             with self.subTest(name=name):
-                count, pin = self.g.visible(name)
-                self.assertEqual(count, 1)
+                rep, pin = self.g.service(name)
                 self.assertAlmostEqual(pin.x, x, places=4)
                 self.assertAlmostEqual(pin.y, y, places=4)
                 self.assertEqual(pin.icon.texture, 10000 + filter_id)
                 self.assertEqual(pin.level, 2013)
                 self.assertGreater(pin.level, self.g.WorldMapFrame.detailLayer.level)
-                self.assertEqual((pin.anchor[1], pin.anchor[3]), ("CENTER", "TOPLEFT"))
-                self.assertAlmostEqual(pin.anchor[4], x * 1000, places=3)
-                self.assertAlmostEqual(pin.anchor[5], -y * 700, places=3)
+                self.assertEqual((rep.anchor[1], rep.anchor[3]), ("CENTER", "TOPLEFT"))
+                self.assertLess(abs(rep.anchor[4] - x * 1000), 70)
+                self.assertLess(abs(rep.anchor[5] + y * 700), 70)
 
     def test_era_coordinates_use_the_displayed_map_bounds(self):
         # Simulate a different art rectangle using the same world-yard units.
@@ -213,13 +224,43 @@ class NativeServiceMapTests(unittest.TestCase):
         self.g.openMap(1426)
         self.g.openMap(1457)
         self.assertEqual(self.g.visible("Tabernero Belm")[0], 0)
-        self.assertEqual(self.g.visible("Garryeth")[0], 1)
+        self.assertIsNotNone(self.g.service("Garryeth"))
         self.g.setFilter("Banker", False)
-        self.assertEqual(self.g.visible("Garryeth")[0], 0)
-        self.assertEqual(self.g.visible("Subastador Cazarez")[0], 1)
+        self.assertIsNone(self.g.service("Garryeth"))
+        self.assertIsNotNone(self.g.service("Subastador Cazarez"))
         self.g.setFilter("Banker", True)
         self.g.openMap(1457)
-        self.assertEqual(self.g.visible("Garryeth")[0], 1)
+        self.assertIsNotNone(self.g.service("Garryeth"))
+
+    def test_kharanos_and_theramore_categories_have_separate_visible_native_icons(self):
+        self.lua.execute("""
+            function checkTown(mapID, names)
+                openMap(mapID)
+                local reps = {}
+                for index, name in ipairs(names) do
+                    local pin = assert(service(name), name)
+                    assert(pin.icon.texture == C_Minimap.GetTrackingInfo(
+                        RutaXPWorldMapTracking.Info(pin.key).index).texture, name)
+                    for _, other in ipairs(reps) do
+                        assert(math.abs(other.anchor[4]-pin.anchor[4]) >= 18 or
+                            math.abs(other.anchor[5]-pin.anchor[5]) >= 18, name)
+                    end
+                    reps[#reps+1] = pin
+                end
+            end
+            checkTown(1426, {"Tabernero Belm", "Shelby Petrepiedra", "Gremlock Pilsnor",
+                "Boran Tintiyerro", "Gimrizz Molaro"})
+            local boran = service("Boran Tintiyerro")
+            assert(boran == service("Gamili Escardida"))
+            boran.scripts.OnEnter(boran)
+            local names = table.concat(GameTooltip.lines, " ")
+            assert(names:find("Boran Tintiyerro") and names:find("Gamili Escardida"))
+            setFilter("Repair", false)
+            assert(not service("Boran Tintiyerro") and service("Tabernero Belm"))
+            setFilter("Repair", true)
+            checkTown(1445, {"Tabernero Janene", "Michael", "Buzón", "Timoteo Valión", "Hans Weston"})
+            assert(service("Tabernero Belm") == nil)
+        """)
 
     def test_stitched_mode_uses_one_service_layer_in_both_installations(self):
         self.lua.execute("""
@@ -267,17 +308,69 @@ class NativeServiceMapTests(unittest.TestCase):
         self.g.setFilter("TrainerClass", True)
         self.assertEqual(self.g.visible("Alamar Grimm")[0], 1)
         self.g.useEmbedded()
-        # An embedded OpenMap performs its own refresh through its townsfolk module.
-        # The standalone bridge must not try to populate the same layer again.
-        self.lua.execute("""
-            RutaXPWorldMapTracking.Refresh(OpenMap)
-            settle()
-            RutaXPWorldMapTracking.Refresh = function() error("duplicate embedded refresh") end
-        """)
         self.g.selectView(True)
         self.assertEqual(self.g.visible("Alamar Grimm")[0], 1)
         self.g.selectView(False)
         self.assertEqual(self.g.visible("Alamar Grimm")[0], 1)
+
+    def test_embedded_openmap_prebuilt_while_closed_populates_on_first_m_and_reopen(self):
+        self.lua.execute("""
+            sets, callbacks = {}, {}
+            OpenMapAPI = {RegisterCallback=function(_, event, cb) callbacks[event] = cb end}
+            local stitched = CreateFrame("Frame", nil, WorldMapFrame)
+            local scale = 1
+            local root = {GetEffectiveScale=function() return scale end}
+            local s = {IsBuilt=function() return true end, Root=function() return root end,
+                Size=function() return 20000, 14000 end, Rect=function() return 0, 1, 0, 1 end}
+            function s.FromYards(c,n,w) return .3*c+w/50000, .3*c-n/50000 end
+            function s.PinSet(key)
+                assert(not sets[key], "created duplicate layer")
+                local set = {on=true, pins={}, frame=CreateFrame("Frame",nil,stitched)}
+                sets[key]=set
+                return set
+            end
+            function s.GetPinSet(key) return sets[key] end
+            function s.SetPinSetOn(set,on) set.on=on; set.frame:SetShown(on) end
+            function s.AddPin(set,u,v,look,data)
+                local pin=CreateFrame("Button",nil,set.frame)
+                pin.u,pin.v,pin.texture,pin.data,pin.name=u,v,look.texture,data,data[5]
+                pin.anchorRegion = {}
+                -- OpenMap stores its immutable world-position anchor in pin.anchor.
+                function pin:ClearAllPoints() self.placement=nil end
+                function pin:SetPoint(...) self.placement={...} end
+                pin.anchor=pin.anchorRegion
+                set.pins[#set.pins+1]=pin
+                return pin
+            end
+            local m={IsStitched=function() return true end, Refresh=function() end}
+            local om={MapStitch=s,GetModule=function() return m end}
+            ns.GetEmbeddedModule=function() return om end
+            fire("ADDON_LOADED","RutaXP")
+            RutaXPWorldMapTracking.Refresh(om)
+            assert(not next(sets))
+            openMap(1426)
+            local inn=assert(service("Tabernero Belm"))
+            assert(inn.texture==10032 and inn.placement[2]==inn.anchorRegion)
+            local repair=assert(service("Boran Tintiyerro"))
+            local function center(pin)
+                return pin.u*20000*scale+pin.placement[4], pin.v*14000*scale-pin.placement[5]
+            end
+            local box=assert(service("Shelby Petrepiedra"))
+            local ix,iy=center(inn)
+            local bx,by=center(box)
+            assert(math.abs(ix-bx)>=18 or math.abs(iy-by)>=18)
+            assert(repair==service("Gamili Escardida"))
+            scale=180
+            callbacks.OpenMap_ViewChanged()
+            assert(service("Boran Tintiyerro")~=service("Gamili Escardida"))
+            local count=#sets.rutaxp_service_repair.pins
+            WorldMapFrame:Hide()
+            setFilter("Repair",false)
+            openMap(1445)
+            assert(not service("Boran Tintiyerro") and service("Tabernero Janene"))
+            setFilter("Repair",true)
+            assert(service("Boran Tintiyerro") and #sets.rutaxp_service_repair.pins==count)
+        """)
 
     def test_native_flight_pin_remains_interactive_without_a_second_marker(self):
         self.lua.execute("""

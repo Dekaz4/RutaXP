@@ -18,7 +18,7 @@ class PortableSuiteSetupTests(unittest.TestCase):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)
         self.work = Path(temp.name)
-        self.client = self.work / "_forever_"
+        self.client = self.work / "World of Warcraft/_forever_"
         self.addons = self.client / "Interface/AddOns"
         self.addons.mkdir(parents=True)
 
@@ -62,13 +62,27 @@ class PortableSuiteSetupTests(unittest.TestCase):
         for name in ("OpenMap", "ForeverDungeonJournal"):
             (self.addons/name).mkdir()
             (self.addons/name/(name+".toc")).touch()
-        tx = self.client / "RutaXP-Suite-Backups" / ("2"*17 + "-" + "b"*32)
+        tx = suite_setup.backup_store(self.client) / ("2"*17 + "-" + "b"*32)
         prior = tx / "prior/0"
         prior.mkdir(parents=True)
         (prior/"Journey.toc").touch()
         (tx/"plan.json").write_text(json.dumps({"rows":[{"dest":"Interface/AddOns/Journey"}]}))
         (tx/"committed").touch()
         self.assertEqual(suite_setup.find_native_sources(self.client)["Journey"], prior)
+
+    def test_store_scopes_to_installation_and_flavor_outside_battlenet_root(self):
+        store = self.work / "RutaXP-Suite-Backups/World of Warcraft"
+        self.assertEqual(suite_setup.backup_store(self.client), store / "_forever_")
+        beta = self.client.parent / "_classic_beta_"
+        self.assertEqual(suite_setup.backup_store(beta), store / "_classic_beta_")
+        custom = self.client.parent / "Custom"
+        (custom.parent / ".build.info").touch()
+        self.assertEqual(suite_setup.backup_store(custom), store / "Custom")
+        other = self.work / "Second installation/_forever_"
+        self.assertNotEqual(suite_setup.backup_store(other), suite_setup.backup_store(self.client))
+        collision = self.work / "RutaXP-Suite-Backups/_forever_"
+        self.assertEqual(suite_setup.backup_store(collision),
+                         self.work / "RutaXP-Suite-Backups-External/RutaXP-Suite-Backups/_forever_")
 
     def test_upgrades_personal_install_without_standalone_sources_or_first_pc_backups(self):
         from tools import suite_journey

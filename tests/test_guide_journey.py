@@ -20,8 +20,10 @@ class JourneyContentsTests(unittest.TestCase):
                 file.parent.mkdir(exist_ok=True, parents=True)
                 source = "select(2, ...).SetupGlobalFacade()\n"
                 if name == "lib/TomCats/Arrows.lua":
-                    source += ("function project(mapID, targetX, targetY) return "
-                               "C_Map.GetWorldPosFromMapPos(mapID, { x = targetX, y = targetY }) end\n")
+                    source += ("ArrowMixin={}\n"
+                               "function ArrowMixin:SetTarget(targetX, targetY, mapID, disablePingAnimation)\n"
+                               "local _, coordinate = C_Map.GetWorldPosFromMapPos(mapID, { x = targetX, y = targetY })\n"
+                               "return coordinate\nend\n")
                 if name == "Tools.lua":
                     source += "--[[ Texture Functions ]]\nfunction AddTexture() end\n--[[ Text Manipulation Functions ]]"
                 file.write_text(source)
@@ -40,7 +42,11 @@ class JourneyContentsTests(unittest.TestCase):
             lua.execute(MOCK)
             lua.execute("function RutaXPJourneyEnvironment() return _G end")
             lua.execute(files["Modules/Journey/lib/TomCats/Arrows.lua"])
-            lua.execute("local _,v=project(1443,.5,.25); assert(v.x==650 and v.y==325)")
+            lua.execute("""
+                local _,v=C_Map.GetWorldPosFromMapPos(1443,CreateVector2D(.5,.25))
+                assert(v.x==650 and v.y==325 and ArrowMixin:SetTarget(.5,.25,1443,false,v)==v)
+            """)
+            self.assertEqual(dict(suite_journey.embedded_contents(files.__getitem__)), files)
 
 
 MOCK = """
@@ -126,6 +132,7 @@ function CreateVector2D(x,y)
     return {x=x,y=y,GetXY=function(self) return self.x,self.y end}
 end
 C_Map={GetWorldPosFromMapPos=function(map,p)
+    assert(getfenv(2)==_G, "unable to find mixin or metatable (Vector2DMixin) in a private environment")
     assert(type(p.GetXY)=="function", "GetWorldPosFromMapPos requires a Vector2DMixin")
     local x,y=p:GetXY()
     return currentWorld,CreateVector2D(x*1300,y*1300)
@@ -280,6 +287,7 @@ class OriginalGuideJourneyTests(unittest.TestCase):
                 if sampledTurn then return sampledTurn end
                 if not waiting then
                     return {mapID=1443, x=.549, y=.263, navigationBlocked=blocked,
+                            navigationBearing=bearing, navigationBearingText=bearing and "Rumbo orientativo · calculando camino",
                             navigationNotice=blocked and "Recalculando desde tu posición"}
                 end
             end
@@ -402,6 +410,10 @@ class OriginalGuideJourneyTests(unittest.TestCase):
             assert(not RutaXPJourneyScreenArrow.container:IsShown())
             assert(hintLabel:GetText()=="Recalculando desde tu posición")
             assert(getTaskIcon().row.text=="Recalculando desde tu posición")
+            bearing=true; ns:GetArrowWaypoint(); tick(); tick()
+            assert(RutaXPJourneyScreenArrow.container:IsShown() and not hintLabel:IsShown())
+            assert(RutaXPJourneyScreenArrow.label.text=="Rumbo orientativo · calculando camino")
+            bearing=false
             blocked=false; ns:GetArrowWaypoint(); tick()
             assert(RutaXPJourneyScreenArrow.container:IsShown() and not hintLabel:IsShown())
             local previousFacing=GetPlayerFacing

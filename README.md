@@ -1,10 +1,10 @@
 # RutaXP para WoW Forever
 
-RutaXP 1.2.1 recupera los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos y la brújula usan la interfaz de tu copia de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
+RutaXP 1.2.3 recupera los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos y la brújula usan la interfaz de tu copia de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
 
 ## Actualizar
 
-Con WoW cerrado, abre **Instalador_RutaXP.exe** y elige **Instalar o actualizar**. El instalador conserva una copia recuperable en `RutaXP-Suite-Backups`, dentro de la carpeta del cliente. Para montar la suite utiliza tus copias locales de OpenMap, ForeverDungeonJournal y Journey, incluidas las que el instalador anterior guardó allí. Los 29 capítulos de Alianza y los 28 de Horda vienen con RutaXP.
+Con WoW cerrado, abre **Instalador_RutaXP.exe** y elige **Instalar o actualizar**. El instalador guarda las copias de recuperación fuera de la carpeta que actualiza Battle.net y traslada allí las copias anteriores. Si tienes el cliente en `E:\WOW\World of Warcraft\_forever_`, las encontrarás en `E:\WOW\RutaXP-Suite-Backups\World of Warcraft\_forever_`. Para montar la suite utiliza tus copias locales de OpenMap, ForeverDungeonJournal y Journey. Los 29 capítulos de Alianza y los 28 de Horda vienen con RutaXP.
 
 Si ya tienes un paquete personal preparado, puedes instalarlo sin conexión con **Instalar_RutaXP_Personal.exe**. Para restaurar la instalación anterior, cierra WoW y ejecuta `Instalar_RutaXP_Personal.exe --restore`.
 
@@ -26,9 +26,13 @@ Si ya tienes un paquete personal preparado, puedes instalarlo sin conexión con 
 
 El panel toma los pasos, los requisitos de misión, las opciones de grupo y los tramos de viaje del motor de RutaXP. Si tienes un capítulo guardado, el addon recupera el avance de ese personaje y comprueba su diario. Un personaje nuevo recibe una recomendación por zona, nivel y facción. En modo dúo cada personaje conserva su propio paso, incluso cuando ayuda a su compañero en uno anterior.
 
-Los filtros de seguimiento del minimapa y de OpenMap comparten selección. Al pulsar **M** puedes ver los servicios de tu facción en la zona que consultas, a cualquier distancia. Las entradas de mazmorra respetan la acción configurada en OpenMap. Para una instalación nueva, el clic abre el diario.
+Pulsa **M** y abre **Filtros** en la esquina superior derecha del mapa, junto al diario de misiones. Marca **Reparación**, **Tabernero** o los servicios que quieras ver en la zona que consultas, a cualquier distancia. El mapa y el minimapa comparten las casillas. Las entradas de mazmorra respetan la acción configurada en OpenMap. Para una instalación nueva, el clic abre el diario.
+
+Los servicios se dibujan también en la primera apertura del mapa. En pueblos como Kharanos y Theramore, los iconos de distintos servicios se separan y el texto al pasar el ratón identifica a sus proveedores.
 
 Si el objetivo está en otro continente, el panel de Journey indica cómo llegar al siguiente transporte. La brújula señala el muelle o el maestro de vuelo. Las conexiones observadas en el mapa de vuelo de ese personaje permiten incorporar vuelos al viaje. En la travesía de Menethil a Auberdine, la guía indica que permanezcas a bordo en Costasur y recupera el destino de misión al llegar. La brújula comparte la opción `/rutaxp flecha` y conserva la posición que ya habías elegido.
+
+Para desplazamientos largos por varias zonas, la guía calcula primero la parada local. Mientras busca un camino transitable puede mostrar «Rumbo orientativo» hacia esa parada. Cuando encuentra el camino, la brújula pasa a guiarte por sus giros.
 
 ### Misiones de mundo y mazmorras
 
@@ -42,7 +46,7 @@ Desde la raíz del proyecto y con Python 3.10 o posterior, indica la carpeta de 
 
 ```powershell
 python tools/build_personal_suite.py --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
-python tools/verify_personal_suite.py dist/RutaXP-1.2.1-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
+python tools/verify_personal_suite.py dist/RutaXP-1.2.3-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
 ```
 
 Los créditos y las licencias se encuentran en [NOTICE.md](NOTICE.md) y en `RutaXP/Licenses`.

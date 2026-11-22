@@ -26,6 +26,20 @@ class Destinations(TravelHost):
 
 
 class DestinationTravelTests(unittest.TestCase):
+    def test_from_theramore_pier_to_desolace_the_chapter_starts_with_a_local_leg(self):
+        h = Destinations((1445,.711,.564))
+        goal = (1443,.5776,.7105)
+        pin,view = h.route(goal,"chapter")
+        self.assertIsNotNone(view)
+        self.assertEqual(pin.mapID,1445)
+        self.assertNotEqual(view.kind,"flight")
+        h.ns.char.observedTaxiRoutes=h.h.table({32:{37:True}})
+        h.ns.FlightNavigation.routeRevision=1
+        pin,view=h.route(goal,"chapter")
+        self.assertEqual((pin.mapID,view.kind),(1445,"flight"))
+        self.assertIn("Punta de Nijel",view.text)
+        self.assertAlmostEqual(pin.x,.6746,places=3)
+
     def test_menethil_auberdine_boat_stopover_reload_and_arrival(self):
         h = Destinations()
         goal = (1439, .373, .402)

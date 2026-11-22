@@ -5,6 +5,10 @@ local _, ns = ...
 local W = { phase="idle", serial=0, requests=0, cancellations=0 }
 ns.Walking = W
 local TRACE_LIMIT = 512
+local SEARCH_SECONDS = 12
+local PROGRESSING_SEARCH_SECONDS = 20
+local SEARCH_CPU_MS = 600
+local TARGET_GAP_SECONDS = 0.75
 local function finite(n)
     return not (issecretvalue and issecretvalue(n)) and type(n)=="number" and n==n and math.abs(n)<math.huge
 end
@@ -54,7 +58,35 @@ function W:Clear(reason)
     self.seenZ,self.seenAt,self.pathTravel,self.pathZ,self.trace,self.traceValid=nil,nil,nil,nil,nil,nil
     self.cornerCredit,self.cornerCreditBefore,self.cornerCreditTravel=nil,nil,nil
     self.latestTarget,self.campCommitted,self.refreshWanted=nil,nil,nil
+    self.budgetUpdated,self.activeSeconds,self.retryAfter,self.timeoutRetried,self.missingSince=nil,nil,nil,nil,nil
+    self.startMap,self.lastRejectedX,self.lastRejectedY=nil,nil,nil
     self.phase,self.text="idle","Esperando un destino"
+end
+local function failed(self,reason,px,py,message)
+    self.failure,self.failedAt,self.failedX,self.failedY=reason,now(),px,py
+    self.trace,self.traceValid=nil,nil
+    self.refreshWanted=true
+    self.phase,self.text="failed",message
+end
+local function checkBudget(self,px,py)
+    if not self.pending then return end
+    local stamp=now()
+    if not combat() and not self.wasPaused then
+        self.activeSeconds=self.activeSeconds+math.max(0,stamp-self.budgetUpdated)
+    end
+    self.budgetUpdated,self.wasPaused=stamp,combat()
+    local cpu=type(self.job)=="table" and self.job.cpu or 0
+    local frames=type(self.job)=="table" and self.job.frames or 0
+    if frames>self.jobFrames then self.jobFrames,self.lastProgressAt=frames,self.activeSeconds end
+    local progressing=frames>0 and self.activeSeconds-self.lastProgressAt<2
+    local limit=progressing and PROGRESSING_SEARCH_SECONDS or SEARCH_SECONDS
+    if self.activeSeconds < limit and cpu < SEARCH_CPU_MS then return end
+    -- A scheduler that never pumped may recover. A search already consuming
+    -- frames gets no second full budget at the same position and endpoint.
+    local stalled=not self.job or type(self.job)~="table" or (self.job.frames or 0)==0
+    self:_Cancel("timeout")
+    failed(self,"timeout",px,py,"Se agotó el tiempo de cálculo del camino")
+    if stalled and not self.timeoutRetried then self.retryAfter=stamp+2 end
 end
 function W:Toggle(enabled)
     local config=settings()
@@ -81,11 +113,13 @@ function W:GetStatus()
 end
 function W:_Ask(engine,continent,px,py,pz,target,reason)
     if self.pending then return false end
-    self:_Cancel()
     if combat() then self.phase,self.text="pending","Sal del combate para calcular el camino"; return end
     if read(IsFalling)==true then self.phase,self.text="pending","Esperando a pisar el suelo para calcular el camino"; return end
+    self:_Cancel()
     local token=self.serial
     self.pending,self.lastAsk,self.failure=true,now(),nil
+    self.budgetUpdated,self.activeSeconds,self.wasPaused,self.retryAfter=self.lastAsk,0,false,nil
+    self.jobFrames,self.lastProgressAt=0,0
     self.requestTravel,self.requestZ=self.travel or 0,pz
     self.target={x=target.x,y=target.y,z=target.z}
     target=self.target
@@ -112,18 +146,25 @@ function W:_Ask(engine,continent,px,py,pz,target,reason)
         end
         if not valid then
             -- A failed background refresh cannot erase a still valid route.
-            self.failure,self.failedAt,self.failedX,self.failedY=type(reason)=="string" and reason or "unreachable",now(),px,py
-            self.refreshWanted=true
-            self.phase,self.text="failed","No hay un camino comprobado hasta ese punto; revisa el acceso"
+            failed(self,type(reason)=="string" and reason or "unreachable",px,py,
+                "No hay un camino comprobado hasta ese punto; revisa el acceso")
             diagnostic(self,"failed")
             return
         end
-        self:_Adopt(points,requestTravel,requestZ)
+        if self:_Adopt(points,requestTravel,requestZ) then
+            self.lastRejectedX,self.lastRejectedY,self.timeoutRetried=nil,nil,nil
+        else
+            -- One new origin can recover after a stale answer. Repeatedly
+            -- rejecting the same origin/floor must settle like an offmesh hit.
+            if self.lastRejectedX and distance(px,py,self.lastRejectedX,self.lastRejectedY)<20 then
+                failed(self,"stale",px,py,"El camino calculado no coincide con tu posición")
+            end
+            self.lastRejectedX,self.lastRejectedY=px,py
+        end
     end,false)
     if not ok then
         self.pending,self.job=nil,nil
-        self.failure,self.failedAt,self.failedX,self.failedY="error",now(),px,py
-        self.phase,self.text="failed","No se pudo calcular el camino; usa /rutaxp recalcular"
+        failed(self,"error",px,py,"No se pudo calcular el camino; usa /rutaxp recalcular")
     elseif self.pending and token==self.serial then self.job=job end
 end
 local function identity(value)
@@ -147,7 +188,7 @@ local function pointKey(point,continent)
     -- game/guide/learned are coordinate providers for the same objective.
     -- Sub-yard marker changes must not cancel an unfinished async search.
     if source=="game" or source=="guide" or source=="learned" then source="goal" end
-    return table.concat({identity(point.targetKey),identity(source),identity(guideID),identity(stepIndex),identity(goalIndex),
+    return table.concat({identity(point.targetKey),identity(point.activityKey),identity(source),identity(guideID),identity(stepIndex),identity(goalIndex),
         identity(point.routeID),identity(point.pointIndex),identity(continent),identity(goal.quest or goal.questID or point.questID),
         identity(goal.t or goal.action),identity(goal.oi or goal.objectiveIndex or goal.objective),
         identity(goal.item),identity(goal.npc),identity(point.candidate and point.candidate.objectiveIndex)},"|")
@@ -286,6 +327,10 @@ function W:_Adopt(points,requestTravel,requestZ)
 end
 local function blockedWaypoint(self, point)
     point.navigationBlocked, point.navigationNotice = true, self.text
+    if self.startMap and self.startMap==point.mapID and not combat() and read(IsFalling)~=true then
+        point.navigationBearing=true
+        point.navigationBearingText=self.pending and "Rumbo orientativo · calculando camino" or "Rumbo orientativo · camino sin confirmar"
+    end
     if self.phase == "pending" then
         if combat() then
             point.navigationHint = "Sal de combate"
@@ -299,27 +344,37 @@ local function blockedWaypoint(self, point)
 end
 
 function W:Resolve(point)
-    if type(point)~="table" then self:Clear();return nil end
+    if type(point)~="table" then
+        if self.key then
+            self.missingSince=self.missingSince or now()
+            if now()-self.missingSince>=TARGET_GAP_SECONDS then self:Clear("target-lost") end
+        end
+        return nil
+    end
+    self.missingSince=nil
     local config=settings()
     if not config then return point end
     local out=copy(point)
-    if not config.enabled then
-        if self.key then self:Clear() end
-        self.phase,self.text="disabled","Dirección orientativa; camino por terreno desactivado"
-        out.navigationNotice=self.text;return out
-    end
     local engine=RutaXPPathEngine
     local continent,gx,gy=ns:GetWaypointWorldPosition(point)
     local here=ns.PlayerPoint and ns:PlayerPoint()
     local pc,px,py
     if here then pc,px,py=ns:GetWaypointWorldPosition(here) end
-    if not engine or not engine.Find or not engine.Available or read(engine.Available,continent)~=true then
+    if (pc and continent and pc~=continent) or (not (pc and continent) and (not here or here.mapID~=point.mapID)) then
+        if self.key then self:Clear("map") end
+        self.phase,self.text="unavailable","Esperando un tramo local de viaje"
+        out.navigationBlocked,out.navigationNotice=true,self.text
+        return out
+    end
+    if not config.enabled then
         if self.key then self:Clear() end
-        self.phase,self.text="unavailable","Dirección orientativa: sin datos de terreno para esta zona"
+        self.phase,self.text="disabled","Dirección orientativa; camino por terreno desactivado"
         out.navigationNotice=self.text;return out
     end
-    if not finite(gx) or not finite(gy) or pc~=continent or not finite(px) or not finite(py) then
-        self:Clear();self.phase,self.text="unavailable","El camino necesita posiciones del mismo continente"
+    if not engine or not engine.Find or not engine.Available or read(engine.Available,continent)~=true or
+        not finite(gx) or not finite(gy) or not finite(px) or not finite(py) then
+        if self.key then self:Clear() end
+        self.phase,self.text="unavailable","Dirección orientativa: sin datos de terreno para esta zona"
         out.navigationNotice=self.text;return out
     end
     local ux,uy,uz,instance=read(UnitPosition,"player")
@@ -348,8 +403,9 @@ function W:Resolve(point)
     local goal=point.goal or {}
     local resourceCandidate=candidate and candidate.objectiveIndex and (goal.quest or goal.questID)
         and (goal.t=="complete" or goal.t=="objective" or goal.t=="collect" or goal.t=="kill")
-    if self.key~=key then
+    if self.key~=key or self.startMap~=here.mapID then
         self:Clear("key");self.key,self.engine=key,engine
+        self.startMap=here.mapID
         self.seenX,self.seenY,self.seenZ,self.seenAt,self.travel=px,py,pz,now(),0
         self.latestTarget,self.campCommitted=latest,resourceCandidate and true or nil
         self:_Ask(engine,continent,px,py,pz,latest,"key")
@@ -361,6 +417,7 @@ function W:Resolve(point)
             -- A teleport or a long position gap cannot justify jumping over
             -- the old path's turns. Start a fresh search at the new position.
             self:Clear("teleport");self.key,self.engine=key,engine
+            self.startMap=here.mapID
             self.seenX,self.seenY,self.seenZ,self.seenAt,self.travel=px,py,pz,now(),0
             self.latestTarget,self.campCommitted=latest,resourceCandidate and true or nil
             self:_Ask(engine,continent,px,py,pz,latest,"teleport")
@@ -372,18 +429,20 @@ function W:Resolve(point)
             and sameFloor(pz,self.target.z) then self.campCommitted=nil end
         local changed=targetMoved(self.target,gx,gy,point.z)
         if changed and not self.campCommitted then self.refreshWanted=true end
+        checkBudget(self,px,py)
         -- NPC/object spawns are alternatives for the same quest objective.
         -- Keep the selected camp while its corridor is valid, even if its
         -- detour makes another camp look closer halfway through the search.
-        if not self.pending and (self.refreshWanted or changed and not self.campCommitted)
-            and (changed or not self.failure or now()-(self.failedAt or 0)>=15)
-            and now()-(self.lastAsk or -100)>=2 then
+        local newTarget=changed and not self.campCommitted
+        local repositioned=self.failure and now()-(self.failedAt or 0)>=15 and
+            distance(px,py,self.failedX or px,self.failedY or py)>20
+        local retry=self.retryAfter and now()>=self.retryAfter
+        if not self.pending and now()-(self.lastAsk or -100)>=2 and
+            (newTarget or repositioned or retry or (not self.failure and (self.refreshWanted or not self.points))) then
+            if retry then self.timeoutRetried=true
+            elseif newTarget or repositioned then self.timeoutRetried=nil end
             self.campCommitted=resourceCandidate and true or nil
-            self:_Ask(engine,continent,px,py,pz,latest,changed and "destination" or "refresh")
-        end
-        if not self.pending and not self.points and now()-(self.lastAsk or -100)>=2 and (not self.failure
-            or (now()-(self.failedAt or 0)>=15 and distance(px,py,self.failedX or px,self.failedY or py)>20)) then
-            self:_Ask(engine,continent,px,py,pz,latest,"query")
+            self:_Ask(engine,continent,px,py,pz,latest,newTarget and "destination" or retry and "timeout-retry" or "refresh")
         end
     end
     if self.pending then
@@ -407,7 +466,11 @@ function W:Resolve(point)
         end
         local node=points[index]
         if index==#points and (self.pending or self.refreshWanted) and distance(px,py,node.x,node.y)<=12 then
-            self.phase,self.text="pending","Actualizando el camino hasta el nuevo destino…"
+            if self.failure and not self.pending then
+                self.phase,self.text="failed","Falta confirmar el camino desde aquí hasta el nuevo destino"
+            else
+                self.phase,self.text="pending","Actualizando el camino hasta el nuevo destino…"
+            end
             return blockedWaypoint(self, out)
         end
         local aim=ns.WorldToWaypoint and ns:WorldToWaypoint(continent,node.x,node.y,here.mapID)
@@ -422,7 +485,8 @@ function W:Resolve(point)
         out.walkingFinal,out.walkingGoal=index==#points and not self.pending and not self.refreshWanted,point
         out.navigationNotice=nil
         self.phase,self.text="walking","Camino por terreno · tramo "..math.max(1,index-1).."/"..(#points-1)
-            ..((self.pending or self.refreshWanted) and " · actualizando" or "")
+            ..(self.pending and " · actualizando" or self.failure and " · tramo final sin confirmar"
+                or self.refreshWanted and " · actualizando" or "")
         return out
     end
     return blockedWaypoint(self, out)

@@ -2,6 +2,7 @@ local _, ns = ...
 local R = ns.TravelRouting
 local TRAM, TELDRASSIL, TREETOP = 369, 1438, "teldrassil-treetop"
 local walkSpeed, flightSpeed = 7, 32
+local localWalkingRange = 2500 -- yards, about six minutes on foot
 local cached, coordinates = {}, setmetatable({}, {__mode="k"})
 local flightDistances = {}
 local arrivals = {}
@@ -128,6 +129,18 @@ local function firstLeg(network,start,finish,sample,destination)
         end
     end
     return answer,best
+end
+
+local function localChapterTrip(fixed,start,finish,here,destination)
+    if not fixed or not fixed[start] or not fixed[finish] then return true end
+    local distance = yards(here,destination)
+    if not distance or distance <= localWalkingRange then return true end
+    -- Local access paths can cross a map border. Keep those authored turns
+    -- when the two zones share a road. Multi-zone journeys need a local stop.
+    for _, e in ipairs(fixed[start]) do
+        if e.kind == "road" and e.target == finish then return true end
+    end
+    return false
 end
 
 local function targetNode(zone, point)
@@ -271,7 +284,7 @@ function ns:RouteDestination(destination,key,channel)
         local here=self.PlayerPoint and self:PlayerPoint()
         local c = here and world(here)
         local destC=world(destination)
-        if c and destC and c==destC then return destination end
+        if c and destC and c==destC and localChapterTrip(fixed,start,target,here,destination) then return destination end
     end
     saved.started=true
     if not zone or not target then

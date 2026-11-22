@@ -194,6 +194,32 @@ namespace RutaXPInstaller
                 if (!actual.ContainsKey(file.Key) || actual[file.Key] != file.Value) throw new IOException("La copia no coincide: " + file.Key);
         }
 
+        public static string BackupStore(string addons)
+        {
+            string client = Path.GetDirectoryName(Path.GetDirectoryName(Normalize(addons)));
+            string name = Path.GetFileName(client);
+            string parent = Path.GetDirectoryName(client);
+            if (string.IsNullOrEmpty(parent)) throw new IOException("No hay una carpeta exterior a la instalacion en esta unidad.");
+            bool flavor = name.Equals("_forever_", StringComparison.OrdinalIgnoreCase)
+                || name.Equals("_classic_beta_", StringComparison.OrdinalIgnoreCase)
+                || File.Exists(Path.Combine(parent, ".build.info"));
+            string game = flavor ? parent : client;
+            string outside = Path.GetDirectoryName(game);
+            if (string.IsNullOrEmpty(outside))
+            {
+                if (File.Exists(Path.Combine(game, ".build.info")))
+                    throw new IOException("La instalacion ocupa la raiz de la unidad; no hay una carpeta exterior en esa unidad para las copias.");
+                outside = parent; game = client; flavor = false;
+            }
+            string gameName = Path.GetFileName(game);
+            string folder = gameName.Equals("RutaXP-Suite-Backups", StringComparison.OrdinalIgnoreCase)
+                ? "RutaXP-Suite-Backups-External" : "RutaXP-Suite-Backups";
+            string store = Path.Combine(outside, folder, gameName);
+            if (flavor) store = Path.Combine(store, name);
+            RejectLinks(store);
+            return store;
+        }
+
         static void GuardChild(string parent, string child, string name)
         {
             parent = Normalize(parent); child = Normalize(child);
@@ -232,13 +258,18 @@ namespace RutaXPInstaller
             RejectLinks(addons);
             Directory.CreateDirectory(addons);
             string token = Guid.NewGuid().ToString("N");
-            string stage = Path.Combine(addons, ".RutaXP.stage." + token);
-            string backup = Path.Combine(addons, ".RutaXP.backup." + token);
-            string failed = Path.Combine(addons, ".RutaXP.failed." + token);
+            string store = BackupStore(addons);
+            Directory.CreateDirectory(store);
+            string stage = Path.Combine(store, ".RutaXP.stage." + token);
+            string backup = Path.Combine(store, ".RutaXP.backup." + token);
+            string failed = Path.Combine(store, ".RutaXP.failed." + token);
+            string lockPath = Path.Combine(store, "install.lock");
+            RejectLinks(lockPath);
             bool oldMoved = false, activated = false;
+            using (FileStream installLock = new FileStream(lockPath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
             try
             {
-                GuardChild(addons, stage, ".RutaXP.stage." + token);
+                GuardChild(store, stage, ".RutaXP.stage." + token);
                 Directory.CreateDirectory(stage);
                 foreach (string relative in manifest.Keys)
                 {
@@ -248,11 +279,11 @@ namespace RutaXPInstaller
                     if (copy == null) File.Copy(from, to, false); else copy(from, to);
                 }
                 ValidateManifest(stage, manifest);
-                GuardChild(addons, target, "RutaXP"); GuardChild(addons, backup, ".RutaXP.backup." + token);
+                GuardChild(addons, target, "RutaXP"); GuardChild(store, backup, ".RutaXP.backup." + token);
                 RequirePublicTarget(target);
                 if (Directory.Exists(target)) { Files(target); Directory.Move(target, backup); oldMoved = true; }
                 if (beforeActivate != null) beforeActivate();
-                GuardChild(addons, stage, ".RutaXP.stage." + token); GuardChild(addons, target, "RutaXP");
+                GuardChild(store, stage, ".RutaXP.stage." + token); GuardChild(addons, target, "RutaXP");
                 Directory.Move(stage, target); activated = true;
                 ValidateManifest(target, manifest);
                 return new InstallResult { Target = target, Backup = oldMoved ? backup : null };
@@ -261,8 +292,8 @@ namespace RutaXPInstaller
             {
                 try
                 {
-                    if (activated && Directory.Exists(target)) { GuardChild(addons, target, "RutaXP"); GuardChild(addons, failed, ".RutaXP.failed." + token); Directory.Move(target, failed); }
-                    if (oldMoved) { GuardChild(addons, backup, ".RutaXP.backup." + token); GuardChild(addons, target, "RutaXP"); Directory.Move(backup, target); }
+                    if (activated && Directory.Exists(target)) { GuardChild(addons, target, "RutaXP"); GuardChild(store, failed, ".RutaXP.failed." + token); Directory.Move(target, failed); }
+                    if (oldMoved) { GuardChild(store, backup, ".RutaXP.backup." + token); GuardChild(addons, target, "RutaXP"); Directory.Move(backup, target); }
                 }
                 catch (Exception restore)
                 {
@@ -273,7 +304,7 @@ namespace RutaXPInstaller
             finally
             {
                 foreach (string path in new string[] { stage, failed })
-                    try { RemoveWorkDirectory(addons, path, Path.GetFileName(path).StartsWith(".RutaXP.stage.") ? ".RutaXP.stage." : ".RutaXP.failed."); }
+                    try { RemoveWorkDirectory(store, path, Path.GetFileName(path).StartsWith(".RutaXP.stage.") ? ".RutaXP.stage." : ".RutaXP.failed."); }
                     catch (Exception cleanup) { Console.Error.WriteLine("Carpeta temporal conservada: " + path + ". " + cleanup.Message); }
             }
         }

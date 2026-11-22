@@ -17,7 +17,7 @@ local filters = {
     lowLevelQuests = "TrivialQuests",
 }
 
-local snapshot
+local snapshot, writingAll, filterButton, menuRefreshPending
 
 function tracking.Read()
     local entries = {}
@@ -54,17 +54,85 @@ function tracking.Get(key)
 end
 
 local function refresh()
+    if writingAll then return end
     local previous = snapshot or {}
     local current = tracking.Read()
-    if not tracking.OnChanged then return end
     for key in pairs(filters) do
         local old, new = previous[key], current[key]
         if (not old) ~= (not new) or (old and new and
             (old.active ~= new.active or old.name ~= new.name or old.texture ~= new.texture)) then
-            tracking.OnChanged()
+            if tracking.OnChanged then tracking.OnChanged() end
+            if filterButton and filterButton:IsMenuOpen() and not menuRefreshPending then
+                menuRefreshPending = true
+                C_Timer.After(0, function()
+                    menuRefreshPending = false
+                    if filterButton:IsMenuOpen() then filterButton:GenerateMenu() end
+                end)
+            end
             return
         end
     end
+end
+
+local function clearFilters()
+    refresh()
+    -- SetTracking can synchronously fire MINIMAP_UPDATE_TRACKING. Apply the
+    -- visible service/quest choices as one edit without touching tracking spells.
+    writingAll = true
+    local ok, err = pcall(function()
+        for _, info in pairs(snapshot) do
+            if info.active then C_Minimap.SetTracking(info.index, false) end
+        end
+    end)
+    writingAll = false
+    refresh()
+    if not ok then error(err, 0) end
+    return MenuResponse.Refresh
+end
+
+local function toggle(key)
+    local active = tracking.Get(key)
+    if active ~= nil then tracking.Set(key, not active) end
+    return MenuResponse.Refresh
+end
+
+local function filterMenu(_, root)
+    refresh()
+    local choices = {}
+    for key, info in pairs(snapshot) do choices[#choices+1] = {key=key, info=info} end
+    table.sort(choices, function(a, b) return a.info.index < b.info.index end)
+    if #choices == 0 then
+        root:CreateTitle("El seguimiento aún no está disponible")
+        return
+    end
+    root:CreateButton(UNCHECK_ALL or "Desmarcar todo", clearFilters)
+    for _, choice in ipairs(choices) do
+        local info = choice.info
+        local row = root:CreateCheckbox(info.name, tracking.Get, toggle, choice.key)
+        if info.texture then
+            row:AddInitializer(function(button)
+                local icon = button:AttachTexture()
+                icon:SetSize(18,18)
+                icon:SetPoint("RIGHT")
+                icon:SetTexture(info.texture)
+                button.fontString:SetPoint("RIGHT", icon, "LEFT", -4, 0)
+                return button.fontString:GetUnboundedStringWidth()+62, 20
+            end)
+        end
+    end
+end
+
+function tracking.AttachFilterButton(map)
+    if filterButton or not (map.ScrollContainer and MenuUtil and AnchorUtil) then return end
+    local view = map.ScrollContainer
+    filterButton = CreateFrame("DropdownButton", "RutaXPWorldMapFiltersButton", map, "UIPanelButtonTemplate")
+    filterButton:SetSize(76, 22)
+    filterButton:SetPoint("TOPRIGHT", view, "TOPRIGHT", -10, -6)
+    filterButton:SetFrameLevel(math.min(view:GetFrameLevel()+9300, 9950))
+    filterButton:SetText("Filtros")
+    filterButton:SetMenuAnchor(AnchorUtil.CreateAnchor("TOPRIGHT", filterButton, "BOTTOMRIGHT", 0, -2))
+    filterButton:SetupMenu(filterMenu)
+    filterButton:HookScript("OnHide", function(self) self:CloseMenu() end)
 end
 
 -- Called only when the player changes a filter in OpenMap. Spell and service

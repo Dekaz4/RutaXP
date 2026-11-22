@@ -494,8 +494,13 @@ function ns:GetArrowWaypoint(step, travel)
         end
     end
     self.destinationTravelView,self.navigationActivity = view,activity
+    if point and activity then
+        local activityPoint = {}
+        for key,value in pairs(point) do activityPoint[key] = value end
+        activityPoint.activityDestination,activityPoint.activityKey = true,planner:RouteKey()
+        point = activityPoint
+    end
     if self.Walking then point = self.Walking:Resolve(point) end
-    if point and activity then point.activityDestination,point.activityKey = true,planner:RouteKey() end
     return point
 end
 

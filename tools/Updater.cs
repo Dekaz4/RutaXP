@@ -335,17 +335,22 @@ namespace RutaXPUpdater
         {
             string addons = ResolveClient(client); List<BackupInfo> valid = new List<BackupInfo>();
             if (!Directory.Exists(addons)) return valid;
-            foreach (string path in Directory.GetDirectories(addons, ".RutaXP.backup.*"))
+            // Older public installers kept their backups inside AddOns.
+            foreach (string folder in new string[] { InstallerCore.BackupStore(addons), addons })
             {
-                string name = Path.GetFileName(path);
-                if (!Regex.IsMatch(name, @"^\.RutaXP\.backup\.[a-f0-9]{32}$")) continue;
-                try
+                if (!Directory.Exists(folder)) continue;
+                foreach (string path in Directory.GetDirectories(folder, ".RutaXP.backup.*"))
                 {
-                    InstallerCore.RejectLinks(path); InstallerCore.Manifest(path);
-                    valid.Add(new BackupInfo { Name = name, Path = path, Version = TocVersion(path), Date = Directory.GetLastWriteTimeUtc(path) });
+                    string name = Path.GetFileName(path);
+                    if (!Regex.IsMatch(name, @"^\.RutaXP\.backup\.[a-f0-9]{32}$")) continue;
+                    try
+                    {
+                        InstallerCore.RejectLinks(path); InstallerCore.Manifest(path);
+                        valid.Add(new BackupInfo { Name = name, Path = path, Version = TocVersion(path), Date = Directory.GetLastWriteTimeUtc(path) });
+                    }
+                    catch (IOException) { }
+                    catch (UnauthorizedAccessException) { }
                 }
-                catch (IOException) { }
-                catch (UnauthorizedAccessException) { }
             }
             valid.Sort(delegate(BackupInfo a, BackupInfo b) { int n = b.Date.CompareTo(a.Date); return n == 0 ? StringComparer.Ordinal.Compare(a.Name, b.Name) : n; });
             return valid;
@@ -358,7 +363,7 @@ namespace RutaXPUpdater
             if (name != null && !Regex.IsMatch(name, @"^\.RutaXP\.backup\.[a-f0-9]{32}$")) throw new IOException("Selecciona una copia anterior de este mismo cliente.");
             List<BackupInfo> copies = Backups(addons); BackupInfo chosen = null;
             foreach (BackupInfo copy in copies) if (name == null || name == copy.Name) { chosen = copy; break; }
-            if (chosen == null || !Path.GetDirectoryName(chosen.Path).Equals(addons, StringComparison.OrdinalIgnoreCase)) throw new IOException("No hay una copia anterior valida para restaurar.");
+            if (chosen == null) throw new IOException("No hay una copia anterior valida para restaurar.");
             InstallerCore.Manifest(chosen.Path); RequireClosed(running);
             Action guardedActivation = delegate { RequireClosed(running); if (beforeActivate != null) beforeActivate(); RequireClosed(running); };
             return InstallerCore.InstallFromDirectory(chosen.Path, addons, null, guardedActivation);

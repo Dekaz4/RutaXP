@@ -50,3 +50,19 @@ class WorldMapServiceDataTests(unittest.TestCase):
         repairs = {p[9] for points in self.maps.values() for p in points if p[1] == "repair"}
         self.assertTrue({2404, 3543}.isdisjoint(repairs))
         self.assertIn(54, repairs)
+
+    def test_theramore_and_dun_morogh_include_specialties_of_generic_trainers(self):
+        for map_id, npc, faction, category, specialty, x, y in (
+            (1445, 4898, "A", "profTrainer", "Herboristería", 64.0, 47.5),
+            (1445, 4900, "A", "profTrainer", "Alquimia", 63.9, 47.6),
+            (1445, 12939, "A", "profTrainer", "Primeros auxilios", 67.8, 49.0),
+            (1445, 8140, "A", "classTrainer", "PALADIN", 67.4, 47.4),
+            (1445, 8141, "A", "classTrainer", "WARRIOR", 67.9, 48.4),
+            (1417, 12920, "H", "profTrainer", "Primeros auxilios", 73.4, 36.9),
+            (1426, 1355, "A", "profTrainer", "Cocina", 68.4, 54.5),
+            (1426, 1701, "A", "profTrainer", "Minería", 69.3, 55.5),
+        ):
+            with self.subTest(map_id=map_id, npc=npc):
+                entries = [(p[2], p[6] or p[7], p[3], p[4], p[8]) for p in self.maps[map_id]
+                           if p[1] == category and p[9] == npc]
+                self.assertEqual(entries, [(faction, specialty, x, y, True)])

@@ -304,7 +304,7 @@ local function updateTarget()
     if not compassFacing() then clearArrow(); return "Esperando la orientación del personaje" end
     if not target or target.map ~= map or target.x ~= x or target.y ~= y or arrow.mapID ~= map then
         clearArrow()
-        arrow:SetTarget(x,y,map,false)
+        arrow:SetTarget(x,y,map,false,point)
         if arrow.mapID ~= map then return "Esperando la posición en el mapa" end
         target = {map=map, x=x, y=y}
     end

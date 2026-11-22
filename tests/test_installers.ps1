@@ -73,6 +73,18 @@ try {
         Assert-Throws { [RutaXPInstaller.InstallerCore]::ResolveDestinations((Join-Path $base '_retail_')) }
         Assert-Throws { Get-RutaXPFullPath 'E:relative' }
         Assert-Throws { [RutaXPInstaller.InstallerCore]::Normalize('E:relative') }
+        Put (Join-Path $base '.build.info') 'fixture'
+        $layouts = @{
+            'World of Warcraft [prueba]\renamed' = 'RutaXP-Suite-Backups\World of Warcraft [prueba]\renamed'
+            'Standalone 1.60' = 'RutaXP-Suite-Backups\Standalone 1.60'
+            'RutaXP-Suite-Backups\_forever_' = 'RutaXP-Suite-Backups-External\RutaXP-Suite-Backups\_forever_'
+        }
+        foreach ($layout in $layouts.Keys) {
+            $addons = Join-Path (Join-Path $FixtureRoot $layout) 'Interface\AddOns'
+            $expectedStore = Join-Path $FixtureRoot $layouts[$layout]
+            Assert-True ((Get-RutaXPBackupStore $addons) -eq $expectedStore) "Incorrect PowerShell backup store for $layout"
+            Assert-True ([RutaXPInstaller.InstallerCore]::BackupStore($addons) -eq $expectedStore) "Incorrect C# backup store for $layout"
+        }
         function Read-Host { return '2' }
         $selected=Select-RutaXPFolder $all
         Assert-True ($selected -eq $all[1]) 'Manual root must choose exactly one client.'
@@ -80,11 +92,17 @@ try {
     } elseif ($Case -eq 'update') {
         foreach ($engine in @('PS','CS')) {
             $addons=New-Destination $engine
+            $store=Join-Path $FixtureRoot ("RutaXP-Suite-Backups\" + $engine + "\_classic_beta_")
             $target=New-Addon (Join-Path $addons 'RutaXP') 'old'
             Put (Join-Path $target 'custom-guide.lua') '-- preserve me'
             Seal-Addon $target
             $before=Get-RutaXPManifest $target
-            if ($engine -eq 'PS') { $result=Install-RutaXP $source $addons } else { $result=[RutaXPInstaller.InstallerCore]::InstallFromDirectory($source,$addons) }
+            $checkStage={
+                Assert-True (@([IO.Directory]::GetDirectories($addons, '.RutaXP.*')).Count -eq 0) 'A partial installation was written into the live AddOns tree.'
+                Assert-True (@([IO.Directory]::GetDirectories($store, '.RutaXP.stage.*')).Count -eq 1) 'The stage must be outside the entire game root.'
+            }
+            if ($engine -eq 'PS') { $result=Install-RutaXP $source $addons -BeforeActivate $checkStage } else { $result=[RutaXPInstaller.InstallerCore]::InstallFromDirectory($source,$addons,$null,[Action]$checkStage) }
+            Assert-True ([IO.Path]::GetDirectoryName($result.Backup) -eq $store) 'Public backups need the same external path as the suite installer.'
             Assert-True ([IO.Directory]::Exists($result.Backup)) 'Successful update must preserve the previous folder.'
             Assert-Old $result.Backup $before
             Assert-RutaXPManifest $target (Get-RutaXPManifest $source)
@@ -163,6 +181,13 @@ try {
             Assert-Throws { [RutaXPInstaller.InstallerCore]::InstallFromDirectory($source,$addons) }
             Assert-True ([IO.File]::ReadAllText((Join-Path $other 'sentinel.txt')) -eq 'untouched') 'Junction destination was changed.'
         } finally { [IO.Directory]::Delete($link) }
+        $external=Join-Path $FixtureRoot 'RutaXP-Suite-Backups'
+        New-Item -ItemType Junction -Path $external -Target $other | Out-Null
+        try {
+            Assert-Throws { Install-RutaXP $source $addons }
+            Assert-Throws { [RutaXPInstaller.InstallerCore]::InstallFromDirectory($source,$addons) }
+            Assert-True (-not [IO.Directory]::Exists((Join-Path $other 'links'))) 'External staging followed a junction.'
+        } finally { [IO.Directory]::Delete($external) }
         $link=Join-Path $source 'linked-source'
         New-Item -ItemType Junction -Path $link -Target $other | Out-Null
         try {

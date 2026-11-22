@@ -74,6 +74,7 @@ local function enter(pin)
     GameTooltip:AddLine(pin.name, 1, 0.82, 0)
     if pin.label and pin.label ~= pin.name then GameTooltip:AddLine(pin.label, 1, 1, 1) end
     if pin.detail then GameTooltip:AddLine(pin.detail, 0.85, 0.85, 0.85) end
+    tracking.ServiceMembersTooltip(pin)
     GameTooltip:Show()
 end
 
@@ -83,7 +84,7 @@ local function add(view, key, info, name, detail, x, y)
     local pin = pins[used]
     if not pin then
         pin = CreateFrame("Button", nil, map:GetCanvas())
-        pin:SetSize(16, 16)
+        pin:SetSize(tracking.ServicePinSize, tracking.ServicePinSize)
         pin:SetMouseClickEnabled(false)
         pin:SetMouseMotionEnabled(true)
         pin.icon = pin:CreateTexture(nil, "ARTWORK")
@@ -95,7 +96,8 @@ local function add(view, key, info, name, detail, x, y)
     pin.x, pin.y, pin.key = x, y, key
     pin.name, pin.label, pin.detail = name, info.name, detail
     pin:SetFrameLevel(view.level)
-    pin.icon:SetTexture(info.texture or ("Interface\\Minimap\\Tracking\\" .. fallback[key]))
+    local fallbackTexture = "Interface\\Minimap\\Tracking\\" .. fallback[key]
+    if pin.icon:SetTexture(info.texture or fallbackTexture) == false then pin.icon:SetTexture(fallbackTexture) end
     pin:Show()
 end
 
@@ -104,12 +106,33 @@ local function layout()
     local canvas = map:GetCanvas()
     local width, height = canvas:GetWidth(), canvas:GetHeight()
     local scale = map:GetCanvasScale() or 1
-    if scale <= 0 then return end
+    if scale <= 0 or width <= 0 or height <= 0 then return end
+    local entries = {}
+    if map.EnumeratePinsByTemplate then
+        for flight in map:EnumeratePinsByTemplate("FlightPointPinTemplate") do
+            if flight:IsShown() and flight.GetPosition then
+                local x, y = flight:GetPosition()
+                if x and y then entries[#entries+1] = {key="flight", x=x*width*scale, y=y*height*scale} end
+            end
+        end
+    end
     for i = 1, used do
         local pin = pins[i]
-        pin:SetScale(1 / scale)
-        pin:ClearAllPoints()
-        pin:SetPoint("CENTER", canvas, "TOPLEFT", pin.x*width*scale, -pin.y*height*scale)
+        entries[#entries+1] = {pin=pin, key=pin.key, x=pin.x*width*scale, y=pin.y*height*scale,
+            name=pin.name, detail=pin.detail}
+    end
+    tracking.PlaceServices(entries)
+    for _, entry in ipairs(entries) do
+        local pin = entry.pin
+        if pin then
+            pin.serviceMembers = entry.members
+            pin:SetShown(entry.dx ~= nil)
+            if entry.dx then
+                pin:SetScale(1 / scale)
+                pin:ClearAllPoints()
+                pin:SetPoint("CENTER", canvas, "TOPLEFT", entry.x+entry.dx, -(entry.y+entry.dy))
+            end
+        end
     end
 end
 
@@ -271,9 +294,15 @@ local function render()
         -- OpenMap owns the interactive flight markers on its stitched canvas.
         -- Some host maps independently create a second, native flight pin.
         nativeFlights(tracked and not openMap.MapFlights)
-        if not embedded and openMap.MapStitch then
-            external = openMap
-            syncExternal(openMap, mod)
+        if openMap.MapStitch then
+            if embedded then
+                -- OpenMap can finish building before M opens. Its townsfolk
+                -- refresh deliberately defers service creation while hidden.
+                tracking.Refresh(openMap)
+            else
+                external = openMap
+                syncExternal(openMap, mod)
+            end
         end
         return
     end
@@ -319,12 +348,16 @@ local function attach()
         function provider:OnMapChanged() self:RemoveAllData(); tracking.RefreshNative() end
         function provider:OnHide() self:RemoveAllData(); externalOffersDirty = true end
         provider.RefreshAllData = tracking.RefreshNative
-        provider.OnShow = tracking.RefreshNative
+        function provider:OnShow()
+            tracking.Read()
+            tracking.RefreshNative()
+        end
         provider.OnCanvasScaleChanged = layout
         provider.OnCanvasSizeChanged = layout
         map:AddDataProvider(provider)
         tracking.RefreshNative()
     end
+    if map then tracking.AttachFilterButton(map) end
     local api = _G.OpenMapAPI
     if api and api.RegisterCallback and callbackAPI ~= api then
         callbackAPI = api
@@ -336,6 +369,7 @@ local function attach()
         -- threshold, without changing its host map or refreshing providers.
         api.RegisterCallback(tracking, "OpenMap_ViewChanged", function()
             if external then tracking.RefreshNative() end
+            if tracking.LayoutStitched then tracking.LayoutStitched() end
         end)
     end
 end
@@ -346,7 +380,8 @@ for _, event in ipairs({"PLAYER_LOGIN", "ADDON_LOADED", "PLAYER_ENTERING_WORLD",
     events:RegisterEvent(event)
 end
 events:SetScript("OnEvent", function(_, event, value)
-    if event == "ADDON_LOADED" and value ~= "Blizzard_WorldMap" and value ~= "OpenMap" and value ~= "RutaXP" then return end
+    if event == "ADDON_LOADED" and value ~= "Blizzard_WorldMap" and value ~= "Blizzard_Menu"
+        and value ~= "OpenMap" and value ~= "RutaXP" then return end
     if event == "PLAYER_LOGIN" or event == "PLAYER_ENTERING_WORLD" or event == "ADDON_LOADED" then
         attach()
         tracking.RefreshNative()

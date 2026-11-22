@@ -143,7 +143,13 @@ function source.Waypoint()
     local leg = travelView()
     if leg and not leg.point then return end
     local nav = ns.navigationFrame
-    if not point or point.navigationBlocked or (point.activityDestination and not activity) then return end
+    if not point or (point.activityDestination and not activity) then return end
+    if point.navigationBlocked then
+        if point.navigationBearing then
+            return point.mapID, point.x, point.y, hasText(point.navigationBearingText) or "Rumbo orientativo"
+        end
+        return
+    end
     local hint = leg and (hasText(leg.shortText) or leg.title) or (nav and hasText(nav.hint:GetText()))
     return point.mapID, point.x, point.y, hint or (activity and planner:Hint()) or hasText(point.navigationNotice) or ""
 end

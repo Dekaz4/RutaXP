@@ -51,7 +51,30 @@ def detect_client():
     return None
 
 
+def game_root(client):
+    if client.name.casefold() in {"_forever_", "_classic_beta_"} or (client.parent / ".build.info").is_file():
+        if client.parent.name or (client.parent / ".build.info").is_file():
+            return client.parent
+    return client
+
+
+def backup_store(client):
+    game = game_root(client)
+    if not game.name:
+        raise ValueError("La instalación ocupa la raíz de la unidad. Usa una carpeta de juego para conservar copias externas en la misma unidad.")
+    folder = "RutaXP-Suite-Backups"
+    if game.name.casefold() == folder.casefold():
+        folder += "-External"
+    store = game.parent / folder / game.name
+    return store / client.name if client != game else store
+
+
 def find_native_sources(client):
+    def backup_path(path):
+        if path.resolve() != path.absolute():
+            raise ValueError("La carpeta de copias de RutaXP contiene un enlace o junction.")
+        return path
+
     addons = client / "Interface/AddOns"
     roots = {}
     needed = ("OpenMap", "ForeverDungeonJournal")
@@ -60,28 +83,30 @@ def find_native_sources(client):
     for name in candidates:
         if (addons / name / (name + ".toc")).is_file():
             roots[name] = addons / name
-    backups = client / "RutaXP-Suite-Backups"
-    if len(roots) != len(candidates) and backups.is_dir():
-        for tx in sorted(backups.iterdir(), reverse=True):
+    external = backup_store(client)
+    if len(roots) != len(candidates):
+        transactions = [tx for store in (external, client / "RutaXP-Suite-Backups") if backup_path(store).is_dir()
+                        for tx in store.iterdir()]
+        for tx in sorted(transactions, key=lambda p: p.name, reverse=True):
             if (not re.fullmatch(r"\d{17}-[0-9a-f]{32}", tx.name)
-                    or not (tx / "committed").is_file() or (tx / "restored").exists()):
+                    or not backup_path(tx / "committed").is_file() or (tx / "restoring").exists() or (tx / "restored").exists()):
                 continue
-            rows = json.loads((tx / "plan.json").read_text(encoding="utf-8-sig"))["rows"]
+            rows = json.loads(backup_path(tx / "plan.json").read_text(encoding="utf-8-sig"))["rows"]
             for index, row in enumerate(rows):
                 dest = row.get("dest", "")
                 if dest == "Interface/AddOns/RutaXP" or re.fullmatch(r"Interface/AddOns/\.RutaXP\.backup\.[0-9a-f]{32}", dest):
-                    integrated.append(tx / "prior" / str(index))
+                    integrated.append(backup_path(tx / "prior" / str(index)))
                 for name in candidates:
                     if name not in roots and dest == f"Interface/AddOns/{name}":
                         original = tx / "prior" / str(index)
-                        if (original / (name + ".toc")).is_file():
+                        if backup_path(original / (name + ".toc")).is_file():
                             roots[name] = original
             if len(roots) == len(candidates):
                 break
     # The 0.7 updater may have placed an earlier integrated installation in
     # one of its named backups before handing control to the suite installer.
     if len(roots) != len(candidates):
-        integrated.extend(sorted((p for p in addons.glob(".RutaXP.backup.*")
+        integrated.extend(sorted((backup_path(p) for store in (external, addons) for p in store.glob(".RutaXP.backup.*")
                                   if re.fullmatch(r"\.RutaXP\.backup\.[0-9a-f]{32}", p.name)),
                                  key=lambda p: p.stat().st_mtime, reverse=True))
     for installed in integrated:
@@ -104,7 +129,7 @@ def find_native_sources(client):
 
 def compose_bundle(client, destination, cache):
     destination = destination.resolve()
-    if destination.is_relative_to(client):
+    if destination.is_relative_to(game_root(client)):
         raise ValueError("Elige un destino para el ZIP fuera de la instalación del juego.")
     roots = find_native_sources(client)
     return composer.compose(resources() / "RutaXP", roots, destination)

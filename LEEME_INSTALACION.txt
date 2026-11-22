@@ -1,4 +1,4 @@
-RUTAXP 1.2.1 PARA WOW FOREVER
+RUTAXP 1.2.3 PARA WOW FOREVER
 
 1. Cierra WoW y abre tu Instalador_RutaXP.exe de siempre.
 2. Elige Instalar o actualizar y comprueba la carpeta del cliente.
@@ -8,4 +8,4 @@ RUTAXP 1.2.1 PARA WOW FOREVER
 
 Si utilizas el instalador de la serie 0.7 y solo aparece la interfaz clásica de RutaXP, cierra WoW y ejecuta Instalar_Suite_RutaXP.exe dentro de Interface/AddOns/RutaXP para componer la suite con tus módulos locales. Las guías vienen en el propio addon. El panel y la brújula de Journey requieren su copia local o la copia que guardó la instalación anterior.
 
-El instalador guarda cada instalación anterior en RutaXP-Suite-Backups, dentro de la carpeta del cliente. El avance se conserva por personaje. Si ya tienes el paquete personal preparado puedes instalarlo sin conexión con Instalar_RutaXP_Personal.exe y volver a la instalación anterior con Instalar_RutaXP_Personal.exe --restore.
+El instalador guarda las copias de recuperación fuera de la carpeta que actualiza Battle.net y traslada automáticamente las copias anteriores. Para una instalación en E:\WOW\World of Warcraft\_forever_, la carpeta de copias es E:\WOW\RutaXP-Suite-Backups\World of Warcraft\_forever_. El avance se conserva por personaje. Si ya tienes el paquete personal preparado puedes instalarlo sin conexión con Instalar_RutaXP_Personal.exe y volver a la instalación anterior con Instalar_RutaXP_Personal.exe --restore.

@@ -243,6 +243,8 @@ try {
         }
         'restore' {
             $result=Update $addons;$oldBackup=$result.Backup
+            $store=[RutaXPInstaller.InstallerCore]::BackupStore($addons)
+            Assert-True ([IO.Path]::GetDirectoryName($oldBackup) -eq $store) 'The public updater placed a backup in the game folder.'
             $bad=New-Addon (Join-Path $addons ('.RutaXP.backup.'+[guid]::NewGuid().ToString('N'))) '0.8.0' 'broken'
             [IO.File]::AppendAllText((Join-Path $bad 'Core.lua'),'corrupt')
             $copies=[RutaXPUpdater.UpdaterCore]::Backups($addons)
@@ -255,6 +257,13 @@ try {
             Assert-Old $target;Assert-Old $oldBackup
             Assert-True ([RutaXPUpdater.UpdaterCore]::TocVersion($restored.Backup) -eq '0.10.0') 'Restoring must also back up the current version.'
             [RutaXPInstaller.InstallerCore]::Manifest($restored.Backup) | Out-Null
+            $legacyName='.RutaXP.backup.'+[guid]::NewGuid().ToString('N')
+            $legacy=New-Addon (Join-Path $addons $legacyName) '0.8.0' 'legacy public backup'
+            $found=@([RutaXPUpdater.UpdaterCore]::Backups($addons) | Where-Object Name -eq $legacyName)
+            Assert-True ($found.Count -eq 1 -and $found[0].Path -eq $legacy) 'The updater must still find local legacy backups.'
+            $legacyRestore=[RutaXPUpdater.UpdaterCore]::Restore($addons,$legacyName,$script:IsRunning,$null)
+            Assert-True ([RutaXPUpdater.UpdaterCore]::TocVersion($target) -eq '0.8.0') 'The legacy copy did not restore.'
+            Assert-True ([IO.Path]::GetDirectoryName($legacyRestore.Backup) -eq $store) 'Restoring a legacy copy must not create more copies under AddOns.'
             Assert-Wtf $addons
         }
         'settings' {

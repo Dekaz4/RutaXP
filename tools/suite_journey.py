@@ -24,8 +24,18 @@ def entries(root):
 
 
 def fix_arrow_vector(text):
-    return text.replace("GetWorldPosFromMapPos(mapID, { x = targetX, y = targetY })",
+    text = text.replace("GetWorldPosFromMapPos(mapID, { x = targetX, y = targetY })",
                         "GetWorldPosFromMapPos(mapID, CreateVector2D(targetX, targetY))")
+    signature = "function ArrowMixin:SetTarget(targetX, targetY, mapID, disablePingAnimation)"
+    if signature in text:
+        # Forever resolves the return-value mixin in the caller's environment.
+        # The host already projected this exact target in the global WoW context.
+        projection = "local _, coordinate = C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(targetX, targetY))"
+        if text.count(signature) != 1 or text.count(projection) != 1:
+            raise ValueError("No se reconoce la función de posición de la brújula de Journey.")
+        text = text.replace(signature, signature[:-1] + ", coordinate)")
+        text = text.replace(projection, "-- The host supplies the verified world coordinate.")
+    return text
 
 
 def embedded_contents(read):

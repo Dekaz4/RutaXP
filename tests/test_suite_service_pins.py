@@ -118,3 +118,20 @@ class WorldMapPinTests(unittest.TestCase):
             flush()
             assert(#sets.rutaxp_service_banker.pins == 3)
         """)
+
+    def test_zone_can_place_a_service_before_continent_projection_is_available(self):
+        self.lua.execute("""
+            local s=openMap.MapStitch
+            s.FromYards=function() return nil end
+            s.Rect=function() return .1, .3, .5, .7 end
+            function CreateVector2D(x,y) return {x=x,y=y} end
+            C_Map={GetMapPosFromWorldPos=function(c,p,id)
+                assert(c==1 and p.x==70 and p.y==40 and id==1412)
+                return id, {GetXY=function() return .4,.6 end}
+            end}
+            active.banker=true
+            RutaXPWorldMapTracking.Refresh(openMap)
+            flush()
+            local pins=sets.rutaxp_service_banker.pins
+            assert(#pins==1 and math.abs(pins[1].x-.18)<.00001 and math.abs(pins[1].y-.62)<.00001)
+        """)
