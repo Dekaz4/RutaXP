@@ -4,7 +4,7 @@ RUTAXP 1.2.11 PARA WOW FOREVER
 2. Pulsa 1. El instalador usa tu cliente guardado o lo detecta si hay uno solo.
 3. Entra con tu personaje. El panel de Journey muestra su capítulo de RutaXP 0.7.36.
 4. Pulsa el título del panel para elegir otro capítulo. /rutaxp zona busca una guía según tu zona, nivel y diario.
-5. La llave del minimapa abre las misiones de mazmorra, incluso al seguir la ruta de mundo abierto. Puedes arrastrarla por el borde. Pulsa M para el mapa, /dj para el diario de mazmorras y N para los talentos.
+5. La llave del minimapa abre un desplegable con las mazmorras y sus alas. Elige una para revisar las misiones. Pulsa Preparar mazmorra o Retomar preparación cuando quieras seguirla con la brújula. Puedes arrastrarla por el borde. Pulsa M para el mapa, /dj para el diario de mazmorras y N para los talentos.
 6. Haz clic izquierdo en la flecha para cambiar su diseño y tamaño o para ocultar el texto y la distancia. Arrástrala para moverla.
 7. Escribe /lfg para buscar grupo. La opción 1 instala LFG Forever de Artefius y su traducción al español.
 

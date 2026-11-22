@@ -12,7 +12,7 @@ local methods = getmetatable(UIParent).__index
 frames, namedCounts = {}, {}
 function CreateFrame(kind, name, parent, template)
     local frame = baseCreate()
-    frame.parent = parent
+    frame.parent, frame.frameName, frame.template = parent, name, template
     frame.kind = kind
     table.insert(frames, frame)
     if name then
@@ -27,6 +27,10 @@ function methods:SetPoint(...) self.point = {...} end
 function methods:GetPoint() return unpack(self.point or {}) end
 function methods:GetCenter() return self.cx or 200, self.cy or 200 end
 function methods:GetEffectiveScale() return 1 end
+function methods:IsMouseOver() return self == hover end
+function methods:EnableMouseWheel(value) self.wheel = value end
+function methods:GetName() return self.frameName end
+function methods:SetScrollChild(child) self.scrollChild = child end
 function methods:GetScript(name) return self.scripts[name] end
 function methods:HookScript(name, callback)
     local previous = self.scripts[name]
@@ -70,6 +74,18 @@ function leftClick(frame)
     assert(frame:IsShown() and frame:IsEnabled())
     frame.scripts.OnClick(frame, "LeftButton")
 end
+function globalMouseDown(target)
+    hover = target
+    for _,frame in ipairs(frames) do
+        if frame.events.GLOBAL_MOUSE_DOWN then frame.scripts.OnEvent(frame, "GLOBAL_MOUSE_DOWN", "LeftButton") end
+    end
+    hover = nil
+end
+function escape()
+    for _, name in ipairs(UISpecialFrames) do
+        if _G[name] and _G[name]:IsShown() then _G[name]:Hide() end
+    end
+end
 function visibleText(needle)
     for _, frame in ipairs(frames) do
         if frame.text and string.find(frame.text, needle, 1, true) then
@@ -80,20 +96,22 @@ function visibleText(needle)
     end
     return false
 end
-reads, starts = 0, {}
+reads, starts, repeats = 0, {}, {}
 options = {
-    {key="Mines", name="Minas de la Muerte", tasks={"Recoge la carta antes de entrar"}, deferred=true},
-    {key="Gnomer", name="Gnomeregan", tasks={"Entrega tu tarjeta en el taller"}},
+    {key="Mines", name="Minas de la Muerte", tasks={"Recoge la carta antes de entrar"}, available=true, deferred=true},
+    {key="Gnomer", name="Gnomeregan", tasks={"Entrega tu tarjeta en el taller"}, available=true},
 }
 RutaXPDB, RutaXPCharDB = {}, {}
 ns = {db=RutaXPDB, char=RutaXPCharDB, DungeonPlanner={}}
 ns.char.activeGuide, ns.char.cursor = "route", 12
 function ns.DungeonPlanner:PreparationOptions() reads = reads + 1; return options end
+function ns.DungeonPlanner:CatalogOptions() reads = reads + 1; return options end
 function ns.DungeonPlanner:StartPreparation(key)
     table.insert(starts, key)
     return true
 end
 function ns.DungeonPlanner:Resume() error("Browsing must not reactivate deferred visits") end
+function ns.DungeonPlanner:Repeat(key) table.insert(repeats, key); return true end
 """
 
 
@@ -135,11 +153,15 @@ class DungeonPreparationUITests(unittest.TestCase):
             button.scripts.OnLeave(button)
             assert(not GameTooltip.shown)
             leftClick(button)
+            assert(ui.menu:IsShown() and #ui.menuRows == 2)
+            assert(visibleText("Minas de la Muerte") and visibleText("Gnomeregan"))
+            assert(not RutaXPDungeonPreparationFrame or not RutaXPDungeonPreparationFrame:IsShown())
+            leftClick(ui.menuRows[1])
             local panel = assert(RutaXPDungeonPreparationFrame)
             assert(panel:IsShown() and visibleText("Minas de la Muerte"))
             assert(ui.prepare:GetText() == "Retomar preparación")
             assert(visibleText("Recoge la carta antes de entrar"))
-            ui:Toggle()
+            escape()
             assert(not panel:IsShown() and button:IsShown())
             assert(#starts == 0 and ns.char.activeGuide == "route" and ns.char.cursor == 12)
         """)
@@ -147,11 +169,14 @@ class DungeonPreparationUITests(unittest.TestCase):
     def test_browsing_and_refresh_never_start_a_detour_until_explicit_click(self):
         self.run_lua("""
             leftClick(button)
-            leftClick(ui.next)
+            -- Pick the second entry immediately, without accepting the suggested first one.
+            leftClick(ui.menuRows[2])
             assert(visibleText("Gnomeregan") and visibleText("Entrega tu tarjeta en el taller"))
             leftClick(ui.previous)
             assert(visibleText("Minas de la Muerte"))
-            leftClick(ui.next)
+            leftClick(ui.selector)
+            assert(ui.menu:IsShown())
+            leftClick(ui.menuRows[2])
             options[2].tasks = {"La tarjeta ya se puede entregar"}
             ui:RefreshIfShown()
             ui:RefreshIfShown()
@@ -167,20 +192,84 @@ class DungeonPreparationUITests(unittest.TestCase):
             options = {}
             ui:RefreshIfShown()
             leftClick(button)
-            assert(RutaXPDungeonPreparationFrame:IsShown() and button:IsShown())
-            assert(not ui.prepare:IsEnabled())
-            assert(visibleText("no hay misiones") and not ui.next:IsShown() and not ui.previous:IsShown())
-            ui:Toggle()
+            assert(ui.menu:IsShown() and button:IsShown())
+            assert(not ui.menuRows[1] or not ui.menuRows[1]:IsShown())
+            globalMouseDown(UIParent)
+            assert(not ui.menu:IsShown())
             leftClick(button)
-            assert(RutaXPDungeonPreparationFrame:IsShown() and not ui.prepare:IsEnabled())
+            assert(ui.menu:IsShown())
             assert(#starts == 0)
+        """)
+
+    def test_escape_outside_and_second_key_click_dismiss_without_changing_route(self):
+        self.run_lua("""
+            leftClick(button)
+            assert(ui.menu:IsShown())
+            leftClick(button)
+            assert(not ui.menu:IsShown())
+            leftClick(button)
+            globalMouseDown(ui.menu)
+            assert(ui.menu:IsShown())
+            globalMouseDown(UIParent)
+            assert(not ui.menu:IsShown())
+            leftClick(button)
+            escape()
+            assert(not ui.menu:IsShown())
+            assert(#starts == 0 and ns.char.activeGuide == "route" and ns.char.cursor == 12)
+        """)
+
+    def test_catalog_scrolls_to_last_entry_and_refresh_keeps_selected_key(self):
+        self.run_lua("""
+            options = {}
+            for i=1, 27 do
+                options[i] = {key="instance"..i, name="Mazmorra "..i, available=true, tasks={"Objetivo "..i}}
+            end
+            leftClick(button)
+            local scroll = assert(ui.menuScroll)
+            assert(scroll.scrollChild and scroll.scrollChild.height > ui.menu.height)
+            assert(scroll.template == "UIPanelScrollFrameTemplate" or scroll.scripts.OnMouseWheel)
+            scroll:SetVerticalScroll(scroll.scrollChild.height - ui.menu.height)
+            local last = assert(ui.menuRows[27])
+            assert(last.key == "instance27")
+            leftClick(last)
+            assert(visibleText("Objetivo 27") and not ui.menu:IsShown())
+            table.remove(options, 1)
+            ui:RefreshIfShown()
+            assert(visibleText("Objetivo 27") and #starts == 0)
+            escape()
+            assert(not RutaXPDungeonPreparationFrame:IsShown())
+            assert(ns.char.activeGuide == "route" and ns.char.cursor == 12)
+        """)
+
+    def test_finished_dungeon_without_turnins_is_never_started_by_browsing(self):
+        self.run_lua("""
+            options = {{key="Done", name="Mazmorra completada", finished=true,
+                available=false, reason="Ya has terminado las misiones de esta mazmorra.", tasks={}}}
+            leftClick(button)
+            leftClick(ui.menuRows[1])
+            ui:RefreshIfShown()
+            assert(ui.prepare:GetText() == "Ir por libre" and visibleText(options[1].reason))
+            assert(#starts == 0 and #repeats == 0 and ns.char.activeGuide == "route" and ns.char.cursor == 12)
+            leftClick(ui.prepare)
+            assert(#starts == 0 and #repeats == 1 and repeats[1] == "Done")
+        """)
+
+    def test_unavailable_entry_explains_reason_and_cannot_start(self):
+        self.run_lua("""
+            options = {{key="High", name="Mazmorra de nivel alto", finished=false, available=false,
+                reason="Todavía no tienes misiones disponibles para tu nivel.", tasks={}}}
+            leftClick(button)
+            leftClick(ui.menuRows[1])
+            assert(not ui.prepare:IsEnabled() and visibleText(options[1].reason))
+            assert(#starts == 0 and #repeats == 0)
         """)
 
     def test_finished_dungeon_with_pending_turnins_offers_to_guide_deliveries(self):
         self.run_lua("""
-            options = {{key="Mines", name="Minas de la Muerte", finished=true,
+            options = {{key="Mines", name="Minas de la Muerte", finished=true, available=true,
                         tasks={"Entrega la carta al volver a la ciudad"}}}
             leftClick(button)
+            leftClick(ui.menuRows[1])
             assert(ui.prepare:GetText() == "Guiar las entregas" and ui.prepare:IsEnabled())
             assert(visibleText("Entrega la carta al volver a la ciudad"))
             assert(#starts == 0)
@@ -197,7 +286,7 @@ class DungeonPreparationUITests(unittest.TestCase):
             button.scripts.OnDragStop(button)
             assert(not button.scripts.OnUpdate)
             leftClick(button)
-            assert(not RutaXPDungeonPreparationFrame and #starts == 0)
+            assert((not ui.menu or not ui.menu:IsShown()) and #starts == 0)
             return ns.char.dungeonPrepMinimapAngle
         """)
         self.assertAlmostEqual(angle, -90)
@@ -207,5 +296,5 @@ class DungeonPreparationUITests(unittest.TestCase):
             assert(math.abs(x) < 0.01 and y < 0)
             button.scripts.OnMouseDown(button)
             leftClick(button)
-            assert(RutaXPDungeonPreparationFrame:IsShown())
+            assert(ui.menu:IsShown())
         """)

@@ -450,36 +450,66 @@ end
 -- Examine live quests without changing the selection, deferrals or visit history.
 local emptyTrips = {finished={},deferred={},runs={}}
 
-local function preparationPlan(key, dungeon, ctx, here, trips)
+local function preparationPlan(key, dungeon, ctx, here, trips, manual)
     local inside = here == key
     local finished = trips.finished[key] or (not inside and runComplete(ctx,trips.runs[key]))
-    if not (inside or finished or trips.selected == key or trips.deferred[key] or inLevelRange(ctx,dungeon)) then return end
-    local plan = planDungeon(ctx,dungeon,inside,finished)
-    if actionable(plan) then return plan,not not finished end
+    if not (manual or inside or finished or trips.selected == key or trips.deferred[key] or inLevelRange(ctx,dungeon)) then return end
+    return planDungeon(ctx,dungeon,inside,finished), not not finished
 end
 
-function planner:PreparationOptions()
+local function unavailableReason(ctx, dungeon, plan, finished)
+    if finished then return "Ya has completado la visita y no te quedan entregas pendientes." end
+    local task = plan.tasks[1]
+    if task then
+        if task.kind == "locked" then return "Tienes misiones previas pendientes para acceder a estos objetivos." end
+        if task.kind == "itemDrop" then return "Primero necesitas el objeto que empieza la misión." end
+        return "La guía todavía no conoce el inicio de estas misiones."
+    end
+    local factionMatch = false
+    for _, id in ipairs(dungeon.quests) do
+        local q = data.quests[id]
+        if not q or not q.faction or q.faction == ctx.faction then factionMatch = true; break end
+    end
+    if #dungeon.quests > 0 and not factionMatch then return "Esta guía no tiene misiones para tu facción." end
+    if plan.done > 0 then return "Ya has entregado misiones aquí. Ahora mismo no tienes otras que preparar." end
+    if ctx.level < (dungeon.minLevel or 1) then return "Todavía no tienes misiones disponibles para tu nivel." end
+    return "Ahora mismo tu personaje no tiene misiones disponibles en esta mazmorra."
+end
+
+local function preparationOptions(catalog)
     local options = {}
     if not ns.char then return options end
     local ctx, here, trips = context(), instance(), ns.char.dungeonTrips or emptyTrips
     for key,dungeon in pairs(data.dungeons) do
-        local plan,finished = preparationPlan(key,dungeon,ctx,here,trips)
-        if plan then
+        local plan,finished = preparationPlan(key,dungeon,ctx,here,trips,catalog)
+        local available = plan and not not actionable(plan)
+        if plan and (available or catalog) then
             local deferred = not not trips.deferred[key]
-            local entry = {key=key, name=dungeonName(key,dungeon), tasks={}, deferred=deferred, finished=finished}
+            local entry = {key=key, name=dungeonName(key,dungeon), minLevel=dungeon.minLevel or 1,
+                maxLevel=dungeon.maxLevel or 60, tasks={}, available=available, deferred=deferred, finished=finished}
             entry.priority = trips.selected == key and 4 or (deferred and trips.lastDeferred == key) and 3
                 or here == key and 2 or deferred and 1 or 0
             local door = dungeon.entrance
             local nearby = door and (door.map or door.mapID) == ctx.map
             entry.relevance = plan.held*20 + math.min(10,plan.localCount)*2 + (nearby and 8 or 0)
-            for _,task in ipairs(plan.tasks) do
-                local place = task.point and task.point.name
-                entry.tasks[#entry.tasks+1] = line(task) .. (place and (" · " .. place) or "")
+            if available then
+                for _,task in ipairs(plan.tasks) do
+                    local place = task.point and task.point.name
+                    entry.tasks[#entry.tasks+1] = line(task) .. (place and (" · " .. place) or "")
+                end
+            else
+                entry.reason = unavailableReason(ctx,dungeon,plan,finished)
             end
             options[#options+1] = entry
         end
     end
     table.sort(options,function(a,b)
+        if catalog then
+            if a.available ~= b.available then return a.available end
+            if a.minLevel ~= b.minLevel then return a.minLevel < b.minLevel end
+            if a.name ~= b.name then return a.name < b.name end
+            return a.key < b.key
+        end
         if a.priority ~= b.priority then return a.priority > b.priority end
         if a.relevance ~= b.relevance then return a.relevance > b.relevance end
         return a.key < b.key
@@ -487,10 +517,16 @@ function planner:PreparationOptions()
     return options
 end
 
+-- Browsing a different level bracket is an explicit choice. Individual quest
+-- requirements and completed visits still apply when the player confirms.
+function planner:CatalogOptions() return preparationOptions(true) end
+function planner:PreparationOptions() return preparationOptions(false) end
+
 function planner:StartPreparation(key)
     local dungeon = data.dungeons[key]
     if not ns.char or not dungeon then return false end
-    if not preparationPlan(key,dungeon,context(),instance(),ns.char.dungeonTrips or emptyTrips) then return false end
+    local plan = preparationPlan(key,dungeon,context(),instance(),ns.char.dungeonTrips or emptyTrips,true)
+    if not actionable(plan) then return false end
     local trips = saved()
     trips.selected, trips.repeatDungeon = key,nil
     trips.deferred[key] = nil

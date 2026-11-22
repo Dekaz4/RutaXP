@@ -245,6 +245,71 @@ class DungeonPlannerTests(unittest.TestCase):
             assert(p:StartPreparation("Crypt") and trips.deferred.Bastion)
         """)
 
+    def test_catalog_includes_all_wings_and_groups_available_before_unavailable(self):
+        self.run_lua("""
+            w.level=36
+            function ns.GetEmbeddedModule(name)
+                return {LocalizeDungeonName=function(key)
+                    return key=="Scarlet Monastery: Library" and "Monasterio Escarlata: Biblioteca" or key
+                end}
+            end
+        """)
+        self.login()
+        self.run_lua("""
+            local count,wings,seen=0,0,{}
+            for _ in pairs(production.dungeons) do count=count+1 end
+            local catalog=ns.DungeonPlanner:CatalogOptions()
+            assert(#catalog==count)
+            for i,entry in ipairs(catalog) do
+                assert(not seen[entry.key] and entry.minLevel<=entry.maxLevel)
+                seen[entry.key]=true
+                if entry.key:find("Scarlet Monastery:",1,true) then wings=wings+1 end
+                if entry.key=="Scarlet Monastery: Library" then assert(entry.name=="Monasterio Escarlata: Biblioteca") end
+                if i>1 then
+                    local prev=catalog[i-1]
+                    assert(prev.available or not entry.available)
+                    if prev.available==entry.available then assert(prev.minLevel<=entry.minLevel) end
+                end
+                if entry.available then assert(#entry.tasks>0 and not entry.reason)
+                else assert(#entry.tasks==0 and entry.reason) end
+            end
+            assert(wings==4)
+        """)
+
+    def test_manual_catalog_keeps_recommendations_and_respects_faction_level_and_visits(self):
+        self.run_lua("""
+            useFixture({[11]={title="Entrega de la cripta",pickup=point(12,60,30)},
+                [12]={title="Encargo anterior",pickup=point(27,60,30),minLevel=8},
+                [13]={title="Solo Horda",faction="Horde",pickup=point(32,60,30)},
+                [14]={title="Para nivel alto",minLevel=58,pickup=point(27,60,30)}}, {11})
+            local all=ns.DungeonQuestData.dungeons
+            all.Low={name="Mazmorra anterior",minLevel=10,maxLevel=15,quests={12},entrance=point(27,50,65)}
+            all.Den={name="Guarida",minLevel=20,maxLevel=30,quests={13},entrance=point(32,50,65)}
+            all.High={name="Cumbre",minLevel=55,maxLevel=60,quests={14},entrance=point(27,85,87)}
+            all.Done={name="Visita anterior",minLevel=10,maxLevel=30,quests={11},entrance=point(12,5,6)}
+            ns.char.dungeonTrips={selected="Crypt",deferred={Den=true},finished={Done=true},runs={}}
+        """)
+        self.login()
+        self.run_lua("""
+            local p,trips=ns.DungeonPlanner,ns.char.dungeonTrips
+            local listed={}
+            for _,e in ipairs(p:CatalogOptions()) do listed[e.key]=e end
+            assert(listed.Low.available and listed.Low.tasks[1]:find("Encargo anterior",1,true))
+            assert(not listed.Den.available and listed.Den.reason:find("facción",1,true))
+            assert(not listed.High.available and listed.High.reason:find("nivel",1,true))
+            assert(listed.Done.finished and not listed.Done.available and #listed.Done.tasks==0)
+            assert(trips.selected=="Crypt" and trips.deferred.Den and not trips.repeatDungeon)
+            for _,e in ipairs(p:PreparationOptions()) do assert(e.key~="Low") end
+            assert(not p:StartPreparation("High") and not p:StartPreparation("Done") and trips.selected=="Crypt")
+            assert(p:StartPreparation("Low") and p:Heading()=="Mazmorra anterior")
+            assert(p:Wants("accept",12) and trips.deferred.Den and not trips.repeatDungeon)
+            w.faction="Horde"; local horde
+            for _,e in ipairs(p:CatalogOptions()) do if e.key=="Den" then horde=e end end
+            assert(horde.available and horde.tasks[1]:find("Solo Horda",1,true))
+            w.done[12]=true
+            assert(not p:StartPreparation("Low"), "stale catalog selection must recheck quest flags")
+        """)
+
     def test_finished_preview_only_offers_known_outdoor_handins_and_never_repeats(self):
         self.run_lua("""
             useFixture({
