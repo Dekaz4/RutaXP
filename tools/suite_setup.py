@@ -135,12 +135,17 @@ def compose_bundle(client, destination, cache):
     return composer.compose(resources() / "RutaXP", roots, destination)
 
 
-def activate(client, archive=None):
+def activate(client, archive=None, *, prepared=None):
     script = resources() / "tools/Install-Suite.ps1"
     powershell = Path(os.environ.get("SystemRoot", "C:/Windows")) / "System32/WindowsPowerShell/v1.0/powershell.exe"
     args = [str(powershell), "-NoLogo", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass",
             "-File", str(script), "-Client", str(client)]
-    args += ["-Restore"] if archive is None else ["-Archive", str(archive.resolve(strict=True))]
+    if prepared is not None:
+        args += ["-PreparedDirectory", str(prepared.resolve(strict=True))]
+    elif archive is not None:
+        args += ["-Archive", str(archive.resolve(strict=True))]
+    else:
+        args += ["-Restore"]
     # Install-Suite verifies the selected client and that WoW is closed both
     # before the transaction and immediately before switching directories.
     process = subprocess.run(args, cwd=resources(), capture_output=True, text=True,
@@ -156,16 +161,21 @@ def run(client, cache, output=None, restore=False, archive=None, compose_only=Fa
         return activate(client)
     if archive:
         return activate(client, archive)
-    if compose_only:
+    if compose_only or output:
         destination = output or (Path.cwd() / "RutaXP-personal.zip")
         compose_bundle(client, destination, cache)
-        return f"Paquete preparado en {destination.resolve()}"
-    with tempfile.TemporaryDirectory(prefix="RutaXP-instalar-") as work:
-        destination = output or (Path(work) / "RutaXP-personal.zip")
-        report("Preparando las guías de RutaXP, los mapas y el diario de mazmorras…")
-        compose_bundle(client, destination, cache)
-        report("Verificando e instalando la suite…")
-        return activate(client, destination)
+        return f"Paquete preparado en {destination.resolve()}" if compose_only else activate(client, destination)
+    store = backup_store(client)
+    if store.resolve() != store.absolute():
+        raise ValueError("La carpeta de copias de RutaXP contiene un enlace o junction.")
+    roots = find_native_sources(client)
+    store.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix=".RutaXP-stage-", dir=store) as work:
+        prepared = Path(work) / "RutaXP"
+        report("Preparando las guías de RutaXP…")
+        composer.prepare_directory(resources() / "RutaXP", roots, prepared, report)
+        report("Verificando los archivos e instalando la suite…")
+        return activate(client, prepared=prepared)
 
 
 def show_window(client, cache):
@@ -326,6 +336,11 @@ def main(argv=None):
         if gui:
             show_window(client, args.cache)
         elif client:
+            # The desktop installer reads a pipe. Show each completed phase while
+            # the helper is running, including when an older launcher invokes it.
+            for stream in (sys.stdout, sys.stderr):
+                if hasattr(stream, "reconfigure") and not stream.isatty():
+                    stream.reconfigure(encoding="utf-8", line_buffering=True)
             print(run(client, args.cache, args.output, args.restore, args.archive, args.compose_only))
         else:
             raise ValueError("Indica la ruta de WoW Forever con --client o --addons.")

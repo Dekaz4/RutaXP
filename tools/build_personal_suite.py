@@ -22,6 +22,7 @@ ASSETS = {".blp", ".tga", ".png", ".ogg", ".mp3", ".wav", ".ttf", ".otf", ".atla
 ASSET_ROOT = re.compile(r"(Interface)([/\\]+)(AddOns)\2(OpenMap|ForeverDungeonJournal|RXPGuides)(?=[/\\])", re.I)
 FILE_TAG = re.compile(r"""<!--.*?-->|<(?:Script|Include)\b[^<>]*?\bfile\s*=\s*(["'])([^"']+)\1[^<>]*>""", re.S)
 TOC_ENTRY = re.compile(r"([^\[\]]+?)(?:\s+\[(AllowLoadGameType|AllowLoadTextLocale) ([\w,]+)\])?")
+INVALID_WINDOWS_PART = re.compile(r'[. ]$|[:*?"<>|\x00-\x1f]|^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(\.|$)', re.I)
 
 
 def relocate(text):
@@ -183,7 +184,7 @@ def merged_bindings(modules):
     return ET.tostring(bindings, encoding="utf-8")
 
 
-def compose(template, roots, destination):
+def write_suite(template, roots, emit, report=None):
     modules = [Module(name, roots[name]) if (roots[name] / (name + ".toc")).is_file()
                else InstalledModule(name, roots[name]) for name in MODULES]
     base = (template / "RutaXP.toc").read_text(encoding="utf-8-sig")
@@ -217,37 +218,61 @@ def compose(template, roots, destination):
         load.extend(suite_journey.entries(journey))
     toc = "\n".join(headers) + "\n" + base.strip() + "\n\n" + "\n".join(load) + "\n"
 
+    checksums = {}
+    def write(name, data):
+        if name in checksums:
+            raise ValueError(f"Duplicate package entry: {name}")
+        checksums[name] = hashlib.sha256(data).hexdigest()
+        emit(name, data)
+
+    for name in suite_files(template):
+        write(name, toc.encode("utf8") if name == "RutaXP.toc" else (template / name).read_bytes())
+    # The already-distributed 1.1.0 updater checks for this directory after activation.
+    write("Modules/RXPGuides/Migracion.txt", "Las guías se cargan desde Leveling.lua de RutaXP.\n".encode("utf8"))
+    for module in modules:
+        if report:
+            report(f"Preparando {module.name}…")
+        for name, data in module.contents():
+            write(name, data)
+    if journey:
+        if report:
+            report("Preparando la interfaz de Journey…")
+        for name, data in (prior_journey.contents() if prior_journey else suite_journey.contents(journey)):
+            write(name, data)
+    write("Bindings.xml", merged_bindings(modules))
+    for name in ("NOTICE.md", "LICENSE"):
+        write(name, (template.parent / name).read_bytes())
+    for lic in sorted((template / "Licenses").glob("*")):
+        if lic.is_file():
+            write("Licenses/" + lic.name, lic.read_bytes())
+    manifest = [f"# RutaXP {metadata['Version']}"] + [f"{value}  {name}" for name, value in sorted(checksums.items())]
+    emit("manifest.sha256", ("\n".join(manifest) + "\n").encode("utf8"))
+    return {module.name: len(module.required) for module in modules}, checksums
+
+
+def prepare_directory(template, roots, destination, report=None):
+    """Create the installer's private staging tree. Install-Suite verifies it before activation."""
+    destination.mkdir()
+
+    def emit(name, data):
+        if "\\" in name or any(not part or INVALID_WINDOWS_PART.search(part) for part in name.split("/")):
+            raise ValueError(f"Invalid package path: {name}")
+        path = destination / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("xb") as stream:
+            stream.write(data)
+
+    write_suite(template, roots, emit, report)
+
+
+def compose(template, roots, destination):
     destination.parent.mkdir(parents=True, exist_ok=True)
     # Build beside the final path so an interrupted run never replaces a working ZIP.
     with tempfile.NamedTemporaryFile(dir=destination.parent, suffix=".tmp", delete=False) as handle:
         temp = Path(handle.name)
     try:
-        checksums = {}
         with ZipFile(temp, "w", ZIP_DEFLATED, compresslevel=3) as archive:
-            def write(name, data):
-                if name in checksums:
-                    raise ValueError(f"Duplicate archive entry: {name}")
-                checksums[name] = hashlib.sha256(data).hexdigest()
-                archive.writestr("RutaXP/" + name, data)
-            for name in suite_files(template):
-                write(name, toc.encode("utf8") if name == "RutaXP.toc" else (template / name).read_bytes())
-            # The already-distributed 1.1.0 updater checks for this directory after activation.
-            write("Modules/RXPGuides/Migracion.txt", "Las guías se cargan desde Leveling.lua de RutaXP.\n".encode("utf8"))
-            for module in modules:
-                for name, data in module.contents():
-                    write(name, data)
-            if journey:
-                for name, data in (prior_journey.contents() if prior_journey else suite_journey.contents(journey)):
-                    write(name, data)
-            write("Bindings.xml", merged_bindings(modules))
-            for name in ("NOTICE.md", "LICENSE"):
-                write(name, (template.parent / name).read_bytes())
-            license_dir = template / "Licenses"
-            for lic in sorted(license_dir.glob("*")):
-                if lic.is_file():
-                    write("Licenses/" + lic.name, lic.read_bytes())
-            manifest = [f"# RutaXP {metadata['Version']}"] + [f"{value}  {name}" for name, value in sorted(checksums.items())]
-            archive.writestr("RutaXP/manifest.sha256", "\n".join(manifest) + "\n")
+            counts, checksums = write_suite(template, roots, lambda name, data: archive.writestr("RutaXP/" + name, data))
         with ZipFile(temp) as archive:
             for name, digest in checksums.items():
                 if hashlib.sha256(archive.read("RutaXP/" + name)).hexdigest() != digest:
@@ -255,7 +280,7 @@ def compose(template, roots, destination):
         os.replace(temp, destination)
     finally:
         temp.unlink(missing_ok=True)
-    return {module.name: len(module.required) for module in modules}
+    return counts
 
 
 def main():

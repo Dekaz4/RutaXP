@@ -122,6 +122,23 @@ class PortableSuiteSetupTests(unittest.TestCase):
         roots = suite_setup.find_native_sources(self.client)
         self.assertEqual(set(roots), {"OpenMap", "ForeverDungeonJournal", "Journey"})
         suite_setup.composer.compose(template, roots, output)
+        captured = []
+        def verify_prepared(client, *, prepared):
+            self.assertEqual(client, self.client)
+            self.assertEqual(prepared.parent.parent, suite_setup.backup_store(self.client))
+            captured.append(prepared)
+            with ZipFile(output) as archive:
+                files = {f.relative_to(prepared).as_posix(): f for f in prepared.rglob("*") if f.is_file()}
+                self.assertEqual(set(archive.namelist()), {"RutaXP/" + name for name in files})
+                for name, file in files.items():
+                    self.assertEqual(file.read_bytes(), archive.read("RutaXP/" + name), name)
+            return "installed"
+
+        with patch.object(suite_setup, "resources", return_value=template.parent), \
+                patch.object(suite_setup.composer, "compose", side_effect=AssertionError("unexpected ZIP")), \
+                patch.object(suite_setup, "activate", side_effect=verify_prepared):
+            self.assertEqual(suite_setup.run(self.client, self.work, report=lambda _: None), "installed")
+        self.assertFalse(captured[0].parent.exists())
         with ZipFile(output) as archive:
             self.assertNotIn("RutaXP/Modules/RXPGuides/unwanted.lua", archive.namelist())
             self.assertNotIn(b"RutaXPRestedDB", archive.read("RutaXP/RutaXP.toc"))

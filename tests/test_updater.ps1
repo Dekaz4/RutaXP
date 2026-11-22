@@ -156,6 +156,29 @@ try {
             $script:Responses[$package.SumUrl] = [Text.Encoding]::UTF8.GetBytes(('0'*64)+'  '+$package.Name)
             Assert-Throws { [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,$show) }
             Assert-True ($script:launches -eq 6) 'Missing, unverified, or duplicate launcher invocation.'
+            $script:bundledBytes = $package.Archive
+            $script:bundleReads = 0
+            $openBundle = [Func[IO.Stream]] {
+                $script:bundleReads++
+                return [IO.MemoryStream]::new($script:bundledBytes, $false)
+            }
+            Use-Package $package
+            $script:Responses.Remove($package.ZipUrl)
+            $reused = [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,$show,$openBundle)
+            Assert-True ($reused.LatestVerified -and $script:FetchCount -eq 2 -and $script:launches -eq 7) 'An identical bundled ZIP should use the official checksum and still run suite verification.'
+            Assert-True ($script:bundleReads -eq 1) 'The matching embedded archive was not opened.'
+
+            foreach ($sameSize in @($false,$true)) {
+                Use-Package $package
+                $script:bundledBytes = if ($sameSize) { $package.Archive.Clone() } else { [byte[]](1,2,3) }
+                $script:bundledBytes[0] = 0
+                $online = [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,$show,$openBundle)
+                Assert-True ($online.LatestVerified -and $script:FetchCount -eq 3) 'A stale or damaged bundle must fall back to the verified online ZIP.'
+            }
+            Use-Package $package
+            $script:bundledBytes = $package.Archive
+            $repaired = [RutaXPUpdater.UpdaterCore]::Update($addons,$true,$null,$script:Fetch,$script:IsRunning,$null,$show,$openBundle)
+            Assert-True ($repaired.LatestVerified -and $script:FetchCount -eq 3 -and $script:bundleReads -eq 3) 'Repair must download even when this installer embeds the exact release.'
             Assert-Wtf $addons
         }
         'personal' {

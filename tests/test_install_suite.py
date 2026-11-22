@@ -140,6 +140,28 @@ class LocalSuiteInstallTests(unittest.TestCase):
             self.assertTrue((self.addons / module / "old").is_file())
         self.assertFalse((self.client / "escape").exists())
 
+    def test_prepared_tree_is_verified_consumed_repairable_and_restorable(self):
+        prepared = self.store / ".RutaXP-stage-abc123" / "RutaXP"
+        self.script("-PreparedDirectory", self.package, ok=False)
+        self.assertTrue(self.package.exists())
+        shutil.copytree(self.package, prepared)
+        original = (prepared / "Suite.lua").read_bytes()
+        (prepared / "Suite.lua").write_bytes(b"broken stage")
+        self.script("-PreparedDirectory", prepared, ok=False)
+        self.assertEqual((self.addons / "RutaXP/old").read_text(), "RutaXP")
+        (prepared / "Suite.lua").write_bytes(original)
+        self.script("-PreparedDirectory", prepared)
+        self.assertFalse(prepared.exists())
+        installed = self.addons / "RutaXP/Suite.lua"
+        self.assertEqual(installed.read_bytes(), original)
+        installed.write_bytes(b"corrupted installation with matching manifest")
+        shutil.copytree(self.package, prepared)
+        self.script("-PreparedDirectory", prepared)
+        self.assertEqual(installed.read_bytes(), original)
+        self.assertEqual(len(list(self.store.glob("*/committed"))), 2)
+        self.script("-Restore")
+        self.assertEqual((self.addons / "RutaXP/old").read_text(), "RutaXP")
+
     @unittest.skipUnless(os.name == "nt", "NTFS permissions required")
     def test_new_files_inherit_destination_access_and_rollback_preserves_prior_access(self):
         def grant(path, *rules):

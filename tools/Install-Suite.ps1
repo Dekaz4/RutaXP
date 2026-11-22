@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory)][string]$Client,
     [Parameter(Mandatory,ParameterSetName='Zip')][string]$Archive,
     [Parameter(Mandatory,ParameterSetName='Directory')][string]$AddonDirectory,
+    [Parameter(Mandatory,ParameterSetName='Prepared')][string]$PreparedDirectory,
     [Parameter(Mandatory,ParameterSetName='Restore')][switch]$Restore
 )
 $ErrorActionPreference = 'Stop'
@@ -16,10 +17,10 @@ $settingsModules = @('OpenMap','ForeverDungeonJournal')
 
 function Assert-NoLink([string]$path) {
     for ($itemPath = $path; $itemPath; $itemPath = [IO.Path]::GetDirectoryName($itemPath)) {
-        if (Test-Path -LiteralPath $itemPath) {
-            $item = Get-Item -LiteralPath $itemPath -Force
-            if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'La ruta contiene un enlace o junction.' }
-        }
+        try { $attributes = [IO.File]::GetAttributes($itemPath) }
+        catch [IO.FileNotFoundException] { continue }
+        catch [IO.DirectoryNotFoundException] { continue }
+        if ($attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'La ruta contiene un enlace o junction.' }
     }
 }
 function ChildPath([string]$root,[string]$relative) {
@@ -58,9 +59,10 @@ function AllFiles([string]$root) {
     $dirs = [Collections.Generic.Stack[string]]::new()
     $dirs.Push($root)
     while ($dirs.Count) {
-        foreach ($item in Get-ChildItem -LiteralPath $dirs.Pop() -Force) {
+        $dir = [IO.DirectoryInfo]::new($dirs.Pop())
+        foreach ($item in $dir.EnumerateFileSystemInfos()) {
             if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Hay un enlace en los archivos del addon.' }
-            if ($item.PSIsContainer) { $dirs.Push($item.FullName) } else { $item.FullName }
+            if ($item.Attributes -band [IO.FileAttributes]::Directory) { $dirs.Push($item.FullName) } else { $item.FullName }
         }
     }
 }
@@ -96,6 +98,20 @@ function ReadPackage([string]$root) {
     return FileHash $manifest
 }
 function StagePackage([string]$target) {
+    if ($PreparedDirectory) {
+        # Only the private, disposable tree created by the local composer can
+        # be consumed. User-selected package directories always use the copy path.
+        $source = [IO.Path]::GetFullPath($PreparedDirectory)
+        $parent = [IO.Path]::GetDirectoryName($source)
+        if ([IO.Path]::GetFileName($source) -cne 'RutaXP' -or
+            [IO.Path]::GetFileName($parent) -cnotmatch '^\.RutaXP-stage-[a-z0-9_]+$' -or
+            [IO.Path]::GetDirectoryName($parent) -ne $store) {
+            throw 'La carpeta preparada no pertenece a esta instalacion de RutaXP.'
+        }
+        $hash = ReadPackage $source
+        Transfer $source $target
+        return $hash
+    }
     MakeDirectory $target
     if ($AddonDirectory) {
         $source = (Get-Item -LiteralPath $AddonDirectory).FullName
@@ -375,8 +391,12 @@ try {
             $rows.Add(@{dest=$dest;old=$old;add=$true;sources=$sources})
         }
         if ($rows.Count -eq 1 -and $active.Count -gt 0) {
-            $installed = try { ReadPackage $suite } catch { $null }
-            if ($packageHash -eq $installed) { Write-Output 'La suite ya esta instalada y verificada.'; return }
+            $installed = try {
+                $manifest = ChildPath $suite 'manifest.sha256'
+                Assert-NoLink $manifest
+                if ([IO.File]::Exists($manifest) -and (FileHash $manifest) -eq $packageHash) { ReadPackage $suite }
+            } catch { $null }
+            if ($installed -and $packageHash -eq $installed) { Write-Output 'La suite ya esta instalada y verificada.'; return }
         }
         CheckClosed
         MakeDirectory (ChildPath $tx 'prior')

@@ -113,9 +113,9 @@ namespace RutaXPUpdater
         {
             using (SHA256 hash = SHA256.Create()) return BitConverter.ToString(hash.ComputeHash(data)).Replace("-", "").ToLowerInvariant();
         }
-        public static void VerifyArchiveHash(byte[] archive, string sums, string name)
+        static string PublishedHash(string sums, string name)
         {
-            if (archive == null || archive.LongLength == 0 || archive.LongLength > MaxArchiveBytes || sums == null || sums.Length > 1024 * 1024)
+            if (sums == null || sums.Length > 1024 * 1024)
                 throw new IOException("Descarga vacia o demasiado grande.");
             string expected = null;
             foreach (string raw in sums.Split('\n'))
@@ -130,7 +130,14 @@ namespace RutaXPUpdater
                     expected = match.Groups[1].Value.ToLowerInvariant();
                 }
             }
-            if (expected == null || Hash(archive) != expected) throw new IOException("El SHA256 del ZIP no coincide; no se ha instalado nada.");
+            if (expected == null) throw new IOException("Falta el SHA256 del ZIP publicado.");
+            return expected;
+        }
+        public static void VerifyArchiveHash(byte[] archive, string sums, string name)
+        {
+            if (archive == null || archive.LongLength == 0 || archive.LongLength > MaxArchiveBytes)
+                throw new IOException("Descarga vacia o demasiado grande.");
+            if (Hash(archive) != PublishedHash(sums, name)) throw new IOException("El SHA256 del ZIP no coincide; no se ha instalado nada.");
         }
         public static void ValidateArchive(byte[] data)
         {
@@ -217,8 +224,13 @@ namespace RutaXPUpdater
         }
         public static void PreparePackage(byte[] archive, string sums, ReleaseInfo release, string destination)
         {
-            VerifyArchiveHash(archive, sums, release.ArchiveName); ValidateArchive(archive);
+            VerifyArchiveHash(archive, sums, release.ArchiveName);
+            ExtractVerifiedPackage(archive, release, destination);
+        }
+        static void ExtractVerifiedPackage(byte[] archive, ReleaseInfo release, string destination)
+        {
             if (archive.LongLength != release.ArchiveSize) throw new IOException("El tamano del ZIP no coincide con el publicado.");
+            ValidateArchive(archive);
             using (MemoryStream input = new MemoryStream(archive, false)) InstallerCore.ExtractArchive(input, destination);
             InstallerCore.Manifest(destination);
             if (TocVersion(destination) != release.Version) throw new IOException("El tag de GitHub y la version del addon no coinciden.");
@@ -230,6 +242,24 @@ namespace RutaXPUpdater
             if (data == null || data.LongLength == 0 || data.LongLength > maximum) throw new IOException("Descarga vacia o fuera del limite permitido.");
             return data;
         }
+        static byte[] ReadMatchingBundle(Func<Stream> openBundled, long size, string expected)
+        {
+            if (openBundled == null) return null;
+            try
+            {
+                using (Stream stream = openBundled())
+                {
+                    if (stream == null || !stream.CanRead || stream.CanSeek && stream.Length - stream.Position != size) return null;
+                    using (BinaryReader reader = new BinaryReader(stream))
+                    {
+                        byte[] bytes = reader.ReadBytes((int)size);
+                        if (bytes.LongLength == size && stream.ReadByte() == -1 && Hash(bytes) == expected) return bytes;
+                    }
+                }
+            }
+            catch (IOException) { /* The release download is still available. */ }
+            return null;
+        }
         public static UpdateResult Update(string client, bool repair, string versionFloor,
             Func<string, long, byte[]> fetch, Func<bool> running, Action beforeActivate)
         {
@@ -237,6 +267,12 @@ namespace RutaXPUpdater
         }
         public static UpdateResult Update(string client, bool repair, string versionFloor,
             Func<string, long, byte[]> fetch, Func<bool> running, Action beforeActivate, Action<ProcessStartInfo> suiteSetup)
+        {
+            return Update(client, repair, versionFloor, fetch, running, beforeActivate, suiteSetup, null);
+        }
+        public static UpdateResult Update(string client, bool repair, string versionFloor,
+            Func<string, long, byte[]> fetch, Func<bool> running, Action beforeActivate, Action<ProcessStartInfo> suiteSetup,
+            Func<Stream> openBundled)
         {
             if (string.IsNullOrWhiteSpace(versionFloor)) versionFloor = null;
             string addons = ResolveClient(client); RequireClosed(running);
@@ -254,11 +290,17 @@ namespace RutaXPUpdater
                 if (valid) { RequireClosed(running); return new UpdateResult { Version = release.Version, Target = target, LatestVerified = true }; }
             }
             string sums = Encoding.UTF8.GetString(Download(fetch, release.ChecksumsUrl, 1024 * 1024));
-            byte[] archive = Download(fetch, release.ArchiveUrl, MaxArchiveBytes);
+            string expected = PublishedHash(sums, release.ArchiveName);
+            byte[] archive = repair ? null : ReadMatchingBundle(openBundled, release.ArchiveSize, expected);
+            if (archive == null)
+            {
+                archive = Download(fetch, release.ArchiveUrl, MaxArchiveBytes);
+                if (Hash(archive) != expected) throw new IOException("El SHA256 del ZIP no coincide; no se ha instalado nada.");
+            }
             string temp = Temporary();
             try
             {
-                PreparePackage(archive, sums, release, temp);
+                ExtractVerifiedPackage(archive, release, temp);
                 UpdateResult result = ActivatePackage(temp, addons, release.Version, running, beforeActivate, suiteSetup);
                 result.LatestVerified = true;
                 return result;
@@ -484,7 +526,10 @@ namespace RutaXPUpdater
         }
         static void InstallSuite(ProcessStartInfo helper)
         {
-            Console.WriteLine("Preparando las guias y los modulos de RutaXP en el cliente elegido...");
+            Console.WriteLine("Abriendo el instalador de la suite...");
+            helper.StandardOutputEncoding = Encoding.UTF8;
+            helper.StandardErrorEncoding = Encoding.UTF8;
+            helper.EnvironmentVariables["PYTHONIOENCODING"] = "utf-8";
             using (Process setup = Process.Start(helper))
             {
                 if (setup == null) throw new IOException("No se ha podido abrir el instalador de la suite.");
@@ -494,6 +539,17 @@ namespace RutaXPUpdater
                 setup.WaitForExit();
                 if (setup.ExitCode != 0) throw new IOException(detail.Length > 0 ? detail : "El instalador de la suite ha terminado con un error.");
             }
+        }
+        static Stream OpenBundled()
+        {
+            return Assembly.GetExecutingAssembly().GetManifestResourceStream("RutaXPInstaller.payload.zip");
+        }
+
+        static byte[] FetchReleaseFile(string url, long maximum)
+        {
+            if (url.EndsWith("-addon.zip", StringComparison.Ordinal))
+                Console.WriteLine("Descargando el paquete de la version publicada...");
+            return HttpDownloads.Fetch(url, maximum);
         }
         [STAThread]
         public static int Main(string[] args)
@@ -526,11 +582,9 @@ namespace RutaXPUpdater
                 if (action == "--choose-client") { Console.WriteLine("Cliente recordado. Cada ordenador guarda su propia ruta."); return 0; }
                 if (action == "--install-bundled")
                 {
-                    UpdateResult bundled = null; Assembly assembly = Assembly.GetExecutingAssembly();
-                    foreach (string name in assembly.GetManifestResourceNames())
-                        if (name.EndsWith("payload.zip", StringComparison.Ordinal))
-                            using (Stream stream = assembly.GetManifestResourceStream(name)) { bundled = UpdaterCore.InstallBundled(stream, addons, WowRunning, null, InstallSuite); break; }
-                    if (bundled == null) throw new IOException("Este ejecutable no contiene una copia del addon.");
+                    UpdateResult bundled;
+                    using (Stream stream = OpenBundled())
+                        bundled = UpdaterCore.InstallBundled(stream, addons, WowRunning, null, InstallSuite);
                     Console.WriteLine("Suite RutaXP " + bundled.Version + " instalada y verificada en " + bundled.Target + ".");
                     return 0;
                 }
@@ -552,7 +606,7 @@ namespace RutaXPUpdater
                 string floor = null;
                 try { floor = ClientSettings.Load(settings, "latest"); if (floor != null) UpdaterCore.StableVersion(floor); } catch (IOException) { floor = null; }
                 Console.WriteLine("Consultando la ultima version publica de Dekaz4/RutaXP...");
-                UpdateResult result = UpdaterCore.Update(addons, action == "--repair", floor, HttpDownloads.Fetch, WowRunning, null, InstallSuite);
+                UpdateResult result = UpdaterCore.Update(addons, action == "--repair", floor, FetchReleaseFile, WowRunning, null, InstallSuite, OpenBundled);
                 ClientSettings.Save(settings, "latest", result.Version);
                 Console.WriteLine("Suite RutaXP " + result.Version + " instalada y verificada en " + result.Target + ".");
                 return 0;
