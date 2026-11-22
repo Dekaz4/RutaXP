@@ -169,6 +169,7 @@ local function rememberConnections(observation)
         elseif node.kind == "unavailable" then reachable[id] = nil end
     end
     routes[observation.origin] = reachable
+    F.routeRevision = (F.routeRevision or 0) + 1
     F.lastTaxiVisit = observation
 end
 
@@ -399,6 +400,7 @@ function F:ApplyRejection()
         local routes = ns.char and ns.char.observedTaxiRoutes
         if type(routes) == "table" and type(routes[attempt.observation.origin]) == "table" then
             routes[attempt.observation.origin][attempt.id] = nil
+            self.routeRevision = (self.routeRevision or 0) + 1
         end
     end
     self.pendingError, self.attempt = nil, nil

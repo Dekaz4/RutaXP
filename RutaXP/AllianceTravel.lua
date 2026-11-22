@@ -205,7 +205,7 @@ link(hinterlands40, searing40, {
         "Usa tu piedra si está ligada a Thelsamar. Para volver en barco, cruza el portal a Rut'theran.")),
     rutShip,
     board(stop("auber-men", 1439, 32.34, 44.13, 30, "Barco al Puerto de Menethil",
-        "Toma el barco de Los Humedales. Si hace escala en Costasur, sigue a bordo hasta Menethil.")),
+        "Sube al barco de Los Humedales y baja en su siguiente parada, Puerto de Menethil.")),
     flight("menethil", "thelsamar"),
     lochBad, badLochSide,
     cross(stop("searing-pass", 1418, 1.09, 62.92, 42, "Paso a la Garganta de Fuego",

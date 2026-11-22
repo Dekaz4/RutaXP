@@ -30,19 +30,33 @@ local function nodeFor(pin, kind)
     return pin.map or pin.instanceID
 end
 
-local function edge(network, kind, a, b)
+local function edge(network, connection, a, b, reverse)
+    local kind = connection.kind
     known[a.map], known[b.map] = true, true
     local node = nodeFor(a, kind)
     local exits = network[node] or {}
     network[node] = exits
-    exits[#exits + 1] = { kind = kind, from = a, to = b, target = nodeFor(b, kind) }
+    exits[#exits + 1] = {kind=kind, from=a, to=b, target=nodeFor(b, kind), id=connection.id,
+        duration=reverse and connection.ba or connection.ab, wait=reverse and connection.waitB or connection.waitA,
+        stop=reverse and connection.stopBA or (not reverse and connection.stopAB or nil)}
 end
 for _, c in ipairs(ns.GuideTravelConnections) do
     for faction, network in pairs(graph) do
         if c.mask == 3 or (faction == "Alliance" and c.mask == 1) or (faction == "Horde" and c.mask == 2) then
-            edge(network, c.kind, c.a, c.b)
-            if not c.oneWay then edge(network, c.kind, c.b, c.a) end
+            edge(network, c, c.a, c.b, false)
+            if not c.oneWay then edge(network, c, c.b, c.a, true) end
         end
+    end
+end
+
+function routing.Network(faction) return graph[faction] end
+
+function routing.KnownZone(map)
+    for _ = 1, 6 do
+        if not map or map == 0 then return end
+        if known[map] then return map end
+        local info = value(C_Map and C_Map.GetMapInfo, 1, map)
+        map = info and info.parentMapID
     end
 end
 
@@ -52,12 +66,8 @@ function routing.Zone()
     if zone and zone == value(C_Map and C_Map.GetAreaInfo, 1, 2257) then return TRAM end
     if value(IsInInstance, 1) then return end
     local map = value(C_Map and C_Map.GetBestMapForUnit, 1, "player")
-    for _ = 1, 6 do
-        if not map or map == 0 then break end
-        if known[map] and map ~= TRAM then return map end
-        local info = value(C_Map and C_Map.GetMapInfo, 1, map)
-        map = info and info.parentMapID
-    end
+    local knownMap = routing.KnownZone(map)
+    if knownMap then return knownMap end
     if zone and zone ~= "" then
         for id in pairs(known) do
             local info = value(C_Map and C_Map.GetMapInfo, 1, id)
@@ -135,6 +145,8 @@ local function currentNode(zone, sample)
         if height <= 23.6 then return TELDRASSIL end
     end
 end
+
+routing.CurrentNode = currentNode
 
 -- Once at the pier, keep the boarding instruction over the water. Never
 -- use the sea corridor itself as proof that the player has disembarked.

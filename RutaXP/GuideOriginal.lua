@@ -4,7 +4,7 @@ local _, ns = ...
 -- manual omissions and the active duo view. Present that same decision.
 local source = {}
 ns.OriginalGuidePresentation = source
-local parkedParent, point
+local parkedParent, point, sampledActivity
 
 function source.Ready()
     return ns.char and ns.tracker and ns.window
@@ -62,6 +62,8 @@ end
 function source.Tasks()
     local result, upcomingRows = {}, {}
     local detour = ns.DungeonPlanner and ns.DungeonPlanner:IsDetouring()
+    local directions = source.TravelText()
+    if directions then result[1] = {text=directions, step=detour and "activities" or 1} end
     if detour then source.AddActivities(result) end
     local count = #result
     for i, frame in ipairs(ns.trackerRows) do
@@ -84,6 +86,39 @@ function source.Tasks()
     return result
 end
 
+local function currentActivitySample(planner)
+    return sampledActivity and planner:RouteKey() == sampledActivity and
+        (not point or point.activityDestination and point.activityKey == sampledActivity)
+end
+
+local function travelView()
+    local planner = ns.DungeonPlanner
+    if planner and planner:IsDetouring() then
+        if currentActivitySample(planner) and ns.GetDestinationTravelView then return ns:GetDestinationTravelView() end
+        if planner.TravelView then return planner:TravelView() end
+    elseif ns.GetDestinationTravelView then return ns:GetDestinationTravelView() end
+end
+
+local function hasText(text) return type(text) == "string" and text ~= "" and text end
+
+function source.TravelText()
+    local leg = travelView()
+    local planner = ns.DungeonPlanner
+    local activity = planner and planner:IsDetouring()
+    local notice
+    if point and point.navigationBlocked and (not leg or leg.point) and
+        ((not activity and not point.activityDestination) or (activity and currentActivitySample(planner))) then
+        notice = hasText(point.navigationNotice) or hasText(point.navigationHint)
+    end
+    if leg then
+        local text = hasText(leg.text) or hasText(leg.title)
+        if hasText(leg.title) and text ~= leg.title then text = leg.title .. "\n" .. text end
+        if text and notice and notice ~= text then return text .. "\n" .. notice end
+        return text or notice
+    end
+    return notice
+end
+
 function source.ClickTask(row, button)
     if row.activity then
         if row.activity.action and button == "LeftButton" then ns.DungeonPlanner:Click(row.activity) end
@@ -99,17 +134,34 @@ end
 function source.Waypoint()
     if not ns.char.arrow then return end
     local planner = ns.DungeonPlanner
-    if planner and planner:IsDetouring() then return planner:Waypoint() end
+    local activity = planner and planner:IsDetouring()
+    if activity and not currentActivitySample(planner) then
+        local map, x, y, title, leg = planner:Waypoint()
+        if leg and not leg.point then return end
+        return map, x, y, leg and (hasText(leg.shortText) or leg.title) or title
+    end
+    local leg = travelView()
+    if leg and not leg.point then return end
     local nav = ns.navigationFrame
-    if not point or not nav or not nav:IsShown() or not nav.arrow:IsShown() then return end
-    return point.mapID, point.x, point.y, nav.hint:GetText() or ""
+    if not point or point.navigationBlocked or (point.activityDestination and not activity) then return end
+    local hint = leg and (hasText(leg.shortText) or leg.title) or (nav and hasText(nav.hint:GetText()))
+    return point.mapID, point.x, point.y, hint or (activity and planner:Hint()) or hasText(point.navigationNotice) or ""
 end
 
 function source.TravelHint()
+    local leg = travelView()
     local planner = ns.DungeonPlanner
-    if planner and planner:IsDetouring() then return planner:Hint() end
+    local activity = planner and planner:IsDetouring()
+    if point and point.navigationBlocked and (not leg or leg.point) and
+        ((not activity and not point.activityDestination) or (activity and currentActivitySample(planner))) then
+        return hasText(point.navigationHint) or hasText(point.navigationNotice)
+    end
+    if leg then return hasText(leg.shortText) or hasText(leg.title) or hasText(leg.text) end
+    if activity then return planner:Hint() end
     local nav = ns.navigationFrame
-    if nav and nav:IsShown() and not nav.arrow:IsShown() then return nav.hint:GetText() end
+    if nav and nav:IsShown() and not nav.arrow:IsShown() then
+        return hasText(nav.hint:GetText()) or hasText(nav.navigationReason) or hasText(nav.statusText)
+    end
 end
 
 -- Read the sampled turn from the navigation engine. Asking for a second
@@ -117,6 +169,8 @@ end
 local resolve = ns.GetArrowWaypoint
 function ns:GetArrowWaypoint(...)
     point = resolve(self, ...)
+    local planner = self.DungeonPlanner
+    sampledActivity = planner and planner.RouteKey and planner:RouteKey()
     return point
 end
 

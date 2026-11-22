@@ -467,6 +467,11 @@ function ns:GetStepWaypoint(step, travel, mapRequest)
     if self.Waypoints and self.Waypoints.Resolve then
         local nextPoint = self.Waypoints:Resolve(step, goal, base)
         if not nextPoint and mapRequest then return base end
+        if not nextPoint and base and self.RouteDestination then
+            local here = self:GetPlayerWorldPosition()
+            local there = self:GetWaypointWorldPosition(base)
+            if here and there and here ~= there then return base end
+        end
         return nextPoint
     end
     return base
@@ -475,8 +480,22 @@ end
 -- Keep terrain steering separate from the semantic target used by the map
 -- and quest engine. Reaching a bend must never finish the real travel goal.
 function ns:GetArrowWaypoint(step, travel)
-    local point = self:GetStepWaypoint(step, travel)
-    if self.Walking then return self.Walking:Resolve(point) end
+    local planner = self.DungeonPlanner
+    local activity = planner and planner.RoutePoint and planner:IsDetouring()
+    local point, view
+    if activity then
+        point, view = planner:RoutePoint()
+    else
+        point = self:GetStepWaypoint(step, travel)
+        if point and self.char and self.RouteDestination and not travel and not point.boatNavigation and not point.flightNavigation then
+            local guide,_,state = self:GetCurrent()
+            local key = point.targetKey or table.concat({guide and guide.id or "", state and state.cursor or "", point.pointIndex or ""}, ":")
+            point,view = self:RouteDestination(point,key,"chapter")
+        end
+    end
+    self.destinationTravelView,self.navigationActivity = view,activity
+    if self.Walking then point = self.Walking:Resolve(point) end
+    if point and activity then point.activityDestination,point.activityKey = true,planner:RouteKey() end
     return point
 end
 
@@ -742,7 +761,8 @@ local function updateArrow(self, frame)
     local _, step = self:GetCurrent()
     local travel = self.GetGuideTravel and self:GetGuideTravel()
     local point = self:GetArrowWaypoint(step, travel or false)
-    if not point and self.char.localTravelChoice and self.GetTravelComparison then
+    if self.navigationActivity then travel=nil end
+    if not point and not self.navigationActivity and self.char.localTravelChoice and self.GetTravelComparison then
         local _, entry = self:GetTravelComparison()
         if entry then
             frame.dNorth, frame.dWest, frame.targetContinent, frame.arrived = nil, nil, nil, false
@@ -754,9 +774,9 @@ local function updateArrow(self, frame)
             return
         end
     end
-    local flight = not travel and self.FlightNavigation and self.FlightNavigation:CurrentView()
+    local flight = not self.navigationActivity and not travel and self.FlightNavigation and self.FlightNavigation:CurrentView()
     if point and not point.flightNavigation then flight = nil end
-    local boat = not travel and self.BoatNavigation and self.BoatNavigation:CurrentView()
+    local boat = not self.navigationActivity and not travel and self.BoatNavigation and self.BoatNavigation:CurrentView()
     if point and not point.boatNavigation then boat = nil end
     if travel then step = travel end
     if not step and not point then
@@ -767,7 +787,7 @@ local function updateArrow(self, frame)
     end
     frame:Show()
 
-    local transport = boat or flight
+    local transport = self.destinationTravelView or boat or flight
     if transport and not point then
         frame.dNorth, frame.dWest, frame.targetContinent, frame.arrived = nil, nil, nil, false
         frame.arrow:Hide()
@@ -958,6 +978,10 @@ local function updateArrow(self, frame)
     if boat then
         frame.destinationText = boat.text
         if boat.state == "landing" or distance <= CONTACT_RANGE then hint = boat.shortText or hint end
+    end
+    if self.destinationTravelView then
+        frame.destinationText = self.destinationTravelView.text
+        hint = self.destinationTravelView.shortText
     end
 
     if right == nil or forward == nil then

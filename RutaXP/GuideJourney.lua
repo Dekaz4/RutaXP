@@ -7,6 +7,69 @@ local loggedIn, initialized, shown, refreshPending
 local title, subtitle, status, stepIndex, stepCount, progressText
 local scroll, scrollChild, compassHint
 local original = ns.OriginalGuidePresentation
+local originWorld, originNorth, originWest, lastDirections
+local function finite(n)
+    if issecretvalue and issecretvalue(n) then return false end
+    return type(n) == "number" and n == n and math.abs(n) < math.huge
+end
+
+local function compassFacing()
+    local angle = GetPlayerFacing and GetPlayerFacing()
+    if finite(angle) then return angle end
+end
+
+local function sampleOrigin()
+    originWorld, originNorth, originWest = nil, nil, nil
+    local map = C_Map.GetBestMapForUnit and C_Map.GetBestMapForUnit("player")
+    local pos = finite(map) and C_Map.GetPlayerMapPosition and C_Map.GetPlayerMapPosition(map, "player")
+    if not pos then return end
+    local x,y = pos:GetXY()
+    if not finite(x) or not finite(y) then return end
+    local world, p = C_Map.GetWorldPosFromMapPos(map, CreateVector2D(x,y))
+    if not p then return end
+    local north,west = p:GetXY()
+    if finite(world) and finite(north) and finite(west) then originWorld, originNorth, originWest = world,north,west end
+end
+
+-- Both ends of Journey's bearing must be in the same coordinate system.
+-- Forever may report a phased instance ID or no native player position even
+-- when the player's location on the zone map is usable. Keep the live native
+-- sample for smooth movement whenever it agrees with the mapped position.
+local function compassPosition(unit)
+    local x,y,z,world
+    if UnitPosition then x,y,z,world = UnitPosition(unit) end
+    if unit == "player" and originWorld and (not finite(world) or world ~= originWorld or not finite(x) or not finite(y)
+        or (x-originNorth)^2 + (y-originWest)^2 > 10000) then
+        return originNorth, originWest, nil, originWorld
+    end
+    if finite(x) and finite(y) and finite(world) then return x,y,z,world end
+end
+
+local anchors = {CENTER=true, TOP=true, BOTTOM=true, LEFT=true, RIGHT=true,
+    TOPLEFT=true, TOPRIGHT=true, BOTTOMLEFT=true, BOTTOMRIGHT=true}
+local function placeCompass()
+    local saved = settings.HUDArrowLocation
+    if not (type(saved) == "table" and anchors[saved[1]] and anchors[saved[3]]
+        and finite(saved[4]) and finite(saved[5])) then
+        local old = original and ns.char.arrowPosition
+        if old and anchors[old.point] and anchors[old.relativePoint] and finite(old.x) and finite(old.y) then
+            saved = {old.point, "UIParent", old.relativePoint, old.x, old.y}
+        else
+            saved = {"CENTER", "UIParent", "TOP", 0, -110}
+        end
+        settings.HUDArrowLocation = saved
+    end
+    -- Journey anchors its artwork to a 1x1 draggable point. Clamp the whole
+    -- compass and label after changing monitor resolution or UI scale.
+    local w,h = UIParent:GetWidth(), UIParent:GetHeight()
+    if w <= 0 or h <= 0 then return end
+    local relative = saved[3]
+    local ax = relative:find("LEFT") and 0 or relative:find("RIGHT") and w or w/2
+    local ay = relative:find("BOTTOM") and 0 or relative:find("TOP") and h or h/2
+    local mx,my = math.min(70,w/2),math.min(80,h/2)
+    saved[4] = math.max(mx,math.min(w-mx,ax+saved[4]))-ax
+    saved[5] = math.max(my,math.min(h-my,ay+saved[5]))-ay
+end
 local function arrowEnabled()
     if original then return ns.char and ns.char.arrow ~= false end
     return shown
@@ -22,6 +85,8 @@ function RutaXPJourneyEnvironment()
     if env then return env end
     local _, addon = RutaXPModuleContext("Journey")
     env = setmetatable({addon=addon, addonName="RutaXPJourney"}, {__index=_G})
+    env.UnitPosition = compassPosition
+    env.GetPlayerFacing = compassFacing
     env.I = setmetatable({}, {__index=function(t, key)
         local suffix = key:match("%.%w+$") and "" or ".blp"
         local path = "Interface\\AddOns\\RutaXP\\Modules\\Journey\\images\\" .. key .. suffix
@@ -192,9 +257,9 @@ end
 
 -- Waiting for a boat or leaving combat has no directional target. Keep the
 -- original short instruction at the compass without displaying a stale arrow.
-local function updateCompassHint()
+local function updateCompassHint(reason)
     if not original then return end
-    local hint = initialized and not target and arrowEnabled() and original.TravelHint()
+    local hint = initialized and not target and arrowEnabled() and (reason or original.TravelHint())
     if not hint or hint == "" then
         if compassHint then compassHint:Hide() end
         return
@@ -225,24 +290,36 @@ local function updateTarget()
     elseif current then waypoint = engine.Waypoint end
     if not waypoint then clearArrow(); return end
     local map, x, y, label = waypoint()
-    if type(map) ~= "number" or type(x) ~= "number" or type(y) ~= "number" or
+    if not finite(map) or not finite(x) or not finite(y) or
         x < 0 or x > 1 or y < 0 or y > 1 then clearArrow(); return end
     local world, point = C_Map.GetWorldPosFromMapPos(map, CreateVector2D(x, y))
-    local _, _, _, playerWorld = UnitPosition("player")
+    sampleOrigin()
+    local px, py, _, playerWorld = compassPosition("player")
     -- World yards have independent origins on each continent. Never point
     -- across the sea by subtracting coordinates from two different worlds.
-    if not point or not world or playerWorld ~= world then clearArrow(); return end
-    if not target or target.map ~= map or target.x ~= x or target.y ~= y then
+    if not point or not finite(world) or not finite(px) or not finite(py) or not finite(playerWorld) then
+        clearArrow(); return "Esperando la posición en el mapa"
+    end
+    if playerWorld ~= world then clearArrow(); return "Destino en otro continente" end
+    if not compassFacing() then clearArrow(); return "Esperando la orientación del personaje" end
+    if not target or target.map ~= map or target.x ~= x or target.y ~= y or arrow.mapID ~= map then
         clearArrow()
         arrow:SetTarget(x,y,map,false)
+        if arrow.mapID ~= map then return "Esperando la posición en el mapa" end
         target = {map=map, x=x, y=y}
     end
     arrow.screenLabel = label or title
 end
 
 local function updateArrow()
-    updateTarget()
-    updateCompassHint()
+    if not initialized then return end
+    local reason = updateTarget()
+    updateCompassHint(reason)
+    local directions = original and original.TravelText()
+    if directions ~= lastDirections then
+        lastDirections = directions
+        refreshPending = true
+    end
 end
 
 local function installScrollArea(components)
@@ -277,6 +354,7 @@ local function init()
     if not engine.Ready() then return false end
     ns.char.journeyDisplay = ns.char.journeyDisplay or {}
     settings = ns.char.journeyDisplay
+    placeCompass()
     env.SavedVariables = settings
     shown = settings.hidden ~= true
     local ui = env.UI
@@ -415,6 +493,6 @@ driver:SetScript("OnUpdate", function(_, dt)
     if elapsed < .2 then return end
     elapsed = 0
     if refreshPending and view:Available() then view:Refresh()
-    elseif target or (compassHint and compassHint:IsShown()) or
-        (arrowEnabled() and (original or current or status == "journal")) then updateArrow() end
+    elseif original or target or (compassHint and compassHint:IsShown()) or
+        (arrowEnabled() and (current or status == "journal")) then updateArrow() end
 end)

@@ -264,8 +264,17 @@ local function rebuild()
     local autoRun = task and not defer and group and GetNumGroupMembers and GetNumGroupMembers() >= 5
         and dungeon.entrance and (dungeon.entrance.map or dungeon.entrance.mapID) == ctx.map
         and best.held > 0 and task.kind == "run"
+    local focusedQuest, focusedMatch
+    if not here and not (ns.DuoAuto and ns.DuoAuto:GetSharedView()) then
+        focusedQuest, focusedMatch = ns.WorldQuestFocus.Current()
+    end
+    -- A passing questgiver can still appear in the panel. Keep the bearing
+    -- for the tracked quest or the journey already under way.
+    local traveling = (ns.GetGuideTravel and ns:GetGuideTravel()) or
+        (not ns.navigationActivity and ns.GetDestinationTravelView and ns:GetDestinationTravelView())
     local nearPickup = task and not defer and task.kind == "pickup" and task.distance < .0009
-    out.detour = chosen and not defer and (chosen == trips.selected or chosen == repeatKey or chosen == here or autoRun or nearPickup)
+    out.detour = chosen and not defer and (chosen == trips.selected or chosen == repeatKey or chosen == here or
+        autoRun or (nearPickup and not focusedQuest and not traveling))
     if chosen then
         local name = dungeon.name or chosen
         if out.detour then
@@ -294,18 +303,15 @@ local function rebuild()
             row(prefix .. " · " .. name, "prepare")
         end
     end
-    if not out.detour and not here and not (ns.DuoAuto and ns.DuoAuto:GetSharedView()) then
-        local id, match = ns.WorldQuestFocus.Current()
-        if id then
-            out.detour, out.world, out.match = true,id,match
-            out.heading = title(id)
-            out.hint = qs.Ready(id) and "Entrega la misión" or "Continúa el objetivo de tu diario"
-            table.insert(out.rows,1,{text=out.hint .. " · " .. out.heading})
-            for _, obj in ipairs(C_QuestLog.GetQuestObjectives and C_QuestLog.GetQuestObjectives(id) or {}) do
-                if obj.text and not obj.finished then table.insert(out.rows,2,{text=obj.text}) end
-            end
-            row("Volver al paso de RutaXP", "world")
+    if not out.detour and focusedQuest then
+        out.detour, out.world, out.match = true,focusedQuest,focusedMatch
+        out.heading = title(focusedQuest)
+        out.hint = qs.Ready(focusedQuest) and "Entrega la misión" or "Continúa el objetivo de tu diario"
+        table.insert(out.rows,1,{text=out.hint .. " · " .. out.heading})
+        for _, obj in ipairs(C_QuestLog.GetQuestObjectives and C_QuestLog.GetQuestObjectives(focusedQuest) or {}) do
+            if obj.text and not obj.finished then table.insert(out.rows,2,{text=obj.text}) end
         end
+        row("Volver al paso de RutaXP", "world")
     end
     return out
 end
@@ -318,7 +324,11 @@ function planner:Rows() return current().rows end
 function planner:IsDetouring() return current().detour end
 function planner:Heading() local m=current(); return m.heading, m.hint end
 function planner:Hint() return current().hint end
-function planner:Waypoint()
+function planner:RouteKey()
+    local m = current()
+    if m.detour then return m.world or (tostring(m.key)..":"..tostring(m.questPoint or m.hint)) end
+end
+function planner:RoutePoint()
     local m = current()
     if not m.detour then return end
     local p
@@ -328,7 +338,18 @@ function planner:Waypoint()
         p = ns.WorldQuestFocus.Point(m.questPoint, match)
         if not p and m.point then p = ns:ResolveWaypointPoint(m.point) end
     elseif m.point then p = ns:ResolveWaypointPoint(m.point) end
-    if p then return p.mapID,p.x,p.y,m.hint end
+    if p and ns.RouteDestination then
+        return ns:RouteDestination(p, self:RouteKey(), "activity")
+    end
+    return p
+end
+function planner:Waypoint()
+    local p,view = self:RoutePoint()
+    return p and p.mapID,p and p.x,p and p.y,view and view.shortText or current().hint,view
+end
+function planner:TravelView()
+    local _,view = self:RoutePoint()
+    return view
 end
 
 function planner:Changed()
@@ -398,6 +419,7 @@ for _, e in ipairs({"PLAYER_LOGIN","PLAYER_ENTERING_WORLD","ZONE_CHANGED_NEW_ARE
     "GROUP_ROSTER_UPDATE","SUPER_TRACKING_CHANGED","GOSSIP_SHOW","QUEST_GREETING","SKILL_LINES_CHANGED"}) do pcall(driver.RegisterEvent,driver,e) end
 driver:SetScript("OnEvent",function(_,event)
     if ns.char and (event == "QUEST_LOG_UPDATE" or event == "QUEST_WATCH_UPDATE") then ns.WorldQuestFocus.Observe() end
+    if ns.char and event == "SUPER_TRACKING_CHANGED" then ns.WorldQuestFocus.TrackingChanged() end
     planner:Changed()
 end)
 

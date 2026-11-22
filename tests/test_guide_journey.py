@@ -249,7 +249,7 @@ class OriginalGuideJourneyTests(unittest.TestCase):
         lua.execute(MOCK)
         lua.execute("""
             ns.GuideEngine=nil
-            ns.char={tracker=true,arrow=true}
+            ns.char={tracker=true,arrow=true,arrowPosition={point="TOP",relativePoint="TOP",x=-76,y=-24}}
             ns.window=CreateFrame(); ns.window:Hide()
             ns.tracker=CreateFrame("Frame", nil, UIParent)
             local function label(text)
@@ -277,7 +277,11 @@ class OriginalGuideJourneyTests(unittest.TestCase):
             samples=0
             function ns:GetArrowWaypoint()
                 samples=samples+1
-                return {mapID=1443, x=.549, y=.263}
+                if sampledTurn then return sampledTurn end
+                if not waiting then
+                    return {mapID=1443, x=.549, y=.263, navigationBlocked=blocked,
+                            navigationNotice=blocked and "Recalculando desde tu posición"}
+                end
             end
             function ns:CreateNavigation()
                 local f=CreateFrame("Frame",nil,UIParent)
@@ -299,6 +303,8 @@ class OriginalGuideJourneyTests(unittest.TestCase):
             ns:CreateNavigation(); ns:GetArrowWaypoint(); tick()
             local env=RutaXPJourneyEnvironment()
             assert(ns.GuideJourney:IsShown() and not ns.tracker:GetParent():IsShown())
+            local anchor=ns.char.journeyDisplay.HUDArrowLocation
+            assert(anchor[1]=="TOP" and anchor[3]=="TOP" and anchor[5]==-80)
             assert(not ns.navigationFrame:GetParent():IsShown() and ns.navigationUpdater:GetParent()==UIParent)
             assert(env.HeaderService.GetStepText()=="Juntos 12 · Tú 14")
             local text=getTaskIcon().row.text
@@ -316,6 +322,7 @@ class OriginalGuideJourneyTests(unittest.TestCase):
             ns.window:Show(); ns:RefreshUI(); tick(); assert(not ns.GuideJourney:IsShown())
             ns.window:Hide(); ns:RefreshUI(); tick(); assert(ns.GuideJourney:IsShown())
             ns.char.arrow=true
+            waiting=true; ns:GetArrowWaypoint()
             ns.navigationFrame.arrow:Hide(); ns.navigationFrame.hint:SetText("Quédate en el barco")
             local newLabel=UIParent.CreateFontString
             UIParent.CreateFontString=function(self, ...)
@@ -324,6 +331,7 @@ class OriginalGuideJourneyTests(unittest.TestCase):
             tick()
             assert(hintLabel:IsShown() and hintLabel:GetText()=="Quédate en el barco")
             assert(not RutaXPJourneyScreenArrow.container:IsShown())
+            waiting=false; ns:GetArrowWaypoint()
             ns.navigationFrame.hint:SetText("Tramo 8/8"); ns.navigationFrame.arrow:Show(); tick()
             assert(not hintLabel:IsShown() and RutaXPJourneyScreenArrow.container:IsShown())
             local active=false
@@ -368,4 +376,55 @@ class OriginalGuideJourneyTests(unittest.TestCase):
             assert(not active and getTaskIcon().row.text:find("Busca a Dalinda",1,true))
             assert(env.HeaderService.GetHeaderTitles()=="Desolace (31–34)")
             assert(RutaXPJourneyScreenArrow.label.text=="Tramo 8/8")
+        """)
+        lua.execute("""
+            ns.DungeonPlanner=nil
+            local zone=1443
+            local unitWorld=2001
+            function UnitPosition() return nil,nil,nil,unitWorld end
+            function C_Map.GetBestMapForUnit() return zone end
+            function C_Map.GetPlayerMapPosition() return CreateVector2D(.4,.5) end
+            function C_Map.GetWorldPosFromMapPos(map,pos)
+                local x,y=pos:GetXY()
+                return map==1443 and 1 or 0,CreateVector2D(1000*x,1000*y)
+            end
+            local scope=RutaXPJourneyEnvironment()
+            ns.navigationFrame:Hide(); ns.navigationFrame.arrow:Hide()
+            tick(); tick()
+            assert(RutaXPJourneyScreenArrow.container:IsShown())
+            local x,y,_,world=scope.UnitPosition("player")
+            assert(x==400 and y==500 and world==1)
+            zone=1436; tick()
+            assert(not RutaXPJourneyScreenArrow.container:IsShown() and hintLabel:IsShown())
+            assert(hintLabel:GetText()=="Destino en otro continente")
+            zone=1443; blocked=true; ns:GetArrowWaypoint()
+            ns.navigationFrame.hint:SetText(""); tick(); tick()
+            assert(not RutaXPJourneyScreenArrow.container:IsShown())
+            assert(hintLabel:GetText()=="Recalculando desde tu posición")
+            assert(getTaskIcon().row.text=="Recalculando desde tu posición")
+            blocked=false; ns:GetArrowWaypoint(); tick()
+            assert(RutaXPJourneyScreenArrow.container:IsShown() and not hintLabel:IsShown())
+            local previousFacing=GetPlayerFacing
+            function issecretvalue(n) return n==-999 end
+            function GetPlayerFacing() return -999 end
+            tick(); assert(not RutaXPJourneyScreenArrow.container:IsShown())
+            assert(hintLabel:GetText()=="Esperando la orientación del personaje")
+            GetPlayerFacing=previousFacing; tick(); assert(RutaXPJourneyScreenArrow.container:IsShown())
+            local key="dungeon:pickup"
+            local directQueries=0
+            ns.DungeonPlanner={
+                RouteKey=function() return key end, IsDetouring=function() return true end,
+                Rows=function() return {} end, Heading=function() return "Preparación","Habla con el instructor" end,
+                Hint=function() return "Habla con el instructor" end,
+                Waypoint=function() directQueries=directQueries+1; return 1443,.8,.8,"Instructor" end,
+            }
+            sampledTurn={mapID=1443,x=.3,y=.2,activityDestination=true,activityKey=key,
+                navigationBlocked=true,navigationHint="Sal de combate",navigationNotice="Esperando al camino"}
+            ns:GetArrowWaypoint(); tick(); tick()
+            assert(not RutaXPJourneyScreenArrow.container:IsShown() and directQueries==0)
+            assert(hintLabel:GetText()=="Sal de combate" and getTaskIcon().row.text=="Esperando al camino")
+            sampledTurn.navigationBlocked=false; ns.navigationFrame.hint:SetText("Tramo 2/3")
+            ns:GetArrowWaypoint(); tick(); tick()
+            assert(RutaXPJourneyScreenArrow.container:IsShown() and directQueries==0)
+            assert(RutaXPJourneyScreenArrow.label.text=="Tramo 2/3")
         """)

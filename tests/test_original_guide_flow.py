@@ -4,6 +4,7 @@ import unittest
 from lupa.lua51 import LuaRuntime
 
 from test_addon import UI_STUBS, WOW_STUBS
+from test_access_navigation import WORLD_STUBS
 from test_guide_journey import MOCK, NATIVE, ROOT
 from tools import suite_journey
 
@@ -34,7 +35,7 @@ end
 
 @unittest.skipUnless((NATIVE / "Journey.toc").is_file(), "requires the owner's original Journey UI")
 class OriginalGuideFlowTests(unittest.TestCase):
-    def client(self, player, faction, chapter, cursor, level=30, map_id=37):
+    def client(self, player, faction, chapter, cursor, level=30, map_id=37, *, travel=False):
         lua = LuaRuntime(unpack_returned_tuples=True)
         lua.execute(WOW_STUBS + UI_STUBS)
         lua.execute("legacyFrameMethods=getmetatable(UIParent).__index; legacyMap=C_Map")
@@ -52,9 +53,22 @@ class OriginalGuideFlowTests(unittest.TestCase):
                 progress={[chapter]={cursor=cursor,placed=true,confirmed={["2:1"]=true},skipped={}}}}
             TEST.quests[1070]={title="Estar de guardia en Espolón",onQuest=true}
         """)
+        if travel:
+            lua.execute("ACCESS_NS=ns; localVector=CreateVector2D")
+            lua.execute(WORLD_STUBS)
+            lua.execute("""
+                CreateVector2D=localVector
+                function UnitOnTaxi() return TEST.onTaxi or false end
+                function UnitIsDeadOrGhost() return false end
+                function GetTime() return TEST.time or 1 end
+                TEST.quests[1459]={onQuest=true}
+                TEST.quests[5561]={onQuest=true}
+                RutaXPCharDB.progress[chapter].routeRevision=3
+            """)
+        transport = ("FlightNavigation", "BoatNavigation", "DestinationTravel") if travel else ()
         for name in ("Core", "MapFrames", "Leveling", "QuestEngine", "GuideMigrations",
                      "Navigation", "WestfallTravelData", "AllianceTravel", "HordeTravel", "TravelConnections",
-                     "TravelRouting", "TravelDetour", "GuideTravel", "TrackerLayout", "TrackerPreview", "UI",
+                     "TravelRouting", "TravelDetour", "GuideTravel", *transport, "TrackerLayout", "TrackerPreview", "UI",
                      "Suite", "DungeonQuestData", "RestedQuestState", "QuestFocus", "DungeonPlanner",
                      "GuideRestore", "GuideOriginal", "GuideJourney"):
             lua.execute((ROOT / f"RutaXP/{name}.lua").read_text(encoding="utf-8-sig"), "RutaXP", lua.globals().ns,
@@ -65,7 +79,8 @@ class OriginalGuideFlowTests(unittest.TestCase):
         lua.execute('event("ADDON_LOADED","RutaXP"); event("PLAYER_LOGIN"); tick()')
         lua.execute("""
             local g,s,state=ns:GetCurrent()
-            assert(g.id==chapter and g.faction==TEST.faction and state.cursor==cursor)
+            assert(g.id==chapter and g.faction==TEST.faction and state.cursor==cursor,
+                tostring(g.id).." at step "..tostring(state.cursor).." (expected "..tostring(cursor)..")")
             assert(ns.char==RutaXPCharDB and state.confirmed["2:1"] and ns.char.duo.wait)
             assert(#ns.order==57 and ns.char.tracker and ns.GuideJourney:IsShown())
             assert(not ns.GetEmbeddedModule("RXPGuides") and not ns.GuideEngine and not RXPGuides)
@@ -100,6 +115,50 @@ class OriginalGuideFlowTests(unittest.TestCase):
 
     def test_horde_character_resumes_its_own_chapter_and_rendered_step(self):
         self.client("Horda", "Horde", "forever/horde/06-hillsbrad-foothills", 12)
+
+    def test_tracked_turnin_from_menethil_via_southshore_to_thundris_in_the_journey_hud(self):
+        lua = self.client("Viajera", "Alliance", "forever/alliance/30-40/02-desolace", 18,
+                          level=33, map_id=1443, travel=True)
+        lua.execute("""
+            local journalID=98209
+            TEST.quests[journalID]={title="Flor de los cielos",onQuest=true,complete=true}
+            TEST.entries={{questID=journalID}}
+            C_SuperTrack.GetSuperTrackedQuestID=function() return journalID end
+            local function move(map,x,y)
+                TEST.mapID,TEST.x,TEST.y=map,x,y
+                TEST.time=(TEST.time or 1)+15
+                event("ZONE_CHANGED_NEW_AREA"); event("QUEST_LOG_UPDATE")
+                for i=1,4 do tick() end
+            end
+            local function panelText()
+                local env=RutaXPJourneyEnvironment()
+                local lines={env.HeaderService.GetHeaderTitles()}
+                for _,group in ipairs(env.GuideNavigationService.GetStep()) do
+                    for _,task in ipairs(group) do lines[#lines+1]=task.row.text end
+                end
+                return table.concat(lines," ")
+            end
+            move(1437,.093,.578)
+            assert(ns.DungeonPlanner:IsDetouring() and panelText():find("Auberdine",1,true),panelText())
+            local dock=RutaXPJourneyScreenArrow
+            assert(dock and dock.container:IsShown(),"The native Journey HUD must point at the departure dock")
+            local dockMap,dockX,dockY=ns.DungeonPlanner:Waypoint()
+            assert(dockMap==1437 and math.abs(dockX-.0449)<.002 and math.abs(dockY-.5666)<.002,
+                "The compass selected the wrong Menethil pier")
+            move(1437,.0449,.5666)
+            move(1424,.5067,.7044)
+            local stop=panelText():lower()
+            assert(stop:find("a bordo",1,true) and stop:find("costasur",1,true)
+                and stop:find("auberdine",1,true),stop)
+            assert(not dock.container:IsShown(),"The waypoint must stay suspended at the intermediate port")
+            move(1439,.3234,.4413)
+            move(1439,.354,.435)
+            local map,x,y=ns.DungeonPlanner:Waypoint()
+            assert(map==1439 and math.abs(x-.374)<.01 and math.abs(y-.4013)<.01,
+                "After docking the compass must return to Thundris")
+            assert(dock.container:IsShown() and panelText():find("Flor de los cielos",1,true),panelText())
+            assert(ns.char.progress[chapter].cursor==18,"The boat journey changed the saved chapter")
+        """)
 
     def test_deadmines_prepare_and_return_from_journey_preserve_world_guide(self):
         lua = self.client("Paladín", "Alliance", "forever/alliance/02-westfall", 4, level=19, map_id=1436)

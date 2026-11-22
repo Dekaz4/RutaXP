@@ -1,7 +1,7 @@
 local _, ns = ...
 local focus, byQuest = {}, nil
 ns.WorldQuestFocus = focus
-local lastProgress, observed, ignored = {}, nil, nil
+local lastProgress, observed, ignored, lastTracked = {}, nil, nil, nil
 
 local function index()
     if byQuest then return byQuest end
@@ -109,6 +109,17 @@ end
 function focus.Clear(id)
     ignored = id
     observed = nil
+end
+
+function focus.TrackingChanged()
+    local id = C_SuperTrack and C_SuperTrack.GetSuperTrackedQuestID and C_SuperTrack.GetSuperTrackedQuestID()
+    id = reportable(id) and id or nil
+    if id ~= lastTracked and id and ns.RestedQuestState.Active(id) then
+        -- Selecting a new destination in the journal takes precedence over
+        -- counters observed while working on the previous quest.
+        observed, ignored = nil, nil
+    end
+    lastTracked = id
 end
 
 function focus.Point(id, match)

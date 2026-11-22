@@ -286,6 +286,22 @@ class DungeonPlannerTests(unittest.TestCase):
             w.done[166]=true; assert(r.Delivered(166))
         """)
 
+    def test_selecting_a_remote_quest_replaces_the_last_local_objective(self):
+        self.run_lua("""
+            useFixture({},{})
+            for _,id in ipairs({331,332}) do
+                ns.DungeonQuestData.restedWorld[id]=true
+                w.active[id]=true; w.objectives[id]={{numFulfilled=0}}
+            end
+            w.journal={331,332}
+            w.waypoints[331]={12,.16,.40}; w.waypoints[332]={56,.38,.71}
+        """)
+        self.login()
+        self.run_lua("""
+            update(); w.objectives[331][1].numFulfilled=1; update(); checkPoint(12,.16,.40)
+            w.tracked=332; fire("SUPER_TRACKING_CHANGED"); checkPoint(56,.38,.71)
+        """)
+
     def test_accepted_instance_quest_does_not_take_over_a_solo_or_duo_route(self):
         self.run_lua("""
             useFixture({[501]={title="Objetivo interior",pickup=point(12,80,80),workInside=true}}, {501})

@@ -1,6 +1,6 @@
 # RutaXP para WoW Forever
 
-RutaXP 1.2.0 recupera los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos y la brújula usan la interfaz de tu copia de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
+RutaXP 1.2.1 recupera los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos y la brújula usan la interfaz de tu copia de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
 
 ## Actualizar
 
@@ -28,6 +28,8 @@ El panel toma los pasos, los requisitos de misión, las opciones de grupo y los 
 
 Los filtros de seguimiento del minimapa y de OpenMap comparten selección. Al pulsar **M** puedes ver los servicios de tu facción en la zona que consultas, a cualquier distancia. Las entradas de mazmorra respetan la acción configurada en OpenMap. Para una instalación nueva, el clic abre el diario.
 
+Si el objetivo está en otro continente, el panel de Journey indica cómo llegar al siguiente transporte. La brújula señala el muelle o el maestro de vuelo. Las conexiones observadas en el mapa de vuelo de ese personaje permiten incorporar vuelos al viaje. En la travesía de Menethil a Auberdine, la guía indica que permanezcas a bordo en Costasur y recupera el destino de misión al llegar. La brújula comparte la opción `/rutaxp flecha` y conserva la posición que ya habías elegido.
+
 ### Misiones de mundo y mazmorras
 
 Journey muestra la misión que estás siguiendo en el juego o en la que acaba de subir un contador. Para las mazmorras, RutaXP relaciona las misiones del capítulo con las guías oficiales de RestedXP disponibles, el diario de mazmorras y los requisitos de Forever. En un mismo panel ves las previas, las recogidas exteriores y las que solo puedes aceptar dentro.
@@ -40,7 +42,7 @@ Desde la raíz del proyecto y con Python 3.10 o posterior, indica la carpeta de 
 
 ```powershell
 python tools/build_personal_suite.py --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
-python tools/verify_personal_suite.py dist/RutaXP-1.2.0-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
+python tools/verify_personal_suite.py dist/RutaXP-1.2.1-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
 ```
 
 Los créditos y las licencias se encuentran en [NOTICE.md](NOTICE.md) y en `RutaXP/Licenses`.
