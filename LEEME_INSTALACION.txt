@@ -1,14 +1,17 @@
-RUTAXP 1.2.10 PARA WOW FOREVER
+RUTAXP 1.2.11 PARA WOW FOREVER
 
 1. Cierra WoW y abre tu Instalador_RutaXP.exe de siempre.
 2. Pulsa 1. El instalador usa tu cliente guardado o lo detecta si hay uno solo.
 3. Entra con tu personaje. El panel de Journey muestra su capítulo de RutaXP 0.7.36.
 4. Pulsa el título del panel para elegir otro capítulo. /rutaxp zona busca una guía según tu zona, nivel y diario.
 5. La llave del minimapa abre las misiones de mazmorra, incluso al seguir la ruta de mundo abierto. Puedes arrastrarla por el borde. Pulsa M para el mapa, /dj para el diario de mazmorras y N para los talentos.
-6. Escribe /lfg para buscar grupo. La opción 1 instala LFG Forever de Artefius y su traducción al español.
+6. Haz clic izquierdo en la flecha para cambiar su diseño y tamaño o para ocultar el texto y la distancia. Arrástrala para moverla.
+7. Escribe /lfg para buscar grupo. La opción 1 instala LFG Forever de Artefius y su traducción al español.
 
 Los instaladores a partir de la versión 1.0.2 reciben el constructor actualizado al pulsar 1. Para las versiones anteriores, sustituye una vez Instalador_RutaXP.exe por https://github.com/Dekaz4/RutaXP/releases/latest/download/Instalador_RutaXP.exe.
 
-La opción 1 recupera los módulos disponibles y descarga los que falten desde su distribución oficial. Si falla la descarga directa de Dungeon Journal o Journey, el instalador abre la página oficial e indica en qué carpeta guardar el ZIP. Déjalo sin descomprimir. La instalación continuará al verificar el archivo.
+Si tienes Descargas en otra unidad, el instalador usa la ubicación de tu cuenta de Windows y busca en las carpetas de descarga configuradas en Chrome, Edge, Brave y Firefox.
+
+La opción 1 recupera los módulos disponibles y descarga los que falten desde su distribución oficial. Si falla la descarga directa de Dungeon Journal o Journey, el instalador abre la página oficial e indica en qué carpeta guardar el ZIP. Déjalo sin descomprimir. Si has usado otra carpeta, al final de la espera puedes seleccionar el ZIP en cualquier unidad. La instalación continuará al verificar el archivo.
 
 El instalador guarda las copias de recuperación fuera de la carpeta que actualiza Battle.net y traslada automáticamente las copias anteriores. Para una instalación en E:\WOW\World of Warcraft\_forever_, la carpeta de copias es E:\WOW\RutaXP-Suite-Backups\World of Warcraft\_forever_. El avance se conserva por personaje. Si ya tienes el paquete personal preparado puedes instalarlo sin conexión con Instalar_RutaXP_Personal.exe y volver a la instalación anterior con Instalar_RutaXP_Personal.exe --restore.

@@ -9,6 +9,15 @@ from test_addon import ADDON, UI_STUBS, WOW_STUBS
 
 
 TALENT_STUBS = r"""
+local widgets = getmetatable(UIParent).__index
+function widgets:SetScrollChild(child) self.scrollChild = child end
+function widgets:SetClipsChildren(clip) self.clipsChildren = clip end
+function widgets:SetPoint(...)
+    self.points = self.points or {}
+    table.insert(self.points, {...})
+end
+function widgets:ClearAllPoints() self.points = {} end
+function widgets:SetBackdrop(backdrop) self.backdrop = backdrop end
 TEST.classToken, TEST.raceToken, TEST.level = "MAGE", "Human", 60
 TEST.now, TEST.money, TEST.trainerType = 0, 100000, 0
 TEST.services, TEST.rows = {}, {}
@@ -69,11 +78,18 @@ end
 
 
 class TalentTrainerHost:
-    def __init__(self, full_toc=False, *, talent_module=False):
+    def __init__(self, full_toc=False, *, talent_module=False, journey=False):
         self.lua = LuaRuntime(unpack_returned_tuples=True)
         self.lua.execute(WOW_STUBS)
         self.lua.execute(UI_STUBS)
         self.lua.execute(TALENT_STUBS)
+        if journey:
+            self.lua.execute("""
+                C_AddOns = C_AddOns or {}
+                function C_AddOns.GetAddOnMetadata(addon, key)
+                    if addon == "RutaXP" and key == "X-RutaXP-Journey-UI" then return "1.0" end
+                end
+            """)
         if full_toc or talent_module:
             self.lua.execute(r"""
                 local original = CreateFrame
@@ -598,6 +614,78 @@ class TalentCatalogRegressionTests(unittest.TestCase):
 
 
 class TalentModuleIntegrationTests(unittest.TestCase):
+    def test_talent_panel_matches_journey_cards_in_both_distributions(self):
+        for journey, emblem in [
+            (True, r"Interface\AddOns\RutaXP\Modules\Journey\images\JourneyLogoMed.png"),
+            (False, r"Interface\Icons\INV_Misc_PocketWatch_01"),
+        ]:
+            with self.subTest(journey=journey):
+                h = TalentTrainerHost(talent_module=True, journey=journey)
+                panel = h.panel()
+                self.assertEqual(panel.emblem.texture.lower(), emblem.lower())
+                for card in (panel.header, panel.nextCard, panel.infoCard, panel.buildBtns[1]):
+                    self.assertEqual(card.backdrop.edgeFile, r"Interface\Tooltips\UI-Tooltip-Border")
+                self.assertTrue(panel.scroll.clipsChildren)
+                self.assertTrue(h.lua.eval("rawequal")(panel.scroll.scrollChild, panel.content))
+                info = panel.infoCard
+                self.assertTrue(info.scroll.clipsChildren)
+                self.assertTrue(h.lua.eval("rawequal")(info.scroll.scrollChild, info.body))
+                self.assertGreaterEqual(info.body.height, info.text.GetStringHeight(info.text))
+
+                # Build cards may not overlap each other or extend beyond the window.
+                occupied = []
+                for button in panel.buildBtns.values():
+                    anchor = button.points[1]
+                    self.assertEqual(anchor[1], "TOPLEFT")
+                    left, top = anchor[2], -anchor[3]
+                    right, bottom = left + button.width, top + button.height
+                    self.assertLessEqual(right, panel.width)
+                    for x1, y1, x2, y2 in occupied:
+                        self.assertTrue(right <= x1 or x2 <= left or bottom <= y1 or y2 <= top)
+                    occupied.append((left, top, right, bottom))
+
+    def test_level_35_rogue_switches_tabs_and_keeps_manual_scroll_on_refresh(self):
+        h = TalentTrainerHost(talent_module=True, journey=True)
+        h.state.classToken, h.state.level = "ROGUE", 35
+        h.live("ROGUE")
+        combat = h.t.Registry.ROGUE.builds[1]
+        for index in range(1, 27):
+            pick = combat.picks[index]
+            h.state.liveNodes[pick.node].activeRank = h.state.liveNodes[pick.node].currentRank = pick.rank
+        h.state.spent, h.state.unspent = 26, 0
+        panel = h.panel()
+        self.assertIn("Cortar y rebanar", panel.nextCard.main.text)
+        self.assertIn("4/5", panel.nextCard.main.text)
+        self.assertIn("36", panel.rows[27].lvl.text)
+        self.assertGreater(panel.scroll.scroll, 0)
+        panel.scroll.SetVerticalScroll(panel.scroll, 138)
+        panel.infoCard.scroll.SetVerticalScroll(panel.infoCard.scroll, 15)
+        h.t.Refresh()
+        self.assertEqual(panel.scroll.scroll, 138)
+        self.assertEqual(panel.infoCard.scroll.scroll, 15)
+
+        h.g.Click(panel.tabSpellsBtn)
+        self.assertEqual(panel.activeTab, "spells")
+        self.assertTrue(panel.tabSpellsBtn.isActive)
+        self.assertFalse(panel.tabTalentsBtn.isActive)
+        spell = panel.rows[1].tipTitle
+        h.g.Click(panel.tabTalentsBtn)
+        self.assertTrue(panel.tabTalentsBtn.isActive)
+        self.assertNotEqual(panel.rows[1].tipTitle, spell)
+        self.assertEqual(sum(row.shown for row in panel.rows.values()), 51)
+        self.assertGreater(panel.scroll.scroll, 0)
+
+        alternative = panel.buildBtns[2]
+        alternative.scripts.OnMouseUp(alternative, "LeftButton")
+        self.assertEqual(h.t.GetChoice(), alternative.buildKey)
+        self.assertEqual(panel.infoCard.scroll.scroll, 0)
+        h.g.Click(panel.autoBtn)
+        self.assertEqual(h.t.GetChoice(), "auto")
+        panel.classBtn.scripts.OnClick(panel.classBtn, "LeftButton")
+        self.assertFalse(h.t.current.isPlayerClass)
+        panel.classBtn.scripts.OnClick(panel.classBtn, "RightButton")
+        self.assertTrue(h.t.current.isPlayerClass)
+
     def test_module_loads_saved_choices_and_recovers_live_talents(self):
         h = TalentTrainerHost(talent_module=True)
         key = h.t.Registry.MAGE.builds[2].key

@@ -102,9 +102,20 @@ local noopMethods = {
 }
 for _, name in ipairs(noopMethods) do methods[name] = function() end end
 function methods:GetFrameLevel() return 1 end
+function methods:SetTexture(file) self.texture = file end
+function methods:SetHighlightTexture(file) self.highlightTexture = file end
+function methods:SetScale(value) self.scale = value end
+function methods:SetHitRectInsets(...) self.hitRectInsets = {...} end
 function methods:GetRight() return 600 end
 function methods:RegisterEvent(event) self.events[event] = true end
 function methods:SetScript(name, callback) self.scripts[name] = callback end
+function methods:HookScript(name, callback)
+    local previous = self.scripts[name]
+    self.scripts[name] = function(...)
+        if previous then previous(...) end
+        callback(...)
+    end
+end
 function methods:SetSize(width, height) self.width, self.height = width, height end
 function methods:SetWidth(width) self.width = width end
 function methods:SetHeight(height) self.height = height end

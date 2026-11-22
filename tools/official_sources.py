@@ -3,8 +3,10 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 import hashlib
 from http.client import HTTPException
+import json
 import os
 from pathlib import Path
+import re
 import shutil
 import tempfile
 import time
@@ -49,10 +51,41 @@ def downloads_directory():
             with winreg.OpenKey(winreg.HKEY_CURRENT_USER,
                                 r"Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders") as key:
                 location, _ = winreg.QueryValueEx(key, "{374DE290-123F-4565-9164-39C4925E467B}")
-            return Path(os.path.expandvars(location))
+            if isinstance(location, str) and Path(os.path.expandvars(location)).is_absolute():
+                return Path(os.path.expandvars(location))
         except OSError:
             pass
     return Path.home() / "Downloads"
+
+
+def browser_download_directories():
+    """A browser may save to a different drive from the Windows Downloads folder."""
+    local = os.environ.get("LOCALAPPDATA")
+    if local:
+        for browser in ("Google/Chrome", "Microsoft/Edge", "BraveSoftware/Brave-Browser"):
+            profiles = Path(local) / browser / "User Data"
+            for prefs in profiles.glob("*/Preferences"):
+                try:
+                    settings = json.loads(prefs.read_text(encoding="utf-8"))
+                    download = settings.get("download") if isinstance(settings, dict) else None
+                    path = download.get("default_directory") if isinstance(download, dict) else None
+                    if isinstance(path, str) and Path(path).is_absolute():
+                        yield Path(path)
+                except (OSError, ValueError):
+                    continue
+    roaming = os.environ.get("APPDATA")
+    if roaming:
+        profiles = Path(roaming) / "Mozilla/Firefox/Profiles"
+        for prefs in profiles.glob("*/prefs.js"):
+            try:
+                settings = prefs.read_text(encoding="utf-8")
+                match = re.search(r'^user_pref\("browser\.download\.dir", (".*")\);$', settings, re.MULTILINE)
+                if match:
+                    path = json.loads(match[1])
+                    if isinstance(path, str) and Path(path).is_absolute():
+                        yield Path(path)
+            except (OSError, ValueError):
+                continue
 
 
 def digest_stream(stream):
@@ -132,18 +165,51 @@ def download_release(source, incoming, report):
         raise ValueError(f"El ZIP de {source.filename} no coincide con la versión comprobada.")
 
 
+def choose_archive(source, initial_directory):
+    """Use the running installer window when present, or own a temporary Tk root in CLI mode."""
+    try:
+        import tkinter as tk
+        from tkinter import filedialog
+    except ImportError:
+        return None
+    owned = None
+    try:
+        parent = tk._default_root
+        if parent is None:
+            owned = parent = tk.Tk()
+            parent.withdraw()
+        selected = filedialog.askopenfilename(
+            parent=parent, title=f"Localizar {source.filename}", initialdir=str(initial_directory),
+            filetypes=[("Archivos ZIP", "*.zip")],
+        )
+        return Path(selected) if selected else None
+    except (tk.TclError, RuntimeError, OSError):
+        return None
+    finally:
+        if owned is not None:
+            owned.destroy()
+
+
 def browser_archive(source, directories, examined, report):
     downloads = directories[0]
-    report(f"Guarda {source.filename} en {downloads}. El instalador continuará automáticamente. {source.browser_url}")
-    if not webbrowser.open(source.browser_url, new=2):
-        raise ValueError(f"No se pudo abrir la descarga oficial. Guarda {source.filename} en {downloads} desde {source.browser_url}.")
-    deadline = time.monotonic() + 300
-    while time.monotonic() < deadline:
-        found = find_download(source, directories, examined)
-        if found:
-            return found
-        time.sleep(1)
-    raise ValueError(f"No se encontró el ZIP oficial {source.filename} en {downloads}. Comprueba las descargas del navegador y vuelve a pulsar 1.")
+    report(f"Esperando {source.filename}. Carpetas de descarga: {' · '.join(str(p) for p in directories)}. "
+           f"La instalación continuará automáticamente. {source.browser_url}")
+    try:
+        opened = webbrowser.open(source.browser_url, new=2)
+    except (webbrowser.Error, OSError):
+        opened = False
+    if opened:
+        deadline = time.monotonic() + 300
+        while time.monotonic() < deadline:
+            found = find_download(source, directories, examined)
+            if found:
+                return found
+            time.sleep(1)
+    report(f"Selecciona {source.filename} en la carpeta donde lo guardaste.")
+    chosen = choose_archive(source, downloads)
+    if chosen:
+        return chosen  # acquire validates the staged copy before extraction.
+    raise ValueError(f"No se seleccionó el ZIP oficial {source.filename}. Puedes guardarlo en {downloads} y volver a pulsar 1.")
 
 
 @contextmanager
@@ -162,7 +228,7 @@ def acquire(name, cache, report):
         package = cached
         if not matches(cached, source):
             incoming = work / "download.zip"
-            directories = tuple(dict.fromkeys((downloads_directory(), cache)))
+            directories = tuple(dict.fromkeys((downloads_directory(), *browser_download_directories(), cache)))
             examined = {}
             found = find_download(source, directories, examined)
             if found is None:

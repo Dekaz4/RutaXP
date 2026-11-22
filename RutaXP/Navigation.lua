@@ -608,7 +608,7 @@ local function showArrowDetails(frame)
         local hint = ns:GetNearbyQuestOfferHint(guide, step, state, travel)
         if hint then GameTooltip:AddLine(hint, 0.55, 1, 0.68, true) end
     end
-    GameTooltip:AddLine("Arrastra con clic izquierdo para moverla.", 0.85, 0.88, 0.92, true)
+    GameTooltip:AddLine("Clic para personalizar la flecha. Arrastra para moverla.", 0.85, 0.88, 0.92, true)
     GameTooltip:Show()
 end
 
@@ -692,6 +692,27 @@ function ns:CreateNavigation()
     frame.distance = outlinedText(frame, "GameFontNormalLarge", -60, 200, 15)
     frame.hint = outlinedText(frame, "GameFontHighlightSmall", -78, 206, 12)
     frame.hint:SetTextColor(1, 0.70, 0.33)
+    if self.ArrowStyles then
+        local styles = self.ArrowStyles
+        styles:Attach(frame, function()
+            body:SetTexture(styles:GetTexture())
+            local scale = styles:GetScale()
+            arrow:SetScale(scale)
+            local height = DIAL * scale
+            frame:SetHeight(height + 58)
+            frame.distance:ClearAllPoints()
+            frame.distance:SetPoint("TOP", frame, "TOP", 0, -height - 4)
+            frame.hint:ClearAllPoints()
+            frame.hint:SetPoint("TOP", frame, "TOP", 0, -height - 22)
+            if styles:ShowsText() then
+                frame.distance:Show()
+                frame.hint:Show()
+            else
+                frame.distance:Hide()
+                frame.hint:Hide()
+            end
+        end)
+    end
     frame:Hide()
 
     local updater = CreateFrame("Frame")

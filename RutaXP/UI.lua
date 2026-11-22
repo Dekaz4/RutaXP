@@ -49,12 +49,27 @@ local function label(parent, font, text, x, y, width, color)
     return item
 end
 
+local function selectorCard(frame, gold)
+    frame:SetBackdrop(ns.JourneyCardBackdrop or BACKDROP_GLUE_TOOLTIP_16_16 or {
+        bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
+        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", edgeSize = 16,
+        insets = {left=4, right=4, top=4, bottom=4},
+    })
+    if ns.StyleJourneyCard then
+        ns.StyleJourneyCard(frame, gold)
+    else
+        frame:SetBackdropColor(0.025, 0.021, 0.014, 0.97)
+        frame:SetBackdropBorderColor(gold and 0.78 or 0.66, gold and 0.73 or 0.66, gold and 0.56 or 0.66)
+    end
+end
+
 -- Modern flat button replacing ugly red Blizzard UIPanelButtonTemplate
 local function flatButton(parent, text, width, height, x, y, action, accent)
     local btn = CreateFrame("Button", nil, parent, BackdropTemplateMixin and "BackdropTemplate" or nil)
     btn:SetSize(width, height or 24)
     btn:SetPoint("TOPLEFT", x, y)
-    btn:SetBackdrop({ bgFile = "Interface\\Buttons\\WHITE8X8", edgeFile = "Interface\\Buttons\\WHITE8X8", edgeSize = 1 })
+    if parent.selectorSkin then selectorCard(btn, accent)
+    else btn:SetBackdrop({ bgFile = "Interface\\Buttons\\WHITE8X8", edgeFile = "Interface\\Buttons\\WHITE8X8", edgeSize = 1 }) end
     btn.isAccent = accent
     btn.isEnabled = true
     local lbl = btn:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
@@ -71,6 +86,10 @@ local function flatButton(parent, text, width, height, x, y, action, accent)
             btn:SetBackdropColor(hover and 0.30 or 0.22, hover and 0.24 or 0.17, hover and 0.12 or 0.08, 0.98)
             btn:SetBackdropBorderColor(0.95, 0.78, 0.42, hover and 1 or 0.85)
             lbl:SetTextColor(1, 0.88, 0.58)
+        elseif parent.selectorSkin then
+            btn:SetBackdropColor(hover and 0.13 or 0.04, hover and 0.10 or 0.035, hover and 0.05 or 0.025, 0.98)
+            btn:SetBackdropBorderColor(hover and 0.95 or 0.59, hover and 0.78 or 0.57, hover and 0.42 or 0.52, 1)
+            lbl:SetTextColor(1, hover and 0.86 or 0.95, hover and 0.56 or 0.85)
         else
             btn:SetBackdropColor(hover and 0.15 or 0.09, hover and 0.20 or 0.12, hover and 0.28 or 0.18, 0.95)
             btn:SetBackdropBorderColor(hover and 0.45 or 0.24, hover and 0.54 or 0.30, hover and 0.68 or 0.42, 0.95)
@@ -164,81 +183,88 @@ function ns:CreateUI()
     self.rows = {}
     local frame = panel(UIParent, 840, 560, 0.04, 0.06, 0.095, 0.98)
     self.window = frame
+    selectorCard(frame)
+    frame.selectorSkin = true
     frame:SetFrameStrata("DIALOG")
     frame:SetScale(math.min(1, UIParent:GetWidth() / 880, UIParent:GetHeight() / 600))
     moveable(frame, "windowPosition", "CENTER", 0, 0)
     frame:Hide()
 
-    -- Top gold accent line & header band
-    local topAccent = frame:CreateTexture(nil, "OVERLAY")
-    topAccent:SetColorTexture(0.95, 0.78, 0.42, 0.9)
-    topAccent:SetPoint("TOPLEFT", 1, -1)
-    topAccent:SetPoint("TOPRIGHT", -1, -1)
-    topAccent:SetHeight(2)
-
-    local headerBand = frame:CreateTexture(nil, "BACKGROUND")
-    if headerBand.SetTexture then headerBand:SetTexture(UI_MEDIA .. "band-stars") end
-    headerBand:SetPoint("TOPLEFT", 1, -3)
-    headerBand:SetPoint("TOPRIGHT", -1, -3)
-    headerBand:SetHeight(48)
-    if headerBand.SetVertexColor then headerBand:SetVertexColor(0.12, 0.20, 0.32, 0.85) end
-
-    label(frame, "GameFontNormalLarge", "RUTA|cfff5f7faXP|r", 20, -15, nil, GOLD)
-    self.recordingLabel = label(frame, "GameFontHighlightSmall", "", 125, -18, 420, MUTED)
+    local header = panel(frame, 804, 48)
+    header:SetPoint("TOPLEFT", 30, -5)
+    selectorCard(header, true)
+    header.selectorSkin = true
+    local emblem = header:CreateTexture(nil, "OVERLAY")
+    emblem:SetPoint("CENTER", header, "LEFT", 3, 0)
+    if ns.SetJourneyEmblem then ns.SetJourneyEmblem(emblem)
+    else emblem:SetSize(34, 34); emblem:SetTexture("Interface\\Icons\\INV_Misc_Map_01") end
+    label(header, "GameFontNormalLarge", "Rutas de leveo", 39, -6, 360, GOLD)
+    self.recordingLabel = label(header, "GameFontHighlightSmall", "", 40, -27, 368, TEXT_MAIN)
 
     -- Zone auto-detect & Talent Guides buttons in header
-    self.talentsButton = flatButton(frame, "Talentos (N)", 106, 24, 462, -13, function()
+    self.talentsButton = flatButton(header, "Talentos (N)", 106, 26, 432, -11, function()
         if self.Talents and self.Talents.TogglePanel then
             self.Talents.TogglePanel()
         end
     end)
 
-    self.zoneDetectButton = flatButton(frame, "Detectar guía de mi zona actual", 220, 24, 575, -13, function()
+    self.zoneDetectButton = flatButton(header, "Detectar guía de mi zona", 220, 26, 545, -11, function()
         if self.DetectZoneGuide then self:DetectZoneGuide(false) end
     end, true)
 
-    local close = flatButton(frame, "×", 26, 24, 804, -13, function()
+    flatButton(header, "×", 26, 26, 770, -11, function()
         frame:Hide()
         self:RefreshUI()
     end)
 
     -- Left column: Guide Browser
-    label(frame, "GameFontHighlightSmall", "SELECCIONA TU ZONA / RUTA", 20, -62, 260, GOLD)
-    local search = CreateFrame("EditBox", nil, frame, "InputBoxTemplate")
+    local browser = panel(frame, 278, 494)
+    browser:SetPoint("TOPLEFT", 8, -58)
+    selectorCard(browser)
+    browser.selectorSkin = true
+    label(browser, "GameFontNormal", "Buscar una guía", 12, -10, 254, GOLD)
+    local search = CreateFrame("EditBox", nil, browser, "InputBoxTemplate")
     self.search = search
     search:SetSize(248, 24)
-    search:SetPoint("TOPLEFT", 25, -82)
+    search:SetPoint("TOPLEFT", 17, -32)
     search:SetAutoFocus(false)
     search:SetMaxLetters(80)
     search:SetScript("OnEscapePressed", function(box) box:ClearFocus() end)
     search:SetScript("OnEnterPressed", function(box) box:ClearFocus() end)
-    search:SetScript("OnTextChanged", function() self:RefreshGuideList() end)
-
-    self.factionButton = flatButton(frame, "Ver: mi facción", 254, 24, 20, -114, function()
-        self.char.allFactions = not self.char.allFactions
+    search:SetScript("OnTextChanged", function()
+        self.listScroll:SetVerticalScroll(0)
         self:RefreshGuideList()
     end)
-    label(frame, "GameFontDisableSmall", "Filtra por zona o nivel (ej. Elwynn, 12, Poniente)", 22, -143, 254)
 
-    local scroll = CreateFrame("ScrollFrame", nil, frame, "UIPanelScrollFrameTemplate")
+    self.factionButton = flatButton(browser, "Mi facción", 254, 24, 12, -66, function()
+        self.char.allFactions = not self.char.allFactions
+        self.listScroll:SetVerticalScroll(0)
+        self:RefreshGuideList()
+    end)
+
+    local scroll = CreateFrame("ScrollFrame", nil, browser, "UIPanelScrollFrameTemplate")
     self.listScroll = scroll
-    scroll:SetPoint("TOPLEFT", 20, -164)
-    scroll:SetSize(236, 332)
+    scroll:SetPoint("TOPLEFT", 12, -98)
+    scroll:SetSize(236, 365)
     if scroll.SetClipsChildren then scroll:SetClipsChildren(true) end
     local content = CreateFrame("Frame", nil, scroll)
-    content:SetSize(236, 332)
+    content:SetSize(236, 365)
     self.listContent = content
     scroll:SetScrollChild(content)
     self.noResults = label(content, "GameFontHighlight", "No hay guías con este filtro.", 8, -12, 215, MUTED)
-    self.guideCount = label(frame, "GameFontHighlightSmall", "", 20, -506, 254, MUTED)
+    self.guideCount = label(browser, "GameFontHighlightSmall", "", 12, -472, 254, MUTED)
+    frame:SetScript("OnShow", function() self.revealActiveGuide = true end)
+    self.revealActiveGuide = true
 
     -- Right column: Active Guide & Current Step
     local detail = panel(frame, 524, 434, 0.065, 0.09, 0.135, 0.98)
     self.detail = detail
+    selectorCard(detail, true)
+    detail.selectorSkin = true
     detail:SetPoint("TOPLEFT", 296, -62)
 
-    self.guideKind = label(detail, "GameFontHighlightSmall", "", 18, -14, 488, GOLD)
-    self.guideTitle = label(detail, "GameFontNormalLarge", "", 18, -34, 488, TEXT_MAIN)
+    self.guideTitle = label(detail, "GameFontNormalLarge", "", 18, -12, 488, GOLD)
+    self.guideKind = label(detail, "GameFontHighlightSmall", "", 18, -43, 488, TEXT_MAIN)
     self.guideTitle:SetHeight(32)
     self.guideSummary = label(detail, "GameFontHighlightSmall", "", 18, -68, 488, MUTED)
     self.guideSummary:SetHeight(42)
@@ -507,54 +533,64 @@ end
 
 function ns:RefreshGuideList()
     if not self.window then return end
-    local guides = self:GetVisibleGuides(self.search:GetText(), self.char.allFactions)
-    self.factionButton:SetText(self.char.allFactions and "Ver: todas las facciones" or "Ver: mi facción")
+    local query = self.search:GetText() or ""
+    local guides = self:GetVisibleGuides(query, self.char.allFactions)
+    self.factionButton:SetText(self.char.allFactions and "Facción: todas" or "Facción: la mía")
     self.noResults:SetShown(#guides == 0)
-    self.listContent:SetHeight(math.max(332, #guides * 66))
+    local rowStride, viewportHeight = 58, self.listScroll:GetHeight()
+    local contentHeight = math.max(viewportHeight, #guides * rowStride)
+    self.listContent:SetHeight(contentHeight)
     local playerMap = C_Map and C_Map.GetBestMapForUnit and C_Map.GetBestMapForUnit("player")
+    local activeTop
 
     for index, guide in ipairs(guides) do
         local row = self.rows[index]
         if not row then
             row = CreateFrame("Button", nil, self.listContent, BackdropTemplateMixin and "BackdropTemplate" or nil)
-            row:SetSize(232, 60)
-            row:SetBackdrop({ bgFile = "Interface\\Buttons\\WHITE8X8", edgeFile = "Interface\\Buttons\\WHITE8X8", edgeSize = 1 })
+            row:SetSize(232, 55)
+            selectorCard(row)
             row.title = label(row, "GameFontHighlight", "", 10, -8, 212)
             row.title:SetHeight(28)
-            row.meta = label(row, "GameFontHighlightSmall", "", 10, -40, 212, MUTED)
+            row.meta = label(row, "GameFontHighlightSmall", "", 10, -36, 212, MUTED)
             row:SetScript("OnClick", function(item) self:SelectGuide(item.guideID) end)
             row:SetScript("OnEnter", function(item) item:SetBackdropBorderColor(unpack(GOLD)) end)
-            row:SetScript("OnLeave", function() self:RefreshGuideList() end)
+            row:SetScript("OnLeave", function(item) item:SetBackdropBorderColor(unpack(item.borderColor)) end)
             self.rows[index] = row
         end
         row.guideID = guide.id
         row:ClearAllPoints()
-        row:SetPoint("TOPLEFT", 0, -((index - 1) * 66))
+        local top = (index - 1) * rowStride
+        row:SetPoint("TOPLEFT", 0, -top)
         local inZone = playerMap and guide.zone == playerMap
-        row.title:SetText((inZone and "|cff6be09e★ |r" or "") .. guide.title)
+        local active = guide.id == self.char.activeGuide
+        row.title:SetText(guide.title)
+        row.title:SetTextColor(unpack(active and GOLD or TEXT_MAIN))
         local state = self:GetProgress(guide.id)
         local levels = guide.minLevel and ("Niv. " .. guide.minLevel .. "–" .. (guide.maxLevel or "?")) or "Guía"
-        local doneQ, totalQ = 0, 0
-        if self.GetGuideQuestStats then doneQ, totalQ = self:GetGuideQuestStats(guide) end
-        local pct = math.floor((state.cursor - 1) / #guide.steps * 100)
-        local metaText = levels .. (totalQ > 0 and (" · " .. doneQ .. "/" .. totalQ .. " mis.") or (" · " .. pct .. "%"))
+        local pct = math.min(100, math.floor((state.cursor - 1) / math.max(1, #guide.steps) * 100))
+        local metaText = levels .. (pct > 0 and (" · " .. pct .. "%") or "")
         if inZone then metaText = "|cff6be09eTu zona|r · " .. metaText end
+        if active then metaText = "|cffffcf52Activa|r · " .. metaText; activeTop = top end
         row.meta:SetText(metaText)
-        local active = guide.id == self.char.activeGuide
-        row:SetBackdropColor(active and 0.16 or 0.07, active and 0.14 or 0.095, active and 0.09 or 0.14, 1)
-        if active then row:SetBackdropBorderColor(unpack(GOLD))
-        elseif inZone then row:SetBackdropBorderColor(0.32, 0.68, 0.48, 0.9)
-        else row:SetBackdropBorderColor(0.16, 0.21, 0.29, 1) end
+        row:SetBackdropColor(active and 0.16 or 0.035, active and 0.12 or 0.032, active and 0.045 or 0.025, 1)
+        row.borderColor = active and GOLD or inZone and GREEN or {0.48, 0.46, 0.42}
+        row:SetBackdropBorderColor(unpack(row.borderColor))
         row:Show()
     end
     for index = #guides + 1, #self.rows do self.rows[index]:Hide() end
-    self.listScroll:SetVerticalScroll(math.min(self.listScroll:GetVerticalScroll(), self.listScroll:GetVerticalScrollRange()))
-    self.guideCount:SetText(#guides .. " guías disponibles · " .. #self.order .. " en total")
+    local offset = self.listScroll:GetVerticalScroll()
+    if activeTop and not query:find("%S") and (self.revealActiveGuide or self.listGuideID ~= self.char.activeGuide) then
+        if activeTop < offset then offset = activeTop
+        elseif activeTop + rowStride > offset + viewportHeight then offset = activeTop + rowStride - viewportHeight end
+    end
+    self.listScroll:SetVerticalScroll(math.min(offset, contentHeight - viewportHeight))
+    self.revealActiveGuide, self.listGuideID = false, self.char.activeGuide
+    self.guideCount:SetText(#guides == #self.order and (#guides .. " guías") or string.format("%d de %d guías", #guides, #self.order))
 end
 
 function ns:RefreshUI()
     if not self.window then return end
-    self:RefreshGuideList()
+    if self.window:IsShown() then self:RefreshGuideList() else self.revealActiveGuide = true end
     self.autoCheck:SetChecked(self.char.auto)
     self.trackCheck:SetChecked(self.char.tracker)
     if self.arrowCheck then self.arrowCheck:SetChecked(self.char.arrow ~= false) end
@@ -591,15 +627,16 @@ function ns:RefreshUI()
     self.localTravelButton:SetShown(choice and not localObjective and choice.localGoals and choice.localGoals[1] ~= nil or false)
 
     local faction = guide.faction == "Alliance" and "Alianza" or guide.faction == "Horde" and "Horda" or "Ambas facciones"
-    local kind = (guide.zoneName or guide.kind or "Guía") .. " · " .. faction
+    local category = guide.zoneName or guide.kind
+    local kind = category and category ~= guide.title and (category .. " · " .. faction) or faction
     if guide.minLevel then kind = kind .. " · Niveles " .. guide.minLevel .. "–" .. (guide.maxLevel or "?") end
-    if self.GetGuideQuestStats then
+    if self.window:IsShown() and self.GetGuideQuestStats then
         local doneQ, totalQ = self:GetGuideQuestStats(guide)
         if totalQ > 0 then kind = kind .. " · " .. doneQ .. "/" .. totalQ .. " misiones hechas" end
     end
     self.guideKind:SetText(kind)
     self.guideTitle:SetText(guide.title)
-    self.guideSummary:SetText(guide.summary or "")
+    self.guideSummary:SetText(guide.summary ~= guide.title and guide.summary or "")
 
     local complete = state.cursor > #guide.steps
     local continuation, reason, managed
@@ -616,10 +653,10 @@ function ns:RefreshUI()
     self.progressBar:SetValue(ratio)
     if self.trackerBar then self.trackerBar:SetValue(ratio) end
 
-    self.stepCount:SetText(travelProgress or managed and "DÚO" or complete and ("¡Recorrido completado! (" .. #guide.steps .. " pasos)") or
-        ("PASO " .. state.cursor .. " DE " .. #guide.steps .. (state.review and " · Revisando paso anterior" or "")))
+    self.stepCount:SetText(travelProgress or managed and "Fin de la ruta" or complete and ("Recorrido completado · " .. #guide.steps .. " pasos") or
+        ("Paso " .. state.cursor .. " de " .. #guide.steps .. (state.review and " · En revisión" or "")))
     self.stepTitle:SetText(step and step.title or localFinish or "¡Has completado esta zona!")
-    if sharedView then self.stepCount:SetText("DÚO · PASO " .. state.cursor .. " DE " .. #guide.steps .. " · Tu progreso: " .. sharedView.ownCursor) end
+    if sharedView then self.stepCount:SetText("Paso " .. state.cursor .. " de " .. #guide.steps .. " · Tu progreso: " .. sharedView.ownCursor) end
 
     local waypoint
     if localObjective then waypoint = self:GetLocalTravelPoint(localObjective)
@@ -632,9 +669,10 @@ function ns:RefreshUI()
     local text
     if step then
         local blocks = {}
-        if sharedView then blocks[#blocks + 1] = "|cffffce72Acompañas al que va más atrás. Tu progreso propio se conserva en el paso " .. sharedView.ownCursor .. ".|r" end
         local body = step.text or step.note
-        if body and body ~= "" then blocks[#blocks + 1] = "|cff9fb0c7" .. body .. "|r" end
+        if body and body ~= "" and body ~= step.title and not objectives:find(body, 1, true) then
+            blocks[#blocks + 1] = "|cffdbd5c8" .. body .. "|r"
+        end
         if objectives ~= "" then blocks[#blocks + 1] = objectives end
         if waypoint then
             blocks[#blocks + 1] = string.format("|cff6c7a89Coordenadas: %.1f, %.1f|r", waypoint.x * 100, waypoint.y * 100)

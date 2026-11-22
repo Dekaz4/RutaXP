@@ -566,16 +566,42 @@ end
 -- Interactive Talent & Character Build Panel (opens on 'N' or button)
 ---------------------------------------------------------------------------
 
-local function createCard(parent, bgR, bgG, bgB, bgA, borderR, borderG, borderB, borderA)
+-- Use the same Blizzard tooltip skin as Journey's header and task groups.
+local journeyBackdrop = BACKDROP_GLUE_TOOLTIP_16_16 or {
+    bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
+    edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+    edgeSize = 16, insets = {left=4, right=4, top=4, bottom=4},
+}
+local function styleCard(frame, gold)
+    if not frame.SetBackdropColor then return end
+    frame:SetBackdropColor(0.025, 0.021, 0.014, 0.97)
+    if gold then
+        frame:SetBackdropBorderColor(0.78, 0.73, 0.56, 1)
+    elseif GLUE_BACKDROP_BORDER_COLOR then
+        frame:SetBackdropBorderColor(GLUE_BACKDROP_BORDER_COLOR:GetRGB())
+    else
+        frame:SetBackdropBorderColor(0.66, 0.66, 0.66, 1)
+    end
+end
+
+ns.JourneyCardBackdrop = journeyBackdrop
+ns.StyleJourneyCard = styleCard
+function ns.SetJourneyEmblem(texture)
+    local version = safe(C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata, ADDON, "X-RutaXP-Journey-UI")
+    if version and version ~= "" then
+        texture:SetSize(58, 58)
+        texture:SetTexture("Interface\\AddOns\\" .. ADDON .. "\\Modules\\Journey\\images\\JourneyLogoMed.png")
+    else
+        texture:SetSize(36, 36)
+        texture:SetTexture("Interface\\Icons\\INV_Misc_PocketWatch_01")
+    end
+end
+
+local function createCard(parent, gold)
     local f = CreateFrame("Frame", nil, parent, BackdropTemplateMixin and "BackdropTemplate" or nil)
     if f.SetBackdrop then
-        f:SetBackdrop({
-            bgFile = "Interface\\Buttons\\WHITE8X8",
-            edgeFile = "Interface\\Buttons\\WHITE8X8",
-            edgeSize = 1,
-        })
-        f:SetBackdropColor(bgR or 0.06, bgG or 0.08, bgB or 0.12, bgA or 0.94)
-        f:SetBackdropBorderColor(borderR or 0.22, borderG or 0.30, borderB or 0.42, borderA or 0.85)
+        f:SetBackdrop(journeyBackdrop)
+        styleCard(f, gold)
     end
     return f
 end
@@ -584,12 +610,9 @@ local function createPillButton(parent, width, height, text, onClick)
     local btn = CreateFrame("Button", nil, parent, BackdropTemplateMixin and "BackdropTemplate" or nil)
     btn:SetSize(width, height)
     if btn.SetBackdrop then
-        btn:SetBackdrop({
-            bgFile = "Interface\\Buttons\\WHITE8X8",
-            edgeFile = "Interface\\Buttons\\WHITE8X8",
-            edgeSize = 1,
-        })
+        btn:SetBackdrop(journeyBackdrop)
     end
+    btn:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
     btn.label = btn:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
     btn.label:SetPoint("LEFT", 6, 0)
     btn.label:SetPoint("RIGHT", -6, 0)
@@ -597,20 +620,13 @@ local function createPillButton(parent, width, height, text, onClick)
     btn.label:SetWordWrap(false)
     btn.label:SetText(text or "")
 
-    function btn:SetActiveStyle(active, accentGold)
+    function btn:SetActiveStyle(active)
         self.isActive = active
-        if not self.SetBackdropColor then return end
+        styleCard(self, active)
         if active then
-            if accentGold then
-                self:SetBackdropColor(0.28, 0.21, 0.06, 0.96)
-                self:SetBackdropBorderColor(0.95, 0.76, 0.25, 0.95)
-            else
-                self:SetBackdropColor(0.12, 0.24, 0.38, 0.96)
-                self:SetBackdropBorderColor(0.40, 0.72, 1.00, 0.95)
-            end
+            self.label:SetTextColor(1, 0.82, 0.16)
         else
-            self:SetBackdropColor(0.08, 0.11, 0.16, 0.92)
-            self:SetBackdropBorderColor(0.20, 0.27, 0.36, 0.80)
+            self.label:SetTextColor(0.95, 0.93, 0.87)
         end
     end
 
@@ -638,8 +654,9 @@ end
 function T.CreatePanel()
     if T.panel then return T.panel end
 
-    local panel = createCard(UIParent, 0.04, 0.06, 0.10, 0.97, 0.82, 0.66, 0.25, 0.92)
-    panel:SetSize(440, 610)
+    local panel = CreateFrame("Frame", nil, UIParent)
+    panel:SetSize(488, 630)
+    panel:SetClampedToScreen(true)
     panel:SetPoint("CENTER", UIParent, "CENTER", 260, 20)
     panel:SetFrameStrata("HIGH")
     panel:SetToplevel(true)
@@ -657,18 +674,25 @@ function T.CreatePanel()
     T.panel = panel
 
     -- Top Header Bar
-    local header = createCard(panel, 0.08, 0.11, 0.18, 0.98, 0.28, 0.38, 0.54, 0.70)
-    header:SetPoint("TOPLEFT", 1, -1)
-    header:SetPoint("TOPRIGHT", -1, -1)
-    header:SetHeight(48)
+    local header = createCard(panel, true)
+    panel.header = header
+    header:SetPoint("TOPLEFT", 24, -4)
+    header:SetPoint("TOPRIGHT", -4, -4)
+    header:SetHeight(58)
+
+    panel.emblem = header:CreateTexture(nil, "OVERLAY")
+    panel.emblem:SetPoint("CENTER", header, "LEFT", 6, 0)
+    ns.SetJourneyEmblem(panel.emblem)
 
     local title = header:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-    title:SetPoint("TOPLEFT", 12, -8)
-    title:SetText("|cffffd966RutaXP|r · Guías de Talentos y Personaje")
+    title:SetPoint("TOPLEFT", 42, -9)
+    title:SetText("Guías de talentos y personaje")
 
     panel.detectedText = header:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
     panel.detectedText:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -3)
+    panel.detectedText:SetWidth(292)
     panel.detectedText:SetJustifyH("LEFT")
+    panel.detectedText:SetWordWrap(false)
 
     local closeBtn = CreateFrame("Button", nil, header, "UIPanelCloseButton")
     closeBtn:SetPoint("TOPRIGHT", -2, -2)
@@ -678,7 +702,7 @@ function T.CreatePanel()
     end)
 
     -- Class selector button (defaults to player's detected class, click to cycle or reset to player class)
-    panel.classBtn = createPillButton(header, 128, 22, "Mi Clase", function(_, button)
+    panel.classBtn = createPillButton(header, 108, 24, "Mi Clase", function(_, button)
         if button == "RightButton" or not T.selectedClass then
             local p = T.DetectPlayer()
             if T.selectedClass and T.selectedClass ~= p.classToken then
@@ -704,29 +728,41 @@ function T.CreatePanel()
         T.Refresh()
     end)
     panel.classBtn:RegisterForClicks("LeftButtonUp", "RightButtonUp")
-    panel.classBtn:SetPoint("BOTTOMRIGHT", header, "BOTTOMRIGHT", -34, 6)
+    panel.classBtn:SetPoint("BOTTOMRIGHT", header, "BOTTOMRIGHT", -8, 4)
+    panel.classBtn:SetScript("OnEnter", function(self)
+        if not GameTooltip then return end
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetText("Cambiar de clase")
+        GameTooltip:AddLine("Clic para ver otra clase. Clic derecho para volver a la tuya.", 1, 1, 1, true)
+        GameTooltip:Show()
+    end)
+    panel.classBtn:SetScript("OnLeave", function() if GameTooltip then GameTooltip:Hide() end end)
 
     -- Section: Build Options (4 buttons in a 2x2 grid + Auto button)
-    local selectorLabel = panel:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    selectorLabel:SetPoint("TOPLEFT", 12, -56)
-    selectorLabel:SetText("|cff8ec5ffELIGE TU GUÍA DE TALENTOS (4 OPCIONES PARA TU CLASE):|r")
+    local choices = createCard(panel)
+    choices:SetPoint("TOPLEFT", 8, -66)
+    choices:SetPoint("TOPRIGHT", -4, -66)
+    choices:SetHeight(128)
+    local selectorLabel = choices:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    selectorLabel:SetPoint("TOPLEFT", 12, -10)
+    selectorLabel:SetText("Elige tu guía de talentos")
 
-    panel.autoBtn = createPillButton(panel, 96, 18, "Auto (Detectar)", function()
+    panel.autoBtn = createPillButton(choices, 118, 24, "Auto (Detectar)", function()
         T.SetChoice("auto")
     end)
-    panel.autoBtn:SetPoint("TOPRIGHT", -12, -54)
+    panel.autoBtn:SetPoint("TOPRIGHT", -8, -4)
 
     panel.buildBtns = {}
     for i = 1, 4 do
         local col = (i - 1) % 2
         local row = math.floor((i - 1) / 2)
-        local btn = createCard(panel, 0.07, 0.10, 0.15, 0.94, 0.20, 0.28, 0.38, 0.85)
-        btn:SetSize(204, 42)
-        btn:SetPoint("TOPLEFT", 12 + col * 210, -76 - row * 46)
+        local btn = createCard(choices)
+        btn:SetSize(230, 44)
+        btn:SetPoint("TOPLEFT", 7 + col * 232, -31 - row * 45)
         btn:EnableMouse(true)
 
-        btn.nameText = btn:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
-        btn.nameText:SetPoint("TOPLEFT", 8, -6)
+        btn.nameText = btn:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+        btn.nameText:SetPoint("TOPLEFT", 9, -7)
         btn.nameText:SetPoint("TOPRIGHT", -8, -6)
         btn.nameText:SetJustifyH("LEFT")
         btn.nameText:SetWordWrap(false)
@@ -736,6 +772,14 @@ function T.CreatePanel()
         btn.metaText:SetPoint("TOPRIGHT", btn.nameText, "BOTTOMRIGHT", 0, -3)
         btn.metaText:SetJustifyH("LEFT")
         btn.metaText:SetWordWrap(false)
+        btn:SetScript("OnEnter", function(self)
+            if not GameTooltip or not self.buildKey then return end
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText(self.nameText:GetText())
+            GameTooltip:AddLine(self.metaText:GetText(), 1, 1, 1, true)
+            GameTooltip:Show()
+        end)
+        btn:SetScript("OnLeave", function() if GameTooltip then GameTooltip:Hide() end end)
 
         btn:SetScript("OnMouseUp", function(self)
             if self.buildKey then
@@ -746,64 +790,75 @@ function T.CreatePanel()
     end
 
     -- Next Talent Highlight Box
-    local nextCard = createCard(panel, 0.11, 0.14, 0.08, 0.96, 0.88, 0.72, 0.24, 0.95)
-    nextCard:SetPoint("TOPLEFT", 12, -172)
-    nextCard:SetPoint("TOPRIGHT", -12, -172)
-    nextCard:SetHeight(50)
+    local nextCard = createCard(panel, true)
+    nextCard:SetPoint("TOPLEFT", 8, -198)
+    nextCard:SetPoint("TOPRIGHT", -4, -198)
+    nextCard:SetHeight(59)
     panel.nextCard = nextCard
+    nextCard.icon = nextCard:CreateTexture(nil, "ARTWORK")
+    nextCard.icon:SetSize(24, 24)
+    nextCard.icon:SetPoint("LEFT", 12, 0)
 
     nextCard.header = nextCard:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    nextCard.header:SetPoint("TOPLEFT", 10, -6)
-    nextCard.header:SetPoint("TOPRIGHT", -10, -6)
+    nextCard.header:SetPoint("TOPLEFT", 44, -9)
+    nextCard.header:SetPoint("TOPRIGHT", -10, -9)
     nextCard.header:SetJustifyH("LEFT")
 
     nextCard.main = nextCard:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     nextCard.main:SetPoint("TOPLEFT", nextCard.header, "BOTTOMLEFT", 0, -3)
     nextCard.main:SetPoint("TOPRIGHT", nextCard.header, "BOTTOMRIGHT", 0, -3)
     nextCard.main:SetJustifyH("LEFT")
-    nextCard.main:SetWordWrap(false)
+    nextCard.main:SetWordWrap(true)
 
     -- Character Guide Card (Stats, Weapons, Skills, Race Tip)
-    local infoCard = createCard(panel, 0.06, 0.09, 0.14, 0.95, 0.22, 0.34, 0.48, 0.85)
-    infoCard:SetPoint("TOPLEFT", 12, -228)
-    infoCard:SetPoint("TOPRIGHT", -12, -228)
-    infoCard:SetHeight(138)
+    local infoCard = createCard(panel)
+    infoCard:SetPoint("TOPLEFT", 8, -261)
+    infoCard:SetPoint("TOPRIGHT", -4, -261)
+    infoCard:SetHeight(146)
     panel.infoCard = infoCard
 
-    infoCard.text = infoCard:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
-    infoCard.text:SetPoint("TOPLEFT", 10, -8)
-    infoCard.text:SetPoint("BOTTOMRIGHT", -10, 8)
+    local adviceScroll = CreateFrame("ScrollFrame", "RutaXPTalentAdviceScrollFrame", infoCard, "UIPanelScrollFrameTemplate")
+    adviceScroll:SetPoint("TOPLEFT", 12, -9)
+    adviceScroll:SetPoint("BOTTOMRIGHT", -29, 9)
+    if adviceScroll.SetClipsChildren then adviceScroll:SetClipsChildren(true) end
+    infoCard.body = CreateFrame("Frame", nil, adviceScroll)
+    infoCard.body:SetSize(435, 1)
+    adviceScroll:SetScrollChild(infoCard.body)
+    infoCard.scroll = adviceScroll
+    infoCard.text = infoCard.body:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    infoCard.text:SetPoint("TOPLEFT")
+    infoCard.text:SetPoint("TOPRIGHT")
     infoCard.text:SetJustifyH("LEFT")
     infoCard.text:SetJustifyV("TOP")
     infoCard.text:SetSpacing(2)
 
     -- Tab selector: Talent Order (10-60) vs Trainer Spells to Buy (1-60)
-    panel.tabTalentsBtn = createPillButton(panel, 204, 20, "Talentos (Niv. 10–60)", function()
+    panel.tabTalentsBtn = createPillButton(panel, 237, 26, "Talentos (Niv. 10–60)", function()
         panel.activeTab = "talents"
         panel.lastScrolledBuild = nil
         T.RenderPanel()
     end)
-    panel.tabTalentsBtn:SetPoint("TOPLEFT", 12, -368)
+    panel.tabTalentsBtn:SetPoint("TOPLEFT", 8, -411)
 
-    panel.tabSpellsBtn = createPillButton(panel, 206, 20, "Habilidades a Comprar (1–60)", function()
+    panel.tabSpellsBtn = createPillButton(panel, 237, 26, "Habilidades a Comprar (1–60)", function()
         panel.activeTab = "spells"
         panel.lastScrolledBuild = nil
         T.RenderPanel()
     end)
-    panel.tabSpellsBtn:SetPoint("TOPRIGHT", -12, -368)
+    panel.tabSpellsBtn:SetPoint("TOPRIGHT", -4, -411)
 
-    local listBox = createCard(panel, 0.03, 0.05, 0.08, 0.96, 0.18, 0.26, 0.36, 0.85)
-    listBox:SetPoint("TOPLEFT", 12, -390)
-    listBox:SetPoint("BOTTOMRIGHT", -12, 12)
+    local listBox = createCard(panel)
+    listBox:SetPoint("TOPLEFT", 8, -439)
+    listBox:SetPoint("BOTTOMRIGHT", -4, 4)
 
     local scroll = CreateFrame("ScrollFrame", "RutaXPTalentScrollFrame", listBox, "UIPanelScrollFrameTemplate")
-    scroll:SetPoint("TOPLEFT", 6, -6)
-    scroll:SetPoint("BOTTOMRIGHT", -26, 6)
+    scroll:SetPoint("TOPLEFT", 9, -8)
+    scroll:SetPoint("BOTTOMRIGHT", -29, 8)
     if scroll.SetClipsChildren then scroll:SetClipsChildren(true) end
     panel.scroll = scroll
 
     local content = CreateFrame("Frame", nil, scroll)
-    content:SetSize(380, 1)
+    content:SetSize(438, 1)
     scroll:SetScrollChild(content)
     panel.content = content
     panel.rows = {}
@@ -815,29 +870,30 @@ local function ensureRow(panel, index)
     local row = panel.rows[index]
     if row then return row end
     row = CreateFrame("Frame", nil, panel.content, BackdropTemplateMixin and "BackdropTemplate" or nil)
-    row:SetSize(380, 22)
+    row:SetSize(438, 22)
     row:EnableMouse(true)
     if row.SetBackdrop then
         row:SetBackdrop({
             bgFile = "Interface\\Buttons\\WHITE8X8",
-            edgeFile = "Interface\\Buttons\\WHITE8X8",
-            edgeSize = 1,
         })
     end
     row.lvl = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    row.lvl:SetPoint("LEFT", 6, 0)
+    row.icon = row:CreateTexture(nil, "ARTWORK")
+    row.icon:SetPoint("LEFT", 5, 0)
+    row.icon:SetSize(15, 15)
+    row.lvl:SetPoint("LEFT", 24, 0)
     row.lvl:SetWidth(62)
     row.lvl:SetJustifyH("LEFT")
 
-    row.name = row:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
-    row.name:SetPoint("LEFT", 70, 0)
-    row.name:SetPoint("RIGHT", -92, 0)
+    row.name = row:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    row.name:SetPoint("LEFT", 88, 0)
+    row.name:SetPoint("RIGHT", -98, 0)
     row.name:SetJustifyH("LEFT")
     row.name:SetWordWrap(false)
 
     row.spec = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     row.spec:SetPoint("RIGHT", -6, 0)
-    row.spec:SetWidth(82)
+    row.spec:SetWidth(90)
     row.spec:SetJustifyH("RIGHT")
     row.spec:SetWordWrap(false)
 
@@ -856,6 +912,24 @@ local function ensureRow(panel, index)
 
     panel.rows[index] = row
     return row
+end
+
+local checkIcon = "Interface\\Buttons\\UI-CheckBox-Check"
+local nextIcon = "Interface\\GossipFrame\\AvailableQuestIcon"
+local talentIcon = "Interface\\GossipFrame\\TrainerGossipIcon"
+local bookIcon = "Interface\\Icons\\INV_Misc_Book_09"
+
+local function styleRow(row, index, current, done, defaultIcon)
+    row.icon:SetTexture(current and nextIcon or done and checkIcon or defaultIcon)
+    if row.SetBackdropColor then
+        if current then
+            row:SetBackdropColor(0.31, 0.23, 0.06, 0.85)
+        elseif done then
+            row:SetBackdropColor(0.10, 0.15, 0.09, 0.72)
+        else
+            row:SetBackdropColor(0.32, 0.30, 0.24, index % 2 == 0 and 0.15 or 0.04)
+        end
+    end
 end
 
 local function renderSpentTalents(panel, c)
@@ -885,10 +959,7 @@ local function renderSpentTalents(panel, c)
         row.lvl:SetText("|cff7edd9cActual|r")
         row.name:SetText(row.tipTitle)
         row.spec:SetText(talent.spec or "")
-        if row.SetBackdropColor then
-            row:SetBackdropColor(0.05, 0.11, 0.08, 0.75)
-            row:SetBackdropBorderColor(0.14, 0.28, 0.20, 0.50)
-        end
+        styleRow(row, i, false, true, talentIcon)
         row:Show()
     end
     return #talents
@@ -944,7 +1015,7 @@ function T.RenderPanel()
         panel.classBtn.label:SetText("Clase: " .. data.nameEs .. " »")
         panel.classBtn:SetActiveStyle(false, false)
     else
-        panel.detectedText:SetText(string.format("|cffffce72Viendo clase:|r %s (Clic der. en Clase para volver a %s)", data.nameEs, p.className))
+        panel.detectedText:SetText(string.format("|cffffce72Viendo clase:|r %s", data.nameEs))
         panel.classBtn.label:SetText("Clase: " .. data.nameEs .. " »")
         panel.classBtn:SetActiveStyle(true, false)
     end
@@ -960,16 +1031,9 @@ function T.RenderPanel()
             local isSelected = (b == build)
             local prefix = isSelected and "|cffffd966» " or (b.recommended and "|cff7edd9c* " or "|cffd5deeb")
             btn.nameText:SetText(prefix .. b.title .. "|r")
-            btn.metaText:SetText(string.format("|cff8ec5ff%s|r · |cff9fb0c7%s|r", b.role or b.specName, b.split or ""))
-            if btn.SetBackdropColor then
-                if isSelected then
-                    btn:SetBackdropColor(0.18, 0.15, 0.05, 0.96)
-                    btn:SetBackdropBorderColor(0.95, 0.78, 0.25, 0.98)
-                else
-                    btn:SetBackdropColor(0.07, 0.10, 0.15, 0.92)
-                    btn:SetBackdropBorderColor(0.20, 0.28, 0.38, 0.80)
-                end
-            end
+            btn.metaText:SetText(string.format("|cffffffff%s|r · |cffd6c699%s|r", b.role or b.specName, b.split or ""))
+            styleCard(btn, isSelected)
+            if isSelected and btn.SetBackdropColor then btn:SetBackdropColor(0.17, 0.13, 0.04, 1) end
             btn:Show()
         else
             btn:Hide()
@@ -1001,7 +1065,9 @@ function T.RenderPanel()
     end
 
     -- Next Highlight Box (shows Next Talent in Talents tab, or Next Trainer Skill in Spells tab)
+    local recommendationIcon = nextIcon
     if activeTab == "spells" and nextSpellEntry then
+        recommendationIcon = bookIcon
         if nextSpellEntry.source == "starting" then
             panel.nextCard.header:SetText("|cffffd966EN TU LIBRO DE HECHIZOS DESDE EL NIVEL 1|r")
         elseif nextSpellEntry.source == "quest" then
@@ -1020,6 +1086,9 @@ function T.RenderPanel()
         panel.nextCard.main:SetText(c.unavailableReason or "Consulta el orden de esta guía como referencia.")
     elseif s.next then
         local nextNode = data.nodes[s.next.node]
+        if nextNode and nextNode.spell then
+            recommendationIcon = safe(C_Spell and C_Spell.GetSpellTexture or GetSpellTexture, nextNode.spell) or nextIcon
+        end
         local nextSpec = (data.specs and nextNode and data.specs[nextNode.spec]) or build.specName
         local nextName = T.NodeName(data, s.next.node, c.valid)
         if not c.isPlayerClass then
@@ -1037,9 +1106,11 @@ function T.RenderPanel()
         end
         panel.nextCard.main:SetText(string.format("|cffffd966» %s|r |cffffffff(Rango %d/%d)|r  ·  |cff8ec5ffRama %s|r", nextName, s.next.rank, rankLimit(c, s.next.node), nextSpec))
     else
+        recommendationIcon = checkIcon
         panel.nextCard.header:SetText("|cff7edd9c¡GUÍA DE TALENTOS COMPLETADA!|r")
         panel.nextCard.main:SetText("Has aprendido los 51 puntos de talento de esta guía.")
     end
+    panel.nextCard.icon:SetTexture(recommendationIcon)
 
     -- Character Guide Summary (Stats, Weapons, Skills, Rotation & Racial Tip)
     local infoLines = {}
@@ -1050,7 +1121,13 @@ function T.RenderPanel()
     if p.raceGuide then
         infoLines[#infoLines + 1] = "|cffc9b3ffConsejo " .. p.raceName .. ":|r |cffd5deeb" .. p.raceGuide.tip .. "|r"
     end
-    panel.infoCard.text:SetText(starter and gnomeWarlockAdvice(p.level) or table.concat(infoLines, "\n"))
+    local advice = starter and gnomeWarlockAdvice(p.level) or table.concat(infoLines, "\n")
+    if panel.infoCard.advice ~= advice then
+        panel.infoCard.advice = advice
+        panel.infoCard.text:SetText(advice)
+        panel.infoCard.body:SetHeight(math.max(1, panel.infoCard.text:GetStringHeight() or 0))
+        panel.infoCard.scroll:SetVerticalScroll(0)
+    end
 
     -- Render Scroll List: either 51 Talent Picks OR Level 1-60 Trainer Spells
     local y = 0
@@ -1082,29 +1159,17 @@ function T.RenderPanel()
             row.tipTitle = string.format("Nivel %d · %s", sp.level, sp.name)
             row.tipBody = sp.tip or ""
 
+            styleRow(row, i, isCurrentOrNext, isPast, bookIcon)
             if isCurrentOrNext then
                 scrollTargetY = math.max(0, y - 44)
-                if row.SetBackdropColor then
-                    row:SetBackdropColor(0.22, 0.18, 0.05, 0.95)
-                    row:SetBackdropBorderColor(0.95, 0.78, 0.25, 0.90)
-                end
                 row.lvl:SetText(string.format("|cffffd966» Niv. %d|r", sp.level))
                 row.name:SetText("|cffffd966" .. sp.name .. "|r")
                 row.spec:SetText(prioTag)
             elseif isPast then
-                if row.SetBackdropColor then
-                    row:SetBackdropColor(0.05, 0.11, 0.08, 0.75)
-                    row:SetBackdropBorderColor(0.14, 0.28, 0.20, 0.50)
-                end
                 row.lvl:SetText(string.format("|cff7edd9cNiv. %d|r", sp.level))
                 row.name:SetText("|cff9be0b5" .. sp.name .. "|r")
                 row.spec:SetText(prioTag)
             else
-                if row.SetBackdropColor then
-                    local even = (i % 2 == 0)
-                    row:SetBackdropColor(even and 0.05 or 0.04, even and 0.08 or 0.06, even and 0.12 or 0.10, 0.82)
-                    row:SetBackdropBorderColor(0.12, 0.18, 0.26, 0.45)
-                end
                 row.lvl:SetText(string.format("|cff9fb0c7Niv. %d|r", sp.level))
                 row.name:SetText("|cffd5deeb" .. sp.name .. "|r")
                 row.spec:SetText(prioTag)
@@ -1133,29 +1198,17 @@ function T.RenderPanel()
             row.tipTitle = string.format("Nivel %d · %s (Rango %d/%d)", pick.level, tName, pick.rank, maxRank)
             row.tipBody = (build.notes and build.notes[pick.level]) or ("Rama: " .. specName)
 
+            styleRow(row, i, isNext, isDone, talentIcon)
             if isNext then
                 scrollTargetY = math.max(0, y - 44)
-                if row.SetBackdropColor then
-                    row:SetBackdropColor(0.22, 0.18, 0.05, 0.95)
-                    row:SetBackdropBorderColor(0.95, 0.78, 0.25, 0.90)
-                end
                 row.lvl:SetText(string.format("|cffffd966» Niv. %d|r", pick.level))
                 row.name:SetText(string.format("|cffffd966%s|r |cffffffff(%d/%d)|r", tName, pick.rank, maxRank))
                 row.spec:SetText("|cffffd966" .. specName .. "|r")
             elseif isDone then
-                if row.SetBackdropColor then
-                    row:SetBackdropColor(0.05, 0.11, 0.08, 0.75)
-                    row:SetBackdropBorderColor(0.14, 0.28, 0.20, 0.50)
-                end
                 row.lvl:SetText(string.format("|cff7edd9c[Hecho] %d|r", pick.level))
                 row.name:SetText(string.format("|cff7edd9c%s (%d/%d)|r", tName, pick.rank, maxRank))
                 row.spec:SetText("|cff6c8c7a" .. specName .. "|r")
             else
-                if row.SetBackdropColor then
-                    local even = (i % 2 == 0)
-                    row:SetBackdropColor(even and 0.05 or 0.04, even and 0.08 or 0.06, even and 0.12 or 0.10, 0.82)
-                    row:SetBackdropBorderColor(0.12, 0.18, 0.26, 0.45)
-                end
                 row.lvl:SetText(string.format("|cff9fb0c7Niv. %d|r", pick.level))
                 row.name:SetText(string.format("|cffd5deeb%s|r |cff8ec5ff(%d/%d)|r", tName, pick.rank, maxRank))
                 row.spec:SetText("|cff8ec5ff" .. specName .. "|r")

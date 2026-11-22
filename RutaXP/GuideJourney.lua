@@ -5,7 +5,7 @@ ns.GuideJourney = view
 local env, settings, engine, arrow, target, current, groupStep
 local loggedIn, initialized, shown, refreshPending
 local title, subtitle, status, stepIndex, stepCount, progressText
-local scroll, scrollChild, compassHint
+local scroll, scrollChild, compassHint, styledHUD
 local original = ns.OriginalGuidePresentation
 local originWorld, originNorth, originWest, lastDirections
 local function finite(n)
@@ -106,7 +106,10 @@ function RutaXPJourneyEnvironment()
             return point
         end,
         IsScreenArrowEnabled=function() return arrowEnabled() and target ~= nil end,
-        IsTomTomSupportEnabled=no, GetArrowScale=function() return settings.arrowScale or 1 end,
+        IsTomTomSupportEnabled=no,
+        GetArrowScale=function()
+            return (settings.arrowScale or 1) * (ns.ArrowStyles and ns.ArrowStyles:GetScale() or 1)
+        end,
         GetArrowTextScale=function() return settings.arrowTextScale or 1 end,
     }
     env.GuideNavigationService = {
@@ -316,6 +319,7 @@ end
 -- original short instruction at the compass without displaying a stale arrow.
 local function updateCompassHint(reason, deathHint)
     local hint = initialized and not target and arrowEnabled() and (original or deathHint)
+        and (not ns.ArrowStyles or ns.ArrowStyles:ShowsText())
         and (reason or (original and original.TravelHint()))
     if not hint or hint == "" then
         if compassHint then compassHint:Hide() end
@@ -382,8 +386,27 @@ local function updateTarget(body, deathHint)
     arrow.screenLabel = label or title
 end
 
+-- Journey creates this frame on the first usable target. Bind it once, so
+-- changing the appearance never needs to clear or recalculate that target.
+local function bindCompassAppearance()
+    local hud = _G.RutaXPJourneyScreenArrow
+    local styles = ns.ArrowStyles
+    if not styles or not hud or hud == styledHUD then return end
+    styledHUD = hud
+    styles:Attach(hud, function()
+        hud.arrowTexture:SetTexture(styles:GetTexture())
+        hud:SetScale(.6 * env.State.GetArrowScale())
+        local visible = styles:ShowsText()
+        for _, region in ipairs({hud.label, hud.distLabel, hud.shadowContainer, hud.distShadowContainer}) do
+            if visible then region:Show() else region:Hide() end
+        end
+        if compassHint and not visible then compassHint:Hide() end
+    end)
+end
+
 local function updateArrow()
     if not initialized then return end
+    bindCompassAppearance()
     local body, deathHint
     if ns.GetDeathNavigation and arrowEnabled() then body, deathHint = ns:GetDeathNavigation() end
     local reason = updateTarget(body, deathHint)

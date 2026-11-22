@@ -12,11 +12,96 @@ except ImportError:
     Image = None
 
 import test_guide_journey as journey
+import test_quest_engine as engine_fixtures
 from tools import suite_journey
 
 
 ROOT = Path(__file__).resolve().parents[1]
 ART = r"Interface\AddOns\RutaXP\Media\Nav\quest-direction.tga"
+
+
+def load_style_picker(load, ns):
+    for name in ("Talents.lua", "ArrowStyles.lua"):
+        load((ROOT / "RutaXP" / name).read_text(encoding="utf-8-sig"), "RutaXP", ns)
+
+
+class ArrowPickerTests(unittest.TestCase):
+    def setUp(self):
+        fixture = engine_fixtures.NavigationAndFullTocTests()
+        fixture.setUp()
+        self.h = fixture.host
+        load_style_picker(self.h.load, self.h.ns)
+        self.h.guide("arrow-test", steps=[{"title": "Camino", "goals": [
+            {"t": "accept", "quest": 12, "map": 1436, "x": 56.33, "y": 47.52, "f": "e"}
+        ]}])
+        self.h.state.mapID, self.h.state.x, self.h.state.y = 1436, .50, .50
+        self.h.initialize()
+        self.h.call("SelectGuide", "arrow-test")
+        self.styles = self.h.ns.ArrowStyles
+        self.frame = self.h.ns.navigationFrame
+
+    def test_click_opens_picker_and_drag_leaves_it_closed(self):
+        frame, styles = self.frame, self.styles
+        for button, drag in (("RightButton", False), ("LeftButton", True), ("LeftButton", False)):
+            frame.scripts.OnMouseDown(frame, button)
+            if drag:
+                frame.scripts.OnDragStart(frame)
+                frame.scripts.OnDragStop(frame)
+            frame.scripts.OnMouseUp(frame, button)
+            if button == "LeftButton" and not drag:
+                self.assertTrue(styles.panel.shown)
+            else:
+                self.assertIsNone(styles.panel)
+        # No extra drag listener or toggle when the HUD registers again.
+        styles.Attach(styles, frame)
+        frame.scripts.OnMouseDown(frame, "LeftButton")
+        frame.scripts.OnMouseUp(frame, "LeftButton")
+        self.assertFalse(styles.panel.shown)
+
+    def test_all_seven_previews_apply_to_the_living_hud_and_persist_per_character(self):
+        h, frame, styles = self.h, self.frame, self.styles
+        styles.Toggle(styles)
+        panel = styles.panel
+        self.assertEqual(len(panel.styles), 7)
+        paths = set()
+        for index, button in panel.styles.items():
+            h.globals.Click(button)
+            art = styles.GetTexture(styles)
+            paths.add(art)
+            self.assertEqual(frame.body.texture, art)
+            self.assertEqual(button.icon.texture, art)
+            asset = ROOT / "RutaXP" / "Media" / "Nav" / art.rsplit("\\", 1)[1]
+            self.assertTrue(asset.is_file(), asset)
+            self.assertEqual([i for i, b in panel.styles.items() if b.check.shown], [index])
+        self.assertEqual(len(paths), 7)
+
+        for button, scale in ((panel.larger, 2.0), (panel.smaller, 0.6)):
+            for _ in range(20):
+                h.globals.Click(button)
+            self.assertEqual(styles.GetScale(styles), scale)
+            self.assertEqual(frame.arrow.scale, scale)
+        previous_height = frame.height
+        h.globals.Click(panel.larger)
+        self.assertGreater(frame.height, previous_height)
+        panel.showText.SetChecked(panel.showText, False)
+        h.globals.Click(panel.showText)
+        h.call("UpdateNavigation")
+        self.assertFalse(frame.distance.shown)
+        self.assertFalse(frame.hint.shown)
+        self.assertTrue(frame.arrow.shown)
+
+        old = h.ns.char
+        h.ns.char = h.table({})
+        self.assertEqual(styles.GetTexture(styles), ART)
+        self.assertEqual(styles.GetScale(styles), 1)
+        self.assertTrue(styles.ShowsText(styles))
+        h.ns.char = old
+        # Fresh module, same persisted SavedVariables (e.g. after /reload).
+        h.load((ROOT / "RutaXP/ArrowStyles.lua").read_text(encoding="utf-8-sig"), "RutaXP", h.ns)
+        restored = h.ns.ArrowStyles
+        self.assertEqual(restored.GetTexture(restored), frame.body.texture)
+        self.assertAlmostEqual(restored.GetScale(restored), 0.7)
+        self.assertFalse(restored.ShowsText(restored))
 
 
 class ArrowAssetTests(unittest.TestCase):
@@ -68,6 +153,7 @@ class JourneyArrowTests(unittest.TestCase):
             end
         """)
         ns = lua.globals().ns
+        load_style_picker(lua.execute, ns)
         lua.execute((journey.ROOT / "RutaXP/GuideJourney.lua").read_text(encoding="utf8"), "RutaXP", ns)
         for filename, data in suite_journey.contents(journey.NATIVE):
             if filename.endswith(".lua"):
@@ -93,6 +179,24 @@ class JourneyArrowTests(unittest.TestCase):
                         self.assertIn(tuple(texture.tint.values()) if texture.tint else (), ((),(1,1,1),(1,1,1,1)))
                         self.assertIn(tuple(texture.uv.values()) if texture.uv else (), ((),(0,1,0,1),(0,0,0,1,1,0,1,1)))
                         self.assertTrue(hud.distLabel.text)
+
+        hud.scripts.OnMouseDown(hud, "LeftButton")
+        hud.scripts.OnMouseUp(hud, "LeftButton")
+        picker = ns.ArrowStyles.panel
+        self.assertTrue(picker.shown)
+        button = picker.styles[3]
+        button.scripts.OnClick(button)
+        self.assertEqual(hud.arrowTexture.art, ART.replace("direction.tga", "forge.tga"))
+        old_scale = hud.scale
+        picker.larger.scripts.OnClick(picker.larger)
+        self.assertAlmostEqual(hud.scale, old_scale * 1.1)
+        for show in (False, True):
+            picker.showText.SetChecked(picker.showText, show)
+            picker.showText.scripts.OnClick(picker.showText)
+            lua.execute("tick(); tick()")
+            self.assertEqual(hud.label.IsShown(hud.label), show)
+            self.assertEqual(hud.distLabel.IsShown(hud.distLabel), show)
+            self.assertTrue(hud.arrowTexture.IsShown(hud.arrowTexture))
 
     def test_upgrade_of_already_embedded_journey_matches_a_clean_package(self):
         # Recreate the old adapted arrow from the owner's source without

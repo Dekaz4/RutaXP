@@ -2,6 +2,7 @@
 import hashlib
 from http.client import IncompleteRead
 import io
+import json
 import os
 from pathlib import Path
 import tempfile
@@ -39,9 +40,13 @@ class OfficialSourceTests(unittest.TestCase):
         self.report = Mock()
         self.enter_patch(patch.dict(official.SOURCES, {"Journey": self.source}))
         self.enter_patch(patch.object(official, "downloads_directory", return_value=self.downloads))
+        self.enter_patch(patch.dict(os.environ, {"LOCALAPPDATA": str(self.work / "local"),
+                                                 "APPDATA": str(self.work / "roaming")}))
         self.browser = self.enter_patch(patch.object(official.webbrowser, "open",
                                                      side_effect=AssertionError("unexpected browser launch")))
         self.http = self.enter_patch(patch.object(official, "urlopen", side_effect=AssertionError("unexpected HTTP")))
+        self.picker = self.enter_patch(patch.object(official, "choose_archive",
+                                                    side_effect=AssertionError("unexpected file picker")))
 
     def enter_patch(self, patcher):
         self.addCleanup(patcher.stop)
@@ -73,6 +78,29 @@ class OfficialSourceTests(unittest.TestCase):
         self.assertFalse(root.parent.exists())
         self.browser.assert_not_called()
         self.http.assert_not_called()
+
+    def test_option_one_finds_zip_in_custom_browser_folder(self):
+        for browser in ("Google/Chrome", "Microsoft/Edge", "BraveSoftware/Brave-Browser", "Firefox"):
+            with self.subTest(browser=browser):
+                custom = self.work / browser / "Mis descargas de juegos"
+                custom.mkdir(parents=True)
+                downloaded = custom / "Journey-1 (2).zip"
+                downloaded.write_bytes(self.data)
+                if browser == "Firefox":
+                    prefs = self.work / "roaming/Mozilla/Firefox/Profiles/abcd.default/prefs.js"
+                    content = 'user_pref("browser.download.dir", ' + json.dumps(str(custom)) + ');'
+                else:
+                    prefs = self.work / "local" / browser / "User Data/Profile 2/Preferences"
+                    content = json.dumps({"download": {"default_directory": str(custom)}})
+                prefs.parent.mkdir(parents=True)
+                prefs.write_text(content, encoding="utf-8")
+                with official.acquire("Journey", self.cache, self.report) as root:
+                    self.assertTrue((root / "Journey.toc").is_file())
+                self.assertEqual(downloaded.read_bytes(), self.data)
+                self.cached.unlink()
+                prefs.unlink()
+        self.http.assert_not_called()
+        self.browser.assert_not_called()
 
     def test_fresh_install_downloads_pinned_file_without_browser_or_user_input(self):
         self.http.side_effect = lambda *_args, **_kwargs: io.BytesIO(self.data)
@@ -139,6 +167,8 @@ class OfficialSourceTests(unittest.TestCase):
         self.browser.side_effect = None
         self.browser.return_value = True
         self.http.side_effect = OSError("HTTP service unavailable")
+        self.picker.side_effect = None
+        self.picker.return_value = None
         with patch.object(official.time, "monotonic", side_effect=[10, 311]):
             with self.assertRaisesRegex(ValueError, "Journey-1.zip"):
                 with official.acquire("Journey", self.cache, self.report):
@@ -146,6 +176,36 @@ class OfficialSourceTests(unittest.TestCase):
         self.assertEqual(list(self.cache.iterdir()), [self.cached])
         self.assertEqual(self.cached.read_bytes(), b"prior")
         self.http.assert_called_once()
+        self.picker.assert_called_once_with(self.source, self.downloads)
+
+    def test_manual_zip_from_an_unmonitored_directory_is_verified_and_cached(self):
+        saved = self.work / "Mis archivos de juegos" / "copia renombrada.zip"
+        saved.parent.mkdir()
+        saved.write_bytes(self.data)
+        self.http.side_effect = OSError("offline")
+        self.browser.side_effect = None
+        self.browser.return_value = False
+        self.picker.side_effect = None
+        self.picker.return_value = saved
+        with official.acquire("Journey", self.cache, self.report) as root:
+            self.assertEqual((root / "art/arrow").read_bytes(), b"arrow")
+        self.assertEqual(self.cached.read_bytes(), self.data)
+        self.assertEqual(saved.read_bytes(), self.data)
+        self.picker.assert_called_once_with(self.source, self.downloads)
+
+    def test_bad_manual_zip_cannot_replace_cache_or_reach_composer(self):
+        saved = self.work / "otro.zip"
+        saved.write_bytes(archive_bytes([("Journey/Journey.toc", b"wrong version")]))
+        self.cached.write_bytes(b"previous")
+        self.http.side_effect = OSError("offline")
+        self.browser.side_effect = official.webbrowser.Error("no browser")
+        self.picker.side_effect = None
+        self.picker.return_value = saved
+        with self.assertRaisesRegex(ValueError, "no coincide"):
+            with official.acquire("Journey", self.cache, self.report):
+                self.fail("unverified files reached the composer")
+        self.assertEqual(list(self.cache.iterdir()), [self.cached])
+        self.assertEqual(self.cached.read_bytes(), b"previous")
 
     def test_browser_recovers_interrupted_or_invalid_response_and_only_caches_verified_zip(self):
         class InterruptedResponse(io.BytesIO):

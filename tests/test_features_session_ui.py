@@ -42,6 +42,25 @@ class FeaturesHost(AddonHost):
 
 
 class FeaturesSessionUIReviewTests(unittest.TestCase):
+    def test_selector_reveals_active_route_and_respects_browsing_and_search(self):
+        h = FeaturesHost()
+        for index in range(15):
+            h.guide("route-%02d" % index)
+        h.call("SelectGuide", "route-14")
+        self.assertGreater(h.ns.listScroll.scroll, 0)
+        self.assertIn("Activa", h.ns.rows[16].meta.text)
+        h.ns.listScroll.SetVerticalScroll(h.ns.listScroll, 24)
+        h.call("RefreshUI")
+        self.assertEqual(h.ns.listScroll.scroll, 24)
+        h.globals.ChangeText(h.ns.search, "route-01")
+        self.assertEqual(h.ns.listScroll.scroll, 0)
+        self.assertEqual(h.ns.rows[1].guideID, "route-01")
+        self.assertEqual(h.ns.char.activeGuide, "route-14")
+        h.globals.ChangeText(h.ns.search, "")
+        h.call("ToggleWindow")
+        h.call("ToggleWindow")
+        self.assertGreater(h.ns.listScroll.scroll, 0)
+
     def test_initial_completed_prefix_is_positioned_before_session_measurement_starts(self):
         h = FeaturesHost(completed_prefix=True)
         self.assertEqual(h.ns.char.progress.current.cursor, 2)
@@ -55,7 +74,7 @@ class FeaturesSessionUIReviewTests(unittest.TestCase):
     def test_core_initializes_session_once_and_central_driver_refreshes_measurements(self):
         h = FeaturesHost()
         self.assertTrue(h.ns.Session.initialized)
-        self.assertIsNotNone(h.ns.toolsButton)
+        self.assertIsNone(h.ns.toolsButton)
         self.assertIsNotNone(h.ns.Session.frame.events.QUEST_TURNED_IN)
         current = h.ns.Session.current
         driver = h.ns.featureDriver
@@ -63,7 +82,8 @@ class FeaturesSessionUIReviewTests(unittest.TestCase):
         same = h.lua.eval("function(a,b) return a==b end")
         self.assertTrue(same(current, h.ns.Session.current))
         self.assertTrue(same(driver, h.ns.featureDriver))
-        h.call("ToggleFeatures", "session")
+        self.assertTrue(h.call("HandleFeatureCommand", "herramientas", ""))
+        self.assertEqual(h.ns.featureTab, "session")
         before = h.ns.featuresPanel.body.text
         h.tick(3)
         self.assertEqual(h.ns.Session.GetSummary(h.ns.Session).activeSeconds, 3)

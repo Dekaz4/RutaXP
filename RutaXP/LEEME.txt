@@ -179,7 +179,7 @@ Las paradas se proponen con bolsas, equipo, mana y niveles conocidos; cada uno
 puede marcarse listo. No compran habilidades ni gastan oro automaticamente.
 
 HERRAMIENTAS NUEVAS
-Abre el boton Duo y herramientas de ruta o /rutaxp herramientas.
+Abre las herramientas con /rutaxp herramientas.
 Duo: ambos instalais esta version y formais grupo de dos de la misma faccion
 (y cualquier raza/clase). Veis misiones y progreso del amigo sin copiar sus
 omisiones. /rutaxp esperar cambia manualmente la espera;

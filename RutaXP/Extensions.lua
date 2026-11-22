@@ -7,12 +7,6 @@ function ns:InitializeFeatures()
     for _, name in ipairs({ "Duo", "Recovery" }) do
         if self[name] and self[name].Initialize then self[name]:Initialize() end
     end
-    if self.window and self.window.SetPoint then
-        self.toolsButton = CreateFrame("Button", nil, self.window, "UIPanelButtonTemplate")
-        self.toolsButton:SetSize(254, 24); self.toolsButton:SetPoint("TOPLEFT", 20, -532)
-        self.toolsButton:SetText("Dúo y herramientas de ruta")
-        self.toolsButton:SetScript("OnClick", function() self:ToggleFeatures() end)
-    end
     self.featureDriver = CreateFrame("Frame")
     local elapsed = 0
     self.featureDriver:SetScript("OnUpdate", function(_, delta)
@@ -153,7 +147,7 @@ function ns:GetDuoConnectionText(ctx, link)
 end
 
 function ns:HandleFeatureCommand(command, rest)
-    if command == "herramientas" then self:ToggleFeatures()
+    if command == "herramientas" then self:ToggleFeatures("session")
     elseif command == "sesion" or command == "sesión" then self:ToggleFeatures("session")
     elseif command == "conexion" or command == "conexión" then
         local ctx, link = self.Duo:GetContext(), self.Duo:GetTransportStatus()

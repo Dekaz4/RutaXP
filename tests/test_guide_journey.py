@@ -63,12 +63,20 @@ local frame={}
 frame.__index=frame
 function frame:SetScript(k,fn) self.scripts[k]=fn end
 function frame:GetScript(k) return self.scripts[k] end
-function frame:HookScript(k,fn) self:SetScript(k,fn) end
+function frame:HookScript(k,fn)
+    local previous=self.scripts[k]
+    self:SetScript(k,function(...) if previous then previous(...) end; fn(...) end)
+end
 function frame:RegisterEvent(k) self.events[k]=true end
 function frame:Show() self.shown=true end
 function frame:Hide() self.shown=false end
 function frame:IsShown() return self.shown~=false end
 function frame:SetShown(b) self.shown=b end
+function frame:SetChecked(b) self.checked=b end
+function frame:GetChecked() return self.checked end
+function frame:SetHitRectInsets(...) self.hitRectInsets={...} end
+function frame:SetToplevel(v) self.topLevel=v end
+function frame:SetScale(v) self.scale=v end
 function frame:SetText(t) self.text=t end
 function frame:GetText() return self.text end
 function frame:GetTexture() return self.texture end
