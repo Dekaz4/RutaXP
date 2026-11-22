@@ -1,4 +1,4 @@
-"""Verify the complete personal suite and its original RutaXP 0.7.36 guides."""
+"""Verify the personal suite and the RutaXP guide catalog for its release."""
 
 import argparse
 import hashlib
@@ -17,8 +17,12 @@ else:
 
 
 MODULES = ("OpenMap", "ForeverDungeonJournal")
-# Canonical LF hash of RutaXP/Leveling.lua in tag v0.7.36.
-GUIDE_HASH = "9bf73f8371177107cf2397bb89d3522b3d335eca9eef691f86a86b9e3ef6b4a4"
+# LF-normalized Leveling.lua from v0.7.36, split at the generated chapter headers.
+STRANGLETHORN = "forever/alliance/30-40/04-stranglethorn-vale"
+UNCHANGED_GUIDES_HASH = "75c618243da6c0946ec0d430987c67c0f59dca66f9d1d527cfc0e8f99761652e"
+ORIGINAL_STRANGLETHORN_HASH = "37e395001a0ec0eded431ae0fdb9f15dd9a787177163893bde5c6a9be6cca73c"
+# v1.2.6 uses revision 3, generated from the reviewed Yohwa and Thorsen overlay.
+REVISED_STRANGLETHORN_HASH = "982e6710802e5a845e2a4cc12ee62b3cb36d7c637bd529d0e666ad4e63d011df"
 ORIGINAL_ASSET = re.compile(r"Interface[/\\]+AddOns[/\\]+(?:OpenMap|ForeverDungeonJournal|RXPGuides)[/\\]", re.I)
 LITERAL_ASSET = re.compile(r"""["']Interface[/\\]+AddOns[/\\]+RutaXP[/\\]+(?P<asset>[^"'{}\n%]+?\.(?:tga|blp|ttf|otf|ogg|mp3|wav))["']""", re.I)
 ASSET_SUFFIXES = {".tga", ".blp", ".png", ".ttf", ".otf", ".ogg", ".mp3", ".wav", ".atlas"}
@@ -162,10 +166,25 @@ def check_launcher(suite):
     """)
 
 
-def verify_guides(tree):
+def chapter_block(source, chapter_id):
+    match = re.search(r"^-- " + re.escape(chapter_id) + r"\n.*?(?=^-- forever/|\Z)", source, re.M | re.S)
+    if match is None:
+        raise ValueError(f"Missing guide chapter: {chapter_id}")
+    return match
+
+
+def verify_guides(tree, version):
     code = tree.read("Leveling.lua").replace("\r\n", "\n")
-    if hashlib.sha256(code.encode("utf8")).hexdigest() != GUIDE_HASH:
-        raise ValueError("Leveling.lua differs from RutaXP v0.7.36")
+    if not re.fullmatch(r"\d+\.\d+\.\d+", version):
+        raise ValueError("Invalid RutaXP suite version for guide verification")
+    chapter = chapter_block(code, STRANGLETHORN)
+    unchanged = code[:chapter.start()] + code[chapter.end():]
+    if hashlib.sha256(unchanged.encode("utf8")).hexdigest() != UNCHANGED_GUIDES_HASH:
+        raise ValueError("Guide catalog outside Alliance Stranglethorn differs from RutaXP v0.7.36")
+    release = tuple(int(part) for part in version.split("."))
+    expected = REVISED_STRANGLETHORN_HASH if release >= (1, 2, 6) else ORIGINAL_STRANGLETHORN_HASH
+    if hashlib.sha256(chapter.group().encode("utf8")).hexdigest() != expected:
+        raise ValueError(f"Alliance Stranglethorn differs from RutaXP guides for suite {version}")
     lua = LuaRuntime(register_eval=False, register_builtins=False)
     loader = lua.eval("""function(source)
         local counts, ids = {}, {}
@@ -224,7 +243,7 @@ def verify(archive_path, addons=None):
                 assets.add(asset.casefold())
         check_launcher(tree.read("Suite.lua"))
         report = {"compiled_lua":len(scripts), "xml":len(graph)-len(scripts), "literal_assets":len(assets),
-                  "bindings":check_bindings(tree), "registrations":verify_guides(tree)}
+                  "bindings":check_bindings(tree), "registrations":verify_guides(tree, meta.get("Version", ""))}
         journey_paths = {n for n in tree.names.values() if n.startswith(suite_journey.PREFIX)}
         if addons is not None:
             if __package__:

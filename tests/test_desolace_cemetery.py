@@ -4,6 +4,7 @@ import unittest
 
 from test_addon import ADDON
 from test_westfall_migration import MigrationHost, WEST
+from tools.verify_personal_suite import chapter_block
 
 
 DESOLACE = "forever/alliance/30-40/02-desolace"
@@ -20,10 +21,11 @@ def restore(cursor, quests=None, active=DESOLACE, **progress):
 
 
 class DesolaceCemeteryTests(unittest.TestCase):
-    def test_runtime_uses_the_original_57_chapter_catalog(self):
-        payload = (ADDON / "Leveling.lua").read_bytes().replace(b"\r\n", b"\n")
-        self.assertEqual(hashlib.sha256(payload).hexdigest(),
-                         "9bf73f8371177107cf2397bb89d3522b3d335eca9eef691f86a86b9e3ef6b4a4")
+    def test_runtime_keeps_the_original_desolace_chapter_and_registers_57_guides(self):
+        code = (ADDON / "Leveling.lua").read_text(encoding="utf8")
+        chapter_source = chapter_block(code, DESOLACE).group()
+        self.assertEqual(hashlib.sha256(chapter_source.encode("utf8")).hexdigest(),
+                         "03a75cc488260d530106237256a64d207800696c2938fca4026fac6613a0a5ee")
         host, _ = restore(14)
         self.assertEqual(len(list(host.ns.guides)), 57)
         chapter = host.ns.guides[DESOLACE]

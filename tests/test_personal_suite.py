@@ -20,6 +20,7 @@ class PersonalSuiteVerificationTests(unittest.TestCase):
         self.files["Suite.lua"] = (ROOT / "RutaXP/Suite.lua").read_text(encoding="utf-8-sig")
         self.files["Leveling.lua"] = (ROOT / "RutaXP/Leveling.lua").read_text(encoding="utf8")
         meta = [
+            "## Version: 1.2.6",
             "## SavedVariables: OpenMapDB, ForeverDungeonJournalDB, RutaXPDB",
             "## SavedVariablesPerCharacter: OpenMapCharDB, ForeverDungeonJournalCharacterDB, RutaXPCharDB",
             "## X-OpenMap-Version: 0.8", "## X-ForeverDungeonJournal-Version: 2.1", "## X-RutaXP-Guide-Version: 0.7.36",
@@ -51,6 +52,18 @@ class PersonalSuiteVerificationTests(unittest.TestCase):
             self.check()
         del self.files[path]
         with self.assertRaisesRegex(ValueError, "Missing file in load graph"):
+            self.check()
+
+    def test_rejects_changes_inside_reviewed_chapter(self):
+        source = self.files["Leveling.lua"]
+        self.assertIn("Habla primero con el sargento Yohwa", source)
+        self.files["Leveling.lua"] = source.replace("Habla primero con el sargento Yohwa", "Espera a Thorsen", 1)
+        with self.assertRaisesRegex(ValueError, "Alliance Stranglethorn differs"):
+            self.check()
+
+    def test_rejects_revised_guides_in_an_older_suite(self):
+        self.files["RutaXP.toc"] = self.files["RutaXP.toc"].replace("## Version: 1.2.6", "## Version: 1.2.5")
+        with self.assertRaisesRegex(ValueError, "Alliance Stranglethorn differs"):
             self.check()
 
     def test_rejects_broken_module_reference_before_shipping(self):
