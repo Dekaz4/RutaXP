@@ -9,6 +9,14 @@ from tools import suite_journey
 
 ROOT = Path(__file__).resolve().parents[1]
 NATIVE = Path(os.environ.get("RUTAXP_JOURNEY", "E:/WOW/World of Warcraft/_forever_/Interface/AddOns/Journey"))
+EMBEDDED = NATIVE.parent / "RutaXP/Modules/Journey"
+HAS_JOURNEY = (NATIVE / "Journey.toc").is_file() or (EMBEDDED / "lib/TomCats/Arrows.lua").is_file()
+
+
+def journey_sources():
+    if (NATIVE / "Journey.toc").is_file():
+        return suite_journey.contents(NATIVE)
+    return ((name, (EMBEDDED / name).read_bytes()) for name in suite_journey.SCRIPTS)
 
 
 class JourneyContentsTests(unittest.TestCase):
@@ -80,6 +88,8 @@ function frame:SetScale(v) self.scale=v end
 function frame:SetText(t) self.text=t end
 function frame:GetText() return self.text end
 function frame:GetTexture() return self.texture end
+function frame:SetTexture(value) self.texture=value end
+function frame:SetRotation(angle) self.drawCount=(self.drawCount or 0)+1; self.angle=angle end
 function frame:GetParent() return self.parent end
 function frame:SetParent(p) self.parent=p end
 function frame:GetStringHeight() return 14 end
@@ -127,7 +137,7 @@ function CreateFrame(kind,name,parent,template)
 end
 function CreateFont(name) return CreateFrame("font",name) end
 function event(e,...) for _,f in ipairs(all) do if f.events[e] then f.scripts.OnEvent(f,e,...) end end end
-function tick() for _,f in ipairs(all) do if f:IsShown() and f.scripts.OnUpdate then f.scripts.OnUpdate(f,.3) end end end
+function tick(dt) for _,f in ipairs(all) do if f:IsShown() and f.scripts.OnUpdate then f.scripts.OnUpdate(f,dt or .3) end end end
 UIParent=CreateFrame(); UIParent:SetHeight(900); Minimap=CreateFrame(); GameFontWhiteSmall=CreateFrame()
 GameTooltip=CreateFrame(); GameTooltip_Hide=noop
 IsInInstance=function() return false end; InCombatLockdown=IsInInstance; IsShiftKeyDown=IsInInstance
@@ -167,7 +177,7 @@ end
 """
 
 
-@unittest.skipUnless((NATIVE / "Journey.toc").is_file(), "the owner's Journey copy is required")
+@unittest.skipUnless(HAS_JOURNEY, "the owner's Journey copy is required")
 class NativeJourneyTests(unittest.TestCase):
     def setUp(self):
         self.lua = LuaRuntime(unpack_returned_tuples=True)
@@ -175,7 +185,7 @@ class NativeJourneyTests(unittest.TestCase):
         g = self.lua.globals()
         self.lua.execute((ROOT / "RutaXP/GuideJourney.lua").read_text(encoding="utf8"), "RutaXP", g.ns)
         self.assertFalse(self.lua.eval("ns.GuideJourney:Available()"))
-        for filename, data in suite_journey.contents(NATIVE):
+        for filename, data in journey_sources():
             if filename.endswith(".lua"):
                 self.lua.execute(data, "RutaXP", g.ns)
         self.lua.execute('event("PLAYER_LOGIN"); tick()')
@@ -197,6 +207,46 @@ class NativeJourneyTests(unittest.TestCase):
             assert(RutaXPJourneyScreenArrow.label.text=="Villadorada")
             loseWaypoint(); tick()
             assert(not RutaXPJourneyScreenArrow.container:IsShown())
+        """)
+
+    def test_live_hud_filters_small_rotations_and_reserves_arrival_for_the_destination(self):
+        self.lua.execute((ROOT / "RutaXP/ArrowStyles.lua").read_text(encoding="utf8"), "RutaXP", self.lua.globals().ns)
+        self.lua.execute("""
+            local view, hud = ns.GuideJourney, RutaXPJourneyScreenArrow
+            local texture = hud.arrowTexture
+            local facing, yards = 1, 5
+            GetPlayerFacing = function() return math.rad(facing) end
+            UnitPosition = function() return .6*1300-yards,.7*1300,0,0 end
+            tick()
+            view:SetCompassTarget("muelle", false, 110)
+            tick(0)
+            local count = texture.drawCount
+            assert(math.abs(texture.angle - math.rad(-1)) < 1e-8)
+            facing=359; tick(0)
+            assert(texture.drawCount == count) -- Two degrees through north.
+            facing=358.1; tick(0)
+            assert(texture.drawCount == count+1) -- Movement accumulates since the last draw.
+            facing=358; view:SetCompassTarget("cadaver",false,110); tick(0)
+            assert(texture.drawCount == count+2)
+            yards=.25; tick(0)
+            assert(texture:IsShown() and not hud.pingFrame:IsShown() and hud.distLabel:GetText()=="101 m")
+            view:SetCompassTarget("cadaver",false,nil); tick(0)
+            assert(texture:IsShown() and hud.distLabel:GetText()=="0 m")
+            view:SetCompassTarget("cadaver",true,nil); tick(0)
+            assert(not texture:IsShown() and hud.pingFrame:IsShown())
+            ns.char.arrowAppearance={style="forge",size=150,showText=false}
+            ns.ArrowStyles:Refresh()
+            assert(texture:GetTexture()==ns.ArrowStyles:GetTexture() and math.abs(hud.scale-.9)<1e-8)
+            assert(not hud.label:IsShown() and not hud.distLabel:IsShown() and not hud.shadowContainer:IsShown())
+            ns.char.arrowAppearance.showText=true; ns.ArrowStyles:Refresh()
+            assert(hud.label:IsShown() and hud.distLabel:IsShown())
+            yards=5; tick(0)
+            assert(texture:IsShown() and not hud.pingFrame:IsShown())
+            local before=texture.drawCount
+            loseWaypoint(); tick()
+            assert(not hud.container:IsShown())
+            ns.GuideEngine.Waypoint=function() return 1429,.6,.7,"Otra misión" end
+            tick(); assert(hud.container:IsShown() and texture.drawCount==before+1)
         """)
 
     def test_task_names_use_journey_colors_and_recycled_icons_use_the_current_action(self):
@@ -303,7 +353,7 @@ class NativeJourneyTests(unittest.TestCase):
         """)
 
 
-@unittest.skipUnless((NATIVE / "Journey.toc").is_file(), "the owner's Journey copy is required")
+@unittest.skipUnless(HAS_JOURNEY, "the owner's Journey copy is required")
 class OriginalGuideJourneyTests(unittest.TestCase):
     def test_original_tracker_duo_controls_and_walking_compass_in_native_journey(self):
         lua = LuaRuntime(unpack_returned_tuples=True)
@@ -357,7 +407,7 @@ class OriginalGuideJourneyTests(unittest.TestCase):
         """)
         for name in ("GuideOriginal", "GuideJourney"):
             lua.execute((ROOT / f"RutaXP/{name}.lua").read_text(encoding="utf8"), "RutaXP", lua.globals().ns)
-        for filename, data in suite_journey.contents(NATIVE):
+        for filename, data in journey_sources():
             if filename.endswith(".lua"):
                 lua.execute(data, "RutaXP", lua.globals().ns)
         lua.execute("""
@@ -504,4 +554,28 @@ class OriginalGuideJourneyTests(unittest.TestCase):
             sampledTurn.walkingWorld={continent=1,north=447,west=500}
             ns:GetArrowWaypoint(); tick(); tick()
             assert(hud.distLabel:GetText()==scope.FormatJourneyDistance(47) and hides==0)
+
+            -- A steering point may be 47 yards away while the next real turn
+            -- is 65 yards down the road. Show the maneuver's path distance.
+            ns.DungeonPlanner=nil
+            sampledTurn.activityDestination=false
+            sampledTurn.navigationNotice=nil
+            sampledTurn.walkingDistance=350
+            sampledTurn.walkingTurn,sampledTurn.walkingTurnDistance="right",65
+            sampledTurn.walkingRouteKey="same objective"
+            ns:GetArrowWaypoint(); tick(); tick()
+            assert(hud.label:GetText()=="Gira a la derecha" and hud.distLabel:GetText()=="59 m")
+            sampledTurn.walkingTurn,sampledTurn.walkingTurnDistance="left",32
+            ns.navigationFrame.hint:SetText("Ve al muelle")
+            ns:GetArrowWaypoint(); tick(); tick()
+            assert(hud.label:GetText()=="Ve al muelle\\nGira a la izquierda" and hud.distLabel:GetText()=="29 m")
+            sampledTurn.walkingTurn,sampledTurn.walkingTurnDistance=nil,nil
+            ns.navigationFrame.hint:SetText("Tramo 3/12")
+            ns:GetArrowWaypoint(); tick(); tick()
+            assert(hud.label:GetText()=="Sigue el camino" and hud.distLabel:GetText()=="320 m" and hides==0)
+            sampledTurn.navigationBlocked=true; sampledTurn.navigationBearing=true
+            sampledTurn.navigationBearingText="Rumbo orientativo"
+            sampledTurn.walking=false
+            ns:GetArrowWaypoint(); tick(); tick()
+            assert(hud.label:GetText()=="Rumbo orientativo" and hud.distLabel:GetText()~="320 m")
         """)

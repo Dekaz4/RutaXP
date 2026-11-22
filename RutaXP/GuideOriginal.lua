@@ -192,13 +192,16 @@ function source.Waypoint()
     if not point or (point.activityDestination and not activity) then return end
     if point.navigationBlocked then
         if point.navigationBearing then
-            return point.mapID, point.x, point.y, hasText(point.navigationBearingText) or "Rumbo orientativo"
+            return point.mapID, point.x, point.y, hasText(point.navigationBearingText) or "Rumbo orientativo", nil, point
         end
         return
     end
     local hint = leg and (hasText(leg.shortText) or leg.title) or (nav and hasText(nav.hint:GetText()))
+    -- Journey describes the next maneuver. Mesh segment numbers belong to the
+    -- underlying tracker and should not mask a travel or dungeon instruction.
+    if point.walking and hint and hint:match("^Tramo %d+/%d+$") then hint = nil end
     return point.mapID, point.x, point.y, hint or (activity and planner:Hint()) or hasText(point.navigationNotice) or "",
-        point.walking and point.walkingWorld or nil
+        point.walking and point.walkingWorld or nil, point
 end
 
 function source.TravelHint()

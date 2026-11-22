@@ -13,6 +13,33 @@ local function finite(n)
     return type(n) == "number" and n == n and math.abs(n) < math.huge
 end
 
+local compassKey, finalTarget, displayedYards, nearYards, lastRotation, boundTexture
+local fullTurn, minimumTurn = 2 * math.pi, math.rad(2.8)
+-- Journey uses a single distance for its arrival sprite, distance label and
+-- minimap. Its minimap radius is much larger than the 1.5-yard arrival radius.
+local passingNode = 1.500001
+
+function view:SetCompassTarget(key, isFinal, yards)
+    if key ~= compassKey or isFinal ~= finalTarget then lastRotation = nil end
+    compassKey, finalTarget = key, isFinal
+    displayedYards = finite(yards) and yards >= 0 and yards or nil
+    nearYards = nil
+end
+
+local function bindCompassRotation()
+    local hud = _G.RutaXPJourneyScreenArrow
+    local texture = hud and hud.arrowTexture
+    if not texture or texture == boundTexture then return end
+    boundTexture, lastRotation = texture, nil
+    local draw = texture.SetRotation
+    texture.SetRotation = function(self, angle)
+        if not finite(angle) then return end
+        if lastRotation and math.abs((angle - lastRotation + math.pi) % fullTurn - math.pi) < minimumTurn then return end
+        lastRotation = angle
+        draw(self, angle)
+    end
+end
+
 local function compassFacing()
     local angle = GetPlayerFacing and GetPlayerFacing()
     if finite(angle) then return angle end
@@ -108,6 +135,8 @@ function RutaXPJourneyEnvironment()
         IsScreenArrowEnabled=function() return arrowEnabled() and target ~= nil end,
         IsTomTomSupportEnabled=no,
         GetArrowScale=function()
+            -- Journey has created its HUD by the time it reads the scale for the first draw.
+            bindCompassRotation()
             return (settings.arrowScale or 1) * (ns.ArrowStyles and ns.ArrowStyles:GetScale() or 1)
         end,
         GetArrowTextScale=function() return settings.arrowTextScale or 1 end,
@@ -139,9 +168,18 @@ function RutaXPJourneyEnvironment()
         end,
         OnHyperlinkLeave=GameTooltip_Hide, OnLeaveTooltipFunc=GameTooltip_Hide,
     }
-    addon.GetDistanceInYards = function(x, y, tx, ty) return ((tx-x)^2 + (ty-y)^2)^0.5 end
+    addon.GetDistanceInYards = function(x, y, tx, ty)
+        local yards = ((tx-x)^2 + (ty-y)^2)^0.5
+        if finalTarget == false and yards <= 1.5 then
+            nearYards = yards
+            return passingNode
+        end
+        nearYards = nil
+        return yards
+    end
     local spanish = GetLocale() == "esES" or GetLocale() == "esMX"
     env.FormatJourneyDistance = function(yards)
+        yards = displayedYards or (yards == passingNode and nearYards) or yards
         if not spanish then return math.floor(yards+0.5) .. " yd" end
         local metres = yards * 0.9144
         if metres >= 1000 then return string.format("%.1f km", metres/1000) end
@@ -311,6 +349,7 @@ function taskRenderer:Render(task, container)
 end
 
 local function clearArrow()
+    view:SetCompassTarget(nil, nil, nil)
     if arrow and target then arrow:ClearTarget() end
     target = nil
 end
@@ -343,9 +382,26 @@ local function updateCompassHint(reason, deathHint)
     compassHint:Show()
 end
 
+local function walkingInstruction(sample, hint)
+    if hint == "" then hint = nil end
+    local locale = GetLocale()
+    local spanish = locale == "esES" or locale == "esMX"
+    local turn = sample.walkingTurn
+    if finite(sample.walkingTurnDistance) and (turn == "left" or turn == "right") then
+        local instruction
+        if turn == "left" then instruction = spanish and "Gira a la izquierda" or "Turn left"
+        else instruction = spanish and "Gira a la derecha" or "Turn right" end
+        return hint and (hint .. "\n" .. instruction) or instruction, sample.walkingTurnDistance
+    end
+    local goal = sample.walkingGoal
+    local name = goal and (goal.routeLabel or goal.label or goal.goalTitle)
+    if not hint and sample.walkingFinal and name and name ~= "" then hint = name end
+    return hint or (spanish and "Sigue el camino" or "Follow the path"), sample.walkingDistance
+end
+
 local function updateTarget(body, deathHint)
     if not initialized or not arrowEnabled() then clearArrow(); return end
-    local map, x, y, label, walking
+    local map, x, y, label, walking, sample
     if deathHint then
         if not body then clearArrow(); return deathHint end
         map, x, y, label = body.mapID, body.x, body.y, deathHint
@@ -355,7 +411,7 @@ local function updateTarget(body, deathHint)
         elseif status == "journal" then waypoint = ns.GuideCarryover.Waypoint
         elseif current then waypoint = engine.Waypoint end
         if not waypoint then clearArrow(); return end
-        map, x, y, label, walking = waypoint()
+        map, x, y, label, walking, sample = waypoint()
     end
     if not finite(map) or not finite(x) or not finite(y) or
         x < 0 or x > 1 or y < 0 or y > 1 then clearArrow(); return end
@@ -376,10 +432,17 @@ local function updateTarget(body, deathHint)
     end
     if playerWorld ~= world then clearArrow(); return "Destino en otro continente" end
     if not compassFacing() then clearArrow(); return "Esperando la orientación del personaje" end
+    local distance
+    if sample and sample.walking then label, distance = walkingInstruction(sample, label) end
+    local intermediate = sample and (sample.navigationBlocked or sample.walking and not sample.walkingFinal
+        or sample.intermediate and sample.pointIndex and sample.pointCount and sample.pointIndex < sample.pointCount)
+    local key = sample and sample.walkingRouteKey
+        or ((deathHint and "corpse" or "guide") .. "/" .. map .. "/" .. x .. "/" .. y)
+    view:SetCompassTarget(key, not intermediate, distance)
     if not target or arrow.mapID ~= map or arrow.worldTargetX ~= point.x or arrow.worldTargetY ~= point.y then
         -- SetTarget replaces the current destination. ClearTarget also hides
         -- the HUD, which made it blink at every turn even on the same road.
-        arrow:SetTarget(x,y,map,not not (walking and target),point)
+        arrow:SetTarget(x,y,map,not not (intermediate or walking and target),point)
         if arrow.mapID ~= map then clearArrow(); return "Esperando la posición en el mapa" end
         target = true
     end

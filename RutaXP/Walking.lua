@@ -60,6 +60,7 @@ function W:Clear(reason)
     self.latestTarget,self.campCommitted,self.refreshWanted=nil,nil,nil
     self.budgetUpdated,self.activeSeconds,self.retryAfter,self.timeoutRetried,self.missingSince=nil,nil,nil,nil,nil
     self.startMap,self.lastRejectedX,self.lastRejectedY=nil,nil,nil
+    self.turns,self.turnCursor,self.steeringIndex,self.corridor=nil,nil,nil,nil
     self.phase,self.text="idle","Esperando un destino"
 end
 local function failed(self,reason,px,py,message)
@@ -235,6 +236,145 @@ local function cellMoves(ax,ay,bx,by,cell)
     return table.concat(moves)
 end
 
+-- PathGrid.Idle releases its decoded pages immediately after the callback.
+-- Keep only nearby pages on this route, at most four and 6 MiB in total
+-- (PathGrid's own estimates). The HUD never loads or decodes a page.
+local function routeCorridor(points,index)
+    local grid=ns.PathingNamespace and ns.PathingNamespace.PathGrid
+    local st=grid and grid.State and grid.State(points[index].map)
+    if not (st and st.val and st.cs and st.C) then return nil end
+    local saved={map=points[index].map,C=st.C,ny=st.ny,cs=st.cs,x0=st.x0,y0=st.y0,GX=st.GX,GY=st.GY,
+        val={},z={},moves={},at={},links={}}
+    local pages,kb,covered=0,0,0
+    for i=index,math.min(#points,index+128) do
+        local a,b=points[i-1],points[i]
+        local length=distance(a.x,a.y,b.x,b.y)
+        local step=math.max(1,math.ceil(length/(st.C*st.cs*.35)))
+        for s=0,step do
+            local u=s/step
+            if covered+length*u>1500 then return saved end
+            local x,y=a.x+(b.x-a.x)*u,a.y+(b.y-a.y)*u
+            local k=math.floor((x-st.x0)/(st.C*st.cs))*st.ny+math.floor((y-st.y0)/(st.C*st.cs))
+            local size=st.sizes and st.sizes[k] or 0
+            if st.val[k] and not saved.val[k] and kb+size<=6144 then
+                saved.val[k],saved.z[k],saved.moves[k],saved.at[k],saved.links[k]=
+                    st.val[k],st.z[k],st.moves[k],st.at[k],st.links[k]
+                pages,kb=pages+1,kb+size
+                if pages==4 then return saved end
+            end
+        end
+        covered=covered+length
+    end
+    return saved
+end
+
+-- A lateral shortcut needs open dry ground on BOTH sides, with no extra
+-- floors/links and no rises or drops. The original polyline is always the
+-- fallback on narrow bridges, stairs, around walls and in cave entrances.
+local function openRoad(continent,px,py,pz,b,corridor)
+    if not (corridor and corridor.map==continent and finite(pz) and finite(b.z)) then return false end
+    local st=corridor
+    local length=distance(px,py,b.x,b.y)
+    if length>124 or math.abs(b.z-pz)>3+.20*length then return false end
+    local C,cell=st.C,st.cs
+    local count=math.max(1,math.ceil(2*length/cell))
+    if count>64 then return false end
+    local lastX,lastY
+    for s=0,count do
+        local u=s/count
+        local gx=math.floor((px+(b.x-px)*u-st.x0)/cell)
+        local gy=math.floor((py+(b.y-py)*u-st.y0)/cell)
+        if gx~=lastX or gy~=lastY then
+            if gx<1 or gy<1 or gx>=st.GX-1 or gy>=st.GY-1 then return false end
+            local x,y=gx%C,gy%C
+            if x<1 or y<1 or x>=C-1 or y>=C-1 then return false end
+            local k=math.floor(gx/C)*st.ny+math.floor(gy/C)
+            local val,heights,moves,floors,links=st.val[k],st.z[k],st.moves[k],st.at[k],st.links[k]
+            if not (val and heights and moves and floors and links) then return false end
+            local i=x*C+y+1
+            local height=heights[i]
+            if not finite(height) or math.abs(height-(pz+(b.z-pz)*u))>3 then return false end
+            for dx=-1,1 do
+                for dy=-1,1 do
+                    local j=i+dx*C+dy
+                    if val[j]~=1 or floors[-j] or links[j] or not finite(heights[j]) or math.abs(heights[j]-height)>2 then return false end
+                    -- Require every cardinal edge inside this 3x3 window.
+                    local m=moves[j] or 0
+                    if (dx<1 and m%2<1) or (dy<1 and m%4<2) then return false end
+                end
+            end
+            lastX,lastY=gx,gy
+        end
+    end
+    return true
+end
+
+local function findTurns(points)
+    local result={}
+    local anchorX,anchorY
+    for i=2,#points-1 do
+        local a,b,c=points[i-1],points[i],points[i+1]
+        local ix,iy=b.x-a.x,b.y-a.y
+        local ox,oy=c.x-b.x,c.y-b.y
+        local il,ol=math.sqrt(ix*ix+iy*iy),math.sqrt(ox*ox+oy*oy)
+        if il>=1 and ol>=1 then
+            ix,iy,ox,oy=ix/il,iy/il,ox/ol,oy/ol
+            anchorX,anchorY=anchorX or ix,anchorY or iy
+            local dot=ix*ox+iy*oy
+            if dot<.84 or anchorX*ox+anchorY*oy<.72 then
+                local cross=anchorX*oy-anchorY*ox
+                if dot<.84 then cross=ix*oy-iy*ox end
+                -- UnitPosition's axes are north, west: a positive cross turns left.
+                result[#result+1]={index=i,side=math.abs(cross)>.08 and (cross>0 and "left" or "right") or nil}
+                anchorX,anchorY=ox,oy
+            end
+        end
+    end
+    return result
+end
+
+local function nextTurn(self,index)
+    if not self.turns then self.turns,self.turnCursor=findTurns(self.points),1 end
+    local turn=self.turns[self.turnCursor]
+    while turn and turn.index<index do
+        self.turnCursor=self.turnCursor+1
+        turn=self.turns[self.turnCursor]
+    end
+    return turn
+end
+
+-- Certify the whole ray from the actual player position. Same ordered mesh
+-- crossings on the path's height profile are sufficient even in a passage.
+-- For a different set of crossings we require a wide, walkable mesh corridor.
+local function canAim(points,index,last,continent,px,py,pz,corridor)
+    local b=points[last]
+    if last-index>24 or distance(px,py,b.x,b.y)>145 then return false end
+    local prev,node=points[index-1],points[index]
+    local off,_,u,z=projection(px,py,prev,node,pz)
+    if off>12 or not finite(z) or (finite(pz) and math.abs(pz-z)>2.5) or not finite(b.z) then return false end
+    local origin={x=px,y=py,z=pz or z}
+    local ax,ay=prev.x+(node.x-prev.x)*u,prev.y+(node.y-prev.y)*u
+    local data=RutaXPPathData and RutaXPPathData[continent]
+    local grid=ns.PathingNamespace and ns.PathingNamespace.PathGrid
+    local cell=data and grid and grid.TILE/data.cells
+    local same=cell and math.floor(px/cell)==math.floor(ax/cell) and math.floor(py/cell)==math.floor(ay/cell)
+    if not cell then same=off<.001 end
+    local moves={}
+    local az=z
+    for i=index,last do
+        local p=points[i]
+        local dist=distance(ax,ay,p.x,p.y)
+        if not finite(p.z) or math.abs(p.z-az)>1+.30*dist then return false end
+        local gap,_,_,height=projection(p.x,p.y,origin,b)
+        if gap>12 or not height or math.abs(p.z-height)>2 then return false end
+        if gap>(cell and 1.5 or .00001) then same=false end
+        if same and cell then moves[#moves+1]=cellMoves(ax,ay,p.x,p.y,cell) end
+        ax,ay,az=p.x,p.y,p.z
+    end
+    if same and (not cell or cellMoves(px,py,b.x,b.y,cell)==table.concat(moves)) then return true end
+    return openRoad(continent,px,py,pz,b,corridor)
+end
+
 local function steeringPoint(points,index,continent,px,py,pz)
     local node=points[index]
     if index>=#points or distance(px,py,node.x,node.y)>25 then return node end
@@ -278,6 +418,29 @@ local function steeringPoint(points,index,continent,px,py,pz)
         walked,ax,ay=walked+length,a.x,a.y
     end
     return aim
+end
+
+local function maneuverPoint(self,index,turn,continent,px,py,pz)
+    local points=self.points
+    local limit=turn and turn.index or #points
+    if limit==index then self.steeringIndex=nil;return points[index] end
+    local held=self.steeringIndex
+    if held and held>=index and held<=limit and
+        (held==index or canAim(points,index,held,continent,px,py,pz,self.corridor)) then return points[held] end
+    self.steeringIndex=nil
+    -- Try the actual corner first. On open ground a nearer mesh vertex has no
+    -- meaning to the player. A blind turn still uses its last certified approach.
+    local node=points[index]
+    local firstLeg=distance(px,py,node.x,node.y)
+    for j=math.min(limit,index+24),index+1,-1 do
+        if firstLeg+self.arc[j]-self.arc[index]<=120 and
+            (turn or openRoad(continent,px,py,pz,points[j],self.corridor)) and
+            canAim(points,index,j,continent,px,py,pz,self.corridor) then
+            self.steeringIndex=j
+            return points[j]
+        end
+    end
+    return steeringPoint(points,index,continent,px,py,pz)
 end
 function W:_Follow(px,py,pz)
     local points,index=self.points,math.max(2,self.index or 2)
@@ -387,6 +550,8 @@ function W:_Adopt(points,requestTravel,requestZ)
         return false
     end
     self.accepted=(self.accepted or 0)+1
+    self.turns,self.turnCursor,self.steeringIndex=nil,nil,nil
+    self.corridor=routeCorridor(points,self.index)
     self.refreshWanted=nil
     diagnostic(self,"accepted")
     self.phase,self.text="walking","Siguiendo el camino por el terreno"
@@ -522,8 +687,14 @@ function W:Resolve(point)
         index,off,floorOK,behind=self:_Follow(px,py,pz)
         -- Replan from where the player really is; never skip across a wall
         -- to a later nearby segment or a floor directly above the player.
-        if off>30 or not floorOK or behind then
+        -- During a refresh, only keep the old instruction if we can still
+        -- connect to its corridor. Above the lateral allowance even a nearby
+        -- road can be on the far side of a wall.
+        local stale=self.pending or self.refreshWanted or self.failure
+        local lost=off>(stale and 6 or 12) and not canAim(points,index,index,continent,px,py,pz,self.corridor)
+        if off>30 or not floorOK or behind or lost then
             self.points,self.left,self.arc,self.index=nil,nil,nil,nil
+            self.turns,self.turnCursor,self.steeringIndex,self.corridor=nil,nil,nil,nil
             self.campCommitted=nil
             self.refreshWanted=true
             diagnostic(self,not floorOK and "floor" or behind and "behind" or "drift")
@@ -540,7 +711,8 @@ function W:Resolve(point)
             end
             return blockedWaypoint(self, out)
         end
-        local visual=steeringPoint(points,index,continent,px,py,pz)
+        local turn=nextTurn(self,index)
+        local visual=maneuverPoint(self,index,turn,continent,px,py,pz)
         local aim=ns.WorldToWaypoint and ns:WorldToWaypoint(continent,visual.x,visual.y,here.mapID)
         if not aim then
             self.phase,self.text="unavailable","No se puede situar el siguiente giro en este mapa"
@@ -549,6 +721,11 @@ function W:Resolve(point)
         out.mapID,out.x,out.y,out.z=aim.mapID,aim.x,aim.y,visual.z
         out.walking,out.walkingIndex,out.walkingCount=true,index,#points
         out.walkingWorld={continent=continent,north=visual.x,west=visual.y}
+        out.walkingRouteKey=key
+        if turn and turn.side then
+            out.walkingTurn=turn.side
+            out.walkingTurnDistance=distance(px,py,node.x,node.y)+self.arc[turn.index]-self.arc[index]
+        end
         out.walkingDistance=distance(px,py,node.x,node.y)+(self.left[index] or 0)
         out.walkingFinal,out.walkingGoal=index==#points and not self.pending and not self.refreshWanted,point
         out.navigationNotice=nil
