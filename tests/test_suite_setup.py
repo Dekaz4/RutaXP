@@ -1,4 +1,5 @@
 import hashlib
+from contextlib import contextmanager
 import json
 import os
 from pathlib import Path
@@ -51,12 +52,118 @@ class PortableSuiteSetupTests(unittest.TestCase):
         output = self.work / "private.zip"
         with patch.object(suite_setup, "find_native_sources", return_value=inputs), \
                 patch.object(suite_setup.composer, "compose") as compose, \
+                patch.object(suite_setup.official_sources, "acquire") as acquire, \
                 patch.object(suite_setup, "activate") as activate:
             self.assertIn(str(output), suite_setup.run(self.client, self.work, output, compose_only=True))
             self.assertEqual(compose.call_args.args[1], inputs)
             activate.assert_not_called()
+            acquire.assert_not_called()
             with self.assertRaises(ValueError):
                 suite_setup.compose_bundle(self.client, self.addons / "unsafe.zip", self.work)
+
+    def test_normal_install_resolves_all_missing_sources_only_for_composition(self):
+        cache = self.work / "cache"
+        expected = {"OpenMap", "ForeverDungeonJournal", "Journey"}
+        active = {}
+        requested = []
+
+        @contextmanager
+        def download(name, folder, progress):
+            self.assertEqual(folder, cache)
+            self.assertIs(progress, report)
+            with tempfile.TemporaryDirectory(dir=self.work) as temporary:
+                root = Path(temporary) / name
+                root.mkdir()
+                (root / (name + ".toc")).touch()
+                requested.append(name)
+                active[name] = root
+                try:
+                    yield root
+                finally:
+                    del active[name]
+
+        def prepare(template, roots, prepared, progress):
+            self.assertEqual(set(roots), expected)
+            for name, root in roots.items():
+                self.assertTrue((root / (name + ".toc")).is_file())
+            prepared.mkdir()
+
+        def install(client, *, prepared):
+            self.assertFalse(active)
+            self.assertTrue(prepared.is_dir())
+            return "installed"
+
+        report = lambda _: None
+        with patch.object(suite_setup.official_sources, "acquire", side_effect=download), \
+                patch.object(suite_setup.composer, "prepare_directory", side_effect=prepare), \
+                patch.object(suite_setup, "activate", side_effect=install):
+            self.assertEqual(suite_setup.run(self.client, cache, report=report), "installed")
+            self.assertCountEqual(requested, expected)
+            requested.clear()
+            (self.addons / "OpenMap").mkdir()
+            (self.addons / "OpenMap/OpenMap.toc").write_text("## Version: v0.8.11\n")
+            (self.addons / "Journey").mkdir()
+            (self.addons / "Journey/Journey.toc").write_text("## Version: 4.00.12\n")
+            tx = suite_setup.backup_store(self.client) / ("2" * 17 + "-" + "b" * 32)
+            prior = tx / "prior/0"
+            prior.mkdir(parents=True)
+            (prior / "ForeverDungeonJournal.toc").write_text("## Version: 2.1.2\n")
+            (tx / "plan.json").write_text(json.dumps({"rows": [{"dest": "Interface/AddOns/ForeverDungeonJournal"}]}))
+            (tx / "committed").touch()
+            self.assertEqual(suite_setup.run(self.client, cache, report=report), "installed")
+            self.assertEqual(requested, ["Journey"])
+
+    def test_pinned_selection_checks_versions_in_older_native_and_embedded_backups(self):
+        versions = {"OpenMap": "v0.8.11", "ForeverDungeonJournal": "2.1.2", "Journey": "4.00.13"}
+        self.assertEqual(suite_setup.INSTALL_VERSIONS, versions)
+        for name in versions:
+            (self.addons / name).mkdir()
+            (self.addons / name / (name + ".toc")).write_text("## Version: 9.9.9\n")
+
+        def make_backup(number, journal_version, journey_version):
+            tx = suite_setup.backup_store(self.client) / (str(number) * 17 + "-" + "b" * 32)
+            native, suite = tx / "prior/0", tx / "prior/1"
+            native.mkdir(parents=True)
+            (native / "OpenMap.toc").write_text("## Version: " + ("v0.8.11" if number == 1 else "v0.8.10"))
+            for name in ("ForeverDungeonJournal", "Journey"):
+                (suite / "Modules" / name).mkdir(parents=True)
+            (suite / "manifest.sha256").touch()
+            (suite / "RutaXP.toc").write_text(
+                f"## X-RutaXP-Embedded: ForeverDungeonJournal\n## X-ForeverDungeonJournal-Version: {journal_version}\n"
+                f"## X-RutaXP-Journey-UI: {journey_version}\n")
+            (tx / "plan.json").write_text(json.dumps({"rows": [
+                {"dest": "Interface/AddOns/OpenMap"}, {"dest": "Interface/AddOns/RutaXP"}]}))
+            (tx / "committed").touch()
+            return native, suite
+
+        earlier_map, earlier_suite = make_backup(1, "2.1.2", "4.00.13")
+        _, recent_suite = make_backup(2, "2.1.1", "4.00.13")
+        self.assertEqual(suite_setup.find_native_sources(self.client, required=(), versions=versions),
+                         {"OpenMap": earlier_map, "ForeverDungeonJournal": earlier_suite, "Journey": recent_suite})
+        self.assertEqual(suite_setup.find_native_sources(self.client), {name: self.addons / name for name in versions})
+
+    def test_missing_journey_during_download_releases_earlier_sources_before_activation(self):
+        active = []
+
+        @contextmanager
+        def acquire(name, cache, progress):
+            if name == "Journey":
+                raise OSError("Journey unavailable")
+            active.append(name)
+            try:
+                yield self.work / name
+            finally:
+                active.remove(name)
+
+        with patch.object(suite_setup.official_sources, "acquire", side_effect=acquire), \
+                patch.object(suite_setup.composer, "prepare_directory") as prepare, \
+                patch.object(suite_setup, "activate") as activate:
+            with self.assertRaisesRegex(OSError, "Journey unavailable"):
+                suite_setup.run(self.client, self.work)
+            self.assertFalse(active)
+            prepare.assert_not_called()
+            activate.assert_not_called()
+            self.assertFalse(list(suite_setup.backup_store(self.client).glob(".RutaXP-stage-*")))
 
     def test_second_update_finds_journey_after_it_moved_out_of_addons(self):
         for name in ("OpenMap", "ForeverDungeonJournal"):
@@ -93,8 +200,8 @@ class PortableSuiteSetupTests(unittest.TestCase):
                "## SavedVariables: OpenMapDB, ForeverDungeonJournalDB, RutaXPRestedDB",
                "## SavedVariablesPerCharacter: OpenMapCharDB, ForeverDungeonJournalCharacterDB, RXPCData",
                "## X-RutaXP-Journey-UI: 4.00.13"]
-        for name in ("OpenMap", "ForeverDungeonJournal"):
-            toc.extend((f"## X-{name}-Title: {name}", f"## X-{name}-Version: 1", f"Modules/{name}/Init.lua"))
+        for name, version in (("OpenMap", "v0.8.11"), ("ForeverDungeonJournal", "2.1.2")):
+            toc.extend((f"## X-{name}-Title: {name}", f"## X-{name}-Version: {version}", f"Modules/{name}/Init.lua"))
             files[f"Modules/{name}/Init.lua"] = b"-- integrated native source"
         for file in suite_journey.entries(None):
             files[file] = b"setfenv(1, RutaXPJourneyEnvironment())\n"

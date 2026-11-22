@@ -339,6 +339,17 @@ namespace RutaXPUpdater
             }
             finally { try { RemoveTemporary(temp); } catch (IOException cleanup) { Console.Error.WriteLine("Temporal conservado: " + cleanup.Message); } }
         }
+        static bool HasJourneyPresentation(string target)
+        {
+            string toc = File.ReadAllText(Path.Combine(target, "RutaXP.toc"));
+            if (!Regex.IsMatch(toc, @"^##[ \t]*X-RutaXP-Journey-UI[ \t]*:[ \t]*\S+", RegexOptions.IgnoreCase | RegexOptions.Multiline))
+                return false;
+            HashSet<string> entries = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (string line in toc.Split('\n')) entries.Add(line.Trim().Replace('\\', '/'));
+            foreach (string script in new[] { "Modules/Journey/ui/UI.lua", "Modules/Journey/ui/TaskDetailContainers.lua", "Modules/Journey/lib/TomCats/Arrows.lua" })
+                if (!entries.Contains(script) || !File.Exists(Path.Combine(target, script))) return false;
+            return true;
+        }
         static UpdateResult ActivatePackage(string verified, string addons, string version,
             Func<bool> running, Action beforeActivate, Action<ProcessStartInfo> suiteSetup)
         {
@@ -358,7 +369,7 @@ namespace RutaXPUpdater
                       RedirectStandardError = true, RedirectStandardOutput = true };
                 guardedActivation();
                 suiteSetup(helper);
-                if (ReadInstalledVersion(addons) != version || !InstallerCore.IsEmbeddedSuite(target)
+                if (ReadInstalledVersion(addons) != version || !InstallerCore.IsEmbeddedSuite(target) || !HasJourneyPresentation(target)
                     || !Directory.Exists(Path.Combine(target, "Modules", "OpenMap"))
                     || !Directory.Exists(Path.Combine(target, "Modules", "ForeverDungeonJournal"))
                     || (!File.Exists(Path.Combine(target, "Leveling.lua")) &&
@@ -496,9 +507,26 @@ namespace RutaXPUpdater
             List<string> found = new List<string>(); foreach (string path in roots) try { found.AddRange(InstallerCore.ResolveDestinations(path)); } catch { }
             return InstallerCore.SortDestinations(found);
         }
-        static string ChooseClient()
+        public static string SelectClient(string settings, string action, Func<List<string>> discover, Func<List<string>, string> choose)
         {
-            List<string> choices = Discover();
+            if (action != "--choose-client")
+            {
+                try
+                {
+                    string saved = ClientSettings.Load(settings, "client");
+                    if (!string.IsNullOrWhiteSpace(saved)) return UpdaterCore.ResolveClient(saved);
+                }
+                catch (IOException) { }
+                catch (UnauthorizedAccessException) { }
+                catch (ArgumentException) { }
+                catch (NotSupportedException) { }
+            }
+            List<string> choices = discover();
+            if (action == "--update" && choices.Count == 1) return choices[0];
+            return choose(choices);
+        }
+        static string ChooseClient(List<string> choices)
+        {
             for (int i = 0; i < choices.Count; i++) Console.WriteLine("  " + (i + 1) + ". " + choices[i]);
             if (choices.Count > 0)
             {
@@ -574,9 +602,7 @@ namespace RutaXPUpdater
                 if (interactive) action = Menu(); else if (action == null) action = "--update";
                 if (action == null) return 0;
                 string settings = ClientSettings.DirectoryPath;
-                if (client == null && action != "--choose-client") try { client = ClientSettings.Load(settings, "client"); } catch (IOException) { }
-                if (client == null) client = ChooseClient();
-                string addons = UpdaterCore.ResolveClient(client);
+                string addons = client == null ? SelectClient(settings, action, Discover, ChooseClient) : UpdaterCore.ResolveClient(client);
                 ClientSettings.Save(settings, "client", addons);
                 Console.WriteLine("Cliente: " + Path.GetDirectoryName(Path.GetDirectoryName(addons)));
                 if (action == "--choose-client") { Console.WriteLine("Cliente recordado. Cada ordenador guarda su propia ruta."); return 0; }
