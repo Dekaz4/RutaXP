@@ -480,6 +480,13 @@ end
 -- Keep terrain steering separate from the semantic target used by the map
 -- and quest engine. Reaching a bend must never finish the real travel goal.
 function ns:GetArrowWaypoint(step, travel)
+    local body, deathHint
+    if self.GetDeathNavigation then body, deathHint = self:GetDeathNavigation() end
+    self.deathNavigationHint = deathHint
+    if deathHint then
+        self.destinationTravelView, self.navigationActivity = nil, nil
+        return body
+    end
     local planner = self.DungeonPlanner
     local activity = planner and planner.RoutePoint and planner:IsDetouring()
     local point, view
@@ -551,6 +558,7 @@ end
 function ns:IsAtWaypoint(step)
     -- Quest/travel completion always measures the actual guide destination.
     -- Reaching an itinerary entry or recovery marker cannot complete it.
+    if self.IsRecoveringCorpse and self:IsRecoveringCorpse() then return false end
     local point = self:GetBaseStepWaypoint(step)
     if not point then return false end
     local distance = self:GetWaypointVector(point)
@@ -766,6 +774,19 @@ local function updateArrow(self, frame)
     local _, step = self:GetCurrent()
     local travel = self.GetGuideTravel and self:GetGuideTravel()
     local point = self:GetArrowWaypoint(step, travel or false)
+    local deathHint = self.deathNavigationHint
+    if deathHint then
+        step, travel, hint = nil, nil, deathHint
+        if not point then
+            frame.dNorth, frame.dWest, frame.targetContinent, frame.arrived = nil, nil, nil, false
+            frame:Show()
+            frame.arrow:Hide()
+            frame.distance:SetText("")
+            frame.statusText, frame.destinationText = deathHint, deathHint
+            frame.navigationState, frame.navigationReason = "waiting", deathHint
+            return deathHint
+        end
+    end
     if self.navigationActivity then travel=nil end
     if not point and not self.navigationActivity and self.char.localTravelChoice and self.GetTravelComparison then
         local _, entry = self:GetTravelComparison()
@@ -779,9 +800,9 @@ local function updateArrow(self, frame)
             return
         end
     end
-    local flight = not self.navigationActivity and not travel and self.FlightNavigation and self.FlightNavigation:CurrentView()
+    local flight = not deathHint and not self.navigationActivity and not travel and self.FlightNavigation and self.FlightNavigation:CurrentView()
     if point and not point.flightNavigation then flight = nil end
-    local boat = not self.navigationActivity and not travel and self.BoatNavigation and self.BoatNavigation:CurrentView()
+    local boat = not deathHint and not self.navigationActivity and not travel and self.BoatNavigation and self.BoatNavigation:CurrentView()
     if point and not point.boatNavigation then boat = nil end
     if travel then step = travel end
     if not step and not point then
@@ -823,7 +844,7 @@ local function updateArrow(self, frame)
     end
     local subText = (stepTitle and goalTitle and stepTitle ~= goalTitle)
         and (goalTitle .. "\n|cff9fb0c7" .. stepTitle .. "|r")
-        or (goalTitle or stepTitle or "Siguiente destino")
+        or (deathHint or goalTitle or stepTitle or "Siguiente destino")
 
     if point and point.intermediate then
         subText = string.format("|cffffce72Punto %d/%d: %s|r\n%s", point.pointIndex, point.pointCount,

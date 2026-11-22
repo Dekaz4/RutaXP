@@ -81,17 +81,16 @@ local function conditions(value)
     if type(class)=="string" then class={class} elseif type(class)~="table" then class=nil end
     return {classes=value.classes or class,races=value.races,factions=value.factions}
 end
-local function npc(goal,applies,faction)
-    local name
+local function contact(goal,applies,faction)
     local code=faction=="Alliance" and "A" or faction=="Horde" and "H" or nil
     for _,candidate in ipairs(type(goal.candidates)=="table" and goal.candidates or {}) do
         local side=candidate.faction
         if (not side or side=="AH" or side==faction or side==code) and applies(conditions(candidate)) and applies(candidate.only) then
-            name=clean(candidate.npcName) or clean(candidate.objName)
-            if name then return name end
+            local npc,object=clean(candidate.npcName),clean(candidate.objName)
+            if npc or object then return npc,object end
         end
     end
-    if not goal.candidates or #goal.candidates==0 then return clean(goal.npcName) or clean(goal.objName) or clean(goal.objectName) end
+    if not goal.candidates or #goal.candidates==0 then return clean(goal.npcName),clean(goal.objName) or clean(goal.objectName) end
 end
 local function describe(goal,step,stepIndex,applies,faction)
     local action=goal.t or goal.action or "manual"
@@ -99,7 +98,8 @@ local function describe(goal,step,stepIndex,applies,faction)
     if action=="note" and not note then return nil end
     local id=number(goal.quest or goal.questID)
     if id and (id<=0 or id~=math.floor(id)) then id=nil end
-    local name=npc(goal,applies,faction)
+    local npc,object=contact(goal,applies,faction)
+    local name=npc or object
     local target
     if id then target=clean(read(C_QuestLog and C_QuestLog.GetTitleForQuestID,id)) or clean(goal.title) or ("Misión "..id)
     elseif action=="level" then target=tostring(goal.level or goal.n or "indicado")
@@ -114,7 +114,8 @@ local function describe(goal,step,stepIndex,applies,faction)
     local detail=ns.GetGoalHint and ns:GetGoalHint(goal) or note
     if detail and detail~=target and detail~=name then subtitle=subtitle.." · "..short(detail,110) end
     return {action=action,title=title,subtitle=subtitle,status="upcoming",preview=true,isCurrent=false,
-        stepIndex=stepIndex,questID=id,details=ns.GetGoalInstruction and ns:GetGoalInstruction(goal,step)}
+        stepIndex=stepIndex,questID=id,questTitle=id and target,goal=goal,npcName=npc,objectName=object,contactResolved=true,
+        details=ns.GetGoalInstruction and ns:GetGoalInstruction(goal,step)}
 end
 
 function ns:GetTrackerUpcomingItems(guide,fromCursor,limit)
@@ -300,8 +301,10 @@ function ns:GetTrackerPlannedUpcomingItems(guide,fromCursor,limit)
         local goal,context=plan.workGoal or plan.source,plan.workContext or plan.step
         local detail=self.GetGoalInstruction and read(self.GetGoalInstruction,self,goal,context)
         if detail then explanation=explanation.."\n"..detail end
+        local npc,object=contact(goal,applies,faction)
         items[#items+1]={action=plan.workStep and (goal.t or goal.action) or "turnin",title=title,
             subtitle=table.concat(parts," · "),details=explanation,status="upcoming",preview=true,questPlan=true,
+            questTitle=title,goal=goal,npcName=npc,objectName=object,contactResolved=true,questObjectives=not q.complete and q.objectives or nil,
             isCurrent=false,questID=id,stepIndex=plan.workStep or plan.turninStep,
             workStep=plan.workStep,turninStep=plan.turninStep}
         scheduled[id]=true

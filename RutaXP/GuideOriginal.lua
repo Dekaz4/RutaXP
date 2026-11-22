@@ -50,12 +50,50 @@ function source.Advance(delta)
     if button and button.isEnabled then button:GetScript("OnClick")(button, "LeftButton") end
 end
 
+-- These values belong to the same RefreshUI sample as the native text and
+-- click target. Journey can style them without querying the quest log again.
+local function public(value,kind)
+    if issecretvalue and issecretvalue(value) then return end
+    if type(value)==kind then return value end
+end
+
+local function describeRow(row,item,action)
+    local goal=item.goal or {}
+    row.action,row.status,row.isCurrent=action,item.status,item.isCurrent
+    row.questID=item.questID or goal.quest or goal.questID
+    row.questTitle=item.questTitle or (row.questID and goal.title)
+    row.targetName,row.itemName=item.targetName or goal.target,item.itemName or goal.itemName
+    row.npcName,row.objectName=item.npcName,item.objectName
+    if not item.contactResolved then
+        row.npcName=row.npcName or goal.npcName
+        row.objectName=row.objectName or goal.objName or goal.objectName
+    end
+    row.placeName=item.placeName or goal.location
+    row.npcReaction,row.targetReaction=goal.npcReaction,goal.targetReaction
+    row.stepIndex,row.workStep,row.turninStep=item.stepIndex,item.workStep,item.turninStep
+    row.preview,row.questPlan=item.preview,item.questPlan
+    local raw=public(item.questObjectives,"table")
+    if raw then
+        for index,obj in ipairs(raw) do
+            if (not item.objectiveIndex or index==item.objectiveIndex) and public(obj,"table") then
+                local text,finished=public(obj.text,"string"),public(obj.finished,"boolean")
+                local have,total=public(obj.numFulfilled,"number"),public(obj.numRequired,"number")
+                if text or have or total or finished~=nil then
+                    row.objectives=row.objectives or {}
+                    row.objectives[#row.objectives+1]={index=index,text=text,have=have,total=total,finished=finished}
+                end
+            end
+        end
+    end
+    return row
+end
+
 function source.AddActivities(rows)
     local planner = ns.DungeonPlanner
     if not planner then return end
     for _, entry in ipairs(planner:Rows()) do
-        rows[#rows+1] = {text=entry.text, step="activities", texture=entry.texture,
-            activity=entry, details=entry.details}
+        rows[#rows+1] = describeRow({text=entry.text, step="activities", texture=entry.texture,
+            activity=entry, details=entry.details},entry,entry.questAction)
     end
 end
 
@@ -75,9 +113,17 @@ function source.Tasks()
                 text = ns.trackerUpcomingLabel:GetText() .. "\n" .. text
             end
             local group = upcoming and upcomingRows or result
-            group[#group+1] = {text=text, step=upcoming and 2 or 1, texture=frame.icon:GetTexture(),
+            local item=frame.presentationItem or {}
+            local row=describeRow({text=text, step=upcoming and 2 or 1, texture=frame.icon:GetTexture(),
                 frame=not frame.preview and frame or nil, details=frame.goalDetails,
-                goalTitle=frame.goalTitle, goalIndex=frame.goalIndex, stepKey=ns.lastStepKey}
+                goalTitle=frame.goalTitle, goalSub=frame.goalSub, goalIndex=frame.goalIndex, stepKey=ns.lastStepKey},
+                item,item.action)
+            row.preview,row.questPlan=frame.preview,frame.questPlan
+            if frame.icon.GetVertexColor then
+                local r,g,b,a=frame.icon:GetVertexColor()
+                if type(r)=="number" and type(g)=="number" and type(b)=="number" then row.iconColor={r,g,b,a} end
+            end
+            group[#group+1] = row
         end
     end
     if #result == count and ns.trackerText:IsShown() then result[#result+1] = {text=ns.trackerText:GetText()} end
@@ -175,10 +221,11 @@ end
 -- resolution here would advance its walking planner twice per sample.
 local resolve = ns.GetArrowWaypoint
 function ns:GetArrowWaypoint(...)
-    point = resolve(self, ...)
+    local resolved = resolve(self, ...)
+    point = resolved and resolved.source ~= "corpse" and resolved or nil
     local planner = self.DungeonPlanner
     sampledActivity = planner and planner.RouteKey and planner:RouteKey()
-    return point
+    return resolved
 end
 
 local function park(frame)

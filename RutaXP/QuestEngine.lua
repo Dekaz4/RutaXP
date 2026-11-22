@@ -1108,7 +1108,7 @@ function ns:ResumePendingQuests()
     return true, "Retomadas tus misiones pendientes del diario en el paso " .. state.cursor .. "."
 end
 
-function ns:GetGoalTitle(goal)
+function ns:GetGoalTitle(goal, includeQuestTitle)
     local action = goal.t or goal.action
     if action == "boat" and goal.location then return "Barco a " .. goal.location end
     local verbs = { accept = "Acepta", turnin = "Entrega", complete = "Completa", kill = "Derrota",
@@ -1116,10 +1116,11 @@ function ns:GetGoalTitle(goal)
         use = "Usa", sethome = "Hogar en", hearth = "Piedra de hogar a",
         getfp = "Ruta de vuelo en", fly = "Vuela a", boat = "Barco a", train = "Entrena habilidades", buy = "Compra",
         vendor = "Vende", level = "Sube a nivel", note = "Nota" }
-    local title
+    local title, questTitle
     if goal.quest or goal.questID then
         local id = goal.quest or goal.questID
         title = read(C_QuestLog and C_QuestLog.GetTitleForQuestID, id) or goal.title or ("Misión " .. id)
+        questTitle = title
     else
         local candidate = matchedCandidate(self, goal)
         title = goal.title or goal.itemName or goal.npcName or (candidate and candidate.npcName)
@@ -1132,7 +1133,9 @@ function ns:GetGoalTitle(goal)
     if action == "train" and goal.class then title = "de tu clase" end
     local verb = goal.instructionVerb
     if not verb and action == "kill" and type(goal.note) == "string" and goal.note:match("^Habla con ") then verb = "Habla con" end
-    return (verb or verbs[action] or action or "Objetivo") .. (title and (": " .. title) or "")
+    local full = (verb or verbs[action] or action or "Objetivo") .. (title and (": " .. title) or "")
+    if includeQuestTitle then return full, questTitle end
+    return full
 end
 
 -- Clean redundant prefix from a note when it starts with the same item/target/NPC name
@@ -1288,6 +1291,7 @@ function ns:GetStepGoalItems(step, state)
                 local npcName = goal.npcName or (candidate and candidate.npcName)
                 local objName = goal.objName or goal.objectName
                 local subLines = {}
+                local objectives
 
                 if status == "done" then
                     -- Quest history can expose zeroed objective counters.
@@ -1297,7 +1301,7 @@ function ns:GetStepGoalItems(step, state)
                     if npcName and not goal.instructionAsHint and not (action == "accept" and goal.item) then subLines[#subLines + 1] = "Habla con " .. npcName end
                 else
                     local hasLiveObj = false
-                    local objectives = id and read(C_QuestLog and C_QuestLog.GetQuestObjectives, id)
+                    objectives = id and read(C_QuestLog and C_QuestLog.GetQuestObjectives, id)
                     for oi, objective in ipairs(objectives or {}) do
                         if objective.text and objective.finished ~= true and (not goal.oi or goal.oi == oi) then
                             subLines[#subLines + 1] = objective.text
@@ -1343,6 +1347,7 @@ function ns:GetStepGoalItems(step, state)
                     local view = self.BoatNavigation:GetView(goal)
                     if view then subLines, details = {view.text}, view.text end
                 end
+                local title, questTitle = self:GetGoalTitle(goal, true)
                 local entry = {
                     index = index,
                     goal = goal,
@@ -1350,7 +1355,8 @@ function ns:GetStepGoalItems(step, state)
                     status = status,
                     reason = reason,
                     isCurrent = (index == currentIdx),
-                    title = self:GetGoalTitle(goal),
+                    title = title, questTitle = questTitle, npcName = npcName, objectName = objName,
+                    questObjectives = objectives, objectiveIndex = goal.oi or goal.objectiveIndex,
                     subtitle = #subLines > 0 and table.concat(subLines, "\n") or nil,
                     details = details,
                 }

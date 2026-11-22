@@ -579,10 +579,10 @@ function ns:RefreshUI()
     self.detail:Show()
     local choice, localObjective
     if not sharedView and self.GetTravelComparison then choice, localObjective = self:GetTravelComparison() end
-    local localTitle, localHint
+    local localTitle, localQuestTitle, localHint
     if localObjective then
         local goal = localObjective.goal
-        localTitle = self:GetGoalTitle(goal)
+        localTitle,localQuestTitle = self:GetGoalTitle(goal,true)
         localHint = self:GetGoalHint(goal) or goal.target or goal.itemName or goal.objName
         local npc = localObjective.point.candidateName or goal.npcName
         if not localHint and npc then localHint = goal.t == "turnin" and ("Habla con " .. npc) or npc end
@@ -691,7 +691,8 @@ function ns:RefreshUI()
 
     local goalItems = sharedItems or ((not travel and step and self.GetStepGoalItems) and self:GetStepGoalItems(step, state) or {})
     if localObjective then
-        goalItems = {{action=localObjective.goal.t, title=localTitle, isCurrent=true,
+        goalItems = {{action=localObjective.goal.t, title=localTitle, questTitle=localQuestTitle, goal=localObjective.goal,
+            npcName=localObjective.point.candidateName or localObjective.goal.npcName, isCurrent=true,
             subtitle=localHint, details=self:GetGoalInstruction(localObjective.goal), localObjective=true}}
     elseif choice then
         local canStay = choice.localGoals and choice.localGoals[1] ~= nil
@@ -734,6 +735,7 @@ function ns:RefreshUI()
             local item = displayItems[i]
             if not self.trackerRows[i] then self:CreateTrackerRow(i) end
             local row = self.trackerRows[i]
+            row.presentationItem = item
             local meta = ACTION_ICONS[item.action] or ACTION_ICONS.goto
             local omitted = item.status == "skip" and item.reason
                 and item.reason:find("^Omitido manualmente") ~= nil

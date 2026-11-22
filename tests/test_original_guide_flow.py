@@ -92,9 +92,46 @@ class OriginalGuideFlowTests(unittest.TestCase):
             assert(title:find(g.title,1,true) and place==s.title)
             assert(env.HeaderService.GetStepText()==("Paso %d/%d"):format(cursor,#g.steps))
             local widgets=env.UI.GetComponent("TaskGroupContainers").Get(1).contents.taskContainers
-            assert(widgets[1].text:GetText():find(ns.trackerRows[1].goalTitle,1,true))
+            local visible=widgets[1].text:GetText():gsub("|c%x%x%x%x%x%x%x%x",""):gsub("|r","")
+            assert(visible:find(ns.trackerRows[1].goalTitle,1,true),visible)
         """)
         return lua
+
+    def test_journey_rows_keep_live_hunt_targets_counts_and_future_quest_actions(self):
+        lua = self.client("Pícara", "Alliance", "forever/alliance/30-40/04-stranglethorn-vale", 13,
+                          level=36, map_id=1434)
+        lua.execute("""
+            ns.char.trackerSize={width=380,height=600}
+            TEST.quests[191]={onQuest=true,complete=true,title="Domina la pantera"}
+            TEST.quests[194]={onQuest=true,title="Título del cliente para el raptor",objectives={
+                {text="Raptor de Tuercespina: 7/10",numFulfilled=7,numRequired=10,finished=false}}}
+            TEST.quests[187]={onQuest=true,title="Domina el tigre",objectives={
+                {text="Tigre de Tuercespina mayor: 0/10",numFulfilled=0,numRequired=10,finished=false}}}
+            ns:RefreshUI()
+            local function snapshot()
+                local old=C_QuestLog.GetQuestObjectives
+                C_QuestLog.GetQuestObjectives=function() error("renderer queried the journal twice") end
+                local rows={}
+                for _,r in ipairs(ns.OriginalGuidePresentation.Tasks()) do
+                    if r.questID then rows[r.questID..":"..r.action..":"..tostring(r.preview)]=r end
+                end
+                C_QuestLog.GetQuestObjectives=old
+                return rows
+            end
+            local rows=snapshot()
+            local r,t=rows["194:kill:false"],rows["187:kill:false"]
+            assert(r and r.isCurrent and r.status=="active" and r.questTitle==TEST.quests[194].title)
+            assert(r.targetName=="Raptor de Tuercespina" and r.objectives[1].have==7 and r.objectives[1].total==10)
+            assert(t and not t.isCurrent and t.targetName=="Tigre de Tuercespina mayor" and t.objectives[1].have==0)
+            local nextRaptor=rows["195:accept:true"]
+            assert(nextRaptor and nextRaptor.npcName=="Hemet Decautela" and nextRaptor.stepIndex==14)
+            assert(not nextRaptor.frame and not nextRaptor.isCurrent and nextRaptor.status=="upcoming")
+            TEST.quests[194].objectives[1].numFulfilled=8
+            TEST.quests[194].objectives[1].text="Raptor de Tuercespina: 8/10"
+            ns:RefreshUI()
+            assert(snapshot()["194:kill:false"].objectives[1].have==8)
+            assert(ns.char.progress[chapter].cursor==13)
+        """)
 
     def test_alliance_paladins_two_steps_apart_resume_independent_saves(self):
         chapter = "forever/alliance/06-ashenvale"

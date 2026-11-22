@@ -1,6 +1,6 @@
 # RutaXP para WoW Forever
 
-RutaXP 1.2.3 recupera los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos y la brújula usan la interfaz de tu copia de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
+RutaXP 1.2.4 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos y la brújula usan la interfaz de tu copia de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
 
 ## Actualizar
 
@@ -46,7 +46,7 @@ Desde la raíz del proyecto y con Python 3.10 o posterior, indica la carpeta de 
 
 ```powershell
 python tools/build_personal_suite.py --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
-python tools/verify_personal_suite.py dist/RutaXP-1.2.3-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
+python tools/verify_personal_suite.py dist/RutaXP-1.2.4-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
 ```
 
 Los créditos y las licencias se encuentran en [NOTICE.md](NOTICE.md) y en `RutaXP/Licenses`.

@@ -193,11 +193,78 @@ local actionIcons = {
     hs="Interface\\Icons\\INV_Misc_Rune_01", home="Interface\\Icons\\INV_Misc_Rune_01",
 }
 
+local colors = {
+    accept="ffffff00", turnin="ffffa500", objective="ff0084eb", item="ffe36ee4",
+    friendly="ff9dff9d", hostile="ffff6363", neutral="ffffd100", unknown="ffe36ee4", place="ffffd100",
+}
+local journeyIcons = {
+    accept={"QuestNormal", .85}, turnin={"QuestTurnin", .85},
+    complete={"worldquest-icon-pvp-ffa", .75}, kill={"VignetteKill", 1.2},
+    collect={"VignetteLoot", 1.2}, getfp={"FlightMaster", .9}, fly={"FlightMaster", .9},
+    done={"Capacitance-General-WorkOrderCheckmark", 1.2}, blocked={"services-icon-warning", 1},
+}
+local contact = {accept=true,turnin=true,talk=true,train=true,vendor=true,fly=true,getfp=true,sethome=true}
+local function coloredInstruction(row)
+    local action = row.action
+    if not action or not row.text or row.text:find("|", 1, true) then return row.text end
+    local npcColor = colors[row.npcReaction] or (action == "kill" and colors.hostile)
+        or (contact[action] and colors.friendly) or colors.unknown
+    local targets = {
+        {row.questTitle, colors[action] or colors.objective}, {row.npcName, npcColor},
+        {row.itemName, colors.item}, {row.objectName, colors.item}, {row.placeName, colors.place},
+        {row.targetName, colors[row.targetReaction] or (action == "kill" and colors.hostile)
+            or (contact[action] and npcColor) or colors.item},
+    }
+    local text, parts, pos = row.text, {}, 1
+    while pos <= #text do
+        local first, last, color
+        for _, token in ipairs(targets) do
+            local name = token[1]
+            if type(name) == "string" and name ~= "" then
+                local at, finish = text:find(name, pos, true)
+                -- Keep short names out of longer names (including UTF-8 letters).
+                while at and (text:sub(at-1, at-1):match("[%w_\128-\255]") or text:sub(finish+1, finish+1):match("[%w_\128-\255]")) do
+                    at, finish = text:find(name, finish+1, true)
+                end
+                if at and (not first or at < first or (at == first and finish > last)) then
+                    first, last, color = at, finish, token[2]
+                end
+            end
+        end
+        if not first then parts[#parts+1] = text:sub(pos); break end
+        parts[#parts+1] = text:sub(pos, first-1) .. "|c" .. color .. text:sub(first, last) .. "|r"
+        pos = last+1
+    end
+    return table.concat(parts)
+end
+
+local function setTaskIcon(icon, row)
+    local texture = icon.texture
+    texture:SetVertexColor(1, 1, 1)
+    texture:SetDesaturated(false)
+    texture:SetTexCoord(0, 1, 0, 1)
+    local style = journeyIcons[row.status] or journeyIcons[row.action]
+    local atlas = style and C_Texture and C_Texture.GetAtlasInfo and C_Texture.GetAtlasInfo(style[1])
+    if atlas and atlas.width and atlas.height and texture.SetAtlas then
+        texture:SetAtlas(style[1], false)
+        local scale = (14*style[2]-2)/math.max(atlas.width, atlas.height)
+        texture:SetSize(atlas.width*scale, atlas.height*scale)
+    else
+        texture:SetTexture(row.texture or (row.checked and "Interface\\Buttons\\UI-CheckBox-Check")
+            or (row.manual and "Interface\\Buttons\\UI-CheckBox-Up")
+            or actionIcons[row.element and row.element.tag] or "Interface\\GossipFrame\\GossipGossipIcon")
+        texture:SetSize(16, 16)
+        if row.action and row.texture and row.iconColor then texture:SetVertexColor(unpack(row.iconColor)) end
+    end
+    if row.status == "skip" then texture:SetDesaturated(true) end
+    icon:SetSize(16, 16)
+end
+
 local taskRenderer = {IsDimmable=yes}
 function taskRenderer:Render(task, container)
     local row = task.row
     container.task = task
-    container.text:SetText(row.text)
+    container.text:SetText(coloredInstruction(row))
     container.text:Show()
     container.button:Hide()
     local icon = container.icon
@@ -225,17 +292,7 @@ function taskRenderer:Render(task, container)
         end
         container.text:SetText("|cffffdf85" .. row.text .. "|r")
     end
-    if row.texture then
-        icon.texture:SetTexture(row.texture)
-    elseif row.checked then
-        icon.texture:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
-    elseif row.manual then
-        icon.texture:SetTexture("Interface\\Buttons\\UI-CheckBox-Up")
-    else
-        icon.texture:SetTexture(actionIcons[row.element and row.element.tag] or "Interface\\GossipFrame\\GossipGossipIcon")
-    end
-    icon.texture:SetSize(16, 16)
-    icon:SetSize(16, 16)
+    setTaskIcon(icon, row)
     icon.row = row
     icon:SetScript("OnClick", manualClick)
     icon:SetScript("OnEnter", displayTaskTip)
@@ -257,9 +314,9 @@ end
 
 -- Waiting for a boat or leaving combat has no directional target. Keep the
 -- original short instruction at the compass without displaying a stale arrow.
-local function updateCompassHint(reason)
-    if not original then return end
-    local hint = initialized and not target and arrowEnabled() and (reason or original.TravelHint())
+local function updateCompassHint(reason, deathHint)
+    local hint = initialized and not target and arrowEnabled() and (original or deathHint)
+        and (reason or (original and original.TravelHint()))
     if not hint or hint == "" then
         if compassHint then compassHint:Hide() end
         return
@@ -282,14 +339,20 @@ local function updateCompassHint(reason)
     compassHint:Show()
 end
 
-local function updateTarget()
+local function updateTarget(body, deathHint)
     if not initialized or not arrowEnabled() then clearArrow(); return end
-    local waypoint
-    if original then waypoint = original.Waypoint
-    elseif status == "journal" then waypoint = ns.GuideCarryover.Waypoint
-    elseif current then waypoint = engine.Waypoint end
-    if not waypoint then clearArrow(); return end
-    local map, x, y, label, walking = waypoint()
+    local map, x, y, label, walking
+    if deathHint then
+        if not body then clearArrow(); return deathHint end
+        map, x, y, label = body.mapID, body.x, body.y, deathHint
+    else
+        local waypoint
+        if original then waypoint = original.Waypoint
+        elseif status == "journal" then waypoint = ns.GuideCarryover.Waypoint
+        elseif current then waypoint = engine.Waypoint end
+        if not waypoint then clearArrow(); return end
+        map, x, y, label, walking = waypoint()
+    end
     if not finite(map) or not finite(x) or not finite(y) or
         x < 0 or x > 1 or y < 0 or y > 1 then clearArrow(); return end
     local world, point
@@ -321,9 +384,11 @@ end
 
 local function updateArrow()
     if not initialized then return end
-    local reason = updateTarget()
-    updateCompassHint(reason)
-    local directions = original and original.TravelText()
+    local body, deathHint
+    if ns.GetDeathNavigation and arrowEnabled() then body, deathHint = ns:GetDeathNavigation() end
+    local reason = updateTarget(body, deathHint)
+    updateCompassHint(reason, deathHint)
+    local directions = original and not deathHint and original.TravelText() or nil
     if directions ~= lastDirections then
         lastDirections = directions
         refreshPending = true
@@ -406,7 +471,8 @@ local function prepareStep(rows)
                 step[#step+1] = group
                 previous = row.step
             end
-            group[#group+1] = {row=row,parent=group,taskType=taskRenderer,conditionPassed=true,completedPassed=row.checked}
+            group[#group+1] = {row=row,parent=group,taskType=taskRenderer,conditionPassed=true,
+                completedPassed=row.checked or row.status == "done"}
         end
     end
     return step
@@ -489,6 +555,9 @@ driver:RegisterEvent("PLAYER_ENTERING_WORLD")
 driver:RegisterEvent("PLAYER_REGEN_ENABLED")
 driver:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 driver:RegisterEvent("GROUP_ROSTER_UPDATE")
+driver:RegisterEvent("PLAYER_DEAD")
+driver:RegisterEvent("PLAYER_ALIVE")
+driver:RegisterEvent("PLAYER_UNGHOST")
 driver:SetScript("OnEvent", function(_, event)
     if event == "GROUP_ROSTER_UPDATE" and status ~= "journal" then return end
     if event == "PLAYER_LOGIN" or event == "PLAYER_ENTERING_WORLD" then loggedIn = true end
@@ -502,5 +571,5 @@ driver:SetScript("OnUpdate", function(_, dt)
     elapsed = 0
     if refreshPending and view:Available() then view:Refresh()
     elseif original or target or (compassHint and compassHint:IsShown()) or
-        (arrowEnabled() and (current or status == "journal")) then updateArrow() end
+        (arrowEnabled() and (current or status == "journal" or (ns.IsRecoveringCorpse and ns:IsRecoveringCorpse()))) then updateArrow() end
 end)

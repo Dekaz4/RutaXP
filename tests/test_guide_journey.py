@@ -191,6 +191,52 @@ class NativeJourneyTests(unittest.TestCase):
             assert(not RutaXPJourneyScreenArrow.container:IsShown())
         """)
 
+    def test_task_names_use_journey_colors_and_recycled_icons_use_the_current_action(self):
+        self.lua.execute("""
+            local scope=RutaXPJourneyEnvironment()
+            local proto=getmetatable(getTaskIcon().texture)
+            function proto:SetAtlas(id) self.atlas=id; self.path=nil end
+            function proto:SetTexture(id) self.path=id; self.atlas=nil end
+            function proto:SetVertexColor(r,g,b) self.r,self.g,self.b=r,g,b end
+            function proto:SetDesaturated(value) self.gray=value end
+            local available=true
+            C_Texture={GetAtlasInfo=function(id)
+                if available then return {width=14,height=28} end
+            end}
+            local currentRow
+            ns.GuideEngine.Tasks=function() return {currentRow} end
+            local function render(row)
+                currentRow=row
+                ns.GuideJourney:Refresh(); tick()
+                local r=scope.UI.GetComponent("TaskGroupContainers").Get(1).contents.taskContainers[1]
+                return r.text:GetText(),r.icon.texture
+            end
+            local title="El trébol de O'Brien"
+            local text,icon=render({action="accept",text="Acepta "..title.." de Ana. Anabel sigue aquí.",
+                questTitle=title,npcName="Ana",status="active",texture="legacy-accept"})
+            assert(text=="Acepta |cffffff00"..title.."|r de |cff9dff9dAna|r. Anabel sigue aquí.")
+            assert(icon.atlas=="QuestNormal" and icon:GetWidth()<icon:GetHeight())
+            text,icon=render({action="turnin",text="Entrega "..title,questTitle=title,status="ready"})
+            assert(text=="Entrega |cffffa500"..title.."|r" and icon.atlas=="QuestTurnin")
+            text,icon=render({action="kill",text="Derrota a Ogrón (0/3)",npcName="Ogrón"})
+            assert(text=="Derrota a |cffff6363Ogrón|r (0/3)" and icon.atlas=="VignetteKill")
+            text,icon=render({action="collect",text="Recoge el Cáliz; habla con Aris.",
+                itemName="Cáliz",npcName="Aris",npcReaction="neutral"})
+            assert(text=="Recoge el |cffe36ee4Cáliz|r; habla con |cffffd100Aris|r.")
+            assert(icon.atlas=="VignetteLoot")
+            text,icon=render({action="goto", text="Ve a Bahía del Botín", placeName="Bahía del Botín"})
+            assert(text=="Ve a |cffffd100Bahía del Botín|r")
+            text,icon=render({action="turnin",text="Ya entregada",status="done"})
+            assert(icon.atlas=="Capacitance-General-WorkOrderCheckmark")
+            text,icon=render({action="turnin",text="Todavía no",status="blocked"})
+            assert(icon.atlas=="services-icon-warning")
+            available=false
+            text,icon=render({action="kill",text="Omitido",status="skip",texture="own-sword",iconColor={.9,.4,.3}})
+            assert(not icon.atlas and icon.path=="own-sword" and icon.gray and icon.r==.9)
+            text,icon=render({text="|cff00ff00Texto previo|r",texture="plain"})
+            assert(text=="|cff00ff00Texto previo|r" and icon.path=="plain" and icon.r==1 and not icon.gray)
+        """)
+
     def test_pending_zone_hides_provisional_target_and_renders_resume_message(self):
         self.lua.execute("""
             status,statusText="pending","¿Continuar por Desolace?"

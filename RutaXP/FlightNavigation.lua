@@ -87,7 +87,7 @@ local function originCandidate(goal, origin, zone, sample)
     end
 end
 local function arrival(ctx)
-    if not ctx or not R or R.OnTaxi() then return false end
+    if not ctx or not R or R.OnTaxi() or (ns.IsRecoveringCorpse and ns:IsRecoveringCorpse()) then return false end
     local zone = R.Zone(); local sample = R.Sample(zone)
     for _, landing in ipairs(destinations(ctx.goal)) do
         if near(landing, zone, sample) then

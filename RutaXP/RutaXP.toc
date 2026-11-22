@@ -2,7 +2,7 @@
 ## Title: RutaXP
 ## Notes: Guías de RutaXP 0.7.36, mapa, diario de mazmorras y talentos para WoW Forever.
 ## Author: Diego
-## Version: 1.2.3
+## Version: 1.2.4
 ## Category: Quests
 ## Category-esES: Misiones
 ## IconTexture: Interface\Icons\INV_Misc_Map_01
@@ -22,6 +22,7 @@ GroupQuestData.lua
 QuestEngine.lua
 GuideMigrations.lua
 Navigation.lua
+CorpseNavigation.lua
 WestfallTravelData.lua
 AllianceTravel.lua
 HordeTravel.lua

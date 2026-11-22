@@ -209,7 +209,11 @@ end
 local verbs = {pickup="Recoge", inside="Recoge dentro", work="Completa la previa",check="Consulta el objetivo en tu diario",
     itemDrop="Acepta si consigues el objeto",
     run="Completa dentro", turnin="Entrega", locked="Después de la previa", unknown="Inicio por confirmar"}
-local function line(kind,id) return verbs[kind] .. " · " .. title(id) end
+local questActions={pickup="accept",inside="accept",itemDrop="accept",work="complete",run="complete",turnin="turnin"}
+local function line(task)
+    task.questTitle = task.questTitle or title(task.id)
+    return verbs[task.kind] .. " · " .. task.questTitle
+end
 
 local function rebuild()
     local trips = saved()
@@ -256,7 +260,9 @@ local function rebuild()
     if trips.selected and chosen ~= trips.selected and (not here or trips.finished[trips.selected]) then trips.selected = nil end
     local out = {rows={}, key=chosen, plan=best}
     local function row(text, action)
-        out.rows[#out.rows+1] = {text=text, action=action, dungeon=chosen}
+        local entry={text=text, action=action, dungeon=chosen}
+        out.rows[#out.rows+1] = entry
+        return entry
     end
     local task, dungeon = best and best.tasks[1], data.dungeons[chosen]
     local group = IsInGroup and IsInGroup()
@@ -282,20 +288,29 @@ local function rebuild()
             local enter = not inside and (task.kind == "run" or task.kind == "inside" or
                 (task.kind == "turnin" and task.point and task.point.inside))
             out.heading = name
-            out.hint = enter and ("Ve a la entrada de " .. name) or line(task.kind,task.id)
+            out.hint = enter and ("Ve a la entrada de " .. name) or line(task)
             out.point = enter and dungeon.entrance or task.point
             if inside and task.kind ~= "inside" and task.kind ~= "run" and not (task.point and task.point.inside) then
                 out.point = nil
                 if task.point then
                     if task.kind == "turnin" then out.hint = "Sal de la mazmorra para continuar las entregas"
                     elseif task.kind == "work" or task.kind == "pickup" then
-                        out.hint = "Fuera de la mazmorra · " .. line(task.kind,task.id)
+                        out.hint = "Fuera de la mazmorra · " .. line(task)
                     end
                 end
             elseif enter then row(out.hint)
             elseif task.kind == "work" or task.kind == "check" then out.questPoint = task.id end
             for _, t in ipairs(best.tasks) do
-                row(line(t.kind,t.id) .. ((t.point and t.point.name) and (" · " .. t.point.name) or ""))
+                local p=t.point
+                local entry=row(line(t) .. ((p and p.name) and (" · " .. p.name) or ""))
+                entry.questID,entry.questTitle,entry.questAction=t.id,t.questTitle,questActions[t.kind]
+                entry.status=t.kind=="locked" and "blocked" or status(ctx,t.id)
+                entry.isCurrent=t==task
+                if p then
+                    if p.npc then entry.npcName=p.name
+                    elseif p.object then entry.objectName=p.name
+                    elseif p.item then entry.itemName=p.name end
+                end
             end
             row("Seguir con la ruta de mundo abierto", "later")
         else
@@ -306,10 +321,22 @@ local function rebuild()
     if not out.detour and focusedQuest then
         out.detour, out.world, out.match = true,focusedQuest,focusedMatch
         out.heading = title(focusedQuest)
-        out.hint = qs.Ready(focusedQuest) and "Entrega la misión" or "Continúa el objetivo de tu diario"
-        table.insert(out.rows,1,{text=out.hint .. " · " .. out.heading})
-        for _, obj in ipairs(C_QuestLog.GetQuestObjectives and C_QuestLog.GetQuestObjectives(focusedQuest) or {}) do
-            if obj.text and not obj.finished then table.insert(out.rows,2,{text=obj.text}) end
+        local ready=qs.Ready(focusedQuest)
+        local goal=focusedMatch and focusedMatch.goal
+        local action=ready and "turnin" or (goal and (goal.t or goal.action)) or "complete"
+        out.hint = ready and "Entrega la misión" or "Continúa el objetivo de tu diario"
+        table.insert(out.rows,1,{text=out.hint .. " · " .. out.heading,questID=focusedQuest,questTitle=out.heading,
+            questAction=action,status=ready and "ready" or "active",isCurrent=true,goal=goal})
+        local objectives=not ready and C_QuestLog.GetQuestObjectives and C_QuestLog.GetQuestObjectives(focusedQuest) or {}
+        local nextRow=2
+        for i,obj in ipairs(objectives) do
+            if obj.text and not obj.finished then
+                local matching=goal and (goal.oi or goal.objectiveIndex or goal.objective)==i and goal or nil
+                table.insert(out.rows,nextRow,{text=obj.text,questID=focusedQuest,questTitle=out.heading,
+                    questAction=matching and (matching.t or matching.action) or "complete",goal=matching,
+                    status="active",questObjectives=objectives,objectiveIndex=i})
+                nextRow=nextRow+1
+            end
         end
         row("Volver al paso de RutaXP", "world")
     end

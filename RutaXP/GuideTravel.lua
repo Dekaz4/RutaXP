@@ -198,6 +198,7 @@ local function travelView(self, source, dest, journey, saved)
 end
 
 function ns:UpdateGuideTravel()
+    if self.IsRecoveringCorpse and self:IsRecoveringCorpse() then return false end
     local old = self.guideTravelView
     local source, dest = travelContext(self)
     local view
