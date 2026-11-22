@@ -43,10 +43,15 @@ class DestinationTravelTests(unittest.TestCase):
         pin,view=h.route(goal)
         self.assertIsNone(pin)
         self.assertEqual(view.shortText, "Quédate a bordo en Costasur")
+        # A zone transition at sea cannot prove arrival, even far from port.
+        h.locate((1439,.01,.4413))
+        self.assertEqual(h.route(goal)[1].state,"crossing")
         h.locate((1439,.3234,.4413))
         pin,view=h.route(goal)
         self.assertEqual((pin.mapID,pin.x,pin.y),goal)
         self.assertEqual(view.state,"arrived")
+        self.assertEqual(h.route(goal)[1].state,"arrived")
+        h.h.lua.execute("local now=GetTime(); function GetTime() return now+9 end")
         self.assertIsNone(h.route(goal)[1])
 
     def test_real_taxi_observation_changes_plan_before_clock_advances(self):

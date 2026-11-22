@@ -4,6 +4,7 @@ local TRAM, TELDRASSIL, TREETOP = 369, 1438, "teldrassil-treetop"
 local walkSpeed, flightSpeed = 7, 32
 local cached, coordinates = {}, setmetatable({}, {__mode="k"})
 local flightDistances = {}
+local arrivals = {}
 
 -- Keep physical connections separate from the directed services that this
 -- character has actually been offered at a flight master.
@@ -181,6 +182,28 @@ local function portKey(e)
     return e.id and e.id..":"..e.from.map
 end
 
+local function nearStop(p,sample,radius)
+    return sample and select(3,sample(p)) <= radius^2
+end
+
+-- The map can change well out at sea. The landing, another known inland
+-- crossing/flight master, or the quest location itself is positive evidence
+-- that the player can continue on land after a missed sample or hearthstone.
+local function onArrivalSide(edge,network,sample,destination)
+    if not sample then return false end
+    if nearStop(edge.to,sample,65) then return true end
+    local zone=edge.to.map
+    if destination.mapID==zone and nearStop({map=zone,x=destination.x*100,y=destination.y*100},sample,50) then return true end
+    for _,exit in ipairs(network[edge.target] or {}) do
+        if exit.kind=="road" and nearStop(exit.from,sample,60) then return true end
+    end
+    for _,node in pairs(ns.GuideTaxiNodes or {}) do
+        if node.map==zone and nearStop(node,sample,55) then return true end
+    end
+    -- Hearthstoning to an inn can bypass the destination dock entirely.
+    return IsResting and IsResting()==true
+end
+
 local function routeState(self, channel, key)
     if not self.char then return {} end
     local trips=self.char.destinationTrips
@@ -203,25 +226,24 @@ function ns:RouteDestination(destination,key,channel)
     local start = R.CurrentNode(zone,sample)
     local faction = UnitFactionGroup("player")
     local fixed = R.Network(faction)
+    local now=GetTime and GetTime() or 0
     local held
     if saved.board and fixed then
         for _,e in ipairs(fixed[saved.origin] or {}) do
             if portKey(e)==saved.board then held=e; break end
         end
     end
-    local arrival
+    local notice=arrivals[channel]
+    local arrival=notice and notice.owner==self.char and notice.key==saved.key and notice.map==zone
+        and now>=notice.at and now-notice.at<8 and notice.text or nil
     if held then
         local name = held.to.name or mapName(held.to.map)
         if zone == held.to.map then
-            -- A zone transition may happen offshore. Keep the landing
-            -- instruction until the vessel reaches the arrival dock.
-            if sample and not R.Near({map=zone,x=held.to.x,y=held.to.y,f=held.to.f,radius=160},sample) then
-                local _,_,d=sample(held.to)
-                if d < 1000^2 then
-                    return nil,view(held.kind,"crossing","Espera a llegar a "..name,"Desembarca cuando llegues al muelle de "..name..".")
-                end
+            if not onArrivalSide(held,fixed,sample,destination) then
+                return nil,view(held.kind,"crossing","Espera a llegar a "..name,"Baja cuando el transporte llegue a "..name..".")
             end
             arrival = "Has llegado a "..name
+            arrivals[channel]={owner=self.char,key=saved.key,map=zone,at=now,text=arrival}
             saved.board,saved.origin=nil,nil
         elseif zone == TRAM or not zone or zone == held.from.map or (held.stop and zone==held.stop.map) then
             local short,text = instruction(held,zone,true,true)
@@ -243,7 +265,7 @@ function ns:RouteDestination(destination,key,channel)
     end
     if (actual==destination.mapID or zone==finish) and (zone~=TELDRASSIL or start==target) then
         saved.started=nil
-        return destination,arrival and view("arrival","arrived",arrival,"Desembarca y sigue la flecha hasta tu objetivo.",destination) or nil
+        return destination,arrival and view("arrival","arrived",arrival,"Sigue la flecha hasta tu objetivo.",destination) or nil
     end
     if channel=="chapter" and not saved.started and zone and zone~=TRAM and start~=TREETOP and finish~=TELDRASSIL then
         local here=self.PlayerPoint and self:PlayerPoint()
@@ -258,7 +280,6 @@ function ns:RouteDestination(destination,key,channel)
     if not start then
         return nil,view("travel","unknown","Ubica la salida de la zona","Acércate a un camino o un punto de transporte para retomar el recorrido.")
     end
-    local now = GetTime and GetTime() or 0
     local c = cached[channel]
     local revision = self.FlightNavigation and self.FlightNavigation.routeRevision or 0
     if not c or c.owner~=self.char or c.key~=saved.key or c.start~=start or c.target~=target or c.revision~=revision
