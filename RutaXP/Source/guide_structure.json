@@ -4,7 +4,7 @@
   "scope": {
     "guides": 57,
     "steps": 2338,
-    "goals": 7456,
+    "goals": 7457,
     "questIDs": 1901,
     "actions": {
       "accept": 2292,
@@ -23,22 +23,23 @@
       "sethome": 74,
       "talk": 10,
       "train": 126,
-      "turnin": 2291,
+      "turnin": 2292,
       "use": 19,
       "vendor": 48
     },
     "goalFields": {
-      "t": 7456,
-      "quest": 6503,
+      "t": 7457,
+      "quest": 6504,
       "oi": 1681,
       "item": 1217,
       "count": 1201,
       "pre": 1217,
       "preAll": 64,
       "closedBy": 159,
-      "chainStarted": 3,
+      "chainStarted": 15,
       "only": 355,
-      "optional": 415,
+      "optional": 416,
+      "optionalWhenOffered": 1,
       "minLevel": 2290,
       "maxLevel": 0,
       "level": 25,
@@ -12787,6 +12788,229 @@
       {
         "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
         "field": "step count"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 1,
+        "field": "quest",
+        "source": 215,
+        "snapshot": 203
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 2,
+        "field": "t",
+        "source": "turnin",
+        "snapshot": "accept"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 2,
+        "field": "quest",
+        "source": 215,
+        "snapshot": 204
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 2,
+        "field": "minLevel",
+        "source": null,
+        "snapshot": 30
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 3,
+        "field": "quest",
+        "source": 200,
+        "snapshot": 215
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 3,
+        "field": "pre",
+        "source": [
+          215
+        ],
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 3,
+        "field": "optional",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 3,
+        "field": "optionalWhenOffered",
+        "source": null,
+        "snapshot": true
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 4,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "turnin"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 4,
+        "field": "quest",
+        "source": 203,
+        "snapshot": 215
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 4,
+        "field": "chainStarted",
+        "source": null,
+        "snapshot": [
+          215
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 4,
+        "field": "minLevel",
+        "source": 30,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 5,
+        "field": "quest",
+        "source": 204,
+        "snapshot": 200
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 5,
+        "field": "pre",
+        "source": null,
+        "snapshot": [
+          215
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 9,
+        "goal": 5,
+        "field": "chainStarted",
+        "source": null,
+        "snapshot": [
+          215
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 11,
+        "goal": 1,
+        "field": "chainStarted",
+        "source": null,
+        "snapshot": [
+          200
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 11,
+        "goal": 2,
+        "field": "chainStarted",
+        "source": null,
+        "snapshot": [
+          200
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 11,
+        "goal": 3,
+        "field": "chainStarted",
+        "source": null,
+        "snapshot": [
+          328
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 11,
+        "goal": 4,
+        "field": "chainStarted",
+        "source": null,
+        "snapshot": [
+          328
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 12,
+        "field": "group shape/condition"
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 12,
+        "goal": 3,
+        "field": "chainStarted",
+        "source": null,
+        "snapshot": [
+          329
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 12,
+        "goal": 4,
+        "field": "chainStarted",
+        "source": null,
+        "snapshot": [
+          329
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 12,
+        "goal": 5,
+        "field": "chainStarted",
+        "source": null,
+        "snapshot": [
+          330
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 12,
+        "goal": 6,
+        "field": "chainStarted",
+        "source": null,
+        "snapshot": [
+          330
+        ]
+      },
+      {
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "step": 12,
+        "goal": 7,
+        "field": "chainStarted",
+        "source": null,
+        "snapshot": [
+          331
+        ]
       },
       {
         "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
@@ -26242,6 +26466,15 @@
             "https://www.wowhead.com/classic/quest=312/tundra-macgranns-stolen-stash"
           ],
           "reason": "Se entrega primero la infusión cronometrada, se recoge la taza de Durnan y se visitan los instructores antes de buscar a Félix en la puerta. La carne de MacGrann se recoge al salir de Las Birras hacia el almacén. Así se evita regresar desde la cantera oriental para un único encargo. La posición de los encargos de clase de nivel 10 se conserva."
+        }
+      },
+      {
+        "id": "stranglethorn-yohwa-before-thorsen-3",
+        "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+        "revision": 3,
+        "evidence": {
+          "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/04-stranglethorn-vale.guide",
+          "reason": "Las misiones 203 y 204 se recogen juntas en el Asentamiento Rebelde. La cadena 215 depende de la emboscada del soldado Thorsen y se puede iniciar cuando el NPC la ofrece."
         }
       }
     ],
@@ -45274,5 +45507,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "e29d86c4ca9601ee8d71631d605c1d72dde3be408ae1c366261726cf76573819"
+  "inputSha256": "cabeb388848f2661a4a331fb73962bbcc0cea843a8be2dbcaca6a08934108d9f"
 }

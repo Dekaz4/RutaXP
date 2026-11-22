@@ -21,7 +21,7 @@ ORIGINAL_SEMANTICS = "46bc091cc7034231f3f7138dc301eaff00126460d6abfe7745a3233ada
 STOUTFIST_REVISIONS = {"wetlands-old-habits-before-nekrosh-return-6", "wetlands-stoutfist-howin-prerequisites-5"}
 MID_ROUTE_REVISIONS = {
     "southshore-coast-return-7", "nijels-point-one-return-2", "desolace-menethil-auberdine-boat-3", "xavian-shared-satyrs-3",
-    "stranglethorn-snapjaw-and-island-2", "swamp-caravan-and-galen-3",
+    "stranglethorn-snapjaw-and-island-2", "stranglethorn-yohwa-before-thorsen-3", "swamp-caravan-and-galen-3",
     "desolace-karnitol-final-hearth-3", "booty-bay-captains-return-3", "aerie-peak-takeoff-2",
 }
 HORDE_ROUTE_REVISIONS = {"mulgore-kyle-level-4", "tirisfal-bandarion-after-leonid-4"}
@@ -327,12 +327,12 @@ class WholeGuideCoverageTests(unittest.TestCase):
     def test_inventory_accounts_for_every_goal_and_keeps_legitimate_exceptions_explicit(self):
         report = self.report
         self.assertEqual(report["totals"]["guides"], 57)
-        self.assertEqual(report["totals"]["goals"], 7456)
+        self.assertEqual(report["totals"]["goals"], 7457)
         self.assertEqual(report["totals"]["steps"], 2338)
-        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7456)
-        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7456)
+        self.assertEqual(sum(r["counts"]["goals"] for r in report["byGuide"]), 7457)
+        self.assertEqual(sum(r["goals"] for r in report["byAction"].values()), 7457)
         self.assertEqual(sum(report["totals"].get(k, 0) for k in
-                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7456)
+                             ("direct", "spots", "candidates", "missing", "no_fixed_navigation", "conditional_navigation")), 7457)
         self.assertEqual(report["invalidNavigation"], [])
         for item in report["missingNavigation"]:
             self.assertTrue(item["classification"])
@@ -537,7 +537,7 @@ class ShippedGuideRenderingTests(unittest.TestCase):
             end
             return count,errorCount,table.concat(errors,"; ")
         ''')
-        self.assertEqual(result, (7456, 0, ""))
+        self.assertEqual(result, (7457, 0, ""))
 
     def test_all_bundled_points_and_candidate_frames_resolve_with_the_real_navigation_converter(self):
         host = AccessHost()

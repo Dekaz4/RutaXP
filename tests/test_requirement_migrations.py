@@ -45,6 +45,32 @@ class RequirementHost(QuestEngineHost):
 
 
 class RequirementMigrationTests(unittest.TestCase):
+    def test_rebel_camp_moves_saved_marks_with_the_quest_and_releases_old_event_recovery(self):
+        guide_id = "forever/alliance/30-40/04-stranglethorn-vale"
+        h = QuestEngineHost(catalog=True)
+        h.load((ADDON / "GuideMigrations.lua").read_text(encoding="utf-8-sig"), "RutaXP", h.ns)
+        for requested, required, keep in [(200, [215], False), (331, [], False), (203, [204], True)]:
+            with self.subTest(requested=requested):
+                h.ns.char = h.table({
+                    "activeGuide": "_recovery", "progress": {guide_id: {
+                        "cursor": 11, "routeRevision": 2, "skipped": {"9:1": True},
+                        "confirmed": {"9:4": True}}},
+                    "recovery": {"active": True, "requestedQuestID": requested, "requiredQuestIDs": required,
+                                 "bookmark": {"guideID": guide_id, "cursor": 11}},
+                })
+                h.call("MigrateGuideProgress")
+                char = h.ns.char
+                state = char.progress[guide_id]
+                self.assertEqual((state.routeRevision, state.cursor), (3, 11))
+                self.assertEqual(primitive_copy(state.skipped), {"9:3": True})
+                self.assertEqual(primitive_copy(state.confirmed), {"9:1": True})
+                self.assertIsNone(state.requirementsRepair)
+                self.assertEqual(char.activeGuide, "_recovery" if keep else guide_id)
+                self.assertEqual(char.recovery is not None, keep)
+                before = primitive_copy(char)
+                h.call("MigrateGuideProgress")
+                self.assertEqual(primitive_copy(char), before)
+
     def test_retired_waypoint_is_saved_in_backup_and_releases_the_arrow(self):
         key = ROUTE + ":3:2:note:"
         kept = ROUTE + ":1:1:accept:100"

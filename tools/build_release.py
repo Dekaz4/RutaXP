@@ -138,6 +138,8 @@ def main():
                     "test_updater.py", "test_updater.ps1", "test_release.py", "test_publish_release.py",
                     "test_walking_lookahead.py", "test_walking_history.py", "test_corpse_navigation.py",
                     "test_golden_quest_arrow.py", "test_navigation_world_consistency.py",
+                    "test_access_navigation.py", "test_duo.py", "test_duo_enhanced.py", "test_duo_journey.py",
+                    "test_requirement_migrations.py", "test_talent_trainer_regressions.py", "test_westfall_migration.py",
                     "test_quest_engine.py", "test_addon.py"):
         for source in sorted(test_dir.glob(pattern)):
             release_files[source.relative_to(ROOT).as_posix()] = source.read_bytes()

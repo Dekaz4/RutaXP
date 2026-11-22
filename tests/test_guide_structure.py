@@ -134,7 +134,7 @@ class GuideStructureAuditTests(unittest.TestCase):
 
     def test_shipped_report_covers_all_guides_and_keeps_the_48_work_cases_explicit(self):
         report = json.loads((ROOT / "RutaXP/Source/guide_structure.json").read_text(encoding="utf-8"))
-        self.assertEqual((report["scope"]["guides"], report["scope"]["steps"], report["scope"]["goals"]), (57, 2338, 7456))
+        self.assertEqual((report["scope"]["guides"], report["scope"]["steps"], report["scope"]["goals"]), (57, 2338, 7457))
         self.assertEqual(report["sourceComparison"]["structuralDifferences"], [])
         comparison = report["sourceComparison"]
         revisions = json.loads((ROOT / "RutaXP/Source/guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
@@ -186,6 +186,8 @@ class GuideStructureAuditTests(unittest.TestCase):
         expected_actions["use"] += 1
         # The Menethil to Auberdine boat is now tracked ahead of the two existing actions.
         expected_actions["boat"] += 1
+        # A player who meets Thorsen on the road can deliver at the return to Rebel Camp.
+        expected_actions["turnin"] += 1
         self.assertEqual(report["scope"]["actions"], expected_actions)
         coverage = report["workCoverage"]
         self.assertEqual(coverage["sourceQuestsWithObjectives"], 48)

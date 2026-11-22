@@ -35,6 +35,9 @@ end
 
 local function currentAdvice(self, row, state)
     local status, reason = self:GetGoalStatus(row.goal, row.step, state, row.g)
+    if row.goal.optionalWhenOffered and (status == "active" or reason == self.eventOfferReason) then
+        return row.goal.note or "Puedes aceptarla si te interesa.", "opcional"
+    end
     if status == "skip" and self.GetLevelingDetourReason and self:GetLevelingDetourReason(row.goal) then return reason, "opcional" end
     if status == "blocked" then return reason, "estado" end
     if status == "skip" and reason ~= "Opcional desactivado" then return reason, "estado" end

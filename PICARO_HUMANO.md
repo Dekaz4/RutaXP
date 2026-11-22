@@ -1,6 +1,6 @@
 # Ruta del pícaro humano
 
-26 capítulos, 932 pasos y 2927 acciones examinadas. 2733 acciones son compatibles por raza y clase, incluidas las opcionales.
+26 capítulos, 932 pasos y 2928 acciones examinadas. 2734 acciones son compatibles por raza y clase, incluidas las opcionales.
 
 En 75 misiones del recorrido hay armas para el pícaro o cuero, capas y accesorios con atributos físicos. Desde nivel 10, la cadena de Keryn y Mathias Shaw da la Hoja de Astucia. Al aceptar o entregar una misión con equipo, pasa el ratón sobre la fila para ver qué recibes y qué puedes elegir.
 
@@ -22,7 +22,7 @@ Los números de paso y fila son los del addon. Las coordenadas usan el mapa del 
 | Los Humedales, Laderas de Trabalomas, Forjaz y Ciudad de Ventormenta | 42 | 115 / 117 | Recorrido ajustado |
 | Desolace | 21 | 43 / 45 | Recorrido ajustado |
 | Vallefresno & Los Humedales | 34 | 74 / 74 | Recorrido ajustado |
-| Vega de Tuercespina | 35 | 115 / 116 | Recorrido ajustado |
+| Vega de Tuercespina | 35 | 116 / 117 | Recorrido ajustado |
 | Tierras Altas de Arathi, Montañas de Alterac y Pantano de las Penas | 48 | 126 / 135 | Recorrido ajustado |
 | Tierras Inhóspitas & Desolace | 38 | 93 / 93 | Recorrido ajustado |
 | Vega de Tuercespina, Marjal Revolcafango y Pantano de las Penas | 51 | 156 / 173 | Recorrido ajustado |
@@ -1301,11 +1301,11 @@ La piel 4104 se entrega en Bahía del Botín y 577 carece de sucesor en la ruta.
 | 7.1 | Derrotar · Maestría en tigres (#186) | Tigre de Tuercespina ×10 · mapa 1434 · 36.4, 13.8 |
 | 8.1 | Entregar · Maestría en tigres (#186) | Ajeck Rouack · mapa 1434 · 35.62, 10.62 |
 | 8.2 | Aceptar · Domina el tigre (#187) | Ajeck Rouack · desde nivel 28 · previa 186 · mapa 1434 · 35.62, 10.62 |
-| 9.1 | Aceptar · Los secretos de la jungla (#215) | Soldado Thorsen · desde nivel 30 · mapa 1434 · 40.34, 8.44 |
-| 9.2 | Entregar · Los secretos de la jungla (#215) | Teniente Doren · mapa 1434 · 38.04, 3.01 |
-| 9.3 | Aceptar · Bookie Herod (#200) | Teniente Doren · desde nivel 30 · previa 215 · mapa 1434 · 38.04, 3.01 |
-| 9.4 | Aceptar · La segunda rebelión (#203) | Sargento Yohwa · desde nivel 30 · mapa 1434 · 38.02, 3.33 |
-| 9.5 | Aceptar · Mala medicina (#204) | Sargento Yohwa · desde nivel 30 · mapa 1434 · 38.02, 3.33 · a elegir · Cuchilla de guerrilla |
+| 9.1 | Aceptar · La segunda rebelión (#203) | Sargento Yohwa · desde nivel 30 · mapa 1434 · 38.02, 3.33 |
+| 9.2 | Aceptar · Mala medicina (#204) | Sargento Yohwa · desde nivel 30 · mapa 1434 · 38.02, 3.33 · a elegir · Cuchilla de guerrilla |
+| 9.3 | Aceptar · Los secretos de la jungla (#215) | Soldado Thorsen · desde nivel 30 · opcional · mapa 1434 · 40.34, 8.44 |
+| 9.4 | Entregar · Los secretos de la jungla (#215) | Teniente Doren · mapa 1434 · 38.04, 3.01 |
+| 9.5 | Aceptar · Bookie Herod (#200) | Teniente Doren · desde nivel 30 · previa 215 · mapa 1434 · 38.04, 3.01 |
 | 10.1 | Derrotar · La segunda rebelión (#203) | Jíbaro Kurzen ×15 · mapa 1434 · 43.57, 9.73 |
 | 10.2 | Recoger · Mala medicina (#204) | Remedio de la selva ×7 · Médico brujo Kurzen · mapa 1434 · 43.7, 9.53 |
 | 10.3 | Recoger · Mala medicina (#204) | Extracto de helecho venenoso · Suministros Kurzen · mapa 1434 · 44.1, 9.54 |
@@ -1320,6 +1320,7 @@ La piel 4104 se entrega en Bahía del Botín y 577 carece de sucesor en la ruta.
 | 12.5 | Entregar · Horarios de patrulla (#330) | Cabo Sethman · mapa 1434 · 37.66, 3.39 |
 | 12.6 | Aceptar · Informa a Doren (#331) | Cabo Sethman · desde nivel 30 · previa 330 · mapa 1434 · 37.66, 3.39 |
 | 12.7 | Entregar · Informa a Doren (#331) | Teniente Doren · mapa 1434 · 38.04, 3.01 |
+| 12.8 | Entregar · Los secretos de la jungla (#215) | Teniente Doren · mapa 1434 · 38.04, 3.01 |
 | 13.1 | Derrotar · Domina la pantera (#191) | Pantera ×10 · mapa 1434 · 30.4, 8.8 |
 | 13.2 | Derrotar · Domina el raptor (#194) | Raptor de Tuercespina ×10 · mapa 1434 · 27.79, 14.32 |
 | 13.3 | Derrotar · Domina el tigre (#187) | Tigre de Tuercespina mayor ×10 · mapa 1434 · 31.29, 16.62 |

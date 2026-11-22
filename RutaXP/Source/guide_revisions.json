@@ -18287,6 +18287,437 @@
         ],
         "reason": "Se entrega primero la infusión cronometrada, se recoge la taza de Durnan y se visitan los instructores antes de buscar a Félix en la puerta. La carne de MacGrann se recoge al salir de Las Birras hacia el almacén. Así se evita regresar desde la cantera oriental para un único encargo. La posición de los encargos de clase de nivel 10 se conserva."
       }
+    },
+    {
+      "id": "stranglethorn-yohwa-before-thorsen-3",
+      "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
+      "previousRevision": 2,
+      "revision": 3,
+      "sourceShape": "3b12143d594550a2029e053953a1bfcd9377e0a6e207543ff1c7a176af3a98e0",
+      "resultShape": "2eaaabd51de31e0a2c47d1a94d72b6c886abb969432db4a7dd013add8e31e724",
+      "previousGoalCounts": [
+        2,
+        1,
+        1,
+        6,
+        2,
+        4,
+        1,
+        2,
+        5,
+        3,
+        4,
+        7,
+        4,
+        5,
+        2,
+        9,
+        1,
+        1,
+        3,
+        1,
+        1,
+        10,
+        1,
+        1,
+        6,
+        2,
+        2,
+        7,
+        4,
+        6,
+        1,
+        1,
+        7,
+        1,
+        2
+      ],
+      "steps": [
+        {
+          "sourceStep": 1
+        },
+        {
+          "sourceStep": 2
+        },
+        {
+          "sourceStep": 3
+        },
+        {
+          "sourceStep": 4
+        },
+        {
+          "sourceStep": 5
+        },
+        {
+          "sourceStep": 6
+        },
+        {
+          "sourceStep": 7
+        },
+        {
+          "sourceStep": 8
+        },
+        {
+          "title": "Asentamiento Rebelde",
+          "note": "Habla primero con el sargento Yohwa para recoger sus dos misiones. Si el soldado Thorsen te ofrece «Los secretos de la jungla» después de la emboscada, puedes aceptarla de paso.",
+          "goals": [
+            [
+              9,
+              4
+            ],
+            [
+              9,
+              5
+            ],
+            [
+              9,
+              1
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              9,
+              3
+            ]
+          ]
+        },
+        {
+          "sourceStep": 10
+        },
+        {
+          "sourceStep": 11
+        },
+        {
+          "title": "Asentamiento Rebelde",
+          "goals": [
+            [
+              12,
+              1
+            ],
+            [
+              12,
+              2
+            ],
+            [
+              12,
+              3
+            ],
+            [
+              12,
+              4
+            ],
+            [
+              12,
+              5
+            ],
+            [
+              12,
+              6
+            ],
+            [
+              12,
+              7
+            ],
+            {
+              "added": "jungle-secrets-on-camp-return"
+            }
+          ]
+        },
+        {
+          "sourceStep": 13
+        },
+        {
+          "sourceStep": 14
+        },
+        {
+          "sourceStep": 15
+        },
+        {
+          "sourceStep": 16
+        },
+        {
+          "sourceStep": 17
+        },
+        {
+          "sourceStep": 18
+        },
+        {
+          "sourceStep": 19
+        },
+        {
+          "sourceStep": 20
+        },
+        {
+          "sourceStep": 21
+        },
+        {
+          "sourceStep": 22
+        },
+        {
+          "sourceStep": 23
+        },
+        {
+          "sourceStep": 24
+        },
+        {
+          "sourceStep": 25
+        },
+        {
+          "sourceStep": 26
+        },
+        {
+          "sourceStep": 27
+        },
+        {
+          "sourceStep": 28
+        },
+        {
+          "sourceStep": 29
+        },
+        {
+          "sourceStep": 30
+        },
+        {
+          "sourceStep": 31
+        },
+        {
+          "sourceStep": 32
+        },
+        {
+          "sourceStep": 33
+        },
+        {
+          "sourceStep": 34
+        },
+        {
+          "sourceStep": 35
+        }
+      ],
+      "goalChanges": [
+        {
+          "match": {
+            "t": "accept",
+            "quest": 215
+          },
+          "count": 1,
+          "set": {
+            "optional": true,
+            "optionalWhenOffered": true,
+            "note": "Si ves la emboscada, ayuda al soldado Thorsen y habla con él al terminar. Si no está, sigue con las misiones de Yohwa."
+          }
+        },
+        {
+          "match": {
+            "t": "turnin",
+            "quest": 215
+          },
+          "count": 2,
+          "set": {
+            "chainStarted": [
+              215
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 200
+          },
+          "count": 1,
+          "set": {
+            "chainStarted": [
+              215
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "turnin",
+            "quest": 200
+          },
+          "count": 1,
+          "set": {
+            "chainStarted": [
+              200
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 328
+          },
+          "count": 1,
+          "set": {
+            "chainStarted": [
+              200
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "turnin",
+            "quest": 328
+          },
+          "count": 1,
+          "set": {
+            "chainStarted": [
+              328
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 329
+          },
+          "count": 1,
+          "set": {
+            "chainStarted": [
+              328
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "turnin",
+            "quest": 329
+          },
+          "count": 1,
+          "set": {
+            "chainStarted": [
+              329
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 330
+          },
+          "count": 1,
+          "set": {
+            "chainStarted": [
+              329
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "turnin",
+            "quest": 330
+          },
+          "count": 1,
+          "set": {
+            "chainStarted": [
+              330
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "accept",
+            "quest": 331
+          },
+          "count": 1,
+          "set": {
+            "chainStarted": [
+              330
+            ]
+          }
+        },
+        {
+          "match": {
+            "t": "turnin",
+            "quest": 331
+          },
+          "count": 1,
+          "set": {
+            "chainStarted": [
+              331
+            ]
+          }
+        }
+      ],
+      "retiredRecoveryQuestIDs": [
+        215,
+        200,
+        328,
+        329,
+        330,
+        331
+      ],
+      "evidence": {
+        "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/guides/forever/alliance/30-40/04-stranglethorn-vale.guide",
+        "reason": "Las misiones 203 y 204 se recogen juntas en el Asentamiento Rebelde. La cadena 215 depende de la emboscada del soldado Thorsen y se puede iniciar cuando el NPC la ofrece."
+      },
+      "originalGoalValues": {
+        "9:1": {
+          "optional": null,
+          "optionalWhenOffered": null,
+          "note": "Soldado Thorsen"
+        },
+        "9:2": {
+          "chainStarted": null
+        },
+        "9:3": {
+          "chainStarted": null
+        },
+        "11:1": {
+          "chainStarted": null
+        },
+        "11:2": {
+          "chainStarted": null
+        },
+        "11:3": {
+          "chainStarted": null
+        },
+        "11:4": {
+          "chainStarted": null
+        },
+        "12:3": {
+          "chainStarted": null
+        },
+        "12:4": {
+          "chainStarted": null
+        },
+        "12:5": {
+          "chainStarted": null
+        },
+        "12:6": {
+          "chainStarted": null
+        },
+        "12:7": {
+          "chainStarted": null
+        }
+      },
+      "addedGoals": {
+        "jungle-secrets-on-camp-return": {
+          "goal": {
+            "title": "Los secretos de la jungla",
+            "note": "Si rescataste a Thorsen después de salir del campamento, entrega la misión a Doren en la cabaña al volver con Yohwa.",
+            "t": "turnin",
+            "quest": 215,
+            "npc": 469,
+            "npcName": "Teniente Doren",
+            "map": 1434,
+            "x": 38.04,
+            "y": 3.01,
+            "z": 75.9,
+            "f": "e",
+            "chainStarted": [
+              215
+            ]
+          },
+          "evidence": {
+            "navigationDonor": "forever/alliance/30-40/04-stranglethorn-vale:9:4",
+            "source": "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Quests.lua#L217",
+            "reason": "El teniente Doren recibe la 215 dentro del mismo campamento al que el personaje ya regresa para entregar 203 y 204 a Yohwa."
+          }
+        }
+      }
     }
   ]
 }

@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "a5a6488099961148ad8986e7bfe4dea32e749724639ca8419bf9e735e0961925",
+      "sha256": "6f07c995a3b1133771492e8b3e3d52c325ae7a31395ed5d5217f1efed2efcd18",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -575,15 +575,16 @@
         "hillsbrad-town-hall-request-8",
         "desolace-menethil-auberdine-boat-3",
         "dun-morogh-warlock-first-demons-3",
-        "dun-morogh-western-visits-4"
+        "dun-morogh-western-visits-4",
+        "stranglethorn-yohwa-before-thorsen-3"
       ]
     }
   },
   "totals": {
     "guides": 57,
-    "goals": 7456,
-    "direct": 6593,
-    "generated_instruction": 7456,
+    "goals": 7457,
+    "direct": 6594,
+    "generated_instruction": 7457,
     "missing_goal_note_text": 3657,
     "missing": 267,
     "no_fixed_point_expected": 279,
@@ -715,9 +716,9 @@
       "direct": 9
     },
     "turnin": {
-      "goals": 2291,
-      "direct": 2291,
-      "generated_instruction": 2291,
+      "goals": 2292,
+      "direct": 2292,
+      "generated_instruction": 2292,
       "missing_goal_note_text": 777,
       "empty_authored_subtitle": 81
     },
@@ -1922,12 +1923,12 @@
       "guideID": "forever/alliance/30-40/04-stranglethorn-vale",
       "title": "Vega de Tuercespina",
       "counts": {
-        "goals": 116,
+        "goals": 117,
         "candidates": 14,
-        "generated_instruction": 116,
+        "generated_instruction": 117,
         "missing_goal_note_text": 36,
         "empty_authored_subtitle": 6,
-        "direct": 99,
+        "direct": 100,
         "missing": 3,
         "no_fixed_point_expected": 3
       },
@@ -1990,9 +1991,9 @@
           "missing_goal_note_text": 2
         },
         "turnin": {
-          "goals": 39,
-          "direct": 39,
-          "generated_instruction": 39,
+          "goals": 40,
+          "direct": 40,
+          "generated_instruction": 40,
           "missing_goal_note_text": 9
         },
         "vendor": {
@@ -16350,6 +16351,7 @@
       "count",
       "only",
       "optional",
+      "optionalWhenOffered",
       "minLevel",
       "maxLevel",
       "level",
@@ -16379,6 +16381,6 @@
       "visitQuest",
       "requiredTravel"
     ],
-    "semanticsSha256": "815b4de26ef7895dd7d541d0d66209d5430c9dca24f9ebf8155ce5211c2c3196"
+    "semanticsSha256": "443d51a0d095ff4a7a1781dc2432a1449bf1afa9f265f837c1e84d321a70ff05"
   }
 }

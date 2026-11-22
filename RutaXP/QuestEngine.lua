@@ -238,7 +238,7 @@ local function isClosedBranch(self, goal)
     return false
 end
 
-local function isUnstartedChain(self, goal)
+function ns:IsUnstartedQuestChain(goal)
     local ids = goal and goal.chainStarted
     if not ids or #ids == 0 then return false end
     for _, id in ipairs(ids) do
@@ -246,6 +246,8 @@ local function isUnstartedChain(self, goal)
     end
     return true
 end
+
+ns.eventOfferReason = "Opcional. Puedes seguir la ruta si el evento no está disponible."
 
 local function earlierAccept(self, layout, id, stepIndex, goalIndex)
     local found
@@ -758,11 +760,16 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
     -- An early visit can serve an already-started chain whose normal pickup
     -- belongs to a later chapter. Keep its acceptance and work together, and
     -- never suppress a quest actually carried in the live journal.
-    if not onQuest and (isUnstartedChain(self, goal) or (id and action ~= "accept"
-        and isUnstartedChain(self, earlierAccept(self, layout, id, stepIndex, index)))) then
+    if not onQuest and (self:IsUnstartedQuestChain(goal) or (id and action ~= "accept"
+        and self:IsUnstartedQuestChain(earlierAccept(self, layout, id, stepIndex, index)))) then
         return "skip", "Esta cadena se retoma en una visita posterior"
     end
-    if goal.optional and not (self.char and self.char.optional) and not onQuest
+    -- A patrol's recorded position does not mean its quest is available.
+    -- Only the actual offer can turn this hint into a pickup.
+    if goal.optionalWhenOffered and not (self.IsQuestOnOpenMenu and self:IsQuestOnOpenMenu(id, goal.npc)) then
+        return "skip", self.eventOfferReason
+    end
+    if goal.optional and not goal.optionalWhenOffered and not (self.char and self.char.optional) and not onQuest
         and not self:IsSoloLevelingDetour(goal)
         and not (id and (includeGroup or self.char and self.char.includeGroupQuests) and isGroupQuest(self, id, layout)) then
         return "skip", "Opcional desactivado"
@@ -1269,7 +1276,10 @@ function ns:GetStepGoalItems(step, state)
     for index, goal in ipairs(step.goals) do
         local status, reason = self:GetGoalStatus(goal, step, state, index)
         local manualSkip = status == "skip" and reason and reason:find("Omitido manualmente", 1, true) == 1
-        if status == "skip" and (reason == groupReason or reason == chainReason) then
+        if status == "skip" and reason == self.eventOfferReason then
+            items[#items+1] = {action="note", status="skip", isCurrent=false,
+                title="Opcional · " .. questLabel(nil, goal.quest or goal.questID, goal.title), subtitle=goal.note or reason}
+        elseif status == "skip" and (reason == groupReason or reason == chainReason) then
             local id = goal.quest or goal.questID
             if id and not groupRows[id] and (state.review or not currentIdx) then
                 items[#items+1] = {action="note",status="skip",isCurrent=false,
@@ -1384,7 +1394,9 @@ function ns:GetObjectives(step)
     for index, goal in ipairs(step.goals) do
         local status, reason = self:GetGoalStatus(goal, step, state, index)
         local manualSkip = status == "skip" and reason and reason:find("Omitido manualmente", 1, true) == 1
-        if status == "skip" and (reason == groupReason or reason == chainReason) then
+        if status == "skip" and reason == self.eventOfferReason then
+            lines[#lines+1] = "|cff9ba8b8[Opcional] " .. questLabel(nil, goal.quest or goal.questID, goal.title) .. " · " .. (goal.note or reason) .. "|r"
+        elseif status == "skip" and (reason == groupReason or reason == chainReason) then
             local id = goal.quest or goal.questID
             if id and not groupRows[id] then
                 lines[#lines+1] = "|cff9ba8b8[Opcional] " .. questLabel(nil,id,goal.title) .. " · " .. reason .. "|r"
@@ -1814,7 +1826,7 @@ end
 local events = CreateFrame("Frame")
 for _, event in ipairs({
     "BAG_UPDATE_DELAYED", "HEARTHSTONE_BOUND", "NEW_TAXI_PATH", "TAXIMAP_OPENED",
-    "MERCHANT_SHOW", "TRAINER_SHOW", "GOSSIP_SHOW", "QUEST_GREETING", "QUEST_DETAIL",
+    "MERCHANT_SHOW", "TRAINER_SHOW", "GOSSIP_SHOW", "QUEST_GREETING", "QUEST_DETAIL", "GOSSIP_CLOSED", "QUEST_FINISHED",
     "QUEST_PROGRESS", "QUEST_COMPLETE", "UNIT_SPELLCAST_SUCCEEDED",
     "ZONE_CHANGED_NEW_AREA", "SKILL_LINES_CHANGED", "TRADE_SKILL_LIST_UPDATE", "PLAYER_ENTERING_WORLD"
 }) do
@@ -1822,6 +1834,13 @@ for _, event in ipairs({
 end
 events:SetScript("OnEvent", function(_, event, ...)
     if not ns.initialized then return end
+    if event == "GOSSIP_CLOSED" or event == "QUEST_FINISHED" then
+        local _, step = ns:GetCurrent()
+        for _, goal in ipairs(step and step.goals or {}) do
+            if goal.optionalWhenOffered then ns:Sync(); break end
+        end
+        return
+    end
     if event == "SKILL_LINES_CHANGED" or event == "TRADE_SKILL_LIST_UPDATE" or event == "PLAYER_ENTERING_WORLD" then
         ns:InvalidateProfessionRequirements()
     end

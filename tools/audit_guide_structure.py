@@ -25,7 +25,7 @@ PIN = "5d207e28e82e2c529143b21ace74fe88692f0067"
 CLASSES = ("WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", "WARLOCK", "DRUID")
 RACES = {"Alliance": ("Human", "Dwarf", "Gnome", "NightElf", "Skyborne"),
          "Horde": ("Orc", "Troll", "Tauren", "Scourge", "Skyborne")}
-FIELDS = ("t", "quest", "oi", "item", "count", "pre", "preAll", "closedBy", "chainStarted", "only", "optional",
+FIELDS = ("t", "quest", "oi", "item", "count", "pre", "preAll", "closedBy", "chainStarted", "only", "optional", "optionalWhenOffered",
           "minLevel", "maxLevel", "level", "n", "class", "group", "order", "departure", "departureLand", "arrival", "arrivalDock",
           "stopover", "arrivalAlternatives", "visitQuest", "requiredTravel")
 GOAL_ACTIONS = {"accept", "turnin", "kill", "collect", "train", "goto", "sethome", "complete", "hearth",

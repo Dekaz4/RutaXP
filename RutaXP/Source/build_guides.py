@@ -170,7 +170,7 @@ def apply_guide_overrides(document: dict[str, Any], path: Path) -> list[str]:
 
 
 ROUTE_FIELDS = ("t", "quest", "oi", "item", "count", "pre", "preAll", "closedBy", "chainStarted", "only", "optional",
-                "minLevel", "maxLevel", "level", "n", "class", "group", "order",
+                "optionalWhenOffered", "minLevel", "maxLevel", "level", "n", "class", "group", "order",
                 "profLine", "profRank", "profName", "requiresSkill", "departure", "departureLand", "arrival", "arrivalDock",
                 "stopover", "arrivalAlternatives", "visitQuest", "requiredTravel")
 
@@ -309,6 +309,8 @@ def revision_progress(revision: dict[str, Any]) -> dict[str, Any] | None:
         result["addedGoalKeys"] = added_keys
     if retired:
         result["retiredGoalKeys"] = dict.fromkeys(retired, True)
+    if revision.get("retiredRecoveryQuestIDs"):
+        result["retiredRecoveryQuestIDs"] = revision["retiredRecoveryQuestIDs"]
     return result
 
 

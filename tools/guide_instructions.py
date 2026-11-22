@@ -198,6 +198,8 @@ def instruction_for(goal: Mapping[str, Any], zone_name: str | None = None, *, so
             base = f"Si tienes {label} en tus bolsas, haz clic derecho en él para iniciar {quest}."
         elif obj:
             base = f"Interactúa con {_quote(obj)} y acepta {quest}."
+        elif npc and goal.get("optionalWhenOffered"):
+            base = f"Puedes aceptar {quest} si {_quote(npc)} te la ofrece."
         elif npc:
             base = f"Habla con {_quote(npc)} y acepta {quest}."
         else:

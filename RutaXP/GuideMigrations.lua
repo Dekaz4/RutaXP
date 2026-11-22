@@ -293,8 +293,16 @@ local function applyMigration(self, id, state, migration)
         lease.reviews[id].cursor = mapStep(migration, lease.reviews[id].cursor)
     end
     if bookmark and saved.active then
-        local stale = affected[saved.requestedQuestID]
-        for _, q in ipairs(saved.requiredQuestIDs or {}) do stale = stale or affected[q] end
+        -- A previously mandatory branch can become optional without changing
+        -- any prerequisites or rewinding characters already past that visit.
+        local function staleQuest(q)
+            if affected[q] then return true end
+            for _, retired in ipairs(migration.retiredRecoveryQuestIDs or {}) do
+                if q == retired then return true end
+            end
+        end
+        local stale = staleQuest(saved.requestedQuestID)
+        for _, q in ipairs(saved.requiredQuestIDs or {}) do stale = stale or staleQuest(q) end
         if stale then
             if runningRecovery then
                 char.activeGuide = id

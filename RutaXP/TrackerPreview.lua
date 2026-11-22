@@ -210,6 +210,9 @@ function ns:GetTrackerPlannedUpcomingItems(guide,fromCursor,limit)
             local q=quest and status(quest)
             if self:GetLevelingDetourReason(goal,q and q.active,q and q.complete) then return false end
         end
+        if goal.optionalWhenOffered then return false end
+        if goal.chainStarted and not (id and status(id).active)
+            and self.IsUnstartedQuestChain and self:IsUnstartedQuestChain(goal) then return false end
         if goal.optional and not char.optional and not (id and status(id).active)
             and not (self.IsSoloLevelingDetour and self:IsSoloLevelingDetour(goal))
             and not (id and char.includeGroupQuests and self.IsGroupQuest and self:IsGroupQuest(id,guide)) then return false end
