@@ -38,13 +38,34 @@ def fix_arrow_vector(text):
     return text
 
 
+def adapt_arrow(text):
+    text = fix_arrow_vector(text)
+    start = "local function SetArrowDirection(texture, rads)"
+    screen = "local function CreateScreenArrow()"
+    old_art = 'arrow:SetTexture(I["arrow-atlas.png"])'
+    art = r'arrow:SetTexture([[Interface\AddOns\RutaXP\Media\Nav\quest-direction.tga]])'
+    if start not in text and screen not in text:
+        return text
+    if art in text:
+        return text  # The installed UI already uses the directional texture.
+    if any(text.count(anchor) != 1 for anchor in (start, screen, old_art, "f:SetSize(128, 128)")):
+        raise ValueError("No se reconoce el dibujo de la brújula de Journey.")
+    begin, end = text.index(start), text.index(screen)
+    if begin >= end:
+        raise ValueError("La estructura de la brújula de Journey es incompatible.")
+    # Keep Journey's HUD, distance, draggable frame and arrival animation.
+    # Positive bearings turn from north towards west, as does SetRotation.
+    text = text[:begin] + start + "\n    texture:SetRotation(rads)\nend\n\n" + text[end:]
+    return text.replace(old_art, art).replace("f:SetSize(128, 128)", "f:SetSize(80, 80)")
+
+
 def embedded_contents(read):
     """Update the already-adapted UI from an earlier RutaXP personal installation."""
     for script in SCRIPTS:
         name = PREFIX + script
         data = read(name)
         if script == "lib/TomCats/Arrows.lua":
-            data = fix_arrow_vector(data.decode("utf-8-sig")).encode("utf8")
+            data = adapt_arrow(data.decode("utf-8-sig")).encode("utf8")
         yield name, data
     for asset in (*("images/" + image for image in IMAGES), "license.txt"):
         yield PREFIX + asset, read(PREFIX + asset)
@@ -76,7 +97,7 @@ def contents(root):
         if script == "ui/TaskDetailContainers.lua":
             text = text.replace("JGGameFontWhite", "RutaXPJourneyGameFontWhite")
         if script == "lib/TomCats/Arrows.lua":
-            text = fix_arrow_vector(text)
+            text = adapt_arrow(text)
             text = text.replace('math.floor(distance + 0.5) .. " yards"', 'FormatJourneyDistance(distance)')
         if script == "ui/HeaderStep.lua":
             text = text.replace('("Step: %s"):format(stepText)', 'FormatJourneyStep(stepText)')

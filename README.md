@@ -1,6 +1,6 @@
 # RutaXP para WoW Forever
 
-RutaXP 1.2.4 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos y la brújula usan la interfaz de tu copia de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
+RutaXP 1.2.5 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos y la brújula usan la interfaz de tu copia de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
 
 ## Actualizar
 
@@ -30,7 +30,7 @@ Pulsa **M** y abre **Filtros** en la esquina superior derecha del mapa, junto al
 
 Los servicios se dibujan también en la primera apertura del mapa. En pueblos como Kharanos y Theramore, los iconos de distintos servicios se separan y el texto al pasar el ratón identifica a sus proveedores.
 
-Si el objetivo está en otro continente, el panel de Journey indica cómo llegar al siguiente transporte. La brújula señala el muelle o el maestro de vuelo. Las conexiones observadas en el mapa de vuelo de ese personaje permiten incorporar vuelos al viaje. En la travesía de Menethil a Auberdine, la guía indica que permanezcas a bordo en Costasur y recupera el destino de misión al llegar. La brújula comparte la opción `/rutaxp flecha` y conserva la posición que ya habías elegido.
+Si el objetivo está en otro continente, el panel de Journey indica cómo llegar al siguiente transporte. La brújula señala el muelle o el maestro de vuelo. Las conexiones observadas en el mapa de vuelo de ese personaje permiten incorporar vuelos al viaje. En la travesía de Menethil a Auberdine, la guía indica que permanezcas a bordo en Costasur y recupera el destino de misión al llegar. La flecha de misión es dorada y lleva dos marcas en la cola. Al liberar el espíritu señala el cadáver y al resucitar recupera el objetivo anterior. La brújula comparte la opción `/rutaxp flecha` y conserva la posición que ya habías elegido.
 
 Para desplazamientos largos por varias zonas, la guía calcula primero la parada local. Mientras busca un camino transitable puede mostrar «Rumbo orientativo» hacia esa parada. En las rectas la brújula apunta más adelante cuando el terreno permite seguir de frente. Al llegar a una curva o al destino señala el punto preciso. En un paso entre zonas te guía hasta la salida de la carretera y retoma la misión cuando cambias de zona.
 
@@ -46,7 +46,7 @@ Desde la raíz del proyecto y con Python 3.10 o posterior, indica la carpeta de 
 
 ```powershell
 python tools/build_personal_suite.py --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
-python tools/verify_personal_suite.py dist/RutaXP-1.2.4-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
+python tools/verify_personal_suite.py dist/RutaXP-1.2.5-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
 ```
 
 Los créditos y las licencias se encuentran en [NOTICE.md](NOTICE.md) y en `RutaXP/Licenses`.

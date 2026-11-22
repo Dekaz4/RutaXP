@@ -44,8 +44,7 @@ class NavigationWorldConsistencyTests(unittest.TestCase):
         h.call("SelectGuide", "world-consistency")
         h.state.arrowPoint = point
         h.ns.GetArrowWaypoint = h.lua.eval("function() return TEST.arrowPoint end")
-        for texture in (h.ns.navigationFrame.body, h.ns.navigationFrame.facet, h.ns.navigationFrame.glow):
-            texture.SetRotation = h.lua.eval("function(self,a) self.lastRotation=a end")
+        h.ns.navigationFrame.body.SetRotation = h.lua.eval("function(self,a) self.lastRotation=a end")
         h.call("UpdateNavigation")
         return h.ns.navigationFrame
 
@@ -99,9 +98,35 @@ class NavigationWorldConsistencyTests(unittest.TestCase):
                     expected = (bearing - facing) % (2 * math.pi)
                     self.assert_angle(frame.body.lastRotation, expected)
                     self.tick()
-                    for texture in (frame.body, frame.facet, frame.glow):
-                        self.assert_angle(texture.lastRotation, expected)
+                    self.assert_angle(frame.body.lastRotation, expected)
         self.assertTrue(frame.useNativePosition)
+
+    def test_regular_quest_uses_square_untinted_art_across_distances_and_cardinal_facings(self):
+        h = self.host
+        h.lua.execute("""
+            local methods=getmetatable(UIParent).__index
+            function methods:SetTexture(path) self.art=path end
+            function methods:SetVertexColor(...) self.tint={...} end
+            function methods:SetTexCoord(...) self.uv={...} end
+        """)
+        frame = self.arrow(self.point(self.north+80,self.west,walking=False))
+        body = frame.body
+        self.assertEqual(body.art, r"Interface\AddOns\RutaXP\Media\Nav\quest-direction.tga")
+        self.assertGreater(body.GetWidth(body), 0)
+        self.assertEqual(body.GetWidth(body), body.GetHeight(body))
+        for yards in (25,250):
+            for facing in (0, math.pi/2, math.pi, 3*math.pi/2):
+                for dn,dw,bearing in ((1,0,0),(0,-1,-math.pi/2),(-1,0,math.pi),(0,1,math.pi/2)):
+                    with self.subTest(yards=yards,facing=facing,direction=(dn,dw)):
+                        h.state.facing = facing
+                        h.state.arrowPoint = self.point(self.north+dn*yards, self.west+dw*yards, walking=False)
+                        h.call("UpdateNavigation")
+                        self.assertTrue(body.IsShown(body))
+                        self.assert_angle(body.lastRotation, bearing-facing)
+                        self.tick()
+                        self.assert_angle(body.lastRotation, bearing-facing)
+                        self.assertIn(tuple(body.tint.values()) if body.tint else (), ((),(1,1,1),(1,1,1,1)))
+                        self.assertIn(tuple(body.uv.values()) if body.uv else (), ((),(0,1,0,1),(0,0,0,1,1,0,1,1)))
 
     def test_live_rotation_uses_moving_native_origin_before_map_origin(self):
         h = self.host

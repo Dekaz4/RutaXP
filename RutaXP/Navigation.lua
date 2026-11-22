@@ -5,7 +5,7 @@ local _, ns = ...
 -- Guide targets use C_Map's frame. Terrain turns carry their native world
 -- point and use UnitPosition only when its instance matches that continent.
 local METRES_PER_YARD = 0.9144
-local SAMPLE_INTERVAL = 0.1 -- Target sampling; the faceted arrow still rotates every frame.
+local SAMPLE_INTERVAL = 0.1 -- Sample destinations while rotating the arrow every frame.
 local TWO_PI = 2 * math.pi
 local DIAL = 56
 local CLOSE_RANGE = 220
@@ -592,8 +592,6 @@ local ANCHORS = { TOPLEFT = true, TOP = true, TOPRIGHT = true, LEFT = true,
 
 local function applyArrowRotation(frame, angle)
     if frame.body and frame.body.SetRotation then frame.body:SetRotation(angle) end
-    if frame.facet and frame.facet.SetRotation then frame.facet:SetRotation(angle) end
-    if frame.glow and frame.glow.SetRotation then frame.glow:SetRotation(angle) end
 end
 
 local function showArrowDetails(frame)
@@ -668,32 +666,20 @@ function ns:CreateNavigation()
     arrow:SetPoint("TOP", 0, -2)
     frame.arrow = arrow
 
-    -- Soft ambient halo behind the arrow
+    -- Glow for the arrival ring.
     local halo = arrow:CreateTexture(nil, "BACKGROUND")
     if halo.SetTexture then halo:SetTexture(NAV_MEDIA .. "glow") end
     halo:SetSize(DIAL * 1.35, DIAL * 1.35)
     halo:SetPoint("CENTER")
     if halo.SetBlendMode then halo:SetBlendMode("ADD") end
+    halo:Hide()
     frame.halo = halo
 
-    -- Directional glow rotated with the arrow
-    local glow = arrow:CreateTexture(nil, "BACKGROUND", nil, 1)
-    if glow.SetTexture then glow:SetTexture(NAV_MEDIA .. "arrow-glow") end
-    glow:SetSize(DIAL * 1.25, DIAL * 1.25)
-    glow:SetPoint("CENTER")
-    if glow.SetBlendMode then glow:SetBlendMode("ADD") end
-    frame.glow = glow
-
-    -- High-resolution faceted arrow body + bevel overlay rotated continuously on GPU
     local body = arrow:CreateTexture(nil, "ARTWORK")
-    if body.SetTexture then body:SetTexture(NAV_MEDIA .. "arrow") end
-    body:SetAllPoints()
+    if body.SetTexture then body:SetTexture(NAV_MEDIA .. "quest-direction.tga") end
+    body:SetSize(48, 48)
+    body:SetPoint("CENTER")
     frame.body = body
-
-    local facet = arrow:CreateTexture(nil, "OVERLAY")
-    if facet.SetTexture then facet:SetTexture(NAV_MEDIA .. "arrow-facet") end
-    facet:SetAllPoints()
-    frame.facet = facet
 
     -- Arrival ring when within target radius
     local ring = arrow:CreateTexture(nil, "ARTWORK")
@@ -1018,21 +1004,16 @@ local function updateArrow(self, frame)
     frame.arrow:Show()
     if arrived then
         frame.body:Hide()
-        frame.facet:Hide()
-        frame.glow:Hide()
+        frame.halo:Show()
         frame.ring:Show()
         if frame.ring.SetVertexColor then frame.ring:SetVertexColor(0.42, 0.88, 0.62, 1) end
         if frame.halo.SetVertexColor then frame.halo:SetVertexColor(0.42, 0.88, 0.62, 0.45) end
     else
         frame.ring:Hide()
+        frame.halo:Hide()
         frame.body:Show()
-        frame.facet:Show()
-        frame.glow:Show()
         local angle = (-math.atan2(right, forward)) % TWO_PI
         applyArrowRotation(frame, angle)
-        if frame.body.SetVertexColor then frame.body:SetVertexColor(r, g, b, 1) end
-        if frame.glow.SetVertexColor then frame.glow:SetVertexColor(r, g, b, 0.45) end
-        if frame.halo.SetVertexColor then frame.halo:SetVertexColor(r, g, b, 0.32) end
     end
     return hint
 end
