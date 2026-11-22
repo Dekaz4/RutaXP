@@ -1,5 +1,6 @@
 """Portable installer entry point. With no arguments it opens the Windows setup."""
 import argparse
+from contextlib import ExitStack
 import hashlib
 import json
 import os
@@ -16,6 +17,11 @@ import threading
 if __package__:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_personal_suite as composer
+import official_sources
+
+
+LOCAL_COMPOSE_MODULES = ("OpenMap", "ForeverDungeonJournal")
+INSTALL_VERSIONS = {"OpenMap": "v0.8.11", "ForeverDungeonJournal": "2.1.2", "Journey": "4.00.13"}
 
 
 def resources():
@@ -69,19 +75,28 @@ def backup_store(client):
     return store / client.name if client != game else store
 
 
-def find_native_sources(client):
+def find_native_sources(client, *, required=LOCAL_COMPOSE_MODULES, versions=None):
     def backup_path(path):
         if path.resolve() != path.absolute():
             raise ValueError("La carpeta de copias de RutaXP contiene un enlace o junction.")
         return path
 
+    def headers(toc):
+        try:
+            with toc.open(encoding="utf-8-sig") as stream:
+                return composer.lines_and_metadata("".join(line for line in stream if line.lstrip().startswith("##")))[1]
+        except (OSError, UnicodeError):
+            return {}
+
+    def usable_native(name, toc):
+        return toc.is_file() and (versions is None or headers(toc).get("Version") == versions[name])
+
     addons = client / "Interface/AddOns"
     roots = {}
-    needed = ("OpenMap", "ForeverDungeonJournal")
-    candidates = (*needed, "Journey")
+    candidates = INSTALL_VERSIONS
     integrated = [addons / "RutaXP"]
     for name in candidates:
-        if (addons / name / (name + ".toc")).is_file():
+        if usable_native(name, addons / name / (name + ".toc")):
             roots[name] = addons / name
     external = backup_store(client)
     if len(roots) != len(candidates):
@@ -99,7 +114,7 @@ def find_native_sources(client):
                 for name in candidates:
                     if name not in roots and dest == f"Interface/AddOns/{name}":
                         original = tx / "prior" / str(index)
-                        if backup_path(original / (name + ".toc")).is_file():
+                        if usable_native(name, backup_path(original / (name + ".toc"))):
                             roots[name] = original
             if len(roots) == len(candidates):
                 break
@@ -114,14 +129,18 @@ def find_native_sources(client):
             break
         if not (installed / "manifest.sha256").is_file() or not (installed / "RutaXP.toc").is_file():
             continue
-        _, meta = composer.lines_and_metadata((installed / "RutaXP.toc").read_text(encoding="utf-8-sig"))
+        toc = installed / "RutaXP.toc"
+        meta = headers(toc) if versions is not None else composer.lines_and_metadata(toc.read_text(encoding="utf-8-sig"))[1]
         embedded = {name.strip() for name in meta.get("X-RutaXP-Embedded", "").split(",")}
         if meta.get("X-RutaXP-Journey-UI"):
             embedded.add("Journey")
         for name in candidates:
+            version_key = "X-RutaXP-Journey-UI" if name == "Journey" else f"X-{name}-Version"
+            if versions is not None and meta.get(version_key) != versions[name]:
+                continue
             if name not in roots and name in embedded and (installed / "Modules" / name).is_dir():
                 roots[name] = installed
-    missing = [name for name in needed if name not in roots]
+    missing = [name for name in required if name not in roots]
     if missing:
         raise ValueError("Instala primero " + " y ".join(missing) + " en " + str(addons) + ".")
     return roots
@@ -168,12 +187,16 @@ def run(client, cache, output=None, restore=False, archive=None, compose_only=Fa
     store = backup_store(client)
     if store.resolve() != store.absolute():
         raise ValueError("La carpeta de copias de RutaXP contiene un enlace o junction.")
-    roots = find_native_sources(client)
+    roots = find_native_sources(client, required=(), versions=INSTALL_VERSIONS)
     store.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix=".RutaXP-stage-", dir=store) as work:
         prepared = Path(work) / "RutaXP"
-        report("Preparando las guías de RutaXP…")
-        composer.prepare_directory(resources() / "RutaXP", roots, prepared, report)
+        with ExitStack() as downloads:
+            for name in INSTALL_VERSIONS:
+                if name not in roots:
+                    roots[name] = downloads.enter_context(official_sources.acquire(name, cache, report))
+            report("Preparando las guías de RutaXP…")
+            composer.prepare_directory(resources() / "RutaXP", roots, prepared, report)
         report("Verificando los archivos e instalando la suite…")
         return activate(client, prepared=prepared)
 
@@ -311,7 +334,7 @@ def wait_for_launcher(pid):
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
-    parser = argparse.ArgumentParser(description="Instala las guías de RutaXP con OpenMap, el diario de mazmorras y la interfaz local de Journey.")
+    parser = argparse.ArgumentParser(description="Instala las guías de RutaXP con OpenMap, el diario de mazmorras y la interfaz de Journey.")
     paths = parser.add_mutually_exclusive_group()
     paths.add_argument("--client", type=Path)
     paths.add_argument("--addons", type=Path)

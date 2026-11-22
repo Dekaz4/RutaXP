@@ -123,6 +123,11 @@ try {
                 else { Assert-True ([IO.File]::ReadAllText((Join-Path $target 'Modules\OpenMap\local.lua')) -ceq '-- personal') 'The updater replaced the previous suite with a public shell.' }
                 # Simulate just the constructor's committed result. Its real rollback is exercised in test_personal_suite_install.
                 $toc = [IO.File]::ReadAllText((Join-Path $source 'RutaXP.toc')) + "`n## X-RutaXP-Embedded: OpenMap, ForeverDungeonJournal, RXPGuides`n"
+                $toc += "## X-RutaXP-Journey-UI: 4.00.13" + [Environment]::NewLine
+                foreach ($scriptFile in @('Modules/Journey/ui/UI.lua','Modules/Journey/ui/TaskDetailContainers.lua','Modules/Journey/lib/TomCats/Arrows.lua')) {
+                    Put (Join-Path $target $scriptFile) '-- presentation'
+                    $toc += $scriptFile + [Environment]::NewLine
+                }
                 Put (Join-Path $target 'RutaXP.toc') $toc
                 foreach ($name in @('OpenMap','ForeverDungeonJournal','RXPGuides')) { Put (Join-Path $target ('Modules\'+$name+'\local.lua')) '-- personal' }
                 Seal $target
@@ -179,6 +184,17 @@ try {
             $script:bundledBytes = $package.Archive
             $repaired = [RutaXPUpdater.UpdaterCore]::Update($addons,$true,$null,$script:Fetch,$script:IsRunning,$null,$show,$openBundle)
             Assert-True ($repaired.LatestVerified -and $script:FetchCount -eq 3 -and $script:bundleReads -eq 3) 'Repair must download even when this installer embeds the exact release.'
+            $silentHelper = [Action[Diagnostics.ProcessStartInfo]] { param($ignored) }
+            $tocPath = Join-Path $target 'RutaXP.toc'
+            $completeToc = [IO.File]::ReadAllText($tocPath)
+            Put $tocPath ($completeToc.Replace('X-RutaXP-Journey-UI','X-Other-UI'))
+            Assert-Throws { [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,$silentHelper) }
+            $arrow = 'Modules/Journey/lib/TomCats/Arrows.lua'
+            Put $tocPath ($completeToc.Replace($arrow,'# removed'))
+            Assert-Throws { [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,$silentHelper) }
+            Put $tocPath $completeToc
+            [IO.File]::Delete((Join-Path $target $arrow))
+            Assert-Throws { [RutaXPUpdater.UpdaterCore]::Update($addons,$false,$null,$script:Fetch,$script:IsRunning,$null,$silentHelper) }
             Assert-Wtf $addons
         }
         'personal' {
@@ -323,6 +339,22 @@ try {
             [RutaXPUpdater.ClientSettings]::Save($settings,'client',$addons)
             Assert-True ([RutaXPUpdater.ClientSettings]::Load($settings,'client') -eq $addons) 'Client was not remembered.'
             $other=New-Client 'SecondComputer'
+            $script:clientChoices = New-Object 'Collections.Generic.List[string]'
+            $script:clientChoices.Add($other)
+            $discover = [Func[Collections.Generic.List[string]]] { return ,$script:clientChoices }
+            $neverDiscover = [Func[Collections.Generic.List[string]]] { throw 'unexpected discovery' }
+            $neverAsk = [Func[Collections.Generic.List[string],string]] { param($choices) throw 'unexpected client prompt' }
+            $pick = [Func[Collections.Generic.List[string],string]] { param($choices) return $choices[$choices.Count-1] }
+            Assert-True ([RutaXPUpdater.Program]::SelectClient($settings,'--update',$neverDiscover,$neverAsk) -eq $addons) 'Saved valid client must take precedence.'
+            [RutaXPUpdater.ClientSettings]::Save($settings,'client',(Join-Path $FixtureRoot 'Moved'))
+            Assert-True ([RutaXPUpdater.Program]::SelectClient($settings,'--update',$discover,$neverAsk) -eq $other) 'An unavailable saved client must not block automatic discovery.'
+            [IO.File]::Delete((Join-Path $settings 'client.txt'))
+            Assert-True ([RutaXPUpdater.Program]::SelectClient($settings,'--update',$discover,$neverAsk) -eq $other) 'A single client on first run must not prompt.'
+            $script:clientChoices.Add($addons)
+            Assert-True ([RutaXPUpdater.Program]::SelectClient($settings,'--update',$discover,$pick) -eq $addons) 'Ambiguous discovery must open the picker.'
+            $script:clientChoices.RemoveAt(1)
+            $explicitPick=[Func[Collections.Generic.List[string],string]]{param($choices) return $addons}
+            Assert-True ([RutaXPUpdater.Program]::SelectClient($settings,'--choose-client',$discover,$explicitPick) -eq $addons) 'Option 4 must allow a different client even with just one discovery.'
             [RutaXPUpdater.ClientSettings]::Save($settings,'client',$other)
             Assert-True ([RutaXPUpdater.ClientSettings]::Load($settings,'client') -eq $other) 'Client path was not changed.'
             Assert-Throws {[RutaXPUpdater.ClientSettings]::Save($settings,'..\WTF','bad')}

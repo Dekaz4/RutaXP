@@ -130,7 +130,7 @@ def main():
                  "build_personal_suite.py", "suite_lua.py", "suite_map_journal.py", "suite_rested.py", "Install-Suite.ps1",
                  "suite_setup.py", "build_suite_setup.py", "verify_personal_suite.py", "PersonalSetup.cs",
                  "build_personal_setup.py", "suite_world_services.py", "suite_journey.py", "build_guide_legacy.py",
-                 "build_dungeon_quest_links.py"]:
+                 "build_dungeon_quest_links.py", "official_sources.py"]:
         release_files[f"tools/{name}"] = (ROOT / "tools" / name).read_bytes()
     test_dir = ROOT / "tests"
     for pattern in ("test_install_suite.py", "test_personal_*.py", "test_suite_*.py", "test_guide_*.py",

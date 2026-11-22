@@ -1,10 +1,10 @@
 # RutaXP para WoW Forever
 
-RutaXP 1.2.7 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos y la brújula usan la interfaz de tu copia de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
+RutaXP 1.2.8 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos y la brújula usan la interfaz de tu copia de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
 
 ## Actualizar
 
-Con WoW cerrado, abre **Instalador_RutaXP.exe** y elige **Instalar o actualizar**. El instalador guarda las copias de recuperación fuera de la carpeta que actualiza Battle.net y traslada allí las copias anteriores. Si tienes el cliente en `E:\WOW\World of Warcraft\_forever_`, las encontrarás en `E:\WOW\RutaXP-Suite-Backups\World of Warcraft\_forever_`. Para montar la suite utiliza tus copias locales de OpenMap, ForeverDungeonJournal y Journey. Los 29 capítulos de Alianza y los 28 de Horda vienen con RutaXP.
+Con WoW cerrado, abre **Instalador_RutaXP.exe** y pulsa **1**. Los instaladores desde la versión 1.0.2 reciben el constructor actualizado desde GitHub. Si conservas el ejecutable de la serie 0.7, 1.0.0 o 1.0.1, sustituye ese archivo una vez por [el instalador actual](https://github.com/Dekaz4/RutaXP/releases/latest/download/Instalador_RutaXP.exe). El instalador guarda las copias de recuperación fuera de la carpeta que actualiza Battle.net y traslada allí las copias anteriores. Si tienes el cliente en `E:\WOW\World of Warcraft\_forever_`, las encontrarás en `E:\WOW\RutaXP-Suite-Backups\World of Warcraft\_forever_`. Para montar la suite utiliza tus copias locales de OpenMap, Dungeon Journal y Journey, incluidas las de una instalación anterior. Si falta OpenMap, descarga la versión verificada del proyecto. Para Journey y Dungeon Journal reconoce sus ZIP oficiales en Descargas. Si falta alguno, abre la página oficial en tu navegador y espera a que termine la descarga. Si el navegador pide confirmación, acepta y guarda el ZIP en la carpeta Descargas de Windows. El instalador comprueba los archivos y continúa. Los 29 capítulos de Alianza y los 28 de Horda vienen con RutaXP.
 
 Si ya tienes un paquete personal preparado, puedes instalarlo sin conexión con **Instalar_RutaXP_Personal.exe**. Para restaurar la instalación anterior, cierra WoW y ejecuta `Instalar_RutaXP_Personal.exe --restore`.
 
@@ -48,7 +48,7 @@ Desde la raíz del proyecto y con Python 3.10 o posterior, indica la carpeta de 
 
 ```powershell
 python tools/build_personal_suite.py --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
-python tools/verify_personal_suite.py dist/RutaXP-1.2.7-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
+python tools/verify_personal_suite.py dist/RutaXP-1.2.8-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
 ```
 
 Los créditos y las licencias se encuentran en [NOTICE.md](NOTICE.md) y en `RutaXP/Licenses`.
