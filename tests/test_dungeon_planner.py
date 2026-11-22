@@ -198,6 +198,77 @@ class DungeonPlannerTests(unittest.TestCase):
             w.done[71]=true; update(); assert(planner:Wants("accept",72))
         """)
 
+    def test_preview_and_remote_resume_preserve_other_deferrals_and_the_world_guide(self):
+        self.run_lua("""
+            useFixture({
+                [41]={title="Recado de la cripta",pickup=point(12,60,30)},
+                [42]={title="Busca al guardia",pickup=point(17,60,30)},
+                [43]={title="Misión de la Horda",faction="Horde",pickup=point(19,60,30)},
+            },{41})
+            ns.DungeonQuestData.quests[42].pickup.name="Cabo Salas"
+            ns.DungeonQuestData.dungeons.Bastion={name="Bastión",quests={42},entrance=point(17,50,50),minLevel=20,maxLevel=25}
+            ns.DungeonQuestData.dungeons.Den={name="Guarida",quests={43},entrance=point(19,50,50)}
+            ns:RegisterGuide({id="outdoor",title="Ruta",steps={{title="Camino",goals={{t="note"}}}}})
+            ns.char.activeGuide="outdoor"
+        """)
+        self.login()
+        self.run_lua("""
+            local p=ns.DungeonPlanner
+            local updates=0
+            ns.DungeonPreparationUI={RefreshIfShown=function() updates=updates+1 end}
+            local opts=p:PreparationOptions()
+            assert(#opts==2 and opts[1].key=="Crypt" and not opts[1].deferred)
+            assert(opts[2].tasks[1]=="Recoge · Busca al guardia · Cabo Salas")
+            assert(not p:IsDetouring() and not ns.char.dungeonTrips.selected and not p:Waypoint())
+            assert(not p:StartPreparation("Den") and not p:StartPreparation("removed"))
+            assert(p:StartPreparation("Crypt"))
+            click("later")
+            assert(p:StartPreparation("Bastion"))
+            click("later")
+            local trips=ns.char.dungeonTrips
+            assert(trips.deferred.Crypt and trips.deferred.Bastion and trips.lastDeferred=="Bastion")
+            w.map=100; w.level=31; fire("ZONE_CHANGED_NEW_AREA")
+            opts=p:PreparationOptions()
+            assert(opts[1].key=="Bastion" and opts[1].deferred and not opts[1].finished)
+            assert(#opts==2 and not p:IsDetouring() and not trips.selected and updates>0)
+            assert(p:Resume() and trips.selected=="Bastion" and trips.deferred.Crypt and not trips.deferred.Bastion)
+            assert(p:IsDetouring() and p:Heading()=="Bastión")
+            assert(p:PreparationOptions()[1].key=="Bastion")
+            assert(ns.char.activeGuide=="outdoor" and ns.char.progress.outdoor==nil)
+            -- A stale preview, before the guide receives another quest event.
+            w.done[41]=true
+            assert(not p:StartPreparation("Crypt") and trips.selected=="Bastion" and trips.deferred.Crypt)
+            assert(#p:PreparationOptions()==1)
+            -- Old saves persisted just the deferral flags, without a last key.
+            w.done[41]=nil; click("later"); trips.lastDeferred=nil
+            assert(p:PreparationOptions()[1].key=="Bastion")
+            assert(p:StartPreparation("Crypt") and trips.deferred.Bastion)
+        """)
+
+    def test_finished_preview_only_offers_known_outdoor_handins_and_never_repeats(self):
+        self.run_lua("""
+            useFixture({
+                [51]={title="Entrega exterior",turnin=point(12,31,42)},
+                [52]={title="Entrega interior",turnin={inside=true,npc=5}},
+                [53]={title="Otro encargo",pickup=point(12,60,30)},
+            },{51,52,53})
+            w.map=100; w.level=40
+            w.active={[51]=true,[52]=true}; w.ready={[51]=true,[52]=true}
+            ns.char.dungeonTrips={runs={Crypt={[51]=true}}, deferred={Crypt=true}, finished={}}
+        """)
+        self.login()
+        self.run_lua("""
+            local p,trips=ns.DungeonPlanner,ns.char.dungeonTrips
+            local visit=p:PreparationOptions()[1]
+            assert(visit and visit.finished and visit.deferred and #visit.tasks==1)
+            assert(visit.tasks[1]=="Entrega · Entrega exterior")
+            assert(p:StartPreparation("Crypt") and not trips.repeatDungeon)
+            assert(p:Wants("turnin",51) and not p:Wants("turnin",52) and not p:Wants("accept",53))
+            w.done[51]=true; w.active[51]=nil; update()
+            assert(#p:PreparationOptions()==0 and not p:StartPreparation("Crypt") and not p:Resume())
+            assert(not p:IsDetouring() and not trips.repeatDungeon)
+        """)
+
     def test_inside_unknown_objective_outdoor_prerequisite_and_handin_have_distinct_hints(self):
         self.run_lua("""
             useFixture({
@@ -340,6 +411,31 @@ class DungeonPlannerTests(unittest.TestCase):
             fire("QUEST_TURNED_IN",166); assert(r.Delivered(166))
             w.time=w.time+6; assert(not r.Delivered(166))
             w.done[166]=true; assert(r.Delivered(166))
+        """)
+
+    def test_real_scarlet_library_uses_journal_translation_in_picker_tracker_and_repeat(self):
+        self.run_lua("""
+            w.level=36; w.map=1455; w.active[1050]=true; w.ready[1050]=true
+            function ns.GetEmbeddedModule(name)
+                if name=="ForeverDungeonJournal" then return {LocalizeDungeonName=function(key)
+                    return key=="Scarlet Monastery: Library" and "Monasterio Escarlata: Biblioteca" or key
+                end} end
+            end
+        """)
+        self.login()
+        self.run_lua("""
+            local p=ns.DungeonPlanner
+            local key="Scarlet Monastery: Library"
+            local label="Monasterio Escarlata: Biblioteca"
+            local found
+            for _,entry in ipairs(p:PreparationOptions()) do
+                if entry.key==key then found=entry.name end
+            end
+            assert(found==label and p:StartPreparation(key))
+            assert(p:Heading()==label)
+            click("later")
+            assert(p:Repeat(label) and ns.char.dungeonTrips.repeatDungeon==key)
+            assert(p:Heading()==label)
         """)
 
     def test_selecting_a_remote_quest_replaces_the_last_local_objective(self):

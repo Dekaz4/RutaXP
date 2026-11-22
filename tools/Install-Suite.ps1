@@ -148,7 +148,9 @@ function StagePackage([string]$target) {
 function CheckClosed {
     foreach ($p in Get-Process -Name 'Wow','WowB','Wow-64','WowClassic','WowClassicB','WowT','WowClassicT','WorldOfWarcraft','World of Warcraft' -ErrorAction SilentlyContinue) {
         try { $exe = $p.Path } catch { $exe = $null }
-        if (!$exe -or [IO.Path]::GetDirectoryName($exe) -eq $game) { throw 'Cierra WoW para instalar o restaurar RutaXP.' }
+        # Process paths can use the short (8.3) spelling of the client folder.
+        $folder = if ($exe) { Get-Item -LiteralPath ([IO.Path]::GetDirectoryName($exe)) -Force -ErrorAction SilentlyContinue }
+        if (!$folder -or $folder.FullName -eq $game) { throw 'Cierra WoW para instalar o restaurar RutaXP.' }
     }
 }
 function SavedDirectories {

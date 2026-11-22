@@ -18,7 +18,7 @@ class PortableSuiteSetupTests(unittest.TestCase):
     def setUp(self):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)
-        self.work = Path(temp.name)
+        self.work = Path(temp.name).resolve()
         self.client = self.work / "World of Warcraft/_forever_"
         self.addons = self.client / "Interface/AddOns"
         self.addons.mkdir(parents=True)
@@ -29,6 +29,37 @@ class PortableSuiteSetupTests(unittest.TestCase):
         (self.work / "client.txt").write_text(str(self.addons), encoding="utf-8-sig")
         with patch.object(suite_setup, "settings_root", return_value=self.work):
             self.assertEqual(suite_setup.detect_client(), self.client)
+
+    @unittest.skipUnless(os.name == "nt", "Windows short names")
+    def test_short_path_allows_backups_but_keeps_output_outside_client(self):
+        import ctypes
+        parent = self.work / "Game library with long name"
+        client = parent / "World of Warcraft/_forever_"
+        (client / "Interface/AddOns").mkdir(parents=True)
+        buf = ctypes.create_unicode_buffer(32768)
+        size = ctypes.windll.kernel32.GetShortPathNameW(str(parent), buf, len(buf))
+        self.assertTrue(0 < size < len(buf))
+        short = Path(buf.value)
+        if short == parent:
+            self.skipTest("Short names are disabled on this volume")
+        short_client = short / client.relative_to(parent)
+        store = suite_setup.backup_store(short_client)
+        self.assertEqual(suite_setup.backup_path(store).resolve(), suite_setup.backup_store(client))
+        self.assertEqual(suite_setup.find_native_sources(short_client, required=()), {})
+        with self.assertRaisesRegex(ValueError, "fuera"):
+            suite_setup.compose_bundle(short_client, client / "unsafe.zip", self.work)
+
+    def test_missing_backup_child_under_link_is_rejected(self):
+        target = self.work / "target"
+        target.mkdir()
+        link = self.work / "backup-link"
+        if os.name == "nt":
+            subprocess.run(["cmd", "/c", "mklink", "/j", str(link), str(target)],
+                           capture_output=True, check=True)
+        else:
+            link.symlink_to(target, target_is_directory=True)
+        with self.assertRaisesRegex(ValueError, "junction"):
+            suite_setup.backup_path(link / "missing" / "child")
 
     def test_repeated_build_uses_only_committed_originals_and_prefers_active_versions(self):
         tx = self.client / "RutaXP-Suite-Backups" / ("1" * 17 + "-" + "a" * 32)

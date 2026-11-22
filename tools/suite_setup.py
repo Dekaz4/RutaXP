@@ -8,6 +8,7 @@ from pathlib import Path
 from queue import Empty, Queue
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
@@ -75,11 +76,22 @@ def backup_store(client):
     return store / client.name if client != game else store
 
 
-def find_native_sources(client, *, required=LOCAL_COMPOSE_MODULES, versions=None):
-    def backup_path(path):
-        if path.resolve() != path.absolute():
+def backup_path(path):
+    # A Windows 8.3 name can resolve to a longer spelling of the same directory.
+    # Check the actual entries, including parents of a not-yet-created backup.
+    if ".." in path.parts:
+        raise ValueError("La ruta de copias de RutaXP contiene un componente '..'.")
+    for entry in (path, *path.absolute().parents):
+        try:
+            info = entry.lstat()
+        except FileNotFoundError:
+            continue
+        if stat.S_ISLNK(info.st_mode) or getattr(info, "st_file_attributes", 0) & stat.FILE_ATTRIBUTE_REPARSE_POINT:
             raise ValueError("La carpeta de copias de RutaXP contiene un enlace o junction.")
-        return path
+    return path
+
+
+def find_native_sources(client, *, required=LOCAL_COMPOSE_MODULES, versions=None):
 
     def headers(toc):
         try:
@@ -148,7 +160,7 @@ def find_native_sources(client, *, required=LOCAL_COMPOSE_MODULES, versions=None
 
 def compose_bundle(client, destination, cache):
     destination = destination.resolve()
-    if destination.is_relative_to(game_root(client)):
+    if destination.is_relative_to(game_root(client).resolve()):
         raise ValueError("Elige un destino para el ZIP fuera de la instalación del juego.")
     roots = find_native_sources(client)
     return composer.compose(resources() / "RutaXP", roots, destination)
@@ -184,9 +196,7 @@ def run(client, cache, output=None, restore=False, archive=None, compose_only=Fa
         destination = output or (Path.cwd() / "RutaXP-personal.zip")
         compose_bundle(client, destination, cache)
         return f"Paquete preparado en {destination.resolve()}" if compose_only else activate(client, destination)
-    store = backup_store(client)
-    if store.resolve() != store.absolute():
-        raise ValueError("La carpeta de copias de RutaXP contiene un enlace o junction.")
+    store = backup_path(backup_store(client))
     roots = find_native_sources(client, required=(), versions=INSTALL_VERSIONS)
     store.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix=".RutaXP-stage-", dir=store) as work:

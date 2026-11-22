@@ -20,7 +20,7 @@ Si ya tienes un paquete personal preparado, puedes instalarlo sin conexión con 
 | Consultar las opciones del dúo | `/rutaxp herramientas` |
 | Abrir el mapa de OpenMap | **M** o `/rutaxp mapa` |
 | Abrir el diario de mazmorras | `/dj` o `/rutaxp mazmorras` |
-| Retomar la preparación de una mazmorra aplazada | `/rutaxp plan` |
+| Ver las misiones de mazmorra y retomar una preparación aplazada | Pulsa la llave del minimapa. El botón **Retomar preparación** dirige la brújula a la siguiente misión. También puedes usar `/rutaxp plan`. |
 | Volver a una mazmorra por libre | `/rutaxp repetir Nombre de la mazmorra` |
 | Ver los talentos y habilidades de tu clase | **N** o `/rutaxp talentos` |
 

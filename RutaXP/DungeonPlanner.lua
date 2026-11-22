@@ -55,6 +55,15 @@ local function eligible(ctx, q)
     return true
 end
 
+local function dungeonName(key, dungeon)
+    local journal = ns.GetEmbeddedModule and ns.GetEmbeddedModule("ForeverDungeonJournal")
+    if journal and journal.LocalizeDungeonName then
+        local name = journal.LocalizeDungeonName(key)
+        if name and name ~= "" and name ~= key then return name end
+    end
+    return dungeon.name or key
+end
+
 local function instance()
     if not IsInInstance or not IsInInstance() then return end
     local journal = ns.GetEmbeddedModule("ForeverDungeonJournal")
@@ -67,7 +76,7 @@ local function instance()
     local map = C_Map.GetBestMapForUnit("player")
     local possible, ambiguous
     for key, d in pairs(data.dungeons) do
-        if name == key or name == d.name or (d.instanceMapID and d.instanceMapID == map) then return key end
+        if name == key or name == d.name or (d.instanceMapID and d.instanceMapID == map) or name == dungeonName(key,d) then return key end
         if instanceID and d.instanceID == instanceID then
             if possible then ambiguous = true end
             possible = key
@@ -89,7 +98,7 @@ local function meets(ctx, requirement)
     return status(ctx, requirement) == "done"
 end
 
-local function planDungeon(ctx, dungeon, inside)
+local function planDungeon(ctx, dungeon, inside, handinsOnly)
     local plan = {tasks={}, seen={}, members={}, held=0, done=0, applicable=0, localCount=0}
     for _, id in ipairs(dungeon.quests) do plan.members[id] = true end
     local function add(kind, id, point)
@@ -157,6 +166,19 @@ local function planDungeon(ctx, dungeon, inside)
             visit(id)
         end
     end
+    if handinsOnly then
+        local deliveries = {}
+        plan.localCount = 0
+        for _,task in ipairs(plan.tasks) do
+            if task.kind == "turnin" and task.point and not task.point.inside then
+                deliveries[#deliveries+1] = task
+                if (task.point.map or task.point.mapID) == ctx.map then
+                    plan.localCount = plan.localCount + 1
+                end
+            end
+        end
+        plan.tasks = deliveries
+    end
     local function priority(t)
         local interior = t.point and t.point.inside
         if inside then
@@ -185,6 +207,24 @@ local function planDungeon(ctx, dungeon, inside)
     return plan
 end
 
+local function actionable(plan)
+    local first = plan.tasks[1]
+    return first and first.kind ~= "locked" and first.kind ~= "unknown" and first.kind ~= "itemDrop"
+end
+
+local function inLevelRange(ctx, dungeon)
+    return ctx.level >= (dungeon.minLevel or 1) and ctx.level <= (dungeon.maxLevel or 60)
+end
+
+local function runComplete(ctx, run)
+    if not run or not next(run) then return false end
+    for id in pairs(run) do
+        local s = status(ctx,id)
+        if s ~= "ready" and s ~= "done" then return false end
+    end
+    return true
+end
+
 local function observeRun(trips, key, ctx, inside)
     if not key then return end
     local dungeon, run = data.dungeons[key], trips.runs[key]
@@ -196,14 +236,9 @@ local function observeRun(trips, key, ctx, inside)
             run[id] = true
         end
     end
-    if not run or not next(run) then return end
-    for id in pairs(run) do
-        local s = status(ctx,id)
-        if s ~= "ready" and s ~= "done" then return end
-    end
     -- Leave inside pickups visible while still in the run. On leaving, the
     -- character only needs hand-ins. This also survives logout in an instance.
-    if not inside then trips.finished[key] = true end
+    if not inside and runComplete(ctx,run) then trips.finished[key] = true end
 end
 
 local verbs = {pickup="Recoge", inside="Recoge dentro", work="Completa la previa",check="Consulta el objetivo en tu diario",
@@ -233,18 +268,9 @@ local function rebuild(activeGuide)
     for key,d in pairs(data.dungeons) do
         local nearby = d.entrance and (d.entrance.map or d.entrance.mapID) == ctx.map
         local requested = key == trips.selected or key == here or key == repeatKey
-        if requested or (not trips.deferred[key] and ctx.level >= (d.minLevel or 1) and ctx.level <= (d.maxLevel or 60)) then
-            local plan = planDungeon(ctx,d,key == here)
-            if trips.finished[key] and key ~= repeatKey then
-                local deliveries = {}
-                for _,t in ipairs(plan.tasks) do
-                    if t.kind == "turnin" and not (t.point and t.point.inside) then deliveries[#deliveries+1]=t end
-                end
-                plan.tasks = deliveries
-            end
-            local first = plan.tasks[1]
-            local actionable = first and first.kind ~= "locked" and first.kind ~= "unknown" and first.kind ~= "itemDrop"
-            if actionable and (requested or nearby or plan.localCount > 0 or plan.held > 0) then
+        if requested or (not trips.deferred[key] and inLevelRange(ctx,d)) then
+            local plan = planDungeon(ctx,d,key == here,trips.finished[key] and key ~= repeatKey)
+            if actionable(plan) and (requested or nearby or plan.localCount > 0 or plan.held > 0) then
                 local rank = (key == here and 10000 or key == repeatKey and 8000 or key == trips.selected and 5000 or 0)
                     + plan.held*20 + math.min(10,plan.localCount)*2 + (nearby and 8 or 0)
                 if not score or rank > score or (rank == score and key < chosen) then chosen,best,score = key,plan,rank end
@@ -253,7 +279,7 @@ local function rebuild(activeGuide)
     end
     if repeatData and chosen ~= repeatKey and (not here or here == repeatKey) then
         local hint = here == repeatKey and "Visita libre en curso" or "Ve a la entrada de la mazmorra"
-        return {detour=true, key=repeatKey, heading=repeatData.name or repeatKey, hint=hint,
+        return {detour=true, key=repeatKey, heading=dungeonName(repeatKey,repeatData), hint=hint,
             point=here ~= repeatKey and repeatData.entrance or nil,
             rows={{text=hint},{text="Volver a la ruta de mundo abierto",action="later",dungeon=repeatKey}}}
     end
@@ -283,7 +309,7 @@ local function rebuild(activeGuide)
     end
     out.detour = chosen and not defer and (chosen == trips.selected or chosen == repeatKey or chosen == here or autoVisit)
     if chosen then
-        local name = dungeon.name or chosen
+        local name = dungeonName(chosen,dungeon)
         if out.detour then
             local inside = chosen == here
             local enter = not inside and (task.kind == "run" or task.kind == "inside" or
@@ -390,6 +416,7 @@ function planner:Changed()
         queued = nil
         if ns.GuideJourney and ns.GuideJourney:Available() then ns.GuideJourney:Refresh()
         elseif ns.window then ns:RefreshUI() end
+        if ns.DungeonPreparationUI then ns.DungeonPreparationUI:RefreshIfShown() end
     end
     if C_Timer and C_Timer.After then queued=true; C_Timer.After(0,refresh) else refresh() end
 end
@@ -398,10 +425,10 @@ function planner:Click(entry)
     local m, trips = current(), saved()
     if not trips then return end
     if entry.action == "prepare" and m.key == entry.dungeon then
-        trips.selected = m.key
-        trips.deferred[m.key] = nil
+        return self:StartPreparation(m.key)
     elseif entry.action == "later" and m.key == entry.dungeon then
         trips.deferred[m.key] = true
+        trips.lastDeferred = m.key
         trips.selected = nil
         trips.repeatDungeon = nil
     elseif entry.action == "world" and m.world then ns.WorldQuestFocus.Clear(m.world)
@@ -419,21 +446,71 @@ function planner:Wants(action,id)
     return false
 end
 
-function planner:Resume()
+-- The picker may be opened while the character is following an unrelated guide.
+-- Examine live quests without changing the selection, deferrals or visit history.
+local emptyTrips = {finished={},deferred={},runs={}}
+
+local function preparationPlan(key, dungeon, ctx, here, trips)
+    local inside = here == key
+    local finished = trips.finished[key] or (not inside and runComplete(ctx,trips.runs[key]))
+    if not (inside or finished or trips.selected == key or trips.deferred[key] or inLevelRange(ctx,dungeon)) then return end
+    local plan = planDungeon(ctx,dungeon,inside,finished)
+    if actionable(plan) then return plan,not not finished end
+end
+
+function planner:PreparationOptions()
+    local options = {}
+    if not ns.char then return options end
+    local ctx, here, trips = context(), instance(), ns.char.dungeonTrips or emptyTrips
+    for key,dungeon in pairs(data.dungeons) do
+        local plan,finished = preparationPlan(key,dungeon,ctx,here,trips)
+        if plan then
+            local deferred = not not trips.deferred[key]
+            local entry = {key=key, name=dungeonName(key,dungeon), tasks={}, deferred=deferred, finished=finished}
+            entry.priority = trips.selected == key and 4 or (deferred and trips.lastDeferred == key) and 3
+                or here == key and 2 or deferred and 1 or 0
+            local door = dungeon.entrance
+            local nearby = door and (door.map or door.mapID) == ctx.map
+            entry.relevance = plan.held*20 + math.min(10,plan.localCount)*2 + (nearby and 8 or 0)
+            for _,task in ipairs(plan.tasks) do
+                local place = task.point and task.point.name
+                entry.tasks[#entry.tasks+1] = line(task) .. (place and (" · " .. place) or "")
+            end
+            options[#options+1] = entry
+        end
+    end
+    table.sort(options,function(a,b)
+        if a.priority ~= b.priority then return a.priority > b.priority end
+        if a.relevance ~= b.relevance then return a.relevance > b.relevance end
+        return a.key < b.key
+    end)
+    return options
+end
+
+function planner:StartPreparation(key)
+    local dungeon = data.dungeons[key]
+    if not ns.char or not dungeon then return false end
+    if not preparationPlan(key,dungeon,context(),instance(),ns.char.dungeonTrips or emptyTrips) then return false end
     local trips = saved()
-    if not trips then return end
-    trips.deferred = {}
+    trips.selected, trips.repeatDungeon = key,nil
+    trips.deferred[key] = nil
+    if trips.lastDeferred == key then trips.lastDeferred = nil end
     self:Changed()
-    local m = current()
-    if m.key then self:Click({action="prepare", dungeon=m.key})
-    else ns:Print("No tienes una visita a mazmorra pendiente para esta zona y nivel.") end
+    return true
+end
+
+function planner:Resume()
+    local first = self:PreparationOptions()[1]
+    if first then return self:StartPreparation(first.key) end
+    ns:Print("No tienes una preparación de mazmorra pendiente.")
+    return false
 end
 
 function planner:Repeat(name)
     local trips = saved()
     if not trips then return false end
     for key, d in pairs(data.dungeons) do
-        if key:lower() == name:lower() or (d.name and d.name:lower() == name:lower()) then
+        if key:lower() == name:lower() or (d.name and d.name:lower() == name:lower()) or dungeonName(key,d):lower() == name:lower() then
             trips.repeatDungeon = key
             trips.deferred[key] = nil
             self:Changed()
