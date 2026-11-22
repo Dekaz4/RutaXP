@@ -196,6 +196,9 @@ end
 function ns:GetQuestOfferAdvice(questID)
     if not validQuest(questID) then return nil end
     if self:IsQuestActive(questID) then return "Ya la tienes en el diario.", "estado" end
+    if self.DungeonPlanner and self.DungeonPlanner:Wants("accept",questID) then
+        return "Acéptala para la visita a la mazmorra.", "ahora"
+    end
     local char = self.char
     local guide = char and self.guides[char.activeGuide]
     if not guide then return "Selecciona una guía para ver cuándo aceptarla.", "estado" end

@@ -90,15 +90,6 @@ def _evidence(chapter, quests, decision, reason, url):
         NOTES[ALLIANCE + chapter, quest] = dict(decision=decision, reason=reason, url=url)
 
 
-_evidence(DESOLACE, (1459,), "Recoger ambos botines en la misma visita",
-          "Aprovecha los escorpiones y los kodos envejecidos que encuentres en el cementerio y sus alrededores. Los dos objetivos cuentan para Kreldig.",
-          "https://db.icy-veins.com/wow-forever/quests/1459")
-_evidence(DESOLACE, (5561,), "Dejar las cinco domas como opcionales",
-          "Cada kodo domesticado requiere una vuelta al campamento de Smeed. Puedes entregar una doma terminada cuando pases por allí.",
-          "https://db.icy-veins.com/wow-forever/quests/5561")
-_evidence(DESOLACE, (1387,), "Cazar junto al poblado Kolkar",
-          "Los centauros y exploradores Kolkar de nivel 30–31 dan las orejas en el mismo poblado.",
-          "https://questing.wiki/wow-forever/quests/1387/")
 _evidence(HILLS, (98059,), "Visitar el ayuntamiento con la misión activa",
           "La solicitud sellada se deja en la mesa del ayuntamiento. La misión se devuelve a McManus en Costasur.",
           "https://zephras.com/forever/enUS/quest/98059/")

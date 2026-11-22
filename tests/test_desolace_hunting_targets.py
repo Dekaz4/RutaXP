@@ -1,8 +1,9 @@
-"""Regress the personal arrow on the Desolace collection outing, on both approaches."""
+"""Exercise the later Desolace hunting overlay independently of the 0.7.36 routes."""
 import json
 import unittest
 
 import test_quest_engine as fixtures
+from tools.desolace_solo_targets import apply_desolace_targets
 
 
 class DesolaceHuntingTargets(unittest.TestCase):
@@ -11,6 +12,7 @@ class DesolaceHuntingTargets(unittest.TestCase):
         self.host.state.level = 33
         self.host.state.mapID = 1443
         data = json.loads((fixtures.ADDON / "Source" / "leveling.json").read_bytes())
+        apply_desolace_targets(data)
         chapter = next(g for g in data["guides"] if g["id"] == "forever/alliance/30-40/02-desolace")
         self.goals = {g["item"]: self.host.table(g) for step in chapter["steps"] for g in step["goals"]
                       if g["t"] == "collect" and g.get("quest") in (1459, 1387)}

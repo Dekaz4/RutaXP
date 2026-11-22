@@ -8,7 +8,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 2
-$modules = @('OpenMap','ForeverDungeonJournal','RXPGuides')
+$modules = @('OpenMap','ForeverDungeonJournal')
 $legacyBackupName = '\.RutaXP\.backup\.[0-9a-f]{32}'
 # Imported RestedXP guides stay with the separate installation, in its own
 # SavedVariables. Only the native map and journal settings enter the suite.
@@ -71,7 +71,9 @@ function ReadPackage([string]$root) {
     $toc = [IO.File]::ReadAllText((ChildPath $root 'RutaXP.toc'))
     $header = [regex]::Match($toc,'(?im)^##\s*X-RutaXP-Embedded\s*:\s*([^\r\n]+)')
     $embedded = @($header.Groups[1].Value.Split(',') | ForEach-Object { $_.Trim() })
-    if (!$header.Success -or (Compare-Object $modules $embedded)) { throw 'El paquete debe incluir los tres modulos de RutaXP.' }
+    # Previous personal ZIPs remain installable and restorable.
+    if (!$header.Success -or ((Compare-Object $modules $embedded) -and
+        (Compare-Object ($modules + 'RXPGuides') $embedded))) { throw 'El paquete no contiene los modulos de RutaXP esperados.' }
     return FileHash $manifest
 }
 function StagePackage([string]$target) {
@@ -245,6 +247,9 @@ try {
         $rows.Add(@{ dest='Interface/AddOns/RutaXP'; old=[IO.Directory]::Exists($suite); add=$true; sources=@() })
         $replace = $modules
         $newToc = [IO.File]::ReadAllText((ChildPath $staged 'RutaXP.toc'))
+        if ($newToc -match '(?im)^##\s*X-RutaXP-Embedded\s*:[^\r\n]*\bRXPGuides\b') {
+            $replace += 'RXPGuides'
+        }
         if ($newToc -match '(?im)^## X-RutaXP-Journey-UI:\s*\S+') {
             foreach ($component in @('ui/GuideContainer.lua','lib/TomCats/Arrows.lua')) {
                 if (![IO.File]::Exists((ChildPath $staged "Modules/Journey/$component"))) { throw 'Faltan componentes de Journey en la nueva suite.' }

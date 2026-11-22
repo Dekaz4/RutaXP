@@ -510,7 +510,7 @@
     },
     "routeRevisions": {
       "file": "Source/guide_revisions.json",
-      "sha256": "fddb1f2ddefefe06a8e4797040814d27cc0a039897ca1f9cae5e906366f206cb",
+      "sha256": "a5a6488099961148ad8986e7bfe4dea32e749724639ca8419bf9e735e0961925",
       "applied": [
         "westfall-alba-mines-2",
         "westfall-engineering-3",
@@ -575,8 +575,7 @@
         "hillsbrad-town-hall-request-8",
         "desolace-menethil-auberdine-boat-3",
         "dun-morogh-warlock-first-demons-3",
-        "dun-morogh-western-visits-4",
-        "desolace-venom-and-kodo-hides-4"
+        "dun-morogh-western-visits-4"
       ]
     }
   },
@@ -16380,6 +16379,6 @@
       "visitQuest",
       "requiredTravel"
     ],
-    "semanticsSha256": "7093a5103146bdf2e364b0f21ff3fb7f7e00836edb820989760f817639a1a5e6"
+    "semanticsSha256": "815b4de26ef7895dd7d541d0d66209d5430c9dca24f9ebf8155ce5211c2c3196"
   }
 }

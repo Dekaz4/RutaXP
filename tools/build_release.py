@@ -17,9 +17,9 @@ import xml.etree.ElementTree as ET
 from zipfile import ZipFile, ZIP_DEFLATED
 
 if __package__:
-    from .suite_lua import SUITE_FILES
+    from .suite_lua import suite_files
 else:
-    from suite_lua import SUITE_FILES
+    from suite_lua import suite_files
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDON = ROOT / "RutaXP"
@@ -27,9 +27,7 @@ SUITE_INSTALLER = "Instalar_Suite_RutaXP.exe"
 
 
 def runtime_files():
-    # The old quest routes remain in source history and the workspace. Only
-    # this explicitly public shell is distributed through the update channel.
-    names = (*SUITE_FILES, SUITE_INSTALLER)
+    names = (*suite_files(ADDON), SUITE_INSTALLER)
     notices = [p for p in (ADDON / "Licenses").iterdir() if p.is_file() and p.suffix.lower() in (".md", ".txt")]
     return sorted([ADDON / name for name in names] + notices)
 
@@ -131,10 +129,12 @@ def main():
     for name in ["Installer.cs", "Updater.cs", "build_release.py", "publish_release.py", "build_talents.js",
                  "build_personal_suite.py", "suite_lua.py", "suite_map_journal.py", "suite_rested.py", "Install-Suite.ps1",
                  "suite_setup.py", "build_suite_setup.py", "verify_personal_suite.py", "PersonalSetup.cs",
-                 "build_personal_setup.py", "suite_world_services.py", "suite_journey.py", "build_guide_legacy.py"]:
+                 "build_personal_setup.py", "suite_world_services.py", "suite_journey.py", "build_guide_legacy.py",
+                 "build_dungeon_quest_links.py"]:
         release_files[f"tools/{name}"] = (ROOT / "tools" / name).read_bytes()
     test_dir = ROOT / "tests"
-    for pattern in ("test_install_suite.py", "test_personal_*.py", "test_suite_*.py", "test_guide_*.py", "test_installers.py", "test_installers.ps1",
+    for pattern in ("test_install_suite.py", "test_personal_*.py", "test_suite_*.py", "test_guide_*.py",
+                    "test_dungeon_*.py", "test_quest_focus.py", "test_installers.py", "test_installers.ps1",
                     "test_updater.py", "test_updater.ps1", "test_release.py", "test_publish_release.py"):
         for source in sorted(test_dir.glob(pattern)):
             release_files[source.relative_to(ROOT).as_posix()] = source.read_bytes()

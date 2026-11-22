@@ -11440,11 +11440,6 @@
       {
         "guideID": "forever/alliance/30-40/02-desolace",
         "step": 14,
-        "field": "group shape/condition"
-      },
-      {
-        "guideID": "forever/alliance/30-40/02-desolace",
-        "step": 14,
         "goal": 1,
         "field": "t",
         "source": "turnin",
@@ -11570,11 +11565,6 @@
       {
         "guideID": "forever/alliance/30-40/02-desolace",
         "step": 18,
-        "field": "group shape/condition"
-      },
-      {
-        "guideID": "forever/alliance/30-40/02-desolace",
-        "step": 18,
         "goal": 1,
         "field": "t",
         "source": "turnin",
@@ -11594,6 +11584,54 @@
         "goal": 1,
         "field": "optional",
         "source": true,
+        "snapshot": null
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 2,
+        "field": "t",
+        "source": "accept",
+        "snapshot": "collect"
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 2,
+        "field": "quest",
+        "source": 5561,
+        "snapshot": 1459
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 2,
+        "field": "oi",
+        "source": null,
+        "snapshot": 2
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 2,
+        "field": "item",
+        "source": null,
+        "snapshot": 6249
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 2,
+        "field": "count",
+        "source": null,
+        "snapshot": 3
+      },
+      {
+        "guideID": "forever/alliance/30-40/02-desolace",
+        "step": 18,
+        "goal": 2,
+        "field": "minLevel",
+        "source": 30,
         "snapshot": null
       },
       {
@@ -26204,20 +26242,6 @@
             "https://www.wowhead.com/classic/quest=312/tundra-macgranns-stolen-stash"
           ],
           "reason": "Se entrega primero la infusión cronometrada, se recoge la taza de Durnan y se visitan los instructores antes de buscar a Félix en la puerta. La carne de MacGrann se recoge al salir de Las Birras hacia el almacén. Así se evita regresar desde la cantera oriental para un único encargo. La posición de los encargos de clase de nivel 10 se conserva."
-        }
-      },
-      {
-        "id": "desolace-venom-and-kodo-hides-4",
-        "guideID": "forever/alliance/30-40/02-desolace",
-        "revision": 4,
-        "evidence": {
-          "sources": [
-            "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Items.lua#L794-L795",
-            "https://github.com/julen92/SendaFH/blob/5d207e28e82e2c529143b21ace74fe88692f0067/addon/SendaFH_QuestDB/Npcs.lua",
-            "https://db.icy-veins.com/wow-forever/quests/1459",
-            "https://db.icy-veins.com/wow-forever/quests/5561"
-          ],
-          "reason": "Kreldig pide siete venenos y tres pellejos en el mismo encargo. Sus presas comparten los alrededores del Cementerio de Kodos. Los dos objetivos se muestran juntos al llegar, antes de los viajes de ida y vuelta que pide Smeed en su rodeo opcional."
         }
       }
     ],
@@ -45250,5 +45274,5 @@
     "Las notas fuente se preservan, pero su redacción no prueba que el tracker muestre el trabajo en el momento adecuado.",
     "No se comprueba aquí la capacidad del diario, duración de escoltas/objetos, nivel dinámico ni disponibilidad real de NPCs."
   ],
-  "inputSha256": "8846c8f89089208cd77b6b325c0e489a2b56ff27b72a58e0e369dbb74cd33c7b"
+  "inputSha256": "e29d86c4ca9601ee8d71631d605c1d72dde3be408ae1c366261726cf76573819"
 }

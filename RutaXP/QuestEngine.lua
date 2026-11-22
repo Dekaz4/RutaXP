@@ -1642,7 +1642,8 @@ local function currentQuestIndex(self, action, questID)
 end
 
 function ns:WantsQuest(action, questID)
-    return currentQuestIndex(self, action, questID) ~= nil
+    return currentQuestIndex(self, action, questID) ~= nil or
+        (questID and self.DungeonPlanner and self.DungeonPlanner:Wants(action,questID)) or false
 end
 
 function ns:GetEarlyQuestSpace()
@@ -1684,6 +1685,9 @@ local function selectAvailable(self, count, getOffer, selectOffer)
         local id, selection = getOffer(i)
         local goal = currentQuestIndex(self, "accept", id)
         local step = -1 -- A current-step pickup precedes every future offer.
+        if not goal and id and self.DungeonPlanner and self.DungeonPlanner:Wants("accept",id) then
+            step,goal = 0,i
+        end
         if not goal and self.GetEarlyQuestOrder then
             step, goal = self:GetEarlyQuestOrder(id)
         end

@@ -248,7 +248,8 @@ end
 function ns:Command(message)
     local command, rest = trim(message):match("^(%S*)%s*(.-)$")
     command = command:lower()
-    if self.HandleFeatureCommand and self:HandleFeatureCommand(command, rest) then return
+    if self.HandleSuiteCommand and self:HandleSuiteCommand(command, rest) then return
+    elseif self.HandleFeatureCommand and self:HandleFeatureCommand(command, rest) then return
     elseif command == "" then self:ToggleWindow()
     elseif command == "siguiente" then self:Next()
     elseif command == "anterior" then self:Previous()
@@ -313,7 +314,7 @@ function ns:Command(message)
         local version, build, _, interface = GetBuildInfo()
         self:Print(tostring(version) .. " · build " .. tostring(build) .. " · interfaz " .. tostring(interface) .. " · proyecto " .. tostring(WOW_PROJECT_ID))
     else
-        self:Print("/rutaxp · autoduo · duo · herramientas · sesion · recuperar · pendientes · limpiar · adaptar · puntos · camino · recalcular · talentos · zona · flecha · mapa · siguiente · anterior · diagnostico · version · actualizar")
+        self:Print("/rutaxp · guias · guia · autoduo · duo · herramientas · sesion · recuperar · pendientes · adaptar · puntos · camino · recalcular · talentos · zona · flecha · mapa · mazmorras · siguiente · anterior · diagnostico · version · actualizar")
     end
 end
 
@@ -357,7 +358,7 @@ function ns:Initialize()
     if self.InitializeFeatures then self:InitializeFeatures() end
     if self.Updates then self.Updates:Initialize() end
     if not self.char.seen then
-        self.window:Show()
+        if not (self.GuideJourney and self.GuideJourney:Available()) then self.window:Show() end
         self.char.seen = true
         self.char.uiV3 = true
     end

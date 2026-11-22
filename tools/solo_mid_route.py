@@ -13,7 +13,7 @@ ALLIANCE = "forever/alliance/"
 # commissions finish at the issuing NPC. Picking them up empty-handed creates
 # an errand to find or buy the craft. A finished quest is still worth handing in.
 DETOURS = {
-    "30-40/02-desolace": {5561, 5821},              # Five kodo returns and the moving caravan
+    "30-40/02-desolace": {5821},                    # Moving caravan, wave escort at 32
     "30-40/04-stranglethorn-vale": {338, 339, 340, 341, 342, 635},
     "30-40/05-arathi-highlands": {635},              # Pendant carried from Stranglethorn
     "30-40/06-badlands": {5943, 716},               # Other leg of the Gizelton caravan

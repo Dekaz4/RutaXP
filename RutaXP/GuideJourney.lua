@@ -4,8 +4,13 @@ ns.GuideJourney = view
 
 local env, settings, engine, arrow, target, current, groupStep
 local loggedIn, initialized, shown, refreshPending
-local title, subtitle, status, stepIndex, stepCount
-local scroll, scrollChild
+local title, subtitle, status, stepIndex, stepCount, progressText
+local scroll, scrollChild, compassHint
+local original = ns.OriginalGuidePresentation
+local function arrowEnabled()
+    if original then return ns.char and ns.char.arrow ~= false end
+    return shown
+end
 local function noop() end
 local function yes() return true end
 local function no() return false end
@@ -35,7 +40,7 @@ function RutaXPJourneyEnvironment()
             if point then point[2] = "UIParent" end
             return point
         end,
-        IsScreenArrowEnabled=function() return shown and target ~= nil end,
+        IsScreenArrowEnabled=function() return arrowEnabled() and target ~= nil end,
         IsTomTomSupportEnabled=no, GetArrowScale=function() return settings.arrowScale or 1 end,
         GetArrowTextScale=function() return settings.arrowTextScale or 1 end,
     }
@@ -43,15 +48,20 @@ function RutaXPJourneyEnvironment()
         IsGuideSet=function() return groupStep ~= nil end,
         GetStep=function() return groupStep end,
         IsInstanceStep=no, IsManualOverrideEnabled=no, SetManualOverrideEnabled=noop, SetSeeking=noop,
-        HasNextStep=function() return current ~= nil and
-            (stepIndex < stepCount or (current.next and current.next ~= "")) end,
-        HasPreviousStep=function() return current ~= nil and stepIndex > 1 end,
+        HasNextStep=function()
+            if original then return current and original.CanAdvance(1) end
+            return current ~= nil and (stepIndex < stepCount or (current.next and current.next ~= ""))
+        end,
+        HasPreviousStep=function()
+            if original then return current and original.CanAdvance(-1) end
+            return current ~= nil and stepIndex > 1
+        end,
         SetStepToPrevious=function() if current then engine.Advance(-1) end end,
         SetStepToNext=function() if current then engine.Advance(1) end end,
     }
     env.HeaderService = {
         GetHeaderTitles=function() return title, subtitle end,
-        GetStepText=function() return current and (stepIndex .. "/" .. stepCount) end,
+        GetStepText=function() return current and (progressText or stepIndex .. "/" .. stepCount) end,
     }
     env.Hyperlinks = {
         OnHyperlinkClick=function(frame, link, text, button) SetItemRef(link, text, button, frame) end,
@@ -69,7 +79,10 @@ function RutaXPJourneyEnvironment()
         if metres >= 1000 then return string.format("%.1f km", metres/1000) end
         return math.floor(metres+0.5) .. " m"
     end
-    env.FormatJourneyStep = function(value) return (spanish and "Paso " or "Step ") .. value end
+    env.FormatJourneyStep = function(value)
+        if original then return value end
+        return (spanish and "Paso " or "Step ") .. value
+    end
     return env
 end
 
@@ -77,10 +90,12 @@ function view:Available()
     return not not (env and env.UI and env.UI.GetComponent("TaskDetailContainers") and env.addon.CreateArrow)
 end
 
-local function manualClick(button)
+local function manualClick(button, mouseButton)
     local task = button.row
     if not task then return end
-    if status == "journal" and task.questID then
+    if original then
+        original.ClickTask(task, mouseButton)
+    elseif status == "journal" and task.questID then
         ns.GuideCarryover.OpenQuest(task.questID)
     elseif current and task.manual then
         engine.ToggleTask(task)
@@ -91,7 +106,9 @@ local function displayTaskTip(button)
     local row = button.row
     if not row then return end
     local text
-    if status == "journal" and row.questID then
+    if original then
+        text = row.details or row.text
+    elseif status == "journal" and row.questID then
         text = "Ver esta misión en el diario"
     elseif current and row.manual then
         text = row.checked and "Volver a marcar como pendiente" or "Marcar esta tarea"
@@ -119,7 +136,33 @@ function taskRenderer:Render(task, container)
     container.text:Show()
     container.button:Hide()
     local icon = container.icon
-    if row.checked then
+    local action = row.activity and row.activity.action
+    if action then
+        local width = container.frame:GetWidth() - 12
+        local textWidth = container.text.GetUnboundedStringWidth and container.text:GetUnboundedStringWidth()
+            or container.text:GetStringWidth()
+        if width > 0 and textWidth <= width and not row.text:find("\n", 1, true) then
+            -- Journey's own button component also participates in its row
+            -- layout. Keep longer instructions in the wrapping text region.
+            local button = container.button
+            button.row = row
+            button:SetText(row.text)
+            button:SetScript("OnClick", manualClick)
+            button:SetScript("OnEnter", displayTaskTip)
+            button:SetScript("OnLeave", GameTooltip_Hide)
+            container:SetButtonColor("FF497BB1")
+            container.frame.row = nil
+            container.frame:EnableMouse(false)
+            container.text:Hide()
+            icon:Hide()
+            button:Show()
+            return
+        end
+        container.text:SetText("|cffffdf85" .. row.text .. "|r")
+    end
+    if row.texture then
+        icon.texture:SetTexture(row.texture)
+    elseif row.checked then
         icon.texture:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
     elseif row.manual then
         icon.texture:SetTexture("Interface\\Buttons\\UI-CheckBox-Up")
@@ -132,7 +175,13 @@ function taskRenderer:Render(task, container)
     icon:SetScript("OnClick", manualClick)
     icon:SetScript("OnEnter", displayTaskTip)
     icon:SetScript("OnLeave", GameTooltip_Hide)
-    icon:EnableMouse(not not (row.manual or (status == "journal" and row.questID)))
+    if original then
+        icon:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+        container.frame.row = row
+        container.frame:EnableMouse(not not (row.frame or action))
+        container.frame:SetScript("OnMouseUp", manualClick)
+    end
+    icon:EnableMouse(not not (row.frame or action or row.manual or (status == "journal" and row.questID)))
     icon:Show()
 end
 
@@ -141,16 +190,44 @@ local function clearArrow()
     target = nil
 end
 
-local function updateArrow()
-    if not initialized or not shown then clearArrow(); return end
+-- Waiting for a boat or leaving combat has no directional target. Keep the
+-- original short instruction at the compass without displaying a stale arrow.
+local function updateCompassHint()
+    if not original then return end
+    local hint = initialized and not target and arrowEnabled() and original.TravelHint()
+    if not hint or hint == "" then
+        if compassHint then compassHint:Hide() end
+        return
+    end
+    if not compassHint then
+        compassHint = UIParent:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+        compassHint:SetTextColor(1, .70, .33)
+    end
+    compassHint:ClearAllPoints()
+    local hud = _G.RutaXPJourneyScreenArrow
+    local saved = settings.HUDArrowLocation
+    if hud then
+        compassHint:SetPoint("TOP", hud, "BOTTOM", 0, 4)
+    elseif saved then
+        compassHint:SetPoint(saved[1], UIParent, saved[3], saved[4], saved[5])
+    else
+        compassHint:SetPoint("CENTER", UIParent, "CENTER", 300, 0)
+    end
+    compassHint:SetText(hint)
+    compassHint:Show()
+end
+
+local function updateTarget()
+    if not initialized or not arrowEnabled() then clearArrow(); return end
     local waypoint
-    if status == "journal" then waypoint = ns.GuideCarryover.Waypoint
+    if original then waypoint = original.Waypoint
+    elseif status == "journal" then waypoint = ns.GuideCarryover.Waypoint
     elseif current then waypoint = engine.Waypoint end
     if not waypoint then clearArrow(); return end
     local map, x, y, label = waypoint()
     if type(map) ~= "number" or type(x) ~= "number" or type(y) ~= "number" or
         x < 0 or x > 1 or y < 0 or y > 1 then clearArrow(); return end
-    local world, point = C_Map.GetWorldPosFromMapPos(map, {x=x, y=y})
+    local world, point = C_Map.GetWorldPosFromMapPos(map, CreateVector2D(x, y))
     local _, _, _, playerWorld = UnitPosition("player")
     -- World yards have independent origins on each continent. Never point
     -- across the sea by subtracting coordinates from two different worlds.
@@ -161,6 +238,11 @@ local function updateArrow()
         target = {map=map, x=x, y=y}
     end
     arrow.screenLabel = label or title
+end
+
+local function updateArrow()
+    updateTarget()
+    updateCompassHint()
 end
 
 local function installScrollArea(components)
@@ -187,9 +269,9 @@ end
 
 local function init()
     if initialized then return true end
-    if not loggedIn or not view:Available() or not ns.GuideEngine or not ns.char then return false end
+    if not loggedIn or not view:Available() or not (original or ns.GuideEngine) or not ns.char then return false end
     if not engine then
-        engine = ns.GuideEngine
+        engine = original or ns.GuideEngine
         engine.Subscribe(function() refreshPending = true end)
     end
     if not engine.Ready() then return false end
@@ -247,6 +329,7 @@ end
 function view:Refresh()
     refreshPending = false
     if not init() then return end
+    if original then shown = original.TrackerShown() end
     local oldGuide, oldIndex, oldStatus = current, stepIndex, status
     local message
     if ns.GuideResume then status, message = ns.GuideResume.Status() end
@@ -263,8 +346,12 @@ function view:Refresh()
         title, subtitle = "Misiones en curso", "Continuar con tu diario"
         rows = ns.GuideCarryover.Rows()
     elseif not current then
-        title, subtitle = "RutaXP", "Guías de RestedXP"
+        title, subtitle = "RutaXP", original and "Guías de leveo" or "Guías de RestedXP"
         rows = {{text=(waiting and message) or "Pulsa el nombre de la guía para elegir una."}}
+        if original then original.AddActivities(rows) end
+    elseif original then
+        title, subtitle, progressText = original.Headings()
+        rows = original.Tasks()
     else
         title = current.displayname or current.title or current.name
         subtitle = current.groupdisplayname or current.group
@@ -294,6 +381,7 @@ end
 
 function view:Show()
     if not init() then return false end
+    if original then original.SetTracker(true) end
     settings.hidden, shown = false, true
     self:Refresh()
     return true
@@ -301,6 +389,7 @@ end
 
 function view:Hide()
     if not init() then return false end
+    if original then original.SetTracker(false) end
     settings.hidden, shown = true, false
     self:Refresh()
     return true
@@ -326,5 +415,6 @@ driver:SetScript("OnUpdate", function(_, dt)
     if elapsed < .2 then return end
     elapsed = 0
     if refreshPending and view:Available() then view:Refresh()
-    elseif target or (shown and (current or status == "journal")) then updateArrow() end
+    elseif target or (compassHint and compassHint:IsShown()) or
+        (arrowEnabled() and (original or current or status == "journal")) then updateArrow() end
 end)

@@ -1146,7 +1146,7 @@ Farren entrega 563 después de 562. El siguiente objetivo de 563 está en Ventor
 
 ## Desolace (31–34)
 
-Kreldig pide siete venenos y tres pellejos en el mismo encargo. Sus presas comparten los alrededores del Cementerio de Kodos. Los dos objetivos se muestran juntos al llegar, antes de los viajes de ida y vuelta que pide Smeed en su rodeo opcional.
+1458 y 1437 se aceptan en la primera visita. Los dos objetivos de 1458 están en Sargeron y el cofre de 1437 está fuera del puesto. 1459 y 1438 se aceptan tras sus respectivas entregas y se hacen más tarde.
 
 | Paso y fila | Acción | Ubicación, condiciones y equipo |
 |---|---|---|
@@ -1181,15 +1181,15 @@ Kreldig pide siete venenos y tres pellejos en el mismo encargo. Sus presas compa
 | 12.4 | Indicación · Lead Dalinda fuera de la fortaleza; ella sale una vez que usted está libre de ella. Vahlarriel toma la entrega en Punta de Nijel al final de la guía. |  |
 | 12.5 | Completar · Vuelve con Vahlarriel (#1440) | varios destinos o ubicaciones según objetivo |
 | 13.1 | Entregar · El Cetro de la Luz (#5741) | Azore Aldamort · mapa 1443 · 38.88, 27.16 |
-| 14.1 | Recoger · Componentes para Reivindicadores y Cía. (#1459) | Veneno Scorpashi ×7 · Azotador Scorpashi · mapa 1443 · 40.39, 40.83 |
-| 14.2 | Recoger · Componentes para Reivindicadores y Cía. (#1459) | Pellejo de kodo mayor ×3 · Kodo envejecido · mapa 1443 · 49.36, 41.23 |
+| 14.1 | Recoger · Componentes para Reivindicadores y Cía. (#1459) | Veneno Scorpashi ×7 · Sacudidor Scorpashi · mapa 1443 · 40.39, 40.83 |
 | 15.1 | Aceptar · El guardaespaldas (#5821) | Cork Gizelton · desde nivel 30 · desvío opcional en solitario · mapa 1443 · 66.54, 37.51 |
 | 16.1 | Completar · El guardaespaldas (#5821) | desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
 | 17.1 | Entregar · El guardaespaldas (#5821) | Smeed Mezclatornillos · desvío opcional en solitario · mapa 1443 · 60.86, 61.86 |
-| 17.2 | Aceptar · El rodeo kodo (#5561) | Smeed Mezclatornillos · desde nivel 30 · desvío opcional en solitario · mapa 1443 · 60.86, 61.86 |
-| 18.1 | Completar · El rodeo kodo (#5561) | desvío opcional en solitario · varios destinos o ubicaciones según objetivo |
-| 19.1 | Entregar · El rodeo kodo (#5561) | Smeed Mezclatornillos · desvío opcional en solitario · mapa 1443 · 60.86, 61.86 |
-| 20.1 | Recoger · Colección de orejas (#1387) | Oreja centauro ×15 · Centauro Kolkar · mapa 1443 · 68.55, 52.17 |
+| 17.2 | Aceptar · El rodeo kodo (#5561) | Smeed Mezclatornillos · desde nivel 30 · mapa 1443 · 60.86, 61.86 |
+| 18.1 | Completar · El rodeo kodo (#5561) | varios destinos o ubicaciones según objetivo |
+| 18.2 | Recoger · Componentes para Reivindicadores y Cía. (#1459) | Pellejo de kodo mayor ×3 · Kodo envejecido · mapa 1443 · 57.76, 71.05 |
+| 19.1 | Entregar · El rodeo kodo (#5561) | Smeed Mezclatornillos · mapa 1443 · 60.86, 61.86 |
+| 20.1 | Recoger · Colección de orejas (#1387) | Oreja centauro ×15 · mapa 1443 · 65.59, 70.3 |
 | 21.1 | Piedra de hogar · Punta de Nijel |  |
 | 21.2 | Entregar · Vuelve con Vahlarriel (#1440) | Vahlarriel Destripademonios · mapa 1443 · 66.44, 11.82 · a elegir · Cinturón de forcejeador, Capa de cuartel |
 | 21.3 | Entregar · Colección de orejas (#1387) | Cabo Melkins · mapa 1443 · 66.74, 10.87 |

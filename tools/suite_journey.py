@@ -23,6 +23,23 @@ def entries(root):
     return [PREFIX + script for script in SCRIPTS]
 
 
+def fix_arrow_vector(text):
+    return text.replace("GetWorldPosFromMapPos(mapID, { x = targetX, y = targetY })",
+                        "GetWorldPosFromMapPos(mapID, CreateVector2D(targetX, targetY))")
+
+
+def embedded_contents(read):
+    """Update the already-adapted UI from an earlier RutaXP personal installation."""
+    for script in SCRIPTS:
+        name = PREFIX + script
+        data = read(name)
+        if script == "lib/TomCats/Arrows.lua":
+            data = fix_arrow_vector(data.decode("utf-8-sig")).encode("utf8")
+        yield name, data
+    for asset in (*("images/" + image for image in IMAGES), "license.txt"):
+        yield PREFIX + asset, read(PREFIX + asset)
+
+
 def contents(root):
     root = Path(root).resolve(strict=True)
 
@@ -49,6 +66,7 @@ def contents(root):
         if script == "ui/TaskDetailContainers.lua":
             text = text.replace("JGGameFontWhite", "RutaXPJourneyGameFontWhite")
         if script == "lib/TomCats/Arrows.lua":
+            text = fix_arrow_vector(text)
             text = text.replace('math.floor(distance + 0.5) .. " yards"', 'FormatJourneyDistance(distance)')
         if script == "ui/HeaderStep.lua":
             text = text.replace('("Step: %s"):format(stepText)', 'FormatJourneyStep(stepText)')

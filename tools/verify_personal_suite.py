@@ -1,6 +1,7 @@
-"""Verify the assembled personal ZIP against the native Forever guide lists."""
+"""Verify the complete personal suite and its original RutaXP 0.7.36 guides."""
 
 import argparse
+import hashlib
 from collections import Counter
 from pathlib import Path, PurePosixPath
 import re
@@ -15,7 +16,9 @@ else:
     import suite_journey
 
 
-MODULES = ("OpenMap", "ForeverDungeonJournal", "RXPGuides")
+MODULES = ("OpenMap", "ForeverDungeonJournal")
+# Canonical LF hash of RutaXP/Leveling.lua in tag v0.7.36.
+GUIDE_HASH = "9bf73f8371177107cf2397bb89d3522b3d335eca9eef691f86a86b9e3ef6b4a4"
 ORIGINAL_ASSET = re.compile(r"Interface[/\\]+AddOns[/\\]+(?:OpenMap|ForeverDungeonJournal|RXPGuides)[/\\]", re.I)
 LITERAL_ASSET = re.compile(r"""["']Interface[/\\]+AddOns[/\\]+RutaXP[/\\]+(?P<asset>[^"'{}\n%]+?\.(?:tga|blp|ttf|otf|ogg|mp3|wav))["']""", re.I)
 ASSET_SUFFIXES = {".tga", ".blp", ".png", ".ttf", ".otf", ".ogg", ".mp3", ".wav", ".atlas"}
@@ -75,24 +78,24 @@ def check_bindings(tree):
     return len(entries)
 
 
-def check_native_bindings(tree, official, addons):
+def check_native_bindings(tree, roots):
     def definitions(root):
         # Count the action code too. A binding with a surviving label but the
         # wrong function would look correct in the options screen.
         return Counter((n.get("name"), n.get("category"), (n.text or "").strip()) for n in root)
     expected = Counter()
     for module in MODULES:
-        if module == "RXPGuides":
-            matches = [p for p in official.namelist() if p.count("/") == 1 and p.endswith("/Bindings.xml")]
-            if matches:
-                expected.update(definitions(ET.fromstring(official.read(matches[0]))))
-        else:
-            expected.update(definitions(ET.parse(addons / module / "Bindings.xml").getroot()))
+        source = roots[module] / "Bindings.xml"
+        if source.is_file():
+            bindings = ET.parse(source).getroot()
+            if (roots[module] / "RutaXP.toc").is_file():
+                bindings = [node for node in bindings if node.get("name", "").startswith(module.upper() + "_")]
+            expected.update(definitions(bindings))
     if definitions(ET.fromstring(tree.read("Bindings.xml"))) != expected:
         raise ValueError("Native keybinding labels or actions differ in the assembled ZIP")
 
 
-def check_native_assets(tree, official, addons):
+def check_native_assets(tree, roots):
     counts = dict.fromkeys(MODULES, 0)
     def check(module, rel, size, crc):
         key = f"Modules/{module}/{rel}".casefold()
@@ -103,16 +106,13 @@ def check_native_assets(tree, official, addons):
         if (info.file_size, info.CRC) != (size, crc):
             raise ValueError(f"Native media changed: {module}/{rel}")
         counts[module] += 1
-    for module in ("OpenMap","ForeverDungeonJournal"):
-        folder = addons / module
+    for module in MODULES:
+        folder = roots[module]
+        if (folder / "RutaXP.toc").is_file():
+            folder = folder / "Modules" / module
         for p in folder.rglob("*"):
             if p.suffix.lower() in ASSET_SUFFIXES and p.is_file():
                 check(module, p.relative_to(folder).as_posix(), p.stat().st_size, crc32(p.read_bytes()))
-    for info in official.infolist():
-        parts = info.filename.split("/", 1)
-        if (len(parts) == 2 and parts[1].split("/")[0] in {"Textures","UI","libs","DB","Guides","lang","locale"}
-                and PurePosixPath(parts[1]).suffix.lower() in ASSET_SUFFIXES):
-            check("RXPGuides", parts[1], info.file_size, info.CRC)
     return counts
 
 
@@ -144,10 +144,9 @@ def check_launcher(suite):
         assert(ROOT.GetEmbeddedModule('OpenMap') == nil)
         assert(ROOT:HandleSuiteCommand('mapa') and actions.mapa)
         actions.mapa = nil
-        local _, rxp = RutaXPModuleContext('RXPGuides')
         local _, map = RutaXPModuleContext('OpenMap')
         local _, journal = RutaXPModuleContext('ForeverDungeonJournal')
-        assert(map~=journal and journal~=rxp and map~=rxp)
+        assert(map~=journal)
         assert(ROOT.GetEmbeddedModule('OpenMap') == map)
         assert(select(2, RutaXPModuleContext('OpenMap'))==map)
         ROOT.OpenGuideLibrary = function() actions.guias=true end
@@ -163,66 +162,26 @@ def check_launcher(suite):
     """)
 
 
-def compare_guides(tree, entries, reference):
-    native_root = next(iter({name.rsplit("/", 1)[0] for name in reference.namelist()
-                             if name.count("/") == 1 and name.endswith("/RXPGuides.toc")}))
-    native = Tree(reference, native_root)
-    _, native_entries = toc(native.read("RXPGuides.toc"))
-    lists = [p for p in native_entries if p.lower().endswith("guidelist-forever.xml")]
-    if not any(p.startswith("lang/Guides-esES/") for p in lists):
-        raise ValueError("Missing native list of Spanish guides")
-    prefix = "Modules/RXPGuides/"
-    if {p for p in entries if p.lower().endswith("guidelist-forever.xml")} != {prefix + p for p in lists}:
-        raise ValueError("The package does not load all the native Forever guide lists")
-    # Compare each list in load order, including the actual Lua source of every
-    # registration. Namespaces are adapted, localized guide text stays identical.
-    bytes_seen = set()
-    english, spanish = [], []
-    for path in lists:
-        original = [p for p in native.graph([path]) if p.lower().endswith(".lua")]
-        copied = [p[len(prefix):] for p in tree.graph([prefix + path]) if p.lower().endswith(".lua")]
-        if original != copied:
-            raise ValueError(f"Different guides or registration order in {path}")
-        for rel in original:
-            if rel in bytes_seen:
-                continue
-            src = native.read(rel).replace("\r\n", "\n")
-            embedded = tree.read(prefix + rel).replace("\r\n", "\n")
-            if src != embedded.replace('RutaXPModuleContext("RXPGuides")', "..."):
-                raise ValueError(f"Guide differs from official copy: {rel}")
-            bytes_seen.add(rel)
-        if path.startswith("Guides/"):
-            english = copied
-        elif path.startswith("lang/Guides-esES/"):
-            spanish = copied
-    registrations = {}
-    for locale, files in (("enUS", english), ("esES", spanish)):
-        for faction in ("Alliance", "Horde"):
-            # A sandbox exposes just the two character queries used by stock
-            # guides. Guide text is collected without executing its contents.
-            lua = LuaRuntime(unpack_returned_tuples=True, register_eval=False, register_builtins=False)
-            setup = lua.eval("""function(locale, faction)
-                local counts=0
-                local mod={enabledLocale={}}
-                if locale~='enUS' then mod.enabledLocale[locale]=true end
-                mod.RegisterGuide=function(body) assert(type(body)=='string' and #body>0); counts=counts+1 end
-                local env={RXPGuides=mod,RXP=mod,GetLocale=function() return locale end,
-                    UnitFactionGroup=function() return faction end,RutaXPModuleContext=function(name) return name,mod end}
-                return function(source, name)
-                    local f=assert(loadstring(source,name)); setfenv(f,env); f('RutaXP',{})
-                end, function() return counts end
-            end""")
-            run, count = setup(locale, faction)
-            for rel in files:
-                run(tree.read(prefix + rel), rel)
-            if not count():
-                raise ValueError(f"No {locale} guide registrations for {faction}")
-            registrations[f"{locale}/{faction}"] = count()
-    return registrations
+def verify_guides(tree):
+    code = tree.read("Leveling.lua").replace("\r\n", "\n")
+    if hashlib.sha256(code.encode("utf8")).hexdigest() != GUIDE_HASH:
+        raise ValueError("Leveling.lua differs from RutaXP v0.7.36")
+    lua = LuaRuntime(register_eval=False, register_builtins=False)
+    loader = lua.eval("""function(source)
+        local counts, ids = {}, {}
+        local ns = {RegisterGuide = function(_, guide)
+            assert(not ids[guide.id] and #guide.steps > 0)
+            ids[guide.id] = true
+            counts[guide.faction] = (counts[guide.faction] or 0) + 1
+        end}
+        assert(loadstring(source, 'Leveling.lua'))('RutaXP', ns)
+        return counts
+    end""")
+    return dict(loader(code))
 
 
-def verify(archive_path, official_path, addons=None):
-    with ZipFile(archive_path) as archive, ZipFile(official_path) as reference:
+def verify(archive_path, addons=None):
+    with ZipFile(archive_path) as archive:
         names = archive.namelist()
         if any(not n.startswith("RutaXP/") for n in names) or [n for n in names if n.lower().endswith(".toc")] != ["RutaXP/RutaXP.toc"]:
             raise ValueError("The ZIP must contain exactly one root addon and TOC")
@@ -232,16 +191,20 @@ def verify(archive_path, official_path, addons=None):
         meta, entries = toc(tree.read("RutaXP.toc"))
         settings = {s.strip() for s in meta["SavedVariables"].split(",")}
         characters = {s.strip() for s in meta["SavedVariablesPerCharacter"].split(",")}
-        if not {"OpenMapDB","ForeverDungeonJournalDB","RutaXPDB","RXPSettings","RutaXPRestedDB"} <= settings:
+        if not {"OpenMapDB","ForeverDungeonJournalDB","RutaXPDB"} <= settings:
             raise ValueError("Missing native account settings")
-        if not {"OpenMapCharDB","ForeverDungeonJournalCharacterDB","RutaXPCharDB","RXPCSettings"} <= characters:
+        if not {"OpenMapCharDB","ForeverDungeonJournalCharacterDB","RutaXPCharDB"} <= characters:
             raise ValueError("Missing native character settings")
         if any(not meta.get(f"X-{m}-Version") for m in MODULES):
             raise ValueError("Missing native module version")
+        if meta.get("X-RutaXP-Guide-Version") != "0.7.36":
+            raise ValueError("Missing original RutaXP guide version")
+        if any(p.startswith("modules/rxpguides/") and p != "modules/rxpguides/migracion.txt" for p in tree.names):
+            raise ValueError("Unexpected RestedXP content")
         graph = tree.graph(entries)
         scripts = [p for p in graph if p.lower().endswith(".lua")]
         if not {"Modules/OpenMap/Init.lua", "Modules/ForeverDungeonJournal/Core/Journal.lua",
-                "Modules/RXPGuides/RXPGuides.lua", "Suite.lua"} <= set(scripts):
+                "Core.lua", "Leveling.lua", "QuestEngine.lua", "GuideOriginal.lua", "Suite.lua"} <= set(scripts):
             raise ValueError("Missing native entry point")
         lua = LuaRuntime(unpack_returned_tuples=True)
         compile_chunk = lua.eval("function(s,n) local f, err=loadstring(s,n); return err end")
@@ -261,8 +224,14 @@ def verify(archive_path, official_path, addons=None):
                 assets.add(asset.casefold())
         check_launcher(tree.read("Suite.lua"))
         report = {"compiled_lua":len(scripts), "xml":len(graph)-len(scripts), "literal_assets":len(assets),
-                  "bindings":check_bindings(tree), "registrations":compare_guides(tree, entries, reference)}
+                  "bindings":check_bindings(tree), "registrations":verify_guides(tree)}
         journey_paths = {n for n in tree.names.values() if n.startswith(suite_journey.PREFIX)}
+        if addons is not None:
+            if __package__:
+                from .suite_setup import client_from, find_native_sources
+            else:
+                from suite_setup import client_from, find_native_sources
+            roots = find_native_sources(client_from(addons))
         if meta.get("X-RutaXP-Journey-UI"):
             journey_scripts = [p for p in graph if p.startswith(suite_journey.PREFIX)]
             expected = set(suite_journey.entries(None))
@@ -270,23 +239,27 @@ def verify(archive_path, official_path, addons=None):
             expected.add(suite_journey.PREFIX + "license.txt")
             if journey_scripts != suite_journey.entries(None) or journey_paths != expected:
                 raise ValueError("Unexpected Journey load order, assets or guide content")
-            if addons is not None and (addons / "Journey/Journey.toc").is_file():
-                for name, data in suite_journey.contents(addons / "Journey"):
+            if addons is not None and "Journey" in roots:
+                source = roots["Journey"]
+                if (source / "Journey.toc").is_file():
+                    content = suite_journey.contents(source)
+                else:
+                    content = suite_journey.embedded_contents(lambda name: (source / name).read_bytes())
+                for name, data in content:
                     if archive.read("RutaXP/" + name) != data:
                         raise ValueError(f"The packaged Journey component differs from the local source: {name}")
             report["journey_ui"] = meta["X-RutaXP-Journey-UI"]
         elif journey_paths:
             raise ValueError("Journey files are present without the UI load metadata")
         if addons is not None:
-            check_native_bindings(tree, reference, addons)
-            report["native_assets"] = check_native_assets(tree, reference, addons)
+            check_native_bindings(tree, roots)
+            report["native_assets"] = check_native_assets(tree, roots)
         return report
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("artifact", type=Path)
-    parser.add_argument("official", type=Path, help="Pinned upstream RestedXP source ZIP")
     parser.add_argument("--addons", type=Path, help="Compare the native map and journal keybinding actions")
     args = parser.parse_args()
-    print(verify(args.artifact, args.official, args.addons))
+    print(verify(args.artifact, args.addons))

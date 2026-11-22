@@ -10,21 +10,21 @@ import tempfile
 import venv
 
 if __package__:
-    from .suite_lua import SUITE_FILES
+    from .suite_lua import suite_files
 else:
-    from suite_lua import SUITE_FILES
+    from suite_lua import suite_files
 
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILD_VERSION = "6.13.0"
 NAME = "Instalar_Suite_RutaXP"
 SCRIPTS = ("suite_setup.py", "build_suite_setup.py", "build_personal_suite.py",
-           "suite_lua.py", "suite_map_journal.py", "suite_rested.py", "suite_journey.py")
+           "suite_lua.py", "suite_map_journal.py", "suite_journey.py")
 
 
 def bundle_inputs(root):
     return [
-        *(root / "RutaXP" / name for name in SUITE_FILES),
+        *(root / "RutaXP" / name for name in suite_files(root / "RutaXP")),
         *(f for f in sorted((root / "RutaXP/Licenses").iterdir())
           if f.is_file() and f.suffix.lower() in (".md", ".txt")),
         root / "tools/Install-Suite.ps1", root / "NOTICE.md", root / "LICENSE",

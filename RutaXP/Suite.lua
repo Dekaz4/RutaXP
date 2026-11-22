@@ -6,12 +6,6 @@ local modules = {}
 function RutaXPModuleContext(name)
     if not modules[name] then
         modules[name] = {}
-        if name == "RXPGuides" then
-            modules[name].rutaXPManualQuesting = function()
-                return (ns.GuideResume and ns.GuideResume.HoldingJournal()) or
-                    (ns.GuideCarryover and ns.GuideCarryover.IsResuming())
-            end
-        end
     end
     return name, modules[name]
 end
@@ -21,7 +15,7 @@ function ns.GetEmbeddedModule(name)
 end
 
 local entries = {
-    {key="guias", label="Biblioteca de guías", icon="INV_Misc_Book_09", module="RXPGuides"},
+    {key="guias", label="Guías de RutaXP", icon="INV_Misc_Book_09"},
     {key="mapa", label="Mapa del mundo", icon="INV_Misc_Map_01"},
     {key="mazmorras", label="Diario de mazmorras", icon="INV_Misc_Book_11", module="ForeverDungeonJournal"},
     {key="talentos", label="Guía de talentos", icon="Ability_Marksmanship"},
@@ -78,10 +72,12 @@ local function showMenu()
     panel:Show()
 end
 
-function ns:HandleSuiteCommand(command)
+function ns:HandleSuiteCommand(command, rest)
     if command == "" then showMenu(); return true end
     if command == "guia" or command == "guía" then ns.ToggleGuidePanel(); return true end
     if command == "zona" then ns.ActivateZoneGuide(); return true end
+    if command == "plan" and self.DungeonPlanner then self.DungeonPlanner:Resume(); return true end
+    if command == "repetir" and self.DungeonPlanner then self.DungeonPlanner:Repeat(rest or ""); return true end
     if command == "guías" then command = "guias" end
     for _, entry in ipairs(entries) do
         if command == entry.key then open(entry); return true end

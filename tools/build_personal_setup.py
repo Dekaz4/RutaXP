@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import os
+import re
 from pathlib import Path
 import struct
 import subprocess
@@ -14,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def build(archive, dest):
     with ZipFile(archive) as bundle:
         toc = bundle.read("RutaXP/RutaXP.toc").decode("utf-8-sig")
-        if "## X-RutaXP-Embedded: OpenMap, ForeverDungeonJournal, RXPGuides" not in toc:
+        if not re.search(r"^## X-RutaXP-Embedded: OpenMap, ForeverDungeonJournal(?:, RXPGuides)?\s*$", toc, re.M):
             raise ValueError("Se necesita el ZIP personal completo.")
     framework = Path(os.environ["WINDIR"]) / "Microsoft.NET"
     compiler = next(framework.glob("Framework64/v4.0.30319/csc.exe"), framework / "Framework/v4.0.30319/csc.exe")

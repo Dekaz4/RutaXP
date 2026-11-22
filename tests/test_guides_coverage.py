@@ -20,8 +20,7 @@ spec.loader.exec_module(audit_module)
 ORIGINAL_SEMANTICS = "46bc091cc7034231f3f7138dc301eaff00126460d6abfe7745a3233ada32350d"
 STOUTFIST_REVISIONS = {"wetlands-old-habits-before-nekrosh-return-6", "wetlands-stoutfist-howin-prerequisites-5"}
 MID_ROUTE_REVISIONS = {
-    "southshore-coast-return-7", "nijels-point-one-return-2", "desolace-menethil-auberdine-boat-3",
-    "desolace-venom-and-kodo-hides-4", "xavian-shared-satyrs-3",
+    "southshore-coast-return-7", "nijels-point-one-return-2", "desolace-menethil-auberdine-boat-3", "xavian-shared-satyrs-3",
     "stranglethorn-snapjaw-and-island-2", "swamp-caravan-and-galen-3",
     "desolace-karnitol-final-hearth-3", "booty-bay-captains-return-3", "aerie-peak-takeoff-2",
 }
@@ -154,19 +153,6 @@ def original_order(document):
     posters[0].update(object=142122, x=66.82, y=22.29, z=8)
     revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
     guides = {guide["id"]: guide for guide in result["guides"]}
-    # Restore only the three reviewed Desolace hunting anchors. The whole
-    # catalog digest below still checks every original location at its old slot.
-    desolace = guides["forever/alliance/30-40/02-desolace"]
-    for quest, item, current, previous in (
-        (1459, 6248, (40.39, 40.83), (40.39, 40.83)),
-        (1459, 6249, (49.36, 41.23), (57.76, 71.05)),
-        (1387, 6067, (68.55, 52.17), (65.59, 70.3)),
-    ):
-        goal, = [g for s in desolace["steps"] for g in s["goals"]
-                 if (g["t"], g.get("quest"), g.get("item")) == ("collect", quest, item)]
-        if (goal["map"], goal["f"], goal["x"], goal["y"]) != (1443, "e", *current):
-            raise AssertionError(f"Changed reviewed Desolace hunting anchor for item {item}")
-        goal["x"], goal["y"] = previous
     hillsbrad = guides["forever/alliance/30-40/01-hillsbrad-foothills"]
     table, = [row for step in hillsbrad["steps"] for row in step["goals"] if row.get("item") == 279386]
     if (table["t"], table["quest"], table["oi"], table["map"], table["x"], table["y"]) != (

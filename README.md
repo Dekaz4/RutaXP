@@ -1,53 +1,46 @@
 # RutaXP para WoW Forever
 
-RutaXP reúne el mapa, el diario de mazmorras, las guías oficiales de RestedXP y los talentos en una sola carpeta `Interface/AddOns/RutaXP`. La biblioteca abre las guías desde RutaXP. Si tienes Journey, el instalador incorpora su panel de pasos y su brújula al paquete personal.
+RutaXP 1.2.0 recupera los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos y la brújula usan la interfaz de tu copia de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
 
-## Instalar el paquete personal
+## Actualizar
 
-Cierra WoW y ejecuta **Instalar_RutaXP_Personal.exe**. Comprueba la carpeta que muestra el instalador. Este ejecutable contiene el paquete ya preparado y sirve también sin conexión. Al volver a la selección de personajes, abre **Accesorios** y comprueba que **RutaXP** está activado para el personaje con el que vas a jugar.
+Con WoW cerrado, abre **Instalador_RutaXP.exe** y elige **Instalar o actualizar**. El instalador conserva una copia recuperable en `RutaXP-Suite-Backups`, dentro de la carpeta del cliente. Para montar la suite utiliza tus copias locales de OpenMap, ForeverDungeonJournal y Journey, incluidas las que el instalador anterior guardó allí. Los 29 capítulos de Alianza y los 28 de Horda vienen con RutaXP.
 
-El instalador comprueba el paquete antes de sustituir RutaXP. Guarda las instalaciones anteriores en `RutaXP-Suite-Backups`, dentro de la carpeta del cliente. Aparta también la copia separada de Journey cuando el paquete incluye su interfaz. Conserva el progreso de cada personaje y tus elecciones de talentos. Para restaurar los addons anteriores, cierra WoW y ejecuta `Instalar_RutaXP_Personal.exe --restore`.
-
-## Preparar el paquete en otro ordenador
-
-En el menú de **Instalador_RutaXP.exe**, elige **Instalar o actualizar**. El instalador prepara la suite para tu cliente con tus copias locales de OpenMap, ForeverDungeonJournal y, si está disponible, Journey. Verifica la edición oficial de RestedXP con SHA-256. También puedes ejecutar **Instalar_Suite_RutaXP.exe** directamente.
+Si ya tienes un paquete personal preparado, puedes instalarlo sin conexión con **Instalar_RutaXP_Personal.exe**. Para restaurar la instalación anterior, cierra WoW y ejecuta `Instalar_RutaXP_Personal.exe --restore`.
 
 ## En el juego
 
-| Acción | Cómo abrirla |
+| Acción | Acceso |
 | --- | --- |
-| Menú de RutaXP | `/rutaxp` o el menú de accesorios |
-| Mapa de OpenMap | **M** o `/rutaxp mapa` |
-| Diario de mazmorras | `/dj` o `/rutaxp mazmorras` |
-| Buscar y elegir una guía | `/rutaxp guias` o el título del panel de Journey |
-| Mostrar u ocultar los pasos y la brújula | `/rutaxp guia` |
-| Volver al seguimiento automático | **Seguir mi zona** o `/rutaxp zona` |
-| Guía de talentos y habilidades de RutaXP | **N** o `/rutaxp talentos` |
+| Abrir el menú del addon | `/rutaxp` |
+| Elegir un capítulo o configurar el seguimiento | Pulsa el título del panel de Journey o escribe `/rutaxp guias` |
+| Mostrar u ocultar el panel de pasos | `/rutaxp guia` |
+| Mostrar u ocultar la brújula | `/rutaxp flecha` |
+| Elegir el capítulo recomendado para la zona, el nivel y el diario actuales | `/rutaxp zona` |
+| Consultar las opciones del dúo | `/rutaxp herramientas` |
+| Abrir el mapa de OpenMap | **M** o `/rutaxp mapa` |
+| Abrir el diario de mazmorras | `/dj` o `/rutaxp mazmorras` |
+| Retomar la preparación de una mazmorra aplazada | `/rutaxp plan` |
+| Volver a una mazmorra por libre | `/rutaxp repetir Nombre de la mazmorra` |
+| Ver los talentos y habilidades de tu clase | **N** o `/rutaxp talentos` |
 
-Las casillas de seguimiento de la lupa del minimapa y del panel de OpenMap comparten la misma selección. Pulsa **M** y elige una zona para ver los servicios de tu facción a cualquier distancia, también con el registro de misiones abierto. Por ejemplo, al marcar **Reparación** puedes ver a **Durnan Cortapieles** en el Valle de Crestanevada, en Dun Morogh. Los instructores de clase corresponden a la clase de tu personaje. Al activar **Misiones de nivel bajo**, el mapa muestra las ofertas que el cliente comunica para cada zona.
+El panel toma los pasos, los requisitos de misión, las opciones de grupo y los tramos de viaje del motor de RutaXP. Si tienes un capítulo guardado, el addon recupera el avance de ese personaje y comprueba su diario. Un personaje nuevo recibe una recomendación por zona, nivel y facción. En modo dúo cada personaje conserva su propio paso, incluso cuando ayuda a su compañero en uno anterior.
 
-Una instalación nueva abre el diario al pulsar una entrada de mazmorra en OpenMap. Si ya elegiste otra acción en OpenMap, el instalador conserva tu preferencia. En el panel de talentos puedes seguir consultando la distribución por nivel y las habilidades de tu clase. RestedXP se encarga del recorrido de leveo.
+Los filtros de seguimiento del minimapa y de OpenMap comparten selección. Al pulsar **M** puedes ver los servicios de tu facción en la zona que consultas, a cualquier distancia. Las entradas de mazmorra respetan la acción configurada en OpenMap. Para una instalación nueva, el clic abre el diario.
 
-## Continuar con un personaje
+### Misiones de mundo y mazmorras
 
-Al entrar, RutaXP da prioridad a la guía y al paso que ya tenías activos en el motor de RestedXP. Para los capítulos antiguos de RutaXP compara las misiones del paso guardado con las del nuevo capítulo, la zona, el nivel y el diario de ese personaje. Los números de paso pertenecen a cada recorrido. El progreso del capítulo antiguo sigue guardado.
+Journey muestra la misión que estás siguiendo en el juego o en la que acaba de subir un contador. Para las mazmorras, RutaXP relaciona las misiones del capítulo con las guías oficiales de RestedXP disponibles, el diario de mazmorras y los requisitos de Forever. En un mismo panel ves las previas, las recogidas exteriores y las que solo puedes aceptar dentro.
 
-En modo automático, RutaXP consulta la zona al viajar. Puedes fijar otra guía en la biblioteca y volver al modo automático con **Seguir mi zona**. La biblioteca incluye las guías oficiales que el cliente considera compatibles con ese personaje. La edición incluida de Forever cubre zonas iniciales y contenidos específicos. Si tu zona y nivel carecen de una ruta oficial de leveo, el panel te avisa.
+Pulsa **Preparar mazmorra** para seguir las recogidas con la brújula. También reconoce una recogida al pasar cerca. Si prefieres seguir solo, pulsa **Seguir con la ruta de mundo abierto**. Al salir con los objetivos de la visita completos, la guía conserva las entregas pendientes. Las visitas posteriores quedan a tu elección. El diario activa el modo **Gamer** al actualizar cada personaje y respeta los cambios que hagas después en sus opciones.
 
-Si venías de un capítulo antiguo con el dúo activado, el panel **Misiones en curso** te permite acabar lo que ya habías empezado. Comprueba tu diario al entrar y da prioridad a las misiones de tu último paso. Pulsa el icono de una misión para abrir su ficha. Cuando jugáis juntos, **Activa para ambos** indica que el juego ve esa misión en los dos diarios. Cada personaje conserva su propio avance. Cuando termines ese grupo de misiones, RutaXP vuelve a buscar un capítulo. También puedes elegirlo antes en la biblioteca.
+## Preparar el paquete local
 
-## Reconstrucción desde el código
-
-Con Python 3.10 o posterior puedes generar el ZIP personal desde la raíz del proyecto.
+Desde la raíz del proyecto y con Python 3.10 o posterior, indica la carpeta de accesorios de WoW Forever.
 
 ```powershell
 python tools/build_personal_suite.py --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
+python tools/verify_personal_suite.py dist/RutaXP-1.2.0-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
 ```
 
-La composición lee los módulos locales y usa la revisión oficial de RestedXP registrada en `tools/suite_rested.py`. El ZIP se genera en `dist`. La instalación es independiente de la compilación.
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/Install-Suite.ps1 -Client 'E:\WOW\World of Warcraft\_forever_' -Archive dist/RutaXP-1.1.0-personal.zip
-```
-
-La última versión de las antiguas rutas propias fue la [0.7.38](https://github.com/Dekaz4/RutaXP/releases/tag/v0.7.38). El índice de migración usa los mapas y los identificadores de misión de esos capítulos.
+Los créditos y las licencias se encuentran en [NOTICE.md](NOTICE.md) y en `RutaXP/Licenses`.

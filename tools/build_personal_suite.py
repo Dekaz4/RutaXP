@@ -12,13 +12,12 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 
-from suite_lua import SUITE_FILES, bind_namespace
+from suite_lua import suite_files, bind_namespace
 from suite_map_journal import transform_lua as transform_journal_map
-from suite_rested import transform_lua as transform_rested
 import suite_journey
 
 ROOT = Path(__file__).resolve().parents[1]
-MODULES = ("OpenMap", "ForeverDungeonJournal", "RXPGuides")
+MODULES = ("OpenMap", "ForeverDungeonJournal")
 ASSETS = {".blp", ".tga", ".png", ".ogg", ".mp3", ".wav", ".ttf", ".otf", ".atlas"}
 ASSET_ROOT = re.compile(r"(Interface)([/\\]+)(AddOns)\2(OpenMap|ForeverDungeonJournal|RXPGuides)(?=[/\\])", re.I)
 FILE_TAG = re.compile(r"""<!--.*?-->|<(?:Script|Include)\b[^<>]*?\bfile\s*=\s*(["'])([^"']+)\1[^<>]*>""", re.S)
@@ -104,9 +103,8 @@ class Module:
                 yield self.prefix + rel, self.xml[rel].encode("utf8")
             elif rel in self.required and suffix == ".lua":
                 text = self.read(rel)
-                transform = transform_rested if self.name == "RXPGuides" else transform_journal_map
                 # Relocate upstream literal paths before inserting new module-specific paths.
-                text = bind_namespace(self.name, rel, transform(self.name, rel, relocate(text)))
+                text = bind_namespace(self.name, rel, transform_journal_map(self.name, rel, relocate(text)))
                 # The updater distributed with 0.7 reads one plain path per TOC line.
                 # Run the very same native locale gate without a TOC path annotation.
                 if rel in self.locales:
@@ -116,14 +114,67 @@ class Module:
                     ("license", "copying", "sources", "credits", "notice", "map_sources")) or "LICENSES/" in rel:
                 yield self.prefix + rel, path.read_bytes()
 
+    def bindings(self):
+        path = self.root / "Bindings.xml"
+        return ET.parse(path).getroot() if path.is_file() else ()
+
+
+class InstalledModule:
+    """Reuse a user's integrated module when this PC never had the standalone addon."""
+    def __init__(self, name, suite):
+        self.name, self.root = name, suite.resolve(strict=True)
+        self.prefix = f"Modules/{name}/"
+        self.hashes = {}
+        for row in (self.root / "manifest.sha256").read_text(encoding="utf-8-sig").splitlines():
+            if not row or row.startswith("#"):
+                continue
+            digest, path = row.split("  ", 1)
+            if path.startswith(self.prefix) or path in ("RutaXP.toc", "Bindings.xml"):
+                if (path in self.hashes or any(p in ("", ".", "..") for p in path.split("/"))
+                        or "\\" in path or ":" in path or not re.fullmatch(r"[a-fA-F0-9]{64}", digest)):
+                    raise ValueError(f"Manifiesto del módulo {name} no válido: {path}")
+                self.hashes[path] = digest.lower()
+        rows, meta = lines_and_metadata(self.read("RutaXP.toc").decode("utf-8-sig"))
+        self.required = {p for p in self.hashes if p.startswith(self.prefix)}
+        self.entries = [(p[len(self.prefix):], flag) for p, flag in rows if p.startswith(self.prefix)]
+        if not self.entries or any(self.prefix + p not in self.required for p, _ in self.entries):
+            raise ValueError(f"Faltan los archivos del módulo instalado {name}.")
+        if name == "Journey":
+            self.metadata = {"Version": meta["X-RutaXP-Journey-UI"]}
+            if [self.prefix + p for p, _ in self.entries] != suite_journey.entries(None):
+                raise ValueError("Versión de Journey incompatible con esta actualización.")
+        else:
+            self.metadata = {k:meta[f"X-{name}-{k}"] for k in ("Title","Version")}
+            for key in ("SavedVariables", "SavedVariablesPerCharacter"):
+                self.metadata[key] = ", ".join(v for v in re.split(r"[,\s]+", meta.get(key, "")) if v.startswith(name))
+            self.metadata["OptionalDeps"] = ", ".join(v for v in re.split(r"[,\s]+", meta.get("OptionalDeps",""))
+                                                       if v and not v.startswith("RXPGuides"))
+
+    def read(self, name):
+        path = (self.root / name).resolve(strict=True)
+        if not path.is_relative_to(self.root) or not path.is_file():
+            raise ValueError(f"Ruta de módulo no válida: {name}")
+        data = path.read_bytes()
+        if hashlib.sha256(data).hexdigest() != self.hashes.get(name):
+            raise ValueError(f"El archivo del módulo instalado ha cambiado: {name}")
+        return data
+
+    def contents(self):
+        if self.name == "Journey":
+            yield from suite_journey.embedded_contents(self.read)
+        else:
+            for p in sorted(self.required):
+                yield p, self.read(p)
+
+    def bindings(self):
+        xml = ET.fromstring(self.read("Bindings.xml"))
+        return [node for node in xml if node.get("name","").startswith(self.name.upper() + "_")]
+
 
 def merged_bindings(modules):
     bindings, names = ET.Element("Bindings"), set()
     for module in modules:
-        path = module.root / "Bindings.xml"
-        if not path.exists():
-            continue
-        for node in ET.parse(path).getroot():
+        for node in module.bindings():
             name = node.get("name")
             if not name or name in names:
                 raise ValueError(f"Invalid or duplicate binding {name}")
@@ -133,14 +184,14 @@ def merged_bindings(modules):
 
 
 def compose(template, roots, destination):
-    modules = [Module(name, roots[name]) for name in MODULES]
+    modules = [Module(name, roots[name]) if (roots[name] / (name + ".toc")).is_file()
+               else InstalledModule(name, roots[name]) for name in MODULES]
     base = (template / "RutaXP.toc").read_text(encoding="utf-8-sig")
     _, metadata = lines_and_metadata(base)
     for key in ("SavedVariables", "SavedVariablesPerCharacter", "OptionalDeps"):
         names = []
         for source in [metadata] + [m.metadata for m in modules]:
-            for token in re.split(r"[,\s]+", source.get(key, "")):
-                name = {"RXPDB":"RutaXPRestedDB","RXPString":"RutaXPRestedString"}.get(token, token)
+            for name in re.split(r"[,\s]+", source.get(key, "")):
                 if name and name not in names and name not in MODULES:
                     names.append(name)
         if names:
@@ -155,8 +206,13 @@ def compose(template, roots, destination):
         headers += [f"## X-{module.name}-{key}: {module.metadata[key]}" for key in ("Title", "Version")]
         load += [module.prefix + rel for rel, _ in module.entries]
     journey = roots.get("Journey")
+    prior_journey = None
     if journey:
-        _, journey_meta = lines_and_metadata((journey / "Journey.toc").read_text(encoding="utf-8-sig"))
+        if (journey / "Journey.toc").is_file():
+            _, journey_meta = lines_and_metadata((journey / "Journey.toc").read_text(encoding="utf-8-sig"))
+        else:
+            prior_journey = InstalledModule("Journey", journey)
+            journey_meta = prior_journey.metadata
         headers.append("## X-RutaXP-Journey-UI: " + journey_meta["Version"])
         load.extend(suite_journey.entries(journey))
     toc = "\n".join(headers) + "\n" + base.strip() + "\n\n" + "\n".join(load) + "\n"
@@ -173,13 +229,15 @@ def compose(template, roots, destination):
                     raise ValueError(f"Duplicate archive entry: {name}")
                 checksums[name] = hashlib.sha256(data).hexdigest()
                 archive.writestr("RutaXP/" + name, data)
-            for name in SUITE_FILES:
+            for name in suite_files(template):
                 write(name, toc.encode("utf8") if name == "RutaXP.toc" else (template / name).read_bytes())
+            # The already-distributed 1.1.0 updater checks for this directory after activation.
+            write("Modules/RXPGuides/Migracion.txt", "Las guías se cargan desde Leveling.lua de RutaXP.\n".encode("utf8"))
             for module in modules:
                 for name, data in module.contents():
                     write(name, data)
             if journey:
-                for name, data in suite_journey.contents(journey):
+                for name, data in (prior_journey.contents() if prior_journey else suite_journey.contents(journey)):
                     write(name, data)
             write("Bindings.xml", merged_bindings(modules))
             for name in ("NOTICE.md", "LICENSE"):
@@ -208,14 +266,9 @@ def main():
     if args.output is None:
         _, metadata = lines_and_metadata((ROOT / "RutaXP/RutaXP.toc").read_text(encoding="utf-8-sig"))
         args.output = ROOT / "dist" / f"RutaXP-{metadata['Version']}-personal.zip"
-    from suite_rested import prepare_official_source
     from suite_setup import find_native_sources, client_from
     roots = find_native_sources(client_from(args.addons))
-    local_rested = args.addons / "RXPGuides"
-    with tempfile.TemporaryDirectory(prefix="RutaXP-official-") as temp:
-        roots["RXPGuides"] = prepare_official_source(local_rested if (local_rested / "RXPGuides.toc").is_file() else None,
-                                                     ROOT / ".sources" / "suite", Path(temp) / "RXPGuides")
-        loaded = compose(ROOT / "RutaXP", roots, args.output)
+    loaded = compose(ROOT / "RutaXP", roots, args.output)
     print(f"{args.output} · " + ", ".join(f"{name}: {count}" for name,count in loaded.items()))
 
 

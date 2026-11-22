@@ -46,16 +46,14 @@ class PortableSuiteSetupTests(unittest.TestCase):
         self.assertEqual(suite_setup.find_native_sources(self.client),
                          {"OpenMap": self.addons / "OpenMap", "ForeverDungeonJournal": tx / "prior/1"})
 
-    def test_composition_uses_official_rested_and_never_installs(self):
+    def test_composition_uses_only_local_modules_and_never_installs(self):
         inputs = {"OpenMap": self.addons / "OpenMap", "ForeverDungeonJournal": self.addons / "ForeverDungeonJournal"}
         output = self.work / "private.zip"
-        with patch.object(suite_setup, "prepare_official_source", return_value=self.work / "stock") as source, \
-                patch.object(suite_setup, "find_native_sources", return_value=inputs), \
+        with patch.object(suite_setup, "find_native_sources", return_value=inputs), \
                 patch.object(suite_setup.composer, "compose") as compose, \
                 patch.object(suite_setup, "activate") as activate:
             self.assertIn(str(output), suite_setup.run(self.client, self.work, output, compose_only=True))
-            self.assertIsNone(source.call_args.args[0])
-            self.assertEqual(compose.call_args.args[1]["RXPGuides"], self.work / "stock")
+            self.assertEqual(compose.call_args.args[1], inputs)
             activate.assert_not_called()
             with self.assertRaises(ValueError):
                 suite_setup.compose_bundle(self.client, self.addons / "unsafe.zip", self.work)
@@ -71,6 +69,56 @@ class PortableSuiteSetupTests(unittest.TestCase):
         (tx/"plan.json").write_text(json.dumps({"rows":[{"dest":"Interface/AddOns/Journey"}]}))
         (tx/"committed").touch()
         self.assertEqual(suite_setup.find_native_sources(self.client)["Journey"], prior)
+
+    def test_upgrades_personal_install_without_standalone_sources_or_first_pc_backups(self):
+        from tools import suite_journey
+        installed = self.addons / "RutaXP"
+        installed.mkdir()
+        files = {"Bindings.xml": b'<Bindings><Binding name="OPENMAP_FIND"/><Binding name="FOREVERDUNGEONJOURNAL_TOGGLE"/></Bindings>'}
+        toc = ["## X-RutaXP-Embedded: OpenMap, ForeverDungeonJournal, RXPGuides",
+               "## SavedVariables: OpenMapDB, ForeverDungeonJournalDB, RutaXPRestedDB",
+               "## SavedVariablesPerCharacter: OpenMapCharDB, ForeverDungeonJournalCharacterDB, RXPCData",
+               "## X-RutaXP-Journey-UI: 4.00.13"]
+        for name in ("OpenMap", "ForeverDungeonJournal"):
+            toc.extend((f"## X-{name}-Title: {name}", f"## X-{name}-Version: 1", f"Modules/{name}/Init.lua"))
+            files[f"Modules/{name}/Init.lua"] = b"-- integrated native source"
+        for file in suite_journey.entries(None):
+            files[file] = b"setfenv(1, RutaXPJourneyEnvironment())\n"
+            toc.append(file)
+        arrow = "Modules/Journey/lib/TomCats/Arrows.lua"
+        files[arrow] += b"GetWorldPosFromMapPos(mapID, { x = targetX, y = targetY })"
+        for asset in suite_journey.IMAGES:
+            files["Modules/Journey/images/" + asset] = b"art"
+        files["Modules/Journey/license.txt"] = b"license"
+        files["Modules/RXPGuides/unwanted.lua"] = b"-- old runtime"
+        files["RutaXP.toc"] = "\n".join(toc).encode()
+        for name, data in files.items():
+            target = installed / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(data)
+        (installed / "manifest.sha256").write_text("\n".join(
+            f"{hashlib.sha256(data).hexdigest()}  {name}" for name,data in files.items()))
+        template = self.work / "template/RutaXP"
+        template.mkdir(parents=True)
+        (template / "RutaXP.toc").write_text("## Version: 1.2.0\nLeveling.lua\n")
+        (template / "Leveling.lua").write_text("-- current guide")
+        for name in ("NOTICE.md", "LICENSE"):
+            (template.parent / name).write_text(name)
+        output = self.work / "suite.zip"
+        roots = suite_setup.find_native_sources(self.client)
+        self.assertEqual(set(roots), {"OpenMap", "ForeverDungeonJournal", "Journey"})
+        suite_setup.composer.compose(template, roots, output)
+        with ZipFile(output) as archive:
+            self.assertNotIn("RutaXP/Modules/RXPGuides/unwanted.lua", archive.namelist())
+            self.assertNotIn(b"RutaXPRestedDB", archive.read("RutaXP/RutaXP.toc"))
+            self.assertIn(b"OpenMapCharDB", archive.read("RutaXP/RutaXP.toc"))
+            self.assertIn(b"CreateVector2D", archive.read("RutaXP/" + arrow))
+        (installed / "Modules/OpenMap/Init.lua").write_text("changed")
+        with self.assertRaisesRegex(ValueError, "ha cambiado"):
+            suite_setup.composer.compose(template, roots, output)
+        backup = self.addons / (".RutaXP.backup." + "b" * 32)
+        installed.rename(backup)
+        self.assertEqual(set(suite_setup.find_native_sources(self.client).values()), {backup})
 
     def test_public_data_inputs_only(self):
         allowed = build_suite_setup.bundle_inputs(build_suite_setup.ROOT)

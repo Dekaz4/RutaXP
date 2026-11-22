@@ -1,14 +1,39 @@
 """Bind an embedded WoW Lua chunk to its native addon namespace."""
 
 import re
+from pathlib import Path
+from xml.etree import ElementTree
 
 
-# The installation templates and both release builders ship exactly this
-# first-party runtime. Native modules are added only to the personal package.
-SUITE_FILES = ("RutaXP.toc", "TalentCore.lua", "Talents.lua", "TalentBuilds.lua",
-               "Suite.lua", "GuideEngine.lua", "GuideLegacyAnchors.lua", "GuideCarryover.lua", "GuideResume.lua",
-               "GuideJourney.lua", "GuideLibrary.lua", "WorldMapTracking.lua", "WorldMapServiceData.lua",
-               "WorldMapServices.lua", "WorldMapQuestTracking.lua", "WorldMapNative.lua")
+def suite_files(template):
+    """Return the same native RutaXP runtime for all installers, including nested walking data."""
+    root = Path(template).resolve()
+    files = {"RutaXP.toc"}
+
+    def include(path):
+        path = path.resolve(strict=True)
+        if not path.is_relative_to(root) or (path.relative_to(root).parts[0] in ("Modules", "Source")):
+            raise ValueError(f"Invalid RutaXP runtime path: {path}")
+        name = path.relative_to(root).as_posix()
+        if name in files:
+            return
+        files.add(name)
+        if path.suffix.lower() == ".xml":
+            for element in ElementTree.parse(path).iter():
+                if element.tag.rsplit("}", 1)[-1] in {"Script", "Include"} and element.get("file"):
+                    include(path.parent / element.get("file").replace("\\", "/"))
+
+    for row in (root / "RutaXP.toc").read_text(encoding="utf-8-sig").splitlines():
+        row = row.strip()
+        if row and not row.startswith("#"):
+            include(root / row.replace("\\", "/"))
+    for asset in (root / "Media").rglob("*.tga"):
+        include(asset)
+    for notice in ("LICENSE", "CREDITS.md", "UPSTREAM.json", "VENDORED.json", "PACK.json"):
+        path = root / "Pathing" / notice
+        if path.is_file():
+            include(path)
+    return sorted(files)
 
 
 # These are the only tokens needed to distinguish a chunk's varargs from a

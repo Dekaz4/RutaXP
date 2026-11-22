@@ -234,6 +234,21 @@ local function render()
     if not map:IsShown() or not ns.char then return end
     local mapID = map:GetMapID()
     if not mapID then clearFrom(1); return end
+    -- The integrated map owns its service, quest and flight layers. The
+    -- guide still needs a destination pin for clients without user waypoints.
+    if RutaXPWorldMapTracking then
+        if destination and destination.mapID == mapID then
+            local frame = frames[1] or newFrame(map:GetCanvas())
+            frames[1], frame.points = frame, {destination}
+            setIcon(frame, destination, {})
+            frame:Show()
+            clearFrom(2)
+            positionFrames()
+        else
+            clearFrom(1)
+        end
+        return
+    end
     applyFlightFilter()
     local native, groups, sites = nativePositions(), {}, {}
     local function addPoint(point)
@@ -299,7 +314,7 @@ function ns:InitializeMapPoints()
     end
     provider.OnCanvasScaleChanged = positionFrames
     provider.OnCanvasSizeChanged = positionFrames
-    Menu.ModifyMenu("MENU_WORLD_MAP_TRACKING", drawMenu)
+    if not RutaXPWorldMapTracking then Menu.ModifyMenu("MENU_WORLD_MAP_TRACKING", drawMenu) end
     map:AddDataProvider(provider)
     ns:RefreshMapPoints()
 end

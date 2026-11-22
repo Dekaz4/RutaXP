@@ -3,6 +3,10 @@ local _, ns = ...
 -- Westfall revision 2 moves Alba's mine investigation after its two real
 -- prerequisites. Stored indices must continue to refer to the same actions.
 local WEST = "forever/alliance/02-westfall"
+local DESOLACE = "forever/alliance/30-40/02-desolace"
+-- The 0.7.37/38 catalog moved the second Kreldig objective from step 18
+-- to step 14. Returning to the 0.7.36 catalog puts it back at 18.
+local desolaceRestore = { from=4, to=3, goalMap={ ["14:2"]="18:2" }, backupSuffix="4-to-3" }
 local REVISION = 2
 local CHAIN = { [92742] = true, [92744] = true, [92745] = true }
 local steps = { 1, 2, 3, 4, 5, 8, 9, 6, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 }
@@ -25,6 +29,9 @@ local function stepIndex(value)
 end
 
 local function migrationAt(guide, revision)
+    if guide and guide.id == DESOLACE and guide.routeRevision == 3 and revision == 4 then
+        return desolaceRestore
+    end
     for _, migration in ipairs(guide and guide.progressMigrations or {}) do
         if migration.from == revision and migration.to > revision then return migration end
     end
@@ -106,8 +113,9 @@ local function questState(id)
     local delivered = readBoolean(C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted, id)
     if delivered == nil then delivered = readBoolean(IsQuestFlaggedCompleted, id) end
     if active == nil or delivered == nil then return nil end
-    if active and readBoolean(C_QuestLog and C_QuestLog.IsComplete, id) == nil then return nil end
-    return { active = active, delivered = ns.turnedIn[id] == true or (not active and delivered) }
+    local complete = readBoolean(C_QuestLog and C_QuestLog.IsComplete, id)
+    if active and complete == nil then return nil end
+    return { active = active, complete = complete, delivered = ns.turnedIn[id] == true or (not active and delivered) }
 end
 
 function ns:RepairWestfallMigration()
@@ -265,7 +273,7 @@ local function applyMigration(self, id, state, migration)
     local affected = {}
     for _, q in ipairs(migration.affectedQuestIDs or {}) do affected[q] = true end
     char.guideMigrationBackups = char.guideMigrationBackups or {}
-    local backupKey = id .. ":" .. migration.to
+    local backupKey = id .. ":" .. (migration.backupSuffix or migration.to)
     if not char.guideMigrationBackups[backupKey] then
         char.guideMigrationBackups[backupKey] = { progress=copy(state), activeGuide=char.activeGuide,
             recovery=bookmark and copy(saved), recoveryProgress=bookmark and copy(char.progress._recovery),
@@ -275,6 +283,9 @@ local function applyMigration(self, id, state, migration)
     state.cursor = mapStep(migration, state.cursor)
     state.confirmed, state.skipped = revisedMarks(migration, state.confirmed), revisedMarks(migration, state.skipped)
     state.routeRevision = migration.to
+    if migration == desolaceRestore and oldCursor > 18 and oldCursor <= 21 and not state.review then
+        state.checkDesolaceCollections = true
+    end
     if bookmark then bookmark.cursor = mapStep(migration, bookmark.cursor) end
     reviseWaypoints(char.waypoints, id, migration)
     local lease = char.duo and char.duo.autoSession
@@ -299,6 +310,45 @@ local function applyMigration(self, id, state, migration)
         state.requirementsRepair = state.requirementsRepair or {}
         for q in pairs(affected) do state.requirementsRepair[q] = true end
     end
+end
+
+local function repairDesolaceCollections(self)
+    local char = self.char
+    local state = char and char.progress and char.progress[DESOLACE]
+    local guide = self.guides[DESOLACE]
+    if not guide or type(state) ~= "table" or not state.checkDesolaceCollections or char.activeGuide ~= DESOLACE
+        or (char.recovery and char.recovery.active) then return false end
+    local cursor = tonumber(state.cursor) or 1
+    if cursor <= 18 or cursor > 21 or state.review then
+        state.checkDesolaceCollections = nil
+        return false
+    end
+    local step = guide.steps[18]
+    local pending = false
+    for gi, goal in ipairs(step.goals) do
+        local key = "18:" .. gi
+        if not (state.skipped and state.skipped[key] or state.confirmed and state.confirmed[key]) then
+            local observed = questState(goal.quest)
+            if not observed then return false end
+            if observed.active and not observed.complete and not observed.delivered then
+                -- A nil objective on a loading quest must not rewind the player.
+                if goal.oi then
+                    local readObjectives = C_QuestLog.GetQuestObjectives
+                    local objectives = readObjectives and readObjectives(goal.quest)
+                    if not (objectives and objectives[goal.oi]) then return false end
+                end
+                if self:GetGoalStatus(goal, step, state, gi) == "active" then pending = true end
+            end
+        end
+    end
+    state.checkDesolaceCollections = nil
+    if pending then
+        state.cursor = 18
+        if self.DuoAuto and self.DuoAuto.RefreshProgressAgreement then self.DuoAuto:RefreshProgressAgreement() end
+        if self.Duo then self.Duo.lastSentHeader = nil end
+        return true
+    end
+    return false
 end
 
 local function unlockedParents(self, guide, observed)
@@ -397,6 +447,7 @@ function ns:MigrateGuideProgress()
     end
     self:RepairWestfallMigration()
     self:RepairGuideRequirements()
+    repairDesolaceCollections(self)
 end
 
 local events = CreateFrame("Frame")
@@ -405,5 +456,6 @@ events:SetScript("OnEvent", function()
     if not ns.initialized then return end
     local changed = ns:RepairWestfallMigration()
     changed = ns:RepairGuideRequirements() or changed
+    changed = repairDesolaceCollections(ns) or changed
     if changed then ns:Sync() end
 end)

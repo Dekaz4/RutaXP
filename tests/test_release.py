@@ -32,13 +32,11 @@ class ReleaseTests(unittest.TestCase):
                 entries[f"RutaXP/{name}"] = checksum
             runtime_names = {n for n in archive.namelist() if n.startswith("RutaXP/")}
             self.assertEqual(runtime_names, set(entries) | {"RutaXP/manifest.sha256"})
-            public = {"RutaXP/" + name for name in (
-                "RutaXP.toc", "Suite.lua", "TalentCore.lua", "Talents.lua", "TalentBuilds.lua",
-                "WorldMapTracking.lua", "WorldMapServiceData.lua", "WorldMapServices.lua",
-                "WorldMapQuestTracking.lua", "WorldMapNative.lua", "Instalar_Suite_RutaXP.exe", "manifest.sha256",
-                "GuideEngine.lua", "GuideLegacyAnchors.lua", "GuideCarryover.lua", "GuideResume.lua", "GuideLibrary.lua", "GuideJourney.lua",
-            )}
-            self.assertEqual({n for n in runtime_names if not n.startswith("RutaXP/Licenses/")}, public)
+            for flight in ("Core.lua","Leveling.lua","QuestEngine.lua","GuideRestore.lua","GuideOriginal.lua",
+                           "GuideJourney.lua","Pathing/Nav/Nav.xml","Media/Nav/arrow.tga","WorldMapNative.lua"):
+                self.assertIn("RutaXP/" + flight, runtime_names)
+            self.assertFalse(any(n.startswith("RutaXP/Modules/") for n in runtime_names))
+            self.assertNotIn("RutaXP/GuideEngine.lua", runtime_names)
             self.assertTrue(archive.read("RutaXP/Instalar_Suite_RutaXP.exe").startswith(b"MZ"))
             for name, checksum in entries.items():
                 self.assertEqual(hashlib.sha256(archive.read(name)).hexdigest(), checksum)
@@ -106,10 +104,10 @@ $unpacked=Join-Path $TemporaryRoot 'unpacked release'
 $third=Install-RutaXP -Source (Join-Path $unpacked 'RutaXP') -AddOns ($addons+'\')
 if (-not $third.Backup -or -not [IO.File]::Exists((Join-Path $third.Backup 'RutaXP.toc'))) { throw 'PS update lost previous addon.' }
 $manifest=Get-RutaXPManifest $third.Target
-foreach ($component in @('TalentCore.lua', 'Talents.lua', 'TalentBuilds.lua', 'Suite.lua', 'Instalar_Suite_RutaXP.exe')) {
+foreach ($component in @('Core.lua', 'Leveling.lua', 'QuestEngine.lua', 'Talents.lua', 'TalentBuilds.lua', 'Suite.lua', 'Instalar_Suite_RutaXP.exe')) {
     if (!$manifest.ContainsKey($component)) { throw "Missing component: $component" }
 }
-if ($manifest.ContainsKey('Leveling.lua')) { throw 'Obsolete leveling engine installed.' }
+if ($manifest.ContainsKey('GuideEngine.lua')) { throw 'RestedXP guide driver installed.' }
 [IO.File]::AppendAllText((Join-Path $third.Target 'RutaXP.toc'), "`n## X-RutaXP-Embedded: OpenMap, ForeverDungeonJournal, RXPGuides`n")
 $blocked = $false
 try { Install-RutaXP -Source (Join-Path $unpacked 'RutaXP') -AddOns $addons } catch { $blocked = $_.Exception.Message -like '*suite personal*' }

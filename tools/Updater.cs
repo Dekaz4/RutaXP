@@ -319,7 +319,8 @@ namespace RutaXPUpdater
                 if (ReadInstalledVersion(addons) != version || !InstallerCore.IsEmbeddedSuite(target)
                     || !Directory.Exists(Path.Combine(target, "Modules", "OpenMap"))
                     || !Directory.Exists(Path.Combine(target, "Modules", "ForeverDungeonJournal"))
-                    || !Directory.Exists(Path.Combine(target, "Modules", "RXPGuides")))
+                    || (!File.Exists(Path.Combine(target, "Leveling.lua")) &&
+                        !Directory.Exists(Path.Combine(target, "Modules", "RXPGuides"))))
                     throw new IOException("No se ha encontrado la suite completa de la version esperada en el cliente elegido.");
             }
             else
@@ -478,7 +479,7 @@ namespace RutaXPUpdater
         }
         static void InstallSuite(ProcessStartInfo helper)
         {
-            Console.WriteLine("Preparando los tres addons e instalando la suite en el cliente elegido...");
+            Console.WriteLine("Preparando las guias y los modulos de RutaXP en el cliente elegido...");
             using (Process setup = Process.Start(helper))
             {
                 if (setup == null) throw new IOException("No se ha podido abrir el instalador de la suite.");

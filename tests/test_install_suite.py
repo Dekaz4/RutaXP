@@ -100,6 +100,32 @@ class LocalSuiteInstallTests(unittest.TestCase):
             self.assertEqual((self.addons / module / "old").read_text(), module)
         self.script("-Restore")
 
+    def test_upgrade_from_rested_suite_replaces_its_runtime_and_retains_original_progress(self):
+        self.script("-Archive", self.archive)
+        old_runtime = self.addons / "RutaXP/Modules/RXPGuides/GuideWindow.lua"
+        old_runtime.parent.mkdir(parents=True)
+        old_runtime.write_text("-- prior RestedXP")
+        saved = self.client / "WTF/Account/account/Realm/Paladin/SavedVariables/RutaXP.lua"
+        saved.parent.mkdir(parents=True)
+        progress = b'RutaXPCharDB = { activeGuide = "forever/alliance/03", progress = { cursor = 37 } }\n'
+        saved.write_bytes(progress)
+        (self.package / "Leveling.lua").write_text("-- original RutaXP guide data")
+        (self.package / "RutaXP.toc").write_text(
+            "## X-RutaXP-Embedded: OpenMap, ForeverDungeonJournal\nLeveling.lua\nSuite.lua\n")
+        marker = self.package / "Modules/RXPGuides/Migracion.txt"
+        marker.parent.mkdir(parents=True)
+        marker.write_text("RutaXP")
+        self.pack()
+        self.script("-Archive", self.archive)
+        self.assertFalse(old_runtime.exists())
+        self.assertTrue((self.addons / "RutaXP/Leveling.lua").is_file())
+        self.assertTrue((self.addons / "RutaXP/Modules/RXPGuides").is_dir())
+        self.assertEqual(saved.read_bytes(), progress)
+        self.script("-Archive", self.archive)
+        store = self.client / "RutaXP-Suite-Backups"
+        self.assertEqual(len(list(store.glob("*/committed"))), 2)
+        self.assertTrue(any(store.glob("*/prior/0/Modules/RXPGuides/GuideWindow.lua")))
+
     def test_invalid_archive_or_manifest_leaves_addons_untouched(self):
         (self.package / "Suite.lua").write_bytes(b"-- tampered")
         self.script("-AddonDirectory", self.package, ok=False)

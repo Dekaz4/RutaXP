@@ -7,6 +7,36 @@ from tools.suite_map_journal import transform_lua
 
 
 class MapJournalIntegrationTests(unittest.TestCase):
+    def test_gamer_mode_applies_once_per_character_before_the_chooser(self):
+        module = (Path(__file__).resolve().parents[1] / "RutaXP/JournalMode.lua").read_text(encoding="utf8")
+        self.lua.globals().module = module
+        self.lua.execute("""
+            function CreateFrame()
+                return {RegisterEvent=function() end, UnregisterEvent=function() end,
+                    SetScript=function(_, _, handler) loaded=handler end}
+            end
+            local player = {rpgKills={BRD=true}, journalMode="rpg"}
+            local journal = {SetJournalMode=function(mode)
+                assert(mode == "gamer")
+                ForeverDungeonJournalCharacterDB = ForeverDungeonJournalCharacterDB or {}
+                ForeverDungeonJournalCharacterDB.journalMode = mode
+            end}
+            local function login(db, embedded)
+                ForeverDungeonJournalCharacterDB = db
+                assert(loadstring(module))("RutaXP", {GetEmbeddedModule=function() return embedded end})
+                loaded(CreateFrame(), "ADDON_LOADED", "Blizzard_WorldMap")
+                assert(db == ForeverDungeonJournalCharacterDB)
+                loaded(CreateFrame(), "ADDON_LOADED", "RutaXP")
+                return ForeverDungeonJournalCharacterDB
+            end
+            assert(login(nil, nil) == nil)
+            local new = login(nil, journal)
+            assert(new.journalMode == "gamer")
+            assert(login(player, journal) == player and player.rpgKills.BRD and player.journalMode == "gamer")
+            player.journalMode = "rpg"
+            assert(login(player, journal).journalMode == "rpg")
+        """)
+
     def setUp(self):
         self.lua = LuaRuntime()
         self.lua.execute("""

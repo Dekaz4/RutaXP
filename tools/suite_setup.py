@@ -16,7 +16,6 @@ import threading
 if __package__:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_personal_suite as composer
-from suite_rested import prepare_official_source
 
 
 def resources():
@@ -57,6 +56,7 @@ def find_native_sources(client):
     roots = {}
     needed = ("OpenMap", "ForeverDungeonJournal")
     candidates = (*needed, "Journey")
+    integrated = [addons / "RutaXP"]
     for name in candidates:
         if (addons / name / (name + ".toc")).is_file():
             roots[name] = addons / name
@@ -68,13 +68,34 @@ def find_native_sources(client):
                 continue
             rows = json.loads((tx / "plan.json").read_text(encoding="utf-8-sig"))["rows"]
             for index, row in enumerate(rows):
+                dest = row.get("dest", "")
+                if dest == "Interface/AddOns/RutaXP" or re.fullmatch(r"Interface/AddOns/\.RutaXP\.backup\.[0-9a-f]{32}", dest):
+                    integrated.append(tx / "prior" / str(index))
                 for name in candidates:
-                    if name not in roots and row.get("dest") == f"Interface/AddOns/{name}":
+                    if name not in roots and dest == f"Interface/AddOns/{name}":
                         original = tx / "prior" / str(index)
                         if (original / (name + ".toc")).is_file():
                             roots[name] = original
             if len(roots) == len(candidates):
                 break
+    # The 0.7 updater may have placed an earlier integrated installation in
+    # one of its named backups before handing control to the suite installer.
+    if len(roots) != len(candidates):
+        integrated.extend(sorted((p for p in addons.glob(".RutaXP.backup.*")
+                                  if re.fullmatch(r"\.RutaXP\.backup\.[0-9a-f]{32}", p.name)),
+                                 key=lambda p: p.stat().st_mtime, reverse=True))
+    for installed in integrated:
+        if len(roots) == len(candidates):
+            break
+        if not (installed / "manifest.sha256").is_file() or not (installed / "RutaXP.toc").is_file():
+            continue
+        _, meta = composer.lines_and_metadata((installed / "RutaXP.toc").read_text(encoding="utf-8-sig"))
+        embedded = {name.strip() for name in meta.get("X-RutaXP-Embedded", "").split(",")}
+        if meta.get("X-RutaXP-Journey-UI"):
+            embedded.add("Journey")
+        for name in candidates:
+            if name not in roots and name in embedded and (installed / "Modules" / name).is_dir():
+                roots[name] = installed
     missing = [name for name in needed if name not in roots]
     if missing:
         raise ValueError("Instala primero " + " y ".join(missing) + " en " + str(addons) + ".")
@@ -86,11 +107,7 @@ def compose_bundle(client, destination, cache):
     if destination.is_relative_to(client):
         raise ValueError("Elige un destino para el ZIP fuera de la instalación del juego.")
     roots = find_native_sources(client)
-    with tempfile.TemporaryDirectory(prefix="RutaXP-suite-") as work:
-        # Always use the pinned official package. No saved data or local
-        # RXPGuides code is read by the public installer.
-        roots["RXPGuides"] = prepare_official_source(None, cache, Path(work) / "RXPGuides")
-        return composer.compose(resources() / "RutaXP", roots, destination)
+    return composer.compose(resources() / "RutaXP", roots, destination)
 
 
 def activate(client, archive=None):
@@ -120,7 +137,7 @@ def run(client, cache, output=None, restore=False, archive=None, compose_only=Fa
         return f"Paquete preparado en {destination.resolve()}"
     with tempfile.TemporaryDirectory(prefix="RutaXP-instalar-") as work:
         destination = output or (Path(work) / "RutaXP-personal.zip")
-        report("Preparando los mapas, las mazmorras y las guías oficiales de RestedXP…")
+        report("Preparando las guías de RutaXP, los mapas y el diario de mazmorras…")
         compose_bundle(client, destination, cache)
         report("Verificando e instalando la suite…")
         return activate(client, destination)
@@ -259,7 +276,7 @@ def wait_for_launcher(pid):
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
-    parser = argparse.ArgumentParser(description="Integra OpenMap, ForeverDungeonJournal y RestedXP en RutaXP.")
+    parser = argparse.ArgumentParser(description="Instala las guías de RutaXP con OpenMap, el diario de mazmorras y la interfaz local de Journey.")
     paths = parser.add_mutually_exclusive_group()
     paths.add_argument("--client", type=Path)
     paths.add_argument("--addons", type=Path)
