@@ -382,16 +382,23 @@ local function updateCompassHint(reason, deathHint)
     compassHint:Show()
 end
 
+local turnPromptYards = 70
+
 local function walkingInstruction(sample, hint)
     if hint == "" then hint = nil end
     local locale = GetLocale()
     local spanish = locale == "esES" or locale == "esMX"
     local turn = sample.walkingTurn
-    if finite(sample.walkingTurnDistance) and (turn == "left" or turn == "right") then
+    local yards = sample.walkingTurnDistance
+    if finite(yards) and (turn == "left" or turn == "right") then
         local instruction
-        if turn == "left" then instruction = spanish and "Gira a la izquierda" or "Turn left"
-        else instruction = spanish and "Gira a la derecha" or "Turn right" end
-        return hint and (hint .. "\n" .. instruction) or instruction, sample.walkingTurnDistance
+        if spanish then
+            local direction = turn == "left" and "a la izquierda" or "a la derecha"
+            instruction = (yards <= turnPromptYards and "Gira " or "Sigue el camino · próximo giro ") .. direction
+        else
+            instruction = (yards <= turnPromptYards and "Turn " or "Follow the path · next turn ") .. turn
+        end
+        return hint and (hint .. "\n" .. instruction) or instruction, yards
     end
     local goal = sample.walkingGoal
     local name = goal and (goal.routeLabel or goal.label or goal.goalTitle)

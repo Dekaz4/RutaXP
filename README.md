@@ -1,6 +1,6 @@
 # RutaXP para WoW Forever
 
-RutaXP 1.2.13 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos, el selector de rutas, la brújula y el panel de talentos comparten el estilo de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
+RutaXP 1.2.14 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos, el selector de rutas, la brújula y el panel de talentos comparten el estilo de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
 
 ## Actualizar
 
@@ -38,7 +38,7 @@ Los servicios se dibujan también en la primera apertura del mapa. En pueblos co
 
 Si el objetivo está en otro continente, el panel de Journey indica cómo llegar al siguiente transporte. La brújula señala el muelle o el maestro de vuelo. Las conexiones observadas en el mapa de vuelo de ese personaje permiten incorporar vuelos al viaje. En la travesía de Menethil a Auberdine, la guía indica que permanezcas a bordo en Costasur y recupera el destino de misión al llegar. La flecha de misión es dorada y lleva dos marcas en la cola. Al liberar el espíritu señala el cadáver y al resucitar recupera el objetivo anterior. La brújula comparte la opción `/rutaxp flecha` y conserva la posición que ya habías elegido.
 
-En los tramos a pie, la brújula señala el siguiente giro del camino y cuenta los metros que faltan por recorrer hasta él. Tras el último giro muestra la distancia restante hasta el destino. Al acercarte al cruce indica si debes girar a la derecha o a la izquierda. Mientras recalcula, conserva la indicación anterior si todavía sirve para ese trayecto. En los viajes entre zonas te guía hasta la salida por carretera y retoma la misión al cruzar.
+En los tramos a pie, la brújula señala un punto a media distancia para que puedas seguir la forma del sendero. Al acercarte al siguiente giro apunta al cruce, indica si debes girar a la derecha o a la izquierda y muestra los metros que faltan por el camino. Tras el último giro muestra la distancia restante hasta el destino. Mientras recalcula, conserva la indicación anterior si todavía sirve para ese trayecto. En los viajes entre zonas te guía hasta la salida por carretera y retoma la misión al cruzar.
 
 ### Misiones de mundo y mazmorras
 
@@ -54,7 +54,7 @@ Desde la raíz del proyecto y con Python 3.10 o posterior, indica la carpeta de 
 
 ```powershell
 python tools/build_personal_suite.py --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
-python tools/verify_personal_suite.py dist/RutaXP-1.2.13-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
+python tools/verify_personal_suite.py dist/RutaXP-1.2.14-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
 ```
 
 Los créditos y las licencias se encuentran en [NOTICE.md](NOTICE.md) y en `RutaXP/Licenses`.

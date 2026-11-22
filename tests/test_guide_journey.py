@@ -565,6 +565,21 @@ class OriginalGuideJourneyTests(unittest.TestCase):
             sampledTurn.walkingRouteKey="same objective"
             ns:GetArrowWaypoint(); tick(); tick()
             assert(hud.label:GetText()=="Gira a la derecha" and hud.distLabel:GetText()=="59 m")
+            sampledTurn.walkingTurnDistance=288
+            ns.navigationFrame.hint:SetText("Ve al muelle")
+            ns:GetArrowWaypoint(); tick(); tick()
+            assert(hud.label:GetText()=="Ve al muelle\\nSigue el camino · próximo giro a la derecha")
+            assert(hud.distLabel:GetText()=="263 m" and hides==0)
+            local savedLocale=GetLocale
+            GetLocale=function() return "enUS" end
+            ns.navigationFrame.hint:SetText("")
+            sampledTurn.walkingTurn="left"
+            ns:GetArrowWaypoint(); tick(); tick()
+            assert(hud.label:GetText()=="Follow the path · next turn left")
+            sampledTurn.walkingTurnDistance=70
+            ns:GetArrowWaypoint(); tick(); tick()
+            assert(hud.label:GetText()=="Turn left")
+            GetLocale=savedLocale
             sampledTurn.walkingTurn,sampledTurn.walkingTurnDistance="left",32
             ns.navigationFrame.hint:SetText("Ve al muelle")
             ns:GetArrowWaypoint(); tick(); tick()

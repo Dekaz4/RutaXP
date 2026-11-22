@@ -9,6 +9,11 @@ local SEARCH_SECONDS = 12
 local PROGRESSING_SEARCH_SECONDS = 20
 local SEARCH_CPU_MS = 600
 local TARGET_GAP_SECONDS = 0.75
+-- Distances in terrain yards. Renew a reference about two seconds before
+-- reaching it at running speed, unless it is the actual turn.
+local REFERENCE_SPACING = 56
+local REFERENCE_LEAD = 14
+local LOOKAHEAD = REFERENCE_SPACING + REFERENCE_LEAD
 local function finite(n)
     return not (issecretvalue and issecretvalue(n)) and type(n)=="number" and n==n and math.abs(n)<math.huge
 end
@@ -309,6 +314,25 @@ local function openRoad(continent,px,py,pz,b,corridor)
     return true
 end
 
+-- A mild bend counts only when the road holds its direction on each side.
+-- Measuring length rather than counting nodes handles both sparse roads and
+-- short, closely spaced mesh edges without announcing their zigzags.
+local function holdsDirection(points,index,step,dx,dy)
+    local length=0
+    for i=index,index+step*7,step do
+        local a,b=points[i],points[i+step]
+        if not b then break end
+        local x,y=b.x-a.x,b.y-a.y
+        local edge=math.sqrt(x*x+y*y)
+        if edge>0 then
+            if x*dx+y*dy<.98*edge then return false end
+            length=length+edge
+            if length>=16 then return true end
+        end
+    end
+    return false
+end
+
 local function findTurns(points)
     local result={}
     local anchorX,anchorY
@@ -321,9 +345,11 @@ local function findTurns(points)
             ix,iy,ox,oy=ix/il,iy/il,ox/ol,oy/ol
             anchorX,anchorY=anchorX or ix,anchorY or iy
             local dot=ix*ox+iy*oy
-            if dot<.84 or anchorX*ox+anchorY*oy<.72 then
+            local localBend=dot<.84 or (dot<.91 and holdsDirection(points,i,-1,-ix,-iy)
+                and holdsDirection(points,i,1,ox,oy))
+            if localBend or anchorX*ox+anchorY*oy<.72 then
                 local cross=anchorX*oy-anchorY*ox
-                if dot<.84 then cross=ix*oy-iy*ox end
+                if localBend then cross=ix*oy-iy*ox end
                 -- UnitPosition's axes are north, west: a positive cross turns left.
                 result[#result+1]={index=i,side=math.abs(cross)>.08 and (cross>0 and "left" or "right") or nil}
                 anchorX,anchorY=ox,oy
@@ -346,8 +372,8 @@ end
 -- Certify the whole ray from the actual player position. Same ordered mesh
 -- crossings on the path's height profile are sufficient even in a passage.
 -- For a different set of crossings we require a wide, walkable mesh corridor.
-local function canAim(points,index,last,continent,px,py,pz,corridor)
-    local b=points[last]
+local function canAim(points,index,last,continent,px,py,pz,corridor,endpoint)
+    local b=endpoint or points[last]
     if last-index>24 or distance(px,py,b.x,b.y)>145 then return false end
     local prev,node=points[index-1],points[index]
     local off,_,u,z=projection(px,py,prev,node,pz)
@@ -362,7 +388,7 @@ local function canAim(points,index,last,continent,px,py,pz,corridor)
     local moves={}
     local az=z
     for i=index,last do
-        local p=points[i]
+        local p=i==last and b or points[i]
         local dist=distance(ax,ay,p.x,p.y)
         if not finite(p.z) or math.abs(p.z-az)>1+.30*dist then return false end
         local gap,_,_,height=projection(p.x,p.y,origin,b)
@@ -423,17 +449,35 @@ end
 local function maneuverPoint(self,index,turn,continent,px,py,pz)
     local points=self.points
     local limit=turn and turn.index or #points
+    local node=points[index]
+    local previous=points[index-1]
+    local length=self.arc[index]-self.arc[index-1]
+    if length>LOOKAHEAD and finite(previous.z) and finite(node.z) then
+        -- Fixed anchors along the certified edge. Reading the HUD repeatedly
+        -- or swaying near an anchor must not move it backwards and forwards.
+        local along=self.progress-self.arc[index-1]
+        local nextAnchor=(math.floor((along+REFERENCE_LEAD)/REFERENCE_SPACING)+1)*REFERENCE_SPACING
+        if nextAnchor<length-REFERENCE_LEAD then
+            local u=nextAnchor/length
+            local anchor={x=previous.x+(node.x-previous.x)*u,y=previous.y+(node.y-previous.y)*u,
+                z=previous.z+(node.z-previous.z)*u}
+            if canAim(points,index,index,continent,px,py,pz,self.corridor,anchor) then
+                self.steeringIndex=nil
+                return anchor
+            end
+        end
+    end
     if limit==index then self.steeringIndex=nil;return points[index] end
     local held=self.steeringIndex
     if held and held>=index and held<=limit and
+        (held==limit or distance(px,py,points[held].x,points[held].y)>REFERENCE_LEAD) and
         (held==index or canAim(points,index,held,continent,px,py,pz,self.corridor)) then return points[held] end
     self.steeringIndex=nil
     -- Try the actual corner first. On open ground a nearer mesh vertex has no
     -- meaning to the player. A blind turn still uses its last certified approach.
-    local node=points[index]
     local firstLeg=distance(px,py,node.x,node.y)
     for j=math.min(limit,index+24),index+1,-1 do
-        if firstLeg+self.arc[j]-self.arc[index]<=120 and
+        if firstLeg+self.arc[j]-self.arc[index]<=LOOKAHEAD and
             (turn or openRoad(continent,px,py,pz,points[j],self.corridor)) and
             canAim(points,index,j,continent,px,py,pz,self.corridor) then
             self.steeringIndex=j
@@ -727,7 +771,8 @@ function W:Resolve(point)
             out.walkingTurnDistance=distance(px,py,node.x,node.y)+self.arc[turn.index]-self.arc[index]
         end
         out.walkingDistance=distance(px,py,node.x,node.y)+(self.left[index] or 0)
-        out.walkingFinal,out.walkingGoal=index==#points and not self.pending and not self.refreshWanted,point
+        out.walkingFinal=index==#points and visual==node and not self.pending and not self.refreshWanted
+        out.walkingGoal=point
         out.navigationNotice=nil
         self.phase,self.text="walking","Camino por terreno · tramo "..math.max(1,index-1).."/"..(#points-1)
             ..(self.pending and " · actualizando" or self.failure and " · tramo final sin confirmar"

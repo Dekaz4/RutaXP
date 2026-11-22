@@ -1,11 +1,11 @@
-RUTAXP 1.2.13 PARA WOW FOREVER
+RUTAXP 1.2.14 PARA WOW FOREVER
 
 1. Cierra WoW y abre tu Instalador_RutaXP.exe de siempre.
 2. Pulsa 1. El instalador usa tu cliente guardado o lo detecta si hay uno solo.
 3. Entra con tu personaje. El panel de Journey muestra su capítulo de RutaXP 0.7.36.
 4. Pulsa el título del panel para elegir otro capítulo. /rutaxp zona busca una guía según tu zona, nivel y diario.
 5. La llave del minimapa abre un desplegable con las mazmorras y sus alas. Elige una para revisar las misiones. Pulsa Preparar mazmorra o Retomar preparación cuando quieras seguirla con la brújula. Puedes arrastrarla por el borde. Pulsa M para el mapa, /dj para el diario de mazmorras y N para los talentos.
-6. Haz clic izquierdo en la flecha para cambiar su diseño y tamaño o para ocultar el texto y la distancia. Arrástrala para moverla. Al ir a pie muestra el sentido del próximo giro y la distancia por el camino. Tras el último giro muestra la distancia hasta el destino.
+6. Haz clic izquierdo en la flecha para cambiar su diseño y tamaño o para ocultar el texto y la distancia. Arrástrala para moverla. Al ir a pie señala un punto a media distancia en el sendero. Al acercarte al giro, indica hacia qué lado ir y cuántos metros faltan. Tras el último giro muestra la distancia hasta el destino.
 7. Escribe /lfg para buscar grupo. La opción 1 instala LFG Forever de Artefius y su traducción al español.
 
 Los instaladores a partir de la versión 1.0.2 reciben el constructor actualizado al pulsar 1. Para las versiones anteriores, sustituye una vez Instalador_RutaXP.exe por https://github.com/Dekaz4/RutaXP/releases/latest/download/Instalador_RutaXP.exe.

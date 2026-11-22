@@ -87,6 +87,57 @@ class WalkingLookaheadTests(unittest.TestCase):
                 self.assertLess(result.walkingWorld.north, 68, "arrow must stage before the hazard")
                 self.assertEqual(h.w.requests, 1)
 
+    def test_long_certified_segment_has_stable_intermediate_targets_before_arrival(self):
+        start, end = 32, 352
+        h, goal, first = self.follow([(start, 64, 12), (end, 64, 12)], open_road=True)
+        first_aim = first.walkingWorld.north
+        self.assertGreater(first_aim - start, 44)
+        self.assertLessEqual(first_aim - start, 70)
+        self.assertFalse(first.walkingFinal)
+        targets = [first_aim]
+        for x in range(start + 4, end, 4):
+            h.s.x, h.s.now = x, h.s.now + .6
+            result = h.w.Resolve(h.w, goal)
+            aim = result.walkingWorld.north
+            self.assertGreater(aim, x, "the arrow must lead me down the segment")
+            self.assertLessEqual(aim - x, 70)
+            self.assertEqual(result.walkingWorld.west, 64)
+            self.assertAlmostEqual(result.walkingDistance, end - x)
+            self.assertEqual(bool(result.walkingFinal), aim == end)
+            if x < start + 20:
+                self.assertEqual(aim, first_aim, "the first target should stay fixed")
+            if aim != targets[-1]:
+                self.assertGreater(aim, targets[-1])
+                targets.append(aim)
+        self.assertEqual(targets[-1], end)
+        self.assertLessEqual(len(targets), 8, "avoid a new arrow target every few yards")
+        self.assertEqual(h.ns.char.progress.g.cursor, 21)
+
+    def test_two_sustained_moderate_bends_are_announced_in_order(self):
+        # A 26.6-degree change persists for 54 yards and then straightens.
+        route = [(x, 64, 12) for x in range(32, 97, 8)]
+        route += [(96 + 8 * i, 64 + 4 * i, 12) for i in range(1, 7)]
+        route += [(x, 88, 12) for x in range(152, 217, 8)]
+        h, goal, _ = self.follow(route, open_road=True)
+        turns = []
+        for p, q in zip(route, route[1:]):
+            for fraction in (0, .5):
+                h.s.x, h.s.y = (p[i] + (q[i] - p[i]) * fraction for i in (0, 1))
+                h.s.now += .6
+                result = h.w.Resolve(h.w, goal)
+                if result.walkingTurn and (not turns or turns[-1] != result.walkingTurn):
+                    turns.append(result.walkingTurn)
+        self.assertEqual(turns, ["left", "right"])
+
+    def test_short_moderate_zigzags_do_not_create_turns(self):
+        route = [(32, 64, 12), (48, 64, 12), (64, 64, 12), (72, 68, 12),
+                 (80, 68, 12), (88, 64, 12), (104, 64, 12), (120, 64, 12)]
+        h, goal, first = self.follow(route, open_road=True)
+        self.assertIsNone(first.walkingTurn)
+        for x, y, _ in route[1:-1]:
+            h.s.x, h.s.y, h.s.now = x, y, h.s.now + 2
+            self.assertIsNone(h.w.Resolve(h.w, goal).walkingTurn)
+
     def test_release_old_leg_when_refresh_has_lost_its_corridor(self):
         h, goal, _ = self.follow([(32, 32, 12), (48, 32, 12), (96, 32, 12), (96, 80, 12)], dynamic=True)
         h.s.x, h.s.y, h.s.now = 41, 45, 3
