@@ -198,6 +198,26 @@ class DungeonPlannerTests(unittest.TestCase):
             w.done[71]=true; update(); assert(planner:Wants("accept",72))
         """)
 
+    def test_inside_unknown_objective_outdoor_prerequisite_and_handin_have_distinct_hints(self):
+        self.run_lua("""
+            useFixture({
+                [31]={title="Busca la señal",turnin=point(12,65,52)},
+                [32]={title="Habla con el guía",work=point(12,80,70),turnin=point(12,69,72)},
+                [33]={title="Explora la cripta",preAll={32},pickup=point(12,50,55)},
+            },{31,33})
+            w.instance="Crypt"; w.map=401; w.active[31]=true; w.active[32]=true
+        """)
+        self.login()
+        self.run_lua("""
+            local p=ns.DungeonPlanner
+            assert(p:IsDetouring() and not p:Waypoint())
+            assert(p:Hint()=="Consulta el objetivo en tu diario · Busca la señal")
+            w.done[31]=true; w.active[31]=nil; update()
+            assert(not p:Waypoint() and p:Hint()=="Fuera de la mazmorra · Completa la previa · Habla con el guía")
+            w.ready[32]=true; update()
+            assert(not p:Waypoint() and p:Hint()=="Sal de la mazmorra para continuar las entregas")
+        """)
+
     def test_partial_visit_is_not_finished_and_repeat_is_explicit(self):
         self.run_lua("""
             useFixture({

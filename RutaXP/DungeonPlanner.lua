@@ -277,7 +277,12 @@ local function rebuild()
             out.point = enter and dungeon.entrance or task.point
             if inside and task.kind ~= "inside" and task.kind ~= "run" and not (task.point and task.point.inside) then
                 out.point = nil
-                out.hint = "Sal de la mazmorra para continuar las entregas"
+                if task.point then
+                    if task.kind == "turnin" then out.hint = "Sal de la mazmorra para continuar las entregas"
+                    elseif task.kind == "work" or task.kind == "pickup" then
+                        out.hint = "Fuera de la mazmorra · " .. line(task.kind,task.id)
+                    end
+                end
             elseif enter then row(out.hint)
             elseif task.kind == "work" or task.kind == "check" then out.questPoint = task.id end
             for _, t in ipairs(best.tasks) do
