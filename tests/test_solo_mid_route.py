@@ -150,7 +150,7 @@ class SoloMidRouteTests(unittest.TestCase):
         host.initialize()
         state = host.ns.char.progress[route]
         self.assertEqual(state.cursor, 22)
-        self.assertEqual(state.routeRevision, 2)
+        self.assertEqual(state.routeRevision, 3)
         self.assertEqual(primitive_copy(state.skipped), {"22:6": True})
         self.assertEqual(primitive_copy(state.confirmed), {"22:1": True})
         goal = host.ns.guides[route].steps[22].goals[6]
