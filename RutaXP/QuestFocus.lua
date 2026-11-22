@@ -1,7 +1,15 @@
 local _, ns = ...
 local focus, byQuest = {}, nil
 ns.WorldQuestFocus = focus
-local lastProgress, observed, ignored, lastTracked = {}, nil, nil, nil
+local lastProgress, observed, ignored, lastTracked
+
+-- Journal focus is a fallback between guides. Drop observations as soon as
+-- a registered chapter owns navigation, including a restored recovery guide.
+function focus.ActiveGuide()
+    local guide = ns.char and ns.guides and ns.guides[ns.char.activeGuide]
+    if guide then lastProgress, observed, ignored, lastTracked = nil, nil, nil, nil end
+    return guide
+end
 
 local function index()
     if byQuest then return byQuest end
@@ -72,6 +80,7 @@ end
 -- A changing quantity identifies the quest even when several are watched.
 -- Loading a character or expanding a journal header is not an objective gain.
 function focus.Observe()
+    if focus.ActiveGuide() then return end
     if not (C_QuestLog.GetInfo and C_QuestLog.GetNumQuestLogEntries and C_QuestLog.GetQuestObjectives) then return end
     local changed, active = nil, {}
     for i = 1, C_QuestLog.GetNumQuestLogEntries() do
@@ -83,7 +92,8 @@ function focus.Observe()
                 local value = obj.numFulfilled
                 if not (issecretvalue and issecretvalue(value)) then
                     quantities[n] = tonumber(value) or (obj.finished and 1 or 0)
-                    if lastProgress[id] and lastProgress[id][n] and quantities[n] > lastProgress[id][n] then changed = id end
+                    local previous = lastProgress and lastProgress[id] and lastProgress[id][n]
+                    if previous and quantities[n] > previous then changed = id end
                 end
             end
             active[id] = quantities
@@ -94,13 +104,11 @@ function focus.Observe()
 end
 
 function focus.Current()
+    if focus.ActiveGuide() then return end
     local super = C_SuperTrack and C_SuperTrack.GetSuperTrackedQuestID and C_SuperTrack.GetSuperTrackedQuestID()
     for _, id in ipairs({observed or 0, reportable(super) and super or 0}) do
         if id > 0 and id ~= ignored and ns.RestedQuestState.Active(id) then
-            local current, step, state = ns:GetCurrent()
-            local goal = step and ns:GetActiveGoal(step, state)
-            if goal and (goal.quest or goal.questID) == id then return end
-            local match = focus.Match(id, current, C_Map.GetBestMapForUnit("player"))
+            local match = focus.Match(id, nil, C_Map.GetBestMapForUnit("player"))
             if match or (ns.DungeonQuestData.restedWorld or {})[id] then return id, match end
         end
     end
@@ -112,6 +120,7 @@ function focus.Clear(id)
 end
 
 function focus.TrackingChanged()
+    if focus.ActiveGuide() then return end
     local id = C_SuperTrack and C_SuperTrack.GetSuperTrackedQuestID and C_SuperTrack.GetSuperTrackedQuestID()
     id = reportable(id) and id or nil
     if id ~= lastTracked and id and ns.RestedQuestState.Active(id) then

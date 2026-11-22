@@ -67,7 +67,7 @@ class OriginalGuideFlowTests(unittest.TestCase):
             """)
         transport = ("FlightNavigation", "BoatNavigation", "DestinationTravel") if travel else ()
         for name in ("Core", "MapFrames", "Leveling", "QuestEngine", "GuideMigrations",
-                     "Navigation", "WestfallTravelData", "AllianceTravel", "HordeTravel", "TravelConnections",
+                     "Navigation", "CorpseNavigation", "WestfallTravelData", "AllianceTravel", "HordeTravel", "TravelConnections",
                      "TravelRouting", "TravelDetour", "GuideTravel", *transport, "TrackerLayout", "TrackerPreview", "UI",
                      "Suite", "DungeonQuestData", "RestedQuestState", "QuestFocus", "DungeonPlanner",
                      "GuideRestore", "GuideOriginal", "GuideJourney"):
@@ -150,17 +150,89 @@ class OriginalGuideFlowTests(unittest.TestCase):
             assert(RutaXPJourneyEnvironment().HeaderService.GetHeaderTitles():find(ns.guides[chapter].title,1,true))
         """)
 
+    def test_journal_tracking_and_kills_keep_current_panther_hunt_until_guide_turnin(self):
+        lua = self.client("Cazadora", "Alliance", "forever/alliance/30-40/04-stranglethorn-vale", 5,
+                          level=34, map_id=1434, travel=True)
+        lua.execute("""
+            local env=RutaXPJourneyEnvironment()
+            local function hunt(name,creature,n)
+                return {title=name,onQuest=true,objectives={{text=creature..": "..n.."/10",
+                    numFulfilled=n,numRequired=10,finished=n==10}},complete=n==10}
+            end
+            TEST.quests[185]={delivered=true}
+            TEST.quests[190]=hunt("Domina la pantera","Pantera joven",4)
+            TEST.quests[186]=hunt("Domina el tigre","Tigre de Tuercespina",0)
+            TEST.quests[194]=hunt("Domina el raptor","Raptor de Tuercespina",6)
+            TEST.entries={{questID=190},{questID=186},{questID=194}}
+            local tracked=0
+            C_SuperTrack.GetSuperTrackedQuestID=function() return tracked end
+            local function update(e,...)
+                TEST.time=(TEST.time or 1)+1
+                event(e,...); tick(); tick()
+            end
+            local function assertGuide(step,id,kind)
+                local guide,current,state=ns:GetCurrent()
+                assert(state.cursor==step,"Unexpected guide step "..state.cursor)
+                local heading,place=env.HeaderService.GetHeaderTitles()
+                assert(heading:find(guide.title,1,true) and place==current.title,heading.." / "..tostring(place))
+                assert(not ns.DungeonPlanner:IsDetouring())
+                for _,group in ipairs(env.GuideNavigationService.GetStep()) do
+                    for _,task in ipairs(group) do
+                        assert(task.row.text~="Volver al paso de RutaXP" and
+                            not (task.row.activity and task.row.activity.action=="world"))
+                    end
+                end
+                local goal=ns:GetActiveGoal()
+                assert(goal and goal.quest==id and goal.t==kind,tostring(goal and goal.quest))
+                local expected=ns:GetGoalWaypoint(goal)
+                local map,x,y=ns.OriginalGuidePresentation.Waypoint()
+                assert(map==expected.mapID and math.abs(x-expected.x)<.0001 and math.abs(y-expected.y)<.0001,
+                    "The HUD sample must still be the chapter's current quest")
+                local meters=env.FormatJourneyDistance(ns:GetWaypointVector(expected))
+                local hud=RutaXPJourneyScreenArrow
+                assert(hud.container:IsShown() and hud.distLabel:GetText()==meters)
+            end
+            ns.char.auto=true
+            update("QUEST_LOG_UPDATE")
+            assertGuide(5,190,"kill")
+            tracked=186
+            update("SUPER_TRACKING_CHANGED")
+            assertGuide(5,190,"kill")
+            TEST.quests[194]=hunt("Domina el raptor","Raptor de Tuercespina",7)
+            update("QUEST_WATCH_UPDATE",194)
+            update("QUEST_LOG_UPDATE")
+            assertGuide(5,190,"kill")
+
+            UnitIsGhost=function() return TEST.ghost end
+            UnitIsDeadOrGhost=function() return TEST.dead or TEST.ghost or false end
+            C_DeathInfo={GetCorpseMapPosition=function() return CreateVector2D(.36,.12) end}
+            TEST.dead=true; update("PLAYER_DEAD")
+            TEST.ghost=true; update("PLAYER_ALIVE")
+            assert(RutaXPJourneyScreenArrow.label:GetText()=="Tu cadáver")
+            TEST.ghost=false; TEST.dead=false; update("PLAYER_UNGHOST")
+            assertGuide(5,190,"kill")
+
+            TEST.quests[190]=hunt("Domina la pantera","Pantera joven",10)
+            update("QUEST_LOG_UPDATE")
+            assertGuide(6,190,"turnin")
+            TEST.quests[190].onQuest=false; TEST.quests[190].delivered=true
+            update("QUEST_TURNED_IN",190)
+            assertGuide(6,191,"accept")
+            TEST.quests[191]=hunt("Domina la pantera","Pantera",0)
+            update("QUEST_ACCEPTED",191); update("QUEST_LOG_UPDATE")
+            assertGuide(7,186,"kill")
+        """)
+
     def test_horde_character_resumes_its_own_chapter_and_rendered_step(self):
         self.client("Horda", "Horde", "forever/horde/06-hillsbrad-foothills", 12)
 
-    def test_tracked_turnin_from_menethil_via_southshore_to_thundris_in_the_journey_hud(self):
-        lua = self.client("Viajera", "Alliance", "forever/alliance/30-40/02-desolace", 18,
-                          level=33, map_id=1443, travel=True)
+    def test_guide_crossing_from_menethil_via_southshore_to_thundris_in_the_journey_hud(self):
+        lua = self.client("Viajera", "Alliance", "forever/alliance/30-40/02-desolace", 2,
+                          level=33, map_id=1437, travel=True)
         lua.execute("""
             local journalID=98209
             TEST.quests[journalID]={title="Flor de los cielos",onQuest=true,complete=true}
             TEST.entries={{questID=journalID}}
-            C_SuperTrack.GetSuperTrackedQuestID=function() return journalID end
             local function move(map,x,y)
                 TEST.mapID,TEST.x,TEST.y=map,x,y
                 TEST.time=(TEST.time or 1)+15
@@ -176,25 +248,25 @@ class OriginalGuideFlowTests(unittest.TestCase):
                 return table.concat(lines," ")
             end
             move(1437,.093,.578)
-            assert(ns.DungeonPlanner:IsDetouring() and panelText():find("Auberdine",1,true),panelText())
+            assert(not ns.DungeonPlanner:IsDetouring() and panelText():find("Auberdine",1,true),panelText())
             local dock=RutaXPJourneyScreenArrow
             assert(dock and dock.container:IsShown(),"The native Journey HUD must point at the departure dock")
-            local dockMap,dockX,dockY=ns.DungeonPlanner:Waypoint()
+            local dockMap,dockX,dockY=ns.OriginalGuidePresentation.Waypoint()
             assert(dockMap==1437 and math.abs(dockX-.0449)<.002 and math.abs(dockY-.5666)<.002,
                 "The compass selected the wrong Menethil pier")
             move(1437,.0449,.5666)
             move(1424,.5067,.7044)
             local stop=panelText():lower()
-            assert(stop:find("a bordo",1,true) and stop:find("costasur",1,true)
+            assert(stop:find("mismo barco",1,true) and stop:find("costasur",1,true)
                 and stop:find("auberdine",1,true),stop)
             assert(not dock.container:IsShown(),"The waypoint must stay suspended at the intermediate port")
             move(1439,.3234,.4413)
-            move(1439,.354,.435)
-            local map,x,y=ns.DungeonPlanner:Waypoint()
+            move(1439,.3704,.4413)
+            local map,x,y=ns.OriginalGuidePresentation.Waypoint()
             assert(map==1439 and math.abs(x-.374)<.01 and math.abs(y-.4013)<.01,
                 "After docking the compass must return to Thundris")
             assert(dock.container:IsShown() and panelText():find("Flor de los cielos",1,true),panelText())
-            assert(ns.char.progress[chapter].cursor==18,"The boat journey changed the saved chapter")
+            assert(ns.char.progress[chapter].cursor==2,"The boat journey changed the saved chapter")
         """)
 
     def test_deadmines_prepare_and_return_from_journey_preserve_world_guide(self):
@@ -226,6 +298,12 @@ class OriginalGuideFlowTests(unittest.TestCase):
             local tasks=env.GuideNavigationService.GetStep()
             assert(tasks[1][1].row.activity and not tasks[2][1].row.activity)
             assert(tasks[2][1].row.text:find(ns.trackerRows[1].goalTitle,1,true))
+            TEST.quests[36]={onQuest=true,title="Estofado de los Páramos de Poniente"}
+            TEST.entries={{questID=36}}
+            C_SuperTrack.GetSuperTrackedQuestID=function() return 36 end
+            event("SUPER_TRACKING_CHANGED"); event("QUEST_LOG_UPDATE"); tick()
+            assert(planner:IsDetouring() and ns.char.dungeonTrips.selected==offer.dungeon)
+            assert(env.HeaderService.GetHeaderTitles()==ns.DungeonQuestData.dungeons[offer.dungeon].name)
             local later=visibleAction("later"); assert(later)
             later.scripts.OnClick(later,"LeftButton"); tick()
             assert(not planner:IsDetouring() and ns.char.dungeonTrips.deferred[offer.dungeon])

@@ -243,15 +243,14 @@ class DungeonPlannerTests(unittest.TestCase):
         self.login()
         self.run_lua('assert(not ns.DungeonPlanner:IsDetouring())')
 
-    def test_world_quest_objective_progress_and_live_waypoint_preserve_the_route(self):
+    def test_journal_progress_and_live_waypoint_without_an_active_chapter(self):
         self.run_lua("""
             useFixture({},{}); ns.DungeonQuestData.restedWorld[333]=true
             local ordinary={id="outdoor", title="Guía", faction="Alliance", steps={
                 {title="De camino",goals={{t="kill",quest=200}}},
                 {title="Encargo",goals={{t="kill",quest=333,oi=1,waypoint={mapID=12,x=.3,y=.32}},
                     {t="turnin",quest=333,waypoint={mapID=12,x=.71,y=.4}}}}}}
-            ns:RegisterGuide(ordinary); ns.char.activeGuide=ordinary.id
-            ns.GetActiveGoal=function(_,step) return step.goals[1] end
+            ns:RegisterGuide(ordinary)
             w.active[333]=true; w.journal={333}
             w.objectives[333]={{numFulfilled=0,text="0/2"},{numFulfilled=0,text="0/5"}}
         """)
@@ -265,14 +264,66 @@ class DungeonPlannerTests(unittest.TestCase):
             assert(rows[1].questID==333 and rows[1].questAction=="kill" and rows[1].isCurrent and not rows[1].action)
             assert(rows[2].objectiveIndex==1 and rows[2].questObjectives[1].numFulfilled==1)
             assert(rows[3].objectiveIndex==2 and rows[3].text=="0/5" and rows[3].questAction=="complete")
-            assert(ns:GetProgress("outdoor").cursor==1)
+            assert(ns.char.progress.outdoor==nil and not ns.char.activeGuide)
             w.waypoints[333]={56,.41,.57}; update(); checkPoint(56,.41,.57)
             click("world"); assert(not p:IsDetouring())
             w.objectives[333][2].numFulfilled=1; update(); assert(p:IsDetouring())
             w.waypoints={}; w.ready[333]=true; update(); checkPoint(12,.71,.4)
             assert(p:Rows()[1].questAction=="turnin" and not contains("1/2"))
             w.done[333]=true; w.active[333]=nil; update()
-            assert(not p:IsDetouring() and ns:GetProgress("outdoor").cursor==1)
+            assert(not p:IsDetouring() and ns.char.progress.outdoor==nil)
+        """)
+
+    def test_selecting_guide_releases_cached_detour_without_rebuilding_saved_progress(self):
+        self.run_lua("""
+            useFixture({[10]={title="Recado",pickup=point(12,5,5)}},{10})
+            assert(ns:RegisterGuide({id="outdoor",title="Ruta",steps={{title="Ruta",goals={{t="kill",quest=200}}}}}))
+            ns.DungeonQuestData.restedWorld[201]=true
+            w.journal={201}; w.active[201]=true; w.tracked=201; w.waypoints[201]={12,.35,.43}
+        """)
+        self.login()
+        self.run_lua("""
+            local p=ns.DungeonPlanner
+            checkPoint(12,.35,.43)
+            local stale=p:Rows()[#p:Rows()]
+            ns.char.activeGuide="outdoor"
+            assert(p:RouteKey()==nil and not p:IsDetouring() and p:Waypoint()==nil)
+            assert(not p:Heading() and contains("Preparar mazmorra") and not p:Wants("accept",10))
+            p:Click(stale)
+            assert(not p:IsDetouring() and ns.char.progress.outdoor==nil)
+            for _,r in ipairs(p:Rows()) do assert(r.action~="world" and not r.isCurrent) end
+            w.tracked=0; fire("SUPER_TRACKING_CHANGED")
+            w.objectives[201]={{numFulfilled=0}}; update()
+            w.objectives[201][1].numFulfilled=1; update()
+            assert(p:RouteKey()==nil and not p:IsDetouring())
+            click("prepare"); assert(p:Wants("accept",10)); checkPoint(12,.05,.05)
+            assert(ns.char.activeGuide=="outdoor" and ns.char.progress.outdoor==nil)
+        """)
+        self.login()
+        self.run_lua("""
+            assert(ns.DungeonPlanner:Wants("accept",10)); click("later")
+            assert(not ns.DungeonPlanner:IsDetouring() and ns.char.activeGuide=="outdoor")
+        """)
+
+    def test_group_outdoors_only_suggests_until_entry_or_explicit_choice_with_a_chapter(self):
+        self.run_lua("""
+            useFixture({[501]={title="Cripta",pickup=point(12,80,80),workInside=true}},{501})
+            assert(ns:RegisterGuide({id="outdoor",title="Ruta",steps={{title="Pausa",goals={{t="note"}}}}}))
+            ns.char.activeGuide="outdoor"; w.active[501]=true; w.group=true; w.size=2
+        """)
+        self.login()
+        self.run_lua("""
+            local p=ns.DungeonPlanner
+            w.size=5; fire("GROUP_ROSTER_UPDATE")
+            assert(not p:IsDetouring() and contains("Preparar mazmorra") and p:Waypoint()==nil)
+            w.instance="Crypt"; w.map=401; fire("PLAYER_ENTERING_WORLD")
+            assert(p:IsDetouring() and p:Heading()=="Cripta")
+            w.instance=nil; w.map=12; fire("PLAYER_ENTERING_WORLD")
+            assert(not p:IsDetouring() and p:RouteKey()==nil)
+            click("prepare"); checkPoint(12,.75,.80)
+            click("later"); assert(not p:IsDetouring())
+            assert(p:Repeat("Cripta") and p:IsDetouring()); checkPoint(12,.75,.80)
+            assert(ns.char.activeGuide=="outdoor" and ns.char.progress.outdoor==nil)
         """)
 
     def test_real_deadmines_chain_and_event_windows(self):

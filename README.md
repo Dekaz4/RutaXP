@@ -38,7 +38,9 @@ Para desplazamientos largos por varias zonas, la guía calcula primero la parada
 
 Journey muestra la misión que estás siguiendo en el juego o en la que acaba de subir un contador. Para las mazmorras, RutaXP relaciona las misiones del capítulo con las guías oficiales de RestedXP disponibles, el diario de mazmorras y los requisitos de Forever. En un mismo panel ves las previas, las recogidas exteriores y las que solo puedes aceptar dentro.
 
-Pulsa **Preparar mazmorra** para seguir las recogidas con la brújula. También reconoce una recogida al pasar cerca. Si prefieres seguir solo, pulsa **Seguir con la ruta de mundo abierto**. Al salir con los objetivos de la visita completos, la guía conserva las entregas pendientes. Las visitas posteriores quedan a tu elección. El diario activa el modo **Gamer** al actualizar cada personaje y respeta los cambios que hagas después en sus opciones.
+Con una guía activa, el panel y la flecha siguen el paso actual. Si marcas otra misión en el diario o completas parte de ella por el camino, su progreso se guarda y la brújula sigue con el recorrido.
+
+La guía puede sugerir una mazmorra cercana. Pulsa **Preparar mazmorra** para seguir sus recogidas con la brújula. Si prefieres volver al recorrido, pulsa **Seguir con la ruta de mundo abierto**. Al salir con los objetivos de la visita completos, la guía conserva las entregas pendientes. Las visitas posteriores quedan a tu elección. El diario activa el modo **Gamer** al actualizar cada personaje y respeta los cambios que hagas después en sus opciones.
 
 ## Preparar el paquete local
 

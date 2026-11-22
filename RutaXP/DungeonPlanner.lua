@@ -2,7 +2,7 @@ local _, ns = ...
 local planner = {}
 ns.DungeonPlanner = planner
 local data, qs = ns.DungeonQuestData, ns.RestedQuestState
-local model, lastInstance, queued
+local model, modelGuide, lastInstance, queued
 
 local function saved()
     local char = ns.char
@@ -215,7 +215,7 @@ local function line(task)
     return verbs[task.kind] .. " · " .. task.questTitle
 end
 
-local function rebuild()
+local function rebuild(activeGuide)
     local trips = saved()
     if not trips then return {rows={}} end
     local ctx, here = context(), instance()
@@ -265,22 +265,23 @@ local function rebuild()
         return entry
     end
     local task, dungeon = best and best.tasks[1], data.dungeons[chosen]
-    local group = IsInGroup and IsInGroup()
     local defer = chosen and trips.deferred[chosen]
-    local autoRun = task and not defer and group and GetNumGroupMembers and GetNumGroupMembers() >= 5
-        and dungeon.entrance and (dungeon.entrance.map or dungeon.entrance.mapID) == ctx.map
-        and best.held > 0 and task.kind == "run"
     local focusedQuest, focusedMatch
-    if not here and not (ns.DuoAuto and ns.DuoAuto:GetSharedView()) then
-        focusedQuest, focusedMatch = ns.WorldQuestFocus.Current()
+    local autoVisit
+    if not activeGuide then
+        if not here and not (ns.DuoAuto and ns.DuoAuto:GetSharedView()) then
+            focusedQuest, focusedMatch = ns.WorldQuestFocus.Current()
+        end
+        if task and task.kind == "run" and best.held > 0 then
+            autoVisit = IsInGroup and IsInGroup() and GetNumGroupMembers and GetNumGroupMembers() >= 5
+                and dungeon.entrance and (dungeon.entrance.map or dungeon.entrance.mapID) == ctx.map
+        elseif task and task.kind == "pickup" and task.distance < .0009 and not focusedQuest then
+            local traveling = (ns.GetGuideTravel and ns:GetGuideTravel()) or
+                (not ns.navigationActivity and ns.GetDestinationTravelView and ns:GetDestinationTravelView())
+            autoVisit = not traveling
+        end
     end
-    -- A passing questgiver can still appear in the panel. Keep the bearing
-    -- for the tracked quest or the journey already under way.
-    local traveling = (ns.GetGuideTravel and ns:GetGuideTravel()) or
-        (not ns.navigationActivity and ns.GetDestinationTravelView and ns:GetDestinationTravelView())
-    local nearPickup = task and not defer and task.kind == "pickup" and task.distance < .0009
-    out.detour = chosen and not defer and (chosen == trips.selected or chosen == repeatKey or chosen == here or
-        autoRun or (nearPickup and not focusedQuest and not traveling))
+    out.detour = chosen and not defer and (chosen == trips.selected or chosen == repeatKey or chosen == here or autoVisit)
     if chosen then
         local name = dungeon.name or chosen
         if out.detour then
@@ -338,13 +339,16 @@ local function rebuild()
                 nextRow=nextRow+1
             end
         end
-        row("Volver al paso de RutaXP", "world")
+        row("Dejar de seguir esta misión", "world")
     end
     return out
 end
 
 local function current()
-    if not model then model = rebuild() end
+    local guide = ns.WorldQuestFocus.ActiveGuide()
+    if not model or guide ~= modelGuide then
+        model, modelGuide = rebuild(guide), guide
+    end
     return model
 end
 function planner:Rows() return current().rows end
