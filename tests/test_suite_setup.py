@@ -101,15 +101,46 @@ class PortableSuiteSetupTests(unittest.TestCase):
             self.assertCountEqual(requested, expected)
             requested.clear()
             (self.addons / "OpenMap").mkdir()
-            (self.addons / "OpenMap/OpenMap.toc").touch()
+            (self.addons / "OpenMap/OpenMap.toc").write_text("## Version: v0.8.11\n")
+            (self.addons / "Journey").mkdir()
+            (self.addons / "Journey/Journey.toc").write_text("## Version: 4.00.12\n")
             tx = suite_setup.backup_store(self.client) / ("2" * 17 + "-" + "b" * 32)
             prior = tx / "prior/0"
             prior.mkdir(parents=True)
-            (prior / "ForeverDungeonJournal.toc").touch()
+            (prior / "ForeverDungeonJournal.toc").write_text("## Version: 2.1.2\n")
             (tx / "plan.json").write_text(json.dumps({"rows": [{"dest": "Interface/AddOns/ForeverDungeonJournal"}]}))
             (tx / "committed").touch()
             self.assertEqual(suite_setup.run(self.client, cache, report=report), "installed")
             self.assertEqual(requested, ["Journey"])
+
+    def test_pinned_selection_checks_versions_in_older_native_and_embedded_backups(self):
+        versions = {"OpenMap": "v0.8.11", "ForeverDungeonJournal": "2.1.2", "Journey": "4.00.13"}
+        self.assertEqual(suite_setup.INSTALL_VERSIONS, versions)
+        for name in versions:
+            (self.addons / name).mkdir()
+            (self.addons / name / (name + ".toc")).write_text("## Version: 9.9.9\n")
+
+        def make_backup(number, journal_version, journey_version):
+            tx = suite_setup.backup_store(self.client) / (str(number) * 17 + "-" + "b" * 32)
+            native, suite = tx / "prior/0", tx / "prior/1"
+            native.mkdir(parents=True)
+            (native / "OpenMap.toc").write_text("## Version: " + ("v0.8.11" if number == 1 else "v0.8.10"))
+            for name in ("ForeverDungeonJournal", "Journey"):
+                (suite / "Modules" / name).mkdir(parents=True)
+            (suite / "manifest.sha256").touch()
+            (suite / "RutaXP.toc").write_text(
+                f"## X-RutaXP-Embedded: ForeverDungeonJournal\n## X-ForeverDungeonJournal-Version: {journal_version}\n"
+                f"## X-RutaXP-Journey-UI: {journey_version}\n")
+            (tx / "plan.json").write_text(json.dumps({"rows": [
+                {"dest": "Interface/AddOns/OpenMap"}, {"dest": "Interface/AddOns/RutaXP"}]}))
+            (tx / "committed").touch()
+            return native, suite
+
+        earlier_map, earlier_suite = make_backup(1, "2.1.2", "4.00.13")
+        _, recent_suite = make_backup(2, "2.1.1", "4.00.13")
+        self.assertEqual(suite_setup.find_native_sources(self.client, required=(), versions=versions),
+                         {"OpenMap": earlier_map, "ForeverDungeonJournal": earlier_suite, "Journey": recent_suite})
+        self.assertEqual(suite_setup.find_native_sources(self.client), {name: self.addons / name for name in versions})
 
     def test_missing_journey_during_download_releases_earlier_sources_before_activation(self):
         active = []
@@ -169,8 +200,8 @@ class PortableSuiteSetupTests(unittest.TestCase):
                "## SavedVariables: OpenMapDB, ForeverDungeonJournalDB, RutaXPRestedDB",
                "## SavedVariablesPerCharacter: OpenMapCharDB, ForeverDungeonJournalCharacterDB, RXPCData",
                "## X-RutaXP-Journey-UI: 4.00.13"]
-        for name in ("OpenMap", "ForeverDungeonJournal"):
-            toc.extend((f"## X-{name}-Title: {name}", f"## X-{name}-Version: 1", f"Modules/{name}/Init.lua"))
+        for name, version in (("OpenMap", "v0.8.11"), ("ForeverDungeonJournal", "2.1.2")):
+            toc.extend((f"## X-{name}-Title: {name}", f"## X-{name}-Version: {version}", f"Modules/{name}/Init.lua"))
             files[f"Modules/{name}/Init.lua"] = b"-- integrated native source"
         for file in suite_journey.entries(None):
             files[file] = b"setfenv(1, RutaXPJourneyEnvironment())\n"
