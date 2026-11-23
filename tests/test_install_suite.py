@@ -72,6 +72,20 @@ class LocalSuiteInstallTests(unittest.TestCase):
         self.assertTrue((self.client / "LFGForeverLanguageSpanish/Spanish.lua").is_file())
         self.assertFalse((game / "WTF").exists())
 
+    @unittest.skipUnless(os.name == "nt", "Windows short paths")
+    def test_fresh_client_reached_through_short_windows_path(self):
+        import ctypes
+        game = self.work / "World of Warcraft on a fresh computer/_forever_"
+        game.mkdir(parents=True)
+        (game / "Wow.exe").touch()
+        short = ctypes.create_unicode_buffer(32768)
+        self.assertTrue(ctypes.windll.kernel32.GetShortPathNameW(str(game), short, len(short)))
+        if short.value == str(game):
+            self.skipTest("The test volume does not create 8.3 names")
+        self.client = Path(short.value) / "Interface/AddOns"
+        self.script("-Archive", self.archive)
+        self.assertTrue((game / "Interface/AddOns/RutaXP/Suite.lua").is_file())
+
     def test_fresh_install_rejects_empty_or_other_game_without_creating_addons(self):
         for branch, executable in (("_forever_", False), ("_retail_", True)):
             with self.subTest(branch=branch):

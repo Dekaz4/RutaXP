@@ -342,11 +342,15 @@ if ([IO.Path]::GetFileName($game) -eq 'AddOns' -and [IO.Path]::GetFileName([IO.P
     $game = [IO.Path]::GetDirectoryName($game)
 }
 Assert-NoLink $game
+if (![IO.Directory]::Exists($game)) { throw 'Selecciona la carpeta de la instalacion de WoW Forever.' }
+# Resolve the existing client after removing the possibly absent AddOns suffix.
+# Keep the same long path spelling for this root and all transaction children.
+$game = (Get-Item -LiteralPath $game).FullName.TrimEnd('\','/')
 $addons = ChildPath $game 'Interface/AddOns'
 Assert-NoLink $addons
 $flavorName = [IO.Path]::GetFileName($game)
 $knownFlavor = $flavorName -in @('_forever_', '_classic_beta_')
-if (![IO.Directory]::Exists($game) -or (!$knownFlavor -and $flavorName -match '^_.*_$')) {
+if (!$knownFlavor -and $flavorName -match '^_.*_$') {
     throw 'Selecciona la carpeta de la instalacion de WoW Forever.'
 }
 $forever = $knownFlavor -and [IO.Directory]::Exists($addons)
