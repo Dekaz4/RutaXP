@@ -12,7 +12,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
-using Microsoft.Win32;
 using RutaXPInstaller;
 
 namespace RutaXPUpdater
@@ -713,20 +712,9 @@ namespace RutaXPUpdater
         }
         internal static bool WowRunning()
         {
-            foreach (string name in new string[] { "Wow", "WowB", "WowClassicB", "WowClassic", "Wow-64", "WorldOfWarcraft" })
+            foreach (string name in new string[] { "Wow", "WowB", "WowClassicB", "WowClassic", "WowForever", "Wow-64", "WorldOfWarcraft" })
                 foreach (Process process in Process.GetProcessesByName(name)) { process.Dispose(); return true; }
             return false;
-        }
-        static List<string> Discover()
-        {
-            List<string> roots = new List<string>();
-            foreach (string sub in new string[] { @"SOFTWARE\WOW6432Node\Blizzard Entertainment\World of Warcraft", @"SOFTWARE\Blizzard Entertainment\World of Warcraft" })
-                foreach (RegistryKey hive in new RegistryKey[] { Registry.LocalMachine, Registry.CurrentUser })
-                    try { using (RegistryKey key = hive.OpenSubKey(sub)) if (key != null) foreach (string name in new string[] { "InstallPath", "Path" }) { string path = key.GetValue(name) as string; if (path != null) roots.Add(path); } } catch { }
-            foreach (DriveInfo drive in DriveInfo.GetDrives())
-                try { if (drive.IsReady && drive.DriveType == DriveType.Fixed) foreach (string path in new string[] { @"World of Warcraft", @"WOW\World of Warcraft", @"Games\World of Warcraft", @"Program Files (x86)\World of Warcraft", @"WoW Forever", @"World of Warcraft Forever" }) roots.Add(Path.Combine(drive.RootDirectory.FullName, path)); } catch { }
-            List<string> found = new List<string>(); foreach (string path in roots) try { found.AddRange(InstallerCore.ResolveDestinations(path)); } catch { }
-            return InstallerCore.SortDestinations(found);
         }
         public static string SelectClient(string settings, string action, Func<List<string>> discover, Func<List<string>, string> choose)
         {
@@ -826,7 +814,7 @@ namespace RutaXPUpdater
                 if (interactive) action = Menu(); else if (action == null) action = "--update";
                 if (action == null) return 0;
                 string settings = ClientSettings.DirectoryPath;
-                string addons = client == null ? SelectClient(settings, action, Discover, ChooseClient) : UpdaterCore.ResolveClient(client);
+                string addons = client == null ? SelectClient(settings, action, InstallerCore.FindWoWAddonFolders, ChooseClient) : UpdaterCore.ResolveClient(client);
                 Console.WriteLine("Cliente: " + Path.GetDirectoryName(Path.GetDirectoryName(addons)));
                 if (action != "--choose-client")
                 {

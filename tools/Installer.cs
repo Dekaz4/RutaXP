@@ -66,12 +66,15 @@ namespace RutaXPInstaller
         {
             if (!Directory.Exists(path)) return false;
             string leaf = Path.GetFileName(Normalize(path));
-            if (leaf.Equals("_classic_beta_", StringComparison.OrdinalIgnoreCase) || leaf.Equals("_forever_", StringComparison.OrdinalIgnoreCase)) return true;
-            foreach (string name in new string[] { "Wow.exe", "WowB.exe", "WowClassic.exe" })
+            bool foreverFolder = leaf.Equals("_classic_beta_", StringComparison.OrdinalIgnoreCase) || leaf.Equals("_forever_", StringComparison.OrdinalIgnoreCase);
+            if (!foreverFolder && leaf.StartsWith("_", StringComparison.Ordinal) && leaf.EndsWith("_", StringComparison.Ordinal)) return false;
+            if (foreverFolder && Directory.Exists(Path.Combine(path, "Interface", "AddOns"))) return true;
+            foreach (string name in new string[] { "Wow.exe", "WowB.exe", "WowClassic.exe", "WowClassicB.exe", "WowForever.exe" })
             {
                 string exe = Path.Combine(path, name);
-                if (File.Exists(exe))
-                    try { if (Regex.IsMatch(FileVersionInfo.GetVersionInfo(exe).FileVersion ?? "", @"^1\.60\.")) return true; } catch { }
+                if (!File.Exists(exe)) continue;
+                if (foreverFolder) return true;
+                try { if (Regex.IsMatch(FileVersionInfo.GetVersionInfo(exe).FileVersion ?? "", @"^1\.60\.")) return true; } catch { }
             }
             return false;
         }
@@ -105,6 +108,45 @@ namespace RutaXPInstaller
                 results.Add(addons);
             }
             return SortDestinations(results);
+        }
+
+        public static List<string> FindWoWAddonFolders()
+        {
+            List<string> roots = new List<string>();
+            foreach (string name in new string[] { "Wow", "WowB", "WowClassic", "WowClassicB", "WowForever", "WorldOfWarcraft", "Wow-64" })
+                try
+                {
+                    foreach (Process process in Process.GetProcessesByName(name))
+                        using (process)
+                        {
+                            try
+                            {
+                                string folder = Path.GetDirectoryName(process.MainModule.FileName);
+                                roots.Add(folder);
+                                roots.Add(Path.GetDirectoryName(folder));
+                            }
+                            catch { }
+                        }
+                } catch { }
+            foreach (string keyName in new string[] { @"SOFTWARE\WOW6432Node\Blizzard Entertainment\World of Warcraft", @"SOFTWARE\Blizzard Entertainment\World of Warcraft", @"SOFTWARE\Blizzard Entertainment\Battle.net\Default Installations" })
+                foreach (RegistryKey hive in new RegistryKey[] { Registry.LocalMachine, Registry.CurrentUser })
+                    try
+                    {
+                        using (RegistryKey key = hive.OpenSubKey(keyName))
+                            if (key != null)
+                                foreach (string property in new string[] { "InstallPath", "Path", "Install_Path" })
+                                { string path = key.GetValue(property) as string; if (!string.IsNullOrEmpty(path)) roots.Add(path); }
+                    } catch { }
+            string[] common = new string[] { @"World of Warcraft", @"Program Files (x86)\World of Warcraft", @"Program Files\World of Warcraft", @"Games\World of Warcraft", @"Juegos\World of Warcraft", @"WOW\World of Warcraft", @"WOW", @"WoW Forever", @"World of Warcraft Forever", @"Forever" };
+            foreach (DriveInfo drive in DriveInfo.GetDrives())
+                try
+                {
+                    if (drive.DriveType == DriveType.Fixed && drive.IsReady)
+                        foreach (string sub in common) roots.Add(Path.Combine(drive.RootDirectory.FullName, sub));
+                } catch { }
+            List<string> found = new List<string>();
+            foreach (string root in roots) try { found.AddRange(ResolveDestinations(root)); } catch { }
+            return SortDestinations(found);
         }
 
         public static List<string> SortDestinations(IEnumerable<string> paths)
@@ -454,7 +496,7 @@ namespace RutaXPInstaller
             Console.WriteLine("\nINSTALADOR DE RUTAXP PARA WOW FOREVER\n");
             Console.ResetColor();
             Console.WriteLine("Buscando clientes de Forever...");
-            string target = Choose(FindWoWAddonFolders());
+            string target = Choose(InstallerCore.FindWoWAddonFolders());
             if (target == null)
             {
                 Console.Write("Ruta de WoW Forever, carpeta principal de WoW o Interface\\AddOns: ");
@@ -478,36 +520,6 @@ namespace RutaXPInstaller
             Console.WriteLine("Cierra WoW completamente y vuelve a abrirlo; /reload no descubre addons nuevos.");
             Console.WriteLine("Activa RutaXP en Accesorios. Usa /rutaxp para las guias y N para los talentos.");
             return 0;
-        }
-
-        static List<string> FindWoWAddonFolders()
-        {
-            List<string> roots = new List<string>();
-            foreach (string name in new string[] { "Wow", "WowB", "WowClassic", "WorldOfWarcraft", "Wow-64" })
-                try
-                {
-                    foreach (Process process in Process.GetProcessesByName(name))
-                        try { string folder = Path.GetDirectoryName(process.MainModule.FileName); roots.Add(folder); roots.Add(Path.GetDirectoryName(folder)); } catch { }
-                } catch { }
-            foreach (string keyName in new string[] { @"SOFTWARE\WOW6432Node\Blizzard Entertainment\World of Warcraft", @"SOFTWARE\Blizzard Entertainment\World of Warcraft", @"SOFTWARE\Blizzard Entertainment\Battle.net\Default Installations" })
-                foreach (RegistryKey hive in new RegistryKey[] { Registry.LocalMachine, Registry.CurrentUser })
-                    try
-                    {
-                        using (RegistryKey key = hive.OpenSubKey(keyName))
-                            if (key != null)
-                                foreach (string property in new string[] { "InstallPath", "Path", "Install_Path" })
-                                { string path = key.GetValue(property) as string; if (!string.IsNullOrEmpty(path)) roots.Add(path); }
-                    } catch { }
-            string[] common = new string[] { @"World of Warcraft", @"Program Files (x86)\World of Warcraft", @"Program Files\World of Warcraft", @"Games\World of Warcraft", @"Juegos\World of Warcraft", @"WOW\World of Warcraft", @"WOW", @"WoW Forever", @"World of Warcraft Forever", @"Forever" };
-            try
-            {
-                foreach (DriveInfo drive in DriveInfo.GetDrives())
-                    if (drive.IsReady && drive.DriveType == DriveType.Fixed)
-                        foreach (string sub in common) roots.Add(Path.Combine(drive.RootDirectory.FullName, sub));
-            } catch { }
-            List<string> found = new List<string>();
-            foreach (string root in roots) try { found.AddRange(InstallerCore.ResolveDestinations(root)); } catch { }
-            return InstallerCore.SortDestinations(found);
         }
     }
 }

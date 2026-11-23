@@ -152,7 +152,7 @@ function StagePackage([string]$target) {
     return ReadPackage $target
 }
 function CheckClosed {
-    foreach ($p in Get-Process -Name 'Wow','WowB','Wow-64','WowClassic','WowClassicB','WowT','WowClassicT','WorldOfWarcraft','World of Warcraft' -ErrorAction SilentlyContinue) {
+    foreach ($p in Get-Process -Name 'Wow','WowB','Wow-64','WowClassic','WowClassicB','WowForever','WowT','WowClassicT','WorldOfWarcraft','World of Warcraft' -ErrorAction SilentlyContinue) {
         try { $exe = $p.Path } catch { $exe = $null }
         # Process paths can use the short (8.3) spelling of the client folder.
         $folder = if ($exe) { Get-Item -LiteralPath ([IO.Path]::GetDirectoryName($exe)) -Force -ErrorAction SilentlyContinue }
@@ -326,25 +326,34 @@ function Rollback([string]$tx,$rows,[bool]$nativeDelta = $false) {
         $replaced = [IO.File]::Exists($prior) -or [IO.Directory]::Exists($prior)
         if ($replaced -or (!$row.old -and $row.add -and !(Test-Path -LiteralPath $stage))) {
             if (Test-Path -LiteralPath $target) { Transfer $target (ChildPath $tx "after/$i") }
-            if ($replaced) { Transfer $prior $target }
+            if ($replaced) {
+                if ($row.dest -like 'Interface/AddOns/*') { MakeDirectory $addons }
+                Transfer $prior $target
+            }
         }
     }
     [IO.File]::WriteAllText((ChildPath $tx 'restored'),'')
 }
 
-$game = (Get-Item -LiteralPath $Client).FullName.TrimEnd('\','/')
+$game = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($Client).TrimEnd('\','/')
 if ([IO.Path]::GetFileName($game) -eq 'AddOns' -and [IO.Path]::GetFileName([IO.Path]::GetDirectoryName($game)) -eq 'Interface') {
     $game = [IO.Path]::GetDirectoryName([IO.Path]::GetDirectoryName($game))
+} elseif ([IO.Path]::GetFileName($game) -eq 'Interface') {
+    $game = [IO.Path]::GetDirectoryName($game)
 }
 Assert-NoLink $game
 $addons = ChildPath $game 'Interface/AddOns'
 Assert-NoLink $addons
-if (![IO.Directory]::Exists($addons)) { throw 'Elige la carpeta del cliente con Interface\AddOns.' }
-$forever = [IO.Path]::GetFileName($game) -in @('_forever_', '_classic_beta_')
+$flavorName = [IO.Path]::GetFileName($game)
+$knownFlavor = $flavorName -in @('_forever_', '_classic_beta_')
+if (![IO.Directory]::Exists($game) -or (!$knownFlavor -and $flavorName -match '^_.*_$')) {
+    throw 'Selecciona la carpeta de la instalacion de WoW Forever.'
+}
+$forever = $knownFlavor -and [IO.Directory]::Exists($addons)
 if (!$forever) {
-    foreach ($name in @('Wow.exe', 'WowB.exe', 'WowClassic.exe', 'WowClassicB.exe')) {
+    foreach ($name in @('Wow.exe', 'WowB.exe', 'WowClassic.exe', 'WowClassicB.exe', 'WowForever.exe')) {
         $exe = ChildPath $game $name
-        if ([IO.File]::Exists($exe) -and [Diagnostics.FileVersionInfo]::GetVersionInfo($exe).FileVersion -match '^1\.60\.') {
+        if ([IO.File]::Exists($exe) -and ($knownFlavor -or [Diagnostics.FileVersionInfo]::GetVersionInfo($exe).FileVersion -match '^1\.60\.')) {
             $forever = $true
             break
         }
@@ -426,7 +435,10 @@ try {
         }
         # Older updaters kept backups inside AddOns. Move only their named
         # RutaXP copies into the same reversible transaction as the upgrade.
-        foreach ($backup in Get-ChildItem -LiteralPath $addons -Directory -Force -Filter '.RutaXP.backup.*') {
+        $oldBackups = if ([IO.Directory]::Exists($addons)) {
+            Get-ChildItem -LiteralPath $addons -Directory -Force -Filter '.RutaXP.backup.*'
+        }
+        foreach ($backup in $oldBackups) {
             if ($backup.Name -notmatch "^$legacyBackupName$") { continue }
             $dest = "Interface/AddOns/$($backup.Name)"
             $toc = ChildPath (TargetPath $dest) 'RutaXP.toc'
@@ -455,6 +467,8 @@ try {
             if ($installed -and $packageHash -eq $installed) { Write-Output 'La suite ya esta instalada y verificada.'; return }
         }
         CheckClosed
+        # Battle.net can install the game before its first launch creates Interface/AddOns.
+        MakeDirectory $addons
         MakeDirectory (ChildPath $tx 'prior')
         [IO.File]::WriteAllText((ChildPath $tx 'plan.tmp'),(ConvertTo-Json -InputObject @{rows=$rows} -Depth 5))
         Transfer (ChildPath $tx 'plan.tmp') $planPath

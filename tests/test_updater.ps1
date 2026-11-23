@@ -348,6 +348,10 @@ try {
             Assert-True ([RutaXPUpdater.Program]::SelectClient($settings,'--update',$neverDiscover,$neverAsk) -eq $addons) 'Saved valid client must take precedence.'
             [RutaXPUpdater.ClientSettings]::Save($settings,'client',(Join-Path $FixtureRoot 'Moved'))
             Assert-True ([RutaXPUpdater.Program]::SelectClient($settings,'--update',$discover,$neverAsk) -eq $other) 'An unavailable saved client must not block automatic discovery.'
+            $emptyFlavor=Join-Path $FixtureRoot 'Removed\_forever_'
+            [IO.Directory]::CreateDirectory($emptyFlavor) | Out-Null
+            [RutaXPUpdater.ClientSettings]::Save($settings,'client',$emptyFlavor)
+            Assert-True ([RutaXPUpdater.Program]::SelectClient($settings,'--update',$discover,$neverAsk) -eq $other) 'An empty leftover Forever directory must not hide the available client.'
             [IO.File]::Delete((Join-Path $settings 'client.txt'))
             Assert-True ([RutaXPUpdater.Program]::SelectClient($settings,'--update',$discover,$neverAsk) -eq $other) 'A single client on first run must not prompt.'
             $script:clientChoices.Add($addons)

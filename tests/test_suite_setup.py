@@ -1,5 +1,6 @@
 import hashlib
-from contextlib import contextmanager
+import io
+from contextlib import contextmanager, redirect_stdout
 import json
 import os
 from pathlib import Path
@@ -29,6 +30,46 @@ class PortableSuiteSetupTests(unittest.TestCase):
         (self.work / "client.txt").write_text(str(self.addons), encoding="utf-8-sig")
         with patch.object(suite_setup, "settings_root", return_value=self.work):
             self.assertEqual(suite_setup.detect_client(), self.client)
+
+    def test_old_launchers_can_pass_a_missing_addons_folder_on_first_install(self):
+        fresh = self.work / "Juegos nuevos/World of Warcraft/_forever_"
+        fresh.mkdir(parents=True)
+        (fresh / "Wow.exe").touch()
+        addons = fresh / "Interface/AddOns"
+        for path in (fresh, fresh.parent, addons.parent, addons):
+            self.assertEqual(suite_setup.client_from(path), fresh)
+        with patch.object(suite_setup, "run", return_value="instalado") as run, redirect_stdout(io.StringIO()):
+            self.assertEqual(suite_setup.main(["--addons", str(addons)]), 0)
+        self.assertEqual(run.call_args.args[0], fresh)
+        self.assertFalse(addons.exists(), "Only the installation transaction should create AddOns")
+
+    def test_rejects_empty_forever_stale_target_and_other_client_flavors(self):
+        empty = self.work / "Antiguo/_forever_"
+        empty.mkdir(parents=True)
+        (empty / ".flavor.info").write_text("Product Flavor!STRING:0\nwowf\n")
+        retail = self.work / "_retail_"
+        (retail / "Interface/AddOns").mkdir(parents=True)
+        (retail / "Wow.exe").touch()
+        with patch.object(suite_setup, "forever_executable", return_value=True):
+            for path in (empty, empty / "Interface/AddOns", self.work / "ausente", retail):
+                with self.subTest(path=path), self.assertRaisesRegex(ValueError, "opción 4"):
+                    suite_setup.client_from(path)
+        self.assertFalse((empty / "Interface").exists())
+
+    def test_renamed_client_needs_a_forever_executable_and_parent_cannot_choose_between_two(self):
+        custom = self.work / "Colección"
+        (custom / "Interface/AddOns").mkdir(parents=True)
+        (custom / "WowClassicB.exe").touch()
+        with patch.object(suite_setup, "forever_executable", return_value=False):
+            with self.assertRaises(ValueError):
+                suite_setup.client_from(custom)
+        with patch.object(suite_setup, "forever_executable", return_value=True):
+            self.assertEqual(suite_setup.client_from(custom), custom)
+        beta = self.client.parent / "_classic_beta_"
+        beta.mkdir()
+        (beta / "WowClassicB.exe").touch()
+        with self.assertRaisesRegex(ValueError, "dos clientes"):
+            suite_setup.client_from(self.client.parent)
 
     @unittest.skipUnless(os.name == "nt", "Windows short names")
     def test_short_path_allows_backups_but_keeps_output_outside_client(self):

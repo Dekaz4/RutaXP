@@ -25,6 +25,8 @@ from zipfile import ZipFile
 
 LOCAL_COMPOSE_MODULES = ("OpenMap", "ForeverDungeonJournal")
 INSTALL_VERSIONS = {"OpenMap": "v0.8.11", "ForeverDungeonJournal": "2.1.2", "Journey": "4.00.13"}
+FOREVER_FLAVORS = ("_forever_", "_classic_beta_")
+WOW_EXECUTABLES = ("Wow.exe", "WowB.exe", "WowClassic.exe", "WowClassicB.exe", "WowForever.exe")
 
 
 def resources():
@@ -37,17 +39,60 @@ def settings_root():
     return Path(os.environ.get("LOCALAPPDATA", Path.home())) / "RutaXP"
 
 
+def forever_executable(exe):
+    """Identify a renamed installation by its Windows file version (1.60.x)."""
+    if os.name != "nt":
+        return False
+    import ctypes
+    from ctypes import wintypes
+    version = ctypes.windll.version
+    size = version.GetFileVersionInfoSizeW(str(exe), None)
+    if not size:
+        return False
+    data = ctypes.create_string_buffer(size)
+    length = wintypes.UINT()
+    translations = ctypes.POINTER(wintypes.WORD)()
+    if not (version.GetFileVersionInfoW(str(exe), 0, size, data) and version.VerQueryValueW(
+            data, r"\VarFileInfo\Translation", ctypes.byref(translations), ctypes.byref(length))):
+        return False
+    # WoW's fixed numeric version differs from its displayed FileVersion.
+    for index in range(0, length.value // 2 - 1, 2):
+        lang, codepage = translations[index:index + 2]
+        key = rf"\StringFileInfo\{lang:04x}{codepage:04x}\FileVersion"
+        value = ctypes.c_wchar_p()
+        if version.VerQueryValueW(data, key, ctypes.byref(value), ctypes.byref(length)):
+            if value.value and value.value.startswith("1.60."):
+                return True
+    return False
+
+
+def valid_client(path):
+    if not path.is_dir():
+        return False
+    executables = (path / name for name in WOW_EXECUTABLES)
+    flavor = path.name.casefold()
+    if flavor in FOREVER_FLAVORS:
+        return (path / "Interface/AddOns").is_dir() or any(exe.is_file() for exe in executables)
+    if flavor.startswith("_") and flavor.endswith("_"):
+        return False
+    return any(exe.is_file() and forever_executable(exe) for exe in executables)
+
+
 def client_from(path):
     path = Path(path).expanduser().resolve()
     if path.name.casefold() == "addons" and path.parent.name.casefold() == "interface":
         path = path.parent.parent
-    if (path / "Interface/AddOns").is_dir():
+    elif path.name.casefold() == "interface":
+        path = path.parent
+    if valid_client(path):
         return path
-    for flavor in ("_forever_", "_classic_beta_"):
-        candidate = path / flavor
-        if (candidate / "Interface/AddOns").is_dir():
-            return candidate
-    raise ValueError("Selecciona la carpeta de WoW Forever o su carpeta Interface/AddOns.")
+    clients = [path / flavor for flavor in FOREVER_FLAVORS if valid_client(path / flavor)]
+    if len(clients) == 1:
+        return clients[0]
+    if clients:
+        raise ValueError(f"Hay dos clientes de WoW Forever en {path}. Elige la carpeta del cliente con el que juegas.")
+    raise ValueError(f"No se encuentra WoW Forever en {path}. En Battle.net, junto a Jugar, usa Mostrar en el "
+                     "Explorador. En el instalador de RutaXP elige la opción 4 y selecciona la carpeta del cliente.")
 
 
 def detect_client():

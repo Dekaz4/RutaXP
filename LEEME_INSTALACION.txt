@@ -1,7 +1,7 @@
-RUTAXP 1.2.16 PARA WOW FOREVER
+RUTAXP 1.2.17 PARA WOW FOREVER
 
 1. Cierra WoW y abre tu Instalador_RutaXP.exe de siempre.
-2. Pulsa 1. El instalador usa tu cliente guardado o lo detecta si hay uno solo.
+2. Pulsa 1. En un PC nuevo, termina primero la instalación de WoW Forever en Battle.net. Si se te pide una ubicación, elige la carpeta _forever_ de ese PC. El instalador prepara Interface\AddOns.
 3. Entra con tu personaje. El panel de Journey muestra su capítulo de RutaXP 0.7.36.
 4. Pulsa el título del panel para elegir otro capítulo. /rutaxp zona busca una guía según tu zona, nivel y diario.
 5. La llave del minimapa abre un desplegable con las mazmorras y sus alas. Elige una para revisar las misiones. Pulsa Preparar mazmorra o Retomar preparación cuando quieras seguirla con la brújula. Puedes arrastrarla por el borde. Pulsa M para el mapa, /dj para el diario de mazmorras y N para los talentos.

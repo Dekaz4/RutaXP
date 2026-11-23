@@ -25,10 +25,14 @@ function Assert-RutaXPNoLinks {
 function Test-RutaXPForeverClient {
     param([string]$Path)
     if (-not (Test-Path -LiteralPath $Path -PathType Container)) { return $false }
-    if ([IO.Path]::GetFileName((Get-RutaXPFullPath $Path)) -in @('_classic_beta_', '_forever_')) { return $true }
-    foreach ($name in @('Wow.exe', 'WowB.exe', 'WowClassic.exe')) {
+    $folder = [IO.Path]::GetFileName((Get-RutaXPFullPath $Path))
+    $foreverFolder = $folder -in @('_classic_beta_', '_forever_')
+    if (!$foreverFolder -and $folder.StartsWith('_') -and $folder.EndsWith('_')) { return $false }
+    if ($foreverFolder -and [IO.Directory]::Exists((Join-Path $Path 'Interface\AddOns'))) { return $true }
+    foreach ($name in @('Wow.exe', 'WowB.exe', 'WowClassic.exe', 'WowClassicB.exe', 'WowForever.exe')) {
         $exe = Join-Path $Path $name
         if (Test-Path -LiteralPath $exe -PathType Leaf) {
+            if ($foreverFolder) { return $true }
             try { if ([Diagnostics.FileVersionInfo]::GetVersionInfo($exe).FileVersion -match '^1\.60\.') { return $true } } catch { }
         }
     }

@@ -87,6 +87,18 @@ try {
         Assert-True ($cs.Count -eq 2 -and $cs[0] -eq $expected) 'C# selected an unrelated client.'
         Assert-Throws { Resolve-RutaXPAddonFolders (Join-Path $base '_retail_') }
         Assert-Throws { [RutaXPInstaller.InstallerCore]::ResolveDestinations((Join-Path $base '_retail_')) }
+        $freshRoot = Join-Path $FixtureRoot 'Program Files (x86)\World of Warcraft'
+        $fresh = Join-Path $freshRoot '_forever_'
+        $freshAddons = Join-Path $fresh 'Interface\AddOns'
+        [IO.Directory]::CreateDirectory($fresh) | Out-Null
+        Assert-Throws { Resolve-RutaXPAddonFolders $fresh }
+        Assert-Throws { [RutaXPInstaller.InstallerCore]::ResolveDestinations($fresh) }
+        Put (Join-Path $fresh 'Wow.exe') 'fixture'
+        foreach ($selection in @($freshRoot, $fresh, $freshAddons)) {
+            Assert-True (@(Resolve-RutaXPAddonFolders $selection)[0] -eq $freshAddons) 'PowerShell missed the fresh Forever client.'
+            Assert-True ([RutaXPInstaller.InstallerCore]::ResolveDestinations($selection)[0] -eq $freshAddons) 'The launcher missed the fresh Forever client.'
+        }
+        Assert-True (![IO.Directory]::Exists((Join-Path $fresh 'Interface'))) 'Discovery wrote to the fresh client.'
         Assert-Throws { Get-RutaXPFullPath 'E:relative' }
         Assert-Throws { [RutaXPInstaller.InstallerCore]::Normalize('E:relative') }
         Put (Join-Path $base '.build.info') 'fixture'

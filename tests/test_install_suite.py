@@ -62,6 +62,34 @@ class LocalSuiteInstallTests(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
         return result.stdout
 
+    def test_first_install_on_unlaunched_client_with_no_addons_folder(self):
+        game = self.work / "PC nuevo/World of Warcraft/_forever_"
+        game.mkdir(parents=True)
+        (game / "Wow.exe").touch()
+        self.client = game / "Interface/AddOns"  # The old launcher passes this path.
+        self.script("-Archive", self.archive, "-IncludeLFG")
+        self.assertTrue((self.client / "RutaXP/Suite.lua").is_file())
+        self.assertTrue((self.client / "LFGForeverLanguageSpanish/Spanish.lua").is_file())
+        self.assertFalse((game / "WTF").exists())
+
+    def test_fresh_install_rejects_empty_or_other_game_without_creating_addons(self):
+        for branch, executable in (("_forever_", False), ("_retail_", True)):
+            with self.subTest(branch=branch):
+                self.client = self.work / "PC nuevo" / branch
+                self.client.mkdir(parents=True)
+                if executable:
+                    (self.client / "Wow.exe").touch()
+                self.script("-Archive", self.archive, ok=False)
+                self.assertFalse((self.client / "Interface").exists())
+
+    def test_invalid_package_does_not_create_interface_on_a_fresh_client(self):
+        self.client = self.work / "PC nuevo/_forever_"
+        self.client.mkdir(parents=True)
+        (self.client / "Wow.exe").touch()
+        (self.package / "Suite.lua").write_bytes(b"-- invalid")
+        self.script("-AddonDirectory", self.package, ok=False)
+        self.assertFalse((self.client / "Interface").exists())
+
     def test_settings_across_accounts_and_characters_and_restore(self):
         account = self.client / "WTF/Account/account/SavedVariables"
         character = self.client / "WTF/Account/account/Realm/Player/SavedVariables"
