@@ -429,7 +429,14 @@ local function getBlizzardTalentFrame()
     if PlayerTalentFrame then
         return PlayerTalentFrame, PlayerTalentFrame
     end
+    if TalentFrame then return TalentFrame, TalentFrame end
     return nil, nil
+end
+
+local function talentTreeVisible()
+    local tree, host = getBlizzardTalentFrame()
+    return tree and tree:IsShown() and (not host.IsShown or host:IsShown())
+        and (not tree.IsVisible or tree:IsVisible())
 end
 
 local function createEdge(parent, a, b, horizontal)
@@ -518,7 +525,7 @@ end
 
 function T.DrawOverlay()
     local tf = getBlizzardTalentFrame()
-    if not tf or not tf:IsShown() or not tf.EnumerateAllTalentButtons then
+    if not talentTreeVisible() or not tf.EnumerateAllTalentButtons then
         return hideAllMarks()
     end
     if InCombatLockdown and InCombatLockdown() then
@@ -639,7 +646,8 @@ function T.PositionPanel()
     local panel = T.panel
     if not panel then return end
     local _, hostFrame = getBlizzardTalentFrame()
-    if hostFrame and hostFrame:IsShown() and not panel.userDragged then
+    if panel.userDragged then return end
+    if talentTreeVisible() then
         panel:ClearAllPoints()
         local rightEdge = hostFrame:GetRight() or 0
         local screenW = UIParent and UIParent.GetWidth and UIParent:GetWidth() or 1920
@@ -648,6 +656,9 @@ function T.PositionPanel()
         else
             panel:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -24, -80)
         end
+    else
+        panel:ClearAllPoints()
+        panel:SetPoint("CENTER", UIParent, "CENTER", 260, 20)
     end
 end
 
@@ -1260,6 +1271,8 @@ function T.TogglePanel(forceShow, tab)
         panel:Show()
     end
     if panel:IsShown() then
+        panel.standaloneOpen = not talentTreeVisible()
+        if panel.Raise then panel:Raise() end
         T.Refresh()
     end
 end
@@ -1268,100 +1281,92 @@ end
 -- Hooks for pressing 'N' / Opening the Talent Frame / Class Trainer
 ---------------------------------------------------------------------------
 
-local attachedFrames = {}
+local evFrame = CreateFrame("Frame")
+local attachedFrames, hookedFunctions = {}, {}
+local treeOpen, sawClose, bindingPressed, syncPending = false, false, false, false
+local registeredEvents
+
+-- Opening talents can load the Blizzard UI, change tabs, and run nested
+-- secure hooks on one keypress. Apply the resulting state once, after layout.
+local function syncTalentPanel()
+    evFrame:SetScript("OnUpdate", nil)
+    local pressed, closed = bindingPressed, sawClose
+    syncPending, bindingPressed, sawClose = false, false, false
+    local panel = T.panel
+    if talentTreeVisible() then
+        if pressed or not (panel and panel.closedByUser) then
+            if not panel or not panel:IsShown() or panel.standaloneOpen then T.TogglePanel(true) end
+        end
+    elseif pressed and (not closed or (panel and (panel.closedByUser or panel.standaloneOpen))) then
+        -- Below the talent unlock level N still toggles the standalone guide.
+        -- N after dismissing just our guide with X can also recover it here.
+        T.TogglePanel()
+    elseif closed and panel and not panel.standaloneOpen then
+        panel:Hide()
+        panel.closedByUser = false
+    end
+end
+
+local function queueTalentSync()
+    if syncPending then return end
+    syncPending = true
+    evFrame:SetScript("OnUpdate", syncTalentPanel)
+end
+
+local function treeShown()
+    if not talentTreeVisible() then return end
+    if not treeOpen and T.panel then T.panel.closedByUser = false end
+    treeOpen = true
+    queueTalentSync()
+end
+
+local function treeHidden()
+    if not treeOpen then return end
+    treeOpen, sawClose = false, true
+    hideAllMarks()
+    queueTalentSync()
+end
 
 local function attachToBlizzardFrame()
-    local tf, hostFrame = getBlizzardTalentFrame()
-    if tf and not attachedFrames[tf] then
-        attachedFrames[tf] = true
-        if tf.HookScript then
-            tf:HookScript("OnShow", function()
-                T._justClosedByBlizzard = false
-                local panel = T.CreatePanel()
-                panel.standaloneOpen = false
-                panel.closedByUser = false
-                panel:Show()
-                T.Refresh()
-            end)
-            tf:HookScript("OnHide", function()
-                T._justClosedByBlizzard = true
-                T._closedAt = type(GetTime) == "function" and GetTime() or 0
-                hideAllMarks()
-                if T.panel and not T.panel.standaloneOpen then
-                    T.panel:Hide()
-                end
-            end)
-        end
-        if EventRegistry and EventRegistry.RegisterCallback then
-            safe(EventRegistry.RegisterCallback, EventRegistry, "TalentFrameBase.ButtonsUpdated", function() T.Refresh() end, T)
-            safe(EventRegistry.RegisterCallback, EventRegistry, "TalentFrameBase.ConfigUpdated", function() T.Refresh() end, T)
-            safe(EventRegistry.RegisterCallback, EventRegistry, "PlayerSpellsFrame.TalentTab.Show", function()
-                local panel = T.CreatePanel()
-                panel.standaloneOpen = false
-                panel.closedByUser = false
-                panel:Show()
-                T.Refresh()
-            end, T)
-        end
+    local tree, host = getBlizzardTalentFrame()
+    if not tree then return end
+    local function attach(frame)
+        if attachedFrames[frame] or not frame.HookScript then return end
+        attachedFrames[frame] = true
+        frame:HookScript("OnShow", treeShown)
+        frame:HookScript("OnHide", treeHidden)
     end
-    if hostFrame and hostFrame ~= tf and not attachedFrames[hostFrame] then
-        attachedFrames[hostFrame] = true
-        if hostFrame.HookScript then
-            hostFrame:HookScript("OnHide", function()
-                T._justClosedByBlizzard = true
-                T._closedAt = type(GetTime) == "function" and GetTime() or 0
-                hideAllMarks()
-                if T.panel and not T.panel.standaloneOpen then
-                    T.panel:Hide()
-                end
-            end)
-        end
+    attach(tree)
+    if host ~= tree then attach(host) end
+    if not treeOpen and talentTreeVisible() then treeShown() end
+    if EventRegistry and EventRegistry.RegisterCallback and registeredEvents ~= EventRegistry then
+        registeredEvents = EventRegistry
+        safe(EventRegistry.RegisterCallback, EventRegistry, "TalentFrameBase.ButtonsUpdated", T.Refresh, T)
+        safe(EventRegistry.RegisterCallback, EventRegistry, "TalentFrameBase.ConfigUpdated", T.Refresh, T)
+        safe(EventRegistry.RegisterCallback, EventRegistry, "PlayerSpellsFrame.TalentTab.Show", treeShown, T)
     end
 end
 
 local function onTalentKeyTriggered()
     attachToBlizzardFrame()
-    local now = type(GetTime) == "function" and GetTime() or 0
-    if T._justClosedByBlizzard and T._closedAt == now then
-        T._justClosedByBlizzard = false
-        return
-    end
-    T._justClosedByBlizzard = false
-    local tf, host = getBlizzardTalentFrame()
-    if (tf and tf:IsShown()) or (host and host:IsShown()) then
-        local panel = T.CreatePanel()
-        panel.standaloneOpen = false
-        panel.closedByUser = false
-        panel:Show()
-        T.Refresh()
-    else
-        -- Even if character is under level 10 and Blizzard didn't open TalentFrame, toggle our Talent Guide on N!
-        local panel = T.CreatePanel()
-        panel.standaloneOpen = not panel:IsShown()
-        T.TogglePanel()
-    end
+    bindingPressed = true
+    queueTalentSync()
 end
 
-local hookedToggles = false
 local function hookTalentKeybindFunctions()
-    if hookedToggles then return end
-    hookedToggles = true
-    if type(hooksecurefunc) == "function" then
-        if type(_G.ToggleTalentFrame) == "function" then
-            hooksecurefunc("ToggleTalentFrame", onTalentKeyTriggered)
-        end
-        if type(_G.PlayerSpellsUtil) == "table" then
-            if type(_G.PlayerSpellsUtil.ToggleClassTalentOrSpecFrame) == "function" then
-                hooksecurefunc(_G.PlayerSpellsUtil, "ToggleClassTalentOrSpecFrame", onTalentKeyTriggered)
-            end
-            if type(_G.PlayerSpellsUtil.OpenToClassTalentsTab) == "function" then
-                hooksecurefunc(_G.PlayerSpellsUtil, "OpenToClassTalentsTab", onTalentKeyTriggered)
-            end
-        end
+    if type(hooksecurefunc) ~= "function" then return end
+    local function hook(owner, key, callback)
+        if not owner or type(owner[key]) ~= "function" then return end
+        local installed = hookedFunctions[owner]
+        if not installed then installed = {}; hookedFunctions[owner] = installed end
+        if installed[key] == owner[key] then return end
+        if owner == _G then hooksecurefunc(key, callback) else hooksecurefunc(owner, key, callback) end
+        installed[key] = owner[key]
     end
+    hook(_G, "ToggleTalentFrame", onTalentKeyTriggered)
+    hook(PlayerSpellsUtil, "ToggleClassTalentOrSpecFrame", onTalentKeyTriggered)
+    hook(PlayerSpellsUtil, "OpenToClassTalentsTab", treeShown)
 end
-
-local evFrame = CreateFrame("Frame")
 for _, ev in ipairs({
     "PLAYER_LOGIN",
     "ADDON_LOADED",
@@ -1385,9 +1390,11 @@ evFrame:SetScript("OnEvent", function(_, event, arg1, arg2)
         hookTalentKeybindFunctions()
         attachToBlizzardFrame()
         T.Refresh()
-    elseif event == "ADDON_LOADED" and (arg1 == "Blizzard_PlayerSpells" or arg1 == "Blizzard_TalentUI") then
-        attachToBlizzardFrame()
-        T.Refresh()
+    elseif event == "ADDON_LOADED" then
+        if arg1 == ADDON or arg1 == "Blizzard_FrameXMLUtil" or arg1 == "Blizzard_PlayerSpells" or arg1 == "Blizzard_TalentUI" then
+            hookTalentKeybindFunctions()
+            attachToBlizzardFrame()
+        end
     elseif event == "QUEST_ACCEPTED" or event == "QUEST_TURNED_IN" or event == "QUEST_WATCH_UPDATE" then
         local questID = event == "QUEST_ACCEPTED" and (arg2 or arg1) or arg1
         if (questID == 1599 or questID == 179) and T.panel and T.panel:IsShown() then T.RenderPanel() end

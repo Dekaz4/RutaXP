@@ -613,6 +613,170 @@ class TalentCatalogRegressionTests(unittest.TestCase):
         self.assertEqual(builds, 36)
 
 
+class TalentWindowBindingTests(unittest.TestCase):
+    def setUp(self):
+        self.h = TalentTrainerHost(talent_module=True, journey=True)
+        self.h.lua.execute("""
+            local timers = {}
+            C_Timer = {After = function(_, fn) timers[#timers + 1] = fn end}
+            function TestNextFrame()
+                TEST.now = TEST.now + .02
+                local current = timers
+                timers = {}
+                for _, fn in ipairs(current) do fn() end
+                for _, frame in ipairs(TEST.eventFrames) do
+                    if frame:IsShown() and frame.scripts.OnUpdate then
+                        frame.scripts.OnUpdate(frame, .02)
+                    end
+                end
+            end
+            function hooksecurefunc(owner, key, after)
+                if type(owner) == "string" then owner, key, after = _G, owner, key end
+                local original = assert(owner[key])
+                owner[key] = function(...)
+                    local result = original(...)
+                    after(...)
+                    return result
+                end
+            end
+            local methods = getmetatable(UIParent).__index
+            function methods:IsVisible() return self:IsShown() end
+            local originalCreateFrame = CreateFrame
+            function CreateFrame(kind, name, parent, template)
+                local frame = originalCreateFrame(kind, name, parent, template)
+                if template == "UIPanelCloseButton" then TEST.closeGuide = frame end
+                return frame
+            end
+            function TestLoadTalentAPI()
+                function ToggleTalentFrame()
+                    PlayerSpellsUtil.ToggleClassTalentOrSpecFrame()
+                end
+                PlayerSpellsUtil = {
+                    ToggleClassTalentOrSpecFrame = function()
+                        if not PlayerTalentFrame or UnitLevel("player") < 10 then return end
+                        local frame = PlayerTalentFrame
+                        if frame:IsShown() then frame:Hide() else frame:Show() end
+                        local handler = frame.scripts[frame:IsShown() and "OnShow" or "OnHide"]
+                        if handler then handler(frame) end
+                    end
+                }
+            end
+            function TestLoadModernTalentUI()
+                local host, tree = CreateFrame(), CreateFrame()
+                PlayerSpellsFrame, host.TalentsFrame = host, tree
+                host:Hide()
+                tree:Hide()
+                function tree:IsVisible() return self:IsShown() and host:IsShown() end
+                local function setVisible(frame, before, after)
+                    if before ~= after then
+                        local handler = frame.scripts[after and "OnShow" or "OnHide"]
+                        if handler then handler(frame) end
+                    end
+                end
+                local function showTab(open, talents)
+                    local hostBefore, treeBefore = host:IsVisible(), tree:IsVisible()
+                    host:SetShown(open)
+                    tree:SetShown(talents)
+                    setVisible(host, hostBefore, host:IsVisible())
+                    setVisible(tree, treeBefore, tree:IsVisible())
+                end
+                function TestOpenSpellbook() showTab(true, false) end
+                function TestCloseNative() showTab(false, tree:IsShown()) end
+                PlayerSpellsUtil = {
+                    ToggleClassTalentOrSpecFrame = function()
+                        if UnitLevel("player") >= 10 then showTab(not tree:IsVisible(), true) end
+                    end
+                }
+            end
+        """)
+        self.h.g.EmitAddonEvent("ADDON_LOADED", "RutaXP")
+
+    def guide_shown(self):
+        panel = self.h.t.panel
+        return panel is not None and panel.IsShown(panel)
+
+    def press_n(self):
+        self.h.g.ToggleTalentFrame()
+        self.h.g.TestNextFrame()
+
+    def test_retries_binding_hooks_when_talents_load_after_login(self):
+        self.h.state.level = 8
+        self.h.g.EmitAddonEvent("PLAYER_LOGIN")
+        self.h.g.TestLoadTalentAPI()
+        self.h.g.EmitAddonEvent("ADDON_LOADED", "Blizzard_PlayerSpells")
+        self.h.g.EmitAddonEvent("ADDON_LOADED", "Blizzard_TalentUI")
+        self.h.g.TestNextFrame()
+        self.assertFalse(self.guide_shown())
+        for visible in (True, False, True):
+            self.press_n()
+            self.assertEqual(self.guide_shown(), visible)
+
+    def test_nested_toggle_callbacks_leave_the_guide_closed_with_the_native_tree(self):
+        self.h.g.TestLoadTalentAPI()
+        self.h.lua.execute("PlayerTalentFrame = CreateFrame(); PlayerTalentFrame:Hide()")
+        self.h.g.EmitAddonEvent("PLAYER_LOGIN")
+        self.h.g.TestNextFrame()
+        for visible in (True, False, True, False):
+            self.press_n()
+            self.assertEqual(self.h.g.PlayerTalentFrame.shown, visible)
+            self.assertEqual(self.guide_shown(), visible)
+
+    def test_attaching_to_an_already_visible_tree_shows_the_guide_on_first_open(self):
+        self.h.g.EmitAddonEvent("PLAYER_LOGIN")
+        self.h.lua.execute("PlayerTalentFrame = CreateFrame(); PlayerTalentFrame:Show()")
+        self.h.g.EmitAddonEvent("ADDON_LOADED", "Blizzard_TalentUI")
+        self.h.g.TestNextFrame()
+        self.assertTrue(self.guide_shown())
+
+    def test_native_binding_follows_visible_talent_tab_through_spellbook_and_reopen(self):
+        self.h.g.TestLoadModernTalentUI()
+        self.h.g.EmitAddonEvent("PLAYER_LOGIN")
+        self.h.g.TestOpenSpellbook()
+        self.h.g.TestNextFrame()
+        self.assertFalse(self.guide_shown())
+        tree = self.h.g.PlayerSpellsFrame.TalentsFrame
+        for visible in (True, False, True):
+            self.h.g.PlayerSpellsUtil.ToggleClassTalentOrSpecFrame()
+            self.h.g.TestNextFrame()
+            self.assertTrue(tree.IsShown(tree))
+            self.assertEqual(tree.IsVisible(tree), visible)
+            self.assertEqual(self.guide_shown(), visible)
+        self.h.g.TestOpenSpellbook()
+        self.h.g.TestNextFrame()
+        self.assertFalse(self.guide_shown())
+
+    def test_locked_talent_tab_toggles_guide_while_spellbook_is_open(self):
+        self.h.state.level = 8
+        self.h.g.TestLoadModernTalentUI()
+        self.h.g.EmitAddonEvent("PLAYER_LOGIN")
+        self.h.g.TestOpenSpellbook()
+        self.h.g.TestNextFrame()
+        for visible in (True, False, True):
+            self.h.g.PlayerSpellsUtil.ToggleClassTalentOrSpecFrame()
+            self.h.g.TestNextFrame()
+            self.assertEqual(self.guide_shown(), visible)
+            self.assertTrue(self.h.g.PlayerSpellsFrame.shown)
+
+    def test_n_recovers_the_guide_after_its_own_close_button_but_escape_keeps_it_closed(self):
+        self.h.g.TestLoadModernTalentUI()
+        self.h.g.EmitAddonEvent("PLAYER_LOGIN")
+        press = self.h.g.PlayerSpellsUtil.ToggleClassTalentOrSpecFrame
+        for dismiss_with_key in (False, True):
+            press()
+            self.h.g.TestNextFrame()
+            self.assertTrue(self.guide_shown())
+            self.h.g.Click(self.h.state.closeGuide)
+            self.assertFalse(self.guide_shown())
+            self.assertTrue(self.h.g.PlayerSpellsFrame.shown)
+            if dismiss_with_key:
+                press()
+            else:
+                self.h.g.TestCloseNative()
+            self.h.g.TestNextFrame()
+            self.assertFalse(self.h.g.PlayerSpellsFrame.shown)
+            self.assertEqual(self.guide_shown(), dismiss_with_key)
+
+
 class TalentModuleIntegrationTests(unittest.TestCase):
     def test_talent_panel_matches_journey_cards_in_both_distributions(self):
         for journey, emblem in [
