@@ -1,0 +1,40 @@
+name: RutaXP 1.2.15 Windows QA
+on:
+  push:
+    branches:
+      - 'codex/qa-1-2-15-win-c5cc12fc'
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-2022
+    timeout-minutes: 55
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install build and test dependencies
+        run: python -m pip install lupa Pillow PyInstaller==6.13.0
+      - name: Build the public release
+        run: python -B tools/build_release.py
+      - name: Verify and expand the original Journey HUD for native UI tests
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $archive = Join-Path $env:RUNNER_TEMP 'Journey-4.00.13.zip'
+          $target = Join-Path $env:RUNNER_TEMP 'native-journey'
+          curl.exe --fail --location --retry 3 --silent --show-error --output "$archive" 'https://edge.forgecdn.net/files/9707/278/Journey-4.00.13.zip'
+          if ($LASTEXITCODE -ne 0) { throw "Journey download failed" }
+          if ((Get-FileHash -Algorithm SHA256 -LiteralPath $archive).Hash -ne 'ac03e7a1e02ba8c029d42e5c8da206f5c12d5db01ee02aaecc056293ac68281d') { throw "Invalid Journey ZIP" }
+          Expand-Archive -LiteralPath $archive -DestinationPath $target
+          $journey = Join-Path $target Journey
+          if (!(Test-Path -LiteralPath (Join-Path $journey Journey.toc))) { throw "Missing native Journey source" }
+          "RUTAXP_JOURNEY=$journey" >> $env:GITHUB_ENV
+      - name: Run full unit and Windows integration suite
+        run: python -B -m unittest discover -s tests
