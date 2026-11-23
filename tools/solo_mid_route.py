@@ -33,9 +33,35 @@ HAND_IN_ITEMS = {
 }
 
 
+def apply_singing_blue_shards(guide):
+    """Use the level 34–35 basilisk camps shared by both Stranglethorn chapters."""
+    for step in guide["steps"]:
+        for goal in step["goals"]:
+            if goal.get("quest") != 605 or goal["t"] not in ("collect", "turnin"):
+                continue
+            goal["collectThenDeliver"] = True
+            if goal["t"] == "turnin":
+                continue
+            # Forever QuestDB/Npcs.lua, NPC 689, map 1434 in Era coordinates.
+            # Item 3918 also drops from stronger basilisks further south.
+            goal.update({
+                "from": "Basilisco Espina de Cristal", "fromKind": "npc",
+                "map": 1434, "f": "e", "x": 24.2, "y": 17.5,
+                "spots": [{"x": 24.2, "y": 17.5, "r": 74}, {"x": 26.7, "y": 18.3, "r": 31}],
+                "note": "Derrota basiliscos Espina de Cristal en la costa noroeste y recoge sus fragmentos.",
+            })
+            if guide["id"].startswith(ALLIANCE):
+                step.update(title="Basiliscos de la costa noroeste", note=goal["note"])
+            else:
+                step.update(title="Basiliscos y aldea Sangrapellejo",
+                            note="Recoge fragmentos de los basiliscos en la costa noroeste y orejas de los trols en la aldea cercana.")
+
+
 def apply_mid_detours(document):
     """Mark reviewed objectives in place without moving or completing any action."""
     for guide in document["guides"]:
+        if guide["id"] in (ALLIANCE + "30-40/04-stranglethorn-vale", "forever/horde/30-40/02-stranglethorn-vale"):
+            apply_singing_blue_shards(guide)
         chapter = guide["id"].removeprefix(ALLIANCE)
         if chapter not in DETOURS:
             continue

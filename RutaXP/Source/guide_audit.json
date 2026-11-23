@@ -585,7 +585,7 @@
     "goals": 7457,
     "direct": 6594,
     "generated_instruction": 7457,
-    "missing_goal_note_text": 3657,
+    "missing_goal_note_text": 3656,
     "missing": 267,
     "no_fixed_point_expected": 279,
     "empty_authored_subtitle": 810,
@@ -622,7 +622,7 @@
       "goals": 1106,
       "direct": 1106,
       "generated_instruction": 1106,
-      "missing_goal_note_text": 591
+      "missing_goal_note_text": 590
     },
     "complete": {
       "goals": 239,
@@ -4534,7 +4534,7 @@
         "generated_instruction": 141,
         "empty_authored_subtitle": 10,
         "candidates": 11,
-        "missing_goal_note_text": 93,
+        "missing_goal_note_text": 92,
         "missing": 6,
         "no_fixed_point_expected": 6
       },
@@ -4552,7 +4552,7 @@
           "goals": 45,
           "direct": 45,
           "generated_instruction": 45,
-          "missing_goal_note_text": 45
+          "missing_goal_note_text": 44
         },
         "complete": {
           "goals": 1,

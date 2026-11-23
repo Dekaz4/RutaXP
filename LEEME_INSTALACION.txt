@@ -1,4 +1,4 @@
-RUTAXP 1.2.15 PARA WOW FOREVER
+RUTAXP 1.2.16 PARA WOW FOREVER
 
 1. Cierra WoW y abre tu Instalador_RutaXP.exe de siempre.
 2. Pulsa 1. El instalador usa tu cliente guardado o lo detecta si hay uno solo.

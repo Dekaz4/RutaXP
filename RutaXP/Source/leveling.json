@@ -628,6 +628,7 @@
       "chainStarted": 15,
       "class": 116,
       "closedBy": 159,
+      "collectThenDeliver": 4,
       "count": 1201,
       "departure": 2,
       "departureLand": 2,
@@ -637,10 +638,10 @@
       "detourOnly": 14,
       "detourQuest": 25,
       "f": 5522,
-      "from": 741,
+      "from": 743,
       "fromAlso": 97,
       "fromFaction": 11,
-      "fromKind": 739,
+      "fromKind": 741,
       "fromRank": 17,
       "group": 9,
       "groupVisitFor": 1,
@@ -658,7 +659,7 @@
       "navigationHint": 434,
       "navigationMode": 14,
       "node": 76,
-      "note": 3595,
+      "note": 3596,
       "npc": 4989,
       "npcName": 4378,
       "objName": 306,
@@ -111529,12 +111530,12 @@
           ]
         },
         {
-          "title": "Mina de Cristal",
-          "note": "Camina hacial norte; el Mina de Cristal se encuentra al oeste de la carretera en medio de la selva. El Crystal Spine Basilisks allí soltar los fragmentos.",
+          "title": "Basiliscos de la costa noroeste",
+          "note": "Derrota basiliscos Espina de Cristal en la costa noroeste y recoge sus fragmentos.",
           "goals": [
             {
               "title": "Fragmentos de cristales canto azules",
-              "note": "Fragmento de cristal canto",
+              "note": "Derrota basiliscos Espina de Cristal en la costa noroeste y recoge sus fragmentos.",
               "t": "collect",
               "quest": 605,
               "oi": 1,
@@ -111542,127 +111543,26 @@
               "itemName": "Fragmento de cristal canto",
               "count": 10,
               "map": 1434,
-              "x": 39.08,
-              "y": 52.02,
+              "x": 24.2,
+              "y": 17.5,
               "f": "e",
               "spots": [
                 {
-                  "x": 38.7,
-                  "y": 50.5,
-                  "r": 70,
-                  "n": 5
-                },
-                {
-                  "x": 38.8,
-                  "y": 44.9,
-                  "r": 46,
-                  "n": 1
-                },
-                {
-                  "x": 37.7,
-                  "y": 40.3,
-                  "r": 46,
-                  "n": 2
-                },
-                {
-                  "x": 35.5,
-                  "y": 39.4,
-                  "r": 46,
-                  "n": 1
-                },
-                {
-                  "x": 29.1,
-                  "y": 38.5,
-                  "r": 71,
-                  "n": 4
-                },
-                {
-                  "x": 28.1,
-                  "y": 41.6,
-                  "r": 53,
-                  "n": 4
+                  "x": 24.2,
+                  "y": 17.5,
+                  "r": 74
                 },
                 {
                   "x": 26.7,
                   "y": 18.3,
-                  "r": 46,
-                  "n": 2
-                },
-                {
-                  "x": 24.2,
-                  "y": 17.5,
-                  "r": 74,
-                  "n": 6
-                },
-                {
-                  "x": 30.8,
-                  "y": 2.4,
-                  "r": 46,
-                  "n": 1
-                },
-                {
-                  "x": 36.1,
-                  "y": 7.5,
-                  "r": 46,
-                  "n": 2
-                },
-                {
-                  "x": 47.3,
-                  "y": 6.1,
-                  "r": 48,
-                  "n": 3
-                },
-                {
-                  "x": 48.7,
-                  "y": 9.3,
-                  "r": 59,
-                  "n": 4
-                },
-                {
-                  "x": 40.7,
-                  "y": 51.7,
-                  "r": 46,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 40.7,
-                  "y": 50,
-                  "r": 59,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 39.3,
-                  "y": 47.1,
-                  "r": 46,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 36.3,
-                  "y": 42.3,
-                  "r": 55,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 31.1,
-                  "y": 37.2,
-                  "r": 46,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 34.2,
-                  "y": 6.6,
-                  "r": 46,
-                  "alt": true,
-                  "n": 2
+                  "r": 31
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Fragmento de cristal canto» (10 en total).\nZona: Vega de Tuercespina."
+              "instruction": "Recoge «Fragmento de cristal canto» (10 en total) del botín de «Basilisco Espina de Cristal».\nZona: Vega de Tuercespina.\nDerrota basiliscos Espina de Cristal en la costa noroeste y recoge sus fragmentos.",
+              "collectThenDeliver": true,
+              "from": "Basilisco Espina de Cristal",
+              "fromKind": "npc"
             }
           ]
         },
@@ -111974,7 +111874,8 @@
               "y": 77.21,
               "z": 15.2,
               "f": "e",
-              "instruction": "Habla con «Loquillo Pinchabujas» y entrega «Fragmentos de cristales canto azules».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Loquillo Pinchabujas» y entrega «Fragmentos de cristales canto azules».\nZona: Vega de Tuercespina.",
+              "collectThenDeliver": true
             },
             {
               "title": "Investiga el campamento",
@@ -296422,8 +296323,8 @@
           ]
         },
         {
-          "title": "Basilisks y la aldea de Bloodscalp",
-          "note": "Al oeste, más allá del campamento, Crystal Spine Basilisks (34-35) se sienta en las rocas; cada Bloodscalp en el pueblo más allá puede caer una oreja.",
+          "title": "Basiliscos y aldea Sangrapellejo",
+          "note": "Recoge fragmentos de los basiliscos en la costa noroeste y orejas de los trols en la aldea cercana.",
           "goals": [
             {
               "title": "Fragmentos de cristales canto azules",
@@ -296434,127 +296335,27 @@
               "itemName": "Fragmento de cristal canto",
               "count": 10,
               "map": 1434,
-              "x": 36.6,
-              "y": 8.27,
+              "x": 24.2,
+              "y": 17.5,
               "f": "e",
               "spots": [
                 {
-                  "x": 36.1,
-                  "y": 7.5,
-                  "r": 46,
-                  "n": 2
-                },
-                {
-                  "x": 30.8,
-                  "y": 2.4,
-                  "r": 46,
-                  "n": 1
+                  "x": 24.2,
+                  "y": 17.5,
+                  "r": 74
                 },
                 {
                   "x": 26.7,
                   "y": 18.3,
-                  "r": 46,
-                  "n": 2
-                },
-                {
-                  "x": 24.2,
-                  "y": 17.5,
-                  "r": 74,
-                  "n": 6
-                },
-                {
-                  "x": 29.1,
-                  "y": 38.5,
-                  "r": 71,
-                  "n": 4
-                },
-                {
-                  "x": 28.1,
-                  "y": 41.6,
-                  "r": 53,
-                  "n": 4
-                },
-                {
-                  "x": 35.5,
-                  "y": 39.4,
-                  "r": 46,
-                  "n": 1
-                },
-                {
-                  "x": 37.7,
-                  "y": 40.3,
-                  "r": 46,
-                  "n": 2
-                },
-                {
-                  "x": 39.3,
-                  "y": 47.1,
-                  "r": 46,
-                  "n": 1
-                },
-                {
-                  "x": 40.7,
-                  "y": 51.7,
-                  "r": 46,
-                  "n": 2
-                },
-                {
-                  "x": 48.7,
-                  "y": 9.3,
-                  "r": 59,
-                  "n": 4
-                },
-                {
-                  "x": 47.3,
-                  "y": 6.1,
-                  "r": 48,
-                  "n": 3
-                },
-                {
-                  "x": 34.2,
-                  "y": 6.6,
-                  "r": 46,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 31.1,
-                  "y": 37.2,
-                  "r": 46,
-                  "alt": true,
-                  "n": 2
-                },
-                {
-                  "x": 36.3,
-                  "y": 42.3,
-                  "r": 55,
-                  "alt": true,
-                  "n": 6
-                },
-                {
-                  "x": 38.8,
-                  "y": 44.9,
-                  "r": 46,
-                  "alt": true,
-                  "n": 1
-                },
-                {
-                  "x": 40.7,
-                  "y": 50,
-                  "r": 59,
-                  "alt": true,
-                  "n": 4
-                },
-                {
-                  "x": 38.7,
-                  "y": 50.5,
-                  "r": 70,
-                  "alt": true,
-                  "n": 5
+                  "r": 31
                 }
               ],
               "spread": true,
-              "instruction": "Reúne «Fragmento de cristal canto» (10 en total).\nZona: Vega de Tuercespina."
+              "instruction": "Recoge «Fragmento de cristal canto» (10 en total) del botín de «Basilisco Espina de Cristal».\nZona: Vega de Tuercespina.\nDerrota basiliscos Espina de Cristal en la costa noroeste y recoge sus fragmentos.",
+              "collectThenDeliver": true,
+              "from": "Basilisco Espina de Cristal",
+              "fromKind": "npc",
+              "note": "Derrota basiliscos Espina de Cristal en la costa noroeste y recoge sus fragmentos."
             },
             {
               "title": "Orejas de Sangrapellejo",
@@ -296906,7 +296707,8 @@
               "y": 77.21,
               "z": 15.2,
               "f": "e",
-              "instruction": "Habla con «Loquillo Pinchabujas» y entrega «Fragmentos de cristales canto azules».\nZona: Vega de Tuercespina."
+              "instruction": "Habla con «Loquillo Pinchabujas» y entrega «Fragmentos de cristales canto azules».\nZona: Vega de Tuercespina.",
+              "collectThenDeliver": true
             },
             {
               "title": "Investiga el campamento",

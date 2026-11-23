@@ -73,7 +73,13 @@ function ns:GetMapQuestPoints(mapID)
             q = {active=active, ready=active and read(C_QuestLog and C_QuestLog.IsComplete, id) == true}
             journal[id] = q
         end
-        local category
+        local category, status
+        local ready = q.ready
+        if goal.collectThenDeliver and q.active then
+            goal, status = self:GetActionableGoal(goal, step, state, gi, guide)
+            action = goal.t
+            ready = action == "turnin"
+        end
         if action == "accept" then
             -- Only show pickups scheduled now or approved for the next visit.
             if q.active or si ~= cursor and not (si == cursor+1 and goal.npc and self.GetPlannedPickupAtNPC
@@ -81,13 +87,13 @@ function ns:GetMapQuestPoints(mapID)
             category = "accept"
         elseif not q.active then return
         elseif action == "turnin" then
-            if not q.ready then return end
+            if not ready then return end
             category = "turnin"
         else
-            if q.ready then return end
+            if ready then return end
             category = "objective"
         end
-        if self:GetGoalStatus(goal, step, state, gi, guide) ~= "active" then return end
+        if (status or self:GetGoalStatus(goal, step, state, gi, guide)) ~= "active" then return end
         local detail = goal.npcName or goal.objName or goal.objectName or goal.target or goal.itemName
         if goal.waypoint or goal.x and goal.y then
             add(goal.waypoint or goal, goal, id, category, detail)

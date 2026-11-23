@@ -172,6 +172,11 @@ local function getGuideLayout(self, guide)
             if q and goal.title then cached.titles[q] = goal.title end
             if q and (authoredGroup(goal.group) or authoredGroup(step.group)) then cached.groupQuests[q] = true end
             local kind = goal.t or goal.action
+            if goal.collectThenDeliver and q then
+                cached.collections = cached.collections or {}
+                cached.collections[q] = cached.collections[q] or {}
+                cached.collections[q][kind] = goal
+            end
             if q and (kind == "collect" or kind == "kill" or kind == "complete" or kind == "objective"
                 or kind == "interact" or kind == "use") then
                 cached.work[q] = cached.work[q] or {}
@@ -428,6 +433,23 @@ local function questWorkReason(goal, id)
         return "Objetos reunidos"
     end
     return nil, complete == false
+end
+
+-- Both authored visits keep their own saved row. The live quest decides
+-- which of the two destinations is actionable, even after a manual skip
+-- on the other visit or a reload between the last loot and the hand-in.
+local function collectionPhase(pair, id)
+    local work = pair.collect
+    if read(C_QuestLog and C_QuestLog.IsComplete, id) == true or itemCount(work.item) >= work.count then
+        return pair.turnin
+    end
+    local objectives = read(C_QuestLog and C_QuestLog.GetQuestObjectives, id)
+    local objective = objectives and objectives[work.oi]
+    if objective then
+        local finished, count = read(function() return objective.finished, objective.numFulfilled end)
+        if finished == true or (finiteNumber(count) and count >= work.count) then return pair.turnin end
+    end
+    return work
 end
 
 local function questLabel(layout, id, fallback)
@@ -728,7 +750,9 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
         and self:IsTravelServiceComplete(guide, stepIndex, index) then return "done", "Llegada confirmada" end
     if id and self:IsQuestDelivered(id) then return "done", "Misión entregada" end
     local onQuest = id and self:IsQuestActive(id)
-    local workDone = id and action ~= "accept" and action ~= "turnin" and questWorkReason(goal, id)
+    local pair = goal.collectThenDeliver and layout and layout.collections and layout.collections[id]
+    local linked = onQuest and pair and pair.collect and pair.turnin
+    local workDone = not linked and id and action ~= "accept" and action ~= "turnin" and questWorkReason(goal, id)
     -- Actual acceptance/objective credit supersedes an earlier manual skip.
     if onQuest and action == "accept" then return "done", "Aceptada" end
     if onQuest and workDone then return "done", workDone end
@@ -825,6 +849,11 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
             end
             return "skip", "La misión no está en tu diario"
         end
+        if linked then
+            local phase = collectionPhase(pair, id)
+            local reason = phase == pair.turnin and "Entrega la misión al NPC" or "Reúne los objetos de la misión"
+            return "active", reason, nil, phase
+        end
         if action == "turnin" then
             local work = layout and layout.turninWork and layout.turninWork[id]
             if work and onQuest and work.s < stepIndex then
@@ -864,6 +893,13 @@ end
 
 -- During a town visit a solo player can hand in a ready quest
 -- to the NPC in front of them. Never pull an acceptance or an escort forward.
+-- Status belongs to the saved row. Its displayed action and navigation
+-- target may instead come from the other half of a collection and hand-in.
+function ns:GetActionableGoal(row, step, state, index, guide)
+    local status, reason, _, phase = self:GetGoalStatus(row, step, state, index, guide)
+    return phase or row, status, reason
+end
+
 local function readyAtContact(self, step, state, first)
     local char = self.char
     if not state or state.review or not char or char.auto ~= true or not char.activeGuide
@@ -896,8 +932,8 @@ function ns:GetActiveGoal(step, state)
         if not self:GetGroupDeferralReason(step, step) and not self:GetLevelingDetourReason(step) then return step, 1, "active" end
         return
     end
-    for index, goal in ipairs(step.goals) do
-        local status, reason = self:GetGoalStatus(goal, step, state, index)
+    for index, row in ipairs(step.goals) do
+        local goal, status, reason = self:GetActionableGoal(row, step, state, index)
         if status ~= "done" and status ~= "skip" then
             if status == "active" and (goal.t == "accept" or goal.t == "turnin") and index < #step.goals then
                 local nearby, row, ready, why = readyAtContact(self, step, state, index)
@@ -1273,8 +1309,8 @@ function ns:GetStepGoalItems(step, state)
     local pendingWorkByQuest = {}
     local groupRows = {}
 
-    for index, goal in ipairs(step.goals) do
-        local status, reason = self:GetGoalStatus(goal, step, state, index)
+    for index, row in ipairs(step.goals) do
+        local goal, status, reason = self:GetActionableGoal(row, step, state, index)
         local manualSkip = status == "skip" and reason and reason:find("Omitido manualmente", 1, true) == 1
         if status == "skip" and reason == self.eventOfferReason then
             items[#items+1] = {action="note", status="skip", isCurrent=false,
@@ -1340,7 +1376,7 @@ function ns:GetStepGoalItems(step, state)
                     subLines[#subLines + 1] = reason
                 end
 
-                local details = self:GetGoalInstruction(goal, index == currentIdx and step or nil)
+                local details = self:GetGoalInstruction(goal, index == currentIdx and goal == row and step or nil)
                 if index == currentIdx and status == "active" and (action == "accept" or action == "turnin")
                     and self.GetLevelingQuestRewardInfo then
                     local hint, rewards = self:GetLevelingQuestRewardInfo(id, action)
@@ -1391,8 +1427,8 @@ function ns:GetObjectives(step)
     local lines = {}
     local skippedDone = 0
     local groupRows = {}
-    for index, goal in ipairs(step.goals) do
-        local status, reason = self:GetGoalStatus(goal, step, state, index)
+    for index, row in ipairs(step.goals) do
+        local goal, status, reason = self:GetActionableGoal(row, step, state, index)
         local manualSkip = status == "skip" and reason and reason:find("Omitido manualmente", 1, true) == 1
         if status == "skip" and reason == self.eventOfferReason then
             lines[#lines+1] = "|cff9ba8b8[Opcional] " .. questLabel(nil, goal.quest or goal.questID, goal.title) .. " · " .. (goal.note or reason) .. "|r"
@@ -1431,7 +1467,7 @@ function ns:GetObjectives(step)
                             if objName then lines[#lines + 1] = "   |cffe6cfa8Interactúa: " .. objName .. "|r" end
                         end
                     end
-                    local note = self:GetGoalInstruction(goal, step)
+                    local note = self:GetGoalInstruction(goal, goal == row and step or nil)
                     if note then lines[#lines + 1] = "   |cff9fb0c7" .. note .. "|r" end
                     if status == "blocked" or status == "manual" then lines[#lines + 1] = "   |cffffb468" .. reason .. "|r" end
                     if goal.group then lines[#lines + 1] = "   |cffffb468Se recomienda grupo" .. (type(goal.group) == "number" and (" de " .. goal.group) or "") .. ".|r" end
@@ -1651,10 +1687,10 @@ local function currentQuestIndex(self, action, questID)
     local guide, step, state = self:GetCurrent()
     if not guide or not step or not state or state.review or not self:MatchesConditions(step.only) then return end
     -- Current, unblocked objectives always take priority in an NPC menu.
-    for index, goal in ipairs(step.goals or { step }) do
-        if (goal.t or goal.action) == action and (goal.quest or goal.questID) == questID
-            and self:GetGoalStatus(goal, step, state, index) == "active" then
-            return index
+    for index, row in ipairs(step.goals or { step }) do
+        if (row.quest or row.questID) == questID then
+            local goal, status = self:GetActionableGoal(row, step, state, index)
+            if (goal.t or goal.action) == action and status == "active" then return index end
         end
     end
 end

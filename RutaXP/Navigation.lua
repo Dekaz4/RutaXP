@@ -436,7 +436,7 @@ function ns:GetStepWaypoint(step, travel, mapRequest)
             goal = step.goals[index]
             if not goal then return nil end
             local guide, _, state = self:GetCurrent()
-            status, reason = self:GetGoalStatus(goal, step, state, index, guide)
+            goal, status, reason = self:GetActionableGoal(goal, step, state, index, guide)
         end
         if mapRequest then mapRequest.goal = goal end
         if status == "blocked" or (mapRequest and (not goal or status == "done" or status == "skip")) then
@@ -497,6 +497,9 @@ function ns:GetArrowWaypoint(step, travel)
         if point and self.char and self.RouteDestination and not travel and not point.boatNavigation and not point.flightNavigation then
             local guide,_,state = self:GetCurrent()
             local key = point.targetKey or table.concat({guide and guide.id or "", state and state.cursor or "", point.pointIndex or ""}, ":")
+            if not point.targetKey and point.goal and point.goal.collectThenDeliver then
+                key = key .. ":" .. point.goal.quest .. ":" .. point.goal.t
+            end
             point,view = self:RouteDestination(point,key,"chapter")
         end
     end
