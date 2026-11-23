@@ -17,12 +17,20 @@ else:
 
 
 MODULES = ("OpenMap", "ForeverDungeonJournal")
-# LF-normalized Leveling.lua from v0.7.36, split at the generated chapter headers.
-STRANGLETHORN = "forever/alliance/30-40/04-stranglethorn-vale"
-UNCHANGED_GUIDES_HASH = "75c618243da6c0946ec0d430987c67c0f59dca66f9d1d527cfc0e8f99761652e"
-ORIGINAL_STRANGLETHORN_HASH = "37e395001a0ec0eded431ae0fdb9f15dd9a787177163893bde5c6a9be6cca73c"
-# v1.2.6 uses revision 3, generated from the reviewed Yohwa and Thorsen overlay.
-REVISED_STRANGLETHORN_HASH = "982e6710802e5a845e2a4cc12ee62b3cb36d7c637bd529d0e666ad4e63d011df"
+# Hash the original v0.7.36 catalog with each reviewed chapter reduced to its
+# header, preserving chapter order. Pin each chapter body for its release.
+UNCHANGED_GUIDES_HASH = "bae747c9322376a17a280e10e0a7dd52d499c50bff7c218c5b57c5b3948273c0"
+CHAPTER_HASHES = {
+    "forever/alliance/30-40/04-stranglethorn-vale": (
+        ((1, 2, 16), "014155fe8bbf89da889316cf3aa1f60b8f2ea3eff7e0313fc1e96dfe5efa47ac"),  # Singing Blue Shards
+        ((1, 2, 6), "982e6710802e5a845e2a4cc12ee62b3cb36d7c637bd529d0e666ad4e63d011df"),  # Yohwa / Thorsen
+        ((0, 0, 0), "37e395001a0ec0eded431ae0fdb9f15dd9a787177163893bde5c6a9be6cca73c"),
+    ),
+    "forever/horde/30-40/02-stranglethorn-vale": (
+        ((1, 2, 16), "8d88d1fa8e65f334576bf45e38be70fdd2a5bff7f01316485544b7e81c431fa6"),  # Singing Blue Shards
+        ((0, 0, 0), "353f9815c674fc6acf7f48479a6caacc52c3f722ed034f2fc78277105cee972f"),
+    ),
+}
 ORIGINAL_ASSET = re.compile(r"Interface[/\\]+AddOns[/\\]+(?:OpenMap|ForeverDungeonJournal|RXPGuides)[/\\]", re.I)
 LITERAL_ASSET = re.compile(r"""["']Interface[/\\]+AddOns[/\\]+RutaXP[/\\]+(?P<asset>[^"'{}\n%]+?\.(?:tga|blp|ttf|otf|ogg|mp3|wav))["']""", re.I)
 ASSET_SUFFIXES = {".tga", ".blp", ".png", ".ttf", ".otf", ".ogg", ".mp3", ".wav", ".atlas"}
@@ -177,14 +185,17 @@ def verify_guides(tree, version):
     code = tree.read("Leveling.lua").replace("\r\n", "\n")
     if not re.fullmatch(r"\d+\.\d+\.\d+", version):
         raise ValueError("Invalid RutaXP suite version for guide verification")
-    chapter = chapter_block(code, STRANGLETHORN)
-    unchanged = code[:chapter.start()] + code[chapter.end():]
-    if hashlib.sha256(unchanged.encode("utf8")).hexdigest() != UNCHANGED_GUIDES_HASH:
-        raise ValueError("Guide catalog outside Alliance Stranglethorn differs from RutaXP v0.7.36")
     release = tuple(int(part) for part in version.split("."))
-    expected = REVISED_STRANGLETHORN_HASH if release >= (1, 2, 6) else ORIGINAL_STRANGLETHORN_HASH
-    if hashlib.sha256(chapter.group().encode("utf8")).hexdigest() != expected:
-        raise ValueError(f"Alliance Stranglethorn differs from RutaXP guides for suite {version}")
+    unchanged = code
+    for chapter_id, versions in CHAPTER_HASHES.items():
+        chapter = chapter_block(unchanged, chapter_id)
+        expected = next(digest for start, digest in versions if release >= start)
+        if hashlib.sha256(chapter.group().encode("utf8")).hexdigest() != expected:
+            faction = chapter_id.split("/")[1].title()
+            raise ValueError(f"{faction} Stranglethorn differs from RutaXP guides for suite {version}")
+        unchanged = unchanged[:chapter.start()] + f"-- {chapter_id}\n" + unchanged[chapter.end():]
+    if hashlib.sha256(unchanged.encode("utf8")).hexdigest() != UNCHANGED_GUIDES_HASH:
+        raise ValueError("Guide catalog outside the reviewed chapters differs from RutaXP v0.7.36")
     lua = LuaRuntime(register_eval=False, register_builtins=False)
     loader = lua.eval("""function(source)
         local counts, ids = {}, {}

@@ -1341,7 +1341,7 @@ La piel 4104 se entrega en Bahía del Botín y 577 carece de sucesor en la ruta.
 | 16.7 | Aceptar · Investiga el campamento (#201) | Krazek · desde nivel 28 · mapa 1434 · 26.95, 77.21 |
 | 16.8 | Aceptar · Orejas de Sangrapellejo (#189) | Kebok · desde nivel 30 · mapa 1434 · 27, 77.13 |
 | 16.9 | Vender · Down a Bahía del Botín | varios destinos o ubicaciones según objetivo |
-| 17.1 | Recoger · Fragmentos de cristales canto azules (#605) | Fragmento de cristal canto ×10 · mapa 1434 · 39.08, 52.02 |
+| 17.1 | Recoger · Fragmentos de cristales canto azules (#605) | Fragmento de cristal canto ×10 · Basilisco Espina de Cristal · mapa 1434 · 24.2, 17.5 |
 | 18.1 | Recoger · Orejas de Sangrapellejo (#189) | Oreja Sangrapellejo ×15 · mapa 1434 · 29.76, 21.62 |
 | 19.1 | Entregar · Domina el raptor (#195) | Hemet Decautela · mapa 1434 · 35.66, 10.81 |
 | 19.2 | Entregar · Domina el tigre (#188) | Ajeck Rouack · mapa 1434 · 35.62, 10.62 · fija · Guantes de cazador de tigre |
