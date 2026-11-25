@@ -1,6 +1,6 @@
 # RutaXP para WoW Forever
 
-RutaXP 1.2.17 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos, el selector de rutas, la brújula y el panel de talentos comparten el estilo de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
+RutaXP 1.2.18 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos, el selector de rutas, la brújula y el panel de talentos comparten el estilo de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
 
 ## Actualizar
 
@@ -26,6 +26,7 @@ Si ya tienes un paquete personal preparado, puedes instalarlo sin conexión con 
 | Elegir el capítulo recomendado para la zona, el nivel y el diario actuales | `/rutaxp zona` |
 | Consultar las opciones del dúo | `/rutaxp herramientas` |
 | Abrir el mapa de OpenMap | **M** o `/rutaxp mapa` |
+| Mostrar solo los puntos de interés de tu zona | **M → Filtros → Solo mi zona**. Se actualiza al cambiar de zona y se guarda por personaje. |
 | Abrir el diario de mazmorras | `/dj` o `/rutaxp mazmorras` |
 | Buscar grupo para una mazmorra | `/lfg` |
 | Ver las misiones de mazmorra y retomar una preparación aplazada | Pulsa la llave del minimapa, elige la mazmorra o el ala y revisa sus misiones. **Preparar mazmorra** o **Retomar preparación** dirige la brújula a la siguiente misión. También puedes usar `/rutaxp plan`. |
@@ -56,7 +57,7 @@ Desde la raíz del proyecto y con Python 3.10 o posterior, indica la carpeta de 
 
 ```powershell
 python tools/build_personal_suite.py --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
-python tools/verify_personal_suite.py dist/RutaXP-1.2.17-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
+python tools/verify_personal_suite.py dist/RutaXP-1.2.18-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
 ```
 
 Los créditos y las licencias se encuentran en [NOTICE.md](NOTICE.md) y en `RutaXP/Licenses`.

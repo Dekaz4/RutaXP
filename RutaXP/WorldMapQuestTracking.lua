@@ -89,7 +89,21 @@ function tracking.RefreshQuestOffers(ns, mod, map, getMaps, enterOffer)
         return
     end
     set = set or stitch.PinSet("rutaxp_service_lowLevelQuests", 0, 4)
-    local maps = getMaps()
+    local scope = tracking.GetAreaScope()
+    local maps, seenMaps = {}, {}
+    if scope and stitch.Rect(scope) then
+        maps[1], seenMaps[scope] = scope, true
+    end
+    for _, mapID in ipairs(getMaps()) do
+        if not seenMaps[mapID] and tracking.IsMapInArea(mapID, scope) then
+            maps[#maps + 1], seenMaps[mapID] = mapID, true
+        end
+    end
+    if #maps == 0 then
+        stitch.SetPinSetOn(set, false)
+        return
+    end
+    if scope ~= nil then stitch.SetPinSetOn(set, false) end
     local index, found = 1, {}
     local provider, view = offerProvider()
     local function readMore()

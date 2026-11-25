@@ -142,8 +142,10 @@ end
 
 local function services(view, faction, class)
     local seen = {}
+    local scope = tracking.GetAreaScope()
     for source, rows in pairs(ns.worldMapServiceData) do
-        for _, row in ipairs(rows) do
+        local inArea = tracking.IsMapInArea(source, scope)
+        for _, row in ipairs(inArea and rows or {}) do
             local info = tracking.Info(row[1])
             if info and info.active and (row[2] == faction or row[2] == "AH")
                 and (not row[6] or row[6] == class) then
@@ -172,17 +174,31 @@ local function services(view, faction, class)
     end
 end
 
-local function nativeFlights(enabled)
+local function flightInArea(node, scope)
+    return scope == nil or (node ~= nil and tracking.IsWorldPositionInArea(node[2], node[3], node[4], scope))
+end
+
+local function nativeFlights(enabled, mapID, scope)
     local shown = {}
     if map.EnumeratePinsByTemplate then
         for pin in map:EnumeratePinsByTemplate("FlightPointPinTemplate") do
             local poi = pin.poiInfo
             if poi and poi.nodeID then
-                if enabled == false and pin:IsShown() then
-                    pin:Hide()
-                    hiddenFlights[pin] = poi.nodeID
-                elseif enabled ~= false and hiddenFlights[pin] == poi.nodeID then pin:Show() end
-                if enabled ~= false then hiddenFlights[pin] = nil end
+                local visible = enabled ~= false
+                if visible and scope ~= nil then
+                    local x, y
+                    if pin.GetPosition then x, y = pin:GetPosition() end
+                    visible = tracking.IsPositionInArea(mapID, x, y, scope)
+                end
+                if not visible then
+                    if pin:IsShown() then
+                        pin:Hide()
+                        hiddenFlights[pin] = poi.nodeID
+                    end
+                else
+                    if hiddenFlights[pin] == poi.nodeID then pin:Show() end
+                    hiddenFlights[pin] = nil
+                end
                 if pin:IsShown() then shown[poi.nodeID] = true end
             end
         end
@@ -192,7 +208,8 @@ end
 
 local function flights(view, openMap, side, class)
     local info = tracking.Info("flight")
-    local occupied = nativeFlights(info and info.active)
+    local scope = tracking.GetAreaScope()
+    local occupied = nativeFlights(info and info.active, view.id, scope)
     if not info or not info.active then return end
     local factions = Enum and Enum.FlightPathFaction
     local opposite = factions and (side == "Alliance" and factions.Horde or factions.Alliance)
@@ -201,7 +218,7 @@ local function flights(view, openMap, side, class)
             for _, node in ipairs(C_TaxiMap.GetTaxiNodesForMap(source) or {}) do
                 if node.nodeID and not occupied[node.nodeID] and (not opposite or node.faction ~= opposite) then
                     local x, y = xy(node.position)
-                    if x and y then
+                    if x and y and tracking.IsPositionInArea(source, x, y, scope) then
                         x, y = project(view, source, x, y)
                         if x and y and x >= 0 and x <= 1 and y >= 0 and y <= 1 then
                             add(view, "flight", info, node.name, nil, x, y)
@@ -218,12 +235,40 @@ local function flights(view, openMap, side, class)
     for id, node in pairs(openMap and openMap.MapFlights and openMap.MapFlights.nodes or {}) do
         if not occupied[id] and (node[5] == factionBit or node[5] == 3) and (not node[6] or node[6] == class) then
             local source = continentMaps[node[2]]
-            if source then
+            if source and flightInArea(node, scope) then
                 local x, y = project(view, source, nil, nil, node[2], node[3], node[4])
                 add(view, "flight", info, node[1], nil, x, y)
             end
         end
     end
+end
+
+local function filterStitchedFlights(openMap, scope)
+    if scope == nil or not openMap.MapFlights then return end
+    local set = openMap.MapStitch.GetPinSet("flight")
+    if not set then return end
+    for _, pin in ipairs(set.pins) do
+        if pin:IsShown() and not flightInArea(openMap.MapFlights.nodes[pin.node], scope) then
+            pin:Hide()
+        end
+    end
+end
+
+local scopedModule, scopedArea, flightHookModule
+local function refreshEmbeddedFlights(openMap, mod)
+    if not openMap.MapFlights or not mod.RefreshFlightsFound then return end
+    if flightHookModule ~= mod and hooksecurefunc then
+        flightHookModule = mod
+        hooksecurefunc(mod, "RefreshFlightsFound", function()
+            filterStitchedFlights(openMap, tracking.GetAreaScope())
+        end)
+    end
+    local scope = tracking.GetAreaScope()
+    local restore = scopedModule == mod and scopedArea ~= nil and scopedArea ~= scope
+    scopedModule, scopedArea = mod, scope
+    -- Ask OpenMap to reapply its own visibility before narrowing a new area.
+    if restore then mod.RefreshFlightsFound() end
+    filterStitchedFlights(openMap, scope)
 end
 
 local external, externalOffersDirty, hookedModule = nil, true, nil
@@ -248,8 +293,11 @@ local function syncExternal(openMap, mod)
                 local visible = info.active and not stitch.WorldPinsHidden("flight")
                 set.frame:SetShown(visible)
                 if visible then
+                    local scope = tracking.GetAreaScope()
+                    local nodes = openMap.MapFlights and openMap.MapFlights.nodes or {}
                     for _, pin in ipairs(set.pins) do
-                        if not pin:IsShown() then pin:Show() end
+                        local inArea = flightInArea(nodes[pin.node], scope)
+                        if inArea ~= pin:IsShown() then pin:SetShown(inArea) end
                         if info.texture and pin.trackingTexture ~= info.texture then
                             stitch.Look(pin.Icon, {texture=info.texture})
                             stitch.Look(pin.Highlight, {texture=info.texture})
@@ -288,17 +336,19 @@ local function render()
     local embedded = ns.GetEmbeddedModule and ns.GetEmbeddedModule("OpenMap")
     local openMap = embedded or _G.OpenMap
     local mod = openMap and openMap.GetModule and openMap:GetModule("worldmap")
+    if tracking.FilterAreaPins then tracking.FilterAreaPins(map, openMap) end
     if mod and mod.IsStitched and mod.IsStitched() then
         hideFrom(1)
         local tracked = tracking.Get("flight")
         -- OpenMap owns the interactive flight markers on its stitched canvas.
         -- Some host maps independently create a second, native flight pin.
-        nativeFlights(tracked and not openMap.MapFlights)
+        nativeFlights(tracked and not openMap.MapFlights, id, tracking.GetAreaScope())
         if openMap.MapStitch then
             if embedded then
                 -- OpenMap can finish building before M opens. Its townsfolk
                 -- refresh deliberately defers service creation while hidden.
                 tracking.Refresh(openMap)
+                refreshEmbeddedFlights(openMap, mod)
             else
                 external = openMap
                 syncExternal(openMap, mod)
@@ -376,7 +426,8 @@ end
 
 local events = CreateFrame("Frame")
 for _, event in ipairs({"PLAYER_LOGIN", "ADDON_LOADED", "PLAYER_ENTERING_WORLD", "QUESTLINE_UPDATE",
-    "QUEST_ACCEPTED", "QUEST_REMOVED", "QUEST_TURNED_IN", "PLAYER_LEVEL_UP", "TAXI_NODE_STATUS_CHANGED"}) do
+    "QUEST_ACCEPTED", "QUEST_REMOVED", "QUEST_TURNED_IN", "PLAYER_LEVEL_UP",
+    "TAXI_NODE_STATUS_CHANGED", "SUPER_TRACKING_CHANGED"}) do
     events:RegisterEvent(event)
 end
 events:SetScript("OnEvent", function(_, event, value)
@@ -386,6 +437,8 @@ events:SetScript("OnEvent", function(_, event, value)
         attach()
         tracking.RefreshNative()
     elseif event == "TAXI_NODE_STATUS_CHANGED" then tracking.RefreshNative()
+    elseif event == "SUPER_TRACKING_CHANGED" then
+        if tracking.GetAreaScope() ~= nil then tracking.RefreshNative() end
     elseif external then
         if tracking.QuestOfferEvent then tracking.QuestOfferEvent(event, value) end
         externalOffersDirty = true

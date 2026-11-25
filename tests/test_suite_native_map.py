@@ -178,7 +178,7 @@ class NativeServiceMapTests(unittest.TestCase):
         self.lua = LuaRuntime(unpack_returned_tuples=True)
         self.lua.execute(CLIENT)
         self.g = self.lua.globals()
-        for source in ("WorldMapTracking", "WorldMapServiceData", "WorldMapServices", "WorldMapNative"):
+        for source in ("WorldMapTracking", "WorldMapServiceData", "WorldMapServices", "WorldMapAreaPins", "WorldMapNative"):
             self.lua.execute((ADDON / f"{source}.lua").read_bytes(), "RutaXP", self.g.ns)
         self.g.fire("ADDON_LOADED", "RutaXP")
         self.g.fire("PLAYER_LOGIN")
@@ -401,6 +401,49 @@ class NativeServiceMapTests(unittest.TestCase):
         self.g.setFilter("TaxiNode", True)
         self.assertTrue(self.g.nativeFlight.IsShown(self.g.nativeFlight))
         self.assertEqual(self.g.visible("Forjaz")[0], 0)
+
+    def test_embedded_flight_pins_track_player_zone_without_replacing_openmap_pins(self):
+        self.lua.execute("""
+            ns.char = {mapOnlyMyZone=true}
+            local zone = 1426
+            function C_Map.GetBestMapForUnit() return zone end
+            function hooksecurefunc(object, method, callback)
+                local previous = object[method]
+                object[method] = function(...) previous(...); callback(...) end
+            end
+            local tracking = RutaXPWorldMapTracking
+            tracking.Refresh = function() end
+            local set = {pins={}, frame=CreateFrame("Frame", nil, WorldMapFrame)}
+            local nodes = {}
+            local function pin(id, zoneMap, known)
+                local continent, point = C_Map.GetWorldPosFromMapPos(zoneMap, CreateVector2D(.5, .5))
+                nodes[id] = {"Flight master", continent, point.x, point.y, 1}
+                local p = CreateFrame("Button", nil, set.frame)
+                p.node, p.known = id, known
+                set.pins[id] = p
+                return p
+            end
+            local dunMorogh, stranglethorn, undiscovered =
+                pin(1, 1426, true), pin(2, 1434, true), pin(3, 1434, false)
+            local mod = {IsStitched=function() return true end}
+            function mod.RefreshFlightsFound()
+                for _, marker in ipairs(set.pins) do marker:SetShown(marker.known) end
+            end
+            local open = {GetModule=function() return mod end, MapFlights={nodes=nodes},
+                MapStitch={GetPinSet=function(key) if key == "flight" then return set end end}}
+            ns.GetEmbeddedModule = function(name) if name == "OpenMap" then return open end end
+            mod.RefreshFlightsFound()
+            openMap(1415)
+            assert(dunMorogh:IsShown() and not stranglethorn:IsShown())
+            mod.RefreshFlightsFound()
+            assert(not stranglethorn:IsShown(), "OpenMap refresh must not reveal filtered pins")
+            zone = 1434
+            fire("ZONE_CHANGED_NEW_AREA")
+            assert(not dunMorogh:IsShown() and stranglethorn:IsShown() and not undiscovered:IsShown())
+            ns.char.mapOnlyMyZone = nil
+            fire("ZONE_CHANGED_NEW_AREA")
+            assert(dunMorogh:IsShown() and stranglethorn:IsShown() and not undiscovered:IsShown())
+        """)
 
 
 if __name__ == "__main__":

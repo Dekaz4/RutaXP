@@ -142,6 +142,8 @@ class MapJournalIntegrationTests(unittest.TestCase):
             state = {on=true, pad=false, sets=0, scanned=0}
             RutaXPWorldMapTracking = {
                 Get=function() return state.on end, Info=function() return {texture=123} end,
+                GetAreaScope=function() return state.area end,
+                IsMapInArea=function(id, scope) return scope == nil or id == scope end,
             }
             C_QuestLog = {IsOnQuest=function(id) return id==4 end,
                 IsQuestFlaggedCompleted=function(id) return id==5 end,
@@ -156,6 +158,7 @@ class MapJournalIntegrationTests(unittest.TestCase):
                     end)
                 end }
             stitch = {IsBuilt=function() return true end,
+                Rect=function() return 0, 1, 0, 1 end,
                 PinSet=function(key, zoom) assert(zoom==0); state.sets=state.sets+1; return {} end,
                 ClearPinSet=function() state.pins={} end,
                 SetPinSetOn=function(_,v) state.visible=v end,
@@ -210,6 +213,15 @@ class MapJournalIntegrationTests(unittest.TestCase):
             assert(state.visible and table.concat(state.pins,",")=="3,11,1,8,10")
             assert(requests[32]==1 and state.sets==1)
             state.pad=false
+            state.area=30
+            refresh(); finish()
+            assert(state.visible and table.concat(state.pins,",")=="1,8")
+            state.area=32
+            refresh(); finish()
+            assert(state.visible and table.concat(state.pins,",")=="10")
+            state.area=nil
+            refresh(); finish()
+            assert(state.visible and table.concat(state.pins,",")=="1,8,10")
             QuestOfferDataProviderMixin={
                 GetAllQuestOffersForMap=function(self,zone)
                     assert(self:GetMap():GetMapID()==zone)

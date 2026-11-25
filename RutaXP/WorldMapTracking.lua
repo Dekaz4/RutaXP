@@ -1,5 +1,6 @@
 -- OpenMap draws its own map. Read the same selections and textures used by
 -- Blizzard’s minimap menu, including when the player is in a different zone.
+local _, ns = ...
 local tracking = {}
 RutaXPWorldMapTracking = tracking
 
@@ -17,7 +18,99 @@ local filters = {
     lowLevelQuests = "TrivialQuests",
 }
 
-local snapshot, writingAll, filterButton, menuRefreshPending
+local snapshot, writingAll, filterButton, menuRefreshPending, lastAreaScope
+
+local function onlyMyZone()
+    return ns ~= nil and ns.char ~= nil and ns.char.mapOnlyMyZone == true
+end
+
+local function mapInfo(mapID)
+    if type(mapID) == "number" and not (issecretvalue and issecretvalue(mapID))
+        and mapID > 0 and C_Map and C_Map.GetMapInfo then
+        return C_Map.GetMapInfo(mapID)
+    end
+end
+
+-- Nil is the unfiltered map, false is an active filter awaiting a zone.
+-- The character's area is independent of the map opened or panned to with M.
+function tracking.GetAreaScope()
+    if not onlyMyZone() then return nil end
+    local types = Enum and Enum.UIMapType
+    local mapID = C_Map and C_Map.GetBestMapForUnit and C_Map.GetBestMapForUnit("player")
+    for _ = 1, 16 do
+        local info = mapInfo(mapID)
+        if not info or not info.mapType or not types then break end
+        if info.mapType == types.Zone or info.mapType == types.Dungeon then return mapID end
+        if info.mapType ~= types.Micro then break end
+        mapID = info.parentMapID
+    end
+    return false
+end
+
+function tracking.IsMapInArea(mapID, scope)
+    if scope == nil then return true end
+    if not scope then return false end
+    for _ = 1, 16 do
+        if mapID == scope then return true end
+        local info = mapInfo(mapID)
+        if not info then break end
+        mapID = info.parentMapID
+    end
+    return false
+end
+
+local positionMap, positionBounds
+
+function tracking.IsWorldPositionInArea(continent, north, west, scope)
+    if scope == nil then return true end
+    if not scope or not (continent and north and west and C_Map and C_Map.GetWorldPosFromMapPos and CreateVector2D) then return false end
+    -- Flight masters may be reported on a continent map, so compare in the
+    -- same world coordinates used when drawing them.
+    if positionMap ~= scope or not positionBounds then
+        positionMap, positionBounds = scope, nil
+        local world, corner = C_Map.GetWorldPosFromMapPos(scope, CreateVector2D(0, 0))
+        local otherWorld, opposite = C_Map.GetWorldPosFromMapPos(scope, CreateVector2D(1, 1))
+        if world and world == otherWorld and corner and opposite then
+            local n, w = corner:GetXY()
+            local s, e = opposite:GetXY()
+            if n ~= s and w ~= e then
+                positionBounds = {world, math.min(n,s), math.max(n,s), math.min(w,e), math.max(w,e)}
+            end
+        end
+    end
+    local box = positionBounds
+    return box ~= nil and box[1] == continent and north >= box[2] and north <= box[3] and west >= box[4] and west <= box[5]
+end
+
+function tracking.IsPositionInArea(mapID, x, y, scope)
+    if tracking.IsMapInArea(mapID, scope) then return true end
+    local types, info = Enum and Enum.UIMapType, mapInfo(mapID)
+    if not (scope and info and types and (info.mapType == types.Continent or info.mapType == types.World)
+        and x and y and C_Map.GetWorldPosFromMapPos and CreateVector2D) then return false end
+    local world, point = C_Map.GetWorldPosFromMapPos(mapID, CreateVector2D(x, y))
+    if not point then return false end
+    local north, west = point:GetXY()
+    return tracking.IsWorldPositionInArea(world, north, west, scope)
+end
+
+local function refreshArea()
+    local scope = tracking.GetAreaScope()
+    if scope == lastAreaScope then return end
+    lastAreaScope = scope
+    if tracking.OnChanged then tracking.OnChanged() end
+end
+
+local function setOnlyMyZone(enabled)
+    if not (ns and ns.char) or enabled == onlyMyZone() then return end
+    ns.char.mapOnlyMyZone = enabled or nil
+    lastAreaScope = tracking.GetAreaScope()
+    if tracking.OnChanged then tracking.OnChanged() end
+end
+
+local function toggleArea()
+    setOnlyMyZone(not onlyMyZone())
+    return MenuResponse.Refresh
+end
 
 function tracking.Read()
     local entries = {}
@@ -85,6 +178,7 @@ local function clearFilters()
         end
     end)
     writingAll = false
+    setOnlyMyZone(false)
     refresh()
     if not ok then error(err, 0) end
     return MenuResponse.Refresh
@@ -98,6 +192,8 @@ end
 
 local function filterMenu(_, root)
     refresh()
+    root:CreateButton(UNCHECK_ALL or "Desmarcar todo", clearFilters)
+    root:CreateCheckbox("Solo mi zona", onlyMyZone, toggleArea)
     local choices = {}
     for key, info in pairs(snapshot) do choices[#choices+1] = {key=key, info=info} end
     table.sort(choices, function(a, b) return a.info.index < b.info.index end)
@@ -105,7 +201,6 @@ local function filterMenu(_, root)
         root:CreateTitle("El seguimiento aún no está disponible")
         return
     end
-    root:CreateButton(UNCHECK_ALL or "Desmarcar todo", clearFilters)
     for _, choice in ipairs(choices) do
         local info = choice.info
         local row = root:CreateCheckbox(info.name, tracking.Get, toggle, choice.key)
@@ -151,9 +246,16 @@ end
 
 local events = CreateFrame("Frame")
 events:RegisterEvent("PLAYER_ENTERING_WORLD")
+events:RegisterEvent("ZONE_CHANGED")
+events:RegisterEvent("ZONE_CHANGED_INDOORS")
+events:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 events:RegisterEvent("SPELLS_CHANGED")
 events:RegisterEvent("MINIMAP_UPDATE_TRACKING")
 events:RegisterEvent("CVAR_UPDATE")
 events:SetScript("OnEvent", function(_, event, cvar)
-    if event ~= "CVAR_UPDATE" or cvar == "minimapTrackedInfov4" then refresh() end
+    if event:find("^ZONE_CHANGED") then refreshArea()
+    elseif event ~= "CVAR_UPDATE" or cvar == "minimapTrackedInfov4" then
+        refresh()
+        if event == "PLAYER_ENTERING_WORLD" then refreshArea() end
+    end
 end)

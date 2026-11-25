@@ -1,6 +1,7 @@
 local _, ns = ...
 local tracking = RutaXPWorldMapTracking
 local mapNamespace, groups, scheduled
+local indexedArea
 local layoutDirty, lastWorldScale = true, nil
 local PIN_SIZE, SPACING = 18, 20
 tracking.ServicePinSize = PIN_SIZE
@@ -157,7 +158,7 @@ local function worldPoint(stitch, mapID, row)
     end
 end
 
-local function index()
+local function index(scope)
     local side = UnitFactionGroup("player")
     local _, class = UnitClass("player")
     if not class or (side ~= "Alliance" and side ~= "Horde") then return end
@@ -165,10 +166,12 @@ local function index()
     local result = {}
     for key in pairs(icons) do result[key] = {points = {}, next = 1, seen = {}} end
     for mapID, rows in pairs(ns.worldMapServiceData) do
-        for _, row in ipairs(rows) do
-            if (row[2] == faction or row[2] == "AH") and (not row[6] or row[6] == class) then
-                local points = result[row[1]].points
-                points[#points + 1] = {mapID, row}
+        if tracking.IsMapInArea(mapID, scope) then
+            for _, row in ipairs(rows) do
+                if (row[2] == faction or row[2] == "AH") and (not row[6] or row[6] == class) then
+                    local points = result[row[1]].points
+                    points[#points + 1] = {mapID, row}
+                end
             end
         end
     end
@@ -273,7 +276,15 @@ function tracking.Refresh(openMap)
     mapNamespace = openMap
     local stitch = openMap.MapStitch
     if not stitch.IsBuilt() or not showing() then return end
-    groups = groups or index()
+    local scope = tracking.GetAreaScope()
+    if groups and scope ~= indexedArea then
+        for _, group in pairs(groups) do
+            if group.set then stitch.ClearPinSet(group.set) end
+        end
+        groups, layoutDirty = nil, true
+    end
+    indexedArea = scope
+    groups = groups or index(scope)
     if not groups then return end
     for key, group in pairs(groups) do
         local info = tracking.Info(key)
@@ -281,7 +292,8 @@ function tracking.Refresh(openMap)
         if enabled ~= group.enabled then layoutDirty = true end
         group.enabled = enabled
         if group.enabled then
-            group.set = group.set or stitch.PinSet("rutaxp_service_" .. key, 1, 5)
+            local setKey = "rutaxp_service_" .. key
+            group.set = group.set or stitch.GetPinSet(setKey) or stitch.PinSet(setKey, 1, 5)
             local fallback = "Interface\\Minimap\\Tracking\\" .. icons[key]
             local texture = info.texture or fallback
             if not group.look or group.look.texture ~= texture then
