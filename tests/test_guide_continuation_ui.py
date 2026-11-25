@@ -6,6 +6,9 @@ from test_access_navigation import AccessHost, DWARF
 
 
 WESTFALL = "forever/alliance/02-westfall"
+DESOLACE = "forever/alliance/30-40/02-desolace"
+STRANGLETHORN = "forever/alliance/30-40/04-stranglethorn-vale"
+ARATHI = "forever/alliance/30-40/05-arathi-highlands"
 
 
 class GuideContinuationUITests(unittest.TestCase):
@@ -30,6 +33,31 @@ class GuideContinuationUITests(unittest.TestCase):
                 self.assertEqual(h.ns.char.activeGuide, WESTFALL)
                 self.assertEqual(h.ns.char.progress[DWARF].cursor, len(h.guide.steps) + 1)
                 self.assertEqual(button.label.text, "Siguiente >")
+
+    def test_paused_recovery_keeps_its_bookmark_and_allows_the_next_chapter(self):
+        for button_name in ("trackerNext", "nextButton"):
+            with self.subTest(button=button_name):
+                h = AccessHost(STRANGLETHORN, find_goal={"quest": 213, "t": "accept"})
+                h.s.level = 38
+                finished_cursor = len(h.guide.steps) + 1
+                h.ns.char.progress[STRANGLETHORN].cursor = finished_cursor
+                h.ns.char.recovery = h.h.table({
+                    "active": True, "status": "active", "requestedQuestID": 5561,
+                    "requiredQuestIDs": [5561], "bookmark": {"guideID": DESOLACE, "cursor": 18},
+                })
+
+                h.ns.RefreshUI(h.ns)
+                button = h.ns[button_name]
+                self.assertTrue(button.enabled)
+                self.assertEqual(button.label.text, "Continuar")
+                self.assertIn(h.ns.guides[ARATHI].title, h.ns.trackerText.text)
+                h.h.g.Click(button)
+                self.assertEqual(h.ns.char.activeGuide, ARATHI)
+                self.assertEqual(h.ns.char.progress[STRANGLETHORN].cursor, finished_cursor)
+                recovery = h.ns.char.recovery
+                self.assertTrue(recovery.active)
+                self.assertEqual((recovery.bookmark.guideID, recovery.bookmark.cursor), (DESOLACE, 18))
+                self.assertFalse(h.ns.IsQuestDelivered(h.ns, 5561))
 
     def test_wait_reason_disables_both_buttons_and_keeps_the_final_cursor(self):
         h = self.completed_visit()

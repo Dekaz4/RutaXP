@@ -1631,7 +1631,9 @@ function ns:GetGuideContinuation()
     local guide, step, state = self:GetCurrent()
     if not guide or step or not state or state.cursor <= #guide.steps then return nil, "Termina el paso actual para continuar." end
     if state.review then return nil, "Estás revisando la guía." end
-    if guide.recovery or guide.temporary or (type(self.char.recovery) == "table" and self.char.recovery.active) then
+    -- A recovery belongs to its temporary guide. Its saved bookmark can
+    -- remain paused while the player finishes and continues a normal chapter.
+    if guide.recovery or guide.temporary then
         return nil, "Termina la recuperación para volver a tu guía."
     end
     local successor, reason = self:GetLinkedGuide(guide)

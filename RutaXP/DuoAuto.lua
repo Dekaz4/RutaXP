@@ -214,8 +214,7 @@ function Auto:_ContinuationPlan(targetID, flow)
         return nil, "Esperando una cabecera reciente del RutaXP del compañero para continuar juntos."
     end
     local guide, _, state = current()
-    if not guide or not state or guide.temporary or guide.recovery
-        or (type(ns.char.recovery) == "table" and ns.char.recovery.active) then return nil, "Termina la recuperación antes de continuar." end
+    if not guide or not state or guide.temporary or guide.recovery then return nil, "Termina la recuperación antes de continuar." end
     local source, partnerSource = guide, guide
     if flow then
         source, partnerSource = ns.guides[flow.originID], ns.guides[flow.partnerOriginID]

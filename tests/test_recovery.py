@@ -225,6 +225,9 @@ class RecoveryTests(unittest.TestCase):
         self.assertEqual(h.ns.char.activeGuide, "_recovery")
         self.assertEqual(h.status().status, "incomplete")
         self.assertFalse(h.status().canResume)
+        next_guide, reason = h.call("GetGuideContinuation")
+        self.assertIsNone(next_guide)
+        self.assertIn("recuperación", reason)
         self.assertFalse(h.recovery.Resume(h.recovery)[0])
         self.assertFalse(h.call("IsQuestDelivered", 101))
 

@@ -2,7 +2,7 @@ local _, ns = ...
 local R = ns.TravelRouting
 local TRAM, TELDRASSIL, TREETOP = 369, 1438, "teldrassil-treetop"
 local walkSpeed, flightSpeed = 7, 32
-local localWalkingRange = 2500 -- yards, about six minutes on foot
+local localWalkingRange = 2500 -- Retain authored waypoints for nearby itineraries.
 local cached, coordinates = {}, setmetatable({}, {__mode="k"})
 local flightDistances = {}
 local arrivals = {}
@@ -133,10 +133,12 @@ end
 
 local function localChapterTrip(fixed,start,finish,here,destination)
     if not fixed or not fixed[start] or not fixed[finish] then return true end
-    local distance = yards(here,destination)
-    if not distance or distance <= localWalkingRange then return true end
-    -- Local access paths can cross a map border. Keep those authored turns
-    -- when the two zones share a road. Multi-zone journeys need a local stop.
+    if destination.source=="itinerary" then
+        local distance = yards(here,destination)
+        if not distance or distance <= localWalkingRange then return true end
+    end
+    -- Adjacent zones can use their authored walk. Even a short trip across
+    -- multiple zones needs each road entrance as a local destination.
     for _, e in ipairs(fixed[start]) do
         if e.kind == "road" and e.target == finish then return true end
     end

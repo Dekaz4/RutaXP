@@ -106,6 +106,33 @@ class DuoContinuationTests(unittest.TestCase):
             self.assertEqual(h.ns.char.progress[NEXT].cursor, 1)
             self.assertEqual(primitive_copy(h.ns.char.progress[NEXT].confirmed), {})
 
+    def test_paused_recovery_does_not_block_the_completed_chapter_in_a_duo(self):
+        a, b = self.pair(automatic=False)
+        a.ns.char.recovery = a.h.table({
+            "active": True, "status": "active",
+            "bookmark": {"guideID": "auto-review/earlier-chapter", "cursor": 18},
+            "requiredQuestIDs": [5561],
+        })
+        recovery = primitive_copy(a.ns.char.recovery)
+        a.finish(); b.finish(); self.exchange(a, b, 12)
+        self.assertEqual(self.state(a)[::2], (True, True))
+        self.assertTrue(self.request(a)[0]); self.assertTrue(self.request(b)[0])
+        self.exchange(a, b)
+        self.assertEqual((a.ns.char.activeGuide, b.ns.char.activeGuide), (NEXT, NEXT))
+        self.assertEqual(primitive_copy(a.ns.char.recovery), recovery)
+        self.assertEqual(a.ns.char.progress[ROUTE_ID].cursor, 4)
+
+    def test_current_recovery_guide_cannot_continue_with_a_duo(self):
+        a, b = self.pair(automatic=False)
+        a.finish(); b.finish(); self.exchange(a, b, 12)
+        a.ns.guides[ROUTE_ID].temporary = True
+        a.ns.guides[ROUTE_ID].recovery = True
+        managed, reason, can_request = self.state(a)
+        self.assertTrue(managed)
+        self.assertFalse(can_request)
+        self.assertIn("recuperación", reason)
+        self.assertFalse(self.request(a)[0])
+
     def test_automatic_pair_changes_agreement_without_rewinding_saved_successor(self):
         a, b = self.pair(pairing=True)
         self.exchange(a, b, 65)

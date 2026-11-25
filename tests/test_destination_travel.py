@@ -155,6 +155,50 @@ class DestinationTravelTests(unittest.TestCase):
         self.assertEqual((pin.mapID,pin.x,pin.y),goal)
         self.assertIsNone(v)
 
+    def test_biggs_chapter_arrow_crosses_deadwind_before_pointing_to_the_npc(self):
+        guide_id = "forever/alliance/30-40/05-arathi-highlands"
+        save = old_save(guide_id, auto=False)
+        save["progress"][guide_id] = {"cursor": 2, "placed": True}
+        h = Destinations((1431, .784, .451), save=save)
+        h.s.level = 38
+        h.h.lua.execute("""
+            local original = C_Map.GetMapInfo
+            local names = {[1430]="Paso de la Muerte", [1435]="Pantano de las Penas"}
+            function C_Map.GetMapInfo(id)
+                if names[id] then return {mapID=id, name=names[id]} end
+                if original then return original(id) end
+            end
+        """)
+        _, step, _ = h.ns.GetCurrent(h.ns)
+        before = primitive_copy(h.ns.char.progress[guide_id])
+
+        for origin, entry, next_zone in (
+            ((1431, .784, .451), (1431, .8988, .4125), "Paso de la Muerte"),
+            ((1430, .3305, .3596), (1430, .5829, .4144), "Pantano de las Penas"),
+        ):
+            with self.subTest(origin=origin):
+                h.locate(origin)
+                point = h.ns.GetArrowWaypoint(h.ns, step, False)
+                view = h.ns.GetDestinationTravelView(h.ns)
+                self.assertEqual((view.kind, view.state), ("road", "approach"))
+                self.assertIn(next_zone, view.shortText)
+                self.assertEqual(point.mapID, entry[0])
+                self.assertAlmostEqual(point.x, entry[1])
+                self.assertAlmostEqual(point.y, entry[2])
+
+                h.locate(entry)
+                forward = h.ns.GetArrowWaypoint(h.ns, step, False)
+                view = h.ns.GetDestinationTravelView(h.ns)
+                self.assertEqual((view.kind, view.state, forward.mapID), ("road", "crossing", entry[0]))
+                self.assertGreater(forward.x, point.x)
+
+        h.locate((1435, .0584, .6078))
+        point = h.ns.GetArrowWaypoint(h.ns, step, False)
+        self.assertEqual((point.mapID, point.goal.quest, point.goal.npc), (1435, 1396, 5476))
+        self.assertAlmostEqual(point.x, .2674)
+        self.assertAlmostEqual(point.y, .5983)
+        self.assertEqual(primitive_copy(h.ns.char.progress[guide_id]), before)
+
     def test_road_uses_live_origin_map_even_when_reverse_api_prefers_next_zone(self):
         h = Destinations((1431,.445,.8751))
         h.h.lua.execute("""
