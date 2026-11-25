@@ -17,14 +17,15 @@ class WorldMapPinTests(unittest.TestCase):
             function UnitFactionGroup() return "Alliance" end
             function UnitClass() return "Pícara", "ROGUE" end
             function UnitPosition() error("World pins must not require player position") end
+            function CreateFrame() return {RegisterEvent=noop, SetScript=noop} end
             WorldMapFrame = {IsShown = function() return shown end}
             C_Timer = {After = function(_, fn) table.insert(timers, fn) end}
             function flush()
                 while #timers > 0 do table.remove(timers, 1)() end
             end
-            RutaXPWorldMapTracking = {Info = function(key)
+            function trackingInfo(key)
                 return {active = active[key], name = key, texture = "game-" .. key}
-            end}
+            end
             local stitch = {}
             function stitch.IsBuilt() return true end
             function stitch.FromYards(cont, north, west)
@@ -40,6 +41,7 @@ class WorldMapPinTests(unittest.TestCase):
                 sets[key] = {pins = {}, on = true}
                 return sets[key]
             end
+            function stitch.GetPinSet(key) return sets[key] end
             function stitch.AddPin(set, x, y, look, row)
                 local pin = {x = x, y = y, texture = look.texture, row = row, SetScript = noop}
                 table.insert(set.pins, pin)
@@ -63,6 +65,8 @@ class WorldMapPinTests(unittest.TestCase):
                 },
             }
         """)
+        self.lua.execute((ROOT / "RutaXP/WorldMapTracking.lua").read_text(encoding="utf-8"), "RutaXP", self.lua.globals().ns)
+        self.lua.execute("RutaXPWorldMapTracking.Info = trackingInfo")
         self.lua.execute((ROOT / "RutaXP/WorldMapServices.lua").read_text(encoding="utf-8"), "RutaXP", self.lua.globals().ns)
 
     def test_distant_icons_use_native_texture_faction_class_and_coordinate_system(self):
