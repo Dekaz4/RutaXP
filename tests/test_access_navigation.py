@@ -137,6 +137,41 @@ class AccessHost:
 
 
 class AuthoredAccessIntegrationTests(unittest.TestCase):
+    def test_opa_hostil_arrow_keeps_the_selected_camp_as_alternatives_get_closer(self):
+        h = AccessHost("forever/alliance/30-40/04-stranglethorn-vale", x=.435, y=.185,
+                       find_goal={"t": "collect", "quest": 213})
+        h.s.level = 36
+        h.h.lua.execute("""
+            TEST.searches={}
+            RutaXPPathEngine={
+                Available=function() return true end,
+                Find=function(map, from, to, callback)
+                    local job={to=to, callback=callback}
+                    table.insert(TEST.searches, job)
+                    return job
+                end,
+                Cancel=function() end,
+            }
+        """)
+        before = h.progress()
+        initial = h.ns.GetArrowWaypoint(h.ns, h.step, False)
+        self.assertTrue(initial.navigationBlocked)
+        first = (initial.x, initial.y)
+        for y in (.190, .195, .200, .195, .190, .185, .190, .195, .200):
+            h.s.y, h.s.now = y, h.s.now + .5
+            candidate = h.point()
+            if y == .20:
+                self.assertNotEqual((candidate.x, candidate.y), first)
+            result = h.ns.GetArrowWaypoint(h.ns, h.step, False)
+            self.assertEqual((result.x, result.y), first)
+            self.assertEqual(result.goal.quest, 213)
+        self.assertEqual(len(h.s.searches), 1)
+
+        h.s.quests[213].objectives[1].finished = True
+        next_point = h.ns.GetArrowWaypoint(h.ns, h.step, False)
+        self.assertTrue(next_point is None or next_point.goal.quest != 213)
+        self.assertEqual(h.progress(), before)
+
     def test_distant_real_fargodeep_goal_keeps_its_access_instead_of_the_final_target(self):
         h = AccessHost(x=.1, y=.1)
         before = h.progress()

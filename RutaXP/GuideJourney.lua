@@ -14,13 +14,32 @@ local function finite(n)
 end
 
 local compassKey, finalTarget, displayedYards, nearYards, lastRotation, boundTexture
+local lastWorldBearing, steeringFrom, steeringStarted
 local fullTurn, minimumTurn = 2 * math.pi, math.rad(2.8)
+local steeringDuration = .18
 -- Journey uses a single distance for its arrival sprite, distance label and
 -- minimap. Its minimap radius is much larger than the 1.5-yard arrival radius.
 local passingNode = 1.500001
 
-function view:SetCompassTarget(key, isFinal, yards)
-    if key ~= compassKey or isFinal ~= finalTarget then lastRotation = nil end
+local function compassFacing()
+    local angle = GetPlayerFacing and GetPlayerFacing()
+    if finite(angle) then return angle end
+end
+
+local function shortestTurn(from, to)
+    return (to - from + math.pi) % fullTurn - math.pi
+end
+
+local function resetSteering()
+    lastRotation, lastWorldBearing, steeringFrom, steeringStarted = nil, nil, nil, nil
+end
+
+function view:SetCompassTarget(key, isFinal, yards, steeringChanged)
+    if key ~= compassKey or (isFinal ~= finalTarget and not steeringChanged) then
+        resetSteering()
+    elseif steeringChanged and lastWorldBearing then
+        steeringFrom, steeringStarted = lastWorldBearing, GetTime()
+    end
     compassKey, finalTarget = key, isFinal
     displayedYards = finite(yards) and yards >= 0 and yards or nil
     nearYards = nil
@@ -30,19 +49,27 @@ local function bindCompassRotation()
     local hud = _G.RutaXPJourneyScreenArrow
     local texture = hud and hud.arrowTexture
     if not texture or texture == boundTexture then return end
-    boundTexture, lastRotation = texture, nil
+    boundTexture = texture
+    resetSteering()
     local draw = texture.SetRotation
     texture.SetRotation = function(self, angle)
         if not finite(angle) then return end
-        if lastRotation and math.abs((angle - lastRotation + math.pi) % fullTurn - math.pi) < minimumTurn then return end
+        local facing = compassFacing()
+        if steeringFrom and facing then
+            local progress = math.max(0, (GetTime() - steeringStarted) / steeringDuration)
+            if progress < 1 then
+                -- Ease the change in the path bearing. The current player
+                -- facing still reaches the arrow on every draw.
+                angle = angle + shortestTurn(angle + facing, steeringFrom) * (1 - progress)
+            else
+                steeringFrom, steeringStarted = nil, nil
+            end
+        end
+        if lastRotation and math.abs(shortestTurn(lastRotation, angle)) < minimumTurn then return end
         lastRotation = angle
+        lastWorldBearing = facing and angle + facing
         draw(self, angle)
     end
-end
-
-local function compassFacing()
-    local angle = GetPlayerFacing and GetPlayerFacing()
-    if finite(angle) then return angle end
 end
 
 local function sampleOrigin()
@@ -445,8 +472,9 @@ local function updateTarget(body, deathHint)
         or sample.intermediate and sample.pointIndex and sample.pointCount and sample.pointIndex < sample.pointCount)
     local key = sample and sample.walkingRouteKey
         or ((deathHint and "corpse" or "guide") .. "/" .. map .. "/" .. x .. "/" .. y)
-    view:SetCompassTarget(key, not intermediate, distance)
-    if not target or arrow.mapID ~= map or arrow.worldTargetX ~= point.x or arrow.worldTargetY ~= point.y then
+    local changed = not target or arrow.mapID ~= map or arrow.worldTargetX ~= point.x or arrow.worldTargetY ~= point.y
+    view:SetCompassTarget(key, not intermediate, distance, changed and sample and sample.walking)
+    if changed then
         -- SetTarget replaces the current destination. ClearTarget also hides
         -- the HUD, which made it blink at every turn even on the same road.
         arrow:SetTarget(x,y,map,not not (intermediate or walking and target),point)

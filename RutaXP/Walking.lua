@@ -62,7 +62,7 @@ function W:Clear(reason)
     self.travel,self.seenX,self.seenY,self.requestTravel,self.requestZ,self.progress=0,nil,nil,nil,nil,0
     self.seenZ,self.seenAt,self.pathTravel,self.pathZ,self.trace,self.traceValid=nil,nil,nil,nil,nil,nil
     self.cornerCredit,self.cornerCreditBefore,self.cornerCreditTravel=nil,nil,nil
-    self.latestTarget,self.campCommitted,self.refreshWanted=nil,nil,nil
+    self.campCommitted,self.refreshWanted=nil,nil
     self.budgetUpdated,self.activeSeconds,self.retryAfter,self.timeoutRetried,self.missingSince=nil,nil,nil,nil,nil
     self.startMap,self.lastRejectedX,self.lastRejectedY=nil,nil,nil
     self.turns,self.turnCursor,self.steeringIndex,self.corridor=nil,nil,nil,nil
@@ -117,7 +117,7 @@ function W:GetStatus()
         updating=self.pending==true and self.points~=nil,
         pendingSeconds=self.pending and math.max(0,now()-(self.lastAsk or now())) or 0}
 end
-function W:_Ask(engine,continent,px,py,pz,target,reason)
+function W:_Ask(engine,continent,px,py,pz,target,reason,camp)
     if self.pending then return false end
     if combat() then self.phase,self.text="pending","Sal del combate para calcular el camino"; return end
     if read(IsFalling)==true then self.phase,self.text="pending","Esperando a pisar el suelo para calcular el camino"; return end
@@ -128,6 +128,7 @@ function W:_Ask(engine,continent,px,py,pz,target,reason)
     self.jobFrames,self.lastProgressAt=0,0
     self.requestTravel,self.requestZ=self.travel or 0,pz
     self.target={x=target.x,y=target.y,z=target.z}
+    self.campCommitted=camp
     target=self.target
     self.trace={{x=px,y=py,z=pz,travel=self.travel or 0,time=now()}}
     self.traceValid=true
@@ -677,39 +678,44 @@ function W:Resolve(point)
     local latest={x=gx,y=gy,z=finite(point.z) and point.z or nil}
     local candidate=point.candidate
     local goal=point.goal or {}
-    local resourceCandidate=candidate and candidate.objectiveIndex and (goal.quest or goal.questID)
-        and (goal.t=="complete" or goal.t=="objective" or goal.t=="collect" or goal.t=="kill")
+    local action=goal.t or goal.action
+    local resourceCandidate=(point.alternativeSpot or candidate and candidate.objectiveIndex) and (goal.quest or goal.questID)
+        and (action=="complete" or action=="objective" or action=="collect" or action=="kill")
+    local camp=resourceCandidate and point or nil
     if self.key~=key or self.startMap~=here.mapID then
         self:Clear("key");self.key,self.engine=key,engine
         self.startMap=here.mapID
         self.seenX,self.seenY,self.seenZ,self.seenAt,self.travel=px,py,pz,now(),0
-        self.latestTarget,self.campCommitted=latest,resourceCandidate and true or nil
-        self:_Ask(engine,continent,px,py,pz,latest,"key")
+        self:_Ask(engine,continent,px,py,pz,latest,"key",camp)
     else
         local moved=self.seenX and distance(px,py,self.seenX,self.seenY) or 0
         self.seenX,self.seenY,self.seenZ,self.seenAt=px,py,pz,now()
-        self.latestTarget=latest
         if moved>60 then
             -- A teleport or a long position gap cannot justify jumping over
             -- the old path's turns. Start a fresh search at the new position.
             self:Clear("teleport");self.key,self.engine=key,engine
             self.startMap=here.mapID
             self.seenX,self.seenY,self.seenZ,self.seenAt,self.travel=px,py,pz,now(),0
-            self.latestTarget,self.campCommitted=latest,resourceCandidate and true or nil
-            self:_Ask(engine,continent,px,py,pz,latest,"teleport")
+            self:_Ask(engine,continent,px,py,pz,latest,"teleport",camp)
         else
             self.travel=(self.travel or 0)+moved
             self:_RecordMotion(px,py,pz)
         end
-        if self.campCommitted and self.target and distance(px,py,self.target.x,self.target.y)<=12
-            and sameFloor(pz,self.target.z) then self.campCommitted=nil end
-        local changed=targetMoved(self.target,gx,gy,point.z)
-        if changed and not self.campCommitted then self.refreshWanted=true end
         checkBudget(self,px,py)
-        -- NPC/object spawns are alternatives for the same quest objective.
-        -- Keep the selected camp while its corridor is valid, even if its
-        -- detour makes another camp look closer halfway through the search.
-        local newTarget=changed and not self.campCommitted
+        if self.campCommitted then
+            local reached=distance(px,py,self.target.x,self.target.y)<=12 and sameFloor(pz,self.target.z)
+            if not camp or reached or self.failure and not self.points then
+                self.campCommitted=nil
+            else
+                -- Distance in a straight line can favor a different camp
+                -- along a detour. Use the same destination in the HUD and
+                -- in the planner until we arrive or cannot reach it.
+                point,camp,latest=self.campCommitted,self.campCommitted,self.target
+                out=copy(point)
+            end
+        end
+        local newTarget=targetMoved(self.target,latest.x,latest.y,latest.z)
+        if newTarget then self.refreshWanted=true end
         local repositioned=self.failure and now()-(self.failedAt or 0)>=15 and
             distance(px,py,self.failedX or px,self.failedY or py)>20
         local retry=self.retryAfter and now()>=self.retryAfter
@@ -717,8 +723,7 @@ function W:Resolve(point)
             (newTarget or repositioned or retry or (not self.failure and (self.refreshWanted or not self.points))) then
             if retry then self.timeoutRetried=true
             elseif newTarget or repositioned then self.timeoutRetried=nil end
-            self.campCommitted=resourceCandidate and true or nil
-            self:_Ask(engine,continent,px,py,pz,latest,newTarget and "destination" or retry and "timeout-retry" or "refresh")
+            self:_Ask(engine,continent,px,py,pz,latest,newTarget and "destination" or retry and "timeout-retry" or "refresh",camp)
         end
     end
     if self.pending then
@@ -739,10 +744,11 @@ function W:Resolve(point)
         if off>30 or not floorOK or behind or lost then
             self.points,self.left,self.arc,self.index=nil,nil,nil,nil
             self.turns,self.turnCursor,self.steeringIndex,self.corridor=nil,nil,nil,nil
-            self.campCommitted=nil
             self.refreshWanted=true
             diagnostic(self,not floorOK and "floor" or behind and "behind" or "drift")
-            if not self.pending and now()-(self.lastAsk or -100)>=2 then self:_Ask(engine,continent,px,py,pz,latest,not floorOK and "floor" or behind and "behind" or "drift") end
+            if not self.pending and now()-(self.lastAsk or -100)>=2 then
+                self:_Ask(engine,continent,px,py,pz,latest,not floorOK and "floor" or behind and "behind" or "drift",camp)
+            end
             self.phase,self.text="pending","Recalculando el camino desde tu posición…"
             return blockedWaypoint(self, out)
         end

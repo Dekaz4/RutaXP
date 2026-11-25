@@ -196,21 +196,28 @@ ns.GetPlayerWorldPosition = playerWorld
 -- Among several authored spots, point to the closest one. A small hysteresis
 -- (25 yards) prevents the arrow from flickering between two similar spots.
 local function nearestPoint(goal, list)
-    if #list <= 1 then return list[1] end
+    if #list == 0 then return end
+    if #list == 1 then
+        local only = list[1]
+        goal._rxpSpot = {mapID=only.mapID, x=only.x, y=only.y}
+        return only
+    end
     local pc, pn, pw = playerWorld()
     if not pc then return list[1] end
-    local best, bestIndex, bestDist, current, currentDist
-    for index, point in ipairs(list) do
+    local best, bestDist, current, currentDist
+    local previous = goal._rxpSpot
+    for _, point in ipairs(list) do
         local c, n, w = pointWorld(point)
         if c == pc then
             local d = math.sqrt((n - pn) ^ 2 + (w - pw) ^ 2)
-            if not bestDist or d < bestDist then best, bestIndex, bestDist = point, index, d end
-            if index == goal._rxpSpot then current, currentDist = point, d end
+            if not bestDist or d < bestDist then best, bestDist = point, d end
+            if type(previous) == "table" and previous.mapID == point.mapID
+                and previous.x == point.x and previous.y == point.y then current, currentDist = point, d end
         end
     end
     if current and bestDist and currentDist - bestDist < 25 then return current end
     if best then
-        goal._rxpSpot = bestIndex
+        goal._rxpSpot = {mapID=best.mapID, x=best.x, y=best.y}
         return best
     end
     return list[1]
@@ -321,7 +328,10 @@ function ns:GetGoalWaypoint(goal)
             end
         end
         point = nearestPoint(goal, list)
-        if point then point.source = "guide" end
+        if point then
+            point.source = "guide"
+            if #list > 1 then point.alternativeSpot = true end
+        end
     end
     if not point then
         local candidates = {}

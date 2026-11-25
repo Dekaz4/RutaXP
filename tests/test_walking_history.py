@@ -122,6 +122,46 @@ class WalkingMotionHistoryTests(unittest.TestCase):
         old.callback(h.table([{"map": 0, "x": 0, "y": 0}, {"map": 0, "x": 100, "y": 0}]), 100)
         self.assertIsNone(h.w.points, "A late callback from the finished objective is discarded")
 
+    def test_authored_spot_stays_the_visible_goal_until_the_player_reaches_it(self):
+        h = WalkingHistoryHost()
+        first = h.point(100, quest=213, dynamic=True)
+        alternative = h.point(250, quest=213, dynamic=True)
+        for point in (first, alternative):
+            point.alternativeSpot, point.source, point.goal.t = True, "guide", "collect"
+        h.w.Resolve(h.w, first)
+        h.s.now = 1
+        pending = h.w.Resolve(h.w, alternative)
+        self.assertEqual(pending.x, first.x)
+        h.answer()
+
+        for x in (30, 60, 85):
+            h.s.x, h.s.now = x, h.s.now + 3
+            walking = h.w.Resolve(h.w, alternative)
+            self.assertTrue(walking.walking)
+            self.assertEqual(walking.walkingGoal.x, first.x)
+            self.assertEqual(h.w.target.x, 100)
+            self.assertEqual((h.s.finds, h.s.cancels), (1, 0))
+
+        h.s.x, h.s.now = 100, h.s.now + 3
+        h.w.Resolve(h.w, alternative)
+        self.assertEqual(h.s.finds, 2)
+        self.assertEqual(h.s.jobs[2].to.x, 250)
+        self.assertEqual(h.ns.char.progress.g.cursor, 21)
+
+    def test_failed_authored_spot_allows_retrying_another_valid_spot(self):
+        h = WalkingHistoryHost()
+        first = h.point(100, quest=213, dynamic=True)
+        alternative = h.point(250, quest=213, dynamic=True)
+        for point in (first, alternative):
+            point.alternativeSpot, point.source, point.goal.t = True, "guide", "collect"
+        h.w.Resolve(h.w, first)
+        h.answer(failure=True)
+        h.s.now = 3
+        pending = h.w.Resolve(h.w, alternative)
+        self.assertEqual(pending.x, alternative.x)
+        self.assertEqual(h.s.finds, 2)
+        self.assertEqual(h.s.jobs[2].to.x, 250)
+
     def test_dynamic_endpoint_updates_keep_pending_job_and_failed_refresh_does_not_fake_arrival(self):
         h = WalkingHistoryHost()
         h.w.Resolve(h.w, h.point(100, dynamic=True))

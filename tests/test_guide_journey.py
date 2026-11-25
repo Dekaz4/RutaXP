@@ -156,7 +156,7 @@ C_Map={GetWorldPosFromMapPos=function(map,p)
     return currentWorld,CreateVector2D(x*1300,y*1300)
 end}
 function remote() currentWorld=1 end
-function clock() return 0 end
+function GetTime() return 0 end
 local task={text="Usa el objeto",manual=true,checked=false,step=2}
 guide={name="Elwynn",group="Alianza",steps={{},{},{}}}
 local mark=true
@@ -247,6 +247,38 @@ class NativeJourneyTests(unittest.TestCase):
             assert(not hud.container:IsShown())
             ns.GuideEngine.Waypoint=function() return 1429,.6,.7,"Otra misión" end
             tick(); assert(hud.container:IsShown() and texture.drawCount==before+1)
+        """)
+
+    def test_walking_arrow_eases_anchor_changes_but_follows_facing_immediately(self):
+        self.lua.execute("""
+            local time, facing = 0, 0
+            function GetTime() return time end
+            function GetPlayerFacing() return facing end
+            local key, north, west = "misma ruta", 570, 500
+            ns.GuideEngine.Waypoint = function()
+                return 1429, north/1300, west/1300, "Camino",
+                    {continent=0, north=north, west=west},
+                    {walking=true, walkingRouteKey=key, walkingDistance=100}
+            end
+            local texture = RutaXPJourneyScreenArrow.arrowTexture
+            local function heading(expected)
+                local diff = (texture.angle - math.rad(expected) + math.pi) % (2*math.pi) - math.pi
+                assert(math.abs(diff) < 1e-5, "heading: " .. math.deg(texture.angle))
+            end
+            tick()
+            heading(0)
+            north, west = 500, 570
+            tick() -- A new reference for the same walking route.
+            heading(0)
+            time = .09; tick(.09)
+            heading(45)
+            facing = math.rad(30); tick(0)
+            heading(15)
+            time = .18; tick(.09)
+            heading(60)
+            key, north, west = "otro objetivo", 430, 500
+            tick()
+            heading(150) -- New destinations do not interpolate.
         """)
 
     def test_task_names_use_journey_colors_and_recycled_icons_use_the_current_action(self):
