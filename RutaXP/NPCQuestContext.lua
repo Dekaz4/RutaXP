@@ -44,19 +44,7 @@ function ns:IsQuestOnOpenMenu(id, npc)
     return false
 end
 
-local function journal(id)
-    if ns.turnedIn[id] == true then return "delivered" end
-    local active = readable(C_QuestLog and C_QuestLog.IsOnQuest, id)
-    if active == true then
-        if readable(C_QuestLog and C_QuestLog.IsComplete, id) == true then return "ready" end
-        return "carried"
-    end
-    if active ~= false then return end
-    local delivered = readable(C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted, id)
-    if delivered == nil then delivered = readable(IsQuestFlaggedCompleted, id) end
-    if delivered == true then return "delivered" end
-    if delivered == false then return "missing" end
-end
+local journal = ns.GetLiveQuestState
 
 local function title(id, fallback)
     local name = readable(C_QuestLog and C_QuestLog.GetTitleForQuestID, id)

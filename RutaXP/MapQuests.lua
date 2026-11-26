@@ -62,6 +62,11 @@ function ns:GetMapQuestPoints(mapID)
             detail=detail, x=p.x, y=p.y}
     end
     local function visit(goal, step, si, gi)
+        local status
+        if si == cursor and goal.pickupIfMissing then
+            -- The pickup can be in a different zone than the authored turn-in.
+            goal, status = self:GetActionableGoal(goal, step, state, gi, guide)
+        end
         local id, action = goal.quest or goal.questID, goal.t or goal.action
         if not id or not (action == "accept" or action == "turnin" or work[action])
             or not onViewedMap(goal, mapID) or not applies(self, goal, faction) then return end
@@ -73,7 +78,7 @@ function ns:GetMapQuestPoints(mapID)
             q = {active=active, ready=active and read(C_QuestLog and C_QuestLog.IsComplete, id) == true}
             journal[id] = q
         end
-        local category, status
+        local category
         local ready = q.ready
         if goal.collectThenDeliver and q.active then
             goal, status = self:GetActionableGoal(goal, step, state, gi, guide)
@@ -87,7 +92,9 @@ function ns:GetMapQuestPoints(mapID)
             category = "accept"
         elseif not q.active then return
         elseif action == "turnin" then
-            if not ready then return end
+            -- A contact-only lead-in is deliverable as soon as it is accepted.
+            -- IsComplete can lag behind the quest log on QUEST_ACCEPTED.
+            if not ready and not (goal.pickupIfMissing and status == "active") then return end
             category = "turnin"
         else
             if ready then return end

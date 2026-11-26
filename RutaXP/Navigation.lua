@@ -871,7 +871,7 @@ local function updateArrow(self, frame)
     end
     local activeGoal = point and point.goal or (step and step.goals and self.GetActiveGoal and self:GetActiveGoal(step))
     local goalTitle = activeGoal and self.GetGoalTitle and self:GetGoalTitle(activeGoal)
-    local stepTitle = step and step.title
+    local stepTitle = activeGoal and activeGoal.routeHeading or (step and step.title)
     if point and (point.source == "local-travel-choice" or point.targetSource == "local-travel-choice"
         or point.walkingGoal and point.walkingGoal.source == "local-travel-choice") then
         stepTitle = "Mis misiones cercanas"

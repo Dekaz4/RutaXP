@@ -59,6 +59,21 @@ function ns:IsQuestActive(id)
     return read(C_QuestLog and C_QuestLog.IsOnQuest, id) == true
 end
 
+-- A journey across zones needs an explicit "missing" from the live client.
+-- Until its journal and history are readable, neither absence is established.
+function ns.GetLiveQuestState(id)
+    if ns.turnedIn[id] == true then return "delivered" end
+    local active = read(C_QuestLog and C_QuestLog.IsOnQuest, id)
+    if active == true then
+        return read(C_QuestLog and C_QuestLog.IsComplete, id) == true and "ready" or "carried"
+    end
+    if active ~= false then return end
+    local delivered = read(C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted, id)
+    if delivered == nil then delivered = read(IsQuestFlaggedCompleted, id) end
+    if delivered == true then return "delivered" end
+    if delivered == false then return "missing" end
+end
+
 local function itemCount(id)
     return read(C_Item and C_Item.GetItemCount, id, false) or read(GetItemCount, id, false) or 0
 end
@@ -801,6 +816,24 @@ function ns:GetGoalStatus(goal, step, state, index, guide, includeGroup)
     local profession, professionReason = self:CheckGoalProfession(goal, step, guide)
     if profession == false then return "skip", professionReason end
     if profession == nil then return "blocked", professionReason end
+    if goal.laterStages and not onQuest then
+        local historyReady = true
+        for _, later in ipairs(goal.laterStages) do
+            local stage = self.GetLiveQuestState(later)
+            if stage and stage ~= "missing" then return "skip", "Ya has avanzado en esta cadena" end
+            if not stage then historyReady = false end
+        end
+        local pickup = goal.pickupIfMissing
+        if pickup then
+            if not historyReady or self.GetLiveQuestState(id) ~= "missing" then
+                return "blocked", "Esperando al diario de misiones"
+            end
+            -- Keep this saved row and its marks. The active action switches
+            -- from the original giver to this recipient on actual acceptance.
+            local status, reason = self:GetGoalStatus(pickup, step, state, index, guide, includeGroup)
+            return status, reason, nil, pickup
+        end
+    end
     local playerLevel = UnitLevel("player") or 1
     if goal.offerLimits and not onQuest then
         local reason = self:GetUnavailableOfferReason(goal, playerLevel)
@@ -961,6 +994,7 @@ function ns:GetLocalCircuitStop(expectedStep)
         or (self.Waypoints and self.Waypoints.IsRouting and self.Waypoints:IsRouting()) then return end
     if self.GetTravelComparison and self:GetTravelComparison() then return end
     local base, index, status = self:GetActiveGoal(step, state)
+    if base and step.goals[index].pickupIfMissing then return end
     return planner:Choose(guide, step, state, base, index, status)
 end
 
@@ -1319,6 +1353,13 @@ function ns:GetGoalHint(goal)
 end
 
 -- Structured list of visible goals for the current step so UI can render clean interactive rows
+-- Keep the unavailable follow-up out of both panels while the active row
+-- already leads to its prerequisite's giver or recipient.
+local function waitingForHandoff(currentRow, goal, status)
+    return status == "blocked" and currentRow and currentRow.pickupIfMissing
+        and goal.pre and #goal.pre == 1 and goal.pre[1] == currentRow.quest
+end
+
 function ns:GetStepGoalItems(step, state)
     if not step then return {} end
     if not state then _, _, state = self:GetCurrent() end
@@ -1335,6 +1376,7 @@ function ns:GetStepGoalItems(step, state)
         } }
     end
     local _, currentIdx = self:GetActiveGoal(step, state)
+    local currentRow = currentIdx and step.goals[currentIdx]
     local items = {}
     local doneItems = {}
     local pendingWorkByQuest = {}
@@ -1342,6 +1384,7 @@ function ns:GetStepGoalItems(step, state)
 
     for index, row in ipairs(step.goals) do
         local goal, status, reason = self:GetActionableGoal(row, step, state, index)
+        if waitingForHandoff(currentRow, goal, status) then status = "skip" end
         local manualSkip = status == "skip" and reason and reason:find("Omitido manualmente", 1, true) == 1
         if status == "skip" and reason == self.eventOfferReason then
             items[#items+1] = {action="note", status="skip", isCurrent=false,
@@ -1455,11 +1498,13 @@ function ns:GetObjectives(step)
     if not step or not step.goals then return basicObjectives(self, step) end
     local _, _, state = self:GetCurrent()
     local _, current = self:GetActiveGoal(step, state)
+    local currentRow = current and step.goals[current]
     local lines = {}
     local skippedDone = 0
     local groupRows = {}
     for index, row in ipairs(step.goals) do
         local goal, status, reason = self:GetActionableGoal(row, step, state, index)
+        if waitingForHandoff(currentRow, goal, status) then status = "skip" end
         local manualSkip = status == "skip" and reason and reason:find("Omitido manualmente", 1, true) == 1
         if status == "skip" and reason == self.eventOfferReason then
             lines[#lines+1] = "|cff9ba8b8[Opcional] " .. questLabel(nil, goal.quest or goal.questID, goal.title) .. " · " .. (goal.note or reason) .. "|r"

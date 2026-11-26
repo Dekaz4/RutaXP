@@ -661,21 +661,24 @@ function ns:RefreshUI()
 
     self.stepCount:SetText(travelProgress or managed and "Fin de la ruta" or complete and ("Recorrido completado · " .. #guide.steps .. " pasos") or
         ("Paso " .. state.cursor .. " de " .. #guide.steps .. (state.review and " · En revisión" or "")))
-    self.stepTitle:SetText(step and step.title or localFinish or "¡Has completado esta zona!")
     if sharedView then self.stepCount:SetText("Paso " .. state.cursor .. " de " .. #guide.steps .. " · Tu progreso: " .. sharedView.ownCursor) end
 
+    local request = {}
     local waypoint
     if localObjective then waypoint = self:GetLocalTravelPoint(localObjective)
     elseif travel then waypoint = travel.point
-    elseif self.GetStepWaypoint then waypoint = self:GetStepWaypoint(step, nil, {})
+    elseif self.GetStepWaypoint then waypoint = self:GetStepWaypoint(step, nil, request)
     else waypoint = step and step.waypoint end
+    local routeHeading = not sharedView and request.goal and request.goal.routeHeading
+    local stepTitle = routeHeading or (step and step.title)
+    self.stepTitle:SetText(stepTitle or localFinish or "¡Has completado esta zona!")
     local objectives = travel and "" or self:GetObjectives(step)
     local sharedItems = sharedView and self.GetFollowingGoalItems and self:GetFollowingGoalItems(sharedView)
     if sharedView then objectives = self:GetFollowingObjectives(sharedItems) end
     local text
     if step then
         local blocks = {}
-        local body = step.text or step.note
+        local body = not routeHeading and (step.text or step.note)
         if body and body ~= "" and body ~= step.title and not objectives:find(body, 1, true) then
             blocks[#blocks + 1] = "|cffdbd5c8" .. body .. "|r"
         end
@@ -705,6 +708,7 @@ function ns:RefreshUI()
     self.stepContent:SetHeight(math.max(182, self.stepText:GetStringHeight() + 12))
     local stepKey = guide.id .. ":" .. (travel and ("travel:" .. travel.title) or state.cursor)
     if sideTrip then stepKey = stepKey .. ":" .. circuit.key end
+    if routeHeading then stepKey = stepKey .. ":" .. routeHeading end
     if self.lastStepKey ~= stepKey then self.stepScroll:SetVerticalScroll(0); self.lastStepKey = stepKey end
 
     local editSteps = not travel and not sharedView
@@ -736,7 +740,7 @@ function ns:RefreshUI()
     local lvlBadge = guide.minLevel and (" (" .. guide.minLevel .. "–" .. (guide.maxLevel or "?") .. ")") or ""
     self.trackerTitle:SetText(guide.title .. lvlBadge)
     local partnerVisit = sharedView and step and step.only and not self:MatchesConditions(step.only)
-    self.trackerStep:SetText(sideTrip and circuit.step.title or localObjective and "Mis misiones cercanas" or partnerVisit and ("Tu amigo · " .. step.title) or step and step.title or localFinish or "¡Zona completada!")
+    self.trackerStep:SetText(sideTrip and circuit.step.title or localObjective and "Mis misiones cercanas" or partnerVisit and ("Tu amigo · " .. step.title) or stepTitle or localFinish or "¡Zona completada!")
     self.trackerProgress:SetText(travelProgress or managed and "Dúo" or complete and "Completada" or ("Paso " .. state.cursor .. "/" .. #guide.steps))
     if sharedView then self.trackerProgress:SetText((partnerVisit and "Amigo " or "Juntos ") .. state.cursor .. " · Tú " .. sharedView.ownCursor) end
 

@@ -651,6 +651,7 @@
       "instructionVerb": 19,
       "item": 1217,
       "itemName": 1217,
+      "laterStages": 9,
       "level": 25,
       "levelingDetour": 395,
       "location": 401,
@@ -669,6 +670,7 @@
       "only": 355,
       "optional": 416,
       "optionalWhenOffered": 1,
+      "pickupIfMissing": 1,
       "pre": 1217,
       "preAll": 64,
       "preTitles": 1394,
@@ -118236,7 +118238,29 @@
               "y": 53.85,
               "z": 32.9,
               "f": "e",
-              "instruction": "Habla con «Quae» y entrega «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi."
+              "instruction": "Habla con «Quae» y entrega «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi.",
+              "laterStages": [
+                658,
+                657,
+                660,
+                661
+              ],
+              "pickupIfMissing": {
+                "t": "accept",
+                "quest": 659,
+                "title": "Sospechas de una nueva Peste",
+                "npc": 2711,
+                "npcName": "Phin Odelic",
+                "minLevel": 30,
+                "qlvl": 33,
+                "map": 1424,
+                "f": "e",
+                "x": 50.35,
+                "y": 59.05,
+                "z": 10.1,
+                "routeHeading": "Phin Odelic · Costasur",
+                "note": "Recoge la primera parte en Costasur. Después llévala a Quae en la Granja Go’shek."
+              }
             },
             {
               "title": "Sospechas de una nueva Peste",
@@ -118257,7 +118281,12 @@
               "z": 32.9,
               "f": "e",
               "qlvl": 36,
-              "instruction": "Habla con «Quae» y acepta «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi."
+              "instruction": "Habla con «Quae» y acepta «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi.",
+              "laterStages": [
+                657,
+                660,
+                661
+              ]
             }
           ]
         },
@@ -118280,7 +118309,12 @@
               "from": "Mensajero Renegado",
               "fromFaction": "H",
               "fromKind": "npc",
-              "instruction": "Recoge «Carpeta sellada» del botín de «Mensajero Renegado».\nZona: Tierras Altas de Arathi."
+              "instruction": "Recoge «Carpeta sellada» del botín de «Mensajero Renegado».\nZona: Tierras Altas de Arathi.",
+              "laterStages": [
+                657,
+                660,
+                661
+              ]
             }
           ]
         },
@@ -118299,7 +118333,12 @@
               "y": 53.85,
               "z": 32.9,
               "f": "e",
-              "instruction": "Habla con «Quae» y entrega «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi."
+              "instruction": "Habla con «Quae» y entrega «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi.",
+              "laterStages": [
+                657,
+                660,
+                661
+              ]
             },
             {
               "title": "Sospechas de una nueva Peste",
@@ -118320,7 +118359,11 @@
               "z": 32.9,
               "f": "e",
               "qlvl": 36,
-              "instruction": "Habla con «Quae» y acepta «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi."
+              "instruction": "Habla con «Quae» y acepta «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi.",
+              "laterStages": [
+                660,
+                661
+              ]
             },
             {
               "title": "Sospechas de una nueva Peste",
@@ -118334,7 +118377,11 @@
               "y": 53.92,
               "z": 32.3,
               "f": "e",
-              "instruction": "Habla con «Kinelory» y entrega «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi."
+              "instruction": "Habla con «Kinelory» y entrega «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi.",
+              "laterStages": [
+                660,
+                661
+              ]
             },
             {
               "title": "Sospechas de una nueva Peste",
@@ -118355,7 +118402,10 @@
               "z": 32.3,
               "f": "e",
               "qlvl": 37,
-              "instruction": "Habla con «Kinelory» y acepta «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi."
+              "instruction": "Habla con «Kinelory» y acepta «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi.",
+              "laterStages": [
+                661
+              ]
             }
           ]
         },
@@ -118378,7 +118428,10 @@
                 }
               ],
               "navigationHint": "La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
-              "instruction": "Abre «Sospechas de una nueva Peste» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso."
+              "instruction": "Abre «Sospechas de una nueva Peste» en el registro y sigue los objetivos que indique el juego.\nAcceso o lugar: La marca es una referencia del objetivo; consulta sus instrucciones y espera a que el juego confirme el progreso.",
+              "laterStages": [
+                661
+              ]
             }
           ]
         },
@@ -118396,7 +118449,10 @@
               "y": 53.85,
               "z": 32.9,
               "f": "e",
-              "instruction": "Habla con «Quae» y entrega «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi."
+              "instruction": "Habla con «Quae» y entrega «Sospechas de una nueva Peste».\nZona: Tierras Altas de Arathi.",
+              "laterStages": [
+                661
+              ]
             },
             {
               "title": "Sospechas de una nueva Peste",

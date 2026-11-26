@@ -57,8 +57,34 @@ def apply_singing_blue_shards(guide):
                             note="Recoge fragmentos de los basiliscos en la costa noroeste y orejas de los trols en la aldea cercana.")
 
 
+def apply_quae_handoff(document):
+    """Reuse Phin's original offer when the Arathi visit needs its missing introduction."""
+    guides = {guide["id"]: guide for guide in document["guides"]}
+    arathi = guides.get(ALLIANCE + "30-40/05-arathi-highlands")
+    hillsbrad = guides.get(ALLIANCE + "30-40/01-hillsbrad-foothills")
+    if not arathi or not hillsbrad:
+        return
+    phin, = (row for step in hillsbrad["steps"] for row in step["goals"]
+             if row.get("quest") == 659 and row["t"] == "accept" and row.get("npc") == 2711)
+    stages = [659, 658, 657, 660, 661]
+    for step in arathi["steps"]:
+        for row in step["goals"]:
+            quest = row.get("quest")
+            if quest not in stages[:-1]:
+                continue
+            row["laterStages"] = stages[stages.index(quest) + 1:]
+            if quest == 659 and row["t"] == "turnin":
+                row["pickupIfMissing"] = {key: phin[key] for key in
+                    ("t", "quest", "title", "npc", "npcName", "minLevel", "qlvl", "map", "f", "x", "y", "z")}
+                row["pickupIfMissing"].update(
+                    routeHeading="Phin Odelic · Costasur",
+                    note="Recoge la primera parte en Costasur. Después llévala a Quae en la Granja Go’shek.",
+                )
+
+
 def apply_mid_detours(document):
     """Mark reviewed objectives in place without moving or completing any action."""
+    apply_quae_handoff(document)
     for guide in document["guides"]:
         if guide["id"] in (ALLIANCE + "30-40/04-stranglethorn-vale", "forever/horde/30-40/02-stranglethorn-vale"):
             apply_singing_blue_shards(guide)
