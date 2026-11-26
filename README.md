@@ -1,6 +1,6 @@
 # RutaXP para WoW Forever
 
-RutaXP 1.2.20 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos, el selector de rutas, la brújula y el panel de talentos comparten el estilo de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
+RutaXP 1.2.21 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos, el selector de rutas, la brújula y el panel de talentos comparten el estilo de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
 
 ## Actualizar
 
@@ -15,6 +15,8 @@ La opción **1** también instala **LFG Forever** de Artefius con su paquete de 
 Si ya tienes un paquete personal preparado, puedes instalarlo sin conexión con **Instalar_RutaXP_Personal.exe**. Para restaurar la instalación anterior, cierra WoW y ejecuta `Instalar_RutaXP_Personal.exe --restore`.
 
 ## En el juego
+
+Con el avance automático activado, RutaXP aprovecha objetivos del diario que quedan de camino en el capítulo actual. Puede sugerir terminar una cacería a medias, trabajar dos misiones con los mismos enemigos o entregar varias al pasar por un campamento. Journey explica la parada y conserva el progreso del capítulo.
 
 | Acción | Acceso |
 | --- | --- |

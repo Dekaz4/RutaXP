@@ -121,7 +121,7 @@ def main():
                  "build_personal_suite.py", "suite_lua.py", "suite_map_journal.py", "suite_rested.py", "Install-Suite.ps1",
                  "suite_setup.py", "build_suite_setup.py", "verify_personal_suite.py", "PersonalSetup.cs",
                  "build_personal_setup.py", "suite_world_services.py", "suite_journey.py", "build_guide_legacy.py",
-                 "build_dungeon_quest_links.py", "official_sources.py"]:
+                 "build_dungeon_quest_links.py", "build_travel_enemies.py", "official_sources.py"]:
         release_files[f"tools/{name}"] = (ROOT / "tools" / name).read_bytes()
     for record in (ROOT / CATALOG).glob("*.json"):
         release_files[record.relative_to(ROOT).as_posix()] = record.read_bytes()
@@ -133,7 +133,7 @@ def main():
                     "test_golden_quest_arrow.py", "test_navigation_world_consistency.py", "test_features_session_ui.py",
                     "test_access_navigation.py", "test_duo.py", "test_duo_enhanced.py", "test_duo_journey.py",
                     "test_requirement_migrations.py", "test_talent_trainer_regressions.py", "test_westfall_migration.py",
-                    "test_quest_engine.py", "test_addon.py"):
+                    "test_quest_engine.py", "test_addon.py", "test_local_circuit*.py", "test_circuit_terrain.py"):
         for source in sorted(test_dir.glob(pattern)):
             release_files[source.relative_to(ROOT).as_posix()] = source.read_bytes()
     destination = ROOT / "dist"

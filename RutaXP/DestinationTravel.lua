@@ -6,10 +6,11 @@ local localWalkingRange = 2500 -- Retain authored waypoints for nearby itinerari
 local cached, coordinates = {}, setmetatable({}, {__mode="k"})
 local flightDistances = {}
 local arrivals = {}
+local estimates = {}
 
 -- Keep physical connections separate from the directed services that this
 -- character has actually been offered at a flight master.
-local function networkFor(faction)
+local function networkFor(faction, party, zone)
     local roads = R.Network(faction)
     if not roads then return end
     local result = {}
@@ -26,7 +27,8 @@ local function networkFor(faction)
         if allowed(from) and type(offers) == "table" then
             for destination, offered in pairs(offers) do
                 local to = nodes[destination]
-                if offered == true and allowed(to) and from.continent == to.continent and from.map ~= to.map then
+                if offered == true and allowed(to) and from.continent == to.continent and from.map ~= to.map
+                    and (not party or ns.FlightNavigation:CanPlanConnection(origin, destination, party, from.map==zone)) then
                     local exits = result[from.map] or {}
                     exits[#exits+1] = {kind="flight", from=from, to=to, target=to.map,
                         id="flight-"..origin.."-"..destination}
@@ -94,20 +96,23 @@ end
 -- Search by arrival point, not only by zone. Two docks in the same zone
 -- can be on opposite shores. Include the walk to the first stop and from
 -- the last stop to the actual NPC. Transit timetable costs are estimates.
-local function firstLeg(network,start,finish,sample,destination)
+local function firstLeg(network,start,finish,sample,destination,departure)
     if not network then return end
     local pending, costs = {}, {}
-    local best, answer = math.huge, nil
-    local function push(e,seconds,first)
+    local best, answer, usesFlight = math.huge, nil, false
+    local function push(e,seconds,first,flight)
         if seconds < best and seconds < (costs[e] or math.huge) then
             costs[e]=seconds
-            pending[#pending+1]={edge=e,seconds=seconds,first=first or e}
+            pending[#pending+1]={edge=e,seconds=seconds,first=first or e,flight=flight or e.kind=="flight"}
         end
     end
     for _,e in ipairs(network[start] or {}) do
-        local distance = sample and select(3,sample(e.from))
-        local access = distance and distance < math.huge and math.sqrt(distance)/walkSpeed or 120
-        push(e,access+transferSeconds(e))
+        if not departure or (e.kind == departure.kind and e.to.map == departure.destination
+            and (yards(e.from,departure.departure) or math.huge) < 75) then
+            local distance = sample and select(3,sample(e.from))
+            local access = distance and distance < math.huge and math.sqrt(distance)/walkSpeed or 120
+            push(e,access+transferSeconds(e))
+        end
     end
     while #pending > 0 do
         local index=1
@@ -119,16 +124,16 @@ local function firstLeg(network,start,finish,sample,destination)
         if job.seconds == costs[e] then
             if e.target == finish then
                 local total = job.seconds + (yards(e.to,destination) or 0)/walkSpeed
-                if total < best then best,answer=total,job.first end
+                if total < best then best,answer,usesFlight=total,job.first,job.flight end
             else
                 for _,nextEdge in ipairs(network[e.target] or {}) do
                     local access = (yards(e.to,nextEdge.from) or 840)/walkSpeed
-                    push(nextEdge,job.seconds+access+transferSeconds(nextEdge),job.first)
+                    push(nextEdge,job.seconds+access+transferSeconds(nextEdge),job.first,job.flight)
                 end
             end
         end
     end
-    return answer,best
+    return answer,best,usesFlight
 end
 
 local function localChapterTrip(fixed,start,finish,here,destination)
@@ -156,6 +161,61 @@ local function targetNode(zone, point)
         if x >= .51 and x <= .61 and y >= .865 then return TELDRASSIL end
         return TREETOP
     end
+end
+
+-- Same graph and units as the compass, from the current position to the
+-- actual work site. A boat or tram remains available in the no-flight route.
+function R.EstimateJourney(point, zone, party, channel, departure)
+    if not point or not point.mapID or not zone then return end
+    local sample = R.Sample(zone)
+    local start, finish = R.CurrentNode(zone, sample), targetNode(R.KnownZone(point.mapID) or point.mapID, point)
+    if not sample or not start or not finish or start == finish then return end
+    local faction = UnitFactionGroup("player")
+    local roads = R.Network(faction)
+    if not roads then return end
+    local time = GetTime and GetTime() or 0
+    local here = ns:PlayerPoint()
+    local revision = ns.FlightNavigation and ns.FlightNavigation.routeRevision or 0
+    local peerRevision = party and ns.Duo.taxiRevision or 0
+    local peer = party and (party.known and party.partnerHeaderFresh and party.partnerNonce or "?")
+    channel = channel or "quest"
+    local last = estimates[channel]
+    local departureKey = departure and departure.key
+    if last and last.owner==ns.char and last.start==start and last.map==point.mapID and last.x==point.x and last.y==point.y
+        and last.revision==revision and last.peer==peer and last.peerRevision==peerRevision and last.departure==departureKey
+        and here and last.here and time >= last.at and time-last.at<12 and (yards(here,last.here) or math.huge)<35 then
+        return last.result
+    end
+    local edge, seconds, flight = firstLeg(networkFor(faction, party, zone),start,finish,sample,point,departure)
+    if not edge then return end
+    local ground = seconds
+    if flight then
+        local _, secondsWithoutFlights = firstLeg(roads,start,finish,sample,point,departure)
+        ground = secondsWithoutFlights
+    end
+    local result = {seconds=seconds, entry=edge.from, usesFlight=flight, groundSeconds=ground and ground < math.huge and ground or nil}
+    estimates[channel] = {owner=ns.char,start=start,map=point.mapID,x=point.x,y=point.y,departure=departureKey,
+        revision=revision,peer=peer,peerRevision=peerRevision,here=here,at=time,result=result}
+    return result
+end
+
+function R.AuthoredFlightSeconds(origin, landing, goal, zone)
+    if not goal then return end
+    local catalog = ns.GuideTaxiNodes or {}
+    local from, to = catalog[origin], catalog[landing]
+    local sample = from and from.map == zone and R.Sample(zone)
+    local distance = sample and select(3,sample(from))
+    local exit = to and yards(to,goal)
+    if distance and distance < math.huge and exit and to.map == goal.mapID then
+        return math.sqrt(distance)/walkSpeed + transferSeconds({kind="flight",from=from,to=to}) + exit/walkSpeed
+    end
+end
+
+function R.DetourBeforeDeparture(point, entry)
+    local here = ns:PlayerPoint()
+    if not here or not point or not entry or point.mapID ~= here.mapID or entry.map ~= here.mapID then return end
+    local a,b,c = yards(here,point),yards(point,entry),yards(here,entry)
+    if a and b and c then return math.max(0, a+b-c)/walkSpeed end
 end
 
 local function mapName(map)
@@ -356,6 +416,7 @@ function ns:RouteDestination(destination,key,channel)
         saved.started=nil
         return destination,arrival and view("arrival","arrived",arrival,"Sigue la flecha hasta tu objetivo.",destination) or nil
     end
+    local party = self.FlightNavigation and self.FlightNavigation:SharedTravelParty()
     if channel=="chapter" and not saved.started and zone and zone~=TRAM and start~=TREETOP and finish~=TELDRASSIL then
         local here=self.PlayerPoint and self:PlayerPoint()
         local c = here and world(here)
@@ -369,7 +430,16 @@ function ns:RouteDestination(destination,key,channel)
                     return crossing.point,crossing
                 end
             end
-            return destination
+            local shortcut
+            -- Nearby final objectives still use the local road. Compare a distant
+            -- quest across the border when this character has observed flights.
+            if here and destination.source ~= "itinerary" and (yards(here,destination) or 0) >= localWalkingRange
+                and self.char and type(self.char.observedTaxiRoutes) == "table" and next(self.char.observedTaxiRoutes) then
+                local estimate = R.EstimateJourney(destination,zone,party,"chapter")
+                shortcut = estimate and estimate.usesFlight and estimate.groundSeconds
+                    and estimate.seconds + 60 < estimate.groundSeconds * .75
+            end
+            if not shortcut then return destination end
         end
     end
     saved.started=true
@@ -381,9 +451,12 @@ function ns:RouteDestination(destination,key,channel)
     end
     local c = cached[channel]
     local revision = self.FlightNavigation and self.FlightNavigation.routeRevision or 0
+    local peerRevision = party and self.Duo.taxiRevision or 0
+    local peer = party and (party.known and party.partnerHeaderFresh and party.partnerNonce or "?")
     if not c or c.owner~=self.char or c.key~=saved.key or c.start~=start or c.target~=target or c.revision~=revision
+        or c.peer~=peer or c.peerRevision~=peerRevision
         or now-c.at >= 8 or now<c.at or c.x~=destination.x or c.y~=destination.y then
-        local network=networkFor(faction)
+        local network=networkFor(faction,party,zone)
         local first
         if zone==TRAM and faction=="Alliance" then
             local best=math.huge
@@ -393,7 +466,7 @@ function ns:RouteDestination(destination,key,channel)
                 if cost and cost < best then best,first=cost,{kind="tram",from={map=TRAM},to={map=city}} end
             end
         else first=firstLeg(network,start,target,sample,destination) end
-        c={owner=self.char,key=saved.key,start=start,target=target,revision=revision,at=now,
+        c={owner=self.char,key=saved.key,start=start,target=target,revision=revision,peer=peer,peerRevision=peerRevision,at=now,
             x=destination.x,y=destination.y,edge=first}
         cached[channel]=c
     end

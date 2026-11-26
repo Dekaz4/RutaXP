@@ -437,6 +437,25 @@ function ns:GetStepWaypoint(step, travel, mapRequest)
             return follow
         end
     end
+    if step and self.GetLocalCircuitStop and not (mapRequest and mapRequest.index) then
+        local stop = self:GetLocalCircuitStop(step)
+        if stop and stop.point then
+            if not mapRequest then self.sampledCircuitStop = stop end
+            local base = {}
+            for field, value in pairs(stop.point) do base[field] = value end
+            local guide = self.guides[self.char.activeGuide]
+            base.goal = stop.goal
+            base.targetKey = table.concat({"local-circuit", guide.id, stop.key, stop.goal.t}, ":")
+            base.guideID, base.stepIndex, base.goalIndex = guide.id, stop.stepIndex, stop.index
+            if mapRequest then mapRequest.goal = stop.goal end
+            if not self.Waypoints or not self.Waypoints.ResolveTarget then return base end
+            local point = self.Waypoints:ResolveTarget({base=base, goal=stop.goal, guide=guide,
+                step=stop.step, stepIndex=stop.stepIndex, goalIndex=stop.index, source="local-circuit", key=base.targetKey})
+            if point then return point end
+            if mapRequest then return base end
+            return nil
+        end
+    end
     local goal, base = step, nil
     if step and step.goals and self.GetActiveGoal and not step.waypoint then
         local active, activeIndex, status, reason = self:GetActiveGoal(step)
@@ -490,6 +509,7 @@ end
 -- Keep terrain steering separate from the semantic target used by the map
 -- and quest engine. Reaching a bend must never finish the real travel goal.
 function ns:GetArrowWaypoint(step, travel)
+    self.sampledCircuitStop = nil
     local body, deathHint
     if self.GetDeathNavigation then body, deathHint = self:GetDeathNavigation() end
     self.deathNavigationHint = deathHint
@@ -808,8 +828,11 @@ local function updateArrow(self, frame)
         end
     end
     if self.navigationActivity then travel=nil end
-    if not point and not self.navigationActivity and self.char.localTravelChoice and self.GetTravelComparison then
-        local _, entry = self:GetTravelComparison()
+    if not point and not self.navigationActivity then
+        local entry = self.sampledCircuitStop
+        if not entry and self.char.localTravelChoice and self.GetTravelComparison then
+            _, entry = self:GetTravelComparison()
+        end
         if entry then
             frame.dNorth, frame.dWest, frame.targetContinent, frame.arrived = nil, nil, nil, false
             frame:Show()
@@ -1052,9 +1075,48 @@ local function updateArrow(self, frame)
     return hint
 end
 
+-- The tracker can stay visible with the compass disabled. Sample movement at
+-- walking speed without running the circuit planner on every compass tick.
+local function trackerMoved(self)
+    local now = safe(GetTime)
+    if not number(now) then return false end
+    local probe = self.trackerPositionSample
+    if probe and now >= probe.at and now - probe.at < 2 then return false end
+    local _, north, west, map = playerWorld()
+    if not probe then
+        probe = {}
+        self.trackerPositionSample = probe
+    end
+    probe.at = now
+    if not number(north) or not number(west) then map = nil end
+    if probe.map == map and (not map or (north-probe.north)^2 + (west-probe.west)^2 < 8^2) then return false end
+    probe.map, probe.north, probe.west = map, north, west
+    return true
+end
+
 function ns:UpdateNavigation()
     if not self.char then return end
     if not self.navigationFrame then self:CreateNavigation() end
     local frame = self.navigationFrame
-    if frame then frame.hint:SetText(updateArrow(self, frame) or "") end
+    if frame then
+        frame.hint:SetText(updateArrow(self, frame) or "")
+        -- Terrain/position updates can change a local stop between journal events.
+        local sampled, shown = self.sampledCircuitStop, self.displayedCircuitStop
+        if self.char.arrow == false then
+            if not (self.LocalCircuit and self.GetLocalCircuitStop and self.char.auto and self.window
+                and (self.char.tracker or self.window:IsShown())) then
+                self.trackerPositionSample = nil
+                return
+            end
+            if not trackerMoved(self) then return end
+            sampled = self:GetLocalCircuitStop()
+        else
+            self.trackerPositionSample = nil
+        end
+        if self.window and sampled ~= shown and
+            (not sampled or not shown or sampled.key ~= shown.key or sampled.goal ~= shown.goal
+                or sampled.authored ~= shown.authored or sampled.reason ~= shown.reason) then
+            self:RefreshUI()
+        end
+    end
 end

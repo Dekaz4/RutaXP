@@ -1,7 +1,7 @@
 """Use the flight master's observed routes, never map discovery as connectivity."""
 import unittest
 
-from test_access_navigation import WORLD_STUBS
+from test_access_navigation import ADDON, WORLD_STUBS
 from test_duo import DUO_STUBS
 from test_duo_journey import primitive_copy
 from test_talent_trainer_regressions import TalentTrainerHost
@@ -83,6 +83,18 @@ class FlightHost:
 
 
 class FlightNavigationTests(unittest.TestCase):
+    def test_western_duskwood_walks_to_sentinel_hill_instead_of_backtracking_to_felicia(self):
+        h = FlightHost()
+        h.h.lua.execute((ADDON/"DestinationTravel.lua").read_text(encoding="utf8"), "RutaXP", h.ns)
+        chapter = h.ns.guides["forever/alliance/04-redridge-mountains"]
+        h.step.goals[1] = h.goal = next(row for step in chapter.steps.values() for row in step.goals.values()
+                                        if row.t == "fly" and row.location == "Colina del Centinela")
+        h.ns.char.auto = True
+        h.ns.char.observedTaxiRoutes = h.h.table({12:{4:True}})
+        h.move(1431,.077,.325)
+        self.assertEqual(h.view().state, "ground")
+        self.assertFalse(h.complete())
+
     def test_unknown_does_not_claim_available_or_missing_from_discovery(self):
         h = FlightHost()
         self.assertEqual(h.view().state, "unknown")

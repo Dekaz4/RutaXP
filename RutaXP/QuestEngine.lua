@@ -944,6 +944,35 @@ function ns:GetActiveGoal(step, state)
     end
 end
 
+-- The authored cursor remains the authority for advancement, prerequisites and
+-- manual skips. A local stop only changes which eligible action we do first.
+function ns:GetLocalCircuitStop(expectedStep)
+    local char, planner = self.char, self.LocalCircuit
+    if not planner or not char or not char.auto then return end
+    local guide, step, state = self:GetCurrent()
+    if not step or not step.goals or (expectedStep and expectedStep ~= step) or state.review
+        or guide.temporary or guide.recovery or step.waypoint then return end
+    if read(UnitIsDeadOrGhost, "player") or read(UnitOnTaxi, "player") or read(IsInInstance)
+        or (self.GetGuideTravel and self:GetGuideTravel())
+        or (self.DungeonPlanner and self.DungeonPlanner.IsDetouring and self.DungeonPlanner:IsDetouring()) then return end
+    if (self.DuoAuto and self.DuoAuto.GetSharedView and self.DuoAuto:GetSharedView())
+        or (self.Duo and self.Duo.GetMeetingWaypoint and self.Duo:GetMeetingWaypoint())
+        or (self.DuoPlanner and self.DuoPlanner.focus and self.DuoPlanner:GetNavigationOverride())
+        or (self.Waypoints and self.Waypoints.IsRouting and self.Waypoints:IsRouting()) then return end
+    if self.GetTravelComparison and self:GetTravelComparison() then return end
+    local base, index, status = self:GetActiveGoal(step, state)
+    return planner:Choose(guide, step, state, base, index, status)
+end
+
+function ns:DeferLocalCircuitStop(key)
+    local stop = self:GetLocalCircuitStop()
+    if not stop or stop.authored or (key and key ~= stop.key) then return false end
+    local guide, _, state = self:GetCurrent()
+    self.LocalCircuit:Defer(guide, state, stop)
+    self:Sync()
+    return true
+end
+
 function ns:IsStepComplete(step, stateOverride)
     if not step or not step.goals then return self:GetLevelingDetourReason(step) ~= nil or self:GetGroupDeferralReason(step, step) ~= nil or basicComplete(self, step) end
     local state = stateOverride or select(3, self:GetCurrent())
@@ -1025,6 +1054,7 @@ function ns:Sync()
 end
 
 function ns:Next()
+    if self:DeferLocalCircuitStop() then return end
     local _, step, state = self:GetCurrent()
     if state and not step then return self:ContinueGuide() end
     if not step or not step.goals or state.review then return basicNext(self) end
@@ -1062,6 +1092,7 @@ end
 
 -- Skip the entire current step with 1 click
 function ns:SkipStep()
+    if self:DeferLocalCircuitStop() then return end
     local guide, step, state = self:GetCurrent()
     if not guide or not step then return end
     if step.goals then
@@ -1730,13 +1761,20 @@ end
 local function turninAtContact(self, id, ready)
     if self.GetGuideTravel and self:GetGuideTravel() then return false end
     if self:WantsQuest("turnin", id) then return true end
-    if not self.CanHandInDuringVisit then return false end
     local npc = self:GetQuestContactNPC()
-    return npc and self:CanHandInDuringVisit(id, npc, ready) or false
+    if not npc then return false end
+    if ready and self:IsQuestActive(id) then
+        local stop = self:GetLocalCircuitStop()
+        if stop and stop.goal.t == "turnin" and stop.goal.quest == id and stop.goal.npc == npc then return true end
+    end
+    return self.CanHandInDuringVisit and self:CanHandInDuringVisit(id, npc, ready) or false
 end
 
 local function selectAvailable(self, count, getOffer, selectOffer)
     local best, firstStep, firstGoal
+    local stop = count > 0 and self:GetLocalCircuitStop()
+    local pickup = stop and stop.goal.t == "accept" and stop.goal.npc
+        and stop.goal.npc == self:GetQuestContactNPC() and stop.goal.quest
     for i = 1, count do
         local id, selection = getOffer(i)
         local goal = currentQuestIndex(self, "accept", id)
@@ -1746,6 +1784,7 @@ local function selectAvailable(self, count, getOffer, selectOffer)
         end
         if not goal and self.GetEarlyQuestOrder then
             step, goal = self:GetEarlyQuestOrder(id)
+            if goal and id == pickup then step = 0 end
         end
         if goal and (not best or step < firstStep or (step == firstStep and goal < firstGoal)) then
             best, firstStep, firstGoal = selection, step, goal

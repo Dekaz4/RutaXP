@@ -170,6 +170,7 @@ local function rememberConnections(observation)
     end
     routes[observation.origin] = reachable
     F.routeRevision = (F.routeRevision or 0) + 1
+    if ns.Duo and ns.Duo.TaxiOffersChanged then ns.Duo:TaxiOffersChanged(observation.origin) end
     F.lastTaxiVisit = observation
 end
 
@@ -177,24 +178,41 @@ function F:HasObservedConnection(origin, destination)
     local routes = ns.char and ns.char.observedTaxiRoutes
     return type(routes) == "table" and type(routes[origin]) == "table" and routes[origin][destination] == true
 end
+function F:SharedTravelParty()
+    local ctx = ns.Duo and ns.Duo:GetContext()
+    if ctx and ctx.enabled and ctx.sameParty and ctx.groupSize == 2 then return ctx end
+end
 
-function F:GetPlanningConnection(goal, zone)
+function F:CanPlanConnection(origin, destination, party, request)
+    if not self:HasObservedConnection(origin, destination) then return false end
+    if not party then return true end
+    local offers = party.online and party.known and party.partnerHeaderFresh and
+        ns.Duo:GetPartnerTaxiOffers(origin, request)
+    return type(offers) == "table" and offers[destination] == true
+end
+
+function F:GetPlanningConnection(goal, zone, party)
     local landings, ids = destinations(goal)
     local map = landings[1] and landings[1].map
     if not map or map == zone then return end
     for _, landing in ipairs(landings) do if map ~= landing.map then return end end
     local sample, code = R.Sample(zone), factionCode()
-    local origin, nearest = nil, math.huge
+    local bestFrom, bestTo, best = nil, nil, math.huge
     for _, c in ipairs(goal.candidates or {}) do
         if sample and c.flightNode and not ids[c.flightNode] and c.map == zone and forFaction(c, code) then
             local _, _, distance = sample(c)
-            if distance < nearest then origin, nearest = c.flightNode, distance end
+            if distance < math.huge then
+                for _, landing in ipairs(landings) do
+                    if self:CanPlanConnection(c.flightNode, landing.flightNode, party, true) then
+                        local cost = R.AuthoredFlightSeconds and R.AuthoredFlightSeconds(c.flightNode,
+                            landing.flightNode, ns:ResolveWaypointPoint(landing), zone) or math.sqrt(distance)/7
+                        if cost < best then bestFrom,bestTo,best = c.flightNode,landing.flightNode,cost end
+                    end
+                end
+            end
         end
     end
-    for _, landing in ipairs(landings) do
-        if origin and self:HasObservedConnection(origin, landing.flightNode) then return map, true end
-    end
-    return map, false
+    return map,bestFrom ~= nil,bestFrom,bestTo
 end
 
 function F:ObserveTaxi()
@@ -317,11 +335,39 @@ function F:GetView(goal, base)
     local name = ctx.goal.location or "el destino"
     base = base or (ns.GetGoalWaypoint and ns:GetGoalWaypoint(ctx.goal))
     local canGround = groundPossible(landing, zone, sample)
+    local party = self:SharedTravelParty()
+    local _, confirmed, origin, id = self:GetPlanningConnection(ctx.goal, zone, party)
+    if ns.char.auto and canGround and R.EstimateJourney and R.AuthoredFlightSeconds then
+        if confirmed and id == landing.flightNode then
+            local target = ns:ResolveWaypointPoint(landing)
+            local estimate = R.EstimateJourney(target, zone, party,"flight")
+            local seconds = R.AuthoredFlightSeconds(origin,id,target,zone)
+            -- Both alternatives reach the authored landing point; any walk from
+            -- there to the quest is identical. Keep a margin for terrain error.
+            if estimate and seconds and estimate.groundSeconds and estimate.groundSeconds + 60 < seconds * .75 then
+                saved.ground = {key=ctx.key,destination=id}
+                return groundView(ctx,landing,zone,sample)
+            end
+        end
+    end
+    local suggested = not observed and confirmed and (ns.GuideTaxiNodes or {})[origin]
+    if suggested then
+        base = point(suggested,ctx.goal,suggested.name,ctx.key..":master:"..origin) or base
+    end
     local _, ids = destinations(ctx.goal)
     local allUnavailable = observed ~= nil
     for id in pairs(ids) do
         local record = observed and observed.nodes[id]
         if record and record.kind == "reachable" then
+            if party and not self:CanPlanConnection(observed.origin, id, party, true) then
+                local peer = party.known and party.partnerHeaderFresh and ns.Duo:GetPartnerTaxiOffers(observed.origin)
+                if peer and ns.char.auto and canGround then
+                    saved.ground = {key=ctx.key,destination=landing.flightNode}
+                    return groundView(ctx,landing,zone,sample)
+                end
+                return {state="unknown",title="Comprobad el vuelo a "..name,shortText="Confirmad ambos el vuelo",
+                    text="Tu maestro ofrece el vuelo. Comprobad que también se lo ofrece a tu compañero.",point=base,canGround=canGround}
+            end
             local instruction = "El vuelo a " .. name .. " está disponible. Elígelo en el mapa de vuelos."
             if observed.origin == 26 and id == 28 then
                 instruction = "Desde el icono verde de Auberdine, baja un poco y mira a la derecha. Elige «" ..
@@ -336,7 +382,8 @@ function F:GetView(goal, base)
         local hub, hubRecord, hubDistance
         for _, candidate in ipairs(ctx.goal.candidates or {}) do
             local record = observed.nodes[candidate.flightNode]
-            if not ids[candidate.flightNode] and record and record.kind == "reachable" then
+            if not ids[candidate.flightNode] and record and record.kind == "reachable"
+                and (not party or self:CanPlanConnection(observed.origin,candidate.flightNode,party,true)) then
                 -- DistanceTo uses the sample only to disambiguate disconnected
                 -- Teldrassil surfaces; their destinations need a proper sample.
                 local distance = candidate.map ~= 1438 and R.DistanceTo and R.DistanceTo(landing, candidate.map)
@@ -354,8 +401,10 @@ function F:GetView(goal, base)
             text="Desde este maestro no tienes conexión a " .. name .. (canGround and ". Pulsa «Ir sin vuelo» para seguir el camino." or ". Consulta otra conexión antes de continuar."),
             point=nil, canGround=canGround}
     end
+    local instruction = suggested and ("Ve al maestro de "..suggested.name.." y elige el vuelo a "..name..".")
+        or ("Habla con el maestro y comprueba el vuelo a " .. name .. ".")
     return {state="unknown", title="Vuela a " .. name, shortText="Consulta los vuelos",
-        text="Habla con el maestro y comprueba el vuelo a " .. name .. ".", point=base, canGround=canGround}
+        text=instruction, point=base, canGround=canGround}
 end
 function F:CurrentView() return self:GetView() end
 function F:Resolve(goal, base)
@@ -401,6 +450,7 @@ function F:ApplyRejection()
         if type(routes) == "table" and type(routes[attempt.observation.origin]) == "table" then
             routes[attempt.observation.origin][attempt.id] = nil
             self.routeRevision = (self.routeRevision or 0) + 1
+            if ns.Duo and ns.Duo.TaxiOffersChanged then ns.Duo:TaxiOffersChanged(attempt.observation.origin) end
         end
     end
     self.pendingError, self.attempt = nil, nil

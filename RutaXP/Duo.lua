@@ -234,6 +234,8 @@ function Duo:Settings()
     return ns.char.duo
 end
 function Duo:ClearPeer()
+    self.taxiOffers, self.requestTaxi, self.replyTaxi, self.taxiSubscribers = nil, nil, nil, nil
+    self.taxiRevision = (self.taxiRevision or 0) + 1
     self.lastTravelSignal, self.lastTravelSent = nil, nil
     self.transport = nil
     self.peer, self.remoteQuests, self.requested, self.outboundRequests = nil, {}, {}, {}
@@ -242,6 +244,50 @@ function Duo:ClearPeer()
     self.lastHeader, self.lastSentHeader, self.rotation = nil, nil, 0
     self.lastSentQuest, self.objectiveRotation = nil, {}
     self.autoQueue, self.lastSentAuto = nil, nil
+end
+-- Exchange only the departure masters a shared journey is considering.
+-- Missing replies (including older clients) never establish connectivity.
+function Duo:GetPartnerTaxiOffers(origin, request)
+    local record = self.taxiOffers and self.taxiOffers[origin]
+    if record and fresh(record.seen, 45) then return record.nodes end
+    if request and ns.GuideTaxiNodes and ns.GuideTaxiNodes[origin] then
+        self.requestTaxi = self.requestTaxi or {}
+        local query = self.requestTaxi[origin] or {}
+        query.wanted = now()
+        self.requestTaxi[origin] = query
+    end
+end
+function Duo:TaxiOffersChanged(origin)
+    if self.taxiSubscribers and fresh(self.taxiSubscribers[origin], 60) then
+        self.replyTaxi = self.replyTaxi or {}
+        self.replyTaxi[origin] = true
+    end
+end
+local function sendTaxiUpdate(self)
+    if not fresh(self.peer and self.peer.headerSeen, 15) then return end
+    local origin = self.replyTaxi and next(self.replyTaxi)
+    if origin then
+        local ids = {}
+        local origins = ns.char.observedTaxiRoutes
+        local offers = type(origins) == "table" and origins[origin]
+        for destination, offered in pairs(type(offers) == "table" and offers or {}) do
+            local node = ns.GuideTaxiNodes[destination]
+            if offered == true and node and destination ~= origin and node.continent == ns.GuideTaxiNodes[origin].continent then
+                ids[#ids+1] = destination
+            end
+        end
+        table.sort(ids)
+        local list = #ids > 0 and table.concat(ids, ",") or "-"
+        if self:Send("F", origin .. "|" .. list) then self.replyTaxi[origin] = nil end
+        return true
+    end
+    for id, query in pairs(self.requestTaxi or {}) do
+        if not fresh(query.wanted, 20) then self.requestTaxi[id] = nil
+        elseif not fresh(query.sent, 15) then
+            if self:Send("F", id .. "|?") then query.sent = now() end
+            return true
+        end
+    end
 end
 function Duo:RefreshRoster()
     local members = safe(GetNumGroupMembers) or 0
@@ -983,6 +1029,8 @@ function Duo:Receive(prefix, message, channel, sender)
         if self.peer and self.peer.nonce == fields[3] and seq <= self.peer.sequence then return false end
         if not self.peer or self.peer.nonce ~= fields[3] then
             self.remoteQuests, self.requested, self.remoteSupplies, self.remoteCheckpoint, self.partnerMeeting = {}, {}, nil, nil, nil
+            self.taxiOffers, self.requestTaxi, self.replyTaxi, self.taxiSubscribers = nil, nil, nil, nil
+            self.taxiRevision = (self.taxiRevision or 0) + 1
         end
         local previous = self.peer
         self.peer = { nonce = fields[3], sequence = seq, level = level, class = fields[6], race = fields[7],
@@ -1009,6 +1057,32 @@ function Duo:Receive(prefix, message, channel, sender)
             if not token(fields[5]) or #fields[5] > 40 or not token(fields[6]) or not reference or not cursor or not phase then return false end
             if not safe(ns.DuoAuto.OnProtocol, ns.DuoAuto, kind, { transaction=fields[5], guideID=fields[6],
                 reference=reference, cursor=cursor, phase=phase, nonce=fields[3], sender=self.partnerName }) then return false end
+        elseif kind == "F" and #fields == 6 then
+            local origin = integer(fields[5], 1, 100000)
+            local catalog = ns.GuideTaxiNodes or {}
+            if not origin or not catalog[origin] or not fresh(self.peer.headerSeen, 15) then return false end
+            if fields[6] == "?" then
+                self.replyTaxi = self.replyTaxi or {}
+                self.replyTaxi[origin] = true
+                self.taxiSubscribers = self.taxiSubscribers or {}
+                self.taxiSubscribers[origin] = now()
+            else
+                local previous = self.taxiOffers and self.taxiOffers[origin]
+                if not ((self.requestTaxi and self.requestTaxi[origin]) or (previous and fresh(previous.seen, 60))) then return false end
+                local nodes = {}
+                if fields[6] ~= "-" then
+                    for raw in (fields[6] .. ","):gmatch("(.-),") do
+                        local id = integer(raw, 1, 100000)
+                        if not id or id == origin or not catalog[id] or nodes[id]
+                            or catalog[id].continent ~= catalog[origin].continent then return false end
+                        nodes[id] = true
+                    end
+                end
+                if self.requestTaxi then self.requestTaxi[origin] = nil end
+                self.taxiOffers = self.taxiOffers or {}
+                self.taxiOffers[origin] = {nodes=nodes, seen=now()}
+                self.taxiRevision = (self.taxiRevision or 0) + 1
+            end
         elseif kind == "T" and #fields == 9 then
             local source, dest = fields[5], fields[6]
             local reached, ready = integer(fields[7], 0, 10000), boolean(fields[8])
@@ -1233,6 +1307,8 @@ function Duo:Tick(elapsed)
         elseif auxiliary and boatSignal and (boatSignal ~= self.lastBoatSignal or not self.lastSentCheckpoint
             or now() - self.lastSentCheckpoint >= 10) then
             if self:Send("C", boatSignal) then self.lastBoatSignal, self.lastSentCheckpoint = boatSignal, now() end
+        elseif auxiliary and sendTaxiUpdate(self) then
+            -- The flight snapshot uses the existing single auxiliary message slot.
         elseif auxiliary and meetingValid(meeting) and (not self.lastSentMeeting or now() - self.lastSentMeeting >= 20) then
             local clear = meeting.clear == true
             if self:Send("M", table.concat({ meeting.revision, clear and 0 or meeting.mapID,

@@ -89,7 +89,7 @@ local function legacyDestination(guide, si, gi, origin, goal, kind)
     end
 end
 
-local function journey(guide, step, state, travel, origin)
+local function journey(guide, step, state, travel, origin, party)
     if travel then
         local destination = ns.guides[travel.destination]
         local route = ns.GuideTravelRoutes[travel.source]
@@ -106,7 +106,7 @@ local function journey(guide, step, state, travel, origin)
     local goal, index, status = ns:GetActiveGoal(step, state)
     if not goal or status ~= "active" and status ~= "manual" then return end
     local kind = legacyKind(goal) or goal.t
-    local destination, flight, label
+    local destination, flight, label, flightOrigin
     if goal.t == "boat" then
         if not goal.departure or goal.departure.map ~= origin then return end
         local phase = ns.BoatNavigation:GetSharedView(goal, guide, state.cursor, index)
@@ -116,10 +116,10 @@ local function journey(guide, step, state, travel, origin)
         -- connection seen from Theramore (32) to Thalanaar (31) can shorten
         -- that land leg. It says nothing about flying between continents.
         if guide.id == "forever/alliance/07-thousand-needles" and origin == 1437 and destination == 1445 then
-            flight = ns.FlightNavigation and ns.FlightNavigation:HasObservedConnection(32, 31)
+            flight = ns.FlightNavigation and ns.FlightNavigation:CanPlanConnection(32, 31, party, true)
         end
     elseif goal.t == "fly" then
-        destination, flight = ns.FlightNavigation:GetPlanningConnection(goal, origin)
+        destination, flight, flightOrigin = ns.FlightNavigation:GetPlanningConnection(goal, origin, party)
     elseif goal.t == "goto" and kind ~= goal.t then
         destination = legacyDestination(guide, state.cursor, index, origin, goal, kind)
         label = goal.text:match("^[Bb]oat a (.+)$") or goal.text:match("^[Bb]arco a (.+)$")
@@ -130,7 +130,8 @@ local function journey(guide, step, state, travel, origin)
     if not destination or destination == origin then return end
     return {key=table.concat({guide.id, guide.routeRevision or 1, state.cursor, index, origin}, ":"),
         guide=guide, start=state.cursor, first=index+1, destination=destination, flight=flight, kind=kind,
-        label=label or goal.location}
+        label=label or goal.location,
+        departure=goal.departure or (flightOrigin and (ns.GuideTaxiNodes or {})[flightOrigin]) or (kind~=goal.t and goal or nil)}
 end
 
 -- Index authored positions once per zone. Evaluate actual work and delivery
@@ -268,7 +269,7 @@ local function destinationBlock(trip, zone, level)
                             or not active and available[id] and status ~= "skip" and status ~= "done")
                         or goal.t == "turnin" and ready == true and status == "active") then
                         seen[id] = true
-                        goals[#goals+1] = {id=id, title=title(goal), map=goalMap(goal), ready=ready == true}
+                        goals[#goals+1] = {id=id, title=title(goal), map=goalMap(goal), ready=ready == true, goal=goal}
                         local enemy = work[goal.t] and enemyRange(id, active)
                         if enemy and enemy.min >= level+3 and (not hard or enemy.min > hard.min) then
                             hard, hardGoal = enemy, title(goal)
@@ -281,17 +282,56 @@ local function destinationBlock(trip, zone, level)
     return goals, hard, hardGoal
 end
 
-local function compare(trip, zone, level, duo, savedQuests)
+local function alongDeparture(trip, entry, localGoals)
+    local anchor = ns:ResolveWaypointPoint(entry)
+    if not anchor then return end
+    for _, row in ipairs(localGoals) do
+        local distance = row.distance
+        local extra = distance <= 240 and ns.TravelRouting.DetourBeforeDeparture(row.point,entry)
+        local action, budget
+        if extra and row.goal.t == "turnin" and extra <= 30 then action, budget = "turnin", 210
+        elseif extra and row.goal.t == "kill" and distance <= 120 and extra <= 15 then
+            local objectives = read(C_QuestLog and C_QuestLog.GetQuestObjectives, row.quest)
+            local obj = type(objectives) == "table" and objectives[row.goal.oi or 1]
+            local left = obj and read(function()
+                if obj.numFulfilled > 0 then return obj.numRequired - obj.numFulfilled end
+            end)
+            if left and left > 0 and left <= 2 then action, budget = "kill:"..(row.goal.oi or 1), 105 end
+        end
+        if action then
+            -- Measure one actionable stop, not a competing mesh job for
+            -- every nearby NPC. On its completion the next can be considered.
+            local key = table.concat({"departure",trip.key,row.quest,action}, ":")
+            if ns.CircuitTerrain and ns.CircuitTerrain:Check(key,row.point,anchor,budget) then
+                return {[row.quest]=action}
+            end
+            return
+        end
+    end
+end
+
+local function compare(trip, zone, level, duo, savedQuests, party)
     local saltFlats = trip.kind == "boat" and zone == 1437 and trip.destination == 1445
         and trip.guide.id == "forever/alliance/07-thousand-needles"
     local earlyCrossing = saltFlats and level < 32 and not duo and not (ns.char.duo and ns.char.duo.enabled)
     local localGoals = nearby(zone, level, duo, savedQuests, earlyCrossing or saltFlats and savedQuests and not duo)
     local dest, hard, hardTitle = destinationBlock(trip, zone, level)
     if #localGoals == 0 and not hard then return end
+    local site = dest[1] and ns:ResolveWaypointPoint(dest[1].goal.waypoint or dest[1].goal)
+    local routing = ns.TravelRouting
+    local crossing = trip.departure and trip.kind ~= "fly" and trip
+    local estimate = site and routing.EstimateJourney and routing.EstimateJourney(site,zone,party,"departure",crossing)
+    local enRoute = estimate and not party and not savedQuests and
+        alongDeparture(trip,trip.departure or estimate.entry,localGoals) or {}
     -- Prefer a long transfer once its block is substantially larger than
     -- the work already in the journal. A confirmed flight reduces that cost.
     local localWeight = trip.flight and 1 or 2
-    local prefer = #localGoals > 0 and (hard ~= nil or #localGoals * localWeight >= #dest)
+    if estimate then
+        -- Estimate travel minutes per destination task. A nearby ready
+        -- turn-in still wins when it fits before the planned departure.
+        localWeight = math.max(1,math.min(3,estimate.seconds / 180))
+    end
+    local prefer = #localGoals > 0 and (next(enRoute) ~= nil or hard ~= nil or #localGoals * localWeight >= #dest)
     if earlyCrossing and not trip.flight and #localGoals > 0 then
         local readyAtDestination = false
         for _, entry in ipairs(dest) do
@@ -322,15 +362,21 @@ local function compare(trip, zone, level, duo, savedQuests)
         details[#details+1] = ("%s incluye %s de nivel %d–%d."):format(hardTitle, hard.label, hard.min, hard.max)
     end
     if trip.flight then
-        details[#details+1] = trip.kind == "boat" and "Tienes observado el vuelo de Theramore a Thalanaar."
-            or "El maestro de salida ya te ofreció el vuelo."
+        details[#details+1] = party and "El maestro de salida os ha ofrecido el vuelo a ambos."
+            or (trip.kind == "boat" and "Tienes observado el vuelo de Theramore a Thalanaar."
+            or "El maestro de salida ya te ofreció el vuelo.")
     elseif trip.kind == "fly" or trip.flight == false then
-        details[#details+1] = "Todavía no hay un vuelo confirmado para ese trayecto."
+        details[#details+1] = party and "Falta confirmar el vuelo para ambos personajes."
+            or "Todavía no hay un vuelo confirmado para ese trayecto."
+    end
+    if estimate then
+        details[#details+1] = ("Hasta el primer objetivo, unos %d min de viaje."):format(math.max(1, math.floor(estimate.seconds/60+.5)))
+        if next(enRoute) then details[#details+1] = "Puedes aprovechar una misión de camino a la salida." end
     end
     if duo then details[#details+1] = "El de menor nivel del dúo está en " .. level .. "." end
     return {key=trip.key, originMap=zone, summary=table.concat(details, " "), localGoals=localGoals,
         localCount=#localGoals, destinationGoals=dest, destinationCount=#dest, level=level,
-        hardTitle=hardTitle, hardLevel=hard and hard.min, preferLocal=prefer,
+        hardTitle=hardTitle, hardLevel=hard and hard.min, preferLocal=prefer, enRoute=enRoute, journey=estimate,
         localTitle=mapTitle(zone) or "Esta zona", destinationTitle=destination, flightConfirmed=trip.flight == true}
 end
 
@@ -339,7 +385,8 @@ function Choice:GetRecommendation(guide, step, state, travel, activeKey)
         (not travel and not firstDeparture(step)) then return end
     local zone = ns.TravelRouting.Zone()
     if not zone or ns.TravelRouting.OnTaxi() then return end
-    local trip = journey(guide, step, state, travel, zone)
+    local party = ns.FlightNavigation and ns.FlightNavigation:SharedTravelParty()
+    local trip = journey(guide, step, state, travel, zone, party)
     if not trip then return end
     if activeKey ~= trip.key then activeKey = nil end
     local level, duo = referenceLevel()
@@ -350,7 +397,7 @@ function Choice:GetRecommendation(guide, step, state, travel, activeKey)
     local key = table.concat({trip.key, level, tostring(duo), tostring(trip.flight), tostring(activeKey),
         tostring(ns.char.includeGroupQuests), tostring(ns.char.optional), tostring(ns.char.skipTrivial)}, "|")
     if now and self.key == key and self.at and now >= self.at and now-self.at < 2 then return self.view end
-    self.view, self.key, self.at = compare(trip, zone, level, duo, savedQuests), key, now
+    self.view, self.key, self.at = compare(trip, zone, level, duo, savedQuests, party), key, now
     return self.view
 end
 

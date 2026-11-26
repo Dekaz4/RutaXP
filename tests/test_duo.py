@@ -73,6 +73,30 @@ class DuoHost(engine.QuestEngineHost):
 
 
 class DuoTests(unittest.TestCase):
+    def test_flight_offers_require_the_same_direction_from_both_characters(self):
+        a, b = self.pair()
+        for h in (a,b):
+            h.ns.GuideTaxiNodes = h.table({7:{"continent":0}, 2:{"continent":0}})
+        b.ns.char.observedTaxiRoutes = b.table({2:{7:True}})
+        def exchange():
+            for _ in range(16):
+                a.tick(); b.tick(); a.deliver_to(b); b.deliver_to(a)
+        self.assertIsNone(a.dcall("GetPartnerTaxiOffers",7,True))
+        exchange()
+        self.assertFalse(a.dcall("GetPartnerTaxiOffers",7,False)[2])
+        b.ns.char.observedTaxiRoutes[7] = b.table({2:True})
+        for _ in range(46):
+            a.tick(); b.tick(); a.deliver_to(b); b.deliver_to(a)
+        self.assertIsNone(a.dcall("GetPartnerTaxiOffers",7,True))
+        exchange()
+        self.assertTrue(a.dcall("GetPartnerTaxiOffers",7,False)[2])
+        b.ns.char.observedTaxiRoutes[7][2] = None
+        b.dcall("TaxiOffersChanged",7)
+        exchange()
+        self.assertFalse(a.dcall("GetPartnerTaxiOffers",7,False)[2])
+        a.dcall("ClearPeer")
+        self.assertIsNone(a.dcall("GetPartnerTaxiOffers",7,False))
+
     def pair(self):
         a, b = DuoHost(), DuoHost("Dos", "Uno")
         for _ in range(2):

@@ -120,7 +120,9 @@ local function flatButton(parent, text, width, height, x, y, action, accent)
 end
 
 local function advanceGuide(button)
-    if button.resumeTravelChoice then
+    if button.circuitKey then
+        ns:DeferLocalCircuitStop(button.circuitKey)
+    elseif button.resumeTravelChoice then
         ns:ResumeTravelChoice(button.resumeTravelChoice)
     elseif button.flightGround then
         ns.FlightNavigation:BeginGround()
@@ -611,10 +613,14 @@ function ns:RefreshUI()
     else guide, step, state = self:GetCurrent() end
     if travel then step = travel end
     self.currentDuoView = sharedView
-    if not guide then self.detail:Hide(); self.tracker:Hide(); return end
+    if not guide then self.displayedCircuitStop = nil; self.detail:Hide(); self.tracker:Hide(); return end
     self.detail:Show()
     local choice, localObjective
     if not sharedView and self.GetTravelComparison then choice, localObjective = self:GetTravelComparison() end
+    local circuit = not localObjective and not choice and not travel and not sharedView and self.GetLocalCircuitStop
+        and self:GetLocalCircuitStop(step)
+    self.displayedCircuitStop = circuit or nil
+    local sideTrip = circuit and not circuit.authored
     local localTitle, localQuestTitle, localHint
     if localObjective then
         local goal = localObjective.goal
@@ -689,32 +695,39 @@ function ns:RefreshUI()
         text = localObjective and (localTitle .. (localHint and ("\n" .. localHint) or "") .. "\n\n" .. choice.summary)
             or (choice.summary .. "\n\n" .. text)
         if localObjective then self.stepTitle:SetText("Mis misiones cercanas") end
+    elseif sideTrip then
+        self.stepTitle:SetText(circuit.step.title)
+        text = self:GetGoalTitle(circuit.goal, true) .. "\n" .. circuit.reason
+    elseif circuit then
+        text = circuit.reason .. "\n\n" .. text
     end
     self.stepText:SetText(text)
     self.stepContent:SetHeight(math.max(182, self.stepText:GetStringHeight() + 12))
     local stepKey = guide.id .. ":" .. (travel and ("travel:" .. travel.title) or state.cursor)
+    if sideTrip then stepKey = stepKey .. ":" .. circuit.key end
     if self.lastStepKey ~= stepKey then self.stepScroll:SetVerticalScroll(0); self.lastStepKey = stepKey end
 
     local editSteps = not travel and not sharedView
     local restorePrevious = self.GetPreviousRestorableStep and self:GetPreviousRestorableStep()
-    local canGoBack = not localObjective and not travel and (restorePrevious or editSteps and state.cursor > 1)
+    local canGoBack = not sideTrip and not localObjective and not travel and (restorePrevious or editSteps and state.cursor > 1)
     self.previousButton:SetEnabled(canGoBack)
     local flight = editSteps and self.FlightNavigation and self.FlightNavigation:CurrentView()
     if waypoint and not waypoint.flightNavigation then flight = nil end
     for _, button in ipairs({self.nextButton, self.trackerNext}) do
+        button.circuitKey = sideTrip and circuit.key or nil
         button.resumeTravelChoice = localObjective and choice.key
         button.continuesGuide = continuation ~= nil
         button.startsTravelHere = travel and travel.waiting and travel.localStart == true
         button.groundDetour = travel and travel.groundOption ~= nil
         button.flightGround = flight and flight.canGround == true
-        button:SetText(localObjective and "Retomar viaje" or (button.flightGround or button.groundDetour) and "Ir sin vuelo" or button.startsTravelHere and "Empezar aquí"
+        button:SetText(sideTrip and "Seguir el paso" or localObjective and "Retomar viaje" or (button.flightGround or button.groundDetour) and "Ir sin vuelo" or button.startsTravelHere and "Empezar aquí"
             or complete and "Continuar" or "Siguiente >")
         button:SetEnabled(localObjective or button.groundDetour or button.startsTravelHere or editSteps and not complete or continuation ~= nil)
     end
     for _, button in ipairs({self.skipButton, self.trackerSkip}) do
         button.skipsTravel = travel ~= nil
         button:SetText(travel and "Omitir viaje" or button == self.skipButton and "Saltar paso" or "Saltar")
-        button:SetEnabled(not localObjective and (travel and not travel.waiting or editSteps and not complete))
+        button:SetEnabled(not sideTrip and not localObjective and (travel and not travel.waiting or editSteps and not complete))
     end
     self.mapButton:SetEnabled(waypoint and true or false)
     self.mapButton:SetText(waypoint and "Marcar mapa" or "Sin pin")
@@ -723,12 +736,34 @@ function ns:RefreshUI()
     local lvlBadge = guide.minLevel and (" (" .. guide.minLevel .. "–" .. (guide.maxLevel or "?") .. ")") or ""
     self.trackerTitle:SetText(guide.title .. lvlBadge)
     local partnerVisit = sharedView and step and step.only and not self:MatchesConditions(step.only)
-    self.trackerStep:SetText(localObjective and "Mis misiones cercanas" or partnerVisit and ("Tu amigo · " .. step.title) or step and step.title or localFinish or "¡Zona completada!")
+    self.trackerStep:SetText(sideTrip and circuit.step.title or localObjective and "Mis misiones cercanas" or partnerVisit and ("Tu amigo · " .. step.title) or step and step.title or localFinish or "¡Zona completada!")
     self.trackerProgress:SetText(travelProgress or managed and "Dúo" or complete and "Completada" or ("Paso " .. state.cursor .. "/" .. #guide.steps))
     if sharedView then self.trackerProgress:SetText((partnerVisit and "Amigo " or "Juntos ") .. state.cursor .. " · Tú " .. sharedView.ownCursor) end
 
-    local goalItems = sharedItems or ((not travel and step and self.GetStepGoalItems) and self:GetStepGoalItems(step, state) or {})
-    if localObjective then
+    local shownStep = sideTrip and circuit.step or step
+    local goalItems = sharedItems or ((not travel and shownStep and self.GetStepGoalItems) and self:GetStepGoalItems(shownStep, state) or {})
+    if circuit then
+        local selected
+        for _, item in ipairs(goalItems) do
+            if item.index == circuit.index and item.goal == circuit.goal then
+                selected = item
+                break
+            end
+        end
+        if sideTrip then
+            if not selected then
+                local goal = circuit.goal
+                local title, questTitle = self:GetGoalTitle(goal, true)
+                selected = {goal=goal, action=goal.t, title=title, questTitle=questTitle, status="active",
+                    subtitle=self:GetGoalHint(goal), details=self:GetGoalInstruction(goal)}
+            end
+            selected.index, selected.isCurrent, selected.localObjective = nil, true, true
+            goalItems = {selected}
+        end
+        if selected then
+            selected.subtitle = selected.subtitle and (selected.subtitle .. "\n" .. circuit.reason) or circuit.reason
+        end
+    elseif localObjective then
         goalItems = {{action=localObjective.goal.t, title=localTitle, questTitle=localQuestTitle, goal=localObjective.goal,
             npcName=localObjective.point.candidateName or localObjective.goal.npcName, isCurrent=true,
             subtitle=localHint, details=self:GetGoalInstruction(localObjective.goal), localObjective=true}}

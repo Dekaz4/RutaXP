@@ -1,11 +1,51 @@
 """A local excursion changes the displayed target, preserving the actual departure."""
 import unittest
 
+from test_access_navigation import ADDON, load_pathing
 from test_boat_navigation import BoatHost, GUIDE
 from test_duo_journey import primitive_copy
 
 
 class TravelChoiceUITests(unittest.TestCase):
+    def test_auto_banks_ready_wetlands_turnins_before_the_theramore_boat(self):
+        h = BoatHost()
+        load_pathing(h.h)
+        for name in ("DestinationTravel.lua","CircuitTerrain.lua"):
+            h.h.lua.execute((ADDON/name).read_text(encoding="utf8"), "RutaXP", h.ns)
+        h.h.lua.execute("""
+            local after = C_Timer.After
+            function C_Timer.After(delay, callback)
+                if delay == 0 then after(0,callback) else TEST.deadline = callback end
+            end
+        """)
+        h.ns.Walking.Clear(h.ns.Walking)
+        self.journal(h, 270, 288)
+        before = h.progress()
+        self.assertTrue(h.point().boatNavigation)
+        self.assertIsNone(h.ns.char.localTravelChoice)
+        for _ in range(25):
+            for job in range(3000):
+                if not h.h.g.AccessPump(): break
+            else:
+                self.fail("The real Menethil mesh failed to settle")
+            h.s.now += 1
+            h.ns.RefreshUI(h.ns)
+            if h.ns.char.localTravelChoice: break
+        else:
+            self.fail("The real Menethil mesh did not finish the detour calculation")
+        choice, entry = h.ns.GetTravelComparison(h.ns)
+        self.assertGreater(choice.journey.seconds,0)
+        self.assertIn("min de viaje",choice.summary)
+        self.assertEqual(entry.quest,288)
+        self.assertEqual(h.point().goal.quest,288)
+        self.assertEqual(h.ns.char.localTravelChoice.actions[288],"turnin")
+        self.assertIsNone(h.ns.char.localTravelChoice.actions[270])
+        self.assertTrue(h.ns.ResumeTravelChoice(h.ns,choice.key))
+        h.ns.RefreshUI(h.ns)
+        self.assertIsNone(h.ns.char.localTravelChoice)
+        self.assertTrue(h.point().boatNavigation)
+        self.assertEqual(h.progress(),before)
+
     def journal(self, h, *ids):
         h.s.entries = h.h.table([{"questID": q, "isHeader": False} for q in ids])
         for q in ids:

@@ -27,6 +27,36 @@ class Destinations(TravelHost):
 
 
 class DestinationTravelTests(unittest.TestCase):
+    def test_long_adjacent_chapter_uses_a_known_shortcut_but_keeps_small_savings_local(self):
+        for goal, expected in (((1440,.343,.48), "flight"), ((1440,.87,.57), None)):
+            h = Destinations((1439,.364,.4562))
+            self.assertIsNone(h.route(goal,"chapter")[1])
+            h.ns.char.observedTaxiRoutes = h.h.table({26:{28:True}})
+            h.ns.FlightNavigation.routeRevision = 1
+            _, view = h.route(goal,"chapter")
+            self.assertEqual(view and view.kind, expected)
+
+    def test_door_to_door_uses_physical_walks_and_a_directed_usable_flight(self):
+        h = Destinations((1437, .0952, .5966))
+        routing = h.ns.TravelRouting
+        goal = h.h.table({"mapID":1453, "x":.663, "y":.6267})
+        other = h.h.table({"mapID":1453, "x":.90, "y":.80})
+        def plan(point=goal):
+            return routing.EstimateJourney(point,1437,None)
+        # An observed connection from Stormwind does not prove a Menethil departure.
+        h.ns.char.observedTaxiRoutes = h.h.table({2:{7:True}})
+        original = plan()
+        self.assertFalse(original.usesFlight)
+        h.ns.char.observedTaxiRoutes[7] = h.h.table({2:True})
+        h.ns.FlightNavigation.routeRevision = 1
+        faster = plan()
+        self.assertTrue(faster.usesFlight)
+        self.assertLess(faster.seconds, faster.groundSeconds)
+        self.assertAlmostEqual(faster.groundSeconds,original.seconds)
+        self.assertGreater(plan(other).seconds,faster.seconds)
+        h.locate((1437,.19,.50))
+        self.assertGreater(plan().seconds,faster.seconds)
+
     def test_from_theramore_pier_to_desolace_the_chapter_starts_with_a_local_leg(self):
         h = Destinations((1445,.711,.564))
         goal = (1443,.5776,.7105)

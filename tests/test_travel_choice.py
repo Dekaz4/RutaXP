@@ -167,6 +167,23 @@ class TravelDecisionTests(unittest.TestCase):
         h.h.g.PumpFlightCallbacks()
         self.assertFalse(self.view().flightConfirmed)
 
+    def test_theramore_shortcut_requires_both_characters_when_planning_together(self):
+        h = self.host
+        self.quest(288, True)
+        h.ns.char.observedTaxiRoutes = h.h.table({32:{31:True}})
+        h.h.lua.execute("""
+            ACCESS_NS.Duo.GetContext = function()
+                return {enabled=true, known=true, online=true, sameParty=true, groupSize=2,
+                    partnerLevel=29, partnerHeaderFresh=true}
+            end
+            ACCESS_NS.Duo.GetPartnerQuest = function() return {state=2} end
+        """)
+        self.assertFalse(self.view().flightConfirmed)
+        h.ns.Duo.taxiOffers = h.h.table({31:{"seen":h.s.now,"nodes":{32:True}}})
+        self.assertFalse(self.view().flightConfirmed)
+        h.ns.Duo.taxiOffers[32] = h.h.table({"seen":h.s.now,"nodes":{31:True}})
+        self.assertTrue(self.view().flightConfirmed)
+
 
 if __name__ == "__main__":
     unittest.main()
