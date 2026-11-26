@@ -153,6 +153,18 @@ def original_order(document):
     posters[0].update(object=142122, x=66.82, y=22.29, z=8)
     revisions = json.loads((SOURCE / "guide_revisions.json").read_text(encoding="utf-8"))["revisions"]
     guides = {guide["id"]: guide for guide in result["guides"]}
+    # In 1.2.16 both Shards objectives moved to the northwestern basilisk camp.
+    # The pre-enrichment audit records a different authored point for each faction.
+    for guide_id, (old_x, old_y) in {
+        "forever/alliance/30-40/04-stranglethorn-vale": (39.08, 52.02),
+        "forever/horde/30-40/02-stranglethorn-vale": (36.6, 8.27),
+    }.items():
+        shard, = [q for step in guides[guide_id]["steps"] for q in step["goals"]
+                  if q.get("quest") == 605 and q.get("item") == 3918 and q["t"] == "collect"]
+        point = {key: shard[key] for key in audit_module.POINT_FIELDS if key in shard}
+        if point != {"map": 1434, "x": 24.2, "y": 17.5, "f": "e"}:
+            raise AssertionError(f"The reviewed Singing Blue Shards location changed in {guide_id}")
+        shard.update(x=old_x, y=old_y)
     hillsbrad = guides["forever/alliance/30-40/01-hillsbrad-foothills"]
     table, = [row for step in hillsbrad["steps"] for row in step["goals"] if row.get("item") == 279386]
     if (table["t"], table["quest"], table["oi"], table["map"], table["x"], table["y"]) != (
