@@ -40,8 +40,10 @@ class OfficialSourceTests(unittest.TestCase):
         self.report = Mock()
         self.enter_patch(patch.dict(official.SOURCES, {"Journey": self.source}))
         self.enter_patch(patch.object(official, "downloads_directory", return_value=self.downloads))
-        self.enter_patch(patch.dict(os.environ, {"LOCALAPPDATA": str(self.work / "local"),
-                                                 "APPDATA": str(self.work / "roaming")}))
+        # The downloader reads these paths in Python. A private mapping also
+        # preserves empty Windows environment values inherited by later tools.
+        self.enter_patch(patch.object(os, "environ", {**os.environ,
+            "LOCALAPPDATA": str(self.work / "local"), "APPDATA": str(self.work / "roaming")}))
         self.browser = self.enter_patch(patch.object(official.webbrowser, "open",
                                                      side_effect=AssertionError("unexpected browser launch")))
         self.http = self.enter_patch(patch.object(official, "urlopen", side_effect=AssertionError("unexpected HTTP")))
@@ -264,5 +266,5 @@ class DownloadsFolderTests(unittest.TestCase):
         redirected = Path("E:/Descargas de juegos")
         with patch.object(winreg, "OpenKey"), \
                 patch.object(winreg, "QueryValueEx", return_value=("%RUTAXP_TEST_DOWNLOADS%", winreg.REG_EXPAND_SZ)), \
-                patch.dict(os.environ, {"RUTAXP_TEST_DOWNLOADS": str(redirected)}):
+                patch.object(os, "environ", {**os.environ, "RUTAXP_TEST_DOWNLOADS": str(redirected)}):
             self.assertEqual(official.downloads_directory(), redirected)
