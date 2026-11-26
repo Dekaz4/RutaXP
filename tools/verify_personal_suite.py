@@ -19,7 +19,7 @@ else:
 MODULES = ("OpenMap", "ForeverDungeonJournal")
 # Hash the original v0.7.36 catalog with each reviewed chapter reduced to its
 # header, preserving chapter order. Pin each chapter body for its release.
-UNCHANGED_GUIDES_HASH = "bae747c9322376a17a280e10e0a7dd52d499c50bff7c218c5b57c5b3948273c0"
+UNCHANGED_GUIDES_HASH = "98e97b7d25fc108833520029f0a63899e943121a6e8d578e831298801782f338"
 CHAPTER_HASHES = {
     "forever/alliance/30-40/04-stranglethorn-vale": (
         ((1, 2, 16), "014155fe8bbf89da889316cf3aa1f60b8f2ea3eff7e0313fc1e96dfe5efa47ac"),  # Singing Blue Shards
@@ -29,6 +29,10 @@ CHAPTER_HASHES = {
     "forever/horde/30-40/02-stranglethorn-vale": (
         ((1, 2, 16), "8d88d1fa8e65f334576bf45e38be70fdd2a5bff7f01316485544b7e81c431fa6"),  # Singing Blue Shards
         ((0, 0, 0), "353f9815c674fc6acf7f48479a6caacc52c3f722ed034f2fc78277105cee972f"),
+    ),
+    "forever/alliance/30-40/05-arathi-highlands": (
+        ((1, 2, 24), "c6dc92dc7eb53288cff3ad27bb93d119500ce3bb6c4ba3e1dfffed189d6263d0"),  # Phin / Quae
+        ((0, 0, 0), "d1e0adb53901aa72bf8475cf44d5d88a5faa86ee364c7686a2dbc99f5e07b107"),
     ),
 }
 ORIGINAL_ASSET = re.compile(r"Interface[/\\]+AddOns[/\\]+(?:OpenMap|ForeverDungeonJournal|RXPGuides)[/\\]", re.I)
@@ -191,8 +195,7 @@ def verify_guides(tree, version):
         chapter = chapter_block(unchanged, chapter_id)
         expected = next(digest for start, digest in versions if release >= start)
         if hashlib.sha256(chapter.group().encode("utf8")).hexdigest() != expected:
-            faction = chapter_id.split("/")[1].title()
-            raise ValueError(f"{faction} Stranglethorn differs from RutaXP guides for suite {version}")
+            raise ValueError(f"Guide chapter {chapter_id} differs from RutaXP guides for suite {version}")
         unchanged = unchanged[:chapter.start()] + f"-- {chapter_id}\n" + unchanged[chapter.end():]
     if hashlib.sha256(unchanged.encode("utf8")).hexdigest() != UNCHANGED_GUIDES_HASH:
         raise ValueError("Guide catalog outside the reviewed chapters differs from RutaXP v0.7.36")

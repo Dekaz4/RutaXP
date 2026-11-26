@@ -19,8 +19,10 @@ class PersonalSuiteVerificationTests(unittest.TestCase):
         self.files = dict.fromkeys(entrypoints, "-- bundled source fixture")
         self.files["Suite.lua"] = (ROOT / "RutaXP/Suite.lua").read_text(encoding="utf-8-sig")
         self.files["Leveling.lua"] = (ROOT / "RutaXP/Leveling.lua").read_text(encoding="utf8")
+        self.version_line = next(line for line in (ROOT / "RutaXP/RutaXP.toc").read_text(encoding="utf-8-sig").splitlines()
+                                 if line.startswith("## Version:"))
         meta = [
-            "## Version: 1.2.16",
+            self.version_line,
             "## SavedVariables: OpenMapDB, ForeverDungeonJournalDB, RutaXPDB",
             "## SavedVariablesPerCharacter: OpenMapCharDB, ForeverDungeonJournalCharacterDB, RutaXPCharDB",
             "## X-OpenMap-Version: 0.8", "## X-ForeverDungeonJournal-Version: 2.1", "## X-RutaXP-Guide-Version: 0.7.36",
@@ -58,19 +60,31 @@ class PersonalSuiteVerificationTests(unittest.TestCase):
         source = self.files["Leveling.lua"]
         self.assertIn("Habla primero con el sargento Yohwa", source)
         self.files["Leveling.lua"] = source.replace("Habla primero con el sargento Yohwa", "Espera a Thorsen", 1)
-        with self.assertRaisesRegex(ValueError, "Alliance Stranglethorn differs"):
+        with self.assertRaisesRegex(ValueError, "alliance/30-40/04-stranglethorn-vale differs"):
             self.check()
 
     def test_rejects_revised_guides_in_an_older_suite(self):
-        self.files["RutaXP.toc"] = self.files["RutaXP.toc"].replace("## Version: 1.2.16", "## Version: 1.2.15")
-        with self.assertRaisesRegex(ValueError, "Alliance Stranglethorn differs"):
+        self.files["RutaXP.toc"] = self.files["RutaXP.toc"].replace(self.version_line, "## Version: 1.2.15")
+        with self.assertRaisesRegex(ValueError, "alliance/30-40/04-stranglethorn-vale differs"):
+            self.check()
+
+    def test_rejects_arathi_handoff_in_a_pre_handoff_suite(self):
+        self.files["RutaXP.toc"] = self.files["RutaXP.toc"].replace(self.version_line, "## Version: 1.2.23")
+        with self.assertRaisesRegex(ValueError, "alliance/30-40/05-arathi-highlands differs"):
+            self.check()
+
+    def test_rejects_changes_to_arathi_giver(self):
+        heading = "Phin Odelic · Costasur"
+        self.assertEqual(self.files["Leveling.lua"].count(heading), 1)
+        self.files["Leveling.lua"] = self.files["Leveling.lua"].replace(heading, "Quae")
+        with self.assertRaisesRegex(ValueError, "alliance/30-40/05-arathi-highlands differs"):
             self.check()
 
     def test_rejects_changes_inside_reviewed_horde_chapter(self):
         title = "Basiliscos y aldea Sangrapellejo"
         self.assertIn(title, self.files["Leveling.lua"])
         self.files["Leveling.lua"] = self.files["Leveling.lua"].replace(title, "Otro destino", 1)
-        with self.assertRaisesRegex(ValueError, "Horde Stranglethorn differs"):
+        with self.assertRaisesRegex(ValueError, "horde/30-40/02-stranglethorn-vale differs"):
             self.check()
 
     def test_rejects_broken_module_reference_before_shipping(self):
