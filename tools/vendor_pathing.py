@@ -6,8 +6,9 @@
 
 The source checkout defaults to .sources/SendaFH. All inputs are verified
 against the pinned manifests and fixed hashes before anything is written.
-Only namespaces, the private addon namespace and an early capability guard
-change; routing algorithms and packed navigation bytes stay identical.
+The adaptations isolate the addon namespace, guard unsupported clients, and
+record the cells and heights actually reached at the ends of a walking route.
+The route search and packed navigation bytes stay identical.
 """
 from __future__ import annotations
 
@@ -39,6 +40,25 @@ HEADER = (
     "-- RutaXP mechanical adaptation, 2026-10-20; tools/vendor_pathing.py.\n"
     f"-- Source: julen92/SendaFH@{COMMIT}; original notices follow.\n"
 )
+ENDPOINT_METADATA = """\t-- RutaXP (2026-11-26): the search may snap either endpoint to another cell or floor.
+\tlocal function meshHeight(index)
+\t\tlocal k = P.k[index]
+\t\tlocal heights = st.z[k] or (grid(st, k) and st.z[k])
+\t\treturn heights and heights[P.n[index] + 1] or nil
+\tend
+\tlocal function matchesEndpoint(index, point)
+\t\tif P.x[index] ~= floor((point.x - x0) / cs) or P.y[index] ~= floor((point.y - y0) / cs) then
+\t\t\treturn false
+\t\tend
+\t\tif point.z == nil then return true end
+\t\tlocal height = meshHeight(index)
+\t\treturn height ~= nil and abs(height - point.z) <= ZTOL
+\tend
+\tpoints.goalOnMesh = matchesEndpoint(#P.x, to)
+\tif not matchesEndpoint(1, from) then
+\t\tpoints.meshStart = { map = map, x = x0 + (P.x[1] + 0.5) * cs, y = y0 + (P.y[1] + 0.5) * cs, z = meshHeight(1) }
+\tend
+"""
 BOOTSTRAP = '''-- RutaXP's private walking namespace; keep installed pathing addons isolated.
 local _, root = ...
 root.PathingNamespace = {}
@@ -126,6 +146,11 @@ def adapt(name: str, data: bytes) -> bytes:
         # Lua still parses a file, but unsupported clients retain none of its
         # packed strings/tables. Bootstrap runs before every payload chunk.
         text = "if not RutaXPPathingSupported then return end\n" + text
+    if name == "Routing/Path.lua":
+        marker = "\tpoints.wet = wetYards\n"
+        if text.count(marker) != 1:
+            raise ValueError(f"Unexpected route result in {name}")
+        text = text.replace(marker, marker + ENDPOINT_METADATA)
     return (HEADER + text).encode("utf-8")
 
 
@@ -146,6 +171,7 @@ def render(source: Path) -> dict[str, bytes]:
                        "substitutions": SUBSTITUTIONS,
                        "namespace": "The addon-private namespace is root.PathingNamespace",
                        "payloadGuard": "Nav Lua chunks return early when required decoding APIs are unavailable",
+                       "routeMetadata": "goalOnMesh checks the destination cell and height; meshStart records the chosen surface for a snapped start",
                        "algorithmChanges": False},
         "files": {name: {"source": f"{ADDON.as_posix()}/{name}",
                          "sourceSHA256": digest(inputs[name]), "sha256": digest(outputs[name])}

@@ -71,7 +71,7 @@ class NavigationRegressions(unittest.TestCase):
         self.assertIn("Entrega: El despertar", frame.destinationText)
         self.assertIn("Dirección orientativa", frame.destinationText)
 
-    def test_walk_to_bashal_aran_displays_distance_and_leg_with_quest_details_on_hover(self):
+    def test_walk_to_bashal_aran_shows_only_segment_and_total_metres_with_details_on_hover(self):
         h = self.host
         h.lua.execute(TOOLTIP_STUBS + """
             local methods = getmetatable(UIParent).__index
@@ -88,8 +88,10 @@ class NavigationRegressions(unittest.TestCase):
                           "map": 1439, "x": 45, "y": 45})
         _, step, _ = h.call("GetCurrent")
         point = h.call("GetStepWaypoint", step)
-        point.walking, point.walkingDistance = True, 119.2
+        point.walking, point.walkingDistance = True, 1300
         point.walkingIndex, point.walkingCount = 3, 5
+        point.walkingSegmentDistance = 50
+        point.walkingTurn, point.walkingTurnDistance = "right", 38
         h.state.arrowPoint = point
         h.ns.GetArrowWaypoint = h.lua.eval("function() return TEST.arrowPoint end")
         h.call("UpdateNavigation")
@@ -99,22 +101,28 @@ class NavigationRegressions(unittest.TestCase):
             return [label.text for label in frame.fontStrings.values() if label.shown and label.text]
 
         self.assertTrue(frame.arrow.shown)
-        self.assertEqual(visible_text(), ["109 m", "Tramo 2/4"])
+        self.assertEqual(visible_text(), ["35 m / 1189 m"])
         self.assertFalse(tooltip.shown)
         frame.scripts.OnEnter(frame)
         self.assertTrue(tooltip.shown)
         details = "\n".join(tooltip.lines.values())
         self.assertIn("Camino por terreno · tramo 2/4", details)
         self.assertIn("Acepta: Bashal'Aran", details)
+        point.walkingTurn, point.walkingTurnDistance = None, None
+        h.call("UpdateNavigation")
+        self.assertEqual(visible_text(), ["46 m / 1189 m"])
+        point.walkingFinal, point.walkingSegmentDistance = True, None
+        h.call("UpdateNavigation")
+        self.assertEqual(visible_text(), ["1189 m"])
         point.walking, point.walkingDistance = False, None
         h.call("UpdateNavigation")
         self.assertEqual(visible_text(), [frame.distance.text])
-        self.assertRegex(frame.distance.text, r"^\d+(?:\.\d+)? (?:m|km)$")
+        self.assertRegex(frame.distance.text, r"^\d+ m$")
         h.state.x, h.state.y = point.x, point.y
         updater = h.ns.navigationUpdater
         updater.scripts.OnUpdate(updater, 1)
         self.assertTrue(frame.arrived)
-        self.assertEqual(frame.distance.text, "0.0 m")
+        self.assertEqual(visible_text(), ["0 m"])
         details = "\n".join(tooltip.lines.values())
         self.assertIn("¡Has llegado!", details)
         self.assertNotIn("tramo", details)

@@ -171,17 +171,20 @@ class BoatNavigationTests(unittest.TestCase):
         self.assertIsNone(h.ns.char.boatNavigation.boarding)
         self.assertEqual(h.progress(), before)
 
-    def test_waiting_and_landing_show_transport_instructions_in_the_arrow(self):
+    def test_waiting_and_landing_keep_transport_details_off_the_compass(self):
         h = BoatHost(position=(1437, .0474, .6376))
         h.ns.UpdateNavigation(h.ns)
         frame = h.ns.navigationFrame
         self.assertEqual(frame.navigationState, "boarding")
         self.assertIn("Espera el barco", frame.hint.text)
+        self.assertFalse(frame.hint.shown)
+        self.assertFalse(frame.distance.shown and frame.distance.text)
         self.assertIn("Permanece a bordo", frame.destinationText)
         self.assertFalse(frame.arrow.IsShown(frame.arrow))
         h.move((1445, .7173, .5666))
         h.ns.UpdateNavigation(h.ns)
         self.assertIn("Desembarca", frame.hint.text)
+        self.assertFalse(frame.hint.shown)
         self.assertIn("Baja del barco", frame.destinationText)
 
     def test_a_map_change_or_destination_dock_does_not_prove_disembarkation(self):

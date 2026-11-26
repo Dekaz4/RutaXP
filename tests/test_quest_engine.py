@@ -355,7 +355,7 @@ class NavigationAndFullTocTests(unittest.TestCase):
         end
         """)
         self.host.ns = self.host.lua.table()
-        for name in ["Core.lua", "MapFrames.lua", "QuestEngine.lua", "Navigation.lua", "UI.lua"]:
+        for name in ["Core.lua", "MapFrames.lua", "QuestEngine.lua", "ArrowStyles.lua", "Navigation.lua", "UI.lua"]:
             self.host.load((ADDON / name).read_text(encoding="utf-8-sig"), "RutaXP", self.host.ns)
         self.host.globals.RUTAXP_TEST_BOUNDS = self.host.ns.mapFrames.era
 

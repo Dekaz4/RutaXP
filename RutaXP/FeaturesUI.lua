@@ -303,7 +303,7 @@ function ns:UpdateFeatures()
         add("Guardar muelle / transporte", function() local ok, reason = self.Waypoints:Capture("Subir al transporte", "transport"); if reason then self:Print(reason) end end)
         local walk = self.Walking and self.Walking:GetStatus()
         if walk then text = "Camino por terreno: " .. (walk.text or "Esperando destino") .. "\n/rutaxp camino: activar o desactivar · /rutaxp recalcular: calcular de nuevo\n\n" .. text end
-        text = text .. "\n\nLa ruta terrestre utiliza el terreno publicado de Forever cuando está disponible. Sin cobertura, la flecha avisa que la dirección es orientativa. Los accesos y transportes sin altura comprobada se confirman manualmente. Saltar un punto nunca completa una misión."
+        text = text .. "\n\nLa flecha sigue el camino por el terreno de Forever. Si falta un tramo comprobado, el panel indica el motivo y la flecha espera. Los accesos y transportes sin altura comprobada se confirman manualmente. Saltar un punto nunca completa una misión."
     end
     for i, b in ipairs(f.actions) do
         local action = actions[i]; b.action = action and action.action

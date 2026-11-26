@@ -134,7 +134,7 @@ class InstalledGuideFlowTests(unittest.TestCase):
         def load_local(name):
             lua.execute((ROOT / "RutaXP" / (name + ".lua")).read_text(encoding="utf8"), "RutaXP", g.ns)
         for name in ("TalentCore", "Suite", "GuideEngine", "GuideLegacyAnchors", "GuideCarryover", "GuideResume",
-                     "GuideJourney", "GuideLibrary"):
+                     "ArrowStyles", "GuideJourney", "GuideLibrary"):
             load_local(name)
         lua.execute(NATIVE_CONTEXT)
         lua.execute(character)
@@ -245,7 +245,10 @@ class InstalledGuideFlowTests(unittest.TestCase):
             expectJournal()
             assert(rows()[1].icon.row.questID==1072 and not rows()[1].text.text:find("ambos",1,true))
             assert(rows()[2].icon.row.questID==968 and rows()[2].text.text:find("Activa para ambos",1,true))
-            assert(RutaXPJourneyScreenArrow.container:IsShown() and RutaXPJourneyScreenArrow.label.text=="Un viejo colega")
+            local hud=RutaXPJourneyScreenArrow
+            assert(hud.container:IsShown() and (hud.label:GetText() or "")=="" and hud.distLabel:GetText():match("^%d+ m$"))
+            local _,_,_,label=ns.GuideCarryover.Waypoint()
+            assert(label=="Un viejo colega")
             ui.GetComponent("HeaderSettingsButton").frame.scripts.OnClick()
             assert(RutaXPGuideLibrary:IsShown() and RutaXPGuideLibrary.status.text:find("Misiones en curso",1,true))
             RutaXPGuideLibrary:Hide()

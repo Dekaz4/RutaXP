@@ -4,7 +4,6 @@ local _, ns = ...
 -- points west; GetPlayerFacing is in radians, increasing towards the west.
 -- Guide targets use C_Map's frame. Terrain turns carry their native world
 -- point and use UnitPosition only when its instance matches that continent.
-local METRES_PER_YARD = 0.9144
 local SAMPLE_INTERVAL = 0.1 -- Sample destinations while rotating the arrow every frame.
 local TWO_PI = 2 * math.pi
 local DIAL = 56
@@ -635,6 +634,10 @@ local function showArrowDetails(frame)
     if reason and reason ~= frame.statusText and reason ~= frame.destinationText then
         GameTooltip:AddLine(reason, 0.85, 0.88, 0.92, true)
     end
+    local hint = frame.hint:GetText()
+    if hint and hint ~= "" and hint ~= frame.statusText and hint ~= frame.destinationText and hint ~= reason then
+        GameTooltip:AddLine(hint, 1, 0.70, 0.33, true)
+    end
     if ns.GetNearbyQuestOfferHint then
         local guide, step, state = ns:GetCurrent()
         local travel = ns.GetGuideTravel and ns:GetGuideTravel()
@@ -649,7 +652,7 @@ function ns:CreateNavigation()
     if self.navigationFrame or not self.char then return end
     local frame = CreateFrame("Frame", nil, UIParent)
     self.navigationFrame = frame
-    frame:SetSize(210, 114)
+    frame:SetSize(210, DIAL + 38)
     if frame.SetHitRectInsets then frame:SetHitRectInsets(26, 26, 0, 18) end
     frame:SetFrameStrata("MEDIUM")
     frame:SetClampedToScreen(true)
@@ -723,8 +726,9 @@ function ns:CreateNavigation()
     frame.ring = ring
 
     frame.distance = outlinedText(frame, "GameFontNormalLarge", -60, 200, 15)
-    frame.hint = outlinedText(frame, "GameFontHighlightSmall", -78, 206, 12)
-    frame.hint:SetTextColor(1, 0.70, 0.33)
+    -- GuideOriginal and the tooltip read the current instruction from this region.
+    frame.hint = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+    frame.hint:Hide()
     if self.ArrowStyles then
         local styles = self.ArrowStyles
         styles:Attach(frame, function()
@@ -732,18 +736,10 @@ function ns:CreateNavigation()
             local scale = styles:GetScale()
             arrow:SetScale(scale)
             local height = DIAL * scale
-            frame:SetHeight(height + 58)
+            frame:SetHeight(height + 38)
             frame.distance:ClearAllPoints()
             frame.distance:SetPoint("TOP", frame, "TOP", 0, -height - 4)
-            frame.hint:ClearAllPoints()
-            frame.hint:SetPoint("TOP", frame, "TOP", 0, -height - 22)
-            if styles:ShowsText() then
-                frame.distance:Show()
-                frame.hint:Show()
-            else
-                frame.distance:Hide()
-                frame.hint:Hide()
-            end
+            frame.distance:SetShown(styles:ShowsText())
         end)
     end
     frame:Hide()
@@ -800,7 +796,7 @@ function ns:CreateNavigation()
     end)
 end
 
--- Return only the short line for the HUD. Full instructions stay in the tooltip.
+-- Return the short instruction for the guide and tooltip.
 local function updateArrow(self, frame)
     local hint
     frame.navigationState, frame.navigationReason = nil, nil
@@ -921,7 +917,7 @@ local function updateArrow(self, frame)
         local label = target and (target.routeLabel or target.label or target.goalTitle) or goalTitle or stepTitle
         subText = "|cffffce72Camino por terreno · tramo " .. segment .. "|r\n" .. (label or "Sigue el siguiente giro")
     end
-    if point and not point.walking and point.navigationNotice then
+    if point and not point.walking and not point.navigationBlocked and point.navigationNotice then
         subText = subText .. "\n|cff9fb0c7" .. point.navigationNotice .. "|r"
     end
 
@@ -990,8 +986,8 @@ local function updateArrow(self, frame)
         frame.arrow:Hide()
         frame.distance:SetText("")
         frame.statusText = point.navigationNotice or "Calculando camino…"
-        frame.destinationText = boat and boat.text or goalTitle or stepTitle or "Destino de la guía"
-        return point.navigationHint
+        frame.destinationText = transport and transport.text or subText
+        return point.navigationHint or (transport and transport.shortText)
     end
 
     frame.dNorth, frame.dWest = dNorth, dWest
@@ -1006,7 +1002,6 @@ local function updateArrow(self, frame)
         return
     end
 
-    local metres = (point.walkingDistance or distance) * METRES_PER_YARD
     local radius = step and number(step.radius) and step.radius > 0 and step.radius or point.radius or 20
     local inRange = distance <= radius
     -- The arrow keeps pointing until you are practically on top of the spot;
@@ -1034,11 +1029,6 @@ local function updateArrow(self, frame)
         frame.statusText = "¡Has llegado!"
     end
     if not hint and segment and not arrived then hint = "Tramo " .. segment end
-    local distStr = metres >= 1000 and string.format("%.1f km", metres / 1000)
-        or metres < 20 and string.format("%.1f m", metres)
-        or string.format("%d m", math.floor(metres + 0.5))
-    frame.distance:SetText(distStr)
-    if frame.distance.SetTextColor then frame.distance:SetTextColor(r, g, b) end
     frame.destinationText = subText
     if flight then
         frame.destinationText = flight.text
@@ -1055,9 +1045,14 @@ local function updateArrow(self, frame)
 
     if right == nil or forward == nil then
         frame.arrow:Hide()
+        frame.distance:SetText("")
         return hint
     end
 
+    local segmentYards = point.walking and not point.walkingFinal and (point.walkingTurnDistance or point.walkingSegmentDistance)
+    local totalYards = point.walking and point.walkingDistance or distance
+    frame.distance:SetText(ns.FormatArrowDistances(segmentYards, totalYards))
+    if frame.distance.SetTextColor then frame.distance:SetTextColor(r, g, b) end
     frame.arrow:Show()
     if arrived then
         frame.body:Hide()

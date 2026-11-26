@@ -179,8 +179,8 @@ class WaypointTests(unittest.TestCase):
         self.assertIn("transporte", self.control("GetStatus").waiting)
         h.call("UpdateNavigation")
         frame = h.ns.navigationFrame
-        self.assertEqual(frame.distance.text, "0.0 m")
-        self.assertTrue(frame.hint.shown)
+        self.assertEqual(frame.distance.text, "0 m")
+        self.assertFalse(frame.hint.shown)
         self.assertEqual(frame.hint.text, "Confirma al embarcar")
         self.assertIn("transporte", frame.statusText)
         self.control("Skip")

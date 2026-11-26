@@ -38,6 +38,7 @@ class CorpseNavigationTests(unittest.TestCase):
         nav = h.ns.navigationFrame
         self.assertFalse(nav.arrow.shown)
         self.assertIn("Libera el espíritu", nav.hint.text)
+        self.assertFalse(nav.hint.shown)
         h.state.ghost, h.state.x, h.state.y = True, .2, .24
         self.event("PLAYER_ALIVE")
         h.ns.DungeonPlanner = h.lua.eval("""{IsDetouring=function() return true end,
@@ -45,6 +46,7 @@ class CorpseNavigationTests(unittest.TestCase):
         h.call("UpdateNavigation")
         self.assertTrue(nav.arrow.shown)
         self.assertEqual(nav.hint.text, "Tu cadáver")
+        self.assertFalse(nav.hint.shown)
         self.assertEqual(nav.destinationText, "Tu cadáver")
         self.assertTrue(nav.distance.text)
         body = h.call("GetArrowWaypoint", step, False)
@@ -105,7 +107,7 @@ class JourneyCorpseTests(unittest.TestCase):
             function C_Map.GetBestMapForUnit() return 1434 end
             C_DeathInfo={GetCorpseMapPosition=function() return CreateVector2D(.12,.56) end}
         """)
-        for name in ["CorpseNavigation.lua", "GuideJourney.lua"]:
+        for name in ["CorpseNavigation.lua", "ArrowStyles.lua", "GuideJourney.lua"]:
             lua.execute((journey.ROOT / "RutaXP" / name).read_text(encoding="utf8"), "RutaXP", lua.globals().ns)
         for filename, data in journey.suite_journey.contents(journey.NATIVE):
             if filename.endswith(".lua"):
@@ -113,14 +115,14 @@ class JourneyCorpseTests(unittest.TestCase):
         lua.execute("""
             event("PLAYER_LOGIN"); tick()
             local hud=RutaXPJourneyScreenArrow
-            assert(hud.label.text=="Villadorada")
+            assertHudDistances("454 m")
             dead=true; event("PLAYER_DEAD"); tick()
             assert(not hud.container:IsShown())
             -- Even with no selected guide, the character still has a corpse.
             status="pending"; ghost=true; event("PLAYER_ALIVE"); tick()
-            assert(hud.label.text=="Tu cadáver" and hud.container:IsShown())
+            assert((hud.label.text or "")=="" and hud.container:IsShown())
             local dx,dy=.12*1300-500,.56*1300-500
             assert(hud.distLabel:GetText()==RutaXPJourneyEnvironment().FormatJourneyDistance(math.sqrt(dx*dx+dy*dy)))
             status=nil; ghost=false; dead=false; event("PLAYER_UNGHOST"); tick()
-            assert(hud.container:IsShown() and hud.label.text=="Villadorada")
+            assertHudDistances("454 m")
         """)

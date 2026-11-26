@@ -56,6 +56,9 @@ class PathingVendorTests(unittest.TestCase):
                     guard = "if not RutaXPPathingSupported then return end\n"
                     self.assertTrue(text.startswith(guard))
                     text = text[len(guard):]
+                if name == "Routing/Path.lua":
+                    self.assertEqual(text.count(vendor.ENDPOINT_METADATA), 1)
+                    text = text.replace(vendor.ENDPOINT_METADATA, "", 1)
                 if name.startswith("Routing/"):
                     text = text.replace("local root = select(2, ...)\nlocal ns = root.PathingNamespace",
                                         "local ns = select(2, ...)", 1)

@@ -13,6 +13,22 @@ for _, style in ipairs(styles) do
     textures[style[1]] = media .. style[1] .. ".tga"
 end
 
+local function metres(yards)
+    if (issecretvalue and issecretvalue(yards)) or type(yards) ~= "number"
+        or not (yards >= 0 and yards < math.huge) then return nil end
+    return math.floor(yards * 0.9144 + 0.5)
+end
+
+function ns.FormatArrowDistances(segmentYards, totalYards)
+    local total = metres(totalYards)
+    if not total then return "" end
+    local segment = metres(segmentYards)
+    if segment and segment < total then
+        return segment .. " m / " .. total .. " m"
+    end
+    return total .. " m"
+end
+
 local function settings()
     if type(ns.char) == "table" and type(ns.char.arrowAppearance) == "table" then
         return ns.char.arrowAppearance
@@ -184,7 +200,7 @@ local function createPanel()
     local showText = CreateFrame("CheckButton", nil, options, "UICheckButtonTemplate")
     showText:SetSize(26, 26)
     showText:SetPoint("BOTTOMLEFT", 11, 14)
-    label(showText, "Mostrar texto y distancia"):SetPoint("LEFT", showText, "RIGHT", 3, 0)
+    label(showText, "Mostrar distancias"):SetPoint("LEFT", showText, "RIGHT", 3, 0)
     showText:SetHitRectInsets(0, -152, 0, 0)
     showText:SetScript("OnClick", function(self) save("showText", not not self:GetChecked()) end)
     panel.showText = showText

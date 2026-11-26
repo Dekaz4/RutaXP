@@ -67,7 +67,7 @@ class OriginalGuideFlowTests(unittest.TestCase):
             """)
         transport = ("FlightNavigation", "BoatNavigation", "DestinationTravel") if travel else ()
         for name in ("Core", "MapFrames", "Leveling", "QuestEngine", "GuideMigrations",
-                     "Navigation", "CorpseNavigation", "WestfallTravelData", "AllianceTravel", "HordeTravel", "TravelConnections",
+                     "ArrowStyles", "Navigation", "CorpseNavigation", "WestfallTravelData", "AllianceTravel", "HordeTravel", "TravelConnections",
                      "TravelRouting", "TravelDetour", "GuideTravel", *transport, "TrackerLayout", "TrackerPreview", "UI",
                      "Suite", "DungeonQuestData", "RestedQuestState", "QuestFocus", "DungeonPlanner",
                      "GuideRestore", "GuideOriginal", "GuideJourney"):
@@ -208,7 +208,10 @@ class OriginalGuideFlowTests(unittest.TestCase):
             C_DeathInfo={GetCorpseMapPosition=function() return CreateVector2D(.36,.12) end}
             TEST.dead=true; update("PLAYER_DEAD")
             TEST.ghost=true; update("PLAYER_ALIVE")
-            assert(RutaXPJourneyScreenArrow.label:GetText()=="Tu cadáver")
+            local hud=RutaXPJourneyScreenArrow
+            assert(hud.container:IsShown() and (hud.label:GetText() or "")=="")
+            assert(hud.distLabel:GetText():match("^%d+ m$"))
+            assert(ns:GetArrowWaypoint().source=="corpse")
             TEST.ghost=false; TEST.dead=false; update("PLAYER_UNGHOST")
             assertGuide(5,190,"kill")
 

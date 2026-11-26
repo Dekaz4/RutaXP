@@ -116,6 +116,7 @@ class TalentTrainerHost:
             manifest = Path(__file__).parent / "fixtures" / "RutaXP-0.7.38.toc"
             files = [line.strip() for line in manifest.read_text(encoding="utf-8-sig").splitlines()
                      if line.strip().endswith(".lua") and not line.lstrip().startswith("#")]
+            files.insert(files.index("Navigation.lua"), "ArrowStyles.lua")
         elif talent_module:
             files = ["TalentCore.lua", "Talents.lua", "TalentBuilds.lua"]
         for filename in files:

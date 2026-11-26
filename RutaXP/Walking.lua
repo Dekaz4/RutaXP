@@ -66,6 +66,8 @@ function W:Clear(reason)
     self.budgetUpdated,self.activeSeconds,self.retryAfter,self.timeoutRetried,self.missingSince=nil,nil,nil,nil,nil
     self.startMap,self.lastRejectedX,self.lastRejectedY=nil,nil,nil
     self.turns,self.turnCursor,self.steeringIndex,self.corridor=nil,nil,nil,nil
+    self.rejoinSince,self.rejoinAttempt,self.steeringRay=nil,nil,nil
+    self.entryPending=nil
     self.phase,self.text="idle","Esperando un destino"
 end
 local function failed(self,reason,px,py,message)
@@ -99,6 +101,7 @@ function W:Toggle(enabled)
     if not config then return false,"Todavía no hay un personaje cargado" end
     config.enabled=enabled==nil and not config.enabled or enabled==true
     self:Clear()
+    if config.enabled and ns.StopDirectMapTracking then ns:StopDirectMapTracking() end
     if ns.UpdateNavigation then ns:UpdateNavigation() end
     if ns.RefreshUI then ns:RefreshUI() end
     return true,config.enabled and "Camino por terreno activado" or "Camino por terreno desactivado; dirección orientativa"
@@ -127,6 +130,8 @@ function W:_Ask(engine,continent,px,py,pz,target,reason,camp)
     self.budgetUpdated,self.activeSeconds,self.wasPaused,self.retryAfter=self.lastAsk,0,false,nil
     self.jobFrames,self.lastProgressAt=0,0
     self.requestTravel,self.requestZ=self.travel or 0,pz
+    local previousTarget=self.target
+    local rejoin=reason=="rejoin" and previousTarget and previousTarget.x==target.x and previousTarget.y==target.y and previousTarget.z==target.z
     self.target={x=target.x,y=target.y,z=target.z}
     self.campCommitted=camp
     target=self.target
@@ -146,10 +151,19 @@ function W:_Ask(engine,continent,px,py,pz,target,reason,camp)
                     or p.map~=continent or (p.z~=nil and not finite(p.z)) then valid=false; break end
             end
         end
-        -- Do not silently select a roof or a tunnel on another floor.
-        if valid and target.z and #points>2 then
+        -- Older route providers expose only the preceding waypoint's elevation.
+        if valid and points.goalOnMesh==nil and target.z and #points>2 then
             local floor=points[#points-1].z
             if finite(floor) and math.abs(floor-target.z)>30 then valid=false;reason="floor" end
+        end
+        -- A search can snap to a nearby cell yet return the requested XY for
+        -- its final marker. Only guide to it when the path reached that surface.
+        if valid and points.goalOnMesh==false then valid=false;reason="offmesh" end
+        if valid and points.meshStart~=nil then
+            local start=points.meshStart
+            valid=type(start)=="table" and start.map==continent and finite(start.x) and finite(start.y)
+                and (start.z==nil or finite(start.z))
+            if not valid then reason="offmesh" end
         end
         if not valid then
             -- A failed background refresh cannot erase a still valid route.
@@ -158,7 +172,7 @@ function W:_Ask(engine,continent,px,py,pz,target,reason,camp)
             diagnostic(self,"failed")
             return
         end
-        if self:_Adopt(points,requestTravel,requestZ) then
+        if self:_Adopt(points,requestTravel,requestZ,rejoin) then
             self.lastRejectedX,self.lastRejectedY,self.timeoutRetried=nil,nil,nil
         else
             -- One new origin can recover after a stale answer. Repeatedly
@@ -222,8 +236,19 @@ end
 -- A shortcut is safe on the path engine's mesh only if it takes the same
 -- ordered cell-to-cell moves (including diagonals) as the certified route.
 -- This bounded walk only reads the grid scale, never decompresses terrain.
-local function cellMoves(ax,ay,bx,by,cell)
-    ax,ay,bx,by=ax/cell,ay/cell,bx/cell,by/cell
+local function meshGeometry(continent,corridor)
+    if corridor and corridor.map==continent then return corridor.cs,corridor.x0,corridor.y0 end
+    local data=RutaXPPathData and RutaXPPathData[continent]
+    local grid=ns.PathingNamespace and ns.PathingNamespace.PathGrid
+    if data and grid and finite(grid.TILE) and finite(data.cells) and data.cells>0 then
+        return grid.TILE/data.cells,(data.cx0 or 0)*grid.TILE,(data.cy0 or 0)*grid.TILE
+    end
+end
+local function sameCell(ax,ay,bx,by,cell,x0,y0)
+    return math.floor((ax-x0)/cell)==math.floor((bx-x0)/cell) and math.floor((ay-y0)/cell)==math.floor((by-y0)/cell)
+end
+local function cellMoves(ax,ay,bx,by,cell,x0,y0)
+    ax,ay,bx,by=(ax-x0)/cell,(ay-y0)/cell,(bx-x0)/cell,(by-y0)/cell
     local x,y,ex,ey=math.floor(ax),math.floor(ay),math.floor(bx),math.floor(by)
     local dx,dy=bx-ax,by-ay
     local sx,sy=dx>=0 and 1 or -1,dy>=0 and 1 or -1
@@ -277,42 +302,114 @@ end
 -- A lateral shortcut needs open dry ground on BOTH sides, with no extra
 -- floors/links and no rises or drops. The original polyline is always the
 -- fallback on narrow bridges, stairs, around walls and in cave entrances.
-local function openRoad(continent,px,py,pz,b,corridor)
-    if not (corridor and corridor.map==continent and finite(pz) and finite(b.z)) then return false end
+local function dryCell(st,gx,gy)
+    if gx<0 or gy<0 or gx>=st.GX or gy>=st.GY then return end
+    local C=st.C
+    local k=math.floor(gx/C)*st.ny+math.floor(gy/C)
+    local i=(gx%C)*C+gy%C+1
+    local val,z,m,at,links=st.val[k],st.z[k],st.moves[k],st.at[k],st.links[k]
+    if val and z and m and at and links and val[i]==1 and finite(z[i]) and m[i] and not at[-i] and not links[i] then
+        return z[i],m[i],k
+    end
+end
+
+local function cardinalOpen(st,gx,gy,mx,my)
+    if mx<0 or my<0 then gx,gy=gx+mx,gy+my end
+    local ax,ay=math.abs(mx),math.abs(my)
+    local h,m,k=dryCell(st,gx,gy)
+    local nextH,_,nextK=dryCell(st,gx+ax,gy+ay)
+    if not h or not nextH or math.abs(nextH-h)>8 then return false end
+    local bit=ax==1 and 1 or 2
+    -- The low mask covers edges inside a page. At a seam the baker's
+    -- original high bits record closed positive cardinal edges.
+    if k~=nextK then return math.floor(m/16)%(bit*2)<bit end
+    return m%(bit*2)>=bit
+end
+
+local function openRoad(continent,px,py,pz,b,corridor,narrow)
+    if not (corridor and corridor.map==continent) then return false end
     local st=corridor
-    local length=distance(px,py,b.x,b.y)
-    if length>124 or math.abs(b.z-pz)>3+.20*length then return false end
-    local C,cell=st.C,st.cs
-    local count=math.max(1,math.ceil(2*length/cell))
-    if count>64 then return false end
-    local lastX,lastY
-    for s=0,count do
-        local u=s/count
-        local gx=math.floor((px+(b.x-px)*u-st.x0)/cell)
-        local gy=math.floor((py+(b.y-py)*u-st.y0)/cell)
-        if gx~=lastX or gy~=lastY then
-            if gx<1 or gy<1 or gx>=st.GX-1 or gy>=st.GY-1 then return false end
-            local x,y=gx%C,gy%C
-            if x<1 or y<1 or x>=C-1 or y>=C-1 then return false end
-            local k=math.floor(gx/C)*st.ny+math.floor(gy/C)
-            local val,heights,moves,floors,links=st.val[k],st.z[k],st.moves[k],st.at[k],st.links[k]
-            if not (val and heights and moves and floors and links) then return false end
-            local i=x*C+y+1
-            local height=heights[i]
-            if not finite(height) or math.abs(height-(pz+(b.z-pz)*u))>3 then return false end
-            for dx=-1,1 do
-                for dy=-1,1 do
-                    local j=i+dx*C+dy
-                    if val[j]~=1 or floors[-j] or links[j] or not finite(heights[j]) or math.abs(heights[j]-height)>2 then return false end
-                    -- Require every cardinal edge inside this 3x3 window.
-                    local m=moves[j] or 0
-                    if (dx<1 and m%2<1) or (dy<1 and m%4<2) then return false end
+    local dx,dy=b.x-px,b.y-py
+    local length=math.sqrt(dx*dx+dy*dy)
+    if length>124 then return false end
+    local cell=st.cs
+    local x0,y0=px-st.x0,py-st.y0
+    local gx,gy=math.floor(x0/cell),math.floor(y0/cell)
+    -- Forever may omit native height. A retained dry cell with exactly
+    -- one surface and no special links can still certify a local rejoin.
+    local bz=b.z
+    if narrow then
+        if not finite(pz) then pz=dryCell(st,gx,gy) end
+        if not finite(bz) then bz=dryCell(st,math.floor((b.x-st.x0)/cell),math.floor((b.y-st.y0)/cell)) end
+    end
+    if not finite(pz) or not finite(bz) or (not narrow and math.abs(bz-pz)>3+.20*length) then return false end
+    local steps=cellMoves(px,py,b.x,b.y,cell,st.x0,st.y0)
+    -- Visit every cell, including ones clipped for only a fraction of a
+    -- yard. Checking regularly spaced samples can miss a thin wall.
+    for n=0,#steps do
+        local h,_,k=dryCell(st,gx,gy)
+        local u=length>0 and (((gx+.5)*cell-x0)*dx+((gy+.5)*cell-y0)*dy)/(length*length) or 0
+        local z=pz+(bz-pz)*math.max(0,math.min(1,u))
+        -- Measured heights can wobble on slopes. For a connection back to
+        -- the path we follow the explicitly open ground edges and their
+        -- heights; the wider shortcut must also be nearly level.
+        if not h or math.abs(h-z)>(narrow and 8 or 3) then return false end
+        if not narrow then
+            for ex=-1,1 do
+                for ey=-1,1 do
+                    local neighbor=dryCell(st,gx+ex,gy+ey)
+                    if not neighbor or math.abs(neighbor-h)>2 then return false end
+                    if ex<1 and not cardinalOpen(st,gx+ex,gy+ey,1,0) then return false end
+                    if ey<1 and not cardinalOpen(st,gx+ex,gy+ey,0,1) then return false end
                 end
             end
-            lastX,lastY=gx,gy
+        end
+        if n<#steps then
+            local code=steps:byte(n+1)-1
+            local mx,my=math.floor(code/3)-1,code%3-1
+            if mx~=0 and my~=0 then
+                if not (cardinalOpen(st,gx,gy,mx,0) and cardinalOpen(st,gx+mx,gy,0,my)
+                    and cardinalOpen(st,gx,gy,0,my) and cardinalOpen(st,gx,gy+my,mx,0)) then return false end
+                local _,_,nextK=dryCell(st,gx+mx,gy+my)
+                if k==nextK then
+                    local _,mask=dryCell(st,mx>0 and gx or gx+mx,mx>0 and gy or gy+my)
+                    local bit=mx==my and 4 or 8
+                    if not mask or mask%(bit*2)<bit then return false end
+                end
+            elseif not cardinalOpen(st,gx,gy,mx,my) then return false end
+            gx,gy=gx+mx,gy+my
         end
     end
     return true
+end
+
+-- If the character is on an accepted edge, its remaining cell crossings are
+-- already certified by the planner. A lateral approach entering other cells
+-- must be verified against the retained terrain before using that same edge.
+local function followsEdge(a,b,px,py,pz,corridor)
+    local off,_,u,z=projection(px,py,a,b,pz)
+    if finite(pz) and finite(z) and math.abs(pz-z)>8 then return false end
+    if off<.01 then return true end
+    local cell,x0,y0=meshGeometry(a.map,corridor)
+    local ax,ay=a.x+(b.x-a.x)*u,a.y+(b.y-a.y)*u
+    if cell and finite(pz) and finite(z) and math.abs(pz-z)<=3 and distance(px,py,b.x,b.y)<=150
+        and sameCell(px,py,ax,ay,cell,x0,y0)
+        and cellMoves(px,py,b.x,b.y,cell,x0,y0)==cellMoves(ax,ay,b.x,b.y,cell,x0,y0) then return true end
+    return openRoad(a.map,px,py,pz,b,corridor,true)
+end
+
+-- Rejoin the current edge locally if the distant reference lies behind a
+-- wall. Interpolate only on the certified polyline, from the projection
+-- forward; near a doorway the previous corner itself can be the only entry.
+local function rejoinEdge(a,b,px,py,pz,corridor,allowProjection)
+    local _,_,u,z=projection(px,py,a,b,pz)
+    local length=distance(a.x,a.y,b.x,b.y)
+    for _,lead in ipairs({12,0}) do
+        local v=length>0 and math.min(1,u+lead/length) or u
+        local p={map=b.map,x=a.x+(b.x-a.x)*v,y=a.y+(b.y-a.y)*v,
+            z=finite(a.z) and finite(b.z) and a.z+(b.z-a.z)*v or z}
+        if (lead>0 or u>0 or allowProjection) and followsEdge(a,p,px,py,pz,corridor) then return p end
+    end
 end
 
 -- A mild bend counts only when the road holds its direction on each side.
@@ -381,10 +478,8 @@ local function canAim(points,index,last,continent,px,py,pz,corridor,endpoint)
     if off>12 or not finite(z) or (finite(pz) and math.abs(pz-z)>2.5) or not finite(b.z) then return false end
     local origin={x=px,y=py,z=pz or z}
     local ax,ay=prev.x+(node.x-prev.x)*u,prev.y+(node.y-prev.y)*u
-    local data=RutaXPPathData and RutaXPPathData[continent]
-    local grid=ns.PathingNamespace and ns.PathingNamespace.PathGrid
-    local cell=data and grid and grid.TILE/data.cells
-    local same=cell and math.floor(px/cell)==math.floor(ax/cell) and math.floor(py/cell)==math.floor(ay/cell)
+    local cell,x0,y0=meshGeometry(continent,corridor)
+    local same=cell and sameCell(px,py,ax,ay,cell,x0,y0)
     if not cell then same=off<.001 end
     local moves={}
     local az=z
@@ -395,31 +490,29 @@ local function canAim(points,index,last,continent,px,py,pz,corridor,endpoint)
         local gap,_,_,height=projection(p.x,p.y,origin,b)
         if gap>12 or not height or math.abs(p.z-height)>2 then return false end
         if gap>(cell and 1.5 or .00001) then same=false end
-        if same and cell then moves[#moves+1]=cellMoves(ax,ay,p.x,p.y,cell) end
+        if same and cell then moves[#moves+1]=cellMoves(ax,ay,p.x,p.y,cell,x0,y0) end
         ax,ay,az=p.x,p.y,p.z
     end
-    if same and (not cell or cellMoves(px,py,b.x,b.y,cell)==table.concat(moves)) then return true end
+    if same and (not cell or cellMoves(px,py,b.x,b.y,cell,x0,y0)==table.concat(moves)) then return true end
     return openRoad(continent,px,py,pz,b,corridor)
 end
 
-local function steeringPoint(points,index,continent,px,py,pz)
+local function steeringPoint(points,index,continent,px,py,pz,corridor)
     local node=points[index]
     if index>=#points or distance(px,py,node.x,node.y)>25 then return node end
     local previous=points[index-1]
     local off,_,u,z=projection(px,py,previous,node,pz)
     if off>1.5 or not finite(z) or (finite(pz) and math.abs(z-pz)>2) then return node end
     local ax,ay=previous.x+(node.x-previous.x)*u,previous.y+(node.y-previous.y)*u
-    local grid=ns.PathingNamespace and ns.PathingNamespace.PathGrid
-    local data=RutaXPPathData and RutaXPPathData[continent]
-    local cell=grid and data and finite(grid.TILE) and finite(data.cells) and data.cells>0 and grid.TILE/data.cells
-    -- Tile origins are integer multiples of the cell size on both axes.
-    if cell and (math.floor(px/cell)~=math.floor(ax/cell) or math.floor(py/cell)~=math.floor(ay/cell)) then return node end
+    local cell,x0,y0=meshGeometry(continent,corridor)
+    if cell and not sameCell(px,py,ax,ay,cell,x0,y0) then return node end
+    if not cell and off>=.01 then return node end
     local origin={x=px,y=py,z=pz or z}
     local aim=node
     local walked=distance(ax,ay,node.x,node.y)
     local grade=finite(pz) and .35 or .05
     if math.abs(node.z-z)>grade*walked then return node end
-    local moves=cell and cellMoves(ax,ay,node.x,node.y,cell) or ""
+    local moves=cell and cellMoves(ax,ay,node.x,node.y,cell,x0,y0) or ""
     for j=index,math.min(#points-1,index+5) do
         local a,b=points[j],points[j+1]
         local dx,dy=b.x-a.x,b.y-a.y
@@ -437,8 +530,8 @@ local function steeringPoint(points,index,continent,px,py,pz)
         end
         if not safe then break end
         if cell then
-            moves=moves..cellMoves(a.x,a.y,target.x,target.y,cell)
-            if cellMoves(px,py,target.x,target.y,cell)~=moves then break end
+            moves=moves..cellMoves(a.x,a.y,target.x,target.y,cell,x0,y0)
+            if cellMoves(px,py,target.x,target.y,cell,x0,y0)~=moves then break end
         end
         aim=target
         if fraction<1 then break end
@@ -485,10 +578,59 @@ local function maneuverPoint(self,index,turn,continent,px,py,pz)
             return points[j]
         end
     end
-    return steeringPoint(points,index,continent,px,py,pz)
+    return steeringPoint(points,index,continent,px,py,pz,self.corridor)
 end
+
+-- The remaining portion of a previously certified ray stays certified when
+-- followed exactly, including through a multi-level entrance. Reprojecting
+-- it onto the older route can place the player on the other side of a wall.
+local function followingRay(self,index,px,py,pz)
+    local ray=self.steeringRay
+    if not ray or ray.path~=self.points or ray.index~=index or ray.destination~=self.target then return nil end
+    local off,t,_,z=projection(px,py,ray.start,ray.aim,ray.start.z)
+    local heightFits=finite(pz) and finite(z) and math.abs(pz-z)<=3
+    if off<.01 and t>=0 and t<1 and (heightFits or (not finite(pz) and not finite(ray.start.z))) then return ray.aim end
+end
+
+-- When the search snapped its origin, the source XY itself is not proof
+-- of being on the path. Admit a sample only on the first edge's own cell
+-- and surface; distance to a vertex cannot distinguish sides of a fence.
+local function onEntrySurface(points,px,py,pz,st)
+    local a,b=points[1],points[2]
+    local off,_,u,z=projection(px,py,a,b)
+    if distance(px,py,a.x,a.y)<.01 and finite(pz) and finite(a.z) and math.abs(pz-a.z)<=2 then return true end
+    if not st then
+        return false
+    end
+    if u==0 then z=a.z elseif u==1 then z=b.z end
+    local ax,ay=a.x+(b.x-a.x)*u,a.y+(b.y-a.y)*u
+    if not sameCell(px,py,ax,ay,st.cs,st.x0,st.y0) then return false end
+    local gx,gy=math.floor((px-st.x0)/st.cs),math.floor((py-st.y0)/st.cs)
+    local height=dryCell(st,gx,gy)
+    if height then
+        return (not finite(pz) or math.abs(pz-height)<=3) and (not finite(z) or math.abs(z-height)<=3)
+    end
+    -- A mapped entrance can itself be on a bridge or in a building.
+    -- Match both elevations to the same decoded surface before entering.
+    if not finite(pz) or not finite(z) or math.abs(pz-z)>3 or off>st.cs then return false end
+    local k=math.floor(gx/st.C)*st.ny+math.floor(gy/st.C)
+    local i=(gx%st.C)*st.C+gy%st.C
+    local grid=ns.PathingNamespace and ns.PathingNamespace.PathGrid
+    if not (grid and grid.surface and st.val[k] and st.z[k] and st.at[k]) then return false end
+    local playerNode,playerGap=grid.surface(st,k,i,-1,pz)
+    local routeNode,routeGap=grid.surface(st,k,i,-1,z)
+    return playerNode~=nil and playerNode==routeNode and playerGap<=3 and routeGap<=3
+end
+
 function W:_Follow(px,py,pz)
     local points,index=self.points,math.max(2,self.index or 2)
+    if self.entryPending then
+        if not onEntrySurface(points,px,py,pz,self.corridor) then
+            local off=projection(px,py,points[1],points[2])
+            return 2,off,true,false
+        end
+        self.entryPending=nil
+    end
     local originZ=self.pathZ
     if self.pathTravel==nil then originZ=self.requestZ end
     -- Only adjacent segments may be acquired. A nearby return corridor in a
@@ -507,8 +649,15 @@ function W:_Follow(px,py,pz)
         local nextOff,nextT,nextU,nextZ=projection(px,py,b,points[index+1])
         local nextArc=self.arc[index]+nextU*(self.arc[index+1]-self.arc[index])
         local atB=distance(px,py,b.x,b.y)<=3 and sameFloor(pz,b.z)
-        local ahead=nextT>=0 and nextOff<=12 and (t>=1 or nextOff+1<off)
+        local ahead=nextT>=0 and nextOff<=12 and (t>=1 or nextOff+.1<off)
         if not sameFloor(pz,nextZ) or nextArc>budget or not (atB or ahead) then break end
+        local c=points[index+1]
+        -- Motion along the outgoing leg can confirm progress even while a
+        -- lateral offset makes the next steering ray unavailable. The ray
+        -- itself is always checked separately before it reaches the HUD.
+        local passed=ahead and nextArc-self.arc[index]>=math.max(2,nextOff*.5)
+        if not passed and not followsEdge(b,c,px,py,pz,self.corridor) and
+            not rejoinEdge(b,c,px,py,pz,self.corridor) then break end
         index=index+1
     end
     self.index=index
@@ -550,7 +699,7 @@ function W:_RecordMotion(px,py,pz)
     end
     trace[#trace+1]={x=px,y=py,z=pz,travel=self.travel or 0,time=now()}
 end
-function W:_Adopt(points,requestTravel,requestZ)
+function W:_Adopt(points,requestTravel,requestZ,rejoin)
     if self.traceValid==false then
         self.trace,self.traceValid=nil,nil
         self.rejected=(self.rejected or 0)+1
@@ -559,10 +708,18 @@ function W:_Adopt(points,requestTravel,requestZ)
         self.phase,self.text="pending","Actualizando el camino desde tu posición…"
         return false
     end
-    local old={points=self.points,left=self.left,arc=self.arc,index=self.index,progress=self.progress,
+    local old={points=self.points,left=self.left,arc=self.arc,index=self.index,progress=self.progress,entryPending=self.entryPending,
         pathTravel=self.pathTravel,pathZ=self.pathZ,cornerCredit=self.cornerCredit,
         cornerCreditBefore=self.cornerCreditBefore,cornerCreditTravel=self.cornerCreditTravel}
+    self.entryPending=points.meshStart~=nil
+    if self.entryPending then
+        -- Route-provider caches and other callers keep the public endpoints.
+        points=copy(points)
+        points[1]=points.meshStart
+    end
     self.points,self.left,self.arc,self.index,self.progress=points,{},{[1]=0},2,0
+    local previousCorridor=self.corridor
+    self.corridor=routeCorridor(points,2)
     self.pathTravel,self.pathZ=requestTravel,requestZ
     self.cornerCredit,self.cornerCreditBefore,self.cornerCreditTravel=nil,nil,nil
     for i=2,#points do self.arc[i]=self.arc[i-1]+distance(points[i-1].x,points[i-1].y,points[i].x,points[i].y) end
@@ -584,10 +741,17 @@ function W:_Adopt(points,requestTravel,requestZ)
     local _,off,floorOK,behind
     if px and py then _,off,floorOK,behind=self:_Follow(px,py,pz) end
     self.trace,self.traceValid=nil,nil
-    if off and (off>30 or not floorOK or behind) then
+    -- An optional reconnect that starts on an unconfirmed surface cannot
+    -- improve a known route to this same destination. Keep that route and
+    -- continue checking each frame for a walkable return to its corridor.
+    local keepRoute=rejoin and old.points and not old.entryPending and self.entryPending
+    if keepRoute or (off and (off>30 or not floorOK or behind)) then
+        self.corridor=previousCorridor
+        self.entryPending=old.entryPending
         self.points,self.left,self.arc,self.index,self.progress=old.points,old.left,old.arc,old.index,old.progress
         self.pathTravel,self.pathZ=old.pathTravel,old.pathZ
         self.cornerCredit,self.cornerCreditBefore,self.cornerCreditTravel=old.cornerCredit,old.cornerCreditBefore,old.cornerCreditTravel
+        if keepRoute then return true end
         self.rejected=(self.rejected or 0)+1
         self.refreshWanted=true
         diagnostic(self,not floorOK and "floor" or behind and "behind" or "drift")
@@ -595,8 +759,8 @@ function W:_Adopt(points,requestTravel,requestZ)
         return false
     end
     self.accepted=(self.accepted or 0)+1
-    self.turns,self.turnCursor,self.steeringIndex=nil,nil,nil
-    self.corridor=routeCorridor(points,self.index)
+    self.turns,self.turnCursor,self.steeringIndex,self.steeringRay=nil,nil,nil,nil
+    if self.index>2 then self.corridor=routeCorridor(points,self.index) end
     self.refreshWanted=nil
     diagnostic(self,"accepted")
     self.phase,self.text="walking","Siguiendo el camino por el terreno"
@@ -604,10 +768,6 @@ function W:_Adopt(points,requestTravel,requestZ)
 end
 local function blockedWaypoint(self, point)
     point.navigationBlocked, point.navigationNotice = true, self.text
-    if self.startMap and self.startMap==point.mapID and not combat() and read(IsFalling)~=true then
-        point.navigationBearing=true
-        point.navigationBearingText=self.pending and "Rumbo orientativo · calculando camino" or "Rumbo orientativo · camino sin confirmar"
-    end
     if self.phase == "pending" then
         if combat() then
             point.navigationHint = "Sal de combate"
@@ -618,6 +778,11 @@ local function blockedWaypoint(self, point)
         point.navigationHint = self.failure == "error" and "Recalcula el camino" or "Revisa el acceso"
     end
     return point
+end
+
+function W:IsEnabled()
+    local config = settings()
+    return config and config.enabled == true or false
 end
 
 function W:Resolve(point)
@@ -640,19 +805,31 @@ function W:Resolve(point)
     if (pc and continent and pc~=continent) or (not (pc and continent) and (not here or here.mapID~=point.mapID)) then
         if self.key then self:Clear("map") end
         self.phase,self.text="unavailable","Esperando un tramo local de viaje"
-        out.navigationBlocked,out.navigationNotice=true,self.text
-        return out
+        return blockedWaypoint(self,out)
     end
     if not config.enabled then
         if self.key then self:Clear() end
         self.phase,self.text="disabled","Dirección orientativa; camino por terreno desactivado"
         out.navigationNotice=self.text;return out
     end
+    -- The boat provides its own disembarkation point once it is at the dock.
+    -- Its moving deck has no walking mesh. Approaches on land still use one.
+    if point.boatLanding then
+        if self.key then self:Clear() end
+        self.phase,self.text="transport","Desembarca por el muelle"
+        return out
+    end
+    -- Ground routing does not steer a taxi, a flying player or a ghost.
+    if read(UnitIsDeadOrGhost,"player")==true or read(IsFlying)==true or read(UnitOnTaxi,"player")==true then
+        if self.key then self:Clear() end
+        self.phase,self.text="unavailable","Dirección orientativa durante vuelo o viaje de fantasma"
+        out.navigationNotice=self.text;return out
+    end
     if not engine or not engine.Find or not engine.Available or read(engine.Available,continent)~=true or
         not finite(gx) or not finite(gy) or not finite(px) or not finite(py) then
         if self.key then self:Clear() end
-        self.phase,self.text="unavailable","Dirección orientativa: sin datos de terreno para esta zona"
-        out.navigationNotice=self.text;return out
+        self.phase,self.text="unavailable","Sin datos de terreno para confirmar el camino hasta el destino"
+        return blockedWaypoint(self,out)
     end
     local ux,uy,uz,instance=read(UnitPosition,"player")
     local pz
@@ -660,19 +837,17 @@ function W:Resolve(point)
     -- rejecting real terrain floors while walking (SendaFH Core/Compat.lua).
     if finite(uz) and uz~=0 and instance==pc then pz=uz end
     if finite(ux) and finite(uy) and instance==pc and distance(ux,uy,px,py)>100 then
-        self:Clear();self.phase,self.text="unavailable","Dirección orientativa: esta fase no coincide con los datos de terreno"
-        out.navigationNotice=self.text;return out
+        if self.key then self:Clear() end
+        self.phase,self.text="unavailable","La posición de esta fase no coincide con los datos de terreno"
+        return blockedWaypoint(self,out)
     end
     -- Pathing and its floor samples use the same native coordinate frame.
     -- Map positions remain for the semantic marker and map conversion only.
     if finite(ux) and finite(uy) and instance==pc then px,py=ux,uy end
     if read(IsInInstance)==true then
-        self:Clear();self.phase,self.text="unavailable","Dirección orientativa: esta instancia no tiene datos de terreno"
-        out.navigationNotice=self.text;return out
-    end
-    if read(UnitIsDeadOrGhost,"player")==true or read(IsFlying)==true or read(UnitOnTaxi,"player")==true then
-        self:Clear();self.phase,self.text="unavailable","Dirección orientativa durante vuelo o viaje de fantasma"
-        out.navigationNotice=self.text;return out
+        if self.key then self:Clear() end
+        self.phase,self.text="unavailable","Sin datos de terreno para confirmar el camino en esta instancia"
+        return blockedWaypoint(self,out)
     end
     local key=pointKey(point,continent)
     local latest={x=gx,y=gy,z=finite(point.z) and point.z or nil}
@@ -739,11 +914,42 @@ function W:Resolve(point)
         -- During a refresh, only keep the old instruction if we can still
         -- connect to its corridor. Above the lateral allowance even a nearby
         -- road can be on the far side of a wall.
+        local node=points[index]
+        local turn=nextTurn(self,index)
+        local visual
+        if self.entryPending then
+            local start,st=points[1],self.corridor
+            if st then
+                local h=dryCell(st,math.floor((px-st.x0)/st.cs),math.floor((py-st.y0)/st.cs))
+                if h and (not finite(pz) or math.abs(h-pz)<=3) and openRoad(continent,px,py,pz,start,st,true) then visual=start end
+            end
+        else
+            visual=maneuverPoint(self,index,turn,continent,px,py,pz)
+        end
+        local retained=followingRay(self,index,px,py,pz)
+        if visual==node and not followsEdge(points[index-1],node,px,py,pz,self.corridor) then
+            visual=retained or rejoinEdge(points[index-1],node,px,py,pz,self.corridor,true)
+        end
         local stale=self.pending or self.refreshWanted or self.failure
-        local lost=off>(stale and 6 or 12) and not canAim(points,index,index,continent,px,py,pz,self.corridor)
+        if not visual and off<=(self.entryPending and 30 or 12) and floorOK and not behind then
+            -- A brief position or height discrepancy must not discard a
+            -- known detour. Resume as soon as a local connection is proven.
+            -- A persistent obstruction gets a new search from the player.
+            local stamp=now()
+            self.rejoinSince=self.rejoinSince or stamp
+            if stamp-self.rejoinSince>=4 and not self.pending and stamp-(self.rejoinAttempt or -100)>=12 then
+                self.rejoinAttempt=stamp
+                self:_Ask(engine,continent,px,py,pz,latest,"rejoin",camp)
+            end
+            self.phase,self.text="pending","Buscando un acceso al camino desde tu posición…"
+            return blockedWaypoint(self,out)
+        end
+        self.rejoinSince=nil
+        local lost=not visual or (not self.entryPending and off>(stale and 6 or 12)
+            and not canAim(points,index,index,continent,px,py,pz,self.corridor))
         if off>30 or not floorOK or behind or lost then
             self.points,self.left,self.arc,self.index=nil,nil,nil,nil
-            self.turns,self.turnCursor,self.steeringIndex,self.corridor=nil,nil,nil,nil
+            self.turns,self.turnCursor,self.steeringIndex,self.corridor,self.steeringRay=nil,nil,nil,nil,nil
             self.refreshWanted=true
             diagnostic(self,not floorOK and "floor" or behind and "behind" or "drift")
             if not self.pending and now()-(self.lastAsk or -100)>=2 then
@@ -752,7 +958,6 @@ function W:Resolve(point)
             self.phase,self.text="pending","Recalculando el camino desde tu posición…"
             return blockedWaypoint(self, out)
         end
-        local node=points[index]
         if index==#points and (self.pending or self.refreshWanted) and distance(px,py,node.x,node.y)<=12 then
             if self.failure and not self.pending then
                 self.phase,self.text="failed","Falta confirmar el camino desde aquí hasta el nuevo destino"
@@ -761,22 +966,30 @@ function W:Resolve(point)
             end
             return blockedWaypoint(self, out)
         end
-        local turn=nextTurn(self,index)
-        local visual=maneuverPoint(self,index,turn,continent,px,py,pz)
         local aim=ns.WorldToWaypoint and ns:WorldToWaypoint(continent,visual.x,visual.y,here.mapID)
         if not aim then
             self.phase,self.text="unavailable","No se puede situar el siguiente giro en este mapa"
             return blockedWaypoint(self, out)
         end
+        if not retained or retained.x~=visual.x or retained.y~=visual.y or retained.z~=visual.z then
+            self.steeringRay={path=points,index=index,destination=self.target,start={x=px,y=py,z=pz},aim=visual}
+        end
         out.mapID,out.x,out.y,out.z=aim.mapID,aim.x,aim.y,visual.z
         out.walking,out.walkingIndex,out.walkingCount=true,index,#points
         out.walkingWorld={continent=continent,north=visual.x,west=visual.y}
         out.walkingRouteKey=key
-        if turn and turn.side then
+        local toNode=distance(px,py,node.x,node.y)
+        if self.entryPending then
+            out.walkingSegmentDistance=distance(px,py,visual.x,visual.y)
+            toNode=out.walkingSegmentDistance+self.arc[2]
+        elseif turn then
             out.walkingTurn=turn.side
-            out.walkingTurnDistance=distance(px,py,node.x,node.y)+self.arc[turn.index]-self.arc[index]
+            out.walkingTurnDistance=toNode+self.arc[turn.index]-self.arc[index]
+        elseif visual~=points[#points] then
+            -- On a straight approach the arrow can aim at a nearer point on the path.
+            out.walkingSegmentDistance=distance(px,py,visual.x,visual.y)
         end
-        out.walkingDistance=distance(px,py,node.x,node.y)+(self.left[index] or 0)
+        out.walkingDistance=toNode+(self.left[index] or 0)
         out.walkingFinal=index==#points and visual==node and not self.pending and not self.refreshWanted
         out.walkingGoal=point
         out.navigationNotice=nil

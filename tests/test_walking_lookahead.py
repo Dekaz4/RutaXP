@@ -3,17 +3,19 @@
 import math
 import unittest
 
-from test_walking_history import WalkingHistoryHost
+from test_walking_history import ROOT, WalkingHistoryHost
 
 
 class WalkingLookaheadTests(unittest.TestCase):
-    def follow(self, nodes, mesh=True, dynamic=False, open_road=False):
+    def follow(self, nodes, mesh=True, dynamic=False, open_road=False, configure_terrain=None):
         host = WalkingHistoryHost()
         if mesh:
             host.ns.PathingNamespace = host.table({"PathGrid": {"TILE": 512}})
             host.lua.globals().RutaXPPathData = host.table({0: {"cells": 128}})
         if open_road:
             self.loaded_road(host)
+            if configure_terrain:
+                configure_terrain(host.s.terrain)
         host.s.x, host.s.y, host.s.z = nodes[0]
         goal = host.point(nodes[-1][0], dynamic=dynamic)
         goal.y, goal.z = nodes[-1][1] / 1000, nodes[-1][2]
@@ -77,7 +79,7 @@ class WalkingLookaheadTests(unittest.TestCase):
     def test_lateral_shortcut_needs_dry_single_level_loaded_terrain_and_open_edges(self):
         route = [(32, 32, 12), (48, 32, 12), (64, 32, 12), (96, 32, 12), (96, 80, 12)]
         for hazard in ("t.val[0][j]=0", "t.val[0][j]=2", "t.z[0][j]=24", "t.at[0][-j]=16384",
-                       "t.links[0][j]={}", "t.moves[0][j]=0", "AUDIT_NS.Walking.corridor.val[0]=false"):
+                       "t.links[0][j]={}", "t.moves[0][j]=0"):
             with self.subTest(hazard=hazard):
                 h, goal, _ = self.follow(route, open_road=True)
                 h.lua.execute("local t=TEST.terrain; local j=17*128+8+1; " + hazard)
@@ -86,6 +88,207 @@ class WalkingLookaheadTests(unittest.TestCase):
                 self.assertEqual(result.walkingTurn, "left")
                 self.assertLess(result.walkingWorld.north, 68, "arrow must stage before the hazard")
                 self.assertEqual(h.w.requests, 1)
+        h, goal, _ = self.follow(route, open_road=True)
+        h.w.corridor.val[0] = False
+        h.s.x, h.s.y, h.s.now = 40, 39, 1
+        result = h.w.Resolve(h.w, goal)
+        self.assertTrue(result.navigationBlocked)
+        self.assertIsNone(result.walkingWorld)
+
+    # The planned path approaches the south-east corner, follows the building's
+    # side, then enters through its east door. Coordinates are synthetic yards.
+    door_route = [(38, 62, 12), (70, 62, 12), (70, 86, 12), (54, 86, 12)]
+    walls = {(x, y) for x in range(12, 17) for y in range(16, 25)
+             if (x in (12, 16) or y in (16, 24)) and not (x == 16 and 20 <= y <= 22)}
+
+    def building(self, terrain, seal_door=False):
+        walls = self.walls | {(16, gy) for gy in range(20, 23)} if seal_door else self.walls
+        for gx, gy in walls:
+            terrain.val[0][gx * terrain.C + gy + 1] = 0
+        for gx in range(11, 18):
+            for gy in range(15, 26):
+                moves = 0
+                for bit, dx, dy in ((1, 1, 0), (2, 0, 1), (4, 1, 1), (8, 1, -1)):
+                    cells = {(gx, gy), (gx + dx, gy + dy)}
+                    if dx and dy:
+                        cells.update(((gx + dx, gy), (gx, gy + dy)))
+                    if cells.isdisjoint(walls):
+                        moves += bit
+                terrain.moves[0][gx * terrain.C + gy + 1] = moves
+
+    def assert_ray_clear(self, position, point):
+        aim = point.walkingWorld
+        self.assertIsNotNone(aim, position)
+        self.assert_clear_segment(position, (aim.north, aim.west))
+
+    def assert_clear_segment(self, position, target):
+        x, y = position
+        dx, dy = target[0] - x, target[1] - y
+        # The open intervals between grid-boundary crossings lie in individual
+        # cells, including a wall that the ray clips for a fraction of a yard.
+        crossings = {0, 1}
+        for start, end in zip(position, target):
+            for boundary in range(math.floor(min(start, end) / 4) + 1, math.ceil(max(start, end) / 4)):
+                crossings.add((4 * boundary - start) / (end - start))
+        ordered = sorted(crossings)
+        for a, b in zip(ordered, ordered[1:]):
+            t = (a + b) / 2
+            cell = (math.floor((x + t * dx) / 4), math.floor((y + t * dy) / 4))
+            self.assertNotIn(cell, self.walls, f"segment from {position} to {target} crosses wall {cell}")
+
+    def test_arrow_rounds_the_building_and_enters_at_the_door(self):
+        h, goal, _ = self.follow(self.door_route, open_road=True, configure_terrain=self.building)
+        positions = [(x, 62) for x in (38, 45, 55, 63, 66, 67.2, 68.5, 70)]
+        positions += [(70, y) for y in (66, 70, 74, 78, 82, 86)]
+        positions += [(66, 86), (60, 86), (54, 86)]
+        for position in positions:
+            h.s.x, h.s.y, h.s.now = *position, h.s.now + .7
+            point = h.w.Resolve(h.w, goal)
+            self.assert_ray_clear(position, point)
+        self.assertTrue(point.walkingFinal)
+        self.assertEqual((point.walkingWorld.north, point.walkingWorld.west), positions[-1])
+        self.assertEqual(h.w.requests, 1)
+
+    def routing_grid(self):
+        h = WalkingHistoryHost()
+        h.ns.PathingNamespace = h.table({})
+        h.lua.globals().RutaXPPathData = h.table({0: {"cells": 32, "nx": 1, "ny": 1,
+            "cx0": 0, "cy0": 0, "swim": 2, "graph": {}}})
+        for name in ("PathGrid", "Path"):
+            source = ROOT / "RutaXP" / "Pathing" / "Routing" / f"{name}.lua"
+            h.load(source.read_text(encoding="utf-8-sig"), h.ns)
+        terrain = h.ns.PathingNamespace.PathGrid.State(0)
+        h.lua.globals().terrain = terrain
+        h.lua.execute("""
+            local t=terrain
+            t.cs,t.nodes[0]=4,{}
+            t.val[0],t.z[0],t.moves[0],t.at[0],t.links[0]={},{},{},{},{}
+            for x=0,t.C-1 do for y=0,t.C-1 do
+                local i=x*t.C+y+1
+                t.val[0][i],t.z[0][i]=1,12
+                t.moves[0][i]=(x<t.C-1 and 1 or 0)+(y<t.C-1 and 2 or 0)
+                    +(x<t.C-1 and y<t.C-1 and 4 or 0)+(x<t.C-1 and y>0 and 8 or 0)
+            end end
+        """)
+        return h, terrain
+
+    def test_grid_routes_through_the_door_and_rejects_a_sealed_building(self):
+        for seal_door in (False, True):
+            with self.subTest(seal_door=seal_door):
+                h, terrain = self.routing_grid()
+                self.building(terrain, seal_door)
+                start = h.table({"x": 38, "y": 62, "z": 12})
+                end = h.table({"x": 54, "y": 86, "z": 12})
+                path, cost, _ = h.ns.PathingNamespace.Path.FindSync(0, start, end)
+                if seal_door:
+                    self.assertIsNone(path)
+                    self.assertEqual(cost, "unreachable")
+                else:
+                    self.assertTrue(path.goalOnMesh)
+                    self.assertGreater(cost, math.hypot(end.x - start.x, end.y - start.y))
+                    for i in range(2, len(path) + 1):
+                        a, b = path[i - 1], path[i]
+                        self.assert_clear_segment((a.x, a.y), (b.x, b.y))
+
+    def test_exact_endpoint_metadata_uses_the_cell_and_height_the_search_reached(self):
+        h, terrain = self.routing_grid()
+        grid = h.ns.PathingNamespace.PathGrid
+        start = h.table({"x": 38, "y": 62, "z": 12})
+        goal = h.table({"x": 54, "y": 86, "z": 12})
+        k, cell = grid.locate(terrain, goal.x, goal.y)
+        terrain.z[k][cell + 1] = 20
+        node, gap = grid.surface(terrain, k, cell, -1, goal.z)
+        self.assertEqual(node, cell)
+        self.assertLessEqual(gap, grid.ZTOL)
+        self.assertNotEqual(grid.snap(terrain, k, cell, goal.x, goal.y, goal.z), cell)
+        for height, exact in ((12, False), (20, True), (40, False), (None, True)):
+            with self.subTest(height=height):
+                goal.z = height
+                path, cost, _ = h.ns.PathingNamespace.Path.FindSync(0, start, goal)
+                self.assertGreater(cost, 0)
+                self.assertEqual((path[len(path)].x, path[len(path)].y), (goal.x, goal.y))
+                self.assertEqual(path.goalOnMesh, exact)
+
+    def test_snapped_start_across_a_fence_can_be_joined_after_walking_round_it(self):
+        for joined_before_answer in (False, True):
+            with self.subTest(joined_before_answer=joined_before_answer):
+                h, terrain = self.routing_grid()
+                grid = h.ns.PathingNamespace.PathGrid
+                k, cell = grid.locate(terrain, 54, 86)
+                terrain.z[k][cell + 1] = 20
+                for gy in range(17, 25):
+                    terrain.moves[0][12 * terrain.C + gy + 1] = 2  # fence at x=52, y=68..100
+                start = h.table({"x": 54, "y": 86, "z": 20})
+                end = h.table({"x": 38, "y": 86, "z": 12})
+                find = h.ns.PathingNamespace.Path.FindSync
+                path, _, _ = find(0, start, end)
+                self.assertIsNone(path.meshStart)
+                self.assertGreater(len(path), 2, "from this surface the real route goes around the fence")
+                start.z = 12
+                path, cost, _ = find(0, start, end)
+                self.assertTrue(path.goalOnMesh)
+                self.assertEqual((path[1].x, path[1].y), (54, 86))
+                self.assertEqual((path.meshStart.x, path.meshStart.y, path.meshStart.z), (50, 86, 12))
+                goal = h.point(end.x)
+                goal.y, goal.z = end.y / 1000, end.z
+                h.s.x, h.s.y, h.s.z = start.x, start.y, start.z
+                h.w.Resolve(h.w, goal)
+                first_job = h.s.jobs[1]
+                if joined_before_answer:
+                    # A legal walk goes round the end of the fence while the engine is busy.
+                    positions = [(54, y) for y in (90, 94, 98, 102)]
+                    positions += [(50, y) for y in (102, 98, 94, 90, 86)]
+                    for position in positions:
+                        h.s.x, h.s.y, h.s.now = *position, h.s.now + .6
+                        h.w.Resolve(h.w, goal)
+                first_job.callback(path, cost)
+                point = h.w.Resolve(h.w, goal)
+                if joined_before_answer:
+                    self.assertTrue(point.walking)
+                    self.assertEqual((point.walkingWorld.north, point.walkingWorld.west), (38, 86))
+                    self.assertEqual(h.s.finds, 1, "the character already reached the computed route")
+                elif point.walkingWorld:
+                    aim = point.walkingWorld
+                    if aim.north <= 52:
+                        crossing = 86 + (aim.west - 86) * (52 - 54) / (aim.north - 54)
+                        self.assertFalse(68 <= crossing < 100, "initial direction crosses the fence")
+                else:
+                    self.assertTrue(point.navigationBlocked)
+
+    def test_legal_lateral_drift_cannot_send_the_arrow_through_a_wall(self):
+        h, goal, _ = self.follow(self.door_route, open_road=True, configure_terrain=self.building)
+        for position in ((38, 62), (42, 66), (46, 70)):
+            h.s.x, h.s.y, h.s.now = *position, h.s.now + .7
+            point = h.w.Resolve(h.w, goal)
+            if point.walkingWorld:
+                self.assert_ray_clear(position, point)
+            else:
+                self.assertTrue(point.navigationBlocked)
+                self.assertTrue(h.w.pending)
+
+    def test_shortcut_at_the_corner_needs_an_open_crossing_even_if_all_cells_are_dry(self):
+        def railing(terrain):
+            # A thin railing runs along y=64 from x=48 to x=68. Cells on
+            # either side remain dry; only the edges crossing the railing close.
+            for gx in range(12, 17):
+                edge = gx * 128 + 15 + 1
+                terrain.moves[0][edge] = 9  # close +y and +x,+y
+                terrain.moves[0][edge + 1] = 7  # close +x,-y
+
+        for blocked in (False, True):
+            with self.subTest(railing=blocked):
+                h, goal, _ = self.follow(self.door_route, open_road=True,
+                                         configure_terrain=railing if blocked else None)
+                for x in (38, 45, 55, 63, 66, 67.2):
+                    h.s.x, h.s.y, h.s.now = x, 62, h.s.now + .7
+                    point = h.w.Resolve(h.w, goal)
+                aim = point.walkingWorld
+                self.assertIsNotNone(aim)
+                if blocked and aim.west > 64:
+                    crossing_x = x + (aim.north - x) * (64 - 62) / (aim.west - 62)
+                    self.assertFalse(48 <= crossing_x < 68, "the diagonal crosses the closed edge")
+                if not blocked:
+                    self.assertGreater(aim.west, 64, "walkable open ground permits this corner cut")
 
     def test_long_certified_segment_has_stable_intermediate_targets_before_arrival(self):
         start, end = 32, 352
@@ -104,6 +307,10 @@ class WalkingLookaheadTests(unittest.TestCase):
             self.assertEqual(result.walkingWorld.west, 64)
             self.assertAlmostEqual(result.walkingDistance, end - x)
             self.assertEqual(bool(result.walkingFinal), aim == end)
+            if aim < end:
+                self.assertAlmostEqual(result.walkingSegmentDistance, aim - x)
+            else:
+                self.assertIsNone(result.walkingSegmentDistance)
             if x < start + 20:
                 self.assertEqual(aim, first_aim, "the first target should stay fixed")
             if aim != targets[-1]:

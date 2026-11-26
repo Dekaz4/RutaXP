@@ -40,10 +40,16 @@ class SingingShardsTests(unittest.TestCase):
         self.assertEqual(state.cursor, cursor)
         row = next(row for row in h.ns.OriginalGuidePresentation.Tasks().values() if row.isCurrent)
         self.assertEqual((row.questID, row.action, row.status), (QUEST, action, "active"))
-        h.ns.GetArrowWaypoint(h.ns, step)
+        sample = h.ns.GetArrowWaypoint(h.ns, step)
         waypoint = h.ns.OriginalGuidePresentation.Waypoint()
-        self.assertIsNotNone(waypoint, "Journey must receive a navigable destination")
-        map_id, x, y, _, _, point = waypoint
+        point = h.point()
+        map_id, x, y = point.mapID, point.x, point.y
+        if h.ns.Walking.IsEnabled(h.ns.Walking):
+            self.assertTrue(sample.navigationBlocked)
+            self.assertIsNone(waypoint)
+        else:
+            self.assertEqual(waypoint[:3], (map_id, x, y))
+            self.assertEqual((waypoint[-1].goal.quest, waypoint[-1].goal.t), (QUEST, action))
         self.assertEqual((map_id, point.goal.quest, point.goal.t), (1434, QUEST, action))
         pins = [p for p in h.ns.GetMapQuestPoints(h.ns, map_id).values() if p.questID == QUEST]
         if action == "collect":
@@ -86,6 +92,7 @@ class SingingShardsTests(unittest.TestCase):
 
     def test_tenth_shard_on_farm_leads_straight_to_crank_before_continuing(self):
         h = self.client("collect")
+        h.ns.Walking.Toggle(h.ns.Walking, False)
         self.update_count(h, 9)
         self.assert_destination(h, 17, "collect", 9)
         self.update_count(h, 10, bag_only=True)  # The quest log still says 9/10 this frame.
