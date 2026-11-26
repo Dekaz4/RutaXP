@@ -330,7 +330,6 @@ class WalkingIntegrationTests(unittest.TestCase):
         self.assertTrue(h.ns.Navigate(h.ns))
         self.assertAlmostEqual(h.s.lastWaypoint.x, semantic.x)
         self.assertAlmostEqual(h.s.lastWaypoint.y, semantic.y)
-        self.assertFalse(h.s.superTracked)
         h.ns.UpdateNavigation(h.ns)
         self.assertTrue(h.ns.navigationFrame.arrow.shown)
         self.assertIn("Camino por terreno", h.ns.navigationFrame.destinationText)
@@ -360,7 +359,7 @@ class WalkingIntegrationTests(unittest.TestCase):
         self.assertEqual(arrow.walkingGoal.goal.t, "kill")
         self.assertEqual(h.progress(), before)
 
-    def test_missing_terrain_holds_arrow_until_player_explicitly_disables_walking(self):
+    def test_missing_terrain_and_disabled_routing_explain_the_direct_direction(self):
         h = AccessHost(DWARF, 13, 2, x=.312, y=.679)
         before = h.progress()
         semantic = h.point()
@@ -368,20 +367,13 @@ class WalkingIntegrationTests(unittest.TestCase):
         fallback = w.Resolve(w, semantic)
         self.assertEqual((fallback.x, fallback.y), (semantic.x, semantic.y))
         self.assertEqual(w.GetStatus(w).phase, "unavailable")
-        self.assertIn("Sin datos de terreno", fallback.navigationNotice)
-        self.assertTrue(fallback.navigationBlocked)
-        h.ns.UpdateNavigation(h.ns)
-        self.assertFalse(h.ns.navigationFrame.arrow.shown)
-        self.assertEqual(h.ns.navigationFrame.distance.text, "")
+        self.assertIn("orientativa", fallback.navigationNotice)
         self.assertFalse(bool(fallback.walking))
         h.ns.char.walking.enabled = False
         disabled = w.Resolve(w, semantic)
         self.assertEqual(w.GetStatus(w).phase, "disabled")
         self.assertIn("desactivado", disabled.navigationNotice)
         self.assertFalse(bool(disabled.navigationBlocked))
-        self.assertTrue(h.ns.Navigate(h.ns))
-        self.assertFalse(h.s.superTracked)
-        self.assertTrue(h.ns.navigationFrame.arrow.shown)
         self.assertEqual(h.progress(), before)
 
     def test_leaving_the_current_segment_recalculates_before_showing_another_direction(self):
@@ -405,34 +397,6 @@ class WalkingIntegrationTests(unittest.TestCase):
         self.assertFalse(h.ns.navigationFrame.arrow.shown)
         self.assertIsNotNone(h.ns.Walking.job)
         self.assertEqual(h.progress(), before)
-
-    def test_activating_walking_removes_only_the_direct_indicator_for_our_existing_pin(self):
-        h = AccessHost(DWARF, 13, 2, x=.312, y=.679)
-        h.h.lua.execute("""
-            function C_Map.GetUserWaypoint()
-                local point = TEST.lastWaypoint
-                return point and {uiMapID=point.mapID, position=CreateVector2D(point.x, point.y)}
-            end
-        """)
-        w = h.ns.Walking
-        w.Toggle(w, False)
-        self.assertTrue(h.ns.Navigate(h.ns))
-        expected = (h.s.lastWaypoint.mapID, h.s.lastWaypoint.x, h.s.lastWaypoint.y)
-        self.assertFalse(h.s.superTracked)
-        h.s.superTracked = True  # The client reactivated our pin.
-        w.Toggle(w, True)
-        self.assertFalse(h.s.superTracked)
-        self.assertEqual((h.s.lastWaypoint.mapID, h.s.lastWaypoint.x, h.s.lastWaypoint.y), expected)
-        for field in ("x", "mapID"):
-            with self.subTest(replaced=field):
-                w.Toggle(w, False)
-                self.assertTrue(h.ns.Navigate(h.ns))
-                h.s.lastWaypoint[field] += 1
-                h.s.superTracked = True  # A different pin was placed and tracked by the player.
-                calls = h.s.superTrackCalls
-                w.Toggle(w, True)
-                self.assertTrue(h.s.superTracked)
-                self.assertEqual(h.s.superTrackCalls, calls)
 
     def test_unreachable_async_answer_blocks_the_arrow_instead_of_using_a_direct_line(self):
         h = AccessHost(DWARF, 13, 2, x=.312, y=.679, terrain=True)

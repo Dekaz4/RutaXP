@@ -200,24 +200,6 @@ function ns:Navigate(goalIndex)
     return self:MarkMapDestination(point, label, pin)
 end
 
--- A user waypoint has no owner ID. Match both its map and its coordinates
--- before touching the world indicator after a reload or a change of mode.
-local function matchesNativeWaypoint(pin)
-    if type(pin) ~= "table" then return false end
-    local waypoint = call(C_Map and C_Map.GetUserWaypoint)
-    return waypoint and call(function()
-        if waypoint.uiMapID ~= pin.mapID or not waypoint.position then return false end
-        local x, y = waypoint.position:GetXY()
-        return math.abs(x - pin.x) < 0.000001 and math.abs(y - pin.y) < 0.000001
-    end)
-end
-
-local function stopWaypointIndicator()
-    if C_SuperTrack and (not C_SuperTrack.IsSuperTrackingUserWaypoint or call(C_SuperTrack.IsSuperTrackingUserWaypoint)) then
-        call(C_SuperTrack.SetSuperTrackedUserWaypoint, false)
-    end
-end
-
 function ns:MarkMapDestination(point, label, pin)
     if pin then pin.mapID, pin.x, pin.y = point.mapID, point.x, point.y end
     local info = call(C_Map and C_Map.GetMapInfo, point.mapID)
@@ -225,15 +207,11 @@ function ns:MarkMapDestination(point, label, pin)
     if C_Map and C_Map.SetUserWaypoint and UiMapPoint and UiMapPoint.CreateFromCoordinates
         and (not C_Map.CanSetUserWaypointOnMap or call(C_Map.CanSetUserWaypointOnMap, point.mapID)) then
         local target = call(UiMapPoint.CreateFromCoordinates, point.mapID, point.x, point.y)
-        local ok, set
-        if target then ok, set = pcall(C_Map.SetUserWaypoint, target) end
-        if ok and set ~= false and (matchesNativeWaypoint(point) or (not C_Map.GetUserWaypoint and set == true)) then
+        if target and call(C_Map.SetUserWaypoint, target) then
             if self.ClearMapDestination then self:ClearMapDestination() end
-            pin = pin or {mapID=point.mapID, x=point.x, y=point.y}
-            pin.native = true
+            if pin then pin.native = true end
             self.guideQuestMapPin = pin
-            self.char.guideUserWaypoint = {mapID=point.mapID, x=point.x, y=point.y}
-            stopWaypointIndicator()
+            call(C_SuperTrack and C_SuperTrack.SetSuperTrackedUserWaypoint, true)
             self:Print("Destino marcado: " .. location)
             return true
         end
@@ -247,23 +225,21 @@ function ns:MarkMapDestination(point, label, pin)
     return false
 end
 
-function ns:StopDirectMapTracking()
-    if not (self.char and self.char.guideUserWaypoint and C_Map and C_Map.GetUserWaypoint) then return end
-    if matchesNativeWaypoint(self.char.guideUserWaypoint) then stopWaypointIndicator()
-    else self.char.guideUserWaypoint = nil end
-end
-
 function ns:ClearDeferredGroupMapPin()
     local pin = self.guideQuestMapPin
-    if not pin or not pin.goal then return end
+    if not pin then return end
     if not (self.GetGroupDeferralReason and self:GetGroupDeferralReason(pin.goal, pin.step, pin.guide, pin.index))
         and not (self.GetLevelingDetourReason and self:GetLevelingDetourReason(pin.goal)) then return end
     self.guideQuestMapPin = nil
     if pin.native then
-        if matchesNativeWaypoint(pin) then
-            self.char.guideUserWaypoint = nil
-            call(C_Map and C_Map.ClearUserWaypoint)
-        end
+        -- Players and other addons can replace the native pin at any time.
+        local waypoint = call(C_Map and C_Map.GetUserWaypoint)
+        local ours = waypoint and call(function()
+            if waypoint.uiMapID ~= pin.mapID or not waypoint.position then return false end
+            local x, y = waypoint.position:GetXY()
+            return math.abs(x - pin.x) < 0.000001 and math.abs(y - pin.y) < 0.000001
+        end)
+        if ours then call(C_Map and C_Map.ClearUserWaypoint) end
     elseif self.ClearMapDestination then
         self:ClearMapDestination()
     end
@@ -398,8 +374,6 @@ ns.events = CreateFrame("Frame")
 ns.events:RegisterEvent("ADDON_LOADED")
 ns.events:RegisterEvent("PLAYER_LOGIN")
 ns.events:RegisterEvent("PLAYER_ENTERING_WORLD")
-if C_Map and C_Map.GetUserWaypoint then pcall(ns.events.RegisterEvent, ns.events, "USER_WAYPOINT_UPDATED") end
-if C_SuperTrack and C_SuperTrack.IsSuperTrackingUserWaypoint then pcall(ns.events.RegisterEvent, ns.events, "SUPER_TRACKING_CHANGED") end
 ns.events:RegisterEvent("QUEST_ACCEPTED")
 ns.events:RegisterEvent("QUEST_TURNED_IN")
 ns.events:RegisterEvent("QUEST_LOG_UPDATE")
@@ -413,10 +387,7 @@ ns.events:SetScript("OnEvent", function(_, event, first, second)
     elseif event == "PLAYER_LOGIN" and ns.loaded and not ns.initialized then
         ns.initialized = true
         ns:Initialize()
-    elseif ns.initialized and (event == "USER_WAYPOINT_UPDATED" or event == "SUPER_TRACKING_CHANGED") then
-        ns:StopDirectMapTracking()
     elseif ns.initialized then
-        if event == "PLAYER_ENTERING_WORLD" then ns:StopDirectMapTracking() end
         if ns.InvalidateGroupQuestInfo then
             if event == "QUEST_ACCEPTED" then ns:InvalidateGroupQuestInfo(second or first)
             elseif event == "QUEST_DATA_LOAD_RESULT" then

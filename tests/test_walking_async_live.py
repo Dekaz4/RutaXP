@@ -1,7 +1,6 @@
 """Real Path.Find competes with movement, navigation sampling and frame timers."""
 
 from collections import Counter
-from itertools import islice
 import math
 import unittest
 
@@ -19,7 +18,7 @@ class LiveAsyncHost:
         self.w.Clear(self.w)
         initial = self.w.GetStatus(self.w)
         self.initial_requests, self.initial_cancellations = initial.requests, initial.cancellations
-        self.s.height = 410 if step == 13 else None
+        self.s.height = 410 if step == 13 else 400
         self.before = self.host.progress()
         self.h.g.LIVE_NS, self.h.g.LIVE_ENGINE = self.ns, self.host.engine
         self.h.lua.execute(r'''
@@ -74,8 +73,7 @@ class LiveAsyncHost:
         self.phases[phase] += 1
         return phase
 
-    def turnin_marker(self, start):
-        self.place(start)
+    def turnin_marker(self):
         self.h.g.LIVE_MARKER = self.ns.GetGoalWaypoint(self.ns, self.host.goal)
         self.s.quests[self.host.goal.quest].complete = True
         self.s.markerDelta = 0
@@ -92,27 +90,6 @@ class LiveWalkingAsyncTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.gozwin_route = FollowHost().route
-        # A separate VM supplies the actual ground and a walkable first six
-        # seconds. Reading its grid cannot prewarm the timed asynchronous jobs.
-        ref = AccessHost(DWARF, 18, 1, x=.44, y=.54, terrain=True)
-        grid = ref.ns.PathingNamespace.PathGrid
-        continent, x, y = ref.ns.GetWaypointWorldPosition(ref.ns, ref.ns.PlayerPoint(ref.ns))
-        _, goal_x, goal_y = ref.ns.GetWaypointWorldPosition(ref.ns, ref.point())
-        terrain = grid.State(continent)
-
-        def ground(x, y):
-            cluster, cell = grid.locate(terrain, x, y)
-            node, _ = grid.standing(terrain, cluster, cell, None)
-            assert node is not None, "the test trajectory must stay on mapped ground"
-            return terrain.z[cluster][node + 1]
-
-        start = ref.h.table({"x": x, "y": y, "z": ground(x, y)})
-        end = ref.h.table({"x": goal_x, "y": goal_y})
-        path, _, _ = ref.engine.FindSync(continent, start, end)
-        nodes = [(path[i].x, path[i].y, path[i].z or 0) for i in range(1, len(path) + 1)]
-        cls.turnin_walk = [(px, py, ground(px, py)) for (px, py, _), _ in
-                           islice(samples(nodes, speed=7, interval=1 / 60), 6 * 60)]
-        assert len(cls.turnin_walk) == 6 * 60, "the turn-in route must cover the full moving test"
 
     def test_actual_gozwin_collect_and_kill_finish_calculating_while_running_at_30_and_60_fps(self):
         for fps in (30, 60):
@@ -133,12 +110,14 @@ class LiveWalkingAsyncTests(unittest.TestCase):
         for fps in (30, 60):
             with self.subTest(fps=fps):
                 h = LiveAsyncHost(fps=fps, step=18, goal_index=1)
-                h.turnin_marker(self.turnin_walk[0])
-                for frame, position in enumerate(self.turnin_walk[::60 // fps]):
+                h.turnin_marker()
+                bounds = h.ns.mapFrames.era[1426]
+                for frame in range(6 * fps):
                     # Run seven yards per second. The same live NPC marker
                     # varies by at most 0.2 yd, well below meaningful relocation.
+                    h.s.x += 7 / fps / abs(bounds.right - bounds.left)
                     h.s.markerDelta = math.sin(frame * .3) * .2
-                    h.frame(position)
+                    h.frame()
                 moving = h.stats
                 for _ in range(6 * fps):
                     h.frame()  # Freeze both movement and the last marker sample.
@@ -150,7 +129,7 @@ class LiveWalkingAsyncTests(unittest.TestCase):
 
     def test_a_material_live_target_move_still_replans_without_altering_quest_progress(self):
         h = LiveAsyncHost(step=18, goal_index=1)
-        h.turnin_marker(self.turnin_walk[0])
+        h.turnin_marker()
         for _ in range(6 * h.fps):
             h.frame()
         initial = h.stats
@@ -165,11 +144,13 @@ class LiveWalkingAsyncTests(unittest.TestCase):
 
     def test_same_turnin_can_alternate_live_and_authored_provider_while_the_player_runs(self):
         h = LiveAsyncHost(step=18, goal_index=1)
-        h.turnin_marker(self.turnin_walk[0])
-        for frame, position in enumerate(self.turnin_walk[::60 // h.fps]):
+        h.turnin_marker()
+        bounds = h.ns.mapFrames.era[1426]
+        for frame in range(6 * h.fps):
+            h.s.x += 7 / h.fps / abs(bounds.right - bounds.left)
             h.s.markerDelta = .2 * math.sin(frame * .3)
             h.s.markerAvailable = (frame // 12) % 2 == 0
-            h.frame(position)
+            h.frame()
         moving = h.stats
         self.assertGreaterEqual(moving["successes"], 1, moving)
         self.assertLessEqual(moving["find"], 2, moving)
@@ -178,7 +159,7 @@ class LiveWalkingAsyncTests(unittest.TestCase):
 
     def test_changing_the_actual_quest_at_identical_marker_xy_still_starts_a_new_search(self):
         h = LiveAsyncHost(step=18, goal_index=1)
-        h.turnin_marker(self.turnin_walk[0])
+        h.turnin_marker()
         for _ in range(6 * h.fps):
             h.frame()
         first = h.host.point()
@@ -198,7 +179,7 @@ class LiveWalkingAsyncTests(unittest.TestCase):
 
     def test_slow_accumulated_marker_drift_eventually_exceeds_the_anchored_tolerance(self):
         h = LiveAsyncHost(step=18, goal_index=1)
-        h.turnin_marker(self.turnin_walk[0])
+        h.turnin_marker()
         origin = h.ns.GetWaypointWorldPosition(h.ns, h.host.point())
         for frame in range(6 * h.fps):
             h.s.markerDelta = (frame + 1) / h.fps * .75

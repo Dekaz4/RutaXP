@@ -136,6 +136,17 @@ class NavigationWorldConsistencyTests(unittest.TestCase):
         self.tick()
         self.assert_angle(frame.body.lastRotation, 3 * math.pi / 2)
 
+    def test_walking_distance_tracks_the_native_position_and_the_remaining_route(self):
+        point = self.point(self.north + 20, self.west)
+        point.walkingFinal = False
+        point.walkingTurnDistance, point.walkingDistance = 40, 90
+        frame = self.arrow(point)
+        self.assertEqual(frame.distance.text, "18 m / 82 m")
+        self.native(self.north + 10, self.west)
+        point.walkingDistance = 80
+        self.host.call("UpdateNavigation")
+        self.assertEqual(frame.distance.text, "9 m / 73 m")
+
     def test_other_instance_or_unreadable_native_xy_falls_back_to_map_origin(self):
         h = self.host
         point = self.point(self.north + 20, self.west)

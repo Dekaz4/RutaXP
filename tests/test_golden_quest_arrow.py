@@ -164,7 +164,7 @@ class JourneyArrowTests(unittest.TestCase):
         self.assertGreater(hud.GetWidth(hud), 0)
         self.assertEqual(hud.GetWidth(hud), hud.GetHeight(hud))
         self.assertTrue(lua.eval("RutaXPJourneyScreenArrow.arrowTexture.allPoints==RutaXPJourneyScreenArrow"))
-        self.assertFalse(hud.label.text)
+        self.assertEqual(hud.label.text, "")
         for yards in (25,250):
             for dn,dw,bearing in ((1,0,0),(0,-1,-math.pi/2),(-1,0,math.pi),(0,1,math.pi/2)):
                 for facing in (0,math.pi/2,math.pi,3*math.pi/2):
@@ -178,7 +178,7 @@ class JourneyArrowTests(unittest.TestCase):
                         self.assertAlmostEqual(error, 0, places=8)
                         self.assertIn(tuple(texture.tint.values()) if texture.tint else (), ((),(1,1,1),(1,1,1,1)))
                         self.assertIn(tuple(texture.uv.values()) if texture.uv else (), ((),(0,1,0,1),(0,0,0,1,1,0,1,1)))
-                        self.assertTrue(hud.distLabel.text)
+                        self.assertEqual(hud.distLabel.text, f"{round(yards * 0.9144)} m")
 
         hud.scripts.OnMouseDown(hud, "LeftButton")
         hud.scripts.OnMouseUp(hud, "LeftButton")
@@ -194,7 +194,7 @@ class JourneyArrowTests(unittest.TestCase):
             picker.showText.SetChecked(picker.showText, show)
             picker.showText.scripts.OnClick(picker.showText)
             lua.execute("tick(); tick()")
-            self.assertFalse(hud.label.IsShown(hud.label) and hud.label.text)
+            self.assertEqual(hud.label.IsShown(hud.label), show)
             self.assertEqual(hud.distLabel.IsShown(hud.distLabel), show)
             self.assertTrue(hud.arrowTexture.IsShown(hud.arrowTexture))
 

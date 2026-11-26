@@ -17,7 +17,6 @@ class LocalCircuitPresentationTests(unittest.TestCase):
 
     def test_actual_tuercespina_partial_credit_is_used_by_journey_map_and_arrow(self):
         h = self.real_client(.266, .168, 48.8)
-        h.ns.Walking.Toggle(h.ns.Walking, False)
         h.s.quests[194] = h.h.table({"onQuest": True, "complete": False, "objectives": [{
             "text": "Raptor de Tuercespina: 8/10", "numFulfilled": 8, "numRequired": 10, "finished": False,
         }]})
@@ -51,9 +50,7 @@ class LocalCircuitPresentationTests(unittest.TestCase):
         observed = []
         for _ in range(2):
             h.ns.UpdateNavigation(h.ns)
-            _, current_step, _ = h.ns.GetCurrent(h.ns)
-            point = h.ns.GetStepWaypoint(h.ns, current_step, None, h.h.table({}))
-            self.assertIsNone(h.ns.OriginalGuidePresentation.Waypoint())
+            point = h.ns.OriginalGuidePresentation.Waypoint()[-1]
             row = next(row for row in h.ns.OriginalGuidePresentation.Tasks().values() if row.isCurrent)
             self.assertEqual((point.goal.quest, point.goal.t), (row.questID, "turnin"))
             self.assertIn(row.questID, (188, 195))
@@ -136,9 +133,7 @@ class LocalCircuitPresentationTests(unittest.TestCase):
         self.assertIn("Ajeck", row.text)
         point = h.ns.GetArrowWaypoint(h.ns, h.step)
         self.assertEqual((point.goal.quest, point.stepIndex, point.goalIndex), (188, 19, 2))
-        self.assertTrue(point.navigationBlocked)
-        self.assertIsNone(h.ns.OriginalGuidePresentation.Waypoint())
-        self.assertAlmostEqual(h.point().x, .3562)
+        self.assertAlmostEqual(h.ns.OriginalGuidePresentation.Waypoint()[1], .3562)
         self.assertEqual(h.ns.GetStepWaypoint(h.ns, h.step, None, h.h.table({"index": 1})).goal.quest, 189)
         h.s.contactID = 715
         h.ns.HandleQuestAutomation(h.ns, "QUEST_PROGRESS")

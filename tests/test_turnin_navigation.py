@@ -93,16 +93,12 @@ class TurninNavigationTests(unittest.TestCase):
                 elif source == "duo-meeting":
                     h.ns.Duo.GetMeetingWaypoint = getter
                 else:
-                    h.h.g.TEST_VIEW = h.h.table({"following": True, "guideID": DWARF, "sharedCursor": 1, "ownCursor": 6})
+                    h.h.g.TEST_VIEW = h.h.table({"following": True, "guideID": DWARF, "sharedCursor": 1})
                     h.ns.DuoAuto.GetSharedView = h.h.lua.eval("function() return TEST_VIEW end")
                     h.ns.DuoAuto.GetNavigationOverride = getter
                 before = h.progress()
                 self.assertEqual(h.point().source, source)
                 h.ns.UpdateNavigation(h.ns)
-                self.assertFalse(h.ns.navigationFrame.arrow.shown)
-                self.assertEqual(h.ns.navigationFrame.distance.text, "")
-                self.assertIn("Sin datos de terreno", h.ns.navigationFrame.statusText)
-                h.ns.Walking.Toggle(h.ns.Walking, False)
                 self.assertTrue(h.ns.navigationFrame.arrow.shown)
                 self.assertNotEqual(h.ns.navigationFrame.navigationState, "waiting")
                 self.assertEqual(h.progress(), before)

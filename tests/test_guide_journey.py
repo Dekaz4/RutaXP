@@ -79,7 +79,6 @@ function frame:RegisterEvent(k) self.events[k]=true end
 function frame:Show() self.shown=true end
 function frame:Hide() self.shown=false end
 function frame:IsShown() return self.shown~=false end
-function frame:IsVisible() return self:IsShown() and (not self.parent or self.parent:IsVisible()) end
 function frame:SetShown(b) self.shown=b end
 function frame:SetChecked(b) self.checked=b end
 function frame:GetChecked() return self.checked end
@@ -171,18 +170,6 @@ ns.GuideEngine={
     Waypoint=function() if mark then return 1429,.6,.7,"Villadorada" end end,
 }
 function loseWaypoint() mark=false end
-function assertVisibleCompassCount(expected)
-    local hud=RutaXPJourneyScreenArrow
-    local count=hud and hud.container:IsVisible() and 1 or 0
-    if ns.navigationFrame and ns.navigationFrame.arrow:IsVisible() then count=count+1 end
-    for _,f in ipairs(all) do
-        if f.ClearTarget and f.ping then
-            if f:IsVisible() then count=count+1 end
-            if f.ping:IsVisible() then count=count+1 end
-        end
-    end
-    assert(count==expected, ("expected %d visible directions, got %d"):format(expected,count))
-end
 function assertHudDistances(expected)
     local hud=RutaXPJourneyScreenArrow
     assert(hud.container:IsShown(), "compass should be visible")
@@ -230,24 +217,6 @@ class NativeJourneyTests(unittest.TestCase):
             assert(not RutaXPJourneyScreenArrow.container:IsShown())
         """)
 
-    def test_one_visible_compass_across_minimap_range_target_changes_and_toggle(self):
-        self.lua.execute("""
-            local goalX,playerX=800,500
-            ns.GuideEngine.Waypoint=function() return 1429,goalX/1300,500/1300,"Destino" end
-            UnitPosition=function() return playerX,500,0,0 end
-            local function check(distanceText)
-                tick()
-                assertHudDistances(distanceText)
-                assertVisibleCompassCount(1)
-            end
-            check("274 m")              -- Beyond the minimap: Journey's directional marker.
-            playerX=750; check("46 m")  -- Inside the minimap: Journey switches to its ping.
-            goalX=1050; check("274 m")
-            ns.GuideJourney:Hide(); tick()
-            assertVisibleCompassCount(0)
-            ns.GuideJourney:Show(); check("274 m")
-        """)
-
     def test_live_hud_filters_small_rotations_and_reserves_arrival_for_the_destination(self):
         self.lua.execute("""
             local view, hud = ns.GuideJourney, RutaXPJourneyScreenArrow
@@ -258,6 +227,9 @@ class NativeJourneyTests(unittest.TestCase):
             tick()
             view:SetCompassTarget("muelle", false, 110)
             tick(0)
+            assertHudDistances("5 m / 101 m")
+            yards=3; tick(0)
+            assertHudDistances("3 m / 101 m")
             local count = texture.drawCount
             assert(math.abs(texture.angle - math.rad(-1)) < 1e-8)
             facing=359; tick(0)
@@ -267,7 +239,7 @@ class NativeJourneyTests(unittest.TestCase):
             facing=358; view:SetCompassTarget("cadaver",false,110); tick(0)
             assert(texture.drawCount == count+2)
             yards=.25; tick(0)
-            assert(texture:IsShown() and not hud.pingFrame:IsShown() and hud.distLabel:GetText()=="101 m")
+            assert(texture:IsShown() and not hud.pingFrame:IsShown() and hud.distLabel:GetText()=="0 m / 101 m")
             view:SetCompassTarget("cadaver",false,nil); tick(0)
             assert(texture:IsShown() and hud.distLabel:GetText()=="0 m")
             view:SetCompassTarget("cadaver",true,nil); tick(0)
@@ -277,7 +249,7 @@ class NativeJourneyTests(unittest.TestCase):
             assert(texture:GetTexture()==ns.ArrowStyles:GetTexture() and math.abs(hud.scale-.9)<1e-8)
             assert(not hud.label:IsShown() and not hud.distLabel:IsShown() and not hud.shadowContainer:IsShown())
             ns.char.arrowAppearance.showText=true; ns.ArrowStyles:Refresh()
-            assert(hud.distLabel:IsShown())
+            assert(hud.label:IsShown() and hud.distLabel:IsShown())
             yards=5; tick(0)
             assert(texture:IsShown() and not hud.pingFrame:IsShown())
             local before=texture.drawCount
@@ -412,26 +384,6 @@ class NativeJourneyTests(unittest.TestCase):
             questIcon.scripts.OnClick(questIcon); assert(openedQuest==472)
             pin=.49; tick(); assert(RutaXPJourneyScreenArrow.container:IsShown())
             assertHudDistances("185 m")
-            local available=false
-            ns.Walking={
-                IsEnabled=function() return true end,
-                Resolve=function(_,p)
-                    assert(p.mapID==1437 and p.x==pin and p.y==.27)
-                    p.navigationBlocked=not available
-                    p.navigationNotice="Esperando al camino del diario"
-                    if available then
-                        p.walking=true
-                        p.walkingDistance,p.walkingSegmentDistance=230,45
-                    end
-                    return p
-                end,
-            }
-            tick(); tick()
-            assert(not RutaXPJourneyScreenArrow.container:IsShown())
-            assert(row(3).text.text=="Esperando al camino del diario")
-            available=true; tick(); tick()
-            assertHudDistances("41 m / 210 m")
-            ns.Walking=nil
             pin=1.2; tick(); assert(not RutaXPJourneyScreenArrow.container:IsShown())
             party="En tu diario"; event("GROUP_ROSTER_UPDATE"); tick()
             assert(row(1).text.text:find(party,1,true))
@@ -487,7 +439,7 @@ class OriginalGuideJourneyTests(unittest.TestCase):
             end
             function ns:CreateNavigation()
                 local f=CreateFrame("Frame",nil,UIParent)
-                f.arrow=CreateFrame("Frame",nil,f); f.hint=label("Tramo 8/8"); ns.navigationFrame=f
+                f.arrow=CreateFrame(); f.hint=label("Tramo 8/8"); ns.navigationFrame=f
                 ns.navigationUpdater=CreateFrame("Frame",nil,UIParent)
             end
             function hooksecurefunc(table, k, hook)
@@ -518,13 +470,10 @@ class OriginalGuideJourneyTests(unittest.TestCase):
                 return ("%d m"):format(math.floor(math.sqrt((1300*x-500)^2+(1300*y-500)^2)*.9144+.5))
             end
             assertHudDistances(directDistance(.549,.263))
-            assertVisibleCompassCount(1)
             for i=1,12 do tick() end; assert(samples==1)
             ns.GuideJourney:Hide(); tick()
             assert(not ns.char.tracker and not ns.GuideJourney:IsShown() and RutaXPJourneyScreenArrow.container:IsShown())
-            assertVisibleCompassCount(1)
             ns.char.arrow=false; tick(); assert(not RutaXPJourneyScreenArrow.container:IsShown())
-            assertVisibleCompassCount(0)
             ns.GuideJourney:Show(); tick()
             assert(ns.char.tracker and not ns.char.arrow and ns.GuideJourney:IsShown())
             ns.window:Show(); ns:RefreshUI(); tick(); assert(not ns.GuideJourney:IsShown())
@@ -619,11 +568,11 @@ class OriginalGuideJourneyTests(unittest.TestCase):
             assertNoFloatingHint()
             assert(getTaskIcon().row.text=="Recalculando desde tu posición")
             bearing=true; ns:GetArrowWaypoint(); tick(); tick()
-            assert(not RutaXPJourneyScreenArrow.container:IsShown())
-            assert(getTaskIcon().row.text=="Recalculando desde tu posición")
+            assert(RutaXPJourneyScreenArrow.container:IsShown())
+            assertHudDistances("256 m")
             bearing=false
             blocked=false; ns:GetArrowWaypoint(); tick()
-            assertHudDistances("256 m")
+            assert(RutaXPJourneyScreenArrow.container:IsShown())
             local previousFacing=GetPlayerFacing
             function issecretvalue(n) return n==-999 end
             function GetPlayerFacing() return -999 end
@@ -655,57 +604,32 @@ class OriginalGuideJourneyTests(unittest.TestCase):
             sampledTurn.walking=true
             sampledTurn.walkingWorld={continent=1,north=417,west=500}
             ns:GetArrowWaypoint(); tick(); tick()
-            assertHudDistances("16 m")
+            assert(hud.distLabel:GetText()==scope.FormatJourneyDistance(17))
             sampledTurn.walkingWorld={continent=1,north=447,west=500}
             ns:GetArrowWaypoint(); tick(); tick()
-            assertHudDistances("43 m")
-            assert(hides==0)
+            assert(hud.distLabel:GetText()==scope.FormatJourneyDistance(47) and hides==0)
 
-            -- A steering point may be 47 yards away while the next real turn
-            -- is 65 yards down the road. Show the maneuver's path distance.
+            -- Distance to the arrow reference and the remaining terrain route.
             ns.DungeonPlanner=nil
             sampledTurn.activityDestination=false
             sampledTurn.navigationNotice=nil
             sampledTurn.walkingDistance=350
             sampledTurn.walkingTurn,sampledTurn.walkingTurnDistance="right",65
             sampledTurn.walkingRouteKey="same objective"
-            ns:GetArrowWaypoint(); tick(); tick()
-            assertHudDistances("59 m / 320 m")
-            sampledTurn.walkingTurnDistance=288
             ns.navigationFrame.hint:SetText("Ve al muelle")
             ns:GetArrowWaypoint(); tick(); tick()
-            assertHudDistances("263 m / 320 m")
-            assert(hides==0)
-            local savedLocale=GetLocale
-            GetLocale=function() return "enUS" end
-            ns.navigationFrame.hint:SetText("")
-            sampledTurn.walkingTurn="left"
-            ns:GetArrowWaypoint(); tick(); tick()
-            assertHudDistances("263 m / 320 m")
-            sampledTurn.walkingTurnDistance=70
-            ns:GetArrowWaypoint(); tick(); tick()
-            assertHudDistances("64 m / 320 m")
-            GetLocale=savedLocale
-            sampledTurn.walkingTurn,sampledTurn.walkingTurnDistance="left",32
-            ns.navigationFrame.hint:SetText("Ve al muelle")
-            ns:GetArrowWaypoint(); tick(); tick()
-            assertHudDistances("29 m / 320 m")
-            sampledTurn.walkingTurn,sampledTurn.walkingTurnDistance=nil,nil
-            ns.navigationFrame.hint:SetText("Tramo 3/12")
-            ns:GetArrowWaypoint(); tick(); tick()
-            assertHudDistances("320 m")
-            assert(hides==0)
-            sampledTurn.walkingSegmentDistance=100
+            assertHudDistances("43 m / 320 m")
+            sampledTurn.walkingWorld.north=425
             sampledTurn.walkingDistance=1600
             ns:GetArrowWaypoint(); tick(); tick()
-            assertHudDistances("91 m / 1463 m")
-            sampledTurn.walkingSegmentDistance=1600
+            assertHudDistances("23 m / 1463 m")
+            assert(hides==0)
+            sampledTurn.walkingFinal=true
             ns:GetArrowWaypoint(); tick(); tick()
             assertHudDistances("1463 m")
             sampledTurn.navigationBlocked=true; sampledTurn.navigationBearing=true
             sampledTurn.navigationBearingText="Rumbo orientativo"
             sampledTurn.walking=false
             ns:GetArrowWaypoint(); tick(); tick()
-            assert(not RutaXPJourneyScreenArrow.container:IsShown())
-            assertNoFloatingHint()
+            assertHudDistances("289 m")
         """)

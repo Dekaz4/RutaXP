@@ -90,7 +90,8 @@ class NavigationRegressions(unittest.TestCase):
         point = h.call("GetStepWaypoint", step)
         point.walking, point.walkingDistance = True, 1300
         point.walkingIndex, point.walkingCount = 3, 5
-        point.walkingSegmentDistance = 50
+        bounds = h.ns.mapFrames.era[1439]
+        h.state.x, h.state.y = point.x - 50 / abs(bounds.right - bounds.left), point.y
         point.walkingTurn, point.walkingTurnDistance = "right", 38
         h.state.arrowPoint = point
         h.ns.GetArrowWaypoint = h.lua.eval("function() return TEST.arrowPoint end")
@@ -101,7 +102,7 @@ class NavigationRegressions(unittest.TestCase):
             return [label.text for label in frame.fontStrings.values() if label.shown and label.text]
 
         self.assertTrue(frame.arrow.shown)
-        self.assertEqual(visible_text(), ["35 m / 1189 m"])
+        self.assertEqual(visible_text(), ["46 m / 1189 m"])
         self.assertFalse(tooltip.shown)
         frame.scripts.OnEnter(frame)
         self.assertTrue(tooltip.shown)

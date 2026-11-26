@@ -106,7 +106,6 @@ local function point(p, ctx, label, phase)
     if result then
         result.goal, result.label, result.source = ctx.goal, label, "boat-navigation"
         result.targetKey, result.boatNavigation = (ctx.key or "boat") .. ":" .. phase, true
-        result.boatLanding = phase == "landing"
         result.radius = p.radius or 25
     end
     return result

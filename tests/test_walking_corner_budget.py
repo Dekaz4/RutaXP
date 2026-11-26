@@ -18,7 +18,7 @@ class WalkingCornerBudgetTests(unittest.TestCase):
             route.append((x, y, z))
         # The supplied corridor is a topology fixture; the real runtime,
         # coordinate conversion, follower and progress engine are unchanged.
-        f.synthetic(route, open_ground=True)
+        f.synthetic(route)
         semantic_target = (f.w.target.x, f.w.target.y, f.w.target.z)
         backwards, blocked = [], []
         last = None
@@ -40,7 +40,7 @@ class WalkingCornerBudgetTests(unittest.TestCase):
         f = FollowHost()
         x, y, z = f.route[0]
         f.synthetic([(x, y, z), (x + 60, y, z), (x + 60, y + 10, z),
-                     (x, y + 10, z)], open_ground=True)
+                     (x, y + 10, z)])
         # Adjacent return corridor is close in XY but the first end has not
         # been reached. Repeated UI reads must not march the budget forward.
         for offset in range(1, 10):

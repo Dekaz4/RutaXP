@@ -401,7 +401,7 @@ class EngineTests(unittest.TestCase):
         self.assertEqual(h.state.waypointCalls, 0)
         self.assertEqual(h.state.superTrackCalls, 0)
 
-    def test_successful_waypoint_sets_a_pin_without_a_second_indicator(self):
+    def test_waypoint_failure_does_not_supertrack_and_success_does(self):
         h = self.host
         h.guide("point", steps=[{"title": "Go", "waypoint": {"mapID": 37, "x": .1, "y": .2}}])
         h.call("SelectGuide", "point")
@@ -411,40 +411,7 @@ class EngineTests(unittest.TestCase):
         h.state.waypointSuccess = True
         self.assertTrue(h.call("Navigate"))
         self.assertEqual(h.state.superTrackCalls, 1)
-        self.assertFalse(h.state.superTracked)
         self.assertEqual(h.state.lastWaypoint.mapID, 37)
-
-    def test_reload_turns_off_only_the_blizzard_indicator_for_the_saved_pin(self):
-        h = self.host
-        h.lua.execute("""
-            function C_Map.SetUserWaypoint(point) TEST.lastWaypoint = point end
-            function C_Map.GetUserWaypoint()
-                local point = TEST.lastWaypoint
-                return point and {uiMapID=point.mapID, position={GetXY=function() return point.x, point.y end}}
-            end
-            function C_SuperTrack.IsSuperTrackingUserWaypoint() return TEST.superTracked end
-        """)
-        h.state.superTracked = True
-        self.assertTrue(h.call("MarkMapDestination", h.table({"mapID": 37, "x": .1, "y": .2}), "Posada"))
-        self.assertFalse(h.state.superTracked)
-        h.new_namespace()
-        h.guide()
-        h.initialize()
-        h.state.superTracked = True
-        h.fire("PLAYER_ENTERING_WORLD")
-        self.assertFalse(h.state.superTracked)
-        self.assertEqual((h.state.lastWaypoint.mapID, h.state.lastWaypoint.x, h.state.lastWaypoint.y), (37, .1, .2))
-        h.state.superTracked = True
-        h.fire("SUPER_TRACKING_CHANGED")
-        self.assertFalse(h.state.superTracked)
-
-        h.state.lastWaypoint.mapID = 84
-        h.state.superTracked = True
-        calls = h.state.superTrackCalls
-        h.fire("USER_WAYPOINT_UPDATED")
-        self.assertIsNone(h.ns.char.guideUserWaypoint)
-        self.assertEqual(h.state.superTrackCalls, calls)
-        self.assertTrue(h.state.superTracked)
 
     def test_missing_waypoint_api_fails_without_supertrack(self):
         h = self.host

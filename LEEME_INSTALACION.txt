@@ -1,4 +1,4 @@
-RUTAXP 1.2.22 PARA WOW FOREVER
+RUTAXP 1.2.23 PARA WOW FOREVER
 
 1. Cierra WoW y abre tu Instalador_RutaXP.exe de siempre.
 2. Pulsa 1. En un PC nuevo, termina primero la instalación de WoW Forever en Battle.net. Si se te pide una ubicación, elige la carpeta _forever_ de ese PC. El instalador prepara Interface\AddOns.

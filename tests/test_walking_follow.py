@@ -100,29 +100,13 @@ class FollowHost:
             self.host.pump()
         return observations
 
-    def synthetic(self, route, *, open_ground=False):
+    def synthetic(self, route):
         """Adversarial contiguous corridors; only the terrain answer is a fixture."""
         self.w.Clear(self.w)
         self.route = route
         self.h.g.FOLLOW_CORRIDOR = self.h.table([
             {"map": 0, "x": x, "y": y, "z": z} for x, y, z in route
         ])
-        if open_ground:
-            x, y, height = route[0]
-            assert all(z == height for _, _, z in route), "the open-ground fixture requires level ground"
-            self.h.lua.execute('''
-                local x,y,z=...
-                local grid=ACCESS_NS.PathingNamespace.PathGrid
-                local width=128
-                local cs=grid.TILE/width
-                local surface={C=width,ny=1,cs=cs,GX=width,GY=width,
-                    x0=math.floor((x-40)/cs)*cs,y0=math.floor((y-40)/cs)*cs,
-                    val={[0]={}},z={[0]={}},moves={[0]={}},at={[0]={}},links={[0]={}}}
-                for cell=1,width*width do
-                    surface.val[0][cell],surface.z[0][cell],surface.moves[0][cell]=1,z,15
-                end
-                grid.State=function() return surface end
-            ''', x, y, height)
         self.h.lua.execute('''
             FOLLOW_PATH.Find=function(map,from,to,callback)
               TEST.walkSearches=TEST.walkSearches+1
@@ -140,75 +124,6 @@ class FollowHost:
 
 
 class CompleteWalkingFollowTests(unittest.TestCase):
-    def test_nearby_walkable_cell_does_not_validate_a_destination_inside_a_wall(self):
-        h = AccessHost(terrain=True)
-        ns = h.ns
-        # The same Elwynn grid has a valid approach here, but no surface at
-        # the destination's stated height. The raw router snaps to a neighbour.
-        start = h.h.table({"x": -9486, "y": 15, "z": 58})
-        end = h.h.table({"x": -9480, "y": 9, "z": 58})
-        path = h.engine.FindSync(0, start, end)[0]
-        self.assertIsNotNone(path)
-        self.assertEqual((path[len(path)].x, path[len(path)].y), (end.x, end.y))
-        player = ns.WorldToWaypoint(ns, 0, start.x, start.y, 1429)
-        h.s.mapID, h.s.x, h.s.y, h.s.height = 1429, player.x, player.y, start.z
-        h.s.destination = ns.WorldToWaypoint(ns, 0, end.x, end.y, 1429)
-        h.s.destination.z = end.z
-        h.h.lua.execute("ACCESS_NS.GetStepWaypoint = function() return TEST.destination end")
-        ns.GetArrowWaypoint(ns, h.step, False)
-        h.pump()
-        point = ns.GetArrowWaypoint(ns, h.step, False)
-        self.assertTrue(point.navigationBlocked)
-        self.assertEqual(ns.Walking.failure, "offmesh")
-        ns.UpdateNavigation(ns)
-        self.assertFalse(ns.navigationFrame.arrow.shown)
-
-    def test_arrow_from_one_side_of_goldshire_inn_to_the_other(self):
-        h = AccessHost(terrain=True)
-        ns = h.ns
-        start, destination = (-9486, 15), (-9434, 21)
-        height = 58  # Both endpoints are on this ground surface in the shipped Elwynn grid.
-
-        def walkable_length(a, b):
-            def world_point(point):
-                return h.h.table({"x": point[0], "y": point[1], "z": height})
-            path = h.engine.FindSync(0, world_point(a), world_point(b))[0]
-            self.assertIsNotNone(path)
-            return sum(math.hypot(path[i].x - path[i-1].x, path[i].y - path[i-1].y)
-                       for i in range(2, len(path) + 1))
-
-        straight = math.dist(start, destination)
-        self.assertGreater(walkable_length(start, destination), straight + 30)
-        goal = ns.WorldToWaypoint(ns, 0, *destination, 1429)
-        goal.z = height
-        h.s.destination = goal
-        h.h.lua.execute("ACCESS_NS.GetStepWaypoint = function() return TEST.destination end")
-        position, last_aim = start, None
-        for _ in range(150):
-            player = ns.WorldToWaypoint(ns, 0, *position, 1429)
-            h.s.mapID, h.s.x, h.s.y, h.s.height = 1429, player.x, player.y, height
-            h.s.now += .15
-            arrow = ns.GetArrowWaypoint(ns, h.step, False)
-            if not arrow.walking:
-                h.pump()
-                arrow = ns.GetArrowWaypoint(ns, h.step, False)
-            self.assertTrue(arrow.walking)
-            aim = (arrow.walkingWorld.north, arrow.walkingWorld.west)
-            distance = math.dist(position, aim)
-            if aim != last_aim:
-                # A heading through the inn would require another detour to reach
-                # its own tip. Allow one mesh cell for differences at the corners.
-                self.assertLessEqual(walkable_length(position, aim), distance + 4.2)
-                last_aim = aim
-            if math.dist(position, destination) < 1:
-                self.assertTrue(arrow.walkingFinal)
-                break
-            self.assertGreater(distance, 0)
-            fraction = min(1, 1 / distance)
-            position = tuple(p + (q - p) * fraction for p, q in zip(position, aim))
-        else:
-            self.fail("Following each heading did not reach the other side of the inn")
-
     def test_entire_real_gozwin_polyline_with_height_noise_reaches_the_final_target(self):
         f = FollowHost()
         observations = f.walk(f.route, noise=True)
@@ -256,8 +171,8 @@ class CompleteWalkingFollowTests(unittest.TestCase):
     def test_twelve_yard_corner_cut_in_a_right_angle_corridor_does_not_hold_an_old_vertex(self):
         f = FollowHost()
         x, y, z = f.route[0]
-        route = [(x, y, z), (x + 80, y, z), (x + 80, y + 80, z), (*f.route[-1][:2], z)]
-        f.synthetic(route, open_ground=True)
+        route = [(x, y, z), (x + 80, y, z), (x + 80, y + 80, z), f.route[-1]]
+        f.synthetic(route)
         observations = f.walk(cut_corners(route, 12))
         backward = [o for o in observations if o.get("distance", 0) > 7 and o.get("dot", 1) < -.25]
         self.assertLessEqual(len(backward), 3, str(backward[:2]))

@@ -146,9 +146,9 @@ Señala el objetivo activo y elige candidatos cercanos compatibles con tu
 clase, facción y mapa. Si no hay coordenadas, lo indica y no señala otro
 objetivo. Ahora calcula un camino por el terreno publicado de Forever y
 señala sus giros para rodear laderas y buscar accesos transitables.
-Bajo la flecha ves los metros del tramo y los que quedan del recorrido.
-Solo te indica un atajo si el terreno permite pasar desde tu posición.
-Si no hay cobertura o falla el calculo, la flecha espera y el panel
+Bajo la flecha aparecen solo los metros del tramo y los que quedan del recorrido.
+Al llegar al tramo final se muestra la distancia al destino.
+Si falta cobertura, la flecha señala una dirección aproximada. Si falla el calculo,
 explica que no dispone de un camino comprobado. Los calculos nuevos esperan
 a salir de combate. /rutaxp recalcular vuelve a intentarlo; /rutaxp camino
 activa o desactiva este seguimiento. Sigue confirmando los accesos sin

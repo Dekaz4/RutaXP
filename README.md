@@ -1,6 +1,6 @@
 # RutaXP para WoW Forever
 
-RutaXP 1.2.22 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos, el selector de rutas, la brújula y el panel de talentos comparten el estilo de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
+RutaXP 1.2.23 incluye los 57 capítulos de leveo de **RutaXP 0.7.36**. El panel de pasos, el selector de rutas, la brújula y el panel de talentos comparten el estilo de Journey. OpenMap, el diario de mazmorras y la guía de talentos se abren desde el mismo addon.
 
 ## Actualizar
 
@@ -43,9 +43,7 @@ Los servicios se dibujan también en la primera apertura del mapa. En pueblos co
 
 Si el objetivo está en otro continente, el panel de Journey indica cómo llegar al siguiente transporte. La brújula señala el muelle o el maestro de vuelo. Las conexiones observadas en el mapa de vuelo de ese personaje permiten incorporar vuelos al viaje. En la travesía de Menethil a Auberdine, la guía indica que permanezcas a bordo en Costasur y recupera el destino de misión al llegar. La flecha de misión es dorada y lleva dos marcas en la cola. Al liberar el espíritu señala el cadáver y al resucitar recupera el objetivo anterior. La brújula comparte la opción `/rutaxp flecha` y conserva la posición que ya habías elegido.
 
-RutaXP usa una sola flecha en pantalla para todo el recorrido. En los tramos a pie, esa misma flecha sigue la forma del sendero y gira al acercarte al cruce. Debajo aparece una sola línea, por ejemplo **35 m / 240 m**. La primera cifra son los metros hasta el siguiente giro o punto intermedio y la segunda, los metros que quedan del recorrido hasta el destino actual. Cuando la flecha ya apunta directamente al destino, solo muestra la distancia restante. Mientras recalcula, conserva la indicación anterior si todavía sirve para ese trayecto. En los viajes entre zonas te guía hasta la salida por carretera y retoma la misión al cruzar.
-
-Con **Camino por terreno** activado, la flecha sigue el rodeo o la entrada que recoge el mapa de colisiones. Solo propone acortar una esquina cuando puede comprobar el paso desde tu posición. Si falta cobertura, el panel indica el motivo y la flecha espera a tener un tramo transitable. Puedes elegir el rumbo directo desactivando el camino por terreno con `/rutaxp camino`.
+En los tramos a pie, la brújula señala un punto a media distancia para que puedas seguir la forma del sendero. Al acercarte al siguiente giro, apunta al cruce. Debajo solo aparecen los metros, por ejemplo **35 m / 240 m**. La primera cifra es la distancia al punto que señala la flecha y la segunda, lo que queda del recorrido. En el tramo final se muestra solo la distancia al destino. Mientras recalcula, conserva la indicación anterior si todavía sirve para ese trayecto. En los viajes entre zonas te guía hasta la salida por carretera y retoma la misión al cruzar.
 
 ### Misiones de mundo y mazmorras
 
@@ -61,7 +59,7 @@ Desde la raíz del proyecto y con Python 3.10 o posterior, indica la carpeta de 
 
 ```powershell
 python tools/build_personal_suite.py --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
-python tools/verify_personal_suite.py dist/RutaXP-1.2.22-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
+python tools/verify_personal_suite.py dist/RutaXP-1.2.23-personal.zip --addons 'E:\WOW\World of Warcraft\_forever_\Interface\AddOns'
 ```
 
 Los créditos y las licencias se encuentran en [NOTICE.md](NOTICE.md) y en `RutaXP/Licenses`.

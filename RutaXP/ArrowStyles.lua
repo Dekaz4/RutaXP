@@ -23,7 +23,7 @@ function ns.FormatArrowDistances(segmentYards, totalYards)
     local total = metres(totalYards)
     if not total then return "" end
     local segment = metres(segmentYards)
-    if segment and segment < total then
+    if segment then
         return segment .. " m / " .. total .. " m"
     end
     return total .. " m"

@@ -182,7 +182,6 @@ function source.Waypoint()
     local planner = ns.DungeonPlanner
     local activity = planner and planner:IsDetouring()
     if activity and not currentActivitySample(planner) then
-        if ns.Walking and ns.Walking:IsEnabled() then return end
         local map, x, y, title, leg = planner:Waypoint()
         if leg and not leg.point then return end
         return map, x, y, leg and (hasText(leg.shortText) or leg.title) or title
@@ -191,7 +190,12 @@ function source.Waypoint()
     if leg and not leg.point then return end
     local nav = ns.navigationFrame
     if not point or (point.activityDestination and not activity) then return end
-    if point.navigationBlocked then return end
+    if point.navigationBlocked then
+        if point.navigationBearing then
+            return point.mapID, point.x, point.y, hasText(point.navigationBearingText) or "Rumbo orientativo", nil, point
+        end
+        return
+    end
     local hint = leg and (hasText(leg.shortText) or leg.title) or (nav and hasText(nav.hint:GetText()))
     -- Journey describes the next maneuver. Mesh segment numbers belong to the
     -- underlying tracker and should not mask a travel or dungeon instruction.

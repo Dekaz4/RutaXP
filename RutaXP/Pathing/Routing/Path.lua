@@ -581,24 +581,6 @@ local function run(map, from, to, waterWalking, costOnly)
 		wetYards = wetYards + length * wet
 	end
 	points.wet = wetYards
-	-- RutaXP (2026-11-26): the search may snap either endpoint to another cell or floor.
-	local function meshHeight(index)
-		local k = P.k[index]
-		local heights = st.z[k] or (grid(st, k) and st.z[k])
-		return heights and heights[P.n[index] + 1] or nil
-	end
-	local function matchesEndpoint(index, point)
-		if P.x[index] ~= floor((point.x - x0) / cs) or P.y[index] ~= floor((point.y - y0) / cs) then
-			return false
-		end
-		if point.z == nil then return true end
-		local height = meshHeight(index)
-		return height ~= nil and abs(height - point.z) <= ZTOL
-	end
-	points.goalOnMesh = matchesEndpoint(#P.x, to)
-	if not matchesEndpoint(1, from) then
-		points.meshStart = { map = map, x = x0 + (P.x[1] + 0.5) * cs, y = y0 + (P.y[1] + 0.5) * cs, z = meshHeight(1) }
-	end
 	-- Smoothing only changes drawing: planning and FindMany use the identical graph cost.
 	return points, cost
 end

@@ -5,7 +5,7 @@ ns.GuideJourney = view
 local env, settings, engine, arrow, target, current, groupStep
 local loggedIn, initialized, shown, refreshPending
 local title, subtitle, status, stepIndex, stepCount, progressText
-local scroll, scrollChild, styledHUD, trackerHint
+local scroll, scrollChild, styledHUD
 local original = ns.OriginalGuidePresentation
 local originWorld, originNorth, originWest, lastDirections
 local function finite(n)
@@ -13,7 +13,7 @@ local function finite(n)
     return type(n) == "number" and n == n and math.abs(n) < math.huge
 end
 
-local compassKey, finalTarget, distanceText, nearYards, lastRotation, boundTexture
+local compassKey, finalTarget, routeYards, nearYards, lastRotation, boundTexture
 local lastWorldBearing, steeringFrom, steeringStarted
 local fullTurn, minimumTurn = 2 * math.pi, math.rad(2.8)
 local steeringDuration = .18
@@ -34,14 +34,14 @@ local function resetSteering()
     lastRotation, lastWorldBearing, steeringFrom, steeringStarted = nil, nil, nil, nil
 end
 
-function view:SetCompassTarget(key, isFinal, totalYards, steeringChanged, segmentYards)
+function view:SetCompassTarget(key, isFinal, yards, steeringChanged)
     if key ~= compassKey or (isFinal ~= finalTarget and not steeringChanged) then
         resetSteering()
     elseif steeringChanged and lastWorldBearing then
         steeringFrom, steeringStarted = lastWorldBearing, GetTime()
     end
     compassKey, finalTarget = key, isFinal
-    distanceText = finite(totalYards) and totalYards >= 0 and ns.FormatArrowDistances(segmentYards, totalYards) or nil
+    routeYards = finite(yards) and yards >= 0 and yards or nil
     nearYards = nil
 end
 
@@ -206,11 +206,12 @@ function RutaXPJourneyEnvironment()
     end
     local spanish = GetLocale() == "esES" or GetLocale() == "esMX"
     env.FormatJourneyDistance = function(yards)
-        -- Journey clears the numbers on a missing position. Restore them even
-        -- when the first good sample rounds to the same number as the last.
+        yards = (yards == passingNode and nearYards) or yards
+        -- Journey clears its text when the player position disappears.
         local hud = _G.RutaXPJourneyScreenArrow
         if hud and not hud.container:IsShown() then hud.lastDistText = nil end
-        return distanceText or ns.FormatArrowDistances(nil, (yards == passingNode and nearYards) or yards)
+        local segmentYards = routeYards and not finalTarget and yards
+        return ns.FormatArrowDistances(segmentYards, routeYards or yards)
     end
     env.FormatJourneyStep = function(value)
         if original then return value end
@@ -381,51 +382,22 @@ local function clearArrow()
     target = nil
 end
 
-local turnPromptYards = 70
-
-local function walkingInstruction(sample)
-    local locale = GetLocale()
-    local spanish = locale == "esES" or locale == "esMX"
-    local turn = sample.walkingTurn
-    local yards = sample.walkingTurnDistance
-    if finite(yards) and (turn == "left" or turn == "right") then
-        local instruction
-        if spanish then
-            local direction = turn == "left" and "a la izquierda" or "a la derecha"
-            instruction = (yards <= turnPromptYards and "Gira " or "Sigue el camino · próximo giro ") .. direction
-        else
-            instruction = (yards <= turnPromptYards and "Turn " or "Follow the path · next turn ") .. turn
-        end
-        return instruction
-    end
-end
-
 local function updateTarget(body, deathHint)
     if not initialized or not arrowEnabled() then clearArrow(); return end
-    local map, x, y, label, walking, sample
+    local map, x, y, _, walking, sample
     if deathHint then
         if not body then clearArrow(); return deathHint end
-        map, x, y, label = body.mapID, body.x, body.y, deathHint
+        map, x, y = body.mapID, body.x, body.y
     else
         local waypoint
         if original then waypoint = original.Waypoint
         elseif status == "journal" then waypoint = ns.GuideCarryover.Waypoint
         elseif current then waypoint = engine.Waypoint end
         if not waypoint then clearArrow(); return end
-        map, x, y, label, walking, sample = waypoint()
+        map, x, y, _, walking, sample = waypoint()
     end
     if not finite(map) or not finite(x) or not finite(y) or
         x < 0 or x > 1 or y < 0 or y > 1 then clearArrow(); return end
-    if not original and not deathHint and not sample and ns.Walking and ns.Walking:IsEnabled() then
-        sample = ns.Walking:Resolve({mapID=map, x=x, y=y, label=label, guideID=title, stepIndex=stepIndex,
-            targetKey=table.concat({"journey", map, label or ""}, ":")})
-        if not sample then clearArrow(); return end
-        map, x, y, walking = sample.mapID, sample.x, sample.y, sample.walkingWorld
-    end
-    if sample and sample.navigationBlocked then
-        clearArrow()
-        return sample.navigationHint or sample.navigationNotice
-    end
     local world, point
     if walking and finite(walking.continent) and finite(walking.north) and finite(walking.west) then
         -- Steering and UnitPosition use terrain yards. Reprojecting a short
@@ -443,17 +415,13 @@ local function updateTarget(body, deathHint)
     end
     if playerWorld ~= world then clearArrow(); return "Destino en otro continente" end
     if not compassFacing() then clearArrow(); return "Esperando la orientación del personaje" end
-    local segmentYards, totalYards
-    if sample and sample.walking then
-        totalYards = sample.walkingDistance
-        if not sample.walkingFinal then segmentYards = sample.walkingTurnDistance or sample.walkingSegmentDistance end
-    end
-    local intermediate = sample and (sample.walking and not sample.walkingFinal
+    local distance = sample and sample.walking and sample.walkingDistance
+    local intermediate = sample and (sample.navigationBlocked or sample.walking and not sample.walkingFinal
         or sample.intermediate and sample.pointIndex and sample.pointCount and sample.pointIndex < sample.pointCount)
     local key = sample and sample.walkingRouteKey
         or ((deathHint and "corpse" or "guide") .. "/" .. map .. "/" .. x .. "/" .. y)
     local changed = not target or arrow.mapID ~= map or arrow.worldTargetX ~= point.x or arrow.worldTargetY ~= point.y
-    view:SetCompassTarget(key, not intermediate, totalYards, changed and sample and sample.walking, segmentYards)
+    view:SetCompassTarget(key, not intermediate, distance, changed and sample and sample.walking)
     if changed then
         -- SetTarget replaces the current destination. ClearTarget also hides
         -- the HUD, which made it blink at every turn even on the same road.
@@ -462,13 +430,6 @@ local function updateTarget(body, deathHint)
         target = true
     end
     arrow.screenLabel = ""
-    if deathHint then return deathHint end
-    if sample then
-        local maneuver = sample.walking and walkingInstruction(sample)
-        if maneuver then return maneuver end
-        if sample.navigationNotice then return sample.navigationNotice end
-        if label and label ~= "" and not label:match("^Tramo %d+/%d+$") then return label end
-    end
 end
 
 -- Journey creates this frame on the first usable target. Bind it once, so
@@ -478,8 +439,7 @@ local function bindCompassAppearance()
     local styles = ns.ArrowStyles
     if not styles or not hud or hud == styledHUD then return end
     styledHUD = hud
-    -- Journey's second row normally sits below a destination name. Put the
-    -- distance and its matching shadows directly under the pointer.
+    -- Use the former title row for the distance and its outline.
     hud.distLabel:ClearAllPoints()
     hud.distLabel:SetPoint("TOP", hud.label, "TOP", 0, 0)
     for index, shadow in ipairs(hud.distShadowContainer.labels) do
@@ -496,18 +456,16 @@ local function bindCompassAppearance()
     end)
 end
 
-local function updateArrow(renderingTracker)
+local function updateArrow()
     if not initialized then return end
     bindCompassAppearance()
     local body, deathHint
     if ns.GetDeathNavigation and arrowEnabled() then body, deathHint = ns:GetDeathNavigation() end
-    local reason = updateTarget(body, deathHint)
+    updateTarget(body, deathHint)
     local directions = original and not deathHint and original.TravelText() or nil
-    local hint = reason or (not target and arrowEnabled() and original and original.TravelHint())
-    if not hint or hint == "" or (directions and directions:find(hint, 1, true)) then hint = nil end
-    if directions ~= lastDirections or hint ~= trackerHint then
-        lastDirections, trackerHint = directions, hint
-        if not renderingTracker then refreshPending = true end
+    if directions ~= lastDirections then
+        lastDirections = directions
+        refreshPending = true
     end
 end
 
@@ -571,13 +529,7 @@ local function init()
     picker:SetScript("OnClick", function(self) if not self.dragged then openLibrary() end end)
     picker:SetScript("OnEnter", function(f) GameTooltip:SetOwner(f,"ANCHOR_TOP"); GameTooltip:SetText("Elegir guía"); GameTooltip:Show() end)
     picker:SetScript("OnLeave", GameTooltip_Hide)
-    -- Journey updates the HUD from a separate driver. Its minimap arrow and
-    -- nearby ping are siblings that it shows again whenever the target moves.
-    local minimapLayers = CreateFrame("Frame", nil, UIParent)
-    minimapLayers:Hide()
     arrow = env.addon.CreateArrow(0,1,0)
-    arrow:SetParent(minimapLayers)
-    arrow.ping:SetParent(minimapLayers)
     initialized = true
     engine.PresentWithJourney(true)
     return true
@@ -631,13 +583,6 @@ function view:Refresh()
         subtitle = current.groupdisplayname or current.group
         rows = engine.Tasks()
     end
-    updateArrow(true)
-    if trackerHint then
-        local first = rows[1]
-        local index = 1
-        while rows[index] and rows[index].step == first.step do index = index + 1 end
-        table.insert(rows, index, {text=trackerHint, step=first and first.step})
-    end
     groupStep = prepareStep(rows)
     env.UI.MarkDirty()
     env.UI.Update(0)
@@ -657,6 +602,7 @@ function view:Refresh()
         if scroll.ScrollBar then scroll.ScrollBar:SetShown(height > limit) end
         if current ~= oldGuide or stepIndex ~= oldIndex or status ~= oldStatus then scroll:SetVerticalScroll(0) end
     end
+    updateArrow()
 end
 
 function view:Show()
@@ -698,6 +644,6 @@ driver:SetScript("OnUpdate", function(_, dt)
     if elapsed < .2 then return end
     elapsed = 0
     if refreshPending and view:Available() then view:Refresh()
-    elseif original or target or trackerHint or
+    elseif original or target or
         (arrowEnabled() and (current or status == "journal" or (ns.IsRecoveringCorpse and ns:IsRecoveringCorpse()))) then updateArrow() end
 end)
